@@ -1,6 +1,6 @@
 if(KDE4_BUILD_TESTS)
 
-  include_directories( ${KDE4_INCLUDES} )
+  include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
   # Tests don't need to go into toplevel/bin, they are fine in the current dir.
   set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
