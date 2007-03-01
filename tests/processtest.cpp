@@ -31,10 +31,19 @@
 void testProcess::testProcesses() {
 	QHash<long, Solid::Process *> processes = Solid::Processes::getProcesses();
 	kDebug() << "Found " << processes.size() << endl;
-	foreach( Solid::Process *process, processes)
-		kDebug() << process->pid << endl;
+	QSet<long> pids;
+	foreach( Solid::Process *process, processes) {
+		QVERIFY(process->pid > 0);
+		QVERIFY(!process->name.isEmpty());
+
+		//test all the pids are unique
+		QVERIFY(!pids.contains(process->pid));
+		pids.insert(process->pid);
+	}
 
 	QHash<long, Solid::Process *> processes2 = Solid::Processes::getProcesses();
+	kDebug() << "Found " << processes2.size() << endl;
+	QVERIFY(processes2.size() == processes.size());
 	QCOMPARE(processes, processes2); //Make sure calling it twice gives the same results.  The difference is time is so small that it really shouldn't have changed
 }
 
