@@ -43,6 +43,18 @@ void testProcess::testProcesses() {
 
 	QHash<long, Solid::Process *> processes2 = Solid::Processes::getProcesses();
 	kDebug() << "Found " << processes2.size() << endl;
+	foreach( Solid::Process *process, processes) {
+		QVERIFY(process->pid > 0);
+		QVERIFY(!process->name.isEmpty());
+
+		//test all the pids are unique
+		if(!pids.contains(process->pid)) {
+			kDebug() << process->pid << " not found. " << process->name << endl;
+		}
+		pids.remove(process->pid);
+	}
+
+
 	QVERIFY(processes2.size() == processes.size());
 	QCOMPARE(processes, processes2); //Make sure calling it twice gives the same results.  The difference is time is so small that it really shouldn't have changed
 }
