@@ -20,12 +20,15 @@
 #define TESTPROCESS_H
 
 #include <QtCore/QObject>
-
+#include "solidstats/process.h"
 class testProcess: public QObject
 {
     Q_OBJECT
+      private:
+        unsigned long countNumChildren(Solid::Process *p);
       private slots:
         void testProcesses();
+        void testProcessesTreeStructure();
 };
 
 #endif
