@@ -29,7 +29,7 @@
 #include "processtest.h"
 
 void testProcess::testProcesses() {
-	QHash<long, Solid::Process *> processes = Solid::Processes::getProcesses();
+	QHash<long, Solid::Process *> processes = Solid::Processes::getInstance()->getProcesses();
 	QSet<long> pids;
 	foreach( Solid::Process *process, processes) {
 		QVERIFY(process->pid > 0);
@@ -40,7 +40,7 @@ void testProcess::testProcesses() {
 		pids.insert(process->pid);
 	}
 
-	QHash<long, Solid::Process *> processes2 = Solid::Processes::getProcesses();
+	QHash<long, Solid::Process *> processes2 = Solid::Processes::getInstance()->getProcesses();
 	foreach( Solid::Process *process, processes) {
 		QVERIFY(process->pid > 0);
 		QVERIFY(!process->name.isEmpty());
@@ -66,7 +66,7 @@ unsigned long testProcess::countNumChildren(Solid::Process *p) {
 }
 
 void testProcess::testProcessesTreeStructure() {
-	QHash<long, Solid::Process *> processes = Solid::Processes::getProcesses();
+	QHash<long, Solid::Process *> processes = Solid::Processes::getInstance()->getProcesses();
 	foreach( Solid::Process *process, processes) {
 		QCOMPARE(countNumChildren(process), process->numChildren);
 
@@ -80,7 +80,7 @@ void testProcess::testProcessesTreeStructure() {
 
 void testProcess::testProcessesModification() {
 	//We will modify the tree, then re-call getProcesses and make sure that it fixed everything we modified
-	QHash<long, Solid::Process *> processes = Solid::Processes::getProcesses();
+	QHash<long, Solid::Process *> processes = Solid::Processes::getInstance()->getProcesses();
 
 
 	if(!processes.contains(1) || processes[1]->numChildren < 3)
@@ -96,7 +96,7 @@ void testProcess::testProcessesModification() {
 	processes[1]->numChildren--;
 	processes[1]->children.removeAt(0);
 
-	QHash<long, Solid::Process *> processes2 = Solid::Processes::getProcesses();
+	QHash<long, Solid::Process *> processes2 = Solid::Processes::getInstance()->getProcesses();
 
 	QCOMPARE(processes, processes2);
 
@@ -106,13 +106,13 @@ void testProcess::testTime() {
 	//See how long it takes to get proccess information	
 	QTime t;
 	t.start();
-	QHash<long, Solid::Process *> processes = Solid::Processes::getProcesses();
+	QHash<long, Solid::Process *> processes = Solid::Processes::getInstance()->getProcesses();
 	kDebug() << "Time elapsed: "<< t.elapsed() <<" ms" <<  endl;
-	QVERIFY(t.elapsed() < 200); //It should take less than about 100ms.  Anything longer than 300ms even on a slow system really needs to be optimised
+	QVERIFY(t.elapsed() < 300); //It should take less than about 100ms.  Anything longer than 300ms even on a slow system really needs to be optimised
         t.start();
-	processes = Solid::Processes::getProcesses();
+	processes = Solid::Processes::getInstance()->getProcesses();
 	kDebug() << "Time elapsed second time: "<< t.elapsed() <<" ms" <<  endl;
-	QVERIFY(t.elapsed() < 200); //It should take less than about 100ms.  Anything longer than 300ms even on a slow system really needs to be optimised
+	QVERIFY(t.elapsed() < 300); //It should take less than about 100ms.  Anything longer than 300ms even on a slow system really needs to be optimised
 
 }
 

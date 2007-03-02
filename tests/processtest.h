@@ -20,7 +20,7 @@
 #define TESTPROCESS_H
 
 #include <QtCore/QObject>
-#include "solidstats/process.h"
+class Solid::Process;
 class testProcess: public QObject
 {
     Q_OBJECT
