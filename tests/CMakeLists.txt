@@ -1,5 +1,7 @@
 if(KDE4_BUILD_TESTS)
 
+  add_test(processtest ${EXECUTABLE_OUTPUT_PATH}/processtest)
+
   include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
   # Tests don't need to go into toplevel/bin, they are fine in the current dir.
