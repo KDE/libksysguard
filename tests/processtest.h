@@ -27,6 +27,7 @@ class testProcess: public QObject
       private:
         unsigned long countNumChildren(Solid::Process *p);
       private slots:
+	void testTime();
         void testProcesses();
         void testProcessesTreeStructure();
 	void testProcessesModification();

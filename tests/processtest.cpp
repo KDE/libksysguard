@@ -52,11 +52,8 @@ void testProcess::testProcesses() {
 		pids.remove(process->pid);
 	}
 
-
 	QVERIFY(processes2.size() == processes.size());
 	QCOMPARE(processes, processes2); //Make sure calling it twice gives the same results.  The difference in time is so small that it really shouldn't have changed
-
-
 }
 
 
@@ -102,6 +99,20 @@ void testProcess::testProcessesModification() {
 	QHash<long, Solid::Process *> processes2 = Solid::Processes::getProcesses();
 
 	QCOMPARE(processes, processes2);
+
+}
+
+void testProcess::testTime() {
+	//See how long it takes to get proccess information	
+	QTime t;
+	t.start();
+	QHash<long, Solid::Process *> processes = Solid::Processes::getProcesses();
+	kDebug() << "Time elapsed: "<< t.elapsed() <<" ms" <<  endl;
+	QVERIFY(t.elapsed() < 200); //It should take less than about 100ms.  Anything longer than 300ms even on a slow system really needs to be optimised
+        t.start();
+	processes = Solid::Processes::getProcesses();
+	kDebug() << "Time elapsed second time: "<< t.elapsed() <<" ms" <<  endl;
+	QVERIFY(t.elapsed() < 200); //It should take less than about 100ms.  Anything longer than 300ms even on a slow system really needs to be optimised
 
 }
 
