@@ -85,6 +85,10 @@ void testProcess::testProcessesModification() {
 	//We will modify the tree, then re-call getProcesses and make sure that it fixed everything we modified
 	QHash<long, Solid::Process *> processes = Solid::Processes::getProcesses();
 
+
+	if(!processes.contains(1) || processes[1]->numChildren < 3)
+		return;
+
 	QVERIFY(processes[1]);
 	QVERIFY(processes[1]->children[0]);
 	QVERIFY(processes[1]->children[1]);
