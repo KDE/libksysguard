@@ -29,6 +29,7 @@ class testProcess: public QObject
       private slots:
         void testProcesses();
         void testProcessesTreeStructure();
+	void testProcessesModification();
 };
 
 #endif

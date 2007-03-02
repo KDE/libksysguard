@@ -81,6 +81,26 @@ void testProcess::testProcessesTreeStructure() {
 
 }
 
+void testProcess::testProcessesModification() {
+	//We will modify the tree, then re-call getProcesses and make sure that it fixed everything we modified
+	QHash<long, Solid::Process *> processes = Solid::Processes::getProcesses();
+
+	QVERIFY(processes[1]);
+	QVERIFY(processes[1]->children[0]);
+	QVERIFY(processes[1]->children[1]);
+	kDebug() << processes[1]->numChildren << endl;
+	processes[1]->children[0]->parent = processes[1]->children[1];
+	processes[1]->children[1]->children.append(processes[1]->children[0]);
+	processes[1]->children[1]->numChildren++;
+	processes[1]->numChildren--;
+	processes[1]->children.removeAt(0);
+
+	QHash<long, Solid::Process *> processes2 = Solid::Processes::getProcesses();
+
+	QCOMPARE(processes, processes2);
+
+}
+
 QTEST_KDEMAIN(testProcess, NoGUI)
 
 #include "processtest.moc"
