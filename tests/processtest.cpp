@@ -32,6 +32,7 @@ void testProcess::testProcesses() {
 	QHash<long, Solid::Process *> processes = Solid::Processes::getInstance()->getProcesses();
 	QSet<long> pids;
 	foreach( Solid::Process *process, processes) {
+		if(process->pid == 0) continue;
 		QVERIFY(process->pid > 0);
 		QVERIFY(!process->name.isEmpty());
 
@@ -42,6 +43,7 @@ void testProcess::testProcesses() {
 
 	QHash<long, Solid::Process *> processes2 = Solid::Processes::getInstance()->getProcesses();
 	foreach( Solid::Process *process, processes) {
+		if(process->pid == 0) continue;
 		QVERIFY(process->pid > 0);
 		QVERIFY(!process->name.isEmpty());
 
