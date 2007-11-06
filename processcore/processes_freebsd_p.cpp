@@ -300,7 +300,7 @@ long long ProcessesLocal::totalPhysicalMemory() {
 
 ProcessesLocal::~ProcessesLocal()
 {
-  
+   delete d;  
 }
 
 }
