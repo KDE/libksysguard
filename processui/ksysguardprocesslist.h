@@ -26,7 +26,7 @@
 #include <kapplication.h>
 #include "ProcessModel.h"
 #include "ProcessFilter.h"
-#include "processcore/processes.h"
+#include "processes.h"
 
 class QShowEvent;
 class QHideEvent;
