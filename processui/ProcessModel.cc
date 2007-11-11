@@ -743,7 +743,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		}
 		switch(index.column()) {
 		case HeadingName: {
-			QString tooltip;
+			QString tooltip = "<qt>";
 			/***  It would be nice to be able to show the icon in the tooltip, but Qt4 won't let us put
 			 *    a picture in a tooltip :(
 			   
@@ -757,10 +757,17 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 				tooltip = i18n("<qt><table><tr><td>%1", icon);
 			}
 			*/
-			if(process->parent_pid == 0)
-				tooltip	= i18nc("name column tooltip. first item is the name","<qt><b>%1</b><br />Process ID: <numid>%2</numid><br />Command: %3</qt>", process->name, (long int)process->pid, process->command);
+			if(process->parent_pid == 0) {
+				//Give a quick explanation of init and kthreadd
+				if(process->name == "init") {
+					tooltip += i18n("<b>Init</b> is the parent of all other processes and cannot be killed.<br/>");
+				} else if(process->name == "kthreadd") {
+					tooltip += i18n("<b>KThreadd</b> manages kernel threads. The children processes run in the kernel, controlling hard disk access etc.<br/>");
+				}
+				tooltip	+= i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Command: %3", process->name, (long int)process->pid, process->command);
+			}
 			else
-				tooltip	= i18nc("name column tooltip. first item is the name","<qt><b>%1</b><br />Process ID: <numid>%2</numid><br />Parent's ID: <numid>%3</numid><br />Command: %4</qt>", process->name, (long int)process->pid, (long int)process->parent_pid, process->command);
+				tooltip	= i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Parent's ID: <numid>%3</numid><br />Command: %4", process->name, (long int)process->pid, (long int)process->parent_pid, process->command);
 			if(!process->tty.isEmpty())
 				tooltip += i18n( "<br />Running on: %1", QString(process->tty));
 			if(!tracer.isEmpty())

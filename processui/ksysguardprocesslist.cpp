@@ -237,6 +237,7 @@ void KSysGuardProcessList::setState(ProcessFilter::State state)
 	d->mFilterModel.setFilter(state);
 	d->mModel.setSimpleMode( (state != ProcessFilter::AllProcessesInTreeForm) );
 	d->mUi->cmbFilter->setCurrentIndex( (int)state);
+	expandInit();
 }
 void KSysGuardProcessList::currentRowChanged(const QModelIndex &current)
 {
@@ -309,7 +310,6 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point){
 		resume->setText(i18n("Resume stopped process"));
 		d->mProcessContextMenu->addAction(resume);
 	}
-
 
 	QAction *result = d->mProcessContextMenu->exec(d->mUi->treeView->mapToGlobal(point));
 	if(result == 0) {
@@ -460,7 +460,7 @@ void KSysGuardProcessList::expandInit()
 {
 	//When we expand the items, make sure we don't call our expand all children function
 	disconnect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
-	d->mUi->treeView->expand(d->mFilterModel.mapFromSource(d->mModel.index(0,0, QModelIndex())));
+	d->mUi->treeView->expandToDepth(0);
 	connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
 }
 
@@ -642,7 +642,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 	if(!changeCPUSchedulerPids.isEmpty()) {
 		Q_ASSERT(reniceDlg.newCPUSched >= 0);
 		if(!changeCpuScheduler(changeCPUSchedulerPids, (KSysGuard::Process::Scheduler) reniceDlg.newCPUSched, reniceDlg.newCPUPriority)) {
-			KMessageBox::sorry(this, i18n("Your privileges do not suffice to change the CPU scheduler. Aborting."));
+			KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU scheduler. Aborting."));
 			return;
 		}
 
@@ -650,13 +650,13 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 	if(!renicePids.isEmpty()) {
 		Q_ASSERT(reniceDlg.newCPUPriority <= 20 && reniceDlg.newCPUPriority >= -20); 
 		if(!reniceProcesses(renicePids, reniceDlg.newCPUPriority)) {
-			KMessageBox::sorry(this, i18n("Your privileges do not suffice to change the CPU priority.  Aborting"));
+			KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU priority.  Aborting"));
 			return;
 		}
 	}
 	if(!changeIOSchedulerPids.isEmpty()) {
 		if(!changeIoScheduler(changeIOSchedulerPids, (KSysGuard::Process::IoPriorityClass) reniceDlg.newIOSched, reniceDlg.newIOPriority)) {
-			KMessageBox::sorry(this, i18n("Your privileges do not suffice to change the IO scheduler and priority. Aborting."));
+			KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the IO scheduler and priority. Aborting."));
 			return;
 		}
 	}
