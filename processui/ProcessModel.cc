@@ -456,6 +456,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
 	  case Qt::TextAlignmentRole: 
 	  {
 		switch(section) {
+			case HeadingPid:
 			case HeadingMemory:
 			case HeadingSharedMemory:
 			case HeadingVmSize:
@@ -490,6 +491,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
 			return i18n("<qt>The command that this process was launched with</qt>");
 		    case HeadingXTitle:
 			return i18n("<qt>The title of any windows that this process is showing</qt>");
+		    case HeadingPid:
+			return i18n("The unique Process ID that identifies this process");
 		    default:
 			return QVariant();
 		}
@@ -661,6 +664,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		switch(index.column()) {
 		case HeadingName:
 			return process->name;
+		case HeadingPid:
+			return (qlonglong)process->pid;
 		case HeadingUser:
 			if(process->uid == process->euid)
 				return d->getUsernameForUser(process->uid, false);
@@ -897,6 +902,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			case HeadingUser:
 			case HeadingCPUUsage:
 				return QVariant(Qt::AlignCenter);
+			case HeadingPid:
 			case HeadingMemory:
 			case HeadingSharedMemory:
 			case HeadingVmSize:
@@ -1039,6 +1045,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 	return QVariant(); //never get here, but make compilier happy
 }
 
+bool ProcessModel::hasGUIWindow(long long pid) const
+{
+	return d->mPidToWindowInfo.contains(pid);
+}
+
 bool ProcessModel::isLocalhost() const
 {
 	return d->mIsLocalhost;
@@ -1049,6 +1060,7 @@ void ProcessModel::setupHeader() {
 	QStringList headings;
 	headings << i18nc("process heading", "Name");
 	headings << i18nc("process heading", "User Name");
+	headings << i18nc("process heading", "Pid");
 	headings << i18nc("process heading", "Tty");
 	headings << i18nc("process heading", "Niceness");
 	// xgettext: no-c-format

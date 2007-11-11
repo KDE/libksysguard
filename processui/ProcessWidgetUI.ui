@@ -97,6 +97,11 @@
         <property name="text" >
          <string>Own Processes</string>
         </property>
+	</item>
+ 	<item>
+        <property name="text" >
+         <string>Programs Only</string>
+        </property>
        </item>
       </widget>
      </item>

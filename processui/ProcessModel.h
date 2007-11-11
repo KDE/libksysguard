@@ -93,6 +93,9 @@ public:
 	/** Whether this is showing the processes for the current machine
 	 */
 	bool isLocalhost() const;
+	
+	/** Whether this process has a GUI window */
+	bool hasGUIWindow(long long pid) const;
 
 	/** Returns for process controller pointer for this model
 	 */
@@ -100,9 +103,11 @@ public:
 
 	/** The headings in the model.  The order here is the order that they are shown
 	 *  in.  If you change this, make sure you also change the 
-	 *  setup header function
+	 *  setup header function, and make sure you increase PROCESSHEADERVERSION.  This will ensure
+	 *  that old saved settings won't be used
 	 */
-	enum { HeadingName=0, HeadingUser, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXTitle };
+#define PROCESSHEADERVERSION 1
+	enum { HeadingName=0, HeadingUser, HeadingPid, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXTitle };
 
 	bool showTotals() const;
 

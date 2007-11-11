@@ -34,7 +34,7 @@ class KDE_EXPORT ProcessFilter : public QSortFilterProxyModel
 	Q_ENUMS(State)
 
   public:
-	enum State {AllProcesses=0,AllProcessesInTreeForm, SystemProcesses, UserProcesses, OwnProcesses};
+	enum State {AllProcesses=0,AllProcessesInTreeForm, SystemProcesses, UserProcesses, OwnProcesses, ProgramsOnly};
 	ProcessFilter(QObject *parent=0) : QSortFilterProxyModel(parent) {mFilter = AllProcesses;}
 	virtual ~ProcessFilter() {}
 	bool lessThan(const QModelIndex &left, const QModelIndex &right) const;

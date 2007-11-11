@@ -173,13 +173,12 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent)
 	connect(d->mUi->treeView->selectionModel(), SIGNAL(currentRowChanged(const QModelIndex & , const QModelIndex & )), this, SLOT(currentRowChanged(const QModelIndex &)));
 	setMinimumSize(sizeHint());
 
-	enum State {AllProcesses=0,AllProcessesInTreeForm, SystemProcesses, UserProcesses, OwnProcesses};
-
 	/*  Hide the vm size column by default since it's not very useful */
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingVmSize);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingNiceness);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingTty);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCommand);
+	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingPid);
 	d->mFilterModel.setFilterKeyColumn(0);
 
 	//Process names can have mixed case. Make the filter case insensitive.
@@ -259,6 +258,14 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point){
 	QAction *selectParent = 0;
 	QAction *selectTracer = 0;
 	QAction *resume = 0;
+	QAction *sigStop = 0;
+	QAction *sigCont = 0;
+	QAction *sigHup = 0;
+	QAction *sigInt = 0;
+	QAction *sigTerm = 0;
+	QAction *sigKill = 0;
+	QAction *sigUsr1 = 0;
+	QAction *sigUsr2 = 0;
 	if(numProcesses != 1 || process->status != KSysGuard::Process::Zombie) {  //If the selected process is a zombie, don't bother offering renice and kill options
 
 		renice = new QAction(d->mProcessContextMenu);
@@ -269,6 +276,16 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point){
 		kill->setText(i18np("Kill Process", "Kill Processes", numProcesses));
 		kill->setIcon(KIcon("stop"));
 		d->mProcessContextMenu->addAction(kill);
+
+		QMenu *signalMenu = d->mProcessContextMenu->addMenu(i18n("Send Signal"));
+		sigStop = signalMenu->addAction(i18n("Suspend (STOP)"));
+		sigCont = signalMenu->addAction(i18n("Continue (CONT)"));
+		sigHup = signalMenu->addAction(i18n("Hangup (HUP)"));
+		sigInt = signalMenu->addAction(i18n("Interupt (INT)"));
+		sigTerm = signalMenu->addAction(i18n("Terminate (TERM)"));
+		sigKill = signalMenu->addAction(i18n("Kill (KILL)"));
+		sigUsr1 = signalMenu->addAction(i18n("User 1 (USR1)"));
+		sigUsr2 = signalMenu->addAction(i18n("User 2 (USR2)"));
 	}
 
 	if(numProcesses == 1 && process->parent_pid > 1) {
@@ -305,10 +322,25 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point){
 		selectAndJumpToProcess(process->parent_pid);
 	} else if(result == selectTracer) {
 		selectAndJumpToProcess(process->tracerpid);
-	} else if(result == resume) {
+	} else {
 		QList< long long > pidlist;
 		pidlist << process->pid;
-		killProcesses(pidlist, SIGCONT);  //Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
+		if(result == resume || result == sigCont)
+			killProcesses(pidlist, SIGCONT);  //Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
+		else if(result == sigStop)
+			killProcesses(pidlist, SIGSTOP);
+		else if(result == sigHup)
+			killProcesses(pidlist, SIGHUP);
+		else if(result == sigInt)
+			killProcesses(pidlist, SIGINT);
+		else if(result == sigTerm)
+			killProcesses(pidlist, SIGTERM);
+		else if(result == sigKill)
+			killProcesses(pidlist, SIGKILL);
+		else if(result == sigUsr1)
+			killProcesses(pidlist, SIGUSR1);
+		else if(result == sigUsr2)
+			killProcesses(pidlist, SIGUSR2);
 		updateList();
 	}
 }
@@ -466,6 +498,7 @@ void KSysGuardProcessList::retranslateUi()
 	d->mUi->cmbFilter->setItemIcon(ProcessFilter::SystemProcesses, KIcon("view-process-system"));
 	d->mUi->cmbFilter->setItemIcon(ProcessFilter::UserProcesses, KIcon("view-process-users"));
 	d->mUi->cmbFilter->setItemIcon(ProcessFilter::OwnProcesses, KIcon("view-process-own"));
+	d->mUi->cmbFilter->setItemIcon(ProcessFilter::ProgramsOnly, KIcon("view-process-all"));
 }
 
 void KSysGuardProcessList::updateList()
@@ -798,17 +831,25 @@ void KSysGuardProcessList::setUnits(ProcessModel::Units unit) {
 }
 
 void KSysGuardProcessList::saveSettings(KConfigGroup &cg) {
+	/* Note that the ksysguard program does not use these functions.  It saves the settings itself to an xml file instead */
 	cg.writeEntry("units", (int)(units()));
 	cg.writeEntry("showTotals", showTotals());
 	cg.writeEntry("filterState", (int)(state()));
 	cg.writeEntry("updateIntervalMSecs", updateIntervalMSecs());
 	cg.writeEntry("headerState", d->mUi->treeView->header()->saveState());
+	//If we change, say, the header between versions of ksysguard, then the old headerState settings will not be valid.
+	//The version property lets us keep track of which version we are
+	cg.writeEntry("version", PROCESSHEADERVERSION);
 }
 
 void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
+	/* Note that the ksysguard program does not use these functions.  It saves the settings itself to an xml file instead */
 	setUnits((ProcessModel::Units) cg.readEntry("units", (int)ProcessModel::UnitsKB));
 	setShowTotals(cg.readEntry("showTotals", true));
 	setStateInt(cg.readEntry("filterState", (int)ProcessFilter::AllProcesses));
 	setUpdateIntervalMSecs(cg.readEntry("updateIntervalMSecs", 2000));
-	d->mUi->treeView->header()->restoreState(cg.readEntry("headerState", QByteArray()));
+	int version = cg.readEntry("version", 0);
+	if(version == PROCESSHEADERVERSION) {  //If the header has changed, the old settings are no longer valid.  Only restore if version is the same
+		d->mUi->treeView->header()->restoreState(cg.readEntry("headerState", QByteArray()));
+	}
 }
