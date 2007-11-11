@@ -574,9 +574,9 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 	foreach(KSysGuard::Process *process, processes) {
 		selectedAsStrings << d->mModel.getStringForProcess(process);
 		if(sched == -2) sched = (int)process->scheduler;
-		else if(sched != -1 && sched == (int)process->scheduler) sched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
+		else if(sched != -1 && sched != (int)process->scheduler) sched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
 		if(iosched == -2) iosched = (int)process->ioPriorityClass;
-		else if(iosched != -1 && iosched == (int)process->ioPriorityClass) iosched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
+		else if(iosched != -1 && iosched != (int)process->ioPriorityClass) iosched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
 
 	}
 
