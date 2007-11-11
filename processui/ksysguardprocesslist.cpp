@@ -642,7 +642,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 	if(!changeCPUSchedulerPids.isEmpty()) {
 		Q_ASSERT(reniceDlg.newCPUSched >= 0);
 		if(!changeCpuScheduler(changeCPUSchedulerPids, (KSysGuard::Process::Scheduler) reniceDlg.newCPUSched, reniceDlg.newCPUPriority)) {
-			KMessageBox::sorry(this, i18n("You do not have sufficient privillages to change the CPU scheduler. Aborting."));
+			KMessageBox::sorry(this, i18n("Your privileges do not suffice to change the CPU scheduler. Aborting."));
 			return;
 		}
 
@@ -650,13 +650,13 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 	if(!renicePids.isEmpty()) {
 		Q_ASSERT(reniceDlg.newCPUPriority <= 20 && reniceDlg.newCPUPriority >= -20); 
 		if(!reniceProcesses(renicePids, reniceDlg.newCPUPriority)) {
-			KMessageBox::sorry(this, i18n("You do not have sufficient privillages to change the CPU priority.  Aborting"));
+			KMessageBox::sorry(this, i18n("Your privileges do not suffice to change the CPU priority.  Aborting"));
 			return;
 		}
 	}
 	if(!changeIOSchedulerPids.isEmpty()) {
 		if(!changeIoScheduler(changeIOSchedulerPids, (KSysGuard::Process::IoPriorityClass) reniceDlg.newIOSched, reniceDlg.newIOPriority)) {
-			KMessageBox::sorry(this, i18n("You do not have sufficient privillages to change the IO scheduler and priority. Aborting."));
+			KMessageBox::sorry(this, i18n("Your privileges do not suffice to change the IO scheduler and priority. Aborting."));
 			return;
 		}
 	}
