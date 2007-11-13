@@ -184,6 +184,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent)
 	d->mFilterModel.setFilterCaseSensitivity(Qt::CaseInsensitive);
 
 	d->mUi->txtFilter->installEventFilter(this);
+	d->mUi->treeView->installEventFilter(this);
 
 	//Logical column 0 will always be the tree bit with the process name.  We expand this automatically in code,
 	//so don't let the user change it
@@ -249,7 +250,13 @@ void KSysGuardProcessList::currentRowChanged(const QModelIndex &current)
 {
 	d->mUi->btnKillProcess->setEnabled(current.isValid());
 }
-void KSysGuardProcessList::showProcessContextMenu(const QPoint &point){
+void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
+	if(!index.isValid()) return;
+	QRect rect = d->mUi->treeView->visualRect(index);
+	QPoint point(rect.x() + rect.width()/4, rect.y() + rect.height()/2 );
+	showProcessContextMenu(point);
+}
+void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	d->mProcessContextMenu->clear();
 
 	QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
@@ -864,13 +871,21 @@ void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
 	if (event->type() == QEvent::KeyPress) {
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-		if(keyEvent->matches(QKeySequence::MoveToNextLine) || keyEvent->matches(QKeySequence::SelectNextLine) ||
-		   keyEvent->matches(QKeySequence::MoveToPreviousLine) || keyEvent->matches(QKeySequence::SelectPreviousLine) ||
-		   keyEvent->matches(QKeySequence::MoveToNextPage) ||  keyEvent->matches(QKeySequence::SelectNextPage) ||
-		   keyEvent->matches(QKeySequence::MoveToPreviousPage) ||  keyEvent->matches(QKeySequence::SelectPreviousPage))
-		{
-			QApplication::sendEvent(d->mUi->treeView, event);
-			return true;
+		if(obj == d->mUi->treeView) {
+			if(  keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return) {
+				showProcessContextMenu(d->mUi->treeView->currentIndex());
+			}
+		} else {
+			// obj must be txtFilter
+			if(keyEvent->matches(QKeySequence::MoveToNextLine) || keyEvent->matches(QKeySequence::SelectNextLine) ||
+			   keyEvent->matches(QKeySequence::MoveToPreviousLine) || keyEvent->matches(QKeySequence::SelectPreviousLine) ||
+			   keyEvent->matches(QKeySequence::MoveToNextPage) ||  keyEvent->matches(QKeySequence::SelectNextPage) ||
+			   keyEvent->matches(QKeySequence::MoveToPreviousPage) ||  keyEvent->matches(QKeySequence::SelectPreviousPage) ||
+			   keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
+			{
+				QApplication::sendEvent(d->mUi->treeView, event);
+				return true;
+			}
 		}
 	}
 	return false;

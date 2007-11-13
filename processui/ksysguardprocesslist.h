@@ -148,6 +148,8 @@ private Q_SLOTS:
 	/** Display a context menu for the column headings allowing the user to show or hide columns. */
 	void showColumnContextMenu(const QPoint &point);
 	
+	/**  Display a context menu for the given process allowing the user to kill etc the process */
+	void showProcessContextMenu(const QModelIndex &index);
 	/** Display a context menu for the selected processes allowing the user to kill etc the process */
 	void showProcessContextMenu(const QPoint &point);
 	
