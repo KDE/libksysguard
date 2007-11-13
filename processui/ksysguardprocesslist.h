@@ -162,9 +162,11 @@ private Q_SLOTS:
 	
 	/** Set state from combo box int value */
 	void setStateInt(int state);
-private:
-	KSysGuardProcessListPrivate* const d;
 
+	/** Called when the text in the gui filter text box has changed */
+	void filterTextChanged(const QString &newText);
+
+protected:
 	/** Inherit QWidget::showEvent(QShowEvent *) to enable the timer, for updates, when visible */
 	virtual void showEvent(QShowEvent*);
 	
@@ -174,8 +176,13 @@ private:
 	/** Capture any change events sent to this widget.  In particular QEvent::LanguageChange */
 	virtual void changeEvent ( QEvent * event );
 
+	bool eventFilter(QObject *obj, QEvent *event);
+
 	/** Retranslate the Ui as needed */
 	void retranslateUi();
+
+private:
+	KSysGuardProcessListPrivate* const d;
 };
 
 #endif

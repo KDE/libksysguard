@@ -166,8 +166,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent)
 	d->mUi->treeView->header()->setCascadingSectionResizes(true);
 	d->mUi->treeView->setSelectionMode( QAbstractItemView::ExtendedSelection );
 	connect(d->mUi->btnKillProcess, SIGNAL(clicked()), this, SLOT(killSelectedProcesses()));
-	connect(d->mUi->txtFilter, SIGNAL(textChanged(const QString &)), &d->mFilterModel, SLOT(setFilterRegExp(const QString &)));
-	connect(d->mUi->txtFilter, SIGNAL(textChanged(const QString &)), this, SLOT(expandInit()));
+	connect(d->mUi->txtFilter, SIGNAL(textChanged(const QString &)), this, SLOT(filterTextChanged(const QString &)));
 	connect(d->mUi->cmbFilter, SIGNAL(currentIndexChanged(int)), this, SLOT(setStateInt(int)));
 	connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
 	connect(d->mUi->treeView->selectionModel(), SIGNAL(currentRowChanged(const QModelIndex & , const QModelIndex & )), this, SLOT(currentRowChanged(const QModelIndex &)));
@@ -183,6 +182,8 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent)
 
 	//Process names can have mixed case. Make the filter case insensitive.
 	d->mFilterModel.setFilterCaseSensitivity(Qt::CaseInsensitive);
+
+	d->mUi->txtFilter->installEventFilter(this);
 
 	//Logical column 0 will always be the tree bit with the process name.  We expand this automatically in code,
 	//so don't let the user change it
@@ -238,6 +239,11 @@ void KSysGuardProcessList::setState(ProcessFilter::State state)
 	d->mModel.setSimpleMode( (state != ProcessFilter::AllProcessesInTreeForm) );
 	d->mUi->cmbFilter->setCurrentIndex( (int)state);
 	expandInit();
+}
+void KSysGuardProcessList::filterTextChanged(const QString &newText) {
+	d->mFilterModel.setFilterRegExp(newText);
+	expandInit();
+	d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
 }
 void KSysGuardProcessList::currentRowChanged(const QModelIndex &current)
 {
@@ -853,3 +859,20 @@ void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 		d->mUi->treeView->header()->restoreState(cg.readEntry("headerState", QByteArray()));
 	}
 }
+
+
+bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
+	if (event->type() == QEvent::KeyPress) {
+		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+		if(keyEvent->matches(QKeySequence::MoveToNextLine) || keyEvent->matches(QKeySequence::SelectNextLine) ||
+		   keyEvent->matches(QKeySequence::MoveToPreviousLine) || keyEvent->matches(QKeySequence::SelectPreviousLine) ||
+		   keyEvent->matches(QKeySequence::MoveToNextPage) ||  keyEvent->matches(QKeySequence::SelectNextPage) ||
+		   keyEvent->matches(QKeySequence::MoveToPreviousPage) ||  keyEvent->matches(QKeySequence::SelectPreviousPage))
+		{
+			QApplication::sendEvent(d->mUi->treeView, event);
+			return true;
+		}
+	}
+	return false;
+}
+
