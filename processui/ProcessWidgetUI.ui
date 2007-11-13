@@ -36,7 +36,7 @@
         </sizepolicy>
        </property>
        <property name="text" >
-        <string>Kill Process</string>
+        <string>&amp;Kill Process</string>
        </property>
        <property name="flat" >
         <bool>false</bool>
@@ -97,8 +97,8 @@
         <property name="text" >
          <string>Own Processes</string>
         </property>
-	</item>
- 	<item>
+       </item>
+       <item>
         <property name="text" >
          <string>Programs Only</string>
         </property>
