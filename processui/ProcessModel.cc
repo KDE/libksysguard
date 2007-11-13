@@ -1077,7 +1077,7 @@ void ProcessModel::setupHeader() {
 	headings << i18nc("process heading", "Shared Mem");
 	headings << i18nc("process heading", "Command");
 #ifdef Q_WS_X11
-	headings << i18nc("process heading", "Title Name");
+	headings << i18nc("process heading", "Window Title");
 #endif
 
 	if(d->mHeadings.isEmpty()) { // If it's empty, this is the first time this has been called, so insert the headings
