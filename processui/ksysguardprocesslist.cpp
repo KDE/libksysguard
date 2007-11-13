@@ -169,7 +169,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent)
 	connect(d->mUi->txtFilter, SIGNAL(textChanged(const QString &)), this, SLOT(filterTextChanged(const QString &)));
 	connect(d->mUi->cmbFilter, SIGNAL(currentIndexChanged(int)), this, SLOT(setStateInt(int)));
 	connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
-	connect(d->mUi->treeView->selectionModel(), SIGNAL(currentRowChanged(const QModelIndex & , const QModelIndex & )), this, SLOT(currentRowChanged(const QModelIndex &)));
+	connect(d->mUi->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection & , const QItemSelection & )), this, SLOT(selectionChanged(const QItemSelection &)));
 	setMinimumSize(sizeHint());
 
 	/*  Hide the vm size column by default since it's not very useful */
@@ -233,6 +233,7 @@ ProcessFilter::State KSysGuardProcessList::state() const
 }
 void KSysGuardProcessList::setStateInt(int state) {
 	setState((ProcessFilter::State) state);
+	d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
 }
 void KSysGuardProcessList::setState(ProcessFilter::State state)
 {  //index is the item the user selected in the combo box
@@ -245,10 +246,11 @@ void KSysGuardProcessList::filterTextChanged(const QString &newText) {
 	d->mFilterModel.setFilterRegExp(newText);
 	expandInit();
 	d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
+	d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
 }
-void KSysGuardProcessList::currentRowChanged(const QModelIndex &current)
+void KSysGuardProcessList::selectionChanged(const QItemSelection &newSelection)
 {
-	d->mUi->btnKillProcess->setEnabled(current.isValid());
+	d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->selectedIndexes().size() != 0 );
 }
 void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
 	if(!index.isValid()) return;
@@ -873,6 +875,7 @@ bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 		if(obj == d->mUi->treeView) {
 			if(  keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return) {
+				d->mUi->treeView->selectionModel()->select(d->mUi->treeView->currentIndex(), QItemSelectionModel::Select | QItemSelectionModel::Rows);
 				showProcessContextMenu(d->mUi->treeView->currentIndex());
 			}
 		} else {
