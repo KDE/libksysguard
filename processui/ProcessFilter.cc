@@ -88,8 +88,14 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		break;
 	}
 	case ProgramsOnly:
-		if(process->tty.isEmpty() && !model->hasGUIWindow(process->pid))
-			accepted = false;
+		if(process->tty.isEmpty()) {
+			if(!model->hasGUIWindow(process->pid))
+				accepted = false;
+		} else {
+			//login and getty kinda _are_ the tty, so I do not really count them as 'programs'. So make a special case and hide them
+			if(process->name == "login" || process->name == "getty")
+				accepted = false;
+		}
 		break;
         default:
 		break;
