@@ -243,7 +243,7 @@ void KSysGuardProcessList::setState(ProcessFilter::State state)
 	expandInit();
 }
 void KSysGuardProcessList::filterTextChanged(const QString &newText) {
-	d->mFilterModel.setFilterRegExp(newText);
+	d->mFilterModel.setFilterRegExp(newText.trimmed());
 	expandInit();
 	d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
 	d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
