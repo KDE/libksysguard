@@ -169,7 +169,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent)
 	connect(d->mUi->txtFilter, SIGNAL(textChanged(const QString &)), this, SLOT(filterTextChanged(const QString &)));
 	connect(d->mUi->cmbFilter, SIGNAL(currentIndexChanged(int)), this, SLOT(setStateInt(int)));
 	connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
-	connect(d->mUi->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection & , const QItemSelection & )), this, SLOT(selectionChanged(const QItemSelection &)));
+	connect(d->mUi->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection & , const QItemSelection & )), this, SLOT(selectionChanged()));
 	setMinimumSize(sizeHint());
 
 	/*  Hide the vm size column by default since it's not very useful */
@@ -248,7 +248,7 @@ void KSysGuardProcessList::filterTextChanged(const QString &newText) {
 	d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
 	d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
 }
-void KSysGuardProcessList::selectionChanged(const QItemSelection &newSelection)
+void KSysGuardProcessList::selectionChanged()
 {
 	d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->selectedIndexes().size() != 0 );
 }

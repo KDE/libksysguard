@@ -88,7 +88,7 @@ public:
 
 public Q_SLOTS:
 	/** Inform the view that the user has changed the selection */
-	void selectionChanged(const QItemSelection &);
+	void selectionChanged();
 	
 	/** Send a kill signal to all the processes that the user has selected.  Pops up a dialog box to confirm with the user */
 	void killSelectedProcesses();
