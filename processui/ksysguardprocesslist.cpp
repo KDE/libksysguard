@@ -180,6 +180,10 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent)
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingPid);
 	d->mFilterModel.setFilterKeyColumn(0);
 
+	d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingCPUUsage, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingCPUUsage));
+	d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingMemory, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingMemory));
+	d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingSharedMemory, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingSharedMemory));
+
 	//Process names can have mixed case. Make the filter case insensitive.
 	d->mFilterModel.setFilterCaseSensitivity(Qt::CaseInsensitive);
 
