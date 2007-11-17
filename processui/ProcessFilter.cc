@@ -1,7 +1,7 @@
 /*
     KSysGuard, the KDE System Guard
 
-	Copyright (c) 2006 John Tapsell <john.tapsell@kdemail.net>
+	Copyright (c) 2006-2007 John Tapsell <john.tapsell@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms version 2 of of the GNU General Public
@@ -93,7 +93,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 				accepted = false;
 		} else {
 			//login and getty kinda _are_ the tty, so I do not really count them as 'programs'. So make a special case and hide them
-			if(process->name == "login" || process->name == "getty")
+			if(process->name == "login" || process->name == "getty" || process->name == "mingetty")
 				accepted = false;
 		}
 		break;
