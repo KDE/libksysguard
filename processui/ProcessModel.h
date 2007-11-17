@@ -2,7 +2,7 @@
     KSysGuard, the KDE System Guard
 
 	Copyright (c) 1999, 2000 Chris Schlaeger <cs@kde.org>
-	Copyright (c) 2006 John Tapsell <john.tapsell@kdemail.net>
+	Copyright (c) 2006 John Tapsell <john.tapsell@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of version 2 of the GNU General Public
@@ -38,7 +38,7 @@ class KDE_EXPORT ProcessModel : public QAbstractItemModel
 	Q_ENUMS(Units)
 		
 public:
-	ProcessModel(QObject* parent = 0);
+	ProcessModel(QObject* parent = 0, const QString &host = QString() );
 	virtual ~ProcessModel();
 
 	/* Functions for our Model for QAbstractItemModel*/

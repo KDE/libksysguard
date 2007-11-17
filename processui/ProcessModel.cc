@@ -2,7 +2,7 @@
     KSysGuard, the KDE System Guard
 
 	Copyright (c) 1999, 2000 Chris Schlaeger <cs@kde.org>
-	Copyright (c) 2006 John Tapsell <john.tapsell@kde.org>
+	Copyright (c) 2006-2007 John Tapsell <john.tapsell@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms version 2 of of the GNU General Public
@@ -62,11 +62,12 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 	mIsChangingLayout = false;
 }
 
-ProcessModel::ProcessModel(QObject* parent)
+ProcessModel::ProcessModel(QObject* parent, const QString &host)
 	: QAbstractItemModel(parent), d(new ProcessModelPrivate)
 {
 	KGlobal::locale()->insertCatalog("processui");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
 	d->q=this;
+	d->mHost = host;
 	d->setupProcesses();
 	setupHeader();
 	d->setupWindows();
@@ -128,9 +129,9 @@ void ProcessModelPrivate::setupWindows() {
 
 void ProcessModelPrivate::setupProcesses() {
 	if(mProcesses)
-		KSysGuard::Processes::returnInstance();
+		KSysGuard::Processes::returnInstance(mHost);
 
-	mProcesses = KSysGuard::Processes::getInstance();  //For now, hard code in a local instance
+	mProcesses = KSysGuard::Processes::getInstance(mHost);  //For now, hard code in a local instance
 
         connect( mProcesses, SIGNAL( processChanged(KSysGuard::Process *, bool)), this, SLOT(processChanged(KSysGuard::Process *, bool)));
 	connect( mProcesses, SIGNAL( beginAddProcess(KSysGuard::Process *)), this, SLOT(beginInsertRow( KSysGuard::Process *)));
@@ -164,10 +165,6 @@ void ProcessModelPrivate::windowAdded(WId wid)
 	NETWinInfo *info = new NETWinInfo( QX11Info::display(), wid, QX11Info::appRootWindow(), 
 			NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMState );
 	long unsigned state = info->state();
-	if(/*state & NET::SkipTaskbar || state & NET::SkipPager || */state & NET::Hidden) {
-		delete info;
-		return;
-	}
 
 	if (handler.error( false ) ) {
 		delete info;
