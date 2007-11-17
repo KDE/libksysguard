@@ -67,7 +67,13 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
 {
 	KGlobal::locale()->insertCatalog("processui");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
 	d->q=this;
-	d->mHost = host;
+	if(host.isEmpty() || host == "localhost") {
+		d->mHostName = QString();
+		d->mIsLocalhost = true;
+	} else {
+		d->mHostName = host;
+		d->mIsLocalhost = false;
+	}
 	d->setupProcesses();
 	setupHeader();
 	d->setupWindows();
@@ -128,10 +134,14 @@ void ProcessModelPrivate::setupWindows() {
 }
 
 void ProcessModelPrivate::setupProcesses() {
-	if(mProcesses)
-		KSysGuard::Processes::returnInstance(mHost);
+	if(mProcesses) {
+		mWIdToPid.clear();
+		mPidToWindowInfo.clear();
+		KSysGuard::Processes::returnInstance(mHostName);
+		q->reset();
+	}
 
-	mProcesses = KSysGuard::Processes::getInstance(mHost);  //For now, hard code in a local instance
+	mProcesses = KSysGuard::Processes::getInstance(mHostName);  //For now, hard code in a local instance
 
         connect( mProcesses, SIGNAL( processChanged(KSysGuard::Process *, bool)), this, SLOT(processChanged(KSysGuard::Process *, bool)));
 	connect( mProcesses, SIGNAL( beginAddProcess(KSysGuard::Process *)), this, SLOT(beginInsertRow( KSysGuard::Process *)));
@@ -164,8 +174,6 @@ void ProcessModelPrivate::windowAdded(WId wid)
 	KXErrorHandler handler;
 	NETWinInfo *info = new NETWinInfo( QX11Info::display(), wid, QX11Info::appRootWindow(), 
 			NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMState );
-	long unsigned state = info->state();
-
 	if (handler.error( false ) ) {
 		delete info;
 		return;  //info is invalid - window just closed or something probably
@@ -1146,5 +1154,9 @@ QString ProcessModel::formatMemoryInfo(long amountInKB) const
 		return  i18n("%1 g", (amountInKB+512*1024)/(1024*1024)); //Round to nearest gigabyte
 	}
 	return "";  //error
+}
+
+QString ProcessModel::hostName() const {
+	return d->mHostName;
 }
 

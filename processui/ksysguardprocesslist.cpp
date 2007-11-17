@@ -49,7 +49,6 @@
 #include "ReniceDlg.h"
 #include "ui_ProcessWidgetUI.h"
 
-
 //Trolltech have a testing class for classes that inherit QAbstractItemModel.  If you want to run with this run-time testing enabled, put the modeltest.* files in this directory and uncomment the next line
 //#define DO_MODELCHECK
 #ifdef DO_MODELCHECK
@@ -115,8 +114,8 @@ class ProgressBarItemDelegate : public QItemDelegate
 
 struct KSysGuardProcessListPrivate {
     
-	KSysGuardProcessListPrivate(KSysGuardProcessList* q) 
-            : mModel(q), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL) 
+	KSysGuardProcessListPrivate(KSysGuardProcessList* q, const QString &hostName) 
+            : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL) 
         {}
 
         ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
@@ -142,8 +141,8 @@ struct KSysGuardProcessListPrivate {
 	int mUpdateIntervalMSecs;
 };
 
-KSysGuardProcessList::KSysGuardProcessList(QWidget* parent)
-	: QWidget(parent), d(new KSysGuardProcessListPrivate(this))
+KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
+	: QWidget(parent), d(new KSysGuardProcessListPrivate(this, hostName))
 {
 	d->mUpdateIntervalMSecs = 2000; //Set 2 seconds as the default update interval
 	d->mUi->setupUi(this);
@@ -698,8 +697,8 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
 
 	//We must use kdesu to kill the process
 	QStringList arguments;
-	arguments << "--" << "sh" << "-c";
-	QString sh("'for f in ");
+	arguments << "--" << "sh" << "-c" << "ls";
+/*	QString sh("'for f in ");
 
         for (int i = 0; i < unchanged_pids.size(); ++i) {
 		sh += QString::number(unchanged_pids.at(i)) + " ";
@@ -720,7 +719,7 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
 	sh += "; done'";
 
 	arguments << sh;
-	
+	*/
 	QProcess *process = new QProcess(NULL);
 	connect(process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(ioniceFailed()));
 	connect(process, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));

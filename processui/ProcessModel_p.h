@@ -177,7 +177,7 @@ public:
 	int mUnits;
 
 	/** The hostname */
-	QString mHost;
+	QString mHostName;
 
 	ProcessModel* q;
 };

@@ -58,7 +58,7 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
 	Q_ENUMS( ProcessModel::Units )
 
 public:
-	KSysGuardProcessList(QWidget* parent);
+	KSysGuardProcessList(QWidget* parent, const QString &hostName = QString());
 	virtual ~KSysGuardProcessList();
 
 	QLineEdit *filterLineEdit() const;

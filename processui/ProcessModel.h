@@ -93,6 +93,9 @@ public:
 	/** Whether this is showing the processes for the current machine
 	 */
 	bool isLocalhost() const;
+
+	/** The host name that this widget is showing the processes of */
+	QString hostName() const;
 	
 	/** Whether this process has a GUI window */
 	bool hasGUIWindow(long long pid) const;
