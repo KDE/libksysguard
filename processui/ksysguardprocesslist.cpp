@@ -43,6 +43,7 @@
 #include <kmessagebox.h>
 #include <kdialog.h>
 #include <kicon.h>
+#include <kstandarddirs.h>
 
 #include "ksysguardprocesslist.moc"
 #include "ksysguardprocesslist.h"
@@ -557,10 +558,13 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
 		arguments << QString::number(unreniced_pids.at(i));
 	}
 
+	QString su = KStandardDirs::findExe("kdesu");
+	if(su.isEmpty()) return false;  //Cannot find kdesu
+
 	QProcess *reniceProcess = new QProcess(NULL);
 	connect(reniceProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(reniceFailed()));
 	connect(reniceProcess, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));
-	reniceProcess->start("kdesu", arguments);
+	reniceProcess->start(su, arguments);
 	return true; //No way to tell if it was successful :(
 }
 
@@ -695,35 +699,61 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
 	if(unchanged_pids.isEmpty()) return true;
 	if(!d->mModel.isLocalhost()) return false; //We can't use kdesu to kill non-localhost processes
 
+
+	QString su = KStandardDirs::findExe("kdesu");
+	if(su.isEmpty()) return false;  //Cannot find kdesu
+
 	//We must use kdesu to kill the process
+	
 	QStringList arguments;
-	arguments << "--" << "sh" << "-c" << "ls";
-/*	QString sh("'for f in ");
+	if(unchanged_pids.size() == 1) {
+		arguments << "--" << "ionice" << "-p" << QString::number(unchanged_pids.at(0)) << "-c";
+		switch(newIoSched) {
+		  case KSysGuard::Process::Idle:
+			arguments << "3";
+			break;
+		  case KSysGuard::Process::BestEffort:
+			arguments << "2" << "-n" << QString::number(newIoSchedPriority);
+			break;
+		  case KSysGuard::Process::RealTime:
+			arguments << "1" << "-n" << QString::number(newIoSchedPriority);
+			break;
+		  default:
+			Q_ASSERT(false);
+			return false; //should never happen - wtf?
+		}
+	} else {
+		//Cope with multiple pids by doing a for loop
+		arguments << "--" << "sh" << "-c";
+		QString sh("for f in ");
 
-        for (int i = 0; i < unchanged_pids.size(); ++i) {
-		sh += QString::number(unchanged_pids.at(i)) + " ";
-	}
-	 sh += "; do ionice -p \"$f\" ";
-	switch(newIoSched) {
-	  case KSysGuard::Process::Idle:
-		sh += "-c 3";
-		break;
-	  case KSysGuard::Process::BestEffort:
-		sh += "-c 2 -n " + QString::number(newIoSchedPriority);
-	  case KSysGuard::Process::RealTime:
-		sh += "-c 1 -n " + QString::number(newIoSchedPriority);
-	  default:
-		Q_ASSERT(false);
-		return false; //should never happen - wtf?
-	}
-	sh += "; done'";
+	        for (int i = 0; i < unchanged_pids.size(); ++i) {
+			sh += QString::number(unchanged_pids.at(i)) + " ";
+		}
+		 sh += "; do ionice -p \"$f\" ";
+		switch(newIoSched) {
+		  case KSysGuard::Process::Idle:
+			sh += "-c 3";
+			break;
+		  case KSysGuard::Process::BestEffort:
+			sh += "-c 2 -n " + QString::number(newIoSchedPriority);
+			break;
+		  case KSysGuard::Process::RealTime:
+			sh += "-c 1 -n " + QString::number(newIoSchedPriority);
+			break;
+		  default:
+			Q_ASSERT(false);
+			return false; //should never happen - wtf?
+		}
+		sh += "; done";
 
-	arguments << sh;
-	*/
+		arguments << sh;
+	}
+
 	QProcess *process = new QProcess(NULL);
 	connect(process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(ioniceFailed()));
 	connect(process, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));
-	process->start("kdesu", arguments);
+	process->start(su, arguments);
 	return true;  //assume it ran successfully :(  We cannot seem to actually check if it did.  There must be a better solution
 }
 
@@ -755,6 +785,9 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
 	if(unkilled_pids.isEmpty()) return true;
 	if(!d->mModel.isLocalhost()) return false; //We can't use kdesu to kill non-localhost processes
 
+	QString su = KStandardDirs::findExe("kdesu");
+	if(su.isEmpty()) return false;  //Cannot find kdesu
+
 	//We must use kdesu to kill the process
 	QStringList arguments;
 	arguments << "--" << "kill";
@@ -769,7 +802,7 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
 	QProcess *killProcess = new QProcess(NULL);
 	connect(killProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(killFailed()));
 	connect(killProcess, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));
-	killProcess->start("kdesu", arguments);
+	killProcess->start(su, arguments);
 	return true;  //assume it ran successfully :(  We cannot seem to actually check if it did.  There must be a better solution
 
 }

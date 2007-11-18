@@ -619,14 +619,14 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
 }
 
 QString ProcessModel::getStringForProcess(KSysGuard::Process *process) const {
-	return i18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid), process->name, d->getUsernameForUser(process->uid, false));
+	return i18nc("Short description of a process. PID, name, user", "<numid>%1</numid>: %2, owned by user %3", (long)(process->pid), process->name, d->getUsernameForUser(process->uid, false));
 }
 
 QString ProcessModelPrivate::getGroupnameForGroup(long long gid) const {
 	if(mIsLocalhost) {
 		QString groupname = KUserGroup(gid).name();
 		if(!groupname.isEmpty())
-			return i18n("%1 (gid: %2)", groupname, gid);
+			return i18n("%1 (gid: <numid>%2</numid>)", groupname, gid);
 	}
 	return QString::number(gid);
 }
