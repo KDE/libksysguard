@@ -98,17 +98,23 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	connect(cpuScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
 	connect(ioScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
 	connect(ui->sliderCPU, SIGNAL(valueChanged(int)), this, SLOT(cpuSliderChanged(int)));
+	connect(ui->sliderIO, SIGNAL(valueChanged(int)), this, SLOT(ioSliderChanged(int)));
 	
 	updateUi();
 }
 
+void ReniceDlg::ioSliderChanged(int value) {
+	ui->sliderIO->setToolTip(QString::number(7- value));
+}
 void ReniceDlg::cpuSliderChanged(int value) {
 	if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch) {
 	   // When we are on other or batch, the priority is  -value.  
+		ui->sliderCPU->setToolTip(QString::number(-value));
 		if( ioScheduler->checkedId() == -1 || ioScheduler->checkedId() == (int)KSysGuard::Process::None) {
 			ui->sliderIO->setValue(7 - (-value+20)/5);
 		}
-	}
+	} else 
+		ui->sliderCPU->setToolTip(QString::number(value));
 }
 
 void ReniceDlg::updateUi() {
@@ -128,13 +134,16 @@ void ReniceDlg::updateUi() {
 		if(ui->sliderCPU->value() >20) ui->sliderCPU->setValue(20);
 		ui->sliderCPU->setMinimum(-19);
 		ui->sliderCPU->setMaximum(20);
+		ui->sliderCPU->setTickInterval(5);
 	} else {
 		if(ui->sliderCPU->value() < 1) ui->sliderCPU->setValue(1);
 		ui->sliderCPU->setMinimum(1);
 		ui->sliderCPU->setMaximum(99);
+		ui->sliderCPU->setTickInterval(12);
 	}
 
 	cpuSliderChanged(ui->sliderCPU->value());
+	ioSliderChanged(ui->sliderIO->value());
 }
 
 void ReniceDlg::slotOk()
