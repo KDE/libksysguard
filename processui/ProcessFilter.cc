@@ -92,8 +92,9 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 			if(!model->hasGUIWindow(process->pid))
 				accepted = false;
 		} else {
-			//login and getty kinda _are_ the tty, so I do not really count them as 'programs'. So make a special case and hide them
-			if(process->name == "login" || process->name == "getty" || process->name == "mingetty")
+			// login and getty kinda _are_ the tty, so I do not really count them as 'programs'. So make a special case and hide them
+			// Their ppid are 1 (init) so by checking we try to avoid false matches, and speed up checking overall
+			if(process->parent_pid == 1 && (process->name == "login" || process->name.endsWith("getty")))
 				accepted = false;
 		}
 		break;
