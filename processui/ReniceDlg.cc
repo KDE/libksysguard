@@ -103,8 +103,11 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 }
 
 void ReniceDlg::cpuSliderChanged(int value) {
-	if( ioScheduler->checkedId() == -1 || ioScheduler->checkedId() == (int)KSysGuard::Process::None) {
-		ui->sliderIO->setValue((value+20)/5);
+	if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch) {
+	   // When we are on other or batch, the priority is  -value.  
+		if( ioScheduler->checkedId() == -1 || ioScheduler->checkedId() == (int)KSysGuard::Process::None) {
+			ui->sliderIO->setValue(7 - (-value+20)/5);
+		}
 	}
 }
 
