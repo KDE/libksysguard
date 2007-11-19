@@ -88,8 +88,10 @@ Processes *Processes::getInstance(const QString &host) { //static
         Processes *processes = d2->processesRemote.value(host, NULL);
         if( !processes ) {
             //connect to it
-	    processes = new Processes( new ProcessesRemote(host) );
+	    ProcessesRemote *remote = new ProcessesRemote(host);
+	    processes = new Processes( remote );
             d2->processesRemote.insert(host, processes);
+	    connect(remote, SIGNAL(runCommand(const QString &, int )), processes, SIGNAL(runCommand(const QString&, int)));
 	}
 	return processes;
     }

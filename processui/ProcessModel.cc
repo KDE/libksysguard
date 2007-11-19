@@ -674,6 +674,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		case HeadingPid:
 			return (qlonglong)process->pid;
 		case HeadingUser:
+			if(!process->login.isEmpty()) return process->login;
 			if(process->uid == process->euid)
 				return d->getUsernameForUser(process->uid, false);
 			else
@@ -953,7 +954,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			long long memory = 0;
 			if(process->vmURSS != -1) memory = process->vmURSS;
 			else memory = process->vmRSS;
-			if(process->uid == getuid())
+			if(d->mIsLocalhost && process->uid == getuid())
 				base = 0;
 			else if(process->uid < 100 || !canUserLogin(process->uid))
 				base = 200000000 - process->uid * 10000;
@@ -968,7 +969,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 				cpu = 1;  //stopped or zombied processes should be near the top of the list
 			bool hasWindow = d->mPidToWindowInfo.contains(process->pid);
 			//However we can of course have lots of processes with the same user.  Next we sort by CPU.
-			return (double)(base - (cpu*100) -(hasWindow?50:0) - memory*100.0/d->mMemTotal);
+			if(d->mMemTotal>0)
+				return (double)(base - (cpu*100) -(hasWindow?50:0) - memory*100.0/d->mMemTotal);
+			else
+				return (double)(base - (cpu*100) -(hasWindow?50:0));
 		}
 		case HeadingCPUUsage: {
 			int cpu;

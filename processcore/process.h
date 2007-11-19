@@ -51,6 +51,7 @@ namespace KSysGuard
          */
         Process *parent;
 
+	QString login; ///The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
         long long uid; ///The user id that the process is running as
         long long euid; ///The effective user id that the process is running as
         long long suid; ///The set user id that the process is running as
