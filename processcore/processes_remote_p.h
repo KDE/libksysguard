@@ -61,7 +61,7 @@ namespace KSysGuard
 	void setup();
 
       protected:
-	enum { PsInfo, Ps, UsedMemory, FreeMemory };
+	enum { PsInfo, Ps, UsedMemory, FreeMemory, Kill, Renice, Ionice };
 
       private:
 	/**

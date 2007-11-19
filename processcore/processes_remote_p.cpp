@@ -41,7 +41,9 @@ namespace KSysGuard
       Private() {havePsInfo = false; pidColumn = 1; 
 	      ppidColumn= ppidColumn = nameColumn = uidColumn = gidColumn = 
 	      statusColumn = userColumn = systemColumn = niceColumn = 
-	      vmSizeColumn = vmRSSColumn = loginColumn = commandColumn = -1;
+	      vmSizeColumn = vmRSSColumn = loginColumn = commandColumn =
+	      tracerPidColumn = ttyColumn = ioprioClassColumn = ioprioColumn =
+	      vmURSSColumn = -1;
               usedMemory = freeMemory;}
       ~Private() {;}
       QString host;
@@ -52,6 +54,7 @@ namespace KSysGuard
       bool havePsInfo;
       int pidColumn;
       int ppidColumn;
+      int tracerPidColumn;
       int nameColumn;
       int uidColumn;
       int gidColumn;
@@ -61,8 +64,12 @@ namespace KSysGuard
       int niceColumn;
       int vmSizeColumn;
       int vmRSSColumn;
+      int vmURSSColumn;
       int loginColumn;
       int commandColumn;
+      int ioprioClassColumn;
+      int ioprioColumn;
+      int ttyColumn;
 
       int numColumns;
 
@@ -117,13 +124,19 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
 			    break;
 	    }
     }
-    if(d->userColumn!= -1) process->userUsage = p.at(d->userColumn).toLong();
-    if(d->systemColumn!= -1) process->sysUsage = p.at(d->systemColumn).toLong();
+    if(d->userColumn!= -1) process->userTime = p.at(d->userColumn).toLong();
+    if(d->systemColumn!= -1) process->sysTime = p.at(d->systemColumn).toLong();
     if(d->niceColumn!= -1) process->niceLevel = p.at(d->niceColumn).toLong();
     if(d->vmSizeColumn!= -1) process->vmSize = p.at(d->vmSizeColumn).toLong();
     if(d->vmRSSColumn!= -1) process->vmRSS = p.at(d->vmRSSColumn).toLong();
+    if(d->vmURSSColumn!= -1) process->vmURSS = p.at(d->vmURSSColumn).toLong();
     if(d->loginColumn!= -1) process->login = QString::fromUtf8(p.at(d->loginColumn).data());
     if(d->commandColumn!= -1) process->command = QString::fromUtf8(p.at(d->commandColumn).data());
+    if(d->tracerPidColumn!= -1) process->tracerpid = p.at(d->tracerPidColumn).toLong();
+    if(d->vmURSSColumn!= -1) process->vmURSS = p.at(d->vmURSSColumn).toLong();
+    if(d->ttyColumn!= -1) process->tty = p.at(d->ttyColumn);
+    if(d->ioprioColumn!= -1) process->ioniceLevel = p.at(d->ioprioColumn).toInt();
+    if(d->ioprioClassColumn!= -1) process->ioPriorityClass = (KSysGuard::Process::IoPriorityClass)(p.at(d->ioprioClassColumn).toInt());
 
     return true;
 }
@@ -149,15 +162,17 @@ QSet<long> ProcessesRemote::getAllPids( )
 
 bool ProcessesRemote::sendSignal(long pid, int sig) {
 	//TODO run the proper command for all these functions below
-    //emit runCommand("kill ", (int)Ps);
+    emit runCommand("kill " + QString::number(pid) + " " + QString::number(sig), (int)Kill);
     return true;
 }
 bool ProcessesRemote::setNiceness(long pid, int priority) {
+    emit runCommand("setpriority " + QString::number(pid) + " " + QString::number(priority), (int)Renice);
     return true;
 }
 
 bool ProcessesRemote::setIoNiceness(long pid, int priorityClass, int priority) {
-    return false; //Not yet supported
+    emit runCommand("ionice " + QString::number(pid) + " " + QString::number(priorityClass) + " " + QString::number(priority), (int)Ionice);
+    return true;
 }
 
 bool ProcessesRemote::setScheduler(long pid, int priorityClass, int priority) {
@@ -165,7 +180,7 @@ bool ProcessesRemote::setScheduler(long pid, int priorityClass, int priority) {
 }
 
 bool ProcessesRemote::supportsIoNiceness() {
-    return false;
+    return true;
 }
 
 long long ProcessesRemote::totalPhysicalMemory() {
@@ -176,10 +191,8 @@ long ProcessesRemote::numberProcessorCores() {
 }
 
 void ProcessesRemote::answerReceived( int id, const QList<QByteArray>& answer ) {
-    kDebug() << "Answer received in remote ";
     switch (id) {
         case PsInfo: {
-            kDebug() << "psinfo";
             if(answer.isEmpty()) return; //Invalid data
             QList<QByteArray> info = answer.at(0).split('\t');
 	    d->numColumns = info.size();
@@ -194,29 +207,38 @@ void ProcessesRemote::answerReceived( int id, const QList<QByteArray>& answer ) 
 			d->uidColumn = i;
 		else if(info[i] == "GID")
 			d->gidColumn = i;
+		else if(info[i] == "TracerPID")
+			d->tracerPidColumn = i;
 		else if(info[i] == "Status")
 			d->statusColumn = i;
-		else if(info[i] == "User%")
+		else if(info[i] == "User Time")
 			d->userColumn = i;
-		else if(info[i] == "System%")
+		else if(info[i] == "System Time")
 			d->systemColumn = i;
 		else if(info[i] == "Nice")
 			d->niceColumn = i;
 		else if(info[i] == "VmSize")
 			d->vmSizeColumn = i;
-		else if(info[i] == "VmRSS")
+		else if(info[i] == "VmRss")
 			d->vmRSSColumn = i;
+		else if(info[i] == "VmURss")
+			d->vmURSSColumn = i;
 		else if(info[i] == "Login")
 			d->loginColumn = i;
+		else if(info[i] == "TTY")
+			d->ttyColumn = i;
 		else if(info[i] == "Command")
 			d->commandColumn = i;
+		else if(info[i] == "IO Priority Class")
+			d->ioprioClassColumn = i;
+		else if(info[i] == "IO Priority")
+			d->ioprioColumn = i;
 	    }
 	    d->havePsInfo = true;
 	    break;
 	}
         case Ps:
 	    d->lastAnswer = answer;
-            kDebug() << "ps";
 	    if(!d->havePsInfo) return;  //Not setup yet.  Should never happen
 	case FreeMemory:
             if(answer.isEmpty()) return; //Invalid data
