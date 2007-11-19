@@ -348,5 +348,12 @@ Processes::~Processes()
 
 }
 
+void Processes::answerReceived( int id, const QList<QByteArray>& answer ) {
+    KSysGuard::ProcessesRemote *processes = dynamic_cast<KSysGuard::ProcessesRemote *>(d->mAbstractProcesses);
+    if(processes)
+        processes->answerReceived(id, answer);
+}
+
 }
 #include "processes.moc"
+

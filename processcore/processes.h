@@ -157,7 +157,6 @@ namespace KSysGuard
 	 *  This is fast (just a system call) */
 	long numberProcessorCores();
 
-
     Q_SIGNALS:
 	/** The data for a process has changed.
 	 *  if @p onlyCpuOrMem is set, only the cpu usage or memory information has been 
@@ -203,6 +202,20 @@ namespace KSysGuard
         inline void deleteProcess(long pid);
         bool updateProcess( Process *process, long ppid, bool onlyReparent = false);
         bool addProcess(long pid, long ppid);
+
+
+    Q_SIGNALS:
+	/** For a remote machine, we rely on being able to communicate with ksysguardd.
+	 *  This must be dealt with by the program including this widget.  It must listen to our
+	 *  'runCommand' signal, and run the given command, with the given id. */
+	void runCommand(const QString &command, int id);
+
+    public:
+	/** For a remote machine, we rely on being able to communicate with ksysguardd.
+	 *  The programing using this must call this slot when an answer is received from ksysguardd,
+	 *  in response to a runCommand request.  The id identifies the answer */
+	void answerReceived( int id, const QList<QByteArray>& answer );
+
     };
 }
 #endif 

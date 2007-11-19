@@ -932,3 +932,6 @@ bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
 	return false;
 }
 
+ProcessModel *KSysGuardProcessList::processModel() {
+	return &d->mModel;
+}

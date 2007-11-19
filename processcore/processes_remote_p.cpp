@@ -21,9 +21,12 @@
 #include "processes_remote_p.h"
 #include "process.h"
 
-#include <klocale.h>
-
+#include <QString>
 #include <QSet>
+
+#include <klocale.h>
+#include <kdebug.h>
+
 
 
 
@@ -41,6 +44,7 @@ namespace KSysGuard
 ProcessesRemote::ProcessesRemote(const QString &hostname) : d(new Private())
 {
   d->host = hostname;
+  kDebug() << "Remote hosti " << hostname;
 }
 
 
@@ -54,6 +58,7 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
 
 QSet<long> ProcessesRemote::getAllPids( )
 {
+    emit runCommand("ps?", 0);
     QSet<long> pids;
     return pids;
 }
@@ -84,9 +89,16 @@ long ProcessesRemote::numberProcessorCores() {
     return 0;
 }
 
+void ProcessesRemote::answerReceived( int id, const QList<QByteArray>& answer ) {
+    kDebug() << "Answer received in remote ";
+}
+
 ProcessesRemote::~ProcessesRemote()
 {
     delete d;
 }
 
 }
+
+#include "processes_remote_p.moc"
+

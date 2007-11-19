@@ -36,9 +36,8 @@ namespace KSysGuard
      *
      * @author John Tapsell <tapsell@kde.org>
      */
-    class AbstractProcesses 
+    class AbstractProcesses : public QObject
     {
-
       public:
 
 	AbstractProcesses() {}
