@@ -81,8 +81,10 @@ class ProgressBarItemDelegate : public QItemDelegate
 	}
 	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 	{
+		Q_ASSERT(index.model());
 		QModelIndex realIndex = (reinterpret_cast< const QAbstractProxyModel *> (index.model()))->mapToSource(index);
 		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (realIndex.internalPointer());
+		Q_CHECK_PTR(process);
 		if(index.column() == ProcessModel::HeadingCPUUsage) {
 			if(numCpuCores == -1) 
 				numCpuCores = index.data(Qt::UserRole+4).toInt();
@@ -95,13 +97,18 @@ class ProgressBarItemDelegate : public QItemDelegate
 				memory = process->vmRSS;
 			if(totalMemory == -1)
 				totalMemory = index.data(Qt::UserRole+3).toLongLong();
-
-			percentage = (int)(memory*100/totalMemory);
+			if(totalMemory > 0) 
+				percentage = (int)(memory*100/totalMemory);
+			else
+				percentage = 0;
 		} else if(index.column() == ProcessModel::HeadingSharedMemory) {
 			if(process->vmURSS != -1) {
 				if(totalMemory == -1)
 					totalMemory = index.data(Qt::UserRole+3).toLongLong();
-				percentage = (int)((process->vmRSS - process->vmURSS)*100/totalMemory);
+				if(totalMemory > 0)
+					percentage = (int)((process->vmRSS - process->vmURSS)*100/totalMemory);
+				else
+					percentage = 0;
 			}
 		} else
 			percentage = 0;
