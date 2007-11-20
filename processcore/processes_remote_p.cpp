@@ -141,11 +141,14 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
     return true;
 }
 
-QSet<long> ProcessesRemote::getAllPids( )
+void ProcessesRemote::updateAllProcesses() 
 {
     if(!d->havePsInfo)
     	emit runCommand("ps?", (int)PsInfo);
     emit runCommand("ps", (int)Ps);
+}
+QSet<long> ProcessesRemote::getAllPids( )
+{
     d->pids.clear();
     d->processByPid.clear();
     foreach(QByteArray process, d->lastAnswer) {
@@ -240,6 +243,7 @@ void ProcessesRemote::answerReceived( int id, const QList<QByteArray>& answer ) 
         case Ps:
 	    d->lastAnswer = answer;
 	    if(!d->havePsInfo) return;  //Not setup yet.  Should never happen
+	    emit processesUpdated();
 	case FreeMemory:
             if(answer.isEmpty()) return; //Invalid data
 	    d->freeMemory = answer[0].toLong();

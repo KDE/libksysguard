@@ -103,6 +103,7 @@ void Processes::returnInstance(const QString &/*host*/) { //static
 Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private())
 {
     d->mAbstractProcesses = abstractProcesses;
+    connect( abstractProcesses, SIGNAL( processesUpdated() ), SLOT( processesUpdated() ));
 }
 
 Process *Processes::getProcess(long pid) const
@@ -249,6 +250,10 @@ void Processes::updateAllProcesses( long updateDurationMS )
         d->mElapsedTimeCentiSeconds = d->mLastUpdated.restart() / 10;
     }
 
+    d->mAbstractProcesses->updateAllProcesses();
+}
+
+void Processes::processesUpdated() {
     d->mToBeProcessed = d->mAbstractProcesses->getAllPids();
 
     QSet<long> beingProcessed(d->mToBeProcessed); //keep a copy so that we can replace mProcessedLastTime with this at the end of this function

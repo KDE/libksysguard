@@ -6,6 +6,7 @@ set(ksysguard_LIB_SRCS
    process.cpp
    processes_local_p.cpp
    processes_remote_p.cpp
+   processes_base_p.cpp
 )
 
 

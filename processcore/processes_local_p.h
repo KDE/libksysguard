@@ -49,6 +49,7 @@ namespace KSysGuard
 	virtual bool setIoNiceness(long pid, int priorityClass, int priority);
 	virtual bool supportsIoNiceness();
 	virtual long numberProcessorCores() { return sysconf(_SC_NPROCESSORS_ONLN); } //This should work on any posix system
+	virtual void updateAllProcesses() { emit processesUpdated(); } //For local machine, there is no delay
 
       private:
 	/**

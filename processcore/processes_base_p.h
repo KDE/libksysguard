@@ -23,6 +23,7 @@
 #define PROCESSES_BASE_P_H
 
 #include <QSet>
+#include <QObject>
 
 namespace KSysGuard
 {
@@ -38,6 +39,8 @@ namespace KSysGuard
      */
     class AbstractProcesses : public QObject
     {
+      Q_OBJECT
+
       public:
 
 	AbstractProcesses() {}
@@ -119,6 +122,16 @@ namespace KSysGuard
 	 *  This is fast (just a system call) */
 	virtual long numberProcessorCores() = 0;
 
+	/**
+	 *  Get all the current process information from the machine.  When done, emit updateAllProcesses().
+	 */
+	virtual void updateAllProcesses() = 0;
+
+      Q_SIGNALS:
+	/**
+	 *  This is emitted when the processes have been updated, and the view should be refreshed
+	 */
+        void processesUpdated();
 
     };
 }

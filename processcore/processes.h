@@ -157,6 +157,10 @@ namespace KSysGuard
 	 *  This is fast (just a system call) */
 	long numberProcessorCores();
 
+    public Q_SLOTS:
+        /** The abstract processes has updated its list of processes */
+        void processesUpdated();
+
     Q_SIGNALS:
 	/** The data for a process has changed.
 	 *  if @p onlyCpuOrMem is set, only the cpu usage or memory information has been 
