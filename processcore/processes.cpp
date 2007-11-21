@@ -195,7 +195,7 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
 bool Processes::addProcess(long pid, long ppid)
 {
     Process *parent = d->mProcesses.value(ppid);
-    Q_ASSERT(parent);  //even init has a non-null parent - the mFakeProcess
+    if(!parent) return false;  //How can this be?
     //it's a new process - we need to set it up
     Process *ps = new Process(pid, ppid, parent);
 
