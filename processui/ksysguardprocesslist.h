@@ -91,6 +91,9 @@ public:
 
 	/** Returns the process model used. Use with caution. */
 	ProcessModel *processModel();
+	
+	/** Restore the headings to the given state. */
+	void restoreHeaderState(const QByteArray & state);
 
 public Q_SLOTS:
 	/** Inform the view that the user has changed the selection */

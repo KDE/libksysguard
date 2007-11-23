@@ -222,7 +222,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	//If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
 	QTimer *mTimer = new QTimer(this);
 	connect(mTimer, SIGNAL(timeout()), &d->mFilterModel, SLOT(invalidate()));
-	mTimer->start(10000); 
+	mTimer->start(4000); 
 
 	expandInit(); //This will expand the init process
 }
@@ -910,10 +910,14 @@ void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 	setUpdateIntervalMSecs(cg.readEntry("updateIntervalMSecs", 1000));
 	int version = cg.readEntry("version", 0);
 	if(version == PROCESSHEADERVERSION) {  //If the header has changed, the old settings are no longer valid.  Only restore if version is the same
-		d->mUi->treeView->header()->restoreState(cg.readEntry("headerState", QByteArray()));
+		restoreHeaderState(cg.readEntry("headerState", QByteArray()));
 	}
 }
 
+void KSysGuardProcessList::restoreHeaderState(const QByteArray & state) {
+	d->mUi->treeView->header()->restoreState(state);
+	d->mFilterModel.sort( d->mUi->treeView->header()->sortIndicatorSection(), d->mUi->treeView->header()->sortIndicatorOrder() );
+}
 
 bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
 	if (event->type() == QEvent::KeyPress) {
