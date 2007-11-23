@@ -145,15 +145,17 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
     ps->parent_pid = ppid;
 
     //Now we can actually get the process info
-    Process old_process(*ps);
+    long oldUserTime = ps->userTime;
+    long oldSysTime = ps->sysTime;
+    ps->changes = Process::Nothing;
     bool success = d->mAbstractProcesses->updateProcessInfo(ps->pid, ps);
 
     //Now we have the process info.  Calculate the cpu usage and total cpu usage for itself and all its parents
-    if(old_process.userTime != -1 && d->mElapsedTimeCentiSeconds!= 0) {  //Update the user usage and sys usage
-        ps->userUsage = (int)(((ps->userTime - old_process.userTime)*100.0 + 0.5) / d->mElapsedTimeCentiSeconds);
-        ps->sysUsage  = (int)(((ps->sysTime - old_process.sysTime)*100.0 + 0.5) / d->mElapsedTimeCentiSeconds);
-        ps->totalUserUsage = ps->userUsage;
-	ps->totalSysUsage = ps->sysUsage;
+    if(oldUserTime != -1 && d->mElapsedTimeCentiSeconds!= 0) {  //Update the user usage and sys usage
+        ps->setUserUsage((int)(((ps->userTime - oldUserTime)*100.0 + 0.5) / d->mElapsedTimeCentiSeconds));
+        ps->setSysUsage((int)(((ps->sysTime - oldSysTime)*100.0 + 0.5) / d->mElapsedTimeCentiSeconds));
+        ps->setTotalUserUsage(ps->userUsage);
+	ps->setTotalSysUsage(ps->sysUsage);
 	if(ps->userUsage != 0 || ps->sysUsage != 0) {
 	    Process *p = ps->parent;
 	    while(p->pid != 0) {
@@ -165,29 +167,7 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
 	}
     }
 
-    if(
-       ps->name != old_process.name ||
-       ps->command != old_process.command ||
-       ps->status != old_process.status ||
-       ps->uid != old_process.uid || 
-       ps->tracerpid != old_process.tracerpid ||
-       ps->niceLevel != old_process.niceLevel ||
-       ps->ioniceLevel != old_process.ioniceLevel ||
-       ps->ioPriorityClass != old_process.ioPriorityClass ) {
-
-       emit processChanged(ps, false);
-
-    } else if(
-       ps->vmSize != old_process.vmSize ||
-       ps->vmRSS != old_process.vmRSS ||
-       ps->vmURSS != old_process.vmURSS ||
-       ps->userUsage != old_process.userUsage ||
-       ps->sysUsage != old_process.sysUsage ||
-       ps->totalUserUsage != old_process.totalUserUsage ||
-       ps->totalSysUsage != old_process.totalSysUsage ) {
-
-       emit processChanged(ps, true);
-    }
+    emit processChanged(ps, false);
 
     return success;
 

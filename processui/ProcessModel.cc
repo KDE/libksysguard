@@ -49,6 +49,7 @@
 #include "ProcessModel_p.h"
 
 #include "processcore/processes.h"
+#include "processcore/process.h"
 
 extern KApplication* Kapp;
 
@@ -153,7 +154,6 @@ void ProcessModelPrivate::setupProcesses() {
         connect( mProcesses, SIGNAL( beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)), this, 
 			       SLOT( beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)));
         connect( mProcesses, SIGNAL( endMoveProcess()), this, SLOT(endMoveRow()));
-	mMemTotal = mProcesses->totalPhysicalMemory();
 	mNumProcessorCores = mProcesses->numberProcessorCores();
 	if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
 	q->update();
@@ -210,6 +210,8 @@ void ProcessModelPrivate::windowAdded(WId wid)
 void ProcessModel::update(int updateDurationMS) {
 //	kDebug() << "update all processes: " << QTime::currentTime().toString("hh:mm:ss.zzz");
 	d->mProcesses->updateAllProcesses(updateDurationMS);
+	if(d->mMemTotal <= 0)
+		d->mMemTotal = d->mProcesses->totalPhysicalMemory();
 	if(d->mIsChangingLayout) {
 		d->mIsChangingLayout = false;
 		emit layoutChanged();
@@ -319,29 +321,73 @@ bool ProcessModel::isSimpleMode() const
     return d->mSimple;
 }
 
-void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyCpuOrMem)
+void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyTotalCpu)
 {
-	//FIXME
-	//
-	//There is a bug with Qt in that updating a block of cells with dataChanged causes all of the cells to be repainted
-	//To work around this bug we emit dataChanged for cell, one at a time.
-
 	int row;
 	if(mSimple)
 		row = process->index;
 	else
 		row = process->parent->children.indexOf(process);
 
+	int totalUpdated = 0;
 	Q_ASSERT(row != -1);  //Something has gone very wrong
-	if(!onlyCpuOrMem) {
-		//Only the cpu usage changed, so only update that
-		for( int i = ProcessModel::HeadingCPUUsage; i<= ProcessModel::HeadingSharedMemory; ++i) {
-			QModelIndex index = q->createIndex(row, i, process);
+	if(onlyTotalCpu) {
+		if(mShowChildTotals) {
+			//Only the total cpu usage changed, so only update that
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingCPUUsage, process);
 			emit q->dataChanged(index, index);
 		}
+		return;
 	} else {
-		for( int i = 0; i< mHeadings.count(); ++i) {
-			QModelIndex index = q->createIndex(row, i, process);
+		if(process->changes == KSysGuard::Process::Nothing) {
+			return; //Nothing changed
+		}
+		if(process->changes & KSysGuard::Process::Uids) {
+			totalUpdated++;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingUser, process);
+			emit q->dataChanged(index, index);
+		}
+		if(process->changes & KSysGuard::Process::Tty) {
+			totalUpdated++;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingTty, process);
+			emit q->dataChanged(index, index);
+		}
+		if(process->changes & (KSysGuard::Process::Usage | KSysGuard::Process::Status) || (process->changes & KSysGuard::Process::TotalUsage && mShowChildTotals)) {
+			totalUpdated++;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingCPUUsage, process);
+			emit q->dataChanged(index, index);
+		}
+		if(process->changes & KSysGuard::Process::NiceLevels) {
+			totalUpdated++;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingNiceness, process);
+			emit q->dataChanged(index, index);
+		}
+		if(process->changes & KSysGuard::Process::VmSize) {
+			totalUpdated++;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingVmSize, process);
+			emit q->dataChanged(index, index);
+		}
+		if(process->changes & (KSysGuard::Process::VmSize | KSysGuard::Process::VmRSS | KSysGuard::Process::VmURSS)) {
+			totalUpdated+=2;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingMemory, process);
+			emit q->dataChanged(index, index);
+			QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingSharedMemory, process);
+			emit q->dataChanged(index2, index2);
+		}
+
+		if(process->changes & KSysGuard::Process::Name) {
+			totalUpdated++;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingName, process);
+			emit q->dataChanged(index, index);
+		}
+		if(process->changes & KSysGuard::Process::Command) {
+			totalUpdated++;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingCommand, process);
+			emit q->dataChanged(index, index);
+		}
+		if(process->changes & KSysGuard::Process::Login) {
+			totalUpdated++;
+			QModelIndex index = q->createIndex(row, ProcessModel::HeadingUser, process);
 			emit q->dataChanged(index, index);
 		}
 	}

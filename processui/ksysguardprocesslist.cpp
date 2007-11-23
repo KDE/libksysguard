@@ -154,7 +154,7 @@ struct KSysGuardProcessListPrivate {
 KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
 	: QWidget(parent), d(new KSysGuardProcessListPrivate(this, hostName))
 {
-	d->mUpdateIntervalMSecs = 2000; //Set 2 seconds as the default update interval
+	d->mUpdateIntervalMSecs = 1000; //Set 2 seconds as the default update interval
 	d->mUi->setupUi(this);
 	d->mFilterModel.setSourceModel(&d->mModel);
 	d->mUi->treeView->setModel(&d->mFilterModel);
@@ -907,7 +907,7 @@ void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 	setUnits((ProcessModel::Units) cg.readEntry("units", (int)ProcessModel::UnitsKB));
 	setShowTotals(cg.readEntry("showTotals", true));
 	setStateInt(cg.readEntry("filterState", (int)ProcessFilter::AllProcesses));
-	setUpdateIntervalMSecs(cg.readEntry("updateIntervalMSecs", 2000));
+	setUpdateIntervalMSecs(cg.readEntry("updateIntervalMSecs", 1000));
 	int version = cg.readEntry("version", 0);
 	if(version == PROCESSHEADERVERSION) {  //If the header has changed, the old settings are no longer valid.  Only restore if version is the same
 		d->mUi->treeView->header()->restoreState(cg.readEntry("headerState", QByteArray()));

@@ -25,6 +25,7 @@
 
 #include <QtCore/QList>
 #include <QtCore/QTime>
+#include <QFlags>
 
 #include <klocale.h>
 
@@ -51,37 +52,70 @@ namespace KSysGuard
          */
         Process *parent;
 
-	QString login; ///The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
-        long long uid; ///The user id that the process is running as
-        long long euid; ///The effective user id that the process is running as
-        long long suid; ///The set user id that the process is running as
-        long long fsuid; ///The file system user id that the process is running as.
+        void setLogin(QString _login); ///The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
+        void setUid(long long _uid); ///The user id that the process is running as
+        void setEuid(long long _euid); ///The effective user id that the process is running as
+        void setSuid(long long _suid); ///The set user id that the process is running as
+        void setFsuid(long long _fsuid); ///The file system user id that the process is running as.
 
-        long long gid; ///The process group id that the process is running as
-        long long egid; ///The effective group id that the process is running as
-        long long sgid; ///The set group id that the process is running as
-        long long fsgid; ///The file system group id that the process is running as
+        void setGid(long long _gid); ///The process group id that the process is running as
+        void setEgid(long long _egid); ///The effective group id that the process is running as
+        void setSgid(long long _sgid); ///The set group id that the process is running as
+        void setFsgid(long long _fsgid); ///The file system group id that the process is running as
 
-        long long tracerpid; ///If this is being debugged, this is the process that is debugging it
-	QByteArray tty; /// The name of the tty the process owns
-        long long userTime; ///The time, in 100ths of a second, spent in total on user calls. -1 if not known
-        long long sysTime;  ///The time, in 100ths of a second, spent in total on system calls.  -1 if not known
-        int userUsage; ///Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
-        int sysUsage;  ///Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
-        int totalUserUsage; ///Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
-        int totalSysUsage; ///Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's equal to sysUsage. It might be more than 100% on multiple cpu core systems
-        unsigned long numChildren; ///Number of children recursively that this process has.  From 0+
-        int niceLevel;      ///If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.  Otherwise sched priority (1 to 99)
-	Scheduler scheduler; ///The scheduler this process is running in.  See man sched_getscheduler for more info
-        IoPriorityClass ioPriorityClass; /// The IO priority class.  See man ionice for detailed information.
-        int ioniceLevel;    ///IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
-        long vmSize;   ///Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
-        long vmRSS;    ///Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
-        long vmURSS;   ///Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
-        QString name;  ///The name (e.g. "ksysguard", "konversation", "init")
-        QString command; ///The command the process was launched with
+        void setTracerpid(long long _tracerpid); ///If this is being debugged, this is the process that is debugging it
+        void setTty(QByteArray _tty); /// The name of the tty the process owns
+        void setUserTime(long long _userTime); ///The time, in 100ths of a second, spent in total on user calls. -1 if not known
+        void setSysTime(long long _sysTime);  ///The time, in 100ths of a second, spent in total on system calls.  -1 if not known
+        void setUserUsage(int _userUsage); ///Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
+        void setSysUsage(int _sysUsage);  ///Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
+        void setTotalUserUsage(int _totalUserUsage); ///Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
+        void setTotalSysUsage(int _totalSysUsage); ///Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's equal to sysUsage. It might be more than 100% on multiple cpu core systems
+        void setNiceLevel(int _niceLevel);      ///If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.  Otherwise sched priority (1 to 99)
+        void setscheduler(Scheduler _scheduler); ///The scheduler this process is running in.  See man sched_getscheduler for more info
+        void setIoPriorityClass(IoPriorityClass _ioPriorityClass); /// The IO priority class.  See man ionice for detailed information.
+        void setIoniceLevel(int _ioniceLevel);    ///IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
+        void setVmSize(long _vmSize);   ///Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
+        void setVmRSS(long _vmRSS);    ///Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
+        void setVmURSS(long _vmURSS);   ///Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
+        void setName(QString _name);  ///The name (e.g. "ksysguard", "konversation", "init")
+        void setCommand(QString _command); ///The command the process was launched with
+	void setStatus( ProcessStatus _status); ///Whether the process is running/sleeping/etc
+
+
+
+	QString login; 
+        long long uid; 
+        long long euid; 
+        long long suid; 
+        long long fsuid; 
+
+        long long gid; 
+        long long egid; 
+        long long sgid; 
+        long long fsgid; 
+
+        long long tracerpid; 
+	QByteArray tty; 
+        long long userTime; 
+        long long sysTime;  
+        int userUsage; 
+        int sysUsage;  
+        int totalUserUsage; 
+        int totalSysUsage; 
+        unsigned long numChildren; 
+        int niceLevel;      
+	Scheduler scheduler; 
+        IoPriorityClass ioPriorityClass; 
+        int ioniceLevel;    
+        long vmSize;   
+        long vmRSS;    
+        long vmURSS;   
+        QString name;  
+        QString command; 
+	ProcessStatus status; 
+
         QList<Process *> children;  ///A list of all the direct children that the process has.  Children of children are not listed here, so note that children_pids <= numChildren
-	ProcessStatus status; ///Whether the process is running/sleeping/etc
 	QTime timeKillWasSent; /// This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.
 
 	QString translatedStatus() const;  /// Returns a translated string of the status. e.g. "Running" etc
@@ -92,10 +126,35 @@ namespace KSysGuard
         
 	int index;  /// Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
 
+        /** An enum to keep track of what changed since the last update.  Note that we
+          * the maximum we can use is 0x4000, so some of the enums represent multiple variables
+          */
+        enum Change {
+            Nothing = 0x0,
+            Uids = 0x1,
+            Gids = 0x2,
+            Tracerpid = 0x4,
+            Tty = 0x8,
+            Usage = 0x10,
+            TotalUsage = 0x20,
+            NiceLevels = 0x40,
+            VmSize = 0x80,
+            VmRSS = 0x100,
+            VmURSS = 0x200,
+            Name = 0x400,
+            Command = 0x800,
+            Status = 0x1000,
+            Login = 0x2000
+        };
+        Q_DECLARE_FLAGS(Changes, Change)
+
+        Changes changes;  /** A QFlags representing what has changed */
+
+
   private:
         void clear();
     }; 
-
+    Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
 }
 
 #endif

@@ -72,22 +72,22 @@ bool ProcessesLocal::Private::readProc(long pid, struct kinfo_proc *p)
 
 void ProcessesLocal::Private::readProcStatus(struct kinfo_proc *p, Process *process)
 {
-    process->uid = 0;
-    process->gid = 0;
-    process->tracerpid = 0;
+    process->setUid(0);
+    process->setGid(0);
+    process->setTracerpid(0);
 
 
 #if defined(__FreeBSD__) && __FreeBSD_version >= 500015
-    process->uid  = p->ki_uid;    
-    process->gid  = p->ki_pgid;
-    process->name = QString(p->ki_comm ? p->ki_comm : "????");
+    process->setUid(p->ki_uid);    
+    process->setGid(p->ki_pgid);
+    process->setName(QString(p->ki_comm ? p->ki_comm : "????"));
 #elif defined(__DragonFly__) && __DragonFly_version >= 190000
-    process->uid  = p->kp_uid;
-    process->gid  = p->kp_pgid;
-    process->name = QString(p->kp_comm ? p->kp_comm : "????");
+    process->setUid(p->kp_uid);
+    process->setGid(p->kp_pgid);
+    process->setName(QString(p->kp_comm ? p->kp_comm : "????"));
 #else
-    process->uid  = p->kp_eproc.e_ucred.cr_uid;
-    process->gid  = p->kp_eproc.e_pgid;
+    process->setUid(p->kp_eproc.e_ucred.cr_uid);
+    process->setGid(p->kp_eproc.e_pgid);
 #endif
 }
 
@@ -96,48 +96,48 @@ void ProcessesLocal::Private::readProcStat(struct kinfo_proc *p, Process *ps)
     int status;
     struct rusage pru;
 #if defined(__FreeBSD__) && __FreeBSD_version >= 500015
-        ps->userTime  = p->ki_runtime / 10000;
-        ps->niceLevel = p->ki_nice;
-        ps->vmSize    = p->ki_size;
-        ps->vmRSS     = p->ki_rssize * getpagesize();
+        ps->setUserTime(p->ki_runtime / 10000);
+        ps->setNiceLevel(p->ki_nice);
+        ps->setVmSize(p->ki_size);
+        ps->setVmRSS(p->ki_rssize * getpagesize());
         status = p->ki_stat;
 #elif defined(__DragonFly__) && __DragonFly_version >= 190000
         if (!getrusage(p->kp_pid, &pru)) {
             errx(1, "failed to get rusage info");
         }
-        ps->userTime  = pru.ru_utime.tv_usec / 1000; /*p_runtime / 1000*/
-        ps->niceLevel = p->kp_nice;
-        ps->vmSize    = p->kp_vm_map_size;
-        ps->vmRSS     = p->kp_vm_rssize * getpagesize();
+        ps->setUserTime(pru.ru_utime.tv_usec / 1000); /*p_runtime / 1000*/
+        ps->setNiceLevel(p->kp_nice);
+        ps->setVmSize(p->kp_vm_map_size);
+        ps->setVmRSS(p->kp_vm_rssize * getpagesize());
         status = p->kp_stat;
 #else
-        ps->userTime  = p->kp_proc.p_rtime.tv_sec*100+p->kp_proc.p_rtime.tv_usec/100;
-        ps->niceLevel = p->kp_proc.p_nice;
-        ps->vmSize    = p->kp_eproc.e_vm.vm_map.size;
-        ps->vmRSS     = p->kp_eproc.e_vm.vm_rssize * getpagesize();
+        ps->setUserTime(p->kp_proc.p_rtime.tv_sec*100+p->kp_proc.p_rtime.tv_usec/100);
+        ps->setNiceLevel(p->kp_proc.p_nice);
+        ps->setVmSize(p->kp_eproc.e_vm.vm_map.size);
+        ps->setVmRSS(p->kp_eproc.e_vm.vm_rssize * getpagesize());
         status = p->kp_proc.p_stat;
 #endif
-        ps->sysTime   = 0;
+        ps->setSysTime(0);
 
 // "idle","run","sleep","stop","zombie"
     switch( status ) {
       case '0':
-        ps->status = Process::DiskSleep;
+        ps->setStatus(Process::DiskSleep);
 	break;
       case '1':
-        ps->status = Process::Running;
+        ps->setStatus(Process::Running);
 	break;
       case '2':
-        ps->status = Process::Sleeping;
+        ps->setStatus(Process::Sleeping);
 	break;
       case '3':
-        ps->status = Process::Stopped;
+        ps->setStatus(Process::Stopped);
 	break;
       case '4':
-         ps->status = Process::Zombie;
+         ps->setStatus(Process::Zombie);
          break;
       default:
-         ps->status = Process::OtherStatus;
+         ps->setStatus(Process::OtherStatus);
          break;
     }
 }
@@ -147,7 +147,7 @@ void ProcessesLocal::Private::readProcStatm(struct kinfo_proc *p, Process *proce
 // TODO
 
 //     unsigned long shared;    
-//     process->vmURSS = process->vmRSS - (shared * sysconf(_SC_PAGESIZE) / 1024);
+//     process->setVmURSS(process->vmRSS - (shared * sysconf(_SC_PAGESIZE) / 1024));
 }
 
 bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
@@ -164,11 +164,11 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
 
     if (sysctl(mib, 4, buf, &buflen, NULL, 0) == -1 || !buflen)
         return false;
-    process->command = QString(buf);
+    QString command = QString(buf);
 
     //cmdline seperates parameters with the NULL character
-    process->command.replace('\0', ' ');
-    process->command = process->command.trimmed();
+    command.replace('\0', ' ');
+    process->setCommand(command.trimmed());
 
     return true;
 }

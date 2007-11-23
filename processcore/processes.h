@@ -163,12 +163,11 @@ namespace KSysGuard
 
     Q_SIGNALS:
 	/** The data for a process has changed.
-	 *  if @p onlyCpuOrMem is set, only the cpu usage or memory information has been 
-	 *  updated.  This is for optomization reasons - the cpu percentage
-	 *  and memory usage change quite often, but if they are the only thing changed 
-	 *  then there's no reason to repaint the whole row
+	 *  if @p onlyTotalCpu is set, only the total cpu usage has been updated.
+         *  process->changes  contains a bit field indicating what has changed since the last time this was emitted
+         *  for this process
 	 */
-        void processChanged( KSysGuard::Process *process, bool onlyCpuOrMem);
+        void processChanged( KSysGuard::Process *process, bool onlyTotalCpu);
         /**
 	 *  This indicates we are about to add a process in the model.  
 	 *  The process already has the pid, ppid and tree_parent set up.

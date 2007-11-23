@@ -216,6 +216,8 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
     int current_word = 0;  //count from 0
     char *word = mBuffer;
     char status='\0';
+    long vmSize;
+    long vmRSS;
     while(current_word < 23) {
 	    if(word[0] == ' ' ) {
 		    ++current_word;
@@ -231,35 +233,35 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
 				int minor = ttyNo & 0xff;
 				switch(major) {
 				  case 136:
-				    ps->tty = QByteArray("pts/") + QByteArray::number(minor);
+				    ps->setTty(QByteArray("pts/") + QByteArray::number(minor));
 				    break;
 				  case 5:
-				    ps->tty = QByteArray("tty");
+				    ps->setTty(QByteArray("tty"));
 				  case 4:
 				    if(minor < 64)
-				      ps->tty = QByteArray("tty") + QByteArray::number(minor);
+				      ps->setTty(QByteArray("tty") + QByteArray::number(minor));
 				    else
-				      ps->tty = QByteArray("ttyS") + QByteArray::number(minor-64);
+				      ps->setTty(QByteArray("ttyS") + QByteArray::number(minor-64));
 				    break;
 				  default:
-				    ps->tty = QByteArray();
+				    ps->setTty(QByteArray());
 				}
 			      }
 			      break;
 			    case 13: //userTime
-			      ps->userTime = atoll(word+1);
+			      ps->setUserTime(atoll(word+1));
 			      break;
 			    case 14: //sysTime
-			      ps->sysTime = atoll(word+1);
+			      ps->setSysTime(atoll(word+1));
 			      break;
 			    case 18: //niceLevel
-			      ps->niceLevel = atoi(word+1);  /*Or should we use getPriority instead? */
+			      ps->setNiceLevel(atoi(word+1));  /*Or should we use getPriority instead? */
 			      break;
 			    case 22: //vmSize
-			      ps->vmSize = atol(word+1);
+			      vmSize = atol(word+1);
 			      break;
 			    case 23: //vmRSS
-			      ps->vmRSS = atol(word+1);
+			      vmRSS = atol(word+1);
 			      break;
 			    default:
 			      break;
@@ -273,30 +275,30 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
     /* There was a "(ps->vmRss+3) * sysconf(_SC_PAGESIZE)" here in the original ksysguard code.  I have no idea why!  After comparing it to
      *   meminfo and other tools, this means we report the RSS by 12 bytes differently compared to them.  So I'm removing the +3
      *   to be consistent.  NEXT TIME COMMENT STRANGE THINGS LIKE THAT! :-) */
-    ps->vmRSS = ps->vmRSS * sysconf(_SC_PAGESIZE) / 1024; /*convert to KiB*/
-    ps->vmSize /= 1024; /* convert to KiB */
+    ps->setVmRSS(vmRSS * sysconf(_SC_PAGESIZE) / 1024); /*convert to KiB*/
+    ps->setVmSize(vmSize /= 1024); /* convert to KiB */
 
     switch( status) {
       case 'R':
-        ps->status = Process::Running;
+        ps->setStatus(Process::Running);
 	break;
       case 'S':
-        ps->status = Process::Sleeping;
+        ps->setStatus(Process::Sleeping);
 	break;
       case 'D':
-        ps->status = Process::DiskSleep;
+        ps->setStatus(Process::DiskSleep);
 	break;
       case 'Z':
-        ps->status = Process::Zombie;
+        ps->setStatus(Process::Zombie);
 	break;
       case 'T':
-         ps->status = Process::Stopped;
+         ps->setStatus(Process::Stopped);
          break;
       case 'W':
-         ps->status = Process::Paging;
+         ps->setStatus(Process::Paging);
          break;
       default:
-         ps->status = Process::OtherStatus;
+         ps->setStatus(Process::OtherStatus);
          break;
     }
     return true;

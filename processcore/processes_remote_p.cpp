@@ -111,32 +111,32 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
     }
     QList<QByteArray> p = d->processByPid[pid];
 
-    if(d->nameColumn!= -1) process->name = p.at(d->nameColumn);
-    if(d->uidColumn!= -1) process->uid = p.at(d->uidColumn).toLong();
-    if(d->gidColumn!= -1) process->gid = p.at(d->gidColumn).toLong();
+    if(d->nameColumn!= -1) process->setName(p.at(d->nameColumn));
+    if(d->uidColumn!= -1) process->setUid(p.at(d->uidColumn).toLong());
+    if(d->gidColumn!= -1) process->setGid(p.at(d->gidColumn).toLong());
     if(d->statusColumn!= -1) {
 	    switch( p.at(d->statusColumn)[0] ) {
 		    case 's':
-			    process->status = Process::Sleeping;
+			    process->setStatus(Process::Sleeping);
 			    break;
 		    case 'r':
-			    process->status = Process::Running;
+			    process->setStatus(Process::Running);
 			    break;
 	    }
     }
-    if(d->userColumn!= -1) process->userTime = p.at(d->userColumn).toLong();
-    if(d->systemColumn!= -1) process->sysTime = p.at(d->systemColumn).toLong();
-    if(d->niceColumn!= -1) process->niceLevel = p.at(d->niceColumn).toLong();
-    if(d->vmSizeColumn!= -1) process->vmSize = p.at(d->vmSizeColumn).toLong();
-    if(d->vmRSSColumn!= -1) process->vmRSS = p.at(d->vmRSSColumn).toLong();
-    if(d->vmURSSColumn!= -1) process->vmURSS = p.at(d->vmURSSColumn).toLong();
-    if(d->loginColumn!= -1) process->login = QString::fromUtf8(p.at(d->loginColumn).data());
-    if(d->commandColumn!= -1) process->command = QString::fromUtf8(p.at(d->commandColumn).data());
-    if(d->tracerPidColumn!= -1) process->tracerpid = p.at(d->tracerPidColumn).toLong();
-    if(d->vmURSSColumn!= -1) process->vmURSS = p.at(d->vmURSSColumn).toLong();
-    if(d->ttyColumn!= -1) process->tty = p.at(d->ttyColumn);
-    if(d->ioprioColumn!= -1) process->ioniceLevel = p.at(d->ioprioColumn).toInt();
-    if(d->ioprioClassColumn!= -1) process->ioPriorityClass = (KSysGuard::Process::IoPriorityClass)(p.at(d->ioprioClassColumn).toInt());
+    if(d->userColumn!= -1) process->setUserTime(p.at(d->userColumn).toLong());
+    if(d->systemColumn!= -1) process->setSysTime(p.at(d->systemColumn).toLong());
+    if(d->niceColumn!= -1) process->setNiceLevel(p.at(d->niceColumn).toLong());
+    if(d->vmSizeColumn!= -1) process->setVmSize(p.at(d->vmSizeColumn).toLong());
+    if(d->vmRSSColumn!= -1) process->setVmRSS(p.at(d->vmRSSColumn).toLong());
+    if(d->vmURSSColumn!= -1) process->setVmURSS(p.at(d->vmURSSColumn).toLong());
+    if(d->loginColumn!= -1) process->setLogin(QString::fromUtf8(p.at(d->loginColumn).data()));
+    if(d->commandColumn!= -1) process->setCommand(QString::fromUtf8(p.at(d->commandColumn).data()));
+    if(d->tracerPidColumn!= -1) process->setTracerpid(p.at(d->tracerPidColumn).toLong());
+    if(d->vmURSSColumn!= -1) process->setVmURSS(p.at(d->vmURSSColumn).toLong());
+    if(d->ttyColumn!= -1) process->setTty(p.at(d->ttyColumn));
+    if(d->ioprioColumn!= -1) process->setIoniceLevel(p.at(d->ioprioColumn).toInt());
+    if(d->ioprioClassColumn!= -1) process->setIoPriorityClass((KSysGuard::Process::IoPriorityClass)(p.at(d->ioprioClassColumn).toInt()));
 
     return true;
 }

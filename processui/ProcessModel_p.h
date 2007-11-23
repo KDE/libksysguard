@@ -74,8 +74,8 @@ public slots:
 #endif
 
 	/** Change the data for a process.  This is called from KSysGuard::Processes
-	 *  if @p onlyCpuOrMem is set, only the cpu and memory information are updated.  This is for optomization reasons - the cpu percentage
-	 *  and memory usage change quite often, but if it's the only thing changed then there's no reason to repaint the whole row
+	 *  if @p onlyCpuOrMem is set, only the total cpu usuage is updated.
+         *  process->changes  contains a bitfield of what has been changed 
 	 */
         void processChanged(KSysGuard::Process *process, bool onlyCpuOrMem);
         /** Called from KSysGuard::Processes
