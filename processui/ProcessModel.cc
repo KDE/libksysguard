@@ -60,6 +60,7 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 	mIsLocalhost = true;
 	mMemTotal = -1;
 	mNumProcessorCores = 1;
+	mProcesses = NULL;
 	
 	mShowChildTotals = true;
 	mIsChangingLayout = false;
