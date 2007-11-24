@@ -25,7 +25,7 @@
 
 #include <QtCore/QList>
 #include <QtCore/QTime>
-#include <QFlags>
+#include <QtCore/QFlags>
 
 #include <klocale.h>
 
