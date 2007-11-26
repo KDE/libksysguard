@@ -195,6 +195,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
 	//Process names can have mixed case. Make the filter case insensitive.
 	d->mFilterModel.setFilterCaseSensitivity(Qt::CaseInsensitive);
+	d->mFilterModel.setSortCaseSensitivity(Qt::CaseInsensitive);
 
 	d->mUi->txtFilter->installEventFilter(this);
 	d->mUi->treeView->installEventFilter(this);

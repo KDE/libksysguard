@@ -770,15 +770,15 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #ifdef Q_WS_X11
 		case HeadingXTitle:
 			{
-				if(!d->mPidToWindowInfo.contains(process->pid)) return QVariant();
+				if(!d->mPidToWindowInfo.contains(process->pid)) return QVariant(QVariant::String);
 				WindowInfo w = d->mPidToWindowInfo.value(process->pid);
-				if(!w.netWinInfo) return QVariant();
+				if(!w.netWinInfo) return QVariant(QVariant::String);
 				const char *name = w.netWinInfo->visibleName();
 				if( !name || name[0] == 0 )
 					name = w.netWinInfo->name();
 				if(name && name[0] != 0)
 					return QString::fromUtf8(name);
-				return QVariant();
+				return QVariant(QVariant::String);
 			}
 #endif
 		default:
