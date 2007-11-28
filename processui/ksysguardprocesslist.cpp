@@ -46,6 +46,8 @@
 #include <kdialog.h>
 #include <kicon.h>
 #include <kstandarddirs.h>
+#include <kwindowinfo.h>
+#include <KWindowSystem>
 
 #include "ksysguardprocesslist.moc"
 #include "ksysguardprocesslist.h"
@@ -87,7 +89,7 @@ class ProgressBarItemDelegate : public QItemDelegate
 		Q_CHECK_PTR(process);
 		if(index.column() == ProcessModel::HeadingCPUUsage) {
 			if(numCpuCores == -1) 
-				numCpuCores = index.data(Qt::UserRole+4).toInt();
+				numCpuCores = index.data(ProcessModel::NumberOfProcessorsRole).toInt();
 			percentage = (process->userUsage + process->sysUsage) / numCpuCores;
 		} else if(index.column() == ProcessModel::HeadingMemory) {
 			long long memory = 0;
@@ -96,7 +98,7 @@ class ProgressBarItemDelegate : public QItemDelegate
 			else 
 				memory = process->vmRSS;
 			if(totalMemory == -1)
-				totalMemory = index.data(Qt::UserRole+3).toLongLong();
+				totalMemory = index.data(ProcessModel::TotalMemoryRole).toLongLong();
 			if(totalMemory > 0) 
 				percentage = (int)(memory*100/totalMemory);
 			else
@@ -104,7 +106,7 @@ class ProgressBarItemDelegate : public QItemDelegate
 		} else if(index.column() == ProcessModel::HeadingSharedMemory) {
 			if(process->vmURSS != -1) {
 				if(totalMemory == -1)
-					totalMemory = index.data(Qt::UserRole+3).toLongLong();
+					totalMemory = index.data(ProcessModel::TotalMemoryRole).toLongLong();
 				if(totalMemory > 0)
 					percentage = (int)((process->vmRSS - process->vmURSS)*100/totalMemory);
 				else
@@ -280,13 +282,15 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
         
 	if(numProcesses == 0) return;  //No processes selected, so no context menu
 
-	KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (d->mFilterModel.mapToSource(selectedIndexes.at(0)).internalPointer());
+	QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
+	KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
 
 
 	QAction *renice = 0;
 	QAction *kill = 0;
 	QAction *selectParent = 0;
 	QAction *selectTracer = 0;
+	QAction *window = 0;
 	QAction *resume = 0;
 	QAction *sigStop = 0;
 	QAction *sigCont = 0;
@@ -296,16 +300,13 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	QAction *sigKill = 0;
 	QAction *sigUsr1 = 0;
 	QAction *sigUsr2 = 0;
-	if(numProcesses != 1 || process->status != KSysGuard::Process::Zombie) {  //If the selected process is a zombie, don't bother offering renice and kill options
 
+	//If the selected process is a zombie, don't bother offering renice and kill options
+	bool showSignalingEntries = numProcesses != 1 || process->status != KSysGuard::Process::Zombie;
+	if(showSignalingEntries) {
 		renice = new QAction(d->mProcessContextMenu);
 		renice->setText(i18np("Renice Process...", "Renice Processes...", numProcesses));
 		d->mProcessContextMenu->addAction(renice);
-
-		kill = new QAction(d->mProcessContextMenu);
-		kill->setText(i18np("Kill Process", "Kill Processes", numProcesses));
-		kill->setIcon(KIcon("stop"));
-		d->mProcessContextMenu->addAction(kill);
 
 		QMenu *signalMenu = d->mProcessContextMenu->addMenu(i18n("Send Signal"));
 		sigStop = signalMenu->addAction(i18n("Suspend (STOP)"));
@@ -332,7 +333,20 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 		selectTracer->setText(i18n("Jump to process debugging this one"));
 		d->mProcessContextMenu->addAction(selectTracer);
 	}
-        
+
+	if(numProcesses == 1 && process->tracerpid > 0) {
+		//If the process is being debugged, offer to select it
+		selectTracer = new QAction(d->mProcessContextMenu);
+		selectTracer->setText(i18n("Jump to process debugging this one"));
+		d->mProcessContextMenu->addAction(selectTracer);
+	}
+
+	if (numProcesses == 1 && !d->mModel.data(realIndex, ProcessModel::WindowIdRole).isNull()) {
+		window = new QAction(d->mProcessContextMenu);
+		window->setText(i18n("Show application window"));
+		d->mProcessContextMenu->addAction(window);
+	}
+
 	if(numProcesses == 1 && process->status == KSysGuard::Process::Stopped) {
 		//If the process is being debugged, offer to select it
 		resume = new QAction(d->mProcessContextMenu);
@@ -340,7 +354,15 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 		d->mProcessContextMenu->addAction(resume);
 	}
 
-	QAction *result = d->mProcessContextMenu->exec(d->mUi->treeView->mapToGlobal(point));
+	if (showSignalingEntries) {
+		d->mProcessContextMenu->addSeparator();
+		kill = new QAction(d->mProcessContextMenu);
+		kill->setText(i18np("Kill Process", "Kill Processes", numProcesses));
+		kill->setIcon(KIcon("stop"));
+		d->mProcessContextMenu->addAction(kill);
+	}
+
+	QAction *result = d->mProcessContextMenu->exec(d->mUi->treeView->viewport()->mapToGlobal(point));
 	if(result == 0) {
 		//Escape was pressed. Do nothing.
 	} else if(result == renice) {
@@ -351,6 +373,15 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 		selectAndJumpToProcess(process->parent_pid);
 	} else if(result == selectTracer) {
 		selectAndJumpToProcess(process->tracerpid);
+	} else if(result == window) {
+		int wid = d->mModel.data(realIndex, ProcessModel::WindowIdRole).toInt();
+
+		KWindowInfo info(wid, NET::WMDesktop);
+		if (!info.isOnCurrentDesktop()) {
+		    KWindowSystem::setCurrentDesktop(info.desktop());
+		}
+
+		KWindowSystem::activateWindow(wid);
 	} else {
 		QList< long long > pidlist;
 		pidlist << process->pid;
