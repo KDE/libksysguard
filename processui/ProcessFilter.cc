@@ -35,8 +35,6 @@
 
 bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source_parent ) const
 {
-	//We need the uid for this, so we have a special understanding with the model.
-	//We query the first row with Qt:UserRole, and it gives us the uid.  Nasty but works.
 	if( (mFilter == AllProcesses || mFilter == AllProcessesInTreeForm) 
 			&& filterRegExp().isEmpty()) return true; //Shortcut for common case 
 	
@@ -135,8 +133,8 @@ bool ProcessFilter::lessThan(const QModelIndex &left, const QModelIndex &right) 
 	if(right.isValid() && left.isValid()) {
 		Q_ASSERT(left.model());
 		Q_ASSERT(right.model());
-		QVariant l = (left.model() ? left.model()->data(left, Qt::UserRole+1) : QVariant());
-		QVariant r = (right.model() ? right.model()->data(right, Qt::UserRole+1) : QVariant());
+		QVariant l = (left.model() ? left.model()->data(left, ProcessModel::SortingValueRole) : QVariant());
+		QVariant r = (right.model() ? right.model()->data(right, ProcessModel::SortingValueRole) : QVariant());
 		if(l.isValid() && r.isValid())
 			return l.toDouble() < r.toDouble();
 	}
