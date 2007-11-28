@@ -971,14 +971,12 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 				return QVariant(Qt::AlignRight);
 		}
 		return QVariant();
-	case Qt::UserRole: {
-		//We have a special understanding with the filter.  If it queries us as UserRole in column 0, return uid
+	case UidRole: {
 		if(index.column() != 0) return QVariant();  //If we query with this role, then we want the raw UID for this.
 		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
 		return process->uid;
 	}
-
-	case Qt::UserRole+1: {
+	case SortingValueRole: {
 		//We have a special understanding with the filter sort. This returns an int (in a qvariant) that can be sorted by
 		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
 		Q_ASSERT(process);
@@ -1044,11 +1042,18 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		}
 		return QVariant();
 	}
-	case Qt::UserRole+3: {
+#ifdef Q_WS_X11
+        case WindowIdRole: {
+		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+		if(!d->mPidToWindowInfo.contains(process->pid)) return QVariant();
+		WindowInfo w = d->mPidToWindowInfo.value(process->pid);
+		return (int)w.wid;
+#endif
+	}
+	case TotalMemoryRole: {
 		return d->mMemTotal;
 	}
-
-	case Qt::UserRole+4: {
+	case NumberOfProcessorsRole: {
 		return d->mNumProcessorCores;
 	}
 	case Qt::DecorationRole: {

@@ -113,6 +113,7 @@ public:
 	 */
 #define PROCESSHEADERVERSION 1
 	enum { HeadingName=0, HeadingUser, HeadingPid, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXTitle };
+	enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, TotalMemoryRole, NumberOfProcessorsRole };
 
 	bool showTotals() const;
 
