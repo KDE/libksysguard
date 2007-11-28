@@ -127,8 +127,26 @@ class ProgressBarItemDelegate : public QItemDelegate
 struct KSysGuardProcessListPrivate {
     
 	KSysGuardProcessListPrivate(KSysGuardProcessList* q, const QString &hostName) 
-            : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL) 
-        {}
+            : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL)
+        {
+		renice = new QAction(i18np("Renice Process...", "Renice Processes...", 1), q);
+		selectParent = new QAction(i18n("Jump to Parent Process"), q);
+
+		selectTracer = new QAction(i18n("Jump to process debugging this one"), q);
+		window = new QAction(i18n("Show application window"), q);
+		resume = new QAction(i18n("Resume stopped process"), q);
+		kill = new QAction(i18np("Kill Process", "Kill Processes", 1), q);
+		kill->setIcon(KIcon("stop"));
+
+		sigStop = new QAction(i18n("Suspend (STOP)"), q);
+		sigCont = new QAction(i18n("Continue (CONT)"), q);
+		sigHup = new QAction(i18n("Hangup (HUP)"), q);
+		sigInt = new QAction(i18n("Interupt (INT)"), q);
+		sigTerm = new QAction(i18n("Terminate (TERM)"), q);
+		sigKill = new QAction(i18n("Kill (KILL)"), q);
+		sigUsr1 = new QAction(i18n("User 1 (USR1)"), q);
+		sigUsr2 = new QAction(i18n("User 2 (USR2)"), q);
+	}
 
         ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
 	
@@ -151,6 +169,21 @@ struct KSysGuardProcessListPrivate {
 
 	/** The time to wait, in milliseconds, between updating the process list */
 	int mUpdateIntervalMSecs;
+
+	QAction *renice;
+	QAction *kill;
+	QAction *selectParent;
+	QAction *selectTracer;
+	QAction *window;
+	QAction *resume;
+	QAction *sigStop;
+	QAction *sigCont;
+	QAction *sigHup;
+	QAction *sigInt;
+	QAction *sigTerm;
+	QAction *sigKill;
+	QAction *sigUsr1;
+	QAction *sigUsr2;
 };
 
 KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
@@ -286,94 +319,59 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
 
 
-	QAction *renice = 0;
-	QAction *kill = 0;
-	QAction *selectParent = 0;
-	QAction *selectTracer = 0;
-	QAction *window = 0;
-	QAction *resume = 0;
-	QAction *sigStop = 0;
-	QAction *sigCont = 0;
-	QAction *sigHup = 0;
-	QAction *sigInt = 0;
-	QAction *sigTerm = 0;
-	QAction *sigKill = 0;
-	QAction *sigUsr1 = 0;
-	QAction *sigUsr2 = 0;
 
-	//If the selected process is a zombie, don't bother offering renice and kill options
+	//If the selected process is a zombie, do not bother offering renice and kill options
 	bool showSignalingEntries = numProcesses != 1 || process->status != KSysGuard::Process::Zombie;
 	if(showSignalingEntries) {
-		renice = new QAction(d->mProcessContextMenu);
-		renice->setText(i18np("Renice Process...", "Renice Processes...", numProcesses));
-		d->mProcessContextMenu->addAction(renice);
-
+		d->mProcessContextMenu->addAction(d->renice);
 		QMenu *signalMenu = d->mProcessContextMenu->addMenu(i18n("Send Signal"));
-		sigStop = signalMenu->addAction(i18n("Suspend (STOP)"));
-		sigCont = signalMenu->addAction(i18n("Continue (CONT)"));
-		sigHup = signalMenu->addAction(i18n("Hangup (HUP)"));
-		sigInt = signalMenu->addAction(i18n("Interupt (INT)"));
-		sigTerm = signalMenu->addAction(i18n("Terminate (TERM)"));
-		sigKill = signalMenu->addAction(i18n("Kill (KILL)"));
-		sigUsr1 = signalMenu->addAction(i18n("User 1 (USR1)"));
-		sigUsr2 = signalMenu->addAction(i18n("User 2 (USR2)"));
+		signalMenu->addAction(d->sigStop);
+		signalMenu->addAction(d->sigCont);
+		signalMenu->addAction(d->sigHup);
+		signalMenu->addAction(d->sigInt);
+		signalMenu->addAction(d->sigTerm);
+		signalMenu->addAction(d->sigKill);
+		signalMenu->addAction(d->sigUsr1);
+		signalMenu->addAction(d->sigUsr2);
 	}
 
 	if(numProcesses == 1 && process->parent_pid > 1) {
 		//As a design decision, I do not show the 'Jump to parent process' option when the 
 		//parent is just 'init'.
-		selectParent = new QAction(d->mProcessContextMenu);
-		selectParent->setText(i18n("Jump to Parent Process"));
-		d->mProcessContextMenu->addAction(selectParent);
+		d->mProcessContextMenu->addAction(d->selectParent);
 	}
 
 	if(numProcesses == 1 && process->tracerpid > 0) {
 		//If the process is being debugged, offer to select it
-		selectTracer = new QAction(d->mProcessContextMenu);
-		selectTracer->setText(i18n("Jump to process debugging this one"));
-		d->mProcessContextMenu->addAction(selectTracer);
-	}
-
-	if(numProcesses == 1 && process->tracerpid > 0) {
-		//If the process is being debugged, offer to select it
-		selectTracer = new QAction(d->mProcessContextMenu);
-		selectTracer->setText(i18n("Jump to process debugging this one"));
-		d->mProcessContextMenu->addAction(selectTracer);
+		d->mProcessContextMenu->addAction(d->selectTracer);
 	}
 
 	if (numProcesses == 1 && !d->mModel.data(realIndex, ProcessModel::WindowIdRole).isNull()) {
-		window = new QAction(d->mProcessContextMenu);
-		window->setText(i18n("Show application window"));
-		d->mProcessContextMenu->addAction(window);
+		d->mProcessContextMenu->addAction(d->window);
 	}
 
 	if(numProcesses == 1 && process->status == KSysGuard::Process::Stopped) {
 		//If the process is being debugged, offer to select it
-		resume = new QAction(d->mProcessContextMenu);
-		resume->setText(i18n("Resume stopped process"));
-		d->mProcessContextMenu->addAction(resume);
+		d->mProcessContextMenu->addAction(d->resume);
 	}
 
 	if (showSignalingEntries) {
 		d->mProcessContextMenu->addSeparator();
-		kill = new QAction(d->mProcessContextMenu);
-		kill->setText(i18np("Kill Process", "Kill Processes", numProcesses));
-		kill->setIcon(KIcon("stop"));
-		d->mProcessContextMenu->addAction(kill);
+		d->mProcessContextMenu->addAction(d->kill);
 	}
 
 	QAction *result = d->mProcessContextMenu->exec(d->mUi->treeView->viewport()->mapToGlobal(point));
 	if(result == 0) {
 		//Escape was pressed. Do nothing.
-	} else if(result == renice) {
+	} else if(result == d->renice) {
 		reniceSelectedProcesses();
-	} else if(result == kill) {
+	} else if(result == d->kill) {
 		killSelectedProcesses();
-	} else if(result == selectParent) {
+	} else if(result == d->selectParent) {
 		selectAndJumpToProcess(process->parent_pid);
-	} else if(result == selectTracer) {
+	} else if(result == d->selectTracer) {
 		selectAndJumpToProcess(process->tracerpid);
-	} else if(result == window) {
+	} else if(result == d->window) {
 		int wid = d->mModel.data(realIndex, ProcessModel::WindowIdRole).toInt();
 
 		KWindowInfo info(wid, NET::WMDesktop);
@@ -385,21 +383,21 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	} else {
 		QList< long long > pidlist;
 		pidlist << process->pid;
-		if(result == resume || result == sigCont)
+		if(result == d->resume || result == d->sigCont)
 			killProcesses(pidlist, SIGCONT);  //Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
-		else if(result == sigStop)
+		else if(result == d->sigStop)
 			killProcesses(pidlist, SIGSTOP);
-		else if(result == sigHup)
+		else if(result == d->sigHup)
 			killProcesses(pidlist, SIGHUP);
-		else if(result == sigInt)
+		else if(result == d->sigInt)
 			killProcesses(pidlist, SIGINT);
-		else if(result == sigTerm)
+		else if(result == d->sigTerm)
 			killProcesses(pidlist, SIGTERM);
-		else if(result == sigKill)
+		else if(result == d->sigKill)
 			killProcesses(pidlist, SIGKILL);
-		else if(result == sigUsr1)
+		else if(result == d->sigUsr1)
 			killProcesses(pidlist, SIGUSR1);
-		else if(result == sigUsr2)
+		else if(result == d->sigUsr2)
 			killProcesses(pidlist, SIGUSR2);
 		updateList();
 	}
