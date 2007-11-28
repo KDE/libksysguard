@@ -299,7 +299,12 @@ void KSysGuardProcessList::filterTextChanged(const QString &newText) {
 }
 void KSysGuardProcessList::selectionChanged()
 {
-	d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->selectedIndexes().size() != 0 );
+	int numSelected =  d->mUi->treeView->selectionModel()->selectedRows().size();
+	d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
+
+	kDebug() << "numSelected is " << numSelected;
+	d->renice->setText(i18np("Renice Process...", "Renice Processes...", numSelected));
+	d->kill->setText(i18np("Kill Process", "Kill Processes", numSelected));
 }
 void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
 	if(!index.isValid()) return;
