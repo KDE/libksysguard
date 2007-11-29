@@ -46,7 +46,6 @@
 #include <kdialog.h>
 #include <kicon.h>
 #include <kstandarddirs.h>
-#include <kwindowinfo.h>
 #include <KWindowSystem>
 
 #include "ksysguardprocesslist.moc"
@@ -378,12 +377,6 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 		selectAndJumpToProcess(process->tracerpid);
 	} else if(result == d->window) {
 		int wid = d->mModel.data(realIndex, ProcessModel::WindowIdRole).toInt();
-
-		KWindowInfo info(wid, NET::WMDesktop);
-		if (!info.isOnCurrentDesktop()) {
-		    KWindowSystem::setCurrentDesktop(info.desktop());
-		}
-
 		KWindowSystem::activateWindow(wid);
 	} else {
 		QList< long long > pidlist;
