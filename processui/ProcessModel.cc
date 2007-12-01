@@ -1048,8 +1048,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		if(!d->mPidToWindowInfo.contains(process->pid)) return QVariant();
 		WindowInfo w = d->mPidToWindowInfo.value(process->pid);
 		return (int)w.wid;
-#endif
 	}
+#endif
 	case TotalMemoryRole: {
 		return d->mMemTotal;
 	}
