@@ -35,6 +35,7 @@
 #include <QPainter>
 #include <QProcess>
 #include <QLineEdit>
+#include <QSignalMapper>
 
 
 #include <signal.h> //For SIGTERM
@@ -145,6 +146,7 @@ struct KSysGuardProcessListPrivate {
 		sigKill = new QAction(i18n("Kill (KILL)"), q);
 		sigUsr1 = new QAction(i18n("User 1 (USR1)"), q);
 		sigUsr2 = new QAction(i18n("User 2 (USR2)"), q);
+		
 	}
 
         ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
@@ -242,6 +244,18 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	//Sort by username by default
 	d->mUi->treeView->sortByColumn(ProcessModel::HeadingUser, Qt::AscendingOrder);
 	d->mFilterModel.sort(ProcessModel::HeadingUser, Qt::AscendingOrder);
+
+	// Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked	
+	QSignalMapper *signalMapper = new QSignalMapper(this);
+	QList<QAction *> actions;
+	actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window << d->resume;
+	actions << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
+	foreach(QAction *action, actions) {
+		addAction(action);
+		connect(action, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
+		signalMapper->setMapping(action, action);
+	}
+	connect(signalMapper, SIGNAL(mapped(QObject *)), SLOT(actionTriggered(QObject *)));
 
 	retranslateUi();
 
@@ -364,7 +378,11 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 		d->mProcessContextMenu->addAction(d->kill);
 	}
 
-	QAction *result = d->mProcessContextMenu->exec(d->mUi->treeView->viewport()->mapToGlobal(point));
+	d->mProcessContextMenu->popup(d->mUi->treeView->viewport()->mapToGlobal(point));
+}
+void KSysGuardProcessList::actionTriggered(QObject *object) {
+	kDebug() << "Action triggered";
+	QAction *result = dynamic_cast<QAction *>(object);
 	if(result == 0) {
 		//Escape was pressed. Do nothing.
 	} else if(result == d->renice) {
@@ -372,15 +390,44 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	} else if(result == d->kill) {
 		killSelectedProcesses();
 	} else if(result == d->selectParent) {
-		selectAndJumpToProcess(process->parent_pid);
+		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
+		int numProcesses = selectedIndexes.size();        
+		if(numProcesses == 0) return;  //No processes selected
+		QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
+		KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
+		if(process)
+			selectAndJumpToProcess(process->parent_pid);
 	} else if(result == d->selectTracer) {
-		selectAndJumpToProcess(process->tracerpid);
+		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
+		int numProcesses = selectedIndexes.size();        
+		if(numProcesses == 0) return;  //No processes selected
+		QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
+		KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
+		if(process)
+			selectAndJumpToProcess(process->tracerpid);
 	} else if(result == d->window) {
-		int wid = d->mModel.data(realIndex, ProcessModel::WindowIdRole).toInt();
-		KWindowSystem::activateWindow(wid);
+		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
+		int numProcesses = selectedIndexes.size();        
+		if(numProcesses == 0) return;  //No processes selected
+		foreach( QModelIndex index, selectedIndexes) {
+			QModelIndex realIndex = d->mFilterModel.mapToSource(index);
+			QVariant widVar= d->mModel.data(realIndex, ProcessModel::WindowIdRole);
+			if( !widVar.isNull() ) {
+				int wid = widVar.toInt();
+				KWindowSystem::activateWindow(wid);
+			}
+		}
 	} else {
 		QList< long long > pidlist;
-		pidlist << process->pid;
+		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
+		int numProcesses = selectedIndexes.size();        
+		if(numProcesses == 0) return;  //No processes selected
+		foreach( QModelIndex index, selectedIndexes) {
+			QModelIndex realIndex = d->mFilterModel.mapToSource(index);
+			KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
+			if(process)
+				pidlist << process->pid;
+		}
 		if(result == d->resume || result == d->sigCont)
 			killProcesses(pidlist, SIGCONT);  //Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
 		else if(result == d->sigStop)

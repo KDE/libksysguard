@@ -177,6 +177,8 @@ private Q_SLOTS:
 	/** Called when the text in the gui filter text box has changed */
 	void filterTextChanged(const QString &newText);
 
+	/** Called when one of the actions (kill, renice etc) is clicked etc */
+	void actionTriggered(QObject *object);
 protected:
 	/** Inherit QWidget::showEvent(QShowEvent *) to enable the timer, for updates, when visible */
 	virtual void showEvent(QShowEvent*);
