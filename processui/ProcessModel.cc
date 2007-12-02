@@ -737,10 +737,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 
 				if(total < 1 && process->status != KSysGuard::Process::Sleeping && process->status != KSysGuard::Process::Running)
 					return process->translatedStatus();  //tell the user when the process is a zombie or stopped
-				if(total < 1)
+				if(total < 0.5)
 					return "";
-
-				return QString::number(total, 'f', (total>=1)?0:1) + '%';
+				
+				return QString::number((int)(total+0.5)) + '%';
 			}
 		case HeadingMemory:
 			if(process->vmRSS == 0) return QVariant(QVariant::String);
