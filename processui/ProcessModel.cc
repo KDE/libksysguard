@@ -61,7 +61,6 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 	mMemTotal = -1;
 	mNumProcessorCores = 1;
 	mProcesses = NULL;
-	
 	mShowChildTotals = true;
 	mIsChangingLayout = false;
 }
@@ -78,8 +77,8 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
 		d->mHostName = host;
 		d->mIsLocalhost = false;
 	}
-	d->setupProcesses();
 	setupHeader();
+	d->setupProcesses();
 	d->setupWindows();
 	d->mUnits = UnitsKB;
 }
@@ -157,7 +156,6 @@ void ProcessModelPrivate::setupProcesses() {
         connect( mProcesses, SIGNAL( endMoveProcess()), this, SLOT(endMoveRow()));
 	mNumProcessorCores = mProcesses->numberProcessorCores();
 	if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
-	q->update();
 }
 
 #ifdef Q_WS_X11

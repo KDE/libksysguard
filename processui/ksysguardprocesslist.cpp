@@ -41,7 +41,6 @@
 #include <signal.h> //For SIGTERM
 
 #include <kapplication.h>
-#include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
@@ -266,14 +265,12 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	d->mUpdateTimer = new QTimer(this);
 	d->mUpdateTimer->setSingleShot(true);
 	connect(d->mUpdateTimer, SIGNAL(timeout()), this, SLOT(updateList()));
-	d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
+	d->mUpdateTimer->start(0);
 
 	//If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
 	QTimer *mTimer = new QTimer(this);
 	connect(mTimer, SIGNAL(timeout()), &d->mFilterModel, SLOT(invalidate()));
 	mTimer->start(4000); 
-
-	expandInit(); //This will expand the init process
 }
 
 KSysGuardProcessList::~KSysGuardProcessList()
@@ -315,7 +312,6 @@ void KSysGuardProcessList::selectionChanged()
 	int numSelected =  d->mUi->treeView->selectionModel()->selectedRows().size();
 	d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
 
-	kDebug() << "numSelected is " << numSelected;
 	d->renice->setText(i18np("Renice Process...", "Renice Processes...", numSelected));
 	d->kill->setText(i18np("Kill Process", "Kill Processes", numSelected));
 }
@@ -381,7 +377,6 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	d->mProcessContextMenu->popup(d->mUi->treeView->viewport()->mapToGlobal(point));
 }
 void KSysGuardProcessList::actionTriggered(QObject *object) {
-	kDebug() << "Action triggered";
 	QAction *result = dynamic_cast<QAction *>(object);
 	if(result == 0) {
 		//Escape was pressed. Do nothing.
