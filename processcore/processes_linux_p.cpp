@@ -216,8 +216,8 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
     int current_word = 0;  //count from 0
     char *word = mBuffer;
     char status='\0';
-    long vmSize;
-    long vmRSS;
+    long vmSize = 0;
+    long vmRSS = 0;
     while(current_word < 23) {
 	    if(word[0] == ' ' ) {
 		    ++current_word;
