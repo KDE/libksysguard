@@ -146,6 +146,9 @@ public Q_SLOTS:
 	/** The units to display memory sizes etc in. */
 	void setUnits(ProcessModel::Units unit);
 
+	/** Row was just inserted in the filter model */
+	void rowsInserted ( const QModelIndex & parent, int start, int end );
+
 private Q_SLOTS:
 
 	/** Expand all the children, recursively, of the node given.  Pass an empty QModelIndex to expand all the top level children */

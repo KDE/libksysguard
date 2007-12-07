@@ -45,6 +45,7 @@
 #include <kmessagebox.h>
 #include <kdialog.h>
 #include <kicon.h>
+#include <kdebug.h>
 #include <kstandarddirs.h>
 #include <KWindowSystem>
 
@@ -214,6 +215,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	connect(d->mUi->cmbFilter, SIGNAL(currentIndexChanged(int)), this, SLOT(setStateInt(int)));
 	connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
 	connect(d->mUi->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection & , const QItemSelection & )), this, SLOT(selectionChanged()));
+	connect(&d->mFilterModel, SIGNAL(rowsInserted( const QModelIndex &, int, int)), this, SLOT(rowsInserted(const QModelIndex &)));
 	setMinimumSize(sizeHint());
 
 	/*  Hide the vm size column by default since it's not very useful */
@@ -554,12 +556,31 @@ void KSysGuardProcessList::expandAllChildren(const QModelIndex &parent)
 	}
 }
 
+void KSysGuardProcessList::rowsInserted(const QModelIndex & parent, int start, int end )
+{
+	if(d->mModel.isSimpleMode()) return; //No tree - no need to expand init
+	if(parent.isValid()) return; //Not a root node
+	//It is a root node that we just inserted - expand it
+	expandInit();
+}
 void KSysGuardProcessList::expandInit()
 {
-	//When we expand the items, make sure we don't call our expand all children function
-	disconnect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
-	d->mUi->treeView->expandToDepth(0);
-	connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
+	if(d->mModel.isSimpleMode()) return; //No tree - no need to expand init
+
+	bool expanded = false;
+	for(int i = 0; i < d->mFilterModel.rowCount(QModelIndex()); i++) {
+		QModelIndex index = d->mFilterModel.index(i, 0, QModelIndex());
+		if(!d->mUi->treeView->isExpanded(index)) {
+			kDebug() << "Expanding root node";
+			if(!expanded) {
+				disconnect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
+				expanded = true;
+			}
+			d->mUi->treeView->expand(index);
+		}
+	}
+	if(expanded)
+		connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
 }
 
 void KSysGuardProcessList::hideEvent ( QHideEvent * event )  //virtual protected from QWidget
@@ -605,6 +626,7 @@ void KSysGuardProcessList::updateList()
 		d->mModel.update(d->mUpdateIntervalMSecs);
 		d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
 	}
+	expandInit();
 }
 
 int KSysGuardProcessList::updateIntervalMSecs() const 
