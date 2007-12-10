@@ -27,5 +27,11 @@
 #include "processes_openbsd_p.cpp"
 #elif defined __NetBSD__
 #include "processes_netbsd_p.cpp"
+#else
+// Use Qt's OS detection
+#include <qglobal.h>
+#ifdef Q_OS_SOLARIS
+#include "processes_solaris_p.cpp"
+#endif
 #endif
 
