@@ -57,6 +57,7 @@ public Q_SLOTS:
 	void ioSliderChanged(int value);
 
 private:
+	void setSliderRange();
 	Ui_ReniceDlgUi *ui;
 	QButtonGroup *cpuScheduler;
 	QButtonGroup *ioScheduler;

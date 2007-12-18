@@ -59,12 +59,6 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	ui = new Ui_ReniceDlgUi();
 	ui->setupUi(widget);
 	ui->listWidget->insertItems(0, processes);
-	if(ioniceSupported)
-		ui->sliderIO->setValue(7- currentIoPrio);
-	if(currentCpuSched == (int)KSysGuard::Process::Other || currentCpuSched == (int)KSysGuard::Process::Batch || currentCpuSched <= 0)
-		ui->sliderCPU->setValue(-currentCpuPrio);
-	else
-		ui->sliderCPU->setValue(currentCpuPrio);
 
 	cpuScheduler = new QButtonGroup(this);
 	cpuScheduler->addButton(ui->radioNormal, (int)KSysGuard::Process::Other);
@@ -91,10 +85,14 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 
 	ioScheduler->setExclusive(true);
 
+	if(ioniceSupported)
+		ui->sliderIO->setValue(currentIoPrio);
+	ui->sliderCPU->setValue(currentCpuPrio);
+
 	ui->imgCPU->setPixmap( KIcon("cpu").pixmap(128, 128) );
 	ui->imgIO->setPixmap( KIcon("drive-harddisk").pixmap(128, 128) );
 
-       	newCPUPriority = 40;
+	newCPUPriority = 40;
 
 	connect(cpuScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
 	connect(ioScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
@@ -105,17 +103,16 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 }
 
 void ReniceDlg::ioSliderChanged(int value) {
-	ui->sliderIO->setToolTip(QString::number(7- value));
+	ui->sliderIO->setToolTip(QString::number(value));
 }
 void ReniceDlg::cpuSliderChanged(int value) {
 	if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch) {
-	   // When we are on other or batch, the priority is  -value.  
-		ui->sliderCPU->setToolTip(QString::number(-value));
 		if( ioScheduler->checkedId() == -1 || ioScheduler->checkedId() == (int)KSysGuard::Process::None) {
-			ui->sliderIO->setValue(7 - (-value+20)/5);
+			//ionice is 'Normal', thus automatically calculated based on cpunice
+			ui->sliderIO->setValue((value+20)/5);
 		}
-	} else 
-		ui->sliderCPU->setToolTip(QString::number(value));
+	}
+	ui->sliderCPU->setToolTip(QString::number(value));
 }
 
 void ReniceDlg::updateUi() {
@@ -130,34 +127,32 @@ void ReniceDlg::updateUi() {
 	ui->lblIOLow->setEnabled(ioPrioEnabled);
 	ui->lblIOHigh->setEnabled(ioPrioEnabled);
 
+	setSliderRange();
+	cpuSliderChanged(ui->sliderCPU->value());
+	ioSliderChanged(ui->sliderIO->value());
+}
+
+void ReniceDlg::setSliderRange() {
 	if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch) {
 		//The slider is setting the priority, so goes from 19 to -20.  We cannot actually do this with a slider, so instead we go from -19 to 20, and negate later
-		if(ui->sliderCPU->value() >20) ui->sliderCPU->setValue(20);
+		if(ui->sliderCPU->value() > 20) ui->sliderCPU->setValue(20);
+		ui->sliderCPU->setInvertedAppearance(true);
 		ui->sliderCPU->setMinimum(-19);
 		ui->sliderCPU->setMaximum(20);
 		ui->sliderCPU->setTickInterval(5);
 	} else {
 		if(ui->sliderCPU->value() < 1) ui->sliderCPU->setValue(1);
+		ui->sliderCPU->setInvertedAppearance(false);
 		ui->sliderCPU->setMinimum(1);
 		ui->sliderCPU->setMaximum(99);
 		ui->sliderCPU->setTickInterval(12);
-	}
-
-	cpuSliderChanged(ui->sliderCPU->value());
-	ioSliderChanged(ui->sliderIO->value());
+	} 
 }
 
 void ReniceDlg::slotOk()
 {
-  if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch)
-	  newCPUPriority = -ui->sliderCPU->value();
-  else
-	  newCPUPriority = ui->sliderCPU->value();
-
-  newIOPriority = 7 - ui->sliderIO->value();
-  newCPUSched = cpuScheduler->checkedId();
-  newIOSched = ioScheduler->checkedId();
-
-
+	newCPUPriority = ui->sliderCPU->value();
+	newIOPriority = ui->sliderIO->value();
+	newCPUSched = cpuScheduler->checkedId();
+	newIOSched = ioScheduler->checkedId();
 }
-

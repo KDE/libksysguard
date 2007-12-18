@@ -35,9 +35,9 @@
 
 bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source_parent ) const
 {
-	if( (mFilter == AllProcesses || mFilter == AllProcessesInTreeForm) 
-			&& filterRegExp().isEmpty()) return true; //Shortcut for common case 
-	
+	if( (mFilter == AllProcesses || mFilter == AllProcessesInTreeForm)
+			&& filterRegExp().isEmpty()) return true; //Shortcut for common case
+
 	ProcessModel *model = static_cast<ProcessModel *>(sourceModel());
 	const KSysGuard::Process *process;
         if(model->isSimpleMode()) {
@@ -67,7 +67,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 	Q_ASSERT(process);
 	long uid = process->uid;
 	long euid = process->euid;
-	
+
 	bool accepted = true;
 	switch(mFilter) {
 	case AllProcesses:
@@ -78,7 +78,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 			accepted = false;
 		break;
         case UserProcesses:
-		if( (uid < 100 || !model->canUserLogin(uid)) && (euid < 100 || !model->canUserLogin(euid))) 
+		if( (uid < 100 || !model->canUserLogin(uid)) && (euid < 100 || !model->canUserLogin(euid)))
 			accepted = false;
 		break;
         case OwnProcesses: {
@@ -102,20 +102,20 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		break;
         }
 
-	if(accepted) { 
+	if(accepted) {
 		if(filterRegExp().isEmpty()) return true;
-		
+
 		//Allow the user to search by PID
 		if(QString::number(process->pid).contains(filterRegExp())) return true;
 
-		//None of our tests have rejected it.  Pass it on to qsortfilterproxymodel's filter	
+		//None of our tests have rejected it.  Pass it on to qsortfilterproxymodel's filter
 		if(QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
 			return true;
 	}
 
 
-	//We did not accept this row at all.  
-	
+	//We did not accept this row at all.
+
 	//If we are in flat mode, then give up now
 	if(mFilter != AllProcessesInTreeForm)
 		return false;
@@ -143,7 +143,7 @@ bool ProcessFilter::lessThan(const QModelIndex &left, const QModelIndex &right) 
 
 
 void ProcessFilter::setFilter(State filter) {
-	mFilter = filter; 
+	mFilter = filter;
 	filterChanged();//Tell the proxy view to refresh all its information
 }
 #include "ProcessFilter.moc"
