@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>583</width>
-    <height>353</height>
+    <width>652</width>
+    <height>397</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" >
@@ -349,11 +349,11 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="1" column="1" >
         <widget class="QLabel" name="lblCpuHigh" >
-         <property name="layoutDirection" >
-          <enum>Qt::RightToLeft</enum>
-         </property>
          <property name="text" >
           <string>High Priority</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
