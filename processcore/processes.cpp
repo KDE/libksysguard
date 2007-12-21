@@ -26,6 +26,8 @@
 #include "process.h"
 
 #include <klocale.h>
+#include <kglobal.h>
+
 
 #include <QFile>
 #include <QDir>
@@ -81,6 +83,7 @@ Processes *Processes::getInstance(const QString &host) { //static
     if(host.isEmpty()) {
         //Localhost processes
         if(!d2->processesLocal) {
+	    KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
             d2->processesLocal = new Processes(new ProcessesLocal());
         }
 	return d2->processesLocal;
@@ -88,6 +91,7 @@ Processes *Processes::getInstance(const QString &host) { //static
         Processes *processes = d2->processesRemote.value(host, NULL);
         if( !processes ) {
             //connect to it
+	    KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
 	    ProcessesRemote *remote = new ProcessesRemote(host);
 	    processes = new Processes( remote );
             d2->processesRemote.insert(host, processes);
