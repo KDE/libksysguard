@@ -987,22 +987,21 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			//First the user we are running as should be at the top.  We add 0 for this
 			//Then any other users in the system.  We add 100,000,000 for this (remember it's ascendingly sorted)
 			//Then at the bottom the 'system' processes.  We add 200,000,000 for this
-
-			//One special exception is a traced process since that's probably important. We should put that at the top
 			//
 			//We subtract the uid to sort ascendingly by that, then subtract the cpu usage to sort by that, then finally subtract the memory
-			if(process->tracerpid >0) return (long long)0;
 			
 			long long base = 0;
 			long long memory = 0;
 			if(process->vmURSS != -1) memory = process->vmURSS;
 			else memory = process->vmRSS;
 			if(d->mIsLocalhost && process->uid == getuid())
-				base = 0;
-			else if(process->uid < 100 || !canUserLogin(process->uid))
-				base = 200000000 - process->uid * 10000;
+				base = 0;  //own user
+			else if(process->uid < 100 || !canUserLogin(process->uid)) 
+				base = 200000000 - process->uid * 10000;  //system user
 			else
 				base = 100000000 - process->uid * 10000;
+			//One special exception is a traced process since that's probably important. We should put that at the top
+			if(process->tracerpid >0) return base - 9999 ;
 			int cpu;
 			if(d->mSimple || !d->mShowChildTotals)
 				cpu = process->userUsage + process->sysUsage;
