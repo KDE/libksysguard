@@ -156,7 +156,7 @@ bool ProcessesLocal::Private::readProcStatus(long pid, Process *process)
 	    break;
 	  case 'T':
 	    if((unsigned int)size > sizeof("TracerPid:") && qstrncmp(mBuffer, "TracerPid:", sizeof("TracerPid:")-1) == 0) {
-		process->uid = atol(mBuffer + sizeof("TracerPid:")-1);
+		process->tracerpid = atol(mBuffer + sizeof("TracerPid:")-1);
 	        if(++found == 4) goto finish;
 	    }
 	    break;
