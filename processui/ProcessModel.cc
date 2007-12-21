@@ -865,7 +865,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			return tooltip + "<br />" + tracer;
 		}	
 		case HeadingCPUUsage: {
-			QString tooltip = ki18n("<qt>Process status: %1 %2<br />"
+			QString tooltip = i18n("<qt>Process status: %1 %2<br />"
 						"User CPU usage: %3%<br />System CPU usage: %4%</qt>")
 						.subs(process->translatedStatus())
 						.subs(d->getStatusDescription(process->status))
@@ -874,7 +874,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 						.toString();
 
 			if(process->numChildren > 0) {
-				tooltip += ki18n("<br />Number of children: %1<br />Total User CPU usage: %2%<br />"
+				tooltip += i18n("<br />Number of children: %1<br />Total User CPU usage: %2%<br />"
 						"Total System CPU usage: %3%<br />Total CPU usage: %4%")
 						.subs(process->numChildren)
 						.subs((float)(process->totalUserUsage)/ d->mNumProcessorCores)
@@ -883,11 +883,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 						.toString();
 			}
 			if(process->userTime > 0) 
-				tooltip += ki18n("<br /><br />CPU time spent running as user: %1 seconds")
+				tooltip += i18n("<br /><br />CPU time spent running as user: %1 seconds")
 						.subs(process->userTime / 100.0, 0, 'f', 1)
 						.toString();
 			if(process->sysTime > 0) 
-				tooltip += ki18n("<br />CPU time spent running in kernel: %1 seconds")
+				tooltip += i18n("<br />CPU time spent running in kernel: %1 seconds")
 						.subs(process->sysTime / 100.0, 0, 'f', 1)
 						.toString();
 			if(process->niceLevel != 0)
