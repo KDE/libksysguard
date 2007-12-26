@@ -65,6 +65,12 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 	mIsChangingLayout = false;
 }
 
+ProcessModelPrivate::~ProcessModelPrivate()
+{
+	if(mProcesses)
+		KSysGuard::Processes::returnInstance(mHostName);
+	mProcesses = NULL;
+}
 ProcessModel::ProcessModel(QObject* parent, const QString &host)
 	: QAbstractItemModel(parent), d(new ProcessModelPrivate)
 {
@@ -144,7 +150,7 @@ void ProcessModelPrivate::setupProcesses() {
 		q->reset();
 	}
 
-	mProcesses = KSysGuard::Processes::getInstance(mHostName);  //For now, hard code in a local instance
+	mProcesses = KSysGuard::Processes::getInstance(mHostName);
 
         connect( mProcesses, SIGNAL( processChanged(KSysGuard::Process *, bool)), this, SLOT(processChanged(KSysGuard::Process *, bool)));
 	connect( mProcesses, SIGNAL( beginAddProcess(KSysGuard::Process *)), this, SLOT(beginInsertRow( KSysGuard::Process *)));

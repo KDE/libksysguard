@@ -60,6 +60,7 @@ class ProcessModelPrivate : public QObject
 	Q_OBJECT
 public:
         ProcessModelPrivate();
+        ~ProcessModelPrivate();
 public slots:
 
 #ifdef Q_WS_X11

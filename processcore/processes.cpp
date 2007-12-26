@@ -27,7 +27,7 @@
 
 #include <klocale.h>
 #include <kglobal.h>
-
+#include <kdebug.h>
 
 #include <QFile>
 #include <QDir>
@@ -51,7 +51,7 @@ namespace KSysGuard
   class Processes::Private
   {
     public:
-      Private() { mAbstractProcesses = 0;  mProcesses.insert(0, &mFakeProcess); mElapsedTimeCentiSeconds = -1; }
+      Private() { mAbstractProcesses = 0;  mProcesses.insert(0, &mFakeProcess); mElapsedTimeCentiSeconds = -1; ref=1; }
       ~Private() {;}
 
       QSet<long> mToBeProcessed;
@@ -64,6 +64,8 @@ namespace KSysGuard
       AbstractProcesses *mAbstractProcesses; //The OS specific code to get the process information 
       QTime mLastUpdated; //This is the time we last updated.  Used to calculate cpu usage.
       long mElapsedTimeCentiSeconds; //The number of centiseconds  (100ths of a second) that passed since the last update
+
+      int ref; //Reference counter.  When it reaches 0, delete.
   };
 
   class Processes::StaticPrivate
@@ -85,7 +87,9 @@ Processes *Processes::getInstance(const QString &host) { //static
         if(!d2->processesLocal) {
 	    KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
             d2->processesLocal = new Processes(new ProcessesLocal());
-        }
+        } else {
+	    d2->processesLocal->d->ref++;
+	}
 	return d2->processesLocal;
     } else {
         Processes *processes = d2->processesRemote.value(host, NULL);
@@ -96,13 +100,38 @@ Processes *Processes::getInstance(const QString &host) { //static
 	    processes = new Processes( remote );
             d2->processesRemote.insert(host, processes);
 	    connect(remote, SIGNAL(runCommand(const QString &, int )), processes, SIGNAL(runCommand(const QString&, int)));
+	} else {
+	    processes->d->ref++;
 	}
 	return processes;
     }
 }
 
-void Processes::returnInstance(const QString &/*host*/) { //static
-	//Implement - we need reference counting etc
+void Processes::returnInstance(const QString &host) { //static
+    if(host.isEmpty()) {
+        //Localhost processes
+        if(!d2->processesLocal) {
+	    //Serious error.  Returning instance we don't have.
+	    kDebug() << "Internal error - returning instance we do not haev";
+	    return;
+        } else {
+	    if(--(d2->processesLocal->d->ref) == 0) {
+	        delete d2->processesLocal;
+		d2->processesLocal = NULL;
+	    }
+	}
+    } else {
+        Processes *processes = d2->processesRemote.value(host, NULL);
+        if( !processes ) {
+            kDebug() << "Internal error - returning instance we do not haev";
+	    return;
+	} else {
+	    if(--(processes->d->ref) == 0) {
+	        delete processes;
+		d2->processesRemote.remove(host);
+	    }
+	}
+    }
 }
 Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private())
 {

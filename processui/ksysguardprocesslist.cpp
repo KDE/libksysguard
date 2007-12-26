@@ -136,7 +136,7 @@ struct KSysGuardProcessListPrivate {
 		window = new QAction(i18n("Show application window"), q);
 		resume = new QAction(i18n("Resume stopped process"), q);
 		kill = new QAction(i18np("Kill Process", "Kill Processes", 1), q);
-		kill->setIcon(KIcon("stop"));
+		kill->setIcon(KIcon("process-stop"));
 
 		sigStop = new QAction(i18n("Suspend (STOP)"), q);
 		sigCont = new QAction(i18n("Continue (CONT)"), q);
@@ -268,6 +268,8 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	d->mUpdateTimer->setSingleShot(true);
 	connect(d->mUpdateTimer, SIGNAL(timeout()), this, SLOT(updateList()));
 	d->mUpdateTimer->start(0);
+
+	d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
 
 	//If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
 	QTimer *mTimer = new QTimer(this);
