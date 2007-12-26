@@ -107,7 +107,7 @@ namespace KSysGuard
   {
     public:
       Private() { mProcDir = opendir( "/proc" );}
-      ~Private() {;}
+      ~Private();
       inline bool readProcStatus(long pid, Process *process);
       inline bool readProcStat(long pid, Process *process);
       inline bool readProcStatm(long pid, Process *process);
@@ -116,7 +116,13 @@ namespace KSysGuard
       QFile mFile;
       char mBuffer[PROCESS_BUFFER_SIZE+1]; //used as a buffer to read data into      
       DIR* mProcDir;
-    };
+  };
+
+ProcessesLocal::Private::~Private() 
+{ 
+    closedir(mProcDir);
+}
+  
 ProcessesLocal::ProcessesLocal() : d(new Private())
 {
 
