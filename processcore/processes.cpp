@@ -29,13 +29,10 @@
 #include <kglobal.h>
 #include <kdebug.h>
 
-#include <QFile>
-#include <QDir>
 #include <QHash>
 #include <QSet>
 #include <QMutableSetIterator>
 #include <QByteArray>
-#include <QTextStream>
 
 //for sysconf
 #include <unistd.h>  
