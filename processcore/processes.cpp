@@ -49,7 +49,7 @@ namespace KSysGuard
   {
     public:
       Private() { mAbstractProcesses = 0;  mProcesses.insert(0, &mFakeProcess); mElapsedTimeCentiSeconds = -1; ref=1; }
-      ~Private() {;}
+      ~Private();
 
       QSet<long> mToBeProcessed;
       QSet<long> mProcessedLastTime;
@@ -68,16 +68,28 @@ namespace KSysGuard
   class Processes::StaticPrivate
   {
     public:
-      StaticPrivate() { processesLocal = 0;}
+      StaticPrivate() { processesLocal = 0; ref =1; }
       Processes *processesLocal;
       QHash<QString, Processes*> processesRemote;
-      
+      int ref; //Reference counter.  When it reaches 0, delete. 
   };
 
+Processes::Private::~Private() {
+  foreach(Process *process, mProcesses) {
+    if(process != &mFakeProcess)
+      delete process;
+  }
+  mProcesses.clear();
+  mListProcesses.clear();
+  delete mAbstractProcesses;
+  mAbstractProcesses = NULL;
+}
 
 Processes *Processes::getInstance(const QString &host) { //static
     if(!d2) {
         d2 = new StaticPrivate();
+    } else {
+        d2->ref++;
     }
     if(host.isEmpty()) {
         //Localhost processes
@@ -105,11 +117,15 @@ Processes *Processes::getInstance(const QString &host) { //static
 }
 
 void Processes::returnInstance(const QString &host) { //static
+    if(!d2) {
+        kDebug() << "Internal error - static class does not exist";
+	return;
+    }
     if(host.isEmpty()) {
         //Localhost processes
         if(!d2->processesLocal) {
 	    //Serious error.  Returning instance we don't have.
-	    kDebug() << "Internal error - returning instance we do not haev";
+	    kDebug() << "Internal error - returning instance we do not have";
 	    return;
         } else {
 	    if(--(d2->processesLocal->d->ref) == 0) {
@@ -120,7 +136,7 @@ void Processes::returnInstance(const QString &host) { //static
     } else {
         Processes *processes = d2->processesRemote.value(host, NULL);
         if( !processes ) {
-            kDebug() << "Internal error - returning instance we do not haev";
+            kDebug() << "Internal error - returning instance we do not have";
 	    return;
 	} else {
 	    if(--(processes->d->ref) == 0) {
@@ -129,6 +145,11 @@ void Processes::returnInstance(const QString &host) { //static
 	    }
 	}
     }
+    if(--(d2->ref) == 0) {
+        delete d2;
+	d2 = NULL;
+    }
+
 }
 Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private())
 {
@@ -136,14 +157,18 @@ Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private())
     connect( abstractProcesses, SIGNAL( processesUpdated() ), SLOT( processesUpdated() ));
 }
 
+Processes::~Processes() 
+{
+    delete d;
+}
 Process *Processes::getProcess(long pid) const
 {
-	return d->mProcesses.value(pid);
+    return d->mProcesses.value(pid);
 }
 	
 QList<Process *> Processes::getAllProcesses() const
 {
-	return d->mListProcesses;
+    return d->mListProcesses;
 }
 bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
 {
@@ -358,11 +383,6 @@ long long Processes::totalPhysicalMemory() {
 
 long Processes::numberProcessorCores() {
     return d->mAbstractProcesses->numberProcessorCores();
-}
-
-Processes::~Processes()
-{
-
 }
 
 void Processes::answerReceived( int id, const QList<QByteArray>& answer ) {
