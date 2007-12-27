@@ -45,11 +45,11 @@
 
 
 #ifdef Q_WS_X11
-	struct WindowInfo {
-		QPixmap icon;
-		WId wid;
-		NETWinInfo *netWinInfo;
-	};
+struct WindowInfo {
+	QPixmap icon;
+	WId wid;
+	NETWinInfo *netWinInfo;
+};
 
 #endif 
 

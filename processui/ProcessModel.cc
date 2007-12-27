@@ -69,6 +69,9 @@ ProcessModelPrivate::~ProcessModelPrivate()
 {
 	if(mProcesses)
 		KSysGuard::Processes::returnInstance(mHostName);
+	foreach(WindowInfo wininfo, mPidToWindowInfo) {
+		delete wininfo.netWinInfo;
+	}
 	mProcesses = NULL;
 }
 ProcessModel::ProcessModel(QObject* parent, const QString &host)
@@ -108,6 +111,7 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
 	QMultiHash<long long, WindowInfo>::iterator i = mPidToWindowInfo.find(pid);
 	while (i != mPidToWindowInfo.end() && i.key() == pid) {
 		if(i.value().wid == wid) {
+			delete i.value().netWinInfo;
 			i = mPidToWindowInfo.erase(i);
 //			break;
 		} else
