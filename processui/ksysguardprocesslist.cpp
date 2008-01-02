@@ -209,7 +209,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	d->mUi->treeView->header()->setClickable(true);
 	d->mUi->treeView->header()->setSortIndicatorShown(true);
 	d->mUi->treeView->header()->setCascadingSectionResizes(true);
-	d->mUi->treeView->setSelectionMode( QAbstractItemView::ExtendedSelection );
 	connect(d->mUi->btnKillProcess, SIGNAL(clicked()), this, SLOT(killSelectedProcesses()));
 	connect(d->mUi->txtFilter, SIGNAL(textChanged(const QString &)), this, SLOT(filterTextChanged(const QString &)));
 	connect(d->mUi->cmbFilter, SIGNAL(currentIndexChanged(int)), this, SLOT(setStateInt(int)));
