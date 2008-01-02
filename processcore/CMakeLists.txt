@@ -14,6 +14,10 @@ set(ksysguard_LIB_SRCS
 kde4_add_library(processcore SHARED ${ksysguard_LIB_SRCS})
 
 target_link_libraries(processcore ${KDE4_KDECORE_LIBS} )
+if( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
+  message(STATUS "Adding kvm library on NetBSD")
+  target_link_libraries(processcore kvm)
+endif( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
 
 set_target_properties(processcore PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 install(TARGETS processcore DESTINATION ${LIB_INSTALL_DIR} )
