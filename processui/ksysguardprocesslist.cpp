@@ -132,9 +132,9 @@ struct KSysGuardProcessListPrivate {
 		renice = new QAction(i18np("Renice Process...", "Renice Processes...", 1), q);
 		selectParent = new QAction(i18n("Jump to Parent Process"), q);
 
-		selectTracer = new QAction(i18n("Jump to process debugging this one"), q);
-		window = new QAction(i18n("Show application window"), q);
-		resume = new QAction(i18n("Resume stopped process"), q);
+		selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
+		window = new QAction(i18n("Show Application Window"), q);
+		resume = new QAction(i18n("Resume Stopped Process"), q);
 		kill = new QAction(i18np("Kill Process", "Kill Processes", 1), q);
 		kill->setIcon(KIcon("process-stop"));
 
