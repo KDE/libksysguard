@@ -355,7 +355,12 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	if(numProcesses == 1 && process->parent_pid > 1) {
 		//As a design decision, I do not show the 'Jump to parent process' option when the
 		//parent is just 'init'.
-		d->mProcessContextMenu->addAction(d->selectParent);
+
+	        KSysGuard::Process *parent_process = d->mModel.getProcess(process->parent_pid);
+		if(parent_process) { //it should not be possible for this process to not exist, but check just incase
+			d->selectParent->setText(i18n("Jump to Parent Process (%1)", parent_process->name));
+			d->mProcessContextMenu->addAction(d->selectParent);
+		}
 	}
 
 	if(numProcesses == 1 && process->tracerpid > 0) {
@@ -380,6 +385,8 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	d->mProcessContextMenu->popup(d->mUi->treeView->viewport()->mapToGlobal(point));
 }
 void KSysGuardProcessList::actionTriggered(QObject *object) {
+	//Reset the text back to normal
+	d->selectParent->setText(i18n("Jump to Parent Process"));
 	QAction *result = dynamic_cast<QAction *>(object);
 	if(result == 0) {
 		//Escape was pressed. Do nothing.
