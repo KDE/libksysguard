@@ -542,7 +542,10 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
 		    case HeadingNiceness:
 			return i18n("The priority that this process is being run with. Ranges from 19 (very nice, least priority) to -19 (top priority)");
 		    case HeadingCPUUsage:
-			return i18n("The current CPU usage of the process, divided by the number of processor cores in the machine.");
+			if(d->mNumProcessorCores == 1)
+			    return i18n("The current CPU usage of the process.");
+			else
+			    return i18np("The current CPU usage of the process, divided by the %1 process core in the machine.", "The current total CPU usage of the process, divided by the %1 processor cores in the machine.", d->mNumProcessorCores);
 		    case HeadingVmSize:
 			return i18n("<qt>This is the amount of virtual memory space that the process is using, included shared libraries, graphics memory, files on disk, and so on. This number is almost meaningless.</qt>");
 		    case HeadingMemory:
@@ -827,10 +830,19 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 				} else if(process->name == "kthreadd") {
 					tooltip += i18n("<b>KThreadd</b> manages kernel threads. The children processes run in the kernel, controlling hard disk access etc.<br/>");
 				}
-				tooltip	+= i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Command: %3", process->name, (long int)process->pid, process->command);
+				tooltip	+= i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid>", process->name, (long int)process->pid);
 			}
-			else
-				tooltip	= i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Parent's ID: <numid>%3</numid><br />Command: %4", process->name, (long int)process->pid, (long int)process->parent_pid, process->command);
+			else {
+				KSysGuard::Process *parent_process = d->mProcesses->getProcess(process->parent_pid);
+				if(parent_process) { //it should not be possible for this process to not exist, but check just incase
+					tooltip	= i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Parent: %3<br />Parent's ID: <numid>%4</numid>", process->name, (long int)process->pid, parent_process->name, (long int)process->parent_pid);
+				} else {
+					tooltip	= i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Parent's ID: <numid>%3</numid>", process->name, (long int)process->pid, (long int)process->parent_pid);
+				}
+			}
+			if(!process->command.isEmpty()) {
+				tooltip+= i18n("<br/>Command: %1", process->command);
+			}
 			if(!process->tty.isEmpty())
 				tooltip += i18n( "<br />Running on: %1", QString(process->tty));
 			if(!tracer.isEmpty())
