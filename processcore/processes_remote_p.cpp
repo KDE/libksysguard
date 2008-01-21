@@ -39,7 +39,7 @@ namespace KSysGuard
   {
     public:
       Private() {havePsInfo = false; pidColumn = 1; 
-	      ppidColumn= ppidColumn = nameColumn = uidColumn = gidColumn = 
+	      ppidColumn = nameColumn = uidColumn = gidColumn = 
 	      statusColumn = userColumn = systemColumn = niceColumn = 
 	      vmSizeColumn = vmRSSColumn = loginColumn = commandColumn =
 	      tracerPidColumn = ttyColumn = ioprioClassColumn = ioprioColumn =
