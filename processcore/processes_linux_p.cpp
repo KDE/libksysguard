@@ -365,13 +365,17 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
   switch(sched) {
       case (SCHED_OTHER):
 	    process->scheduler = KSysGuard::Process::Other;
+            break;
       case (SCHED_RR):
 	    process->scheduler = KSysGuard::Process::RoundRobin;
+            break;
       case (SCHED_FIFO):
 	    process->scheduler = KSysGuard::Process::Fifo;
+            break;
 #ifdef SCHED_BATCH
       case (SCHED_BATCH):
 	    process->scheduler = KSysGuard::Process::Batch;
+            break;
 #endif
       default:
 	    process->scheduler = KSysGuard::Process::Other;
