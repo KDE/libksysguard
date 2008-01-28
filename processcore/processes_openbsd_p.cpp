@@ -35,6 +35,7 @@
 #endif
 #include <signal.h>
 #include <unistd.h>  
+#include <stdlib.h>
 
 
 
@@ -250,6 +251,14 @@ bool ProcessesLocal::setNiceness(long pid, int priority) {
     return true;
 }
 
+bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) 
+{
+    if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
+	    priority = 0;
+    if(pid <= 0) return false; // check the parameters
+	    return false;
+}
+
 bool ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority) {
     return false; //Not yet supported
 }
@@ -275,6 +284,20 @@ long long ProcessesLocal::totalPhysicalMemory() {
     return Total /= 1024;
 }
 
+long int KSysGuard::ProcessesLocal::numberProcessorCores()
+{
+    int mib[2];
+    int ncpu;
+    size_t len;
+
+    mib[0] = CTL_HW;
+    mib[1] = HW_NCPU;
+    len = sizeof(ncpu);
+
+    if (sysctl(mib, 2, &ncpu, &len, NULL, 0) == -1 || !len)
+        return 1;
+    return len;
+}
 ProcessesLocal::~ProcessesLocal()
 {
    delete d;  
