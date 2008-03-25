@@ -266,14 +266,16 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	d->mUpdateTimer = new QTimer(this);
 	d->mUpdateTimer->setSingleShot(true);
 	connect(d->mUpdateTimer, SIGNAL(timeout()), this, SLOT(updateList()));
-	d->mUpdateTimer->start(0);
+	d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
 
 	d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
 
 	//If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
 	QTimer *mTimer = new QTimer(this);
 	connect(mTimer, SIGNAL(timeout()), &d->mFilterModel, SLOT(invalidate()));
-	mTimer->start(4000);
+//	mTimer->start(4000);
+// QT BUG?  We have to disable the sorting for now because there seems to be a bug in Qt introduced in Qt 4.4beta which makes the view scroll back to the top
+        d->mModel.update(d->mUpdateIntervalMSecs);
 }
 
 KSysGuardProcessList::~KSysGuardProcessList()
