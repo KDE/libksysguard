@@ -1,6 +1,7 @@
 /*
     KSysGuard, the KDE System Guard
 
+        Copyright (C) 2007 Trent Waddington <trent.waddington@gmail.com>
 	Copyright (c) 2008 John Tapsell <tapsell@kde.org>
 
     This library is free software; you can redistribute it and/or
@@ -24,6 +25,45 @@
 #include <klocale.h>
 #include <kdebug.h>
 
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/ptrace.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/syscall.h>
+#include <byteswap.h>
+#include <endian.h>
+#include <sys/user.h>
+#include <ctype.h>
+#include <QTimer>
+
+#ifdef __i386__
+	#define REG_ORIG_ACCUM orig_eax
+	#define REG_ACCUM eax
+	#define REG_PARAM1 ebx
+	#define REG_PARAM2 ecx
+	#define REG_PARAM3 edx
+#else
+#ifdef __amd64__
+	#define REG_ORIG_ACCUM orig_rax
+	#define REG_ACCUM rax
+	#define REG_PARAM1 rdi
+	#define REG_PARAM2 rsi
+	#define REG_PARAM3 rdx
+#else
+#ifdef __ppc__
+	#define REG_ORIG_ACCUM gpr[0]
+	#define REG_ACCUM gpr[3]
+	#define REG_PARAM1 orig_gpr3
+	#define REG_PARAM2 gpr[4]
+	#define REG_PARAM3 gpr[5]
+#ifndef PT_ORIG_R3
+	#define PT_ORIG_R3 34
+#endif
+#endif
+#endif
+#endif
+
 #include "DisplayProcessDlg.h"
 
 #include "DisplayProcessDlg.moc"
@@ -36,42 +76,104 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, const QString & processnam
 	setCaption( i18n("Monitoring IO for %1 (%2)", process->pid, process->name) );
 	setButtons( Close );
 	showButtonSeparator( true );
+	
+	eight_bit_clean = 0;
+	no_headers = 0;
+	follow_forks = 0;
+	remove_duplicates = 0;
 
-	mIOProcess << processname << args;
-	connect(&mIOProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(error(QProcess::ProcessError)));
-	connect(&mIOProcess, SIGNAL(finished( int, QProcess::ExitStatus)), this, SLOT(finished( int, QProcess::ExitStatus)));
+	mPid = process->pid;
 
-	connect(&mIOProcess, SIGNAL(readyReadStandardError()), this, SLOT(readyReadStandardError()));
-	connect(&mIOProcess, SIGNAL(readyReadStandardOutput ()), this, SLOT(readyReadStandardOutput ()));
-	connect(&mIOProcess, SIGNAL(started ()), this, SLOT(started ()));
-	connect(&mIOProcess, SIGNAL(stateChanged ( QProcess::ProcessState)), this, SLOT(stateChanged ( QProcess::ProcessState)));
-	mIOProcess.setOutputChannelMode( KProcess::MergedChannels);
-	mIOProcess.start();
+	lastdir = 3;  //an invalid direction, so the color gets set the first time
+
 	mTextEdit = new QTextEdit( this );
 	setMainWidget( mTextEdit );
+	mTextEdit->document()->setMaximumBlockCount(100);
+
+	attach(mPid);
+	if (attached_pids.isEmpty()) {
+		detach();
+		accept();
+		return;
+	}
+
+	ptrace(PTRACE_SYSCALL, attached_pids[0], 0, 0);
+
+	QTimer *timer = new QTimer(this);
+	timer->setSingleShot(false);
+	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+	timer->start(20);
 }
+
 DisplayProcessDlg::~DisplayProcessDlg() {
+	detach();
 }
 void DisplayProcessDlg::slotButtonClicked(int)
 {
-	mIOProcess.kill();
-}
-void DisplayProcessDlg::error ( QProcess::ProcessError error ) {
+	detach();
 	accept();
-}
-void DisplayProcessDlg::finished ( int exitCode, QProcess::ExitStatus exitStatus ) {
-	accept();
-}
-void DisplayProcessDlg::readyReadStandardError() {
-}
-void DisplayProcessDlg::readyReadStandardOutput() {
-	mTextEdit->append(QString::fromUtf8(mIOProcess.readAllStandardOutput()));
-}
-void DisplayProcessDlg::started () {
-}
-void DisplayProcessDlg::stateChanged ( QProcess::ProcessState newState ) {
 }
 
 QSize DisplayProcessDlg::sizeHint() const {
 	return QSize(600,600);
 }
+
+void DisplayProcessDlg::detach() {
+        foreach(long pid, attached_pids)
+                ptrace(PTRACE_DETACH, pid, 0, 0);
+	attached_pids.clear();
+}
+
+void DisplayProcessDlg::attach(long pid) {
+	attached_pids.append(pid);
+	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) {
+		kDebug() << "Failed to attach to process " << pid;
+		accept();
+	}
+}
+
+void DisplayProcessDlg::update()
+{
+	static QColor writeColor = QColor(255,0,0);
+	static QColor readColor = QColor(0,0,255);
+
+	int status;
+		int pid = waitpid(-1, &status, WNOHANG | WUNTRACED | WCONTINUED);
+		if (!WIFSTOPPED(status)) { return; }
+#ifdef PPC
+		struct pt_regs regs;
+		regs.gpr[0] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R0, 0);
+		regs.gpr[3] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R3, 0);
+		regs.gpr[4] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R4, 0);
+		regs.gpr[5] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R5, 0);
+		regs.orig_gpr3 = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_ORIG_R3, 0);
+#else
+		struct user_regs_struct regs;
+		ptrace(PTRACE_GETREGS, pid, 0, &regs);
+#endif	
+		/*unsigned int b = ptrace(PTRACE_PEEKTEXT, pid, regs.eip, 0);*/
+		if (follow_forks && (regs.REG_ORIG_ACCUM == SYS_fork || regs.REG_ORIG_ACCUM == SYS_clone)) {
+			if (regs.REG_ACCUM > 0)
+				attach(regs.REG_ACCUM);					
+		}
+		if ((regs.REG_ORIG_ACCUM == SYS_read || regs.REG_ORIG_ACCUM == SYS_write) && (regs.REG_PARAM3 == regs.REG_ACCUM)) {
+			for (unsigned int i = 0; i < regs.REG_PARAM3; i++) {
+				unsigned int a = ptrace(PTRACE_PEEKTEXT, pid, regs.REG_PARAM2 + i, 0);
+#ifdef _BIG_ENDIAN
+				a = bswap_32(a);
+#endif
+				if(regs.REG_ORIG_ACCUM != lastdir) {
+					if(regs.REG_ORIG_ACCUM == SYS_read)
+						mTextEdit->setTextColor(readColor);
+					else
+						mTextEdit->setTextColor(writeColor);
+					lastdir = regs.REG_ORIG_ACCUM;
+				}
+
+				mTextEdit->insertPlainText(QString(QChar(a & 0xff)));
+			}
+		}
+		ptrace(PTRACE_SYSCALL, pid, 0, 0);
+		update();
+}
+

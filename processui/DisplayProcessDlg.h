@@ -38,16 +38,22 @@ public:
 	virtual QSize sizeHint() const;
 public Q_SLOTS:
 	virtual void slotButtonClicked(int);
-	void error ( QProcess::ProcessError error );
-	void finished ( int exitCode, QProcess::ExitStatus exitStatus );
-	void readyReadStandardError ();
-	void readyReadStandardOutput (); 
-	void started ();
-	void stateChanged ( QProcess::ProcessState newState );
+	void update();
 
 private:
 	KProcess mIOProcess;
 	QTextEdit *mTextEdit;
+	long mPid;
+	QList<long> attached_pids;
+
+	int eight_bit_clean;
+	int no_headers;
+	int follow_forks;
+	int remove_duplicates;
+	void detach();
+	void attach(long);
+
+	unsigned int lastdir;
 };
 
 #endif

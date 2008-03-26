@@ -246,6 +246,8 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	//so don't let the user change it
 	d->mUi->treeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
 	d->mUi->treeView->header()->setStretchLastSection(true);
+	// For speed, disable sorting for now.  This is reenabled when the items have been added
+//	d->mUi->treeView->setSortingEnabled(false); 
 
 	//Sort by username by default
 	d->mUi->treeView->sortByColumn(ProcessModel::HeadingUser, Qt::AscendingOrder);
@@ -282,6 +284,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 //	mTimer->start(4000);
 // QT BUG?  We have to disable the sorting for now because there seems to be a bug in Qt introduced in Qt 4.4beta which makes the view scroll back to the top
         d->mModel.update(d->mUpdateIntervalMSecs);
+
 }
 
 KSysGuardProcessList::~KSysGuardProcessList()
