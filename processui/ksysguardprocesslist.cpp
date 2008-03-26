@@ -379,7 +379,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	if (numProcesses == 1 && !d->mModel.data(realIndex, ProcessModel::WindowIdRole).isNull()) {
 		d->mProcessContextMenu->addAction(d->window);
 	}
-	if (numProcesses == 1 && process->pid != getpid() && process->pid != getppid()) { //Don't attach to ourselves - crashes
+	if (numProcesses == 1 && d->mModel.isLocalhost() && process->uid == getuid() && process->pid != getpid() && process->pid != getppid()) { //Don't attach to ourselves - crashes
 		d->mProcessContextMenu->addAction(d->monitorio);
 	}
 
