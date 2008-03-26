@@ -68,13 +68,14 @@
 
 #include "DisplayProcessDlg.moc"
 
-DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, const QString & processname, const QStringList & args, KSysGuard::Process *process)
+DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *process)
 	: KDialog( parent )
 {
 	setObjectName( "Display Process Dialog" );
 	setModal( false );
-	setCaption( i18n("Monitoring IO for %1 (%2)", process->pid, process->name) );
+	setCaption( i18n("Monitoring I/O for %1 (%2)", process->pid, process->name) );
 	setButtons( Close );
+	//enableLinkedHelp( true );
 	showButtonSeparator( true );
 	
 	eight_bit_clean = 0;
@@ -84,11 +85,14 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, const QString & processnam
 
 	mPid = process->pid;
 
-	lastdir = 3;  //an invalid direction, so the color gets set the first time
+	lastdir = 3;  //an invalid direction, so that the color gets set the first time
 
 	mTextEdit = new QTextEdit( this );
 	setMainWidget( mTextEdit );
+	mTextEdit->setReadOnly(true);
+	mTextEdit->setWhatsThis(i18n("The program '%1' (Pid: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc).  Data being written by the process is shown in red and data being read by the process is shown in blue.", process->name, mPid));
 	mTextEdit->document()->setMaximumBlockCount(100);
+	mCursor = mTextEdit->textCursor();
 
 	attach(mPid);
 	if (attached_pids.isEmpty()) {
@@ -132,14 +136,18 @@ void DisplayProcessDlg::attach(long pid) {
 	}
 }
 
-void DisplayProcessDlg::update()
+void DisplayProcessDlg::update(bool modified)
 {
 	static QColor writeColor = QColor(255,0,0);
 	static QColor readColor = QColor(0,0,255);
 
-	int status;
+		int status;
 		int pid = waitpid(-1, &status, WNOHANG | WUNTRACED | WCONTINUED);
-		if (!WIFSTOPPED(status)) { return; }
+		if (!WIFSTOPPED(status)) { 
+			if(modified)
+				mTextEdit->ensureCursorVisible();
+			return;
+		}
 #ifdef PPC
 		struct pt_regs regs;
 		regs.gpr[0] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R0, 0);
@@ -162,6 +170,11 @@ void DisplayProcessDlg::update()
 #ifdef _BIG_ENDIAN
 				a = bswap_32(a);
 #endif
+
+				if(!modified) {
+					//Before we add text or change the color, make sure we are at the end
+					mTextEdit->moveCursor(QTextCursor::End);
+				}
 				if(regs.REG_ORIG_ACCUM != lastdir) {
 					if(regs.REG_ORIG_ACCUM == SYS_read)
 						mTextEdit->setTextColor(readColor);
@@ -171,9 +184,9 @@ void DisplayProcessDlg::update()
 				}
 
 				mTextEdit->insertPlainText(QString(QChar(a & 0xff)));
+				modified = true;
 			}
 		}
 		ptrace(PTRACE_SYSCALL, pid, 0, 0);
-		update();
+	update(modified);
 }
-

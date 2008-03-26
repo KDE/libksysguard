@@ -33,12 +33,12 @@ class DisplayProcessDlg : public KDialog
 	Q_OBJECT
 
 public:
-	DisplayProcessDlg(QWidget* parent, const QString & processname, const QStringList & args, KSysGuard::Process *process);
+	DisplayProcessDlg(QWidget* parent, KSysGuard::Process *process);
 	~DisplayProcessDlg();
 	virtual QSize sizeHint() const;
 public Q_SLOTS:
 	virtual void slotButtonClicked(int);
-	void update();
+	void update(bool modified=false);
 
 private:
 	KProcess mIOProcess;
@@ -54,6 +54,7 @@ private:
 	void attach(long);
 
 	unsigned int lastdir;
+	QTextCursor mCursor;
 };
 
 #endif

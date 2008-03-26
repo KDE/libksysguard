@@ -442,7 +442,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 		QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
 		KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
 		if(process) {
-			DisplayProcessDlg *dialog = new DisplayProcessDlg( this, "peekfd", QStringList() << "-n" << "-d" << "-8" << "-c" <<  QString::number(process->pid), process );
+			DisplayProcessDlg *dialog = new DisplayProcessDlg( this,process );
 			dialog->show();
 		}
 	} else {
