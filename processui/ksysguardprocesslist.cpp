@@ -52,6 +52,7 @@
 #include "ksysguardprocesslist.moc"
 #include "ksysguardprocesslist.h"
 #include "ReniceDlg.h"
+#include "DisplayProcessDlg.h"
 #include "ui_ProcessWidgetUI.h"
 
 //Trolltech have a testing class for classes that inherit QAbstractItemModel.  If you want to run with this run-time testing enabled, put the modeltest.* files in this directory and uncomment the next line
@@ -134,6 +135,7 @@ struct KSysGuardProcessListPrivate {
 
 		selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
 		window = new QAction(i18n("Show Application Window"), q);
+		monitorio = new QAction(i18n("Monitor input and output"), q);
 		resume = new QAction(i18n("Resume Stopped Process"), q);
 		kill = new QAction(i18np("Kill Process", "Kill Processes", 1), q);
 		kill->setIcon(KIcon("process-stop"));
@@ -176,6 +178,7 @@ struct KSysGuardProcessListPrivate {
 	QAction *selectParent;
 	QAction *selectTracer;
 	QAction *window;
+	QAction *monitorio;
 	QAction *resume;
 	QAction *sigStop;
 	QAction *sigCont;
@@ -248,7 +251,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	// Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked
 	QSignalMapper *signalMapper = new QSignalMapper(this);
 	QList<QAction *> actions;
-	actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window << d->resume;
+	actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window << d->monitorio << d->resume;
 	actions << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
 	foreach(QAction *action, actions) {
 		addAction(action);
@@ -373,6 +376,9 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	if (numProcesses == 1 && !d->mModel.data(realIndex, ProcessModel::WindowIdRole).isNull()) {
 		d->mProcessContextMenu->addAction(d->window);
 	}
+	if (numProcesses == 1) {
+		d->mProcessContextMenu->addAction(d->monitorio);
+	}
 
 	if(numProcesses == 1 && process->status == KSysGuard::Process::Stopped) {
 		//If the process is being debugged, offer to select it
@@ -423,6 +429,15 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 				int wid = widVar.toInt();
 				KWindowSystem::activateWindow(wid);
 			}
+		}
+	} else if(result == d->monitorio) {
+		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
+		if(selectedIndexes.isEmpty()) return;  //No processes selected
+		QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
+		KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
+		if(process) {
+			DisplayProcessDlg *dialog = new DisplayProcessDlg( this, "peekfd", QStringList(QString::number(process->pid)), process );
+			dialog->show();
 		}
 	} else {
 		QList< long long > pidlist;
