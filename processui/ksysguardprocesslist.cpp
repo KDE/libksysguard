@@ -55,6 +55,9 @@
 #include "DisplayProcessDlg.h"
 #include "ui_ProcessWidgetUI.h"
 
+#include <sys/types.h>
+#include <unistd.h>
+
 //Trolltech have a testing class for classes that inherit QAbstractItemModel.  If you want to run with this run-time testing enabled, put the modeltest.* files in this directory and uncomment the next line
 //#define DO_MODELCHECK
 #ifdef DO_MODELCHECK
@@ -376,7 +379,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	if (numProcesses == 1 && !d->mModel.data(realIndex, ProcessModel::WindowIdRole).isNull()) {
 		d->mProcessContextMenu->addAction(d->window);
 	}
-	if (numProcesses == 1) {
+	if (numProcesses == 1 && process->pid != getpid() && process->pid != getppid()) { //Don't attach to ourselves - crashes
 		d->mProcessContextMenu->addAction(d->monitorio);
 	}
 
@@ -436,7 +439,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 		QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
 		KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
 		if(process) {
-			DisplayProcessDlg *dialog = new DisplayProcessDlg( this, "peekfd", QStringList(QString::number(process->pid)), process );
+			DisplayProcessDlg *dialog = new DisplayProcessDlg( this, "peekfd", QStringList() << QString::number(process->pid), process );
 			dialog->show();
 		}
 	} else {
