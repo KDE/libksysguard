@@ -9,4 +9,9 @@ Group=KSysGuard (KDE)
 ConstructorArgs=(parent)
 IncludeFile=ksysguardprocesslist.h
 
-
+[KTextEditVT]
+ToolTip=A text box suitable for displaying output from VT console-based programs.
+WhatsThis=A widget for displaying out from console based programs.  Some VT100 style commands are interpreted (For example to change the color) as well as some non-printable characters (backspace/delete etc will delete the last character.).  For example the output from 'ls --color' can be displayed.
+Group=KSysGuard (KDE)
+ConstructorArgs=(parent)
+IncludeFile=KTextEditVT.h

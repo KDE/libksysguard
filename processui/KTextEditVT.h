@@ -25,7 +25,7 @@
 
 #include <QTextEdit>
 
-class KTextEditVT : public QTextEdit
+class KDE_EXPORT KTextEditVT : public QTextEdit
 {
 	Q_OBJECT
 
