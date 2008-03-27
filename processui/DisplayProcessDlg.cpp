@@ -24,6 +24,7 @@
 
 #include <klocale.h>
 #include <kdebug.h>
+#include <QTimer>
 
 #include <unistd.h>
 #include <stdio.h>
@@ -35,7 +36,6 @@
 #include <endian.h>
 #include <sys/user.h>
 #include <ctype.h>
-#include <QTimer>
 
 #ifdef __i386__
 	#define REG_ORIG_ACCUM orig_eax
@@ -86,7 +86,7 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *proces
 
 	lastdir = 3;  //an invalid direction, so that the color gets set the first time
 
-	mTextEdit = new QTextEdit( this );
+	mTextEdit = new KTextEditVT( this );
 	setMainWidget( mTextEdit );
 	mTextEdit->setReadOnly(true);
 	mTextEdit->setWhatsThis(i18n("The program '%1' (Pid: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc).  Data being written by the process is shown in red and data being read by the process is shown in blue.", process->name, mPid));
@@ -140,100 +140,53 @@ void DisplayProcessDlg::update(bool modified)
 	static QColor writeColor = QColor(255,0,0);
 	static QColor readColor = QColor(0,0,255);
 
-		int status;
-		int pid = waitpid(-1, &status, WNOHANG | WUNTRACED | WCONTINUED);
-		if (!WIFSTOPPED(status)) { 
-			if(modified)
-				mTextEdit->ensureCursorVisible();
-			return;
-		}
+	int status;
+	int pid = waitpid(-1, &status, WNOHANG | WUNTRACED | WCONTINUED);
+	if (!WIFSTOPPED(status)) { 
+		if(modified)
+			mTextEdit->ensureCursorVisible();
+		return;
+	}
 #ifdef PPC
-		struct pt_regs regs;
-		regs.gpr[0] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R0, 0);
-		regs.gpr[3] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R3, 0);
-		regs.gpr[4] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R4, 0);
-		regs.gpr[5] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R5, 0);
-		regs.orig_gpr3 = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_ORIG_R3, 0);
+	struct pt_regs regs;
+	regs.gpr[0] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R0, 0);
+	regs.gpr[3] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R3, 0);
+	regs.gpr[4] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R4, 0);
+	regs.gpr[5] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R5, 0);
+	regs.orig_gpr3 = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_ORIG_R3, 0);
 #else
-		struct user_regs_struct regs;
-		ptrace(PTRACE_GETREGS, pid, 0, &regs);
-#endif	
-		/*unsigned int b = ptrace(PTRACE_PEEKTEXT, pid, regs.eip, 0);*/
-		if (follow_forks && (regs.REG_ORIG_ACCUM == SYS_fork || regs.REG_ORIG_ACCUM == SYS_clone)) {
-			if (regs.REG_ACCUM > 0)
-				attach(regs.REG_ACCUM);					
-		}
-		if ((regs.REG_ORIG_ACCUM == SYS_read || regs.REG_ORIG_ACCUM == SYS_write) && (regs.REG_PARAM3 == regs.REG_ACCUM)) {
-			bool escape_sequence = false;
-			bool escape_bracket = false;
-			int escape_number = -1;
-			char escape_code = 0;
-
-			for (unsigned int i = 0; i < regs.REG_PARAM3; i++) {
-				unsigned int a = ptrace(PTRACE_PEEKTEXT, pid, regs.REG_PARAM2 + i, 0);
+	struct user_regs_struct regs;
+	ptrace(PTRACE_GETREGS, pid, 0, &regs);
+#endif
+	/*unsigned int b = ptrace(PTRACE_PEEKTEXT, pid, regs.eip, 0);*/
+	if (follow_forks && (regs.REG_ORIG_ACCUM == SYS_fork || regs.REG_ORIG_ACCUM == SYS_clone)) {
+		if (regs.REG_ACCUM > 0)
+			attach(regs.REG_ACCUM);					
+	}
+	if ((regs.REG_ORIG_ACCUM == SYS_read || regs.REG_ORIG_ACCUM == SYS_write) && (regs.REG_PARAM3 == regs.REG_ACCUM)) {
+		for (unsigned int i = 0; i < regs.REG_PARAM3; i++) {
+			unsigned int a = ptrace(PTRACE_PEEKTEXT, pid, regs.REG_PARAM2 + i, 0);
 #ifdef _BIG_ENDIAN
-				a = bswap_32(a);
+			a = bswap_32(a);
 #endif
 
-				if(!modified) {
-					//Before we add text or change the color, make sure we are at the end
-					mTextEdit->moveCursor(QTextCursor::End);
-				}
-				if(regs.REG_ORIG_ACCUM != lastdir) {
-					if(regs.REG_ORIG_ACCUM == SYS_read)
-						mTextEdit->setTextColor(readColor);
-					else
-						mTextEdit->setTextColor(writeColor);
-					lastdir = regs.REG_ORIG_ACCUM;
-				}
-				char c = a&0xff;
-				if(isprint(c) || c == '\n') { 
-					if(escape_sequence) {
-						if(escape_bracket) {
-							if(isdigit(c)) {
-								if(escape_number == -1) escape_number = c-'0';
-								else escape_number = escape_number*10 + c-'0';
-							} else {
-								escape_code = c;
-							}
-							
-						} else if(c=='[') {
-							escape_bracket = true;
-						}
-						else if(c=='(' || c==')') {}
-						else
-							escape_code = c;
-						if(escape_code) {
-							//We've read in the whole escape sequence.  Now parse it
-							escape_code = 0;
-							escape_number = -1;
-							escape_bracket = false;
-							escape_sequence = false;
-						}
-					} else
-						mTextEdit->insertPlainText(QChar(c));
-
-				}
-				else if(c == 0x0d)
-					mTextEdit->insertPlainText(QChar('\n'));
-				else if(!eight_bit_clean) {
-					if(c == 127 || c == 8) { // delete or backspace, respectively
-//						mTextEdit->moveCursor(QTextCursor::Left, QTextCursor::KeepAnchor);
-						mTextEdit->textCursor().deletePreviousChar();
-					} else if(c==27) // escape key
-						escape_sequence = true;
-
-				}
-				else if(c) {
-					mTextEdit->insertPlainText("[");
-					QByteArray num;
-					num.setNum(c);
-					mTextEdit->insertPlainText(num);
-					mTextEdit->insertPlainText("]");
-				}
+			if(!modified) {
+				//Before we add text or change the color, make sure we are at the end
+				mTextEdit->moveCursor(QTextCursor::End);
 			}
-			modified = true;
+			if(regs.REG_ORIG_ACCUM != lastdir) {
+				if(regs.REG_ORIG_ACCUM == SYS_read)
+					mTextEdit->setTextColor(readColor);
+				else
+					mTextEdit->setTextColor(writeColor);
+				lastdir = regs.REG_ORIG_ACCUM;
+			}
+			char c = a&0xff;
+			/** Use the KTextEditVT specific function to parse the character 'c' */
+			mTextEdit->insertVTChar(QChar(c));
 		}
-		ptrace(PTRACE_SYSCALL, pid, 0, 0);
+		modified = true;
+	}
+	ptrace(PTRACE_SYSCALL, pid, 0, 0);
 	update(modified);
 }

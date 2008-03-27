@@ -20,40 +20,31 @@
 
 */
 
-#ifndef _DisplayProcessDlg_h_
-#define _DisplayProcessDlg_h_
+#ifndef _KTextEditVT_h_
+#define _KTextEditVT_h_
 
-#include "KTextEditVT.h"
-#include <kdialog.h>
-#include <kprocess.h>
-#include "processes.h"
+#include <QTextEdit>
 
-class DisplayProcessDlg : public KDialog
+class KTextEditVT : public QTextEdit
 {
 	Q_OBJECT
 
 public:
-	DisplayProcessDlg(QWidget* parent, KSysGuard::Process *process);
-	~DisplayProcessDlg();
-	virtual QSize sizeHint() const;
+	KTextEditVT(QWidget* parent);
 public Q_SLOTS:
-	virtual void slotButtonClicked(int);
-	void update(bool modified=false);
+	/** Insert the given character at the current position based on the current state.
+	 *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
+	 *  escape sequences can move the cursor and set the current color etc.
+	 */
+	void insertVTChar(const QChar & c);
 
 private:
-	KProcess mIOProcess;
-	KTextEditVT *mTextEdit;
-	long mPid;
-	QList<long> attached_pids;
-
 	bool eight_bit_clean;
-	bool follow_forks;
-	bool remove_duplicates;
-	void detach();
-	void attach(long);
+	bool escape_sequence;
+	bool escape_bracket;
+	int escape_number;
+	QChar escape_code;
 
-	unsigned int lastdir;
-	QTextCursor mCursor;
 };
 
 #endif

@@ -7,6 +7,7 @@ set(processui_LIB_SRCS
    ProcessModel.cc
    ReniceDlg.cc
    DisplayProcessDlg.cpp
+   KTextEditVT.cpp
 )
 
 kde4_add_ui_files( processui_LIB_SRCS
