@@ -23,7 +23,6 @@
 */
 
 #include <klocale.h>
-#include <kdebug.h>
 #include "KTextEditVT.h"
 
 #include "KTextEditVT.moc"
@@ -31,6 +30,7 @@
 KTextEditVT::KTextEditVT(QWidget* parent)
 	: QTextEdit( parent )
 {
+	eight_bit_clean = false;
 	escape_sequence = false;
 	escape_bracket = false;
 	escape_number = -1;
@@ -59,6 +59,41 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 				escape_code = c;
 			if(!escape_code.isNull()) {
 				//We've read in the whole escape sequence.  Now parse it
+				if(escape_code == 'm') { // change color
+					switch(escape_number){
+						case 0: //all off
+							setFontWeight(QFont::Normal);
+							setTextColor(Qt::black);
+							break;
+						case 1: //bold
+							setFontWeight(QFont::Bold);
+							break;
+						case 31: //red
+							setTextColor(Qt::red);
+							break;
+						case 32: //green
+							setTextColor(Qt::green);
+							break;
+						case 33: //yellow
+							setTextColor(Qt::yellow);
+							break;
+						case 34: //blue
+							setTextColor(Qt::blue);
+							break;
+						case 35: //magenta
+							setTextColor(Qt::magenta);
+							break;
+						case 36: //cyan
+							setTextColor(Qt::cyan);
+							break;
+						case -1:
+						case 30: //black
+						case 39: //reset
+						case 37: //white
+							setTextColor(Qt::black);
+							break;
+					}
+				}
 				escape_code = 0;
 				escape_number = -1;
 				escape_bracket = false;
@@ -73,8 +108,12 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 	else if(!eight_bit_clean) {
 		if(c == 127 || c == 8) { // delete or backspace, respectively
 			textCursor().deletePreviousChar();
-		} else if(c==27) // escape key
+		} else if(c==27) { // escape key
 			escape_sequence = true;
+		} else if(c==0x9b) { // CSI - equivalent to esc [
+			escape_sequence = true;
+			escape_bracket = true;
+		}
 
 	}
 	else if(!c.isNull()) {
@@ -84,4 +123,18 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 		insertPlainText(num);
 		insertPlainText("]");
 	}
+}
+
+void KTextEditVT::insertVTText(const QByteArray & string)
+{
+	int size= string.size();
+	for(int i =0; i < size; i++)
+		insertVTChar(QChar(string.at(i)));
+}
+
+void KTextEditVT::insertVTText(const QString & string)
+{
+	int size= string.size();
+	for(int i =0; i < size; i++)
+		insertVTChar(string.at(i));
 }

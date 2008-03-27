@@ -128,11 +128,12 @@ void DisplayProcessDlg::detach() {
 }
 
 void DisplayProcessDlg::attach(long pid) {
-	attached_pids.append(pid);
 	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) {
 		kDebug() << "Failed to attach to process " << pid;
-		accept();
-	}
+		if(attached_pids.isEmpty())
+			accept(); //give up
+	} else 
+		attached_pids.append(pid);
 }
 
 void DisplayProcessDlg::update(bool modified)
