@@ -165,6 +165,7 @@ void DisplayProcessDlg::update(bool modified)
 				attach(regs.REG_ACCUM);					
 		}
 		if ((regs.REG_ORIG_ACCUM == SYS_read || regs.REG_ORIG_ACCUM == SYS_write) && (regs.REG_PARAM3 == regs.REG_ACCUM)) {
+			QByteArray word;
 			for (unsigned int i = 0; i < regs.REG_PARAM3; i++) {
 				unsigned int a = ptrace(PTRACE_PEEKTEXT, pid, regs.REG_PARAM2 + i, 0);
 #ifdef _BIG_ENDIAN
@@ -182,10 +183,21 @@ void DisplayProcessDlg::update(bool modified)
 						mTextEdit->setTextColor(writeColor);
 					lastdir = regs.REG_ORIG_ACCUM;
 				}
-
-				mTextEdit->insertPlainText(QString(QChar(a & 0xff)));
-				modified = true;
+				char c = a&0xff;
+				if(isprint(c) || c == '\n')
+					word.append(c);
+				else if(c == 0x0d)
+					word.append('\n');
+				else if(c) {
+					word.append('[');
+					QByteArray num;
+					num.setNum(c);
+					word.append(num);
+					word.append(']');
+				}
 			}
+			mTextEdit->insertPlainText(QString::fromUtf8(word));
+			modified = true;
 		}
 		ptrace(PTRACE_SYSCALL, pid, 0, 0);
 	update(modified);
