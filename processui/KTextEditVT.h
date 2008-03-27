@@ -32,11 +32,6 @@
  *   programmatically append VT100 formatted text.  For example to display the output
  *   from console programs.
  *
- *    \mainclass
- *
- *    \tableofcontents
- *
- *    \section1 Basics
  *    This class can be used to display the output of VT100 formatted text with
  *    ANSI escape code - for example output from the command 'ls --color'.
  *
@@ -59,9 +54,16 @@
 class KDE_EXPORT KTextEditVT : public QTextEdit
 {
 	Q_OBJECT
+	Q_PROPERTY( bool parseAnsiEscapeCodes READ parseAnsiEscapeCodes WRITE setParseAnsiEscapeCodes )
 
 public:
 	KTextEditVT(QWidget* parent);
+
+	/** Set whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
+	void setParseAnsiEscapeCodes(bool displayall);
+	/** Whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
+	bool parseAnsiEscapeCodes();
+
 public Q_SLOTS:
 	/** Insert the given string at the current position based on the current state.
 	 *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
@@ -84,8 +86,10 @@ public Q_SLOTS:
 	 */
 	void insertVTChar(const QChar & c);
 
+	
 private:
-	bool eight_bit_clean;
+	bool mParseAnsi;
+
 	bool escape_sequence;
 	bool escape_bracket;
 	int escape_number;

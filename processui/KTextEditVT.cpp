@@ -30,7 +30,7 @@
 KTextEditVT::KTextEditVT(QWidget* parent)
 	: QTextEdit( parent )
 {
-	eight_bit_clean = false;
+	mParseAnsi = true;
 	escape_sequence = false;
 	escape_bracket = false;
 	escape_number = -1;
@@ -105,7 +105,7 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 	}
 	else if(c == 0x0d)
 		insertPlainText(QChar('\n'));
-	else if(!eight_bit_clean) {
+	else if(mParseAnsi) {
 		if(c == 127 || c == 8) { // delete or backspace, respectively
 			textCursor().deletePreviousChar();
 		} else if(c==27) { // escape key
@@ -138,3 +138,14 @@ void KTextEditVT::insertVTText(const QString & string)
 	for(int i =0; i < size; i++)
 		insertVTChar(string.at(i));
 }
+
+void KTextEditVT::setParseAnsiEscapeCodes(bool parseAnsi)
+{
+	mParseAnsi = parseAnsi;
+}
+
+bool KTextEditVT::parseAnsiEscapeCodes()
+{
+	return mParseAnsi;
+}
+
