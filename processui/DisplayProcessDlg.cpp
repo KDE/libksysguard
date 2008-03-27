@@ -78,10 +78,9 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *proces
 	//enableLinkedHelp( true );
 	showButtonSeparator( true );
 	
-	eight_bit_clean = 0;
-	no_headers = 0;
-	follow_forks = 0;
-	remove_duplicates = 0;
+	eight_bit_clean = false;
+	follow_forks = true;
+	remove_duplicates = false;
 
 	mPid = process->pid;
 
@@ -165,7 +164,11 @@ void DisplayProcessDlg::update(bool modified)
 				attach(regs.REG_ACCUM);					
 		}
 		if ((regs.REG_ORIG_ACCUM == SYS_read || regs.REG_ORIG_ACCUM == SYS_write) && (regs.REG_PARAM3 == regs.REG_ACCUM)) {
-			QByteArray word;
+			bool escape_sequence = false;
+			bool escape_bracket = false;
+			int escape_number = -1;
+			char escape_code = 0;
+
 			for (unsigned int i = 0; i < regs.REG_PARAM3; i++) {
 				unsigned int a = ptrace(PTRACE_PEEKTEXT, pid, regs.REG_PARAM2 + i, 0);
 #ifdef _BIG_ENDIAN
@@ -184,19 +187,51 @@ void DisplayProcessDlg::update(bool modified)
 					lastdir = regs.REG_ORIG_ACCUM;
 				}
 				char c = a&0xff;
-				if(isprint(c) || c == '\n')
-					word.append(c);
+				if(isprint(c) || c == '\n') { 
+					if(escape_sequence) {
+						if(escape_bracket) {
+							if(isdigit(c)) {
+								if(escape_number == -1) escape_number = c-'0';
+								else escape_number = escape_number*10 + c-'0';
+							} else {
+								escape_code = c;
+							}
+							
+						} else if(c=='[') {
+							escape_bracket = true;
+						}
+						else if(c=='(' || c==')') {}
+						else
+							escape_code = c;
+						if(escape_code) {
+							//We've read in the whole escape sequence.  Now parse it
+							escape_code = 0;
+							escape_number = -1;
+							escape_bracket = false;
+							escape_sequence = false;
+						}
+					} else
+						mTextEdit->insertPlainText(QChar(c));
+
+				}
 				else if(c == 0x0d)
-					word.append('\n');
+					mTextEdit->insertPlainText(QChar('\n'));
+				else if(!eight_bit_clean) {
+					if(c == 127 || c == 8) { // delete or backspace, respectively
+//						mTextEdit->moveCursor(QTextCursor::Left, QTextCursor::KeepAnchor);
+						mTextEdit->textCursor().deletePreviousChar();
+					} else if(c==27) // escape key
+						escape_sequence = true;
+
+				}
 				else if(c) {
-					word.append('[');
+					mTextEdit->insertPlainText("[");
 					QByteArray num;
 					num.setNum(c);
-					word.append(num);
-					word.append(']');
+					mTextEdit->insertPlainText(num);
+					mTextEdit->insertPlainText("]");
 				}
 			}
-			mTextEdit->insertPlainText(QString::fromUtf8(word));
 			modified = true;
 		}
 		ptrace(PTRACE_SYSCALL, pid, 0, 0);

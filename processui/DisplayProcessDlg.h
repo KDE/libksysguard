@@ -46,10 +46,9 @@ private:
 	long mPid;
 	QList<long> attached_pids;
 
-	int eight_bit_clean;
-	int no_headers;
-	int follow_forks;
-	int remove_duplicates;
+	bool eight_bit_clean;
+	bool follow_forks;
+	bool remove_duplicates;
 	void detach();
 	void attach(long);
 
