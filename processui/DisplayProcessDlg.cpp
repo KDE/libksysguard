@@ -89,6 +89,7 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *proces
 	mTextEdit = new KTextEditVT( this );
 	setMainWidget( mTextEdit );
 	mTextEdit->setReadOnly(true);
+	mTextEdit->setParseAnsiEscapeCodes(true);
 	mTextEdit->setWhatsThis(i18n("The program '%1' (Pid: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc).  Data being written by the process is shown in red and data being read by the process is shown in blue.", process->name, mPid));
 	mTextEdit->document()->setMaximumBlockCount(100);
 	mCursor = mTextEdit->textCursor();
@@ -148,7 +149,7 @@ void DisplayProcessDlg::update(bool modified)
 			mTextEdit->ensureCursorVisible();
 		return;
 	}
-#ifdef PPC
+#ifdef __ppc__
 	struct pt_regs regs;
 	regs.gpr[0] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R0, 0);
 	regs.gpr[3] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R3, 0);

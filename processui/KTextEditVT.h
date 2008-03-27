@@ -92,7 +92,9 @@ private:
 
 	bool escape_sequence;
 	bool escape_bracket;
-	int escape_number;
+	int escape_number1;
+	int escape_number2;
+	bool escape_number_seperator;
 	QChar escape_code;
 
 };

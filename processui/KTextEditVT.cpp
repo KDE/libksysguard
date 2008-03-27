@@ -33,7 +33,9 @@ KTextEditVT::KTextEditVT(QWidget* parent)
 	mParseAnsi = true;
 	escape_sequence = false;
 	escape_bracket = false;
-	escape_number = -1;
+	escape_number1 = -1;
+	escape_number_seperator = false;
+	escape_number2 = -1;
 	escape_code = 0;
 }
 
@@ -43,11 +45,22 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 		if(escape_sequence) {
 			if(escape_bracket) {
 				if(c.isDigit()) {
-					if(escape_number == -1)
-						escape_number = c.digitValue();
-					else 
-						escape_number = escape_number*10 + c.digitValue();
-				} else {
+					if(!escape_number_seperator) {
+						if(escape_number1 == -1)
+							escape_number1 = c.digitValue();
+						else 
+							escape_number1 = escape_number1*10 + c.digitValue();
+					} else {
+						if(escape_number2 == -1)
+							escape_number2 = c.digitValue();
+						else 
+							escape_number2 = escape_number2*10 + c.digitValue();
+
+					}
+
+				} else if(c == ';')
+					escape_number_seperator = true;
+				else {
 					escape_code = c;
 				}
 			
@@ -60,7 +73,7 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 			if(!escape_code.isNull()) {
 				//We've read in the whole escape sequence.  Now parse it
 				if(escape_code == 'm') { // change color
-					switch(escape_number){
+					switch(escape_number2){
 						case 0: //all off
 							setFontWeight(QFont::Normal);
 							setTextColor(Qt::black);
@@ -95,9 +108,11 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 					}
 				}
 				escape_code = 0;
-				escape_number = -1;
+				escape_number1 = -1;
+				escape_number2 = -1;
 				escape_bracket = false;
 				escape_sequence = false;
+				escape_number_seperator = false;
 			}
 		} else
 			insertPlainText(QChar(c));
