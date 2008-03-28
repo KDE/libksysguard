@@ -32,7 +32,8 @@ KTextEditVT::KTextEditVT(QWidget* parent)
 {
 	mParseAnsi = true;
 	escape_sequence = false;
-	escape_bracket = false;
+	escape_CSI = false;
+	escape_OSC = false;
 	escape_number1 = -1;
 	escape_number_seperator = false;
 	escape_number2 = -1;
@@ -41,97 +42,98 @@ KTextEditVT::KTextEditVT(QWidget* parent)
 
 
 void KTextEditVT::insertVTChar(const QChar & c) {
-	if(c.isPrint() || c == '\n') { 
-		if(escape_sequence) {
-			if(escape_bracket) {
-				if(c.isDigit()) {
-					if(!escape_number_seperator) {
-						if(escape_number1 == -1)
-							escape_number1 = c.digitValue();
-						else 
-							escape_number1 = escape_number1*10 + c.digitValue();
-					} else {
-						if(escape_number2 == -1)
-							escape_number2 = c.digitValue();
-						else 
-							escape_number2 = escape_number2*10 + c.digitValue();
+	if(escape_sequence) {
+		if(escape_CSI || escape_OSC) {
+			if(c.isDigit()) {
+				if(!escape_number_seperator) {
+					if(escape_number1 == -1)
+						escape_number1 = c.digitValue();
+					else 
+						escape_number1 = escape_number1*10 + c.digitValue();
+				} else {
+					if(escape_number2 == -1)
+						escape_number2 = c.digitValue();
+					else 
+						escape_number2 = escape_number2*10 + c.digitValue();
 
-					}
-
-				} else if(c == ';')
-					escape_number_seperator = true;
-				else {
-					escape_code = c;
 				}
-			
-			} else if(c=='[') {
-				escape_bracket = true;
-			}
-			else if(c=='(' || c==')') {}
-			else
+			} else if(c == ';') {
+				escape_number_seperator = true;
+			} else if(escape_OSC && c==7) { //Throw away any letters that are not OSC
+				escape_code = c; 
+			} else if(escape_CSI)
 				escape_code = c;
-			if(!escape_code.isNull()) {
-				//We've read in the whole escape sequence.  Now parse it
-				if(escape_code == 'm') { // change color
-					switch(escape_number2){
-						case 0: //all off
-							setFontWeight(QFont::Normal);
-							setTextColor(Qt::black);
-							break;
-						case 1: //bold
-							setFontWeight(QFont::Bold);
-							break;
-						case 31: //red
-							setTextColor(Qt::red);
-							break;
-						case 32: //green
-							setTextColor(Qt::green);
-							break;
-						case 33: //yellow
-							setTextColor(Qt::yellow);
-							break;
-						case 34: //blue
-							setTextColor(Qt::blue);
-							break;
-						case 35: //magenta
-							setTextColor(Qt::magenta);
-							break;
-						case 36: //cyan
-							setTextColor(Qt::cyan);
-							break;
-						case -1:
-						case 30: //black
-						case 39: //reset
-						case 37: //white
-							setTextColor(Qt::black);
-							break;
-					}
+		} else if(c=='[') {
+			escape_CSI = true;
+		} else if(c==']') {
+			escape_OSC = true;
+		}
+		else if(c=='(' || c==')') {}
+		else
+			escape_code = c;
+		if(!escape_code.isNull()) {
+			//We've read in the whole escape sequence.  Now parse it
+			if(escape_code == 'm') { // change color
+				switch(escape_number2){
+					case 0: //all off
+						setFontWeight(QFont::Normal);
+						setTextColor(Qt::black);
+						break;
+					case 1: //bold
+						setFontWeight(QFont::Bold);
+						break;
+					case 31: //red
+						setTextColor(Qt::red);
+						break;
+					case 32: //green
+						setTextColor(Qt::green);
+						break;
+					case 33: //yellow
+						setTextColor(Qt::yellow);
+						break;
+					case 34: //blue
+						setTextColor(Qt::blue);
+						break;
+					case 35: //magenta
+						setTextColor(Qt::magenta);
+						break;
+					case 36: //cyan
+						setTextColor(Qt::cyan);
+						break;
+					case -1:
+					case 30: //black
+					case 39: //reset
+					case 37: //white
+						setTextColor(Qt::black);
+						break;
 				}
-				escape_code = 0;
-				escape_number1 = -1;
-				escape_number2 = -1;
-				escape_bracket = false;
-				escape_sequence = false;
-				escape_number_seperator = false;
 			}
-		} else
-			insertPlainText(QChar(c));
-
-	}
-	else if(c == 0x0d)
+			escape_code = 0;
+			escape_number1 = -1;
+			escape_number2 = -1;
+			escape_CSI = false;
+			escape_OSC = false;
+			escape_sequence = false;
+			escape_number_seperator = false;
+		}
+	} else if(c == 0x0d) {
 		insertPlainText(QChar('\n'));
-	else if(mParseAnsi) {
+	} else if(c.isPrint() || c == '\n') { 
+		insertPlainText(QChar(c));
+	} else if(mParseAnsi) {
 		if(c == 127 || c == 8) { // delete or backspace, respectively
 			textCursor().deletePreviousChar();
 		} else if(c==27) { // escape key
 			escape_sequence = true;
 		} else if(c==0x9b) { // CSI - equivalent to esc [
 			escape_sequence = true;
-			escape_bracket = true;
+			escape_CSI = true;
+		} else if(c==0x9d) { // OSC - equivalent to esc ]
+			escape_sequence = true;
+			escape_OSC = true;
 		}
 
-	}
-	else if(!c.isNull()) {
+	} else if(!c.isNull()) {
 		insertPlainText("[");
 		QByteArray num;
 		num.setNum(c.toAscii());

@@ -91,7 +91,8 @@ private:
 	bool mParseAnsi;
 
 	bool escape_sequence;
-	bool escape_bracket;
+	bool escape_CSI;
+	bool escape_OSC;
 	int escape_number1;
 	int escape_number2;
 	bool escape_number_seperator;
