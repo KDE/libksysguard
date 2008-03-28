@@ -35,8 +35,10 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *proces
 	//enableLinkedHelp( true );
 	showButtonSeparator( true );
 
-	mTextEdit = new KMonitorProcessIO( this, process->pid, process->name );
+	mTextEdit = new KMonitorProcessIO( this, process->pid);
 	setMainWidget( mTextEdit );
+
+	mTextEdit->setWhatsThis(i18n("The program '%1' (Pid: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc).  Data being written by the process is shown in red and data being read by the process is shown in blue.", process->name, process->pid));
 }
 
 DisplayProcessDlg::~DisplayProcessDlg() {

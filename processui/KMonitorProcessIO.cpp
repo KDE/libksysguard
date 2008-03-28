@@ -15,7 +15,7 @@
     Library General Public License for more details.
 
     You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to
+    aint with this library; see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 
@@ -69,7 +69,7 @@
 
 #include "KMonitorProcessIO.moc"
 
-KMonitorProcessIO::KMonitorProcessIO(QWidget* parent, int pid, const QString &name)
+KMonitorProcessIO::KMonitorProcessIO(QWidget* parent, int pid)
 	: KTextEditVT( parent )
 {
 	mIncludeChildProcesses = true;
@@ -84,7 +84,6 @@ KMonitorProcessIO::KMonitorProcessIO(QWidget* parent, int pid, const QString &na
 
 	setReadOnly(true);
 	setParseAnsiEscapeCodes(true);
-	setWhatsThis(i18n("The program '%1' (Pid: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc).  Data being written by the process is shown in red and data being read by the process is shown in blue.", name, mPid));
 	document()->setMaximumBlockCount(100);
 	mCursor = textCursor();
 
@@ -92,14 +91,6 @@ KMonitorProcessIO::KMonitorProcessIO(QWidget* parent, int pid, const QString &na
 	if(pid == -1)
 		return;
 	attach(mPid);
-	if (attached_pids.isEmpty())
-		return;
-
-	ptrace(PTRACE_SYSCALL, attached_pids[0], 0, 0);
-
-	if(mPid > 0) {
-		mTimer.start(mUpdateInterval);
-	}
 }
 
 KMonitorProcessIO::~KMonitorProcessIO() {
@@ -131,9 +122,13 @@ void KMonitorProcessIO::setRunning(bool run) {
 		mTimer.stop();
 }
 void KMonitorProcessIO::detach() {
-        foreach(long pid, attached_pids) {
+        foreach(int pid, attached_pids) {
 		detach(pid);
 	}
+}
+
+int KMonitorProcessIO::attachedPid() {
+	return mPid;
 }
 void KMonitorProcessIO::detach(int pid) {
 	int status;
@@ -174,17 +169,30 @@ void KMonitorProcessIO::detach(int pid) {
 		  }
 	}
 	attached_pids.removeAll(pid);
+
+	if(attached_pids.isEmpty()) {
+		mTimer.stop();
+		mPid = -1;
+	} else if(pid == mPid )
+		mPid = attached_pids[0];
 }
 
-void KMonitorProcessIO::attach(long pid) {
+void KMonitorProcessIO::attach(int pid) {
 	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) {
 		kDebug() << "Failed to attach to process " << pid;
 		if(attached_pids.isEmpty()) {
 			mTimer.stop();
 			insertHtml(i18n("<p><i><font color=\"gray\">Failed to attach to process %1</font></i></p>", pid));
 		}
-	} else 
+	} else {
+		if(attached_pids.isEmpty()) {
+			//First process added.  Automatically start timer
+			ptrace(PTRACE_SYSCALL, pid, 0, 0);
+			mTimer.start(mUpdateInterval);
+			mPid = pid;
+		}
 		attached_pids.append(pid);
+	}
 }
 
 void KMonitorProcessIO::update(bool modified)

@@ -35,9 +35,10 @@ class KDE_EXPORT KMonitorProcessIO : public KTextEditVT
 	Q_PROPERTY( bool includeChildProcesses READ includeChildProcesses WRITE setIncludeChildProcesses )
 	Q_PROPERTY( bool running READ running WRITE setRunning )
 	Q_PROPERTY( bool updateInterval READ updateInterval WRITE setUpdateInterval )
+	Q_PROPERTY( int attachedPid READ attachedPid WRITE attach )
 
 public:
-	KMonitorProcessIO(QWidget* parent, int pid = -1, const QString &name = QString());
+	KMonitorProcessIO(QWidget* parent, int pid = -1);
 	~KMonitorProcessIO();
 
 	/** Set whether to include the output from child processes.  If true, forks and clones will be monitored */
@@ -58,6 +59,9 @@ public:
 
 	void detach();
 	void detach(int pid);
+	void attach(int pid);
+	int attachedPid();
+
 Q_SIGNALS:
 	void finished();
 private Q_SLOTS:
@@ -70,13 +74,12 @@ private:
 	KProcess mIOProcess;
 	KTextEditVT *mTextEdit;
 	QTimer mTimer;
-	long mPid;
-	QList<long> attached_pids;
+	int mPid;
+	QList<int> attached_pids;
 
 	int mUpdateInterval;
 	bool mIncludeChildProcesses;
 	bool remove_duplicates;
-	void attach(long);
 
 	unsigned int lastdir;
 	QTextCursor mCursor;
