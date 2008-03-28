@@ -23,7 +23,7 @@
 #ifndef _KTextEditVT_h_
 #define _KTextEditVT_h_
 
-#include <QTextEdit>
+#include <QtGui/QTextEdit>
 
 /*
  *    \class KTextEditVT
