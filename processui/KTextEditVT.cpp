@@ -161,7 +161,7 @@ void KTextEditVT::setParseAnsiEscapeCodes(bool parseAnsi)
 	mParseAnsi = parseAnsi;
 }
 
-bool KTextEditVT::parseAnsiEscapeCodes()
+bool KTextEditVT::parseAnsiEscapeCodes() const
 {
 	return mParseAnsi;
 }

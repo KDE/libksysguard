@@ -24,6 +24,7 @@
 #define _KTextEditVT_h_
 
 #include <QtGui/QTextEdit>
+#include <kdemacros.h>
 
 /*
  *    \class KTextEditVT
@@ -62,7 +63,7 @@ public:
 	/** Set whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
 	void setParseAnsiEscapeCodes(bool displayall);
 	/** Whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
-	bool parseAnsiEscapeCodes();
+	bool parseAnsiEscapeCodes() const;
 
 public Q_SLOTS:
 	/** Insert the given string at the current position based on the current state.

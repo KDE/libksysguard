@@ -23,10 +23,11 @@
 #ifndef _DisplayProcessDlg_h_
 #define _DisplayProcessDlg_h_
 
-#include "KTextEditVT.h"
 #include <kdialog.h>
 #include <kprocess.h>
 #include "processes.h"
+
+class KMonitorProcessIO;
 
 class DisplayProcessDlg : public KDialog
 {
@@ -35,26 +36,16 @@ class DisplayProcessDlg : public KDialog
 public:
 	DisplayProcessDlg(QWidget* parent, KSysGuard::Process *process);
 	~DisplayProcessDlg();
+	/** Returns the default size of the dialog.  Reimplmentation from QDialog */
 	virtual QSize sizeHint() const;
+
 public Q_SLOTS:
+	/** Close button has been clicked.  Reimplementation from KDialog */
 	virtual void slotButtonClicked(int);
-	void update(bool modified=false);
 
 private:
-	KProcess mIOProcess;
-	KTextEditVT *mTextEdit;
-	long mPid;
-	QList<long> attached_pids;
-
-	bool eight_bit_clean;
-	bool follow_forks;
-	bool remove_duplicates;
-	void detach();
-	void attach(long);
-	bool want_to_exit;
-
-	unsigned int lastdir;
-	QTextCursor mCursor;
+	KMonitorProcessIO *mTextEdit;
 };
 
 #endif
+
