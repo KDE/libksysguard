@@ -23,7 +23,7 @@
 #ifndef _KMonitorProcessIO_h_
 #define _KMonitorProcessIO_h_
 
-#include <QTimer>
+#include <QtCore/QTimer>
 #include "KTextEditVT.h"
 #include <kdialog.h>
 #include <kprocess.h>
