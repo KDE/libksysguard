@@ -51,7 +51,7 @@
 	#define REG_PARAM2 rsi
 	#define REG_PARAM3 rdx
 #else
-#ifdef __ppc__
+#if defined(__ppc__) || defined(__powerpc__) || defined(__powerpc64__) || defined(__PPC__)
 	#define REG_ORIG_ACCUM gpr[0]
 	#define REG_ACCUM gpr[3]
 	#define REG_PARAM1 orig_gpr3
@@ -149,7 +149,7 @@ void DisplayProcessDlg::update(bool modified)
 			mTextEdit->ensureCursorVisible();
 		return;
 	}
-#ifdef __ppc__
+#if defined(__ppc__) || defined(__powerpc__) || defined(__powerpc64__) || defined(__PPC__)
 	struct pt_regs regs;
 	regs.gpr[0] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R0, 0);
 	regs.gpr[3] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R3, 0);
