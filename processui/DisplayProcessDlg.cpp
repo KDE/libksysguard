@@ -80,6 +80,10 @@ void DisplayProcessDlg::slotBtnPause(bool pause) {
 void DisplayProcessDlg::slotBtnDetach(bool detach) {
 	if(detach) {
 		ui->btnDetach->setText(i18n("&Attach"));
+		ui->btnDetach->setChecked(true);
+		ui->btnPause->setText(i18n("&Pause"));
+		ui->btnPause->setChecked(false);
+		ui->btnPause->setEnabled(false);
 		ui->mTextEdit->detach();
 	} else {
 		if(!ui->mTextEdit->reattach()) {

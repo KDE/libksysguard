@@ -151,7 +151,7 @@
    <sender>btnDetach</sender>
    <signal>toggled(bool)</signal>
    <receiver>btnPause</receiver>
-   <slot>setHidden(bool)</slot>
+   <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
      <x>624</x>
