@@ -42,8 +42,6 @@ public:
 	KMonitorProcessIO(QWidget* parent, int pid = -1);
 	~KMonitorProcessIO();
 
-	/** Set whether to include the output from child processes.  If true, forks and clones will be monitored */
-	void setIncludeChildProcesses(bool include);
 	/** Whether to include the output from child processes.  If true, forks and clones will be monitored */
 	bool includeChildProcesses() const;
 
@@ -70,16 +68,23 @@ public:
 	KMonitorProcessIO::State state() const;
 
 public Q_SLOTS:
+	/** Set whether to include the output from child processes.  If true, forks and clones will be monitored */
+	void setIncludeChildProcesses(bool include);
 	/** If the state is in AttachedRunning, change to AttachedPaused.  This will block the process until we resume or detach.*/
 	void pauseProcesses();
 	/** If the state is in AttachedPaused, change to AttachedRunning.  This will allow the process to run again. */
 	void resumeProcesses();
-	/** Stop monitoring all processes and set the pid to -1. */
+	/** Stop monitoring all processes*/
 	void detach();
-	/** Stop monitoring the given process. If this is equal to attachedPid() the attachedPid is set to -1. */
+	/** Stop monitoring the given process */
 	void detach(int pid);
-	/** Start monitoring the given process.  If this is the first process being monitored, the state is set to AttachedRunning if possible and attachedPid() will return @p pid */
-	void attach(int pid);
+	/** Start monitoring the given process.  If this is the first process being monitored, the state is set to
+	 *  AttachedRunning if possible and attachedPid() will return @p pid 
+	 *  @return true if successfully reattached.  Can fail if process has disappeared or we do not have the right to attach. */
+	bool attach(int pid);
+	/** Reattach the pid that was first attached. 
+	 *  @return true if successfully reattached.  Can fail if process has disappeared or we do not have the right to attach. */
+	bool reattach();
 	/** Return the main pid that we are monitoring.*/
 	int attachedPid() const;
 	/** Attempts to set the state.  Check status() to confirm whether the state has changed successfully. */

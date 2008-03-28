@@ -27,7 +27,7 @@
 #include <kprocess.h>
 #include "processes.h"
 
-class KMonitorProcessIO;
+class Ui_DisplayProcessUi;
 
 class DisplayProcessDlg : public KDialog
 {
@@ -42,9 +42,11 @@ public:
 public Q_SLOTS:
 	/** Close button has been clicked.  Reimplementation from KDialog */
 	virtual void slotButtonClicked(int);
+	void slotBtnPause(bool pause);
+	void slotBtnDetach(bool detach);
 
 private:
-	KMonitorProcessIO *mTextEdit;
+	Ui_DisplayProcessUi *ui;
 };
 
 #endif

@@ -25,6 +25,8 @@
 #include "KMonitorProcessIO.h"
 #include "DisplayProcessDlg.h"
 #include "DisplayProcessDlg.moc"
+#include "ui_DisplayProcessUi.h"
+
 DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *process)
 	: KDialog( parent )
 {
@@ -35,22 +37,60 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *proces
 	//enableLinkedHelp( true );
 	showButtonSeparator( true );
 
-	mTextEdit = new KMonitorProcessIO( this, process->pid);
-	setMainWidget( mTextEdit );
+	QWidget *widget = new QWidget(this);
+	setMainWidget(widget);
+	ui = new Ui_DisplayProcessUi();
+	ui->setupUi(widget);
 
-	mTextEdit->setWhatsThis(i18n("The program '%1' (Pid: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc).  Data being written by the process is shown in red and data being read by the process is shown in blue.", process->name, process->pid));
+	ui->mTextEdit->setWhatsThis(i18n("The program '%1' (Pid: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc).  Data being written by the process is shown in red and data being read by the process is shown in blue.", process->name, process->pid));
+	if(!ui->mTextEdit->attach(process->pid)) {
+		ui->btnDetach->setText(i18n("&Attach"));
+		ui->btnDetach->setChecked(true);
+		ui->btnPause->setText(i18n("&Pause"));
+		ui->btnPause->setChecked(false);
+		ui->btnPause->setEnabled(false);
+
+	}
+	connect(ui->btnPause, SIGNAL(toggled(bool)), this, SLOT(slotBtnPause(bool)));
+	connect(ui->btnDetach, SIGNAL(toggled(bool)), this, SLOT(slotBtnDetach(bool)));
 }
 
 DisplayProcessDlg::~DisplayProcessDlg() {
-	mTextEdit->detach();
+	ui->mTextEdit->detach();
 }
 void DisplayProcessDlg::slotButtonClicked(int)
 {
-	mTextEdit->detach();
+	ui->mTextEdit->detach();
 	accept();
 }
 
 QSize DisplayProcessDlg::sizeHint() const {
 	return QSize(600,600);
+}
+
+void DisplayProcessDlg::slotBtnPause(bool pause) {
+	if(pause) {
+		ui->mTextEdit->pauseProcesses();
+		ui->btnPause->setText(i18n("&Resume"));
+	} else {
+		ui->mTextEdit->resumeProcesses();
+		ui->btnPause->setText(i18n("&Pause"));
+	}
+}
+void DisplayProcessDlg::slotBtnDetach(bool detach) {
+	if(detach) {
+		ui->btnDetach->setText(i18n("&Attach"));
+		ui->mTextEdit->detach();
+	} else {
+		if(!ui->mTextEdit->reattach()) {
+			//failed to attached
+			ui->btnDetach->setText(i18n("&Attach"));
+			ui->btnDetach->setChecked(true);
+			ui->btnPause->setText(i18n("&Pause"));
+			ui->btnPause->setChecked(false);
+			ui->btnPause->setEnabled(false);
+		} else
+			ui->btnDetach->setText(i18n("&Detach"));
+	}
 }
 

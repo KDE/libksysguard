@@ -70,12 +70,11 @@
 #include "KMonitorProcessIO.moc"
 
 KMonitorProcessIO::KMonitorProcessIO(QWidget* parent, int pid)
-	: KTextEditVT( parent )
+	: KTextEditVT( parent ), mPid(pid)
 {
 	mIncludeChildProcesses = true;
 	remove_duplicates = false;
 
-	mPid = pid;
 	mUpdateInterval = 20;
 	mTimer.setSingleShot(false);
 	connect(&mTimer, SIGNAL(timeout()), this, SLOT(update()));
@@ -161,32 +160,39 @@ void KMonitorProcessIO::detach(int pid) {
 
 	if(attached_pids.isEmpty()) {
 		mTimer.stop();
-		mPid = -1;
-	} else if(pid == mPid )
-		mPid = attached_pids[0];
+	}
 }
 
-void KMonitorProcessIO::attach(int pid) {
+bool KMonitorProcessIO::reattach() {
+	if(mPid == -1)
+		return false;
+	return attach(mPid);
+}
+
+bool KMonitorProcessIO::attach(int pid) {
 	if(pid == -1) {
 		//Indicates to detach all
 		detach();
-		return;
+		return false;
 	}
 	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) {
 		kDebug() << "Failed to attach to process " << pid;
 		if(attached_pids.isEmpty()) {
 			mTimer.stop();
-			insertHtml(i18n("<p><i><font color=\"gray\">Failed to attach to process %1</font></i></p>", pid));
+			insertHtml(i18n("<br/><i><font color=\"gray\">Failed to attach to process %1</font></i><br/>", pid));
+			return false;
 		}
 	} else {
 		if(attached_pids.isEmpty()) {
 			//First process added.  Automatically start timer
 			ptrace(PTRACE_SYSCALL, pid, 0, 0);
 			mTimer.start(mUpdateInterval);
-			mPid = pid;
+			if(mPid == -1)
+				mPid = pid;
 		}
 		attached_pids.append(pid);
 	}
+	return true;
 }
 
 void KMonitorProcessIO::update(bool modified)
@@ -253,7 +259,7 @@ bool KMonitorProcessIO::includeChildProcesses() const {
 
 
 KMonitorProcessIO::State KMonitorProcessIO::state() const {
-	if(mPid == -1)
+	if(attached_pids.isEmpty())
 		return Detached;
 	if(mTimer.isActive())
 		return AttachedRunning;

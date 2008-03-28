@@ -14,6 +14,7 @@ set(processui_LIB_SRCS
 kde4_add_ui_files( processui_LIB_SRCS
    ReniceDlgUi.ui
    ProcessWidgetUI.ui
+   DisplayProcessUi.ui
 )
 
 

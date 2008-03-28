@@ -60,12 +60,12 @@ class KDE_EXPORT KTextEditVT : public QTextEdit
 public:
 	KTextEditVT(QWidget* parent);
 
-	/** Set whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
-	void setParseAnsiEscapeCodes(bool displayall);
 	/** Whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
 	bool parseAnsiEscapeCodes() const;
 
 public Q_SLOTS:
+	/** Set whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
+	void setParseAnsiEscapeCodes(bool displayall);
 	/** Insert the given string at the current position based on the current state.
 	 *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
 	 *  escape sequences can move the cursor and set the current color etc.
