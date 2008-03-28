@@ -110,24 +110,13 @@ void KMonitorProcessIO::setUpdateInterval(int msecs) {
 		
 }
 
-bool KMonitorProcessIO::running() const {
-	return mTimer.isActive(); 
-}
-
-void KMonitorProcessIO::setRunning(bool run) {
-	if(mTimer.isActive() == run) return;
-	if(run)
-		mTimer.start(mUpdateInterval);
-	else
-		mTimer.stop();
-}
 void KMonitorProcessIO::detach() {
         foreach(int pid, attached_pids) {
 		detach(pid);
 	}
 }
 
-int KMonitorProcessIO::attachedPid() {
+int KMonitorProcessIO::attachedPid() const {
 	return mPid;
 }
 void KMonitorProcessIO::detach(int pid) {
@@ -178,6 +167,11 @@ void KMonitorProcessIO::detach(int pid) {
 }
 
 void KMonitorProcessIO::attach(int pid) {
+	if(pid == -1) {
+		//Indicates to detach all
+		detach();
+		return;
+	}
 	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) {
 		kDebug() << "Failed to attach to process " << pid;
 		if(attached_pids.isEmpty()) {
@@ -255,6 +249,31 @@ void KMonitorProcessIO::setIncludeChildProcesses(bool include) {
 }
 bool KMonitorProcessIO::includeChildProcesses() const {
 	return mIncludeChildProcesses;
+}
+
+
+KMonitorProcessIO::State KMonitorProcessIO::state() const {
+	if(mPid == -1)
+		return Detached;
+	if(mTimer.isActive())
+		return AttachedRunning;
+	return AttachedPaused;
+}
+
+void KMonitorProcessIO::pauseProcesses() {
+	if(state() == AttachedRunning) {
+		mTimer.stop();
+	}
+}
+void KMonitorProcessIO::resumeProcesses() {
+	if(state() == AttachedPaused)
+		mTimer.start(mUpdateInterval);
+}
+
+void KMonitorProcessIO::setState(State new_state) {
+	if(new_state == AttachedPaused) pauseProcesses();
+	if(new_state == AttachedRunning) resumeProcesses();
+	if(new_state == Detached) detach();
 }
 
 
