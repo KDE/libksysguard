@@ -26,6 +26,7 @@
 #include <kdebug.h>
 #include <QTimer>
 
+#include <errno.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/ptrace.h>
@@ -81,6 +82,7 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *proces
 	eight_bit_clean = false;
 	follow_forks = true;
 	remove_duplicates = false;
+	want_to_exit = false;
 
 	mPid = process->pid;
 
@@ -96,7 +98,6 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *proces
 
 	attach(mPid);
 	if (attached_pids.isEmpty()) {
-		detach();
 		accept();
 		return;
 	}
@@ -115,7 +116,7 @@ DisplayProcessDlg::~DisplayProcessDlg() {
 void DisplayProcessDlg::slotButtonClicked(int)
 {
 	detach();
-	accept();
+	want_to_exit = true; //exit when there's nothing more to parse.  If we exit straight away we risk crashing the process that we are debugging
 }
 
 QSize DisplayProcessDlg::sizeHint() const {
@@ -123,8 +124,45 @@ QSize DisplayProcessDlg::sizeHint() const {
 }
 
 void DisplayProcessDlg::detach() {
-        foreach(long pid, attached_pids)
-                ptrace(PTRACE_DETACH, pid, 0, 0);
+	int status;
+        foreach(long pid, attached_pids) {
+                if(!ptrace(PTRACE_DETACH, pid, 0, 0)) {
+			//successfully detached
+		} else if(kill(pid, 0) < 0) {
+			if(errno != ESRCH)
+				kDebug() << "Something seriously strange when trying to detach.";
+		} else if (kill(pid, SIGSTOP) < 0) {
+			if (errno != ESRCH)
+				kDebug() << "Something seriously strange when trying to detach and then trying to stop the process";
+		} else {
+		  for (;;) {
+			if (waitpid(pid, &status, 0) < 0) {
+				if (errno != ECHILD)
+					kDebug() << "Something seriously strange when trying to detach and waiting for process to stop";
+				break;
+			}
+			if (!WIFSTOPPED(status)) {
+				/* Au revoir, mon ami. */
+				break;
+			}
+			if (WSTOPSIG(status) == SIGSTOP) {
+				//Okay process is now stopped.  Lets try detaching again.  Silly linux.
+				if (ptrace(PTRACE_DETACH,pid, 0, 0) < 0) {
+					if (errno != ESRCH)
+						kDebug() << "Something seriously strange when trying to detach the second time.";
+					/* I died trying. */
+				}
+				break;
+			}
+			// we didn't manage to stop the process.  Lets try continuing it and the stopping it
+			if (ptrace(PTRACE_CONT, pid, 0, 0) < 0) {
+				if (errno != ESRCH)
+					kDebug() << "Something seriously strange when trying to detach and continue";
+				break;
+			}
+		  }
+		}
+	}
 	attached_pids.clear();
 }
 
@@ -147,6 +185,8 @@ void DisplayProcessDlg::update(bool modified)
 	if (!WIFSTOPPED(status)) { 
 		if(modified)
 			mTextEdit->ensureCursorVisible();
+		if(want_to_exit)
+			accept(); //we can now exit.  Nothing more to process
 		return;
 	}
 #if defined(__ppc__) || defined(__powerpc__) || defined(__powerpc64__) || defined(__PPC__) || defined(powerpc)
@@ -171,7 +211,6 @@ void DisplayProcessDlg::update(bool modified)
 #ifdef _BIG_ENDIAN
 			a = bswap_32(a);
 #endif
-
 			if(!modified) {
 				//Before we add text or change the color, make sure we are at the end
 				mTextEdit->moveCursor(QTextCursor::End);

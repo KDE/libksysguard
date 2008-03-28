@@ -51,6 +51,7 @@ private:
 	bool remove_duplicates;
 	void detach();
 	void attach(long);
+	bool want_to_exit;
 
 	unsigned int lastdir;
 	QTextCursor mCursor;
