@@ -26,6 +26,7 @@
 #include "KTextEditVT.h"
 
 #include "KTextEditVT.moc"
+#include <kglobalsettings.h>
 
 KTextEditVT::KTextEditVT(QWidget* parent)
 	: QTextEdit( parent )
@@ -38,6 +39,7 @@ KTextEditVT::KTextEditVT(QWidget* parent)
 	escape_number_seperator = false;
 	escape_number2 = -1;
 	escape_code = 0;
+	setFont( KGlobalSettings::fixedFont() );
 }
 
 
