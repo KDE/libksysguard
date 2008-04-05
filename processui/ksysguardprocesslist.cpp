@@ -151,7 +151,6 @@ struct KSysGuardProcessListPrivate {
 		sigKill = new QAction(i18n("Kill (KILL)"), q);
 		sigUsr1 = new QAction(i18n("User 1 (USR1)"), q);
 		sigUsr2 = new QAction(i18n("User 2 (USR2)"), q);
-
 	}
 
         ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
@@ -246,8 +245,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	//so don't let the user change it
 	d->mUi->treeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
 	d->mUi->treeView->header()->setStretchLastSection(true);
-	// For speed, disable sorting for now.  This is reenabled when the items have been added
-//	d->mUi->treeView->setSortingEnabled(false); 
 
 	//Sort by username by default
 	d->mUi->treeView->sortByColumn(ProcessModel::HeadingUser, Qt::AscendingOrder);
@@ -267,9 +264,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
 	retranslateUi();
 
-	// Dynamic sort filter seems to require repainting the whole screen, slowing everything down drastically.
-	// When this bug is fixed we can re-enable this.
-	//d->mFilterModel.setDynamicSortFilter(true);
+	d->mFilterModel.setDynamicSortFilter(true);
 
 	d->mUpdateTimer = new QTimer(this);
 	d->mUpdateTimer->setSingleShot(true);
