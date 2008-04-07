@@ -1,14 +1,21 @@
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../  ../processcore/)
 
+check_include_files(sys/ptrace.h HAVE_SYS_PTRACE_H)
+
+if (HAVE_SYS_PTRACE_H)
+   set(processui_ptrace_SRCS KMonitorProcessIO.cpp DisplayProcessDlg.cpp)
+else (HAVE_SYS_PTRACE_H)
+   set(processui_ptrace_SRCS )
+endif (HAVE_SYS_PTRACE_H)
+
 set(processui_LIB_SRCS
    ksysguardprocesslist.cpp
    ProcessFilter.cc
    ProcessModel.cc
    ReniceDlg.cc
-   DisplayProcessDlg.cpp
    KTextEditVT.cpp
-   KMonitorProcessIO.cpp
+   ${processui_ptrace_SRCS}
 )
 
 kde4_add_ui_files( processui_LIB_SRCS
