@@ -31,7 +31,7 @@
 #include <QMenu>
 #include <QSet>
 #include <QComboBox>
-#include <QItemDelegate>
+#include <QStyledItemDelegate>
 #include <QPainter>
 #include <QProcess>
 #include <QLineEdit>
@@ -64,29 +64,16 @@
 #include "modeltest.h"
 #endif
 
-class ProgressBarItemDelegate : public QItemDelegate
+class ProgressBarItemDelegate : public QStyledItemDelegate
 {
   public:
-	ProgressBarItemDelegate(QObject *parent) : QItemDelegate(parent), startProgressColor(0x00, 0x71, 0xBC, 100), endProgressColor(0x83, 0xDD, 0xF5, 100), totalMemory(-1), numCpuCores(-1) {}
-  protected:
-	virtual void drawDisplay(QPainter *painter, const QStyleOptionViewItem &option,
-		                                 const QRect &rect, const QString &text) const
+	ProgressBarItemDelegate(QObject *parent) : QStyledItemDelegate(parent), startProgressColor(0x00, 0x71, 0xBC, 100), endProgressColor(0x83, 0xDD, 0xF5, 100), totalMemory(-1), numCpuCores(-1) {}
+  
+  	virtual void paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const
 	{
+		QStyleOptionViewItemV4 option = opt;
+		initStyleOption(&option,index);
 
-		if(percentage > 0 && percentage * rect.width() > 100 ) { //make sure the line will have a width of more than 1 pixel
-			QPen old = painter->pen();
-			painter->setPen(Qt::NoPen);
-			QLinearGradient  linearGrad( QPointF(rect.x(),rect.y()), QPointF(rect.x() + rect.width(), rect.y()));
-			linearGrad.setColorAt(0, startProgressColor);
-			linearGrad.setColorAt(1, endProgressColor);
-			painter->fillRect( rect.x(), rect.y(), rect.width() * percentage /100 , rect.height(), QBrush(linearGrad));
-			painter->setPen( old );
-		}
-
-		QItemDelegate::drawDisplay( painter, option, rect, text);
-	}
-	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
-	{
 		Q_ASSERT(index.model());
 		QModelIndex realIndex = (reinterpret_cast< const QAbstractProxyModel *> (index.model()))->mapToSource(index);
 		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (realIndex.internalPointer());
@@ -118,14 +105,36 @@ class ProgressBarItemDelegate : public QItemDelegate
 			}
 		} else
 			percentage = 0;
-		QItemDelegate::paint(painter, option, index);
+
+		if (percentage > 0)
+			drawPercentageDisplay(painter,option,index.data(Qt::DisplayRole).toString());
+		else
+			QStyledItemDelegate::paint(painter, option, index);
 	}
+
+  private:
+	void drawPercentageDisplay(QPainter *painter, const QStyleOptionViewItem& option, const QString& text) const 
+	{
+		QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem,&option,painter);
+		
+		const QRect rect = option.rect;
+		if(percentage * rect.width() > 100 ) { //make sure the line will have a width of more than 1 pixel
+			QPen old = painter->pen();
+			painter->setPen(Qt::NoPen);
+			QLinearGradient  linearGrad( QPointF(rect.x(),rect.y()), QPointF(rect.x() + rect.width(), rect.y()));
+			linearGrad.setColorAt(0, startProgressColor);
+			linearGrad.setColorAt(1, endProgressColor);
+			painter->fillRect( rect.x(), rect.y(), rect.width() * percentage /100 , rect.height(), QBrush(linearGrad));
+			painter->setPen( old );
+		}
+		painter->drawText(rect,option.displayAlignment,text);
+	}
+	
 	mutable int percentage;
 	QColor startProgressColor;
 	QColor endProgressColor;
 	mutable long long totalMemory;
 	mutable int numCpuCores;
-
 };
 
 struct KSysGuardProcessListPrivate {
