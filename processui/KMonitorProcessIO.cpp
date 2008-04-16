@@ -33,10 +33,13 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/syscall.h>
-#include <byteswap.h>
-#include <endian.h>
+#include <endian.h>  //Required to define _BIG_ENDIAN on big endian systems
 #include <sys/user.h>
 #include <ctype.h>
+#ifdef _BIG_ENDIAN
+//Required for bswap on big endian systems
+#include <byteswap.h> 
+#endif
 
 #ifdef __i386__
 	#define REG_ORIG_ACCUM orig_eax
