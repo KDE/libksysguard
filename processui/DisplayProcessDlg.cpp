@@ -42,7 +42,7 @@ DisplayProcessDlg::DisplayProcessDlg(QWidget* parent, KSysGuard::Process *proces
 	ui = new Ui_DisplayProcessUi();
 	ui->setupUi(widget);
 
-	ui->mTextEdit->setWhatsThis(i18n("The program '%1' (Pid: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc).  Data being written by the process is shown in red and data being read by the process is shown in blue.", process->name, process->pid));
+	ui->mTextEdit->setWhatsThis(i18n("The program '%1' (PID: %2) is being monitored for input and output through any file descriptor (stdin, stdout, stderr, open files, network connections, etc.).  Data being written by the process is shown in red and data being read by the process is shown in blue.", process->name, process->pid));
 	if(!ui->mTextEdit->attach(process->pid)) {
 		ui->btnDetach->setText(i18n("&Attach"));
 		ui->btnDetach->setChecked(true);

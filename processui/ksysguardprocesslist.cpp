@@ -155,7 +155,7 @@ struct KSysGuardProcessListPrivate {
 		sigStop = new QAction(i18n("Suspend (STOP)"), q);
 		sigCont = new QAction(i18n("Continue (CONT)"), q);
 		sigHup = new QAction(i18n("Hangup (HUP)"), q);
-		sigInt = new QAction(i18n("Interupt (INT)"), q);
+		sigInt = new QAction(i18n("Interrupt (INT)"), q);
 		sigTerm = new QAction(i18n("Terminate (TERM)"), q);
 		sigKill = new QAction(i18n("Kill (KILL)"), q);
 		sigUsr1 = new QAction(i18n("User 1 (USR1)"), q);
@@ -528,17 +528,17 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 		menu->addSeparator()->setText(i18n("Display Units"));
 		QActionGroup *unitsGroup = new QActionGroup(menu);
 		actionKB = new QAction(menu);
-		actionKB->setText(i18n("KiloBytes"));
+		actionKB->setText(i18n("Kilobytes"));
 		actionKB->setCheckable(true);
 		menu->addAction(actionKB);
 		unitsGroup->addAction(actionKB);
 		actionMB = new QAction(menu);
-		actionMB->setText(i18n("MegaBytes"));
+		actionMB->setText(i18n("Megabytes"));
 		actionMB->setCheckable(true);
 		menu->addAction(actionMB);
 		unitsGroup->addAction(actionMB);
 		actionGB = new QAction(menu);
-		actionGB->setText(i18n("GigaBytes"));
+		actionGB->setText(i18n("Gigabytes"));
 		actionGB->setCheckable(true);
 		menu->addAction(actionGB);
 		unitsGroup->addAction(actionGB);
@@ -733,7 +733,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 
 	if (processes.isEmpty())
 	{
-		KMessageBox::sorry(this, i18n("You need to select a process first."));
+		KMessageBox::sorry(this, i18n("You must select a process first."));
 		return;
 	}
 
@@ -818,13 +818,13 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 	if(!renicePids.isEmpty()) {
 		Q_ASSERT(reniceDlg.newCPUPriority <= 20 && reniceDlg.newCPUPriority >= -20);
 		if(!reniceProcesses(renicePids, reniceDlg.newCPUPriority)) {
-			KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU priority.  Aborting"));
+			KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU priority. Aborting"));
 			return;
 		}
 	}
 	if(!changeIOSchedulerPids.isEmpty()) {
 		if(!changeIoScheduler(changeIOSchedulerPids, (KSysGuard::Process::IoPriorityClass) reniceDlg.newIOSched, reniceDlg.newIOPriority)) {
-			KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the IO scheduler and priority. Aborting."));
+			KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the IO scheduler and priority. Aborting"));
 			return;
 		}
 	}
@@ -966,7 +966,7 @@ void KSysGuardProcessList::killSelectedProcesses()
 
 	if (selectedAsStrings.isEmpty())
 	{
-		KMessageBox::sorry(this, i18n("You need to select a process first."));
+		KMessageBox::sorry(this, i18n("You must select a process first."));
 		return;
 	}
 	else

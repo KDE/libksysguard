@@ -52,7 +52,7 @@
         <bool>false</bool>
        </property>
        <property name="clickMessage" >
-        <string> Quick search</string>
+        <string>Quick search</string>
        </property>
        <property name="showClearButton" stdset="0" >
         <bool>true</bool>

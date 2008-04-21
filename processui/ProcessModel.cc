@@ -555,7 +555,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
 		    case HeadingSharedMemory:
 			return i18n("<qt>This is the amount of real physical memory that this process's shared libraries are using. This memory is shared among all processes that use this library</qt>");
 		    case HeadingCommand:
-			return i18n("<qt>The command that this process was launched with</qt>");
+			return i18n("<qt>The command with which this process was launched</qt>");
 		    case HeadingXTitle:
 			return i18n("<qt>The title of any windows that this process is showing</qt>");
 		    case HeadingPid:
@@ -644,7 +644,7 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
 	} else {
 		KUser user(ps->uid);
 		if(!user.isValid())
-			userTooltip = i18n("This user is not recognised for some reason");
+			userTooltip = i18n("This user is not recognized for some reason.");
 		else {
 			userTooltip = "<qt>";
             if(!user.property(KUser::FullName).isValid()) userTooltip += i18n("<b>%1</b><br/>", user.property(KUser::FullName).toString());
@@ -830,7 +830,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 				if(process->name == "init") {
 					tooltip += i18n("<b>Init</b> is the parent of all other processes and cannot be killed.<br/>");
 				} else if(process->name == "kthreadd") {
-					tooltip += i18n("<b>KThreadd</b> manages kernel threads. The children processes run in the kernel, controlling hard disk access etc.<br/>");
+					tooltip += i18n("<b>KThreadd</b> manages kernel threads. The children processes run in the kernel, controlling hard disk access, etc.<br/>");
 				}
 				tooltip	+= i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid>", process->name, (long int)process->pid);
 			}
@@ -946,7 +946,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		}
 		case HeadingSharedMemory: {
 			if(process->vmURSS == -1)
-				return i18n("<qt>Your system does not seem to have this information for us to read, sorry.</qt>");
+				return i18n("<qt>Your system does not seem to have this information available to be read.</qt>");
 			QString tooltip = "<qt>";
 			if(d->mMemTotal >0)
 				tooltip += i18n("Shared library memory usage: %1 out of %2  (%3 %)", KGlobal::locale()->formatByteSize((process->vmRSS - process->vmURSS) * 1024), KGlobal::locale()->formatByteSize(d->mMemTotal*1024), (process->vmRSS-process->vmURSS)*100/d->mMemTotal);
@@ -1151,8 +1151,8 @@ void ProcessModel::setupHeader() {
 	QStringList headings;
 	headings << i18nc("process heading", "Name");
 	headings << i18nc("process heading", "User Name");
-	headings << i18nc("process heading", "Pid");
-	headings << i18nc("process heading", "Tty");
+	headings << i18nc("process heading", "PID");
+	headings << i18nc("process heading", "TTY");
 	headings << i18nc("process heading", "Niceness");
 	// xgettext: no-c-format
 	headings << i18nc("process heading", "CPU %");
@@ -1226,11 +1226,11 @@ QString ProcessModel::formatMemoryInfo(long amountInKB) const
 {
 	switch(d->mUnits) {
 	  case UnitsKB:
-		return  i18n("%1 k", amountInKB);
+		return  i18n("%1 K", amountInKB);
 	  case UnitsMB:
-		return  i18n("%1 m", (amountInKB+512)/1024);  //Round to nearest megabyte
+		return  i18n("%1 M", (amountInKB+512)/1024);  //Round to nearest megabyte
 	  case UnitsGB:
-		return  i18n("%1 g", (amountInKB+512*1024)/(1024*1024)); //Round to nearest gigabyte
+		return  i18n("%1 G", (amountInKB+512*1024)/(1024*1024)); //Round to nearest gigabyte
 	}
 	return "";  //error
 }

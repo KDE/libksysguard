@@ -25,7 +25,7 @@
    <item>
     <widget class="QCheckBox" name="chkColorOutput" >
      <property name="toolTip" >
-      <string>Interpret output as containing VT100 commands. For based console prgrams.</string>
+      <string>Interpret output as containing VT100 commands. For console-based programs.</string>
      </property>
      <property name="whatsThis" >
       <string>If this is checked then ANSI escape sequences will be interpreted and not displayed.  Useful for when monitoring bash.</string>
@@ -41,7 +41,7 @@
    <item>
     <widget class="QCheckBox" name="chkMonitorChildProcesses" >
      <property name="statusTip" >
-      <string>Show the ouput from processes launched by this process</string>
+      <string>Show the output from processes launched by this process.</string>
      </property>
      <property name="whatsThis" >
       <string>Follow fork and clone commands to monitor child processes</string>
@@ -62,7 +62,7 @@
         <string>Pause the process and its output</string>
        </property>
        <property name="whatsThis" >
-        <string>Stop reading the output from the process  This will cause the process to block, effectivey pausing it  The process can be resumed by resuming, by detaching or by closing the dialog</string>
+        <string>Stop reading the output from the process. This will cause the process to be blocked, effectively pausing it. The process can be resumed by resuming, detaching or closing the dialog.</string>
        </property>
        <property name="text" >
         <string>&amp;Pause</string>
