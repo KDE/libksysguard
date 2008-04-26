@@ -151,7 +151,7 @@ QSet<long> ProcessesRemote::getAllPids( )
 {
     d->pids.clear();
     d->processByPid.clear();
-    foreach(QByteArray process, d->lastAnswer) {
+    foreach(const QByteArray &process, d->lastAnswer) {
         QList<QByteArray> info = process.split('\t');
 	if(info.size() == d->numColumns) {
 		int pid =  info.at(d->pidColumn).toLong();

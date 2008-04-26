@@ -432,7 +432,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
 		int numProcesses = selectedIndexes.size();
 		if(numProcesses == 0) return;  //No processes selected
-		foreach( QModelIndex index, selectedIndexes) {
+		foreach( const QModelIndex &index, selectedIndexes) {
 			QModelIndex realIndex = d->mFilterModel.mapToSource(index);
 			QVariant widVar= d->mModel.data(realIndex, ProcessModel::WindowIdRole);
 			if( !widVar.isNull() ) {
@@ -454,7 +454,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
 		int numProcesses = selectedIndexes.size();
 		if(numProcesses == 0) return;  //No processes selected
-		foreach( QModelIndex index, selectedIndexes) {
+		foreach( const QModelIndex &index, selectedIndexes) {
 			QModelIndex realIndex = d->mFilterModel.mapToSource(index);
 			KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
 			if(process)
