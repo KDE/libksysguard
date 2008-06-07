@@ -52,8 +52,11 @@
 #include "ksysguardprocesslist.moc"
 #include "ksysguardprocesslist.h"
 #include "ReniceDlg.h"
-#include "DisplayProcessDlg.h"
 #include "ui_ProcessWidgetUI.h"
+
+#ifdef HAVE_SYS_PTRACE_H
+#include "DisplayProcessDlg.h"
+#endif
 
 #include <sys/types.h>
 #include <unistd.h>
@@ -441,6 +444,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 			}
 		}
 	} else if(result == d->monitorio) {
+#ifdef HAVE_SYS_PTRACE_H
 		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
 		if(selectedIndexes.isEmpty()) return;  //No processes selected
 		QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
@@ -449,6 +453,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 			DisplayProcessDlg *dialog = new DisplayProcessDlg( this,process );
 			dialog->show();
 		}
+#endif
 	} else {
 		QList< long long > pidlist;
 		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
