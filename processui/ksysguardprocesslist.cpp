@@ -21,6 +21,8 @@
 
 */
 
+#include "../config-ksysguard.h"
+
 #include <QTimer>
 #include <QList>
 #include <QShowEvent>

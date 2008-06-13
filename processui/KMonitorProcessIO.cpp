@@ -22,6 +22,8 @@
 
 */
 
+#include "../config-ksysguard.h"
+
 #include <klocale.h>
 #include <kdebug.h>
 #include <QTimer>
@@ -29,14 +31,16 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdio.h>
+#ifdef HAVE_SYS_PTRACE_H
 #include <sys/ptrace.h>
+#endif
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/syscall.h>
 #include <endian.h>  //Required to define _BIG_ENDIAN on big endian systems
 #include <sys/user.h>
 #include <ctype.h>
-#ifdef _BIG_ENDIAN
+#if defined(_BIG_ENDIAN) && defined(HAVE_BYTESWAP_H)
 //Required for bswap on big endian systems
 #include <byteswap.h> 
 #endif
@@ -123,6 +127,7 @@ int KMonitorProcessIO::attachedPid() const {
 }
 void KMonitorProcessIO::detach(int pid) {
 	int status;
+#ifdef HAVE_SYS_PTRACE_H
 	if(!ptrace(PTRACE_DETACH, pid, 0, 0)) {
 		//successfully detached
 	} else if(kill(pid, 0) < 0) {
@@ -159,6 +164,7 @@ void KMonitorProcessIO::detach(int pid) {
 			}
 		  }
 	}
+#endif
 	attached_pids.removeAll(pid);
 
 	if(attached_pids.isEmpty()) {
@@ -178,6 +184,7 @@ bool KMonitorProcessIO::attach(int pid) {
 		detach();
 		return false;
 	}
+#ifdef HAVE_SYS_PTRACE_H
 	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) {
 		kDebug() << "Failed to attach to process " << pid;
 		if(attached_pids.isEmpty()) {
@@ -196,10 +203,14 @@ bool KMonitorProcessIO::attach(int pid) {
 		attached_pids.append(pid);
 	}
 	return true;
+#else
+	return false;
+#endif
 }
 
 void KMonitorProcessIO::update(bool modified)
 {
+#ifdef HAVE_SYS_PTRACE_H
 	static QColor writeColor = QColor(255,0,0);
 	static QColor readColor = QColor(0,0,255);
 
@@ -251,11 +262,13 @@ void KMonitorProcessIO::update(bool modified)
 	}
 	ptrace(PTRACE_SYSCALL, pid, 0, 0);
 	update(modified);
+#endif
 }
 
 void KMonitorProcessIO::setIncludeChildProcesses(bool include) {
 	mIncludeChildProcesses = include;
 }
+
 bool KMonitorProcessIO::includeChildProcesses() const {
 	return mIncludeChildProcesses;
 }
