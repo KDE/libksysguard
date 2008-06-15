@@ -37,9 +37,14 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/syscall.h>
-#include <endian.h>  //Required to define _BIG_ENDIAN on big endian systems
 #include <sys/user.h>
 #include <ctype.h>
+#ifdef HAVE_SYS_ENDIAN_H
+ //Required to define _BIG_ENDIAN on big endian systems
+#include <sys/endian.h>
+#else
+#include <endian.h>
+#endif
 #if defined(_BIG_ENDIAN) && defined(HAVE_BYTESWAP_H)
 //Required for bswap on big endian systems
 #include <byteswap.h> 
