@@ -53,4 +53,4 @@ target_link_libraries(ksysguardwidgets ${KDE4_KIO_PARTS} processui)
 
 install(TARGETS ksysguardwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
-install( FILES ProcessModel.h DisplayProcessDlg.h ProcessFilter.h KTextEditVT.h ksysguardprocesslist.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard)
+install( FILES ProcessModel.h DisplayProcessDlg.h ProcessFilter.h KTextEditVT.h ksysguardprocesslist.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard COMPONENT Devel)

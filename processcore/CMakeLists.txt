@@ -24,5 +24,5 @@ install(TARGETS processcore ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
-install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard)
+install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard COMPONENT Devel)
 
