@@ -39,42 +39,39 @@
 #include <sys/syscall.h>
 #include <sys/user.h>
 #include <ctype.h>
-#ifdef HAVE_SYS_ENDIAN_H
- //Required to define _BIG_ENDIAN on big endian systems
-#include <sys/endian.h>
-#else
-#include <endian.h>
-#endif
-#if defined(_BIG_ENDIAN) && defined(HAVE_BYTESWAP_H)
-//Required for bswap on big endian systems
-#include <byteswap.h> 
-#endif
 
 #ifdef __i386__
-	#define REG_ORIG_ACCUM orig_eax
-	#define REG_ACCUM eax
-	#define REG_PARAM1 ebx
-	#define REG_PARAM2 ecx
-	#define REG_PARAM3 edx
-#else
+	#define REG_ORIG_ACCUM(regs) regs.orig_eax
+	#define REG_ACCUM(regs) regs.eax
+	#define REG_PARAM1(regs) regs.ebx
+	#define REG_PARAM2(regs) regs.ecx
+	#define REG_PARAM3(regs) regs.edx
+#endif
 #ifdef __amd64__
-	#define REG_ORIG_ACCUM orig_rax
-	#define REG_ACCUM rax
-	#define REG_PARAM1 rdi
-	#define REG_PARAM2 rsi
-	#define REG_PARAM3 rdx
-#else
+	#define REG_ORIG_ACCUM(regs) regs.orig_rax
+	#define REG_ACCUM(regs) regs.rax
+	#define REG_PARAM1(regs) regs.rdi
+	#define REG_PARAM2(regs) regs.rsi
+	#define REG_PARAM3(regs) regs.rdx
+#endif
 #if defined(__ppc__) || defined(__powerpc__) || defined(__powerpc64__) || defined(__PPC__) || defined(powerpc)
-	#define REG_ORIG_ACCUM gpr[0]
-	#define REG_ACCUM gpr[3]
-	#define REG_PARAM1 orig_gpr3
-	#define REG_PARAM2 gpr[4]
-	#define REG_PARAM3 gpr[5]
+	#define REG_ORIG_ACCUM(regs) regs.gpr[0]
+	#define REG_ACCUM(regs) regs.gpr[3]
+	#define REG_PARAM1(regs) regs.orig_gpr3
+	#define REG_PARAM2(regs) regs.gpr[4]
+	#define REG_PARAM3(regs) regs.gpr[5]
 #ifndef PT_ORIG_R3
 	#define PT_ORIG_R3 34
 #endif
 #endif
-#endif
+#ifdef __ia64__
+	#undef slots
+	#include <sys/rse.h>
+	#define REG_ORIG_ACCUM(regs) regs.pt.gr[15]
+	#define REG_ACCUM(regs) (regs.pt.gr[10] ? -regs.pt.gr[8] : regs.pt.gr[8])
+	#define REG_PARAM1(regs) regs.arg[0]
+	#define REG_PARAM2(regs) regs.arg[1]
+	#define REG_PARAM3(regs) regs.arg[2]
 #endif
 
 #include "KMonitorProcessIO.h"
@@ -221,7 +218,7 @@ void KMonitorProcessIO::update(bool modified)
 
 	int status;
 	int pid = waitpid(-1, &status, WNOHANG | WUNTRACED | WCONTINUED);
-	if (!WIFSTOPPED(status)) { 
+	if (pid == -1 || !WIFSTOPPED(status)) { 
 		if(modified)
 			ensureCursorVisible();
 		return;
@@ -233,35 +230,62 @@ void KMonitorProcessIO::update(bool modified)
 	regs.gpr[4] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R4, 0);
 	regs.gpr[5] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R5, 0);
 	regs.orig_gpr3 = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_ORIG_R3, 0);
-#else
+#endif
+#ifdef __ia64__
+	struct {
+		struct pt_all_user_regs pt;
+		unsigned long arg[3];
+	} regs;
+	ptrace(PTRACE_GETREGS, pid, 0, &regs.pt);
+	if (REG_ORIG_ACCUM(regs) >= 0) {
+		unsigned long *out0 = ia64_rse_skip_regs((unsigned long *)regs.pt.ar[17], -(regs.pt.cfm & 0x7f) + ((regs.pt.cfm >> 7) & 0x7f));
+		regs.arg[0] = ptrace(PTRACE_PEEKDATA, pid, ia64_rse_skip_regs(out0, 0), 0);
+		regs.arg[1] = ptrace(PTRACE_PEEKDATA, pid, ia64_rse_skip_regs(out0, 1), 0);
+		regs.arg[2] = ptrace(PTRACE_PEEKDATA, pid, ia64_rse_skip_regs(out0, 2), 0);
+	}
+#endif
+#if defined __i386__ || defined __amd64__
 	struct user_regs_struct regs;
 	ptrace(PTRACE_GETREGS, pid, 0, &regs);
 #endif
 	/*unsigned int b = ptrace(PTRACE_PEEKTEXT, pid, regs.eip, 0);*/
-	if (mIncludeChildProcesses && (regs.REG_ORIG_ACCUM == SYS_fork || regs.REG_ORIG_ACCUM == SYS_clone)) {
-		if (regs.REG_ACCUM > 0)
-			attach(regs.REG_ACCUM);					
-	}
-	if ((regs.REG_ORIG_ACCUM == SYS_read || regs.REG_ORIG_ACCUM == SYS_write) && (regs.REG_PARAM3 == regs.REG_ACCUM)) {
-		for (unsigned int i = 0; i < regs.REG_PARAM3; i++) {
-			unsigned int a = ptrace(PTRACE_PEEKTEXT, pid, regs.REG_PARAM2 + i, 0);
-#ifdef _BIG_ENDIAN
-			a = bswap_32(a);
+	if (mIncludeChildProcesses && (
+#ifdef SYS_fork
+				       REG_ORIG_ACCUM(regs) == SYS_fork ||
 #endif
+#ifdef SYS_clone
+				       REG_ORIG_ACCUM(regs) == SYS_clone ||
+#endif
+#ifdef SYS_clone2
+				       REG_ORIG_ACCUM(regs) == SYS_clone2 ||
+#endif
+				       0)) {
+		if (REG_ACCUM(regs) > 0)
+			attach(REG_ACCUM(regs));
+	}
+	if ((REG_ORIG_ACCUM(regs) == SYS_read || REG_ORIG_ACCUM(regs) == SYS_write) && (REG_PARAM3(regs) == REG_ACCUM(regs))) {
+		for (unsigned long i = 0; i < REG_PARAM3(regs); i++) {
+			union {
+				unsigned long l;
+				unsigned char c[sizeof(long)];
+			} a;
+			a.l = ptrace(PTRACE_PEEKDATA, pid, REG_PARAM2(regs) + i, 0);
 			if(!modified) {
 				//Before we add text or change the color, make sure we are at the end
 				moveCursor(QTextCursor::End);
 			}
-			if(regs.REG_ORIG_ACCUM != lastdir) {
-				if(regs.REG_ORIG_ACCUM == SYS_read)
+			if(REG_ORIG_ACCUM(regs) != lastdir) {
+				if(REG_ORIG_ACCUM(regs) == SYS_read)
 					setTextColor(readColor);
 				else
 					setTextColor(writeColor);
-				lastdir = regs.REG_ORIG_ACCUM;
+				lastdir = REG_ORIG_ACCUM(regs);
 			}
-			char c = a&0xff;
-			/** Use the KTextEditVT specific function to parse the character 'c' */
-			insertVTChar(QChar(c));
+			for (unsigned j = 0; j < sizeof(a.c) && i < REG_PARAM3(regs); i++, j++) {
+				unsigned char c = a.c[j];
+				/** Use the KTextEditVT specific function to parse the character 'c' */
+				insertVTChar(QChar(c));
+			}
 		}
 		modified = true;
 	}
