@@ -56,7 +56,7 @@
 #include "ReniceDlg.h"
 #include "ui_ProcessWidgetUI.h"
 
-#ifdef HAVE_SYS_PTRACE_H
+#ifdef WITH_MONITOR_PROCESS_IO
 #include "DisplayProcessDlg.h"
 #endif
 
@@ -152,7 +152,11 @@ struct KSysGuardProcessListPrivate {
 
 		selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
 		window = new QAction(i18n("Show Application Window"), q);
+#ifdef WITH_MONITOR_PROCESS_IO
 		monitorio = new QAction(i18n("Monitor input and output"), q);
+#else
+		monitorio = 0;
+#endif
 		resume = new QAction(i18n("Resume Stopped Process"), q);
 		kill = new QAction(i18np("Kill Process", "Kill Processes", 1), q);
 		kill->setIcon(KIcon("process-stop"));
@@ -267,8 +271,10 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	// Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked
 	QSignalMapper *signalMapper = new QSignalMapper(this);
 	QList<QAction *> actions;
-	actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window << d->monitorio << d->resume;
-	actions << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
+	actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window;
+	if (d->monitorio)
+	    actions << d->monitorio;
+	actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
 	foreach(QAction *action, actions) {
 		addAction(action);
 		connect(action, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
@@ -391,7 +397,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 	if (numProcesses == 1 && !d->mModel.data(realIndex, ProcessModel::WindowIdRole).isNull()) {
 		d->mProcessContextMenu->addAction(d->window);
 	}
-	if (numProcesses == 1 && d->mModel.isLocalhost() && (process->uid==0 || process->uid == getuid()) && process->pid != getpid() && process->pid != getppid()) { //Don't attach to ourselves - crashes
+	if (d->monitorio && numProcesses == 1 && d->mModel.isLocalhost() && (process->uid==0 || process->uid == getuid()) && process->pid != getpid() && process->pid != getppid()) { //Don't attach to ourselves - crashes
 		d->mProcessContextMenu->addAction(d->monitorio);
 	}
 
@@ -445,8 +451,8 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 				KWindowSystem::activateWindow(wid);
 			}
 		}
+#ifdef WITH_MONITOR_PROCESS_IO
 	} else if(result == d->monitorio) {
-#ifdef HAVE_SYS_PTRACE_H
 		QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
 		if(selectedIndexes.isEmpty()) return;  //No processes selected
 		QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
