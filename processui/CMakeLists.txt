@@ -73,9 +73,9 @@ target_link_libraries(processui ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} processcore)
 set_target_properties(processui
    PROPERTIES VERSION ${GENERIC_LIB_VERSION}
    SOVERSION ${GENERIC_LIB_SOVERSION}
+   ${KDE4_DISABLE_PROPERTY_}LINK_INTERFACE_LIBRARIES "${KDE4_KDEUI_LIBS};processcore"
    )
 
-_kde4_target_link_interface_libraries(processui "${KDE4_KDEUI_LIBS};processcore")
 
 install(TARGETS processui ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
