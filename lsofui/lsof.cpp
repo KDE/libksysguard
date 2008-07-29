@@ -23,6 +23,11 @@ KLsofWidget::KLsofWidget(QWidget *parent) : QTreeWidget(parent), d(new KLsofWidg
 	connect(d->process, SIGNAL(finished ( int, QProcess::ExitStatus)), this, SLOT(finished(int, QProcess::ExitStatus)));
 }
 
+KLsofWidget::~KLsofWidget()
+{
+        delete d;
+}
+
 qlonglong KLsofWidget::pid() const
 {
 	return d->pid;

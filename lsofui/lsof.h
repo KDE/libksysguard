@@ -34,6 +34,7 @@ class KDE_EXPORT KLsofWidget : public QTreeWidget {
   Q_PROPERTY( qlonglong pid READ pid WRITE setPid )
 	public:
 		KLsofWidget(QWidget *parent = NULL);
+                ~KLsofWidget();
 		bool update();
 
 	private Q_SLOTS:
