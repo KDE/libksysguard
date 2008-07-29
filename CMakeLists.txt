@@ -1,6 +1,7 @@
 
 ########### next target ###############
 
+add_subdirectory( lsofui )
 add_subdirectory( processcore )
 add_subdirectory( processui )
 add_subdirectory( tests )

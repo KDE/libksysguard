@@ -927,9 +927,46 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
 		}
 	}
 	if(unchanged_pids.isEmpty()) return true;
-	if(!d->mModel.isLocalhost()) return false; //We can't use kdesu to kill non-localhost processes
+	if(!d->mModel.isLocalhost()) {
+		KMessageBox::sorry(this, i18n("No."));
+		return false; //We can't use kdesu to kill non-localhost processes
+	}
 
-	return false;  //TODO Must implement some form of kdesu or something
+	QString su = KStandardDirs::findExe("kdesu");
+	if(su.isEmpty()) {
+		KMessageBox::sorry(this, i18n("Could not find kdesu executable"));
+		return false;  //Cannot find kdesu
+	}
+	QString setscheduler = KStandardDirs::findExe("setscheduler");
+	if(setscheduler.isEmpty()) {
+		KMessageBox::sorry(this, i18n("Could not find setscheduler executable.  This should have been installed alongside system monitor."));
+		return false;
+	}
+
+	//We must use kdesu to kill the process
+
+	QStringList arguments;
+	if(unchanged_pids.size() == 1) {
+		arguments << "--" << setscheduler << QString::number(unchanged_pids.at(0)) << QString::number((int)newCpuSched) << QString::number(newCpuSchedPriority);
+	} else {
+		//Cope with multiple pids by doing a for loop
+		arguments << "--" << "sh" << "-c";
+		QString sh("for f in ");
+
+	        for (int i = 0; i < unchanged_pids.size(); ++i) {
+			sh += QString::number(unchanged_pids.at(i)) + " ";
+		}
+		sh += "; do " + setscheduler + "\"$f\" " + newCpuSched + " " + newCpuSchedPriority;
+		sh += "; done";
+
+		arguments << sh;
+	}
+
+	QProcess *process = new QProcess(NULL);
+	connect(process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(ioniceFailed()));
+	connect(process, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));
+	process->start(su, arguments);
+	return true;  //assume it ran successfully :(  We cannot seem to actually check if it did.  There must be a better solution
 }
 
 bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)

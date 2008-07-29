@@ -39,6 +39,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	setCaption( i18n("Renice Process") );
 	setButtons( Ok | Cancel );
 	showButtonSeparator( true );
+	previous_cpuscheduler = 0;
 
 	connect( this, SIGNAL( okClicked() ), SLOT( slotOk() ) );
 
@@ -67,8 +68,10 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	cpuScheduler->addButton(ui->radioRR, (int)KSysGuard::Process::RoundRobin);
 	if(currentCpuSched >= 0) { //negative means none of these
 		QAbstractButton *sched = cpuScheduler->button(currentCpuSched);
-		if(sched)
+		if(sched) {
 			sched->setChecked(true); //Check the current scheduler
+			previous_cpuscheduler = currentCpuSched;
+		}
 	}
 	cpuScheduler->setExclusive(true);
 
@@ -94,7 +97,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 
 	newCPUPriority = 40;
 
-	connect(cpuScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
+	connect(cpuScheduler, SIGNAL(buttonClicked(int)), this, SLOT(cpuSchedulerChanged(int)));
 	connect(ioScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
 	connect(ui->sliderCPU, SIGNAL(valueChanged(int)), this, SLOT(cpuSliderChanged(int)));
 	connect(ui->sliderIO, SIGNAL(valueChanged(int)), this, SLOT(ioSliderChanged(int)));
@@ -105,6 +108,25 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 void ReniceDlg::ioSliderChanged(int value) {
 	ui->sliderIO->setToolTip(QString::number(value));
 }
+
+void ReniceDlg::cpuSchedulerChanged(int value) {
+	if(value != previous_cpuscheduler) {
+		if( (value == (int)KSysGuard::Process::Other || value == KSysGuard::Process::Batch) &&
+		    (previous_cpuscheduler == (int)KSysGuard::Process::Fifo || previous_cpuscheduler == (int)KSysGuard::Process::RoundRobin)) {
+			int slider = -ui->sliderCPU->value() * 2 / 5 + 20;
+			setSliderRange();
+			ui->sliderCPU->setValue( slider );
+		} else if( (previous_cpuscheduler == (int)KSysGuard::Process::Other || previous_cpuscheduler == KSysGuard::Process::Batch) &&
+		    (value == (int)KSysGuard::Process::Fifo || value == (int)KSysGuard::Process::RoundRobin)) {
+			int slider = (-ui->sliderCPU->value() + 20) * 5 / 2; 
+			setSliderRange();
+			ui->sliderCPU->setValue( slider );
+		}
+	}
+	previous_cpuscheduler = value;
+	updateUi();
+}
+
 void ReniceDlg::cpuSliderChanged(int value) {
 	if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch) {
 		if( ioScheduler->checkedId() == -1 || ioScheduler->checkedId() == (int)KSysGuard::Process::None) {

@@ -55,12 +55,13 @@ public Q_SLOTS:
 	void updateUi();
 	void cpuSliderChanged(int value);
 	void ioSliderChanged(int value);
-
+	void cpuSchedulerChanged(int value);
 private:
 	void setSliderRange();
 	Ui_ReniceDlgUi *ui;
 	QButtonGroup *cpuScheduler;
 	QButtonGroup *ioScheduler;
+	int previous_cpuscheduler;
 };
 
 #endif

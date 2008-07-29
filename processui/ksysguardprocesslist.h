@@ -83,7 +83,10 @@ public:
 	/** Returns a list of the processes that have been selected by the user. */
 	QList<KSysGuard::Process *> selectedProcesses() const;
 
-	/** Save the current state of the widget to the given config group */
+	/** Save the current state of the widget to the given config group 
+	 *
+	 *  @param[in] cg Config group to add these settings to
+	 * */
 	void saveSettings(KConfigGroup &cg);
 	
 	/** Load the saved state of the widget from the given config group */

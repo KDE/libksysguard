@@ -637,20 +637,21 @@ bool ProcessModel::canUserLogin(long long uid ) const
 
 QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) const
 {
-	QString userTooltip;
+	QString userTooltip = "<qt><p style='white-space:pre'>";
 	if(!mIsLocalhost) {
-		userTooltip = "<qt>";
 		userTooltip += i18n("Login Name: %1<br/>", getUsernameForUser(ps->uid, true));
 	} else {
 		KUser user(ps->uid);
 		if(!user.isValid())
-			userTooltip = i18n("This user is not recognized for some reason.");
+			userTooltip += i18n("This user is not recognized for some reason.");
 		else {
-			userTooltip = "<qt>";
-            if(!user.property(KUser::FullName).isValid()) userTooltip += i18n("<b>%1</b><br/>", user.property(KUser::FullName).toString());
+			if(!user.property(KUser::FullName).isValid()) 
+				userTooltip += i18n("<b>%1</b><br/>", user.property(KUser::FullName).toString());
 			userTooltip += i18n("Login Name: %1 (uid: %2)<br/>", user.loginName(), ps->uid);
-            if(!user.property(KUser::RoomNumber).isValid()) userTooltip += i18n("  Room Number: %1<br/>", user.property(KUser::RoomNumber).toString());
-            if(!user.property(KUser::WorkPhone).isValid()) userTooltip += i18n("  Work Phone: %1<br/>", user.property(KUser::WorkPhone).toString());
+			if(!user.property(KUser::RoomNumber).isValid()) 
+				userTooltip += i18n("  Room Number: %1<br/>", user.property(KUser::RoomNumber).toString());
+			if(!user.property(KUser::WorkPhone).isValid()) 
+				userTooltip += i18n("  Work Phone: %1<br/>", user.property(KUser::WorkPhone).toString());
 		}
 	}
 	if( (ps->uid != ps->euid && ps->euid != -1) || 
@@ -811,9 +812,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		}
 		switch(index.column()) {
 		case HeadingName: {
-			QString tooltip = "<qt>";
-			/***  It would be nice to be able to show the icon in the tooltip, but Qt4 won't let us put
-			 *    a picture in a tooltip :(
+			QString tooltip = "<qt><p style='white-space:pre'>";
+			/*   It would be nice to be able to show the icon in the tooltip, but Qt4 won't let us put
+			 *   a picture in a tooltip :(
 			   
 			QIcon icon;
 			if(mPidToWindowInfo.contains(process->pid)) {
@@ -866,15 +867,15 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			return d->getTooltipForUser(process);
 		}
 		case HeadingNiceness: {
-		        QString tooltip;
+		        QString tooltip = "<qt><p style='white-space:pre'>";
 			switch(process->scheduler) {
 			  case KSysGuard::Process::Other:
 			  case KSysGuard::Process::Batch:
-				  tooltip = i18n("<qt>Nice level: %1 (%2)", process->niceLevel, process->niceLevelAsString() );
+				  tooltip += i18n("Nice level: %1 (%2)", process->niceLevel, process->niceLevelAsString() );
 				  break;
 			  case KSysGuard::Process::RoundRobin:
 			  case KSysGuard::Process::Fifo:
-				  tooltip = i18n("<qt>Scheduler priority: %1", process->niceLevel);
+				  tooltip += i18n("Scheduler priority: %1", process->niceLevel);
 				  break;
 			}
 			if(process->scheduler != KSysGuard::Process::Other)
@@ -889,7 +890,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			return tooltip + "<br />" + tracer;
 		}	
 		case HeadingCPUUsage: {
-			QString tooltip = ki18n("<qt>Process status: %1 %2<br />"
+			QString tooltip = ki18n("<qt><p style='white-space:pre'>"
+						"Process status: %1 %2<br />"
 						"User CPU usage: %3%<br />System CPU usage: %4%</qt>")
 						.subs(process->translatedStatus())
 						.subs(d->getStatusDescription(process->status))
@@ -930,7 +932,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			return QVariant();
 		}
 		case HeadingMemory: {
-			QString tooltip = "<qt>";
+			QString tooltip = "<qt><p style='white-space:pre'>";
 			if(process->vmURSS != -1) {
 				//We don't have information about the URSS, so just fallback to RSS
 				if(d->mMemTotal > 0)
@@ -945,9 +947,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			return tooltip;
 		}
 		case HeadingSharedMemory: {
-			if(process->vmURSS == -1)
-				return i18n("<qt>Your system does not seem to have this information available to be read.</qt>");
-			QString tooltip = "<qt>";
+			QString tooltip = "<qt><p style='white-space:pre'>";
+			if(process->vmURSS == -1) {
+				tooltip += i18n("<qt>Your system does not seem to have this information available to be read.</qt>");
+				return tooltip;
+			}
 			if(d->mMemTotal >0)
 				tooltip += i18n("Shared library memory usage: %1 out of %2  (%3 %)", KGlobal::locale()->formatByteSize((process->vmRSS - process->vmURSS) * 1024), KGlobal::locale()->formatByteSize(d->mMemTotal*1024), (process->vmRSS-process->vmURSS)*100/d->mMemTotal);
 			else
@@ -973,7 +977,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 				}
 			}
 			if(!tooltip.isEmpty())
-				return "<qt><ul>" + tooltip + "</ul>";
+				return "<qt><p style='white-space:pre'><ul>" + tooltip + "</ul>";
 			return QVariant(QVariant::String);
 		}
 
