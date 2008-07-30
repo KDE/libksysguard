@@ -84,7 +84,7 @@ KDE4_ADD_WIDGET_FILES(ksysguardwidgets_PART_SRCS ${ksysguard_WIDGETS})
 
 kde4_add_plugin(ksysguardwidgets ${ksysguardwidgets_PART_SRCS})
 
-target_link_libraries(ksysguardwidgets ${KDE4_KIO_PARTS} processui)
+target_link_libraries(ksysguardwidgets ${KDE4_KIO_LIBS} processui)
 
 install(TARGETS ksysguardwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
