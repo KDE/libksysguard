@@ -68,7 +68,7 @@ kde4_add_ui_files( processui_LIB_SRCS
 
 kde4_add_library(processui SHARED ${processui_LIB_SRCS})
 
-target_link_libraries(processui ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} processcore)
+target_link_libraries(processui ${KDE4_KDEUI_LIBS} processcore)
 
 set_target_properties(processui
    PROPERTIES VERSION ${GENERIC_LIB_VERSION}
@@ -84,7 +84,7 @@ KDE4_ADD_WIDGET_FILES(ksysguardwidgets_PART_SRCS ${ksysguard_WIDGETS})
 
 kde4_add_plugin(ksysguardwidgets ${ksysguardwidgets_PART_SRCS})
 
-target_link_libraries(ksysguardwidgets ${KDE4_KIO_LIBS} processui)
+target_link_libraries(ksysguardwidgets ${KDE4_KDEUI_LIBS} processui)
 
 install(TARGETS ksysguardwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
