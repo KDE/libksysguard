@@ -32,13 +32,8 @@
 
 class QShowEvent;
 class QHideEvent;
-class QAction;
-class QMenu;
 class QLineEdit;
 class QTreeView;
-namespace Ui {
-  class ProcessWidget;
-}
 struct KSysGuardProcessListPrivate;
 extern KApplication* Kapp;
 

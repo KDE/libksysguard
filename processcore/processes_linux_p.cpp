@@ -27,7 +27,6 @@
 #include <QFile>
 #include <QHash>
 #include <QSet>
-#include <QMutableSetIterator>
 #include <QByteArray>
 #include <QTextStream>
 
