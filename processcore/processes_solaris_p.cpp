@@ -33,7 +33,9 @@
 #include <stdlib.h>
 #include <sched.h>
 
+#ifdef __GNUC__
 #warning Totally bogus ProcessesLocal implementation
+#endif
 
 namespace KSysGuard
 {
