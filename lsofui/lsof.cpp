@@ -18,7 +18,7 @@ KLsofWidget::KLsofWidget(QWidget *parent) : QTreeWidget(parent), d(new KLsofWidg
 	setItemsExpandable(false);
 	setSortingEnabled(true);
 	setAllColumnsShowFocus(true);
-	setHeaderLabels(QStringList() << i18n("FD") << i18n("Type") << i18n("Object"));
+	setHeaderLabels(QStringList() << i18nc("Short for File Descriptor", "FD") << i18n("Type") << i18n("Object"));
 	d->process = new QProcess(this);
 	connect(d->process, SIGNAL(finished ( int, QProcess::ExitStatus)), this, SLOT(finished(int, QProcess::ExitStatus)));
 }
