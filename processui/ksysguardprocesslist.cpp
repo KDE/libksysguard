@@ -711,13 +711,14 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
 	if(!d->mModel.isLocalhost()) return false; //We can't use kdesu to renice non-localhost processes
 
 	QStringList arguments;
+	arguments << "--embed" << QString::number(window()->winId()) << "--noignorebutton";
 	arguments << "--" << "renice" << QString::number(niceValue);
 
         for (int i = 0; i < unreniced_pids.size(); ++i) {
 		arguments << QString::number(unreniced_pids.at(i));
 	}
 
-	QString su = KStandardDirs::findExe("kdesu");
+	QString su = KStandardDirs::findExe("kdesu");  //kdesu is a libexec program, so it will not be in the path.  findExe will find it correctly anyway
 	if(su.isEmpty()) return false;  //Cannot find kdesu
 
 	QProcess *reniceProcess = new QProcess(NULL);
@@ -865,6 +866,7 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
 	//We must use kdesu to kill the process
 
 	QStringList arguments;
+	arguments << "--embed" << QString::number(window()->winId()) << "--noignorebutton";
 	if(unchanged_pids.size() == 1) {
 		arguments << "--" << "ionice" << "-p" << QString::number(unchanged_pids.at(0)) << "-c";
 		switch(newIoSched) {
@@ -946,6 +948,7 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
 	//We must use kdesu to kill the process
 
 	QStringList arguments;
+	arguments << "--embed" << QString::number(window()->winId()) << "--noignorebutton";
 	if(unchanged_pids.size() == 1) {
 		arguments << "--" << setscheduler << QString::number(unchanged_pids.at(0)) << QString::number((int)newCpuSched) << QString::number(newCpuSchedPriority);
 	} else {
@@ -984,8 +987,10 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
 	QString su = KStandardDirs::findExe("kdesu");
 	if(su.isEmpty()) return false;  //Cannot find kdesu
 
+	kDebug() << "running " << su;
 	//We must use kdesu to kill the process
 	QStringList arguments;
+	arguments << "--embed" << QString::number(window()->winId()) << "--noignorebutton";
 	arguments << "--" << "kill";
 	if(sig != SIGTERM) {
 		arguments << ('-' + QString::number(sig));
