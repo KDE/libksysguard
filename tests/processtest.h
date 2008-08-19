@@ -21,7 +21,10 @@
 #define TESTPROCESS_H
 
 #include <QtCore/QObject>
-class KSysGuard::Process;
+namespace KSysGuard
+{
+    class Process;
+}
 class testProcess: public QObject
 {
     Q_OBJECT
