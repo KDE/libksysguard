@@ -178,7 +178,7 @@ void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
 
 void ProcessModelPrivate::windowAdded(WId wid)
 {
-	foreach(WindowInfo w, mPidToWindowInfo.values()) {
+	foreach(WindowInfo w, mPidToWindowInfo) {
 		if(w.wid == wid) return; //already added
 	}
 	//The name changed
