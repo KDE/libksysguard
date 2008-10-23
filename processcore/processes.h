@@ -215,7 +215,7 @@ namespace KSysGuard
 
     public:
 	/** For a remote machine, we rely on being able to communicate with ksysguardd.
-	 *  The programing using this must call this slot when an answer is received from ksysguardd,
+	 *  The programming using this must call this slot when an answer is received from ksysguardd,
 	 *  in response to a runCommand request.  The id identifies the answer */
 	void answerReceived( int id, const QList<QByteArray>& answer );
 

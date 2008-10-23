@@ -58,7 +58,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 			//}
 		}
 		if(!model->isSimpleMode() && source_row >= parent_process->children.size()) {
-			kDebug() << "Serious error with data.  Source row requested for a non existant row. Requested " << source_row << " of " << parent_process->children.size() << " for " << parent_process->pid;
+			kDebug() << "Serious error with data.  Source row requested for a non existent row. Requested " << source_row << " of " << parent_process->children.size() << " for " << parent_process->pid;
 			return true;
 		}
 
