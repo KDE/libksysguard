@@ -73,7 +73,7 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 {
   public:
 	ProgressBarItemDelegate(QObject *parent) : QStyledItemDelegate(parent), startProgressColor(0x00, 0x71, 0xBC, 100), endProgressColor(0x83, 0xDD, 0xF5, 100), totalMemory(-1), numCpuCores(-1) {}
-  
+
   	virtual void paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const
 	{
 		QStyleOptionViewItemV4 option = opt;
@@ -118,10 +118,10 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 	}
 
   private:
-	void drawPercentageDisplay(QPainter *painter, const QStyleOptionViewItem& option, const QString& text) const 
+	void drawPercentageDisplay(QPainter *painter, const QStyleOptionViewItem& option, const QString& text) const
 	{
 		QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem,&option,painter);
-		
+
 		const QRect rect = option.rect;
 		if(percentage * rect.width() > 100 ) { //make sure the line will have a width of more than 1 pixel
 			QPen old = painter->pen();
@@ -134,7 +134,7 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 		}
 		painter->drawText(rect,option.displayAlignment,text);
 	}
-	
+
 	mutable int percentage;
 	QColor startProgressColor;
 	QColor endProgressColor;
@@ -153,7 +153,7 @@ struct KSysGuardProcessListPrivate {
 		selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
 		window = new QAction(i18n("Show Application Window"), q);
 #ifdef WITH_MONITOR_PROCESS_IO
-		monitorio = new QAction(i18n("Monitor input and output"), q);
+		monitorio = new QAction(i18n("Monitor Input && Output"), q);
 #else
 		monitorio = 0;
 #endif
