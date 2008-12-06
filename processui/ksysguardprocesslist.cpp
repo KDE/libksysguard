@@ -246,7 +246,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingTty);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCommand);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingPid);
-	d->mFilterModel.setFilterKeyColumn(0);
+	d->mFilterModel.setFilterKeyColumn(-1);
 
 	d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingCPUUsage, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingCPUUsage));
 	d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingMemory, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingMemory));
