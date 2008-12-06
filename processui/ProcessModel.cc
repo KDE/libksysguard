@@ -32,6 +32,8 @@
 #include <QIcon>
 #include <QPixmap>
 #include <QList>
+#include <QMimeData>
+#include <QTextDocument>
 
 #define HEADING_X_ICON_SIZE 16
 
@@ -1067,6 +1069,66 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		}
 		return QVariant();
 	}
+	case PlainValueRole:  //Used to return a plain value.  For copying to a clipboard etc
+	{
+		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+		switch(index.column()) {
+		case HeadingName:
+			return process->name;
+		case HeadingPid:
+			return (qlonglong)process->pid;
+		case HeadingUser:
+			if(!process->login.isEmpty()) return process->login;
+			if(process->uid == process->euid)
+				return d->getUsernameForUser(process->uid, false);
+			else
+				return d->getUsernameForUser(process->uid, false) + ", " + d->getUsernameForUser(process->euid, false);
+		case HeadingNiceness:
+			return process->niceLevel;
+		case HeadingTty:
+			return process->tty;
+		case HeadingCPUUsage:
+			{
+				double total;
+				if(d->mShowChildTotals && !d->mSimple) total = process->totalUserUsage + process->totalSysUsage;
+				else total = process->userUsage + process->sysUsage;
+				return total / d->mNumProcessorCores;
+			}
+		case HeadingMemory:
+			if(process->vmRSS == 0) return QVariant(QVariant::String);
+			if(process->vmURSS == -1) {
+				return (long long)process->vmRSS;
+			} else {
+				return (long long)process->vmURSS;
+			}
+		case HeadingVmSize:
+			return (long long)process->vmSize;
+		case HeadingSharedMemory:
+			if(process->vmRSS - process->vmURSS < 0 || process->vmURSS == -1) return QVariant(QVariant::String);
+			return (long long)(process->vmRSS - process->vmURSS);
+		case HeadingCommand: 
+			{
+				return process->command;
+			}
+#ifdef Q_WS_X11
+		case HeadingXTitle:
+			{
+				if(!d->mPidToWindowInfo.contains(process->pid)) return QVariant(QVariant::String);
+				WindowInfo w = d->mPidToWindowInfo.value(process->pid);
+				if(!w.netWinInfo) return QVariant(QVariant::String);
+				const char *name = w.netWinInfo->visibleName();
+				if( !name || name[0] == 0 )
+					name = w.netWinInfo->name();
+				if(name && name[0] != 0)
+					return QString::fromUtf8(name);
+				return QVariant(QVariant::String);
+			}
+#endif
+		default:
+			return QVariant();
+		}
+		break;
+	}
 #ifdef Q_WS_X11
         case WindowIdRole: {
 		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
@@ -1099,9 +1161,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		} else if (index.column() == HeadingCPUUsage) {
 			KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
 			if(process->status == KSysGuard::Process::Stopped || process->status == KSysGuard::Process::Zombie) {
-        			QPixmap pix = KIconLoader::global()->loadIcon("button_cancel", KIconLoader::Small,
-			                KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(),
-				        0L, true);
+        	//		QPixmap pix = KIconLoader::global()->loadIcon("button_cancel", KIconLoader::Small,
+		//	                KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(),
+		//		        0L, true);
 
 			}
 		}
@@ -1242,4 +1304,81 @@ QString ProcessModel::formatMemoryInfo(long amountInKB) const
 QString ProcessModel::hostName() const {
 	return d->mHostName;
 }
+QStringList ProcessModel::mimeTypes() const
+{
+	QStringList types;
+	types << "text/plain";
+	types << "text/csv";
+	types << "text/html";
+	return types;
+}
+QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
+{
+	QMimeData *mimeData = new QMimeData();
+	QString textCsv;
+	QString textCsvHeaders;
+	QString textPlain;
+	QString textPlainHeaders;
+	QString textHtml;
+	QString textHtmlHeaders;
+	QString display;
+	int firstColumn = -1;
+	bool firstrow = true;
+	foreach (QModelIndex index, indexes) {
+		if (index.isValid()) {
+			if(firstColumn == -1)
+				firstColumn = index.column();
+			else if(firstColumn != index.column())
+				continue;
+			else {
+				textCsv += '\n';
+				textPlain += '\n';
+				textHtml += "</tr><tr>";
+				firstrow = false;
+			}
+			for(int i = 0; i < d->mHeadings.size(); i++) {
+				if(firstrow) {
+					QString heading = d->mHeadings[i];
+					textHtmlHeaders += "<th>" + heading + "</th>";
+					if(i) {
+						textCsvHeaders += ',';
+						textPlainHeaders += ", ";
+					}
+					textPlainHeaders += heading;
+					heading.replace('"', "\"\"");
+					textCsvHeaders += '"' + heading + '"';
+				}
+				QModelIndex index2 = createIndex(index.row(), i, reinterpret_cast< KSysGuard::Process * > (index.internalPointer()));
+				QString display = data(index2, PlainValueRole).toString();
+				if(i) {
+					textCsv += ',';
+					textPlain += ", ";
+				}
+				textHtml += "<td>" + Qt::escape(display) + "</td>";
+				textPlain += display;
+				display.replace('"',"\"\"");
+				textCsv += '"' + display + '"';
+			}
+		}
+	}
+	textHtml = "<html><table><tr>" + textHtmlHeaders + "</tr><tr>" + textHtml + "</tr></table>";
+	textCsv = textCsvHeaders + '\n' + textCsv;
+	textPlain = textPlainHeaders + '\n' + textPlain;
+
+	mimeData->setText(textPlain);
+	mimeData->setHtml(textHtml);
+	mimeData->setData("text/csv", textCsv.toUtf8());
+	return mimeData;
+
+}
+Qt::ItemFlags ProcessModel::flags(const QModelIndex &index) const
+{
+	Qt::ItemFlags defaultFlags = QAbstractItemModel::flags(index);
+	if (index.isValid())
+		return Qt::ItemIsDragEnabled | defaultFlags;
+	else
+		return defaultFlags;
+
+}
+
 

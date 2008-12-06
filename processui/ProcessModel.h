@@ -52,7 +52,12 @@ public:
 	QModelIndex parent ( const QModelIndex & index ) const;
 	
 	bool hasChildren ( const QModelIndex & parent) const;
-	
+
+	/* Functions for drag and drop and copying to clipboard, inherited from QAbstractItemModel */
+	QStringList mimeTypes() const;
+	QMimeData *mimeData(const QModelIndexList &indexes) const;
+	Qt::ItemFlags flags(const QModelIndex &index) const;
+
 	/* Functions for setting the model */
 
 	/** Setup the column headings by inserting the appropriate headings into the model.
@@ -113,7 +118,7 @@ public:
 	 */
 #define PROCESSHEADERVERSION 1
 	enum { HeadingName=0, HeadingUser, HeadingPid, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXTitle };
-	enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, TotalMemoryRole, NumberOfProcessorsRole };
+	enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, TotalMemoryRole, NumberOfProcessorsRole, PlainValueRole };
 
 	bool showTotals() const;
 
