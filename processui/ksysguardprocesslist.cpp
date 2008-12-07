@@ -109,11 +109,11 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 					percentage = 0;
 			}
 		} else
-			percentage = 0;
+			percentage = -1;
 
-		if (percentage > 0)
+		if (percentage >= 0)
 			drawPercentageDisplay(painter,option,index.data(Qt::DisplayRole).toString());
-		else
+		else 
 			QStyledItemDelegate::paint(painter, option, index);
 	}
 
@@ -132,7 +132,7 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 			painter->fillRect( rect.x(), rect.y(), rect.width() * percentage /100 , rect.height(), QBrush(linearGrad));
 			painter->setPen( old );
 		}
-		painter->drawText(rect,option.displayAlignment,text);
+		painter->drawText(rect,option.displayAlignment,text + ' ');
 	}
 
 	mutable int percentage;
