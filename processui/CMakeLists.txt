@@ -76,7 +76,7 @@ set_target_properties(processui
    SOVERSION ${GENERIC_LIB_SOVERSION}
    )
 
-install(TARGETS processui ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS processui EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 #----------------------
 
