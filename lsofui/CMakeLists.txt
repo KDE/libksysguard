@@ -17,7 +17,7 @@ install(TARGETS lsofui EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAU
 
 ########### install files ###############
 
-install( FILES lsof.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard)
+install( FILES lsof.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard COMPONENT Devel)
 
 set(ksysguardlsofwidgets_PART_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/ksysguardlsofwidgets.cpp
