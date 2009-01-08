@@ -30,7 +30,15 @@
 
 class QModelIndex;
 
-class KDE_EXPORT ProcessFilter : public QSortFilterProxyModel
+#ifdef Q_CC_MSVC
+// this workaround is needed to make krunner link under msvc
+// please keep it this way even if you port this library to have a _export.h header file
+#define KSYSGUARD_EXPORT
+#else
+#define KSYSGUARD_EXPORT KDE_EXPORT
+#endif
+
+class KSYSGUARD_EXPORT ProcessFilter : public QSortFilterProxyModel
 {
 	Q_OBJECT
 	Q_ENUMS(State)
