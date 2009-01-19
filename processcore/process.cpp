@@ -25,7 +25,7 @@
 KSysGuard::Process::Process() { 
 	clear();
 }
-KSysGuard::Process::Process(long long _pid, long long _ppid, Process *_parent)  {
+KSysGuard::Process::Process(qlonglong _pid, qlonglong _ppid, Process *_parent)  {
 	clear();
 	pid = _pid;
 	parent_pid = _ppid;
@@ -115,49 +115,49 @@ void KSysGuard::Process::setLogin(QString _login) {
         login = _login;
         changes |= Process::Login;
 } 
-void KSysGuard::Process::setUid(long long _uid) {
+void KSysGuard::Process::setUid(qlonglong _uid) {
         if(uid == _uid) return;
         uid = _uid;
         changes |= Process::Uids;
 } 
-void KSysGuard::Process::setEuid(long long _euid) {
+void KSysGuard::Process::setEuid(qlonglong _euid) {
         if(euid == _euid) return;
         euid = _euid;
         changes |= Process::Uids;
 } 
-void KSysGuard::Process::setSuid(long long _suid) {
+void KSysGuard::Process::setSuid(qlonglong _suid) {
         if(suid == _suid) return;
         suid = _suid;
         changes |= Process::Uids;
 } 
-void KSysGuard::Process::setFsuid(long long _fsuid) {
+void KSysGuard::Process::setFsuid(qlonglong _fsuid) {
         if(fsuid == _fsuid) return;
         fsuid = _fsuid;
         changes |= Process::Uids;
 } 
 
-void KSysGuard::Process::setGid(long long _gid) {
+void KSysGuard::Process::setGid(qlonglong _gid) {
         if(gid == _gid) return;
         gid = _gid;
         changes |= Process::Gids;
 } 
-void KSysGuard::Process::setEgid(long long _egid) {
+void KSysGuard::Process::setEgid(qlonglong _egid) {
         if(egid == _egid) return;
         egid = _egid;
         changes |= Process::Gids;
 } 
-void KSysGuard::Process::setSgid(long long _sgid) {
+void KSysGuard::Process::setSgid(qlonglong _sgid) {
         if(sgid == _sgid) return;
         sgid = _sgid;
         changes |= Process::Gids;
 } 
-void KSysGuard::Process::setFsgid(long long _fsgid) {
+void KSysGuard::Process::setFsgid(qlonglong _fsgid) {
         if(fsgid == _fsgid) return;
         fsgid = _fsgid;
         changes |= Process::Gids;
 } 
 
-void KSysGuard::Process::setTracerpid(long long _tracerpid) {
+void KSysGuard::Process::setTracerpid(qlonglong _tracerpid) {
         if(tracerpid == _tracerpid) return;
         tracerpid = _tracerpid;
         changes |= Process::Tracerpid;
@@ -167,10 +167,10 @@ void KSysGuard::Process::setTty(QByteArray _tty) {
         tty = _tty;
         changes |= Process::Tty;
 } 
-void KSysGuard::Process::setUserTime(long long _userTime) {
+void KSysGuard::Process::setUserTime(qlonglong _userTime) {
         userTime = _userTime;
 } 
-void KSysGuard::Process::setSysTime(long long _sysTime) {
+void KSysGuard::Process::setSysTime(qlonglong _sysTime) {
         sysTime = _sysTime;
 }  
 void KSysGuard::Process::setUserUsage(int _userUsage) {
@@ -213,17 +213,17 @@ void KSysGuard::Process::setIoniceLevel(int _ioniceLevel) {
         ioniceLevel = _ioniceLevel;
         changes |= Process::NiceLevels;
 }    
-void KSysGuard::Process::setVmSize(long _vmSize) {
+void KSysGuard::Process::setVmSize(qlonglong _vmSize) {
         if(vmSize == _vmSize) return;
         vmSize = _vmSize;
         changes |= Process::VmSize;
 }   
-void KSysGuard::Process::setVmRSS(long _vmRSS) {
+void KSysGuard::Process::setVmRSS(qlonglong _vmRSS) {
         if(vmRSS == _vmRSS) return;
         vmRSS = _vmRSS;
         changes |= Process::VmRSS;
 }    
-void KSysGuard::Process::setVmURSS(long _vmURSS) {
+void KSysGuard::Process::setVmURSS(qlonglong _vmURSS) {
         if(vmURSS == _vmURSS) return;
         vmURSS = _vmURSS;
         changes |= Process::VmURSS;

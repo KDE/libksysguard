@@ -81,7 +81,7 @@ public:
 	/** Return a string with the pid of the process and the name of the process.  E.g.  13343: ksyguard
 	 */
 	QString getStringForProcess(KSysGuard::Process *process) const;
-	KSysGuard::Process *getProcess(long long pid);
+	KSysGuard::Process *getProcess(qlonglong pid);
 
 	/** This is used from ProcessFilter to get the process at a given index when in flat mode */	
 	KSysGuard::Process *getProcessAtIndex(int index) const;
@@ -89,7 +89,7 @@ public:
 	/** Returns whether this user can log in or not.
 	 *  @see mUidCanLogin
 	 */
-	bool canUserLogin(long long uid) const;
+	bool canUserLogin(long uid) const;
 	/** In simple mode, everything is flat, with no icons, few if any colors, no xres etc.
 	 *  This can be changed at any time.  It is a fairly quick operation.  Basically it resets the model
 	 */ 
@@ -99,7 +99,7 @@ public:
 	bool isSimpleMode() const;
 	
 	/** Returns the total amount of physical memory in the machine. */
-	long long totalMemory() const;
+	qlonglong totalMemory() const;
 
         /** This returns a QModelIndex for the given process.  It has to look up the parent for this pid, find the offset this 
 	 *  pid is from the parent, and return that.  It's not that slow, but does involve a couple of hash table lookups.
@@ -114,7 +114,7 @@ public:
 	QString hostName() const;
 	
 	/** Whether this process has a GUI window */
-	bool hasGUIWindow(long long pid) const;
+	bool hasGUIWindow(qlonglong pid) const;
 
 	/** Returns for process controller pointer for this model
 	 */
@@ -138,7 +138,7 @@ public:
 	/** The units memory sizes etc should be displayed in */
 	Units units() const;
 	/** Take an amount in kb, and return a string in the units set by setUnits() */
-	QString formatMemoryInfo(long amountInKB) const;
+	QString formatMemoryInfo(qlonglong amountInKB) const;
 	/** Whether to show the command line options in the process name column */
 	bool isShowCommandLineOptions() const;
 	/** Set whether to show the command line options in the process name column */

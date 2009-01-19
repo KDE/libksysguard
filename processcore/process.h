@@ -39,7 +39,7 @@ namespace KSysGuard
 	enum IoPriorityClass { None, RealTime, BestEffort, Idle };
 	enum Scheduler { Other = 0, Fifo, RoundRobin, Batch };
         Process();
-        Process(long long _pid, long long _ppid, Process *_parent);
+        Process(qlonglong _pid, qlonglong _ppid, Process *_parent);
 
         long pid;    ///The system's ID for this process.  1 for init.  0 for our virtual 'parent of init' process used just for convience.
         long parent_pid;  ///The system's ID for the parent of this process.  0 for init.
@@ -53,20 +53,20 @@ namespace KSysGuard
         Process *parent;
 
         void setLogin(QString _login); ///The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
-        void setUid(long long _uid); ///The user id that the process is running as
-        void setEuid(long long _euid); ///The effective user id that the process is running as
-        void setSuid(long long _suid); ///The set user id that the process is running as
-        void setFsuid(long long _fsuid); ///The file system user id that the process is running as.
+        void setUid(qlonglong _uid); ///The user id that the process is running as
+        void setEuid(qlonglong _euid); ///The effective user id that the process is running as
+        void setSuid(qlonglong _suid); ///The set user id that the process is running as
+        void setFsuid(qlonglong _fsuid); ///The file system user id that the process is running as.
 
-        void setGid(long long _gid); ///The process group id that the process is running as
-        void setEgid(long long _egid); ///The effective group id that the process is running as
-        void setSgid(long long _sgid); ///The set group id that the process is running as
-        void setFsgid(long long _fsgid); ///The file system group id that the process is running as
+        void setGid(qlonglong _gid); ///The process group id that the process is running as
+        void setEgid(qlonglong _egid); ///The effective group id that the process is running as
+        void setSgid(qlonglong _sgid); ///The set group id that the process is running as
+        void setFsgid(qlonglong _fsgid); ///The file system group id that the process is running as
 
-        void setTracerpid(long long _tracerpid); ///If this is being debugged, this is the process that is debugging it
+        void setTracerpid(qlonglong _tracerpid); ///If this is being debugged, this is the process that is debugging it
         void setTty(QByteArray _tty); /// The name of the tty the process owns
-        void setUserTime(long long _userTime); ///The time, in 100ths of a second, spent in total on user calls. -1 if not known
-        void setSysTime(long long _sysTime);  ///The time, in 100ths of a second, spent in total on system calls.  -1 if not known
+        void setUserTime(qlonglong _userTime); ///The time, in 100ths of a second, spent in total on user calls. -1 if not known
+        void setSysTime(qlonglong _sysTime);  ///The time, in 100ths of a second, spent in total on system calls.  -1 if not known
         void setUserUsage(int _userUsage); ///Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
         void setSysUsage(int _sysUsage);  ///Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
         void setTotalUserUsage(int _totalUserUsage); ///Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
@@ -75,9 +75,9 @@ namespace KSysGuard
         void setscheduler(Scheduler _scheduler); ///The scheduler this process is running in.  See man sched_getscheduler for more info
         void setIoPriorityClass(IoPriorityClass _ioPriorityClass); /// The IO priority class.  See man ionice for detailed information.
         void setIoniceLevel(int _ioniceLevel);    ///IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
-        void setVmSize(long _vmSize);   ///Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
-        void setVmRSS(long _vmRSS);    ///Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
-        void setVmURSS(long _vmURSS);   ///Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
+        void setVmSize(qlonglong _vmSize);   ///Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
+        void setVmRSS(qlonglong _vmRSS);    ///Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
+        void setVmURSS(qlonglong _vmURSS);   ///Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
         void setName(QString _name);  ///The name (e.g. "ksysguard", "konversation", "init")
         void setCommand(QString _command); ///The command the process was launched with
 	void setStatus( ProcessStatus _status); ///Whether the process is running/sleeping/etc
@@ -85,20 +85,20 @@ namespace KSysGuard
 
 
 	QString login; 
-        long long uid; 
-        long long euid; 
-        long long suid; 
-        long long fsuid; 
+        qlonglong uid; 
+        qlonglong euid; 
+        qlonglong suid; 
+        qlonglong fsuid; 
 
-        long long gid; 
-        long long egid; 
-        long long sgid; 
-        long long fsgid; 
+        qlonglong gid; 
+        qlonglong egid; 
+        qlonglong sgid; 
+        qlonglong fsgid; 
 
-        long long tracerpid; 
+        qlonglong tracerpid; 
 	QByteArray tty; 
-        long long userTime; 
-        long long sysTime;  
+        qlonglong userTime; 
+        qlonglong sysTime;  
         int userUsage; 
         int sysUsage;  
         int totalUserUsage; 
@@ -108,9 +108,9 @@ namespace KSysGuard
 	Scheduler scheduler; 
         IoPriorityClass ioPriorityClass; 
         int ioniceLevel;    
-        long vmSize;   
-        long vmRSS;    
-        long vmURSS;   
+        qlonglong vmSize;   
+        qlonglong vmRSS;    
+        qlonglong vmURSS;   
         QString name;  
         QString command; 
 	ProcessStatus status; 

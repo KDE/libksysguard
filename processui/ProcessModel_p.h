@@ -125,12 +125,12 @@ public:
 	 *
 	 *  If withuid is set, and the username is found, return: "username (Uid: uid)"
 	 */
-	inline QString getUsernameForUser(long long uid, bool withuid) const;
+	inline QString getUsernameForUser(long uid, bool withuid) const;
 
 	/** Return the groupname for a given gid.  This is in the form of "gid" if not known, or
 	 *  "groupname (Uid: gid)" if known.
 	 */
-	inline QString getGroupnameForGroup(long long gid) const;
+	inline QString getGroupnameForGroup(long gid) const;
 	/** @see setIsLocalhost */
 	bool mIsLocalhost;
 

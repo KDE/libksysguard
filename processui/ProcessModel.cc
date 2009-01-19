@@ -107,11 +107,11 @@ KSysGuard::Processes *ProcessModel::processController()
 
 void ProcessModelPrivate::windowRemoved(WId wid) {
 #ifdef Q_WS_X11
-	long long pid = mWIdToPid.value(wid, 0);
+	qlonglong pid = mWIdToPid.value(wid, 0);
 	if(pid <= 0) return;
 
 	int count = mPidToWindowInfo.count(pid);
-	QMultiHash<long long, WindowInfo>::iterator i = mPidToWindowInfo.find(pid);
+	QMultiHash<qlonglong, WindowInfo>::iterator i = mPidToWindowInfo.find(pid);
 	while (i != mPidToWindowInfo.end() && i.key() == pid) {
 		if(i.value().wid == wid) {
 			delete i.value().netWinInfo;
@@ -192,7 +192,7 @@ void ProcessModelPrivate::windowAdded(WId wid)
 		delete info;
 		return;  //info is invalid - window just closed or something probably
         }
-	long long pid = info->pid();
+	qlonglong pid = info->pid();
 	if(pid <= 0) {
 		delete info;
 		return;
@@ -607,7 +607,7 @@ void ProcessModel::setSimpleMode(bool simple)
 
 }
 
-bool ProcessModel::canUserLogin(long long uid ) const
+bool ProcessModel::canUserLogin(long uid ) const
 {
 	if(uid == 65534) {
 		//nobody user
@@ -688,7 +688,7 @@ QString ProcessModel::getStringForProcess(KSysGuard::Process *process) const {
 	return i18nc("Short description of a process. PID, name, user", "<numid>%1</numid>: %2, owned by user %3", (long)(process->pid), process->name, d->getUsernameForUser(process->uid, false));
 }
 
-QString ProcessModelPrivate::getGroupnameForGroup(long long gid) const {
+QString ProcessModelPrivate::getGroupnameForGroup(long gid) const {
 	if(mIsLocalhost) {
 		QString groupname = KUserGroup(gid).name();
 		if(!groupname.isEmpty())
@@ -697,7 +697,7 @@ QString ProcessModelPrivate::getGroupnameForGroup(long long gid) const {
 	return QString::number(gid);
 }
 
-QString ProcessModelPrivate::getUsernameForUser(long long uid, bool withuid) const {
+QString ProcessModelPrivate::getUsernameForUser(long uid, bool withuid) const {
 	QString &username = mUserUsername[uid];
 	if(username.isNull()) {
 		if(!mIsLocalhost) {
@@ -1024,8 +1024,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			//
 			//We subtract the uid to sort ascendingly by that, then subtract the cpu usage to sort by that, then finally subtract the memory
 			
-			long long base = 0;
-			long long memory = 0;
+			qlonglong base = 0;
+			qlonglong memory = 0;
 			if(process->vmURSS != -1) memory = process->vmURSS;
 			else memory = process->vmRSS;
 			if(d->mIsLocalhost && process->uid == getuid())
@@ -1062,14 +1062,14 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		 }
 		case HeadingMemory:
 			if(process->vmURSS == -1) 
-				return (long long)-process->vmRSS;
+				return (qlonglong)-process->vmRSS;
 			else
-				return (long long)-process->vmURSS;
+				return (qlonglong)-process->vmURSS;
 		case HeadingVmSize:
-			return (long long)-process->vmSize;
+			return (qlonglong)-process->vmSize;
 		case HeadingSharedMemory:
-			if(process->vmURSS == -1) return (long long)0;
-			return (long long)-(process->vmRSS - process->vmURSS);
+			if(process->vmURSS == -1) return (qlonglong)0;
+			return (qlonglong)-(process->vmRSS - process->vmURSS);
 		}
 		return QVariant();
 	}
@@ -1101,15 +1101,15 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		case HeadingMemory:
 			if(process->vmRSS == 0) return QVariant(QVariant::String);
 			if(process->vmURSS == -1) {
-				return (long long)process->vmRSS;
+				return (qlonglong)process->vmRSS;
 			} else {
-				return (long long)process->vmURSS;
+				return (qlonglong)process->vmURSS;
 			}
 		case HeadingVmSize:
-			return (long long)process->vmSize;
+			return (qlonglong)process->vmSize;
 		case HeadingSharedMemory:
 			if(process->vmRSS - process->vmURSS < 0 || process->vmURSS == -1) return QVariant(QVariant::String);
-			return (long long)(process->vmRSS - process->vmURSS);
+			return (qlonglong)(process->vmRSS - process->vmURSS);
 		case HeadingCommand: 
 			{
 				return process->command;
@@ -1206,7 +1206,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 	return QVariant(); //never get here, but make compilier happy
 }
 
-bool ProcessModel::hasGUIWindow(long long pid) const
+bool ProcessModel::hasGUIWindow(qlonglong pid) const
 {
 	return d->mPidToWindowInfo.contains(pid);
 }
@@ -1252,7 +1252,7 @@ void ProcessModel::retranslateUi()
 	setupHeader();
 }
 
-KSysGuard::Process *ProcessModel::getProcess(long long pid) {
+KSysGuard::Process *ProcessModel::getProcess(qlonglong pid) {
 	return d->mProcesses->getProcess(pid);
 }
 
@@ -1279,7 +1279,7 @@ void ProcessModel::setShowTotals(bool showTotals)  //slot
        }
 }
 
-long long ProcessModel::totalMemory() const
+qlonglong ProcessModel::totalMemory() const
 {
 	return d->mMemTotal;
 }
@@ -1292,7 +1292,7 @@ ProcessModel::Units ProcessModel::units() const
 	return (Units) d->mUnits;
 }
 
-QString ProcessModel::formatMemoryInfo(long amountInKB) const
+QString ProcessModel::formatMemoryInfo(qlonglong amountInKB) const
 {
 	//We cache the result of i18n for speed reasons.  We call this function 
 	//hundreds of times, every second or so
