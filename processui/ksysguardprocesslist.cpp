@@ -153,7 +153,7 @@ struct KSysGuardProcessListPrivate {
 		selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
 		window = new QAction(i18n("Show Application Window"), q);
 #ifdef WITH_MONITOR_PROCESS_IO
-		monitorio = new QAction(i18n("Monitor Input && Output"), q);
+		monitorio = new QAction(i18n("Monitor Input && Output..."), q);
 #else
 		monitorio = 0;
 #endif
