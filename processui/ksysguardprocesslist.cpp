@@ -1095,6 +1095,7 @@ void KSysGuardProcessList::setUnits(ProcessModel::Units unit) {
 void KSysGuardProcessList::saveSettings(KConfigGroup &cg) {
 	/* Note that the ksysguard program does not use these functions.  It saves the settings itself to an xml file instead */
 	cg.writeEntry("units", (int)(units()));
+	cg.writeEntry("showCommandLineOptions", d->mModel.isShowCommandLineOptions());
 	cg.writeEntry("showTotals", showTotals());
 	cg.writeEntry("filterState", (int)(state()));
 	cg.writeEntry("updateIntervalMSecs", updateIntervalMSecs());
@@ -1107,6 +1108,7 @@ void KSysGuardProcessList::saveSettings(KConfigGroup &cg) {
 void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 	/* Note that the ksysguard program does not use these functions.  It saves the settings itself to an xml file instead */
 	setUnits((ProcessModel::Units) cg.readEntry("units", (int)ProcessModel::UnitsKB));
+	d->mModel.setShowCommandLineOptions(cg.readEntry("showCommandLineOptions", false));
 	setShowTotals(cg.readEntry("showTotals", true));
 	setStateInt(cg.readEntry("filterState", (int)ProcessFilter::AllProcesses));
 	setUpdateIntervalMSecs(cg.readEntry("updateIntervalMSecs", 2000));
