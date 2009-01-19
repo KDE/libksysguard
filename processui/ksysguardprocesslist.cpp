@@ -533,6 +533,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 	QAction *actionKB = NULL;
 	QAction *actionMB = NULL;
 	QAction *actionGB = NULL;
+	QAction *actionPercentage = NULL;
 	QAction *actionShowCmdlineOptions = NULL;
 
 	if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory ||  index == ProcessModel::HeadingSharedMemory) {
@@ -555,6 +556,12 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 		actionGB->setCheckable(true);
 		menu->addAction(actionGB);
 		unitsGroup->addAction(actionGB);
+		actionPercentage = new QAction(menu);
+		actionPercentage->setText(i18n("Percentage"));
+		actionPercentage->setCheckable(true);
+		menu->addAction(actionPercentage);
+		unitsGroup->addAction(actionPercentage);
+
 		unitsGroup->setExclusive(true);
 		switch(d->mModel.units()) {
 		  case ProcessModel::UnitsKB:
@@ -565,6 +572,9 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 			break;
 		  case ProcessModel::UnitsGB:
 			actionGB->setChecked(true);
+			break;
+		  case ProcessModel::UnitsPercentage:
+			actionPercentage->setChecked(true);
 			break;
 		}
 	} else if(index == ProcessModel::HeadingName) {
@@ -587,6 +597,9 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 		return;
 	} else if(result == actionGB) {
 		d->mModel.setUnits(ProcessModel::UnitsGB);
+		return;
+	} else if(result == actionPercentage) {
+		d->mModel.setUnits(ProcessModel::UnitsPercentage);
 		return;
 	} else if(result == actionShowCmdlineOptions) {
 		d->mModel.setShowCommandLineOptions(actionShowCmdlineOptions->isChecked());

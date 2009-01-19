@@ -1294,13 +1294,30 @@ ProcessModel::Units ProcessModel::units() const
 
 QString ProcessModel::formatMemoryInfo(long amountInKB) const
 {
+	//We cache the result of i18n for speed reasons.  We call this function 
+	//hundreds of times, every second or so
+	static QString kbString = i18n("%1 K", QString::fromLatin1("%1"));
+	static QString mbString = i18n("%1 M", QString::fromLatin1("%1"));
+	static QString gbString = i18n("%1 G", QString::fromLatin1("%1"));
+	static QString percentageString = i18n("%1%", QString::fromLatin1("%1"));
+	double amount; 
 	switch(d->mUnits) {
 	  case UnitsKB:
-		return  i18n("%1 K", amountInKB);
+		return kbString.arg(amountInKB);
 	  case UnitsMB:
-		return  i18n("%1 M", (amountInKB+512)/1024);  //Round to nearest megabyte
+		amount = amountInKB/1024.0;
+		if(amount < 0.1) amount = 0.1;
+		return mbString.arg(amount, 0, 'f', 1);
 	  case UnitsGB:
-		return  i18n("%1 G", (amountInKB+512*1024)/(1024*1024)); //Round to nearest gigabyte
+		amount = amountInKB/(1024.0*1024.0);
+		if(amount < 0.1) amount = 0.1;
+		return gbString.arg(amount, 0, 'f', 1);
+	  case UnitsPercentage:
+		if(d->mMemTotal == 0)
+			return ""; //memory total not determined yet.  Shouldn't happen, but don't crash if it does
+		float percentage = amountInKB*100.0/d->mMemTotal;
+		if(percentage < 0.1) percentage = 0.1;
+		return percentageString.arg(percentage, 0, 'f', 1);
 	}
 	return "";  //error
 }

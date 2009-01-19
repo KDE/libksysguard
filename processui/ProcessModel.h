@@ -132,7 +132,7 @@ public:
 	bool showTotals() const;
 
 	/** When displaying memory sizes, this is the units it should be displayed in */
-	enum Units { UnitsKB, UnitsMB, UnitsGB  };
+	enum Units { UnitsKB, UnitsMB, UnitsGB, UnitsPercentage  };
 	/** Set the units memory sizes etc should be displayed in */
 	void setUnits(Units units);
 	/** The units memory sizes etc should be displayed in */
