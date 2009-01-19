@@ -143,6 +143,7 @@ bool ProcessesLocal::Private::readProcStatus(long pid, Process *process)
         switch( mBuffer[0]) {
 	  case 'N':
 	    if((unsigned int)size > sizeof("Name:") && qstrncmp(mBuffer, "Name:", sizeof("Name:")-1) == 0) {
+	        if(process->command.isEmpty())
                 process->name = QString::fromLocal8Bit(mBuffer + sizeof("Name:")-1, size-sizeof("Name:")+1).trimmed();
 	        if(++found == 4) goto finish;
 	    }
@@ -354,6 +355,12 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
     //cmdline seperates parameters with the NULL character
     process->command.replace('\0', ' ');
     process->command = process->command.trimmed();
+    if(!process->command.isEmpty()) {
+        QString processname = process->command;
+	processname.remove(QRegExp("^[^ ]*/"));
+	if(processname.startsWith(process->name))
+	    process->name = processname;
+    }
 
     mFile.close();
     return true;
