@@ -259,9 +259,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	d->mUi->txtFilter->installEventFilter(this);
 	d->mUi->treeView->installEventFilter(this);
 
-	//Logical column 0 will always be the tree bit with the process name.  We expand this automatically in code,
-	//so don't let the user change it
-	d->mUi->treeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+	d->mUi->treeView->header()->setResizeMode(0, QHeaderView::Interactive);
 	d->mUi->treeView->header()->setStretchLastSection(true);
 	d->mUi->treeView->setDragEnabled(true);
 	d->mUi->treeView->setDragDropMode(QAbstractItemView::DragOnly);
@@ -297,8 +295,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
 
 	//If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
-	QTimer *mTimer = new QTimer(this);
-	connect(mTimer, SIGNAL(timeout()), &d->mFilterModel, SLOT(invalidate()));
+//	QTimer *mTimer = new QTimer(this);
 //	mTimer->start(4000);
 // QT BUG?  We have to disable the sorting for now because there seems to be a bug in Qt introduced in Qt 4.4beta which makes the view scroll back to the top
         d->mModel.update(d->mUpdateIntervalMSecs);
@@ -536,6 +533,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 	QAction *actionKB = NULL;
 	QAction *actionMB = NULL;
 	QAction *actionGB = NULL;
+	QAction *actionShowCmdlineOptions = NULL;
 
 	if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory ||  index == ProcessModel::HeadingSharedMemory) {
 		//If the user right clicks on a column that contains a memory size, show a toggle option for displaying
@@ -569,6 +567,13 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 			actionGB->setChecked(true);
 			break;
 		}
+	} else if(index == ProcessModel::HeadingName) {
+		menu->addSeparator();
+		actionShowCmdlineOptions = new QAction(menu);
+		actionShowCmdlineOptions->setText(i18n("Display command line options"));
+		actionShowCmdlineOptions->setCheckable(true);
+		actionShowCmdlineOptions->setChecked(d->mModel.isShowCommandLineOptions());
+		menu->addAction(actionShowCmdlineOptions);
 	}
 
 
@@ -582,6 +587,9 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 		return;
 	} else if(result == actionGB) {
 		d->mModel.setUnits(ProcessModel::UnitsGB);
+		return;
+	} else if(result == actionShowCmdlineOptions) {
+		d->mModel.setShowCommandLineOptions(actionShowCmdlineOptions->isChecked());
 		return;
 	}
 	int i = result->data().toInt();
@@ -1111,6 +1119,7 @@ void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 void KSysGuardProcessList::restoreHeaderState(const QByteArray & state) {
 	d->mUi->treeView->header()->restoreState(state);
 	d->mFilterModel.sort( d->mUi->treeView->header()->sortIndicatorSection(), d->mUi->treeView->header()->sortIndicatorOrder() );
+	d->mUi->treeView->header()->setResizeMode(0, QHeaderView::Interactive);
 }
 
 bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {

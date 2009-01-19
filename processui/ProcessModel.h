@@ -139,6 +139,10 @@ public:
 	Units units() const;
 	/** Take an amount in kb, and return a string in the units set by setUnits() */
 	QString formatMemoryInfo(long amountInKB) const;
+	/** Whether to show the command line options in the process name column */
+	bool isShowCommandLineOptions() const;
+	/** Set whether to show the command line options in the process name column */
+	void setShowCommandLineOptions(bool showCommandLineOptions);
 
 	/** Retranslate the GUI, for when the system language changes */
 	void retranslateUi();

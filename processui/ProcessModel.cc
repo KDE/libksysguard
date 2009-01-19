@@ -65,6 +65,7 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 	mProcesses = NULL;
 	mShowChildTotals = true;
 	mIsChangingLayout = false;
+	mShowCommandLineOptions = false;
 }
 
 ProcessModelPrivate::~ProcessModelPrivate()
@@ -733,7 +734,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
 		switch(index.column()) {
 		case HeadingName:
-			return process->name;
+			if(d->mShowCommandLineOptions)
+				return process->name;
+			else
+				return process->name.section(' ', 0,0);
 		case HeadingPid:
 			return (qlonglong)process->pid;
 		case HeadingUser:
@@ -1381,4 +1385,14 @@ Qt::ItemFlags ProcessModel::flags(const QModelIndex &index) const
 
 }
 
+bool ProcessModel::isShowCommandLineOptions() const
+{
+	return d->mShowCommandLineOptions;
+}
+void ProcessModel::setShowCommandLineOptions(bool showCommandLineOptions)
+{
+	if(d->mShowCommandLineOptions == showCommandLineOptions)
+		return;
+	d->mShowCommandLineOptions = showCommandLineOptions;
+}
 
