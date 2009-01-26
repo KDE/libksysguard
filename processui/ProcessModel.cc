@@ -66,6 +66,8 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 	mShowChildTotals = true;
 	mIsChangingLayout = false;
 	mShowCommandLineOptions = false;
+	mShowingTooltips = true;
+	mNormalizeCPUUsage = true;
 }
 
 ProcessModelPrivate::~ProcessModelPrivate()
@@ -535,6 +537,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
 	  }
 	  case Qt::ToolTipRole: 
 	  {
+                if(!d->mShowingTooltips)
+		    return QVariant();
 		switch(section) {
 		    case HeadingName:
 			return i18n("The process name");
@@ -550,13 +554,17 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
 			else
 			    // i18n: %1 is always greater than 1, so do not worry about
 			    // nonsensical verbosity of the singular part.
-			    return i18np("The current total CPU usage of the process, divided by the %1 processor core in the machine.", "The current total CPU usage of the process, divided by the %1 processor cores in the machine.", d->mNumProcessorCores);
+			    if(d->mNormalizeCPUUsage)
+				    return i18np("The current total CPU usage of the process, divided by the %1 processor core in the machine.", "The current total CPU usage of the process, divided by the %1 processor cores in the machine.", d->mNumProcessorCores);
+			    else
+				    return i18np("The current total CPU usage of the process.", "The current total CPU usage of the process.", d->mNumProcessorCores);
+				    
 		    case HeadingVmSize:
 			return i18n("<qt>This is the amount of virtual memory space that the process is using, included shared libraries, graphics memory, files on disk, and so on. This number is almost meaningless.</qt>");
 		    case HeadingMemory:
-			return i18n("<qt>This is the amount of real physical memory that this process is using by itself. It does not include any swapped out memory, nor the code size of its shared libraries. This is often the most useful figure to judge the memory use of a program.</qt>");
+			return i18n("<qt>This is the amount of real physical memory that this process is using by itself.<br>It does not include any swapped out memory, nor the code size of its shared libraries.<br>This is often the most useful figure to judge the memory use of a program.</qt>");
 		    case HeadingSharedMemory:
-			return i18n("<qt>This is the amount of real physical memory that this process's shared libraries are using. This memory is shared among all processes that use this library</qt>");
+			return i18n("<qt>This is the amount of real physical memory that this process's shared libraries are using.<br>This memory is shared among all processes that use this library</qt>");
 		    case HeadingCommand:
 			return i18n("<qt>The command with which this process was launched</qt>");
 		    case HeadingXTitle:
@@ -755,7 +763,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 				double total;
 				if(d->mShowChildTotals && !d->mSimple) total = process->totalUserUsage + process->totalSysUsage;
 				else total = process->userUsage + process->sysUsage;
-				total = total / d->mNumProcessorCores;
+				if(d->mNormalizeCPUUsage)
+					total = total / d->mNumProcessorCores;
 
 				if(total < 1 && process->status != KSysGuard::Process::Sleeping && process->status != KSysGuard::Process::Running)
 					return process->translatedStatus();  //tell the user when the process is a zombie or stopped
@@ -807,6 +816,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 		break;
 	}
 	case Qt::ToolTipRole: {
+                if(!d->mShowingTooltips)
+		    return QVariant();
 		KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
 		QString tracer;
 		if(process->tracerpid > 0) {
@@ -896,22 +907,24 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 			return tooltip + "<br />" + tracer;
 		}	
 		case HeadingCPUUsage: {
+			int divideby = (d->mNormalizeCPUUsage?d->mNumProcessorCores:1);
 			QString tooltip = ki18n("<qt><p style='white-space:pre'>"
 						"Process status: %1 %2<br />"
-						"User CPU usage: %3%<br />System CPU usage: %4%</qt>")
+						"User CPU usage : %3%<br />"
+						"System CPU usage: %4%</qt>")
 						.subs(process->translatedStatus())
 						.subs(d->getStatusDescription(process->status))
-						.subs((float)(process->userUsage) / d->mNumProcessorCores)
-						.subs((float)(process->sysUsage) / d->mNumProcessorCores)
+						.subs((float)(process->userUsage) / divideby)
+						.subs((float)(process->sysUsage) / divideby)
 						.toString();
 
 			if(process->numChildren > 0) {
 				tooltip += ki18n("<br />Number of children: %1<br />Total User CPU usage: %2%<br />"
 						"Total System CPU usage: %3%<br />Total CPU usage: %4%")
 						.subs(process->numChildren)
-						.subs((float)(process->totalUserUsage)/ d->mNumProcessorCores)
-						.subs((float)(process->totalSysUsage) / d->mNumProcessorCores)
-						.subs((float)(process->totalUserUsage + process->totalSysUsage) / d->mNumProcessorCores)
+						.subs((float)(process->totalUserUsage)/ divideby)
+						.subs((float)(process->totalSysUsage) / divideby)
+						.subs((float)(process->totalUserUsage + process->totalSysUsage) / divideby)
 						.toString();
 			}
 			if(process->userTime > 0) 
@@ -1096,7 +1109,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 				double total;
 				if(d->mShowChildTotals && !d->mSimple) total = process->totalUserUsage + process->totalSysUsage;
 				else total = process->userUsage + process->sysUsage;
-				return total / d->mNumProcessorCores;
+
+				if(d->mNormalizeCPUUsage)
+					return total / d->mNumProcessorCores;
+				else
+					return total;
 			}
 		case HeadingMemory:
 			if(process->vmRSS == 0) return QVariant(QVariant::String);
@@ -1408,8 +1425,22 @@ bool ProcessModel::isShowCommandLineOptions() const
 }
 void ProcessModel::setShowCommandLineOptions(bool showCommandLineOptions)
 {
-	if(d->mShowCommandLineOptions == showCommandLineOptions)
-		return;
 	d->mShowCommandLineOptions = showCommandLineOptions;
+}
+bool ProcessModel::isShowingTooltips() const
+{
+	return d->mShowingTooltips;
+}
+void ProcessModel::setShowingTooltips(bool showTooltips)
+{
+	d->mShowingTooltips = showTooltips;
+}
+bool ProcessModel::isNormalizedCPUUsage() const
+{
+	return d->mNormalizeCPUUsage;
+}
+void ProcessModel::setNormalizedCPUUsage(bool normalizeCPUUsage)
+{
+	d->mNormalizeCPUUsage = normalizeCPUUsage;
 }
 

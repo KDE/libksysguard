@@ -144,6 +144,15 @@ public:
 	/** Set whether to show the command line options in the process name column */
 	void setShowCommandLineOptions(bool showCommandLineOptions);
 
+	/** Whether to show tooltips when the mouse hovers over a process */
+	bool isShowingTooltips() const;
+	/** Set whether to show tooltips when the mouse hovers over a process */
+	void setShowingTooltips(bool showTooltips);
+	/** Whether to divide CPU usage by the number of CPUs */
+	bool isNormalizedCPUUsage() const;
+	/** Set whether to divide CPU usage by the number of CPUs */
+	void setNormalizedCPUUsage(bool normalizeCPUUsage);
+
 	/** Retranslate the GUI, for when the system language changes */
 	void retranslateUi();
 

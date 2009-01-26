@@ -535,6 +535,9 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 	QAction *actionGB = NULL;
 	QAction *actionPercentage = NULL;
 	QAction *actionShowCmdlineOptions = NULL;
+	QAction *actionShowTooltips = NULL;
+	QAction *actionNormalizeCPUUsage = NULL;
+	
 
 	if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory ||  index == ProcessModel::HeadingSharedMemory) {
 		//If the user right clicks on a column that contains a memory size, show a toggle option for displaying
@@ -584,7 +587,20 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 		actionShowCmdlineOptions->setCheckable(true);
 		actionShowCmdlineOptions->setChecked(d->mModel.isShowCommandLineOptions());
 		menu->addAction(actionShowCmdlineOptions);
+	} else if(index == ProcessModel::HeadingCPUUsage) {
+		menu->addSeparator();
+		actionNormalizeCPUUsage = new QAction(menu);
+		actionNormalizeCPUUsage->setText(i18n("Divide CPU usage by number of CPUs"));
+		actionNormalizeCPUUsage->setCheckable(true);
+		actionNormalizeCPUUsage->setChecked(d->mModel.isNormalizedCPUUsage());
+		menu->addAction(actionNormalizeCPUUsage);
 	}
+	menu->addSeparator();
+	actionShowTooltips = new QAction(menu);
+	actionShowTooltips->setCheckable(true);
+	actionShowTooltips->setChecked(d->mModel.isShowingTooltips());
+	actionShowTooltips->setText(i18n("Show Tooltips"));
+	menu->addAction(actionShowTooltips);
 
 
 	QAction *result = menu->exec(d->mUi->treeView->header()->mapToGlobal(point));
@@ -604,7 +620,14 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 	} else if(result == actionShowCmdlineOptions) {
 		d->mModel.setShowCommandLineOptions(actionShowCmdlineOptions->isChecked());
 		return;
+	} else if(result == actionNormalizeCPUUsage) {
+		d->mModel.setNormalizedCPUUsage(actionNormalizeCPUUsage->isChecked());
+		return;
+	} else if(result == actionShowTooltips) {
+		d->mModel.setShowingTooltips(actionShowTooltips->isChecked());
+		return;
 	}
+
 	int i = result->data().toInt();
 	//We set data to be negative to hide a column, and positive to show a column
 	if(i < 0)
@@ -1109,6 +1132,8 @@ void KSysGuardProcessList::saveSettings(KConfigGroup &cg) {
 	/* Note that the ksysguard program does not use these functions.  It saves the settings itself to an xml file instead */
 	cg.writeEntry("units", (int)(units()));
 	cg.writeEntry("showCommandLineOptions", d->mModel.isShowCommandLineOptions());
+	cg.writeEntry("normalizeCPUUsage", d->mModel.isNormalizedCPUUsage());
+	cg.writeEntry("showTooltips", d->mModel.isShowingTooltips());
 	cg.writeEntry("showTotals", showTotals());
 	cg.writeEntry("filterState", (int)(state()));
 	cg.writeEntry("updateIntervalMSecs", updateIntervalMSecs());
@@ -1122,6 +1147,8 @@ void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 	/* Note that the ksysguard program does not use these functions.  It saves the settings itself to an xml file instead */
 	setUnits((ProcessModel::Units) cg.readEntry("units", (int)ProcessModel::UnitsKB));
 	d->mModel.setShowCommandLineOptions(cg.readEntry("showCommandLineOptions", false));
+	d->mModel.setNormalizedCPUUsage(cg.readEntry("normalizeCPUUsage", true));
+	d->mModel.setShowingTooltips(cg.readEntry("showTooltips", true));
 	setShowTotals(cg.readEntry("showTotals", true));
 	setStateInt(cg.readEntry("filterState", (int)ProcessFilter::AllProcesses));
 	setUpdateIntervalMSecs(cg.readEntry("updateIntervalMSecs", 2000));

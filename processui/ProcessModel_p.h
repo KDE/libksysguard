@@ -177,6 +177,8 @@ public:
 	/** Show the process command line options in the process name column */
 	bool mShowCommandLineOptions;
 
+	bool mShowingTooltips;
+	bool mNormalizeCPUUsage;
 	/** When displaying memory sizes, this is the units it should be displayed in */
 	int mUnits;
 
