@@ -30,6 +30,14 @@
 #include "ProcessFilter.h"
 #include "processes.h"
 
+#ifdef Q_CC_MSVC
+// this workaround is needed to make krunner link under msvc
+// please keep it this way even if you port this library to have a _export.h header file
+#define KSYSGUARD_EXPORT
+#else
+#define KSYSGUARD_EXPORT KDE_EXPORT
+#endif
+
 class QShowEvent;
 class QHideEvent;
 class QLineEdit;
@@ -44,7 +52,7 @@ extern KApplication* Kapp;
  * update rate and the process filter.  The buttons are used to force
  * an immediate update and to kill a process.
  */
-class KDE_EXPORT KSysGuardProcessList : public QWidget
+class KSYSGUARD_EXPORT KSysGuardProcessList : public QWidget
 {
 	Q_OBJECT
 	Q_PROPERTY( bool showTotalsInTree READ showTotals WRITE setShowTotals )

@@ -27,6 +27,15 @@
 #include "process.h"
 #include <QtCore/QHash>
 
+#ifdef Q_CC_MSVC
+// this workaround is needed to make krunner link under msvc
+// please keep it this way even if you port this library to have a _export.h header file
+#define KSYSGUARDCORE_EXPORT
+#else
+#define KSYSGUARDCORE_EXPORT KDE_EXPORT
+#endif
+
+
 namespace KSysGuard
 {
     class AbstractProcesses;
@@ -50,7 +59,7 @@ namespace KSysGuard
      *
      * @author John Tapsell <tapsell@kde.org>
      */
-    class KDE_EXPORT Processes : public QObject
+    class KSYSGUARDCORE_EXPORT Processes : public QObject
     {
     Q_OBJECT
 
