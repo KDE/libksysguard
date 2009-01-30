@@ -240,17 +240,27 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	connect(&d->mFilterModel, SIGNAL(rowsInserted( const QModelIndex &, int, int)), this, SLOT(rowsInserted(const QModelIndex &, int, int)));
 	setMinimumSize(sizeHint());
 
+	d->mFilterModel.setFilterKeyColumn(-1);
+
+
 	/*  Hide the vm size column by default since it's not very useful */
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingVmSize);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingNiceness);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingTty);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCommand);
 	d->mUi->treeView->header()->hideSection(ProcessModel::HeadingPid);
-	d->mFilterModel.setFilterKeyColumn(-1);
-
+	// NOTE!  After this is all setup, the settings for the header are restored
+	// from the user's last run.  (in restoreHeaderState)
+	// So making changes here only affects the default settings.  To 
+	// test changes temporarily, comment out the lines in restoreHeaderState.
+	// When you are happy with the changes and want to commit, increase the 
+	// value of PROCESSHEADERVERSION.  This will force the header state
+	// to be reset back to the defaults for all users.
 	d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingCPUUsage, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingCPUUsage));
 	d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingMemory, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingMemory));
 	d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingSharedMemory, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingSharedMemory));
+	d->mUi->treeView->header()->setResizeMode(0, QHeaderView::Interactive);
+	d->mUi->treeView->header()->setStretchLastSection(true);
 
 	//Process names can have mixed case. Make the filter case insensitive.
 	d->mFilterModel.setFilterCaseSensitivity(Qt::CaseInsensitive);
@@ -259,8 +269,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	d->mUi->txtFilter->installEventFilter(this);
 	d->mUi->treeView->installEventFilter(this);
 
-	d->mUi->treeView->header()->setResizeMode(0, QHeaderView::Interactive);
-	d->mUi->treeView->header()->setStretchLastSection(true);
+
 	d->mUi->treeView->setDragEnabled(true);
 	d->mUi->treeView->setDragDropMode(QAbstractItemView::DragOnly);
 
