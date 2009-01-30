@@ -125,7 +125,7 @@ public:
 	 *  setup header function, and make sure you increase PROCESSHEADERVERSION.  This will ensure
 	 *  that old saved settings won't be used
 	 */
-#define PROCESSHEADERVERSION 1
+#define PROCESSHEADERVERSION 2
 	enum { HeadingName=0, HeadingUser, HeadingPid, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXTitle };
 	enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, TotalMemoryRole, NumberOfProcessorsRole, PlainValueRole };
 

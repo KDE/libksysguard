@@ -231,7 +231,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
 	d->mUi->treeView->header()->setClickable(true);
 	d->mUi->treeView->header()->setSortIndicatorShown(true);
-	d->mUi->treeView->header()->setCascadingSectionResizes(true);
+	d->mUi->treeView->header()->setCascadingSectionResizes(false);
 	connect(d->mUi->btnKillProcess, SIGNAL(clicked()), this, SLOT(killSelectedProcesses()));
 	connect(d->mUi->txtFilter, SIGNAL(textChanged(const QString &)), this, SLOT(filterTextChanged(const QString &)));
 	connect(d->mUi->cmbFilter, SIGNAL(currentIndexChanged(int)), this, SLOT(setStateInt(int)));
@@ -1161,7 +1161,6 @@ void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 void KSysGuardProcessList::restoreHeaderState(const QByteArray & state) {
 	d->mUi->treeView->header()->restoreState(state);
 	d->mFilterModel.sort( d->mUi->treeView->header()->sortIndicatorSection(), d->mUi->treeView->header()->sortIndicatorOrder() );
-	d->mUi->treeView->header()->setResizeMode(0, QHeaderView::Interactive);
 }
 
 bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
