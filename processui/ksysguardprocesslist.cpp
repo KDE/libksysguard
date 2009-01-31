@@ -739,6 +739,7 @@ void KSysGuardProcessList::updateList()
 	if(isVisible()) {
 		d->mModel.update(d->mUpdateIntervalMSecs);
 		d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
+		emit updated();
 	}
 }
 

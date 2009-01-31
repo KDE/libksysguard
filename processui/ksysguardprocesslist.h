@@ -92,7 +92,9 @@ public:
 	
 	/** Restore the headings to the given state. */
 	void restoreHeaderState(const QByteArray & state);
-
+Q_SIGNALS:
+	/** Emitted when the display has been updated */
+	void updated();
 public Q_SLOTS:
 	/** Inform the view that the user has changed the selection */
 	void selectionChanged();
