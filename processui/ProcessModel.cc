@@ -557,7 +557,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
 			    if(d->mNormalizeCPUUsage)
 				    return i18np("The current total CPU usage of the process, divided by the %1 processor core in the machine.", "The current total CPU usage of the process, divided by the %1 processor cores in the machine.", d->mNumProcessorCores);
 			    else
-				    return i18np("The current total CPU usage of the process.", "The current total CPU usage of the process.", d->mNumProcessorCores);
+				    return i18n("The current total CPU usage of the process.");
 				    
 		    case HeadingVmSize:
 			return i18n("<qt>This is the amount of virtual memory space that the process is using, included shared libraries, graphics memory, files on disk, and so on. This number is almost meaningless.</qt>");
