@@ -124,6 +124,8 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 
 		const QRect rect = option.rect;
 		if(percentage * rect.width() > 100 ) { //make sure the line will have a width of more than 1 pixel
+			if(percentage > 100) 
+				percentage = 100;  //Don't draw outside our bounds
 			QPen old = painter->pen();
 			painter->setPen(Qt::NoPen);
 			QLinearGradient  linearGrad( QPointF(rect.x(),rect.y()), QPointF(rect.x() + rect.width(), rect.y()));
