@@ -150,9 +150,20 @@ namespace KSysGuard
 
         Changes changes;  /** A QFlags representing what has changed */
 
+        /** This is the number of 1/10ths of a second since this 
+	 *  particular process was last updated compared to when all the processes
+	 *  were updated. The purpose is to allow a more fine tracking of the time
+	 *  a process has been running for. 
+	 *
+	 *  This is updated in processes.cpp and so shouldn't be touched by the
+	 *  OS dependant classes. 
+	 */ 
+	int elapsedTimeMilliSeconds; 
+
 
   private:
         void clear();
+
     }; 
     Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
 }

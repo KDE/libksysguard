@@ -48,7 +48,7 @@ namespace KSysGuard
   class Processes::Private
   {
     public:
-      Private() { mAbstractProcesses = 0;  mProcesses.insert(0, &mFakeProcess); mElapsedTimeCentiSeconds = -1; ref=1; }
+      Private() { mAbstractProcesses = 0;  mProcesses.insert(0, &mFakeProcess); mElapsedTimeMilliSeconds = -1; ref=1; }
       ~Private();
 
       QSet<long> mToBeProcessed;
@@ -60,7 +60,7 @@ namespace KSysGuard
 
       AbstractProcesses *mAbstractProcesses; //The OS specific code to get the process information 
       QTime mLastUpdated; //This is the time we last updated.  Used to calculate cpu usage.
-      long mElapsedTimeCentiSeconds; //The number of centiseconds  (100ths of a second) that passed since the last update
+      long mElapsedTimeMilliSeconds; //The number of milliseconds  (1000ths of a second) that passed since the last update
 
       int ref; //Reference counter.  When it reaches 0, delete.
   };
@@ -206,10 +206,18 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
     bool success = d->mAbstractProcesses->updateProcessInfo(ps->pid, ps);
 
     //Now we have the process info.  Calculate the cpu usage and total cpu usage for itself and all its parents
-    if(oldUserTime != -1 && d->mElapsedTimeCentiSeconds!= 0) {  //Update the user usage and sys usage
+    if(oldUserTime != -1 && d->mElapsedTimeMilliSeconds!= 0) {  //Update the user usage and sys usage
 #ifndef Q_OS_NETBSD
-        ps->setUserUsage((int)(((ps->userTime - oldUserTime)*100.0 + 0.5) / d->mElapsedTimeCentiSeconds));
-        ps->setSysUsage((int)(((ps->sysTime - oldSysTime)*100.0 + 0.5) / d->mElapsedTimeCentiSeconds));
+	/* The elapsed time is the d->mElapsedTimeMilliSeconds 
+	 * (which is of the order 2 seconds or so) plus a small
+	 * correction where we get the amount of time elapsed since
+	 * we start processing. This is because the procsesing itself
+	 * can take a non-trivial amount of time.  */
+        int elapsedTime = ps->elapsedTimeMilliSeconds;
+	ps->elapsedTimeMilliSeconds = d->mLastUpdated.elapsed();
+	elapsedTime = ps->elapsedTimeMilliSeconds - elapsedTime + d->mElapsedTimeMilliSeconds;
+        ps->setUserUsage((int)(((ps->userTime - oldUserTime)*1000.0) / elapsedTime));
+        ps->setSysUsage((int)(((ps->sysTime - oldSysTime)*1000.0) / elapsedTime));
 #endif
         ps->setTotalUserUsage(ps->userUsage);
 	ps->setTotalSysUsage(ps->sysUsage);
@@ -277,14 +285,14 @@ bool Processes::updateOrAddProcess( long pid)
 
 void Processes::updateAllProcesses( long updateDurationMS )
 {
-    if(d->mElapsedTimeCentiSeconds == -1) {
+    if(d->mElapsedTimeMilliSeconds == -1) {
         //First time update has been called
         d->mLastUpdated.start();
-	d->mElapsedTimeCentiSeconds = 0;
+	d->mElapsedTimeMilliSeconds = 0;
     } else {
         if(d->mLastUpdated.elapsed() < updateDurationMS) //don't update more often than the time given
 		return;
-        d->mElapsedTimeCentiSeconds = d->mLastUpdated.restart() / 10;
+        d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
     }
 
     d->mAbstractProcesses->updateAllProcesses();
