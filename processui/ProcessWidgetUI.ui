@@ -45,9 +45,6 @@
      </item>
      <item>
       <widget class="KLineEdit" name="txtFilter" >
-       <property name="styleSheet" >
-        <string>QLineEdit { padding-right: 16; }</string>
-       </property>
        <property name="urlDropsEnabled" >
         <bool>false</bool>
        </property>
