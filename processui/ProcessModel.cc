@@ -74,7 +74,7 @@ ProcessModelPrivate::~ProcessModelPrivate()
 {
 	if(mProcesses)
 		KSysGuard::Processes::returnInstance(mHostName);
-	foreach(WindowInfo wininfo, mPidToWindowInfo) {
+	foreach(const WindowInfo &wininfo, mPidToWindowInfo) {
 		delete wininfo.netWinInfo;
 	}
 	mProcesses = NULL;
@@ -183,7 +183,7 @@ void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
 
 void ProcessModelPrivate::windowAdded(WId wid)
 {
-	foreach(WindowInfo w, mPidToWindowInfo) {
+	foreach(const WindowInfo &w, mPidToWindowInfo) {
 		if(w.wid == wid) return; //already added
 	}
 	//The name changed
@@ -1362,7 +1362,7 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
 	QString display;
 	int firstColumn = -1;
 	bool firstrow = true;
-	foreach (QModelIndex index, indexes) {
+	foreach (const QModelIndex &index, indexes) {
 		if (index.isValid()) {
 			if(firstColumn == -1)
 				firstColumn = index.column();
