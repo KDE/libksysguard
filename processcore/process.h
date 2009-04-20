@@ -148,7 +148,7 @@ namespace KSysGuard
         };
         Q_DECLARE_FLAGS(Changes, Change)
 
-        Changes changes;  /** A QFlags representing what has changed */
+        Changes changes;  /**< A QFlags representing what has changed */
 
         /** This is the number of 1/10ths of a second since this 
 	 *  particular process was last updated compared to when all the processes
