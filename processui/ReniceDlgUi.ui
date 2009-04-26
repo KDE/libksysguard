@@ -149,7 +149,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">Round Robin&lt;/span> is a simple enhancement of &lt;span style=" font-weight:600;">FIFO&lt;/span>.  Everything described below for &lt;span style=" font-weight:600;">FIFO&lt;/span> also applies to &lt;span style=" font-weight:600;">Round Robin&lt;/span>, except that each process is only allowed to run for a maximum time quantum.&lt;/p>&lt;/body>&lt;/html></string>
          </property>
          <property name="text" >
-          <string>Round Robin</string>
+          <string>Round robin</string>
          </property>
         </widget>
        </item>
@@ -293,7 +293,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Processes with a higher priority will take priority for access to the hard disk.  Programs running at the same &lt;span style=" font-weight:600;">Best Effort/Normal&lt;/span> priority are served in a &lt;span style=" font-weight:600;">Round Robin&lt;/span> fashion.&lt;/p>&lt;/body>&lt;/html></string>
          </property>
          <property name="text" >
-          <string>Best Effort</string>
+          <string>Best effort</string>
          </property>
         </widget>
        </item>
@@ -313,7 +313,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The &lt;span style=" font-weight:600;">Real Time&lt;/span> scheduling class is given first access to the disk, regardless of what else is going on in the system. Thus the &lt;span style=" font-weight:600;">Real Time&lt;/span> class needs to be used with some care,  as  it  can  starve other processes. As with the &lt;span style=" font-weight:600;">Best Effort&lt;/span> class, 8 priority levels are defined denoting how big a time slice a given process will receive on each scheduling window&lt;/p>&lt;/body>&lt;/html></string>
          </property>
          <property name="text" >
-          <string>Real Time</string>
+          <string>Real time</string>
          </property>
         </widget>
        </item>
