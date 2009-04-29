@@ -303,7 +303,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 	connect(d->mUpdateTimer, SIGNAL(timeout()), this, SLOT(updateList()));
 	d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
 
-	d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
+	d->mUi->btnKillProcess->setIcon(KIcon("edit-bomb"));
 
 	//If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
 //	QTimer *mTimer = new QTimer(this);
@@ -1084,13 +1084,14 @@ void KSysGuardProcessList::killSelectedProcesses()
 	}
 	else
 	{
-		QString  msg = i18np("Do you want to kill the selected process?",
-				"Do you want to kill the %1 selected processes?",
-				selectedAsStrings.count());
+		int count = selectedAsStrings.count();
+                QString  msg = i18np("Are you sure you want to kill this process?",
+				"Are you sure you want to kill these %1 processes?",
+				count);
 
 		int res = KMessageBox::warningContinueCancelList(this, msg, selectedAsStrings,
-								 i18n("Kill Process"),
-								 KGuiItem(i18n("Kill")),
+								 i18np("Kill process", "Kill %1 processes", count),
+								 KGuiItem(i18n("Kill"), "edit-bomb"),
 								 KStandardGuiItem::cancel(),
 								 "killconfirmation");
 		if (res != KMessageBox::Continue)
