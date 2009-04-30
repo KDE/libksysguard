@@ -1203,3 +1203,13 @@ bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
 ProcessModel *KSysGuardProcessList::processModel() {
 	return &d->mModel;
 }
+
+void KSysGuardProcessList::setKillButtonVisible(bool visible)
+{
+	d->mUi->btnKillProcess->setVisible(visible);
+}
+
+bool KSysGuardProcessList::isKillButtonVisible() const
+{
+	return d->mUi->btnKillProcess->isVisible();
+}

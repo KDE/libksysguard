@@ -35,7 +35,6 @@ class QHideEvent;
 class QLineEdit;
 class QTreeView;
 struct KSysGuardProcessListPrivate;
-extern KApplication* Kapp;
 
 /**
  * This widget implements a process list page. Besides the process
@@ -51,6 +50,7 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
 	Q_PROPERTY( ProcessFilter::State state READ state WRITE setState )
 	Q_PROPERTY( int updateIntervalMSecs READ updateIntervalMSecs WRITE setUpdateIntervalMSecs )
 	Q_PROPERTY( ProcessModel::Units units READ units WRITE setUnits )
+	Q_PROPERTY( bool killButtonVisible READ isKillButtonVisible WRITE setKillButtonVisible )
 	Q_ENUMS( ProcessFilter::State )
 	Q_ENUMS( ProcessModel::Units )
 
@@ -60,7 +60,7 @@ public:
 
 	QLineEdit *filterLineEdit() const;
 	QTreeView *treeView() const;
-	
+
 	/** Returns which processes we are currently filtering for and the way in which we show them.
 	 *  @see setState()
 	 */
@@ -92,6 +92,13 @@ public:
 	
 	/** Restore the headings to the given state. */
 	void restoreHeaderState(const QByteArray & state);
+    
+	/** @returns whether the Kill Process button is visible. */
+	bool isKillButtonVisible() const;
+    
+	/** @param visible defines whether the Kill Process button is shown or not. */
+	void setKillButtonVisible(bool visible);
+    
 Q_SIGNALS:
 	/** Emitted when the display has been updated */
 	void updated();
