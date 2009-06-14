@@ -506,7 +506,14 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
 void KSysGuardProcessList::selectAndJumpToProcess(int pid) {
 	KSysGuard::Process *process = d->mModel.getProcess(pid);
 	if(!process) return;
-	QModelIndex filterIndex = d->mFilterModel.mapFromSource( d->mModel.getQModelIndex(process, 0));
+	QModelIndex sourceIndex = d->mModel.getQModelIndex(process, 0);
+	QModelIndex filterIndex = d->mFilterModel.mapFromSource( sourceIndex );
+	if(!filterIndex.isValid() && !d->mUi->txtFilter->text().isEmpty()) {
+		//The filter is preventing us from finding the parent.  Clear the filter
+		//(It could also be the combo box - should we deal with that case as well?)
+		d->mUi->txtFilter->clear();
+		filterIndex = d->mFilterModel.mapFromSource( sourceIndex );
+	}
 	d->mUi->treeView->clearSelection();
 	d->mUi->treeView->setCurrentIndex(filterIndex);
 	d->mUi->treeView->scrollTo( filterIndex, QAbstractItemView::PositionAtCenter);
