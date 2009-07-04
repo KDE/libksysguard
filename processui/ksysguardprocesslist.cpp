@@ -38,6 +38,7 @@
 #include <QProcess>
 #include <QLineEdit>
 #include <QSignalMapper>
+#include <QToolTip>
 
 
 #include <signal.h> //For SIGTERM
@@ -270,7 +271,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
 	d->mUi->txtFilter->installEventFilter(this);
 	d->mUi->treeView->installEventFilter(this);
-
 
 	d->mUi->treeView->setDragEnabled(true);
 	d->mUi->treeView->setDragDropMode(QAbstractItemView::DragOnly);
@@ -745,11 +745,18 @@ void KSysGuardProcessList::retranslateUi()
 
 void KSysGuardProcessList::updateList()
 {
-	if(isVisible()) {
-		d->mModel.update(d->mUpdateIntervalMSecs);
-		d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
-		emit updated();
-	}
+    if(isVisible()) {
+        d->mModel.update(d->mUpdateIntervalMSecs);
+        d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
+        emit updated();
+        if(QToolTip::isVisible()) {
+            QWidget *w = d->mUi->treeView->viewport();
+            if(w->geometry().contains(w->mapFromGlobal( QCursor::pos() ))) {
+                QHelpEvent event(QEvent::ToolTip, w->mapFromGlobal( QCursor::pos() ), QCursor::pos());
+                kapp->notify(w, &event);
+            }
+        }
+    }
 }
 
 int KSysGuardProcessList::updateIntervalMSecs() const
@@ -1184,27 +1191,27 @@ void KSysGuardProcessList::restoreHeaderState(const QByteArray & state) {
 }
 
 bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
-	if (event->type() == QEvent::KeyPress) {
-		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-		if(obj == d->mUi->treeView) {
-			if(  keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return) {
-				d->mUi->treeView->selectionModel()->select(d->mUi->treeView->currentIndex(), QItemSelectionModel::Select | QItemSelectionModel::Rows);
-				showProcessContextMenu(d->mUi->treeView->currentIndex());
-			}
-		} else {
-			// obj must be txtFilter
-			if(keyEvent->matches(QKeySequence::MoveToNextLine) || keyEvent->matches(QKeySequence::SelectNextLine) ||
-			   keyEvent->matches(QKeySequence::MoveToPreviousLine) || keyEvent->matches(QKeySequence::SelectPreviousLine) ||
-			   keyEvent->matches(QKeySequence::MoveToNextPage) ||  keyEvent->matches(QKeySequence::SelectNextPage) ||
-			   keyEvent->matches(QKeySequence::MoveToPreviousPage) ||  keyEvent->matches(QKeySequence::SelectPreviousPage) ||
-			   keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
-			{
-				QApplication::sendEvent(d->mUi->treeView, event);
-				return true;
-			}
-		}
-	}
-	return false;
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if(obj == d->mUi->treeView) {
+            if(  keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return) {
+                d->mUi->treeView->selectionModel()->select(d->mUi->treeView->currentIndex(), QItemSelectionModel::Select | QItemSelectionModel::Rows);
+                showProcessContextMenu(d->mUi->treeView->currentIndex());
+            }
+        } else {
+            // obj must be txtFilter
+            if(keyEvent->matches(QKeySequence::MoveToNextLine) || keyEvent->matches(QKeySequence::SelectNextLine) ||
+                    keyEvent->matches(QKeySequence::MoveToPreviousLine) || keyEvent->matches(QKeySequence::SelectPreviousLine) ||
+                    keyEvent->matches(QKeySequence::MoveToNextPage) ||  keyEvent->matches(QKeySequence::SelectNextPage) ||
+                    keyEvent->matches(QKeySequence::MoveToPreviousPage) ||  keyEvent->matches(QKeySequence::SelectPreviousPage) ||
+                    keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
+            {
+                QApplication::sendEvent(d->mUi->treeView, event);
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 ProcessModel *KSysGuardProcessList::processModel() {
