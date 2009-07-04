@@ -537,7 +537,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
       }
       case Qt::ToolTipRole: 
       {
-                if(!d->mShowingTooltips)
+          if(!d->mShowingTooltips)
             return QVariant();
         switch(section) {
             case HeadingName:
