@@ -191,7 +191,7 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
             p = p->parent;
             p->numChildren++;
         } while (p->pid!= 0);
-	emit endMoveProcess();
+        emit endMoveProcess();
     }
     if(onlyReparent) 
 	    return true; 
@@ -199,6 +199,13 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
     ps->parent = parent;
     ps->parent_pid = ppid;
 
+    bool success = updateProcessInfo(ps);
+    emit processChanged(ps, false);
+
+    return success;
+}
+
+bool Processes::updateProcessInfo(Process *ps) {
     //Now we can actually get the process info
     long oldUserTime = ps->userTime;
     long oldSysTime = ps->sysTime;
@@ -206,37 +213,56 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
     bool success = d->mAbstractProcesses->updateProcessInfo(ps->pid, ps);
 
     //Now we have the process info.  Calculate the cpu usage and total cpu usage for itself and all its parents
-    if(oldUserTime != -1 && d->mElapsedTimeMilliSeconds!= 0) {  //Update the user usage and sys usage
+    if(d->mElapsedTimeMilliSeconds != 0) {  //Update the user usage and sys usage
 #ifndef Q_OS_NETBSD
 	/* The elapsed time is the d->mElapsedTimeMilliSeconds 
 	 * (which is of the order 2 seconds or so) plus a small
 	 * correction where we get the amount of time elapsed since
-	 * we start processing. This is because the procsesing itself
+	 * we start processing. This is because the processing itself
 	 * can take a non-trivial amount of time.  */
         int elapsedTime = ps->elapsedTimeMilliSeconds;
-	ps->elapsedTimeMilliSeconds = d->mLastUpdated.elapsed();
-	elapsedTime = ps->elapsedTimeMilliSeconds - elapsedTime + d->mElapsedTimeMilliSeconds;
-        ps->setUserUsage((int)(((ps->userTime - oldUserTime)*1000.0) / elapsedTime));
-        ps->setSysUsage((int)(((ps->sysTime - oldSysTime)*1000.0) / elapsedTime));
+        ps->elapsedTimeMilliSeconds = d->mLastUpdated.elapsed();
+        bool temp = false;
+        if(elapsedTime == 0) {
+            kDebug() << "found a new process";
+            kDebug() << "usage is now " << ps->userUsage;
+            kDebug() << "sys usage is now " << ps->sysUsage;
+            kDebug() << "user time is " << ps->userTime;
+            kDebug() << "sys time is " << ps->sysTime;
+            kDebug() << "old user time is " << oldUserTime;
+            kDebug() << "old sys time is " << oldSysTime;
+
+            temp = true;
+        }
+        elapsedTime = ps->elapsedTimeMilliSeconds - elapsedTime + d->mElapsedTimeMilliSeconds;
+        if(temp) {
+            kDebug() << "new elapsed time is " << elapsedTime;
+            kDebug() << "so usage is " << (ps->sysTime - oldSysTime)*1000.0 << "/" << elapsedTime;
+        }
+        if(elapsedTime) {
+            ps->setUserUsage((int)(((ps->userTime - oldUserTime)*1000.0) / elapsedTime));
+            ps->setSysUsage((int)(((ps->sysTime - oldSysTime)*1000.0) / elapsedTime));
+        }
+        if(temp) {
+            kDebug() << "usage is now " << ps->userUsage;
+            kDebug() << "sys usage is now " << ps->sysUsage;
+        }
 #endif
         ps->setTotalUserUsage(ps->userUsage);
-	ps->setTotalSysUsage(ps->sysUsage);
-	if(ps->userUsage != 0 || ps->sysUsage != 0) {
-	    Process *p = ps->parent;
-	    while(p->pid != 0) {
-	        p->totalUserUsage += ps->userUsage;
-	        p->totalSysUsage += ps->sysUsage;
+        ps->setTotalSysUsage(ps->sysUsage);
+        if(ps->userUsage != 0 || ps->sysUsage != 0) {
+            Process *p = ps->parent;
+            while(p->pid != 0) {
+                p->totalUserUsage += ps->userUsage;
+                p->totalSysUsage += ps->sysUsage;
                 emit processChanged(p, true);
-	        p= p->parent;
-	    }
-	}
+                p= p->parent;
+            }
+        }
     }
-
-    emit processChanged(ps, false);
-
     return success;
-
 }
+
 bool Processes::addProcess(long pid, long ppid)
 {
     Process *parent = d->mProcesses.value(ppid);
@@ -260,7 +286,7 @@ bool Processes::addProcess(long pid, long ppid)
     ps->parent_pid = ppid;
 
     //Now we can actually get the process info
-    bool success = d->mAbstractProcesses->updateProcessInfo(pid, ps);
+    bool success = updateProcessInfo(ps);
     emit endAddProcess();
     return success;
 
@@ -280,7 +306,7 @@ bool Processes::updateOrAddProcess( long pid)
     if(!ps) 
         return addProcess(pid, ppid);
     else 
-	return updateProcess(ps, ppid);
+        return updateProcess(ps, ppid);
 }
 
 void Processes::updateAllProcesses( long updateDurationMS )
@@ -337,7 +363,7 @@ void Processes::deleteProcess(long pid)
     Process *process = d->mProcesses.value(pid);
     foreach( Process *it, process->children) {
         d->mProcessedLastTime.remove(it->pid);
-	deleteProcess(it->pid);
+        deleteProcess(it->pid);
     }
 
     emit beginRemoveProcess(process);
@@ -353,9 +379,9 @@ void Processes::deleteProcess(long pid)
 
     int i=0;
     foreach( Process *it, d->mListProcesses ) {
-	if(it->index > process->index)
-	    	it->index--;
-	Q_ASSERT(it->index == i++);
+        if(it->index > process->index)
+            it->index--;
+        Q_ASSERT(it->index == i++);
     }
 
     delete process;

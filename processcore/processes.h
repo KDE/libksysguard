@@ -204,6 +204,7 @@ namespace KSysGuard
         bool updateOrAddProcess( long pid);
         inline void deleteProcess(long pid);
         bool updateProcess( Process *process, long ppid, bool onlyReparent = false);
+        bool updateProcessInfo(Process *ps);
         bool addProcess(long pid, long ppid);
 
 

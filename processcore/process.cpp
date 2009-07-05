@@ -85,30 +85,31 @@ QString KSysGuard::Process::schedulerAsString() const {
 }
 
 void KSysGuard::Process::clear() {
-	pid = 0; 
-	parent_pid = 0; 
-	uid = 0; 
-	gid = -1; 
-	suid = euid = fsuid = -1;
-	sgid = egid = fsgid = -1;
-	tracerpid = 0; 
-	userTime = -1; 
-	sysTime = -1; 
-	userUsage=0; 
-	sysUsage=0; 
-	totalUserUsage=0; 
-	totalSysUsage=0; 
-	numChildren=0; 
-	niceLevel=0; 
-	vmSize=0; 
-	vmRSS = 0; 
-	vmURSS = 0; 
-	status=OtherStatus;
-	parent = NULL;
-	ioPriorityClass = None;
-	ioniceLevel = -1;
-	scheduler = Other;
-        changes = Process::Nothing;
+    pid = 0; 
+    parent_pid = 0; 
+    uid = 0; 
+    gid = -1; 
+    suid = euid = fsuid = -1;
+    sgid = egid = fsgid = -1;
+    tracerpid = 0;
+    userTime = 0;
+    sysTime = 0;
+    elapsedTimeMilliSeconds = 0;
+    userUsage=0;
+    sysUsage=0;
+    totalUserUsage=0;
+    totalSysUsage=0;
+    numChildren=0;
+    niceLevel=0;
+    vmSize=0;
+    vmRSS = 0;
+    vmURSS = 0;
+    status=OtherStatus;
+    parent = NULL;
+    ioPriorityClass = None;
+    ioniceLevel = -1;
+    scheduler = Other;
+    changes = Process::Nothing;
 }
 void KSysGuard::Process::setLogin(QString _login) {
         if(login == _login) return;
