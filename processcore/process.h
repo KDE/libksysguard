@@ -35,13 +35,13 @@ namespace KSysGuard
 
   class KDE_EXPORT Process {
     public:
-	enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, OtherStatus };
-	enum IoPriorityClass { None, RealTime, BestEffort, Idle };
+    enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, OtherStatus };
+    enum IoPriorityClass { None, RealTime, BestEffort, Idle };
     enum Scheduler { Other = 0, Fifo, RoundRobin, Batch };
     Process();
     Process(qlonglong _pid, qlonglong _ppid, Process *_parent);
 
-    long pid;    ///< The system's ID for this process.  1 for init.  0 for our virtual 'parent of init' process used just for convience.
+    long pid;    ///< The system's ID for this process.  1 for init.  0 for our virtual 'parent of init' process used just for convenience.
     long parent_pid;  ///< The system's ID for the parent of this process.  0 for init.
 
     /** A guaranteed NON-NULL pointer for all real processes to the parent process except for the fake process with pid 0.
@@ -52,38 +52,37 @@ namespace KSysGuard
      */
     Process *parent;
 
-    void setLogin(QString _login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
-    void setUid(qlonglong _uid); ///< The user id that the process is running as
-    void setEuid(qlonglong _euid); ///< The effective user id that the process is running as
-    void setSuid(qlonglong _suid); ///< The set user id that the process is running as
-    void setFsuid(qlonglong _fsuid); ///< The file system user id that the process is running as.
+    void setLogin(QString login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
+    void setUid(qlonglong uid); ///< The user id that the process is running as
+    void setEuid(qlonglong euid); ///< The effective user id that the process is running as
+    void setSuid(qlonglong suid); ///< The set user id that the process is running as
+    void setFsuid(qlonglong fsuid); ///< The file system user id that the process is running as.
 
-    void setGid(qlonglong _gid); ///< The process group id that the process is running as
-    void setEgid(qlonglong _egid); ///< The effective group id that the process is running as
-    void setSgid(qlonglong _sgid); ///< The set group id that the process is running as
-    void setFsgid(qlonglong _fsgid); ///< The file system group id that the process is running as
+    void setGid(qlonglong gid); ///< The process group id that the process is running as
+    void setEgid(qlonglong egid); ///< The effective group id that the process is running as
+    void setSgid(qlonglong sgid); ///< The set group id that the process is running as
+    void setFsgid(qlonglong fsgid); ///< The file system group id that the process is running as
 
-    void setTracerpid(qlonglong _tracerpid); ///< If this is being debugged, this is the process that is debugging it
-    void setTty(QByteArray _tty); ///< The name of the tty the process owns
-    void setUserTime(qlonglong _userTime); ///< The time, in 100ths of a second, spent in total on user calls. -1 if not known
-    void setSysTime(qlonglong _sysTime);  ///< The time, in 100ths of a second, spent in total on system calls.  -1 if not known
-    void setUserUsage(int _userUsage); ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
-    void setSysUsage(int _sysUsage);  ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
-    void setTotalUserUsage(int _totalUserUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
-    void setTotalSysUsage(int _totalSysUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's equal to sysUsage. It might be more than 100% on multiple cpu core systems
-    void setNiceLevel(int _niceLevel);      ///< If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.  Otherwise sched priority (1 to 99)
-    void setscheduler(Scheduler _scheduler); ///< The scheduler this process is running in.  See man sched_getscheduler for more info
-    void setIoPriorityClass(IoPriorityClass _ioPriorityClass); ///< The IO priority class.  See man ionice for detailed information.
-    void setIoniceLevel(int _ioniceLevel);    ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
-    void setVmSize(qlonglong _vmSize);   ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
-    void setVmRSS(qlonglong _vmRSS);    ///< Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
-    void setVmURSS(qlonglong _vmURSS);   ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
-    void setName(QString _name);  ///< The name (e.g. "ksysguard", "konversation", "init")
-    void setCommand(QString _command); ///< The command the process was launched with
-    void setStatus( ProcessStatus _status); ///< Whether the process is running/sleeping/etc
+    void setTracerpid(qlonglong tracerpid); ///< If this is being debugged, this is the process that is debugging it
+    void setTty(QByteArray tty); ///< The name of the tty the process owns
+    void setUserTime(qlonglong userTime); ///< The time, in 100ths of a second, spent in total on user calls. -1 if not known
+    void setSysTime(qlonglong sysTime);  ///< The time, in 100ths of a second, spent in total on system calls.  -1 if not known
+    void setUserUsage(int userUsage); ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
+    void setSysUsage(int sysUsage);  ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
+    void setTotalUserUsage(int totalUserUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
+    void setTotalSysUsage(int totalSysUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's equal to sysUsage. It might be more than 100% on multiple cpu core systems
+    void setNiceLevel(int niceLevel);      ///< If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.  Otherwise sched priority (1 to 99)
+    void setscheduler(Scheduler scheduler); ///< The scheduler this process is running in.  See man sched_getscheduler for more info
+    void setIoPriorityClass(IoPriorityClass ioPriorityClass); ///< The IO priority class.  See man ionice for detailed information.
+    void setIoniceLevel(int ioniceLevel);    ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
+    void setVmSize(qlonglong vmSize);   ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
+    void setVmRSS(qlonglong vmRSS);    ///< Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
+    void setVmURSS(qlonglong vmURSS);   ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
+    void setName(QString name);  ///< The name (e.g. "ksysguard", "konversation", "init")
+    void setCommand(QString command); ///< The command the process was launched with
+    void setStatus( ProcessStatus status); ///< Whether the process is running/sleeping/etc
 
-
-
+    /* The member variables are made to public for efficiency, but should only be read from. */
     QString login; 
     qlonglong uid; 
     qlonglong euid; 
@@ -119,12 +118,12 @@ namespace KSysGuard
     QTime timeKillWasSent; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.
 
     QString translatedStatus() const;  ///< Returns a translated string of the status. e.g. "Running" etc
-	QString niceLevelAsString() const; ///< Returns a simple translated string of the nice priority.  e.g. "Normal", "High", etc
-	QString ioniceLevelAsString() const; ///< Returns a simple translated string of the io nice priority.  e.g. "Normal", "High", etc
-	QString ioPriorityClassAsString() const; ///< Returns a translated string of the io nice class.  i.e. "None", "Real Time", "Best Effort", "Idle"
-	QString schedulerAsString() const; ///< Returns a translated string of the scheduler class.  e.g. "FIFO", "Round Robin", "Batch"
-        
-	int index;  ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
+    QString niceLevelAsString() const; ///< Returns a simple translated string of the nice priority.  e.g. "Normal", "High", etc
+    QString ioniceLevelAsString() const; ///< Returns a simple translated string of the io nice priority.  e.g. "Normal", "High", etc
+    QString ioPriorityClassAsString() const; ///< Returns a translated string of the io nice class.  i.e. "None", "Real Time", "Best Effort", "Idle"
+    QString schedulerAsString() const; ///< Returns a translated string of the scheduler class.  e.g. "FIFO", "Round Robin", "Batch"
+
+    int index;  ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
 
     /** An enum to keep track of what changed since the last update.  Note that we
      * the maximum we can use is 0x4000, so some of the enums represent multiple variables
@@ -159,7 +158,6 @@ namespace KSysGuard
      *  OS dependant classes. 
      */ 
     int elapsedTimeMilliSeconds; 
-
 
   private:
     void clear();
