@@ -164,8 +164,8 @@ namespace KSysGuard
   private:
     void clear();
 
-    }; 
-    Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
+  }; 
+  Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
 }
 
 #endif
