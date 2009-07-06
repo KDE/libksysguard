@@ -94,60 +94,60 @@ Processes *Processes::getInstance(const QString &host) { //static
     if(host.isEmpty()) {
         //Localhost processes
         if(!d2->processesLocal) {
-	    KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
+            KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
             d2->processesLocal = new Processes(new ProcessesLocal());
         } else {
-	    d2->processesLocal->d->ref++;
-	}
-	return d2->processesLocal;
+            d2->processesLocal->d->ref++;
+        }
+        return d2->processesLocal;
     } else {
         Processes *processes = d2->processesRemote.value(host, NULL);
         if( !processes ) {
             //connect to it
-	    KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
-	    ProcessesRemote *remote = new ProcessesRemote(host);
-	    processes = new Processes( remote );
+            KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
+            ProcessesRemote *remote = new ProcessesRemote(host);
+            processes = new Processes( remote );
             d2->processesRemote.insert(host, processes);
-	    connect(remote, SIGNAL(runCommand(const QString &, int )), processes, SIGNAL(runCommand(const QString&, int)));
-	} else {
-	    processes->d->ref++;
-	}
-	return processes;
+            connect(remote, SIGNAL(runCommand(const QString &, int )), processes, SIGNAL(runCommand(const QString&, int)));
+        } else {
+            processes->d->ref++;
+        }
+        return processes;
     }
 }
 
 void Processes::returnInstance(const QString &host) { //static
     if(!d2) {
         kDebug() << "Internal error - static class does not exist";
-	return;
+        return;
     }
     if(host.isEmpty()) {
         //Localhost processes
         if(!d2->processesLocal) {
-	    //Serious error.  Returning instance we don't have.
-	    kDebug() << "Internal error - returning instance we do not have";
-	    return;
+            //Serious error.  Returning instance we don't have.
+            kDebug() << "Internal error - returning instance we do not have";
+            return;
         } else {
-	    if(--(d2->processesLocal->d->ref) == 0) {
-	        delete d2->processesLocal;
-		d2->processesLocal = NULL;
-	    }
-	}
+            if(--(d2->processesLocal->d->ref) == 0) {
+                delete d2->processesLocal;
+                d2->processesLocal = NULL;
+            }
+        }
     } else {
         Processes *processes = d2->processesRemote.value(host, NULL);
         if( !processes ) {
             kDebug() << "Internal error - returning instance we do not have";
-	    return;
-	} else {
-	    if(--(processes->d->ref) == 0) {
-	        delete processes;
-		d2->processesRemote.remove(host);
-	    }
-	}
+            return;
+        } else {
+            if(--(processes->d->ref) == 0) {
+                delete processes;
+                d2->processesRemote.remove(host);
+            }
+        }
     }
     if(--(d2->ref) == 0) {
         delete d2;
-	d2 = NULL;
+        d2 = NULL;
     }
 
 }
@@ -165,7 +165,7 @@ Process *Processes::getProcess(long pid) const
 {
     return d->mProcesses.value(pid);
 }
-	
+
 QList<Process *> Processes::getAllProcesses() const
 {
     return d->mListProcesses;
@@ -194,7 +194,7 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
         emit endMoveProcess();
     }
     if(onlyReparent) 
-	    return true; 
+        return true; 
 
     ps->parent = parent;
     ps->parent_pid = ppid;
@@ -215,37 +215,17 @@ bool Processes::updateProcessInfo(Process *ps) {
     //Now we have the process info.  Calculate the cpu usage and total cpu usage for itself and all its parents
     if(d->mElapsedTimeMilliSeconds != 0) {  //Update the user usage and sys usage
 #ifndef Q_OS_NETBSD
-	/* The elapsed time is the d->mElapsedTimeMilliSeconds 
-	 * (which is of the order 2 seconds or so) plus a small
-	 * correction where we get the amount of time elapsed since
-	 * we start processing. This is because the processing itself
-	 * can take a non-trivial amount of time.  */
+        /* The elapsed time is the d->mElapsedTimeMilliSeconds 
+         * (which is of the order 2 seconds or so) plus a small
+         * correction where we get the amount of time elapsed since
+         * we start processing. This is because the processing itself
+         * can take a non-trivial amount of time.  */
         int elapsedTime = ps->elapsedTimeMilliSeconds;
         ps->elapsedTimeMilliSeconds = d->mLastUpdated.elapsed();
-        bool temp = false;
-        if(elapsedTime == 0) {
-            kDebug() << "found a new process";
-            kDebug() << "usage is now " << ps->userUsage;
-            kDebug() << "sys usage is now " << ps->sysUsage;
-            kDebug() << "user time is " << ps->userTime;
-            kDebug() << "sys time is " << ps->sysTime;
-            kDebug() << "old user time is " << oldUserTime;
-            kDebug() << "old sys time is " << oldSysTime;
-
-            temp = true;
-        }
         elapsedTime = ps->elapsedTimeMilliSeconds - elapsedTime + d->mElapsedTimeMilliSeconds;
-        if(temp) {
-            kDebug() << "new elapsed time is " << elapsedTime;
-            kDebug() << "so usage is " << (ps->sysTime - oldSysTime)*1000.0 << "/" << elapsedTime;
-        }
         if(elapsedTime) {
             ps->setUserUsage((int)(((ps->userTime - oldUserTime)*1000.0) / elapsedTime));
             ps->setSysUsage((int)(((ps->sysTime - oldSysTime)*1000.0) / elapsedTime));
-        }
-        if(temp) {
-            kDebug() << "usage is now " << ps->userUsage;
-            kDebug() << "sys usage is now " << ps->sysUsage;
         }
 #endif
         ps->setTotalUserUsage(ps->userUsage);
@@ -273,7 +253,7 @@ bool Processes::addProcess(long pid, long ppid)
     emit beginAddProcess(ps);
 
     d->mProcesses.insert(pid, ps);
-    
+
     ps->index = d->mListProcesses.count();
     d->mListProcesses.append(ps);
 
@@ -314,10 +294,10 @@ void Processes::updateAllProcesses( long updateDurationMS )
     if(d->mElapsedTimeMilliSeconds == -1) {
         //First time update has been called
         d->mLastUpdated.start();
-	d->mElapsedTimeMilliSeconds = 0;
+        d->mElapsedTimeMilliSeconds = 0;
     } else {
         if(d->mLastUpdated.elapsed() < updateDurationMS) //don't update more often than the time given
-		return;
+            return;
         d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
     }
 
@@ -331,26 +311,26 @@ void Processes::processesUpdated() {
 
     long pid;
     {
-      QMutableSetIterator<long> i(d->mToBeProcessed);
-      while( i.hasNext()) {
-          pid = i.next();
-          i.remove();
-          d->mProcessedLastTime.remove(pid); //It may or may not be here - remove it if it is there
-          updateOrAddProcess(pid);  //This adds the process or changes an extisting one
-	  i.toFront(); //we can remove entries from this set elsewhere, so our iterator might be invalid.  reset it back to the start of the set
-      }
+        QMutableSetIterator<long> i(d->mToBeProcessed);
+        while( i.hasNext()) {
+            pid = i.next();
+            i.remove();
+            d->mProcessedLastTime.remove(pid); //It may or may not be here - remove it if it is there
+            updateOrAddProcess(pid);  //This adds the process or changes an extisting one
+            i.toFront(); //we can remove entries from this set elsewhere, so our iterator might be invalid.  reset it back to the start of the set
+        }
     }
     {
-      QMutableSetIterator<long> i(d->mProcessedLastTime);
-      while( i.hasNext()) {
-          //We saw these pids last time, but not this time.  That means we have to delete them now
-          pid = i.next();
-	  i.remove();
-          deleteProcess(pid);
-	  i.toFront();
-      }
+        QMutableSetIterator<long> i(d->mProcessedLastTime);
+        while( i.hasNext()) {
+            //We saw these pids last time, but not this time.  That means we have to delete them now
+            pid = i.next();
+            i.remove();
+            deleteProcess(pid);
+            i.toFront();
+        }
     }
-    
+
     d->mProcessedLastTime = beingProcessed;  //update the set for next time this function is called 
     return;
 }
@@ -373,8 +353,8 @@ void Processes::deleteProcess(long pid)
     process->parent->children.removeAll(process);
     Process *p = process;
     do {
-      p = p->parent;
-      p->numChildren--;
+        p = p->parent;
+        p->numChildren--;
     } while (p->pid!= 0);
 
     int i=0;
@@ -390,7 +370,7 @@ void Processes::deleteProcess(long pid)
 
 
 bool Processes::killProcess(long pid) {
-  return sendSignal(pid, SIGTERM);
+    return sendSignal(pid, SIGTERM);
 }
 
 bool Processes::sendSignal(long pid, int sig) {
