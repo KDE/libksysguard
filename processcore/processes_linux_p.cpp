@@ -83,7 +83,7 @@ extern int sys_ioprio_get(int, int);
 #define IOPRIO_WHO_PROCESS 1
 #define IOPRIO_CLASS_SHIFT 13
 
-/* Expose the kernel calls to usespace via syscall
+/* Expose the kernel calls to userspace via syscall
  * See man ioprio_set  and man ioprio_get   for information on these functions */
 static int ioprio_set(int which, int who, int ioprio)
 {
@@ -352,7 +352,7 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
     QTextStream in(&mFile);
     process->command = in.readAll();
 
-    //cmdline seperates parameters with the NULL character
+    //cmdline separates parameters with the NULL character
     process->command.replace('\0', ' ');
     process->command = process->command.trimmed();
     if(!process->command.isEmpty()) {
@@ -498,7 +498,7 @@ long long ProcessesLocal::totalPhysicalMemory() {
     long long memory = ((long long)sysconf(_SC_PHYS_PAGES)) * (sysconf(_SC_PAGESIZE)/1024);
     if(memory > 0) return memory;
 
-    //This is backup code incase the above failed.  It should never fail on a linux system.
+    //This is backup code in case the above failed.  It should never fail on a linux system.
 
     d->mFile.setFileName("/proc/meminfo");
     if(!d->mFile.open(QIODevice::ReadOnly | QIODevice::Text))
