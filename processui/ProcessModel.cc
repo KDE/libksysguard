@@ -112,7 +112,9 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
     qlonglong pid = mWIdToPid.value(wid, 0);
     if(pid <= 0) return;
 
+#ifndef QT_NO_DEBUG
     int count = mPidToWindowInfo.count(pid);
+#endif
     QMultiHash<qlonglong, WindowInfo>::iterator i = mPidToWindowInfo.find(pid);
     while (i != mPidToWindowInfo.end() && i.key() == pid) {
         if(i.value().wid == wid) {
@@ -539,7 +541,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
       {
           if(!d->mShowingTooltips)
             return QVariant();
-        switch(section) {
+          switch(section) {
             case HeadingName:
                 return i18n("The process name.");
             case HeadingUser:
@@ -573,7 +575,40 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("The unique Process ID that identifies this process.");
             default:
                 return QVariant();
-        }
+          }
+      }
+      case Qt::WhatsThisRole: 
+      {
+          switch(section) {
+            case HeadingName:
+                return i18n("<qt><i>Technical information: </i>The kernel process name is a maximum of 8 characters long, so the full command is examined.  If the first word in the full command line starts with the process name, the first word of the command line is shown, otherwise the process name is used.");
+            case HeadingUser:
+                return i18n("<qt>The user who owns this process.  If the effective, setuid etc user is different, the user who owns the process will be shown, followed by the effective user.  The ToolTip contains the full information.  <p>"
+                        "<table>"
+                          "<tr><td>Login Name/Group</td><td>The username of the Real User/Group who created this process</td></tr>"
+                          "<tr><td>Effective User/Group</td><td>The process is running with privileges of the Effective User/Group.  This is shown if different from the real user.</td></tr>"
+                          "<tr><td>Setuid User/Group</td><td>The saved username of the binary.  The process can escalate its Effective User/Group to the Setuid User/Group.</td></tr>"
+#ifdef Q_OS_LINUX
+                          "<tr><td>File System User/Group</td><td>Accesses to the filesystem are checked with the File System User/Group.  This is a Linux specific call. See setfsuid(2) for more information.</td></tr>"
+#endif
+                        "</table>");
+            case HeadingVmSize:
+                return i18n("<qt>This is the size of allocated address space - not memory, but address space. This value in practice means next to nothing. When a process requests a large memory block from the system but uses only a small part of it, the real usage will be low, VIRT will be high. <p><i>Technical information: </i>This is VmSize in proc/*/status and VIRT in top.");
+            case HeadingMemory:
+                return i18n("<qt><i>Technical information: </i>This is the URSS - Unique Resident Set Size, calculated as VmRSS - Shared, from /proc/*/statm.  This tends to underestimate the 'true' memory usage of a process (by not including i/o backed memory pages, but is the best estimation that is fast to determine.");
+            case HeadingCPUUsage:
+                return i18n("The CPU usage of a process and all of its threads.");
+            case HeadingSharedMemory:
+                return i18n("<qt><i>Technical information: </i>This is the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt)");
+            case HeadingCommand:
+                return i18n("<qt><i>Technical information: </i>This is from /proc/*/cmdline");
+            case HeadingXTitle:
+                return i18n("<qt><i>Technical information: </i>For each X11 window, the X11 property _NET_WM_PID is used to map the window to a PID.  If a process's windows are not shown, then that application incorrectly is not setting _NET_WM_PID.");
+            case HeadingPid:
+                return i18n("<qt><i>Technical information: </i>This is the Process ID.  A multi-threaded application is treated a single process, with all threads sharing the same PID.  The CPU usage etc will be the total, accumulated, CPU usage of all the threads.");
+            default:
+                return QVariant();
+          }
       }
       case Qt::DisplayRole:
         return d->mHeadings[section];
@@ -1220,7 +1255,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    return QVariant(); //never get here, but make compilier happy
+    return QVariant(); //never get here, but make compiler happy
 }
 
 bool ProcessModel::hasGUIWindow(qlonglong pid) const
