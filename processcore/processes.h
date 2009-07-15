@@ -60,6 +60,7 @@ namespace KSysGuard
          *  Leave as the default for the current machine
          */
         static Processes *getInstance(const QString &host = QString());
+
         /**
          *  Call when you are finished with the Processes pointer from getInstance.
          *  The pointer from getInstance may not be valid after calling this.
@@ -76,6 +77,7 @@ namespace KSysGuard
          *  more often than needed
          */
         void updateAllProcesses(long updateDurationMS = 0);
+
         /**
          *  Return information for one specific process.  Call getProcess(0) to get the 
          *  fake process used as the top most parent for all processes.
@@ -85,7 +87,7 @@ namespace KSysGuard
         Process *getProcess(long pid) const;
 
         /**
-         *  Kill the specified process.  You may not have the privillage to kill the process.
+         *  Kill the specified process.  You may not have the privilege to kill the process.
          *  The process may also chose to ignore the command.  Send the SIGKILL signal to kill
          *  the process immediately.  You may lose any unsaved data.
          *
@@ -153,7 +155,7 @@ namespace KSysGuard
 
         /**
          *  Return the number of processor cores enabled. 
-         *  (A system can disable procesors.  Disabled processors are not counted here).
+         *  (A system can disable processors.  Disabled processors are not counted here).
          *  This is fast (just a system call) */
         long numberProcessorCores();
 
@@ -168,11 +170,13 @@ namespace KSysGuard
          *  for this process
          */
         void processChanged( KSysGuard::Process *process, bool onlyTotalCpu);
+
         /**
          *  This indicates we are about to add a process in the model.  
          *  The process already has the pid, ppid and tree_parent set up.
          */
         void beginAddProcess( KSysGuard::Process *process);
+
         /**
          *  We have finished inserting a process
          */
@@ -180,15 +184,19 @@ namespace KSysGuard
         /** 
          *  This indicates we are about to remove a process in the model.  Emit the appropriate signals
          */
+
         void beginRemoveProcess( KSysGuard::Process *process);
+
         /** 
          *  We have finished removing a process
          */
         void endRemoveProcess();
+
         /**
          *  This indicates we are about move a process from one parent to another.
          */
         void beginMoveProcess(KSysGuard::Process *process, KSysGuard::Process *new_parent);
+
         /**
          *  We have finished moving the process
          */
