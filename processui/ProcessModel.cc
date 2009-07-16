@@ -225,7 +225,7 @@ void ProcessModelPrivate::windowAdded(WId wid)
 
 void ProcessModel::update(int updateDurationMS) {
 //    kDebug() << "update all processes: " << QTime::currentTime().toString("hh:mm:ss.zzz");
-    d->mProcesses->updateAllProcesses(updateDurationMS, KSysGuard::Processes::IOStatistics);
+    d->mProcesses->updateAllProcesses(updateDurationMS);
     if(d->mMemTotal <= 0)
         d->mMemTotal = d->mProcesses->totalPhysicalMemory();
     if(d->mIsChangingLayout) {
@@ -406,13 +406,6 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingUser, process);
             emit q->dataChanged(index, index);
         }
-        if(process->changes & KSysGuard::Process::IO) {
-            totalUpdated++;
-            QModelIndex index = q->createIndex(row, ProcessModel::HeadingIoRead, process);
-            emit q->dataChanged(index, index);
-            index = q->createIndex(row, ProcessModel::HeadingIoWrite, process);
-            emit q->dataChanged(index, index);
-        }
     }
 }
 
@@ -580,10 +573,6 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt>The title of any windows that this process is showing.</qt>");
             case HeadingPid:
                 return i18n("The unique Process ID that identifies this process.");
-            case HeadingIoRead:
-                return i18n("The number of bytes read.  See WhatsThis for more information.");
-            case HeadingIoWrite:
-                return i18n("The number of bytes written.  See WhatsThis for more information.");
             default:
                 return QVariant();
           }
@@ -617,18 +606,6 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt><i>Technical information: </i>For each X11 window, the X11 property _NET_WM_PID is used to map the window to a PID.  If a process's windows are not shown, then that application incorrectly is not setting _NET_WM_PID.");
             case HeadingPid:
                 return i18n("<qt><i>Technical information: </i>This is the Process ID.  A multi-threaded application is treated a single process, with all threads sharing the same PID.  The CPU usage etc will be the total, accumulated, CPU usage of all the threads.");
-            case HeadingIoRead:
-            case HeadingIoWrite:
-                return i18n("<qt>This column shows the IO statistics for each process. The tooltip provides the following information:<br>"
-                        "<table>"
-                        "<tr><td>Characters Read</td><td>The number of bytes which this task has caused to be read from storage. This is simply the sum of bytes which this process passed to read() and pread(). It includes things like tty IO and it is unaffected by whether or not actual physical disk IO was required (the read might have been satisfied from pagecache).</td></tr>"
-                        "<tr><td>Characters Written</td><td>The number of bytes which this task has caused, or shall cause to be written to disk. Similar caveats apply here as with Characters Read.</td></tr>"
-                        "<tr><td>Read Syscalls</td><td>The number of read I/O operations, i.e. syscalls like read() and pread().</td></tr>"
-                        "<tr><td>Write Syscalls</td><td>The number of write I/O operations, i.e. syscalls like write() and pwrite().</td></tr>"
-                        "<tr><td>Actual Bytes Read</td><td>The number of bytes which this process really did cause to be fetched from the storage layer. Done at the submit_bio() level, so it is accurate for block-backed filesystems. This may not give sensible values for NFS and CIFS filesystems.</td></tr>"
-                        "<tr><td>Actual Bytes Written</td><td>Attempt to count the number of bytes which this process caused to be sent to the storage layer. This is done at page-dirtying time.</td>"
-                        "</table><p>"
-                        "<i>Technical information: </i>This data is collected from /proc/*/io and is documented further in Documentation/accounting and Documentation/filesystems/proc.txt in the kernel source.");
             default:
                 return QVariant();
           }
@@ -854,18 +831,6 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 //                command.replace(process->name, "<b>" + process->name + "</b>");
 //                return "<qt>" + command;
             }
-        case HeadingIoRead:
-            {
-                if(process->ioCharactersRead)
-                    return KGlobal::locale()->formatByteSize(process->ioCharactersRead);
-                return QVariant();
-            }
-        case HeadingIoWrite:
-            {
-                if(process->ioCharactersWritten)
-                    return KGlobal::locale()->formatByteSize(process->ioCharactersWritten);
-                return QVariant();
-            }
 #ifdef Q_WS_X11
         case HeadingXTitle:
             {
@@ -886,7 +851,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         break;
     }
     case Qt::ToolTipRole: {
-        if(!d->mShowingTooltips)
+                if(!d->mShowingTooltips)
             return QVariant();
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         QString tracer;
@@ -1038,7 +1003,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingSharedMemory: {
             QString tooltip = "<qt><p style='white-space:pre'>";
             if(process->vmURSS == -1) {
-                tooltip += i18n("Your system does not seem to have this information available to be read.");
+                tooltip += i18n("<qt>Your system does not seem to have this information available to be read.</qt>");
                 return tooltip;
             }
             if(d->mMemTotal >0)
@@ -1046,12 +1011,6 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             else
                 tooltip += i18n("Shared library memory usage: %1", KGlobal::locale()->formatByteSize((process->vmRSS - process->vmURSS) * 1024));
 
-            return tooltip;
-        }
-        case HeadingIoWrite:
-        case HeadingIoRead: {
-            QString tooltip = "<qt><p style='white-space:pre'>";
-            tooltip += i18n("Characters read: %1<br>Characters written: %2<br>Read syscalls: %3<br>Write syscalls: %4<br>Actual bytes read: %5<br>Actual bytes written: %6", KGlobal::locale()->formatByteSize(process->ioCharactersRead), KGlobal::locale()->formatByteSize(process->ioCharactersWritten), QString::number(process->ioReadSyscalls), QString::number(process->ioWriteSyscalls), KGlobal::locale()->formatByteSize(process->ioCharactersActuallyRead), KGlobal::locale()->formatByteSize(process->ioCharactersActuallyWritten));
             return tooltip;
         }
         case HeadingXTitle: {
@@ -1089,8 +1048,6 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingMemory:
             case HeadingSharedMemory:
             case HeadingVmSize:
-            case HeadingIoWrite:
-            case HeadingIoRead:
                 return QVariant(Qt::AlignRight);
         }
         return QVariant();
@@ -1161,10 +1118,6 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingSharedMemory:
             if(process->vmURSS == -1) return (qlonglong)0;
             return (qlonglong)-(process->vmRSS - process->vmURSS);
-        case HeadingIoRead:
-            return -process->ioCharactersRead;
-        case HeadingIoWrite:
-            return -process->ioCharactersWritten;
         }
         return QVariant();
     }
@@ -1325,8 +1278,6 @@ void ProcessModel::setupHeader() {
     headings << i18nc("process heading", "Niceness");
     // xgettext: no-c-format
     headings << i18nc("process heading", "CPU %");
-    headings << i18nc("process heading", "IO Read");
-    headings << i18nc("process heading", "IO Write");
     headings << i18nc("process heading", "Virtual Size");
     headings << i18nc("process heading", "Memory");
     headings << i18nc("process heading", "Shared Mem");
