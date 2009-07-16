@@ -27,6 +27,7 @@
 #include <QtCore/QAbstractItemModel>
 
 #include <kdemacros.h>
+#include "processcore/processes.h"
 
 namespace KSysGuard {
 	class Processes;
@@ -75,10 +76,11 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         void setupHeader();
 
         /** Update data.  You can pass in the time between updates to only update if there hasn't
-         *  been an update within the last @p updateDurationMSecs milliseconds */
-        void update(int updateDurationMSecs = 0);
-
-        /** Return a string with the pid of the process and the name of the process.  E.g.  13343: ksyguard
+         *  been an update within the last @p updateDurationMSecs milliseconds.  0 indicate to update
+         *  regardless of when the last update was.
+         *  The updateFlags indicates what to additional update, as well as the usual details. */
+        void update(long updateDurationMSecs = 0, KSysGuard::Processes::UpdateFlags updateFlags = KSysGuard::Processes::IOStatistics);
+        /** Return a string with the pid of the process and the name of the process.  E.g.  13343: ksysguard
         */
         QString getStringForProcess(KSysGuard::Process *process) const;
         KSysGuard::Process *getProcess(qlonglong pid);

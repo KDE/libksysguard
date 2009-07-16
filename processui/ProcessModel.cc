@@ -223,9 +223,9 @@ void ProcessModelPrivate::windowAdded(WId wid)
 }
 #endif
 
-void ProcessModel::update(int updateDurationMS) {
+void ProcessModel::update(long updateDurationMSecs, KSysGuard::Processes::UpdateFlags updateFlags) {
 //    kDebug() << "update all processes: " << QTime::currentTime().toString("hh:mm:ss.zzz");
-    d->mProcesses->updateAllProcesses(updateDurationMS, KSysGuard::Processes::IOStatistics);
+    d->mProcesses->updateAllProcesses(updateDurationMSecs, updateFlags);
     if(d->mMemTotal <= 0)
         d->mMemTotal = d->mProcesses->totalPhysicalMemory();
     if(d->mIsChangingLayout) {

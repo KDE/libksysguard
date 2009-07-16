@@ -311,7 +311,8 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 //	QTimer *mTimer = new QTimer(this);
 //	mTimer->start(4000);
 // QT BUG?  We have to disable the sorting for now because there seems to be a bug in Qt introduced in Qt 4.4beta which makes the view scroll back to the top
-        d->mModel.update(d->mUpdateIntervalMSecs);
+//    updateList();
+    d->mModel.update(d->mUpdateIntervalMSecs);
 }
 
 KSysGuardProcessList::~KSysGuardProcessList()
@@ -748,7 +749,10 @@ void KSysGuardProcessList::retranslateUi()
 void KSysGuardProcessList::updateList()
 {
     if(isVisible()) {
-        d->mModel.update(d->mUpdateIntervalMSecs);
+        KSysGuard::Processes::UpdateFlags updateFlags = 0;
+        if(!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoRead) || !d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoWrite))
+            updateFlags = KSysGuard::Processes::IOStatistics;
+        d->mModel.update(d->mUpdateIntervalMSecs, updateFlags);
         d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
         emit updated();
         if(QToolTip::isVisible()) {
