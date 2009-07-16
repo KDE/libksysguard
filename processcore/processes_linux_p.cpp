@@ -83,7 +83,7 @@ extern int sys_ioprio_get(int, int);
 #define IOPRIO_WHO_PROCESS 1
 #define IOPRIO_CLASS_SHIFT 13
 
-/* Expose the kernel calls to usespace via syscall
+/* Expose the kernel calls to userspace via syscall
  * See man ioprio_set  and man ioprio_get   for information on these functions */
 static int ioprio_set(int which, int who, int ioprio)
 {
@@ -112,6 +112,7 @@ namespace KSysGuard
       inline bool readProcStatm(long pid, Process *process);
       inline bool readProcCmdline(long pid, Process *process);
       inline bool getNiceness(long pid, Process *process);
+      inline bool getIOStatistics(long pid, Process *process);
       QFile mFile;
       char mBuffer[PROCESS_BUFFER_SIZE+1]; //used as a buffer to read data into      
       DIR* mProcDir;
@@ -130,7 +131,7 @@ ProcessesLocal::ProcessesLocal() : d(new Private())
 bool ProcessesLocal::Private::readProcStatus(long pid, Process *process)
 {
     mFile.setFileName(QString("/proc/%1/status").arg(pid));
-    if(!mFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
     process->uid = 0;
@@ -179,7 +180,7 @@ bool ProcessesLocal::Private::readProcStatus(long pid, Process *process)
 long ProcessesLocal::getParentPid(long pid) {
     Q_ASSERT(pid != 0);
     d->mFile.setFileName(QString("/proc/%1/stat").arg(pid));
-    if(!d->mFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!d->mFile.open(QIODevice::ReadOnly))
         return 0;      /* process has terminated in the meantime */
 
     int size; //amount of data read in
@@ -207,16 +208,16 @@ long ProcessesLocal::getParentPid(long pid) {
 bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
 {
     QString filename = QString("/proc/%1/stat").arg(pid);
-    // As an optomization, if the last file read in was stat, then we already have this info in memory
+    // As an optimization, if the last file read in was stat, then we already have this info in memory
     if(mFile.fileName() != filename) {  
         mFile.setFileName(filename);
-        if(!mFile.open(QIODevice::ReadOnly | QIODevice::Text))
+        if(!mFile.open(QIODevice::ReadOnly))
             return false;      /* process has terminated in the meantime */
-	if( mFile.readLine( mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
-	    mFile.close();
-	    return false;
-	}
-	mFile.close();
+        if( mFile.readLine( mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
+            mFile.close();
+            return false;
+        }
+        mFile.close();
     }
 
     int current_word = 0;  //count from 0
@@ -225,57 +226,57 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
     long vmSize = 0;
     long vmRSS = 0;
     while(current_word < 23) {
-	    if(word[0] == ' ' ) {
-		    ++current_word;
-		    switch(current_word) {
-			    case 2: //status
-                              status=word[1];  // Look at the first letter of the status.  
-			                      // We analyze this after the while loop
-			      break;
-			    case 6: //ttyNo
-			      {
-			        int ttyNo = atoi(word+1);
-				int major = ttyNo >> 8;
-				int minor = ttyNo & 0xff;
-				switch(major) {
-				  case 136:
-				    ps->setTty(QByteArray("pts/") + QByteArray::number(minor));
-				    break;
-				  case 5:
-				    ps->setTty(QByteArray("tty"));
-				  case 4:
-				    if(minor < 64)
-				      ps->setTty(QByteArray("tty") + QByteArray::number(minor));
-				    else
-				      ps->setTty(QByteArray("ttyS") + QByteArray::number(minor-64));
-				    break;
-				  default:
-				    ps->setTty(QByteArray());
-				}
-			      }
-			      break;
-			    case 13: //userTime
-			      ps->setUserTime(atoll(word+1));
-			      break;
-			    case 14: //sysTime
-			      ps->setSysTime(atoll(word+1));
-			      break;
-			    case 18: //niceLevel
-			      ps->setNiceLevel(atoi(word+1));  /*Or should we use getPriority instead? */
-			      break;
-			    case 22: //vmSize
-			      vmSize = atol(word+1);
-			      break;
-			    case 23: //vmRSS
-			      vmRSS = atol(word+1);
-			      break;
-			    default:
-			      break;
-		    }
-	    } else if(word[0] == 0) {
-	    	return false; //end of data - serious problem
-	    }
-	    word++;
+        if(word[0] == ' ' ) {
+            ++current_word;
+            switch(current_word) {
+                case 2: //status
+                    status=word[1];  // Look at the first letter of the status.  
+                    // We analyze this after the while loop
+                    break;
+                case 6: //ttyNo
+                    {
+                        int ttyNo = atoi(word+1);
+                        int major = ttyNo >> 8;
+                        int minor = ttyNo & 0xff;
+                        switch(major) {
+                            case 136:
+                                ps->setTty(QByteArray("pts/") + QByteArray::number(minor));
+                                break;
+                            case 5:
+                                ps->setTty(QByteArray("tty"));
+                            case 4:
+                                if(minor < 64)
+                                    ps->setTty(QByteArray("tty") + QByteArray::number(minor));
+                                else
+                                    ps->setTty(QByteArray("ttyS") + QByteArray::number(minor-64));
+                                break;
+                            default:
+                                ps->setTty(QByteArray());
+                        }
+                    }
+                    break;
+                case 13: //userTime
+                    ps->setUserTime(atoll(word+1));
+                    break;
+                case 14: //sysTime
+                    ps->setSysTime(atoll(word+1));
+                    break;
+                case 18: //niceLevel
+                    ps->setNiceLevel(atoi(word+1));  /*Or should we use getPriority instead? */
+                    break;
+                case 22: //vmSize
+                    vmSize = atol(word+1);
+                    break;
+                case 23: //vmRSS
+                    vmRSS = atol(word+1);
+                    break;
+                default:
+                    break;
+            }
+        } else if(word[0] == 0) {
+            return false; //end of data - serious problem
+        }
+        word++;
     }
 
     /* There was a "(ps->vmRss+3) * sysconf(_SC_PAGESIZE)" here in the original ksysguard code.  I have no idea why!  After comparing it to
@@ -285,27 +286,27 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
     ps->setVmSize(vmSize /= 1024); /* convert to KiB */
 
     switch( status) {
-      case 'R':
-        ps->setStatus(Process::Running);
-	break;
-      case 'S':
-        ps->setStatus(Process::Sleeping);
-	break;
-      case 'D':
-        ps->setStatus(Process::DiskSleep);
-	break;
-      case 'Z':
-        ps->setStatus(Process::Zombie);
-	break;
-      case 'T':
-         ps->setStatus(Process::Stopped);
-         break;
-      case 'W':
-         ps->setStatus(Process::Paging);
-         break;
-      default:
-         ps->setStatus(Process::OtherStatus);
-         break;
+        case 'R':
+            ps->setStatus(Process::Running);
+            break;
+        case 'S':
+            ps->setStatus(Process::Sleeping);
+            break;
+        case 'D':
+            ps->setStatus(Process::DiskSleep);
+            break;
+        case 'Z':
+            ps->setStatus(Process::Zombie);
+            break;
+        case 'T':
+            ps->setStatus(Process::Stopped);
+            break;
+        case 'W':
+            ps->setStatus(Process::Paging);
+            break;
+        default:
+            ps->setStatus(Process::OtherStatus);
+            break;
     }
     return true;
 }
@@ -313,7 +314,7 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
 bool ProcessesLocal::Private::readProcStatm(long pid, Process *process)
 {
     mFile.setFileName(QString("/proc/%1/statm").arg(pid));
-    if(!mFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
     if( mFile.readLine( mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
@@ -346,20 +347,20 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
 {
     if(!process->command.isNull()) return true; //only parse the cmdline once
     mFile.setFileName(QString("/proc/%1/cmdline").arg(pid));
-    if(!mFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
     QTextStream in(&mFile);
     process->command = in.readAll();
 
-    //cmdline seperates parameters with the NULL character
+    //cmdline separates parameters with the NULL character
     process->command.replace('\0', ' ');
     process->command = process->command.trimmed();
     if(!process->command.isEmpty()) {
         QString processname = process->command;
-	processname.remove(QRegExp("^[^ ]*/"));
-	if(processname.startsWith(process->name))
-	    process->name = processname;
+        processname.remove(QRegExp("^[^ ]*/"));
+        if(processname.startsWith(process->name))
+            process->name = processname;
     }
 
     mFile.close();
@@ -409,15 +410,61 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
   return true;
 }
 
+bool ProcessesLocal::Private::getIOStatistics(long pid, Process *process)
+{
+    QString filename = QString("/proc/%1/io").arg(pid);
+    // As an optimization, if the last file read in was io, then we already have this info in memory
+    mFile.setFileName(filename);
+    if(!mFile.open(QIODevice::ReadOnly))
+        return false;      /* process has terminated in the meantime */
+    if( mFile.read( mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
+        mFile.close();
+        return false;
+    }
+    mFile.close();
+
+    int current_word = 0;  //count from 0
+    char *word = mBuffer;
+    while(current_word < 6 && word[0] != 0) {
+        if(word[0] == ' ' ) {
+            qlonglong number = atoll(word+1);
+            switch(current_word++) {
+                case 0: //rchar - characters read
+                    process->setIoCharactersRead(number);
+                    break;
+                case 1: //wchar - characters written
+                    process->setIoCharactersWritten(number);
+                    break;
+                case 2: //syscr - read syscall
+                    process->setIoReadSyscalls(number);
+                    break;
+                case 3: //syscw - write syscall
+                    process->setIoWriteSyscalls(number);
+                    break;
+                case 4: //read_bytes - bytes actually read from I/O
+                    process->setIoCharactersActuallyRead(number);
+                    break;
+                case 5: //write_bytes - bytes actually written to I/O
+                    process->setIoCharactersActuallyWritten(number);
+                default:
+                    break;
+            }
+        }
+        word++;
+    }
+    return true;
+}
 bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 {
-    if(!d->readProcStat(pid, process)) return false;
-    if(!d->readProcStatus(pid, process)) return false;
-    if(!d->readProcStatm(pid, process)) return false;
-    if(!d->readProcCmdline(pid, process)) return false;
-    if(!d->getNiceness(pid, process)) return false;
+    bool success = true;
+    if(!d->readProcStat(pid, process)) success = false;
+    if(!d->readProcStatus(pid, process)) success = false;
+    if(!d->readProcStatm(pid, process)) success = false;
+    if(!d->readProcCmdline(pid, process)) success = false;
+    if(!d->getNiceness(pid, process)) success = false;
+    if(mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(pid, process)) success = false;
 
-    return true;
+    return success;
 }
 
 QSet<long> ProcessesLocal::getAllPids( )
@@ -498,10 +545,10 @@ long long ProcessesLocal::totalPhysicalMemory() {
     long long memory = ((long long)sysconf(_SC_PHYS_PAGES)) * (sysconf(_SC_PAGESIZE)/1024);
     if(memory > 0) return memory;
 
-    //This is backup code incase the above failed.  It should never fail on a linux system.
+    //This is backup code in case the above failed.  It should never fail on a linux system.
 
     d->mFile.setFileName("/proc/meminfo");
-    if(!d->mFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!d->mFile.open(QIODevice::ReadOnly))
         return 0; 
 
     int size;

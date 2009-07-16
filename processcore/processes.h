@@ -55,11 +55,18 @@ namespace KSysGuard
         Q_OBJECT
 
     public:
+        enum UpdateFlag {
+            StandardInformation = 0,
+            IOStatistics
+        };
+        Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
+
         /**
          *  Singleton pattern to return the instance associated with @p host.
          *  Leave as the default for the current machine
          */
         static Processes *getInstance(const QString &host = QString());
+
         /**
          *  Call when you are finished with the Processes pointer from getInstance.
          *  The pointer from getInstance may not be valid after calling this.
@@ -73,9 +80,10 @@ namespace KSysGuard
          *
          *  Set updateDuration to whatever time period that you update, in milliseconds.
          *  For example, if you update every 2000ms, set this to 2000.  That way it won't update
-         *  more often than needed
+         *  more often than needed.
          */
-        void updateAllProcesses(long updateDurationMS = 0);
+        void updateAllProcesses(long updateDurationMS = 0, Processes::UpdateFlags updateFlags = 0);
+
         /**
          *  Return information for one specific process.  Call getProcess(0) to get the 
          *  fake process used as the top most parent for all processes.
@@ -85,7 +93,7 @@ namespace KSysGuard
         Process *getProcess(long pid) const;
 
         /**
-         *  Kill the specified process.  You may not have the privillage to kill the process.
+         *  Kill the specified process.  You may not have the privilege to kill the process.
          *  The process may also chose to ignore the command.  Send the SIGKILL signal to kill
          *  the process immediately.  You may lose any unsaved data.
          *
@@ -140,7 +148,7 @@ namespace KSysGuard
 
         /** 
          *  Return the internal pointer of all the processes.  The order of the processes 
-         *  is guaranteed to never change.  Call updateAllProcesses first to actually
+         *  is guaranteed to never change.  Call updateAllProcesses() first to actually
          *  update the information.
          */
         QList< Process *> getAllProcesses() const;
@@ -153,7 +161,7 @@ namespace KSysGuard
 
         /**
          *  Return the number of processor cores enabled. 
-         *  (A system can disable procesors.  Disabled processors are not counted here).
+         *  (A system can disable processors.  Disabled processors are not counted here).
          *  This is fast (just a system call) */
         long numberProcessorCores();
 
@@ -168,11 +176,13 @@ namespace KSysGuard
          *  for this process
          */
         void processChanged( KSysGuard::Process *process, bool onlyTotalCpu);
+
         /**
          *  This indicates we are about to add a process in the model.  
          *  The process already has the pid, ppid and tree_parent set up.
          */
         void beginAddProcess( KSysGuard::Process *process);
+
         /**
          *  We have finished inserting a process
          */
@@ -180,15 +190,19 @@ namespace KSysGuard
         /** 
          *  This indicates we are about to remove a process in the model.  Emit the appropriate signals
          */
+
         void beginRemoveProcess( KSysGuard::Process *process);
+
         /** 
          *  We have finished removing a process
          */
         void endRemoveProcess();
+
         /**
          *  This indicates we are about move a process from one parent to another.
          */
         void beginMoveProcess(KSysGuard::Process *process, KSysGuard::Process *new_parent);
+
         /**
          *  We have finished moving the process
          */
@@ -219,5 +233,6 @@ namespace KSysGuard
          *  in response to a runCommand request.  The id identifies the answer */
         void answerReceived( int id, const QList<QByteArray>& answer );
     };
+    Q_DECLARE_OPERATORS_FOR_FLAGS(Processes::UpdateFlags)
 }
 #endif 

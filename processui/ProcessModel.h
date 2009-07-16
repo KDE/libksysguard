@@ -45,125 +45,126 @@ class ProcessModelPrivate;
 
 class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
 {
-	Q_OBJECT
-	Q_ENUMS(Units)
-		
-public:
-	ProcessModel(QObject* parent = 0, const QString &host = QString() );
-	virtual ~ProcessModel();
+    Q_OBJECT
+    Q_ENUMS(Units)
 
-	/* Functions for our Model for QAbstractItemModel*/
-	int rowCount(const QModelIndex &parent = QModelIndex()) const;
-	int columnCount ( const QModelIndex & parent = QModelIndex() ) const;
+    public:
+        ProcessModel(QObject* parent = 0, const QString &host = QString() );
+        virtual ~ProcessModel();
+
+        /* Functions for our Model for QAbstractItemModel*/
+        int rowCount(const QModelIndex &parent = QModelIndex()) const;
+        int columnCount ( const QModelIndex & parent = QModelIndex() ) const;
         QVariant data(const QModelIndex &index, int role) const;
         QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-	QModelIndex index ( int row, int column, const QModelIndex & parent = QModelIndex() ) const;
-	QModelIndex parent ( const QModelIndex & index ) const;
-	
-	bool hasChildren ( const QModelIndex & parent) const;
+        QModelIndex index ( int row, int column, const QModelIndex & parent = QModelIndex() ) const;
+        QModelIndex parent ( const QModelIndex & index ) const;
 
-	/* Functions for drag and drop and copying to clipboard, inherited from QAbstractItemModel */
-	QStringList mimeTypes() const;
-	QMimeData *mimeData(const QModelIndexList &indexes) const;
-	Qt::ItemFlags flags(const QModelIndex &index) const;
+        bool hasChildren ( const QModelIndex & parent) const;
 
-	/* Functions for setting the model */
+        /* Functions for drag and drop and copying to clipboard, inherited from QAbstractItemModel */
+        QStringList mimeTypes() const;
+        QMimeData *mimeData(const QModelIndexList &indexes) const;
+        Qt::ItemFlags flags(const QModelIndex &index) const;
 
-	/** Setup the column headings by inserting the appropriate headings into the model.
-	 *  Can be called more than once to retranslate the headings if the system language changes.
-	 */
-	void setupHeader();
+        /* Functions for setting the model */
 
-	/** Update data.  You can pass in the time between updates to only update if there hasn't
-	 *  been an update within the last @p updateDurationMSecs milliseconds */
-	void update(int updateDurationMSecs = 0);
-	
-	/** Return a string with the pid of the process and the name of the process.  E.g.  13343: ksyguard
-	 */
-	QString getStringForProcess(KSysGuard::Process *process) const;
-	KSysGuard::Process *getProcess(qlonglong pid);
+        /** Setup the column headings by inserting the appropriate headings into the model.
+         *  Can be called more than once to retranslate the headings if the system language changes.
+         */
+        void setupHeader();
 
-	/** This is used from ProcessFilter to get the process at a given index when in flat mode */	
-	KSysGuard::Process *getProcessAtIndex(int index) const;
-        
-	/** Returns whether this user can log in or not.
-	 *  @see mUidCanLogin
-	 */
-	bool canUserLogin(long uid) const;
-	/** In simple mode, everything is flat, with no icons, few if any colors, no xres etc.
-	 *  This can be changed at any time.  It is a fairly quick operation.  Basically it resets the model
-	 */ 
-	void setSimpleMode(bool simple);
-	/** In simple mode, everything is flat, with no icons, few if any colors, no xres etc
-	 */
-	bool isSimpleMode() const;
-	
-	/** Returns the total amount of physical memory in the machine. */
-	qlonglong totalMemory() const;
+        /** Update data.  You can pass in the time between updates to only update if there hasn't
+         *  been an update within the last @p updateDurationMSecs milliseconds */
+        void update(int updateDurationMSecs = 0);
+
+        /** Return a string with the pid of the process and the name of the process.  E.g.  13343: ksyguard
+        */
+        QString getStringForProcess(KSysGuard::Process *process) const;
+        KSysGuard::Process *getProcess(qlonglong pid);
+
+        /** This is used from ProcessFilter to get the process at a given index when in flat mode */	
+        KSysGuard::Process *getProcessAtIndex(int index) const;
+
+        /** Returns whether this user can log in or not.
+         *  @see mUidCanLogin
+         */
+        bool canUserLogin(long uid) const;
+        /** In simple mode, everything is flat, with no icons, few if any colors, no xres etc.
+         *  This can be changed at any time.  It is a fairly quick operation.  Basically it resets the model
+         */ 
+        void setSimpleMode(bool simple);
+        /** In simple mode, everything is flat, with no icons, few if any colors, no xres etc
+        */
+        bool isSimpleMode() const;
+
+        /** Returns the total amount of physical memory in the machine. */
+        qlonglong totalMemory() const;
 
         /** This returns a QModelIndex for the given process.  It has to look up the parent for this pid, find the offset this 
-	 *  pid is from the parent, and return that.  It's not that slow, but does involve a couple of hash table lookups.
-	 */
-	QModelIndex getQModelIndex ( KSysGuard::Process *process, int column) const;
+         *  pid is from the parent, and return that.  It's not that slow, but does involve a couple of hash table lookups.
+         */
+        QModelIndex getQModelIndex ( KSysGuard::Process *process, int column) const;
 
-	/** Whether this is showing the processes for the current machine
-	 */
-	bool isLocalhost() const;
+        /** Whether this is showing the processes for the current machine
+        */
+        bool isLocalhost() const;
 
-	/** The host name that this widget is showing the processes of */
-	QString hostName() const;
-	
-	/** Whether this process has a GUI window */
-	bool hasGUIWindow(qlonglong pid) const;
+        /** The host name that this widget is showing the processes of */
+        QString hostName() const;
 
-	/** Returns for process controller pointer for this model
-	 */
-	KSysGuard::Processes *processController();   ///The processes instance
+        /** Whether this process has a GUI window */
+        bool hasGUIWindow(qlonglong pid) const;
 
-	/** The headings in the model.  The order here is the order that they are shown
-	 *  in.  If you change this, make sure you also change the 
-	 *  setup header function, and make sure you increase PROCESSHEADERVERSION.  This will ensure
-	 *  that old saved settings won't be used
-	 */
-#define PROCESSHEADERVERSION 2
-	enum { HeadingName=0, HeadingUser, HeadingPid, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXTitle };
-	enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, TotalMemoryRole, NumberOfProcessorsRole, PlainValueRole };
+        /** Returns for process controller pointer for this model
+        */
+        KSysGuard::Processes *processController();   ///The processes instance
 
-	bool showTotals() const;
+        /** The headings in the model.  The order here is the order that they are shown
+         *  in.  If you change this, make sure you also change the 
+         *  setup header function, and make sure you increase PROCESSHEADERVERSION.  This will ensure
+         *  that old saved settings won't be used
+         */
+#define PROCESSHEADERVERSION 3
+        enum { HeadingName=0, HeadingUser, HeadingPid, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingIoRead, HeadingIoWrite, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXTitle };
 
-	/** When displaying memory sizes, this is the units it should be displayed in */
-	enum Units { UnitsKB, UnitsMB, UnitsGB, UnitsPercentage  };
-	/** Set the units memory sizes etc should be displayed in */
-	void setUnits(Units units);
-	/** The units memory sizes etc should be displayed in */
-	Units units() const;
-	/** Take an amount in kb, and return a string in the units set by setUnits() */
-	QString formatMemoryInfo(qlonglong amountInKB) const;
-	/** Whether to show the command line options in the process name column */
-	bool isShowCommandLineOptions() const;
-	/** Set whether to show the command line options in the process name column */
-	void setShowCommandLineOptions(bool showCommandLineOptions);
+        enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, TotalMemoryRole, NumberOfProcessorsRole, PlainValueRole };
 
-	/** Whether to show tooltips when the mouse hovers over a process */
-	bool isShowingTooltips() const;
-	/** Set whether to show tooltips when the mouse hovers over a process */
-	void setShowingTooltips(bool showTooltips);
-	/** Whether to divide CPU usage by the number of CPUs */
-	bool isNormalizedCPUUsage() const;
-	/** Set whether to divide CPU usage by the number of CPUs */
-	void setNormalizedCPUUsage(bool normalizeCPUUsage);
+        bool showTotals() const;
 
-	/** Retranslate the GUI, for when the system language changes */
-	void retranslateUi();
+        /** When displaying memory sizes, this is the units it should be displayed in */
+        enum Units { UnitsKB, UnitsMB, UnitsGB, UnitsPercentage  };
+        /** Set the units memory sizes etc should be displayed in */
+        void setUnits(Units units);
+        /** The units memory sizes etc should be displayed in */
+        Units units() const;
+        /** Take an amount in kb, and return a string in the units set by setUnits() */
+        QString formatMemoryInfo(qlonglong amountInKB) const;
+        /** Whether to show the command line options in the process name column */
+        bool isShowCommandLineOptions() const;
+        /** Set whether to show the command line options in the process name column */
+        void setShowCommandLineOptions(bool showCommandLineOptions);
 
-public Q_SLOTS:
+        /** Whether to show tooltips when the mouse hovers over a process */
+        bool isShowingTooltips() const;
+        /** Set whether to show tooltips when the mouse hovers over a process */
+        void setShowingTooltips(bool showTooltips);
+        /** Whether to divide CPU usage by the number of CPUs */
+        bool isNormalizedCPUUsage() const;
+        /** Set whether to divide CPU usage by the number of CPUs */
+        void setNormalizedCPUUsage(bool normalizeCPUUsage);
 
-	/** Whether to show the total cpu for the process plus all of its children */
-	void setShowTotals(bool showTotals);
+        /** Retranslate the GUI, for when the system language changes */
+        void retranslateUi();
 
-private:
-	ProcessModelPrivate*  const d;
-	friend class ProcessModelPrivate;
+        public Q_SLOTS:
+
+            /** Whether to show the total cpu for the process plus all of its children */
+            void setShowTotals(bool showTotals);
+
+    private:
+        ProcessModelPrivate*  const d;
+        friend class ProcessModelPrivate;
 };
 
 #endif
