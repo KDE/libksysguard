@@ -357,6 +357,7 @@ void Processes::deleteProcess(long pid)
         p->numChildren--;
     } while (p->pid!= 0);
 
+    int i = 0;
     foreach( Process *it, d->mListProcesses ) {
         if(it->index > process->index)
             it->index--;
