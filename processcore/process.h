@@ -82,6 +82,13 @@ namespace KSysGuard
     void setCommand(QString command); ///< The command the process was launched with
     void setStatus( ProcessStatus status); ///< Whether the process is running/sleeping/etc
 
+    void setIoCharactersRead(qlonglong number); ///< The number of bytes which this task has caused to be read from storage
+    void setIoCharactersWritten(qlonglong number); ///< The number of bytes which this task has caused, or shall cause to be written to disk. 
+    void setIoReadSyscalls(qlonglong number); ///< Number of read I/O operations, i.e. syscalls like read() and pread().
+    void setIoWriteSyscalls(qlonglong number); ///< Number of write I/O operations, i.e. syscalls like write() and pwrite().
+    void setIoCharactersActuallyRead(qlonglong number); ///< Number of bytes which this process really did cause to be fetched from the storage layer.
+    void setIoCharactersActuallyWritten(qlonglong number); ///< Attempt to count the number of bytes which this process caused to be sent to the storage layer.
+
     /* The member variables are made to public for efficiency, but should only be read from. */
     QString login; 
     qlonglong uid; 
@@ -94,25 +101,32 @@ namespace KSysGuard
     qlonglong sgid; 
     qlonglong fsgid; 
 
-    qlonglong tracerpid; 
-    QByteArray tty; 
-    qlonglong userTime; 
-    qlonglong sysTime;  
-    int userUsage; 
-    int sysUsage;  
-    int totalUserUsage; 
-    int totalSysUsage; 
-    unsigned long numChildren; 
-    int niceLevel;      
-    Scheduler scheduler; 
-    IoPriorityClass ioPriorityClass; 
-    int ioniceLevel;    
-    qlonglong vmSize;   
-    qlonglong vmRSS;    
-    qlonglong vmURSS;   
-    QString name;  
-    QString command; 
-    ProcessStatus status; 
+    qlonglong tracerpid;
+    QByteArray tty;
+    qlonglong userTime;
+    qlonglong sysTime;
+    int userUsage;
+    int sysUsage;
+    int totalUserUsage;
+    int totalSysUsage;
+    unsigned long numChildren;
+    int niceLevel;
+    Scheduler scheduler;
+    IoPriorityClass ioPriorityClass;
+    int ioniceLevel;
+    qlonglong vmSize;
+    qlonglong vmRSS;
+    qlonglong vmURSS;
+    QString name;
+    QString command;
+    ProcessStatus status;
+    qlonglong ioCharactersRead;
+    qlonglong ioCharactersWritten;
+    qlonglong ioReadSyscalls;
+    qlonglong ioWriteSyscalls;
+    qlonglong ioCharactersActuallyRead;
+    qlonglong ioCharactersActuallyWritten;
+
 
     QList<Process *> children;  ///< A list of all the direct children that the process has.  Children of children are not listed here, so note that children_pids <= numChildren
     QTime timeKillWasSent; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.
@@ -143,7 +157,8 @@ namespace KSysGuard
         Name = 0x400,
         Command = 0x800,
         Status = 0x1000,
-        Login = 0x2000
+        Login = 0x2000,
+        IO = 0x4000
     };
     Q_DECLARE_FLAGS(Changes, Change)
 

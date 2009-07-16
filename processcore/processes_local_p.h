@@ -36,35 +36,37 @@ namespace KSysGuard
      * This is the OS specific code to get process information for the local host.
      */
     class ProcessesLocal : public AbstractProcesses {
-      public:
-	ProcessesLocal();
-	virtual ~ProcessesLocal();
-	virtual QSet<long> getAllPids();
-	virtual long getParentPid(long pid);
-	virtual bool updateProcessInfo(long pid, Process *process);
-	virtual bool sendSignal(long pid, int sig);
-        virtual bool setNiceness(long pid, int priority);
-	virtual bool setScheduler(long pid, int priorityClass, int priority);
-	virtual long long totalPhysicalMemory();
-	virtual bool setIoNiceness(long pid, int priorityClass, int priority);
-	virtual bool supportsIoNiceness();
-	virtual long numberProcessorCores()
+        public:
+            ProcessesLocal();
+            virtual ~ProcessesLocal();
+            virtual QSet<long> getAllPids();
+            virtual long getParentPid(long pid);
+            virtual bool updateProcessInfo(long pid, Process *process);
+            virtual bool sendSignal(long pid, int sig);
+            virtual bool setNiceness(long pid, int priority);
+            virtual bool setScheduler(long pid, int priorityClass, int priority);
+            virtual long long totalPhysicalMemory();
+            virtual bool setIoNiceness(long pid, int priorityClass, int priority);
+            virtual bool supportsIoNiceness();
+            virtual long numberProcessorCores()
 #ifdef _SC_NPROCESSORS_ONLN
-	{ return sysconf(_SC_NPROCESSORS_ONLN); } // Should work on any recent posix system
+            { return sysconf(_SC_NPROCESSORS_ONLN); } // Should work on any recent posix system
 #else
-	;
+            ;
 #endif
-	virtual void updateAllProcesses() { emit processesUpdated(); } //For local machine, there is no delay
+            virtual void updateAllProcesses(Processes::UpdateFlags updateFlags) { mUpdateFlags = updateFlags; emit processesUpdated(); } //For local machine, there is no delay
 
-      private:
-	/**
-	 * You can use this for whatever data you want.  Be careful about preserving state in between getParentPid and updateProcessInfo calls
-	 * if you chose to do that. getParentPid may be called several times for different pids before the relevant updateProcessInfo calls are made.
-	 * This is because the tree structure has to be sorted out first.
-	 */
-        class Private;
-        Private *d;
-
+        private:
+            /**
+             * You can use this for whatever data you want.
+             * Be careful about preserving state in between getParentPid and updateProcessInfo calls
+             * if you chose to do that. getParentPid may be called several times
+             * for different pids before the relevant updateProcessInfo calls are made.
+             * This is because the tree structure has to be sorted out first.
+             */
+            class Private;
+            Private *d;
+            Processes::UpdateFlags mUpdateFlags;
     };
 }
 #endif 

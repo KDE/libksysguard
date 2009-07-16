@@ -44,7 +44,7 @@ namespace KSysGuard
 	virtual bool setIoNiceness(long pid, int priorityClass, int priority);
 	virtual bool supportsIoNiceness();
 	virtual long numberProcessorCores();
-	virtual void updateAllProcesses();
+    virtual void updateAllProcesses( Processes::UpdateFlags updateFlags );
 
 
       Q_SIGNALS:

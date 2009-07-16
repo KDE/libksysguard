@@ -24,6 +24,7 @@
 
 #include <QSet>
 #include <QObject>
+#include "processes.h"
 
 namespace KSysGuard
 {
@@ -136,7 +137,7 @@ namespace KSysGuard
              *
              *  Get all the current process information from the machine.  When done, emit updateAllProcesses().
              */
-            virtual void updateAllProcesses() = 0;
+            virtual void updateAllProcesses( Processes::UpdateFlags updateFlags ) = 0;
 
 Q_SIGNALS:
             /** \brief This is emitted when the processes have been updated, and the view should be refreshed.
