@@ -289,7 +289,7 @@ bool Processes::updateOrAddProcess( long pid)
         return updateProcess(ps, ppid);
 }
 
-void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags updateFlags)
+void Processes::updateAllProcesses( long updateDurationMS )
 {
     if(d->mElapsedTimeMilliSeconds == -1) {
         //First time update has been called
@@ -301,7 +301,7 @@ void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags
         d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
     }
 
-    d->mAbstractProcesses->updateAllProcesses(updateFlags);
+    d->mAbstractProcesses->updateAllProcesses();
 }
 
 void Processes::processesUpdated() {
@@ -316,8 +316,8 @@ void Processes::processesUpdated() {
             pid = i.next();
             i.remove();
             d->mProcessedLastTime.remove(pid); //It may or may not be here - remove it if it is there
-            updateOrAddProcess(pid);  //This adds the process or changes an existing one
-            i.toFront(); //we can remove entries from this set elsewhere, so our iterator might be invalid.  Reset it back to the start of the set
+            updateOrAddProcess(pid);  //This adds the process or changes an extisting one
+            i.toFront(); //we can remove entries from this set elsewhere, so our iterator might be invalid.  reset it back to the start of the set
         }
     }
     {
@@ -357,6 +357,7 @@ void Processes::deleteProcess(long pid)
         p->numChildren--;
     } while (p->pid!= 0);
 
+    int i=0;
     foreach( Process *it, d->mListProcesses ) {
         if(it->index > process->index)
             it->index--;

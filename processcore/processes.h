@@ -55,12 +55,6 @@ namespace KSysGuard
         Q_OBJECT
 
     public:
-        enum UpdateFlag {
-            StandardInformation = 0,
-            IOStatistics
-        };
-        Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
-
         /**
          *  Singleton pattern to return the instance associated with @p host.
          *  Leave as the default for the current machine
@@ -80,9 +74,9 @@ namespace KSysGuard
          *
          *  Set updateDuration to whatever time period that you update, in milliseconds.
          *  For example, if you update every 2000ms, set this to 2000.  That way it won't update
-         *  more often than needed.
+         *  more often than needed
          */
-        void updateAllProcesses(long updateDurationMS = 0, Processes::UpdateFlags updateFlags = 0);
+        void updateAllProcesses(long updateDurationMS = 0);
 
         /**
          *  Return information for one specific process.  Call getProcess(0) to get the 
@@ -148,7 +142,7 @@ namespace KSysGuard
 
         /** 
          *  Return the internal pointer of all the processes.  The order of the processes 
-         *  is guaranteed to never change.  Call updateAllProcesses() first to actually
+         *  is guaranteed to never change.  Call updateAllProcesses first to actually
          *  update the information.
          */
         QList< Process *> getAllProcesses() const;
@@ -233,6 +227,5 @@ namespace KSysGuard
          *  in response to a runCommand request.  The id identifies the answer */
         void answerReceived( int id, const QList<QByteArray>& answer );
     };
-    Q_DECLARE_OPERATORS_FOR_FLAGS(Processes::UpdateFlags)
 }
 #endif 

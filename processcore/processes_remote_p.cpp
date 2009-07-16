@@ -76,7 +76,6 @@ namespace KSysGuard
       long freeMemory;
       long usedMemory;
 
-      Processes::UpdateFlags updateFlags;
     };
 ProcessesRemote::ProcessesRemote(const QString &hostname) : d(new Private())
 {
@@ -142,9 +141,8 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
     return true;
 }
 
-void ProcessesRemote::updateAllProcesses( Processes::UpdateFlags updateFlags )
+void ProcessesRemote::updateAllProcesses() 
 {
-    d->updateFlags = updateFlags;
     if(!d->havePsInfo)
     	emit runCommand("ps?", (int)PsInfo);
     emit runCommand("ps", (int)Ps);

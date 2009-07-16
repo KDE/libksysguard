@@ -109,13 +109,6 @@ void KSysGuard::Process::clear() {
     ioPriorityClass = None;
     ioniceLevel = -1;
     scheduler = Other;
-    ioCharactersRead = 0;
-    ioCharactersWritten = 0;
-    ioReadSyscalls = 0;
-    ioWriteSyscalls = 0;
-    ioCharactersActuallyRead = 0;
-    ioCharactersActuallyWritten = 0;
-
     changes = Process::Nothing;
 }
 void KSysGuard::Process::setLogin(QString _login) {
@@ -251,34 +244,4 @@ void KSysGuard::Process::setStatus(ProcessStatus _status) {
     status = _status;
     changes |= Process::Status;
 } 
-void KSysGuard::Process::setIoCharactersRead(qlonglong number) {
-    if(number == ioCharactersRead) return;
-    ioCharactersRead = number;
-    changes |= Process::IO;
-}
-void KSysGuard::Process::setIoCharactersWritten(qlonglong number) {
-    if(number == ioCharactersWritten) return;
-    ioCharactersWritten = number;
-    changes |= Process::IO;
-}
-void KSysGuard::Process::setIoReadSyscalls(qlonglong number) {
-    if(number == ioReadSyscalls) return;
-    ioReadSyscalls = number;
-    changes |= Process::IO;
-}
-void KSysGuard::Process::setIoWriteSyscalls(qlonglong number) {
-    if(number == ioWriteSyscalls) return;
-    ioWriteSyscalls = number;
-    changes |= Process::IO;
-}
-void KSysGuard::Process::setIoCharactersActuallyRead(qlonglong number) {
-    if(number == ioCharactersActuallyRead) return;
-    ioCharactersActuallyRead = number;
-    changes |= Process::IO;
-}
-void KSysGuard::Process::setIoCharactersActuallyWritten(qlonglong number) {
-    if(number == ioCharactersActuallyWritten) return;
-    ioCharactersActuallyWritten = number;
-    changes |= Process::IO;
-}
 
