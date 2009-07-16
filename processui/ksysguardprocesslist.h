@@ -39,173 +39,175 @@ struct KSysGuardProcessListPrivate;
 /**
  * This widget implements a process list page. Besides the process
  * list which is implemented as a ProcessList, it contains two
- * comboxes and two buttons.  The combo boxes are used to set the
+ * combo boxes and two buttons.  The combo boxes are used to set the
  * update rate and the process filter.  The buttons are used to force
  * an immediate update and to kill a process.
  */
 class KDE_EXPORT KSysGuardProcessList : public QWidget
 {
-	Q_OBJECT
-	Q_PROPERTY( bool showTotalsInTree READ showTotals WRITE setShowTotals )
-	Q_PROPERTY( ProcessFilter::State state READ state WRITE setState )
-	Q_PROPERTY( int updateIntervalMSecs READ updateIntervalMSecs WRITE setUpdateIntervalMSecs )
-	Q_PROPERTY( ProcessModel::Units units READ units WRITE setUnits )
-	Q_PROPERTY( bool killButtonVisible READ isKillButtonVisible WRITE setKillButtonVisible )
-	Q_ENUMS( ProcessFilter::State )
-	Q_ENUMS( ProcessModel::Units )
+    Q_OBJECT
+        Q_PROPERTY( bool showTotalsInTree READ showTotals WRITE setShowTotals )
+        Q_PROPERTY( ProcessFilter::State state READ state WRITE setState )
+        Q_PROPERTY( int updateIntervalMSecs READ updateIntervalMSecs WRITE setUpdateIntervalMSecs )
+        Q_PROPERTY( ProcessModel::Units units READ units WRITE setUnits )
+        Q_PROPERTY( bool killButtonVisible READ isKillButtonVisible WRITE setKillButtonVisible )
+        Q_ENUMS( ProcessFilter::State )
+        Q_ENUMS( ProcessModel::Units )
 
-public:
-	KSysGuardProcessList(QWidget* parent, const QString &hostName = QString());
-	virtual ~KSysGuardProcessList();
+    public:
+        KSysGuardProcessList(QWidget* parent, const QString &hostName = QString());
+        virtual ~KSysGuardProcessList();
 
-	QLineEdit *filterLineEdit() const;
-	QTreeView *treeView() const;
+        QLineEdit *filterLineEdit() const;
+        QTreeView *treeView() const;
 
-	/** Returns which processes we are currently filtering for and the way in which we show them.
-	 *  @see setState()
-	 */
-	ProcessFilter::State state() const;
-	
-	/** Returns the number of milliseconds that have to elapse before updating the list of processes */
-	int updateIntervalMSecs() const;
+        /** Returns which processes we are currently filtering for and the way in which we show them.
+         *  @see setState()
+         */
+        ProcessFilter::State state() const;
 
-	/** Whether the widget will show child totals for CPU and Memory etc usage */
-	bool showTotals() const;
+        /** Returns the number of milliseconds that have to elapse before updating the list of processes */
+        int updateIntervalMSecs() const;
 
-	/** The units to display memory sizes etc in.  E.g. kb/mb/gb */
-	ProcessModel::Units units() const;
+        /** Whether the widget will show child totals for CPU and Memory etc usage */
+        bool showTotals() const;
 
-	/** Returns a list of the processes that have been selected by the user. */
-	QList<KSysGuard::Process *> selectedProcesses() const;
+        /** The units to display memory sizes etc in.  E.g. kb/mb/gb */
+        ProcessModel::Units units() const;
 
-	/** Save the current state of the widget to the given config group 
-	 *
-	 *  @param[in] cg Config group to add these settings to
-	 * */
-	void saveSettings(KConfigGroup &cg);
-	
-	/** Load the saved state of the widget from the given config group */
-	void loadSettings(const KConfigGroup &cg);
+        /** Returns a list of the processes that have been selected by the user. */
+        QList<KSysGuard::Process *> selectedProcesses() const;
 
-	/** Returns the process model used. Use with caution. */
-	ProcessModel *processModel();
-	
-	/** Restore the headings to the given state. */
-	void restoreHeaderState(const QByteArray & state);
-    
-	/** @returns whether the Kill Process button is visible. */
-	bool isKillButtonVisible() const;
-    
-	/** @param visible defines whether the Kill Process button is shown or not. */
-	void setKillButtonVisible(bool visible);
-    
-Q_SIGNALS:
-	/** Emitted when the display has been updated */
-	void updated();
-public Q_SLOTS:
-	/** Inform the view that the user has changed the selection */
-	void selectionChanged();
-	
-	/** Send a kill signal to all the processes that the user has selected.  Pops up a dialog box to confirm with the user */
-	void killSelectedProcesses();
-	
-	/** Send a signal to a list of given processes.
-	 *   @p pids A list of PIDs that should be sent the signal 
-	 *   @p sig  The signal to send. 
-	 *   @return Whether the kill went ahead. True if successful or user cancelled.  False if there was a problem
-	 */
-	bool killProcesses(const QList< long long> &pids, int sig);
+        /** Save the current state of the widget to the given config group 
+         *
+         *  @param[in] cg Config group to add these settings to
+         * */
+        void saveSettings(KConfigGroup &cg);
 
-	/** Renice all the processes that the user has selected.  Pops up a dialog box to ask for the nice value and confirm */
-	void reniceSelectedProcesses();
-	
-	/** Change the CPU scheduler for the given of processes to the given scheduler, with the given scheduler priority.
-	 *  If the scheduler is Other or Batch, @p newCpuSchedPriority is ignored.
-	 *   @return Whether the cpu scheduler changing went ahead.  True if successful or user cancelled.  False if there was a problem
-	 */
-	bool changeCpuScheduler(const QList< long long> &pids, KSysGuard::Process::Scheduler newCpuSched, int newCpuSchedPriority);
+        /** Load the saved state of the widget from the given config group */
+        void loadSettings(const KConfigGroup &cg);
 
-	/** Change the I/O scheduler for the given of processes to the given scheduler, with the given scheduler priority.
-	 *  If the scheduler is Other or Batch, @p newCpuSchedPriority is ignored.
-	 *   @return Whether the cpu scheduler changing went ahead.  True if successful or user cancelled.  False if there was a problem
-	 */
-	bool changeIoScheduler(const QList< long long> &pids, KSysGuard::Process::IoPriorityClass newIoSched, int newIoSchedPriority);
-	/** Renice the processes given to the given niceValue. 
-	 *   @return Whether the kill went ahead.  True if successful or user cancelled.  False if there was a problem
-	 * */ 
-	bool reniceProcesses(const QList<long long> &pids, int niceValue);
+        /** Returns the process model used. Use with caution. */
+        ProcessModel *processModel();
 
-	/** Fetch new process information and redraw the display */
-	void updateList();
-	
-	/** Set which processes we are currently filtering for and the way in which we show them. */
-	void setState(ProcessFilter::State state);
-	
- 	/** Set the number of milliseconds that have to elapse before updating the list of processes */
-	void setUpdateIntervalMSecs(int intervalMSecs);
+        /** Restore the headings to the given state. */
+        void restoreHeaderState(const QByteArray & state);
 
-	/** Set whether to show child totals for CPU and Memory etc usage */
-	void setShowTotals(bool showTotals);
+        /** @returns whether the Kill Process button is visible. */
+        bool isKillButtonVisible() const;
+
+        /** @param visible defines whether the Kill Process button is shown or not. */
+        void setKillButtonVisible(bool visible);
+
+    Q_SIGNALS:
+        /** Emitted when the display has been updated */
+        void updated();
+
+    public Q_SLOTS:
+        /** Inform the view that the user has changed the selection */
+        void selectionChanged();
+
+        /** Send a kill signal to all the processes that the user has selected.  Pops up a dialog box to confirm with the user */
+        void killSelectedProcesses();
+
+        /** Send a signal to a list of given processes.
+         *   @p pids A list of PIDs that should be sent the signal 
+         *   @p sig  The signal to send. 
+         *   @return Whether the kill went ahead. True if successful or user cancelled.  False if there was a problem
+         */
+        bool killProcesses(const QList< long long> &pids, int sig);
+
+        /** Renice all the processes that the user has selected.  Pops up a dialog box to ask for the nice value and confirm */
+        void reniceSelectedProcesses();
+
+        /** Change the CPU scheduler for the given of processes to the given scheduler, with the given scheduler priority.
+         *  If the scheduler is Other or Batch, @p newCpuSchedPriority is ignored.
+         *   @return Whether the cpu scheduler changing went ahead.  True if successful or user cancelled.  False if there was a problem
+         */
+        bool changeCpuScheduler(const QList< long long> &pids, KSysGuard::Process::Scheduler newCpuSched, int newCpuSchedPriority);
+
+        /** Change the I/O scheduler for the given of processes to the given scheduler, with the given scheduler priority.
+         *  If the scheduler is Other or Batch, @p newCpuSchedPriority is ignored.
+         *   @return Whether the cpu scheduler changing went ahead.  True if successful or user cancelled.  False if there was a problem
+         */
+        bool changeIoScheduler(const QList< long long> &pids, KSysGuard::Process::IoPriorityClass newIoSched, int newIoSchedPriority);
+        /** Renice the processes given to the given niceValue. 
+         *   @return Whether the kill went ahead.  True if successful or user cancelled.  False if there was a problem
+         * */ 
+        bool reniceProcesses(const QList<long long> &pids, int niceValue);
+
+        /** Fetch new process information and redraw the display */
+        void updateList();
+
+        /** Set which processes we are currently filtering for and the way in which we show them. */
+        void setState(ProcessFilter::State state);
+
+        /** Set the number of milliseconds that have to elapse before updating the list of processes */
+        void setUpdateIntervalMSecs(int intervalMSecs);
+
+        /** Set whether to show child totals for CPU and Memory etc usage */
+        void setShowTotals(bool showTotals);
 
         /** Focus on a particular process, and select it */
         void selectAndJumpToProcess(int pid);
 
-	/** The units to display memory sizes etc in. */
-	void setUnits(ProcessModel::Units unit);
+        /** The units to display memory sizes etc in. */
+        void setUnits(ProcessModel::Units unit);
 
-	/** Row was just inserted in the filter model */
-	void rowsInserted ( const QModelIndex & parent, int start, int end );
+        /** Row was just inserted in the filter model */
+        void rowsInserted ( const QModelIndex & parent, int start, int end );
 
-private Q_SLOTS:
+    private Q_SLOTS:
+        /** Expand all the children, recursively, of the node given.  Pass an empty QModelIndex to expand all the top level children */
+        void expandAllChildren(const QModelIndex &parent);
 
-	/** Expand all the children, recursively, of the node given.  Pass an empty QModelIndex to expand all the top level children */
-	void expandAllChildren(const QModelIndex &parent);
+        /** Expand init to show its children, but not the sub children processes. */
+        void expandInit();
 
-	/** Expand init to show its children, but not the sub children processes. */
-	void expandInit();
-	
-	/** Display a context menu for the column headings allowing the user to show or hide columns. */
-	void showColumnContextMenu(const QPoint &point);
-	
-	/**  Display a context menu for the given process allowing the user to kill etc the process */
-	void showProcessContextMenu(const QModelIndex &index);
-	/** Display a context menu for the selected processes allowing the user to kill etc the process */
-	void showProcessContextMenu(const QPoint &point);
-	
-	/** Handle the situation where killing a process has failed - usually due to insufficent rights */
-	void killFailed();
-	
-	/** Handle the situation where renicing a process has failed - usually due to insufficent rights */
-	void reniceFailed();
+        /** Display a context menu for the column headings allowing the user to show or hide columns. */
+        void showColumnContextMenu(const QPoint &point);
 
-	/** Handle the situation where ionice'ing a process has failed - usually due to insufficent rights */
-	void ioniceFailed();
-	
-	/** Set state from combo box int value */
-	void setStateInt(int state);
+        /**  Display a context menu for the given process allowing the user to kill etc the process */
+        void showProcessContextMenu(const QModelIndex &index);
 
-	/** Called when the text in the gui filter text box has changed */
-	void filterTextChanged(const QString &newText);
+        /** Display a context menu for the selected processes allowing the user to kill etc the process */
+        void showProcessContextMenu(const QPoint &point);
 
-	/** Called when one of the actions (kill, renice etc) is clicked etc */
-	void actionTriggered(QObject *object);
-protected:
-	/** Inherit QWidget::showEvent(QShowEvent *) to enable the timer, for updates, when visible */
-	virtual void showEvent(QShowEvent*);
-	
-	/** Inherit QWidget::hideEvent(QShowEvent *) to disable the timer, for updates, when not visible */
-	virtual void hideEvent(QHideEvent*);
-	
-	/** Capture any change events sent to this widget.  In particular QEvent::LanguageChange */
-	virtual void changeEvent ( QEvent * event );
+        /** Handle the situation where killing a process has failed - usually due to insufficient rights */
+        void killFailed();
 
-	bool eventFilter(QObject *obj, QEvent *event);
+        /** Handle the situation where renicing a process has failed - usually due to insufficient rights */
+        void reniceFailed();
 
-	/** Retranslate the Ui as needed */
-	void retranslateUi();
+        /** Handle the situation where ionice'ing a process has failed - usually due to insufficient rights */
+        void ioniceFailed();
 
-private:
-	KSysGuardProcessListPrivate* const d;
+        /** Set state from combo box int value */
+        void setStateInt(int state);
+
+        /** Called when the text in the gui filter text box has changed */
+        void filterTextChanged(const QString &newText);
+
+        /** Called when one of the actions (kill, renice etc) is clicked etc */
+        void actionTriggered(QObject *object);
+
+    protected:
+        /** Inherit QWidget::showEvent(QShowEvent *) to enable the timer, for updates, when visible */
+        virtual void showEvent(QShowEvent*);
+
+        /** Inherit QWidget::hideEvent(QShowEvent *) to disable the timer, for updates, when not visible */
+        virtual void hideEvent(QHideEvent*);
+
+        /** Capture any change events sent to this widget.  In particular QEvent::LanguageChange */
+        virtual void changeEvent ( QEvent * event );
+
+        bool eventFilter(QObject *obj, QEvent *event);
+
+        /** Retranslate the Ui as needed */
+        void retranslateUi();
+
+    private:
+        KSysGuardProcessListPrivate* const d;
 };
 
 #endif
