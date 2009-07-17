@@ -68,6 +68,7 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
     mShowCommandLineOptions = false;
     mShowingTooltips = true;
     mNormalizeCPUUsage = true;
+    mIoInformation = ProcessModel::ActualBytes; 
 }
 
 ProcessModelPrivate::~ProcessModelPrivate()
@@ -95,6 +96,7 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
     d->setupProcesses();
     d->setupWindows();
     d->mUnits = UnitsKB;
+    d->mIoUnits = UnitsKB;
 }
 
 ProcessModel::~ProcessModel()
@@ -535,6 +537,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingPid:
             case HeadingMemory:
             case HeadingSharedMemory:
+            case HeadingIoRead:
+            case HeadingIoWrite:
             case HeadingVmSize:
     //            return QVariant(Qt::AlignRight);
             case HeadingUser:
@@ -832,20 +836,18 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 return QString::number((int)(total+0.5)) + '%';
             }
         case HeadingMemory:
-            if(process->vmRSS == 0) return QVariant(QVariant::String);
             if(process->vmURSS == -1) {
                 //If we don't have the URSS (the memory used by only the process, not the shared libraries)
                 //then return the RSS (physical memory used by the process + shared library) as the next best thing
-                return formatMemoryInfo(process->vmRSS);
+                return formatMemoryInfo(process->vmRSS, d->mUnits, true);
             } else {
-                return formatMemoryInfo(process->vmURSS);
+                return formatMemoryInfo(process->vmURSS, d->mUnits, true);
             }
         case HeadingVmSize:
-            if(process->vmSize == 0) return QVariant(QVariant::String);
-            return formatMemoryInfo(process->vmSize);
+            return formatMemoryInfo(process->vmSize, d->mUnits, true);
         case HeadingSharedMemory:
             if(process->vmRSS - process->vmURSS <= 0 || process->vmURSS == -1) return QVariant(QVariant::String);
-            return formatMemoryInfo(process->vmRSS - process->vmURSS);
+            return formatMemoryInfo(process->vmRSS - process->vmURSS, d->mUnits);
         case HeadingCommand: 
             {
                 return process->command;
@@ -856,14 +858,30 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
         case HeadingIoRead:
             {
-                if(process->ioCharactersRead)
-                    return KGlobal::locale()->formatByteSize(process->ioCharactersRead);
+                switch(d->mIoInformation) {
+                    case ProcessModel::Bytes:  //divide by 1024 to convert to kB
+                        return formatMemoryInfo(process->ioCharactersRead/1024, d->mIoUnits, true);
+                    case ProcessModel::Syscalls:
+                        if( process->ioReadSyscalls )
+                            return QString::number(process->ioReadSyscalls);
+                        return QVariant();
+                    case ProcessModel::ActualBytes:
+                        return formatMemoryInfo(process->ioCharactersActuallyRead/1024, d->mIoUnits, true);
+                }
                 return QVariant();
             }
         case HeadingIoWrite:
             {
-                if(process->ioCharactersWritten)
-                    return KGlobal::locale()->formatByteSize(process->ioCharactersWritten);
+                switch(d->mIoInformation) {
+                    case ProcessModel::Bytes:
+                        return formatMemoryInfo(process->ioCharactersWritten/1024, d->mIoUnits, true);
+                    case ProcessModel::Syscalls:
+                        if( process->ioWriteSyscalls )
+                            return QString::number(process->ioWriteSyscalls);
+                        return QVariant();
+                    case ProcessModel::ActualBytes:
+                        return formatMemoryInfo(process->ioCharactersActuallyWritten/1024, d->mIoUnits, true);
+                }
                 return QVariant();
             }
 #ifdef Q_WS_X11
@@ -1162,9 +1180,23 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->vmURSS == -1) return (qlonglong)0;
             return (qlonglong)-(process->vmRSS - process->vmURSS);
         case HeadingIoRead:
-            return -process->ioCharactersRead;
+            switch(d->mIoInformation) {
+                case ProcessModel::Bytes:
+                    return -process->ioCharactersRead;
+                case ProcessModel::Syscalls:
+                    return -process->ioReadSyscalls;
+                case ProcessModel::ActualBytes:
+                    return -process->ioCharactersActuallyRead;
+            }
         case HeadingIoWrite:
-            return -process->ioCharactersWritten;
+            switch(d->mIoInformation) {
+                case ProcessModel::Bytes:
+                    return -process->ioCharactersWritten;
+                case ProcessModel::Syscalls:
+                    return -process->ioWriteSyscalls;
+                case ProcessModel::ActualBytes:
+                    return -process->ioCharactersActuallyWritten;
+            }
         }
         return QVariant();
     }
@@ -1210,8 +1242,24 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->vmRSS - process->vmURSS < 0 || process->vmURSS == -1) return QVariant(QVariant::String);
             return (qlonglong)(process->vmRSS - process->vmURSS);
         case HeadingCommand: 
-            {
-                return process->command;
+            return process->command;
+        case HeadingIoRead:
+            switch(d->mIoInformation) {
+                case ProcessModel::Bytes:
+                    return process->ioCharactersRead;
+                case ProcessModel::Syscalls:
+                    return process->ioReadSyscalls;
+                case ProcessModel::ActualBytes:
+                    return process->ioCharactersActuallyRead;
+            }
+        case HeadingIoWrite:
+            switch(d->mIoInformation) {
+                case ProcessModel::Bytes:
+                    return process->ioCharactersWritten;
+                case ProcessModel::Syscalls:
+                    return process->ioWriteSyscalls;
+                case ProcessModel::ActualBytes:
+                    return process->ioCharactersActuallyWritten;
             }
 #ifdef Q_WS_X11
         case HeadingXTitle:
@@ -1394,17 +1442,34 @@ ProcessModel::Units ProcessModel::units() const
 {
     return (Units) d->mUnits;
 }
-
-QString ProcessModel::formatMemoryInfo(qlonglong amountInKB) const
+void ProcessModel::setIoUnits(Units units)
+{
+    d->mIoUnits = units;
+}
+ProcessModel::Units ProcessModel::ioUnits() const
+{
+    return (Units) d->mIoUnits;
+}
+void ProcessModel::setIoInformation( ProcessModel::IoInformation ioInformation )
+{
+    d->mIoInformation = ioInformation;
+}
+ProcessModel::IoInformation ProcessModel::ioInformation() const
+{
+    return d->mIoInformation;
+}
+QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool returnEmptyIfValueIsZero) const
 {
     //We cache the result of i18n for speed reasons.  We call this function 
     //hundreds of times, every second or so
+    if(returnEmptyIfValueIsZero && amountInKB == 0)
+        return QString();
     static QString kbString = i18n("%1 K", QString::fromLatin1("%1"));
     static QString mbString = i18n("%1 M", QString::fromLatin1("%1"));
     static QString gbString = i18n("%1 G", QString::fromLatin1("%1"));
     static QString percentageString = i18n("%1%", QString::fromLatin1("%1"));
     double amount; 
-    switch(d->mUnits) {
+    switch(units) {
       case UnitsKB:
         return kbString.arg(amountInKB);
       case UnitsMB:

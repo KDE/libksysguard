@@ -559,8 +559,12 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     QAction *actionShowTooltips = NULL;
     QAction *actionNormalizeCPUUsage = NULL;
 
+    QAction *actionIoCharacters = NULL;
+    QAction *actionIoSyscalls = NULL;
+    QAction *actionIoActualCharacters = NULL;
 
-    if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory ||  index == ProcessModel::HeadingSharedMemory) {
+
+    if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory ||  index == ProcessModel::HeadingSharedMemory || ( (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) && d->mModel.ioInformation() != ProcessModel::Syscalls)) {
         //If the user right clicks on a column that contains a memory size, show a toggle option for displaying
         //the memory in different units.  e.g.  "2000 k" or "2 m"
         menu->addSeparator()->setText(i18n("Display Units"));
@@ -580,14 +584,18 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         actionGB->setCheckable(true);
         menu->addAction(actionGB);
         unitsGroup->addAction(actionGB);
-        actionPercentage = new QAction(menu);
-        actionPercentage->setText(i18n("Percentage"));
-        actionPercentage->setCheckable(true);
-        menu->addAction(actionPercentage);
-        unitsGroup->addAction(actionPercentage);
-
-        unitsGroup->setExclusive(true);
-        switch(d->mModel.units()) {
+        ProcessModel::Units currentUnit;
+        if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
+            currentUnit = d->mModel.ioUnits();
+        } else {
+            actionPercentage = new QAction(menu);
+            actionPercentage->setText(i18n("Percentage"));
+            actionPercentage->setCheckable(true);
+            menu->addAction(actionPercentage);
+            unitsGroup->addAction(actionPercentage);
+            currentUnit = d->mModel.units();
+        }
+        switch(currentUnit) {
             case ProcessModel::UnitsKB:
                 actionKB->setChecked(true);
                 break;
@@ -600,7 +608,10 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
             case ProcessModel::UnitsPercentage:
                 actionPercentage->setChecked(true);
                 break;
+            default:
+                break;
         }
+        unitsGroup->setExclusive(true);
     } else if(index == ProcessModel::HeadingName) {
         menu->addSeparator();
         actionShowCmdlineOptions = new QAction(menu);
@@ -616,6 +627,42 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         actionNormalizeCPUUsage->setChecked(d->mModel.isNormalizedCPUUsage());
         menu->addAction(actionNormalizeCPUUsage);
     }
+    
+    if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
+        menu->addSeparator()->setText(i18n("Displayed Information"));
+        QActionGroup *ioInformationGroup = new QActionGroup(menu);
+        actionIoCharacters = new QAction(menu);
+        actionIoCharacters->setText(i18n("Characters read/written"));
+        actionIoCharacters->setCheckable(true);
+        menu->addAction(actionIoCharacters);
+        ioInformationGroup->addAction(actionIoCharacters);
+        actionIoSyscalls = new QAction(menu);
+        actionIoSyscalls->setText(i18n("Number of Read/Write operations"));
+        actionIoSyscalls->setCheckable(true);
+        menu->addAction(actionIoSyscalls);
+        ioInformationGroup->addAction(actionIoSyscalls);
+        actionIoActualCharacters = new QAction(menu);
+        actionIoActualCharacters->setText(i18n("Bytes actually read/written"));
+        actionIoActualCharacters->setCheckable(true);
+        menu->addAction(actionIoActualCharacters);
+        ioInformationGroup->addAction(actionIoActualCharacters);
+
+        switch(d->mModel.ioInformation()) {
+            case ProcessModel::Bytes:
+                actionIoCharacters->setChecked(true);
+                break;
+            case ProcessModel::Syscalls:
+                actionIoSyscalls->setChecked(true);
+                break;
+            case ProcessModel::ActualBytes:
+                actionIoActualCharacters->setChecked(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+
     menu->addSeparator();
     actionShowTooltips = new QAction(menu);
     actionShowTooltips->setCheckable(true);
@@ -627,13 +674,22 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     QAction *result = menu->exec(d->mUi->treeView->header()->mapToGlobal(point));
     if(!result) return; //Menu cancelled
     if(result == actionKB) {
-        d->mModel.setUnits(ProcessModel::UnitsKB);
+        if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+            d->mModel.setIoUnits(ProcessModel::UnitsKB);
+        else
+            d->mModel.setUnits(ProcessModel::UnitsKB);
         return;
     } else if(result == actionMB) {
-        d->mModel.setUnits(ProcessModel::UnitsMB);
+        if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+            d->mModel.setIoUnits(ProcessModel::UnitsMB);
+        else
+            d->mModel.setUnits(ProcessModel::UnitsMB);
         return;
     } else if(result == actionGB) {
-        d->mModel.setUnits(ProcessModel::UnitsGB);
+        if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+            d->mModel.setIoUnits(ProcessModel::UnitsGB);
+        else
+            d->mModel.setUnits(ProcessModel::UnitsGB);
         return;
     } else if(result == actionPercentage) {
         d->mModel.setUnits(ProcessModel::UnitsPercentage);
@@ -647,7 +703,18 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     } else if(result == actionShowTooltips) {
         d->mModel.setShowingTooltips(actionShowTooltips->isChecked());
         return;
+    } else if(result == actionIoCharacters) {
+        d->mModel.setIoInformation(ProcessModel::Bytes);
+        return;
+    } else if(result == actionIoSyscalls) {
+        d->mModel.setIoInformation(ProcessModel::Syscalls);
+        return;
+    } else if(result == actionIoActualCharacters) {
+        d->mModel.setIoInformation(ProcessModel::ActualBytes);
+        return;
     }
+
+
 
     int i = result->data().toInt();
     //We set data to be negative to hide a column, and positive to show a column

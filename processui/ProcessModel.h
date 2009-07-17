@@ -140,8 +140,19 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         void setUnits(Units units);
         /** The units memory sizes etc should be displayed in */
         Units units() const;
+        /** Set the I/O units sizes etc should be displayed in */
+        void setIoUnits(Units units);
+        /** The units I/O sizes etc should be displayed in */
+        Units ioUnits() const;
+
+        enum IoInformation { Bytes, Syscalls, ActualBytes };
+        /** Set the information to show in the Io Read and Io Write columns */
+        void setIoInformation( IoInformation ioInformation );
+        /** The information to show in the Io Read and Io Write columns */
+        IoInformation ioInformation() const;
+
         /** Take an amount in kb, and return a string in the units set by setUnits() */
-        QString formatMemoryInfo(qlonglong amountInKB) const;
+        QString formatMemoryInfo(qlonglong amountInKB, Units units, bool returnEmptyIfValueIsZero = false) const;
         /** Whether to show the command line options in the process name column */
         bool isShowCommandLineOptions() const;
         /** Set whether to show the command line options in the process name column */
@@ -159,10 +170,9 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         /** Retranslate the GUI, for when the system language changes */
         void retranslateUi();
 
-        public Q_SLOTS:
-
-            /** Whether to show the total cpu for the process plus all of its children */
-            void setShowTotals(bool showTotals);
+    public Q_SLOTS:
+        /** Whether to show the total cpu for the process plus all of its children */
+        void setShowTotals(bool showTotals);
 
     private:
         ProcessModelPrivate*  const d;

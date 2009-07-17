@@ -180,7 +180,10 @@ public:
 	bool mShowingTooltips;
 	bool mNormalizeCPUUsage;
 	/** When displaying memory sizes, this is the units it should be displayed in */
-	int mUnits;
+    ProcessModel::Units mUnits;
+    ProcessModel::Units mIoUnits;
+
+    ProcessModel::IoInformation mIoInformation;
 
 	/** The hostname */
 	QString mHostName;
