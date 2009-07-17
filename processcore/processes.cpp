@@ -356,8 +356,9 @@ void Processes::deleteProcess(long pid)
         p = p->parent;
         p->numChildren--;
     } while (p->pid!= 0);
-
+#ifndef QT_NO_DEBUG
     int i = 0;
+#endif
     foreach( Process *it, d->mListProcesses ) {
         if(it->index > process->index)
             it->index--;
