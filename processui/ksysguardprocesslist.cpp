@@ -44,6 +44,7 @@
 #include <signal.h> //For SIGTERM
 
 #include <kapplication.h>
+#include <kaction.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
@@ -150,28 +151,28 @@ struct KSysGuardProcessListPrivate {
     KSysGuardProcessListPrivate(KSysGuardProcessList* q, const QString &hostName)
         : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL)
     {
-        renice = new QAction(i18np("Renice Process...", "Renice Processes...", 1), q);
-        selectParent = new QAction(i18n("Jump to Parent Process"), q);
+        renice = new KAction(i18np("Renice Process...", "Renice Processes...", 1), q);
+        selectParent = new KAction(i18n("Jump to Parent Process"), q);
 
-        selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
-        window = new QAction(i18n("Show Application Window"), q);
+        selectTracer = new KAction(i18n("Jump to Process Debugging This One"), q);
+        window = new KAction(i18n("Show Application Window"), q);
 #ifdef WITH_MONITOR_PROCESS_IO
-        monitorio = new QAction(i18n("Monitor Input && Output"), q);
+        monitorio = new KAction(i18n("Monitor Input && Output"), q);
 #else
         monitorio = 0;
 #endif
-        resume = new QAction(i18n("Resume Stopped Process"), q);
-        kill = new QAction(i18np("Kill Process", "Kill Processes", 1), q);
+        resume = new KAction(i18n("Resume Stopped Process"), q);
+        kill = new KAction(i18np("Kill Process", "Kill Processes", 1), q);
         kill->setIcon(KIcon("process-stop"));
 
-        sigStop = new QAction(i18n("Suspend (STOP)"), q);
-        sigCont = new QAction(i18n("Continue (CONT)"), q);
-        sigHup = new QAction(i18n("Hangup (HUP)"), q);
-        sigInt = new QAction(i18n("Interrupt (INT)"), q);
-        sigTerm = new QAction(i18n("Terminate (TERM)"), q);
-        sigKill = new QAction(i18n("Kill (KILL)"), q);
-        sigUsr1 = new QAction(i18n("User 1 (USR1)"), q);
-        sigUsr2 = new QAction(i18n("User 2 (USR2)"), q);
+        sigStop = new KAction(i18n("Suspend (STOP)"), q);
+        sigCont = new KAction(i18n("Continue (CONT)"), q);
+        sigHup = new KAction(i18n("Hangup (HUP)"), q);
+        sigInt = new KAction(i18n("Interrupt (INT)"), q);
+        sigTerm = new KAction(i18n("Terminate (TERM)"), q);
+        sigKill = new KAction(i18n("Kill (KILL)"), q);
+        sigUsr1 = new KAction(i18n("User 1 (USR1)"), q);
+        sigUsr2 = new KAction(i18n("User 2 (USR2)"), q);
     }
 
     ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
@@ -196,21 +197,21 @@ struct KSysGuardProcessListPrivate {
     /** The time to wait, in milliseconds, between updating the process list */
     int mUpdateIntervalMSecs;
 
-    QAction *renice;
-    QAction *kill;
-    QAction *selectParent;
-    QAction *selectTracer;
-    QAction *window;
-    QAction *monitorio;
-    QAction *resume;
-    QAction *sigStop;
-    QAction *sigCont;
-    QAction *sigHup;
-    QAction *sigInt;
-    QAction *sigTerm;
-    QAction *sigKill;
-    QAction *sigUsr1;
-    QAction *sigUsr2;
+    KAction *renice;
+    KAction *kill;
+    KAction *selectParent;
+    KAction *selectTracer;
+    KAction *window;
+    KAction *monitorio;
+    KAction *resume;
+    KAction *sigStop;
+    KAction *sigCont;
+    KAction *sigHup;
+    KAction *sigInt;
+    KAction *sigTerm;
+    KAction *sigKill;
+    KAction *sigUsr1;
+    KAction *sigUsr2;
 };
 
     KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
