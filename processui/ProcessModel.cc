@@ -610,7 +610,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingVmSize:
                 return i18n("<qt>This is the size of allocated address space - not memory, but address space. This value in practice means next to nothing. When a process requests a large memory block from the system but uses only a small part of it, the real usage will be low, VIRT will be high. <p><i>Technical information: </i>This is VmSize in proc/*/status and VIRT in top.");
             case HeadingMemory:
-                return i18n("<qt><i>Technical information: </i>This is the URSS - Unique Resident Set Size, calculated as VmRSS - Shared, from /proc/*/statm.  This tends to underestimate the 'true' memory usage of a process (by not including i/o backed memory pages, but is the best estimation that is fast to determine.");
+                return i18n("<qt><i>Technical information: </i>This is the URSS - Unique Resident Set Size, calculated as VmRSS - Shared, from /proc/*/statm.  This tends to underestimate the 'true' memory usage of a process (by not including i/o backed memory pages), but is the best estimation that is fast to determine.");
             case HeadingCPUUsage:
                 return i18n("The CPU usage of a process and all of its threads.");
             case HeadingSharedMemory:
