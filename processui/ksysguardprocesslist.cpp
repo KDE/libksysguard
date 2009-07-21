@@ -170,6 +170,7 @@ struct KSysGuardProcessListPrivate {
         sigHup = new KAction(i18n("Hangup (HUP)"), q);
         sigInt = new KAction(i18n("Interrupt (INT)"), q);
         sigTerm = new KAction(i18n("Terminate (TERM)"), q);
+        sigTerm->setShortcut(Qt::Key_Delete);
         sigKill = new KAction(i18n("Kill (KILL)"), q);
         sigUsr1 = new KAction(i18n("User 1 (USR1)"), q);
         sigUsr2 = new KAction(i18n("User 2 (USR2)"), q);
