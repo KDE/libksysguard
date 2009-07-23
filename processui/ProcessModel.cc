@@ -632,6 +632,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                         "<tr><td>Actual Bytes Read</td><td>The number of bytes which this process really did cause to be fetched from the storage layer. Done at the submit_bio() level, so it is accurate for block-backed filesystems. This may not give sensible values for NFS and CIFS filesystems.</td></tr>"
                         "<tr><td>Actual Bytes Written</td><td>Attempt to count the number of bytes which this process caused to be sent to the storage layer. This is done at page-dirtying time.</td>"
                         "</table><p>"
+                        "The number in brackets shows the rate at which each value is changing, determined from taking the difference between the previous value and the new value, and dividing by the update interval.<p>"
                         "<i>Technical information: </i>This data is collected from /proc/*/io and is documented further in Documentation/accounting and Documentation/filesystems/proc.txt in the kernel source.");
             default:
                 return QVariant();
@@ -1069,7 +1070,14 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingIoWrite:
         case HeadingIoRead: {
             QString tooltip = "<qt><p style='white-space:pre'>";
-            tooltip += i18n("Characters read: %1<br>Characters written: %2<br>Read syscalls: %3<br>Write syscalls: %4<br>Actual bytes read: %5<br>Actual bytes written: %6", KGlobal::locale()->formatByteSize(process->ioCharactersRead), KGlobal::locale()->formatByteSize(process->ioCharactersWritten), QString::number(process->ioReadSyscalls), QString::number(process->ioWriteSyscalls), KGlobal::locale()->formatByteSize(process->ioCharactersActuallyRead), KGlobal::locale()->formatByteSize(process->ioCharactersActuallyWritten));
+            //FIXME - use the formatByteRate functions when added
+            tooltip += i18n("Characters read: %1 (%2 KiB/s)<br>Characters written: %3 (%4 KiB/s)<br>Read syscalls: %5 (%6 s⁻¹)<br>Write syscalls: %7 (%8 s⁻¹)<br>Actual bytes read: %9 (%10 KiB/s)<br>Actual bytes written: %11 (%12 KiB/s)",
+                    KGlobal::locale()->formatByteSize(process->ioCharactersRead), QString::number(process->ioCharactersReadRate/1024), 
+                    KGlobal::locale()->formatByteSize(process->ioCharactersWritten), QString::number(process->ioCharactersWrittenRate/1024),
+                    QString::number(process->ioReadSyscalls), QString::number(process->ioReadSyscallsRate),
+                    QString::number(process->ioWriteSyscalls), QString::number(process->ioWriteSyscallsRate)).arg(
+                    KGlobal::locale()->formatByteSize(process->ioCharactersActuallyRead), QString::number(process->ioCharactersActuallyReadRate/1024 ),
+                    KGlobal::locale()->formatByteSize(process->ioCharactersActuallyWritten), QString::number(process->ioCharactersActuallyWrittenRate/1024));
             return tooltip;
         }
         case HeadingXTitle: {

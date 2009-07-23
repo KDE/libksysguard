@@ -89,6 +89,13 @@ namespace KSysGuard
     void setIoCharactersActuallyRead(qlonglong number); ///< Number of bytes which this process really did cause to be fetched from the storage layer.
     void setIoCharactersActuallyWritten(qlonglong number); ///< Attempt to count the number of bytes which this process caused to be sent to the storage layer.
 
+    void setIoCharactersReadRate(long number); ///< The rate, in bytes per second, which this task has caused to be read from storage
+    void setIoCharactersWrittenRate(long number); ///< The rate, in bytes per second, which this task has caused, or shall cause to be written to disk. 
+    void setIoReadSyscallsRate(long number); ///< Number of read I/O operations per second, i.e. syscalls like read() and pread().
+    void setIoWriteSyscallsRate(long number); ///< Number of write I/O operations per second, i.e. syscalls like write() and pwrite().
+    void setIoCharactersActuallyReadRate(long number); ///< Number of bytes per second which this process really did cause to be fetched from the storage layer.
+    void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
+
     /* The member variables are made to public for efficiency, but should only be read from. */
     QString login; 
     qlonglong uid; 
@@ -127,6 +134,12 @@ namespace KSysGuard
     qlonglong ioCharactersActuallyRead;
     qlonglong ioCharactersActuallyWritten;
 
+    long ioCharactersReadRate;
+    long ioCharactersWrittenRate;
+    long ioReadSyscallsRate;
+    long ioWriteSyscallsRate;
+    long ioCharactersActuallyReadRate;
+    long ioCharactersActuallyWrittenRate;
 
     QList<Process *> children;  ///< A list of all the direct children that the process has.  Children of children are not listed here, so note that children_pids <= numChildren
     QTime timeKillWasSent; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.

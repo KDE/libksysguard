@@ -63,6 +63,7 @@ namespace KSysGuard
       long mElapsedTimeMilliSeconds; //The number of milliseconds  (1000ths of a second) that passed since the last update
 
       int ref; //Reference counter.  When it reaches 0, delete.
+      Processes::UpdateFlags mUpdateFlags;
   };
 
   class Processes::StaticPrivate
@@ -207,8 +208,25 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
 
 bool Processes::updateProcessInfo(Process *ps) {
     //Now we can actually get the process info
-    long oldUserTime = ps->userTime;
-    long oldSysTime = ps->sysTime;
+    qlonglong oldUserTime = ps->userTime;
+    qlonglong oldSysTime = ps->sysTime;
+
+    qlonglong oldIoCharactersRead = 0;
+    qlonglong oldIoCharactersWritten = 0;
+    qlonglong oldIoReadSyscalls = 0;
+    qlonglong oldIoWriteSyscalls = 0;
+    qlonglong oldIoCharactersActuallyRead = 0;
+    qlonglong oldIoCharactersActuallyWritten = 0;
+
+    if(d->mUpdateFlags.testFlag(Processes::IOStatistics)) {
+        oldIoCharactersRead = ps->ioCharactersRead;
+        oldIoCharactersWritten = ps->ioCharactersWritten;
+        oldIoReadSyscalls = ps->ioReadSyscalls;
+        oldIoWriteSyscalls = ps->ioWriteSyscalls;
+        oldIoCharactersActuallyRead = ps->ioCharactersActuallyRead;
+        oldIoCharactersActuallyWritten = ps->ioCharactersActuallyWritten;
+    }
+
     ps->changes = Process::Nothing;
     bool success = d->mAbstractProcesses->updateProcessInfo(ps->pid, ps);
 
@@ -238,6 +256,14 @@ bool Processes::updateProcessInfo(Process *ps) {
                 emit processChanged(p, true);
                 p= p->parent;
             }
+        }
+        if(d->mUpdateFlags.testFlag(Processes::IOStatistics)) {
+            ps->setIoCharactersReadRate((ps->ioCharactersRead - oldIoCharactersRead) * 1000.0 / elapsedTime);
+            ps->setIoCharactersWrittenRate((ps->ioCharactersWritten - oldIoCharactersWritten) * 1000.0 / elapsedTime);
+            ps->setIoReadSyscallsRate((ps->ioReadSyscalls - oldIoReadSyscalls) * 1000.0 / elapsedTime);
+            ps->setIoWriteSyscallsRate((ps->ioWriteSyscalls - oldIoWriteSyscalls) * 1000.0 / elapsedTime);
+            ps->setIoCharactersActuallyReadRate((ps->ioCharactersActuallyRead - oldIoCharactersActuallyRead) * 1000.0 / elapsedTime);
+            ps->setIoCharactersActuallyWrittenRate((ps->ioCharactersActuallyWritten - oldIoCharactersActuallyWritten) * 1000.0 / elapsedTime);
         }
     }
     return success;
@@ -291,6 +317,11 @@ bool Processes::updateOrAddProcess( long pid)
 
 void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags updateFlags)
 {
+    if(d->ref == 1)
+        d->mUpdateFlags = updateFlags;
+    else
+        d->mUpdateFlags |= updateFlags;
+
     if(d->mElapsedTimeMilliSeconds == -1) {
         //First time update has been called
         d->mLastUpdated.start();
@@ -301,7 +332,7 @@ void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags
         d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
     }
 
-    d->mAbstractProcesses->updateAllProcesses(updateFlags);
+    d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags);
 }
 
 void Processes::processesUpdated() {

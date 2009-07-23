@@ -281,4 +281,34 @@ void KSysGuard::Process::setIoCharactersActuallyWritten(qlonglong number) {
     ioCharactersActuallyWritten = number;
     changes |= Process::IO;
 }
+void KSysGuard::Process::setIoCharactersReadRate(long number) {
+    if(number == ioCharactersReadRate) return;
+    ioCharactersReadRate = number;
+    changes |= Process::IO;
+}
+void KSysGuard::Process::setIoCharactersWrittenRate(long number) {
+    if(number == ioCharactersWrittenRate) return;
+    ioCharactersWrittenRate = number;
+    changes |= Process::IO;
+}
+void KSysGuard::Process::setIoReadSyscallsRate(long number) {
+    if(number == ioReadSyscallsRate) return;
+    ioReadSyscallsRate = number;
+    changes |= Process::IO;
+}
+void KSysGuard::Process::setIoWriteSyscallsRate(long number) {
+    if(number == ioWriteSyscallsRate) return;
+    ioWriteSyscallsRate = number;
+    changes |= Process::IO;
+}
+void KSysGuard::Process::setIoCharactersActuallyReadRate(long number) {
+    if(number == ioCharactersActuallyReadRate) return;
+    ioCharactersActuallyReadRate = number;
+    changes |= Process::IO;
+}
+void KSysGuard::Process::setIoCharactersActuallyWrittenRate(long number) {
+    if(number == ioCharactersActuallyWrittenRate) return;
+    ioCharactersActuallyWrittenRate = number;
+    changes |= Process::IO;
+}
 
