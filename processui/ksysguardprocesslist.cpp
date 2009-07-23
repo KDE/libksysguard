@@ -307,7 +307,7 @@ struct KSysGuardProcessListPrivate {
     connect(d->mUpdateTimer, SIGNAL(timeout()), this, SLOT(updateList()));
     d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
 
-    d->mUi->btnKillProcess->setIcon(KIcon("edit-bomb"));
+    d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
 
     //If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
     //	QTimer *mTimer = new QTimer(this);
