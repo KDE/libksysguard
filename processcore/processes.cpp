@@ -48,7 +48,7 @@ namespace KSysGuard
   class Processes::Private
   {
     public:
-      Private() { mAbstractProcesses = 0;  mProcesses.insert(0, &mFakeProcess); mElapsedTimeMilliSeconds = -1; ref=1; }
+      Private() { mAbstractProcesses = 0;  mProcesses.insert(0, &mFakeProcess); mElapsedTimeMilliSeconds = -1; ref=1; mHavePreviousIoValues = false; mUpdateFlags = 0; }
       ~Private();
 
       QSet<long> mToBeProcessed;
@@ -64,6 +64,7 @@ namespace KSysGuard
 
       int ref; //Reference counter.  When it reaches 0, delete.
       Processes::UpdateFlags mUpdateFlags;
+      bool mHavePreviousIoValues; //This is whether we updated the IO value on the last update
   };
 
   class Processes::StaticPrivate
@@ -258,12 +259,23 @@ bool Processes::updateProcessInfo(Process *ps) {
             }
         }
         if(d->mUpdateFlags.testFlag(Processes::IOStatistics)) {
-            ps->setIoCharactersReadRate((ps->ioCharactersRead - oldIoCharactersRead) * 1000.0 / elapsedTime);
-            ps->setIoCharactersWrittenRate((ps->ioCharactersWritten - oldIoCharactersWritten) * 1000.0 / elapsedTime);
-            ps->setIoReadSyscallsRate((ps->ioReadSyscalls - oldIoReadSyscalls) * 1000.0 / elapsedTime);
-            ps->setIoWriteSyscallsRate((ps->ioWriteSyscalls - oldIoWriteSyscalls) * 1000.0 / elapsedTime);
-            ps->setIoCharactersActuallyReadRate((ps->ioCharactersActuallyRead - oldIoCharactersActuallyRead) * 1000.0 / elapsedTime);
-            ps->setIoCharactersActuallyWrittenRate((ps->ioCharactersActuallyWritten - oldIoCharactersActuallyWritten) * 1000.0 / elapsedTime);
+            if( d->mHavePreviousIoValues ) {
+                ps->setIoCharactersReadRate((ps->ioCharactersRead - oldIoCharactersRead) * 1000.0 / elapsedTime);
+                ps->setIoCharactersWrittenRate((ps->ioCharactersWritten - oldIoCharactersWritten) * 1000.0 / elapsedTime);
+                ps->setIoReadSyscallsRate((ps->ioReadSyscalls - oldIoReadSyscalls) * 1000.0 / elapsedTime);
+                ps->setIoWriteSyscallsRate((ps->ioWriteSyscalls - oldIoWriteSyscalls) * 1000.0 / elapsedTime);
+                ps->setIoCharactersActuallyReadRate((ps->ioCharactersActuallyRead - oldIoCharactersActuallyRead) * 1000.0 / elapsedTime);
+                ps->setIoCharactersActuallyWrittenRate((ps->ioCharactersActuallyWritten - oldIoCharactersActuallyWritten) * 1000.0 / elapsedTime);
+            } else
+                d->mHavePreviousIoValues = true; 
+        } else if(d->mHavePreviousIoValues) { 
+            d->mHavePreviousIoValues = false;
+            ps->setIoCharactersReadRate(0);
+            ps->setIoCharactersWrittenRate(0);
+            ps->setIoReadSyscallsRate(0);
+            ps->setIoWriteSyscallsRate(0);
+            ps->setIoCharactersActuallyReadRate(0);
+            ps->setIoCharactersActuallyWrittenRate(0);
         }
     }
     return success;

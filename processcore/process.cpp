@@ -115,6 +115,12 @@ void KSysGuard::Process::clear() {
     ioWriteSyscalls = 0;
     ioCharactersActuallyRead = 0;
     ioCharactersActuallyWritten = 0;
+    ioCharactersReadRate = 0;
+    ioCharactersWrittenRate = 0;
+    ioReadSyscallsRate = 0;
+    ioWriteSyscallsRate = 0;
+    ioCharactersActuallyReadRate = 0;
+    ioCharactersActuallyWrittenRate = 0;
 
     changes = Process::Nothing;
 }
