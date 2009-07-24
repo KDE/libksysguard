@@ -564,7 +564,12 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     QAction *actionIoCharacters = NULL;
     QAction *actionIoSyscalls = NULL;
     QAction *actionIoActualCharacters = NULL;
-
+    QAction *actionIoShowRate = NULL;
+    bool showIoRate = false;
+    if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+        showIoRate = d->mModel.ioInformation() == ProcessModel::BytesRate || 
+                     d->mModel.ioInformation() == ProcessModel::SyscallsRate ||
+                     d->mModel.ioInformation() == ProcessModel::ActualBytesRate;
 
     if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory ||  index == ProcessModel::HeadingSharedMemory || ( (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) && d->mModel.ioInformation() != ProcessModel::Syscalls)) {
         //If the user right clicks on a column that contains a memory size, show a toggle option for displaying
@@ -572,17 +577,17 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         menu->addSeparator()->setText(i18n("Display Units"));
         QActionGroup *unitsGroup = new QActionGroup(menu);
         actionKB = new QAction(menu);
-        actionKB->setText(i18n("Kilobytes"));
+        actionKB->setText((showIoRate)?i18n("Kilobytes per second"):i18n("Kilobytes"));
         actionKB->setCheckable(true);
         menu->addAction(actionKB);
         unitsGroup->addAction(actionKB);
         actionMB = new QAction(menu);
-        actionMB->setText(i18n("Megabytes"));
+        actionMB->setText((showIoRate)?i18n("Megabytes per second"):i18n("Megabytes"));
         actionMB->setCheckable(true);
         menu->addAction(actionMB);
         unitsGroup->addAction(actionMB);
         actionGB = new QAction(menu);
-        actionGB->setText(i18n("Gigabytes"));
+        actionGB->setText((showIoRate)?i18n("Gigabytes per second"):i18n("Gigabytes"));
         actionGB->setCheckable(true);
         menu->addAction(actionGB);
         unitsGroup->addAction(actionGB);
@@ -649,21 +654,29 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         menu->addAction(actionIoActualCharacters);
         ioInformationGroup->addAction(actionIoActualCharacters);
 
+        actionIoShowRate = new QAction(menu);
+        actionIoShowRate->setText(i18n("Show I/O rate"));
+        actionIoShowRate->setCheckable(true);
+        actionIoShowRate->setChecked(showIoRate);
+        menu->addAction(actionIoShowRate);
+
         switch(d->mModel.ioInformation()) {
             case ProcessModel::Bytes:
+            case ProcessModel::BytesRate:
                 actionIoCharacters->setChecked(true);
                 break;
             case ProcessModel::Syscalls:
+            case ProcessModel::SyscallsRate:
                 actionIoSyscalls->setChecked(true);
                 break;
             case ProcessModel::ActualBytes:
+            case ProcessModel::ActualBytesRate:
                 actionIoActualCharacters->setChecked(true);
                 break;
             default:
                 break;
         }
     }
-
 
     menu->addSeparator();
     actionShowTooltips = new QAction(menu);
@@ -706,17 +719,33 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         d->mModel.setShowingTooltips(actionShowTooltips->isChecked());
         return;
     } else if(result == actionIoCharacters) {
-        d->mModel.setIoInformation(ProcessModel::Bytes);
+        d->mModel.setIoInformation((showIoRate)?ProcessModel::BytesRate:ProcessModel::Bytes);
         return;
     } else if(result == actionIoSyscalls) {
-        d->mModel.setIoInformation(ProcessModel::Syscalls);
+        d->mModel.setIoInformation((showIoRate)?ProcessModel::SyscallsRate:ProcessModel::Syscalls);
         return;
     } else if(result == actionIoActualCharacters) {
-        d->mModel.setIoInformation(ProcessModel::ActualBytes);
+        d->mModel.setIoInformation((showIoRate)?ProcessModel::ActualBytesRate:ProcessModel::ActualBytes);
         return;
+    } else if(result == actionIoShowRate) {
+        showIoRate = actionIoShowRate->isChecked();
+        switch(d->mModel.ioInformation()) {
+            case ProcessModel::Bytes:
+            case ProcessModel::BytesRate:
+                d->mModel.setIoInformation((showIoRate)?ProcessModel::BytesRate:ProcessModel::Bytes);
+                break;
+            case ProcessModel::Syscalls:
+            case ProcessModel::SyscallsRate:
+                d->mModel.setIoInformation((showIoRate)?ProcessModel::SyscallsRate:ProcessModel::Syscalls);
+                break;
+            case ProcessModel::ActualBytes:
+            case ProcessModel::ActualBytesRate:
+                d->mModel.setIoInformation((showIoRate)?ProcessModel::ActualBytesRate:ProcessModel::ActualBytes);
+                break;
+            default:
+                break;
+        }
     }
-
-
 
     int i = result->data().toInt();
     //We set data to be negative to hide a column, and positive to show a column

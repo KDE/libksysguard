@@ -865,9 +865,21 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     case ProcessModel::Syscalls:
                         if( process->ioReadSyscalls )
                             return QString::number(process->ioReadSyscalls);
-                        return QVariant();
+                        break;
                     case ProcessModel::ActualBytes:
                         return formatMemoryInfo(process->ioCharactersActuallyRead/1024, d->mIoUnits, true);
+                    case ProcessModel::BytesRate:
+                        if( process->ioCharactersReadRate/1024 )
+                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersReadRate/1024, d->mIoUnits, true));
+                        break;
+                    case ProcessModel::SyscallsRate:
+                        if( process->ioReadSyscallsRate )
+                            return QString::number(process->ioReadSyscallsRate);
+                        break;
+                    case ProcessModel::ActualBytesRate:
+                        if( process->ioCharactersActuallyReadRate/1024 )
+                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersActuallyReadRate/1024, d->mIoUnits, true));
+                        break;
                 }
                 return QVariant();
             }
@@ -879,9 +891,21 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     case ProcessModel::Syscalls:
                         if( process->ioWriteSyscalls )
                             return QString::number(process->ioWriteSyscalls);
-                        return QVariant();
+                        break;
                     case ProcessModel::ActualBytes:
                         return formatMemoryInfo(process->ioCharactersActuallyWritten/1024, d->mIoUnits, true);
+                    case ProcessModel::BytesRate:
+                        if(process->ioCharactersWrittenRate/1024)
+                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersWrittenRate/1024, d->mIoUnits, true));
+                        break;
+                    case ProcessModel::SyscallsRate:
+                        if( process->ioWriteSyscallsRate )
+                            return QString::number(process->ioWriteSyscallsRate);
+                        break;
+                    case ProcessModel::ActualBytesRate:
+                        if(process->ioCharactersActuallyWrittenRate/1024)
+                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersActuallyWrittenRate/1024, d->mIoUnits, true));
+                        break;
                 }
                 return QVariant();
             }
@@ -1195,6 +1219,13 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return -process->ioReadSyscalls;
                 case ProcessModel::ActualBytes:
                     return -process->ioCharactersActuallyRead;
+                case ProcessModel::BytesRate:
+                    return -(qlonglong)process->ioCharactersReadRate;
+                case ProcessModel::SyscallsRate:
+                    return -(qlonglong)process->ioReadSyscallsRate;
+                case ProcessModel::ActualBytesRate:
+                    return -(qlonglong)process->ioCharactersActuallyReadRate;
+
             }
         case HeadingIoWrite:
             switch(d->mIoInformation) {
@@ -1204,6 +1235,13 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return -process->ioWriteSyscalls;
                 case ProcessModel::ActualBytes:
                     return -process->ioCharactersActuallyWritten;
+                case ProcessModel::BytesRate:
+                    return -(qlonglong)process->ioCharactersWrittenRate;
+                case ProcessModel::SyscallsRate:
+                    return -(qlonglong)process->ioWriteSyscallsRate;
+                case ProcessModel::ActualBytesRate:
+                    return -(qlonglong)process->ioCharactersActuallyWrittenRate;
+
             }
         }
         return QVariant();
@@ -1259,6 +1297,13 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return process->ioReadSyscalls;
                 case ProcessModel::ActualBytes:
                     return process->ioCharactersActuallyRead;
+                case ProcessModel::BytesRate:
+                    return (qlonglong)process->ioCharactersReadRate;
+                case ProcessModel::SyscallsRate:
+                    return (qlonglong)process->ioReadSyscallsRate;
+                case ProcessModel::ActualBytesRate:
+                    return (qlonglong)process->ioCharactersActuallyReadRate;
+
             }
         case HeadingIoWrite:
             switch(d->mIoInformation) {
@@ -1268,6 +1313,13 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return process->ioWriteSyscalls;
                 case ProcessModel::ActualBytes:
                     return process->ioCharactersActuallyWritten;
+                case ProcessModel::BytesRate:
+                    return (qlonglong)process->ioCharactersWrittenRate;
+                case ProcessModel::SyscallsRate:
+                    return (qlonglong)process->ioWriteSyscallsRate;
+                case ProcessModel::ActualBytesRate:
+                    return (qlonglong)process->ioCharactersActuallyWrittenRate;
+
             }
 #ifdef Q_WS_X11
         case HeadingXTitle:

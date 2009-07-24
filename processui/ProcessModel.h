@@ -145,7 +145,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         /** The units I/O sizes etc should be displayed in */
         Units ioUnits() const;
 
-        enum IoInformation { Bytes, Syscalls, ActualBytes };
+        enum IoInformation { Bytes, Syscalls, ActualBytes, BytesRate, SyscallsRate, ActualBytesRate };
         /** Set the information to show in the Io Read and Io Write columns */
         void setIoInformation( IoInformation ioInformation );
         /** The information to show in the Io Read and Io Write columns */
