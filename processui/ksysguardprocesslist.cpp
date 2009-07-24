@@ -1262,6 +1262,8 @@ void KSysGuardProcessList::setUnits(ProcessModel::Units unit) {
 void KSysGuardProcessList::saveSettings(KConfigGroup &cg) {
     /* Note that the ksysguard program does not use these functions.  It saves the settings itself to an xml file instead */
     cg.writeEntry("units", (int)(units()));
+    cg.writeEntry("ioUnits", (int)(d->mModel.ioUnits()));
+    cg.writeEntry("ioInformation", (int)(d->mModel.ioInformation()));
     cg.writeEntry("showCommandLineOptions", d->mModel.isShowCommandLineOptions());
     cg.writeEntry("normalizeCPUUsage", d->mModel.isNormalizedCPUUsage());
     cg.writeEntry("showTooltips", d->mModel.isShowingTooltips());
@@ -1277,6 +1279,8 @@ void KSysGuardProcessList::saveSettings(KConfigGroup &cg) {
 void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
     /* Note that the ksysguard program does not use these functions.  It saves the settings itself to an xml file instead */
     setUnits((ProcessModel::Units) cg.readEntry("units", (int)ProcessModel::UnitsKB));
+    d->mModel.setIoUnits((ProcessModel::Units) cg.readEntry("ioUnits", (int)ProcessModel::UnitsKB));
+    d->mModel.setIoInformation((ProcessModel::IoInformation) cg.readEntry("ioInformation", (int)ProcessModel::ActualBytesRate));
     d->mModel.setShowCommandLineOptions(cg.readEntry("showCommandLineOptions", false));
     d->mModel.setNormalizedCPUUsage(cg.readEntry("normalizeCPUUsage", true));
     d->mModel.setShowingTooltips(cg.readEntry("showTooltips", true));
