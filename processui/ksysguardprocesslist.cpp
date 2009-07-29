@@ -39,6 +39,7 @@
 #include <QLineEdit>
 #include <QSignalMapper>
 #include <QToolTip>
+#include <QAbstractItemModel>
 
 
 #include <signal.h> //For SIGTERM
@@ -350,6 +351,27 @@ void KSysGuardProcessList::filterTextChanged(const QString &newText) {
     expandInit();
     d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
     d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
+    emit updated();
+}
+
+int KSysGuardProcessList::numberViewingProcess() const  {
+    return numberOfViewingProcessRecursive(QModelIndex(),d->mUi->treeView->model());
+}
+
+int KSysGuardProcessList::numberOfViewingProcessRecursive(QModelIndex parent, QAbstractItemModel *model ) const {
+    int numRow = model->rowCount(parent);
+    int totalRows = 0;
+    for (int i = 0; i < numRow; ++i) {
+        QModelIndex index = model->index(i, 0,parent);
+        //if it has children add the total of leaf under it plus 1 for itself
+        if (model->hasChildren(index))
+            totalRows += numberOfViewingProcessRecursive(index,model)+1;
+        //otherwise add 1 for a leaf
+        else
+            ++totalRows;
+    }
+    return totalRows;
+
 }
 void KSysGuardProcessList::selectionChanged()
 {

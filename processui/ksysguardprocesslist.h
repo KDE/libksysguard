@@ -78,6 +78,9 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         /** Returns a list of the processes that have been selected by the user. */
         QList<KSysGuard::Process *> selectedProcesses() const;
 
+        /** Returns the number of process currently being displayed */
+        int numberViewingProcess() const;
+
         /** Save the current state of the widget to the given config group 
          *
          *  @param[in] cg Config group to add these settings to
@@ -207,6 +210,7 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         void retranslateUi();
 
     private:
+        int numberOfViewingProcessRecursive(QModelIndex parent, QAbstractItemModel *model ) const;
         KSysGuardProcessListPrivate* const d;
 };
 
