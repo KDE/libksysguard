@@ -244,6 +244,7 @@ struct KSysGuardProcessListPrivate {
     connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
     connect(d->mUi->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection & , const QItemSelection & )), this, SLOT(selectionChanged()));
     connect(&d->mFilterModel, SIGNAL(rowsInserted( const QModelIndex &, int, int)), this, SLOT(rowsInserted(const QModelIndex &, int, int)));
+    connect(&d->mFilterModel, SIGNAL(rowsRemoved( const QModelIndex &, int, int)), this, SIGNAL(processListChanged()));
     setMinimumSize(sizeHint());
 
     d->mFilterModel.setFilterKeyColumn(-1);
@@ -351,7 +352,7 @@ void KSysGuardProcessList::filterTextChanged(const QString &newText) {
     expandInit();
     d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
     d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
-    emit updated();
+    emit processListChanged();
 }
 
 int KSysGuardProcessList::numberViewingProcess() const  {
@@ -809,6 +810,7 @@ void KSysGuardProcessList::rowsInserted(const QModelIndex & parent, int start, i
     }
     if(expanded)
         connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
+    emit processListChanged();
 }
 void KSysGuardProcessList::expandInit()
 {

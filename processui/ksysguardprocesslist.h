@@ -105,6 +105,7 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
     Q_SIGNALS:
         /** Emitted when the display has been updated */
         void updated();
+        void processListChanged();
 
     public Q_SLOTS:
         /** Inform the view that the user has changed the selection */
