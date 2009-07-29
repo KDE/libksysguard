@@ -163,6 +163,7 @@ Processes::~Processes()
 {
     delete d;
 }
+
 Process *Processes::getProcess(long pid) const
 {
     return d->mProcesses.value(pid);
@@ -172,6 +173,12 @@ QList<Process *> Processes::getAllProcesses() const
 {
     return d->mListProcesses;
 }
+
+int Processes::processCount() const
+{
+    return d->mListProcesses.count();
+}
+
 bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
 {
     Process *parent = d->mProcesses.value(ppid);

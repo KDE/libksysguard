@@ -179,6 +179,9 @@ struct KSysGuardProcessListPrivate {
 
     ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
 
+    /** The number rows and their children for the given parent in the mFilterModel model */
+    int totalRowCount(const QModelIndex &parent) const;
+
     /** The process model.  This contains all the data on all the processes running on the system */
     ProcessModel mModel;
 
@@ -216,8 +219,8 @@ struct KSysGuardProcessListPrivate {
     KAction *sigUsr2;
 };
 
-    KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
-: QWidget(parent), d(new KSysGuardProcessListPrivate(this, hostName))
+KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
+    : QWidget(parent), d(new KSysGuardProcessListPrivate(this, hostName))
 {
     d->mUpdateIntervalMSecs = 2000; //Set 2 seconds as the default update interval
     d->mUi->setupUi(this);
@@ -352,28 +355,28 @@ void KSysGuardProcessList::filterTextChanged(const QString &newText) {
     expandInit();
     d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
     d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
-    emit processListChanged();
 }
 
-int KSysGuardProcessList::numberViewingProcess() const  {
-    return numberOfViewingProcessRecursive(QModelIndex(),d->mUi->treeView->model());
+int KSysGuardProcessList::visibleProcessesCount() const  {
+    //This assumes that all the visible rows are processes.  This is true currently, but might not be
+    //true if we add support for showing threads etc
+    if(d->mModel.isSimpleMode())
+        return d->mFilterModel.rowCount();
+    return d->totalRowCount(QModelIndex());
 }
 
-int KSysGuardProcessList::numberOfViewingProcessRecursive(QModelIndex parent, QAbstractItemModel *model ) const {
-    int numRow = model->rowCount(parent);
-    int totalRows = 0;
-    for (int i = 0; i < numRow; ++i) {
-        QModelIndex index = model->index(i, 0,parent);
-        //if it has children add the total of leaf under it plus 1 for itself
-        if (model->hasChildren(index))
-            totalRows += numberOfViewingProcessRecursive(index,model)+1;
-        //otherwise add 1 for a leaf
-        else
-            ++totalRows;
+int KSysGuardProcessListPrivate::totalRowCount(const QModelIndex &parent ) const {
+    int numRows = mFilterModel.rowCount(parent);
+    int total = numRows;
+    for (int i = 0; i < numRows; ++i) {
+        QModelIndex index = mFilterModel.index(i, 0,parent);
+        //if it has children add the total
+        if (mFilterModel.hasChildren(index))
+            total += totalRowCount(index);
     }
-    return totalRows;
-
+    return total;
 }
+
 void KSysGuardProcessList::selectionChanged()
 {
     int numSelected =  d->mUi->treeView->selectionModel()->selectedRows().size();
@@ -794,8 +797,11 @@ void KSysGuardProcessList::expandAllChildren(const QModelIndex &parent)
 
 void KSysGuardProcessList::rowsInserted(const QModelIndex & parent, int start, int end )
 {
-    if(d->mModel.isSimpleMode()) return; //No tree - no need to expand init
-    if(parent.isValid()) return; //Not a root node
+    if(d->mModel.isSimpleMode() || parent.isValid()) {
+        emit processListChanged();
+        return; //No tree or not a root node - no need to expand init
+    }
+    disconnect(&d->mFilterModel, SIGNAL(rowsInserted( const QModelIndex &, int, int)), this, SLOT(rowsInserted(const QModelIndex &, int, int)));
     //It is a root node that we just inserted - expand it
     bool expanded = false;
     for(int i = start; i <= end; i++) {
@@ -810,8 +816,10 @@ void KSysGuardProcessList::rowsInserted(const QModelIndex & parent, int start, i
     }
     if(expanded)
         connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
+    connect(&d->mFilterModel, SIGNAL(rowsInserted( const QModelIndex &, int, int)), this, SLOT(rowsInserted(const QModelIndex &, int, int)));
     emit processListChanged();
 }
+
 void KSysGuardProcessList::expandInit()
 {
     if(d->mModel.isSimpleMode()) return; //No tree - no need to expand init

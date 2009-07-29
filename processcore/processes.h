@@ -158,6 +158,14 @@ namespace KSysGuard
         QList< Process *> getAllProcesses() const;
 
         /**
+         *  Return the number of processes.  Call updateAllProcesses() to actually
+         *  update the information.
+         *  
+         *  This is equivalent to getAllProcesses().count()
+         */
+        int processCount() const;
+
+        /**
          *  Return the total amount of physical memory in KB.  This is fast (just a system call)
          *  Returns 0 on error
          */

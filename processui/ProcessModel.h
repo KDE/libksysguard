@@ -118,9 +118,13 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         /** Whether this process has a GUI window */
         bool hasGUIWindow(qlonglong pid) const;
 
-        /** Returns for process controller pointer for this model
-        */
-        KSysGuard::Processes *processController();   ///The processes instance
+        /** Returns for process controller pointer for this model */
+        KSysGuard::Processes *processController() const;   //The processes instance
+
+        /** Convenience function to get the number of processes.
+         *
+         *  Equivalent to processController->processCount() */
+        int processCount() const { return processController()->processCount(); }
 
         /** The headings in the model.  The order here is the order that they are shown
          *  in.  If you change this, make sure you also change the 

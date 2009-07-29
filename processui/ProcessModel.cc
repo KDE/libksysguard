@@ -104,10 +104,10 @@ ProcessModel::~ProcessModel()
     delete d;
 }
 
-KSysGuard::Processes *ProcessModel::processController() 
-{ 
+KSysGuard::Processes *ProcessModel::processController() const
+{
     return d->mProcesses;
-}  
+}
 
 void ProcessModelPrivate::windowRemoved(WId wid) {
 #ifdef Q_WS_X11
@@ -262,7 +262,7 @@ int ProcessModel::rowCount(const QModelIndex &parent) const
 {
     if(d->mSimple) {
         if(parent.isValid()) return 0; //In flat mode, none of the processes have children
-        return d->mProcesses->getAllProcesses().count();
+        return d->mProcesses->processCount();
     }
 
     //Deal with the case that we are showing it as a tree
@@ -313,7 +313,7 @@ QModelIndex ProcessModel::index ( int row, int column, const QModelIndex & paren
 
     if(d->mSimple) {
         if( parent.isValid()) return QModelIndex();
-        if( d->mProcesses->getAllProcesses().count() <= row) return QModelIndex();
+        if( d->mProcesses->processCount() <= row) return QModelIndex();
         return createIndex( row, column, d->mProcesses->getAllProcesses().at(row));
     }
 
@@ -427,7 +427,7 @@ void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
     }
 
     if(mSimple) {
-        int row = mProcesses->getAllProcesses().count();
+        int row = mProcesses->processCount();
         q->beginInsertRows( QModelIndex(), row, row );
         return;
     }
