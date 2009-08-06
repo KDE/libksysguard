@@ -177,7 +177,7 @@ namespace KSysGuard
 
     Changes changes;  /**< A QFlags representing what has changed */
 
-    /** This is the number of 1/10ths of a second since this 
+    /** This is the number of 1/1000ths of a second since this
      *  particular process was last updated compared to when all the processes
      *  were updated. The purpose is to allow a more fine tracking of the time
      *  a process has been running for. 
