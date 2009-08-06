@@ -84,6 +84,9 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
          * */
         int visibleProcessesCount() const;
 
+        /** If the value is false the internal timer will be ignored and calls to updateList() will be necessary in order to update the list*/
+        void setUseInternalTimer(bool value);
+
         /** Save the current state of the widget to the given config group 
          *
          *  @param[in] cg Config group to add these settings to
