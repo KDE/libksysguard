@@ -48,7 +48,15 @@ namespace KSysGuard
   class Processes::Private
   {
     public:
-      Private() { mAbstractProcesses = 0;  mProcesses.insert(0, &mFakeProcess); mElapsedTimeMilliSeconds = -1; ref=1; mHavePreviousIoValues = false; mUpdateFlags = 0; }
+      Private() {
+        mAbstractProcesses = 0;
+        mProcesses.insert(0, &mFakeProcess);
+        mElapsedTimeMilliSeconds = 0;
+        mLastUpdated.start();
+        ref = 1;
+        mHavePreviousIoValues = false;
+        mUpdateFlags = 0;
+    }
       ~Private();
 
       QSet<long> mToBeProcessed;
@@ -157,6 +165,7 @@ Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private())
 {
     d->mAbstractProcesses = abstractProcesses;
     connect( abstractProcesses, SIGNAL( processesUpdated() ), SLOT( processesUpdated() ));
+    updateAllProcesses(0,StandardInformation);
 }
 
 Processes::~Processes() 
@@ -341,17 +350,10 @@ void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags
     else
         d->mUpdateFlags |= updateFlags;
 
-    if(d->mElapsedTimeMilliSeconds == -1) {
-        //First time update has been called
-        d->mLastUpdated.start();
-        d->mElapsedTimeMilliSeconds = 0;
-    } else {
-        if(d->mLastUpdated.elapsed() < updateDurationMS) //don't update more often than the time given
-            return;
+    if(d->mLastUpdated.elapsed() >= updateDurationMS)  {
         d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
+        d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags);
     }
-
-    d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags);
 }
 
 void Processes::processesUpdated() {
