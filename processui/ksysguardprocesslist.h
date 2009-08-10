@@ -66,7 +66,8 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
          */
         ProcessFilter::State state() const;
 
-        /** Returns the number of milliseconds that have to elapse before updating the list of processes */
+        /** Returns the number of milliseconds that have to elapse before updating the list of processes.
+         *  If this is 0, the processes will not be automatically updated. */
         int updateIntervalMSecs() const;
 
         /** Whether the widget will show child totals for CPU and Memory etc usage */
@@ -83,9 +84,6 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
          *  To get the total number processes, visible or not, use processModel()->
          * */
         int visibleProcessesCount() const;
-
-        /** If the value is false the internal timer will be ignored and calls to updateList() will be necessary in order to update the list*/
-        void setUseInternalTimer(bool value);
 
         /** Save the current state of the widget to the given config group 
          *
@@ -152,7 +150,9 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         /** Set which processes we are currently filtering for and the way in which we show them. */
         void setState(ProcessFilter::State state);
 
-        /** Set the number of milliseconds that have to elapse before updating the list of processes */
+        /** Set the number of milliseconds that have to elapse before updating the list of processes.
+         *  If this is set to 0, the process list will not be automatically updated and the owner can call
+         *  updateList() manually. */
         void setUpdateIntervalMSecs(int intervalMSecs);
 
         /** Set whether to show child totals for CPU and Memory etc usage */

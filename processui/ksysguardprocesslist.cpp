@@ -150,7 +150,7 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 struct KSysGuardProcessListPrivate {
 
     KSysGuardProcessListPrivate(KSysGuardProcessList* q, const QString &hostName)
-        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL)
+        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL)
     {
         renice = new KAction(i18np("Renice Process...", "Renice Processes...", 1), q);
         selectParent = new KAction(i18n("Jump to Parent Process"), q);
@@ -175,7 +175,6 @@ struct KSysGuardProcessListPrivate {
         sigKill = new KAction(i18n("Kill (KILL)"), q);
         sigUsr1 = new KAction(i18n("User 1 (USR1)"), q);
         sigUsr2 = new KAction(i18n("User 2 (USR2)"), q);
-        mUseInternalTimer = true;
     }
 
     ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
@@ -200,11 +199,9 @@ struct KSysGuardProcessListPrivate {
     /** The context menu when you right click on a process */
     QMenu *mProcessContextMenu;
 
-    /** A timer to call updateList() every mUpdateIntervalMSecs */
-    QTimer mUpdateTimer;
-
-    /** If this is false the internal timer will not be used and a call to updateList() is necessary in order to update the list*/
-    bool mUseInternalTimer;
+    /** A timer to call updateList() every mUpdateIntervalMSecs.
+     *  NULL is mUpdateIntervalMSecs is <= 0. */
+    QTimer *mUpdateTimer;
 
     /** The time to wait, in milliseconds, between updating the process list */
     int mUpdateIntervalMSecs;
@@ -229,7 +226,7 @@ struct KSysGuardProcessListPrivate {
 KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
     : QWidget(parent), d(new KSysGuardProcessListPrivate(this, hostName))
 {
-    d->mUpdateIntervalMSecs = 2000; //Set 2 seconds as the default update interval
+    d->mUpdateIntervalMSecs = 0; //Set process to not update manually by default
     d->mUi->setupUi(this);
     d->mFilterModel.setSourceModel(&d->mModel);
     d->mUi->treeView->setModel(&d->mFilterModel);
@@ -314,10 +311,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
     d->mFilterModel.setDynamicSortFilter(true);
 
-    d->mUpdateTimer.setSingleShot(true);
-    connect(&(d->mUpdateTimer), SIGNAL(timeout()), this, SLOT(updateList()));
-    d->fireTimerEvent();
-
     d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
 
     //If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
@@ -371,13 +364,6 @@ int KSysGuardProcessList::visibleProcessesCount() const  {
     return d->totalRowCount(QModelIndex());
 }
 
-void KSysGuardProcessList::setUseInternalTimer(bool value)  {
-    d->mUseInternalTimer = value;
-}
-void KSysGuardProcessListPrivate::fireTimerEvent() {
-    if (mUseInternalTimer)
-        mUpdateTimer.start(mUpdateIntervalMSecs);
-}
 int KSysGuardProcessListPrivate::totalRowCount(const QModelIndex &parent ) const {
     int numRows = mFilterModel.rowCount(parent);
     int total = numRows;
@@ -855,15 +841,16 @@ void KSysGuardProcessList::expandInit()
 void KSysGuardProcessList::hideEvent ( QHideEvent * event )  //virtual protected from QWidget
 {
     //Stop updating the process list if we are hidden
-    d->mUpdateTimer.stop();
+    if(d->mUpdateTimer)
+        d->mUpdateTimer->stop();
     QWidget::hideEvent(event);
 }
 
 void KSysGuardProcessList::showEvent ( QShowEvent * event )  //virtual protected from QWidget
 {
     //Start updating the process list again if we are shown again
-    if(!d->mUpdateTimer.isActive()) {
-        d->fireTimerEvent();
+    if(d->mUpdateTimer && !d->mUpdateTimer->isActive()) {
+        d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
     }
 
     QWidget::showEvent(event);
@@ -896,7 +883,8 @@ void KSysGuardProcessList::updateList()
         if(!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoRead) || !d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoWrite))
             updateFlags = KSysGuard::Processes::IOStatistics;
         d->mModel.update(d->mUpdateIntervalMSecs, updateFlags);
-        d->fireTimerEvent();
+        if(d->mUpdateTimer)
+            d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
         emit updated();
         if(QToolTip::isVisible()) {
             QWidget *w = d->mUi->treeView->viewport();
@@ -915,8 +903,24 @@ int KSysGuardProcessList::updateIntervalMSecs() const
 
 void KSysGuardProcessList::setUpdateIntervalMSecs(int intervalMSecs)
 {
+    if(intervalMSecs == d->mUpdateIntervalMSecs)
+        return;
+
     d->mUpdateIntervalMSecs = intervalMSecs;
-    d->mUpdateTimer.setInterval(d->mUpdateIntervalMSecs);
+    if(intervalMSecs <= 0) { //no point keep the timer around if we aren't updating automatically
+        delete d->mUpdateTimer;
+        d->mUpdateTimer = NULL;
+        return;
+    }
+
+    if(!d->mUpdateTimer) {
+        //intervalMSecs is a valid time, so set up a timer 
+        d->mUpdateTimer = new QTimer(this);
+        d->mUpdateTimer->setSingleShot(true);
+        connect(d->mUpdateTimer, SIGNAL(timeout()), SLOT(updateList()));
+        d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
+    } else
+        d->mUpdateTimer->setInterval(d->mUpdateIntervalMSecs);
 }
 
 bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int niceValue)
