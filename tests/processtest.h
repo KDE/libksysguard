@@ -28,14 +28,13 @@ namespace KSysGuard
 class testProcess: public QObject
 {
     Q_OBJECT
-      private:
+    private:
         unsigned long countNumChildren(KSysGuard::Process *p);
-      private slots:
-	void testTime();
+    private slots:
+        void testTime();
         void testProcesses();
         void testProcessesTreeStructure();
-	void testProcessesModification();
+        void testProcessesModification();
 };
-
 #endif
 
