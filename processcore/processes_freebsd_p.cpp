@@ -78,7 +78,7 @@ void ProcessesLocal::Private::readProcStatus(struct kinfo_proc *p, Process *proc
     process->setTracerpid(0);
 
 
-#if defined(__FreeBSD__)
+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
     process->setEuid(p->ki_uid);    
     process->setUid(p->ki_ruid);
     process->setEgid(p->ki_svgid);
@@ -98,7 +98,7 @@ void ProcessesLocal::Private::readProcStat(struct kinfo_proc *p, Process *ps)
 {
     int status;
     struct rusage pru;
-#if defined(__FreeBSD__)
+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
         ps->setUserTime(p->ki_rusage.ru_utime.tv_sec * 100 + p->ki_rusage.ru_utime.tv_usec / 10000);
         ps->setSysTime(p->ki_rusage.ru_stime.tv_sec * 100 + p->ki_rusage.ru_stime.tv_usec / 10000);
         ps->setNiceLevel(p->ki_nice);
@@ -185,7 +185,7 @@ long ProcessesLocal::getParentPid(long pid) {
     struct kinfo_proc p;
     if(d->readProc(pid, &p))
     {
-#if defined(__FreeBSD__)
+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
         ppid = p.ki_ppid;
 #elif defined(__DragonFly__) && __DragonFly_version >= 190000
         ppid = p.kp_ppid;
@@ -230,7 +230,7 @@ QSet<long> ProcessesLocal::getAllPids( )
 
     for (num = 0; num < len / sizeof(struct kinfo_proc); num++)
     {
-#if defined(__FreeBSD__)
+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
         long pid = p[num].ki_pid;
         long long ppid = p[num].ki_ppid;
 #elif defined(__DragonFly__) && __DragonFly_version >= 190000
