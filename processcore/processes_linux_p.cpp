@@ -281,7 +281,11 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
 
     /* There was a "(ps->vmRss+3) * sysconf(_SC_PAGESIZE)" here in the original ksysguard code.  I have no idea why!  After comparing it to
      *   meminfo and other tools, this means we report the RSS by 12 bytes differently compared to them.  So I'm removing the +3
-     *   to be consistent.  NEXT TIME COMMENT STRANGE THINGS LIKE THAT! :-) */
+     *   to be consistent.  NEXT TIME COMMENT STRANGE THINGS LIKE THAT! :-) 
+     *
+     *   Update: I think I now know why - the kernel allocates 3 pages for 
+     *   tracking information about each the process. This memory isn't 
+     *   included in vmRSS..*/
     ps->setVmRSS(vmRSS * sysconf(_SC_PAGESIZE) / 1024); /*convert to KiB*/
     ps->setVmSize(vmSize /= 1024); /* convert to KiB */
 
