@@ -1,5 +1,5 @@
-[org.kde.ksysguardprocesslisthelper.sendsignal]
-Name=Kill, stop etc a process
-Description=Sends a signal (e.g. SIGKILL, SIGSTOP, etc) to a given process
+[org.kde.ksysguard.processlisthelper.sendsignal]
+Name=Kill stop etc a process
+Description=Sends a signal to a given process
 Policy=auth_admin
 

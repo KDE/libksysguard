@@ -73,8 +73,6 @@
 #include "modeltest.h"
 #endif
 
-Q_DECLARE_METATYPE( QList<long long> );
-
 class ProgressBarItemDelegate : public QStyledItemDelegate
 {
     public:
@@ -1210,10 +1208,10 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-    KAuth::Action::setHelperID("org.kde.ksysguardprocesslisthelper");
-    KAuth::Action action("org.kde.ksysguardprocesslisthelper.sendsignal");
+    KAuth::Action::setHelperID("org.kde.ksysguard.processlisthelper");
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
     action.addArgument("signal", sig);
-    action.addArgument("pids", qVariantFromValue(unkilled_pids));
+    action.addArgument("pids", QVariant::fromValue(unkilled_pids));
     KAuth::ActionReply reply = action.execute();
 
     if (reply == KAuth::ActionReply::SuccessReply) {

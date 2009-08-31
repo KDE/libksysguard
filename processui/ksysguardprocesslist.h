@@ -217,4 +217,6 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         KSysGuardProcessListPrivate* const d;
 };
 
+Q_DECLARE_METATYPE( QList<long long> )
+
 #endif
