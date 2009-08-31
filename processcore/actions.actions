@@ -1,5 +1,5 @@
 [org.kde.ksysguardprocesslisthelper.sendsignal]
-Name=Send SIG to process
-Description=Sends a signal (e.g. SIGKILL) to a process.  Expects an argument "signal" (an int) and an argument "pids" (A QList<long long> ) of pids to send the given signal to.
+Name=Kill, stop etc a process
+Description=Sends a signal (e.g. SIGKILL, SIGSTOP, etc) to a given process
 Policy=auth_admin
 
