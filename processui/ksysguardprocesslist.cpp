@@ -1252,7 +1252,7 @@ void KSysGuardProcessList::killSelectedProcesses()
 
         int res = KMessageBox::warningContinueCancelList(this, msg, selectedAsStrings,
                 i18np("Kill process", "Kill %1 processes", count),
-                KGuiItem(i18n("Kill"), "edit-bomb"),
+                KGuiItem(i18n("Kill"), "process-stop"),
                 KStandardGuiItem::cancel(),
                 "killconfirmation");
         if (res != KMessageBox::Continue)
