@@ -45,6 +45,7 @@
 #include <signal.h> //For SIGTERM
 
 #include <kapplication.h>
+#include <kauth.h>
 #include <kaction.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -71,6 +72,8 @@
 #ifdef DO_MODELCHECK
 #include "modeltest.h"
 #endif
+
+Q_DECLARE_METATYPE( QList<long long> );
 
 class ProgressBarItemDelegate : public QStyledItemDelegate
 {
@@ -1170,8 +1173,6 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
         return false;
     }
 
-    //We must use kdesu to kill the process
-
     QStringList arguments;
     arguments << "--attach" << QString::number(window()->winId()) << "--noignorebutton";
     if(unchanged_pids.size() == 1) {
@@ -1207,31 +1208,24 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
         }
     }
     if(unkilled_pids.isEmpty()) return true;
-    if(!d->mModel.isLocalhost()) return false; //We can't use kdesu to kill non-localhost processes
+    if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-    QString su = KStandardDirs::findExe("kdesu");
-    if(su.isEmpty()) return false;  //Cannot find kdesu
+    KAuth::Action action("org.kde.ksysguardprocesslisthelper.sendsignal");
+    action.addArgument("signal", sig);
+    action.addArgument("pids", qVariantFromValue(unkilled_pids));
+    KAuth::ActionReply reply = action.execute();
 
-    kDebug() << "running " << su;
-    //We must use kdesu to kill the process
-    QStringList arguments;
-    arguments << "--attach" << QString::number(window()->winId()) << "--noignorebutton";
-    arguments << "--" << "kill";
-    if(sig != SIGTERM) {
-        arguments << ('-' + QString::number(sig));
+    if (reply == KAuth::ActionReply::SuccessReply) {
+        updateList();
+        return true;
     }
-
-    for (int i = 0; i < unkilled_pids.size(); ++i) {
-        arguments << QString::number(unkilled_pids.at(i));
+    else {
+        KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
+                    "was a problem trying to run as root.  Error %1 (%1)", reply.errorCode(), reply.errorDescription()));
+        return false;
     }
-
-    QProcess *killProcess = new QProcess(NULL);
-    connect(killProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(killFailed()));
-    connect(killProcess, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));
-    killProcess->start(su, arguments);
-    return true;  //assume it ran successfully :(  We cannot seem to actually check if it did.  There must be a better solution
-
 }
+
 void KSysGuardProcessList::killSelectedProcesses()
 {
     QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
@@ -1279,11 +1273,6 @@ void KSysGuardProcessList::killSelectedProcesses()
 void KSysGuardProcessList::reniceFailed()
 {
     KMessageBox::sorry(this, i18n("You do not have the permission to renice the process and there "
-                "was a problem trying to run as root."));
-}
-void KSysGuardProcessList::killFailed()
-{
-    KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
                 "was a problem trying to run as root."));
 }
 void KSysGuardProcessList::ioniceFailed()

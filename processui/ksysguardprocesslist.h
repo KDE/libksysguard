@@ -183,9 +183,6 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         /** Display a context menu for the selected processes allowing the user to kill etc the process */
         void showProcessContextMenu(const QPoint &point);
 
-        /** Handle the situation where killing a process has failed - usually due to insufficient rights */
-        void killFailed();
-
         /** Handle the situation where renicing a process has failed - usually due to insufficient rights */
         void reniceFailed();
 
