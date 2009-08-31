@@ -26,3 +26,19 @@ install(TARGETS processcore EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_
 
 install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard COMPONENT Devel)
 
+#------ KAuth stuff
+
+include (MacroKAuth)
+
+# Auth example helper
+set(ksysguardprocesslist_helper_srcs
+    helper.cpp
+    process.cpp
+    processes_local_p.cpp
+    processes_base_p.cpp)
+
+kde4_auth_add_helper(ksysguardprocesslist_helper org.kde.ksysguardprocesslisthelper root ${ksysguardprocesslist_helper_srcs})
+kde4_auth_register_actions(org.kde.ksysguardprocesslisthelper actions.actions)
+
+set_target_properties(ksysguardprocesslist_helper PROPERTIES COMPILE_FLAGS "-Wall -ggdb")
+
