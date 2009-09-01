@@ -25,6 +25,7 @@
 #define _KSysGuardProcessList_h_
 
 #include <QtGui/QWidget>
+#include <QMetaType>
 #include <kapplication.h>
 #include "ProcessModel.h"
 #include "ProcessFilter.h"
@@ -217,6 +218,7 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         KSysGuardProcessListPrivate* const d;
 };
 
+Q_DECLARE_METATYPE( long long )
 Q_DECLARE_METATYPE( QList<long long> )
 
 #endif

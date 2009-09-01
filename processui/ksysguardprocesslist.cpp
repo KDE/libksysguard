@@ -227,6 +227,8 @@ struct KSysGuardProcessListPrivate {
 KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
     : QWidget(parent), d(new KSysGuardProcessListPrivate(this, hostName))
 {
+    qRegisterMetaType<QList<long long> >();
+  
     d->mUpdateIntervalMSecs = 0; //Set process to not update manually by default
     d->mUi->setupUi(this);
     d->mFilterModel.setSourceModel(&d->mModel);

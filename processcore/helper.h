@@ -23,6 +23,8 @@
 #include <kauth.h>
 #include <QObject>
 
+using namespace KAuth;
+
 Q_DECLARE_METATYPE( QList<long long> );
 
 /* The functions here run as ROOT.  So be careful. */
@@ -31,6 +33,6 @@ class KSysGuardProcessListHelper : public QObject {
     Q_OBJECT
 
     public slots:
-        KAuth::ActionReply sendsignal(QVariantMap parameters);
+        ActionReply sendsignal(QVariantMap parameters);
 
 };
