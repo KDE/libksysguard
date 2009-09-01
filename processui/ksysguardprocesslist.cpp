@@ -1213,9 +1213,9 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
     qDebug() << unkilled_pids;  
-      
-    KAuth::Action::setHelperID("org.kde.ksysguard.processlisthelper");
+
     KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
+    action.setHelperID("org.kde.ksysguard.processlisthelper");
     //bleh
     int count = 0;
     foreach (long long pid, unkilled_pids) {
