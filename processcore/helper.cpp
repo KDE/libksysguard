@@ -30,7 +30,7 @@
 KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters) {
     qDebug() << "HERERERER";
     KSysGuard::ProcessesLocal processes;
-    QList< long long> pids = qvariant_cast<QList<long long> >(parameters.value("pids"));
+    QList< long long> pids = parameters.value("pids").value<QList<long long> >();
     int signal = qvariant_cast<int>(parameters.value("signal"));
     bool success = true;
     for (int i = 0; i < pids.size(); ++i) {

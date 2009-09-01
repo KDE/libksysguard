@@ -25,8 +25,6 @@
 
 using namespace KAuth;
 
-Q_DECLARE_METATYPE( QList<long long> );
-
 /* The functions here run as ROOT.  So be careful. */
 
 class KSysGuardProcessListHelper : public QObject {
@@ -36,3 +34,5 @@ class KSysGuardProcessListHelper : public QObject {
         ActionReply sendsignal(QVariantMap parameters);
 
 };
+
+Q_DECLARE_METATYPE( QList<long long> )

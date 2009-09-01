@@ -40,6 +40,7 @@
 #include <QSignalMapper>
 #include <QToolTip>
 #include <QAbstractItemModel>
+#include <QtDBus>
 
 
 #include <signal.h> //For SIGTERM
@@ -228,6 +229,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     : QWidget(parent), d(new KSysGuardProcessListPrivate(this, hostName))
 {
     qRegisterMetaType<QList<long long> >();
+    qDBusRegisterMetaType<QList<long long> >();
   
     d->mUpdateIntervalMSecs = 0; //Set process to not update manually by default
     d->mUi->setupUi(this);
