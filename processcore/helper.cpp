@@ -45,5 +45,5 @@ KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters
         return KAuth::ActionReply::HelperErrorReply;
 }
 
-KDE4_AUTH_HELPER_MAIN("org.kde.ksysguard.processlisthelper", KSysGuardProcessListHelper);
+KDE4_AUTH_HELPER_MAIN("org.kde.ksysguard.processlisthelper", KSysGuardProcessListHelper)
 
