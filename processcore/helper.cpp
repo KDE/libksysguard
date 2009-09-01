@@ -24,17 +24,20 @@
 #include <QDebug>
 #include "processes_local_p.h"
 
+KSysGuardProcessListHelper::KSysGuardProcessListHelper()
+{
+    qRegisterMetaType<QList<long long> >();
+}
 
 /* The functions here run as ROOT.  So be careful. */
 
 KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters) {
     qDebug() << "HERERERER";
     KSysGuard::ProcessesLocal processes;
-    QList< long long> pids = parameters.value("pids").value<QList<long long> >();
     int signal = qvariant_cast<int>(parameters.value("signal"));
     bool success = true;
-    for (int i = 0; i < pids.size(); ++i) {
-        success = processes.sendSignal(pids.at(i), signal);
+    for (int i = 0; i < parameters.value("pidcount").toInt(); ++i) {
+        success = processes.sendSignal(parameters.value(QString("pid%1").arg(i)).toULongLong(), signal);
     }
     if(success)
         return KAuth::ActionReply::SuccessReply;

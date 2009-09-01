@@ -1212,10 +1212,18 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
+    qDebug() << unkilled_pids;  
+      
     KAuth::Action::setHelperID("org.kde.ksysguard.processlisthelper");
     KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
+    //bleh
+    int count = 0;
+    foreach (long long pid, unkilled_pids) {
+        action.addArgument(QString("pid%1").arg(count), pid);
+        ++count;
+    }
     action.addArgument("signal", sig);
-    action.addArgument("pids", QVariant::fromValue(unkilled_pids));
+    action.addArgument("pidcount", unkilled_pids.count());
     KAuth::ActionReply reply = action.execute();
 
     if (reply == KAuth::ActionReply::SuccessReply) {

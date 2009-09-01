@@ -29,6 +29,8 @@ using namespace KAuth;
 
 class KSysGuardProcessListHelper : public QObject {
     Q_OBJECT
+    public:
+        KSysGuardProcessListHelper();
 
     public slots:
         ActionReply sendsignal(QVariantMap parameters);
