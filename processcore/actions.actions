@@ -1,5 +1,21 @@
 [org.kde.ksysguard.processlisthelper.sendsignal]
-Name=Kill stop etc a process
-Description=Sends a signal to a given process
+Name=Kill or stop etc a process
+Description=Sends a given signal to a given process
 Policy=auth_admin
+
+[org.kde.ksysguard.processlisthelper.renice]
+Name=Change the priority of a process
+Description=Change the niceness of a given process
+Policy=auth_admin
+
+[org.kde.ksysguard.processlisthelper.changeioscheduler]
+Name=Change IO Scheduler and priority
+Description=Change how the read and writes of a given process are prioritized
+Policy=auth_admin
+
+[org.kde.ksysguard.processlisthelper.changecpuscheduler]
+Name=Change CPU Scheduler and priority
+Description=Change which CPU scheduler is to schedule the running of a given process
+Policy=auth_admin
+
 

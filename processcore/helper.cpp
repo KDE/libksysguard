@@ -34,8 +34,9 @@ KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters
     KSysGuard::ProcessesLocal processes;
     int signal = qvariant_cast<int>(parameters.value("signal"));
     bool success = true;
-    for (int i = 0; i < parameters.value("pidcount").toInt(); ++i) {
-        success = processes.sendSignal(parameters.value(QString("pid%1").arg(i)).toULongLong(), signal);
+    int numProcesses = parameters.value("pidcount").toInt();
+    for (int i = 0; i < numProcesses; ++i) {
+        success = processes.sendSignal(parameters.value(QString("pid%1").arg(i)).toULongLong(), signal) && success;
     }
     if(success)
         return KAuth::ActionReply::SuccessReply;
@@ -43,5 +44,50 @@ KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters
         return KAuth::ActionReply::HelperErrorReply;
 }
 
+KAuth::ActionReply KSysGuardProcessListHelper::renice(QVariantMap parameters) {
+    KSysGuard::ProcessesLocal processes;
+    int niceValue = qvariant_cast<int>(parameters.value("nicevalue"));
+    bool success = true;
+    int numProcesses = parameters.value("pidcount").toInt();
+    for (int i = 0; i < numProcesses; ++i) {
+        success = processes.setNiceness(parameters.value(QString("pid%1").arg(i)).toULongLong(), niceValue) && success;
+    }
+    if(success)
+        return KAuth::ActionReply::SuccessReply;
+    else
+        return KAuth::ActionReply::HelperErrorReply;
+}
+
+KAuth::ActionReply KSysGuardProcessListHelper::changeioscheduler(QVariantMap parameters) {
+    KSysGuard::ProcessesLocal processes;
+    int ioScheduler = qvariant_cast<int>(parameters.value("ioScheduler"));
+    int ioSchedulerPriority = qvariant_cast<int>(parameters.value("ioSchedulerPriority"));
+    bool success = true;
+    int numProcesses = parameters.value("pidcount").toInt();
+    for (int i = 0; i < numProcesses; ++i) {
+        success = processes.setIoNiceness(parameters.value(QString("pid%1").arg(i)).toULongLong(), ioScheduler, ioSchedulerPriority) && success;
+    }
+    if(success)
+        return KAuth::ActionReply::SuccessReply;
+    else
+        return KAuth::ActionReply::HelperErrorReply;
+
+}
+KAuth::ActionReply KSysGuardProcessListHelper::changecpuscheduler(QVariantMap parameters) {
+    KSysGuard::ProcessesLocal processes;
+    int cpuScheduler = qvariant_cast<int>(parameters.value("cpuScheduler"));
+    int cpuSchedulerPriority = qvariant_cast<int>(parameters.value("cpuSchedulerPriority"));
+    bool success = true;
+
+    int numProcesses = parameters.value("pidcount").toInt();
+    for (int i = 0; i < numProcesses; ++i) {
+        success = processes.setScheduler(parameters.value(QString("pid%1").arg(i)).toULongLong(), cpuScheduler, cpuSchedulerPriority) && success;
+    }
+    if(success)
+        return KAuth::ActionReply::SuccessReply;
+    else
+        return KAuth::ActionReply::HelperErrorReply;
+
+}
 KDE4_AUTH_HELPER_MAIN("org.kde.ksysguard.processlisthelper", KSysGuardProcessListHelper)
 

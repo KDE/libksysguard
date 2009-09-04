@@ -184,6 +184,9 @@ struct KSysGuardProcessListPrivate {
     /** The number rows and their children for the given parent in the mFilterModel model */
     int totalRowCount(const QModelIndex &parent) const;
 
+    /** Helper function to setup 'action' with the given pids */
+    void setupKAuthAction(KAuth::Action *action, const QList<long long> & pids) const;
+
     /** fire a timer event if we are set to use our internal timer*/
     void fireTimerEvent();
 
@@ -381,6 +384,16 @@ int KSysGuardProcessListPrivate::totalRowCount(const QModelIndex &parent ) const
     return total;
 }
 
+void KSysGuardProcessListPrivate::setupKAuthAction(KAuth::Action *action, const QList<long long> & pids) const
+{
+    action->setHelperID("org.kde.ksysguard.processlisthelper");
+
+    int processCount = pids.count();
+    for(int i = 0; i < processCount; i++) {
+        action->addArgument(QString("pid%1").arg(i), pids[i]);
+    }
+    action->addArgument("pidcount", processCount);
+}
 void KSysGuardProcessList::selectionChanged()
 {
     int numSelected =  d->mUi->treeView->selectionModel()->selectedRows().size();
@@ -938,24 +951,23 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
         }
     }
     if(unreniced_pids.isEmpty()) return true; //All processes were reniced successfully
-    if(!d->mModel.isLocalhost()) return false; //We can't use kdesu to renice non-localhost processes
+    if(!d->mModel.isLocalhost()) return false; //We can't use kauth to renice non-localhost processes
 
-    QStringList arguments;
-    arguments << "--attach" << QString::number(window()->winId()) << "--noignorebutton";
-    arguments << "--" << "renice" << QString::number(niceValue);
 
-    for (int i = 0; i < unreniced_pids.size(); ++i) {
-        arguments << QString::number(unreniced_pids.at(i));
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.renice");
+    d->setupKAuthAction( &action, unreniced_pids);
+    action.addArgument("nicevalue", niceValue);
+    KAuth::ActionReply reply = action.execute();
+
+    if (reply == KAuth::ActionReply::SuccessReply) {
+        updateList();
+        return true;
     }
-
-    QString su = KStandardDirs::findExe("kdesu");  //kdesu is a libexec program, so it will not be in the path.  findExe will find it correctly anyway
-    if(su.isEmpty()) return false;  //Cannot find kdesu
-
-    QProcess *reniceProcess = new QProcess(NULL);
-    connect(reniceProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(reniceFailed()));
-    connect(reniceProcess, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));
-    reniceProcess->start(su, arguments);
-    return true; //No way to tell if it was successful :(
+    else {
+        KMessageBox::sorry(this, i18n("You do not have the permission to renice the process and there "
+                    "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
+        return false;
+    }
 }
 
 QList<KSysGuard::Process *> KSysGuardProcessList::selectedProcesses() const
@@ -1087,65 +1099,25 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
         }
     }
     if(unchanged_pids.isEmpty()) return true;
-    if(!d->mModel.isLocalhost()) return false; //We can't use kdesu to kill non-localhost processes
+    if(!d->mModel.isLocalhost()) return false; //We can't use kauth to affect non-localhost processes
 
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.changeioscheduler");
 
-    QString su = KStandardDirs::findExe("kdesu");
-    if(su.isEmpty()) return false;  //Cannot find kdesu
+    d->setupKAuthAction( &action, unchanged_pids);
+    action.addArgument("ioScheduler", (int)newIoSched);
+    action.addArgument("ioSchedulerPriority", newIoSchedPriority);
 
-    //We must use kdesu to kill the process
+    KAuth::ActionReply reply = action.execute();
 
-    QStringList arguments;
-    arguments << "--attach" << QString::number(window()->winId()) << "--noignorebutton";
-    if(unchanged_pids.size() == 1) {
-        arguments << "--" << "ionice" << "-p" << QString::number(unchanged_pids.at(0)) << "-c";
-        switch(newIoSched) {
-            case KSysGuard::Process::Idle:
-                arguments << "3";
-                break;
-            case KSysGuard::Process::BestEffort:
-                arguments << "2" << "-n" << QString::number(newIoSchedPriority);
-                break;
-            case KSysGuard::Process::RealTime:
-                arguments << "1" << "-n" << QString::number(newIoSchedPriority);
-                break;
-            default:
-                Q_ASSERT(false);
-                return false; //should never happen - wtf?
-        }
-    } else {
-        //Cope with multiple pids by doing a for loop
-        arguments << "--" << "sh" << "-c";
-        QString sh("for f in ");
-
-        for (int i = 0; i < unchanged_pids.size(); ++i) {
-            sh += QString::number(unchanged_pids.at(i)) + " ";
-        }
-        sh += "; do ionice -p \"$f\" ";
-        switch(newIoSched) {
-            case KSysGuard::Process::Idle:
-                sh += "-c 3";
-                break;
-            case KSysGuard::Process::BestEffort:
-                sh += "-c 2 -n " + QString::number(newIoSchedPriority);
-                break;
-            case KSysGuard::Process::RealTime:
-                sh += "-c 1 -n " + QString::number(newIoSchedPriority);
-                break;
-            default:
-                Q_ASSERT(false);
-                return false; //should never happen - wtf?
-        }
-        sh += "; done";
-
-        arguments << sh;
+    if (reply == KAuth::ActionReply::SuccessReply) {
+        updateList();
+        return true;
     }
-
-    QProcess *process = new QProcess(NULL);
-    connect(process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(ioniceFailed()));
-    connect(process, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));
-    process->start(su, arguments);
-    return true;  //assume it ran successfully :(  We cannot seem to actually check if it did.  There must be a better solution
+    else {
+        KMessageBox::sorry(this, i18n("You do not have the permission to change the I/O priority of the process and there "
+                    "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
+        return false;
+    }
 }
 
 bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSysGuard::Process::Scheduler newCpuSched, int newCpuSchedPriority)
@@ -1159,45 +1131,23 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
         }
     }
     if(unchanged_pids.isEmpty()) return true;
-    if(!d->mModel.isLocalhost()) {
-        KMessageBox::sorry(this, i18n("No."));
-        return false; //We can't use kdesu to kill non-localhost processes
-    }
+    if(!d->mModel.isLocalhost()) return false; //We can't use KAuth to affect non-localhost processes
 
-    QString su = KStandardDirs::findExe("kdesu");
-    if(su.isEmpty()) {
-        KMessageBox::sorry(this, i18n("Could not find kdesu executable."));
-        return false;  //Cannot find kdesu
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.changecpuscheduler");
+    d->setupKAuthAction( &action, unchanged_pids);
+    action.addArgument("cpuScheduler", (int)newCpuSched);
+    action.addArgument("cpuSchedulerPriority", newCpuSchedPriority);
+    KAuth::ActionReply reply = action.execute();
+
+    if (reply == KAuth::ActionReply::SuccessReply) {
+        updateList();
+        return true;
     }
-    QString setscheduler = KStandardDirs::findExe("setscheduler");
-    if(setscheduler.isEmpty()) {
-        KMessageBox::sorry(this, i18n("Could not find setscheduler executable.  This should have been installed alongside system monitor."));
+    else {
+        KMessageBox::sorry(this, i18n("You do not have the permission to change the CPU Scheduler for the process and there "
+                    "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         return false;
     }
-
-    QStringList arguments;
-    arguments << "--attach" << QString::number(window()->winId()) << "--noignorebutton";
-    if(unchanged_pids.size() == 1) {
-        arguments << "--" << setscheduler << QString::number(unchanged_pids.at(0)) << QString::number((int)newCpuSched) << QString::number(newCpuSchedPriority);
-    } else {
-        //Cope with multiple pids by doing a for loop
-        arguments << "--" << "sh" << "-c";
-        QString sh("for f in ");
-
-        for (int i = 0; i < unchanged_pids.size(); ++i) {
-            sh += QString::number(unchanged_pids.at(i)) + " ";
-        }
-        sh += "; do " + setscheduler + "\"$f\" " + newCpuSched + " " + newCpuSchedPriority;
-        sh += "; done";
-
-        arguments << sh;
-    }
-
-    QProcess *process = new QProcess(NULL);
-    connect(process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(ioniceFailed()));
-    connect(process, SIGNAL(finished( int, QProcess::ExitStatus) ), this, SLOT(updateList()));
-    process->start(su, arguments);
-    return true;  //assume it ran successfully :(  We cannot seem to actually check if it did.  There must be a better solution
 }
 
 bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
@@ -1212,18 +1162,9 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-    qDebug() << unkilled_pids;  
-
     KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
-    action.setHelperID("org.kde.ksysguard.processlisthelper");
-    //bleh
-    int count = 0;
-    foreach (long long pid, unkilled_pids) {
-        action.addArgument(QString("pid%1").arg(count), pid);
-        ++count;
-    }
+    d->setupKAuthAction( &action, unkilled_pids);
     action.addArgument("signal", sig);
-    action.addArgument("pidcount", unkilled_pids.count());
     KAuth::ActionReply reply = action.execute();
 
     if (reply == KAuth::ActionReply::SuccessReply) {
@@ -1281,16 +1222,6 @@ void KSysGuardProcessList::killSelectedProcesses()
     updateList();
 }
 
-void KSysGuardProcessList::reniceFailed()
-{
-    KMessageBox::sorry(this, i18n("You do not have the permission to renice the process and there "
-                "was a problem trying to run as root."));
-}
-void KSysGuardProcessList::ioniceFailed()
-{
-    KMessageBox::sorry(this, i18n("You do not have the permission to set the I/O priority and there "
-                "was a problem trying to run as root."));
-}
 bool KSysGuardProcessList::showTotals() const {
     return d->mModel.showTotals();
 }
