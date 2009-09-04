@@ -21,7 +21,6 @@
 */
 
 #include "helper.h"
-#include <QDebug>
 #include "processes_local_p.h"
 
 KSysGuardProcessListHelper::KSysGuardProcessListHelper()
@@ -29,10 +28,9 @@ KSysGuardProcessListHelper::KSysGuardProcessListHelper()
     qRegisterMetaType<QList<long long> >();
 }
 
-/* The functions here run as ROOT.  So be careful. */
+/* The functions here run as ROOT.  So be careful.  DO NOT TRUST THE INPUTS TO BE SANE. */
 
 KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters) {
-    qDebug() << "HERERERER";
     KSysGuard::ProcessesLocal processes;
     int signal = qvariant_cast<int>(parameters.value("signal"));
     bool success = true;
