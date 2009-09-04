@@ -1232,7 +1232,7 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     }
     else {
         KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
-                    "was a problem trying to run as root.  Error %1 (%1)", reply.errorCode(), reply.errorDescription()));
+                    "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         return false;
     }
 }
