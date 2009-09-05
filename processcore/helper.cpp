@@ -29,14 +29,18 @@ KSysGuardProcessListHelper::KSysGuardProcessListHelper()
 }
 
 /* The functions here run as ROOT.  So be careful.  DO NOT TRUST THE INPUTS TO BE SANE. */
-
+#define GET_PID(i) parameters.value(QString("pid%1").arg(i), -1).toULongLong(); if(pid < 0) return KAuth::ActionReply::HelperErrorReply;
 KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters) {
+    if(!parameters.contains("signal") || !parameters.contains("pidcount"))
+        return KAuth::ActionReply::HelperErrorReply;
+
     KSysGuard::ProcessesLocal processes;
     int signal = qvariant_cast<int>(parameters.value("signal"));
     bool success = true;
     int numProcesses = parameters.value("pidcount").toInt();
     for (int i = 0; i < numProcesses; ++i) {
-        success = processes.sendSignal(parameters.value(QString("pid%1").arg(i)).toULongLong(), signal) && success;
+        qlonglong pid = GET_PID(i);
+        success = processes.sendSignal(pid, signal) && success;
     }
     if(success)
         return KAuth::ActionReply::SuccessReply;
@@ -45,12 +49,16 @@ KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters
 }
 
 KAuth::ActionReply KSysGuardProcessListHelper::renice(QVariantMap parameters) {
+    if(!parameters.contains("nicevalue") || !parameters.contains("pidcount"))
+        return KAuth::ActionReply::HelperErrorReply;
+
     KSysGuard::ProcessesLocal processes;
     int niceValue = qvariant_cast<int>(parameters.value("nicevalue"));
     bool success = true;
     int numProcesses = parameters.value("pidcount").toInt();
     for (int i = 0; i < numProcesses; ++i) {
-        success = processes.setNiceness(parameters.value(QString("pid%1").arg(i)).toULongLong(), niceValue) && success;
+        qlonglong pid = GET_PID(i);
+        success = processes.setNiceness(pid, niceValue) && success;
     }
     if(success)
         return KAuth::ActionReply::SuccessReply;
@@ -59,13 +67,17 @@ KAuth::ActionReply KSysGuardProcessListHelper::renice(QVariantMap parameters) {
 }
 
 KAuth::ActionReply KSysGuardProcessListHelper::changeioscheduler(QVariantMap parameters) {
+    if(!parameters.contains("ioScheduler") || !parameters.contains("ioSchedulerPriority") || !parameters.contains("pidcount"))
+        return KAuth::ActionReply::HelperErrorReply;
+
     KSysGuard::ProcessesLocal processes;
     int ioScheduler = qvariant_cast<int>(parameters.value("ioScheduler"));
     int ioSchedulerPriority = qvariant_cast<int>(parameters.value("ioSchedulerPriority"));
     bool success = true;
     int numProcesses = parameters.value("pidcount").toInt();
     for (int i = 0; i < numProcesses; ++i) {
-        success = processes.setIoNiceness(parameters.value(QString("pid%1").arg(i)).toULongLong(), ioScheduler, ioSchedulerPriority) && success;
+        qlonglong pid = GET_PID(i);
+        success = processes.setIoNiceness(pid, ioScheduler, ioSchedulerPriority) && success;
     }
     if(success)
         return KAuth::ActionReply::SuccessReply;
@@ -74,6 +86,9 @@ KAuth::ActionReply KSysGuardProcessListHelper::changeioscheduler(QVariantMap par
 
 }
 KAuth::ActionReply KSysGuardProcessListHelper::changecpuscheduler(QVariantMap parameters) {
+    if(!parameters.contains("cpuScheduler") || !parameters.contains("cpuSchedulerPriority") || !parameters.contains("pidcount"))
+        return KAuth::ActionReply::HelperErrorReply;
+
     KSysGuard::ProcessesLocal processes;
     int cpuScheduler = qvariant_cast<int>(parameters.value("cpuScheduler"));
     int cpuSchedulerPriority = qvariant_cast<int>(parameters.value("cpuSchedulerPriority"));
@@ -81,7 +96,8 @@ KAuth::ActionReply KSysGuardProcessListHelper::changecpuscheduler(QVariantMap pa
 
     int numProcesses = parameters.value("pidcount").toInt();
     for (int i = 0; i < numProcesses; ++i) {
-        success = processes.setScheduler(parameters.value(QString("pid%1").arg(i)).toULongLong(), cpuScheduler, cpuSchedulerPriority) && success;
+        qlonglong pid = GET_PID(i);
+        success = processes.setScheduler(pid, cpuScheduler, cpuSchedulerPriority) && success;
     }
     if(success)
         return KAuth::ActionReply::SuccessReply;
