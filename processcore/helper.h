@@ -33,10 +33,10 @@ class KSysGuardProcessListHelper : public QObject {
         KSysGuardProcessListHelper();
 
     public slots:
-        ActionReply sendsignal(QVariantMap parameters);
+        ActionReply sendSignal(QVariantMap parameters);
         ActionReply renice(QVariantMap parameters);
-        ActionReply changeioscheduler(QVariantMap parameters);
-        ActionReply changecpuscheduler(QVariantMap parameters);
+        ActionReply changeIoScheduler(QVariantMap parameters);
+        ActionReply changeCpuScheduler(QVariantMap parameters);
 };
 
 Q_DECLARE_METATYPE( QList<long long> )

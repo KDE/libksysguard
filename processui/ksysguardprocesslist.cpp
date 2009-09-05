@@ -1101,7 +1101,7 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
     if(unchanged_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to affect non-localhost processes
 
-    KAuth::Action action("org.kde.ksysguard.processlisthelper.changeioscheduler");
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.changeIoScheduler");
 
     d->setupKAuthAction( &action, unchanged_pids);
     action.addArgument("ioScheduler", (int)newIoSched);
@@ -1133,7 +1133,7 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
     if(unchanged_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't use KAuth to affect non-localhost processes
 
-    KAuth::Action action("org.kde.ksysguard.processlisthelper.changecpuscheduler");
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.changeCpuScheduler");
     d->setupKAuthAction( &action, unchanged_pids);
     action.addArgument("cpuScheduler", (int)newCpuSched);
     action.addArgument("cpuSchedulerPriority", newCpuSchedPriority);
@@ -1162,7 +1162,7 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-    KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.sendSignal");
     d->setupKAuthAction( &action, unkilled_pids);
     action.addArgument("signal", sig);
     KAuth::ActionReply reply = action.execute();
