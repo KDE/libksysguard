@@ -28,8 +28,6 @@ install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguar
 
 #------ KAuth stuff
 
-include (MacroKAuth)
-
 # Auth example helper
 set(ksysguardprocesslist_helper_srcs
     helper.cpp
@@ -37,8 +35,12 @@ set(ksysguardprocesslist_helper_srcs
     processes_local_p.cpp
     processes_base_p.cpp)
 
-kde4_auth_add_helper(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root ${ksysguardprocesslist_helper_srcs})
-kde4_auth_register_actions(org.kde.ksysguard.processlisthelper actions.actions)
+kde4_add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
+target_link_libraries(ksysguardprocesslist_helper ${KDE4_KDECORE_LIBS})
+install(TARGETS ksysguardprocesslist_helper DESTINATION ${LIBEXEC_INSTALL_DIR})
+
+kde4_install_auth_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)
+kde4_install_auth_actions(org.kde.ksysguard.processlisthelper actions.actions)
 
 set_target_properties(ksysguardprocesslist_helper PROPERTIES COMPILE_FLAGS "-Wall -ggdb")
 
