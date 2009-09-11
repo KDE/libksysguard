@@ -1,68 +1,85 @@
 [org.kde.ksysguard.processlisthelper.sendsignal]
 Name=Kill or stop etc a process
+Name[id]=Matikan atau stop dll sebuah proses
 Name[nds]=En Perzess anhollen oder afscheten
 Name[pt]=Matar ou interromper um processo
 Name[pt_BR]=Matar ou interromper um processo
 Name[sv]=Döda eller stoppa en process, etc.
+Name[tr]=Bir süreci durdur veya sonlandır
 Name[uk]=Завершити чи зупинити процес
+Name[x-test]=xxKill or stop etc a processxx
 Name[zh_TW]=砍掉或停止行程
 Description=Sends a given signal to a given process
+Description[id]=Kirim sinyal yang diberikan ke proses yang diberikan
 Description[nds]=Stüert en angeven Perzess en angeven Signaal to
 Description[pt]=Envia um dado sinal a um processo em particular
 Description[pt_BR]=Envia um dado sinal para um dado processo
 Description[sv]=Skicka en given signal till en given process
 Description[uk]=Надсілати вказаний сигнал процесові
+Description[x-test]=xxSends a given signal to a given processxx
 Description[zh_TW]=送一個指定的信號給指定的行程
 Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.renice]
 Name=Change the priority of a process
+Name[id]=Ubah prioritas proses
 Name[nds]=De Prioriteet vun en Perzess ännern
 Name[pt]=Mudar a prioridade de um processo
 Name[pt_BR]=Altera a prioridade de um processo
 Name[sv]=Ändra prioritety för en process
 Name[uk]=Змінити пріоритет процесу
+Name[x-test]=xxChange the priority of a processxx
 Name[zh_TW]=變更行程的優先權
 Description=Change the niceness of a given process
+Description[id]=Ubah kebaikan proses yang diberikan
 Description[nds]=Den "nice"-Weert vun en angeven Perzess ännern
 Description[pt]=Mudar a prioridade de um dado processo
 Description[pt_BR]=Mudar a prioridade de um dado processo
 Description[sv]=Ändra prioritetsvärdet för en given process
 Description[uk]=Змінити значення nice вказаного процесу
+Description[x-test]=xxChange the niceness of a given processxx
 Description[zh_TW]=變更指定行程的優先權
 Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.changeioscheduler]
 Name=Change IO Scheduler and priority
+Name[id]=Ubah Penjadwal IO dan prioritas
 Name[nds]=Den In-/Utgaavplaner un de Prioriteet ännern
 Name[pt]=Mudar o escalonamento e a prioridade das E/S
 Name[pt_BR]=Mudar o escalonamento e a prioridade das E/S
 Name[sv]=Ändra in- och utmatningsschemaläggare och prioritet
 Name[uk]=Змінити планування і пріоритет вводу-виводу
+Name[x-test]=xxChange IO Scheduler and priorityxx
 Name[zh_TW]=變更 IO 排程器與優先權
 Description=Change how the read and writes of a given process are prioritized
+Description[id]=Ubah bagaimana pembacaan dan penulisan proses yang diberikan akan diprioritaskan
 Description[nds]=Topassen, wodennig en Perzess sien Lees- un Schrievopgaven en Prioriteet towiest warrt
 Description[pt]=Mudar a forma como são prioritizadas as leituras e escritas de um dado processo
 Description[pt_BR]=Mudar a forma como são prioritizadas as leituras e escritas de um dado processo
 Description[sv]=Ändra hur läsning och skrivning av en given process prioriteras
 Description[uk]=Змінити спосіб визначення пріоритету читання та запису для вказаного процесу
+Description[x-test]=xxChange how the read and writes of a given process are prioritizedxx
 Description[zh_TW]=變更讀取與寫入指定行程的優先權
 Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.changecpuscheduler]
 Name=Change CPU Scheduler and priority
+Name[id]=Ubah Penjadwal CPU dan prioritas
 Name[nds]=CPU-Planer un Prioriteet ännern
 Name[pt]=Mudar o escalonamento e a prioridade do CPU
 Name[pt_BR]=Mudar o escalonamento e a prioridade do CPU
 Name[sv]=Ändra processorns schemaläggare och prioritet
 Name[uk]=Змінити планування і пріоритет ЦП
+Name[x-test]=xxChange CPU Scheduler and priorityxx
 Name[zh_TW]=變更 CPU 排程器與優先權
 Description=Change which CPU scheduler is to schedule the running of a given process
+Description[id]=Ubah penjadwal CPU mana yang akan dijadwalkan untuk menjalankan proses yang diberikan
 Description[nds]=Den bruukten CPU-Planer för't Utföhren vun en angeven Perzess ännern
 Description[pt]=Mudar o escalonador do CPU que é usado para agendar a execução de um dado processo
 Description[pt_BR]=Mudar o escalonador do CPU que é usado para agendar a execução de um dado processo
 Description[sv]=Ändra vilken processorschemaläggare ska schemalägga körningen av en given process
 Description[uk]=Змінити спосіб планування використання ЦП для виконання вказаного процесу
+Description[x-test]=xxChange which CPU scheduler is to schedule the running of a given processxx
 Description[zh_TW]=變更要使用哪個 CPU 排程器來排程指定的行程
 Policy=auth_admin
 
