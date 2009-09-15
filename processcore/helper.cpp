@@ -30,7 +30,7 @@ KSysGuardProcessListHelper::KSysGuardProcessListHelper()
 
 /* The functions here run as ROOT.  So be careful.  DO NOT TRUST THE INPUTS TO BE SANE. */
 #define GET_PID(i) parameters.value(QString("pid%1").arg(i), -1).toULongLong(); if(pid < 0) return KAuth::ActionReply::HelperErrorReply;
-KAuth::ActionReply KSysGuardProcessListHelper::sendSignal(QVariantMap parameters) {
+KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters) {
     if(!parameters.contains("signal") || !parameters.contains("pidcount"))
         return KAuth::ActionReply::HelperErrorReply;
 
@@ -66,7 +66,7 @@ KAuth::ActionReply KSysGuardProcessListHelper::renice(QVariantMap parameters) {
         return KAuth::ActionReply::HelperErrorReply;
 }
 
-KAuth::ActionReply KSysGuardProcessListHelper::changeIoScheduler(QVariantMap parameters) {
+KAuth::ActionReply KSysGuardProcessListHelper::changeioscheduler(QVariantMap parameters) {
     if(!parameters.contains("ioScheduler") || !parameters.contains("ioSchedulerPriority") || !parameters.contains("pidcount"))
         return KAuth::ActionReply::HelperErrorReply;
 
@@ -85,7 +85,7 @@ KAuth::ActionReply KSysGuardProcessListHelper::changeIoScheduler(QVariantMap par
         return KAuth::ActionReply::HelperErrorReply;
 
 }
-KAuth::ActionReply KSysGuardProcessListHelper::changeCpuScheduler(QVariantMap parameters) {
+KAuth::ActionReply KSysGuardProcessListHelper::changecpuscheduler(QVariantMap parameters) {
     if(!parameters.contains("cpuScheduler") || !parameters.contains("cpuSchedulerPriority") || !parameters.contains("pidcount"))
         return KAuth::ActionReply::HelperErrorReply;
 
