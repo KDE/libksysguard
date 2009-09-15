@@ -1,3 +1,7 @@
+[Domain]
+Name=KSysGuard
+Icon=utilities-system-monitor
+
 [org.kde.ksysguard.processlisthelper.sendsignal]
 Name=Kill or stop etc a process
 Name[id]=Matikan atau stop dll sebuah proses
