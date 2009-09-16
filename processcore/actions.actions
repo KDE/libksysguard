@@ -1,5 +1,7 @@
 [Domain]
 Name=KSysGuard
+Name[uz]=KDE tizim nazoratchisi
+Name[uz@cyrillic]=KDE тизим назоратчиси
 Icon=utilities-system-monitor
 
 [org.kde.ksysguard.processlisthelper.sendsignal]
@@ -19,6 +21,7 @@ Description[nds]=Stüert en angeven Perzess en angeven Signaal to
 Description[pt]=Envia um dado sinal a um processo em particular
 Description[pt_BR]=Envia um dado sinal para um dado processo
 Description[sv]=Skicka en given signal till en given process
+Description[tr]=Belirli bir sürece belirli bir sinyali gönderir
 Description[uk]=Надсілати вказаний сигнал процесові
 Description[x-test]=xxSends a given signal to a given processxx
 Description[zh_TW]=送一個指定的信號給指定的行程
@@ -31,6 +34,7 @@ Name[nds]=De Prioriteet vun en Perzess ännern
 Name[pt]=Mudar a prioridade de um processo
 Name[pt_BR]=Alterar a prioridade de um processo
 Name[sv]=Ändra prioritety för en process
+Name[tr]=Bir sürecin önceliğini değiştirir
 Name[uk]=Змінити пріоритет процесу
 Name[x-test]=xxChange the priority of a processxx
 Name[zh_TW]=變更行程的優先權
@@ -40,6 +44,7 @@ Description[nds]=Den "nice"-Weert vun en angeven Perzess ännern
 Description[pt]=Mudar a prioridade de um dado processo
 Description[pt_BR]=Altera a prioridade de um processo indicado
 Description[sv]=Ändra prioritetsvärdet för en given process
+Description[tr]=Verilen sürecin iyileştirmesini değiştirir
 Description[uk]=Змінити значення nice вказаного процесу
 Description[x-test]=xxChange the niceness of a given processxx
 Description[zh_TW]=變更指定行程的優先權
