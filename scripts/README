@@ -1,0 +1,31 @@
+To create a script:
+
+* Make a folder here with any name
+* Inside create a file with any name, ending .desktop, looking like:
+
+
+Name=Detailed Memory Info..
+Description=Display detailed memory information
+
+
+You will now get the Name in a context menu when right clicking on a process.
+
+* Create a .js file containing javascript code.  This code will be run when the user choses the context menu entry.
+* There are the following functions:
+
+filecontent = readFile("/proc/blah")
+
+exists = fileExists("/proc/blah")
+
+setHtml("<html><b>Hi!</b>");
+
+* For a quick and simple GUI, you can just call "setHtml" which will create a dialog box with a webkit browser.  Subsequent calls to setHtml will replace the html in the same browser widget.
+
+* If you create a GUI using designer, save the file in the same folder.  Any file ending .ui  will be made accessible to the script, with the variable name
+being the filename, with "." replaced with "_".
+
+e.g. A file called "dialog.ui" with a textbox called 'textBox' can be used like:
+
+dialog_ui.textBox.text = "Hello";
+dialog_ui.show();
+

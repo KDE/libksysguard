@@ -9,5 +9,6 @@ add_subdirectory( tests )
 check_include_files(sys/ptrace.h HAVE_SYS_PTRACE_H)
 
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )
+install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts PATTERN .svn EXCLUDE)
 
 

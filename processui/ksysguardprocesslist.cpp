@@ -21,13 +21,15 @@
 
 */
 
+#include "ksysguardprocesslist.moc"
+#include "ksysguardprocesslist.h"
+
 #include "../config-ksysguard.h"
 
 #include <QTimer>
 #include <QList>
 #include <QShowEvent>
 #include <QHideEvent>
-#include <QSortFilterProxyModel>
 #include <QHeaderView>
 #include <QAction>
 #include <QMenu>
@@ -35,13 +37,11 @@
 #include <QComboBox>
 #include <QStyledItemDelegate>
 #include <QPainter>
-#include <QProcess>
 #include <QLineEdit>
 #include <QSignalMapper>
 #include <QToolTip>
 #include <QAbstractItemModel>
 #include <QtDBus>
-
 
 #include <signal.h> //For SIGTERM
 
@@ -53,13 +53,11 @@
 #include <kdialog.h>
 #include <kicon.h>
 #include <kdebug.h>
-#include <kstandarddirs.h>
 #include <KWindowSystem>
 
-#include "ksysguardprocesslist.moc"
-#include "ksysguardprocesslist.h"
 #include "ReniceDlg.h"
 #include "ui_ProcessWidgetUI.h"
+#include "scripting.h"
 
 #ifdef WITH_MONITOR_PROCESS_IO
 #include "DisplayProcessDlg.h"
@@ -152,7 +150,7 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 struct KSysGuardProcessListPrivate {
 
     KSysGuardProcessListPrivate(KSysGuardProcessList* q, const QString &hostName)
-        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL)
+        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL), mScripting(q)
     {
         renice = new KAction(i18np("Renice Process...", "Renice Processes...", 1), q);
         selectParent = new KAction(i18n("Jump to Parent Process"), q);
@@ -211,6 +209,9 @@ struct KSysGuardProcessListPrivate {
     /** The time to wait, in milliseconds, between updating the process list */
     int mUpdateIntervalMSecs;
 
+    /** Class to deal with the scripting */
+    Scripting mScripting;
+    
     KAction *renice;
     KAction *kill;
     KAction *selectParent;
@@ -264,7 +265,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
     d->mFilterModel.setFilterKeyColumn(-1);
 
-
     /*  Hide the vm size column by default since it's not very useful */
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingVmSize);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingNiceness);
@@ -308,6 +308,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     if (d->monitorio)
         actions << d->monitorio;
     actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
+
     foreach(QAction *action, actions) {
         addAction(action);
         connect(action, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
@@ -460,10 +461,15 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     }
 
     if(numProcesses == 1 && process->status == KSysGuard::Process::Stopped) {
-        //If the process is being debugged, offer to select it
+        //If the process is stopped, offer to resume it
         d->mProcessContextMenu->addAction(d->resume);
     }
 
+    if(numProcesses == 1) {
+        foreach(QAction *action, d->mScripting.actions()) {
+            d->mProcessContextMenu->addAction(action);
+        }
+    }
     if (showSignalingEntries) {
         d->mProcessContextMenu->addSeparator();
         d->mProcessContextMenu->addAction(d->kill);
@@ -861,6 +867,8 @@ void KSysGuardProcessList::hideEvent ( QHideEvent * event )  //virtual protected
     //Stop updating the process list if we are hidden
     if(d->mUpdateTimer)
         d->mUpdateTimer->stop();
+    //stop any scripts running, to save on memory
+    d->mScripting.stopAllScripts();
     QWidget::hideEvent(event);
 }
 

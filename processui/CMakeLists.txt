@@ -56,6 +56,7 @@ set(processui_LIB_SRCS
    ProcessModel.cc
    ReniceDlg.cc
    KTextEditVT.cpp
+   scripting.cpp
    ${processui_ptrace_SRCS}
 )
 
@@ -68,8 +69,8 @@ kde4_add_ui_files( processui_LIB_SRCS
 
 kde4_add_library(processui SHARED ${processui_LIB_SRCS})
 
-target_link_libraries(processui ${KDE4_KDEUI_LIBS} processcore)
-target_link_libraries(processui LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} processcore)
+target_link_libraries(processui ${KDE4_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTWEBKIT_LIBRARY} ${QT_QTUITOOLS_LIBRARY} processcore)
+target_link_libraries(processui LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTWEBKIT_LIBRARY} ${QT_QTUITOOLS_LIBRARY} processcore)
 
 set_target_properties(processui
    PROPERTIES VERSION ${GENERIC_LIB_VERSION}
