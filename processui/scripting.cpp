@@ -169,7 +169,7 @@ QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
     }
 
     if( fileInfo2.isRelative() || fileInfo2.isSymLink() || fileInfo2.isDir() || !fileInfo2.permissions().testFlag(QFile::ReadOther) ) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: Insufficent privillages to read from '%1'", canonicalPath));
+        KMessageBox::sorry(scriptingParent, i18n("Script error: Insufficient privileges to read from '%1'", canonicalPath));
         return QScriptValue();
     }
     QFile file(canonicalPath);
