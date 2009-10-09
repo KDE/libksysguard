@@ -71,7 +71,9 @@ QScriptValue setHtml(QScriptContext *context, QScriptEngine *engine)
     Scripting *scriptingParent = static_cast<Scripting *>(qVariantValue<QObject*>(engine->property("scriptingParent")));
 
     if(context->argumentCount() != 1) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: There needs to be exactly one argument to setHtml(), but there was %1", context->argumentCount()));
+        KMessageBox::sorry(scriptingParent, i18np("Script error: There needs to be exactly one argument to setHtml(), but there was %1.",
+                                                  "Script error: There needs to be exactly one argument to setHtml(), but there were %1.",
+                                                  context->argumentCount()));
         return QScriptValue();
     }
     if(!context->argument(0).isString()) {
@@ -107,7 +109,9 @@ QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
      * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
      * may be lifted */
     if(context->argumentCount() !=1) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: There needs to be exactly one argument to fileExists(), but there was %1", context->argumentCount()));
+        KMessageBox::sorry(scriptingParent, i18np("Script error: There needs to be exactly one argument to fileExists(), but there was %1.", 
+                                                  "Script error: There needs to be exactly one argument to fileExists(), but there were %1.",
+                                                  context->argumentCount()));
         return QScriptValue(engine, false);
     }
     if(!context->argument(0).isString()) {
@@ -124,7 +128,7 @@ QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
     if(canonicalPath.isEmpty())
         return QScriptValue(engine, false);
     if(!canonicalPath.startsWith("/proc/") && !canonicalPath.startsWith("/sys/")) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: fileExists() can only read from /proc or /sys.  Not '%1'", canonicalPath));
+        KMessageBox::sorry(scriptingParent, i18n("Script error: fileExists() can only read from /proc or /sys, not '%1'.", canonicalPath));
         return QScriptValue();
     }
 
@@ -139,7 +143,9 @@ QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
      * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
      * may be lifted */
     if(context->argumentCount() !=1) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: There needs to be exactly one argument to readFile(), but there was %1", context->argumentCount()));
+        KMessageBox::sorry(scriptingParent, i18np("Script error: There needs to be exactly one argument to readFile(), but there was %1.",
+                                                  "Script error: There needs to be exactly one argument to readFile(), but there were %1.",
+                                                  context->argumentCount()));
         return QScriptValue();
     }
     if(!context->argument(0).isString()) {
@@ -158,7 +164,7 @@ QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
         return QScriptValue();
     }
     if(!canonicalPath.startsWith("/proc/") && !canonicalPath.startsWith("/sys/")) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: readFile() can only read from /proc or /sys.  Not '%1'", canonicalPath));
+        KMessageBox::sorry(scriptingParent, i18n("Script error: readFile() can only read from /proc or /sys, not '%1'.", canonicalPath));
         return QScriptValue();
     }
 

@@ -585,9 +585,9 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingPid:
                 return i18n("The unique Process ID that identifies this process.");
             case HeadingIoRead:
-                return i18n("The number of bytes read.  See WhatsThis for more information.");
+                return i18n("The number of bytes read.  See What's This for more information.");
             case HeadingIoWrite:
-                return i18n("The number of bytes written.  See WhatsThis for more information.");
+                return i18n("The number of bytes written.  See What's This for more information.");
             default:
                 return QVariant();
           }
@@ -614,11 +614,11 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingCPUUsage:
                 return i18n("The CPU usage of a process and all of its threads.");
             case HeadingSharedMemory:
-                return i18n("<qt><i>Technical information: </i>This is the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt)");
+                return i18n("<qt><i>Technical information: </i>This is the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt .)");
             case HeadingCommand:
                 return i18n("<qt><i>Technical information: </i>This is from /proc/*/cmdline");
             case HeadingXTitle:
-                return i18n("<qt><i>Technical information: </i>For each X11 window, the X11 property _NET_WM_PID is used to map the window to a PID.  If a process's windows are not shown, then that application incorrectly is not setting _NET_WM_PID.");
+                return i18n("<qt><i>Technical information: </i>For each X11 window, the X11 property _NET_WM_PID is used to map the window to a PID.  If a process' windows are not shown, then that application incorrectly is not setting _NET_WM_PID.");
             case HeadingPid:
                 return i18n("<qt><i>Technical information: </i>This is the Process ID.  A multi-threaded application is treated a single process, with all threads sharing the same PID.  The CPU usage etc will be the total, accumulated, CPU usage of all the threads.");
             case HeadingIoRead:
