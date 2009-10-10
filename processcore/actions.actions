@@ -24,6 +24,7 @@ Icon=utilities-system-monitor
 
 [org.kde.ksysguard.processlisthelper.sendsignal]
 Name=Kill or stop etc a process
+Name[en_GB]=Kill or stop etc a process
 Name[et]=Protsesside peatamine, tapmine jms
 Name[gl]=Matar, deter etc un proceso
 Name[id]=Matikan atau stop dll sebuah proses
