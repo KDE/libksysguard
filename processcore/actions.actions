@@ -28,6 +28,7 @@ Icon=utilities-system-monitor
 [org.kde.ksysguard.processlisthelper.sendsignal]
 Name=Kill or stop etc a process
 Name[en_GB]=Kill or stop etc a process
+Name[eo]=Mortigi aŭ halti procedon
 Name[et]=Protsesside peatamine, tapmine jms
 Name[gl]=Matar, deter etc un proceso
 Name[id]=Matikan atau stop dll sebuah proses
@@ -63,6 +64,7 @@ Policy=auth_admin
 [org.kde.ksysguard.processlisthelper.renice]
 Name=Change the priority of a process
 Name[en_GB]=Change the priority of a process
+Name[eo]=Ŝanĝi prioritaton de la procedo
 Name[et]=Protsessi prioriteedi muutmine
 Name[gl]=Trocar a prioridade dun proceso
 Name[id]=Ubah prioritas proses
@@ -98,6 +100,7 @@ Policy=auth_admin
 [org.kde.ksysguard.processlisthelper.changeioscheduler]
 Name=Change IO Scheduler and priority
 Name[en_GB]=Change IO Scheduler and priority
+Name[eo]=Ŝanĝi lega-skriban prioritatan vicigilon kaj prioritaton
 Name[et]=IO planeerija ja prioriteedi muutmine
 Name[gl]=Trocar o planificador de E/S e a prioridade
 Name[id]=Ubah Penjadwal IO dan prioritas
@@ -132,6 +135,7 @@ Policy=auth_admin
 [org.kde.ksysguard.processlisthelper.changecpuscheduler]
 Name=Change CPU Scheduler and priority
 Name[en_GB]=Change CPU Scheduler and priority
+Name[eo]=Ŝangi ĉefprocesoran prioritatan vicigilon kaj prioritaton
 Name[et]=CPU planeerija ja prioriteedi muutmine
 Name[gl]=Trocas o planificador da CPU e a prioridade
 Name[id]=Ubah Penjadwal CPU dan prioritas
