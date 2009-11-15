@@ -52,6 +52,9 @@ bool KLsofWidget::update()
 
 void KLsofWidget::finished ( int exitCode, QProcess::ExitStatus exitStatus ) 
 {
+	Q_UNUSED(exitCode);
+	Q_UNUSED(exitStatus);
+
 	char buf[1024];
 	QTreeWidgetItem *process = NULL;
 	while(true) {
