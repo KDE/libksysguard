@@ -67,6 +67,7 @@ Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.renice]
 Name=Change the priority of a process
+Name[cs]=Změnit prioritu procesu
 Name[en_GB]=Change the priority of a process
 Name[eo]=Ŝanĝi prioritaton de la procedo
 Name[et]=Protsessi prioriteedi muutmine
