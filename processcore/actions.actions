@@ -29,6 +29,7 @@ Icon=utilities-system-monitor
 
 [org.kde.ksysguard.processlisthelper.sendsignal]
 Name=Kill or stop etc a process
+Name[de]=Einen Prozess anhalten, abschießen usw.
 Name[en_GB]=Kill or stop etc a process
 Name[eo]=Mortigi aŭ halti procedon
 Name[et]=Protsesside peatamine, tapmine jms
@@ -47,6 +48,7 @@ Name[uk]=Завершити чи зупинити процес
 Name[x-test]=xxKill or stop etc a processxx
 Name[zh_TW]=砍掉或停止行程
 Description=Sends a given signal to a given process
+Description[de]=Schickt ein gegebenes Signal an einen Prozess
 Description[en_GB]=Sends a given signal to a given process
 Description[et]=Määratud signaali saatmine määratud protsessile
 Description[gl]=Envía un sinal dado a un proceso dado
@@ -68,6 +70,7 @@ Policy=auth_admin
 [org.kde.ksysguard.processlisthelper.renice]
 Name=Change the priority of a process
 Name[cs]=Změnit prioritu procesu
+Name[de]=Die Priorität eines Prozesses ändern
 Name[en_GB]=Change the priority of a process
 Name[eo]=Ŝanĝi prioritaton de la procedo
 Name[et]=Protsessi prioriteedi muutmine
