@@ -115,13 +115,13 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
                 percentage = -1;
 
             if (percentage >= 0)
-                drawPercentageDisplay(painter,option,index.data(Qt::DisplayRole).toString());
+                drawPercentageDisplay(painter,option);
             else 
                 QStyledItemDelegate::paint(painter, option, index);
         }
 
     private:
-        void drawPercentageDisplay(QPainter *painter, const QStyleOptionViewItemV4& option, const QString& text) const
+        void drawPercentageDisplay(QPainter *painter, const QStyleOptionViewItemV4& option) const
         {
             const QRect &rect = option.rect;
             if(percentage * rect.width() > 100 ) { //make sure the line will have a width of more than 1 pixel
