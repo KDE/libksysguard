@@ -1213,7 +1213,10 @@ void KSysGuardProcessList::killSelectedProcesses()
     QList<KSysGuard::Process *> processes = selectedProcesses();
     foreach(KSysGuard::Process *process, processes) {
         selectedPids << process->pid;
-        selectedAsStrings << d->mModel.getStringForProcess(process);
+        QString name = d->mModel.getStringForProcess(process);
+        if(name.size() > 100)
+            name = name.left(95) + QString::fromUtf8("…");
+        selectedAsStrings << name;
     }
 
     if (selectedAsStrings.isEmpty())
