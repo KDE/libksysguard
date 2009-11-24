@@ -446,7 +446,10 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 
         KSysGuard::Process *parent_process = d->mModel.getProcess(process->parent_pid);
         if(parent_process) { //it should not be possible for this process to not exist, but check just incase
-            d->selectParent->setText(i18n("Jump to Parent Process (%1)", parent_process->name));
+            if(parent_process->name.size() > 20) //Elide the text if it is too long
+                d->selectParent->setText(i18n("Jump to Parent Process (%1…)", parent_process->name.left(15)));
+            else
+                d->selectParent->setText(i18n("Jump to Parent Process (%1)", parent_process->name));
             d->mProcessContextMenu->addAction(d->selectParent);
         }
     }
