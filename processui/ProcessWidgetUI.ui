@@ -28,7 +28,7 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Send a SIGKILL signal to the selected process.
+        <string>Send a SIGTERM signal to the selected process.
 See WhatsThis for more information.
 Right click on a process to send other signals.</string>
        </property>
@@ -37,8 +37,8 @@ Right click on a process to send other signals.</string>
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Attempt to kill the currently selected process by sending it the SIGKILL signal.&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Technical information: &lt;/span&gt;&lt;br /&gt;The SIGKILL signal is sent to the given process. If there are insufficient privillages to do so, by default a password is requested.&lt;br /&gt;By running the program &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;polkit-kde-authorization&lt;/span&gt; you can give certain (or all) users permission to kill any process, without requiring a password. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Attempt to kill the currently selected process by sending it the SIGTERM signal.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Technical information: &lt;/span&gt;&lt;br /&gt;The SIGTERM signal is sent to the given process. If there are insufficient privillages to do so, by default a password is requested.&lt;br /&gt;By running the program &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;polkit-kde-authorization&lt;/span&gt; you can give certain (or all) users permission to kill any process, without requiring a password. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>&amp;Kill Process...</string>
