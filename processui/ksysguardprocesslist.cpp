@@ -121,23 +121,20 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
         }
 
     private:
-        void drawPercentageDisplay(QPainter *painter, const QStyleOptionViewItem& option, const QString& text) const
+        void drawPercentageDisplay(QPainter *painter, const QStyleOptionViewItemV4& option, const QString& text) const
         {
-            QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem,&option,painter);
-
-            const QRect rect = option.rect;
+            const QRect &rect = option.rect;
             if(percentage * rect.width() > 100 ) { //make sure the line will have a width of more than 1 pixel
-                if(percentage > 100) 
+                if(percentage > 100)
                     percentage = 100;  //Don't draw outside our bounds
-                QPen old = painter->pen();
                 painter->setPen(Qt::NoPen);
                 QLinearGradient  linearGrad( QPointF(rect.x(),rect.y()), QPointF(rect.x() + rect.width(), rect.y()));
                 linearGrad.setColorAt(0, startProgressColor);
                 linearGrad.setColorAt(1, endProgressColor);
                 painter->fillRect( rect.x(), rect.y(), rect.width() * percentage /100 , rect.height(), QBrush(linearGrad));
-                painter->setPen( old );
             }
-            painter->drawText(rect,option.displayAlignment,text + ' ');
+            QStyle *style = option.widget ? option.widget->style() : QApplication::style();
+            style->drawControl(QStyle::CE_ItemViewItem, &option, painter, option.widget);
         }
 
         mutable int percentage;
