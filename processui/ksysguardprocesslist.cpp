@@ -150,6 +150,7 @@ struct KSysGuardProcessListPrivate {
         : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL), mScripting(q)
     {
         renice = new KAction(i18np("Renice Process...", "Renice Processes...", 1), q);
+        renice->setShortcut(Qt::Key_F8);
         selectParent = new KAction(i18n("Jump to Parent Process"), q);
 
         selectTracer = new KAction(i18n("Jump to Process Debugging This One"), q);
@@ -160,18 +161,22 @@ struct KSysGuardProcessListPrivate {
         monitorio = 0;
 #endif
         resume = new KAction(i18n("Resume Stopped Process"), q);
-        kill = new KAction(i18np("Kill Process", "Kill Processes", 1), q);
+        kill = new KAction(i18np("Kill Process...", "Kill Processes...", 1), q);
         kill->setIcon(KIcon("process-stop"));
+        kill->setShortcut(Qt::Key_Delete);
 
         sigStop = new KAction(i18n("Suspend (STOP)"), q);
         sigCont = new KAction(i18n("Continue (CONT)"), q);
         sigHup = new KAction(i18n("Hangup (HUP)"), q);
         sigInt = new KAction(i18n("Interrupt (INT)"), q);
         sigTerm = new KAction(i18n("Terminate (TERM)"), q);
-        sigTerm->setShortcut(Qt::Key_Delete);
         sigKill = new KAction(i18n("Kill (KILL)"), q);
         sigUsr1 = new KAction(i18n("User 1 (USR1)"), q);
         sigUsr2 = new KAction(i18n("User 2 (USR2)"), q);
+
+        //Set up '/' as a shortcut to jump to the quick search text widget
+        jumpToSearchFilter = new KAction(i18n("Focus on Quick Search"), q);
+        jumpToSearchFilter->setShortcut('/');
     }
 
     ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
@@ -213,6 +218,7 @@ struct KSysGuardProcessListPrivate {
     KAction *kill;
     KAction *selectParent;
     KAction *selectTracer;
+    KAction *jumpToSearchFilter;
     KAction *window;
     KAction *monitorio;
     KAction *resume;
@@ -301,7 +307,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     // Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked
     QSignalMapper *signalMapper = new QSignalMapper(this);
     QList<QAction *> actions;
-    actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window;
+    actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window << d->jumpToSearchFilter;
     if (d->monitorio)
         actions << d->monitorio;
     actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
@@ -475,6 +481,8 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     d->mProcessContextMenu->popup(d->mUi->treeView->viewport()->mapToGlobal(point));
 }
 void KSysGuardProcessList::actionTriggered(QObject *object) {
+    if(!isVisible()) //Ignore triggered actions if we are not visible!
+        return;
     //Reset the text back to normal
     d->selectParent->setText(i18n("Jump to Parent Process"));
     QAction *result = dynamic_cast<QAction *>(object);
@@ -512,6 +520,8 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
                 KWindowSystem::activateWindow(wid);
             }
         }
+    } else if(result == d->jumpToSearchFilter) {
+        d->mUi->txtFilter->setFocus();
 #ifdef WITH_MONITOR_PROCESS_IO
     } else if(result == d->monitorio) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
