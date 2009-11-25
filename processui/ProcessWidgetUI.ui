@@ -29,7 +29,7 @@
        </property>
        <property name="toolTip">
         <string>Send a SIGTERM signal to the selected process.
-See WhatsThis for more information.
+See What's This for more information.
 Right click on a process to send other signals.</string>
        </property>
        <property name="whatsThis">
