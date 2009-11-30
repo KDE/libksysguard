@@ -2,11 +2,13 @@
 Name=KSysGuard
 Name[br]=KSysGuard
 Name[cy]=KSysGuard
+Name[da]=KSysGuard
 Name[de]=KSysGuard
 Name[el]=KSysGuard
 Name[en_GB]=KSysGuard
 Name[eo]=KDE-Sistemobservilo
 Name[et]=KSysGuard
+Name[eu]=KSysGuard
 Name[ga]=KSysGuard
 Name[gl]=KSysGuard
 Name[he]=משמר המערכת של KDE
@@ -33,6 +35,7 @@ Icon=utilities-system-monitor
 
 [org.kde.ksysguard.processlisthelper.sendsignal]
 Name=Kill or stop etc a process
+Name[da]=Dræb eller stop en proces osv.
 Name[de]=Einen Prozess anhalten, abschießen usw.
 Name[el]=Σκότωμα ή σταμάτημα κτλ μιας διεργασίας
 Name[en_GB]=Kill or stop etc a process
@@ -56,6 +59,7 @@ Name[uk]=Завершити чи зупинити процес
 Name[x-test]=xxKill or stop etc a processxx
 Name[zh_TW]=砍掉或停止行程
 Description=Sends a given signal to a given process
+Description[da]=Sender et givet signal til en given proces
 Description[de]=Schickt ein gegebenes Signal an einen Prozess
 Description[el]=Αποστολή ενός δοσμένου σήματος σε μία δοσμένη διεργασία
 Description[en_GB]=Sends a given signal to a given process
@@ -81,11 +85,13 @@ Policy=auth_admin
 [org.kde.ksysguard.processlisthelper.renice]
 Name=Change the priority of a process
 Name[cs]=Změnit prioritu procesu
+Name[da]=Skift prioritet på en proces
 Name[de]=Die Priorität eines Prozesses ändern
 Name[el]=Αλλαγή προτεραιότητας μιας διεργασίας
 Name[en_GB]=Change the priority of a process
 Name[eo]=Ŝanĝi prioritaton de la procedo
 Name[et]=Protsessi prioriteedi muutmine
+Name[eu]=Aldatu prozesu baten lehentasuna
 Name[gl]=Trocar a prioridade dun proceso
 Name[gu]=પ્રક્રિયાની અગ્રતા બદલો
 Name[he]=שנה את העדיפות של תהליך
@@ -105,6 +111,7 @@ Name[uk]=Змінити пріоритет процесу
 Name[x-test]=xxChange the priority of a processxx
 Name[zh_TW]=變更行程的優先權
 Description=Change the niceness of a given process
+Description[da]=Skift niceness for en given proces
 Description[el]=Αλλαγή λεπτότητας μιας δοσμένης διεργασίας
 Description[en_GB]=Change the niceness of a given process
 Description[et]=Määratud protsessi viisakuse muutmine
@@ -127,6 +134,7 @@ Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.changeioscheduler]
 Name=Change IO Scheduler and priority
+Name[da]=Skift IO-skemalægning og prioritet
 Name[el]=Αλλαγή προγραμματιστή χρόνου IO και προτεραιότητας
 Name[en_GB]=Change IO Scheduler and priority
 Name[eo]=Ŝanĝi lega-skriban prioritatan vicigilon kaj prioritaton
@@ -148,6 +156,7 @@ Name[uk]=Змінити планування і пріоритет вводу-в
 Name[x-test]=xxChange IO Scheduler and priorityxx
 Name[zh_TW]=變更 IO 排程器與優先權
 Description=Change how the read and writes of a given process are prioritized
+Description[da]=Ændr hvordan læsning og skrivning fra en given proces prioriteres
 Description[el]=Αλλαγή προτεραιότητας ανάγνωσης και εγγραφής μιας δοσμένης διεργασίας 
 Description[en_GB]=Change how the read and writes of a given process are prioritised
 Description[et]=Määratud protsessi lugemise ja kirjutamise prioriteedi muutmine
@@ -170,6 +179,7 @@ Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.changecpuscheduler]
 Name=Change CPU Scheduler and priority
+Name[da]=Ændr CPU-skemalægning og prioritet
 Name[el]=Αλλαγή προγραμματισμού χρόνου και προτεραιότητας ΚΜΕ(CPU)
 Name[en_GB]=Change CPU Scheduler and priority
 Name[eo]=Ŝangi ĉefprocesoran prioritatan vicigilon kaj prioritaton
@@ -191,6 +201,7 @@ Name[uk]=Змінити планування і пріоритет ЦП
 Name[x-test]=xxChange CPU Scheduler and priorityxx
 Name[zh_TW]=變更 CPU 排程器與優先權
 Description=Change which CPU scheduler is to schedule the running of a given process
+Description[da]=Ændr hvilken CPU-skemalægning der skal skemalægge kørslen af en given proces
 Description[el]= 
 Description[en_GB]=Change which CPU scheduler is to schedule the running of a given process
 Description[et]=Määramine, kuidas CPU planeerija ajastab määratud protsessi töö
