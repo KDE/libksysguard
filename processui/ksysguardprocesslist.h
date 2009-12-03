@@ -52,6 +52,7 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         Q_PROPERTY( int updateIntervalMSecs READ updateIntervalMSecs WRITE setUpdateIntervalMSecs )
         Q_PROPERTY( ProcessModel::Units units READ units WRITE setUnits )
         Q_PROPERTY( bool killButtonVisible READ isKillButtonVisible WRITE setKillButtonVisible )
+        Q_PROPERTY( bool scriptingEnabled READ scriptingEnabled WRITE setScriptingEnabled )
         Q_ENUMS( ProcessFilter::State )
         Q_ENUMS( ProcessModel::Units )
 
@@ -106,6 +107,15 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
 
         /** @param visible defines whether the Kill Process button is shown or not. */
         void setKillButtonVisible(bool visible);
+
+        /** Whether scripting support is enabled.
+         *
+         *  Default is false. */
+        bool scriptingEnabled() const;
+        /** Set whether scripting support is enabled.
+         *
+         *  Default is false. */
+        void setScriptingEnabled(bool enabled);
 
     Q_SIGNALS:
         /** Emitted when the display has been updated */

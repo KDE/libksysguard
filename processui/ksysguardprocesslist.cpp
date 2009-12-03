@@ -147,8 +147,9 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 struct KSysGuardProcessListPrivate {
 
     KSysGuardProcessListPrivate(KSysGuardProcessList* q, const QString &hostName)
-        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL), mScripting(q)
+        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL)
     {
+        mScripting = NULL;
         renice = new KAction(i18np("Renice Process...", "Renice Processes...", 1), q);
         renice->setShortcut(Qt::Key_F8);
         selectParent = new KAction(i18n("Jump to Parent Process"), q);
@@ -211,9 +212,9 @@ struct KSysGuardProcessListPrivate {
     /** The time to wait, in milliseconds, between updating the process list */
     int mUpdateIntervalMSecs;
 
-    /** Class to deal with the scripting */
-    Scripting mScripting;
-    
+    /** Class to deal with the scripting. NULL if mScriptingEnabled is false. */
+    Scripting *mScripting;
+
     KAction *renice;
     KAction *kill;
     KAction *selectParent;
@@ -471,8 +472,8 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
         d->mProcessContextMenu->addAction(d->resume);
     }
 
-    if(numProcesses == 1) {
-        foreach(QAction *action, d->mScripting.actions()) {
+    if(numProcesses == 1 && d->mScripting) {
+        foreach(QAction *action, d->mScripting->actions()) {
             d->mProcessContextMenu->addAction(action);
         }
     }
@@ -878,7 +879,8 @@ void KSysGuardProcessList::hideEvent ( QHideEvent * event )  //virtual protected
     if(d->mUpdateTimer)
         d->mUpdateTimer->stop();
     //stop any scripts running, to save on memory
-    d->mScripting.stopAllScripts();
+    if(d->mScripting)
+        d->mScripting->stopAllScripts();
     QWidget::hideEvent(event);
 }
 
@@ -1343,4 +1345,20 @@ void KSysGuardProcessList::setKillButtonVisible(bool visible)
 bool KSysGuardProcessList::isKillButtonVisible() const
 {
     return d->mUi->btnKillProcess->isVisible();
+}
+bool KSysGuardProcessList::scriptingEnabled() const
+{
+    return !!d->mScripting;
+}
+void KSysGuardProcessList::setScriptingEnabled(bool enabled)
+{
+    if(!!d->mScripting == enabled)
+        return;  //Nothing changed
+    if(!enabled) {
+        delete d->mScripting;
+        d->mScripting = NULL;
+    } else {
+        d->mScripting = new Scripting(this);
+    }
+
 }
