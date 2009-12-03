@@ -212,7 +212,7 @@ struct KSysGuardProcessListPrivate {
     /** The time to wait, in milliseconds, between updating the process list */
     int mUpdateIntervalMSecs;
 
-    /** Class to deal with the scripting. NULL if mScriptingEnabled is false. */
+    /** Class to deal with the scripting. NULL if scripting is disabled */
     Scripting *mScripting;
 
     KAction *renice;
@@ -238,7 +238,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 {
     qRegisterMetaType<QList<long long> >();
     qDBusRegisterMetaType<QList<long long> >();
-  
+
     d->mUpdateIntervalMSecs = 0; //Set process to not update manually by default
     d->mUi->setupUi(this);
     d->mFilterModel.setSourceModel(&d->mModel);
