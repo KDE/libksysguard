@@ -1159,7 +1159,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             QString tooltip = ki18n("<qt><p style='white-space:pre'>"
                         "Process status: %1 %2<br />"
                         "User CPU usage : %3%<br />"
-                        "System CPU usage: %4%</qt>")
+                        "System CPU usage: %4%")  /* Please do not add </qt> here - the tooltip is appended to */
                         .subs(process->translatedStatus())
                         .subs(d->getStatusDescription(process->status))
                         .subs((float)(process->userUsage) / divideby)
