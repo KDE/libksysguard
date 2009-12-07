@@ -68,7 +68,7 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
     mShowCommandLineOptions = false;
     mShowingTooltips = true;
     mNormalizeCPUUsage = true;
-    mIoInformation = ProcessModel::ActualBytes; 
+    mIoInformation = ProcessModel::ActualBytes;
 }
 
 ProcessModelPrivate::~ProcessModelPrivate()
@@ -300,7 +300,7 @@ void ProcessModelPrivate::setupProcesses() {
     connect( mProcesses, SIGNAL( endAddProcess()), this, SLOT(endInsertRow()));
     connect( mProcesses, SIGNAL( beginRemoveProcess(KSysGuard::Process *)), this, SLOT(beginRemoveRow( KSysGuard::Process *)));
     connect( mProcesses, SIGNAL( endRemoveProcess()), this, SLOT(endRemoveRow()));
-    connect( mProcesses, SIGNAL( beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)), this, 
+    connect( mProcesses, SIGNAL( beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)), this,
             SLOT( beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)));
     connect( mProcesses, SIGNAL( endMoveProcess()), this, SLOT(endMoveRow()));
     mNumProcessorCores = mProcesses->numberProcessorCores();
@@ -322,7 +322,7 @@ void ProcessModelPrivate::windowAdded(WId wid)
     }
     //The name changed
     KXErrorHandler handler;
-    NETWinInfo *info = new NETWinInfo( QX11Info::display(), wid, QX11Info::appRootWindow(), 
+    NETWinInfo *info = new NETWinInfo( QX11Info::display(), wid, QX11Info::appRootWindow(),
             NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMState );
     if (handler.error( false ) ) {
         delete info;
@@ -449,7 +449,7 @@ QModelIndex ProcessModel::index ( int row, int column, const QModelIndex & paren
 
     //Deal with the case that we are showing it as a tree
     KSysGuard::Process *parent_process = 0;
-    
+
     if(parent.isValid()) //not valid for init, and init has ppid of 0
         parent_process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer());
     else
@@ -586,7 +586,7 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
 
     Q_ASSERT(process);
     Q_ASSERT(process->pid > 0);
-    
+
     if(mSimple) {
         return q->beginRemoveRows(QModelIndex(), process->index, process->index);
     } else  {
@@ -599,7 +599,7 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
         return q->beginRemoveRows(q->getQModelIndex(process->parent,0), row, row);
     }
 }
-void ProcessModelPrivate::endRemoveRow() 
+void ProcessModelPrivate::endRemoveRow()
 {
     q->endRemoveRows();
 }
@@ -626,7 +626,7 @@ void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuar
     }
     q->changePersistentIndexList(fromIndexes, toIndexes);
 }
-void ProcessModelPrivate::endMoveRow() 
+void ProcessModelPrivate::endMoveRow()
 {
 }
 
@@ -654,7 +654,7 @@ QModelIndex ProcessModel::parent ( const QModelIndex & index ) const
 
     if(d->mSimple)
         return QModelIndex();
-    else 
+    else
         return getQModelIndex(process->parent,0);
 }
 
@@ -666,7 +666,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
     if(section < 0 || section >= d->mHeadings.count())
         return QVariant(); //is this needed?
     switch( role ) {
-      case Qt::TextAlignmentRole: 
+      case Qt::TextAlignmentRole:
       {
         switch(section) {
             case HeadingPid:
@@ -683,7 +683,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
         }
         return QVariant();
       }
-      case Qt::ToolTipRole: 
+      case Qt::ToolTipRole:
       {
           if(!d->mShowingTooltips)
             return QVariant();
@@ -727,7 +727,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return QVariant();
           }
       }
-      case Qt::WhatsThisRole: 
+      case Qt::WhatsThisRole:
       {
           switch(section) {
             case HeadingName:
@@ -780,7 +780,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
     }
 }
 void ProcessModel::setSimpleMode(bool simple)
-{ 
+{
     if(d->mSimple == simple) return;
 
     if(!d->mIsChangingLayout) {
@@ -799,7 +799,7 @@ void ProcessModel::setSimpleMode(bool simple)
         treerow = process->parent->children.indexOf(process);
         flatIndexes.clear();
         treeIndexes.clear();
-    
+
         for(int i=0; i < columnCount(); i++) {
             flatIndexes << createIndex(flatrow, i, process);
             treeIndexes << createIndex(treerow, i, process);
@@ -826,9 +826,9 @@ bool ProcessModel::canUserLogin(long uid ) const
     if(canLogin != -1) return canLogin; //We know whether they can log in
 
     //We got the default, -1, so we don't know.  Look it up
-    
+
     KUser user(uid);
-    if(!user.isValid()) { 
+    if(!user.isValid()) {
         //for some reason the user isn't recognised.  This might happen under certain security situations.
         //Just return true to be safe
         d->mUidCanLogin[uid] = 1;
@@ -854,19 +854,19 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
         if(!user.isValid())
             userTooltip += i18n("This user is not recognized for some reason.");
         else {
-            if(!user.property(KUser::FullName).isValid()) 
+            if(!user.property(KUser::FullName).isValid())
                 userTooltip += i18n("<b>%1</b><br/>", user.property(KUser::FullName).toString());
             userTooltip += i18n("Login Name: %1 (uid: %2)<br/>", user.loginName(), ps->uid);
-            if(!user.property(KUser::RoomNumber).isValid()) 
+            if(!user.property(KUser::RoomNumber).isValid())
                 userTooltip += i18n("  Room Number: %1<br/>", user.property(KUser::RoomNumber).toString());
-            if(!user.property(KUser::WorkPhone).isValid()) 
+            if(!user.property(KUser::WorkPhone).isValid())
                 userTooltip += i18n("  Work Phone: %1<br/>", user.property(KUser::WorkPhone).toString());
         }
     }
-    if( (ps->uid != ps->euid && ps->euid != -1) || 
-                   (ps->uid != ps->suid && ps->suid != -1) || 
+    if( (ps->uid != ps->euid && ps->euid != -1) ||
+                   (ps->uid != ps->suid && ps->suid != -1) ||
                    (ps->uid != ps->fsuid && ps->fsuid != -1)) {
-        if(ps->euid != -1) 
+        if(ps->euid != -1)
             userTooltip += i18n("Effective User: %1<br/>", getUsernameForUser(ps->euid, true));
         if(ps->suid != -1)
             userTooltip += i18n("Setuid User: %1<br/>", getUsernameForUser(ps->suid, true));
@@ -876,10 +876,10 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
     }
     if(ps->gid != -1) {
         userTooltip += i18n("Group: %1", getGroupnameForGroup(ps->gid));
-        if( (ps->gid != ps->egid && ps->egid != -1) || 
-                       (ps->gid != ps->sgid && ps->sgid != -1) || 
+        if( (ps->gid != ps->egid && ps->egid != -1) ||
+                       (ps->gid != ps->sgid && ps->sgid != -1) ||
                        (ps->gid != ps->fsgid && ps->fsgid != -1)) {
-            if(ps->egid != -1) 
+            if(ps->egid != -1)
                 userTooltip += i18n("<br/>Effective Group: %1", getGroupnameForGroup(ps->egid));
             if(ps->sgid != -1)
                 userTooltip += i18n("<br/>Setuid Group: %1", getGroupnameForGroup(ps->sgid));
@@ -916,7 +916,7 @@ QString ProcessModelPrivate::getUsernameForUser(long uid, bool withuid) const {
                 username = user.loginName();
         }
     }
-    if(username.isEmpty()) 
+    if(username.isEmpty())
         return QString::number(uid);
     if(withuid)
         return i18n("%1 (uid: %2)", username, (long int)uid);
@@ -932,7 +932,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
     if (index.column() >= d->mHeadings.count()) {
-        return QVariant(); 
+        return QVariant();
     }
 
     switch (role){
@@ -968,7 +968,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return process->translatedStatus();  //tell the user when the process is a zombie or stopped
                 if(total < 0.5)
                     return "";
-                
+
                 return QString::number((int)(total+0.5)) + '%';
             }
         case HeadingMemory:
@@ -984,7 +984,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingSharedMemory:
             if(process->vmRSS - process->vmURSS <= 0 || process->vmURSS == -1) return QVariant(QVariant::String);
             return formatMemoryInfo(process->vmRSS - process->vmURSS, d->mUnits);
-        case HeadingCommand: 
+        case HeadingCommand:
             {
                 return process->command;
 // It would be nice to embolden the process name in command, but this requires that the itemdelegate to support html text
@@ -1080,7 +1080,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             QString tooltip = "<qt><p style='white-space:pre'>";
             /*   It would be nice to be able to show the icon in the tooltip, but Qt4 won't let us put
              *   a picture in a tooltip :(
-               
+
             QIcon icon;
             if(mPidToWindowInfo.contains(process->pid)) {
                 WId wid;
@@ -1153,7 +1153,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
                 if(tracer.isEmpty()) return tooltip;
             return tooltip + "<br />" + tracer;
-        }    
+        }
         case HeadingCPUUsage: {
             int divideby = (d->mNormalizeCPUUsage?d->mNumProcessorCores:1);
             QString tooltip = ki18n("<qt><p style='white-space:pre'>"
@@ -1175,11 +1175,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                         .subs((float)(process->totalUserUsage + process->totalSysUsage) / divideby)
                         .toString();
             }
-            if(process->userTime > 0) 
+            if(process->userTime > 0)
                 tooltip += ki18n("<br /><br />CPU time spent running as user: %1 seconds")
                         .subs(process->userTime / 100.0, 0, 'f', 1)
                         .toString();
-            if(process->sysTime > 0) 
+            if(process->sysTime > 0)
                 tooltip += ki18n("<br />CPU time spent running in kernel: %1 seconds")
                         .subs(process->sysTime / 100.0, 0, 'f', 1)
                         .toString();
@@ -1231,7 +1231,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             QString tooltip = "<qt><p style='white-space:pre'>";
             //FIXME - use the formatByteRate functions when added
             tooltip += i18n("Characters read: %1 (%2 KiB/s)<br>Characters written: %3 (%4 KiB/s)<br>Read syscalls: %5 (%6 s⁻¹)<br>Write syscalls: %7 (%8 s⁻¹)<br>Actual bytes read: %9 (%10 KiB/s)<br>Actual bytes written: %11 (%12 KiB/s)",
-                    KGlobal::locale()->formatByteSize(process->ioCharactersRead), QString::number(process->ioCharactersReadRate/1024), 
+                    KGlobal::locale()->formatByteSize(process->ioCharactersRead), QString::number(process->ioCharactersReadRate/1024),
                     KGlobal::locale()->formatByteSize(process->ioCharactersWritten), QString::number(process->ioCharactersWrittenRate/1024),
                     QString::number(process->ioReadSyscalls), QString::number(process->ioReadSyscallsRate),
                     QString::number(process->ioWriteSyscalls), QString::number(process->ioWriteSyscallsRate)).arg(
@@ -1325,7 +1325,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingSharedMemory:
             if(process->vmRSS - process->vmURSS < 0 || process->vmURSS == -1) return QVariant(QVariant::String);
             return (qlonglong)(process->vmRSS - process->vmURSS);
-        case HeadingCommand: 
+        case HeadingCommand:
             return process->command;
         case HeadingIoRead:
             switch(d->mIoInformation) {
@@ -1396,14 +1396,14 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         if(index.column() == HeadingName) {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
             if(!d->mPidToWindowInfo.contains(process->pid)) {
-                if(d->mSimple) //When not in tree mode, we need to pad the name column where we do not have an icon 
+                if(d->mSimple) //When not in tree mode, we need to pad the name column where we do not have an icon
                     return QIcon(d->mBlankPixmap);
                 else  //When in tree mode, the padding looks pad, so do not pad in this case
                     return QVariant();
             }
 
             WindowInfo w = d->mPidToWindowInfo.value(process->pid);
-            if(w.icon.isNull()) 
+            if(w.icon.isNull())
                 return QIcon(d->mBlankPixmap);
             return w.icon;
 
@@ -1558,7 +1558,7 @@ ProcessModel::IoInformation ProcessModel::ioInformation() const
 }
 QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool returnEmptyIfValueIsZero) const
 {
-    //We cache the result of i18n for speed reasons.  We call this function 
+    //We cache the result of i18n for speed reasons.  We call this function
     //hundreds of times, every second or so
     if(returnEmptyIfValueIsZero && amountInKB == 0)
         return QString();
@@ -1566,7 +1566,7 @@ QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool r
     static QString mbString = i18n("%1 M", QString::fromLatin1("%1"));
     static QString gbString = i18n("%1 G", QString::fromLatin1("%1"));
     static QString percentageString = i18n("%1%", QString::fromLatin1("%1"));
-    double amount; 
+    double amount;
     switch(units) {
       case UnitsKB:
         return kbString.arg(amountInKB);
