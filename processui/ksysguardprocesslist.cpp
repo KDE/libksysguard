@@ -303,7 +303,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
     //Sort by username by default
     d->mUi->treeView->sortByColumn(ProcessModel::HeadingUser, Qt::AscendingOrder);
-    d->mFilterModel.sort(ProcessModel::HeadingUser, Qt::AscendingOrder);
 
     // Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked
     QSignalMapper *signalMapper = new QSignalMapper(this);
@@ -1306,7 +1305,6 @@ void KSysGuardProcessList::loadSettings(const KConfigGroup &cg) {
 
 void KSysGuardProcessList::restoreHeaderState(const QByteArray & state) {
     d->mUi->treeView->header()->restoreState(state);
-    d->mFilterModel.sort( d->mUi->treeView->header()->sortIndicatorSection(), d->mUi->treeView->header()->sortIndicatorOrder() );
 }
 
 bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
