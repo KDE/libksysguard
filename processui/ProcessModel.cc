@@ -99,6 +99,135 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
     d->mIoUnits = UnitsKB;
 }
 
+bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
+{
+    KSysGuard::Process *processLeft = reinterpret_cast< KSysGuard::Process * > (left.internalPointer());
+    KSysGuard::Process *processRight = reinterpret_cast< KSysGuard::Process * > (right.internalPointer());
+    Q_ASSERT(process);
+    Q_ASSERT(left.column() == right.column());
+    switch(left.column()) {
+        case HeadingUser:
+        {
+            /* Sorting by user will be the default and the most common.
+               We want to sort in the most useful way that we can. We need to return a number though.
+               This code is based on that sorting ascendingly should put the current user at the top
+               First the user we are running as should be at the top.
+               Then any other users in the system.
+               Then at the bottom the 'system' processes.
+               We then sort by cpu usage to sort by that, then finally sort by memory usage */
+
+            /* First, place traced processes at the very top, ignoring any other sorting criteria */
+            if(processLeft->tracerpid > 0)
+                return true;
+            if(processRight->tracerpid > 0)
+                return false;
+
+            /* Sort by username.  First group into own user, normal users, system users */
+            if(processLeft->uid != processRight->uid) {
+                //We primarily sort by username
+                if(d->mIsLocalhost) {
+                    int ownUid = getuid();
+                    if(processLeft->uid == ownUid)
+                        return true; //Left is our user, right is not.  So left is above right
+                    if(processRight->uid == ownUid)
+                        return false; //Left is not our user, right is.  So right is above left
+                }
+                bool isLeftSystemUser = processLeft->uid < 100 || !canUserLogin(processLeft->uid);
+                bool isRightSystemUser = processRight->uid < 100 || !canUserLogin(processRight->uid);
+                if(isLeftSystemUser && !isRightSystemUser)
+                    return false; //System users are less than non-system users
+                if(!isLeftSystemUser && isRightSystemUser)
+                    return true;
+                //They are either both system users, or both non-system users.
+                //So now sort by username
+                return d->getUsernameForUser(processLeft->uid, false) < d->getUsernameForUser(processRight->uid, false);
+            }
+
+            /* 2nd sort order - Graphics Windows */
+            //Both columns have the same user.  Place processes with windows at the top
+            bool leftHasWindow = d->mPidToWindowInfo.contains(processLeft->pid);
+            bool rightHasWindow = d->mPidToWindowInfo.contains(processRight->pid);
+            if(leftHasWindow && !rightHasWindow)
+                return true; //Processes with windows at the top
+            if(!leftHasWindow && rightHasWindow)
+                return false;
+
+            /* 3rd sort order - CPU Usage */
+            int leftCpu, rightCpu;
+            if(d->mSimple || !d->mShowChildTotals) {
+                leftCpu = processLeft->userUsage + processLeft->sysUsage;
+                rightCpu = processRight->userUsage + processRight->sysUsage;
+            } else {
+                leftCpu = processLeft->totalUserUsage + processLeft->totalSysUsage;
+                rightCpu = processRight->totalUserUsage + processRight->totalSysUsage;
+            }
+            if(leftCpu != rightCpu)
+                return leftCpu > rightCpu;
+
+            /* 4th sort order - Memory Usage */
+            qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmURSS:processLeft->vmRSS;
+            qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmURSS:processRight->vmRSS;
+            return memoryLeft > memoryRight;
+        }
+        case HeadingCPUUsage: {
+            int leftCpu, rightCpu;
+            if(d->mSimple || !d->mShowChildTotals) {
+                leftCpu = processLeft->userUsage + processLeft->sysUsage;
+                rightCpu = processRight->userUsage + processRight->sysUsage;
+            } else {
+                leftCpu = processLeft->totalUserUsage + processLeft->totalSysUsage;
+                rightCpu = processRight->totalUserUsage + processRight->totalSysUsage;
+            }
+            return leftCpu > rightCpu;
+         }
+        case HeadingMemory: {
+            qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmURSS:processLeft->vmRSS;
+            qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmURSS:processRight->vmRSS;
+            return memoryLeft > memoryRight;
+        }
+        case HeadingVmSize:
+            return processLeft->vmSize > processRight->vmSize;
+        case HeadingSharedMemory: {
+            qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmRSS - processLeft->vmURSS:0;
+            qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmRSS - processRight->vmURSS:0;
+            return memoryLeft > memoryRight;
+        }
+        case HeadingIoRead:
+            switch(d->mIoInformation) {
+                case ProcessModel::Bytes:
+                    return processLeft->ioCharactersRead > processRight->ioCharactersRead;
+                case ProcessModel::Syscalls:
+                    return processLeft->ioReadSyscalls > processRight->ioReadSyscalls;
+                case ProcessModel::ActualBytes:
+                    return processLeft->ioCharactersActuallyRead > processRight->ioCharactersActuallyRead;
+                case ProcessModel::BytesRate:
+                    return processLeft->ioCharactersReadRate > processRight->ioCharactersReadRate;
+                case ProcessModel::SyscallsRate:
+                    return processLeft->ioReadSyscallsRate > processRight->ioReadSyscallsRate;
+                case ProcessModel::ActualBytesRate:
+                    return processLeft->ioCharactersActuallyReadRate > processRight->ioCharactersActuallyReadRate;
+
+            }
+        case HeadingIoWrite:
+            switch(d->mIoInformation) {
+                case ProcessModel::Bytes:
+                    return processLeft->ioCharactersWritten > processRight->ioCharactersWritten;
+                case ProcessModel::Syscalls:
+                    return processLeft->ioWriteSyscalls > processRight->ioWriteSyscalls;
+                case ProcessModel::ActualBytes:
+                    return processLeft->ioCharactersActuallyWritten > processRight->ioCharactersActuallyWritten;
+                case ProcessModel::BytesRate:
+                    return processLeft->ioCharactersWrittenRate > processRight->ioCharactersWrittenRate;
+                case ProcessModel::SyscallsRate:
+                    return processLeft->ioWriteSyscallsRate > processRight->ioWriteSyscallsRate;
+                case ProcessModel::ActualBytesRate:
+                    return processLeft->ioCharactersActuallyWrittenRate > processRight->ioCharactersActuallyWrittenRate;
+        }
+    }
+    //Sort by the display string if we do not have an explicit sorting here
+    return data(left, Qt::DisplayRole).toString() < data(right, Qt::DisplayRole).toString();
+}
+
 ProcessModel::~ProcessModel()
 {
     delete d;
@@ -1148,103 +1277,6 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         if(index.column() != 0) return QVariant();  //If we query with this role, then we want the raw UID for this.
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         return process->uid;
-    }
-    case SortingValueRole: {
-        //We have a special understanding with the filter sort. This returns an int (in a qvariant) that can be sorted by
-        KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-        Q_ASSERT(process);
-        switch(index.column()) {
-        case HeadingUser: {
-            //Sorting by user will be the default and the most common.
-            //We want to sort in the most useful way that we can. We need to return a number though.
-            //This code is based on that sorting ascendingly should put the current user at the top
-            //
-            //First the user we are running as should be at the top.  We add 0 for this
-            //Then any other users in the system.  We add 100,000,000 for this (remember it's ascendingly sorted)
-            //Then at the bottom the 'system' processes.  We add 200,000,000 for this
-            //
-            //We subtract the uid to sort ascendingly by that, then subtract the cpu usage to sort by that, then finally subtract the memory
-            
-            qlonglong base = 0;
-            qlonglong memory = 0;
-            if(process->vmURSS != -1) memory = process->vmURSS;
-            else memory = process->vmRSS;
-            if(d->mIsLocalhost && process->uid == getuid())
-                base = 0;  //own user
-            else if(process->uid < 100 || !canUserLogin(process->uid)) 
-                base = 200000000 - process->uid * 10000;  //system user
-            else
-                base = 100000000 - process->uid * 10000;
-            //One special exception is a traced process since that's probably important. We should put that at the top
-            if(process->tracerpid >0) return base - 9999 ;
-            int cpu;
-            if(d->mSimple || !d->mShowChildTotals)
-                cpu = process->userUsage + process->sysUsage;
-            else
-                cpu = process->totalUserUsage + process->totalSysUsage;
-            if(cpu == 0 && process->status != KSysGuard::Process::Running && process->status != KSysGuard::Process::Sleeping) 
-                cpu = 1;  //stopped or zombied processes should be near the top of the list
-            bool hasWindow = d->mPidToWindowInfo.contains(process->pid);
-            //However we can of course have lots of processes with the same user.  Next we sort by CPU.
-            if(d->mMemTotal>0)
-                return (double)(base - (cpu*100) -(hasWindow?50:0) - memory*100.0/d->mMemTotal);
-            else
-                return (double)(base - (cpu*100) -(hasWindow?50:0));
-        }
-        case HeadingCPUUsage: {
-            int cpu;
-            if(d->mSimple || !d->mShowChildTotals)
-                cpu = process->userUsage + process->sysUsage;
-            else
-                cpu = process->totalUserUsage + process->totalSysUsage;
-            if(cpu == 0 && process->status != KSysGuard::Process::Running && process->status != KSysGuard::Process::Sleeping) 
-                cpu = 1;  //stopped or zombied processes should be near the top of the list
-            return -cpu;
-         }
-        case HeadingMemory:
-            if(process->vmURSS == -1) 
-                return (qlonglong)-process->vmRSS;
-            else
-                return (qlonglong)-process->vmURSS;
-        case HeadingVmSize:
-            return (qlonglong)-process->vmSize;
-        case HeadingSharedMemory:
-            if(process->vmURSS == -1) return (qlonglong)0;
-            return (qlonglong)-(process->vmRSS - process->vmURSS);
-        case HeadingIoRead:
-            switch(d->mIoInformation) {
-                case ProcessModel::Bytes:
-                    return -process->ioCharactersRead;
-                case ProcessModel::Syscalls:
-                    return -process->ioReadSyscalls;
-                case ProcessModel::ActualBytes:
-                    return -process->ioCharactersActuallyRead;
-                case ProcessModel::BytesRate:
-                    return -(qlonglong)process->ioCharactersReadRate;
-                case ProcessModel::SyscallsRate:
-                    return -(qlonglong)process->ioReadSyscallsRate;
-                case ProcessModel::ActualBytesRate:
-                    return -(qlonglong)process->ioCharactersActuallyReadRate;
-
-            }
-        case HeadingIoWrite:
-            switch(d->mIoInformation) {
-                case ProcessModel::Bytes:
-                    return -process->ioCharactersWritten;
-                case ProcessModel::Syscalls:
-                    return -process->ioWriteSyscalls;
-                case ProcessModel::ActualBytes:
-                    return -process->ioCharactersActuallyWritten;
-                case ProcessModel::BytesRate:
-                    return -(qlonglong)process->ioCharactersWrittenRate;
-                case ProcessModel::SyscallsRate:
-                    return -(qlonglong)process->ioWriteSyscallsRate;
-                case ProcessModel::ActualBytesRate:
-                    return -(qlonglong)process->ioCharactersActuallyWrittenRate;
-
-            }
-        }
-        return QVariant();
     }
     case PlainValueRole:  //Used to return a plain value.  For copying to a clipboard etc
     {

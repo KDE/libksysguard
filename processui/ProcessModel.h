@@ -62,6 +62,8 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         QModelIndex parent ( const QModelIndex & index ) const;
 
         bool hasChildren ( const QModelIndex & parent) const;
+        /** Returns if (left < right), used by the sort-filter proxy model to sort the columns */
+        bool lessThan( const QModelIndex & left, const QModelIndex & right) const;
 
         /* Functions for drag and drop and copying to clipboard, inherited from QAbstractItemModel */
         QStringList mimeTypes() const;
@@ -127,7 +129,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         int processCount() const { return processController()->processCount(); }
 
         /** The headings in the model.  The order here is the order that they are shown
-         *  in.  If you change this, make sure you also change the 
+         *  in.  If you change this, make sure you also change the
          *  setup header function, and make sure you increase PROCESSHEADERVERSION.  This will ensure
          *  that old saved settings won't be used
          */

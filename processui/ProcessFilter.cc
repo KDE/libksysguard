@@ -134,10 +134,8 @@ bool ProcessFilter::lessThan(const QModelIndex &left, const QModelIndex &right) 
 	if(right.isValid() && left.isValid()) {
 		Q_ASSERT(left.model());
 		Q_ASSERT(right.model());
-		QVariant l = (left.model() ? left.model()->data(left, ProcessModel::SortingValueRole) : QVariant());
-		QVariant r = (right.model() ? right.model()->data(right, ProcessModel::SortingValueRole) : QVariant());
-		if(l.isValid() && r.isValid())
-			return l.toDouble() < r.toDouble();
+        const ProcessModel *model = static_cast<const ProcessModel *>(left.model());
+        return model->lessThan(left, right);
 	}
 	return QSortFilterProxyModel::lessThan(left,right);
 }
