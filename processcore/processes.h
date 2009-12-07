@@ -1,5 +1,5 @@
 /*  This file is part of the KDE project
-    
+
     Copyright (C) 2007 John Tapsell <tapsell@kde.org>
 
     This library is free software; you can redistribute it and/or
@@ -79,7 +79,7 @@ namespace KSysGuard
         static void returnInstance(const QString &host = QString());
 
         /**
-         *  Update all the process information.  After calling this, /proc or equivalent is scanned and 
+         *  Update all the process information.  After calling this, /proc or equivalent is scanned and
          *  the signals processChanged, etc  are emitted.
          *
          *  Set updateDuration to whatever time period that you update, in milliseconds.
@@ -89,7 +89,7 @@ namespace KSysGuard
         void updateAllProcesses(long updateDurationMS = 0, Processes::UpdateFlags updateFlags = 0);
 
         /**
-         *  Return information for one specific process.  Call getProcess(0) to get the 
+         *  Return information for one specific process.  Call getProcess(0) to get the
          *  fake process used as the top most parent for all processes.
          *  This doesn't fetch any new information and so returns almost instantly.
          *  Call updateAllProcesses() to actually fetch the process information.
@@ -120,15 +120,15 @@ namespace KSysGuard
         bool sendSignal(long pid, int sig);
 
         /**
-         *  Set the priority for a process.  This is from 19 (very nice, lowest priority) to 
+         *  Set the priority for a process.  This is from 19 (very nice, lowest priority) to
          *    -20 (highest priority).  The default value for a process is 0.
-         *  
+         *
          *  @return false if you do not have permission to set the priority
          */
         bool setNiceness(long pid, int priority);
 
         /**
-         *  Set the scheduler for a process.  This is defined according to POSIX.1-2001 
+         *  Set the scheduler for a process.  This is defined according to POSIX.1-2001
          *  See "man sched_setscheduler" for more information.
          *
          *  @p priorityClass One of SCHED_FIFO, SCHED_RR, SCHED_OTHER, and SCHED_BATCH
@@ -150,8 +150,8 @@ namespace KSysGuard
          */
         bool supportsIoNiceness();
 
-        /** 
-         *  Return the internal pointer of all the processes.  The order of the processes 
+        /**
+         *  Return the internal pointer of all the processes.  The order of the processes
          *  is guaranteed to never change.  Call updateAllProcesses() first to actually
          *  update the information.
          */
@@ -160,7 +160,7 @@ namespace KSysGuard
         /**
          *  Return the number of processes.  Call updateAllProcesses() to actually
          *  update the information.
-         *  
+         *
          *  This is equivalent to getAllProcesses().count()
          */
         int processCount() const;
@@ -172,7 +172,7 @@ namespace KSysGuard
         long long totalPhysicalMemory();
 
         /**
-         *  Return the number of processor cores enabled. 
+         *  Return the number of processor cores enabled.
          *  (A system can disable processors.  Disabled processors are not counted here).
          *  This is fast (just a system call) */
         long numberProcessorCores();
@@ -190,7 +190,7 @@ namespace KSysGuard
         void processChanged( KSysGuard::Process *process, bool onlyTotalCpu);
 
         /**
-         *  This indicates we are about to add a process in the model.  
+         *  This indicates we are about to add a process in the model.
          *  The process already has the pid, ppid and tree_parent set up.
          */
         void beginAddProcess( KSysGuard::Process *process);
@@ -199,13 +199,13 @@ namespace KSysGuard
          *  We have finished inserting a process
          */
         void endAddProcess();
-        /** 
+        /**
          *  This indicates we are about to remove a process in the model.  Emit the appropriate signals
          */
 
         void beginRemoveProcess( KSysGuard::Process *process);
 
-        /** 
+        /**
          *  We have finished removing a process
          */
         void endRemoveProcess();
@@ -247,4 +247,4 @@ namespace KSysGuard
     };
     Q_DECLARE_OPERATORS_FOR_FLAGS(Processes::UpdateFlags)
 }
-#endif 
+#endif
