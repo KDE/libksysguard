@@ -71,7 +71,6 @@
 #ifdef DO_MODELCHECK
 #include "modeltest.h"
 #endif
-
 class ProgressBarItemDelegate : public QStyledItemDelegate
 {
     public:
@@ -925,7 +924,7 @@ void KSysGuardProcessList::updateList()
         emit updated();
         if(QToolTip::isVisible()) {
             QWidget *w = d->mUi->treeView->viewport();
-            if(w->geometry().contains(w->mapFromGlobal( QCursor::pos() ))) {
+            if(w->geometry().contains(d->mUi->treeView->mapFromGlobal( QCursor::pos() ))) {
                 QHelpEvent event(QEvent::ToolTip, w->mapFromGlobal( QCursor::pos() ), QCursor::pos());
                 kapp->notify(w, &event);
             }
