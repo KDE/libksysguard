@@ -101,6 +101,7 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
 
 bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
+    //Because we need to sort Descendingly by default for most of the headings, we often return left > right
     KSysGuard::Process *processLeft = reinterpret_cast< KSysGuard::Process * > (left.internalPointer());
     KSysGuard::Process *processRight = reinterpret_cast< KSysGuard::Process * > (right.internalPointer());
     Q_ASSERT(process);
@@ -500,8 +501,11 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             emit q->dataChanged(index, index);
         }
         if(process->changes & (KSysGuard::Process::Usage | KSysGuard::Process::Status) || (process->changes & KSysGuard::Process::TotalUsage && mShowChildTotals)) {
-            totalUpdated++;
+            totalUpdated+=2;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingCPUUsage, process);
+            emit q->dataChanged(index, index);
+            //Because of our sorting, changing usage needs to also invalidate the User column
+            index = q->createIndex(row, ProcessModel::HeadingUser, process);
             emit q->dataChanged(index, index);
         }
         if(process->changes & KSysGuard::Process::NiceLevels) {
@@ -520,8 +524,10 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             emit q->dataChanged(index, index);
             QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingSharedMemory, process);
             emit q->dataChanged(index2, index2);
+            //Because of our sorting, changing usage needs to also invalidate the User column
+            index = q->createIndex(row, ProcessModel::HeadingUser, process);
+            emit q->dataChanged(index, index);
         }
-
         if(process->changes & KSysGuard::Process::Name) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingName, process);
