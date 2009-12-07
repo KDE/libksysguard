@@ -104,7 +104,8 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
     //Because we need to sort Descendingly by default for most of the headings, we often return left > right
     KSysGuard::Process *processLeft = reinterpret_cast< KSysGuard::Process * > (left.internalPointer());
     KSysGuard::Process *processRight = reinterpret_cast< KSysGuard::Process * > (right.internalPointer());
-    Q_ASSERT(process);
+    Q_ASSERT(processLeft);
+    Q_ASSERT(processRight);
     Q_ASSERT(left.column() == right.column());
     switch(left.column()) {
         case HeadingUser:
