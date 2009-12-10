@@ -53,12 +53,8 @@ class ScriptingHtmlDialog : public KDialog {
             setDefaultButton( KDialog::Close );
             setEscapeButton( KDialog::Close );
             showButtonSeparator( false );
-            
-            QVBoxLayout *layout = new QVBoxLayout(this);
-            layout->addWidget(&m_webView);
             setMainWidget(&m_webView);
         }
-        
         QWebView *webView() {
             return &m_webView;
         }
