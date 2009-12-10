@@ -1387,11 +1387,35 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         return (int)w.wid;
     }
 #endif
-    case TotalMemoryRole: {
-        return d->mMemTotal;
-    }
-    case NumberOfProcessorsRole: {
-        return d->mNumProcessorCores;
+    case PercentageRole: {
+        KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+        Q_CHECK_PTR(process);
+        switch(index.column()) {
+            case HeadingCPUUsage: {
+                float cpu;
+                if(d->mSimple || !d->mShowChildTotals)
+                    cpu = process->userUsage + process->sysUsage;
+                else
+                    cpu = process->totalUserUsage + process->totalSysUsage;
+                cpu = cpu / 100.0;
+                if(!d->mNormalizeCPUUsage)
+                    return cpu;
+                return cpu / d->mNumProcessorCores;
+            }
+            case HeadingMemory:
+                if(d->mMemTotal <= 0)
+                    return -1;
+                if(process->vmURSS != -1)
+                    return float(process->vmURSS) / d->mMemTotal;
+                else
+                    return float(process->vmRSS) / d->mMemTotal;
+            case HeadingSharedMemory:
+                if(process->vmURSS == -1 || d->mMemTotal <= 0)
+                    return -1;
+                return float(process->vmRSS - process->vmURSS)/d->mMemTotal;
+            default:
+                return -1;
+        }
     }
     case Qt::DecorationRole: {
         if(index.column() == HeadingName) {

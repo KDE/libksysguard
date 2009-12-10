@@ -136,7 +136,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
 #define PROCESSHEADERVERSION 3
         enum { HeadingName=0, HeadingUser, HeadingPid, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingIoRead, HeadingIoWrite, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXTitle };
 
-        enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, TotalMemoryRole, NumberOfProcessorsRole, PlainValueRole };
+        enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, PlainValueRole, PercentageRole };
 
         bool showTotals() const;
 

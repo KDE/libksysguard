@@ -75,53 +75,23 @@
 class ProgressBarItemDelegate : public QStyledItemDelegate
 {
     public:
-        ProgressBarItemDelegate(QObject *parent) : QStyledItemDelegate(parent), startProgressColor(0x00, 0x71, 0xBC, 100), endProgressColor(0x83, 0xDD, 0xF5, 100), totalMemory(-1), numCpuCores(-1) {}
+        ProgressBarItemDelegate(QObject *parent) : QStyledItemDelegate(parent), color(0x00, 0x71, 0xBC, 100) {
+        }
 
         virtual void paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const
         {
             QStyleOptionViewItemV4 option = opt;
             initStyleOption(&option,index);
 
-            Q_ASSERT(index.model());
-            QModelIndex realIndex = (reinterpret_cast< const QAbstractProxyModel *> (index.model()))->mapToSource(index);
-            KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (realIndex.internalPointer());
-            Q_CHECK_PTR(process);
-            if(index.column() == ProcessModel::HeadingCPUUsage) {
-                if(numCpuCores == -1)
-                    numCpuCores = index.data(ProcessModel::NumberOfProcessorsRole).toInt();
-                percentage = (process->userUsage + process->sysUsage) / numCpuCores;
-            } else if(index.column() == ProcessModel::HeadingMemory) {
-                long long memory = 0;
-                if(process->vmURSS != -1)
-                    memory = process->vmURSS;
-                else
-                    memory = process->vmRSS;
-                if(totalMemory == -1)
-                    totalMemory = index.data(ProcessModel::TotalMemoryRole).toLongLong();
-                if(totalMemory > 0)
-                    percentage = (int)(memory*100/totalMemory);
-                else
-                    percentage = 0;
-            } else if(index.column() == ProcessModel::HeadingSharedMemory) {
-                if(process->vmURSS != -1) {
-                    if(totalMemory == -1)
-                        totalMemory = index.data(ProcessModel::TotalMemoryRole).toLongLong();
-                    if(totalMemory > 0)
-                        percentage = (int)((process->vmRSS - process->vmURSS)*100/totalMemory);
-                    else
-                        percentage = 0;
-                }
-            } else
-                percentage = -1;
-
-            if (percentage >= 0) {
-                drawPercentageDisplay(painter,option);
-            } else
+            float percentage = index.data(ProcessModel::PercentageRole).toFloat();
+            if (percentage >= 0)
+                drawPercentageDisplay(painter,option, percentage);
+            else
                 QStyledItemDelegate::paint(painter, option, index);
         }
 
     private:
-        void drawPercentageDisplay(QPainter *painter, QStyleOptionViewItemV4 option) const
+        inline void drawPercentageDisplay(QPainter *painter, QStyleOptionViewItemV4 &option, float percentage) const
         {
             QStyle *style = option.widget ? option.widget->style() : QApplication::style();
 
@@ -130,14 +100,12 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 
             //Now draw our percentage thingy
             const QRect &rect = option.rect;
-            if(percentage * rect.width() > 100 ) { //make sure the line will have a width of more than 1 pixel
-                if(percentage > 100)
-                    percentage = 100;  //Don't draw outside our bounds
+            if(percentage * rect.width() > 1 ) { //make sure the line will have a width of more than 1 pixel
+                if(percentage > 1)
+                    percentage = 1;  //Don't draw outside our bounds
                 painter->setPen(Qt::NoPen);
-                QLinearGradient  linearGrad( QPointF(rect.x(),rect.y()), QPointF(rect.x() + rect.width(), rect.y()));
-                linearGrad.setColorAt(0, startProgressColor);
-                linearGrad.setColorAt(1, endProgressColor);
-                painter->fillRect( rect.x(), rect.y(), rect.width() * percentage/100, rect.height(), QBrush(linearGrad));
+
+                painter->fillRect( rect.x(), rect.y(), rect.width() * percentage, rect.height(), color);
             }
 
             // draw the text
@@ -178,12 +146,7 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
                 style->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, option.widget);
             }
         }
-
-        mutable int percentage;
-        QColor startProgressColor;
-        QColor endProgressColor;
-        mutable long long totalMemory;
-        mutable int numCpuCores;
+        const QColor color;
 };
 
 struct KSysGuardProcessListPrivate {
