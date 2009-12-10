@@ -35,6 +35,7 @@
 #include <QMenu>
 #include <QSet>
 #include <QComboBox>
+#include <QStyle>
 #include <QStyledItemDelegate>
 #include <QPainter>
 #include <QLineEdit>
@@ -113,15 +114,21 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
             } else
                 percentage = -1;
 
-            if (percentage >= 0)
+            if (percentage >= 0) {
                 drawPercentageDisplay(painter,option);
-            else 
+            } else
                 QStyledItemDelegate::paint(painter, option, index);
         }
 
     private:
-        void drawPercentageDisplay(QPainter *painter, const QStyleOptionViewItemV4& option) const
+        void drawPercentageDisplay(QPainter *painter, QStyleOptionViewItemV4 option) const
         {
+            QStyle *style = option.widget ? option.widget->style() : QApplication::style();
+
+            // draw the background
+            style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
+
+            //Now draw our percentage thingy
             const QRect &rect = option.rect;
             if(percentage * rect.width() > 100 ) { //make sure the line will have a width of more than 1 pixel
                 if(percentage > 100)
@@ -130,10 +137,46 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
                 QLinearGradient  linearGrad( QPointF(rect.x(),rect.y()), QPointF(rect.x() + rect.width(), rect.y()));
                 linearGrad.setColorAt(0, startProgressColor);
                 linearGrad.setColorAt(1, endProgressColor);
-                painter->fillRect( rect.x(), rect.y(), rect.width() * percentage /100 , rect.height(), QBrush(linearGrad));
+                painter->fillRect( rect.x(), rect.y(), rect.width() * percentage/100, rect.height(), QBrush(linearGrad));
             }
-            QStyle *style = option.widget ? option.widget->style() : QApplication::style();
-            style->drawControl(QStyle::CE_ItemViewItem, &option, painter, option.widget);
+
+            // draw the text
+            if (!option.text.isEmpty()) {
+                QRect textRect = style->subElementRect(QStyle::SE_ItemViewItemText, &option, option.widget);
+
+                QPalette::ColorGroup cg = option.state & QStyle::State_Enabled
+                                      ? QPalette::Normal : QPalette::Disabled;
+                if (cg == QPalette::Normal && !(option.state & QStyle::State_Active))
+                    cg = QPalette::Inactive;
+
+                if (option.state & QStyle::State_Selected) {
+                    painter->setPen(option.palette.color(cg, QPalette::HighlightedText));
+                } else {
+                    painter->setPen(option.palette.color(cg, QPalette::Text));
+                }
+
+                painter->setFont(option.font);
+                QTextOption textOption;
+                textOption.setWrapMode(QTextOption::ManualWrap);
+                textOption.setTextDirection(option.direction);
+                textOption.setAlignment(QStyle::visualAlignment(option.direction, option.displayAlignment));
+
+                painter->drawText(textRect, option.text, textOption);
+            }
+
+            // draw the focus rect
+             if (option.state & QStyle::State_HasFocus) {
+                QStyleOptionFocusRect o;
+                o.QStyleOption::operator=(option);
+                o.rect = style->subElementRect(QStyle::SE_ItemViewItemFocusRect, &option, option.widget);
+                o.state |= QStyle::State_KeyboardFocusChange;
+                o.state |= QStyle::State_Item;
+                QPalette::ColorGroup cg = (option.state & QStyle::State_Enabled)
+                              ? QPalette::Normal : QPalette::Disabled;
+                o.backgroundColor = option.palette.color(cg, (option.state & QStyle::State_Selected)
+                                             ? QPalette::Highlight : QPalette::Window);
+                style->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, option.widget);
+            }
         }
 
         mutable int percentage;
