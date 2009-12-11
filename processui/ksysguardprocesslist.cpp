@@ -155,6 +155,7 @@ struct KSysGuardProcessListPrivate {
         : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL)
     {
         mScripting = NULL;
+        mNumItemsSelected = -1;
         renice = new KAction(i18np("Renice Process...", "Renice Processes...", 1), q);
         renice->setShortcut(Qt::Key_F8);
         selectParent = new KAction(i18n("Jump to Parent Process"), q);
@@ -216,6 +217,9 @@ struct KSysGuardProcessListPrivate {
 
     /** The time to wait, in milliseconds, between updating the process list */
     int mUpdateIntervalMSecs;
+
+    /** Number of items that are selected */
+    int mNumItemsSelected;
 
     /** Class to deal with the scripting. NULL if scripting is disabled */
     Scripting *mScripting;
@@ -406,6 +410,9 @@ void KSysGuardProcessListPrivate::setupKAuthAction(KAuth::Action *action, const 
 void KSysGuardProcessList::selectionChanged()
 {
     int numSelected =  d->mUi->treeView->selectionModel()->selectedRows().size();
+    if(numSelected == d->mNumItemsSelected)
+        return;
+    d->mNumItemsSelected = numSelected;
     d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
 
     d->renice->setText(i18np("Renice Process...", "Renice Processes...", numSelected));
