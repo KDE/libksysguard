@@ -173,8 +173,6 @@ class ProcessModelPrivate : public QObject
 
         KSysGuard::Processes *mProcesses;  ///< The processes instance
 
-        bool mIsChangingLayout;
-
         QPixmap mBlankPixmap; ///< Used to pad out process names which don't have an icon
 
         /** Show the process command line options in the process name column */

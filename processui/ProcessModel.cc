@@ -64,7 +64,6 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
     mNumProcessorCores = 1;
     mProcesses = NULL;
     mShowChildTotals = true;
-    mIsChangingLayout = false;
     mShowCommandLineOptions = false;
     mShowingTooltips = true;
     mNormalizeCPUUsage = true;
@@ -361,10 +360,6 @@ void ProcessModel::update(long updateDurationMSecs, KSysGuard::Processes::Update
     d->mProcesses->updateAllProcesses(updateDurationMSecs, updateFlags);
     if(d->mMemTotal <= 0)
         d->mMemTotal = d->mProcesses->totalPhysicalMemory();
-    if(d->mIsChangingLayout) {
-        d->mIsChangingLayout = false;
-        emit layoutChanged();
-    }
 //    kDebug() << "finished:             " << QTime::currentTime().toString("hh:mm:ss.zzz");
 }
 
@@ -451,7 +446,7 @@ QModelIndex ProcessModel::index ( int row, int column, const QModelIndex & paren
     //Deal with the case that we are showing it as a tree
     KSysGuard::Process *parent_process = 0;
 
-    if(parent.isValid()) //not valid for init, and init has ppid of 0
+    if(parent.isValid()) //not valid for init or children without parents, so use our special item with pid of 0
         parent_process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer());
     else
         parent_process = d->mProcesses->getProcess(0);
@@ -557,11 +552,6 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
 void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
 {
     Q_ASSERT(process);
-    if(mIsChangingLayout) {
-        mIsChangingLayout = false;
-        emit q->layoutChanged();
-    }
-
     if(mSimple) {
         int row = mProcesses->processCount();
         q->beginInsertRows( QModelIndex(), row, row );
@@ -580,11 +570,6 @@ void ProcessModelPrivate::endInsertRow() {
 }
 void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
 {
-    if(mIsChangingLayout) {
-        mIsChangingLayout = false;
-        emit q->layoutChanged();
-    }
-
     Q_ASSERT(process);
     Q_ASSERT(process->pid > 0);
 
@@ -609,10 +594,7 @@ void ProcessModelPrivate::endRemoveRow()
 void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuard::Process *new_parent)
 {
     if(mSimple) return;  //We don't need to move processes when in simple mode
-    if(!mIsChangingLayout) {
-        emit q->layoutAboutToBeChanged ();
-        mIsChangingLayout = true;
-    }
+    emit q->layoutAboutToBeChanged ();
 
     //FIXME
     int current_row = process->parent->children.indexOf(process);
@@ -629,6 +611,7 @@ void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuar
 }
 void ProcessModelPrivate::endMoveRow()
 {
+    emit q->layoutChanged();
 }
 
 
@@ -784,18 +767,15 @@ void ProcessModel::setSimpleMode(bool simple)
 {
     if(d->mSimple == simple) return;
 
-    if(!d->mIsChangingLayout) {
-        emit layoutAboutToBeChanged ();
-    }
+    emit layoutAboutToBeChanged ();
 
     d->mSimple = simple;
-    d->mIsChangingLayout = false;
 
     int flatrow;
     int treerow;
     QList<QModelIndex> flatIndexes;
     QList<QModelIndex> treeIndexes;
-        foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         flatrow = process->index;
         treerow = process->parent->children.indexOf(process);
         flatIndexes.clear();
@@ -810,8 +790,8 @@ void ProcessModel::setSimpleMode(bool simple)
         else // change from flat mode to tree mode
             changePersistentIndexList(flatIndexes, treeIndexes);
     }
-    emit layoutChanged();
 
+    emit layoutChanged();
 }
 
 bool ProcessModel::canUserLogin(long uid ) const
@@ -1071,10 +1051,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         QString tracer;
         if(process->tracerpid > 0) {
             KSysGuard::Process *process_tracer = d->mProcesses->getProcess(process->tracerpid);
-            if(process_tracer) { //it is possible for this to be not the case in certain race conditions
-                KSysGuard::Process *process_tracer = d->mProcesses->getProcess(process->tracerpid);
+            if(process_tracer) //it is possible for this to be not the case in certain race conditions
                 tracer = i18nc("tooltip. name,pid ","This process is being debugged by %1 (<numid>%2</numid>)", process_tracer->name, (long int)process->tracerpid);
-            }
         }
         switch(index.column()) {
         case HeadingName: {
@@ -1103,7 +1081,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
             else {
                 KSysGuard::Process *parent_process = d->mProcesses->getProcess(process->parent_pid);
-                if(parent_process) { //it should not be possible for this process to not exist, but check just incase
+                if(parent_process) { //In race conditions, it's possible for this process to not exist
                     tooltip    = i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Parent: %3<br />Parent's ID: <numid>%4</numid>", process->name, (long int)process->pid, parent_process->name, (long int)process->parent_pid);
                 } else {
                     tooltip    = i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Parent's ID: <numid>%3</numid>", process->name, (long int)process->pid, (long int)process->parent_pid);

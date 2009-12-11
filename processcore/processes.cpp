@@ -178,7 +178,7 @@ Process *Processes::getProcess(long pid) const
     return d->mProcesses.value(pid);
 }
 
-QList<Process *> Processes::getAllProcesses() const
+const QList<Process *> &Processes::getAllProcesses() const
 {
     return d->mListProcesses;
 }
@@ -188,7 +188,7 @@ int Processes::processCount() const
     return d->mListProcesses.count();
 }
 
-bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
+bool Processes::updateProcess( Process *ps, long ppid)
 {
     Process *parent = d->mProcesses.value(ppid);
     if(!parent)
@@ -212,11 +212,9 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
             p->numChildren++;
         } while (p->pid!= 0);
         emit endMoveProcess();
+        ps->parent = parent;
     }
-    if(onlyReparent)
-        return true;
 
-    ps->parent = parent;
     ps->parent_pid = ppid;
 
     bool success = updateProcessInfo(ps);

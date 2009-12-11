@@ -155,7 +155,7 @@ namespace KSysGuard
          *  is guaranteed to never change.  Call updateAllProcesses() first to actually
          *  update the information.
          */
-        QList< Process *> getAllProcesses() const;
+        const QList< Process *> &getAllProcesses() const;
 
         /**
          *  Return the number of processes.  Call updateAllProcesses() to actually
@@ -229,7 +229,7 @@ namespace KSysGuard
     private:
         bool updateOrAddProcess( long pid);
         inline void deleteProcess(long pid);
-        bool updateProcess( Process *process, long ppid, bool onlyReparent = false);
+        bool updateProcess( Process *process, long ppid);
         bool updateProcessInfo(Process *ps);
         bool addProcess(long pid, long ppid);
 
