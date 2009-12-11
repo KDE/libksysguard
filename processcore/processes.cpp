@@ -1,5 +1,5 @@
 /*  This file is part of the KDE project
-    
+
     Copyright (C) 2007 John Tapsell <tapsell@kde.org>
 
     This library is free software; you can redistribute it and/or
@@ -35,7 +35,7 @@
 #include <QByteArray>
 
 //for sysconf
-#include <unistd.h>  
+#include <unistd.h>
 
 /* if porting to an OS without signal.h  please #define SIGTERM to something */
 #include <signal.h>
@@ -66,7 +66,7 @@ namespace KSysGuard
       QList<Process *> mListProcesses;   //A list of the processes.  Does not include mFakeProcesses
       Process mFakeProcess; //A fake process with pid 0 just so that even init points to a parent
 
-      AbstractProcesses *mAbstractProcesses; //The OS specific code to get the process information 
+      AbstractProcesses *mAbstractProcesses; //The OS specific code to get the process information
       QTime mLastUpdated; //This is the time we last updated.  Used to calculate cpu usage.
       long mElapsedTimeMilliSeconds; //The number of milliseconds  (1000ths of a second) that passed since the last update
 
@@ -81,7 +81,7 @@ namespace KSysGuard
       StaticPrivate() { processesLocal = 0; ref =1; }
       Processes *processesLocal;
       QHash<QString, Processes*> processesRemote;
-      int ref; //Reference counter.  When it reaches 0, delete. 
+      int ref; //Reference counter.  When it reaches 0, delete.
   };
 
 Processes::Private::~Private() {
@@ -168,7 +168,7 @@ Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private())
     updateAllProcesses(0,StandardInformation);
 }
 
-Processes::~Processes() 
+Processes::~Processes()
 {
     delete d;
 }
@@ -213,8 +213,8 @@ bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
         } while (p->pid!= 0);
         emit endMoveProcess();
     }
-    if(onlyReparent) 
-        return true; 
+    if(onlyReparent)
+        return true;
 
     ps->parent = parent;
     ps->parent_pid = ppid;
@@ -252,7 +252,7 @@ bool Processes::updateProcessInfo(Process *ps) {
     //Now we have the process info.  Calculate the cpu usage and total cpu usage for itself and all its parents
     if(d->mElapsedTimeMilliSeconds != 0) {  //Update the user usage and sys usage
 #ifndef Q_OS_NETBSD
-        /* The elapsed time is the d->mElapsedTimeMilliSeconds 
+        /* The elapsed time is the d->mElapsedTimeMilliSeconds
          * (which is of the order 2 seconds or so) plus a small
          * correction where we get the amount of time elapsed since
          * we start processing. This is because the processing itself
@@ -285,8 +285,8 @@ bool Processes::updateProcessInfo(Process *ps) {
                 ps->setIoCharactersActuallyReadRate((ps->ioCharactersActuallyRead - oldIoCharactersActuallyRead) * 1000.0 / elapsedTime);
                 ps->setIoCharactersActuallyWrittenRate((ps->ioCharactersActuallyWritten - oldIoCharactersActuallyWritten) * 1000.0 / elapsedTime);
             } else
-                d->mHavePreviousIoValues = true; 
-        } else if(d->mHavePreviousIoValues) { 
+                d->mHavePreviousIoValues = true;
+        } else if(d->mHavePreviousIoValues) {
             d->mHavePreviousIoValues = false;
             ps->setIoCharactersReadRate(0);
             ps->setIoCharactersWrittenRate(0);
@@ -304,7 +304,7 @@ bool Processes::addProcess(long pid, long ppid)
     Process *parent = d->mProcesses.value(ppid);
     if(!parent) {
         //Under race conditions, the parent could have already quit
-        //In this case, attach to top leve
+        //In this case, attach to top leaf
         parent = d->mProcesses.value(0);
         Q_ASSERT(parent);  //even init has a non-null parent - the mFakeProcess
     }
@@ -344,9 +344,9 @@ bool Processes::updateOrAddProcess( long pid)
     }
 
     Process *ps = d->mProcesses.value(pid, 0);
-    if(!ps) 
+    if(!ps)
         return addProcess(pid, ppid);
-    else 
+    else
         return updateProcess(ps, ppid);
 }
 
@@ -390,7 +390,7 @@ void Processes::processesUpdated() {
         }
     }
 
-    d->mProcessedLastTime = beingProcessed;  //update the set for next time this function is called 
+    d->mProcessedLastTime = beingProcessed;  //update the set for next time this function is called
     return;
 }
 
@@ -451,7 +451,7 @@ bool Processes::setIoNiceness(long pid, KSysGuard::Process::IoPriorityClass prio
     return d->mAbstractProcesses->setIoNiceness(pid, priorityClass, priority);
 }
 
-bool Processes::supportsIoNiceness() { 
+bool Processes::supportsIoNiceness() {
     return d->mAbstractProcesses->supportsIoNiceness();
 }
 
