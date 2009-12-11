@@ -107,12 +107,12 @@ namespace KSysGuard
     public:
       Private() { mProcDir = opendir( "/proc" );}
       ~Private();
-      inline bool readProcStatus(long pid, Process *process);
-      inline bool readProcStat(long pid, Process *process);
-      inline bool readProcStatm(long pid, Process *process);
-      inline bool readProcCmdline(long pid, Process *process);
+      inline bool readProcStatus(const QString &dir, Process *process);
+      inline bool readProcStat(const QString &dir, Process *process);
+      inline bool readProcStatm(const QString &dir, Process *process);
+      inline bool readProcCmdline(const QString &dir, Process *process);
       inline bool getNiceness(long pid, Process *process);
-      inline bool getIOStatistics(long pid, Process *process);
+      inline bool getIOStatistics(const QString &dir, Process *process);
       QFile mFile;
       char mBuffer[PROCESS_BUFFER_SIZE+1]; //used as a buffer to read data into      
       DIR* mProcDir;
@@ -128,9 +128,9 @@ ProcessesLocal::ProcessesLocal() : d(new Private())
 
 }
 
-bool ProcessesLocal::Private::readProcStatus(long pid, Process *process)
+bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *process)
 {
-    mFile.setFileName(QString("/proc/%1/status").arg(pid));
+    mFile.setFileName(dir + "status");
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
@@ -179,7 +179,7 @@ bool ProcessesLocal::Private::readProcStatus(long pid, Process *process)
 
 long ProcessesLocal::getParentPid(long pid) {
     Q_ASSERT(pid != 0);
-    d->mFile.setFileName(QString("/proc/%1/stat").arg(pid));
+    d->mFile.setFileName("/proc/" + QString::number(pid) + "/stat");
     if(!d->mFile.open(QIODevice::ReadOnly))
         return 0;      /* process has terminated in the meantime */
 
@@ -205,11 +205,11 @@ long ProcessesLocal::getParentPid(long pid) {
     return atol(++word);
 }
 
-bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
+bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
 {
-    QString filename = QString("/proc/%1/stat").arg(pid);
+    QString filename = dir + "stat";
     // As an optimization, if the last file read in was stat, then we already have this info in memory
-    if(mFile.fileName() != filename) {  
+    if(mFile.fileName() != filename) {
         mFile.setFileName(filename);
         if(!mFile.open(QIODevice::ReadOnly))
             return false;      /* process has terminated in the meantime */
@@ -315,9 +315,9 @@ bool ProcessesLocal::Private::readProcStat(long pid, Process *ps)
     return true;
 }
 
-bool ProcessesLocal::Private::readProcStatm(long pid, Process *process)
+bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process)
 {
-    mFile.setFileName(QString("/proc/%1/statm").arg(pid));
+    mFile.setFileName(dir + "statm");
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
@@ -347,10 +347,10 @@ bool ProcessesLocal::Private::readProcStatm(long pid, Process *process)
 }
 
 
-bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
+bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *process)
 {
     if(!process->command.isNull()) return true; //only parse the cmdline once
-    mFile.setFileName(QString("/proc/%1/cmdline").arg(pid));
+    mFile.setFileName(dir + "cmdline");
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
@@ -414,9 +414,9 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
   return true;
 }
 
-bool ProcessesLocal::Private::getIOStatistics(long pid, Process *process)
+bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *process)
 {
-    QString filename = QString("/proc/%1/io").arg(pid);
+    QString filename = dir + "io";
     // As an optimization, if the last file read in was io, then we already have this info in memory
     mFile.setFileName(filename);
     if(!mFile.open(QIODevice::ReadOnly))
@@ -461,12 +461,13 @@ bool ProcessesLocal::Private::getIOStatistics(long pid, Process *process)
 bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 {
     bool success = true;
-    if(!d->readProcStat(pid, process)) success = false;
-    if(!d->readProcStatus(pid, process)) success = false;
-    if(!d->readProcStatm(pid, process)) success = false;
-    if(!d->readProcCmdline(pid, process)) success = false;
+    QString dir = "/proc/" + QString::number(pid) + '/';
+    if(!d->readProcStat(dir, process)) success = false;
+    if(!d->readProcStatus(dir, process)) success = false;
+    if(!d->readProcStatm(dir, process)) success = false;
+    if(!d->readProcCmdline(dir, process)) success = false;
     if(!d->getNiceness(pid, process)) success = false;
-    if(mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(pid, process)) success = false;
+    if(mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(dir, process)) success = false;
 
     return success;
 }
