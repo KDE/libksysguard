@@ -223,14 +223,14 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
     int current_word = 0;  //count from 0
     char *word = mBuffer;
     char status='\0';
-    long vmSize = 0;
-    long vmRSS = 0;
+    unsigned long long vmSize = 0;
+    unsigned long long vmRSS = 0;
     while(current_word < 23) {
         if(word[0] == ' ' ) {
             ++current_word;
             switch(current_word) {
                 case 2: //status
-                    status=word[1];  // Look at the first letter of the status.  
+                    status=word[1];  // Look at the first letter of the status.
                     // We analyze this after the while loop
                     break;
                 case 6: //ttyNo
@@ -265,10 +265,10 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
                     ps->setNiceLevel(atoi(word+1));  /*Or should we use getPriority instead? */
                     break;
                 case 22: //vmSize
-                    vmSize = atol(word+1);
+                    vmSize = atoll(word+1);
                     break;
                 case 23: //vmRSS
-                    vmRSS = atol(word+1);
+                    vmRSS = atoll(word+1);
                     break;
                 default:
                     break;
@@ -281,13 +281,13 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
 
     /* There was a "(ps->vmRss+3) * sysconf(_SC_PAGESIZE)" here in the original ksysguard code.  I have no idea why!  After comparing it to
      *   meminfo and other tools, this means we report the RSS by 12 bytes differently compared to them.  So I'm removing the +3
-     *   to be consistent.  NEXT TIME COMMENT STRANGE THINGS LIKE THAT! :-) 
+     *   to be consistent.  NEXT TIME COMMENT STRANGE THINGS LIKE THAT! :-)
      *
-     *   Update: I think I now know why - the kernel allocates 3 pages for 
-     *   tracking information about each the process. This memory isn't 
+     *   Update: I think I now know why - the kernel allocates 3 pages for
+     *   tracking information about each the process. This memory isn't
      *   included in vmRSS..*/
-    ps->setVmRSS(vmRSS * sysconf(_SC_PAGESIZE) / 1024); /*convert to KiB*/
-    ps->setVmSize(vmSize /= 1024); /* convert to KiB */
+    ps->setVmRSS(vmRSS * (sysconf(_SC_PAGESIZE) / 1024)); /*convert to KiB*/
+    ps->setVmSize(vmSize / 1024); /* convert to KiB */
 
     switch( status) {
         case 'R':
@@ -317,6 +317,7 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
 
 bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process)
 {
+#ifdef _SC_PAGESIZE
     mFile.setFileName(dir + "statm");
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
@@ -343,6 +344,9 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
 
     /* we use the rss - shared  to find the amount of memory just this app uses */
     process->vmURSS = process->vmRSS - (shared * sysconf(_SC_PAGESIZE) / 1024);
+#else
+    process->vmURSS = 0;
+#endif
     return true;
 }
 
@@ -547,14 +551,14 @@ bool ProcessesLocal::supportsIoNiceness() {
 long long ProcessesLocal::totalPhysicalMemory() {
     //Try to get the memory via sysconf.  Note the cast to long long to try to avoid a long overflow
     //Should we use sysconf(_SC_PAGESIZE)  or getpagesize()  ?
-    long long memory = ((long long)sysconf(_SC_PHYS_PAGES)) * (sysconf(_SC_PAGESIZE)/1024);
-    if(memory > 0) return memory;
-
-    //This is backup code in case the above failed.  It should never fail on a linux system.
+#ifdef _SC_PHYS_PAGES
+    return ((long long)sysconf(_SC_PHYS_PAGES)) * (sysconf(_SC_PAGESIZE)/1024);
+#else
+    //This is backup code in case this is not defined.  It should never fail on a linux system.
 
     d->mFile.setFileName("/proc/meminfo");
     if(!d->mFile.open(QIODevice::ReadOnly))
-        return 0; 
+        return 0;
 
     int size;
     while( (size = d->mFile.readLine( d->mBuffer, sizeof(d->mBuffer))) > 0) {  //-1 indicates an error
@@ -567,10 +571,11 @@ long long ProcessesLocal::totalPhysicalMemory() {
 	}
     }
     return 0; // Not found.  Probably will never happen
+#endif
 }
 ProcessesLocal::~ProcessesLocal()
 {
-  delete d;  
+  delete d;
 }
 
 }
