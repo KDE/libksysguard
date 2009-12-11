@@ -27,6 +27,9 @@
 
 #include "processcore/processes.h"
 #include "processcore/process.h"
+#include "processcore/processes_base_p.h"
+
+#include "processui/ksysguardprocesslist.h"
 
 #include "processtest.h"
 
@@ -107,18 +110,26 @@ void testProcess::testProcessesModification() {
     initProcess->children.removeAt(0);
 }
 
-void testProcess::testTime() {
-    //See how long it takes to get proccess information    
+void testProcess::testTimeToUpdateAllProcesses() {
+    //See how long it takes to get process information
     KSysGuard::Processes *processController = KSysGuard::Processes::getInstance();
-    QTime t;
-    t.start();
-    for(int i =0; i < 100; i++) 
+    QBENCHMARK {
         processController->updateAllProcesses();
-    kDebug() << "Time elapsed: "<< t.elapsed() <<" ms, so " << t.elapsed()/100 << "ms" <<  endl;
-    QVERIFY(t.elapsed()/100 < 300); //It should take less than about 100ms.  Anything longer than 300ms even on a slow system really needs to be optimised
+    }
+}
+void testProcess::testTimeToUpdateModel() {
+    KSysGuardProcessList *processList = new KSysGuardProcessList;
+    processList->show();
+    QTest::qWaitForWindowShown(processList);
+
+    QBENCHMARK {
+        processList->updateList();
+        QTest::qWait(0);
+    }
+    delete processList;
 }
 
-QTEST_KDEMAIN_CORE(testProcess)
+QTEST_KDEMAIN(testProcess,GUI)
 
 #include "processtest.moc"
 

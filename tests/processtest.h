@@ -31,7 +31,8 @@ class testProcess: public QObject
     private:
         unsigned long countNumChildren(KSysGuard::Process *p);
     private slots:
-        void testTime();
+        void testTimeToUpdateAllProcesses();
+        void testTimeToUpdateModel();
         void testProcesses();
         void testProcessesTreeStructure();
         void testProcessesModification();
