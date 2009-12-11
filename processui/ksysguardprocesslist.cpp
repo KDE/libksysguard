@@ -75,7 +75,7 @@
 class ProgressBarItemDelegate : public QStyledItemDelegate
 {
     public:
-        ProgressBarItemDelegate(QObject *parent) : QStyledItemDelegate(parent), color(0x00, 0x71, 0xBC, 100) {
+        ProgressBarItemDelegate(QObject *parent) : QStyledItemDelegate(parent) {
         }
 
         virtual void paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const
@@ -98,24 +98,28 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
             // draw the background
             style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
 
+            QPalette::ColorGroup cg = option.state & QStyle::State_Enabled
+                ? QPalette::Normal : QPalette::Disabled;
+            if (cg == QPalette::Normal && !(option.state & QStyle::State_Active))
+                cg = QPalette::Inactive;
+
             //Now draw our percentage thingy
             const QRect &rect = option.rect;
-            if(percentage * rect.width() > 1 ) { //make sure the line will have a width of more than 1 pixel
+            int size = percentage * rect.width();
+            if(size > 2 ) { //make sure the line will have a width of more than 1 pixel
                 if(percentage > 1)
                     percentage = 1;  //Don't draw outside our bounds
                 painter->setPen(Qt::NoPen);
+                QColor color = option.palette.color(cg, QPalette::Link);
+                color.setAlpha(50);
 
-                painter->fillRect( rect.x(), rect.y(), rect.width() * percentage, rect.height(), color);
+                painter->fillRect( rect.x(), rect.y(), size, rect.height(), color);
             }
 
             // draw the text
             if (!option.text.isEmpty()) {
                 QRect textRect = style->subElementRect(QStyle::SE_ItemViewItemText, &option, option.widget);
 
-                QPalette::ColorGroup cg = option.state & QStyle::State_Enabled
-                                      ? QPalette::Normal : QPalette::Disabled;
-                if (cg == QPalette::Normal && !(option.state & QStyle::State_Active))
-                    cg = QPalette::Inactive;
 
                 if (option.state & QStyle::State_Selected) {
                     painter->setPen(option.palette.color(cg, QPalette::HighlightedText));
@@ -146,7 +150,6 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
                 style->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, option.widget);
             }
         }
-        const QColor color;
 };
 
 struct KSysGuardProcessListPrivate {
