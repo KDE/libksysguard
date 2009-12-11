@@ -191,6 +191,8 @@ int Processes::processCount() const
 bool Processes::updateProcess( Process *ps, long ppid, bool onlyReparent)
 {
     Process *parent = d->mProcesses.value(ppid);
+    if(!parent)
+        parent = d->mProcesses.value(0);
     Q_ASSERT(parent);  //even init has a non-null parent - the mFakeProcess
 
     if(ps->parent != parent) {
@@ -300,7 +302,12 @@ bool Processes::updateProcessInfo(Process *ps) {
 bool Processes::addProcess(long pid, long ppid)
 {
     Process *parent = d->mProcesses.value(ppid);
-    if(!parent) return false;  //How can this be?
+    if(!parent) {
+        //Under race conditions, the parent could have already quit
+        //In this case, attach to top leve
+        parent = d->mProcesses.value(0);
+        Q_ASSERT(parent);  //even init has a non-null parent - the mFakeProcess
+    }
     //it's a new process - we need to set it up
     Process *ps = new Process(pid, ppid, parent);
 
@@ -393,6 +400,8 @@ void Processes::deleteProcess(long pid)
     Q_ASSERT(pid > 0);
 
     Process *process = d->mProcesses.value(pid);
+    if(!process)
+        return;
     foreach( Process *it, process->children) {
         d->mProcessedLastTime.remove(it->pid);
         deleteProcess(it->pid);
