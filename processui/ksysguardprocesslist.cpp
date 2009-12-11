@@ -26,6 +26,7 @@
 
 #include "../config-ksysguard.h"
 
+#include <QApplication>
 #include <QTimer>
 #include <QList>
 #include <QShowEvent>
@@ -46,7 +47,6 @@
 
 #include <signal.h> //For SIGTERM
 
-#include <kapplication.h>
 #include <kauth.h>
 #include <kaction.h>
 #include <klocale.h>
@@ -932,7 +932,7 @@ void KSysGuardProcessList::updateList()
             QWidget *w = d->mUi->treeView->viewport();
             if(w->geometry().contains(d->mUi->treeView->mapFromGlobal( QCursor::pos() ))) {
                 QHelpEvent event(QEvent::ToolTip, w->mapFromGlobal( QCursor::pos() ), QCursor::pos());
-                kapp->notify(w, &event);
+                qApp->notify(w, &event);
             }
         }
     }
