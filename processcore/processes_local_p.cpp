@@ -27,6 +27,8 @@
 #include "processes_openbsd_p.cpp"
 #elif defined __NetBSD__
 #include "processes_netbsd_p.cpp"
+#elif defined __GNU__
+#include "processes_gnu_p.cpp"
 #else
 // Use Qt's OS detection
 #include <qglobal.h>
