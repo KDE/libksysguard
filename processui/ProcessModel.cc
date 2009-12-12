@@ -1537,7 +1537,24 @@ qlonglong ProcessModel::totalMemory() const
 }
 void ProcessModel::setUnits(Units units)
 {
+    if(d->mUnits == units)
+        return;
     d->mUnits = units;
+
+    QModelIndex index;
+    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+        int row;
+        if(d->mSimple)
+            row = process->index;
+        else
+            row = process->parent->children.indexOf(process);
+        index = createIndex(row, HeadingMemory, process);
+        emit dataChanged(index, index);
+        index = createIndex(row, HeadingSharedMemory, process);
+        emit dataChanged(index, index);
+        index = createIndex(row, HeadingVmSize, process);
+        emit dataChanged(index, index);
+    }
 }
 ProcessModel::Units ProcessModel::units() const
 {
@@ -1545,7 +1562,22 @@ ProcessModel::Units ProcessModel::units() const
 }
 void ProcessModel::setIoUnits(Units units)
 {
-    d->mIoUnits = units;
+    if(d->mIoUnits == units)
+        d->mIoUnits = units;
+
+    QModelIndex index;
+    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+        int row;
+        if(d->mSimple)
+            row = process->index;
+        else
+            row = process->parent->children.indexOf(process);
+        index = createIndex(row, HeadingIoRead, process);
+        emit dataChanged(index, index);
+        index = createIndex(row, HeadingIoWrite, process);
+        emit dataChanged(index, index);
+    }
+
 }
 ProcessModel::Units ProcessModel::ioUnits() const
 {
