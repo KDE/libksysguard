@@ -1422,7 +1422,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
     case Qt::BackgroundRole: {
-                if(index.column() != HeadingUser) return QVariant();
+        if(index.column() != HeadingUser) return QVariant();
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         if(process->tracerpid >0) {
             //It's being debugged, so probably important.  Let's mark it as such
