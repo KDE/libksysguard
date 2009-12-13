@@ -44,7 +44,7 @@ ProcessesLocal::ProcessesLocal()
 
 ProcessesLocal::~ProcessesLocal()
 {
-   delete d;  
+   delete d;
 }
 
 long ProcessesLocal::getParentPid(long pid)
@@ -74,7 +74,7 @@ bool ProcessesLocal::setNiceness(long pid, int priority)
     return false;
 }
 
-bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) 
+bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     return false;
 }
