@@ -374,6 +374,8 @@ QString ProcessModelPrivate::getStatusDescription(KSysGuard::Process::ProcessSta
             return i18n("- Process has been stopped. It will not respond to user input at the moment.");
         case KSysGuard::Process::Zombie:
             return i18n("- Process has finished and is now dead, but the parent process has not cleaned up.");
+        case KSysGuard::Process::Ended:
+//            return i18n("- Process has finished and no longer exists.");
         default:
             return QString();
     }
@@ -1424,9 +1426,12 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     case Qt::BackgroundRole: {
         if(index.column() != HeadingUser) return QVariant();
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+        if(process->status == KSysGuard::Process::Ended) {
+            return QColor(Qt::lightGray);
+        }
         if(process->tracerpid >0) {
             //It's being debugged, so probably important.  Let's mark it as such
-            return QColor("yellow");
+            return QColor(Qt::yellow);
         }
         if(d->mIsLocalhost && process->uid == getuid()) { //own user
             return QColor(0, 208, 214, 50);
@@ -1695,11 +1700,14 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
 }
 Qt::ItemFlags ProcessModel::flags(const QModelIndex &index) const
 {
-    Qt::ItemFlags defaultFlags = QAbstractItemModel::flags(index);
-    if (index.isValid())
-        return Qt::ItemIsDragEnabled | defaultFlags;
+    if (!index.isValid())
+        return Qt::NoItemFlags; //Would this ever happen?
+
+    KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+    if(process->status == KSysGuard::Process::Ended)
+        return Qt::ItemIsDragEnabled | Qt::ItemIsSelectable;
     else
-        return defaultFlags;
+        return Qt::ItemIsDragEnabled | Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
 }
 

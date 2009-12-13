@@ -48,7 +48,7 @@ namespace KSysGuard
   class Processes::Private
   {
     public:
-      Private() {
+      Private(Processes *q_ptr) {
         mAbstractProcesses = 0;
         mProcesses.insert(0, &mFakeProcess);
         mElapsedTimeMilliSeconds = 0;
@@ -56,23 +56,27 @@ namespace KSysGuard
         ref = 1;
         mHavePreviousIoValues = false;
         mUpdateFlags = 0;
+        q = q_ptr;
     }
       ~Private();
+      void markProcessesAsEnded(long pid);
 
       QSet<long> mToBeProcessed;
       QSet<long> mProcessedLastTime;
+      QSet<long> mEndedProcesses; ///< Processes that have finished
 
-      QHash<long, Process *> mProcesses; //This must include mFakeProcess at pid 0
-      QList<Process *> mListProcesses;   //A list of the processes.  Does not include mFakeProcesses
-      Process mFakeProcess; //A fake process with pid 0 just so that even init points to a parent
+      QHash<long, Process *> mProcesses; ///< This must include mFakeProcess at pid 0
+      QList<Process *> mListProcesses;   ///< A list of the processes.  Does not include mFakeProcesses
+      Process mFakeProcess; ///< A fake process with pid 0 just so that even init points to a parent
 
-      AbstractProcesses *mAbstractProcesses; //The OS specific code to get the process information
-      QTime mLastUpdated; //This is the time we last updated.  Used to calculate cpu usage.
-      long mElapsedTimeMilliSeconds; //The number of milliseconds  (1000ths of a second) that passed since the last update
+      AbstractProcesses *mAbstractProcesses; ///< The OS specific code to get the process information
+      QTime mLastUpdated; ///< This is the time we last updated.  Used to calculate cpu usage.
+      long mElapsedTimeMilliSeconds; ///< The number of milliseconds  (1000ths of a second) that passed since the last update
 
-      int ref; //Reference counter.  When it reaches 0, delete.
+      int ref; /// <Reference counter.  When it reaches 0, delete.
       Processes::UpdateFlags mUpdateFlags;
-      bool mHavePreviousIoValues; //This is whether we updated the IO value on the last update
+      bool mHavePreviousIoValues; ///< This is whether we updated the IO value on the last update
+      Processes *q;
   };
 
   class Processes::StaticPrivate
@@ -161,7 +165,7 @@ void Processes::returnInstance(const QString &host) { //static
     }
 
 }
-Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private())
+Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private(this))
 {
     d->mAbstractProcesses = abstractProcesses;
     connect( abstractProcesses, SIGNAL( processesUpdated() ), SLOT( processesUpdated() ));
@@ -362,11 +366,20 @@ void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags
 }
 
 void Processes::processesUpdated() {
+    //First really delete any processes that ended last time
+    long pid;
+    {
+        QSetIterator<long> i(d->mEndedProcesses);
+        while( i.hasNext() ) {
+            pid = i.next();
+            deleteProcess(pid);
+        }
+    }
+
     d->mToBeProcessed = d->mAbstractProcesses->getAllPids();
 
     QSet<long> beingProcessed(d->mToBeProcessed); //keep a copy so that we can replace mProcessedLastTime with this at the end of this function
 
-    long pid;
     {
         QMutableSetIterator<long> i(d->mToBeProcessed);
         while( i.hasNext()) {
@@ -378,21 +391,29 @@ void Processes::processesUpdated() {
         }
     }
     {
-        QMutableSetIterator<long> i(d->mProcessedLastTime);
+        QSetIterator<long> i(d->mProcessedLastTime);
         while( i.hasNext()) {
-            //We saw these pids last time, but not this time.  That means we have to delete them now
+            //We saw these pids last time, but not this time.  That means we have to mark them for deletion now
             pid = i.next();
-            i.remove();
-            deleteProcess(pid);
-            i.toFront();
+            d->markProcessesAsEnded(pid);
         }
+        d->mEndedProcesses = d->mProcessedLastTime;
     }
 
     d->mProcessedLastTime = beingProcessed;  //update the set for next time this function is called
     return;
 }
 
+void Processes::Private::markProcessesAsEnded(long pid)
+{
+    Q_ASSERT(pid > 0);
 
+    Process *process = mProcesses.value(pid);
+    if(!process)
+        return;
+    process->status = Process::Ended;
+    emit q->processChanged(process, false);
+}
 void Processes::deleteProcess(long pid)
 {
     Q_ASSERT(pid > 0);

@@ -35,7 +35,7 @@ namespace KSysGuard
 
   class KDE_EXPORT Process {
     public:
-    enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, OtherStatus };
+    enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, Ended, OtherStatus=99 };
     enum IoPriorityClass { None, RealTime, BestEffort, Idle };
     enum Scheduler { Other = 0, Fifo, RoundRobin, Batch };
     Process();
