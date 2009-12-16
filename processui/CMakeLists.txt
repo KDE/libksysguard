@@ -1,7 +1,9 @@
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../  ../processcore/)
 
-check_include_files(sys/ptrace.h HAVE_SYS_PTRACE_H)
+# FIXME The monitor IO stuff tends to just freeze up everything, so prevent it from building for now
+set(HAVE_SYS_PTRACE_H false)
+#check_include_files(sys/ptrace.h HAVE_SYS_PTRACE_H)
 check_include_files(sys/endian.h HAVE_SYS_ENDIAN_H)
 check_include_files(byteswap.h HAVE_BYTESWAP_H)
 
