@@ -503,7 +503,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         return;
     //Reset the text back to normal
     d->selectParent->setText(i18n("Jump to Parent Process"));
-    QAction *result = dynamic_cast<QAction *>(object);
+    QAction *result = qobject_cast<QAction *>(object);
     if(result == 0) {
         //Escape was pressed. Do nothing.
     } else if(result == d->renice) {

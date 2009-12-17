@@ -483,7 +483,7 @@ long Processes::numberProcessorCores() {
 }
 
 void Processes::answerReceived( int id, const QList<QByteArray>& answer ) {
-    KSysGuard::ProcessesRemote *processes = dynamic_cast<KSysGuard::ProcessesRemote *>(d->mAbstractProcesses);
+    KSysGuard::ProcessesRemote *processes = qobject_cast<KSysGuard::ProcessesRemote *>(d->mAbstractProcesses);
     if(processes)
         processes->answerReceived(id, answer);
 }
