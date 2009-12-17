@@ -74,7 +74,7 @@ ProcessModelPrivate::~ProcessModelPrivate()
 {
     if(mProcesses)
         KSysGuard::Processes::returnInstance(mHostName);
-    foreach(const WindowInfo &wininfo, mPidToWindowInfo) {
+    Q_FOREACH(const WindowInfo &wininfo, mPidToWindowInfo) {
         delete wininfo.netWinInfo;
     }
     mProcesses = NULL;
@@ -317,7 +317,7 @@ void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
 
 void ProcessModelPrivate::windowAdded(WId wid)
 {
-    foreach(const WindowInfo &w, mPidToWindowInfo) {
+    Q_FOREACH(const WindowInfo &w, mPidToWindowInfo) {
         if(w.wid == wid) return; //already added
     }
     //The name changed
@@ -777,7 +777,7 @@ void ProcessModel::setSimpleMode(bool simple)
     int treerow;
     QList<QModelIndex> flatIndexes;
     QList<QModelIndex> treeIndexes;
-    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    Q_FOREACH( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         flatrow = process->index;
         treerow = process->parent->children.indexOf(process);
         flatIndexes.clear();
@@ -1523,7 +1523,7 @@ void ProcessModel::setShowTotals(bool showTotals)  //slot
     d->mShowChildTotals = showTotals;
 
     QModelIndex index;
-    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    Q_FOREACH( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         if(process->numChildren > 0) {
             int row;
             if(d->mSimple)
@@ -1547,7 +1547,7 @@ void ProcessModel::setUnits(Units units)
     d->mUnits = units;
 
     QModelIndex index;
-    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    Q_FOREACH( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         int row;
         if(d->mSimple)
             row = process->index;
@@ -1571,7 +1571,7 @@ void ProcessModel::setIoUnits(Units units)
         d->mIoUnits = units;
 
     QModelIndex index;
-    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    Q_FOREACH( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         int row;
         if(d->mSimple)
             row = process->index;
@@ -1651,7 +1651,7 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
     QString display;
     int firstColumn = -1;
     bool firstrow = true;
-    foreach (const QModelIndex &index, indexes) {
+    Q_FOREACH (const QModelIndex &index, indexes) {
         if (index.isValid()) {
             if(firstColumn == -1)
                 firstColumn = index.column();

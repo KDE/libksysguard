@@ -217,7 +217,7 @@ void Scripting::runScript(KSysGuard::Process *process, const QString &path, cons
     QDir dir(path, "*.ui");
     QStringList uiFiles = dir.entryList();
     QUiLoader *loader = NULL;
-    foreach(QString uiFileName, uiFiles) { //We do uiFileName.replace so can't make this a const reference
+    Q_FOREACH(QString uiFileName, uiFiles) { //We do uiFileName.replace so can't make this a const reference
         if(!loader)
             loader = new QUiLoader(this);
         QFile uiFile(path + uiFileName);
@@ -259,7 +259,7 @@ void Scripting::loadContextMenu() {
     mActions.clear();
 
     QStringList scripts = KGlobal::dirs()->findAllResources("data", "ksysguard/scripts/*/*.desktop", KStandardDirs::NoDuplicates);
-    foreach(const QString &script, scripts) {
+    Q_FOREACH(const QString &script, scripts) {
         KDesktopFile desktopFile(script);
         if(!desktopFile.name().isEmpty() && !desktopFile.noDisplay()) {
             KAction *action = new KAction(desktopFile.readName(), this);

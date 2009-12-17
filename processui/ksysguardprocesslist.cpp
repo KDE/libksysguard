@@ -324,7 +324,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
         actions << d->monitorio;
     actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
 
-    foreach(QAction *action, actions) {
+    Q_FOREACH(QAction *action, actions) {
         addAction(action);
         connect(action, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
         signalMapper->setMapping(action, action);
@@ -487,7 +487,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     }
 
     if(numProcesses == 1 && d->mScripting) {
-        foreach(QAction *action, d->mScripting->actions()) {
+        Q_FOREACH(QAction *action, d->mScripting->actions()) {
             d->mProcessContextMenu->addAction(action);
         }
     }
@@ -530,7 +530,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();
         if(numProcesses == 0) return;  //No processes selected
-        foreach( const QModelIndex &index, selectedIndexes) {
+        Q_FOREACH( const QModelIndex &index, selectedIndexes) {
             QModelIndex realIndex = d->mFilterModel.mapToSource(index);
             QVariant widVar= d->mModel.data(realIndex, ProcessModel::WindowIdRole);
             if( !widVar.isNull() ) {
@@ -556,7 +556,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();
         if(numProcesses == 0) return;  //No processes selected
-        foreach( const QModelIndex &index, selectedIndexes) {
+        Q_FOREACH( const QModelIndex &index, selectedIndexes) {
             QModelIndex realIndex = d->mFilterModel.mapToSource(index);
             KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
             if(process)
@@ -1031,7 +1031,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 
     int sched = -2;
     int iosched = -2;
-    foreach(KSysGuard::Process *process, processes) {
+    Q_FOREACH(KSysGuard::Process *process, processes) {
         selectedAsStrings << d->mModel.getStringForProcess(process);
         if(sched == -2) sched = (int)process->scheduler;
         else if(sched != -1 && sched != (int)process->scheduler) sched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
@@ -1051,7 +1051,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
     QList<long long> renicePids;
     QList<long long> changeCPUSchedulerPids;
     QList<long long> changeIOSchedulerPids;
-    foreach(KSysGuard::Process *process, processes) {
+    Q_FOREACH(KSysGuard::Process *process, processes) {
         switch(reniceDlg.newCPUSched) {
             case -2:
             case -1:  //Invalid, not changed etc.
@@ -1227,7 +1227,7 @@ void KSysGuardProcessList::killSelectedProcesses()
     QList< long long> selectedPids;
 
     QList<KSysGuard::Process *> processes = selectedProcesses();
-    foreach(KSysGuard::Process *process, processes) {
+    Q_FOREACH(KSysGuard::Process *process, processes) {
         selectedPids << process->pid;
         QString name = d->mModel.getStringForProcess(process);
         if(name.size() > 100)
@@ -1261,7 +1261,7 @@ void KSysGuardProcessList::killSelectedProcesses()
 
     Q_ASSERT(selectedPids.size() == selectedAsStrings.size());
     if(!killProcesses(selectedPids, SIGTERM)) return;
-    foreach(KSysGuard::Process *process, processes) {
+    Q_FOREACH(KSysGuard::Process *process, processes) {
         process->timeKillWasSent.start();
     }
     updateList();

@@ -38,7 +38,7 @@ void testProcess::testProcesses() {
     processController->updateAllProcesses();
     QList<KSysGuard::Process *> processes = processController->getAllProcesses();
     QSet<long> pids;
-    foreach( KSysGuard::Process *process, processes) {
+    Q_FOREACH( KSysGuard::Process *process, processes) {
         if(process->pid == 0) continue;
         QVERIFY(process->pid > 0);
         QVERIFY(!process->name.isEmpty());
@@ -49,7 +49,7 @@ void testProcess::testProcesses() {
     }
     processController->updateAllProcesses();
     QList<KSysGuard::Process *> processes2 = processController->getAllProcesses();
-    foreach( KSysGuard::Process *process, processes2) {
+    Q_FOREACH( KSysGuard::Process *process, processes2) {
         if(process->pid == 0) continue;
         QVERIFY(process->pid > 0);
         QVERIFY(!process->name.isEmpty());
@@ -79,7 +79,7 @@ void testProcess::testProcessesTreeStructure() {
     processController->updateAllProcesses();
     QList<KSysGuard::Process *> processes = processController->getAllProcesses();
     
-    foreach( KSysGuard::Process *process, processes) {
+    Q_FOREACH( KSysGuard::Process *process, processes) {
         QCOMPARE(countNumChildren(process), process->numChildren);
 
         for(int i =0; i < process->children.size(); i++) {

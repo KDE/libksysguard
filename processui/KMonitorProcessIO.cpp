@@ -119,7 +119,7 @@ void KMonitorProcessIO::setUpdateInterval(int msecs) {
 }
 
 void KMonitorProcessIO::detach() {
-        foreach(int pid, attached_pids) {
+        Q_FOREACH(int pid, attached_pids) {
 		detach(pid);
 	}
 }

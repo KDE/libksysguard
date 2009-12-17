@@ -89,7 +89,7 @@ namespace KSysGuard
   };
 
 Processes::Private::~Private() {
-  foreach(Process *process, mProcesses) {
+  Q_FOREACH(Process *process, mProcesses) {
     if(process != &mFakeProcess)
       delete process;
   }
@@ -421,7 +421,7 @@ void Processes::deleteProcess(long pid)
     Process *process = d->mProcesses.value(pid);
     if(!process)
         return;
-    foreach( Process *it, process->children) {
+    Q_FOREACH( Process *it, process->children) {
         d->mProcessedLastTime.remove(it->pid);
         deleteProcess(it->pid);
     }
@@ -439,7 +439,7 @@ void Processes::deleteProcess(long pid)
 #ifndef QT_NO_DEBUG
     int i = 0;
 #endif
-    foreach( Process *it, d->mListProcesses ) {
+    Q_FOREACH( Process *it, d->mListProcesses ) {
         if(it->index > process->index)
             it->index--;
         Q_ASSERT(it->index == i++);
