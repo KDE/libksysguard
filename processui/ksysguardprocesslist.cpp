@@ -261,22 +261,22 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->setItemDelegate(new ProgressBarItemDelegate(d->mUi->treeView));
 
     d->mUi->treeView->header()->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(d->mUi->treeView->header(), SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showColumnContextMenu(const QPoint&)));
+    connect(d->mUi->treeView->header(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showColumnContextMenu(QPoint)));
 
     d->mProcessContextMenu = new QMenu(d->mUi->treeView);
     d->mUi->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(d->mUi->treeView, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showProcessContextMenu(const QPoint&)));
+    connect(d->mUi->treeView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showProcessContextMenu(QPoint)));
 
     d->mUi->treeView->header()->setClickable(true);
     d->mUi->treeView->header()->setSortIndicatorShown(true);
     d->mUi->treeView->header()->setCascadingSectionResizes(false);
     connect(d->mUi->btnKillProcess, SIGNAL(clicked()), this, SLOT(killSelectedProcesses()));
-    connect(d->mUi->txtFilter, SIGNAL(textChanged(const QString &)), this, SLOT(filterTextChanged(const QString &)));
+    connect(d->mUi->txtFilter, SIGNAL(textChanged(QString)), this, SLOT(filterTextChanged(QString)));
     connect(d->mUi->cmbFilter, SIGNAL(currentIndexChanged(int)), this, SLOT(setStateInt(int)));
-    connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
-    connect(d->mUi->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection & , const QItemSelection & )), this, SLOT(selectionChanged()));
-    connect(&d->mFilterModel, SIGNAL(rowsInserted( const QModelIndex &, int, int)), this, SLOT(rowsInserted(const QModelIndex &, int, int)));
-    connect(&d->mFilterModel, SIGNAL(rowsRemoved( const QModelIndex &, int, int)), this, SIGNAL(processListChanged()));
+    connect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
+    connect(d->mUi->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(selectionChanged()));
+    connect(&d->mFilterModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(rowsInserted(QModelIndex,int,int)));
+    connect(&d->mFilterModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SIGNAL(processListChanged()));
     setMinimumSize(sizeHint());
 
     d->mFilterModel.setFilterKeyColumn(-1);
@@ -329,7 +329,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
         connect(action, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
         signalMapper->setMapping(action, action);
     }
-    connect(signalMapper, SIGNAL(mapped(QObject *)), SLOT(actionTriggered(QObject *)));
+    connect(signalMapper, SIGNAL(mapped(QObject*)), SLOT(actionTriggered(QObject*)));
 
     retranslateUi();
 
@@ -849,22 +849,22 @@ void KSysGuardProcessList::rowsInserted(const QModelIndex & parent, int start, i
         emit processListChanged();
         return; //No tree or not a root node - no need to expand init
     }
-    disconnect(&d->mFilterModel, SIGNAL(rowsInserted( const QModelIndex &, int, int)), this, SLOT(rowsInserted(const QModelIndex &, int, int)));
+    disconnect(&d->mFilterModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(rowsInserted(QModelIndex,int,int)));
     //It is a root node that we just inserted - expand it
     bool expanded = false;
     for(int i = start; i <= end; i++) {
         QModelIndex index = d->mFilterModel.index(i, 0, QModelIndex());
         if(!d->mUi->treeView->isExpanded(index)) {
             if(!expanded) {
-                disconnect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
+                disconnect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
                 expanded = true;
             }
             d->mUi->treeView->expand(index);
         }
     }
     if(expanded)
-        connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
-    connect(&d->mFilterModel, SIGNAL(rowsInserted( const QModelIndex &, int, int)), this, SLOT(rowsInserted(const QModelIndex &, int, int)));
+        connect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
+    connect(&d->mFilterModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(rowsInserted(QModelIndex,int,int)));
     emit processListChanged();
 }
 
@@ -877,14 +877,14 @@ void KSysGuardProcessList::expandInit()
         QModelIndex index = d->mFilterModel.index(i, 0, QModelIndex());
         if(!d->mUi->treeView->isExpanded(index)) {
             if(!expanded) {
-                disconnect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
+                disconnect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
                 expanded = true;
             }
             d->mUi->treeView->expand(index);
         }
     }
     if(expanded)
-        connect(d->mUi->treeView, SIGNAL(expanded(const QModelIndex &)), this, SLOT(expandAllChildren(const QModelIndex &)));
+        connect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
 }
 
 void KSysGuardProcessList::hideEvent ( QHideEvent * event )  //virtual protected from QWidget

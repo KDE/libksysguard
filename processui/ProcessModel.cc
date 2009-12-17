@@ -279,9 +279,9 @@ void ProcessModelPrivate::setupWindows() {
         windowAdded(*it);
     }
 
-    connect( KWindowSystem::self(), SIGNAL( windowChanged (WId, unsigned int )), this, SLOT(windowChanged(WId, unsigned int)));
-    connect( KWindowSystem::self(), SIGNAL( windowAdded (WId )), this, SLOT(windowAdded(WId)));
-    connect( KWindowSystem::self(), SIGNAL( windowRemoved (WId )), this, SLOT(windowRemoved(WId)));
+    connect( KWindowSystem::self(), SIGNAL(windowChanged (WId, unsigned int )), this, SLOT(windowChanged(WId, unsigned int)));
+    connect( KWindowSystem::self(), SIGNAL(windowAdded (WId )), this, SLOT(windowAdded(WId)));
+    connect( KWindowSystem::self(), SIGNAL(windowRemoved (WId )), this, SLOT(windowRemoved(WId)));
 #endif
 }
 
@@ -295,14 +295,14 @@ void ProcessModelPrivate::setupProcesses() {
 
     mProcesses = KSysGuard::Processes::getInstance(mHostName);
 
-    connect( mProcesses, SIGNAL( processChanged(KSysGuard::Process *, bool)), this, SLOT(processChanged(KSysGuard::Process *, bool)));
-    connect( mProcesses, SIGNAL( beginAddProcess(KSysGuard::Process *)), this, SLOT(beginInsertRow( KSysGuard::Process *)));
-    connect( mProcesses, SIGNAL( endAddProcess()), this, SLOT(endInsertRow()));
-    connect( mProcesses, SIGNAL( beginRemoveProcess(KSysGuard::Process *)), this, SLOT(beginRemoveRow( KSysGuard::Process *)));
-    connect( mProcesses, SIGNAL( endRemoveProcess()), this, SLOT(endRemoveRow()));
-    connect( mProcesses, SIGNAL( beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)), this,
-            SLOT( beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)));
-    connect( mProcesses, SIGNAL( endMoveProcess()), this, SLOT(endMoveRow()));
+    connect( mProcesses, SIGNAL(processChanged(KSysGuard::Process *, bool)), this, SLOT(processChanged(KSysGuard::Process *, bool)));
+    connect( mProcesses, SIGNAL(beginAddProcess(KSysGuard::Process *)), this, SLOT(beginInsertRow( KSysGuard::Process *)));
+    connect( mProcesses, SIGNAL(endAddProcess()), this, SLOT(endInsertRow()));
+    connect( mProcesses, SIGNAL(beginRemoveProcess(KSysGuard::Process *)), this, SLOT(beginRemoveRow( KSysGuard::Process *)));
+    connect( mProcesses, SIGNAL(endRemoveProcess()), this, SLOT(endRemoveRow()));
+    connect( mProcesses, SIGNAL(beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)), this,
+            SLOT(beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)));
+    connect( mProcesses, SIGNAL(endMoveProcess()), this, SLOT(endMoveRow()));
     mNumProcessorCores = mProcesses->numberProcessorCores();
     if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
 }

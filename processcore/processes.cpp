@@ -122,7 +122,7 @@ Processes *Processes::getInstance(const QString &host) { //static
             ProcessesRemote *remote = new ProcessesRemote(host);
             processes = new Processes( remote );
             d2->processesRemote.insert(host, processes);
-            connect(remote, SIGNAL(runCommand(const QString &, int )), processes, SIGNAL(runCommand(const QString&, int)));
+            connect(remote, SIGNAL(runCommand(QString,int)), processes, SIGNAL(runCommand(QString,int)));
         } else {
             processes->d->ref++;
         }
@@ -168,7 +168,7 @@ void Processes::returnInstance(const QString &host) { //static
 Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private(this))
 {
     d->mAbstractProcesses = abstractProcesses;
-    connect( abstractProcesses, SIGNAL( processesUpdated() ), SLOT( processesUpdated() ));
+    connect( abstractProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
     updateAllProcesses(0,StandardInformation);
 }
 
