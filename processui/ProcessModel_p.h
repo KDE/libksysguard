@@ -61,7 +61,7 @@ class ProcessModelPrivate : public QObject
     public:
         ProcessModelPrivate();
         ~ProcessModelPrivate();
-    public slots:
+    public Q_SLOTS:
 
 #ifdef Q_WS_X11
         /** When an X window is changed, this is called */
