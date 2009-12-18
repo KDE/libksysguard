@@ -1257,9 +1257,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingVmSize:
             case HeadingIoWrite:
             case HeadingIoRead:
-                return QVariant(Qt::AlignRight);
+                return QVariant(Qt::AlignRight | Qt::AlignVCenter);
         }
-        return QVariant();
+        return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
     case UidRole: {
         if(index.column() != 0) return QVariant();  //If we query with this role, then we want the raw UID for this.
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
