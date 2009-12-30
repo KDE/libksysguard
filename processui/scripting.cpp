@@ -105,7 +105,7 @@ QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
      * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
      * may be lifted */
     if(context->argumentCount() !=1) {
-        KMessageBox::sorry(scriptingParent, i18np("Script error: There needs to be exactly one argument to fileExists(), but there was %1.", 
+        KMessageBox::sorry(scriptingParent, i18np("Script error: There needs to be exactly one argument to fileExists(), but there was %1.",
                                                   "Script error: There needs to be exactly one argument to fileExists(), but there were %1.",
                                                   context->argumentCount()));
         return QScriptValue(engine, false);
@@ -116,20 +116,7 @@ QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
     }
     QString filename = context->argument(0).toString();
     QFileInfo fileInfo(filename);
-    if(fileInfo.isRelative()) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: fileExists() was passed a relative path"));
-        return QScriptValue(engine, false);
-    }
-    QString canonicalPath = fileInfo.canonicalFilePath();
-    if(canonicalPath.isEmpty())
-        return QScriptValue(engine, false);
-    if(!canonicalPath.startsWith("/proc/") && !canonicalPath.startsWith("/sys/")) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: fileExists() can only read from /proc or /sys, not '%1'.", canonicalPath));
-        return QScriptValue();
-    }
-
-    QFileInfo fileInfo2(canonicalPath);
-    return QScriptValue(engine, fileInfo2.exists());
+    return QScriptValue(engine, fileInfo.exists());
 
 }
 QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
@@ -149,34 +136,8 @@ QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
         return QScriptValue();
     }
     QString filename = context->argument(0).toString();
-    QFileInfo fileInfo(filename);
-    if(fileInfo.isRelative()) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: readFile() was passed a relative path"));
-        return QScriptValue();
-    }
-    QString canonicalPath = fileInfo.canonicalFilePath();
-    if(canonicalPath.isEmpty()) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: readFile() '%1' does not exist", canonicalPath));
-        return QScriptValue();
-    }
-    if(!canonicalPath.startsWith("/proc/") && !canonicalPath.startsWith("/sys/")) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: readFile() can only read from /proc or /sys, not '%1'.", canonicalPath));
-        return QScriptValue();
-    }
-
-    QFileInfo fileInfo2(canonicalPath);
-    if( !fileInfo2.exists() ) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: readFile() '%1' does not exist", canonicalPath));
-        return QScriptValue();
-    }
-
-    if( fileInfo2.isRelative() || fileInfo2.isSymLink() || fileInfo2.isDir() || !fileInfo2.permissions().testFlag(QFile::ReadOther) ) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: Insufficient privileges to read from '%1'", canonicalPath));
-        return QScriptValue();
-    }
-    QFile file(canonicalPath);
+    QFile file(filename);
     if(!file.open(QIODevice::ReadOnly)) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: readFile() could not read from '%1'", canonicalPath));
         return QScriptValue();
     }
     QTextStream stream(&file);
