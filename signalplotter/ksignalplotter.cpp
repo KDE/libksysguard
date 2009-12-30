@@ -53,6 +53,7 @@ KSignalPlotter::KSignalPlotter( QWidget *parent)
   : QWidget( parent), d(new KSignalPlotterPrivate(this))
 {
     // Anything smaller than this does not make sense.
+    qRegisterMetaType<KLocalizedString>("KLocalizedString");
     setMinimumSize( 4, 4 );
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     sizePolicy.setHeightForWidth(false);
@@ -292,6 +293,7 @@ void KSignalPlotter::setMinimumValue( double min )
     if(min == d->mUserMinValue) return;
     d->mUserMinValue = min;
     d->calculateNiceRange();
+    update();
     //this change will be detected in paint and the image cache regenerated
 }
 
@@ -305,6 +307,7 @@ void KSignalPlotter::setMaximumValue( double max )
     if(max == d->mUserMaxValue) return;
     d->mUserMaxValue = max;
     d->calculateNiceRange();
+    update();
     //this change will be detected in paint and the image cache regenerated
 }
 
@@ -433,18 +436,6 @@ void KSignalPlotter::setSvgBackground( const QString &filename )
     d->mSvgFilename = filename;
     d->mBackgroundImage = QPixmap();
     update();
-}
-
-void KSignalPlotter::setThinFrame( bool set)
-{
-    if(d->mShowThinFrame == set) return;
-    d->mShowThinFrame = set;
-    d->mBackgroundImage = QPixmap(); //we changed a paint setting, so reset the cache
-    update();
-}
-bool KSignalPlotter::thinFrame() const
-{
-    return d->mShowThinFrame;
 }
 
 void KSignalPlotter::setMaxAxisTextWidth(int axisTextWidth)
@@ -993,6 +984,10 @@ void KSignalPlotter::setFillOpacity(int fill)
 
 }
 
+QSize KSignalPlotter::sizeHint() const
+{
+    return QSize(200,200); //Just a random size which would usually look okay
+}
 
 #include "ksignalplotter.moc"
 

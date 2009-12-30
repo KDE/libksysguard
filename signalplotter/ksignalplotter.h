@@ -34,6 +34,8 @@ class QPaintEvent;
 class QResizeEvent;
 class KSignalPlotterPrivate;
 
+Q_DECLARE_METATYPE(KLocalizedString)
+
 /** \brief The KSignalPlotter widget draws a real time graph of data that updates continually.
  *
  *  Features include:
@@ -68,7 +70,6 @@ class KDE_EXPORT KSignalPlotter : public QWidget
   Q_PROPERTY( double maximumValue READ maximumValue WRITE setMaximumValue )
   Q_PROPERTY( bool useAutoRange READ useAutoRange WRITE setUseAutoRange )
   Q_PROPERTY( KLocalizedString unit READ unit WRITE setUnit )
-  Q_PROPERTY( bool thinFrame READ thinFrame WRITE setThinFrame )
   Q_PROPERTY( double scaleDownBy READ scaleDownBy WRITE setScaleDownBy )
   Q_PROPERTY( uint horizontalScale READ horizontalScale WRITE setHorizontalScale )
   Q_PROPERTY( bool showHorizontalLines READ showHorizontalLines WRITE setShowHorizontalLines )
@@ -384,13 +385,6 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      */
     QString valueAsString( double value, int precision = -1) const;
 
-    /**  \brief Set whether to show a white line on the left and bottom of the widget, for a 3D effect.
-     *
-     * Default is true.*/
-    void setThinFrame( bool set );
-    /**  \brief Whether to show a white line on the left and bottom of the widget, for a 3D effect. */
-    bool thinFrame() const;
-
     /** \brief Set the distance between the left of the widget and the left of the plotting region.
      *
      *  For example:
@@ -443,6 +437,8 @@ class KDE_EXPORT KSignalPlotter : public QWidget
     virtual void paintEvent( QPaintEvent* );
     /* Reimplemented */
     virtual void changeEvent ( QEvent * event );
+    /* Reimplemented */
+    virtual QSize sizeHint() const;
   private:
     KSignalPlotterPrivate * const d;
     friend class KSignalPlotterPrivate;
