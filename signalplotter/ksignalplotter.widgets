@@ -1,0 +1,10 @@
+[Global]
+PluginName=KSignalPlotterWidgets
+
+
+[KSignalPlotter]
+ToolTip=A graph plotter widget for plotting continuously incoming data
+Group=KSysGuard (KDE)
+ConstructorArgs=(parent)
+IncludeFile=ksignalplotter.h
+

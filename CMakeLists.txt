@@ -4,6 +4,7 @@
 add_subdirectory( lsofui )
 add_subdirectory( processcore )
 add_subdirectory( processui )
+add_subdirectory( signalplotter )
 add_subdirectory( tests )
 
 check_include_files(sys/ptrace.h HAVE_SYS_PTRACE_H)
