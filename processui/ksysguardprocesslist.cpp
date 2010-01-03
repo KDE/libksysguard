@@ -1045,54 +1045,57 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 
     bool supportsIoNice = d->mModel.processController()->supportsIoNiceness();
     if(!supportsIoNice) { iosched = -2; firstIOPriority = -2; }
-    ReniceDlg reniceDlg(d->mUi->treeView, selectedAsStrings, firstPriority, sched, firstIOPriority, iosched);
-    if(reniceDlg.exec() == QDialog::Rejected) return;
+    QPointer<ReniceDlg> reniceDlg = new ReniceDlg(d->mUi->treeView, selectedAsStrings, firstPriority, sched, firstIOPriority, iosched);
+    if(reniceDlg->exec() == QDialog::Rejected) {
+        delete reniceDlg;
+        return;
+    }
 
     QList<long long> renicePids;
     QList<long long> changeCPUSchedulerPids;
     QList<long long> changeIOSchedulerPids;
     Q_FOREACH(KSysGuard::Process *process, processes) {
-        switch(reniceDlg.newCPUSched) {
+        switch(reniceDlg->newCPUSched) {
             case -2:
             case -1:  //Invalid, not changed etc.
                 break;  //So do nothing
             case KSysGuard::Process::Other:
             case KSysGuard::Process::Fifo:
-                if(reniceDlg.newCPUSched != (int)process->scheduler) {
+                if(reniceDlg->newCPUSched != (int)process->scheduler) {
                     changeCPUSchedulerPids << process->pid;
                     renicePids << process->pid;
-                } else if(reniceDlg.newCPUPriority != process->niceLevel)
+                } else if(reniceDlg->newCPUPriority != process->niceLevel)
                     renicePids << process->pid;
                 break;
 
             case KSysGuard::Process::RoundRobin:
             case KSysGuard::Process::Batch:
-                if(reniceDlg.newCPUSched != (int)process->scheduler || reniceDlg.newCPUPriority != process->niceLevel) {
+                if(reniceDlg->newCPUSched != (int)process->scheduler || reniceDlg->newCPUPriority != process->niceLevel) {
                     changeCPUSchedulerPids << process->pid;
                 }
                 break;
         }
-        switch(reniceDlg.newIOSched) {
+        switch(reniceDlg->newIOSched) {
             case -2:
             case -1:  //Invalid, not changed etc.
                 break;  //So do nothing
             case KSysGuard::Process::None:
-                if(reniceDlg.newIOSched != (int)process->ioPriorityClass) {
+                if(reniceDlg->newIOSched != (int)process->ioPriorityClass) {
                     // Unfortunately linux doesn't actually let us set the ioniceness back to none after being set to something else
-                    if(process->ioPriorityClass != KSysGuard::Process::BestEffort || reniceDlg.newIOPriority != process->ioniceLevel)
+                    if(process->ioPriorityClass != KSysGuard::Process::BestEffort || reniceDlg->newIOPriority != process->ioniceLevel)
                         changeIOSchedulerPids << process->pid;
                 }
                 break;
             case KSysGuard::Process::Idle:
-                if(reniceDlg.newIOSched != (int)process->ioPriorityClass) {
+                if(reniceDlg->newIOSched != (int)process->ioPriorityClass) {
                     changeIOSchedulerPids << process->pid;
                 }
                 break;
             case KSysGuard::Process::BestEffort:
-                if(process->ioPriorityClass == KSysGuard::Process::None && reniceDlg.newIOPriority  == (process->niceLevel + 20)/5)
+                if(process->ioPriorityClass == KSysGuard::Process::None && reniceDlg->newIOPriority  == (process->niceLevel + 20)/5)
                     break;  //Don't set to BestEffort if it's on None and the nicelevel wouldn't change
             case KSysGuard::Process::RealTime:
-                if(reniceDlg.newIOSched != (int)process->ioPriorityClass || reniceDlg.newIOPriority != process->ioniceLevel) {
+                if(reniceDlg->newIOSched != (int)process->ioPriorityClass || reniceDlg->newIOPriority != process->ioniceLevel) {
                     changeIOSchedulerPids << process->pid;
                 }
                 break;
@@ -1100,26 +1103,30 @@ void KSysGuardProcessList::reniceSelectedProcesses()
 
     }
     if(!changeCPUSchedulerPids.isEmpty()) {
-        Q_ASSERT(reniceDlg.newCPUSched >= 0);
-        if(!changeCpuScheduler(changeCPUSchedulerPids, (KSysGuard::Process::Scheduler) reniceDlg.newCPUSched, reniceDlg.newCPUPriority)) {
+        Q_ASSERT(reniceDlg->newCPUSched >= 0);
+        if(!changeCpuScheduler(changeCPUSchedulerPids, (KSysGuard::Process::Scheduler) reniceDlg->newCPUSched, reniceDlg->newCPUPriority)) {
             KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU scheduler. Aborting."));
+            delete reniceDlg;
             return;
         }
 
     }
     if(!renicePids.isEmpty()) {
-        Q_ASSERT(reniceDlg.newCPUPriority <= 20 && reniceDlg.newCPUPriority >= -20);
-        if(!reniceProcesses(renicePids, reniceDlg.newCPUPriority)) {
+        Q_ASSERT(reniceDlg->newCPUPriority <= 20 && reniceDlg->newCPUPriority >= -20);
+        if(!reniceProcesses(renicePids, reniceDlg->newCPUPriority)) {
             KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU priority. Aborting."));
+            delete reniceDlg;
             return;
         }
     }
     if(!changeIOSchedulerPids.isEmpty()) {
-        if(!changeIoScheduler(changeIOSchedulerPids, (KSysGuard::Process::IoPriorityClass) reniceDlg.newIOSched, reniceDlg.newIOPriority)) {
+        if(!changeIoScheduler(changeIOSchedulerPids, (KSysGuard::Process::IoPriorityClass) reniceDlg->newIOSched, reniceDlg->newIOPriority)) {
             KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the IO scheduler and priority. Aborting."));
+            delete reniceDlg;
             return;
         }
     }
+    delete reniceDlg;
     updateList();
 }
 
