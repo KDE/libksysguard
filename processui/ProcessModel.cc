@@ -195,6 +195,10 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
         }
         case HeadingPid:
             return processLeft->pid > processRight->pid;
+        case HeadingNiceness:
+            if(processLeft->niceLevel == processRight->niceLevel)
+                return processLeft->pid < processRight->pid; //Subsort by pid if the niceLevel is the same
+            return processLeft->niceLevel < processRight->niceLevel;
         case HeadingTty: {
             if( processLeft->tty == processRight->tty)
                 return processLeft->pid < processRight->pid; //Both ttys are the same.  Sort by pid
