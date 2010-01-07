@@ -676,10 +676,6 @@ void KSignalPlotterPrivate::calculateNiceRange()
         }
     }
 
-    if ( !minFromUser && min != 0.0) {  //If the minimum value is from data, round it down to make it a pretty number
-        double dim = pow( 10, floor( log10( fabs( min ) ) ) ) / 2;
-        min = dim * floor( min / dim );
-    }
     /* If the range is too small we will force it to 1.0 since it
      * looks a lot nicer. */
     if(max - min < 0.000001 )
@@ -700,16 +696,18 @@ void KSignalPlotterPrivate::calculateNiceRange()
     } else
         step = range / (mScaleDownBy*(mHorizontalLinesCount+1));
 
-    int logdim = (int)floor( log10( step ) );
-    double dim = pow( (double)10.0, logdim ) / 2;
-    int a = (int)ceil( step / dim );
+    const int sigFigs = 2;                                   //Number of significant figures of the step to use.  Update the 0.05 below if this changes
+    int logdim = (int)floor( log10( step ) ) - (sigFigs-1);  //find the order of the number, reduced by 1.  E.g. if step=1234 then logdim is 3-1=2
+    double dim = pow( (double)10.0, logdim );                //e.g.  if step=1234, logdim=2, so dim = 100
+    int a = (int)ceil( step / dim - 0.000005);                   //so a = ceil(1234/100) = ceil(12.34) = 13    (we subtract an epsilon)
+
     if(logdim >= 0)
-        mPrecision = 0;
-    else if( a % 2 == 0)
-        mPrecision = -logdim;
+        mPrecision = 0;                                      //Work out the number of decimal places.  e.g. If step=1.5, then logdim = -1 so precision is 1
+    else if(a % 10 == 0)                                     //We just happened to round to a nice number, requiring 1 less precision
+        mPrecision = -logdim - 1;
     else
-        mPrecision = 1-logdim;
-    step = dim*a;
+        mPrecision = -logdim;
+    step = dim*a;                                            //e.g. if step=1234, dim=100, a=13  so step= 1300.  So 1234 was rounded up to 1300
 
     range = mScaleDownBy * step * (mHorizontalLinesCount+1);
 
@@ -898,6 +896,11 @@ void KSignalPlotterPrivate::drawHorizontalLines(QPainter *p, const QRect &boundi
         int y_coord =  boundingBox.top() + (y * (boundingBox.height()-1)) / (mHorizontalLinesCount+1);  //Make sure it's y*h first to avoid rounding bugs
         p->drawLine( boundingBox.left(), y_coord, boundingBox.right() - 1, y_coord);
     }
+}
+
+int KSignalPlotter::currentAxisPrecision() const
+{
+    return d->mPrecision;
 }
 
 double KSignalPlotter::lastValue( int i) const

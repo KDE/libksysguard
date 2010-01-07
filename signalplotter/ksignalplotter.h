@@ -333,6 +333,11 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      *  Default is true. */
     bool showHorizontalLines() const;
 
+    /** \brief The number of decimal places used for the axis labels
+     *
+     *  This is calculated based on the current range */
+    int currentAxisPrecision() const;
+
     /** \brief Set whether to show the vertical axis labels.
      *
      * Default is true.

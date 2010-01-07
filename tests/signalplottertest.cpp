@@ -221,28 +221,33 @@ void TestSignalPlotter::testMaximumRange()
 
     QCOMPARE(s->maximumValue(), 0.0);
     QCOMPARE(s->minimumValue(), 0.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 1.25); //It gets rounded up
+
+    QCOMPARE(s->currentMaximumRangeValue(), 1.1); //It gets rounded up.
     QCOMPARE(s->currentMinimumRangeValue(), 0.0);
+    QCOMPARE(s->currentAxisPrecision(), 2); //step is 0.22
 
     s->setMaximumValue(1.0);
     QCOMPARE(s->maximumValue(), 1.0);
     QCOMPARE(s->minimumValue(), 0.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 1.25); //Current value is still larger
+    QCOMPARE(s->currentMaximumRangeValue(), 1.1); //Current value is still larger
     QCOMPARE(s->currentMinimumRangeValue(), 0.0);
+    QCOMPARE(s->currentAxisPrecision(), 2);
 
     s->setMaximumValue(1.4);
     QCOMPARE(s->maximumValue(), 1.4);
     QCOMPARE(s->minimumValue(), 0.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 1.5); //given maximum range is now the larger value
+    QCOMPARE(s->currentMaximumRangeValue(), 1.4); //given maximum range is now the larger value
     QCOMPARE(s->currentMinimumRangeValue(), 0.0);
+    QCOMPARE(s->currentAxisPrecision(), 2);
 
 
     s->addBeam(Qt::red);
     //nothing changed by adding a beam
     QCOMPARE(s->maximumValue(), 1.4);
     QCOMPARE(s->minimumValue(), 0.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 1.5); //given maximum range hasn't changed
+    QCOMPARE(s->currentMaximumRangeValue(), 1.4); //given maximum range hasn't changed
     QCOMPARE(s->currentMinimumRangeValue(), 0.0);
+    QCOMPARE(s->currentAxisPrecision(), 2);
 }
 
 void TestSignalPlotter::testNonZeroRange()
@@ -251,32 +256,37 @@ void TestSignalPlotter::testNonZeroRange()
     s->setMinimumValue(10);
     s->setMaximumValue(20);
 
-    QCOMPARE(s->currentMinimumRangeValue(), 10.0);
+    QCOMPARE(s->currentMinimumRangeValue(), 10.0); //Current range should be 10, 12, 14, 16, 18, 20
     QCOMPARE(s->currentMaximumRangeValue(), 20.0);
+    QCOMPARE(s->currentAxisPrecision(), 0);
 
     s->addSample(QList<double>() << 15);
     s->addSample(QList<double>() << 25);
     s->addSample(QList<double>() << 5);
 
     QCOMPARE(s->currentMinimumRangeValue(), 5.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 25.0);
+    QCOMPARE(s->currentMaximumRangeValue(), 25.0); //Current range should be 5, 9, 13, 17, 21, 25
+    QCOMPARE(s->currentAxisPrecision(), 0);
 
     s->addBeam(Qt::red);
     s->addSample(QList<double>() << 7 << 9);
-    s->addSample(QList<double>() << 30 << 2);
+    s->addSample(QList<double>() << 29.8 << 2);
 
     QCOMPARE(s->currentMinimumRangeValue(), 2.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 32.0);
+    QCOMPARE(s->currentMaximumRangeValue(), 30.0); //Current range should be  2, 7.6, 13.2, 18.8, 24.4, 30
+    QCOMPARE(s->currentAxisPrecision(), 1);
 
     s->addSample(QList<double>() << std::numeric_limits<double>::quiet_NaN()); //These should appear as gaps in the data
 
     QCOMPARE(s->currentMinimumRangeValue(), 2.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 32.0);
+    QCOMPARE(s->currentMaximumRangeValue(), 30.0);
+    QCOMPARE(s->currentAxisPrecision(), 1);
 
     s->addSample(QList<double>() << 1.0/0.0 << -1.0/0.0);
 
     QCOMPARE(s->currentMinimumRangeValue(), 2.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 32.0);
+    QCOMPARE(s->currentMaximumRangeValue(), 30.0);
+    QCOMPARE(s->currentAxisPrecision(), 1);
 }
 
 void TestSignalPlotter::testNonZeroRange2()
@@ -300,17 +310,19 @@ void TestSignalPlotter::testNiceRangeCalculation_data()
     QTest::addColumn<double>("max");
     QTest::addColumn<double>("niceMin");
     QTest::addColumn<double>("niceMax");
+    QTest::addColumn<int>("precision");
 
 #define STRINGIZE(number) #number
-#define testRange(min,max,niceMin,niceMax) QTest::newRow(STRINGIZE(min) " to " STRINGIZE(max)) << double(min) << double(max) << double(niceMin) << double(niceMax)
-    testRange(-49,  199, -50, 200);  // Scale should read -50,  0,  50, 100, 150, 200
-    testRange(-50,  199, -50, 200);  // Scale should read -50,  0,  50, 100, 150, 200
-    testRange(-49,  200, -50, 200);  // Scale should read -50,  0,  50, 100, 150, 200
-    testRange(-50,  200, -50, 200);  // Scale should read -50,  0,  50, 100, 150, 200
-    testRange(-1,   199, -50, 200);  // Scale should read -50,  0,  50, 100, 150, 200
-    testRange(-99,  149, -100, 150); // Scale should read -100, 50, 0,  50,  100, 150
-    testRange(-100, 150, -100, 150); // Scale should read -100, 50, 0,  50,  100, 150
-    testRange(-1000, 1000, -1000, 1500); // Scale should read -1000, 500, 0,  500,  1000, 1500
+#define testRange(min,max,niceMin,niceMax, precision) QTest::newRow(STRINGIZE(min) " to " STRINGIZE(max)) << double(min) << double(max) << double(niceMin) << double(niceMax) << int(precision)
+/*    testRange(-49,  199, -50, 200, 0);      // Scale should read -50,   0,   50,  100, 150,  200
+    testRange(-50,  199, -50, 200, 0);      // Scale should read -50,   0,   50,  100, 150,  200
+    testRange(-49,  200, -50, 200, 0);      // Scale should read -50,   0,   50,  100, 150,  200
+    testRange(-50,  200, -50, 200, 0);      // Scale should read -50,   0,   50,  100, 150,  200
+    testRange(-1,   199, -50, 200, 0);      // Scale should read -50,   0,   50,  100, 150,  200
+    testRange(-99,  149, -100, 150, 0);     // Scale should read -100,  50,  0,   50,  100,  150
+    testRange(-100, 150, -100, 150, 0);     // Scale should read -100,  50,  0,   50,  100,  150
+    testRange(-1000, 1000, -1000, 1500, 0); // Scale should read -1000, 500, 0,   500, 1000, 1500 */
+    testRange(0, 7, 0, 7, 1);               // Scale should read 0,     1.4, 2.8, 4.2, 5.6,  7
 }
 void TestSignalPlotter::testNiceRangeCalculation()
 {
@@ -318,12 +330,14 @@ void TestSignalPlotter::testNiceRangeCalculation()
     QFETCH(double, max);
     QFETCH(double, niceMin);
     QFETCH(double, niceMax);
+    QFETCH(int, precision);
 
     s->addBeam(Qt::blue);
     s->changeRange(min, max);
 
     QCOMPARE(s->currentMinimumRangeValue(), niceMin);
     QCOMPARE(s->currentMaximumRangeValue(), niceMax);
+    QCOMPARE(s->currentAxisPrecision(), precision);
 }
 
 void TestSignalPlotter::testNegativeMinimumRange()
@@ -338,19 +352,19 @@ void TestSignalPlotter::testNegativeMinimumRange()
     s->setScaleDownBy(1024);
     QCOMPARE(s->minimumValue(), -1000.0);
     QCOMPARE(s->maximumValue(),  4000.0);
-    QCOMPARE(s->currentMinimumRangeValue(), -1024.0);
-    QCOMPARE(s->currentMaximumRangeValue(), 4096.0);
+    QCOMPARE(s->currentMaximumRangeValue(), 4014.08); //The given range was -0.976KB to 3.906KB.  This was rounded as: -0.98KB to  3.92KB
+    QCOMPARE(s->currentMinimumRangeValue(), -1003.52);
 
     QCOMPARE(s->valueAsString(4096,1), QString("4.0"));
     QCOMPARE(s->valueAsString(-4096,1), QString("-4.0"));
 
     s->addBeam(Qt::red);
     s->addSample(QList<double>() << -1024.0);
-    QCOMPARE(s->currentMinimumRangeValue(), -1024.0);
     QCOMPARE(s->currentMaximumRangeValue(), 4096.0);
+    QCOMPARE(s->currentMinimumRangeValue(), -1024.0);
     s->addSample(QList<double>() << -1025.0); //Scale now becomes  -3, -1.5, 0, 1.5, 3, 4.5 in KB
-    QCOMPARE(s->currentMinimumRangeValue(), -3072.0); //-3KB
-    QCOMPARE(s->currentMaximumRangeValue(), 4608.0); //4.5KB
+    QCOMPARE(s->currentMinimumRangeValue(), -1126.4); //-1.1KB
+    QCOMPARE(s->currentMaximumRangeValue(), 4505.6); //4.4KB
 }
 void TestSignalPlotter::testSetBeamColor() {
     s->addBeam(Qt::red);
