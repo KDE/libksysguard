@@ -193,6 +193,8 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmRSS - processRight->vmURSS:0;
             return memoryLeft > memoryRight;
         }
+        case HeadingPid:
+            return processLeft->pid > processRight->pid;
         case HeadingIoRead:
             switch(d->mIoInformation) {
                 case ProcessModel::Bytes:
