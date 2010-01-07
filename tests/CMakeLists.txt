@@ -9,5 +9,27 @@ kde4_add_unit_test(processtest processtest.cpp)
 
 target_link_libraries(processtest processui ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
 
+set( signalplottertest_SRCS signalplottertest.cpp ../signalplotter/ksignalplotter.cpp)
+set( signalplotterbenchmark_SRCS signalplotterbenchmark.cpp ../signalplotter/ksignalplotter.cpp)
+kde4_add_unit_test( signalplottertest
+    TESTNAME ksubmodule-signalplottertest
+    ${signalplottertest_SRCS}
+)
+
+kde4_add_unit_test( signalplotterbenchmark
+    TESTNAME ksubmodule-signalplottertest
+    ${signalplotterbenchmark_SRCS}
+)
+
+target_link_libraries( signalplottertest
+    ${KDE4_KDEUI_LIBS}
+    ${QT_QTTEST_LIBRARY}
+)
+target_link_libraries( signalplotterbenchmark
+    ${KDE4_KDEUI_LIBS}
+    ${QT_QTTEST_LIBRARY}
+    ${QT_QTBENCHMARK_LIBRARY}
+)
+
 
 
