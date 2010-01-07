@@ -195,6 +195,27 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
         }
         case HeadingPid:
             return processLeft->pid > processRight->pid;
+        case HeadingTty: {
+            if( processLeft->tty == processRight->tty)
+                return processLeft->pid < processRight->pid; //Both ttys are the same.  Sort by pid
+            if(processLeft->tty.isEmpty())
+                return false; //Only left is empty (since they aren't the same)
+            else if(processRight->tty.isEmpty())
+                return true; //Only right is empty
+
+            //Neither left or right is empty. The tty string is like  "tty10"  so split this into "tty" and "10"
+            //and sort by the string first, then sort by the number
+            QRegExp regexpLeft("^(\\D*)(\\d*)$");
+            QRegExp regexpRight(regexpLeft);
+            if(regexpLeft.indexIn(processLeft->tty) == -1 || regexpRight.indexIn(processRight->tty) == -1)
+                return processLeft->tty < processRight->tty;
+            int nameMatch = regexpLeft.cap(1).compare(regexpRight.cap(1));
+            if(nameMatch < 0)
+                return true;
+            if(nameMatch > 0)
+                return false;
+            return regexpLeft.cap(2).toInt() < regexpRight.cap(2).toInt();
+        }
         case HeadingIoRead:
             switch(d->mIoInformation) {
                 case ProcessModel::Bytes:
