@@ -1379,6 +1379,7 @@ void KSysGuardProcessList::setScriptingEnabled(bool enabled)
         d->mScripting = NULL;
     } else {
         d->mScripting = new Scripting(this);
+        d->mScripting->hide();
     }
 
 }
