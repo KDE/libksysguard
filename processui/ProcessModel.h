@@ -87,7 +87,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         QString getStringForProcess(KSysGuard::Process *process) const;
         KSysGuard::Process *getProcess(qlonglong pid);
 
-        /** This is used from ProcessFilter to get the process at a given index when in flat mode */	
+        /** This is used from ProcessFilter to get the process at a given index when in flat mode */
         KSysGuard::Process *getProcessAtIndex(int index) const;
 
         /** Returns whether this user can log in or not.
@@ -96,7 +96,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         bool canUserLogin(long uid) const;
         /** In simple mode, everything is flat, with no icons, few if any colors, no xres etc.
          *  This can be changed at any time.  It is a fairly quick operation.  Basically it resets the model
-         */ 
+         */
         void setSimpleMode(bool simple);
         /** In simple mode, everything is flat, with no icons, few if any colors, no xres etc
         */
@@ -105,7 +105,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         /** Returns the total amount of physical memory in the machine. */
         qlonglong totalMemory() const;
 
-        /** This returns a QModelIndex for the given process.  It has to look up the parent for this pid, find the offset this 
+        /** This returns a QModelIndex for the given process.  It has to look up the parent for this pid, find the offset this
          *  pid is from the parent, and return that.  It's not that slow, but does involve a couple of hash table lookups.
          */
         QModelIndex getQModelIndex ( KSysGuard::Process *process, int column) const;

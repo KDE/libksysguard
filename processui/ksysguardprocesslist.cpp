@@ -291,9 +291,9 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingIoWrite);
     // NOTE!  After this is all setup, the settings for the header are restored
     // from the user's last run.  (in restoreHeaderState)
-    // So making changes here only affects the default settings.  To 
+    // So making changes here only affects the default settings.  To
     // test changes temporarily, comment out the lines in restoreHeaderState.
-    // When you are happy with the changes and want to commit, increase the 
+    // When you are happy with the changes and want to commit, increase the
     // value of PROCESSHEADERVERSION.  This will force the header state
     // to be reset back to the defaults for all users.
     d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingCPUUsage, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingCPUUsage));
@@ -641,7 +641,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     QAction *actionIoShowRate = NULL;
     bool showIoRate = false;
     if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
-        showIoRate = d->mModel.ioInformation() == ProcessModel::BytesRate || 
+        showIoRate = d->mModel.ioInformation() == ProcessModel::BytesRate ||
                      d->mModel.ioInformation() == ProcessModel::SyscallsRate ||
                      d->mModel.ioInformation() == ProcessModel::ActualBytesRate;
 
@@ -708,7 +708,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         actionNormalizeCPUUsage->setChecked(d->mModel.isNormalizedCPUUsage());
         menu->addAction(actionNormalizeCPUUsage);
     }
-    
+
     if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
         menu->addSeparator()->setText(i18n("Displayed Information"));
         QActionGroup *ioInformationGroup = new QActionGroup(menu);
@@ -966,7 +966,7 @@ void KSysGuardProcessList::setUpdateIntervalMSecs(int intervalMSecs)
     }
 
     if(!d->mUpdateTimer) {
-        //intervalMSecs is a valid time, so set up a timer 
+        //intervalMSecs is a valid time, so set up a timer
         d->mUpdateTimer = new QTimer(this);
         d->mUpdateTimer->setSingleShot(true);
         connect(d->mUpdateTimer, SIGNAL(timeout()), SLOT(updateList()));

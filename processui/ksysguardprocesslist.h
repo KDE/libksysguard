@@ -87,7 +87,7 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
          * */
         int visibleProcessesCount() const;
 
-        /** Save the current state of the widget to the given config group 
+        /** Save the current state of the widget to the given config group
          *
          *  @param[in] cg Config group to add these settings to
          * */
@@ -130,8 +130,8 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         void killSelectedProcesses();
 
         /** Send a signal to a list of given processes.
-         *   @p pids A list of PIDs that should be sent the signal 
-         *   @p sig  The signal to send. 
+         *   @p pids A list of PIDs that should be sent the signal
+         *   @p sig  The signal to send.
          *   @return Whether the kill went ahead. True if successful or user cancelled.  False if there was a problem
          */
         bool killProcesses(const QList< long long> &pids, int sig);
@@ -150,9 +150,9 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
          *   @return Whether the cpu scheduler changing went ahead.  True if successful or user cancelled.  False if there was a problem
          */
         bool changeIoScheduler(const QList< long long> &pids, KSysGuard::Process::IoPriorityClass newIoSched, int newIoSchedPriority);
-        /** Renice the processes given to the given niceValue. 
+        /** Renice the processes given to the given niceValue.
          *   @return Whether the kill went ahead.  True if successful or user cancelled.  False if there was a problem
-         * */ 
+         * */
         bool reniceProcesses(const QList<long long> &pids, int niceValue);
 
         /** Fetch new process information and redraw the display */
