@@ -178,7 +178,7 @@ void Scripting::runScript(KSysGuard::Process *process, const QString &path, cons
     QDir dir(path, "*.ui");
     QStringList uiFiles = dir.entryList();
     QUiLoader *loader = NULL;
-    foreach(const QString &uiFileName, uiFiles) { //We do uiFileName.replace so can't make this a const reference
+    foreach(QString uiFileName, uiFiles) { //We do uiFileName.replace so can't make this a const reference
         if(!loader)
             loader = new QUiLoader(this);
         QFile uiFile(path + uiFileName);
