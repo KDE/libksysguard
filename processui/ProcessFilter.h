@@ -53,10 +53,10 @@ class KSYSGUARD_EXPORT ProcessFilter : public QSortFilterProxyModel
 
   public Q_SLOTS:
 	void setFilter(State index);
-	
+
   protected:
 	virtual bool filterAcceptsRow( int source_row, const QModelIndex & source_parent ) const;
-	
+
 	State mFilter;
 };
 

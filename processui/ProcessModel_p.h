@@ -51,7 +51,7 @@ struct WindowInfo {
     NETWinInfo *netWinInfo;
 };
 
-#endif 
+#endif
 
 
 class ProcessModel;
@@ -76,7 +76,7 @@ class ProcessModelPrivate : public QObject
 
         /** Change the data for a process.  This is called from KSysGuard::Processes
          *  if @p onlyCpuOrMem is set, only the total cpu usuage is updated.
-         *  process->changes  contains a bitfield of what has been changed 
+         *  process->changes  contains a bitfield of what has been changed
          */
         void processChanged(KSysGuard::Process *process, bool onlyCpuOrMem);
         /** Called from KSysGuard::Processes
@@ -152,7 +152,7 @@ class ProcessModelPrivate : public QObject
          *  \code mUidCanLogin.value(uid,-1) \endcode  and thus we get a tristate for whether
          *  they are logged in, not logged in, or not known yet.
          *  */
-        mutable QHash<long long, int> mUidCanLogin; 
+        mutable QHash<long long, int> mUidCanLogin;
 
 
         /** A translated list of headings (column titles) in the order we want to display them. Used in headerData() */

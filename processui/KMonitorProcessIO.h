@@ -79,10 +79,10 @@ public Q_SLOTS:
 	/** Stop monitoring the given process */
 	void detach(int pid);
 	/** Start monitoring the given process.  If this is the first process being monitored, the state is set to
-	 *  AttachedRunning if possible and attachedPid() will return @p pid 
+	 *  AttachedRunning if possible and attachedPid() will return @p pid
 	 *  @return true if successfully reattached.  Can fail if process has disappeared or we do not have the right to attach. */
 	bool attach(int pid);
-	/** Reattach the pid that was first attached. 
+	/** Reattach the pid that was first attached.
 	 *  @return true if successfully reattached.  Can fail if process has disappeared or we do not have the right to attach. */
 	bool reattach();
 	/** Return the main pid that we are monitoring.*/

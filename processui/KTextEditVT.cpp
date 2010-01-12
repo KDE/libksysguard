@@ -50,19 +50,19 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 				if(!escape_number_seperator) {
 					if(escape_number1 == -1)
 						escape_number1 = c.digitValue();
-					else 
+					else
 						escape_number1 = escape_number1*10 + c.digitValue();
 				} else {
 					if(escape_number2 == -1)
 						escape_number2 = c.digitValue();
-					else 
+					else
 						escape_number2 = escape_number2*10 + c.digitValue();
 
 				}
 			} else if(c == ';') {
 				escape_number_seperator = true;
 			} else if(escape_OSC && c==7) { //Throw away any letters that are not OSC
-				escape_code = c; 
+				escape_code = c;
 			} else if(escape_CSI)
 				escape_code = c;
 		} else if(c=='[') {
@@ -120,7 +120,7 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 		}
 	} else if(c == 0x0d) {
 		insertPlainText(QChar('\n'));
-	} else if(c.isPrint() || c == '\n') { 
+	} else if(c.isPrint() || c == '\n') {
 		insertPlainText(QChar(c));
 	} else if(mParseAnsi) {
 		if(c == 127 || c == 8) { // delete or backspace, respectively

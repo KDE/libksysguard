@@ -101,7 +101,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	connect(ioScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
 	connect(ui->sliderCPU, SIGNAL(valueChanged(int)), this, SLOT(cpuSliderChanged(int)));
 	connect(ui->sliderIO, SIGNAL(valueChanged(int)), this, SLOT(ioSliderChanged(int)));
-	
+
 	updateUi();
 }
 
@@ -118,7 +118,7 @@ void ReniceDlg::cpuSchedulerChanged(int value) {
 			ui->sliderCPU->setValue( slider );
 		} else if( (previous_cpuscheduler == (int)KSysGuard::Process::Other || previous_cpuscheduler == KSysGuard::Process::Batch) &&
 		    (value == (int)KSysGuard::Process::Fifo || value == (int)KSysGuard::Process::RoundRobin)) {
-			int slider = (-ui->sliderCPU->value() + 20) * 5 / 2; 
+			int slider = (-ui->sliderCPU->value() + 20) * 5 / 2;
 			setSliderRange();
 			ui->sliderCPU->setValue( slider );
 		}
@@ -168,7 +168,7 @@ void ReniceDlg::setSliderRange() {
 		ui->sliderCPU->setMinimum(1);
 		ui->sliderCPU->setMaximum(99);
 		ui->sliderCPU->setTickInterval(12);
-	} 
+	}
 }
 
 void ReniceDlg::slotOk()
