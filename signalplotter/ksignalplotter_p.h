@@ -36,7 +36,7 @@ struct KSignalPlotterPrivate {
 
     KSignalPlotterPrivate( KSignalPlotter * q_ptr );
 
-    void drawWidget(QPainter *p, QRect boundingBox, bool onlyDrawPlotter);
+    void drawWidget(QPainter *p, const QRect &boundingBox, bool onlyDrawPlotter);
     void drawBackground(QPainter *p, const QRect & boundingBox);
     void drawThinFrame(QPainter *p, const QRect &boundingBox);
     void calculateNiceRange();

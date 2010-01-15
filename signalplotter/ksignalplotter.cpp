@@ -499,24 +499,24 @@ void KSignalPlotter::paintEvent( QPaintEvent* event)
         d->drawWidget(&p, QRect(0,0,w, h), false);
 }
 
-void KSignalPlotterPrivate::drawWidget(QPainter *p, QRect boundingBox, bool onlyDrawPlotter)
+void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundingBox, bool onlyDrawPlotter)
 {
-    if(boundingBox.height() <= 2 || boundingBox.width() <= 2 ) return;
+    if(originalBoundingBox.height() <= 2 || originalBoundingBox.width() <= 2 ) return;
     p->setFont( q->font() );
-    int fontheight = p->fontMetrics().height();
+    int fontheight = q->fontMetrics().height();
+    QRect boundingBox = originalBoundingBox;
     int newHorizontalLinesCount = qBound(0, (int)(boundingBox.height() / fontheight)-2, 4);
     if(newHorizontalLinesCount != mHorizontalLinesCount) {
         mHorizontalLinesCount = newHorizontalLinesCount;
         calculateNiceRange();
     }
-    QRect originalBoundingBox = boundingBox;
 
     mActualAxisTextWidth = 0;
     if(!onlyDrawPlotter) {
-        if( mShowAxis && mAxisTextWidth != 0 && boundingBox.width() > (mAxisTextWidth*1.10+2) && boundingBox.height() > p->fontMetrics().height() ) {  //if there's room to draw the labels, then draw them!
+        if( mShowAxis && mAxisTextWidth != 0 && boundingBox.width() > (mAxisTextWidth*1.10+2) && boundingBox.height() > fontheight ) {  //if there's room to draw the labels, then draw them!
             //We want to adjust the size of plotter bit inside so that the axis text aligns nicely at the top and bottom
             //but we don't want to sacrifice too much of the available room, so don't use it if it will take more than 20% of the available space
-            qreal offset = (p->fontMetrics().height()+1)/2;
+            qreal offset = (fontheight+1)/2;
             if(offset < boundingBox.height() * 0.1)
                 boundingBox.adjust(0,offset, 0, -offset);
 
@@ -630,7 +630,7 @@ void KSignalPlotterPrivate::drawWidget(QPainter *p, QRect boundingBox, bool only
     }
 
     if(!onlyDrawPlotter || mAxisTextOverlapsPlotter) {
-        if( mShowAxis && originalBoundingBox.height() > p->fontMetrics().height() ) {  //if there's room to draw the labels, then draw them!
+        if( mShowAxis && originalBoundingBox.height() > fontheight ) {  //if there's room to draw the labels, then draw them!
             p->setClipping(false);
             drawAxisText(p, originalBoundingBox);
         }
