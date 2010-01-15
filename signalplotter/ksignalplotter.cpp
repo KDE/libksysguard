@@ -56,6 +56,8 @@ KSignalPlotter::KSignalPlotter( QWidget *parent)
     // Anything smaller than this does not make sense.
     qRegisterMetaType<KLocalizedString>("KLocalizedString");
     setMinimumSize( 4, 4 );
+    setAttribute(Qt::WA_NoSystemBackground);
+    setAttribute(Qt::WA_OpaquePaintEvent, true);
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     sizePolicy.setHeightForWidth(false);
     setSizePolicy( sizePolicy );
@@ -513,21 +515,28 @@ void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundin
 
     mActualAxisTextWidth = 0;
     if(!onlyDrawPlotter) {
+        QBrush brush = q->palette().color(q->palette().currentColorGroup(), QPalette::Window);
         if( mShowAxis && mAxisTextWidth != 0 && boundingBox.width() > (mAxisTextWidth*1.10+2) && boundingBox.height() > fontheight ) {  //if there's room to draw the labels, then draw them!
             //We want to adjust the size of plotter bit inside so that the axis text aligns nicely at the top and bottom
             //but we don't want to sacrifice too much of the available room, so don't use it if it will take more than 20% of the available space
             qreal offset = (fontheight+1)/2;
-            if(offset < boundingBox.height() * 0.1)
+            if(offset && offset < boundingBox.height() * 0.1) {
                 boundingBox.adjust(0,offset, 0, -offset);
+                p->fillRect(QRectF(originalBoundingBox.left(), originalBoundingBox.top(), originalBoundingBox.width(), offset), brush);
+                p->fillRect(QRectF(originalBoundingBox.left(), originalBoundingBox.bottom() - offset + 1, originalBoundingBox.width(), offset), brush);
+            }
 
             int padding = 1;
             if(boundingBox.width() > mAxisTextWidth + 50)
                 padding = 10; //If there's plenty of room, at 10 pixels for padding the axis text, so that it looks nice
 
-            if ( kapp->layoutDirection() == Qt::RightToLeft )
+            if ( kapp->layoutDirection() == Qt::RightToLeft ) {
                 boundingBox.setRight(boundingBox.right() - mAxisTextWidth - padding);
-            else
+                p->fillRect(QRectF(boundingBox.right()+1, originalBoundingBox.top(), mAxisTextWidth+padding, originalBoundingBox.height()), brush);
+            } else {
                 boundingBox.setLeft(mAxisTextWidth+padding);
+                p->fillRect(QRectF(originalBoundingBox.left(), originalBoundingBox.top(), mAxisTextWidth+padding, originalBoundingBox.height()), brush);
+            }
             mActualAxisTextWidth = mAxisTextWidth;
         }
 
@@ -536,7 +545,11 @@ void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundin
     } else {
         boundingBox = mPlottingArea;
     }
-    if(boundingBox.height() <= 2 || boundingBox.width() <= 2 ) return;
+    if(boundingBox.height() <= 2 || boundingBox.width() <= 2 ) {
+        QBrush brush = q->palette().color(q->palette().currentColorGroup(), QPalette::Window);
+        p->fillRect(originalBoundingBox, brush);
+        return;
+    }
 
     if(mBackgroundImage.isNull() || mBackgroundImage.height() != boundingBox.height() || mBackgroundImage.width() != boundingBox.width()) { //recreate on resize etc
         mBackgroundImage = QPixmap(boundingBox.width(), boundingBox.height());
@@ -734,6 +747,7 @@ void KSignalPlotterPrivate::calculateNiceRange()
 #else
     mScrollableImage = QPixmap();
 #endif
+    q->update(); //We need to redraw the axis
     emit q->axisScaleChanged();
 }
 
