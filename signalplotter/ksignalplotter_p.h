@@ -19,7 +19,7 @@
 
 */
 
-#define USE_QIMAGE
+//#define USE_QIMAGE
 
 // SVG support causes it to crash at the moment :(
 //#define SVG_SUPPORT

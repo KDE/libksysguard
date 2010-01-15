@@ -28,6 +28,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QPainterPath>
 #include <QtGui/QPaintEvent>
+#include <QtGui/QColormap>
 
 #include <kdebug.h>
 #include <kglobal.h>
@@ -588,7 +589,7 @@ void KSignalPlotterPrivate::drawWidget(QPainter *p, QRect boundingBox, bool only
         mScrollableImage.fill(0);
 #else
         mScrollableImage = QPixmap(alignedWidth, boundingBox.height());
-        mScrollableImage.fill(QColormap::instance().pixel(QColor(Qt::transparent)));
+        mScrollableImage.fill(Qt::transparent);
 #endif
         Q_ASSERT(!mScrollableImage.isNull());
         redraw = true;
@@ -614,7 +615,11 @@ void KSignalPlotterPrivate::drawWidget(QPainter *p, QRect boundingBox, bool only
     }
     //We draw the pixmap in two halves, wrapping around the window
     if(mScrollOffset != 0)
+#ifdef USE_QIMAGE
         p->drawImage(boundingBox.right() - mScrollOffset+1, boundingBox.top(), mScrollableImage, 0, 0, mScrollOffset, boundingBox.height());
+#else
+        p->drawPixmap(boundingBox.right() - mScrollOffset+1, boundingBox.top(), mScrollableImage, 0, 0, mScrollOffset, boundingBox.height());
+#endif
     if(boundingBox.width() - mScrollOffset != 0) {
         int widthOfSecondHalf = boundingBox.width() - mScrollOffset+1;
 #ifdef USE_QIMAGE
