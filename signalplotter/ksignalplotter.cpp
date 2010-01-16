@@ -505,7 +505,6 @@ void KSignalPlotter::paintEvent( QPaintEvent* event)
 void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundingBox, bool onlyDrawPlotter)
 {
     if(originalBoundingBox.height() <= 2 || originalBoundingBox.width() <= 2 ) return;
-    p->setFont( q->font() );
     int fontheight = q->fontMetrics().height();
     QRect boundingBox = originalBoundingBox;
     int newHorizontalLinesCount = qBound(0, (int)(boundingBox.height() / fontheight)-2, 4);
@@ -874,6 +873,7 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
 void KSignalPlotterPrivate::drawAxisText(QPainter *p, const QRect &boundingBox)
 {
     if(mHorizontalLinesCount < 0) return;
+    p->setFont( q->font() );
     double stepsize = mNiceRange/(mScaleDownBy*(mHorizontalLinesCount+1));
     if(mActualAxisTextWidth == 0) //If we are drawing completely inside the plotter area, using the Text color
         p->setPen( QPen( q->palette().brush(QPalette::Text), 0) );
