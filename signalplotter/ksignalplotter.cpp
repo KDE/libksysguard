@@ -94,6 +94,7 @@ KSignalPlotterPrivate::KSignalPlotterPrivate(KSignalPlotter * q_ptr) : q(q_ptr)
 }
 KSignalPlotter::~KSignalPlotter()
 {
+    delete d;
 }
 
 KLocalizedString KSignalPlotter::unit() const {
