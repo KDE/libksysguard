@@ -37,14 +37,14 @@ struct KSignalPlotterPrivate {
     KSignalPlotterPrivate( KSignalPlotter * q_ptr );
 
     void drawWidget(QPainter *p, const QRect &boundingBox, bool onlyDrawPlotter);
-    void drawBackground(QPainter *p, const QRect & boundingBox);
+    void drawBackground(QPainter *p, const QRect & boundingBox) const;
     void drawThinFrame(QPainter *p, const QRect &boundingBox);
     void calculateNiceRange();
-    void drawVerticalLines(QPainter *p, const QRect &boundingBox, int correction=0);
-    void drawBeamToScrollableImage(int index);
+    void drawBeamToScrollableImage(QPainter *p, int index);
     void drawBeam(QPainter *p, const QRect &boundingBox, int horizontalScale, int index);
     void drawAxisText(QPainter *p, const QRect &boundingBox);
-    void drawHorizontalLines(QPainter *p, const QRect &boundingBox);
+    void drawHorizontalLines(QPainter *p, const QRect &boundingBox) const;
+    void drawVerticalLines(QPainter *p, const QRect &boundingBox, int correction=0) const;
 
     void recalculateMaxMinValueForSample(const QList<double>&sampleBuf, int time );
     void rescale();
@@ -57,6 +57,7 @@ struct KSignalPlotterPrivate {
     /** We make the SVG renderer static so that an SVG renderer is shared among all of the images.  This is because a SVG renderer takes up a lot of memory, so we want to
      *  share them as much as we can */
 #ifdef SVG_SUPPORT
+    void updateSvgBackground(const QRect &boundingBox);
     static QHash<QString, Plasma::SVG *> sSvgRenderer;
 #endif
     QString mSvgFilename;

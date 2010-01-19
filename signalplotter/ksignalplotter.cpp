@@ -202,13 +202,10 @@ void KSignalPlotterPrivate::addSample( const QList<double>& sampleBuf )
             calculateNiceRange();
     }
 
-    /* If the vertical lines are scrolling, increment the offset
-     * so they move with the data. */
-    if ( mVerticalLinesScroll ) {
-        mVerticalLinesOffset = ( mVerticalLinesOffset + mHorizontalScale)
-            % mVerticalLinesDistance;
-    }
-    drawBeamToScrollableImage(0);
+    if(mScrollableImage.isNull())
+        return;
+    QPainter pCache(&mScrollableImage);
+    drawBeamToScrollableImage(&pCache, 0);
 }
 
 void KSignalPlotter::reorderBeams( const QList<int>& newOrder )
@@ -330,12 +327,17 @@ double KSignalPlotter::currentMinimumRangeValue() const
 
 void KSignalPlotter::setHorizontalScale( uint scale )
 {
-    if (scale == d->mHorizontalScale || scale <= 0)
+    if (scale == d->mHorizontalScale || scale == 0)
         return;
 
     d->mHorizontalScale = scale;
     d->updateDataBuffers();
-    d->mBackgroundImage = QPixmap(); //we changed a paint setting, so reset the cache
+#ifdef USE_QIMAGE
+    d->mScrollableImage = QImage();
+#else
+    d->mScrollableImage = QPixmap();
+#endif
+
     update();
 }
 
@@ -384,7 +386,6 @@ void KSignalPlotter::setVerticalLinesScroll( bool value )
 {
     if(value == d->mVerticalLinesScroll) return;
     d->mVerticalLinesScroll = value;
-    d->mBackgroundImage = QPixmap(); //we changed a paint setting, so reset the cache
 #ifdef USE_QIMAGE
     d->mScrollableImage = QImage();
 #else
@@ -402,7 +403,12 @@ void KSignalPlotter::setShowHorizontalLines( bool value )
 {
     if(value == d->mShowHorizontalLines) return;
     d->mShowHorizontalLines = value;
-    d->mBackgroundImage = QPixmap(); //we changed a paint setting, so reset the cache
+#ifdef USE_QIMAGE
+    d->mScrollableImage = QImage();
+#else
+    d->mScrollableImage = QPixmap();
+#endif
+
     update();
 }
 
@@ -530,120 +536,111 @@ void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundin
                 boundingBox.setLeft(mAxisTextWidth+padding);
             mActualAxisTextWidth = mAxisTextWidth;
         }
-
-        // Remember bounding box to pass to update, so that we only update the plotting area
+        if(mShowThinFrame) {
+            drawThinFrame(p, boundingBox);
+            //We have a 'frame' in the bottom and right - so subtract them from the view
+            boundingBox.adjust(0,0,-1,-1);
+        }
+        // Remember bounding box to pass to update, so that we only update the plotting area the next time, if that's the only that thing that has changed
         mPlottingArea = boundingBox;
     } else {
         boundingBox = mPlottingArea;
     }
     if(boundingBox.height() <= 2 || boundingBox.width() <= 2 ) return;
 
-    if(mBackgroundImage.isNull() || mBackgroundImage.height() != boundingBox.height() || mBackgroundImage.width() != boundingBox.width()) { //recreate on resize etc
-        mBackgroundImage = QPixmap(boundingBox.width(), boundingBox.height());
-        Q_ASSERT(!mBackgroundImage.isNull());
-        QPainter pCache(&mBackgroundImage);
-        pCache.setRenderHint(QPainter::Antialiasing, false);
-        pCache.setFont( q->font() );
-        //To paint to the cache, we need a new bounding box
-        QRect cacheBoundingBox = QRect(0,0,boundingBox.width(), boundingBox.height());
-
-        drawBackground(&pCache, cacheBoundingBox);
-        if(mShowThinFrame) {
-            drawThinFrame(&pCache, cacheBoundingBox);
-            //We have a 'frame' in the bottom and right - so subtract them from the view
-            cacheBoundingBox.adjust(0,0,-1,-1);
-            pCache.setClipRect( cacheBoundingBox );
+#ifdef SVG_SUPPORT
+    if(!mSvgFilename.isEmpty()) {
+        if(mBackgroundImage.isNull() || mBackgroundImage.height() != boundingBox.height() || mBackgroundImage.width() != boundingBox.width()) { //recreate on resize etc
+            updateSvgBackground(boundingBox);
         }
-
-
-        /* Draw scope-like grid vertical lines if it doesn't move.  If it does move, draw it in the dynamic part of the code*/
-        if(!mVerticalLinesScroll && mShowVerticalLines && cacheBoundingBox.width() > 60)
-            drawVerticalLines(&pCache, cacheBoundingBox);
-        if ( mShowHorizontalLines )
-            drawHorizontalLines(&pCache, cacheBoundingBox.adjusted(-3,0,0,0));
+        p->drawPixmap(boundingBox, mBackgroundImage);
     }
-    p->drawPixmap(boundingBox, mBackgroundImage);
+#endif
 
-    if(mShowThinFrame) {
-        //We have a 'frame' in the bottom and right - so subtract them from the view
-        boundingBox.adjust(0,0,-1,-1);
-    }
-    if(boundingBox.height() == 0 || boundingBox.width() == 0) return;
-    p->setClipRect( boundingBox);
+    //Align width of bounding box to the size of the horizontal scale
+    int alignedWidth = ((boundingBox.width() + 1) / mHorizontalScale + 1) * mHorizontalScale;
 
-    bool redraw = false;
-    //Align width of bounding box to the size of the horizontal scale and to the size of the vertical lines distance
-    int alignedWidth;
-    if(mVerticalLinesDistance) {
-        if(mVerticalLinesDistance % mHorizontalScale == 0)
-            alignedWidth = ((boundingBox.width() -1) / mVerticalLinesDistance + 1) * mVerticalLinesDistance;
-        else // We should find the lowest common denomiator of mVerticalLinesDistance and mHorizontalScale, but this is close enough..
-            alignedWidth = ((boundingBox.width() -1) / mVerticalLinesDistance + 1) * mVerticalLinesDistance * mHorizontalScale;
-    }
-    else
-        alignedWidth = ((boundingBox.width() -1) / mHorizontalScale + 1) * mHorizontalScale;
-
-    if( redraw || mScrollableImage.isNull() || mScrollableImage.height() != boundingBox.height() || mScrollableImage.width() != alignedWidth) {
+    if( mScrollableImage.isNull() || mScrollableImage.height() != boundingBox.height() || mScrollableImage.width() != alignedWidth) {
+        //Redraw the whole thing
 #ifdef USE_QIMAGE
         mScrollableImage = QImage(alignedWidth, boundingBox.height(),QImage::Format_ARGB32_Premultiplied);
-        mScrollableImage.fill(0);
 #else
         mScrollableImage = QPixmap(alignedWidth, boundingBox.height());
-        mScrollableImage.fill(Qt::transparent);
 #endif
         Q_ASSERT(!mScrollableImage.isNull());
-        redraw = true;
-    }
 
-    if(redraw) {
-        //Redraw the whole thing
-        /* Draw scope-like grid vertical lines */
         mScrollOffset = 0;
+        mVerticalLinesOffset = mVerticalLinesDistance - mHorizontalScale+1; // mVerticalLinesDistance - alignedWidth % mVerticalLinesDistance;
+        //We need to draw the background for areas without a beam
+        int withoutBeamWidth = qMax(mBeamData.size()-1, 0) * mHorizontalScale;
+        QPainter pCache(&mScrollableImage);
+        if(withoutBeamWidth < mScrollableImage.width())
+            drawBackground(&pCache, QRect(withoutBeamWidth, 0, alignedWidth - withoutBeamWidth, mScrollableImage.height()));
+
+        /* Draw scope-like grid vertical lines */
+        mVerticalLinesOffset = 0;
         if(mBeamData.size() > 2) {
             for(int i = mBeamData.size()-2; i >= 0; i--)
-                drawBeamToScrollableImage(i);
-        }
-        if(mVerticalLinesScroll && mShowVerticalLines) {
-            QPainter pCache(&mScrollableImage);
-            pCache.setRenderHint(QPainter::Antialiasing, true);
-            int x = mScrollOffset - (mScrollOffset % mVerticalLinesDistance) + mVerticalLinesDistance;
-            for(;x < mScrollableImage.width(); x+= mVerticalLinesDistance) {
-                pCache.setPen( QPen(q->palette().brush(QPalette::Window), 0) );
-                pCache.drawLine( x + VERTICAL_LINE_OFFSET, 0, x + VERTICAL_LINE_OFFSET, mScrollableImage.height()-1);
-            }
+                drawBeamToScrollableImage(&pCache, i);
         }
     }
     //We draw the pixmap in two halves, wrapping around the window
-    if(mScrollOffset != 0)
+    if(mScrollOffset > 1) {
 #ifdef USE_QIMAGE
-        p->drawImage(boundingBox.right() - mScrollOffset+1, boundingBox.top(), mScrollableImage, 0, 0, mScrollOffset, boundingBox.height());
+        p->drawImage(boundingBox.right() - mScrollOffset+2, boundingBox.top(), mScrollableImage, 0, 0, mScrollOffset-1, boundingBox.height());
 #else
-        p->drawPixmap(boundingBox.right() - mScrollOffset+1, boundingBox.top(), mScrollableImage, 0, 0, mScrollOffset, boundingBox.height());
+        p->drawPixmap(boundingBox.right() - mScrollOffset+2, boundingBox.top(), mScrollableImage, 0, 0, mScrollOffset-1, boundingBox.height());
 #endif
-    if(boundingBox.width() - mScrollOffset != 0) {
-        int widthOfSecondHalf = boundingBox.width() - mScrollOffset+1;
+    }
+    int widthOfSecondHalf = boundingBox.width() - mScrollOffset + 1;
+    if(widthOfSecondHalf > 0) {
 #ifdef USE_QIMAGE
-        p->drawImage(boundingBox.left(), boundingBox.top(), mScrollableImage, mScrollableImage.width() - widthOfSecondHalf, 0, widthOfSecondHalf, boundingBox.height());
+        p->drawImage(boundingBox.left(), boundingBox.top(), mScrollableImage, mScrollableImage.width() - widthOfSecondHalf-1, 0, widthOfSecondHalf, boundingBox.height());
 #else
-        p->drawPixmap(boundingBox.left(), boundingBox.top(), mScrollableImage, mScrollableImage.width() - widthOfSecondHalf, 0, widthOfSecondHalf, boundingBox.height());
+        p->drawPixmap(boundingBox.left(), boundingBox.top(), mScrollableImage, mScrollableImage.width() - widthOfSecondHalf-1, 0, widthOfSecondHalf, boundingBox.height());
 #endif
     }
 
+    /* Draw scope-like grid vertical lines if it doesn't move.  If it does move, draw it in the dynamic part of the code*/
+    if(mShowVerticalLines && !mVerticalLinesScroll)
+        drawVerticalLines(p, boundingBox);
+
     if(!onlyDrawPlotter || mAxisTextOverlapsPlotter) {
         if( mShowAxis && originalBoundingBox.height() > fontheight ) {  //if there's room to draw the labels, then draw them!
-            p->setClipping(false);
             drawAxisText(p, originalBoundingBox);
         }
     }
 }
-void KSignalPlotterPrivate::drawBackground(QPainter *p, const QRect &boundingBox)
+void KSignalPlotterPrivate::drawBackground(QPainter *p, const QRect &boundingBox) const
 {
-    p->fillRect(boundingBox, q->palette().brush(QPalette::Base));
+    p->setRenderHint(QPainter::Antialiasing, false);
+#ifdef SVG_SUPPORT
+    if(!mSvgFilename.isEmpty()) //our background is an svg, so don't paint over the top of it
+        p->fillRect(boundingBox, Qt::transparent);
+    else
+#endif
+        p->fillRect(boundingBox, q->palette().brush(QPalette::Base));
 
-    if(mSvgFilename.isEmpty())
-        return; //nothing to draw, return
+    if ( mShowHorizontalLines )
+        drawHorizontalLines(p, boundingBox.adjusted(0,0,1,0));
+
+    if ( mShowVerticalLines && mVerticalLinesScroll )
+        drawVerticalLines(p, boundingBox, mVerticalLinesOffset);
+
+    p->setRenderHint(QPainter::Antialiasing, true);
+}
 
 #ifdef SVG_SUPPORT
+void KSignalPlotterPrivate::updateSvgBackground(const QRect &boundingBox)
+{
+    Q_ASSERT(!mSvgFilename.isEmpty());
+    Q_ASSERT(boundingBox.isNull());
+    mBackgroundImage = QPixmap(boundingBox.width(), boundingBox.height());
+    Q_ASSERT(!mBackgroundImage.isNull());
+    QPainter pCache(&mBackgroundImage);
+
+    pCache.fill( q->palette().color(QPalette::Base) );
+
     Plasma::Svg *svgRenderer;
     if(!sSvgRenderer.contains(mSvgFilename)) {
         svgRenderer = new Plasma::Svg(this);
@@ -653,18 +650,21 @@ void KSignalPlotterPrivate::drawBackground(QPainter *p, const QRect &boundingBox
         svgRenderer = sSvgRenderer[mSvgFilename];
     }
 
-    svgRenderer->resize(boundingBox.width(), boundingBox.height());
-    svgRenderer->paint(p, 0, 0);
-#endif
+    svgRenderer->resize(boundingBox.size());
+    svgRenderer->paint(&pCache, 0, 0);
+
 }
+#endif
 
 void KSignalPlotterPrivate::drawThinFrame(QPainter *p, const QRect &boundingBox)
 {
     /* Draw white line along the bottom and the right side of the
      * widget to create a 3D like look. */
+    p->setRenderHint(QPainter::Antialiasing, false);
     p->setPen( QPen(q->palette().color( QPalette::Light ), 0) );
     p->drawLine( boundingBox.bottomLeft(), boundingBox.bottomRight());
     p->drawLine( boundingBox.bottomRight(), boundingBox.topRight());
+    p->setRenderHint(QPainter::Antialiasing, true);
 }
 
 void KSignalPlotterPrivate::calculateNiceRange()
@@ -738,44 +738,31 @@ void KSignalPlotterPrivate::calculateNiceRange()
     q->update();
 }
 
-
-void KSignalPlotterPrivate::drawVerticalLines(QPainter *p, const QRect &boundingBox, int offset)
+void KSignalPlotterPrivate::drawVerticalLines(QPainter *p, const QRect &boundingBox, int offset) const
 {
-    p->setPen( QPen(q->palette().brush(QPalette::Window), 0) );
+    QColor color = q->palette().color(QPalette::Window);
+    if(!mVerticalLinesScroll)
+        color.setAlpha(127);
+    p->setPen( QPen(color, 0) );
 
-    for ( int x = boundingBox.right() - ( (mVerticalLinesOffset + offset) % mVerticalLinesDistance); x >= boundingBox.left(); x -= mVerticalLinesDistance )
+    p->setRenderHint(QPainter::Antialiasing, false);
+    for ( int x = boundingBox.right() - ( offset % mVerticalLinesDistance); x >= boundingBox.left(); x -= mVerticalLinesDistance )
         p->drawLine( x, boundingBox.top(), x, boundingBox.bottom()  );
+    p->setRenderHint(QPainter::Antialiasing, true);
 }
 
-void KSignalPlotterPrivate::drawBeamToScrollableImage(int index)
+void KSignalPlotterPrivate::drawBeamToScrollableImage(QPainter *p, int index)
 {
-    if(mScrollableImage.isNull())
-        return;
     QRect cacheBoundingBox = QRect(mScrollOffset, 0, mHorizontalScale, mScrollableImage.height());
 
-    QPainter pCache(&mScrollableImage);
-    pCache.setRenderHint(QPainter::Antialiasing, true);
-    //To paint to the cache, we need a new bounding box
-
-    pCache.setCompositionMode(QPainter::CompositionMode_Clear); //This makes the fill rect faster for some reason
-    pCache.fillRect(cacheBoundingBox, Qt::transparent);
-    pCache.setCompositionMode(QPainter::CompositionMode_SourceOver);
-
-    drawBeam(&pCache, cacheBoundingBox, mHorizontalScale, index);
-
-    if ( mVerticalLinesScroll && mShowVerticalLines ) {
-        if( mScrollOffset % mVerticalLinesDistance == 0) {
-            pCache.setPen( QPen(q->palette().brush(QPalette::Window), 0) );
-            pCache.setCompositionMode(QPainter::CompositionMode_DestinationOver);
-            pCache.drawLine( mScrollOffset+VERTICAL_LINE_OFFSET, cacheBoundingBox.top(), mScrollOffset+VERTICAL_LINE_OFFSET, cacheBoundingBox.bottom()  );
-            pCache.setCompositionMode(QPainter::CompositionMode_SourceOver);
-        }
-    }
-
+    drawBackground(p, cacheBoundingBox);
+    drawBeam(p, cacheBoundingBox, mHorizontalScale, index);
 
     mScrollOffset += mHorizontalScale;
+    mVerticalLinesOffset = (mVerticalLinesOffset + mHorizontalScale) % mVerticalLinesDistance;
     if(mScrollOffset >= mScrollableImage.width()-1) {
         mScrollOffset = 0;
+        mVerticalLinesOffset--; //We skip over the last pixel drawn
     }
 }
 
@@ -783,23 +770,24 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
 {
     if(mNiceRange == 0) return;
     QPen pen;
-    pen.setWidth(2);
+    if(mHorizontalScale == 1) //Don't use a pen width of 2 if there's only 1 pixel between points
+        pen.setWidth(1);
+    else
+        pen.setWidth(2);
+
     pen.setCapStyle(Qt::FlatCap);
 
     double scaleFac = (boundingBox.height()-2) / mNiceRange;
     if(mBeamData.size() - 1 <= index )
         return;  // Something went wrong?
 
-    QList<double> datapoints = mBeamData[index];
-    QList<double> prev_datapoints = mBeamData[index+1];
-    QList<double> prev_prev_datapoints;
-    if(index +2 < mBeamData.size())
-        prev_prev_datapoints = mBeamData[index+2]; //used for bezier curve gradient calculation
-    else
-        prev_prev_datapoints = prev_datapoints;
+    const QList<double> &datapoints = mBeamData[index];
+    const QList<double> &prev_datapoints = mBeamData[index+1];
+    bool hasPrevPrevDatapoints = (index +2 < mBeamData.size()); //used for bezier curve gradient calculation
+    const QList<double> &prev_prev_datapoints = hasPrevPrevDatapoints?mBeamData[index+2]:prev_datapoints;
 
     float x0 = boundingBox.right();
-    float x1 = boundingBox.right() - horizontalScale;
+    float x1 = qMax(boundingBox.right() - horizontalScale, 0);
 
     float y0 = 0;
     float y1 = 0;
@@ -807,7 +795,10 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
     qreal xaxis = boundingBox.bottom();
     if( mNiceMinValue < 0)
        xaxis = qMax(qreal(xaxis + mNiceMinValue*scaleFac), qreal(boundingBox.top()));
-    for (int j =  qMin(datapoints.size(), mBeamColors.size())-1; j >=0 ; --j) {
+
+    const int count = qMin(datapoints.size(), mBeamColors.size());
+    QVector<QPainterPath> paths(count);
+    for (int j = count - 1; j >=0 ; --j) {
         if(!mStackBeams)
             y0 = y1 = y2 = 0;
         float point0 = datapoints[j];
@@ -833,28 +824,29 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
         y0 += qBound((qreal)boundingBox.top(), qreal(boundingBox.bottom() - (point0 - mNiceMinValue)*scaleFac), (qreal)boundingBox.bottom());
         y1 += qBound((qreal)boundingBox.top(), qreal(boundingBox.bottom() - (point1 - mNiceMinValue)*scaleFac), (qreal)boundingBox.bottom());
         y2 += qBound((qreal)boundingBox.top(), qreal(boundingBox.bottom() - (point2 - mNiceMinValue)*scaleFac), (qreal)boundingBox.bottom());
+
+        QPainterPath &path = paths[j];
+        path.moveTo( x1, y1);
+        QPointF c1( x1 + horizontalScale/3.0, (4* y1 - y2)/3.0 );//Control point 1 - same gradient as prev_prev_datapoint to prev_datapoint
+        QPointF c2( x1 + 2*horizontalScale/3.0, (2* y0 + y1)/3.0);//Control point 2 - same gradient as prev_datapoint to datapoint
+        path.cubicTo( c1, c2, QPointF(x0, y0) );
+        if(mFillOpacity) {
+            QPainterPath fillPath = path; //Make a copy to do our fill
+            fillPath.lineTo(x0, xaxis);
+            fillPath.lineTo(x1, xaxis);
+            fillPath.lineTo(x1,y1);
+            QColor fillColor = mBeamColors[j];
+            fillColor.setAlpha(mFillOpacity);
+            p->fillPath(fillPath, fillColor);
+        }
+    }
+    for(int j = count-1; j >= 0 ; --j) {
         QColor beamColor = mBeamColors[j];
         if(mFillOpacity)
             beamColor = beamColor.lighter();
         pen.setColor(beamColor);
 
-        QPainterPath path;
-        path.moveTo( x1, y1);
-        QPointF c1( x1 + horizontalScale/3.0, (4* y1 - y2)/3.0 );//Control point 1 - same gradient as prev_prev_datapoint to prev_datapoint
-        QPointF c2( x1 + 2*horizontalScale/3.0, (2* y0 + y1)/3.0);//Control point 2 - same gradient as prev_datapoint to datapoint
-        path.cubicTo( c1, c2, QPointF(x0, y0) );
-        p->setPen(pen);
-        p->drawPath(path);
-        if(mFillOpacity) {
-            path.lineTo(x0, xaxis);
-            path.lineTo(x1, xaxis);
-            path.lineTo(x1,y1);
-            QColor fillColor = mBeamColors[j];
-            fillColor.setAlpha(mFillOpacity);
-            p->setCompositionMode(QPainter::CompositionMode_DestinationOver);
-            p->fillPath(path, fillColor);
-            p->setCompositionMode(QPainter::CompositionMode_SourceOver);
-        }
+        p->strokePath(paths.at(j),pen);
     }
 }
 void KSignalPlotterPrivate::drawAxisText(QPainter *p, const QRect &boundingBox)
@@ -894,10 +886,10 @@ void KSignalPlotterPrivate::drawAxisText(QPainter *p, const QRect &boundingBox)
     }
 }
 
-void KSignalPlotterPrivate::drawHorizontalLines(QPainter *p, const QRect &boundingBox)
+void KSignalPlotterPrivate::drawHorizontalLines(QPainter *p, const QRect &boundingBox) const
 {
     if(mHorizontalLinesCount <= 0) return;
-    p->setPen( QPen(q->palette().brush(QPalette::Window), 0, Qt::DashLine));
+    p->setPen( QPen(q->palette().color(QPalette::Window) ));
     for ( int y = 0; y <= mHorizontalLinesCount+1; y++ ) {
         //note that the y_coord starts from 0.  so we draw from pixel number 0 to h-1.  Thus the -1 in the y_coord
         int y_coord =  boundingBox.top() + (y * (boundingBox.height()-1)) / (mHorizontalLinesCount+1);  //Make sure it's y*h first to avoid rounding bugs

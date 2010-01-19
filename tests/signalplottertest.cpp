@@ -561,6 +561,13 @@ void TestSignalPlotter::testAddingData()
     // For debugging, show the widget so that we can check it visually
 //    s->show();
 //    QTest::qWait(10000);
+
+    //Test that it does not crash at small sizes
+    for(int x = 0; x < 4; x++)
+        for(int y = 0; y < 4; y++) {
+            s->setGeometry(0,0,x,y);
+            s->render(&pixmap);
+        }
 }
 QTEST_KDEMAIN(TestSignalPlotter, GUI)
 
