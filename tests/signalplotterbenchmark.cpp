@@ -32,5 +32,20 @@ void BenchmarkSignalPlotter::addData()
     }
 
 }
+
+void BenchmarkSignalPlotter::addDataWhenHidden()
+{
+    s->addBeam(Qt::blue);
+    s->addBeam(Qt::green);
+    s->addBeam(Qt::red);
+    s->addBeam(Qt::yellow);
+
+    QBENCHMARK {
+        s->addSample(QList<double>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
+        qApp->processEvents();
+    }
+
+}
+
 QTEST_KDEMAIN(BenchmarkSignalPlotter, GUI)
 
