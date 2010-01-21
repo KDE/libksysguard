@@ -103,7 +103,7 @@ struct KSignalPlotterPrivate {
 
     QList < QList<double> > mBeamData; // Every item in the linked list contains a set of data points to plot.  The first item is the newest
     QList< QColor> mBeamColors;  //These colors match up against the QList<double>  in mBeamData
-    QList< QColor> mBeamColorsDark;  //These colors match up against the QList<double> in mBeamData, and are darker than mBeamColors.  Done for gradient effects
+    QList< QColor> mBeamColorsLight;  //These colors match up against the QList<double> in mBeamData, and are lighter than mBeamColors.  Done for gradient effects
 
     unsigned int mMaxSamples; //This is what mBeamData.size() should equal when full.  When we start off and have no data then mSamples will be higher.  If we resize the widget so it's smaller, then for a short while this will be smaller
     int mNewestIndex; //The index to the newest item added.  newestIndex+1   is the second newest, and so on

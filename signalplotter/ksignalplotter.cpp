@@ -111,7 +111,7 @@ void KSignalPlotter::addBeam( const QColor &color )
         (*it).append( std::numeric_limits<double>::quiet_NaN() );
     }
     d->mBeamColors.append(color);
-    d->mBeamColorsDark.append(color.darker(150));
+    d->mBeamColorsLight.append(color.lighter());
 }
 
 QColor KSignalPlotter::beamColor( int index ) const {
@@ -127,10 +127,10 @@ void KSignalPlotter::setBeamColor( int index, const QColor &color ) {
         kDebug(1215) << "Invalid index" << index;
         return;
     }
-    Q_ASSERT(d->mBeamColors.count() == d->mBeamColorsDark.count());
+    Q_ASSERT(d->mBeamColors.count() == d->mBeamColorsLight.count());
 
     d->mBeamColors[ index ] = color;
-    d->mBeamColorsDark[ index ] = color.darker(150);
+    d->mBeamColorsLight[ index ] = color.darker(150);
 }
 
 int KSignalPlotter::numBeams() const {
@@ -231,10 +231,10 @@ void KSignalPlotter::reorderBeams( const QList<int>& newOrder )
     for(int i = 0; i < newOrder.count(); i++) {
         int newIndex = newOrder[i];
         newBeamColors.append(d->mBeamColors.at(newIndex));
-        newBeamColorsDark.append(d->mBeamColorsDark.at(newIndex));
+        newBeamColorsDark.append(d->mBeamColorsLight.at(newIndex));
     }
     d->mBeamColors = newBeamColors;
-    d->mBeamColorsDark = newBeamColorsDark;
+    d->mBeamColorsLight = newBeamColorsDark;
 }
 
 
@@ -249,9 +249,9 @@ void KSignalPlotter::changeRange( double min, double max )
 void KSignalPlotter::removeBeam( int index )
 {
     if(index >= d->mBeamColors.size()) return;
-    if(index >= d->mBeamColorsDark.size()) return;
+    if(index >= d->mBeamColorsLight.size()) return;
     d->mBeamColors.removeAt( index );
-    d->mBeamColorsDark.removeAt(index);
+    d->mBeamColorsLight.removeAt(index);
 
     QList< QList<double> >::Iterator i;
     for(i = d->mBeamData.begin(); i != d->mBeamData.end(); ++i) {
@@ -841,10 +841,10 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
         }
     }
     for(int j = count-1; j >= 0 ; --j) {
-        QColor beamColor = mBeamColors[j];
         if(mFillOpacity)
-            beamColor = beamColor.lighter();
-        pen.setColor(beamColor);
+            pen.setColor(mBeamColorsLight.at(j));
+        else
+            pen.setColor(mBeamColors.at(j));
 
         p->strokePath(paths.at(j),pen);
     }
