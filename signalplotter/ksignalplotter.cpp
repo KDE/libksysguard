@@ -59,6 +59,13 @@ KSignalPlotter::KSignalPlotter( QWidget *parent)
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     sizePolicy.setHeightForWidth(false);
     setSizePolicy( sizePolicy );
+
+#ifdef USE_SEPERATE_WIDGET
+    graphWidget = new GraphWidget; ///< This is the widget that draws the actual graph
+    graphWidget->signalPlotter = q;
+    graphWidget->signalPlotterPrivate = d;
+    graphWidget->setVisible(false);
+#endif
 }
 
 KSignalPlotterPrivate::KSignalPlotterPrivate(KSignalPlotter * q_ptr) : q(q_ptr)
@@ -465,9 +472,52 @@ void KSignalPlotter::changeEvent ( QEvent * event )
         update();
     }
 }
-void KSignalPlotter::resizeEvent( QResizeEvent* )
+void KSignalPlotter::resizeEvent( QResizeEvent* event )
 {
-    d->mPlottingArea = QRect();
+    QRect boundingBox(QPoint(0,0), event->size());
+    int fontHeight = fontMetrics().height();
+    if( d->mShowAxis && d->mAxisTextWidth != 0 && boundingBox.width() > (d->mAxisTextWidth*1.10+2) && boundingBox.height() > fontHeight ) {  //if there's room to draw the labels, then draw them!
+        //We want to adjust the size of plotter bit inside so that the axis text aligns nicely at the top and bottom
+        //but we don't want to sacrifice too much of the available room, so don't use it if it will take more than 20% of the available space
+        qreal offset = (fontHeight+1)/2;
+        if(offset < boundingBox.height() * 0.1)
+            boundingBox.adjust(0,offset, 0, -offset);
+
+        int padding = 1;
+        if(boundingBox.width() > d->mAxisTextWidth + 50)
+            padding = 10; //If there's plenty of room, at 10 pixels for padding the axis text, so that it looks nice
+
+        if ( kapp->layoutDirection() == Qt::RightToLeft )
+            boundingBox.setRight(boundingBox.right() - d->mAxisTextWidth - padding);
+        else
+            boundingBox.setLeft(d->mAxisTextWidth+padding);
+        d->mActualAxisTextWidth = d->mAxisTextWidth;
+    } else {
+        d->mActualAxisTextWidth = 0;
+    }
+    if(d->mShowThinFrame)
+        boundingBox.adjust(0,0,-1,-1);
+
+    // Remember bounding box to pass to update, so that we only update the plotting area the next time, if that's the only that thing that has changed
+    d->mPlottingArea = boundingBox;
+
+    //Calculate the new number of horizontal lines
+    int newHorizontalLinesCount = qBound(0, (int)(boundingBox.height() / fontHeight)-2, 4);
+    if(newHorizontalLinesCount != d->mHorizontalLinesCount) {
+        d->mHorizontalLinesCount = newHorizontalLinesCount;
+        d->calculateNiceRange();
+    }
+#ifdef USE_QIMAGE
+    d->mScrollableImage = QImage();
+#else
+    d->mScrollableImage = QPixmap();
+#endif
+
+#ifdef USE_SEPERATE_WIDGET
+    d->graphWidget->setVisible(true);
+    d->graphWidget->setGeometry(boundingBox);
+#endif
+
     d->updateDataBuffers();
 }
 
@@ -508,45 +558,13 @@ void KSignalPlotter::paintEvent( QPaintEvent* event)
 
 void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundingBox, bool onlyDrawPlotter)
 {
-    if(originalBoundingBox.height() <= 2 || originalBoundingBox.width() <= 2 ) return;
     int fontheight = q->fontMetrics().height();
-    QRect boundingBox = originalBoundingBox;
-    int newHorizontalLinesCount = qBound(0, (int)(boundingBox.height() / fontheight)-2, 4);
-    if(newHorizontalLinesCount != mHorizontalLinesCount) {
-        mHorizontalLinesCount = newHorizontalLinesCount;
-        calculateNiceRange();
-    }
+    QRect boundingBox = mPlottingArea;
 
-    mActualAxisTextWidth = 0;
-    if(!onlyDrawPlotter) {
-        if( mShowAxis && mAxisTextWidth != 0 && boundingBox.width() > (mAxisTextWidth*1.10+2) && boundingBox.height() > fontheight ) {  //if there's room to draw the labels, then draw them!
-            //We want to adjust the size of plotter bit inside so that the axis text aligns nicely at the top and bottom
-            //but we don't want to sacrifice too much of the available room, so don't use it if it will take more than 20% of the available space
-            qreal offset = (fontheight+1)/2;
-            if(offset < boundingBox.height() * 0.1)
-                boundingBox.adjust(0,offset, 0, -offset);
-
-            int padding = 1;
-            if(boundingBox.width() > mAxisTextWidth + 50)
-                padding = 10; //If there's plenty of room, at 10 pixels for padding the axis text, so that it looks nice
-
-            if ( kapp->layoutDirection() == Qt::RightToLeft )
-                boundingBox.setRight(boundingBox.right() - mAxisTextWidth - padding);
-            else
-                boundingBox.setLeft(mAxisTextWidth+padding);
-            mActualAxisTextWidth = mAxisTextWidth;
-        }
-        if(mShowThinFrame) {
-            drawThinFrame(p, boundingBox);
-            //We have a 'frame' in the bottom and right - so subtract them from the view
-            boundingBox.adjust(0,0,-1,-1);
-        }
-        // Remember bounding box to pass to update, so that we only update the plotting area the next time, if that's the only that thing that has changed
-        mPlottingArea = boundingBox;
-    } else {
-        boundingBox = mPlottingArea;
-    }
     if(boundingBox.height() <= 2 || boundingBox.width() <= 2 ) return;
+
+    if(!onlyDrawPlotter && mShowThinFrame)
+        drawThinFrame(p, mPlottingArea.adjusted(0,0,1,1)); //We have a 'frame' in the bottom and right - so subtract them from the view
 
 #ifdef SVG_SUPPORT
     if(!mSvgFilename.isEmpty()) {
@@ -557,33 +575,9 @@ void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundin
     }
 #endif
 
-    //Align width of bounding box to the size of the horizontal scale
-    int alignedWidth = ((boundingBox.width() + 1) / mHorizontalScale + 1) * mHorizontalScale;
+    if( mScrollableImage.isNull() )
+        redrawScrollableImage();
 
-    if( mScrollableImage.isNull() || mScrollableImage.height() != boundingBox.height() || mScrollableImage.width() != alignedWidth) {
-        //Redraw the whole thing
-#ifdef USE_QIMAGE
-        mScrollableImage = QImage(alignedWidth, boundingBox.height(),QImage::Format_ARGB32_Premultiplied);
-#else
-        mScrollableImage = QPixmap(alignedWidth, boundingBox.height());
-#endif
-        Q_ASSERT(!mScrollableImage.isNull());
-
-        mScrollOffset = 0;
-        mVerticalLinesOffset = mVerticalLinesDistance - mHorizontalScale+1; // mVerticalLinesDistance - alignedWidth % mVerticalLinesDistance;
-        //We need to draw the background for areas without a beam
-        int withoutBeamWidth = qMax(mBeamData.size()-1, 0) * mHorizontalScale;
-        QPainter pCache(&mScrollableImage);
-        if(withoutBeamWidth < mScrollableImage.width())
-            drawBackground(&pCache, QRect(withoutBeamWidth, 0, alignedWidth - withoutBeamWidth, mScrollableImage.height()));
-
-        /* Draw scope-like grid vertical lines */
-        mVerticalLinesOffset = 0;
-        if(mBeamData.size() > 2) {
-            for(int i = mBeamData.size()-2; i >= 0; i--)
-                drawBeamToScrollableImage(&pCache, i);
-        }
-    }
     //We draw the pixmap in two halves, wrapping around the window
     if(mScrollOffset > 1) {
 #ifdef USE_QIMAGE
@@ -655,6 +649,34 @@ void KSignalPlotterPrivate::updateSvgBackground(const QRect &boundingBox)
 
 }
 #endif
+void KSignalPlotterPrivate::redrawScrollableImage()
+{
+    //Align width of bounding box to the size of the horizontal scale
+    int alignedWidth = ((mPlottingArea.width() + 1) / mHorizontalScale + 1) * mHorizontalScale;
+    //Redraw the whole thing
+#ifdef USE_QIMAGE
+    mScrollableImage = QImage(alignedWidth, mPlottingArea.height(),QImage::Format_ARGB32_Premultiplied);
+#else
+    mScrollableImage = QPixmap(alignedWidth, mPlottingArea.height());
+#endif
+    Q_ASSERT(!mScrollableImage.isNull());
+
+    mScrollOffset = 0;
+    mVerticalLinesOffset = mVerticalLinesDistance - mHorizontalScale+1; // mVerticalLinesDistance - alignedWidth % mVerticalLinesDistance;
+    //We need to draw the background for areas without a beam
+    int withoutBeamWidth = qMax(mBeamData.size()-1, 0) * mHorizontalScale;
+    QPainter pCache(&mScrollableImage);
+    if(withoutBeamWidth < mScrollableImage.width())
+        drawBackground(&pCache, QRect(withoutBeamWidth, 0, alignedWidth - withoutBeamWidth, mScrollableImage.height()));
+
+    /* Draw scope-like grid vertical lines */
+    mVerticalLinesOffset = 0;
+    if(mBeamData.size() > 2) {
+        for(int i = mBeamData.size()-2; i >= 0; i--)
+            drawBeamToScrollableImage(&pCache, i);
+    }
+
+}
 
 void KSignalPlotterPrivate::drawThinFrame(QPainter *p, const QRect &boundingBox)
 {

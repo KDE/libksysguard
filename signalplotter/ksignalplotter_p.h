@@ -23,11 +23,19 @@
 
 // SVG support causes it to crash at the moment :(
 //#define SVG_SUPPORT
+// Use a seperate child widget to draw the graph in
+//#define USE_SEPERATE_WIDGET
+
+
 #ifdef SVG_SUPPORT
 namespace Plasma
 {
     class SVG;
 }
+#endif
+
+#ifdef USE_SEPERATE_WIDGET
+class GraphWidget;
 #endif
 
 class KSignalPlotter;
@@ -45,6 +53,7 @@ struct KSignalPlotterPrivate {
     void drawAxisText(QPainter *p, const QRect &boundingBox);
     void drawHorizontalLines(QPainter *p, const QRect &boundingBox) const;
     void drawVerticalLines(QPainter *p, const QRect &boundingBox, int correction=0) const;
+    void redrawScrollableImage();
 
     void recalculateMaxMinValueForSample(const QList<double>&sampleBuf, int time );
     void rescale();
@@ -117,4 +126,18 @@ struct KSignalPlotterPrivate {
     bool mSmoothGraph; /// Whether to smooth the graph by averaging using the formula (value*2 + last_value)/3.
     KSignalPlotter *q;
     bool mAxisTextOverlapsPlotter; // Whether we need to redraw the axis text on every update
+#ifdef USE_SEPERATE_WIDGET
+    GraphWidget *graphWidget; ///< This is the widget that draws the actual graph
+#endif
 };
+
+#ifdef USE_SEPERATE_WIDGET
+/* A class to draw the actual widget */
+class GraphWidget : public QWidget {
+  public:
+    virtual void paintEvent ( QPaintEvent * event );
+
+    KSignalPlotter *signalPlotter;
+    KSignalPlotterPrivate *signalPlotterPrivate;
+};
+#endif
