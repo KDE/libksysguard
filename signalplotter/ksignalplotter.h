@@ -395,7 +395,7 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      *  For example:
      *  \code
      *      int axisTextWidth = fontMetrics().width(i18nc("Largest axis title", "99999 XXXX"));
-     *      plotter->setAxisTextWidth(axisTextWidth);
+     *      plotter->setMaxAxisTextWidth(axisTextWidth);
      *  \endcode
      *
      *  If this is 0, the default, then the text will be shown inside the plotting area.

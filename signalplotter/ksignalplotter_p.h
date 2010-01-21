@@ -24,7 +24,7 @@
 // SVG support causes it to crash at the moment :(
 //#define SVG_SUPPORT
 // Use a seperate child widget to draw the graph in
-//#define USE_SEPERATE_WIDGET
+#define USE_SEPERATE_WIDGET
 
 
 #ifdef SVG_SUPPORT
@@ -44,7 +44,7 @@ struct KSignalPlotterPrivate {
 
     KSignalPlotterPrivate( KSignalPlotter * q_ptr );
 
-    void drawWidget(QPainter *p, const QRect &boundingBox, bool onlyDrawPlotter);
+    void drawWidget(QPainter *p, const QRect &boundingBox);
     void drawBackground(QPainter *p, const QRect & boundingBox) const;
     void drawThinFrame(QPainter *p, const QRect &boundingBox);
     void calculateNiceRange();
@@ -127,7 +127,7 @@ struct KSignalPlotterPrivate {
     KSignalPlotter *q;
     bool mAxisTextOverlapsPlotter; // Whether we need to redraw the axis text on every update
 #ifdef USE_SEPERATE_WIDGET
-    GraphWidget *graphWidget; ///< This is the widget that draws the actual graph
+    GraphWidget *mGraphWidget; ///< This is the widget that draws the actual graph
 #endif
 };
 
@@ -135,9 +135,9 @@ struct KSignalPlotterPrivate {
 /* A class to draw the actual widget */
 class GraphWidget : public QWidget {
   public:
+    GraphWidget(QWidget *parent);
     virtual void paintEvent ( QPaintEvent * event );
 
-    KSignalPlotter *signalPlotter;
     KSignalPlotterPrivate *signalPlotterPrivate;
 };
 #endif

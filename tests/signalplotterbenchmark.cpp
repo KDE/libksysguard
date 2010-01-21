@@ -22,12 +22,13 @@ void BenchmarkSignalPlotter::addData()
     s->addBeam(Qt::red);
     s->addBeam(Qt::yellow);
     s->show();
+    s->setMaxAxisTextWidth(5);
     s->resize(1000,500);
     QTest::qWaitForWindowShown(s);
 
     QBENCHMARK {
         s->addSample(QList<double>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
-        s->repaint();
+        qApp->processEvents();
     }
 
 }

@@ -60,12 +60,6 @@ KSignalPlotter::KSignalPlotter( QWidget *parent)
     sizePolicy.setHeightForWidth(false);
     setSizePolicy( sizePolicy );
 
-#ifdef USE_SEPERATE_WIDGET
-    graphWidget = new GraphWidget; ///< This is the widget that draws the actual graph
-    graphWidget->signalPlotter = q;
-    graphWidget->signalPlotterPrivate = d;
-    graphWidget->setVisible(false);
-#endif
 }
 
 KSignalPlotterPrivate::KSignalPlotterPrivate(KSignalPlotter * q_ptr) : q(q_ptr)
@@ -96,6 +90,12 @@ KSignalPlotterPrivate::KSignalPlotterPrivate(KSignalPlotter * q_ptr) : q(q_ptr)
     mUnit = ki18n("%1");
     mAxisTextOverlapsPlotter = false;
     mActualAxisTextWidth = 0;
+#ifdef USE_SEPERATE_WIDGET
+    mGraphWidget = new GraphWidget(q); ///< This is the widget that draws the actual graph
+    mGraphWidget->signalPlotterPrivate = this;
+    mGraphWidget->setVisible(false);
+#endif
+
 }
 KSignalPlotter::~KSignalPlotter()
 {
@@ -182,7 +182,11 @@ void KSignalPlotterPrivate::rescale() {
 void KSignalPlotter::addSample( const QList<double>& sampleBuf )
 {
     d->addSample(sampleBuf);
+#ifdef USE_SEPERATE_WIDGET
+    d->mGraphWidget->update();
+#else
     update(d->mPlottingArea);
+#endif
 }
 void KSignalPlotterPrivate::addSample( const QList<double>& sampleBuf )
 {
@@ -514,8 +518,8 @@ void KSignalPlotter::resizeEvent( QResizeEvent* event )
 #endif
 
 #ifdef USE_SEPERATE_WIDGET
-    d->graphWidget->setVisible(true);
-    d->graphWidget->setGeometry(boundingBox);
+    d->mGraphWidget->setVisible(true);
+    d->mGraphWidget->setGeometry(boundingBox);
 #endif
 
     d->updateDataBuffers();
@@ -546,26 +550,57 @@ void KSignalPlotter::paintEvent( QPaintEvent* event)
     uint w = width();
     uint h = height();
     /* Do not do repaints when the widget is not yet setup properly. */
-    if ( w <= 2 )
+    if ( w <= 2 || h <= 2 )
         return;
     QPainter p(this);
 
-    if(event && d->mPlottingArea.contains(event->rect()) && !d->mBackgroundImage.isNull())
-        d->drawWidget(&p, QRect(0,0,w, h), true);  // do not bother drawing axis text etc.
-    else
-        d->drawWidget(&p, QRect(0,0,w, h), false);
+    bool onlyDrawPlotter = event && d->mPlottingArea.contains(event->rect()) && !d->mBackgroundImage.isNull();
+
+#ifdef USE_SEPERATE_WIDGET
+    if(onlyDrawPlotter)
+        return; //The painting will be handled entirely by GraphWidget::paintEvent
+#endif
+
+    if(!onlyDrawPlotter && d->mShowThinFrame)
+        d->drawThinFrame(&p, d->mPlottingArea.adjusted(0,0,1,1)); //We have a 'frame' in the bottom and right - so subtract them from the view
+
+#ifndef USE_SEPERATE_WIDGET
+    d->drawWidget(&p, d->mPlottingArea); //Draw the widget only if we don't have a GraphWidget to draw it for us
+#endif
+
+    if(d->mShowAxis) {
+        int fontheight = fontMetrics().height();
+        if( d->mPlottingArea.height() > fontheight ) {  //if there's room to draw the labels, then draw them!
+            d->drawAxisText(&p, QRect(0,0,w,h));
+        }
+    }
 }
-
-void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundingBox, bool onlyDrawPlotter)
+#ifdef USE_SEPERATE_WIDGET
+void GraphWidget::paintEvent( QPaintEvent*)
 {
-    int fontheight = q->fontMetrics().height();
-    QRect boundingBox = mPlottingArea;
+    if (testAttribute(Qt::WA_PendingResizeEvent))
+        return; // lets not do this more than necessary, shall we?
 
-    if(boundingBox.height() <= 2 || boundingBox.width() <= 2 ) return;
+    uint w = width();
+    uint h = height();
+    /* Do not do repaints when the widget is not yet setup properly. */
+    if ( w <= 2 || h <= 2 )
+        return;
+    QPainter p(this);
 
-    if(!onlyDrawPlotter && mShowThinFrame)
-        drawThinFrame(p, mPlottingArea.adjusted(0,0,1,1)); //We have a 'frame' in the bottom and right - so subtract them from the view
+    signalPlotterPrivate->drawWidget(&p, QRect(0,0,w,h));
 
+    if(signalPlotterPrivate->mAxisTextOverlapsPlotter && signalPlotterPrivate->mShowAxis) {
+        uint fontheight = signalPlotterPrivate->q->fontMetrics().height();
+        if( h > fontheight ) {  //if there's room to draw the labels, then draw them!
+            QSize originalSize = signalPlotterPrivate->q->size();
+            signalPlotterPrivate->drawAxisText(&p, QRect(-signalPlotterPrivate->mPlottingArea.topLeft(), originalSize));
+        }
+    }
+}
+#endif
+void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &boundingBox)
+{
 #ifdef SVG_SUPPORT
     if(!mSvgFilename.isEmpty()) {
         if(mBackgroundImage.isNull() || mBackgroundImage.height() != boundingBox.height() || mBackgroundImage.width() != boundingBox.width()) { //recreate on resize etc
@@ -598,12 +633,6 @@ void KSignalPlotterPrivate::drawWidget(QPainter *p, const QRect &originalBoundin
     /* Draw scope-like grid vertical lines if it doesn't move.  If it does move, draw it in the dynamic part of the code*/
     if(mShowVerticalLines && !mVerticalLinesScroll)
         drawVerticalLines(p, boundingBox);
-
-    if(!onlyDrawPlotter || mAxisTextOverlapsPlotter) {
-        if( mShowAxis && originalBoundingBox.height() > fontheight ) {  //if there's room to draw the labels, then draw them!
-            drawAxisText(p, originalBoundingBox);
-        }
-    }
 }
 void KSignalPlotterPrivate::drawBackground(QPainter *p, const QRect &boundingBox) const
 {
@@ -675,7 +704,6 @@ void KSignalPlotterPrivate::redrawScrollableImage()
         for(int i = mBeamData.size()-2; i >= 0; i--)
             drawBeamToScrollableImage(&pCache, i);
     }
-
 }
 
 void KSignalPlotterPrivate::drawThinFrame(QPainter *p, const QRect &boundingBox)
@@ -1013,5 +1041,11 @@ QSize KSignalPlotter::sizeHint() const
     return QSize(200,200); //Just a random size which would usually look okay
 }
 
+GraphWidget::GraphWidget(QWidget *parent) : QWidget(parent)
+{
+    setAttribute(Qt::WA_PaintOnScreen);
+    setAttribute(Qt::WA_NoSystemBackground);
+    setAttribute(Qt::WA_OpaquePaintEvent);
+}
 #include "ksignalplotter.moc"
 
