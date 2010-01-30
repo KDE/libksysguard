@@ -60,10 +60,6 @@
 #include "ui_ProcessWidgetUI.h"
 #include "scripting.h"
 
-#ifdef WITH_MONITOR_PROCESS_IO
-#include "DisplayProcessDlg.h"
-#endif
-
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -165,11 +161,6 @@ struct KSysGuardProcessListPrivate {
 
         selectTracer = new KAction(i18n("Jump to Process Debugging This One"), q);
         window = new KAction(i18n("Show Application Window"), q);
-#ifdef WITH_MONITOR_PROCESS_IO
-        monitorio = new KAction(i18n("Monitor Input && Output"), q);
-#else
-        monitorio = 0;
-#endif
         resume = new KAction(i18n("Resume Stopped Process"), q);
         kill = new KAction(i18np("End Process...", "End Processes...", 1), q);
         kill->setIcon(KIcon("process-stop"));
@@ -233,7 +224,6 @@ struct KSysGuardProcessListPrivate {
     KAction *selectTracer;
     KAction *jumpToSearchFilter;
     KAction *window;
-    KAction *monitorio;
     KAction *resume;
     KAction *sigStop;
     KAction *sigCont;
@@ -321,8 +311,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     QSignalMapper *signalMapper = new QSignalMapper(this);
     QList<QAction *> actions;
     actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window << d->jumpToSearchFilter;
-    if (d->monitorio)
-        actions << d->monitorio;
     actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
 
     foreach(QAction *action, actions) {
@@ -479,9 +467,6 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     if (numProcesses == 1 && !d->mModel.data(realIndex, ProcessModel::WindowIdRole).isNull()) {
         d->mProcessContextMenu->addAction(d->window);
     }
-    if (d->monitorio && numProcesses == 1 && d->mModel.isLocalhost() && (process->uid==0 || process->uid == getuid()) && process->pid != getpid() && process->pid != getppid()) { //Don't attach to ourselves - crashes
-        d->mProcessContextMenu->addAction(d->monitorio);
-    }
 
     if(numProcesses == 1 && process->status == KSysGuard::Process::Stopped) {
         //If the process is stopped, offer to resume it
@@ -542,17 +527,6 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         }
     } else if(result == d->jumpToSearchFilter) {
         d->mUi->txtFilter->setFocus();
-#ifdef WITH_MONITOR_PROCESS_IO
-    } else if(result == d->monitorio) {
-        QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
-        if(selectedIndexes.isEmpty()) return;  //No processes selected
-        QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
-        KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
-        if(process) {
-            DisplayProcessDlg *dialog = new DisplayProcessDlg( this,process );
-            dialog->show();
-        }
-#endif
     } else {
         QList< long long > pidlist;
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
