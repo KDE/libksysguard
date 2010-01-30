@@ -281,12 +281,13 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
     d->mFilterModel.setFilterKeyColumn(-1);
 
-    /*  Hide the vm size column by default since it's not very useful */
+    /*  Hide various columns by default, to reduce information overload */
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingVmSize);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingNiceness);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingTty);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCommand);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingPid);
+    d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCPUTime);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingIoRead);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingIoWrite);
     // NOTE!  After this is all setup, the settings for the header are restored
@@ -336,6 +337,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mFilterModel.setDynamicSortFilter(true);
 
     d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
+    d->mUi->btnKillProcess->setToolTip("<qt>End the selected process. Warning - you may lose unsaved work.<br>Right click on a process to send other signals.<br>See What's This for technical information.<br>To target a specific window to kill, press ctrl+alt+esc at any time.");
 
     //If the view resorts continually, then it can be hard to keep track of processes.  By doing it only every few seconds it reduces the 'jumping around'
     //	QTimer *mTimer = new QTimer(this);

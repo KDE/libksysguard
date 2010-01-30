@@ -28,9 +28,7 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Send a SIGTERM signal to the selected process.
-See What's This for more information.
-Right click on a process to send other signals.</string>
+        <string/>
        </property>
        <property name="whatsThis">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
