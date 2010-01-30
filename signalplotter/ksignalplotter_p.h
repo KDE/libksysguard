@@ -24,8 +24,12 @@
 // SVG support causes it to crash at the moment :(
 //#define SVG_SUPPORT
 // Use a seperate child widget to draw the graph in
-#define USE_SEPERATE_WIDGET
 
+#ifndef GRAPHICS_SIGNAL_PLOTTER
+#define USE_SEPERATE_WIDGET
+#include <QWidget>
+#include <QPaintEvent>
+#endif
 
 #ifdef SVG_SUPPORT
 namespace Plasma
@@ -54,20 +58,22 @@ struct KSignalPlotterPrivate {
     void drawHorizontalLines(QPainter *p, const QRect &boundingBox) const;
     void drawVerticalLines(QPainter *p, const QRect &boundingBox, int correction=0) const;
     void redrawScrollableImage();
+    void reorderBeams( const QList<int>& newOrder );
 
     void recalculateMaxMinValueForSample(const QList<double>&sampleBuf, int time );
     void rescale();
     void updateDataBuffers();
     void setupStyle();
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+    void themeChanged();
+#endif
 
     /** Return the given value as a string, with the given precision */
     QString scaledValueAsString( double value, int precision) const;
     void addSample( const QList<double>& sampleBuf );
-    /** We make the SVG renderer static so that an SVG renderer is shared among all of the images.  This is because a SVG renderer takes up a lot of memory, so we want to
-     *  share them as much as we can */
 #ifdef SVG_SUPPORT
     void updateSvgBackground(const QRect &boundingBox);
-    static QHash<QString, Plasma::SVG *> sSvgRenderer;
+    Plasma::SVG* mSvgRenderer;
 #endif
     QString mSvgFilename;
 
@@ -132,7 +138,7 @@ struct KSignalPlotterPrivate {
 };
 
 #ifdef USE_SEPERATE_WIDGET
-/* A class to draw the actual widget */
+/* A class to draw the actual widget.  This is used for the QWidget version of KSignalPlotter in order to speed up redraws */
 class GraphWidget : public QWidget {
   public:
     GraphWidget(QWidget *parent);
@@ -141,3 +147,4 @@ class GraphWidget : public QWidget {
     KSignalPlotterPrivate *signalPlotterPrivate;
 };
 #endif
+

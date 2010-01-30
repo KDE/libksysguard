@@ -19,29 +19,29 @@
 
 */
 
-#ifndef KSIGNALPLOTTER_H
-#define KSIGNALPLOTTER_H
+#ifndef KGRAPHICSSIGNALPLOTTER_H
+#define KGRAPHICSSIGNALPLOTTER_H
 
 #include <QtCore/QList>
 #include <QtCore/QString>
 #include <QtGui/QColor>
 #include <QtGui/QFont>
-#include <QtGui/QWidget>
+#include <QtGui/QGraphicsWidget>
 #include <klocalizedstring.h>
 #include <kcomponentdata.h>
 
 class QPaintEvent;
 class QResizeEvent;
 class QGraphicsSceneResizeEvent;
-class KSignalPlotterPrivate;
+class KGraphicsSignalPlotterPrivate;
 
 //Make sure only declare KLocalizedString once
-#ifndef KGRAPHICSSIGNALPLOTTER_H
+#ifndef KSIGNALPLOTTER_H
 Q_DECLARE_METATYPE(KLocalizedString)
 #endif
 
-/** \class KSignalPlotter
- * \brief The KSignalPlotter widget draws a real time graph of data that updates continually.
+/** \class KGraphicsSignalPlotter
+ * \brief The KGraphicsSignalPlotter graphics widget draws a real time graph of data that updates continually.
  *
  *  Features include:
  *  \li Points are joined by a bezier curve.
@@ -54,10 +54,10 @@ Q_DECLARE_METATYPE(KLocalizedString)
  *
  *  Example usage:
  *  \code
- *    KSignalPlotter *s = KSignalPlotter(parent);
+ *    KGraphicsSignalPlotter *s = KGraphicsSignalPlotter(parent);
  *    s->addBeam(Qt::blue);
  *    s->addBeam(Qt::green);
- *    QList<qreal> data;
+ *    QList<double> data;
  *    data << 4.0 << 5.0;
  *    s->addSample(data);
  *  \endcode
@@ -66,16 +66,16 @@ Q_DECLARE_METATYPE(KLocalizedString)
  *
  *  Smoothing looks very nice visually and is enabled by default.  It can be disabled with setSmoothGraph().
  *
- *  \image KSignalPlotter.png  Example KSignalPlotter with two beams
+ *  \image KSignalPlotter.png  Example KGraphicsSignalPlotter with two beams
  */
-class KDE_EXPORT KSignalPlotter : public QWidget
+class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
 {
   Q_OBJECT
-  Q_PROPERTY(qreal minimumValue READ minimumValue WRITE setMinimumValue)
-  Q_PROPERTY(qreal maximumValue READ maximumValue WRITE setMaximumValue)
+  Q_PROPERTY(double minimumValue READ minimumValue WRITE setMinimumValue)
+  Q_PROPERTY(double maximumValue READ maximumValue WRITE setMaximumValue)
   Q_PROPERTY(bool useAutoRange READ useAutoRange WRITE setUseAutoRange)
   Q_PROPERTY(KLocalizedString unit READ unit WRITE setUnit)
-  Q_PROPERTY(qreal scaleDownBy READ scaleDownBy WRITE setScaleDownBy)
+  Q_PROPERTY(double scaleDownBy READ scaleDownBy WRITE setScaleDownBy)
   Q_PROPERTY(uint horizontalScale READ horizontalScale WRITE setHorizontalScale)
   Q_PROPERTY(bool showHorizontalLines READ showHorizontalLines WRITE setShowHorizontalLines)
   Q_PROPERTY(bool showVerticalLines READ showVerticalLines WRITE setShowVerticalLines)
@@ -90,8 +90,8 @@ class KDE_EXPORT KSignalPlotter : public QWidget
   Q_PROPERTY(int fillOpacity READ fillOpacity WRITE setFillOpacity)
 
   public:
-    KSignalPlotter( QWidget *parent = 0);
-    virtual ~KSignalPlotter();
+    KGraphicsSignalPlotter( QGraphicsItem *parent = 0);
+    virtual ~KGraphicsSignalPlotter();
 
     /** \brief Add a new line to the graph plotter, with the specified color.
      *
@@ -118,7 +118,7 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      *    s->addBeam(Qt::red);
      *    s->addBeam(Qt::green);
      *    s->addBeam(Qt::blue);
-     *    signalPlotter->addSample( QList<qreal>() << std::numeric_limits<double>::quiet_NaN() << 1.0/0 << 10.0 );
+     *    signalPlotter->addSample( QList<double>() << std::numeric_limits<double>::quiet_NaN() << 1.0/0 << 10.0 );
      *  \endcode
      *
      *  This indicates that no data is available yet for red (so the beam will not be drawn for this section),
@@ -127,7 +127,7 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      *  Infinity is handled by drawing a straight line up to the top or bottom of the display, and does not affect the range.
      *  For the above example, the displayed range would now be 0 to 10.
      */
-    void addSample( const QList<qreal> &samples );
+    void addSample( const QList<double> &samples );
 
     /** \brief Reorder the beams into the order given.
      *
@@ -220,12 +220,12 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      * Typically this is followed by calling setUnit() to set the display axis
      * units.  Default value is 1.
      */
-    void setScaleDownBy( qreal value );
+    void setScaleDownBy( double value );
 
     /** \brief Amount scaled down by.
      *
      * \sa setScaleDownBy */
-    qreal scaleDownBy() const;
+    double scaleDownBy() const;
 
     /** \brief Set whether to scale the graph automatically beyond the given range.
      *
@@ -266,27 +266,27 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      *
      *  \sa setMinimumValue(), setMaximumValue(), minimumValue(), maximumValue()
      */
-    void changeRange( qreal min, double max );
+    void changeRange( double min, double max );
 
     /** \brief Set the min value hint for the vertical axis.
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    void setMinimumValue( qreal min );
+    void setMinimumValue( double min );
 
     /** \brief Get the min value hint for the vertical axis.
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    qreal minimumValue() const;
+    double minimumValue() const;
 
     /** \brief Set the max value hint for the vertical axis. *
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    void setMaximumValue( qreal max );
+    void setMaximumValue( double max );
 
     /** \brief Get the maximum value hint for the vertical axis.
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    qreal maximumValue() const;
+    double maximumValue() const;
 
     /** \brief Get the current maximum value on the y-axis.
      *
@@ -294,14 +294,14 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      *  it will be equal or larger (due to rounding up to make it a nice number)
      *  than the highest value being shown.
      */
-    qreal currentMaximumRangeValue() const;
+    double currentMaximumRangeValue() const;
     /** \brief Get the current minimum value on the y-axis.
      *
      *  This will never be lower than minimumValue(), and if autoRange() is true,
      *  it will be equal or larger (due to rounding up to make it a nice number)
      *  than the highest value being shown.
      */
-    qreal currentMinimumRangeValue() const;
+    double currentMinimumRangeValue() const;
 
     /** \brief Set the number of pixels horizontally between data points.
      *  Default is 6. */
@@ -366,7 +366,7 @@ class KDE_EXPORT KSignalPlotter : public QWidget
     /** \brief Return the last value that we have for the given beam index.
      *
      * \return last value, or 0 if not known. */
-    qreal lastValue( int index) const;
+    double lastValue( int index) const;
 
     /** \brief Return a translated string for the last value at the given index.
      *
@@ -394,7 +394,7 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      * \endcode
      *
      */
-    QString valueAsString( qreal value, int precision = -1) const;
+    QString valueAsString( double value, int precision = -1) const;
 
     /** \brief Set the distance between the left of the widget and the left of the plotting region.
      *
@@ -448,14 +448,16 @@ class KDE_EXPORT KSignalPlotter : public QWidget
 
   protected:
     /* Reimplemented */
-    virtual void resizeEvent( QResizeEvent* );
-    virtual void paintEvent( QPaintEvent* );
-    virtual QSize sizeHint() const;
+    virtual void resizeEvent( QGraphicsSceneResizeEvent* event );
+    virtual void paint( QPainter * p, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 );
+    virtual QSizeF sizeHint( Qt::SizeHint which, const QSizeF & constraint = QSizeF() ) const;
     virtual void changeEvent ( QEvent * event );
+    virtual QPainterPath opaqueArea() const;
+
 
   private:
-    KSignalPlotterPrivate * const d;
-    friend class KSignalPlotterPrivate;
+    KGraphicsSignalPlotterPrivate * const d;
+    friend class KGraphicsSignalPlotterPrivate;
 };
 
 #endif

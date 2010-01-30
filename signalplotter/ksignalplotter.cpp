@@ -19,7 +19,16 @@
 
 */
 
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+#define KSignalPlotter KGraphicsSignalPlotter
+#define KSignalPlotterPrivate KGraphicsSignalPlotterPrivate
+#include "kgraphicssignalplotter.h"
+#else
+#undef KSignalPlotter
+#undef KSignalPlotterPrivate
 #include "ksignalplotter.h"
+#endif
+
 #include "ksignalplotter_p.h"
 
 #include <math.h>  //For floor, ceil, log10 etc for calculating ranges
@@ -28,12 +37,18 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QPainterPath>
 #include <QtGui/QPaintEvent>
-#include <QtGui/QColormap>
+#include <QEvent>
+
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+#include <QtGui/QGraphicsSceneResizeEvent>
+#include <QtGui/QStyleOptionGraphicsItem>
+#include <plasma/theme.h>
+#endif
 
 #include <kdebug.h>
 #include <kglobal.h>
 #include <klocale.h>
-#include <kapplication.h>
+#include <kiconloader.h>
 #include <math.h>
 #include <limits>
 
@@ -46,57 +61,26 @@
 //Never store less 1000 samples if not visible.  This is kinda arbituary
 #define NUM_SAMPLES_WHEN_INVISIBLE ((uint)1000)
 
-#ifdef SVG_SUPPORT
-QHash<QString, Plasma::Svg *> KSignalPlotter::sSvgRenderer ;
-#endif
-
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+KGraphicsSignalPlotter::KGraphicsSignalPlotter( QGraphicsItem *parent)
+  : QGraphicsWidget(parent), d(new KGraphicsSignalPlotterPrivate(this))
+#else
 KSignalPlotter::KSignalPlotter( QWidget *parent)
-  : QWidget( parent), d(new KSignalPlotterPrivate(this))
+  : QWidget(parent), d(new KSignalPlotterPrivate(this))
+#endif
 {
-    // Anything smaller than this does not make sense.
     qRegisterMetaType<KLocalizedString>("KLocalizedString");
-    setMinimumSize( 4, 4 );
+    // Anything smaller than this does not make sense.
+    setMinimumSize( KIconLoader::SizeSmall, KIconLoader::SizeSmall);
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     sizePolicy.setHeightForWidth(false);
     setSizePolicy( sizePolicy );
 
-}
-
-KSignalPlotterPrivate::KSignalPlotterPrivate(KSignalPlotter * q_ptr) : q(q_ptr)
-{
-    mPrecision = 0;
-    mMaxSamples = NUM_SAMPLES_WHEN_INVISIBLE;
-    mMinValue = mMaxValue = std::numeric_limits<double>::quiet_NaN();
-    mUserMinValue = mUserMaxValue = 0.0;
-    mNiceMinValue = mNiceMaxValue = 0.0;
-    mNiceRange = 0;
-    mUseAutoRange = true;
-    mScaleDownBy = 1;
-    mShowThinFrame = true;
-    mSmoothGraph = true;
-    mShowVerticalLines = false;
-    mVerticalLinesDistance = 30;
-    mVerticalLinesScroll = true;
-    mVerticalLinesOffset = 0;
-    mHorizontalScale = 6;
-    mShowHorizontalLines = true;
-    mHorizontalLinesCount = 4;
-    mShowAxis = true;
-    mAxisTextWidth = 0;
-    mScrollOffset = 0;
-    mStackBeams = false;
-    mFillOpacity = 20;
-    mRescaleTime = 0;
-    mUnit = ki18n("%1");
-    mAxisTextOverlapsPlotter = false;
-    mActualAxisTextWidth = 0;
-#ifdef USE_SEPERATE_WIDGET
-    mGraphWidget = new GraphWidget(q); ///< This is the widget that draws the actual graph
-    mGraphWidget->signalPlotterPrivate = this;
-    mGraphWidget->setVisible(false);
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+    setFlag(QGraphicsItem::ItemClipsToShape);
 #endif
-
 }
+
 KSignalPlotter::~KSignalPlotter()
 {
     delete d;
@@ -111,11 +95,11 @@ void KSignalPlotter::setUnit(const KLocalizedString &unit) {
 
 void KSignalPlotter::addBeam( const QColor &color )
 {
-    QList< QList<double> >::Iterator it;
+    QList< QList<qreal> >::Iterator it;
     //When we add a new beam, go back and set the data for this beam to NaN for all the other times, to pad it out.
     //This is because it makes it easier for moveSensors
     for(it = d->mBeamData.begin(); it != d->mBeamData.end(); ++it) {
-        (*it).append( std::numeric_limits<double>::quiet_NaN() );
+        (*it).append( std::numeric_limits<qreal>::quiet_NaN() );
     }
     d->mBeamColors.append(color);
     d->mBeamColorsLight.append(color.lighter());
@@ -144,42 +128,7 @@ int KSignalPlotter::numBeams() const {
     return d->mBeamColors.count();
 }
 
-void KSignalPlotterPrivate::recalculateMaxMinValueForSample(const QList<double>&sampleBuf, int time )
-{
-    if(mStackBeams) {
-        double value=0;
-        for(int i = sampleBuf.count()-1; i>= 0; i--) {
-            double newValue = sampleBuf[i];
-            if( !isinf(newValue) && !isnan(newValue) )
-                value += newValue;
-        }
-        if(isnan(mMinValue) || mMinValue > value) mMinValue = value;
-        if(isnan(mMaxValue) || mMaxValue < value) mMaxValue = value;
-        if(value > 0.7*mMaxValue)
-            mRescaleTime = time;
-    } else {
-        double value;
-        for(int i = sampleBuf.count()-1; i>= 0; i--) {
-            value = sampleBuf[i];
-            if( !isinf(value) && !isnan(value) ) {
-                if(isnan(mMinValue) || mMinValue > value) mMinValue = value;
-                if(isnan(mMaxValue) || mMaxValue < value) mMaxValue = value;
-                if(value > 0.7*mMaxValue)
-                    mRescaleTime = time;
-            }
-        }
-    }
-}
-
-void KSignalPlotterPrivate::rescale() {
-    mMaxValue = mMinValue = std::numeric_limits<double>::quiet_NaN();
-    for(int i = mBeamData.count()-1; i >= 0; i--) {
-        recalculateMaxMinValueForSample(mBeamData[i], i);
-    }
-    calculateNiceRange();
-}
-
-void KSignalPlotter::addSample( const QList<double>& sampleBuf )
+void KSignalPlotter::addSample( const QList<qreal>& sampleBuf )
 {
     d->addSample(sampleBuf);
 #ifdef USE_SEPERATE_WIDGET
@@ -188,68 +137,12 @@ void KSignalPlotter::addSample( const QList<double>& sampleBuf )
     update(d->mPlottingArea);
 #endif
 }
-void KSignalPlotterPrivate::addSample( const QList<double>& sampleBuf )
-{
-    if(sampleBuf.count() != mBeamColors.count()) {
-        kDebug(1215) << "Sample data discarded - contains wrong number of beams";
-        return;
-    }
-    mBeamData.prepend(sampleBuf);
-    if((unsigned int)mBeamData.size() > mMaxSamples) {
-        mBeamData.removeLast(); // we have too many.  Remove the last item
-        if((unsigned int)mBeamData.size() > mMaxSamples)
-            mBeamData.removeLast(); // If we still have too many, then we have resized the widget.  Remove one more.  That way we will slowly resize to the new size
-    }
-
-    if(mUseAutoRange) {
-        recalculateMaxMinValueForSample(sampleBuf, 0);
-
-        if(mRescaleTime++ > mMaxSamples)
-            rescale();
-        else if(mMinValue < mNiceMinValue || mMaxValue > mNiceMaxValue || (mMaxValue > mUserMaxValue && mNiceRange != 1 && mMaxValue < (mNiceRange*0.75 + mNiceMinValue)) || mNiceRange == 0)
-            calculateNiceRange();
-    } else {
-        if(mMinValue < mNiceMinValue || mMaxValue > mNiceMaxValue || (mMaxValue > mUserMaxValue && mNiceRange != 1 && mMaxValue < (mNiceRange*0.75 + mNiceMinValue)) || mNiceRange == 0)
-            calculateNiceRange();
-    }
-
-    if(mScrollableImage.isNull())
-        return;
-    QPainter pCache(&mScrollableImage);
-    drawBeamToScrollableImage(&pCache, 0);
-}
-
 void KSignalPlotter::reorderBeams( const QList<int>& newOrder )
 {
-    if(newOrder.count() != d->mBeamColors.count()) {
-        return;
-    }
-    QList< QList<double> >::Iterator it;
-    for(it = d->mBeamData.begin(); it != d->mBeamData.end(); ++it) {
-        if(newOrder.count() != (*it).count()) {
-            kWarning(1215) << "Serious problem in move sample.  beamdata[i] has " << (*it).count() << " and neworder has " << newOrder.count();
-        } else {
-            QList<double> newBeam;
-            for(int i = 0; i < newOrder.count(); i++) {
-                int newIndex = newOrder[i];
-                newBeam.append((*it).at(newIndex));
-            }
-            (*it) = newBeam;
-        }
-    }
-    QList< QColor > newBeamColors;
-    QList< QColor > newBeamColorsDark;
-    for(int i = 0; i < newOrder.count(); i++) {
-        int newIndex = newOrder[i];
-        newBeamColors.append(d->mBeamColors.at(newIndex));
-        newBeamColorsDark.append(d->mBeamColorsLight.at(newIndex));
-    }
-    d->mBeamColors = newBeamColors;
-    d->mBeamColorsLight = newBeamColorsDark;
+    d->reorderBeams(newOrder);
 }
 
-
-void KSignalPlotter::changeRange( double min, double max )
+void KSignalPlotter::changeRange( qreal min, double max )
 {
     if( min == d->mUserMinValue && max == d->mUserMaxValue ) return;
     d->mUserMinValue = min;
@@ -264,7 +157,7 @@ void KSignalPlotter::removeBeam( int index )
     d->mBeamColors.removeAt( index );
     d->mBeamColorsLight.removeAt(index);
 
-    QList< QList<double> >::Iterator i;
+    QList< QList<qreal> >::Iterator i;
     for(i = d->mBeamData.begin(); i != d->mBeamData.end(); ++i) {
         if( (*i).size() >= index)
             (*i).removeAt(index);
@@ -273,7 +166,7 @@ void KSignalPlotter::removeBeam( int index )
         d->rescale();
 }
 
-void KSignalPlotter::setScaleDownBy( double value )
+void KSignalPlotter::setScaleDownBy( qreal value )
 {
     if(d->mScaleDownBy == value) return;
     d->mScaleDownBy = value;
@@ -281,7 +174,7 @@ void KSignalPlotter::setScaleDownBy( double value )
     d->calculateNiceRange();
     update();
 }
-double KSignalPlotter::scaleDownBy() const
+qreal KSignalPlotter::scaleDownBy() const
 {
     return d->mScaleDownBy;
 }
@@ -298,7 +191,7 @@ bool KSignalPlotter::useAutoRange() const
     return d->mUseAutoRange;
 }
 
-void KSignalPlotter::setMinimumValue( double min )
+void KSignalPlotter::setMinimumValue( qreal min )
 {
     if(min == d->mUserMinValue) return;
     d->mUserMinValue = min;
@@ -307,12 +200,12 @@ void KSignalPlotter::setMinimumValue( double min )
     //this change will be detected in paint and the image cache regenerated
 }
 
-double KSignalPlotter::minimumValue() const
+qreal KSignalPlotter::minimumValue() const
 {
     return d->mUserMinValue;
 }
 
-void KSignalPlotter::setMaximumValue( double max )
+void KSignalPlotter::setMaximumValue( qreal max )
 {
     if(max == d->mUserMaxValue) return;
     d->mUserMaxValue = max;
@@ -321,17 +214,17 @@ void KSignalPlotter::setMaximumValue( double max )
     //this change will be detected in paint and the image cache regenerated
 }
 
-double KSignalPlotter::maximumValue() const
+qreal KSignalPlotter::maximumValue() const
 {
     return d->mUserMaxValue;
 }
 
-double KSignalPlotter::currentMaximumRangeValue() const
+qreal KSignalPlotter::currentMaximumRangeValue() const
 {
     return d->mNiceMaxValue;
 }
 
-double KSignalPlotter::currentMinimumRangeValue() const
+qreal KSignalPlotter::currentMinimumRangeValue() const
 {
     return d->mNiceMinValue;
 }
@@ -453,6 +346,16 @@ void KSignalPlotter::setSvgBackground( const QString &filename )
 {
     if(d->mSvgFilename == filename) return;
     d->mSvgFilename = filename;
+#ifdef SVG_SUPPORT
+    if(filename.isEmpty()) {
+        delete d->mSvgRenderer;
+        d->mSvgRenderer = NULL;
+    } else {
+        if(!d->mSvgRenderer)
+            d->mSvgRenderer = new Plasma::Svg(this);
+        d->mSvgRenderer->setImagePath(d->mSvgFilename);
+    }
+#endif
     d->mBackgroundImage = QPixmap();
     update();
 }
@@ -471,15 +374,31 @@ int KSignalPlotter::maxAxisTextWidth() const
 }
 void KSignalPlotter::changeEvent ( QEvent * event )
 {
-    if(event->type() == QEvent::ApplicationPaletteChange || event->type() == QEvent::PaletteChange) {
-        d->mBackgroundImage = QPixmap(); //we changed a paint setting, so reset the cache
-        update();
+    switch (event->type()) {
+        case QEvent::ApplicationPaletteChange:
+        case QEvent::PaletteChange:
+        case QEvent::FontChange:
+        case QEvent::LanguageChange:
+        case QEvent::LocaleChange:
+        case QEvent::LayoutDirectionChange:
+            d->mBackgroundImage = QPixmap(); //we changed a paint setting, so reset the cache
+            update();
+            break;
+        default: //Do nothing
+            break;
     }
 }
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+void KGraphicsSignalPlotter::resizeEvent( QGraphicsSceneResizeEvent* event )
+{
+    QRect boundingBox(QPoint(0,0), event->newSize().toSize());
+    int fontHeight = QFontMetrics(font()).height();
+#else
 void KSignalPlotter::resizeEvent( QResizeEvent* event )
 {
     QRect boundingBox(QPoint(0,0), event->size());
     int fontHeight = fontMetrics().height();
+#endif
     if( d->mShowAxis && d->mAxisTextWidth != 0 && boundingBox.width() > (d->mAxisTextWidth*1.10+2) && boundingBox.height() > fontHeight ) {  //if there's room to draw the labels, then draw them!
         //We want to adjust the size of plotter bit inside so that the axis text aligns nicely at the top and bottom
         //but we don't want to sacrifice too much of the available room, so don't use it if it will take more than 20% of the available space
@@ -491,7 +410,7 @@ void KSignalPlotter::resizeEvent( QResizeEvent* event )
         if(boundingBox.width() > d->mAxisTextWidth + 50)
             padding = 10; //If there's plenty of room, at 10 pixels for padding the axis text, so that it looks nice
 
-        if ( kapp->layoutDirection() == Qt::RightToLeft )
+        if ( layoutDirection() == Qt::RightToLeft )
             boundingBox.setRight(boundingBox.right() - d->mAxisTextWidth - padding);
         else
             boundingBox.setLeft(d->mAxisTextWidth+padding);
@@ -525,6 +444,136 @@ void KSignalPlotter::resizeEvent( QResizeEvent* event )
     d->updateDataBuffers();
 }
 
+KSignalPlotterPrivate::KSignalPlotterPrivate(KSignalPlotter *q_ptr_) : q(q_ptr_)
+{
+    mPrecision = 0;
+    mMaxSamples = NUM_SAMPLES_WHEN_INVISIBLE;
+    mMinValue = mMaxValue = std::numeric_limits<qreal>::quiet_NaN();
+    mUserMinValue = mUserMaxValue = 0.0;
+    mNiceMinValue = mNiceMaxValue = 0.0;
+    mNiceRange = 0;
+    mUseAutoRange = true;
+    mScaleDownBy = 1;
+    mShowThinFrame = true;
+    mSmoothGraph = true;
+    mShowVerticalLines = false;
+    mVerticalLinesDistance = 30;
+    mVerticalLinesScroll = true;
+    mVerticalLinesOffset = 0;
+    mHorizontalScale = 6;
+    mShowHorizontalLines = true;
+    mHorizontalLinesCount = 4;
+    mShowAxis = true;
+    mAxisTextWidth = 0;
+    mScrollOffset = 0;
+    mStackBeams = false;
+    mFillOpacity = 20;
+    mRescaleTime = 0;
+    mUnit = ki18n("%1");
+    mAxisTextOverlapsPlotter = false;
+    mActualAxisTextWidth = 0;
+#ifdef USE_SEPERATE_WIDGET
+    mGraphWidget = new GraphWidget(q); ///< This is the widget that draws the actual graph
+    mGraphWidget->signalPlotterPrivate = this;
+    mGraphWidget->setVisible(false);
+#endif
+}
+
+void KSignalPlotterPrivate::recalculateMaxMinValueForSample(const QList<qreal>&sampleBuf, int time )
+{
+    if(mStackBeams) {
+        qreal value=0;
+        for(int i = sampleBuf.count()-1; i>= 0; i--) {
+            qreal newValue = sampleBuf[i];
+            if( !isinf(newValue) && !isnan(newValue) )
+                value += newValue;
+        }
+        if(isnan(mMinValue) || mMinValue > value) mMinValue = value;
+        if(isnan(mMaxValue) || mMaxValue < value) mMaxValue = value;
+        if(value > 0.7*mMaxValue)
+            mRescaleTime = time;
+    } else {
+        qreal value;
+        for(int i = sampleBuf.count()-1; i>= 0; i--) {
+            value = sampleBuf[i];
+            if( !isinf(value) && !isnan(value) ) {
+                if(isnan(mMinValue) || mMinValue > value) mMinValue = value;
+                if(isnan(mMaxValue) || mMaxValue < value) mMaxValue = value;
+                if(value > 0.7*mMaxValue)
+                    mRescaleTime = time;
+            }
+        }
+    }
+}
+
+void KSignalPlotterPrivate::rescale() {
+    mMaxValue = mMinValue = std::numeric_limits<qreal>::quiet_NaN();
+    for(int i = mBeamData.count()-1; i >= 0; i--) {
+        recalculateMaxMinValueForSample(mBeamData[i], i);
+    }
+    calculateNiceRange();
+}
+
+void KSignalPlotterPrivate::addSample( const QList<qreal>& sampleBuf )
+{
+    if(sampleBuf.count() != mBeamColors.count()) {
+        kDebug(1215) << "Sample data discarded - contains wrong number of beams";
+        return;
+    }
+    mBeamData.prepend(sampleBuf);
+    if((unsigned int)mBeamData.size() > mMaxSamples) {
+        mBeamData.removeLast(); // we have too many.  Remove the last item
+        if((unsigned int)mBeamData.size() > mMaxSamples)
+            mBeamData.removeLast(); // If we still have too many, then we have resized the widget.  Remove one more.  That way we will slowly resize to the new size
+    }
+
+    if(mUseAutoRange) {
+        recalculateMaxMinValueForSample(sampleBuf, 0);
+
+        if(mRescaleTime++ > mMaxSamples)
+            rescale();
+        else if(mMinValue < mNiceMinValue || mMaxValue > mNiceMaxValue || (mMaxValue > mUserMaxValue && mNiceRange != 1 && mMaxValue < (mNiceRange*0.75 + mNiceMinValue)) || mNiceRange == 0)
+            calculateNiceRange();
+    } else {
+        if(mMinValue < mNiceMinValue || mMaxValue > mNiceMaxValue || (mMaxValue > mUserMaxValue && mNiceRange != 1 && mMaxValue < (mNiceRange*0.75 + mNiceMinValue)) || mNiceRange == 0)
+            calculateNiceRange();
+    }
+
+    if(mScrollableImage.isNull())
+        return;
+    QPainter pCache(&mScrollableImage);
+    drawBeamToScrollableImage(&pCache, 0);
+}
+
+void KSignalPlotterPrivate::reorderBeams( const QList<int>& newOrder )
+{
+    if(newOrder.count() != mBeamColors.count()) {
+        return;
+    }
+    QList< QList<qreal> >::Iterator it;
+    for(it = mBeamData.begin(); it != mBeamData.end(); ++it) {
+        if(newOrder.count() != (*it).count()) {
+            kWarning(1215) << "Serious problem in move sample.  beamdata[i] has " << (*it).count() << " and neworder has " << newOrder.count();
+        } else {
+            QList<qreal> newBeam;
+            for(int i = 0; i < newOrder.count(); i++) {
+                int newIndex = newOrder[i];
+                newBeam.append((*it).at(newIndex));
+            }
+            (*it) = newBeam;
+        }
+    }
+    QList< QColor > newBeamColors;
+    QList< QColor > newBeamColorsDark;
+    for(int i = 0; i < newOrder.count(); i++) {
+        int newIndex = newOrder[i];
+        newBeamColors.append(mBeamColors.at(newIndex));
+        newBeamColorsDark.append(mBeamColorsLight.at(newIndex));
+    }
+    mBeamColors = newBeamColors;
+    mBeamColorsLight = newBeamColorsDark;
+}
+
 void KSignalPlotterPrivate::updateDataBuffers()
 {
 
@@ -537,24 +586,35 @@ void KSignalPlotterPrivate::updateDataBuffers()
      *     2) no loss of precision when drawing the first data point.
      */
     if(q->isVisible())
-        mMaxSamples = uint(q->width() / mHorizontalScale + 4);
+        mMaxSamples = uint(q->size().width() / mHorizontalScale + 4);
     else //If it's not visible, we can't rely on sensible values for width.  Store some minimum number of data points
-        mMaxSamples = qMin(q->width() / mHorizontalScale + 4, NUM_SAMPLES_WHEN_INVISIBLE);
+        mMaxSamples = qMin((uint)(q->size().width() / mHorizontalScale + 4), NUM_SAMPLES_WHEN_INVISIBLE);
 }
 
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+void KGraphicsSignalPlotter::paint( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+{
+    Q_UNUSED(widget);
+#else
 void KSignalPlotter::paintEvent( QPaintEvent* event)
 {
     if (testAttribute(Qt::WA_PendingResizeEvent))
         return; // lets not do this more than necessary, shall we?
+    QPainter p(this);
+    QPainter *painter = &p;
+#endif
 
-    uint w = width();
-    uint h = height();
+    uint w = size().width();
+    uint h = size().height();
     /* Do not do repaints when the widget is not yet setup properly. */
     if ( w <= 2 || h <= 2 )
         return;
-    QPainter p(this);
 
-    bool onlyDrawPlotter = event && d->mPlottingArea.contains(event->rect()) && !d->mBackgroundImage.isNull();
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+    bool onlyDrawPlotter = option && d->mPlottingArea.contains(option->exposedRect.toRect());
+#else
+    bool onlyDrawPlotter = event && d->mPlottingArea.contains(event->rect());
+#endif
 
 #ifdef USE_SEPERATE_WIDGET
     if(onlyDrawPlotter)
@@ -562,16 +622,20 @@ void KSignalPlotter::paintEvent( QPaintEvent* event)
 #endif
 
     if(!onlyDrawPlotter && d->mShowThinFrame)
-        d->drawThinFrame(&p, d->mPlottingArea.adjusted(0,0,1,1)); //We have a 'frame' in the bottom and right - so subtract them from the view
+        d->drawThinFrame(painter, d->mPlottingArea.adjusted(0,0,1,1)); //We have a 'frame' in the bottom and right - so subtract them from the view
 
 #ifndef USE_SEPERATE_WIDGET
-    d->drawWidget(&p, d->mPlottingArea); //Draw the widget only if we don't have a GraphWidget to draw it for us
+    d->drawWidget(painter, d->mPlottingArea); //Draw the widget only if we don't have a GraphWidget to draw it for us
 #endif
 
     if(d->mShowAxis) {
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+        int fontheight = QFontMetrics(font()).height();
+#else
         int fontheight = fontMetrics().height();
+#endif
         if( d->mPlottingArea.height() > fontheight ) {  //if there's room to draw the labels, then draw them!
-            d->drawAxisText(&p, QRect(0,0,w,h));
+            d->drawAxisText(painter, QRect(0,0,w,h));
         }
     }
 }
@@ -653,6 +717,19 @@ void KSignalPlotterPrivate::drawBackground(QPainter *p, const QRect &boundingBox
     p->setRenderHint(QPainter::Antialiasing, true);
 }
 
+bool KSignalPlotter::thinFrame() const
+{
+    return d->mShowThinFrame;
+}
+void KSignalPlotter::setThinFrame(bool thinFrame)
+{
+    if(thinFrame == d->mShowThinFrame)
+        return;
+
+    d->mShowThinFrame = thinFrame;
+    update(); //Trigger a repaint
+}
+
 #ifdef SVG_SUPPORT
 void KSignalPlotterPrivate::updateSvgBackground(const QRect &boundingBox)
 {
@@ -661,17 +738,7 @@ void KSignalPlotterPrivate::updateSvgBackground(const QRect &boundingBox)
     mBackgroundImage = QPixmap(boundingBox.width(), boundingBox.height());
     Q_ASSERT(!mBackgroundImage.isNull());
     QPainter pCache(&mBackgroundImage);
-
     pCache.fill( q->palette().color(QPalette::Base) );
-
-    Plasma::Svg *svgRenderer;
-    if(!sSvgRenderer.contains(mSvgFilename)) {
-        svgRenderer = new Plasma::Svg(this);
-        svgRenderer->setImagePath(mSvgFilename);
-        sSvgRenderer.insert(mSvgFilename, svgRenderer);
-    } else {
-        svgRenderer = sSvgRenderer[mSvgFilename];
-    }
 
     svgRenderer->resize(boundingBox.size());
     svgRenderer->paint(&pCache, 0, 0);
@@ -708,7 +775,7 @@ void KSignalPlotterPrivate::redrawScrollableImage()
 
 void KSignalPlotterPrivate::drawThinFrame(QPainter *p, const QRect &boundingBox)
 {
-    /* Draw white line along the bottom and the right side of the
+    /* Draw a line along the bottom and the right side of the
      * widget to create a 3D like look. */
     p->setRenderHint(QPainter::Antialiasing, false);
     p->setPen( QPen(q->palette().color( QPalette::Light ), 0) );
@@ -719,8 +786,8 @@ void KSignalPlotterPrivate::drawThinFrame(QPainter *p, const QRect &boundingBox)
 
 void KSignalPlotterPrivate::calculateNiceRange()
 {
-    double max = mUserMaxValue;
-    double min = mUserMinValue;
+    qreal max = mUserMaxValue;
+    qreal min = mUserMinValue;
     bool minFromUser = true;
     if( mUseAutoRange ) {
         if(!isnan(mMaxValue) && mMaxValue * 0.99 > max)  //Allow max value to go very slightly over the given max, for rounding reasons
@@ -736,10 +803,10 @@ void KSignalPlotterPrivate::calculateNiceRange()
     if(max - min < 0.000001 )
         max = min +1;
 
-    double range = max - min;
+    qreal range = max - min;
 
     // Massage the range so that the grid shows some nice values.
-    double step;
+    qreal step;
     int number_lines_above_zero = 0;
     int number_lines_below_zero = 0;
     //If y=0 is visible and have at least 1 horizontal lines make sure that we have a line crossing through 0
@@ -753,7 +820,7 @@ void KSignalPlotterPrivate::calculateNiceRange()
 
     const int sigFigs = 2;                                   //Number of significant figures of the step to use.  Update the 0.05 below if this changes
     int logdim = (int)floor( log10( step ) ) - (sigFigs-1);  //find the order of the number, reduced by 1.  E.g. if step=1234 then logdim is 3-1=2
-    double dim = pow( (double)10.0, logdim );                //e.g.  if step=1234, logdim=2, so dim = 100
+    qreal dim = pow( (qreal)10.0, logdim );                //e.g.  if step=1234, logdim=2, so dim = 100
     int a = (int)ceil( step / dim - 0.000005);                   //so a = ceil(1234/100) = ceil(12.34) = 13    (we subtract an epsilon)
 
     if(logdim >= 0)
@@ -827,21 +894,21 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
 
     pen.setCapStyle(Qt::FlatCap);
 
-    double scaleFac = (boundingBox.height()-2) / mNiceRange;
+    qreal scaleFac = (boundingBox.height()-2) / mNiceRange;
     if(mBeamData.size() - 1 <= index )
         return;  // Something went wrong?
 
-    const QList<double> &datapoints = mBeamData[index];
-    const QList<double> &prev_datapoints = mBeamData[index+1];
+    const QList<qreal> &datapoints = mBeamData[index];
+    const QList<qreal> &prev_datapoints = mBeamData[index+1];
     bool hasPrevPrevDatapoints = (index +2 < mBeamData.size()); //used for bezier curve gradient calculation
-    const QList<double> &prev_prev_datapoints = hasPrevPrevDatapoints?mBeamData[index+2]:prev_datapoints;
+    const QList<qreal> &prev_prev_datapoints = hasPrevPrevDatapoints?mBeamData[index+2]:prev_datapoints;
 
-    float x0 = boundingBox.right();
-    float x1 = qMax(boundingBox.right() - horizontalScale, 0);
+    qreal x0 = boundingBox.right();
+    qreal x1 = qMax(boundingBox.right() - horizontalScale, 0);
 
-    float y0 = 0;
-    float y1 = 0;
-    float y2 = 0;
+    qreal y0 = 0;
+    qreal y1 = 0;
+    qreal y2 = 0;
     qreal xaxis = boundingBox.bottom();
     if( mNiceMinValue < 0)
        xaxis = qMax(qreal(xaxis + mNiceMinValue*scaleFac), qreal(boundingBox.top()));
@@ -851,12 +918,12 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
     for (int j = count - 1; j >=0 ; --j) {
         if(!mStackBeams)
             y0 = y1 = y2 = 0;
-        float point0 = datapoints[j];
+        qreal point0 = datapoints[j];
         if( isnan(point0) )
             continue; //Just do not draw points with nans. skip them
 
-        float point1 = prev_datapoints[j];
-        float point2 = prev_prev_datapoints[j];
+        qreal point1 = prev_datapoints[j];
+        qreal point2 = prev_prev_datapoints[j];
 
         if(isnan(point1))
             point1 = point0;
@@ -903,7 +970,7 @@ void KSignalPlotterPrivate::drawAxisText(QPainter *p, const QRect &boundingBox)
 {
     if(mHorizontalLinesCount < 0) return;
     p->setFont( q->font() );
-    double stepsize = mNiceRange/(mScaleDownBy*(mHorizontalLinesCount+1));
+    qreal stepsize = mNiceRange/(mScaleDownBy*(mHorizontalLinesCount+1));
     if(mActualAxisTextWidth == 0) //If we are drawing completely inside the plotter area, using the Text color
         p->setPen( QPen( q->palette().brush(QPalette::Text), 0) );
     else
@@ -917,7 +984,7 @@ void KSignalPlotterPrivate::drawAxisText(QPainter *p, const QRect &boundingBox)
     mAxisTextOverlapsPlotter = false;
     for ( int y = 0; y < numItems; y++, axisTitleIndex++) {
         int y_coord = boundingBox.top() + (y * (boundingBox.height()-fontHeight)) /(mHorizontalLinesCount+1);  //Make sure it's y*h first to avoid rounding bugs
-        double value;
+        qreal value;
         if(y == mHorizontalLinesCount+1)
             value = mNiceMinValue/mScaleDownBy; //sometimes using the formulas gives us a value very slightly off
         else
@@ -929,7 +996,7 @@ void KSignalPlotterPrivate::drawAxisText(QPainter *p, const QRect &boundingBox)
         if(textBoundingRect.width() > mActualAxisTextWidth)
             mAxisTextOverlapsPlotter = true;
         int offset = qMax(mActualAxisTextWidth - textBoundingRect.right(), -textBoundingRect.left());
-        if ( kapp->layoutDirection() == Qt::RightToLeft )
+        if ( q->layoutDirection() == Qt::RightToLeft )
             p->drawText( boundingBox.left(), y_coord, boundingBox.width() - offset , fontHeight+1, Qt::AlignLeft | Qt::AlignTop, val);
         else
             p->drawText( boundingBox.left() + offset, y_coord, boundingBox.width() - offset, fontHeight+1, Qt::AlignLeft | Qt::AlignTop, val);
@@ -952,9 +1019,9 @@ int KSignalPlotter::currentAxisPrecision() const
     return d->mPrecision;
 }
 
-double KSignalPlotter::lastValue( int i) const
+qreal KSignalPlotter::lastValue( int i) const
 {
-    if(d->mBeamData.isEmpty() || d->mBeamData.first().size() <= i) return std::numeric_limits<double>::quiet_NaN();
+    if(d->mBeamData.isEmpty() || d->mBeamData.first().size() <= i) return std::numeric_limits<qreal>::quiet_NaN();
     return d->mBeamData.first().at(i);
 }
 QString KSignalPlotter::lastValueAsString( int i, int precision) const
@@ -962,16 +1029,16 @@ QString KSignalPlotter::lastValueAsString( int i, int precision) const
     if(d->mBeamData.isEmpty() || d->mBeamData.first().size() <= i || isnan(d->mBeamData.first().at(i))) return QString();
     return valueAsString(d->mBeamData.first().at(i), precision); //retrieve the newest value for this beam
 }
-QString KSignalPlotter::valueAsString( double value, int precision) const
+QString KSignalPlotter::valueAsString( qreal value, int precision) const
 {
     if(isnan(value))
         return QString();
     value = value / d->mScaleDownBy; // scale the value.  E.g. from Bytes to KiB
     return d->scaledValueAsString(value, precision);
 }
-QString KSignalPlotterPrivate::scaledValueAsString( double value, int precision) const
+QString KSignalPlotterPrivate::scaledValueAsString( qreal value, int precision) const
 {
-    double absvalue = qAbs(value);
+    qreal absvalue = qAbs(value);
     if(precision == -1) {
         if(absvalue >= 99.5)
             precision = 0;
@@ -1036,16 +1103,34 @@ void KSignalPlotter::setFillOpacity(int fill)
 
 }
 
+#ifdef GRAPHICS_SIGNAL_PLOTTER
+QPainterPath KGraphicsSignalPlotter::opaqueArea() const
+{
+    return shape(); //The whole thing is opaque
+}
+
+QSizeF KGraphicsSignalPlotter::sizeHint( Qt::SizeHint which, const QSizeF & constraint ) const
+{
+    Q_UNUSED(constraint);
+    if(which == Qt::PreferredSize)
+        return QSizeF(200,200);
+    return QGraphicsWidget::sizeHint(which, constraint);
+}
+#else
 QSize KSignalPlotter::sizeHint() const
 {
     return QSize(200,200); //Just a random size which would usually look okay
 }
+#endif
 
+#ifdef USE_SEPERATE_WIDGET
 GraphWidget::GraphWidget(QWidget *parent) : QWidget(parent)
 {
     setAttribute(Qt::WA_PaintOnScreen);
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_OpaquePaintEvent);
 }
-#include "ksignalplotter.moc"
+#endif
 
+#undef KSignalPlotter
+#undef KSignalPlotterPrivate

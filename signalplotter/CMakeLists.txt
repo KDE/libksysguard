@@ -3,8 +3,9 @@ set(ksignalplotter_WIDGETS "ksignalplotter.widgets")
 
 set(ksignalplotter_LIB_SRCS
     ksignalplotter.cpp
+    kgraphicssignalplotter.cpp
 )
-
+KDE4_MOC_HEADERS(ksignalplotter ksignalplotter.h kgraphicssignalplotter.h)
 kde4_add_library(ksignalplotter SHARED ${ksignalplotter_LIB_SRCS})
 
 target_link_libraries(ksignalplotter ${KDE4_KDEUI_LIBS})
