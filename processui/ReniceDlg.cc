@@ -36,7 +36,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 {
 	setObjectName( "Renice Dialog" );
 	setModal( true );
-	setCaption( i18n("Renice Process") );
+	setCaption( i18n("Set Priority") );
 	setButtons( Ok | Cancel );
 	showButtonSeparator( true );
 	previous_cpuscheduler = 0;

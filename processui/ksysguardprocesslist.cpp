@@ -159,7 +159,7 @@ struct KSysGuardProcessListPrivate {
     {
         mScripting = NULL;
         mNumItemsSelected = -1;
-        renice = new KAction(i18np("Renice Process...", "Renice Processes...", 1), q);
+        renice = new KAction(i18np("Set Priority...", "Set Priority...", 1), q);
         renice->setShortcut(Qt::Key_F8);
         selectParent = new KAction(i18n("Jump to Parent Process"), q);
 
@@ -418,7 +418,7 @@ void KSysGuardProcessList::selectionChanged()
     d->mNumItemsSelected = numSelected;
     d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
 
-    d->renice->setText(i18np("Renice Process...", "Renice Processes...", numSelected));
+    d->renice->setText(i18np("Set Priority...", "Set Priority...", numSelected));
     d->kill->setText(i18np("Kill Process", "Kill Processes", numSelected));
 }
 void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
