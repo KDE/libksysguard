@@ -725,7 +725,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                     else
                         return i18n("The current total CPU usage of the process.");
             case HeadingCPUTime:
-                return i18n("<qt>The total user and system time that this process has been running for.");
+                return i18n("<qt>The total user and system time that this process has been running for, displayed as minutes:seconds.");
             case HeadingVmSize:
                 return i18n("<qt>This is the amount of virtual memory space that the process is using, included shared libraries, graphics memory, files on disk, and so on. This number is almost meaningless.</qt>");
             case HeadingMemory:
