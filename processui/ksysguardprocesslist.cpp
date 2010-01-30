@@ -171,7 +171,7 @@ struct KSysGuardProcessListPrivate {
         monitorio = 0;
 #endif
         resume = new KAction(i18n("Resume Stopped Process"), q);
-        kill = new KAction(i18np("Kill Process...", "Kill Processes...", 1), q);
+        kill = new KAction(i18np("End Process...", "End Processes...", 1), q);
         kill->setIcon(KIcon("process-stop"));
         kill->setShortcut(Qt::Key_Delete);
 
@@ -419,7 +419,7 @@ void KSysGuardProcessList::selectionChanged()
     d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
 
     d->renice->setText(i18np("Set Priority...", "Set Priority...", numSelected));
-    d->kill->setText(i18np("Kill Process", "Kill Processes", numSelected));
+    d->kill->setText(i18np("End Process", "End Processes", numSelected));
 }
 void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
     if(!index.isValid()) return;
@@ -1250,15 +1250,15 @@ void KSysGuardProcessList::killSelectedProcesses()
     else
     {
         int count = selectedAsStrings.count();
-        QString  msg = i18np("Are you sure you want to kill this process?",
-                "Are you sure you want to kill these %1 processes?",
+        QString  msg = i18np("Are you sure you want to end this process?  Any unsaved work may be lost.",
+                "Are you sure you want to end these %1 processes?  Any unsaved work may be lost",
                 count);
 
         int res = KMessageBox::warningContinueCancelList(this, msg, selectedAsStrings,
-                i18np("Kill process", "Kill %1 processes", count),
-                KGuiItem(i18n("Kill"), "process-stop"),
+                i18np("End process", "End %1 processes", count),
+                KGuiItem(i18n("End"), "process-stop"),
                 KStandardGuiItem::cancel(),
-                "killconfirmation");
+                "endconfirmation");
         if (res != KMessageBox::Continue)
         {
             return;

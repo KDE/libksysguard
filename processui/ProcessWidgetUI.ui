@@ -41,7 +41,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Technical information: &lt;/span&gt;&lt;br /&gt;The SIGTERM signal is sent to the given process. If there are insufficient privillages to do so, by default a password is requested.&lt;br /&gt;By running the program &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;polkit-kde-authorization&lt;/span&gt; you can give certain (or all) users permission to kill any process, without requiring a password. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>&amp;Kill Process...</string>
+        <string>&amp;End Process...</string>
        </property>
        <property name="flat">
         <bool>false</bool>
