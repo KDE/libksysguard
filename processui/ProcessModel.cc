@@ -181,6 +181,9 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             }
             return leftCpu > rightCpu;
          }
+        case HeadingCPUTime: {
+            return (processLeft->userTime + processLeft->sysTime) > (processRight->userTime + processRight->sysTime);
+        }
         case HeadingMemory: {
             qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmURSS:processLeft->vmRSS;
             qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmURSS:processRight->vmRSS;
@@ -529,6 +532,8 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             totalUpdated+=2;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingCPUUsage, process);
             emit q->dataChanged(index, index);
+            index = q->createIndex(row, ProcessModel::HeadingCPUTime, process);
+            emit q->dataChanged(index, index);
             //Because of our sorting, changing usage needs to also invalidate the User column
             index = q->createIndex(row, ProcessModel::HeadingUser, process);
             emit q->dataChanged(index, index);
@@ -719,7 +724,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                         return i18np("The current total CPU usage of the process, divided by the %1 processor core in the machine.", "The current total CPU usage of the process, divided by the %1 processor cores in the machine.", d->mNumProcessorCores);
                     else
                         return i18n("The current total CPU usage of the process.");
-
+            case HeadingCPUTime:
+                return i18n("<qt>The total user and system time that this process has been running for.");
             case HeadingVmSize:
                 return i18n("<qt>This is the amount of virtual memory space that the process is using, included shared libraries, graphics memory, files on disk, and so on. This number is almost meaningless.</qt>");
             case HeadingMemory:
@@ -761,6 +767,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt><i>Technical information: </i>This is the URSS - Unique Resident Set Size, calculated as VmRSS - Shared, from /proc/*/statm.  This tends to underestimate the 'true' memory usage of a process (by not including i/o backed memory pages), but is the best estimation that is fast to determine.");
             case HeadingCPUUsage:
                 return i18n("The CPU usage of a process and all of its threads.");
+            case HeadingCPUTime:
+                return i18n("<qt>The total system and user time that a process and all of its threads have been running on the CPU for. This can be greater than the wall clock time if the process has been across multiple CPU cores.");
             case HeadingSharedMemory:
                 return i18n("<qt><i>Technical information: </i>This is the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt .)");
             case HeadingCommand:
@@ -981,6 +989,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 
                 return QString::number((int)(total+0.5)) + '%';
             }
+        case HeadingCPUTime: {
+            qlonglong seconds = (process->userTime + process->sysTime)/100;
+            return QString("%1:%2").arg(seconds/60).arg((int)seconds%60, 2, 10, QLatin1Char('0'));
+        }
         case HeadingMemory:
             if(process->vmURSS == -1) {
                 //If we don't have the URSS (the memory used by only the process, not the shared libraries)
@@ -1162,7 +1174,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 if(tracer.isEmpty()) return tooltip;
             return tooltip + "<br />" + tracer;
         }
-        case HeadingCPUUsage: {
+        case HeadingCPUUsage:
+        case HeadingCPUTime: {
             int divideby = (d->mNormalizeCPUUsage?d->mNumProcessorCores:1);
             QString tooltip = ki18n("<qt><p style='white-space:pre'>"
                         "Process status: %1 %2<br />"
@@ -1278,6 +1291,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingUser:
             case HeadingCPUUsage:
                 return QVariant(Qt::AlignCenter);
+            case HeadingCPUTime:
             case HeadingPid:
             case HeadingMemory:
             case HeadingSharedMemory:
@@ -1321,6 +1335,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 else
                     return total;
             }
+        case HeadingCPUTime:
+            return (qlonglong)(process->userTime + process->sysTime);
         case HeadingMemory:
             if(process->vmRSS == 0) return QVariant(QVariant::String);
             if(process->vmURSS == -1) {
@@ -1498,6 +1514,7 @@ bool ProcessModel::isLocalhost() const
 
 
 void ProcessModel::setupHeader() {
+    //These must be in the same order that they are in in the header file
     QStringList headings;
     headings << i18nc("process heading", "Name");
     headings << i18nc("process heading", "Username");
@@ -1506,6 +1523,7 @@ void ProcessModel::setupHeader() {
     headings << i18nc("process heading", "Niceness");
     // xgettext: no-c-format
     headings << i18nc("process heading", "CPU %");
+    headings << i18nc("process heading", "CPU Time");
     headings << i18nc("process heading", "IO Read");
     headings << i18nc("process heading", "IO Write");
     headings << i18nc("process heading", "Virtual Size");
