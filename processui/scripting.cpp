@@ -89,7 +89,7 @@ void Scripting::displayHtml(const QString &html) {
         connect(mScriptingHtmlDialog, SIGNAL(finished(int)), SLOT(deleteScriptingHtmlDialog()));
     }
 
-    mScriptingHtmlDialog->webView()->setHtml(html, mScriptPath);
+    mScriptingHtmlDialog->webView()->setHtml(html, QUrl::fromLocalFile(mScriptPath + '/'));
     mScriptingHtmlDialog->show();
 }
 
