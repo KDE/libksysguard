@@ -1251,13 +1251,20 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingIoRead: {
             QString tooltip = "<qt><p style='white-space:pre'>";
             //FIXME - use the formatByteRate functions when added
-            tooltip += i18n("Characters read: %1 (%2 KiB/s)<br>Characters written: %3 (%4 KiB/s)<br>Read syscalls: %5 (%6 s⁻¹)<br>Write syscalls: %7 (%8 s⁻¹)<br>Actual bytes read: %9 (%10 KiB/s)<br>Actual bytes written: %11 (%12 KiB/s)",
-                    KGlobal::locale()->formatByteSize(process->ioCharactersRead), QString::number(process->ioCharactersReadRate/1024),
-                    KGlobal::locale()->formatByteSize(process->ioCharactersWritten), QString::number(process->ioCharactersWrittenRate/1024),
-                    QString::number(process->ioReadSyscalls), QString::number(process->ioReadSyscallsRate),
-                    QString::number(process->ioWriteSyscalls), QString::number(process->ioWriteSyscallsRate)).arg(
-                    KGlobal::locale()->formatByteSize(process->ioCharactersActuallyRead), QString::number(process->ioCharactersActuallyReadRate/1024 ),
-                    KGlobal::locale()->formatByteSize(process->ioCharactersActuallyWritten), QString::number(process->ioCharactersActuallyWrittenRate/1024));
+            tooltip += ki18n("Characters read: %1 (%2 KiB/s)<br>Characters written: %3 (%4 KiB/s)<br>Read syscalls: %5 (%6 s⁻¹)<br>Write syscalls: %7 (%8 s⁻¹)<br>Actual bytes read: %9 (%10 KiB/s)<br>Actual bytes written: %11 (%12 KiB/s)")
+                .subs(KGlobal::locale()->formatByteSize(process->ioCharactersRead))
+                .subs(QString::number(process->ioCharactersReadRate/1024))
+                .subs(KGlobal::locale()->formatByteSize(process->ioCharactersWritten))
+                .subs(QString::number(process->ioCharactersWrittenRate/1024))
+                .subs(QString::number(process->ioReadSyscalls))
+                .subs(QString::number(process->ioReadSyscallsRate))
+                .subs(QString::number(process->ioWriteSyscalls))
+                .subs(QString::number(process->ioWriteSyscallsRate))
+                .subs(KGlobal::locale()->formatByteSize(process->ioCharactersActuallyRead))
+                .subs(QString::number(process->ioCharactersActuallyReadRate/1024 ))
+                .subs(KGlobal::locale()->formatByteSize(process->ioCharactersActuallyWritten))
+                .subs(QString::number(process->ioCharactersActuallyWrittenRate/1024))
+                .toString();
             return tooltip;
         }
         case HeadingXTitle: {
