@@ -54,6 +54,9 @@ class ScriptingHtmlDialog : public KDialog {
             setEscapeButton( KDialog::Close );
             showButtonSeparator( false );
             setMainWidget(&m_webView);
+            m_webView.settings()->setOfflineStoragePath(QString());
+            m_webView.settings()->setOfflineWebApplicationCachePath(QString());
+            m_webView.settings()->setObjectCacheCapacities(0,0,0);
         }
         QWebView *webView() {
             return &m_webView;
