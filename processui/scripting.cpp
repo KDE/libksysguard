@@ -54,6 +54,8 @@ class ScriptingHtmlDialog : public KDialog {
             setEscapeButton( KDialog::Close );
             showButtonSeparator( false );
             setMainWidget(&m_webView);
+            (void)minimumSizeHint(); //Force the dialog to be laid out now
+            layout()->setContentsMargins(0,0,0,0);
             m_webView.settings()->setOfflineStoragePath(QString());
             m_webView.settings()->setOfflineWebApplicationCachePath(QString());
             m_webView.settings()->setObjectCacheCapacities(0,0,0);
