@@ -71,7 +71,7 @@ QString KSysGuard::Process::translatedStatus() const {
         case Zombie: return i18nc("process status", "zombie");
         case Stopped: return i18nc("process status", "stopped");
         case Paging: return i18nc("process status", "paging");
-//        case Ended: return i18nc("process status", "finished");
+        case Ended: return i18nc("process status", "finished");
         default: return i18nc("process status", "unknown");
     }
 }
