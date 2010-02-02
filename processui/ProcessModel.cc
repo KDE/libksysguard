@@ -982,7 +982,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 if(d->mNormalizeCPUUsage)
                     total = total / d->mNumProcessorCores;
 
-                if(total < 1 && process->status != KSysGuard::Process::Sleeping && process->status != KSysGuard::Process::Running)
+                if(total < 1 && process->status != KSysGuard::Process::Sleeping && process->status != KSysGuard::Process::Running && process->status != KSysGuard::Process::Ended)
                     return process->translatedStatus();  //tell the user when the process is a zombie or stopped
                 if(total < 0.5)
                     return "";
