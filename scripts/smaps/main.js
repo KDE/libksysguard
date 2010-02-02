@@ -50,6 +50,11 @@ function parseSmaps() {
     }
     if(dataBlock)
         data.push(dataBlock);
+    // Add in totals
+    for(var i = 0; i < data.length; i++) {
+        data[i]['Private'] = data[i]['Private_Clean'] + data[i]['Private_Dirty'];
+        data[i]['Shared'] = data[i]['Shared_Clean'] + data[i]['Shared_Dirty'];
+    }
     return data;
 }
 function calculateTotal(data, info) {
@@ -67,7 +72,22 @@ function formatKB(kb) {
         format = Math.round(kb/1024) + " MB";
     else
         format = Math.round(kb/1048576) + " GB";
-    return "<font color='blue'>" + format + "</font>";
+    return "<span class=\"memory\">" + format + "</span>";
+}
+function sortDataByInfo(data, info) {
+    return data.sort( function(a,b) { return b[info] - a[info]; } );
+}
+function getHtmlTableForLibrarySummary(data, info, total) {
+    var sortedData = sortDataByInfo(data, info);
+    var html = "<table class='librarySummary'><thead><tr><th colspan='2'>" + info + "</th><tbody>";
+    for(var i = 0; i < sortedData.length && i < 5; i++) {
+        var value = sortedData[i][info] ;
+        if(value < (total / 1000))
+            break; //Do not bother if library usage is less than 0.1% of the total
+        html += "<tr><td class='memory'>" + value + " KB</td><td>" + sortedData[i]['pathname'] + " <span class='perms'>(" + sortedData[i]['perms'] + ")</span></td></tr>";
+    }
+    html += "</tbody></table>";
+    return html;
 }
 function getHtmlSummary(data) {
     var pss = calculateTotal(data,'Pss');
@@ -82,37 +102,51 @@ function getHtmlSummary(data) {
     var html = "";
     html += "<h2>Summary</h2>";
     html += "The process <b>" + process.name.substr(0,20) + "</b> (with pid " + process.pid + ") is using approximately " + formatKB(pss) + " of memory.<br>";
-    html += "It is using " + formatKB(private_total) + " privately, and a further " + formatKB(shared_total) + " is, or could be, shared with other programs.<br>";
+    html += "It is using " + formatKB(private_total) + " privately, and a further " + formatKB(shared_total) + " that is, or could be, shared with other programs.<br>";
     if(shared_total != 0)
         html += "Dividing up the shared memory between all the processes sharing that memory we get a reduced shared memory usage of " + formatKB(pss - private_total) + ". Adding that to the private usage, we get the above mentioned total memory footprint of " + formatKB(pss) + ".<br>";
     if( swap != 0)
         html += swap + " KB is swapped out to disk, probably due to a low amount of available memory left.";
-    html += "<h2>Totals</h2>";
+    html += "<h2>Library usage</h2>";
+    html += "<div class='summaryTable'>" + getHtmlTableForLibrarySummary(data, 'Private', private_total) + "</div>";
+    html += "<div class='summaryTable'>" + getHtmlTableForLibrarySummary(data, 'Shared', shared_total) + "</div>";
+
+    html += "<div style='clear:both'><h2>Totals</h2><div class='totalTable'>";
     html += "<table>";
     html += "<tbody>";
-    html += "<tr><th align='right'>Private</th><td align='right'>" + private_total + " KB</td><td><font color='gray'>(" + private_clean + " KB clean + " + private_dirty + " KB dirty)</font></td></tr>";
-    html += "<tr><th align='right'>Shared</th><td align='right'>" + shared_total + " KB</td><td><font color='gray'>(" + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</font></td></tr>";
-    html += "<tr><th align='right'>Private + Shared (Rss)</th><td align='right'>" + rss + " KB</td></tr>";
-    html += "<tr><th align='right'>Private + Shared/Number of Processes (Pss)</th><td align='right'>" + pss + " KB</td></tr>";
-    html += "<tr><th align='right'>Swaped out to disk</th><td align='right'>" + swap + " KB</td></tr>";
+    html += "<tr><th class='memory'>Private</th><td class='memory'>" + private_total + " KB</td><td class='comment'>(" + private_clean + " KB clean + " + private_dirty + " KB dirty)</td></tr>";
+    html += "<tr><th class='memory'>Shared</th><td class='memory'>" + shared_total + " KB</td><td class='comment'>(" + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</td></tr>";
+    html += "<tr><th class='memory'>Rss</th><td class='memory'>" + rss + " KB</td><td class='comment'>(= Private + Shared)</td></tr>";
+    html += "<tr><th class='memory'>Pss</th><td class='memory'>" + pss + " KB</td><td class='comment'>(= Private + Shared/Number of Processes)</td></tr>";
+    html += "<tr><th class='memory'>Swap</th><td class='memory'>" + swap + " KB</td></tr>";
     html += "</tbody>";
-    html += "</table>";
+    html += "</table></div></div>";
+    return html;
+}
+function getHtmlHeader() {
+    var html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">";
+    html += "<html><head><link href='style.css' rel='stylesheet' type='text/css'>";
+    html += "<script language='javascript' src='helper.js' language='javascript' type='text/javascript'/>";
+    html += "</head><body>";
     return html;
 }
 function getHtml() {
     var data = parseSmaps();
     if(!data)
         return;
-
-    var html = "<h1>Process " + process.pid + " - " + process.name + "</h1>";
+    var html = getHtmlHeader();
+    html += "<div id='innertoc' class='innertoc'></div>";
+    html += "<h1>Process " + process.pid + " - " + process.name + "</h1>";
     html += getHtmlSummary(data);
-    html += "<h2>Full details</h2>";
+    html += "<div class='fullDetails'><h2>Full details</h2>";
     html += "<table cellspace='2'>";
     html += "<tr><th>Address</th><th>Perm</th><th>Size</th><th align='left'>Filename</th></tr>"
     for(var i = 0; i < data.length; i++) {
-        html += "<tr><td nowrap><font color='gray'>" + data[i]['address'] + "</font></td><td nowrap><code>" + data[i]['perms'] + "</code></td><td align='right' nowrap>" + data[i]['Size'] + " KB</td><td nowrap>" + data[i]['pathname'] + "</td></tr>";
+        html += "<tr><td class='address'>" + data[i]['address'] + "</td><td class='perms'>" + data[i]['perms'] + "</td><td align='right'>" + data[i]['Size'] + " KB</td><td>" + data[i]['pathname'] + "</td></tr>";
     }
-    html += "</table>";
+    html += "</table></div>";
+    html += "<script language='javascript'>createTOC()</script>";
+    html += "</body></html>";
     return html;
 }
 var result = getHtml();

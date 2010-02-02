@@ -1,0 +1,51 @@
+th {
+    color: #6D929B;
+}
+td, th {
+    white-space:nowrap;
+}
+td.address {
+    color:gray;
+    font-family: monospace;
+}
+span.memory {
+    color:blue;
+}
+
+table {
+    border-width:10px;
+}
+
+span.perms {
+    color:gray;
+    font-family: monospace;
+}
+td.perms {
+    font-family: monospace;
+}
+td.memory, th.memory {
+    text-align: right;
+}
+td.comment {
+    color:gray;
+}
+div.innertoc {
+    float:right;
+    background-color: #eeeeee;
+    padding:5px;
+}
+div.summaryTable {
+    float:left;
+}
+div.totalTable {
+    float:left;
+}
+div.fullDetails {
+    clear:both;
+}
+table.librarySummary {
+}
+
+a.page {
+    display:block;
+}
