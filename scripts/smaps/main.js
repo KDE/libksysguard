@@ -1,3 +1,4 @@
+
 function readSmapsFile() {
     if( !fileExists("/proc/" + process.pid + "/smaps" ) ) {
         if( fileExists("/proc/" + process.pid ) ) {  //Check that it's not just a timing issue - the process might have already ended
@@ -55,7 +56,34 @@ function parseSmaps() {
         data[i]['Private'] = data[i]['Private_Clean'] + data[i]['Private_Dirty'];
         data[i]['Shared'] = data[i]['Shared_Clean'] + data[i]['Shared_Dirty'];
     }
-    return data;
+
+    // Now build up another hash table, collapsing the pathname values
+    var combinedHash = new Array();
+    for(var i = 0; i < data.length; i++) {
+        var pathname = data[i]['pathname'];
+        if(pathname == "")
+            pathname = "[heap]";
+        if(!combinedHash[pathname])
+            combinedHash[pathname] = new Array();
+        for(var j in data[i]) {
+            if(j == 'address' || j == 'perms' || j == 'offset' || j == 'dev' || j == 'inode' || j == 'pathname')
+                continue;
+
+            if(combinedHash[pathname][j])
+                combinedHash[pathname][j] += data[i][j];
+            else
+                combinedHash[pathname][j] = data[i][j];
+        }
+    }
+    //Convert hash table to an array so that we can sort it
+    var combined = new Array();
+    var i = 0;
+    for(var key in combinedHash) {
+        combined[i] = combinedHash[key];
+        combined[i]['pathname'] = key;
+        i++;
+    }
+    return [data,combined];
 }
 function calculateTotal(data, info) {
     var total = 0;
@@ -69,9 +97,9 @@ function formatKB(kb) {
     if(kb < 2048) /* less than 2MB, write as just KB */
         format = kb + " KB";
     else if(kb < (1048576)) /* less than 1GB, write in MB */
-        format = Math.round(kb/1024) + " MB";
+        format = (kb/1024).toFixed(1) + " MB";
     else
-        format = Math.round(kb/1048576) + " GB";
+        format = (kb/1048576).toFixed(1) + " GB";
     return "<span class=\"memory\">" + format + "</span>";
 }
 function sortDataByInfo(data, info) {
@@ -84,21 +112,22 @@ function getHtmlTableForLibrarySummary(data, info, total) {
         var value = sortedData[i][info] ;
         if(value < (total / 1000))
             break; //Do not bother if library usage is less than 0.1% of the total
-        html += "<tr><td class='memory'>" + value + " KB</td><td>" + sortedData[i]['pathname'] + " <span class='perms'>(" + sortedData[i]['perms'] + ")</span></td></tr>";
+        var pathname = sortedData[i]['pathname'];
+        html += "<tr><td class='memory'>" + value + " KB</td><td>" + pathname + "</td></tr>";
     }
     html += "</tbody></table>";
     return html;
 }
-function getHtmlSummary(data) {
-    var pss = calculateTotal(data,'Pss');
-    var rss = calculateTotal(data,'Rss');
-    var private_clean = calculateTotal(data,'Private_Clean');
-    var private_dirty = calculateTotal(data,'Private_Dirty');
+function getHtmlSummary(combined) {
+    var pss = calculateTotal(combined,'Pss');
+    var rss = calculateTotal(combined,'Rss');
+    var private_clean = calculateTotal(combined,'Private_Clean');
+    var private_dirty = calculateTotal(combined,'Private_Dirty');
     var private_total = private_clean + private_dirty;
-    var shared_clean = calculateTotal(data,'Shared_Clean');
-    var shared_dirty = calculateTotal(data,'Shared_Dirty');
+    var shared_clean = calculateTotal(combined,'Shared_Clean');
+    var shared_dirty = calculateTotal(combined,'Shared_Dirty');
     var shared_total = shared_clean + shared_dirty;
-    var swap = calculateTotal(data,'Swap');
+    var swap = calculateTotal(combined,'Swap');
     var html = "";
     html += "<h2>Summary</h2>";
     html += "The process <b>" + process.name.substr(0,20) + "</b> (with pid " + process.pid + ") is using approximately " + formatKB(pss) + " of memory.<br>";
@@ -108,8 +137,9 @@ function getHtmlSummary(data) {
     if( swap != 0)
         html += swap + " KB is swapped out to disk, probably due to a low amount of available memory left.";
     html += "<h2>Library usage</h2>";
-    html += "<div class='summaryTable'>" + getHtmlTableForLibrarySummary(data, 'Private', private_total) + "</div>";
-    html += "<div class='summaryTable'>" + getHtmlTableForLibrarySummary(data, 'Shared', shared_total) + "</div>";
+    html += "The memory usage of a process is found by adding up the memory usage of each of its libraries, plus the process's own heap, stack and any other mappings, plus the stack of any of its threads.<br>";
+    html += "<div class='summaryTable'>" + getHtmlTableForLibrarySummary(combined, 'Private', private_total) + "</div>";
+    html += "<div class='summaryTable'>" + getHtmlTableForLibrarySummary(combined, 'Shared', shared_total) + "</div>";
 
     html += "<div style='clear:both'><h2>Totals</h2><div class='totalTable'>";
     html += "<table>";
@@ -131,20 +161,23 @@ function getHtmlHeader() {
     return html;
 }
 function getHtml() {
-    var data = parseSmaps();
-    if(!data)
+    var smapData = parseSmaps();
+    if(!smapData)
         return;
+    var data = smapData[0];
+    var combined = smapData[1];
+
     var html = getHtmlHeader();
     html += "<div id='innertoc' class='innertoc'></div>";
     html += "<h1>Process " + process.pid + " - " + process.name + "</h1>";
-    html += getHtmlSummary(data);
+    html += getHtmlSummary(combined);
     html += "<div class='fullDetails'><h2>Full details</h2>";
     html += "<table cellspace='2'>";
-    html += "<tr><th>Address</th><th>Perm</th><th>Size</th><th align='left'>Filename</th></tr>"
+    html += "<thead><tr><th>Address</th><th>Perm</th><th>Size</th><th align='left'>Filename</th></tr></thead><tbody>"
     for(var i = 0; i < data.length; i++) {
         html += "<tr><td class='address'>" + data[i]['address'] + "</td><td class='perms'>" + data[i]['perms'] + "</td><td align='right'>" + data[i]['Size'] + " KB</td><td>" + data[i]['pathname'] + "</td></tr>";
     }
-    html += "</table></div>";
+    html += "</tbody></table></div>";
     html += "<script language='javascript'>createTOC()</script>";
     html += "</body></html>";
     return html;

@@ -37,7 +37,7 @@ div.innertoc {
 div.summaryTable {
     float:left;
     padding:0px;
-    width: 49%;
+    min-width:48%;
 }
 thead th {
     border-color: gray;
@@ -52,7 +52,7 @@ div.fullDetails {
     clear:both;
 }
 table.librarySummary {
-    width: 50%;
+    width: 48%;
 }
 
 a.page {
