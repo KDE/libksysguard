@@ -1,3 +1,19 @@
+var sizeKeys = new Array(); /* The keys which contain a size - e.g. Size, Pss, Rss etc */
+var kernelPageSize;  /* The size of the kernel page size.  -1 if it's not the same for all. */
+var mmuPageSize;     /* The size of the mmu page size.  -1 if it's not the same for all. */
+
+function removeItem(items, item) {
+    var i = 0;
+    while (i < items.length) {
+        if (items[i] == item) {
+            items.splice(i, 1);
+            break;
+        } else {
+            i++;
+        }
+    }
+    return items;
+}
 
 function readSmapsFile() {
     if( !fileExists("/proc/" + process.pid + "/smaps" ) ) {
@@ -30,11 +46,14 @@ function parseSmaps() {
     for(var i = 0; i < smaps.length; i++) {
         lineMatch = lineRegex.exec(smaps[i]);
         if(lineMatch) {
-            dataBlock[ lineMatch[1] ] = parseInt(lineMatch[2]);  /* E.g.  dataBlock['Size'] = 84 */
+            var key = lineMatch[1];
+            dataBlock[ key ] = parseInt(lineMatch[2]);  /* E.g.  dataBlock['Size'] = 84 */
             /* Size - Virtual memory space (useless) */
             /* RSS - Includes video card memory etc */
             /* PSS - */
             /* Shared + Private = RSS, but it's more accurate to instead make Shared = Pss - Private */
+            if(data.length == 0)
+                sizeKeys.push(lineMatch[1]);
         } else if(headingMatch = headingRegex.exec(smaps[i])) {
             if(dataBlock)
                 data.push(dataBlock);
@@ -51,28 +70,41 @@ function parseSmaps() {
     }
     if(dataBlock)
         data.push(dataBlock);
-    // Add in totals
+
+    // Add in totals and check page sizes
     for(var i = 0; i < data.length; i++) {
         data[i]['Private'] = data[i]['Private_Clean'] + data[i]['Private_Dirty'];
         data[i]['Shared'] = data[i]['Shared_Clean'] + data[i]['Shared_Dirty'];
+        if(!kernelPageSize)
+            kernelPageSize = data[i]['KernelPageSize'];
+        else if(data[i]['KernelPageSize'] && kernelPageSize != data[i]['KernelPageSize'])
+            kernelPageSize = -1;
+        if(!mmuPageSize)
+            mmuPageSize = data[i]['MMUPageSize'];
+        else if(data[i]['mmuPageSize'] && mmuPageSize != data[i]['MMUPageSize'])
+            mmuPageSize = -1;
+
     }
+    if(mmuPageSize != -1)
+        removeItem(sizeKeys, 'MMUPageSize');
+    if(kernelPageSize != -1)
+        removeItem(sizeKeys, 'KernelPageSize');
+    var sizeKeysIncludingCombined = sizeKeys.concat(['Private', 'Shared']);
 
     // Now build up another hash table, collapsing the pathname values
     var combinedHash = new Array();
     for(var i = 0; i < data.length; i++) {
         var pathname = data[i]['pathname'];
-        if(pathname == "")
+        if(pathname == "") //Count anonymous mappings (mmap to /dev/zero) as part of the heap
             pathname = "[heap]";
         if(!combinedHash[pathname])
             combinedHash[pathname] = new Array();
-        for(var j in data[i]) {
-            if(j == 'address' || j == 'perms' || j == 'offset' || j == 'dev' || j == 'inode' || j == 'pathname')
-                continue;
-
-            if(combinedHash[pathname][j])
-                combinedHash[pathname][j] += data[i][j];
+        for(var j = 0; j < sizeKeysIncludingCombined.length; j++) {
+            var key = sizeKeysIncludingCombined[j]
+            if(combinedHash[pathname][key])
+                combinedHash[pathname][key] += data[i][key];
             else
-                combinedHash[pathname][j] = data[i][j];
+                combinedHash[pathname][key] = data[i][key];
         }
     }
     //Convert hash table to an array so that we can sort it
@@ -82,7 +114,7 @@ function parseSmaps() {
         combined[i] = combinedHash[key];
         combined[i]['pathname'] = key;
         i++;
-    }
+    }i
     return [data,combined];
 }
 function calculateTotal(data, info) {
@@ -107,12 +139,18 @@ function sortDataByInfo(data, info) {
 }
 function getHtmlTableForLibrarySummary(data, info, total) {
     var sortedData = sortDataByInfo(data, info);
-    var html = "<table class='librarySummary'><thead><tr><th colspan='2'>" + info + "</th><tbody>";
-    for(var i = 0; i < sortedData.length && i < 5; i++) {
-        var value = sortedData[i][info] ;
-        if(value < (total / 1000))
-            break; //Do not bother if library usage is less than 0.1% of the total
+    var html = "<table class='librarySummary'><thead><tr><th colspan='2'>" + info + "</th></thead>"
+    html += "<tfoot class='showFullLibrarySummaryLink'><tr><td colspan='2'>"
+    html += "<a id='link" + info + "' href='javascript:showFullLibrarySummary(\"hidden" + info + "\", \"link" + info + "\")'>more</a>";
+    html += "</td></tr></tfoot>";
+    html += "<tbody>";
+    for(var i = 0; i < sortedData.length; i++) {
+        var value = sortedData[i][info];
+        if(value == 0)
+            break; //Do not show libraries with a value of 0 KB
         var pathname = sortedData[i]['pathname'];
+        if( i == 5 && sortedData.length > 8)
+            html += "</tbody><tbody id='hidden" + info + "' style='display:none'>";
         html += "<tr><td class='memory'>" + value + " KB</td><td>" + pathname + "</td></tr>";
     }
     html += "</tbody></table>";
@@ -157,6 +195,7 @@ function getHtmlHeader() {
     var html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">";
     html += "<html><head><link href='style.css' rel='stylesheet' type='text/css'>";
     html += "<script language='javascript' src='helper.js' language='javascript' type='text/javascript'/>";
+    html += "<script language='javascript' src='sorttable.js' language='javascript' type='text/javascript'/>";
     html += "</head><body>";
     return html;
 }
@@ -172,12 +211,34 @@ function getHtml() {
     html += "<h1>Process " + process.pid + " - " + process.name + "</h1>";
     html += getHtmlSummary(combined);
     html += "<div class='fullDetails'><h2>Full details</h2>";
-    html += "<table cellspace='2'>";
-    html += "<thead><tr><th>Address</th><th>Perm</th><th>Size</th><th align='left'>Filename</th></tr></thead><tbody>"
-    for(var i = 0; i < data.length; i++) {
-        html += "<tr><td class='address'>" + data[i]['address'] + "</td><td class='perms'>" + data[i]['perms'] + "</td><td align='right'>" + data[i]['Size'] + " KB</td><td>" + data[i]['pathname'] + "</td></tr>";
+    html += "Information about the complete virtual space for the process is available, with sortable columns.  An empty filename means that it is an anonymous mapping (see the <code>mmap</code> man page, under <code>MAP_ANONYMOUS</code>.  It's basically a fast way to allocate and clear a block of space).<br>";
+    if(kernelPageSize != -1 && mmuPageSize != -1 && kernelPageSize == mmuPageSize)
+        html += "Both the MMU page size and the kernel page size are " + kernelPageSize + " KB.<br>";
+    else {
+        if(kernelPageSize != -1)
+            html += "The kernel page size is " + kernelPageSize + " KB. ";
+        if(mmuPageSize != -1)
+            html += "The MMU page size is " + mmuPageSize + " KB.";
+        html += "<br>";
     }
-    html += "</tbody></table></div>";
+    html += "<table class='sortable fullDetails' id='fullDetails'>";
+    html += "<thead><tr><th>Address</th><th>Perm</th>";
+    for(var i = 0; i < sizeKeys.length; i++)
+        html += "<th>" + sizeKeys[i].replace('_',' ') + "</th>";
+
+    html += "<th align='left'>Filename</th></tr></thead><tbody>"
+    for(var i = 0; i < data.length; i++) {
+        html += "<tr><td class='address'>" + data[i]['address'] + "</td><td class='perms'>" + data[i]['perms'] + "</td>";
+        for(var j = 0; j < sizeKeys.length; j++) {
+            var value = data[i][sizeKeys[j]];
+            html += "<td align='right' sorttable_customkey='" + value + "'>" + value + " KB</td>";
+        }
+        html += "<td>" + data[i]['pathname'] + "</td></tr>";
+
+    }
+    html += "</tbody></table>";
+    html += "<a href='javascript:showFullDetailsTable();' id='showFullDetailsLink'>Show Full Details</a>";
+    html += "</div>";
     html += "<script language='javascript'>createTOC()</script>";
     html += "</body></html>";
     return html;

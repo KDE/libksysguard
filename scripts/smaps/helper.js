@@ -52,4 +52,20 @@ function createTOC() {
     return y;
 }
 
-
+function showFullDetailsTable() {
+    var table = document.getElementById('fullDetails');
+    table.style.display = 'block';
+    var link = document.getElementById('showFullDetailsLink');
+    link.style.display = 'none';
+}
+function showFullLibrarySummary(tbodyId, aId) {
+    var tbody = document.getElementById(tbodyId);
+    if(tbody.style.display == 'none') {
+        //show it again
+        tbody.style.display = '';
+        document.getElementById(aId).innerHTML = 'hide';
+    } else {
+        tbody.style.display = 'none';
+        document.getElementById(aId).innerHTML = 'more';
+    }
+}

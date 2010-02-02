@@ -1,7 +1,7 @@
 th {
     color: #6D929B;
 }
-td, th {
+td {
     white-space:nowrap;
 }
 td.address {
@@ -48,8 +48,16 @@ table {
     margin-left: auto;
     margin-right: auto;
 }
+tbody.hidden {
+    display:none;
+}
 div.fullDetails {
     clear:both;
+    float:left;
+}
+table.fullDetails {
+    display:none;
+    width: 100%;
 }
 table.librarySummary {
     width: 48%;
@@ -57,7 +65,12 @@ table.librarySummary {
 
 a.page {
     display:block;
+    text-align: right;
 }
 td {
     padding: 0em 0.3em;
+}
+tfoot.showFullLibrarySummaryLink {
+    font-size: small;
+    text-align: right;
 }
