@@ -114,8 +114,8 @@ function getHtmlSummary(data) {
     html += "<div style='clear:both'><h2>Totals</h2><div class='totalTable'>";
     html += "<table>";
     html += "<tbody>";
-    html += "<tr><th class='memory'>Private</th><td class='memory'>" + private_total + " KB</td><td class='comment'>(" + private_clean + " KB clean + " + private_dirty + " KB dirty)</td></tr>";
-    html += "<tr><th class='memory'>Shared</th><td class='memory'>" + shared_total + " KB</td><td class='comment'>(" + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</td></tr>";
+    html += "<tr><th class='memory'>Private</th><td class='memory'>" + private_total + " KB</td><td class='comment'>(= " + private_clean + " KB clean + " + private_dirty + " KB dirty)</td></tr>";
+    html += "<tr><th class='memory'>Shared</th><td class='memory'>" + shared_total + " KB</td><td class='comment'>(= " + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</td></tr>";
     html += "<tr><th class='memory'>Rss</th><td class='memory'>" + rss + " KB</td><td class='comment'>(= Private + Shared)</td></tr>";
     html += "<tr><th class='memory'>Pss</th><td class='memory'>" + pss + " KB</td><td class='comment'>(= Private + Shared/Number of Processes)</td></tr>";
     html += "<tr><th class='memory'>Swap</th><td class='memory'>" + swap + " KB</td></tr>";
