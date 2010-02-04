@@ -1,6 +1,8 @@
 
 ########### next target ###############
 
+kde4_no_enable_final( signalplotter )
+
 add_subdirectory( lsofui )
 add_subdirectory( processcore )
 add_subdirectory( processui )
