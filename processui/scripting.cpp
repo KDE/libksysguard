@@ -70,16 +70,13 @@ class ScriptingHtmlDialog : public KDialog {
 QScriptValue setHtml(QScriptContext *context, QScriptEngine *engine)
 {
     Scripting *scriptingParent = static_cast<Scripting *>(qVariantValue<QObject*>(engine->property("scriptingParent")));
-
     if(context->argumentCount() != 1) {
-        KMessageBox::sorry(scriptingParent, i18np("Script error: There needs to be exactly one argument to setHtml(), but there was %1.",
-                                                  "Script error: There needs to be exactly one argument to setHtml(), but there were %1.",
-                                                  context->argumentCount()));
-        return QScriptValue();
+        return context->throwError(QScriptContext::SyntaxError, i18np("Script error: There needs to be exactly one argument to setHtml(), but there was %1.",
+                    "Script error: There needs to be exactly one argument to setHtml(), but there were %1.",
+                    context->argumentCount()));
     }
     if(!context->argument(0).isString()) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: Argument to setHtml() was not a string"));
-        return QScriptValue();
+        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument to setHtml() was not a string"));
     }
     QString html = context->argument(0).toString();
 
@@ -105,20 +102,17 @@ void Scripting::deleteScriptingHtmlDialog() {
 
 QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
 {
-    Scripting *scriptingParent = static_cast<Scripting *>(qVariantValue<QObject*>(engine->property("scriptingParent")));
+    Q_UNUSED(engine);
     /* We do lots of checks on the file to see whether we should allow this to be read
      * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
      * may be lifted */
-    if(context->argumentCount() !=1) {
-        KMessageBox::sorry(scriptingParent, i18np("Script error: There needs to be exactly one argument to fileExists(), but there was %1.",
-                                                  "Script error: There needs to be exactly one argument to fileExists(), but there were %1.",
-                                                  context->argumentCount()));
-        return QScriptValue(engine, false);
+    if(context->argumentCount() !=1)  {
+        return context->throwError(QScriptContext::SyntaxError, i18np("Script error: There needs to be exactly one argument to fileExists(), but there was %1.",
+                    "Script error: There needs to be exactly one argument to fileExists(), but there were %1.",
+                    context->argumentCount()));
     }
-    if(!context->argument(0).isString()) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: Argument to fileExists() was not a string"));
-        return QScriptValue(engine, false);
-    }
+    if(!context->argument(0).isString())
+        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument to fileExists() was not a string"));
     QString filename = context->argument(0).toString();
     QFileInfo fileInfo(filename);
     return QScriptValue(engine, fileInfo.exists());
@@ -126,20 +120,16 @@ QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
 }
 QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
 {
-    Scripting *scriptingParent = static_cast<Scripting *>(qVariantValue<QObject*>(engine->property("scriptingParent")));
+    Q_UNUSED(engine);
     /* We do lots of checks on the file to see whether we should allow this to be read
      * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
      * may be lifted */
-    if(context->argumentCount() !=1) {
-        KMessageBox::sorry(scriptingParent, i18np("Script error: There needs to be exactly one argument to readFile(), but there was %1.",
-                                                  "Script error: There needs to be exactly one argument to readFile(), but there were %1.",
-                                                  context->argumentCount()));
-        return QScriptValue();
-    }
-    if(!context->argument(0).isString()) {
-        KMessageBox::sorry(scriptingParent, i18n("Script error: Argument to readFile() was not a string"));
-        return QScriptValue();
-    }
+    if(context->argumentCount() !=1)
+        return context->throwError(QScriptContext::SyntaxError, i18np("Script error: There needs to be exactly one argument to readFile(), but there was %1.",
+                    "Script error: There needs to be exactly one argument to readFile(), but there were %1.",
+                    context->argumentCount()));
+    if(!context->argument(0).isString())
+        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument to readFile() was not a string"));
     QString filename = context->argument(0).toString();
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly)) {
