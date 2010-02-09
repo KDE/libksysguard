@@ -62,7 +62,7 @@ void TestSignalPlotter::testAddRemoveBeamsWithData()
     QCOMPARE(s->numBeams(), 2);
     QVERIFY(s->beamColor(0) == Qt::blue);
     QVERIFY(s->beamColor(1) == Qt::red);
-    s->addSample(QList<double>() << 1.0 << 2.0);
+    s->addSample(QList<qreal>() << 1.0 << 2.0);
     QCOMPARE(s->lastValue(0), 1.0);
     QCOMPARE(s->lastValue(1), 2.0);
 
@@ -76,7 +76,7 @@ void TestSignalPlotter::testAddRemoveBeamsWithData()
 
     s->addBeam(Qt::blue);
     s->addBeam(Qt::red);
-    s->addSample(QList<double>() << 1.0 << 2.0);
+    s->addSample(QList<qreal>() << 1.0 << 2.0);
     QCOMPARE(s->numBeams(), 2);
     QVERIFY(s->beamColor(0) == Qt::blue);
     QVERIFY(s->beamColor(1) == Qt::red);
@@ -157,7 +157,7 @@ void TestSignalPlotter::testReorderBeamsWithData()
     QVERIFY(isnan(s->lastValue(0))); //unset, so should default to NaN
     QVERIFY(isnan(s->lastValue(1))); //unset, so should default to NaN
     //Add some data
-    QList<double> data;
+    QList<qreal> data;
     data << 1.0 << 2.0;
     s->addSample(data);
     QCOMPARE(s->lastValue(0), 1.0);
@@ -215,7 +215,7 @@ void TestSignalPlotter::testMaximumRange()
     QCOMPARE(s->currentMaximumRangeValue(), 0.0);
     QCOMPARE(s->currentMinimumRangeValue(), 0.0);
 
-    QList<double> data;
+    QList<qreal> data;
     data << 1.1;
     s->addSample(data);
 
@@ -260,29 +260,29 @@ void TestSignalPlotter::testNonZeroRange()
     QCOMPARE(s->currentMaximumRangeValue(), 20.0);
     QCOMPARE(s->currentAxisPrecision(), 0);
 
-    s->addSample(QList<double>() << 15);
-    s->addSample(QList<double>() << 25);
-    s->addSample(QList<double>() << 5);
+    s->addSample(QList<qreal>() << 15);
+    s->addSample(QList<qreal>() << 25);
+    s->addSample(QList<qreal>() << 5);
 
     QCOMPARE(s->currentMinimumRangeValue(), 5.0);
     QCOMPARE(s->currentMaximumRangeValue(), 25.0); //Current range should be 5, 9, 13, 17, 21, 25
     QCOMPARE(s->currentAxisPrecision(), 0);
 
     s->addBeam(Qt::red);
-    s->addSample(QList<double>() << 7 << 9);
-    s->addSample(QList<double>() << 29.8 << 2);
+    s->addSample(QList<qreal>() << 7 << 9);
+    s->addSample(QList<qreal>() << 29.8 << 2);
 
     QCOMPARE(s->currentMinimumRangeValue(), 2.0);
     QCOMPARE(s->currentMaximumRangeValue(), 30.0); //Current range should be  2, 7.6, 13.2, 18.8, 24.4, 30
     QCOMPARE(s->currentAxisPrecision(), 1);
 
-    s->addSample(QList<double>() << std::numeric_limits<double>::quiet_NaN()); //These should appear as gaps in the data
+    s->addSample(QList<qreal>() << std::numeric_limits<qreal>::quiet_NaN()); //These should appear as gaps in the data
 
     QCOMPARE(s->currentMinimumRangeValue(), 2.0);
     QCOMPARE(s->currentMaximumRangeValue(), 30.0);
     QCOMPARE(s->currentAxisPrecision(), 1);
 
-    s->addSample(QList<double>() << 1.0/0.0 << -1.0/0.0);
+    s->addSample(QList<qreal>() << 1.0/0.0 << -1.0/0.0);
 
     QCOMPARE(s->currentMinimumRangeValue(), 2.0);
     QCOMPARE(s->currentMaximumRangeValue(), 30.0);
@@ -298,7 +298,7 @@ void TestSignalPlotter::testNonZeroRange2()
     QCOMPARE(s->currentMinimumRangeValue(), 22.0);
     QCOMPARE(s->currentMaximumRangeValue(), 23.0);
 
-    s->addSample(QList<double>() << 25);
+    s->addSample(QList<qreal>() << 25);
     QCOMPARE(s->currentMinimumRangeValue(), 22.0);
     QCOMPARE(s->currentMaximumRangeValue(), 25.0);
 
@@ -306,14 +306,14 @@ void TestSignalPlotter::testNonZeroRange2()
 
 void TestSignalPlotter::testNiceRangeCalculation_data()
 {
-    QTest::addColumn<double>("min");
-    QTest::addColumn<double>("max");
-    QTest::addColumn<double>("niceMin");
-    QTest::addColumn<double>("niceMax");
+    QTest::addColumn<qreal>("min");
+    QTest::addColumn<qreal>("max");
+    QTest::addColumn<qreal>("niceMin");
+    QTest::addColumn<qreal>("niceMax");
     QTest::addColumn<int>("precision");
 
 #define STRINGIZE(number) #number
-#define testRange(min,max,niceMin,niceMax, precision) QTest::newRow(STRINGIZE(min) " to " STRINGIZE(max)) << double(min) << double(max) << double(niceMin) << double(niceMax) << int(precision)
+#define testRange(min,max,niceMin,niceMax, precision) QTest::newRow(STRINGIZE(min) " to " STRINGIZE(max)) << qreal(min) << qreal(max) << qreal(niceMin) << qreal(niceMax) << int(precision)
 /*    testRange(-49,  199, -50, 200, 0);      // Scale should read -50,   0,   50,  100, 150,  200
     testRange(-50,  199, -50, 200, 0);      // Scale should read -50,   0,   50,  100, 150,  200
     testRange(-49,  200, -50, 200, 0);      // Scale should read -50,   0,   50,  100, 150,  200
@@ -326,10 +326,10 @@ void TestSignalPlotter::testNiceRangeCalculation_data()
 }
 void TestSignalPlotter::testNiceRangeCalculation()
 {
-    QFETCH(double, min);
-    QFETCH(double, max);
-    QFETCH(double, niceMin);
-    QFETCH(double, niceMax);
+    QFETCH(qreal, min);
+    QFETCH(qreal, max);
+    QFETCH(qreal, niceMin);
+    QFETCH(qreal, niceMax);
     QFETCH(int, precision);
 
     s->addBeam(Qt::blue);
@@ -359,10 +359,10 @@ void TestSignalPlotter::testNegativeMinimumRange()
     QCOMPARE(s->valueAsString(-4096,1), QString("-4.0"));
 
     s->addBeam(Qt::red);
-    s->addSample(QList<double>() << -1024.0);
+    s->addSample(QList<qreal>() << -1024.0);
     QCOMPARE(s->currentMaximumRangeValue(), 4096.0);
     QCOMPARE(s->currentMinimumRangeValue(), -1024.0);
-    s->addSample(QList<double>() << -1025.0); //Scale now becomes  -3, -1.5, 0, 1.5, 3, 4.5 in KB
+    s->addSample(QList<qreal>() << -1025.0); //Scale now becomes  -3, -1.5, 0, 1.5, 3, 4.5 in KB
     QCOMPARE(s->currentMinimumRangeValue(), -1126.4); //-1.1KB
     QCOMPARE(s->currentMaximumRangeValue(), 4505.6); //4.4KB
 }
@@ -499,57 +499,57 @@ void TestSignalPlotter::testAddingData()
     QCOMPARE(s->useAutoRange(), true);
     s->setGeometry(0,0,500,500);
     //Test adding sample without any beams.  It should just ignore this
-    s->addSample(QList<double>() << 1.0 << 2.0);
+    s->addSample(QList<qreal>() << 1.0 << 2.0);
     //Test setting the beam color of a non-existant beam.  It should just ignore this too.
 //    s->setBeamColor(0, Qt::blue);
 
     //Add an empty sample.  This should just be ignored?
-    s->addSample(QList<double>());
+    s->addSample(QList<qreal>());
 
     //Okay let's be serious now
     s->addBeam(Qt::red);
-    s->addSample(QList<double>() << 0.0);
-    s->addSample(QList<double>() << -0.0);
-    s->addSample(QList<double>() << -1.0);
-    s->addSample(QList<double>() << -1000.0);
-    s->addSample(QList<double>() << 1000.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
-    s->addSample(QList<double>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
-    s->addSample(QList<double>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
-    s->addSample(QList<double>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
-    s->addSample(QList<double>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
-    s->addSample(QList<double>() << -1.0/0.0); //Positive infinity.  Likewise.
-    s->addSample(QList<double>() << -1.0/0.0); //Negative infinity.  Likewise.
-    s->addSample(QList<double>() << -1.0/0.0); //Negative infinity.  Likewise.
-    s->addSample(QList<double>() << -1.0/0.0); //Negative infinity.  Likewise.
-    s->addSample(QList<double>() << -1.0/0.0); //Negative infinity.  Likewise.
-    s->addSample(QList<double>() << -1.0/0.0); //Negative infinity.  Likewise.
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << std::numeric_limits<double>::quiet_NaN()); //These should appear as gaps in the data
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << 300.0);
-    s->addSample(QList<double>() << std::numeric_limits<double>::quiet_NaN());
-    s->addSample(QList<double>() << 400.0);
-    s->addSample(QList<double>() << std::numeric_limits<double>::quiet_NaN());
-    s->addSample(QList<double>() << std::numeric_limits<double>::quiet_NaN());
+    s->addSample(QList<qreal>() << 0.0);
+    s->addSample(QList<qreal>() << -0.0);
+    s->addSample(QList<qreal>() << -1.0);
+    s->addSample(QList<qreal>() << -1000.0);
+    s->addSample(QList<qreal>() << 1000.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
+    s->addSample(QList<qreal>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
+    s->addSample(QList<qreal>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
+    s->addSample(QList<qreal>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
+    s->addSample(QList<qreal>() << 1.0/0.0); //Positive infinity.  Should be ignore for range values, not crash, and draw something reasonable
+    s->addSample(QList<qreal>() << -1.0/0.0); //Positive infinity.  Likewise.
+    s->addSample(QList<qreal>() << -1.0/0.0); //Negative infinity.  Likewise.
+    s->addSample(QList<qreal>() << -1.0/0.0); //Negative infinity.  Likewise.
+    s->addSample(QList<qreal>() << -1.0/0.0); //Negative infinity.  Likewise.
+    s->addSample(QList<qreal>() << -1.0/0.0); //Negative infinity.  Likewise.
+    s->addSample(QList<qreal>() << -1.0/0.0); //Negative infinity.  Likewise.
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << std::numeric_limits<qreal>::quiet_NaN()); //These should appear as gaps in the data
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << 300.0);
+    s->addSample(QList<qreal>() << std::numeric_limits<qreal>::quiet_NaN());
+    s->addSample(QList<qreal>() << 400.0);
+    s->addSample(QList<qreal>() << std::numeric_limits<qreal>::quiet_NaN());
+    s->addSample(QList<qreal>() << std::numeric_limits<qreal>::quiet_NaN());
     s->addBeam(Qt::green);
-    s->addSample(QList<double>() << std::numeric_limits<double>::quiet_NaN() << 100.0);
-    s->addSample(QList<double>() << std::numeric_limits<double>::quiet_NaN() << 100.0);
-    s->addSample(QList<double>() << 200.0 << 100.0);
-    s->addSample(QList<double>() << 300.0 << 100.0);
+    s->addSample(QList<qreal>() << std::numeric_limits<qreal>::quiet_NaN() << 100.0);
+    s->addSample(QList<qreal>() << std::numeric_limits<qreal>::quiet_NaN() << 100.0);
+    s->addSample(QList<qreal>() << 200.0 << 100.0);
+    s->addSample(QList<qreal>() << 300.0 << 100.0);
     s->addBeam(Qt::blue);
-    s->addSample(QList<double>() << 400.0 << 100.0 << 200.0);
-    s->addSample(QList<double>() << 500.0 << 100.0 << 200.0);
-    s->addSample(QList<double>() << 600.0 << 100.0 << 200.0);
+    s->addSample(QList<qreal>() << 400.0 << 100.0 << 200.0);
+    s->addSample(QList<qreal>() << 500.0 << 100.0 << 200.0);
+    s->addSample(QList<qreal>() << 600.0 << 100.0 << 200.0);
 
     QCOMPARE(s->currentMinimumRangeValue(), -1000.0);
     QCOMPARE(s->currentMaximumRangeValue(), 1500.0);

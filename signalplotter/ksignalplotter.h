@@ -266,7 +266,7 @@ class KDE_EXPORT KSignalPlotter : public QWidget
      *
      *  \sa setMinimumValue(), setMaximumValue(), minimumValue(), maximumValue()
      */
-    void changeRange( qreal min, double max );
+    void changeRange( qreal min, qreal max );
 
     /** \brief Set the min value hint for the vertical axis.
      *

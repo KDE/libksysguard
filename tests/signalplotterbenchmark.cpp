@@ -27,7 +27,7 @@ void BenchmarkSignalPlotter::addData()
     QTest::qWaitForWindowShown(s);
 
     QBENCHMARK {
-        s->addSample(QList<double>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
+        s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
         qApp->processEvents();
     }
 
@@ -41,7 +41,7 @@ void BenchmarkSignalPlotter::addDataWhenHidden()
     s->addBeam(Qt::yellow);
 
     QBENCHMARK {
-        s->addSample(QList<double>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
+        s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
         qApp->processEvents();
     }
 

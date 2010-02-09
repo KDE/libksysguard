@@ -60,7 +60,7 @@ struct KSignalPlotterPrivate {
     void redrawScrollableImage();
     void reorderBeams( const QList<int>& newOrder );
 
-    void recalculateMaxMinValueForSample(const QList<double>&sampleBuf, int time );
+    void recalculateMaxMinValueForSample(const QList<qreal>&sampleBuf, int time );
     void rescale();
     void updateDataBuffers();
     void setupStyle();
@@ -69,8 +69,8 @@ struct KSignalPlotterPrivate {
 #endif
 
     /** Return the given value as a string, with the given precision */
-    QString scaledValueAsString( double value, int precision) const;
-    void addSample( const QList<double>& sampleBuf );
+    QString scaledValueAsString( qreal value, int precision) const;
+    void addSample( const QList<qreal>& sampleBuf );
 #ifdef SVG_SUPPORT
     void updateSvgBackground(const QRect &boundingBox);
     Plasma::SVG* mSvgRenderer;
@@ -84,19 +84,19 @@ struct KSignalPlotterPrivate {
     QPixmap mScrollableImage;	///The scrollable image for the widget.  Contains the SVG lines
 #endif
     int mScrollOffset;		///The scrollable image is, well, scrolled in a wrap-around window.  mScrollOffset determines where the left hand side of the mScrollableImage should be drawn relative to the right hand side of view.  0 <= mScrollOffset < mScrollableImage.width()
-    double mMinValue;		///The minimum value (unscaled) currently being displayed
-    double mMaxValue;		///The maximum value (unscaled) currently being displayed
+    qreal mMinValue;		///The minimum value (unscaled) currently being displayed
+    qreal mMaxValue;		///The maximum value (unscaled) currently being displayed
 
-    double mUserMinValue;		///The minimum value (unscaled) set by changeRange().  This is the _maximum_ value that the range will start from.
-    double mUserMaxValue;		///The maximum value (unscaled) set by changeRange().  This is the _minimum_ value that the range will reach to.
+    qreal mUserMinValue;		///The minimum value (unscaled) set by changeRange().  This is the _maximum_ value that the range will start from.
+    qreal mUserMaxValue;		///The maximum value (unscaled) set by changeRange().  This is the _minimum_ value that the range will reach to.
     unsigned int mRescaleTime;		///The number of data points passed since a value that is within 70% of the current maximum was found.  This is for scaling the graph
 
-    double mNiceMinValue;	///The minimum value rounded down to a 'nice' value
-    double mNiceMaxValue;	///The maximum value rounded up to a 'nice' value.  The idea is to round the value, say, 93 to 100.
-    double mNiceRange;		/// mNiceMaxValue - mNiceMinValue
+    qreal mNiceMinValue;	///The minimum value rounded down to a 'nice' value
+    qreal mNiceMaxValue;	///The maximum value rounded up to a 'nice' value.  The idea is to round the value, say, 93 to 100.
+    qreal mNiceRange;		/// mNiceMaxValue - mNiceMinValue
     int mPrecision;		///The number of decimal place required to unambiguously label the axis
 
-    double mScaleDownBy;	/// @see setScaleDownBy
+    qreal mScaleDownBy;	/// @see setScaleDownBy
     bool mUseAutoRange;		/// @see setUseAutoRange
 
     /**  Whether to show a white line on the left and bottom of the widget, for a 3D effect */
@@ -116,9 +116,9 @@ struct KSignalPlotterPrivate {
 
     bool mShowAxis;
 
-    QList < QList<double> > mBeamData; // Every item in the linked list contains a set of data points to plot.  The first item is the newest
-    QList< QColor> mBeamColors;  //These colors match up against the QList<double>  in mBeamData
-    QList< QColor> mBeamColorsLight;  //These colors match up against the QList<double> in mBeamData, and are lighter than mBeamColors.  Done for gradient effects
+    QList < QList<qreal> > mBeamData; // Every item in the linked list contains a set of data points to plot.  The first item is the newest
+    QList< QColor> mBeamColors;  //These colors match up against the QList<qreal>  in mBeamData
+    QList< QColor> mBeamColorsLight;  //These colors match up against the QList<qreal> in mBeamData, and are lighter than mBeamColors.  Done for gradient effects
 
     unsigned int mMaxSamples; //This is what mBeamData.size() should equal when full.  When we start off and have no data then mSamples will be higher.  If we resize the widget so it's smaller, then for a short while this will be smaller
     int mNewestIndex; //The index to the newest item added.  newestIndex+1   is the second newest, and so on

@@ -142,7 +142,7 @@ void KSignalPlotter::reorderBeams( const QList<int>& newOrder )
     d->reorderBeams(newOrder);
 }
 
-void KSignalPlotter::changeRange( qreal min, double max )
+void KSignalPlotter::changeRange( qreal min, qreal max )
 {
     if( min == d->mUserMinValue && max == d->mUserMaxValue ) return;
     d->mUserMinValue = min;

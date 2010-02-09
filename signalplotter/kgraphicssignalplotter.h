@@ -57,7 +57,7 @@ Q_DECLARE_METATYPE(KLocalizedString)
  *    KGraphicsSignalPlotter *s = KGraphicsSignalPlotter(parent);
  *    s->addBeam(Qt::blue);
  *    s->addBeam(Qt::green);
- *    QList<double> data;
+ *    QList<qreal> data;
  *    data << 4.0 << 5.0;
  *    s->addSample(data);
  *  \endcode
@@ -71,11 +71,11 @@ Q_DECLARE_METATYPE(KLocalizedString)
 class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
 {
   Q_OBJECT
-  Q_PROPERTY(double minimumValue READ minimumValue WRITE setMinimumValue)
-  Q_PROPERTY(double maximumValue READ maximumValue WRITE setMaximumValue)
+  Q_PROPERTY(qreal minimumValue READ minimumValue WRITE setMinimumValue)
+  Q_PROPERTY(qreal maximumValue READ maximumValue WRITE setMaximumValue)
   Q_PROPERTY(bool useAutoRange READ useAutoRange WRITE setUseAutoRange)
   Q_PROPERTY(KLocalizedString unit READ unit WRITE setUnit)
-  Q_PROPERTY(double scaleDownBy READ scaleDownBy WRITE setScaleDownBy)
+  Q_PROPERTY(qreal scaleDownBy READ scaleDownBy WRITE setScaleDownBy)
   Q_PROPERTY(uint horizontalScale READ horizontalScale WRITE setHorizontalScale)
   Q_PROPERTY(bool showHorizontalLines READ showHorizontalLines WRITE setShowHorizontalLines)
   Q_PROPERTY(bool showVerticalLines READ showVerticalLines WRITE setShowVerticalLines)
@@ -118,7 +118,7 @@ class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *    s->addBeam(Qt::red);
      *    s->addBeam(Qt::green);
      *    s->addBeam(Qt::blue);
-     *    signalPlotter->addSample( QList<double>() << std::numeric_limits<double>::quiet_NaN() << 1.0/0 << 10.0 );
+     *    signalPlotter->addSample( QList<qreal>() << std::numeric_limits<qreal>::quiet_NaN() << 1.0/0 << 10.0 );
      *  \endcode
      *
      *  This indicates that no data is available yet for red (so the beam will not be drawn for this section),
@@ -127,7 +127,7 @@ class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *  Infinity is handled by drawing a straight line up to the top or bottom of the display, and does not affect the range.
      *  For the above example, the displayed range would now be 0 to 10.
      */
-    void addSample( const QList<double> &samples );
+    void addSample( const QList<qreal> &samples );
 
     /** \brief Reorder the beams into the order given.
      *
@@ -220,12 +220,12 @@ class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      * Typically this is followed by calling setUnit() to set the display axis
      * units.  Default value is 1.
      */
-    void setScaleDownBy( double value );
+    void setScaleDownBy( qreal value );
 
     /** \brief Amount scaled down by.
      *
      * \sa setScaleDownBy */
-    double scaleDownBy() const;
+    qreal scaleDownBy() const;
 
     /** \brief Set whether to scale the graph automatically beyond the given range.
      *
@@ -266,27 +266,27 @@ class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *
      *  \sa setMinimumValue(), setMaximumValue(), minimumValue(), maximumValue()
      */
-    void changeRange( double min, double max );
+    void changeRange( qreal min, qreal max );
 
     /** \brief Set the min value hint for the vertical axis.
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    void setMinimumValue( double min );
+    void setMinimumValue( qreal min );
 
     /** \brief Get the min value hint for the vertical axis.
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    double minimumValue() const;
+    qreal minimumValue() const;
 
     /** \brief Set the max value hint for the vertical axis. *
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    void setMaximumValue( double max );
+    void setMaximumValue( qreal max );
 
     /** \brief Get the maximum value hint for the vertical axis.
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    double maximumValue() const;
+    qreal maximumValue() const;
 
     /** \brief Get the current maximum value on the y-axis.
      *
@@ -294,14 +294,14 @@ class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *  it will be equal or larger (due to rounding up to make it a nice number)
      *  than the highest value being shown.
      */
-    double currentMaximumRangeValue() const;
+    qreal currentMaximumRangeValue() const;
     /** \brief Get the current minimum value on the y-axis.
      *
      *  This will never be lower than minimumValue(), and if autoRange() is true,
      *  it will be equal or larger (due to rounding up to make it a nice number)
      *  than the highest value being shown.
      */
-    double currentMinimumRangeValue() const;
+    qreal currentMinimumRangeValue() const;
 
     /** \brief Set the number of pixels horizontally between data points.
      *  Default is 6. */
@@ -366,7 +366,7 @@ class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
     /** \brief Return the last value that we have for the given beam index.
      *
      * \return last value, or 0 if not known. */
-    double lastValue( int index) const;
+    qreal lastValue( int index) const;
 
     /** \brief Return a translated string for the last value at the given index.
      *
@@ -394,7 +394,7 @@ class KDE_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      * \endcode
      *
      */
-    QString valueAsString( double value, int precision = -1) const;
+    QString valueAsString( qreal value, int precision = -1) const;
 
     /** \brief Set the distance between the left of the widget and the left of the plotting region.
      *
