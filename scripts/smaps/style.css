@@ -10,6 +10,7 @@ td.address {
 }
 span.memory {
     color:blue;
+    white-space: nowrap;
 }
 
 table {
@@ -25,6 +26,7 @@ td.perms {
 }
 td.memory, th.memory {
     text-align: right;
+    white-space: nowrap;
 }
 td.comment {
     color:gray;
