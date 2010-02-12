@@ -74,9 +74,7 @@ ProcessModelPrivate::~ProcessModelPrivate()
 {
     if(mProcesses)
         KSysGuard::Processes::returnInstance(mHostName);
-    Q_FOREACH(const WindowInfo &wininfo, mPidToWindowInfo) {
-        delete wininfo.netWinInfo;
-    }
+    qDeleteAll(mPidToWindowInfo);
     mProcesses = NULL;
 }
 ProcessModel::ProcessModel(QObject* parent, const QString &host)
@@ -271,22 +269,21 @@ KSysGuard::Processes *ProcessModel::processController() const
 
 void ProcessModelPrivate::windowRemoved(WId wid) {
 #ifdef Q_WS_X11
-    qlonglong pid = mWIdToPid.value(wid, 0);
-    if(pid <= 0) return;
+    WindowInfo *window = mWIdToWindowInfo.take(wid);
+    if(!window) return;
+    qlonglong pid = window->pid;
+    delete window;
 
-#ifndef QT_NO_DEBUG
-    int count = mPidToWindowInfo.count(pid);
-#endif
-    QMultiHash<qlonglong, WindowInfo>::iterator i = mPidToWindowInfo.find(pid);
+    QMultiHash<qlonglong, WindowInfo*>::iterator i = mPidToWindowInfo.find(pid);
     while (i != mPidToWindowInfo.end() && i.key() == pid) {
-        if(i.value().wid == wid) {
-            delete i.value().netWinInfo;
+        if(i.value()->wid == wid) {
             i = mPidToWindowInfo.erase(i);
-//            break;
+            break;
         } else
             i++;
     }
-    Q_ASSERT(count-1 == mPidToWindowInfo.count(pid) || count == mPidToWindowInfo.count(pid));
+
+    //Update the model so that it redraws and resorts
     KSysGuard::Process *process = mProcesses->getProcess(pid);
     if(!process) return;
 
@@ -295,8 +292,6 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
         row = process->index;
     else
         row = process->parent->children.indexOf(process);
-    QModelIndex index1 = q->createIndex(row, ProcessModel::HeadingName, process);
-    emit q->dataChanged(index1, index1);
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
     emit q->dataChanged(index2, index2);
 #endif
@@ -317,7 +312,7 @@ void ProcessModelPrivate::setupWindows() {
 
 void ProcessModelPrivate::setupProcesses() {
     if(mProcesses) {
-        mWIdToPid.clear();
+        mWIdToWindowInfo.clear();
         mPidToWindowInfo.clear();
         KSysGuard::Processes::returnInstance(mHostName);
         q->reset();
@@ -340,48 +335,63 @@ void ProcessModelPrivate::setupProcesses() {
 #ifdef Q_WS_X11
 void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
 {
-    if(! (properties & NET::WMVisibleName || properties & NET::WMName || properties & NET::WMIcon || properties & NET::WMState)) return;
-    windowAdded(wid);
+    bool newWindow = properties == ~0u; //We use ~0u to indicate that the window has been added
+    properties &= (NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMState | NET::WMIcon);
 
-}
+    if(!properties)
+        return; //Nothing interesting changed
 
-void ProcessModelPrivate::windowAdded(WId wid)
-{
-    Q_FOREACH(const WindowInfo &w, mPidToWindowInfo) {
-        if(w.wid == wid) return; //already added
-    }
+    WindowInfo *w = mWIdToWindowInfo.value(wid);
+    if(!w && !newWindow)
+        return; //We do not have a record of this window and this is not a new window
+
     //The name changed
     KXErrorHandler handler;
-    NETWinInfo *info = new NETWinInfo( QX11Info::display(), wid, QX11Info::appRootWindow(),
-            NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMState );
-    if (handler.error( false ) ) {
-        delete info;
+    NETWinInfo info( QX11Info::display(), wid, QX11Info::appRootWindow(), properties & ~NET::WMIcon );
+    if (handler.error( false ) )
         return;  //info is invalid - window just closed or something probably
-    }
-    qlonglong pid = info->pid();
-    if(pid <= 0) {
-        delete info;
-        return;
+
+    if(!w) {
+        qlonglong pid = info.pid();
+        if(!(properties & NET::WMPid && pid))
+            return; //No PID for the window - this happens if the process did not set _NET_WM_PID
+        w = new WindowInfo(wid, pid);
+        mPidToWindowInfo.insertMulti(pid, w);
+        mWIdToWindowInfo.insert(wid, w);
     }
 
-    WindowInfo w;
-    w.icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE, HEADING_X_ICON_SIZE, true);
-    w.wid = wid;
-    w.netWinInfo = info;
-    mPidToWindowInfo.insertMulti(pid, w);
-    mWIdToPid[wid] = pid;
+    if(properties & NET::WMIcon)
+        w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE, HEADING_X_ICON_SIZE, true);
+    if(properties & NET::WMVisibleName && info.visibleName())
+        w->name = QString::fromUtf8(info.visibleName());
+    else if(properties & NET::WMName)
+        w->name = QString::fromUtf8(info.name());
+    else if(properties & (NET::WMName | NET::WMVisibleName))
+        w->name.clear();
+    if(properties & NET::WMState)
+        w->state = info.state();
 
-    KSysGuard::Process *process = mProcesses->getProcess(pid);
+    KSysGuard::Process *process = mProcesses->getProcess(w->pid);
     if(!process) return; //shouldn't really happen.. maybe race condition etc
     int row;
     if(mSimple)
         row = process->index;
     else
         row = process->parent->children.indexOf(process);
-    QModelIndex index1 = q->createIndex(row, ProcessModel::HeadingName, process);
-    emit q->dataChanged(index1, index1);
+    if(newWindow && mPidToWindowInfo.count(w->pid) == 1) {
+        //Since this is the first window for a process, invalidate HeadingName so that
+        //if we are sorting by name this gets taken into account
+        QModelIndex index1 = q->createIndex(row, ProcessModel::HeadingName, process);
+        emit q->dataChanged(index1, index1);
+    }
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
     emit q->dataChanged(index2, index2);
+
+}
+
+void ProcessModelPrivate::windowAdded(WId wid)
+{
+    windowChanged(wid, ~0u);
 }
 #endif
 
@@ -812,7 +822,7 @@ void ProcessModel::setSimpleMode(bool simple)
     int treerow;
     QList<QModelIndex> flatIndexes;
     QList<QModelIndex> treeIndexes;
-    Q_FOREACH( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         flatrow = process->index;
         treerow = process->parent->children.indexOf(process);
         flatIndexes.clear();
@@ -1069,15 +1079,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #ifdef Q_WS_X11
         case HeadingXTitle:
             {
-                if(!d->mPidToWindowInfo.contains(process->pid)) return QVariant(QVariant::String);
-                WindowInfo w = d->mPidToWindowInfo.value(process->pid);
-                if(!w.netWinInfo) return QVariant(QVariant::String);
-                const char *name = w.netWinInfo->visibleName();
-                if( !name || name[0] == 0 )
-                    name = w.netWinInfo->name();
-                if(name && name[0] != 0)
-                    return QString::fromUtf8(name);
-                return QVariant(QVariant::String);
+                WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+                if(!w)
+                    return QVariant(QVariant::String);
+                else
+                    return w->name;
             }
 #endif
         default:
@@ -1269,20 +1275,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingXTitle: {
             QString tooltip;
-            QList<WindowInfo> values = d->mPidToWindowInfo.values(process->pid);
+            QList<WindowInfo *> values = d->mPidToWindowInfo.values(process->pid);
             if(values.isEmpty()) return QVariant(QVariant::String);
-            for(int i = 0; i< values.size(); i++) {
-                WindowInfo w = values[i];
-                if(w.netWinInfo) {
-                    const char *name = w.netWinInfo->visibleName();
-                    if( !name || name[0] == 0 )
-                        name = w.netWinInfo->name();
-                    if(name && name[0] != 0) {
-                        if( i==0 && values.size()==1)
-                            return QString::fromUtf8(name);
-                        tooltip += "<li>" + QString::fromUtf8(name) + "</li>";
-                    }
-                }
+            for(int i = 0; i < values.size(); i++) {
+                if(!values.at(i)->name.isEmpty())
+                    tooltip += "<li>" + values.at(i)->name + "</li>";
             }
             if(!tooltip.isEmpty())
                 return "<qt><p style='white-space:pre'><ul>" + tooltip + "</ul>";
@@ -1393,15 +1390,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #ifdef Q_WS_X11
         case HeadingXTitle:
             {
-                if(!d->mPidToWindowInfo.contains(process->pid)) return QVariant(QVariant::String);
-                WindowInfo w = d->mPidToWindowInfo.value(process->pid);
-                if(!w.netWinInfo) return QVariant(QVariant::String);
-                const char *name = w.netWinInfo->visibleName();
-                if( !name || name[0] == 0 )
-                    name = w.netWinInfo->name();
-                if(name && name[0] != 0)
-                    return QString::fromUtf8(name);
-                return QVariant(QVariant::String);
+                WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+                if(!w)
+                    return QString();
+                return w->name;
             }
 #endif
         default:
@@ -1412,9 +1404,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #ifdef Q_WS_X11
         case WindowIdRole: {
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-        if(!d->mPidToWindowInfo.contains(process->pid)) return QVariant();
-        WindowInfo w = d->mPidToWindowInfo.value(process->pid);
-        return (int)w.wid;
+        WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+        if(!w)
+            return (int)0;
+        else
+            return (int)w->wid;
     }
 #endif
     case PercentageRole: {
@@ -1450,17 +1444,17 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     case Qt::DecorationRole: {
         if(index.column() == HeadingName) {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            if(!d->mPidToWindowInfo.contains(process->pid)) {
+            WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+            if(!w) {
                 if(d->mSimple) //When not in tree mode, we need to pad the name column where we do not have an icon
                     return QIcon(d->mBlankPixmap);
-                else  //When in tree mode, the padding looks pad, so do not pad in this case
+                else  //When in tree mode, the padding looks bad, so do not pad in this case
                     return QVariant();
             }
 
-            WindowInfo w = d->mPidToWindowInfo.value(process->pid);
-            if(w.icon.isNull())
+            if(w->icon.isNull())
                 return QIcon(d->mBlankPixmap);
-            return w.icon;
+            return w->icon;
 
         } else if (index.column() == HeadingCPUUsage) {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
@@ -1575,7 +1569,7 @@ void ProcessModel::setShowTotals(bool showTotals)  //slot
     d->mShowChildTotals = showTotals;
 
     QModelIndex index;
-    Q_FOREACH( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         if(process->numChildren > 0) {
             int row;
             if(d->mSimple)
@@ -1599,7 +1593,7 @@ void ProcessModel::setUnits(Units units)
     d->mUnits = units;
 
     QModelIndex index;
-    Q_FOREACH( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         int row;
         if(d->mSimple)
             row = process->index;
@@ -1623,7 +1617,7 @@ void ProcessModel::setIoUnits(Units units)
         d->mIoUnits = units;
 
     QModelIndex index;
-    Q_FOREACH( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
+    foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         int row;
         if(d->mSimple)
             row = process->index;
@@ -1703,7 +1697,7 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
     QString display;
     int firstColumn = -1;
     bool firstrow = true;
-    Q_FOREACH (const QModelIndex &index, indexes) {
+    foreach (const QModelIndex &index, indexes) {
         if (index.isValid()) {
             if(firstColumn == -1)
                 firstColumn = index.column();

@@ -46,9 +46,18 @@
 
 #ifdef Q_WS_X11
 struct WindowInfo {
+
+    WindowInfo(WId _wid, qlonglong _pid) {
+        wid = _wid;
+        pid = 0;
+        state = 0;
+        pid = _pid;
+    }
+    qlonglong pid;
     QPixmap icon;
     WId wid;
-    NETWinInfo *netWinInfo;
+    QString name;
+    unsigned long state;
 };
 
 #endif
@@ -158,8 +167,8 @@ class ProcessModelPrivate : public QObject
         /** A translated list of headings (column titles) in the order we want to display them. Used in headerData() */
         QStringList mHeadings;
 
-        QMultiHash< long long, WindowInfo> mPidToWindowInfo;  ///< Map a process pid to X window info if available
-        QHash< WId, long long> mWIdToPid; ///< Map an X window id to a process pid
+        QMultiHash< long long, WindowInfo *> mPidToWindowInfo;  ///< Map a process pid to X window info if available
+        QHash< WId, WindowInfo *> mWIdToWindowInfo; ///< Map an X window id to window info
 
 
         bool mShowChildTotals; ///< If set to true, a parent will return the CPU usage of all its children recursively
