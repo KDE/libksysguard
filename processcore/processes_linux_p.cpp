@@ -353,7 +353,7 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
 
 bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *process)
 {
-    if(!process->command.isNull()) return true; //only parse the cmdline once
+    if(!process->command.isNull()) return true; //only parse the cmdline once.  This function takes up 25% of the CPU time :-/
     mFile.setFileName(dir + "cmdline");
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
@@ -362,13 +362,12 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
     process->command = in.readAll();
 
     //cmdline separates parameters with the NULL character
-    process->command.replace('\0', ' ');
-    process->command = process->command.trimmed();
     if(!process->command.isEmpty()) {
-        QString processname = process->command;
-        processname.remove(QRegExp("^[^ ]*/"));
-        if(processname.startsWith(process->name))
-            process->name = processname;
+        if(process->command.startsWith(process->name)) {
+            int index = process->command.indexOf(QChar('\0'));
+            process->name = process->command.left(index);
+        }
+        process->command.replace('\0', ' ');
     }
 
     mFile.close();
