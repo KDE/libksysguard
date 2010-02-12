@@ -99,9 +99,6 @@ void Scripting::deleteScriptingHtmlDialog() {
 QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
 {
     Q_UNUSED(engine);
-    /* We do lots of checks on the file to see whether we should allow this to be read
-     * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
-     * may be lifted */
     if(context->argumentCount() !=1)
         return context->throwError(QScriptContext::SyntaxError, i18n("Script error: Incorrect number of arguments"));
     if(!context->argument(0).isString())
@@ -114,9 +111,6 @@ QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
 QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
 {
     Q_UNUSED(engine);
-    /* We do lots of checks on the file to see whether we should allow this to be read
-     * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
-     * may be lifted */
     if(context->argumentCount() !=1)
         return context->throwError(QScriptContext::SyntaxError, i18n("Script error: Incorrect number of arguments"));
     if(!context->argument(0).isString())
