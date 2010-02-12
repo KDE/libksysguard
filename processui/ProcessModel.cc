@@ -22,6 +22,11 @@
 */
 
 
+#include "ProcessModel.h"
+#include "ProcessModel_p.h"
+
+#include "processcore/processes.h"
+#include "processcore/process.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -47,11 +52,10 @@
 
 #include "ProcessModel.moc"
 #include "ProcessModel_p.moc"
-#include "ProcessModel.h"
-#include "ProcessModel_p.h"
 
-#include "processcore/processes.h"
-#include "processcore/process.h"
+#ifdef HAVE_XRES
+#include <X11/extensions/XRes.h>
+#endif
 
 extern KApplication* Kapp;
 
@@ -68,6 +72,9 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
     mShowingTooltips = true;
     mNormalizeCPUUsage = true;
     mIoInformation = ProcessModel::ActualBytes;
+#ifdef HAVE_XRES
+    mHaveXRes = false;
+#endif
 }
 
 ProcessModelPrivate::~ProcessModelPrivate()
@@ -82,6 +89,11 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
 {
     KGlobal::locale()->insertCatalog("processui");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
     d->q=this;
+#ifdef HAVE_XRES
+    int event, error, major, minor;
+    d->mHaveXRes = XResQueryExtension(QX11Info::display(), &event, &error) && XResQueryVersion(QX11Info::display(), &major, &minor);
+#endif
+
     if(host.isEmpty() || host == "localhost") {
         d->mHostName = QString();
         d->mIsLocalhost = true;
@@ -94,6 +106,8 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
     d->setupWindows();
     d->mUnits = UnitsKB;
     d->mIoUnits = UnitsKB;
+
+
 }
 
 bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
@@ -187,6 +201,8 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmURSS:processRight->vmRSS;
             return memoryLeft > memoryRight;
         }
+        case HeadingXMemory:
+            return processLeft->pixmapBytes > processRight->pixmapBytes;
         case HeadingVmSize:
             return processLeft->vmSize > processRight->vmSize;
         case HeadingSharedMemory: {
@@ -345,8 +361,8 @@ void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
     if(!w && !newWindow)
         return; //We do not have a record of this window and this is not a new window
 
-    //The name changed
     KXErrorHandler handler;
+    //The name changed
     NETWinInfo info( QX11Info::display(), wid, QX11Info::appRootWindow(), properties & ~NET::WMIcon );
     if (handler.error( false ) )
         return;  //info is invalid - window just closed or something probably
@@ -386,9 +402,14 @@ void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
     }
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
     emit q->dataChanged(index2, index2);
-
+#ifdef HAVE_XRES
+    if(newWindow && mHaveXRes) {
+        bool success = XResQueryClientPixmapBytes(QX11Info::display(), w->wid, &process->pixmapBytes);
+        if(!success)
+            process->pixmapBytes = -1;
+    }
+#endif
 }
-
 void ProcessModelPrivate::windowAdded(WId wid)
 {
     windowChanged(wid, ~0u);
@@ -699,6 +720,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
         switch(section) {
             case HeadingPid:
             case HeadingMemory:
+            case HeadingXMemory:
             case HeadingSharedMemory:
             case HeadingIoRead:
             case HeadingIoWrite:
@@ -744,6 +766,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt>This is the amount of real physical memory that this process's shared libraries are using.<br>This memory is shared among all processes that use this library.</qt>");
             case HeadingCommand:
                 return i18n("<qt>The command with which this process was launched.</qt>");
+            case HeadingXMemory:
+                return i18n("<qt>The amount of pixmap memory that this process is using.</qt>");
             case HeadingXTitle:
                 return i18n("<qt>The title of any windows that this process is showing.</qt>");
             case HeadingPid:
@@ -783,6 +807,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt><i>Technical information: </i>This is the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt .)");
             case HeadingCommand:
                 return i18n("<qt><i>Technical information: </i>This is from /proc/*/cmdline");
+            case HeadingXMemory:
+                return i18n("<qt><i>This is the amount of memory used by the Xorg process for images for this process.  This is memory used in addition to Memory and Shared Memory.<br><i>Technical information: </i>This only counts the pixmap memory, and does not include resource memory used by fonts, cursors, glyphsets etc.  See the <code>xrestop</code> for a more detailed breakdown.");
             case HeadingXTitle:
                 return i18n("<qt><i>Technical information: </i>For each X11 window, the X11 property _NET_WM_PID is used to map the window to a PID.  If a process' windows are not shown, then that application incorrectly is not setting _NET_WM_PID.");
             case HeadingPid:
@@ -1077,6 +1103,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 return QVariant();
             }
 #ifdef Q_WS_X11
+        case HeadingXMemory:
+            return formatMemoryInfo(process->pixmapBytes/1024, d->mUnits, true);
         case HeadingXTitle:
             {
                 WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
@@ -1298,13 +1326,15 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingCPUTime:
             case HeadingPid:
             case HeadingMemory:
+            case HeadingXMemory:
             case HeadingSharedMemory:
             case HeadingVmSize:
             case HeadingIoWrite:
             case HeadingIoRead:
                 return QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            default:
+                return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
         }
-        return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
     case UidRole: {
         if(index.column() != 0) return QVariant();  //If we query with this role, then we want the raw UID for this.
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
@@ -1387,6 +1417,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return (qlonglong)process->ioCharactersActuallyWrittenRate;
 
             }
+        case HeadingXMemory:
+            return (qulonglong)process->pixmapBytes;
 #ifdef Q_WS_X11
         case HeadingXTitle:
             {
@@ -1532,6 +1564,7 @@ void ProcessModel::setupHeader() {
     headings << i18nc("process heading", "Shared Mem");
     headings << i18nc("process heading", "Command");
 #ifdef Q_WS_X11
+    headings << i18nc("process heading", "X11 Memory");
     headings << i18nc("process heading", "Window Title");
 #endif
 
@@ -1600,6 +1633,8 @@ void ProcessModel::setUnits(Units units)
         else
             row = process->parent->children.indexOf(process);
         index = createIndex(row, HeadingMemory, process);
+        emit dataChanged(index, index);
+        index = createIndex(row, HeadingXMemory, process);
         emit dataChanged(index, index);
         index = createIndex(row, HeadingSharedMemory, process);
         emit dataChanged(index, index);

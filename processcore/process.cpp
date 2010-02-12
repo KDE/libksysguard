@@ -105,6 +105,7 @@ void KSysGuard::Process::clear() {
     vmSize=0;
     vmRSS = 0;
     vmURSS = 0;
+    pixmapBytes = 0;
     status=OtherStatus;
     parent = NULL;
     ioPriorityClass = None;

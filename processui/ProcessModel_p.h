@@ -22,6 +22,8 @@
 #ifndef PROCESSMODEL_P_H_
 #define PROCESSMODEL_P_H_
 
+#include "processcore/process.h"
+
 #include <kapplication.h>
 #include <kuser.h>
 #include <QPixmap>
@@ -32,19 +34,13 @@
 #include <QSet>
 #include <QTime>
 
-
 #ifdef Q_WS_X11
 #include <kwindowsystem.h>
 #include <netwm.h>
 #include <QtGui/QX11Info>
 #include <X11/Xatom.h>
 #include <kxerrorhandler.h>
-#endif
 
-#include "processcore/process.h"
-
-
-#ifdef Q_WS_X11
 struct WindowInfo {
 
     WindowInfo(WId _wid, qlonglong _pid) {
@@ -59,7 +55,7 @@ struct WindowInfo {
     QString name;
     unsigned long state;
 };
-
+#include "../config-ksysguard.h"
 #endif
 
 
@@ -170,7 +166,6 @@ class ProcessModelPrivate : public QObject
         QMultiHash< long long, WindowInfo *> mPidToWindowInfo;  ///< Map a process pid to X window info if available
         QHash< WId, WindowInfo *> mWIdToWindowInfo; ///< Map an X window id to window info
 
-
         bool mShowChildTotals; ///< If set to true, a parent will return the CPU usage of all its children recursively
 
         bool mSimple; //< In simple mode, the model returns everything as flat, with no icons, etc.  This is set by changing cmbFilter
@@ -197,6 +192,10 @@ class ProcessModelPrivate : public QObject
 
         /** The hostname */
         QString mHostName;
+
+#ifdef HAVE_XRES
+        bool mHaveXRes; ///< True if the XRes extension is available
+#endif
 
         ProcessModel* q;
 };

@@ -20,8 +20,13 @@ kde4_add_ui_files( processui_LIB_SRCS
    ProcessWidgetUI.ui
 )
 
-
 kde4_add_library(processui SHARED ${processui_LIB_SRCS})
+
+if(XRES_LIBRARY)
+  ADD_DEFINITIONS(-DHAVE_XRES)
+  TARGET_LINK_LIBRARIES(processui ${XRES_LIBRARY})
+  TARGET_LINK_LIBRARIES(processui LINK_INTERFACE_LIBRARIES ${XRES_LIBRARY})
+endif(XRES_LIBRARY)
 
 target_link_libraries(processui ${KDE4_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTWEBKIT_LIBRARY} ${QT_QTUITOOLS_LIBRARY} processcore)
 target_link_libraries(processui LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTWEBKIT_LIBRARY} ${QT_QTUITOOLS_LIBRARY} processcore)
