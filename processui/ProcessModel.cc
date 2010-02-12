@@ -158,11 +158,9 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
 
             /* 2nd sort order - Graphics Windows */
             //Both columns have the same user.  Place processes with windows at the top
-            bool leftHasWindow = d->mPidToWindowInfo.contains(processLeft->pid);
-            bool rightHasWindow = d->mPidToWindowInfo.contains(processRight->pid);
-            if(leftHasWindow && !rightHasWindow)
-                return true; //Processes with windows at the top
-            if(!leftHasWindow && rightHasWindow)
+            if(processLeft->hasManagedGuiWindow && !processRight->hasManagedGuiWindow)
+                return true;
+            if(!processLeft->hasManagedGuiWindow && processRight->hasManagedGuiWindow)
                 return false;
 
             /* 3rd sort order - CPU Usage */
@@ -317,8 +315,21 @@ void ProcessModelPrivate::setupWindows() {
 #ifdef Q_WS_X11
     QList<WId>::ConstIterator it;
     for ( it = KWindowSystem::windows().begin(); it != KWindowSystem::windows().end(); ++it ) {
-        windowAdded(*it);
+        updateWindowInfo(*it, ~0u, true);
     }
+
+#ifdef HAVE_XRES
+    Window       *children, dummy;
+    unsigned int  count;
+    Status result = XQueryTree(QX11Info::display(), QX11Info::appRootWindow(), &dummy, &dummy, &children, &count);
+    if(result) {
+        for (uint i=0; i < count; ++i) {
+            updateWindowInfo(children[i], NET::WMPid, true);
+        }
+        if(children)
+            XFree((char*)children);
+    }
+#endif
 
     connect( KWindowSystem::self(), SIGNAL(windowChanged (WId, unsigned int )), this, SLOT(windowChanged(WId, unsigned int)));
     connect( KWindowSystem::self(), SIGNAL(windowAdded (WId )), this, SLOT(windowAdded(WId)));
@@ -351,7 +362,16 @@ void ProcessModelPrivate::setupProcesses() {
 #ifdef Q_WS_X11
 void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
 {
-    bool newWindow = properties == ~0u; //We use ~0u to indicate that the window has been added
+    updateWindowInfo(wid, properties, false);
+}
+
+void ProcessModelPrivate::windowAdded(WId wid)
+{
+    updateWindowInfo(wid, ~0u, true);
+}
+
+void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, bool newWindow)
+{
     properties &= (NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMState | NET::WMIcon);
 
     if(!properties)
@@ -361,22 +381,35 @@ void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
     if(!w && !newWindow)
         return; //We do not have a record of this window and this is not a new window
 
+    if(properties == NET::WMIcon) {
+        if(w)
+            w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE, HEADING_X_ICON_SIZE, true);
+        return;
+    }
+    /* Get PID for window */
     KXErrorHandler handler;
-    //The name changed
     NETWinInfo info( QX11Info::display(), wid, QX11Info::appRootWindow(), properties & ~NET::WMIcon );
-    if (handler.error( false ) )
+    if (handler.error( false ) ) {
         return;  //info is invalid - window just closed or something probably
+    }
 
     if(!w) {
+        //We know that this much be a newWindow
         qlonglong pid = info.pid();
         if(!(properties & NET::WMPid && pid))
             return; //No PID for the window - this happens if the process did not set _NET_WM_PID
+
+        //If we are to get the PID only, we are only interested in the XRes info for this,
+        //so don't bother if we already have this info
+        if(properties == NET::WMPid && mPidToWindowInfo.contains(pid))
+            return;
+
         w = new WindowInfo(wid, pid);
         mPidToWindowInfo.insertMulti(pid, w);
         mWIdToWindowInfo.insert(wid, w);
     }
 
-    if(properties & NET::WMIcon)
+    if(w && (properties & NET::WMIcon))
         w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE, HEADING_X_ICON_SIZE, true);
     if(properties & NET::WMVisibleName && info.visibleName())
         w->name = QString::fromUtf8(info.visibleName());
@@ -389,30 +422,29 @@ void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
 
     KSysGuard::Process *process = mProcesses->getProcess(w->pid);
     if(!process) return; //shouldn't really happen.. maybe race condition etc
+
     int row;
     if(mSimple)
         row = process->index;
     else
         row = process->parent->children.indexOf(process);
-    if(newWindow && mPidToWindowInfo.count(w->pid) == 1) {
+    bool firstWindow = newWindow && mPidToWindowInfo.count(w->pid) == 1;
+    if(firstWindow) {
         //Since this is the first window for a process, invalidate HeadingName so that
         //if we are sorting by name this gets taken into account
         QModelIndex index1 = q->createIndex(row, ProcessModel::HeadingName, process);
         emit q->dataChanged(index1, index1);
     }
+    process->hasManagedGuiWindow = process->hasManagedGuiWindow || (properties != NET::WMPid);
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
     emit q->dataChanged(index2, index2);
 #ifdef HAVE_XRES
-    if(newWindow && mHaveXRes) {
+    if(firstWindow && mHaveXRes) {
         bool success = XResQueryClientPixmapBytes(QX11Info::display(), w->wid, &process->pixmapBytes);
         if(!success)
-            process->pixmapBytes = -1;
+            process->pixmapBytes = 0;
     }
 #endif
-}
-void ProcessModelPrivate::windowAdded(WId wid)
-{
-    windowChanged(wid, ~0u);
 }
 #endif
 

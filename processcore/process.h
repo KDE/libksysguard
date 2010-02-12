@@ -125,6 +125,7 @@ namespace KSysGuard
     qlonglong vmRSS;
     qlonglong vmURSS;
     unsigned long pixmapBytes; ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
+    bool hasManagedGuiWindow;
     QString name;
     QString command;
     ProcessStatus status;

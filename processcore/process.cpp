@@ -106,6 +106,7 @@ void KSysGuard::Process::clear() {
     vmRSS = 0;
     vmURSS = 0;
     pixmapBytes = 0;
+    hasManagedGuiWindow = false;
     status=OtherStatus;
     parent = NULL;
     ioPriorityClass = None;

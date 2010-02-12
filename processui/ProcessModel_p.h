@@ -137,6 +137,9 @@ class ProcessModelPrivate : public QObject
          *  "groupname (Uid: gid)" if known.
          */
         inline QString getGroupnameForGroup(long gid) const;
+#ifdef Q_WS_X11
+        void updateWindowInfo(WId wid, unsigned int properties, bool newWindow);
+#endif
         /** @see setIsLocalhost */
         bool mIsLocalhost;
 
