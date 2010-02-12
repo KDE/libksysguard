@@ -70,14 +70,10 @@ class ScriptingHtmlDialog : public KDialog {
 QScriptValue setHtml(QScriptContext *context, QScriptEngine *engine)
 {
     Scripting *scriptingParent = static_cast<Scripting *>(qVariantValue<QObject*>(engine->property("scriptingParent")));
-    if(context->argumentCount() != 1) {
-        return context->throwError(QScriptContext::SyntaxError, i18np("Script error: There needs to be exactly one argument to setHtml(), but there was %1.",
-                    "Script error: There needs to be exactly one argument to setHtml(), but there were %1.",
-                    context->argumentCount()));
-    }
-    if(!context->argument(0).isString()) {
-        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument to setHtml() was not a string"));
-    }
+    if(context->argumentCount() != 1)
+        return context->throwError(QScriptContext::SyntaxError, i18n("Script error: Incorrect number of arguments"));
+    if(!context->argument(0).isString())
+        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument was not a string"));
     QString html = context->argument(0).toString();
 
     scriptingParent->displayHtml(html);
@@ -106,13 +102,10 @@ QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
     /* We do lots of checks on the file to see whether we should allow this to be read
      * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
      * may be lifted */
-    if(context->argumentCount() !=1)  {
-        return context->throwError(QScriptContext::SyntaxError, i18np("Script error: There needs to be exactly one argument to fileExists(), but there was %1.",
-                    "Script error: There needs to be exactly one argument to fileExists(), but there were %1.",
-                    context->argumentCount()));
-    }
+    if(context->argumentCount() !=1)
+        return context->throwError(QScriptContext::SyntaxError, i18n("Script error: Incorrect number of arguments"));
     if(!context->argument(0).isString())
-        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument to fileExists() was not a string"));
+        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument was not a string"));
     QString filename = context->argument(0).toString();
     QFileInfo fileInfo(filename);
     return QScriptValue(engine, fileInfo.exists());
@@ -125,11 +118,9 @@ QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
      * Maybe this is a bit too paranoid and too restrictive.  Some restrictions
      * may be lifted */
     if(context->argumentCount() !=1)
-        return context->throwError(QScriptContext::SyntaxError, i18np("Script error: There needs to be exactly one argument to readFile(), but there was %1.",
-                    "Script error: There needs to be exactly one argument to readFile(), but there were %1.",
-                    context->argumentCount()));
+        return context->throwError(QScriptContext::SyntaxError, i18n("Script error: Incorrect number of arguments"));
     if(!context->argument(0).isString())
-        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument to readFile() was not a string"));
+        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument was not a string"));
     QString filename = context->argument(0).toString();
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly)) {
