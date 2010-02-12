@@ -79,7 +79,7 @@ void ProcessesLocal::Private::readProcStatus(struct kinfo_proc *p, Process *proc
 
 
 #if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
-    process->setEuid(p->ki_uid);    
+    process->setEuid(p->ki_uid);
     process->setUid(p->ki_ruid);
     process->setEgid(p->ki_svgid);
     process->setGid(p->ki_rgid);
@@ -105,7 +105,7 @@ void ProcessesLocal::Private::readProcStat(struct kinfo_proc *p, Process *ps)
         ps->setVmSize(p->ki_size / 1024);
         ps->setVmRSS(p->ki_rssize * getpagesize() / 1024);
         status = p->ki_stat;
-#elif defined(__DragonFly__) 
+#elif defined(__DragonFly__)
 #if __DragonFly_version >= 190000
         if (!getrusage(p->kp_pid, &pru)) {
             errx(1, "failed to get rusage info");
@@ -222,7 +222,7 @@ QSet<long> ProcessesLocal::getAllPids( )
     if (sysctl(mib, 3, NULL, &len, NULL, 0) == -1)
         return pids;
     if ((p = (kinfo_proc *) malloc(len)) == NULL)
-        return pids;    
+        return pids;
     if (sysctl(mib, 3, p, &len, NULL, 0) == -1) {
 	free(p);
         return pids;
@@ -265,7 +265,7 @@ bool ProcessesLocal::setNiceness(long pid, int priority) {
     return true;
 }
 
-bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) 
+bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
 	    priority = 0;
@@ -310,7 +310,7 @@ long long ProcessesLocal::totalPhysicalMemory() {
 
 ProcessesLocal::~ProcessesLocal()
 {
-   delete d;  
+   delete d;
 }
 
 }

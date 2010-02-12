@@ -1,5 +1,5 @@
 /*  This file is part of the KDE project
-    
+
     Copyright (C) 2007 John Tapsell <tapsell@kde.org>
 
     This library is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@
 #include <QTextStream>
 
 //for sysconf
-#include <unistd.h>  
+#include <unistd.h>
 //for kill and setNice
 #include <sys/types.h>
 #include <signal.h>
@@ -89,7 +89,7 @@ static int ioprio_set(int which, int who, int ioprio)
 {
   return syscall(SYS_ioprio_set, which, who, ioprio);
 }
- 
+
 static int ioprio_get(int which, int who)
 {
   return syscall(SYS_ioprio_get, which, who);
@@ -114,15 +114,15 @@ namespace KSysGuard
       inline bool getNiceness(long pid, Process *process);
       inline bool getIOStatistics(const QString &dir, Process *process);
       QFile mFile;
-      char mBuffer[PROCESS_BUFFER_SIZE+1]; //used as a buffer to read data into      
+      char mBuffer[PROCESS_BUFFER_SIZE+1]; //used as a buffer to read data into
       DIR* mProcDir;
   };
 
-ProcessesLocal::Private::~Private() 
-{ 
+ProcessesLocal::Private::~Private()
+{
     closedir(mProcDir);
 }
-  
+
 ProcessesLocal::ProcessesLocal() : d(new Private())
 {
 
@@ -149,7 +149,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 	        if(++found == 4) goto finish;
 	    }
 	    break;
-	  case 'U': 
+	  case 'U':
 	    if((unsigned int)size > sizeof("Uid:") && qstrncmp(mBuffer, "Uid:", sizeof("Uid:")-1) == 0) {
 		sscanf(mBuffer + sizeof("Uid:") -1, "%Ld %Ld %Ld %Ld", &process->uid, &process->euid, &process->suid, &process->fsuid );
 	        if(++found == 4) goto finish;
@@ -399,7 +399,7 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
     if(sched_getparam(pid, &param) == 0)
       process->niceLevel = param.sched_priority;
     else
-      process->niceLevel = 0;  //Error getting scheduler parameters. 
+      process->niceLevel = 0;  //Error getting scheduler parameters.
   }
 
 #ifdef HAVE_IONICE

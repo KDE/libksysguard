@@ -83,30 +83,30 @@ namespace KSysGuard
     void setStatus( ProcessStatus status); ///< Whether the process is running/sleeping/etc
 
     void setIoCharactersRead(qlonglong number); ///< The number of bytes which this task has caused to be read from storage
-    void setIoCharactersWritten(qlonglong number); ///< The number of bytes which this task has caused, or shall cause to be written to disk. 
+    void setIoCharactersWritten(qlonglong number); ///< The number of bytes which this task has caused, or shall cause to be written to disk.
     void setIoReadSyscalls(qlonglong number); ///< Number of read I/O operations, i.e. syscalls like read() and pread().
     void setIoWriteSyscalls(qlonglong number); ///< Number of write I/O operations, i.e. syscalls like write() and pwrite().
     void setIoCharactersActuallyRead(qlonglong number); ///< Number of bytes which this process really did cause to be fetched from the storage layer.
     void setIoCharactersActuallyWritten(qlonglong number); ///< Attempt to count the number of bytes which this process caused to be sent to the storage layer.
 
     void setIoCharactersReadRate(long number); ///< The rate, in bytes per second, which this task has caused to be read from storage
-    void setIoCharactersWrittenRate(long number); ///< The rate, in bytes per second, which this task has caused, or shall cause to be written to disk. 
+    void setIoCharactersWrittenRate(long number); ///< The rate, in bytes per second, which this task has caused, or shall cause to be written to disk.
     void setIoReadSyscallsRate(long number); ///< Number of read I/O operations per second, i.e. syscalls like read() and pread().
     void setIoWriteSyscallsRate(long number); ///< Number of write I/O operations per second, i.e. syscalls like write() and pwrite().
     void setIoCharactersActuallyReadRate(long number); ///< Number of bytes per second which this process really did cause to be fetched from the storage layer.
     void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
 
     /* The member variables are made to public for efficiency, but should only be read from. */
-    QString login; 
-    qlonglong uid; 
-    qlonglong euid; 
-    qlonglong suid; 
-    qlonglong fsuid; 
+    QString login;
+    qlonglong uid;
+    qlonglong euid;
+    qlonglong suid;
+    qlonglong fsuid;
 
-    qlonglong gid; 
-    qlonglong egid; 
-    qlonglong sgid; 
-    qlonglong fsgid; 
+    qlonglong gid;
+    qlonglong egid;
+    qlonglong sgid;
+    qlonglong fsgid;
 
     qlonglong tracerpid;
     QByteArray tty;
@@ -180,17 +180,17 @@ namespace KSysGuard
     /** This is the number of 1/1000ths of a second since this
      *  particular process was last updated compared to when all the processes
      *  were updated. The purpose is to allow a more fine tracking of the time
-     *  a process has been running for. 
+     *  a process has been running for.
      *
      *  This is updated in processes.cpp and so shouldn't be touched by the
-     *  OS dependant classes. 
-     */ 
-    int elapsedTimeMilliSeconds; 
+     *  OS dependant classes.
+     */
+    int elapsedTimeMilliSeconds;
 
   private:
     void clear();
 
-  }; 
+  };
   Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
 }
 

@@ -34,7 +34,7 @@
 #include <err.h>
 #endif
 #include <signal.h>
-#include <unistd.h>  
+#include <unistd.h>
 #include <stdlib.h>
 
 
@@ -79,7 +79,7 @@ void ProcessesLocal::Private::readProcStatus(struct kinfo_proc *p, Process *proc
 
 
 #if defined(__FreeBSD__) && __FreeBSD_version >= 500015
-    process->setUid(p->ki_uid);    
+    process->setUid(p->ki_uid);
     process->setGid(p->ki_pgid);
     process->setName(QString(p->ki_comm ? p->ki_comm : "????"));
 #elif defined(__DragonFly__) && __DragonFly_version >= 190000
@@ -147,7 +147,7 @@ void ProcessesLocal::Private::readProcStatm(struct kinfo_proc *p, Process *proce
 {
 // TODO
 
-//     unsigned long shared;    
+//     unsigned long shared;
 //     process->setVmURSS(process->vmRSS - (shared * sysconf(_SC_PAGESIZE) / 1024));
 }
 
@@ -251,7 +251,7 @@ bool ProcessesLocal::setNiceness(long pid, int priority) {
     return true;
 }
 
-bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) 
+bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
 	    priority = 0;
@@ -300,7 +300,7 @@ long int KSysGuard::ProcessesLocal::numberProcessorCores()
 }
 ProcessesLocal::~ProcessesLocal()
 {
-   delete d;  
+   delete d;
 }
 
 }

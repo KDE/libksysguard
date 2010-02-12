@@ -38,9 +38,9 @@ namespace KSysGuard
   class ProcessesRemote::Private
   {
     public:
-      Private() {havePsInfo = false; pidColumn = 1; 
-	      ppidColumn = nameColumn = uidColumn = gidColumn = 
-	      statusColumn = userColumn = systemColumn = niceColumn = 
+      Private() {havePsInfo = false; pidColumn = 1;
+	      ppidColumn = nameColumn = uidColumn = gidColumn =
+	      statusColumn = userColumn = systemColumn = niceColumn =
 	      vmSizeColumn = vmRSSColumn = loginColumn = commandColumn =
 	      tracerPidColumn = ttyColumn = ioprioClassColumn = ioprioColumn =
 	      vmURSSColumn = -1;

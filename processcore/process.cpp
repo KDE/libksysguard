@@ -1,5 +1,5 @@
 /*  This file is part of the KDE project
-    
+
     Copyright (C) 2007 John Tapsell <tapsell@kde.org>
 
     This library is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@
 #include "process.h"
 
 
-KSysGuard::Process::Process() { 
+KSysGuard::Process::Process() {
     clear();
 }
 KSysGuard::Process::Process(qlonglong _pid, qlonglong _ppid, Process *_parent)  {
@@ -63,8 +63,8 @@ QString KSysGuard::Process::ioPriorityClassAsString() const {
     }
 }
 
-QString KSysGuard::Process::translatedStatus() const { 
-    switch( status ) { 
+QString KSysGuard::Process::translatedStatus() const {
+    switch( status ) {
         case Running: return i18nc("process status", "running");
         case Sleeping: return i18nc("process status", "sleeping");
         case DiskSleep: return i18nc("process status", "disk sleep");
@@ -76,8 +76,8 @@ QString KSysGuard::Process::translatedStatus() const {
     }
 }
 
-QString KSysGuard::Process::schedulerAsString() const { 
-    switch( scheduler ) { 
+QString KSysGuard::Process::schedulerAsString() const {
+    switch( scheduler ) {
         case Fifo: return i18nc("Scheduler", "FIFO");
         case RoundRobin: return i18nc("Scheduler", "Round Robin");
         case Batch: return i18nc("Scheduler", "Batch");
@@ -86,10 +86,10 @@ QString KSysGuard::Process::schedulerAsString() const {
 }
 
 void KSysGuard::Process::clear() {
-    pid = 0; 
-    parent_pid = 0; 
-    uid = 0; 
-    gid = -1; 
+    pid = 0;
+    parent_pid = 0;
+    uid = 0;
+    gid = -1;
     suid = euid = fsuid = -1;
     sgid = egid = fsgid = -1;
     tracerpid = 0;
@@ -129,135 +129,135 @@ void KSysGuard::Process::setLogin(QString _login) {
     if(login == _login) return;
     login = _login;
     changes |= Process::Login;
-} 
+}
 void KSysGuard::Process::setUid(qlonglong _uid) {
     if(uid == _uid) return;
     uid = _uid;
     changes |= Process::Uids;
-} 
+}
 void KSysGuard::Process::setEuid(qlonglong _euid) {
     if(euid == _euid) return;
     euid = _euid;
     changes |= Process::Uids;
-} 
+}
 void KSysGuard::Process::setSuid(qlonglong _suid) {
     if(suid == _suid) return;
     suid = _suid;
     changes |= Process::Uids;
-} 
+}
 void KSysGuard::Process::setFsuid(qlonglong _fsuid) {
     if(fsuid == _fsuid) return;
     fsuid = _fsuid;
     changes |= Process::Uids;
-} 
+}
 
 void KSysGuard::Process::setGid(qlonglong _gid) {
     if(gid == _gid) return;
     gid = _gid;
     changes |= Process::Gids;
-} 
+}
 void KSysGuard::Process::setEgid(qlonglong _egid) {
     if(egid == _egid) return;
     egid = _egid;
     changes |= Process::Gids;
-} 
+}
 void KSysGuard::Process::setSgid(qlonglong _sgid) {
     if(sgid == _sgid) return;
     sgid = _sgid;
     changes |= Process::Gids;
-} 
+}
 void KSysGuard::Process::setFsgid(qlonglong _fsgid) {
     if(fsgid == _fsgid) return;
     fsgid = _fsgid;
     changes |= Process::Gids;
-} 
+}
 
 void KSysGuard::Process::setTracerpid(qlonglong _tracerpid) {
     if(tracerpid == _tracerpid) return;
     tracerpid = _tracerpid;
     changes |= Process::Tracerpid;
-} 
+}
 void KSysGuard::Process::setTty(QByteArray _tty) {
     if(tty == _tty) return;
     tty = _tty;
     changes |= Process::Tty;
-} 
+}
 void KSysGuard::Process::setUserTime(qlonglong _userTime) {
     userTime = _userTime;
-} 
+}
 void KSysGuard::Process::setSysTime(qlonglong _sysTime) {
     sysTime = _sysTime;
-}  
+}
 void KSysGuard::Process::setUserUsage(int _userUsage) {
     if(userUsage == _userUsage) return;
     userUsage = _userUsage;
     changes |= Process::Usage;
-} 
+}
 void KSysGuard::Process::setSysUsage(int _sysUsage) {
     if(sysUsage == _sysUsage) return;
     sysUsage = _sysUsage;
     changes |= Process::Usage;
-}  
+}
 void KSysGuard::Process::setTotalUserUsage(int _totalUserUsage) {
     if(totalUserUsage == _totalUserUsage) return;
     totalUserUsage = _totalUserUsage;
     changes |= Process::TotalUsage;
-} 
+}
 void KSysGuard::Process::setTotalSysUsage(int _totalSysUsage) {
     if(totalSysUsage == _totalSysUsage) return;
     totalSysUsage = _totalSysUsage;
     changes |= Process::TotalUsage;
-} 
+}
 void KSysGuard::Process::setNiceLevel(int _niceLevel) {
     if(niceLevel == _niceLevel) return;
     niceLevel = _niceLevel;
     changes |= Process::NiceLevels;
-}      
+}
 void KSysGuard::Process::setscheduler(Scheduler _scheduler) {
     if(scheduler == _scheduler) return;
     scheduler = _scheduler;
     changes |= Process::NiceLevels;
-} 
+}
 void KSysGuard::Process::setIoPriorityClass(IoPriorityClass _ioPriorityClass) {
     if(ioPriorityClass == _ioPriorityClass) return;
     ioPriorityClass = _ioPriorityClass;
     changes |= Process::NiceLevels;
-} 
+}
 void KSysGuard::Process::setIoniceLevel(int _ioniceLevel) {
     if(ioniceLevel == _ioniceLevel) return;
     ioniceLevel = _ioniceLevel;
     changes |= Process::NiceLevels;
-}    
+}
 void KSysGuard::Process::setVmSize(qlonglong _vmSize) {
     if(vmSize == _vmSize) return;
     vmSize = _vmSize;
     changes |= Process::VmSize;
-}   
+}
 void KSysGuard::Process::setVmRSS(qlonglong _vmRSS) {
     if(vmRSS == _vmRSS) return;
     vmRSS = _vmRSS;
     changes |= Process::VmRSS;
-}    
+}
 void KSysGuard::Process::setVmURSS(qlonglong _vmURSS) {
     if(vmURSS == _vmURSS) return;
     vmURSS = _vmURSS;
     changes |= Process::VmURSS;
-}   
+}
 void KSysGuard::Process::setName(QString _name) {
     if(name == _name) return;
     name = _name;
     changes |= Process::Name;
-}  
+}
 void KSysGuard::Process::setCommand(QString _command) {
     if(command == _command) return;
     command = _command;
     changes |= Process::Command;
-} 
+}
 void KSysGuard::Process::setStatus(ProcessStatus _status) {
     if(status == _status) return;
     status = _status;
     changes |= Process::Status;
-} 
+}
 void KSysGuard::Process::setIoCharactersRead(qlonglong number) {
     if(number == ioCharactersRead) return;
     ioCharactersRead = number;

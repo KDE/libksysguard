@@ -1,5 +1,5 @@
 /*  This file is part of the KDE project
-    
+
     Copyright (C) 2007 John Tapsell <tapsell@kde.org>
 
     This library is free software; you can redistribute it and/or
@@ -69,4 +69,4 @@ namespace KSysGuard
             Processes::UpdateFlags mUpdateFlags;
     };
 }
-#endif 
+#endif

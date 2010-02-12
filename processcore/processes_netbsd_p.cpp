@@ -70,7 +70,7 @@ long int KSysGuard::ProcessesLocal::numberProcessorCores()
         return 1;
     return len;
 }
-#endif  
+#endif
 
 bool ProcessesLocal::Private::readProc(long pid, struct kinfo_proc2 **p, int *num)
 {
@@ -155,7 +155,7 @@ void ProcessesLocal::Private::readProcStatm(struct kinfo_proc2 *p, Process *proc
 {
 // TODO
 
-//     unsigned long shared;    
+//     unsigned long shared;
 //     process->vmURSS = process->vmRSS - (shared * sysconf(_SC_PAGESIZE) / 1024);
   process->setVmURSS(-1);
 }
@@ -244,7 +244,7 @@ bool ProcessesLocal::setNiceness(long pid, int priority) {
     return true;
 }
 
-bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) 
+bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
 	    priority = 0;
@@ -286,7 +286,7 @@ long long ProcessesLocal::totalPhysicalMemory() {
 
 ProcessesLocal::~ProcessesLocal()
 {
-   delete d;  
+   delete d;
 }
 
 }

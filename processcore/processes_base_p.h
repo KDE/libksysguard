@@ -1,5 +1,5 @@
 /*  This file is part of the KDE project
-    
+
     Copyright (C) 2007 John Tapsell <tapsell@kde.org>
 
     This library is free software; you can redistribute it and/or
@@ -69,7 +69,7 @@ namespace KSysGuard
              *
              *  The process->pid process->ppid and process->parent  are all guaranteed
              *  to be filled in correctly and process->parent will be non null.
-             */ 
+             */
             virtual bool updateProcessInfo(long pid, Process *process) = 0;
 
             /** \brief Send the specified named POSIX signal to the process given.
@@ -87,18 +87,18 @@ namespace KSysGuard
 
             /** \brief Set the priority for a process.
              *
-             *  For the normal scheduler, this is usually from 19 
+             *  For the normal scheduler, this is usually from 19
              *  (very nice, lowest priority) to -20 (highest priority).  The default value for a process is 0.
              *
              *  This has no effect if the scheduler is not the normal one (SCHED_OTHER in Linux).
-             *  
+             *
              *  @return false if you do not have permission to set the priority.
              */
             virtual bool setNiceness(long pid, int priority) = 0;
 
             /** \brief Set the scheduler for a process.
              *
-             * This is defined according to POSIX.1-2001 
+             * This is defined according to POSIX.1-2001
              *  See "man sched_setscheduler" for more information.
              *
              *  @p priorityClass One of SCHED_FIFO, SCHED_RR, SCHED_OTHER, and SCHED_BATCH

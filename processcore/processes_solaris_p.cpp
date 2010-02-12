@@ -75,7 +75,7 @@ bool ProcessesLocal::setNiceness(long pid, int priority) {
     return false;
 }
 
-bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) 
+bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     return false;
 }
@@ -94,7 +94,7 @@ long long ProcessesLocal::totalPhysicalMemory() {
 
 ProcessesLocal::~ProcessesLocal()
 {
-   delete d;  
+   delete d;
 }
 
 }
