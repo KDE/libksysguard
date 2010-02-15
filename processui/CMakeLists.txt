@@ -24,7 +24,7 @@ kde4_add_library(processui SHARED ${processui_LIB_SRCS})
 
 if(XRES_LIBRARY)
   target_link_libraries(processui ${XRES_LIBRARY} ${X11_LIBRARIES})
-  include_directories(${X11_INCLUDE_DIR})
+  include_directories(${X11_INCLUDE_DIR} ${XRES_INCLUDE_DIR})
 endif(XRES_LIBRARY)
 
 target_link_libraries(processui ${KDE4_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTWEBKIT_LIBRARY} ${QT_QTUITOOLS_LIBRARY} processcore)
