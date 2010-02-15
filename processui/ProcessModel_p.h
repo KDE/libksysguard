@@ -46,14 +46,12 @@ struct WindowInfo {
     WindowInfo(WId _wid, qlonglong _pid) {
         wid = _wid;
         pid = 0;
-        state = 0;
         pid = _pid;
     }
     qlonglong pid;
     QPixmap icon;
     WId wid;
     QString name;
-    unsigned long state;
 };
 #include "../config-ksysguard.h"
 #endif
@@ -139,6 +137,9 @@ class ProcessModelPrivate : public QObject
         inline QString getGroupnameForGroup(long gid) const;
 #ifdef Q_WS_X11
         void updateWindowInfo(WId wid, unsigned int properties, bool newWindow);
+#ifdef HAVE_XRES
+        void queryForAndUpdateAllXWindows();
+#endif
 #endif
         /** @see setIsLocalhost */
         bool mIsLocalhost;

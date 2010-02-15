@@ -597,6 +597,10 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         int num_headings = d->mFilterModel.columnCount();
         for(int i = 0; i < num_headings; ++i) {
             if(d->mUi->treeView->header()->isSectionHidden(i)) {
+#ifndef HAVE_XRES
+                if(i == ProcessModel::HeadingXMemory)
+                    continue;
+#endif
                 action = new QAction(menu);
                 action->setText(i18n("Show Column '%1'", d->mFilterModel.headerData(i, Qt::Horizontal, Qt::DisplayRole).toString()));
                 action->setData(i); //We set data to be negative (and minus 1) to hide a column, and positive to show a column
@@ -804,6 +808,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         d->mUi->treeView->hideColumn(-1-i);
     else {
         d->mUi->treeView->showColumn(i);
+        updateList();
         d->mUi->treeView->resizeColumnToContents(i);
         d->mUi->treeView->resizeColumnToContents(d->mFilterModel.columnCount());
     }
@@ -908,9 +913,11 @@ void KSysGuardProcessList::retranslateUi()
 void KSysGuardProcessList::updateList()
 {
     if(isVisible()) {
-        KSysGuard::Processes::UpdateFlags updateFlags = 0;
+        KSysGuard::Processes::UpdateFlags updateFlags = KSysGuard::Processes::StandardInformation;
         if(!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoRead) || !d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoWrite))
-            updateFlags = KSysGuard::Processes::IOStatistics;
+            updateFlags |= KSysGuard::Processes::IOStatistics;
+        if(!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingXMemory))
+            updateFlags |= KSysGuard::Processes::XMemory;
         d->mModel.update(d->mUpdateIntervalMSecs, updateFlags);
         if(d->mUpdateTimer)
             d->mUpdateTimer->start(d->mUpdateIntervalMSecs);

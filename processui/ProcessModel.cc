@@ -313,30 +313,62 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
 
 void ProcessModelPrivate::setupWindows() {
 #ifdef Q_WS_X11
+    connect( KWindowSystem::self(), SIGNAL(windowChanged (WId, unsigned int )), this, SLOT(windowChanged(WId, unsigned int)));
+    connect( KWindowSystem::self(), SIGNAL(windowAdded (WId )), this, SLOT(windowAdded(WId)));
+    connect( KWindowSystem::self(), SIGNAL(windowRemoved (WId )), this, SLOT(windowRemoved(WId)));
+
+    //Add all the windows that KWin is managing - i.e. windows that the user can see
     QList<WId>::ConstIterator it;
     for ( it = KWindowSystem::windows().begin(); it != KWindowSystem::windows().end(); ++it ) {
         updateWindowInfo(*it, ~0u, true);
     }
-
+#endif
+}
 #ifdef HAVE_XRES
+void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
+    qDebug() << "updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
     Window       *children, dummy;
     unsigned int  count;
     Status result = XQueryTree(QX11Info::display(), QX11Info::appRootWindow(), &dummy, &dummy, &children, &count);
-    if(result) {
-        for (uint i=0; i < count; ++i) {
-            updateWindowInfo(children[i], NET::WMPid, true);
+    if(!result)
+        return;
+    QSet<qlonglong> foundPids;
+    for (uint i=0; i < count; ++i) {
+        WId wid = children[i];
+
+        //Get the PID for this window if we do not know it
+        KXErrorHandler handler;
+        NETWinInfo info( QX11Info::display(), wid, QX11Info::appRootWindow(), NET::WMPid );
+        if (handler.error( false ) )
+            continue;  //info is invalid - window just closed or something probably
+
+        qlonglong pid = info.pid();
+        if(!pid || foundPids.contains(pid))
+            continue;
+
+        KSysGuard::Process *process = mProcesses->getProcess(pid);
+        if(!process) return; //shouldn't really happen.. maybe race condition etc
+        unsigned long previousPixmapBytes = process->pixmapBytes;
+        //Now update the pixmap bytes for this window
+        bool success = XResQueryClientPixmapBytes(QX11Info::display(), wid, &process->pixmapBytes);
+        if(!success)
+            process->pixmapBytes = 0;
+
+        if(previousPixmapBytes != process->pixmapBytes) {
+            int row;
+            if(mSimple)
+                row = process->index;
+            else
+                row = process->parent->children.indexOf(process);
+            QModelIndex index = q->createIndex(row, ProcessModel::HeadingXMemory, process);
+            emit q->dataChanged(index, index);
         }
-        if(children)
-            XFree((char*)children);
     }
-#endif
-
-    connect( KWindowSystem::self(), SIGNAL(windowChanged (WId, unsigned int )), this, SLOT(windowChanged(WId, unsigned int)));
-    connect( KWindowSystem::self(), SIGNAL(windowAdded (WId )), this, SLOT(windowAdded(WId)));
-    connect( KWindowSystem::self(), SIGNAL(windowRemoved (WId )), this, SLOT(windowRemoved(WId)));
-#endif
+    if(children)
+        XFree((char*)children);
+    qDebug() << "done updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
 }
-
+#endif
 void ProcessModelPrivate::setupProcesses() {
     if(mProcesses) {
         mWIdToWindowInfo.clear();
@@ -372,7 +404,7 @@ void ProcessModelPrivate::windowAdded(WId wid)
 
 void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, bool newWindow)
 {
-    properties &= (NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMState | NET::WMIcon);
+    properties &= (NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMIcon);
 
     if(!properties)
         return; //Nothing interesting changed
@@ -394,7 +426,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
     }
 
     if(!w) {
-        //We know that this much be a newWindow
+        //We know that this must be a newWindow
         qlonglong pid = info.pid();
         if(!(properties & NET::WMPid && pid))
             return; //No PID for the window - this happens if the process did not set _NET_WM_PID
@@ -417,8 +449,6 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         w->name = QString::fromUtf8(info.name());
     else if(properties & (NET::WMName | NET::WMVisibleName))
         w->name.clear();
-    if(properties & NET::WMState)
-        w->state = info.state();
 
     KSysGuard::Process *process = mProcesses->getProcess(w->pid);
     if(!process) return; //shouldn't really happen.. maybe race condition etc
@@ -428,23 +458,15 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         row = process->index;
     else
         row = process->parent->children.indexOf(process);
-    bool firstWindow = newWindow && mPidToWindowInfo.count(w->pid) == 1;
-    if(firstWindow) {
+    if(!process->hasManagedGuiWindow) {
+        process->hasManagedGuiWindow = true;;
         //Since this is the first window for a process, invalidate HeadingName so that
         //if we are sorting by name this gets taken into account
         QModelIndex index1 = q->createIndex(row, ProcessModel::HeadingName, process);
         emit q->dataChanged(index1, index1);
     }
-    process->hasManagedGuiWindow = process->hasManagedGuiWindow || (properties != NET::WMPid);
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
     emit q->dataChanged(index2, index2);
-#ifdef HAVE_XRES
-    if(firstWindow && mHaveXRes) {
-        bool success = XResQueryClientPixmapBytes(QX11Info::display(), w->wid, &process->pixmapBytes);
-        if(!success)
-            process->pixmapBytes = 0;
-    }
-#endif
 }
 #endif
 
@@ -453,7 +475,14 @@ void ProcessModel::update(long updateDurationMSecs, KSysGuard::Processes::Update
     d->mProcesses->updateAllProcesses(updateDurationMSecs, updateFlags);
     if(d->mMemTotal <= 0)
         d->mMemTotal = d->mProcesses->totalPhysicalMemory();
+
 //    kDebug() << "finished:             " << QTime::currentTime().toString("hh:mm:ss.zzz");
+#ifdef HAVE_XRES
+    //Add all the rest of the windows
+    if(d->mHaveXRes && updateFlags.testFlag(KSysGuard::Processes::XMemory))
+        d->queryForAndUpdateAllXWindows();
+#endif
+
 }
 
 QString ProcessModelPrivate::getStatusDescription(KSysGuard::Process::ProcessStatus status) const
