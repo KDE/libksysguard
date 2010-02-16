@@ -359,7 +359,7 @@ void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags
 
     if(d->mLastUpdated.elapsed() >= updateDurationMS || !d->mLastUpdated.isValid())  {
         d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
-        d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags);
+        d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags);  //For a local machine, this will directly call Processes::processesUpdated()
     }
 }
 

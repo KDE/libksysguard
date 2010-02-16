@@ -178,6 +178,8 @@ namespace KSysGuard
          *  This is fast (just a system call) */
         long numberProcessorCores();
 
+        /** Update/add process for given pid immediately */
+        bool updateOrAddProcess( long pid);
     public Q_SLOTS:
         /** The abstract processes has updated its list of processes */
         void processesUpdated();
@@ -228,7 +230,6 @@ namespace KSysGuard
         class StaticPrivate;
         static StaticPrivate *d2;
     private:
-        bool updateOrAddProcess( long pid);
         inline void deleteProcess(long pid);
         bool updateProcess( Process *process, long ppid);
         bool updateProcessInfo(Process *ps);
