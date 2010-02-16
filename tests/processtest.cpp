@@ -20,6 +20,7 @@
 
 #include <QtTest>
 #include <QtCore>
+#include <QTreeView>
 
 #include <klocale.h>
 #include <qtest_kde.h>
@@ -119,6 +120,7 @@ void testProcess::testTimeToUpdateAllProcesses() {
 }
 void testProcess::testTimeToUpdateModel() {
     KSysGuardProcessList *processList = new KSysGuardProcessList;
+    processList->treeView()->setColumnHidden(13, false);
     processList->show();
     QTest::qWaitForWindowShown(processList);
 
