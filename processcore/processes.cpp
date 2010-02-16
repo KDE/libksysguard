@@ -52,7 +52,6 @@ namespace KSysGuard
         mAbstractProcesses = 0;
         mProcesses.insert(0, &mFakeProcess);
         mElapsedTimeMilliSeconds = 0;
-        mLastUpdated.start();
         ref = 1;
         mHavePreviousIoValues = false;
         mUpdateFlags = 0;
@@ -169,7 +168,6 @@ Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private(this)
 {
     d->mAbstractProcesses = abstractProcesses;
     connect( abstractProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
-    updateAllProcesses(0,StandardInformation);
 }
 
 Processes::~Processes()
@@ -359,7 +357,7 @@ void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags
     else
         d->mUpdateFlags |= updateFlags;
 
-    if(d->mLastUpdated.elapsed() >= updateDurationMS)  {
+    if(d->mLastUpdated.elapsed() >= updateDurationMS || !d->mLastUpdated.isValid())  {
         d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
         d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags);
     }

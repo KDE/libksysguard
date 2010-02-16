@@ -326,7 +326,7 @@ void ProcessModelPrivate::setupWindows() {
 }
 #ifdef HAVE_XRES
 void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
-    qDebug() << "updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
+//    qDebug() << "updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
     Window       *children, dummy;
     unsigned int  count;
     Status result = XQueryTree(QX11Info::display(), QX11Info::appRootWindow(), &dummy, &dummy, &children, &count);
@@ -366,7 +366,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
     }
     if(children)
         XFree((char*)children);
-    qDebug() << "done updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
+//    qDebug() << "done updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
 }
 #endif
 void ProcessModelPrivate::setupProcesses() {
@@ -451,7 +451,8 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         w->name.clear();
 
     KSysGuard::Process *process = mProcesses->getProcess(w->pid);
-    if(!process) return; //shouldn't really happen.. maybe race condition etc
+    if(!process)
+        return; //This happens when a new window is detected before we've read in the process
 
     int row;
     if(mSimple)
@@ -678,6 +679,8 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
 void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
 {
     Q_ASSERT(process);
+    if(!process->hasManagedGuiWindow && mPidToWindowInfo.contains(process->pid))
+        process->hasManagedGuiWindow = true;
     if(mSimple) {
         int row = mProcesses->processCount();
         q->beginInsertRows( QModelIndex(), row, row );
@@ -1168,6 +1171,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return formatMemoryInfo(process->pixmapBytes/1024, d->mUnits, true);
         case HeadingXTitle:
             {
+                if(!process->hasManagedGuiWindow)
+                    return QVariant(QVariant::String);
+
                 WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
                 if(!w)
                     return QVariant(QVariant::String);
@@ -1537,15 +1543,15 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     case Qt::DecorationRole: {
         if(index.column() == HeadingName) {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
-            if(!w) {
+            if(!process->hasManagedGuiWindow) {
                 if(d->mSimple) //When not in tree mode, we need to pad the name column where we do not have an icon
                     return QIcon(d->mBlankPixmap);
                 else  //When in tree mode, the padding looks bad, so do not pad in this case
                     return QVariant();
             }
 
-            if(w->icon.isNull())
+            WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+            if(!w || w->icon.isNull())
                 return QIcon(d->mBlankPixmap);
             return w->icon;
 
