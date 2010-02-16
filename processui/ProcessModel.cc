@@ -334,6 +334,7 @@ bool ProcessModelPrivate::updateXResClientData() {
     if (handler.error( false ) )
         return false;
 
+    mXResClientResources.clear();
     for (int i=0; i < count; i++)
         mXResClientResources.insert(-(qlonglong)(clients[i].resource_base), clients[i].resource_mask);
 
@@ -348,6 +349,8 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
     unsigned int  count;
     Status result = XQueryTree(QX11Info::display(), QX11Info::appRootWindow(), &dummy, &dummy, &children, &count);
     if(!result)
+        return;
+    if(!updateXResClientData())
         return;
     for (uint i=0; i < count; ++i) {
         WId wid = children[i];
@@ -897,7 +900,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingCommand:
                 return i18n("<qt><i>Technical information: </i>This is from /proc/*/cmdline");
             case HeadingXMemory:
-                return i18n("<qt><i>This is the amount of memory used by the Xorg process for images for this process.  This is memory used in addition to Memory and Shared Memory.<br><i>Technical information: </i>This only counts the pixmap memory, and does not include resource memory used by fonts, cursors, glyphsets etc.  See the <code>xrestop</code> for a more detailed breakdown.");
+                return i18n("<qt><i>Technical information: </i>This is the amount of memory used by the Xorg process for images for this process.  This is memory used in addition to Memory and Shared Memory.<br><i>Technical information: </i>This only counts the pixmap memory, and does not include resource memory used by fonts, cursors, glyphsets etc.  See the <code>xrestop</code> for a more detailed breakdown.");
             case HeadingXTitle:
                 return i18n("<qt><i>Technical information: </i>For each X11 window, the X11 property _NET_WM_PID is used to map the window to a PID.  If a process' windows are not shown, then that application incorrectly is not setting _NET_WM_PID.");
             case HeadingPid:
