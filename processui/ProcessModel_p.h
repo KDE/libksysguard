@@ -138,6 +138,7 @@ class ProcessModelPrivate : public QObject
 #ifdef Q_WS_X11
         void updateWindowInfo(WId wid, unsigned int properties, bool newWindow);
 #ifdef HAVE_XRES
+        bool updateXResClientData();
         void queryForAndUpdateAllXWindows();
 #endif
 #endif
@@ -198,7 +199,8 @@ class ProcessModelPrivate : public QObject
         QString mHostName;
 
 #ifdef HAVE_XRES
-        bool mHaveXRes; ///< True if the XRes extension is available
+        bool mHaveXRes; ///< True if the XRes extension is available at run time
+        QMap<qlonglong, XID> mXResClientResources;
 #endif
 
         ProcessModel* q;

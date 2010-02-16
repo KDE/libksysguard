@@ -325,16 +325,38 @@ void ProcessModelPrivate::setupWindows() {
 #endif
 }
 #ifdef HAVE_XRES
+bool ProcessModelPrivate::updateXResClientData() {
+    XResClient *clients;
+    int count;
+
+    KXErrorHandler handler;
+    XResQueryClients(QX11Info::display(), &count, &clients);
+    if (handler.error( false ) )
+        return false;
+
+    for (int i=0; i < count; i++)
+        mXResClientResources.insert(-(qlonglong)(clients[i].resource_base), clients[i].resource_mask);
+
+    if(clients)
+        XFree(clients);
+    return true;
+}
 void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
 //    qDebug() << "updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
+    updateXResClientData();
     Window       *children, dummy;
     unsigned int  count;
     Status result = XQueryTree(QX11Info::display(), QX11Info::appRootWindow(), &dummy, &dummy, &children, &count);
     if(!result)
         return;
-    QSet<qlonglong> foundPids;
     for (uint i=0; i < count; ++i) {
         WId wid = children[i];
+        QMap<qlonglong, XID>::iterator i = mXResClientResources.lowerBound(-(qlonglong)(wid));
+        if(i == mXResClientResources.constEnd())
+            continue; //We couldn't find it this time :-/
+
+        if(-i.key() != (qlonglong)(wid & ~i.value()))
+            continue; //Already added this window
 
         //Get the PID for this window if we do not know it
         KXErrorHandler handler;
@@ -343,9 +365,10 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
             continue;  //info is invalid - window just closed or something probably
 
         qlonglong pid = info.pid();
-        if(!pid || foundPids.contains(pid))
+        if(!pid)
             continue;
-
+        //We found a window with this client
+        mXResClientResources.erase(i);
         KSysGuard::Process *process = mProcesses->getProcess(pid);
         if(!process) return; //shouldn't really happen.. maybe race condition etc
         unsigned long previousPixmapBytes = process->pixmapBytes;
