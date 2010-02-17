@@ -355,7 +355,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
     for (uint i=0; i < count; ++i) {
         WId wid = children[i];
         QMap<qlonglong, XID>::iterator i = mXResClientResources.lowerBound(-(qlonglong)(wid));
-        if(i == mXResClientResources.constEnd())
+        if(i == mXResClientResources.end())
             continue; //We couldn't find it this time :-/
 
         if(-i.key() != (qlonglong)(wid & ~i.value()))
