@@ -41,6 +41,8 @@ sorttable = {
   
   makeSortable: function(table) {
     if (table.getElementsByTagName('thead').length == 0) {
+        if(table.rows.length == 0)
+            return;
       // table doesn't have a tHead. Since it should have, create one and
       // put the first table row in it.
       the = document.createElement('thead');

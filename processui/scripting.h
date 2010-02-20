@@ -24,13 +24,10 @@
 #define KSYSGUARDSCRIPTING_H
 
 #include <QList>
-#include <QScriptValue>
 #include <QString>
 #include <QWidget>
 #include "processes.h"
 
-class QScriptContext;
-class QScriptEngine;
 class QAction;
 class ScriptingHtmlDialog; //Defined in scripting.cpp file
 class KSysGuardProcessList;
@@ -41,7 +38,7 @@ class Scripting : public QWidget {
     /** Create a scripting object */
     Scripting(KSysGuardProcessList *parent);
     /** Run the script in the given path */
-    void runScript(KSysGuard::Process *process, const QString &path, const QString &name);
+    void runScript(const QString &path, const QString &name);
     /** Read all the script .desktop files and create an action for each one */
     void loadContextMenu();
     /** List of context menu actions that are created by loadContextMenu() */
@@ -55,11 +52,11 @@ class Scripting : public QWidget {
   private Q_SLOTS:
     /** Run the script associated with the QAction that called this slot */
     void runScriptSlot();
+    void setupJavascriptObjects();
+    void refreshScript();
   private:
     /** This is created on the fly as needed, and deleted when no longer used */
     ScriptingHtmlDialog *mScriptingHtmlDialog;
-    /** This is created on the fly as needed */
-    QScriptEngine *mScriptEngine;
     /** The parent process list to script for */
     KSysGuardProcessList * const mProcessList;
     /** List of context menu actions that are created by loadContextMenu() */
@@ -67,7 +64,17 @@ class Scripting : public QWidget {
     QString mScriptPath;
     QString mScriptName;
 
+    qlonglong mPid;
+};
 
+class ProcessObject : public QObject {
+    Q_OBJECT
+    public:
+        ProcessObject(KSysGuard::Process *process);
+
+    public Q_SLOTS:
+        bool fileExists(const QString &filename);
+        QString readFile(const QString &filename);
 };
 
 #endif

@@ -16,16 +16,16 @@ function removeItem(items, item) {
 }
 
 function readSmapsFile() {
-    if( !fileExists("/proc/" + process.pid + "/smaps" ) ) {
-        if( fileExists("/proc/" + process.pid ) ) {  //Check that it's not just a timing issue - the process might have already ended
-            setHtml("<h1>Sorry</h1>Your system is not currently supported (/proc/"+process.pid+"/smaps was not found)");
+    if( !window.process.fileExists("/proc/" + window.process.pid + "/smaps" ) ) {
+        if( window.process.fileExists("/proc/" + window.process.pid ) ) {  //Check that it's not just a timing issue - the process might have already ended
+            setHtml("<h1>Sorry</h1>Your system is not currently supported (/proc/"+window.process.pid+"/smaps was not found)");
         }
         return;
     }
-    var smaps = readFile("/proc/" + process.pid + "/smaps");
+    var smaps = window.process.readFile("/proc/" + window.process.pid + "/smaps");
     if(!smaps) {
-        if( fileExists("/proc/" + process.pid ) ) {  //Check that it's not just a timing issue - the process might have already ended
-            setHtml("<h1>Sorry</h1>Could not read detailed memory information (/proc/"+process.pid+"/smaps could not be read)");
+        if( window.process.fileExists("/proc/" + window.process.pid ) ) {  //Check that it's not just a timing issue - the process might have already ended
+            setHtml("<h1>Sorry</h1>Could not read detailed memory information (/proc/"+window.process.pid+"/smaps could not be read)");
         }
         return;
     }
@@ -142,22 +142,24 @@ function sortDataByInfo(data, info) {
 }
 function getHtmlTableForLibrarySummary(data, info, total) {
     var sortedData = sortDataByInfo(data, info);
-    var html = "<table class='librarySummary'><thead><tr><th colspan='2'>" + info + "</th></thead>"
-    html += "<tfoot class='showFullLibrarySummaryLink'><tr><td colspan='2'>"
-    html += "<a id='link" + info + "' href='javascript:showFullLibrarySummary(\"hidden" + info + "\", \"link" + info + "\")'>more</a>";
-    html += "</td></tr></tfoot>";
-    html += "<tbody>";
+    var html = "";
+    var htmlIsForHidddenTBody = false;
     for(var i = 0; i < sortedData.length; i++) {
         var value = sortedData[i][info];
         if(value == 0)
             break; //Do not show libraries with a value of 0 KB
+        if( i == 5 && sortedData.length > 8) {
+            document.getElementById('tbody' + info).innerHTML = html;
+            html = "";
+            htmlIsForHiddenTBody = true;
+        }
         var pathname = sortedData[i]['pathname'];
-        if( i == 5 && sortedData.length > 8)
-            html += "</tbody><tbody id='hidden" + info + "' style='display:none'>";
         html += "<tr><td class='memory'>" + value + " KB</td><td>" + pathname + "</td></tr>";
     }
-    html += "</tbody></table>";
-    return html;
+    if(htmlIsForHiddenTBody)
+        document.getElementById('tbody' + info + 'Hidden').innerHTML = html;
+    else
+        document.getElementById('tbody' + info).innerHTML = html;
 }
 function getHtmlSummary(combined) {
     var pss = calculateTotal(combined,'Pss');
@@ -170,65 +172,65 @@ function getHtmlSummary(combined) {
     var shared_total = shared_clean + shared_dirty;
     var swap = calculateTotal(combined,'Swap');
     var html = "";
-    html += "<h2>Summary</h2>";
-    html += "The process <b>" + process.name.substr(0,20) + "</b> (with pid " + process.pid + ") is using approximately " + formatKB(pss) + " of memory.<br>";
+    html += "The process <b>" + window.process.name.substr(0,20) + "</b> (with pid " + window.process.pid + ") is using approximately " + formatKB(pss) + " of memory.<br>";
     html += "It is using " + formatKB(private_total) + " privately, and a further " + formatKB(shared_total) + " that is, or could be, shared with other programs.<br>";
     if(shared_total != 0)
         html += "Dividing up the shared memory between all the processes sharing that memory we get a reduced shared memory usage of " + formatKB(pss - private_total) + ". Adding that to the private usage, we get the above mentioned total memory footprint of " + formatKB(pss) + ".<br>";
     if( swap != 0)
         html += swap + " KB is swapped out to disk, probably due to a low amount of available memory left.";
-    html += "<h2>Library usage</h2>";
-    html += "The memory usage of a process is found by adding up the memory usage of each of its libraries, plus the process's own heap, stack and any other mappings, plus the stack of any of its threads.<br>";
-    html += "<div class='summaryTable'>" + getHtmlTableForLibrarySummary(combined, 'Private', private_total) + "</div>";
-    html += "<div class='summaryTable'>" + getHtmlTableForLibrarySummary(combined, 'Shared', shared_total) + "</div>";
 
-    html += "<div style='clear:both'><h2>Totals</h2><div class='totalTable'>";
-    html += "<table>";
-    html += "<tbody>";
+    document.getElementById('processsummary').innerHTML = html;
+
+    getHtmlTableForLibrarySummary(combined, 'Private', private_total);
+    getHtmlTableForLibrarySummary(combined, 'Shared', shared_total);
+
+    html = "";
     html += "<tr><th class='memory'>Private</th><td class='memory'>" + private_total + " KB</td><td class='comment'>(= " + private_clean + " KB clean + " + private_dirty + " KB dirty)</td></tr>";
     html += "<tr><th class='memory'>Shared</th><td class='memory'>" + shared_total + " KB</td><td class='comment'>(= " + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</td></tr>";
     html += "<tr><th class='memory'>Rss</th><td class='memory'>" + rss + " KB</td><td class='comment'>(= Private + Shared)</td></tr>";
     html += "<tr><th class='memory'>Pss</th><td class='memory'>" + pss + " KB</td><td class='comment'>(= Private + Shared/Number of Processes)</td></tr>";
     html += "<tr><th class='memory'>Swap</th><td class='memory'>" + swap + " KB</td></tr>";
-    html += "</tbody>";
-    html += "</table></div></div>";
-    return html;
+    document.getElementById('totalTableBody').innerHTML = html;
 }
-function getHtmlHeader() {
-    var html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">";
-    html += "<html><head><link href='style.css' rel='stylesheet' type='text/css'>";
-    html += "<script language='javascript' src='helper.js' language='javascript' type='text/javascript'/>";
-    html += "<script language='javascript' src='sorttable.js' language='javascript' type='text/javascript'/>";
-    html += "</head><body>";
-    return html;
+
+function translate() {
+    document.getElementById('heading').innerHTML = 'Process ' + window.process.pid + " - " + window.process.name;
+    document.getElementById('SummaryHeading').innerHTML = 'Summary';
+    document.getElementById('LibraryUsageHeading').innerHTML = 'Library Usage';
+    document.getElementById('showFullDetailsLink').innerHTML = 'Show Full Details';
+    document.getElementById('libraryusageintro').innerHTML = "The memory usage of a process is found by adding up the memory usage of each of its libraries, plus the process's own heap, stack and any other mappings, plus the stack of any of its threads.";
+    document.getElementById('TotalsHeading').innerHTML = "Totals";
+    document.getElementById('FullDetailsHeading').innerHTML = "Full Details";
+    document.getElementById('linkPrivate').innerHTML = "more";
+    document.getElementById('linkShared').innerHTML = "more";
+    document.getElementById('thPrivate').innerHTML = "Private";
+    document.getElementById('thShared').innerHTML = "Shared";
 }
-function getHtml() {
+function refresh() {
     var smapData = parseSmaps();
     if(!smapData)
         return;
     var data = smapData[0];
     var combined = smapData[1];
 
-    var html = getHtmlHeader();
-    html += "<div id='innertoc' class='innertoc'></div>";
-    html += "<h1>Process " + process.pid + " - " + process.name + "</h1>";
-    html += getHtmlSummary(combined);
-    html += "<div class='fullDetails'><h2>Full details</h2>";
+    getHtmlSummary(combined);
+
+    var html = "";
     html += "Information about the complete virtual space for the process is available, with sortable columns.  An empty filename means that it is an anonymous mapping (see the <code>mmap</code> man page, under <code>MAP_ANONYMOUS</code>.  It's basically a fast way to allocate and clear a block of space).<br>";
     if(kernelPageSize != -1 && mmuPageSize != -1 && kernelPageSize == mmuPageSize)
-        html += "Both the MMU page size and the kernel page size are " + kernelPageSize + " KB.<br>";
+        html += "Both the MMU page size and the kernel page size are " + kernelPageSize + " KB.";
     else {
         if(kernelPageSize != -1)
             html += "The kernel page size is " + kernelPageSize + " KB. ";
         if(mmuPageSize != -1)
             html += "The MMU page size is " + mmuPageSize + " KB.";
-        html += "<br>";
     }
-    html += "<table class='sortable fullDetails' id='fullDetails'>";
-    html += "<thead><tr><th>Address</th><th>Perm</th>";
+
+    document.getElementById('fullDetailsSummary').innerHTML = html;
+
+    html = "<thead><tr><th>Address</th><th>Perm</th>";
     for(var i = 0; i < sizeKeys.length; i++)
         html += "<th>" + sizeKeys[i].replace('_',' ') + "</th>";
-
     html += "<th align='left'>Filename</th></tr></thead><tbody>"
     for(var i = 0; i < data.length; i++) {
         html += "<tr><td class='address'>" + data[i]['address'] + "</td><td class='perms'>" + data[i]['perms'] + "</td>";
@@ -237,16 +239,9 @@ function getHtml() {
             html += "<td align='right' sorttable_customkey='" + value + "'>" + value + " KB</td>";
         }
         html += "<td>" + data[i]['pathname'] + "</td></tr>";
-
     }
-    html += "</tbody></table>";
-    html += "<a href='javascript:showFullDetailsTable();' id='showFullDetailsLink'>Show Full Details</a>";
-    html += "</div>";
-    html += "<script language='javascript'>createTOC()</script>";
-    html += "</body></html>";
-    return html;
+    html += "</tbody>";
+
+    document.getElementById('fullDetails').innerHTML = html;
 }
-var result = getHtml();
-if(result)
-    setHtml(result);
 

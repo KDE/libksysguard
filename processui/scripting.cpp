@@ -29,10 +29,9 @@
 #include <QFileInfo>
 #include <QScriptValue>
 #include <QScriptContext>
-#include <QScriptEngine>
 #include <QTextStream>
-#include <QUiLoader>
 #include <QWebView>
+#include <QWebFrame>
 
 #include <QDebug>
 
@@ -59,6 +58,11 @@ class ScriptingHtmlDialog : public KDialog {
             m_webView.settings()->setOfflineStoragePath(QString());
             m_webView.settings()->setOfflineWebApplicationCachePath(QString());
             m_webView.settings()->setObjectCacheCapacities(0,0,0);
+            m_webView.settings()->setAttribute(QWebSettings::PluginsEnabled, false);
+            m_webView.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+            m_webView.page()->setNetworkAccessManager(NULL); //Disable talking to remote servers
+            m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAsNeeded);
+            m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAsNeeded);
         }
         QWebView *webView() {
             return &m_webView;
@@ -66,136 +70,67 @@ class ScriptingHtmlDialog : public KDialog {
     protected:
         QWebView m_webView;
 };
-
-QScriptValue setHtml(QScriptContext *context, QScriptEngine *engine)
-{
-    Scripting *scriptingParent = static_cast<Scripting *>(qVariantValue<QObject*>(engine->property("scriptingParent")));
-    if(context->argumentCount() != 1)
-        return context->throwError(QScriptContext::SyntaxError, i18n("Script error: Incorrect number of arguments"));
-    if(!context->argument(0).isString())
-        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument was not a string"));
-    QString html = context->argument(0).toString();
-
-    scriptingParent->displayHtml(html);
-    return QScriptValue();
+ProcessObject::ProcessObject(KSysGuard::Process *process) {
+    setProperty("pid", (int)process->pid);
+    setProperty("ppid", (int)process->parent_pid);
+    setProperty("name", process->name.section(' ', 0,0));
+    setProperty("fullname", process->name);
+    setProperty("command", process->command);
 }
 
-void Scripting::displayHtml(const QString &html) {
+bool ProcessObject::fileExists(const QString &filename)
+{
+    QFileInfo fileInfo(filename);
+    return fileInfo.exists();
+}
+QString ProcessObject::readFile(const QString &filename)
+{
+    QFile file(filename);
+    if(!file.open(QIODevice::ReadOnly))
+        return QString();
+    QTextStream stream(&file);
+    QString contents = stream.readAll();
+    file.close();
+    return contents;
+}
 
+Scripting::Scripting(KSysGuardProcessList * parent) : QWidget(parent), mProcessList(parent) {
+    mScriptingHtmlDialog = NULL;
+    loadContextMenu();
+}
+void Scripting::runScript(const QString &path, const QString &name) {
+    //Record the script name and path for use in the script helper functions
+    mScriptPath = path;
+    mScriptName = name;
+
+    QString fileName = path + "index.html";
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
         connect(mScriptingHtmlDialog, SIGNAL(closeClicked()), SLOT(stopAllScripts()));
     }
 
-    mScriptingHtmlDialog->webView()->setHtml(html, QUrl::fromLocalFile(mScriptPath + '/'));
-    mScriptingHtmlDialog->show();
-}
-
-QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
-{
-    Q_UNUSED(engine);
-    if(context->argumentCount() !=1)
-        return context->throwError(QScriptContext::SyntaxError, i18n("Script error: Incorrect number of arguments"));
-    if(!context->argument(0).isString())
-        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument was not a string"));
-    QString filename = context->argument(0).toString();
-    QFileInfo fileInfo(filename);
-    return QScriptValue(engine, fileInfo.exists());
-
-}
-QScriptValue readFile(QScriptContext *context, QScriptEngine *engine)
-{
-    Q_UNUSED(engine);
-    if(context->argumentCount() !=1)
-        return context->throwError(QScriptContext::SyntaxError, i18n("Script error: Incorrect number of arguments"));
-    if(!context->argument(0).isString())
-        return context->throwError(QScriptContext::TypeError, i18n("Script error: Argument was not a string"));
-    QString filename = context->argument(0).toString();
-    QFile file(filename);
-    if(!file.open(QIODevice::ReadOnly)) {
-        return QScriptValue();
-    }
-    QTextStream stream(&file);
-    QString contents = stream.readAll();
-    file.close();
-
-    return contents;
-}
-Scripting::Scripting(KSysGuardProcessList * parent) : QWidget(parent), mProcessList(parent) {
-    mScriptingHtmlDialog = NULL;
-    mScriptEngine = NULL;
-    loadContextMenu();
-}
-void Scripting::runScript(KSysGuard::Process *process, const QString &path, const QString &name) {
-    if(!mScriptEngine) {
-        mScriptEngine = new QScriptEngine(this);
-        mScriptEngine->setProperty("scriptingParent", qVariantFromValue(static_cast<QObject *>(this)));
-    }
-    //Record the script name and path for use in the script helper functions
-    mScriptPath = path;
-    mScriptName = name;
-
-    //Add the various functions to the script
-    mScriptEngine->globalObject().setProperty("readFile", mScriptEngine->newFunction( readFile ) );
-    mScriptEngine->globalObject().setProperty("fileExists", mScriptEngine->newFunction( fileExists ) );
-    mScriptEngine->globalObject().setProperty("setHtml", mScriptEngine->newFunction( setHtml ) );
-
     //Make the process information available to the script
-    QScriptValue p = mScriptEngine->newObject();
-    p.setProperty("pid", (int)process->pid);
-    p.setProperty("ppid", (int)process->parent_pid);
-    p.setProperty("name", process->name.section(' ', 0,0));
-    p.setProperty("fullname", process->name);
-    p.setProperty("command", process->command);
-    mScriptEngine->globalObject().setProperty("process", p);
+    mScriptingHtmlDialog->webView()->load(fileName);
+    mScriptingHtmlDialog->show();
+    connect(mScriptingHtmlDialog->webView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), SLOT(setupJavascriptObjects()));
+    setupJavascriptObjects();
 
-    //Load ui resources first
-    QDir dir(path, "*.ui");
-    QStringList uiFiles = dir.entryList();
-    QUiLoader *loader = NULL;
-    foreach(QString uiFileName, uiFiles) { //We do uiFileName.replace so can't make this a const reference
-        if(!loader)
-            loader = new QUiLoader(this);
-        QFile uiFile(path + uiFileName);
-        uiFile.open(QIODevice::ReadOnly);
-        QWidget *ui = loader->load(&uiFile, this);
-        uiFile.close();
-
-        //Call the ui, e.g.,  form.ui as variable name form_ui
-        QScriptValue scriptUi = mScriptEngine->newQObject(ui, QScriptEngine::ScriptOwnership);
-        mScriptEngine->globalObject().setProperty(uiFileName.replace('.', '_'), scriptUi);
-    }
-    delete loader;
-
-    /* load main javascript file */
-    QString fileName = path + "main.js";
-    QFile scriptFile(fileName);
-    if (!scriptFile.open(QIODevice::ReadOnly)) {
-        KMessageBox::sorry(this, i18n("Could not read script '%1'.  Error %2", fileName, scriptFile.error()));
-        return;
-    }
-    QTextStream stream(&scriptFile);
-    QString contents = stream.readAll();
-    scriptFile.close();
-
-    mScriptEngine->evaluate(contents, fileName);
-    if(mScriptEngine->hasUncaughtException()) {
-        KMessageBox::sorry(this, i18n("<qt>Script failed: %1: %2<br>%3",
-                    mScriptEngine->uncaughtExceptionLineNumber(),
-                    mScriptEngine->uncaughtException().toString(),
-                    mScriptEngine->uncaughtExceptionBacktrace().join("<br>")));
-        return;
-    }
-    qScriptConnect(mProcessList, SIGNAL(updated()), mScriptEngine->globalObject(), mScriptEngine->globalObject().property("refresh", QScriptValue::ResolveLocal));
+//    connect(mProcessList, SIGNAL(updated()), SLOT(refreshScript()));
 }
+void Scripting::refreshScript() {
+    //Call any refresh function, if it exists
 
+    if(mScriptingHtmlDialog && mScriptingHtmlDialog->webView() && mScriptingHtmlDialog->webView()->page() && mScriptingHtmlDialog->webView()->page()->mainFrame())
+        mScriptingHtmlDialog->webView()->page()->mainFrame()->evaluateJavaScript("refresh();");
+}
+void Scripting::setupJavascriptObjects() {
+    KSysGuard::Process *process = mProcessList->processModel()->getProcess(mPid);
+    mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject("process", new ProcessObject(process), QScriptEngine::ScriptOwnership);
+}
 void Scripting::stopAllScripts()
 {
-    qDebug() << "Stop all scripts!";
     mScriptingHtmlDialog->deleteLater();
     mScriptingHtmlDialog = NULL;
-    delete mScriptEngine;
-    mScriptEngine = NULL;
     mScriptPath.clear();
     mScriptName.clear();
 }
@@ -229,7 +164,7 @@ void Scripting::runScriptSlot() {
     QList<KSysGuard::Process *> selectedProcesses = mProcessList->selectedProcesses();
     if(selectedProcesses.isEmpty())
         return;
+    mPid = selectedProcesses[0]->pid;
 
-    runScript(selectedProcesses[0], path, action->text());
-
+    runScript(path, action->text());
 }
