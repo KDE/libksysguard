@@ -48,12 +48,10 @@ class Scripting : public QWidget {
     QList<QAction *> actions() { return mActions; }
     /** Create a ScriptingHtmlDialog, if one does not already exist, and display the given html */
     void displayHtml(const QString &html);
-    /** Stop all scripts and delete the script engine */
-    void stopAllScripts();
 
   public Q_SLOTS:
-    /** Delete scripting html dialog if it exists */
-    void deleteScriptingHtmlDialog();
+    /** Stop all scripts and delete the script engine */
+    void stopAllScripts();
   private Q_SLOTS:
     /** Run the script associated with the QAction that called this slot */
     void runScriptSlot();

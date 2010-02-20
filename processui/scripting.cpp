@@ -84,16 +84,11 @@ void Scripting::displayHtml(const QString &html) {
 
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
-        connect(mScriptingHtmlDialog, SIGNAL(finished(int)), SLOT(deleteScriptingHtmlDialog()));
+        connect(mScriptingHtmlDialog, SIGNAL(closeClicked()), SLOT(stopAllScripts()));
     }
 
     mScriptingHtmlDialog->webView()->setHtml(html, QUrl::fromLocalFile(mScriptPath + '/'));
     mScriptingHtmlDialog->show();
-}
-
-void Scripting::deleteScriptingHtmlDialog() {
-    delete mScriptingHtmlDialog;
-    mScriptingHtmlDialog = NULL;
 }
 
 QScriptValue fileExists(QScriptContext *context, QScriptEngine *engine)
@@ -189,16 +184,20 @@ void Scripting::runScript(KSysGuard::Process *process, const QString &path, cons
                     mScriptEngine->uncaughtExceptionLineNumber(),
                     mScriptEngine->uncaughtException().toString(),
                     mScriptEngine->uncaughtExceptionBacktrace().join("<br>")));
+        return;
     }
+    qScriptConnect(mProcessList, SIGNAL(updated()), mScriptEngine->globalObject(), mScriptEngine->globalObject().property("refresh", QScriptValue::ResolveLocal));
 }
 
 void Scripting::stopAllScripts()
 {
-    deleteScriptingHtmlDialog();
+    qDebug() << "Stop all scripts!";
+    mScriptingHtmlDialog->deleteLater();
+    mScriptingHtmlDialog = NULL;
     delete mScriptEngine;
     mScriptEngine = NULL;
-    mScriptPath = QString();
-    mScriptName = QString();
+    mScriptPath.clear();
+    mScriptName.clear();
 }
 void Scripting::loadContextMenu() {
     //Clear any existing actions
