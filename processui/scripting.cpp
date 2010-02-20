@@ -42,6 +42,7 @@
 #include <KMessageBox>
 #include <KDesktopFile>
 #include <KStandardDirs>
+#include <KStandardAction>
 #include <QVBoxLayout>
 
 class ScriptingHtmlDialog : public KDialog {
@@ -107,6 +108,17 @@ void Scripting::runScript(const QString &path, const QString &name) {
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
         connect(mScriptingHtmlDialog, SIGNAL(closeClicked()), SLOT(stopAllScripts()));
+
+        KAction *refreshAction = new KAction("refresh", mScriptingHtmlDialog);
+        refreshAction->setShortcut(QKeySequence::Refresh);
+        connect(refreshAction, SIGNAL(triggered()), SLOT(refreshScript()));
+        mScriptingHtmlDialog->addAction(refreshAction);
+
+        KAction *zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), mScriptingHtmlDialog);
+        mScriptingHtmlDialog->addAction(zoomInAction);
+
+        KAction *zoomOutAction = KStandardAction::zoomOut(this, SLOT(zoomOut()), mScriptingHtmlDialog);
+        mScriptingHtmlDialog->addAction(zoomOutAction);
     }
 
     //Make the process information available to the script
@@ -117,6 +129,16 @@ void Scripting::runScript(const QString &path, const QString &name) {
 
 //    connect(mProcessList, SIGNAL(updated()), SLOT(refreshScript()));
 }
+void Scripting::zoomIn() {
+    QWebView *webView = mScriptingHtmlDialog->webView();
+    webView->setZoomFactor( webView->zoomFactor() * 1.1 );
+}
+void Scripting::zoomOut() {
+    QWebView *webView = mScriptingHtmlDialog->webView();
+    if(webView->zoomFactor() > 0.1) //Prevent it getting too small
+        webView->setZoomFactor( webView->zoomFactor() / 1.1 );
+}
+
 void Scripting::refreshScript() {
     //Call any refresh function, if it exists
 

@@ -54,6 +54,8 @@ class Scripting : public QWidget {
     void runScriptSlot();
     void setupJavascriptObjects();
     void refreshScript();
+    void zoomIn();
+    void zoomOut();
   private:
     /** This is created on the fly as needed, and deleted when no longer used */
     ScriptingHtmlDialog *mScriptingHtmlDialog;
