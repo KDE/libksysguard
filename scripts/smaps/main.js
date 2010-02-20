@@ -1,4 +1,4 @@
-var sizeKeys = new Array(); /* The keys which contain a size - e.g. Size, Pss, Rss etc */
+var sizeKeys; /* The keys which contain a size - e.g. Size, Pss, Rss etc */
 var kernelPageSize;  /* The size of the kernel page size.  -1 if it's not the same for all. */
 var mmuPageSize;     /* The size of the mmu page size.  -1 if it's not the same for all. */
 
@@ -36,6 +36,9 @@ function parseSmaps() {
     var smaps = readSmapsFile();
     if(!smaps)
         return;
+    sizeKeys = new Array();
+    kernelPageSize = undefined;
+    mmuPageSize = undefined;
 
     var data = new Array();  /* This is a 0 indexed array */
     /* data contains many dataBlocks */
