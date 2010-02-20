@@ -143,7 +143,7 @@ function sortDataByInfo(data, info) {
 function getHtmlTableForLibrarySummary(data, info, total) {
     var sortedData = sortDataByInfo(data, info);
     var html = "";
-    var htmlIsForHidddenTBody = false;
+    var htmlIsForHiddenTBody = false;
     for(var i = 0; i < sortedData.length; i++) {
         var value = sortedData[i][info];
         if(value == 0)
@@ -207,41 +207,50 @@ function translate() {
     document.getElementById('thShared').innerHTML = "Shared";
 }
 function refresh() {
-    var smapData = parseSmaps();
-    if(!smapData)
-        return;
-    var data = smapData[0];
-    var combined = smapData[1];
-
-    getHtmlSummary(combined);
-
-    var html = "";
-    html += "Information about the complete virtual space for the process is available, with sortable columns.  An empty filename means that it is an <span title='This is a fast way to allocate and clear a block of space.   See the mmap(2) man page under MAP_ANONYMOUS' class='definedWord'>anonymous mapping</span>.<br>";
-    if(kernelPageSize != -1 && mmuPageSize != -1 && kernelPageSize == mmuPageSize)
-        html += "Both the <span class='definedWord' title='Memory Management Unit'>MMU</span> page size and the kernel page size are " + kernelPageSize + " KB.";
-    else {
-        if(kernelPageSize != -1)
-            html += "The kernel page size is " + kernelPageSize + " KB. ";
-        if(mmuPageSize != -1)
-            html += "The MMU page size is " + mmuPageSize + " KB.";
-    }
-
-    document.getElementById('fullDetailsSummary').innerHTML = html;
-
-    html = "<thead><tr><th>Address</th><th>Perm</th>";
-    for(var i = 0; i < sizeKeys.length; i++)
-        html += "<th>" + sizeKeys[i].replace('_',' ') + "</th>";
-    html += "<th align='left'>Filename</th></tr></thead><tbody>"
-    for(var i = 0; i < data.length; i++) {
-        html += "<tr><td class='address'>" + data[i]['address'] + "</td><td class='perms'>" + data[i]['perms'] + "</td>";
-        for(var j = 0; j < sizeKeys.length; j++) {
-            var value = data[i][sizeKeys[j]];
-            html += "<td align='right' sorttable_customkey='" + value + "'>" + value + " KB</td>";
+    try {
+        document.body.style.cursor = "wait";
+        document.getElementById('errorMessage').innerHTML = "";
+        var smapData = parseSmaps();
+        if(!smapData) {
+            document.body.style.cursor = "";
+            return;
         }
-        html += "<td>" + data[i]['pathname'] + "</td></tr>";
-    }
-    html += "</tbody>";
+        var data = smapData[0];
+        var combined = smapData[1];
 
-    document.getElementById('fullDetails').innerHTML = html;
+        getHtmlSummary(combined);
+        var html = "";
+        html += "Information about the complete virtual space for the process is available, with sortable columns.  An empty filename means that it is an <span title='This is a fast way to allocate and clear a block of space.   See the mmap(2) man page under MAP_ANONYMOUS' class='definedWord'>anonymous mapping</span>.<br>";
+        if(kernelPageSize != -1 && mmuPageSize != -1 && kernelPageSize == mmuPageSize)
+            html += "Both the <span class='definedWord' title='Memory Management Unit'>MMU</span> page size and the kernel page size are " + kernelPageSize + " KB.";
+        else {
+            if(kernelPageSize != -1)
+                html += "The kernel page size is " + kernelPageSize + " KB. ";
+            if(mmuPageSize != -1)
+                html += "The MMU page size is " + mmuPageSize + " KB.";
+        }
+
+        document.getElementById('fullDetailsSummary').innerHTML = html;
+
+        html = "<thead><tr><th>Address</th><th>Perm</th>";
+        for(var i = 0; i < sizeKeys.length; i++)
+            html += "<th>" + sizeKeys[i].replace('_',' ') + "</th>";
+        html += "<th align='left'>Filename</th></tr></thead><tbody>"
+            for(var i = 0; i < data.length; i++) {
+                html += "<tr><td class='address'>" + data[i]['address'] + "</td><td class='perms'>" + data[i]['perms'] + "</td>";
+                for(var j = 0; j < sizeKeys.length; j++) {
+                    var value = data[i][sizeKeys[j]];
+                    html += "<td align='right' sorttable_customkey='" + value + "'>" + value + " KB</td>";
+                }
+                html += "<td>" + data[i]['pathname'] + "</td></tr>";
+            }
+        html += "</tbody>";
+
+        document.getElementById('fullDetails').innerHTML = html;
+    } catch (detectedError) {
+        document.getElementById('errorMessage').innerHTML = "Sorry, there was an <span class='definedWord' title='" + detectedError.toString().replace("'","\&#39;") + " on line " + detectedError.line + ".  Right click and chose inspect for more details, or file a bug on http://bugs.kde.org'>error</span> in the script.  The details may not be complete or correct.";
+    } finally {
+        document.body.style.cursor = "";
+    }
 }
 

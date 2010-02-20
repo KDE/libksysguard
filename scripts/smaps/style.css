@@ -84,3 +84,7 @@ span.definedWord {
 th.definedWord {
     cursor:help;
 }
+
+div.errorMessage {
+    color: red;
+}
