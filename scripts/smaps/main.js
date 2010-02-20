@@ -185,11 +185,11 @@ function getHtmlSummary(combined) {
     getHtmlTableForLibrarySummary(combined, 'Shared', shared_total);
 
     html = "";
-    html += "<tr><th class='memory'>Private</th><td class='memory'>" + private_total + " KB</td><td class='comment'>(= " + private_clean + " KB clean + " + private_dirty + " KB dirty)</td></tr>";
-    html += "<tr><th class='memory'>Shared</th><td class='memory'>" + shared_total + " KB</td><td class='comment'>(= " + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</td></tr>";
-    html += "<tr><th class='memory'>Rss</th><td class='memory'>" + rss + " KB</td><td class='comment'>(= Private + Shared)</td></tr>";
-    html += "<tr><th class='memory'>Pss</th><td class='memory'>" + pss + " KB</td><td class='comment'>(= Private + Shared/Number of Processes)</td></tr>";
-    html += "<tr><th class='memory'>Swap</th><td class='memory'>" + swap + " KB</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Memory used only by this process'>Private</th><td class='memory'>" + private_total + " KB</td><td class='comment'>(= " + private_clean + " KB clean + " + private_dirty + " KB dirty)</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Memory that can be used by multiple processes'>Shared</th><td class='memory'>" + shared_total + " KB</td><td class='comment'>(= " + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Resident Set Size'>Rss</th><td class='memory'>" + rss + " KB</td><td class='comment'>(= Private + Shared)</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Proportional Set Size'>Pss</th><td class='memory'>" + pss + " KB</td><td class='comment'>(= Private + Shared/Number of Processes)</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Memory swapped out to disk, typically because the system ran low of physical memory'>Swap</th><td class='memory'>" + swap + " KB</td></tr>";
     document.getElementById('totalTableBody').innerHTML = html;
 }
 
@@ -216,9 +216,9 @@ function refresh() {
     getHtmlSummary(combined);
 
     var html = "";
-    html += "Information about the complete virtual space for the process is available, with sortable columns.  An empty filename means that it is an anonymous mapping (see the <code>mmap</code> man page, under <code>MAP_ANONYMOUS</code>.  It's basically a fast way to allocate and clear a block of space).<br>";
+    html += "Information about the complete virtual space for the process is available, with sortable columns.  An empty filename means that it is an <span title='This is a fast way to allocate and clear a block of space.   See the mmap(2) man page under MAP_ANONYMOUS' class='definedWord'>anonymous mapping</span>.<br>";
     if(kernelPageSize != -1 && mmuPageSize != -1 && kernelPageSize == mmuPageSize)
-        html += "Both the MMU page size and the kernel page size are " + kernelPageSize + " KB.";
+        html += "Both the <span class='definedWord' title='Memory Management Unit'>MMU</span> page size and the kernel page size are " + kernelPageSize + " KB.";
     else {
         if(kernelPageSize != -1)
             html += "The kernel page size is " + kernelPageSize + " KB. ";
