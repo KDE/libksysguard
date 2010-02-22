@@ -88,6 +88,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 
 	ioScheduler->setExclusive(true);
 
+	setSliderRange(); //Update the slider ranges before trying to set their current values
 	if(ioniceSupported)
 		ui->sliderIO->setValue(currentIoPrio);
 	ui->sliderCPU->setValue(currentCpuPrio);
