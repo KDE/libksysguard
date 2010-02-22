@@ -838,7 +838,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingTty:
                 return i18n("The controlling terminal on which this process is running.");
             case HeadingNiceness:
-                return i18n("The priority with which this process is being run. Ranges from 19 (very nice, least priority) to -19 (top priority).");
+                return i18n("The priority with which this process is being run. For the normal scheduler, this ranges from 19 (very nice, least priority) to -19 (top priority).");
             case HeadingCPUUsage:
                 if(d->mNumProcessorCores == 1)
                     return i18n("The current CPU usage of the process.");
