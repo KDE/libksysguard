@@ -817,6 +817,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingIoRead:
             case HeadingIoWrite:
             case HeadingVmSize:
+            case HeadingNiceness:
     //            return QVariant(Qt::AlignRight);
             case HeadingUser:
             case HeadingCPUUsage:
@@ -1418,6 +1419,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingUser:
             case HeadingCPUUsage:
                 return QVariant(Qt::AlignCenter);
+            case HeadingNiceness:
             case HeadingCPUTime:
             case HeadingPid:
             case HeadingMemory:
