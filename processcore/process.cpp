@@ -81,6 +81,7 @@ QString KSysGuard::Process::schedulerAsString() const {
         case Fifo: return i18nc("Scheduler", "FIFO");
         case RoundRobin: return i18nc("Scheduler", "Round Robin");
         case Batch: return i18nc("Scheduler", "Batch");
+        case SchedulerIdle: return i18nc("Scheduler", "Idle");
         default: return QString();
     }
 }

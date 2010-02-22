@@ -37,7 +37,7 @@ namespace KSysGuard
     public:
     enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, Ended, OtherStatus=99 };
     enum IoPriorityClass { None, RealTime, BestEffort, Idle };
-    enum Scheduler { Other = 0, Fifo, RoundRobin, Batch };
+    enum Scheduler { Other = 0, Fifo, RoundRobin, Batch, SchedulerIdle };
     Process();
     Process(qlonglong _pid, qlonglong _ppid, Process *_parent);
 

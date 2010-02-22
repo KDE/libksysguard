@@ -386,6 +386,10 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
       case (SCHED_FIFO):
 	    process->scheduler = KSysGuard::Process::Fifo;
             break;
+#ifdef SCHED_IDLE
+      case (SCHED_IDLE):
+	    process->scheduler = KSysGuard::Process::SchedulerIdle;
+#endif
 #ifdef SCHED_BATCH
       case (SCHED_BATCH):
 	    process->scheduler = KSysGuard::Process::Batch;
@@ -397,9 +401,9 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
   if(sched == SCHED_FIFO || sched == SCHED_RR) {
     struct sched_param param;
     if(sched_getparam(pid, &param) == 0)
-      process->niceLevel = param.sched_priority;
+      process->setNiceLevel(param.sched_priority);
     else
-      process->niceLevel = 0;  //Error getting scheduler parameters.
+      process->setNiceLevel(0);  //Error getting scheduler parameters.
   }
 
 #ifdef HAVE_IONICE
@@ -411,10 +415,10 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
   }
   process->ioniceLevel = ioprio & 0xff;  /* Bottom few bits are the priority */
   process->ioPriorityClass = (KSysGuard::Process::IoPriorityClass)(ioprio >> IOPRIO_CLASS_SHIFT); /* Top few bits are the class */
+  return true;
 #else
   return false;  /* Do nothing, if we do not support this architecture */
 #endif
-  return true;
 }
 
 bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *process)
@@ -505,7 +509,7 @@ bool ProcessesLocal::setNiceness(long pid, int priority) {
 }
 
 bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) {
-    if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
+    if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch || priorityClass == KSysGuard::Process::SchedulerIdle)
 	    priority = 0;
     if(pid <= 0) return false; // check the parameters
     struct sched_param params;
@@ -517,6 +521,10 @@ bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) {
 	    return (sched_setscheduler( pid, SCHED_RR, &params) == 0);
       case (KSysGuard::Process::Fifo):
 	    return (sched_setscheduler( pid, SCHED_FIFO, &params) == 0);
+#ifdef SCHED_IDLE
+      case (KSysGuard::Process::SchedulerIdle):
+	    return (sched_setscheduler( pid, SCHED_IDLE, &params) == 0);
+#endif
 #ifdef SCHED_BATCH
       case (KSysGuard::Process::Batch):
 	    return (sched_setscheduler( pid, SCHED_BATCH, &params) == 0);

@@ -211,6 +211,19 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
         case HeadingPid:
             return processLeft->pid > processRight->pid;
         case HeadingNiceness:
+            //Sort by scheduler first
+            if(processLeft->scheduler != processRight->scheduler) {
+                if(processLeft->scheduler == KSysGuard::Process::RoundRobin || processLeft->scheduler == KSysGuard::Process::Fifo)
+                    return true;
+                if(processRight->scheduler == KSysGuard::Process::RoundRobin || processRight->scheduler == KSysGuard::Process::Fifo)
+                    return false;
+                if(processLeft->scheduler == KSysGuard::Process::Other)
+                    return true;
+                if(processRight->scheduler == KSysGuard::Process::Other)
+                    return false;
+                if(processLeft->scheduler == KSysGuard::Process::Batch)
+                    return true;
+            }
             if(processLeft->niceLevel == processRight->niceLevel)
                 return processLeft->pid < processRight->pid; //Subsort by pid if the niceLevel is the same
             return processLeft->niceLevel < processRight->niceLevel;
@@ -1100,7 +1113,21 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             else
                 return d->getUsernameForUser(process->uid, false) + ", " + d->getUsernameForUser(process->euid, false);
         case HeadingNiceness:
-            return process->niceLevel;
+            switch(process->scheduler) {
+              case KSysGuard::Process::Other:
+                  return process->niceLevel;
+              case KSysGuard::Process::SchedulerIdle:
+                  return i18n("Idle"); //neither static nor dynamic priority matter
+              case KSysGuard::Process::Batch:
+                  return i18n("(Batch) %1", process->niceLevel); //only dynamic priority matters
+              case KSysGuard::Process::RoundRobin:
+                  return i18n("RR %1", process->niceLevel);
+              case KSysGuard::Process::Fifo:
+                  if(process->niceLevel == 99)
+                      return i18n("RT");
+                  else
+                      return i18n("FIFO %1", process->niceLevel);
+            }
         case HeadingTty:
             return process->tty;
         case HeadingCPUUsage:
@@ -1290,8 +1317,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                   break;
               case KSysGuard::Process::RoundRobin:
               case KSysGuard::Process::Fifo:
-                  tooltip += i18n("Scheduler priority: %1", process->niceLevel);
+                  tooltip += i18n("This is a real time process.<br>Scheduler priority: %1", process->niceLevel);
                   break;
+              case KSysGuard::Process::SchedulerIdle:
+                  break; //has neither dynamic (niceness) or static (scheduler priority) priotiy
             }
             if(process->scheduler != KSysGuard::Process::Other)
                 tooltip += i18n("<br/>Scheduler: %1", process->schedulerAsString());
