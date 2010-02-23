@@ -1117,16 +1117,16 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
               case KSysGuard::Process::Other:
                   return process->niceLevel;
               case KSysGuard::Process::SchedulerIdle:
-                  return i18n("Idle"); //neither static nor dynamic priority matter
+                  return i18nc("scheduler", "Idle"); //neither static nor dynamic priority matter
               case KSysGuard::Process::Batch:
-                  return i18n("(Batch) %1", process->niceLevel); //only dynamic priority matters
+                  return i18nc("scheduler", "(Batch) %1", process->niceLevel); //only dynamic priority matters
               case KSysGuard::Process::RoundRobin:
-                  return i18n("RR %1", process->niceLevel);
+                  return i18nc("Round robin scheduler", "RR %1", process->niceLevel);
               case KSysGuard::Process::Fifo:
                   if(process->niceLevel == 99)
-                      return i18n("RT");
+                      return i18nc("Real Time scheduler", "RT");
                   else
-                      return i18n("FIFO %1", process->niceLevel);
+                      return i18nc("First in first out scheduler", "FIFO %1", process->niceLevel);
             }
         case HeadingTty:
             return process->tty;
