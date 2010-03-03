@@ -925,7 +925,6 @@ void KSysGuardProcessList::updateList()
             //resort now
             QHeaderView *header= d->mUi->treeView->header();
             d->mUi->treeView->sortByColumn(header->sortIndicatorSection(), header->sortIndicatorOrder());
-
         }
     }
 }
@@ -946,15 +945,14 @@ void KSysGuardProcessList::setUpdateIntervalMSecs(int intervalMSecs)
         d->mUpdateTimer = NULL;
         return;
     }
-    if(!isVisible())
-        return;
 
     if(!d->mUpdateTimer) {
         //intervalMSecs is a valid time, so set up a timer
         d->mUpdateTimer = new QTimer(this);
         d->mUpdateTimer->setSingleShot(true);
         connect(d->mUpdateTimer, SIGNAL(timeout()), SLOT(updateList()));
-        d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
+        if(isVisible())
+            d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
     } else
         d->mUpdateTimer->setInterval(d->mUpdateIntervalMSecs);
 }
