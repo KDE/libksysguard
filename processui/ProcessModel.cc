@@ -514,9 +514,11 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
 
 void ProcessModel::update(long updateDurationMSecs, KSysGuard::Processes::UpdateFlags updateFlags) {
 //    kDebug() << "update all processes: " << QTime::currentTime().toString("hh:mm:ss.zzz");
-    d->mProcesses->updateAllProcesses(updateDurationMSecs, updateFlags);
-    if(d->mMemTotal <= 0)
-        d->mMemTotal = d->mProcesses->totalPhysicalMemory();
+    if(updateFlags != KSysGuard::Processes::XMemory) {
+        d->mProcesses->updateAllProcesses(updateDurationMSecs, updateFlags);
+        if(d->mMemTotal <= 0)
+            d->mMemTotal = d->mProcesses->totalPhysicalMemory();
+    }
 
 //    kDebug() << "finished:             " << QTime::currentTime().toString("hh:mm:ss.zzz");
 #ifdef HAVE_XRES
