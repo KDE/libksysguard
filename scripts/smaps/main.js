@@ -179,7 +179,7 @@ function getHtmlSummary(combined) {
     if(shared_total !== 0)
         html += "Dividing up the shared memory between all the processes sharing that memory we get a reduced shared memory usage of " + formatKB(pss - private_total) + ". Adding that to the private usage, we get the above mentioned total memory footprint of " + formatKB(pss) + ".<br>";
     if( swap !== 0)
-        html += swap + " KB is swapped out to disk, probably due to a low amount of available memory left.";
+        html += formatKB(swap) + " is swapped out to disk, probably due to a low amount of available memory left.";
 
     document.getElementById('processsummary').innerHTML = html;
 
