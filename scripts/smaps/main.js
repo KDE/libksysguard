@@ -137,7 +137,7 @@ function formatKB(kb) {
         format = (kb/1024).toFixed(1) + " MB";
     else
         format = (kb/1048576).toFixed(1) + " GB";
-    return "<span class=\"memory\">" + format + "</span>";
+    return "<span class=\"memory\" title=\"" + kb + " kb\">" + format + "</span>";
 }
 function sortDataByInfo(data, info) {
     return data.sort( function(a,b) { return b[info] - a[info]; } );

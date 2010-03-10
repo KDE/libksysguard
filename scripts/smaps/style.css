@@ -11,6 +11,7 @@ td.address {
 span.memory {
     color:blue;
     white-space: nowrap;
+    cursor:default;
 }
 
 table {
