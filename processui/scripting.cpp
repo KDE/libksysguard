@@ -33,8 +33,6 @@
 #include <QWebView>
 #include <QWebFrame>
 
-#include <QDebug>
-
 #include "processes.h"
 #include "ksysguardprocesslist.h"
 #include <KAction>
@@ -77,6 +75,12 @@ ProcessObject::ProcessObject(KSysGuard::Process *process) {
     setProperty("name", process->name.section(' ', 0,0));
     setProperty("fullname", process->name);
     setProperty("command", process->command);
+    update(process);
+}
+void ProcessObject::update(KSysGuard::Process *process) {
+    setProperty("pixmapBytes", (qulonglong) process->pixmapBytes);
+    setProperty("rss", process->vmRSS);
+    setProperty("urss", process->vmURSS);
 }
 
 bool ProcessObject::fileExists(const QString &filename)
@@ -141,18 +145,26 @@ void Scripting::zoomOut() {
 
 void Scripting::refreshScript() {
     //Call any refresh function, if it exists
-
-    if(mScriptingHtmlDialog && mScriptingHtmlDialog->webView() && mScriptingHtmlDialog->webView()->page() && mScriptingHtmlDialog->webView()->page()->mainFrame())
+    if(mScriptingHtmlDialog && mScriptingHtmlDialog->webView() && mScriptingHtmlDialog->webView()->page() && mScriptingHtmlDialog->webView()->page()->mainFrame()) {
+        KSysGuard::Process *process = mProcessList->processModel()->getProcess(mPid);
+        if(process) {
+            mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
+            mProcessObject->update(process);
+        }
         mScriptingHtmlDialog->webView()->page()->mainFrame()->evaluateJavaScript("refresh();");
+    }
 }
 void Scripting::setupJavascriptObjects() {
     KSysGuard::Process *process = mProcessList->processModel()->getProcess(mPid);
-    mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject("process", new ProcessObject(process), QScriptEngine::ScriptOwnership);
+    mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
+    mProcessObject = new ProcessObject(process);
+    mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject("process", mProcessObject, QScriptEngine::ScriptOwnership);
 }
 void Scripting::stopAllScripts()
 {
     mScriptingHtmlDialog->deleteLater();
     mScriptingHtmlDialog = NULL;
+    mProcessObject = NULL;
     mScriptPath.clear();
     mScriptName.clear();
 }

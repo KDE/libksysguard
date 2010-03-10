@@ -31,6 +31,7 @@
 class QAction;
 class ScriptingHtmlDialog; //Defined in scripting.cpp file
 class KSysGuardProcessList;
+class ProcessObject;
 
 class Scripting : public QWidget {
   Q_OBJECT
@@ -65,6 +66,7 @@ class Scripting : public QWidget {
     QList<QAction *> mActions;
     QString mScriptPath;
     QString mScriptName;
+    ProcessObject *mProcessObject;
 
     qlonglong mPid;
 };
@@ -75,6 +77,7 @@ class ProcessObject : public QObject {
         ProcessObject(KSysGuard::Process *process);
 
     public Q_SLOTS:
+        void update(KSysGuard::Process *process);
         bool fileExists(const QString &filename);
         QString readFile(const QString &filename);
 };

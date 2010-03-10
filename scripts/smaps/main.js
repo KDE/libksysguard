@@ -132,12 +132,17 @@ function calculateTotal(data, info) {
 function formatKB(kb) {
     var format = "";
     if(kb < 2048) /* less than 2MB, write as just KB */
-        format = kb + " KB";
+        format = kb.toFixed(1) + " KB";
     else if(kb < (1048576)) /* less than 1GB, write in MB */
         format = (kb/1024).toFixed(1) + " MB";
     else
         format = (kb/1048576).toFixed(1) + " GB";
-    return "<span class=\"memory\" title=\"" + kb + " kb\">" + format + "</span>";
+    return "<span class=\"memory\" title=\"" + kb.toFixed(0) + " KB\">" + format + "</span>";
+}
+function formatBytes(b) {
+    if(b > 2048) /* if more than 2KB, format as KB */
+        return formatKB(b/1024)
+    return "<span class=\"memory\" title=\"" + b + " B\">" + b + "</span>";
 }
 function sortDataByInfo(data, info) {
     return data.sort( function(a,b) { return b[info] - a[info]; } );
@@ -174,10 +179,20 @@ function getHtmlSummary(combined) {
     var shared_total = shared_clean + shared_dirty;
     var swap = calculateTotal(combined,'Swap');
     var html = "";
-    html += "The process <b>" + window.process.name.substr(0,20) + "</b> (with pid " + window.process.pid + ") is using approximately " + formatKB(pss) + " of memory.<br>";
-    html += "It is using " + formatKB(private_total) + " privately, and a further " + formatKB(shared_total) + " that is, or could be, shared with other programs.<br>";
-    if(shared_total !== 0)
-        html += "Dividing up the shared memory between all the processes sharing that memory we get a reduced shared memory usage of " + formatKB(pss - private_total) + ". Adding that to the private usage, we get the above mentioned total memory footprint of " + formatKB(pss) + ".<br>";
+    var total = pss;
+    if( window.process.pixmapBytes > 0 )
+        total += (window.process.pixmapBytes / 1024);
+
+    html += "The process <b>" + window.process.name.substr(0,20) + "</b> (with pid " + window.process.pid + ") is using approximately " + formatKB(total) + " of memory.<br>";
+    if( window.process.pixmapBytes > 0 ) {
+        html += "It is using " + formatKB(private_total) + " privately, " + formatBytes(window.process.pixmapBytes) + " for pixmaps, and a further " + formatKB(shared_total) + " that is, or could be, shared with other programs.<br>";
+        if(shared_total !== 0)
+            html += "Dividing up the shared memory between all the processes sharing that memory we get a reduced shared memory usage of " + formatKB(pss - private_total) + ". Adding that to the private and pixmap usage, we get the above mentioned total memory footprint of " + formatKB(total) + ".<br>";
+    } else {
+        html += "It is using " + formatKB(private_total) + " privately, and a further " + formatKB(shared_total) + " that is, or could be, shared with other programs.<br>";
+        if(shared_total !== 0)
+            html += "Dividing up the shared memory between all the processes sharing that memory we get a reduced shared memory usage of " + formatKB(pss - private_total) + ". Adding that to the private usage, we get the above mentioned total memory footprint of " + formatKB(total) + ".<br>";
+    }
     if( swap !== 0)
         html += formatKB(swap) + " is swapped out to disk, probably due to a low amount of available memory left.";
 
