@@ -194,7 +194,7 @@ function getHtmlSummary(combined) {
             html += "Dividing up the shared memory between all the processes sharing that memory we get a reduced shared memory usage of " + formatKB(pss - private_total) + ". Adding that to the private usage, we get the above mentioned total memory footprint of " + formatKB(total) + ".<br>";
     }
     if( swap !== 0)
-        html += formatKB(swap) + " is swapped out to disk, probably due to a low amount of available memory left.";
+        html += formatKB(swap) + " is swapped out to disk, probably due to a low amount of available memory left.<br>";
 
     document.getElementById('processsummary').innerHTML = html;
 
@@ -202,10 +202,10 @@ function getHtmlSummary(combined) {
     getHtmlTableForLibrarySummary(combined, 'Shared', shared_total);
 
     html = "";
-    html += "<tr><th class='memory definedWord' title='Memory used only by this process'>Private</th><td class='memory'>" + private_total + " KB</td><td class='comment'>(= " + private_clean + " KB clean + " + private_dirty + " KB dirty)</td></tr>";
-    html += "<tr><th class='memory definedWord' title='Memory that can be used by multiple processes'>Shared</th><td class='memory'>" + shared_total + " KB</td><td class='comment'>(= " + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</td></tr>";
-    html += "<tr><th class='memory definedWord' title='Resident Set Size'>Rss</th><td class='memory'>" + rss + " KB</td><td class='comment'>(= Private + Shared)</td></tr>";
-    html += "<tr><th class='memory definedWord' title='Proportional Set Size'>Pss</th><td class='memory'>" + pss + " KB</td><td class='comment'>(= Private + Shared/Number of Processes)</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Memory used only by this process. This can be different from the value shown in the Memory column in the process list because the process list uses an approximation that tends to underestimate this real value.'>Private</th><td class='memory'>" + private_total + " KB</td><td class='comment'>(= " + private_clean + " KB clean + " + private_dirty + " KB dirty)</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Memory that can be used by multiple processes. This can be different from the value shown in the Shared column in the process list because the process list uses an approximation that tends to overestimate this real value.'>Shared</th><td class='memory'>" + shared_total + " KB</td><td class='comment'>(= " + shared_clean + " KB clean + " + shared_dirty + " KB dirty)</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Resident Set Size.  This is the value shown in /proc/<pid>/status under VmRSS.'>Rss</th><td class='memory'>" + rss + " KB</td><td class='comment'>(= Private + Shared)</td></tr>";
+    html += "<tr><th class='memory definedWord' title='Proportional Set Size.  This is the most useful way to measure memory size.'>Pss</th><td class='memory'>" + pss + " KB</td><td class='comment'>(= Private + Shared/Number of Processes)</td></tr>";
     html += "<tr><th class='memory definedWord' title='Memory swapped out to disk, typically because the system ran low of physical memory'>Swap</th><td class='memory'>" + swap + " KB</td></tr>";
     document.getElementById('totalTableBody').innerHTML = html;
 }

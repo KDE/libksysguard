@@ -869,9 +869,9 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingVmSize:
                 return i18n("<qt>This is the amount of virtual memory space that the process is using, included shared libraries, graphics memory, files on disk, and so on. This number is almost meaningless.</qt>");
             case HeadingMemory:
-                return i18n("<qt>This is the amount of real physical memory that this process is using by itself.<br>It does not include any swapped out memory, nor the code size of its shared libraries.<br>This is often the most useful figure to judge the memory use of a program.</qt>");
+                return i18n("<qt>This is the amount of real physical memory that this process is using by itself, and approximates the Private memory usage of the process.<br>It does not include any swapped out memory, nor the code size of its shared libraries.<br>This is often the most useful figure to judge the memory use of a program.  See What's This for more information.</qt>");
             case HeadingSharedMemory:
-                return i18n("<qt>This is the amount of real physical memory that this process's shared libraries are using.<br>This memory is shared among all processes that use this library.</qt>");
+                return i18n("<qt>This is approximately the amount of real physical memory that this process's shared libraries are using.<br>This memory is shared among all processes that use this library.</qt>");
             case HeadingCommand:
                 return i18n("<qt>The command with which this process was launched.</qt>");
             case HeadingXMemory:
@@ -906,17 +906,17 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingVmSize:
                 return i18n("<qt>This is the size of allocated address space - not memory, but address space. This value in practice means next to nothing. When a process requests a large memory block from the system but uses only a small part of it, the real usage will be low, VIRT will be high. <p><i>Technical information: </i>This is VmSize in proc/*/status and VIRT in top.");
             case HeadingMemory:
-                return i18n("<qt><i>Technical information: </i>This is the URSS - Unique Resident Set Size, calculated as VmRSS - Shared, from /proc/*/statm.  This tends to underestimate the 'true' memory usage of a process (by not including i/o backed memory pages), but is the best estimation that is fast to determine.");
+                return i18n("<qt><i>Technical information: </i>This is an approximation of the Private memory usage, calculated as VmRSS - Shared, from /proc/*/statm.  This tends to underestimate the true Private memory usage of a process (by not including i/o backed memory pages), but is the best estimation that is fast to determine.  This is sometimes known as URSS (Unique Resident Set Size). For an individual process, see \"Detailed  Memory Information\" for a more accurate, but slower, calculation of the true Private memory usage.");
             case HeadingCPUUsage:
                 return i18n("The CPU usage of a process and all of its threads.");
             case HeadingCPUTime:
                 return i18n("<qt>The total system and user time that a process and all of its threads have been running on the CPU for. This can be greater than the wall clock time if the process has been across multiple CPU cores.");
             case HeadingSharedMemory:
-                return i18n("<qt><i>Technical information: </i>This is the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt .)");
+                return i18n("<qt><i>Technical information: </i>This is an approximation of the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt).  For an individual process, see \"Detailed  Memory Information\" for a more accurate, but slower, calculation of the true Shared memory usage.");
             case HeadingCommand:
                 return i18n("<qt><i>Technical information: </i>This is from /proc/*/cmdline");
             case HeadingXMemory:
-                return i18n("<qt><i>Technical information: </i>This is the amount of memory used by the Xorg process for images for this process.  This is memory used in addition to Memory and Shared Memory.<br><i>Technical information: </i>This only counts the pixmap memory, and does not include resource memory used by fonts, cursors, glyphsets etc.  See the <code>xrestop</code> for a more detailed breakdown.");
+                return i18n("<qt><i>Technical information: </i>This is the amount of memory used by the Xorg process for images for this process.  This is memory used in addition to Memory and Shared Memory.<br><i>Technical information: </i>This only counts the pixmap memory, and does not include resource memory used by fonts, cursors, glyphsets etc.  See the <code>xrestop</code> program for a more detailed breakdown.");
             case HeadingXTitle:
                 return i18n("<qt><i>Technical information: </i>For each X11 window, the X11 property _NET_WM_PID is used to map the window to a PID.  If a process' windows are not shown, then that application incorrectly is not setting _NET_WM_PID.");
             case HeadingPid:
