@@ -86,6 +86,6 @@ th.definedWord {
     cursor:help;
 }
 
-div.errorMessage {
+span.errorMessage {
     color: red;
 }
