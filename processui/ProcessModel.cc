@@ -912,7 +912,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingCPUTime:
                 return i18n("<qt>The total system and user time that a process and all of its threads have been running on the CPU for. This can be greater than the wall clock time if the process has been across multiple CPU cores.");
             case HeadingSharedMemory:
-                return i18n("<qt><i>Technical information: </i>This is an approximation of the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt).  For an individual process, see \"Detailed  Memory Information\" for a more accurate, but slower, calculation of the true Shared memory usage.");
+                return i18n("<qt><i>Technical information: </i>This is an approximation of the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt).  For an individual process, see \"Detailed Memory Information\" for a more accurate, but slower, calculation of the true Shared memory usage.");
             case HeadingCommand:
                 return i18n("<qt><i>Technical information: </i>This is from /proc/*/cmdline");
             case HeadingXMemory:
