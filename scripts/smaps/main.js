@@ -46,7 +46,7 @@ function parseSmaps() {
     /* data contains many dataBlocks */
     var dataBlock; /* This is a hash table */
 
-    var headingRegex = /^([0-9A-Fa-f]+-[0-9A-Fa-f]+) +([^ ]*) +([0-9A-Fa-f]+) +(\d+:\d+) +(\d+) +(.*)$/;
+    var headingRegex = /^([0-9A-Fa-f]+-[0-9A-Fa-f]+) +([^ ]*) +([0-9A-Fa-f]+) +([0-9A-Fa-f]+:[0-9A-Fa-f]+) +(\d+) +(.*)$/;
     var lineRegex = /^([^ ]+): +(\d+) kB$/;
     for(var i = 0; i < smaps.length; i++) {
         lineMatch = lineRegex.exec(smaps[i]);
