@@ -129,12 +129,14 @@ void ReniceDlg::cpuSchedulerChanged(int value) {
 }
 
 void ReniceDlg::cpuSliderChanged(int value) {
-	if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch) {
-		if( ioScheduler->checkedId() == -1 || ioScheduler->checkedId() == (int)KSysGuard::Process::None) {
-			//ionice is 'Normal', thus automatically calculated based on cpunice
-			ui->sliderIO->setValue((value+20)/5);
-		}
-	}
+    if(ioniceSupported) {
+        if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch) {
+            if( ioScheduler->checkedId() == -1 || ioScheduler->checkedId() == (int)KSysGuard::Process::None) {
+                //ionice is 'Normal', thus automatically calculated based on cpunice
+                ui->sliderIO->setValue((value+20)/5);
+            }
+        }
+    }
 	ui->sliderCPU->setToolTip(QString::number(value));
 }
 
@@ -149,6 +151,11 @@ void ReniceDlg::updateUi() {
 	ui->sliderIO->setEnabled(ioPrioEnabled);
 	ui->lblIOLow->setEnabled(ioPrioEnabled);
 	ui->lblIOHigh->setEnabled(ioPrioEnabled);
+
+    ui->radioIONormal->setEnabled(ioniceSupported);
+    ui->radioIdle->setEnabled(ioniceSupported);
+    ui->radioRealTime->setEnabled(ioniceSupported);
+    ui->radioBestEffort->setEnabled(ioniceSupported);
 
 	setSliderRange();
 	cpuSliderChanged(ui->sliderCPU->value());
