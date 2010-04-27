@@ -1129,6 +1129,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                       return i18nc("Real Time scheduler", "RT");
                   else
                       return i18nc("First in first out scheduler", "FIFO %1", process->niceLevel);
+              case KSysGuard::Process::Interactive:
+                  return i18nc("scheduler", "(IA) %1", process->niceLevel);
             }
         case HeadingTty:
             return process->tty;
@@ -1315,6 +1317,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             switch(process->scheduler) {
               case KSysGuard::Process::Other:
               case KSysGuard::Process::Batch:
+              case KSysGuard::Process::Interactive:
                   tooltip += i18n("Nice level: %1 (%2)", process->niceLevel, process->niceLevelAsString() );
                   break;
               case KSysGuard::Process::RoundRobin:

@@ -63,7 +63,12 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 
 	cpuScheduler = new QButtonGroup(this);
 	cpuScheduler->addButton(ui->radioNormal, (int)KSysGuard::Process::Other);
+#ifndef Q_OS_SOLARIS
 	cpuScheduler->addButton(ui->radioBatch, (int)KSysGuard::Process::Batch);
+#else
+	cpuScheduler->addButton(ui->radioBatch, (int)KSysGuard::Process::Interactive);
+    ui->radioBatch->setText( i18nc("Scheduler", "Interactive") );
+#endif
 	cpuScheduler->addButton(ui->radioFIFO, (int)KSysGuard::Process::Fifo);
 	cpuScheduler->addButton(ui->radioRR, (int)KSysGuard::Process::RoundRobin);
 	if(currentCpuSched >= 0) { //negative means none of these
@@ -163,7 +168,7 @@ void ReniceDlg::updateUi() {
 }
 
 void ReniceDlg::setSliderRange() {
-	if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch) {
+	if(cpuScheduler->checkedId() == (int)KSysGuard::Process::Other || cpuScheduler->checkedId() == (int)KSysGuard::Process::Batch || cpuScheduler->checkedId() == (int)KSysGuard::Process::Interactive) {
 		//The slider is setting the priority, so goes from 19 to -20.  We cannot actually do this with a slider, so instead we go from -19 to 20, and negate later
 		if(ui->sliderCPU->value() > 20) ui->sliderCPU->setValue(20);
 		ui->sliderCPU->setInvertedAppearance(true);

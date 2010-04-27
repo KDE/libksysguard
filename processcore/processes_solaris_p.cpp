@@ -175,7 +175,7 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
         process->setscheduler( KSysGuard::Process::RoundRobin );
 
     } else if (strcmp(psinfo.pr_lwp.pr_clname, "IA") == 0) {
-        process->setscheduler( KSysGuard::Process::Batch );
+        process->setscheduler( KSysGuard::Process::Interactive );
     }
     process->setNiceLevel( psinfo.pr_lwp.pr_pri );
     process->setUserTime( prusage.pr_utime.tv_sec * 100 + prusage.pr_utime.tv_nsec / 10000000.0);
