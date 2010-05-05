@@ -795,20 +795,14 @@ void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuar
 
     if(mSimple) return;  //We don't need to move processes when in simple mode
     mMovingRow = true;
-    emit q->layoutAboutToBeChanged();
 
-    //FIXME
     int current_row = process->parent->children.indexOf(process);
-    int new_row = new_parent->children.count();
     Q_ASSERT(current_row != -1);
-
-    QList<QModelIndex> fromIndexes;
-    QList<QModelIndex> toIndexes;
-    for(int i=0; i < q->columnCount(); i++) {
-        fromIndexes << q->createIndex(current_row, i, process);
-        toIndexes << q->createIndex(new_row, i, process);
-    }
-    q->changePersistentIndexList(fromIndexes, toIndexes);
+    int new_row = new_parent->children.count();
+    QModelIndex sourceParent = q->getQModelIndex( process->parent, 0);
+    QModelIndex destinationParent = q->getQModelIndex( new_parent, 0 );
+    mMovingRow = q->beginMoveRows(sourceParent, current_row, current_row, destinationParent, new_row);
+    Q_ASSERT(mMovingRow);
 }
 void ProcessModelPrivate::endMoveRow()
 {
@@ -818,7 +812,7 @@ void ProcessModelPrivate::endMoveRow()
         return;
     mMovingRow = false;
 
-    emit q->layoutChanged();
+    q->endMoveRows();
 }
 
 
