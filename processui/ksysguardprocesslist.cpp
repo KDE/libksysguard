@@ -152,6 +152,7 @@ struct KSysGuardProcessListPrivate {
         : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL)
     {
         mScripting = NULL;
+        mNeedToExpandInit = false;
         mNumItemsSelected = -1;
         mResortCountDown = 2; //The items added initially will be already sorted, but without CPU info.  On the second refresh we will have CPU usage, so /then/ we can resort
         renice = new KAction(i18np("Set Priority...", "Set Priority...", 1), q);
@@ -219,6 +220,8 @@ struct KSysGuardProcessListPrivate {
 
     /** A counter to mark when to resort, so that we do not resort on every update */
     int mResortCountDown;
+
+    bool mNeedToExpandInit;
 
     KAction *renice;
     KAction *kill;
@@ -355,11 +358,13 @@ void KSysGuardProcessList::setState(ProcessFilter::State state)
     d->mFilterModel.setFilter(state);
     d->mModel.setSimpleMode( (state != ProcessFilter::AllProcessesInTreeForm) );
     d->mUi->cmbFilter->setCurrentIndex( (int)state);
-    expandInit();
+    if(isVisible())
+        expandInit();
 }
 void KSysGuardProcessList::filterTextChanged(const QString &newText) {
     d->mFilterModel.setFilterRegExp(newText.trimmed());
-    expandInit();
+    if(isVisible())
+        expandInit();
     d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
     d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
 }
@@ -835,6 +840,7 @@ void KSysGuardProcessList::rowsInserted(const QModelIndex & parent, int start, i
                 expanded = true;
             }
             d->mUi->treeView->expand(index);
+            d->mNeedToExpandInit = true;
         }
     }
     if(expanded)
@@ -855,6 +861,7 @@ void KSysGuardProcessList::expandInit()
                 disconnect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
                 expanded = true;
             }
+
             d->mUi->treeView->expand(index);
         }
     }
@@ -923,6 +930,10 @@ void KSysGuardProcessList::updateList()
             //resort now
             QHeaderView *header= d->mUi->treeView->header();
             d->mUi->treeView->sortByColumn(header->sortIndicatorSection(), header->sortIndicatorOrder());
+        }
+        if( d->mNeedToExpandInit ) {
+            expandInit();
+            d->mNeedToExpandInit = false;
         }
     }
 }
