@@ -75,6 +75,9 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 #ifdef HAVE_XRES
     mHaveXRes = false;
 #endif
+    mMovingRow = false;
+    mRemovingRow = false;
+    mInsertingRow = false;
 }
 
 ProcessModelPrivate::~ProcessModelPrivate()
@@ -722,6 +725,11 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
 void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
 {
     Q_ASSERT(process);
+    Q_ASSERT(!mRemovingRow);
+    Q_ASSERT(!mInsertingRow);
+    Q_ASSERT(!mMovingRow);
+    mInsertingRow = true;
+
     if(!process->hasManagedGuiWindow && mPidToWindowInfo.contains(process->pid))
         process->hasManagedGuiWindow = true;
     if(mSimple) {
@@ -738,12 +746,21 @@ void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
     q->beginInsertRows(parentModelIndex, row, row);
 }
 void ProcessModelPrivate::endInsertRow() {
+    Q_ASSERT(!mRemovingRow);
+    Q_ASSERT(mInsertingRow);
+    Q_ASSERT(!mMovingRow);
+    mInsertingRow = false;
+
     q->endInsertRows();
 }
 void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
 {
     Q_ASSERT(process);
     Q_ASSERT(process->pid > 0);
+    Q_ASSERT(!mRemovingRow);
+    Q_ASSERT(!mInsertingRow);
+    Q_ASSERT(!mMovingRow);
+    mRemovingRow = true;
 
     if(mSimple) {
         return q->beginRemoveRows(QModelIndex(), process->index, process->index);
@@ -751,6 +768,7 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
         int row = process->parent->children.indexOf(process);
         if(row == -1) {
             kDebug(1215) << "A serious problem occurred in remove row.";
+            mRemovingRow = false;
             return;
         }
 
@@ -759,14 +777,25 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
 }
 void ProcessModelPrivate::endRemoveRow()
 {
+    Q_ASSERT(!mInsertingRow);
+    Q_ASSERT(!mMovingRow);
+    if(!mRemovingRow)
+        return;
+    mRemovingRow = false;
+
     q->endRemoveRows();
 }
 
 
 void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuard::Process *new_parent)
 {
+    Q_ASSERT(!mRemovingRow);
+    Q_ASSERT(!mInsertingRow);
+    Q_ASSERT(!mMovingRow);
+
     if(mSimple) return;  //We don't need to move processes when in simple mode
-    emit q->layoutAboutToBeChanged ();
+    mMovingRow = true;
+    emit q->layoutAboutToBeChanged();
 
     //FIXME
     int current_row = process->parent->children.indexOf(process);
@@ -783,6 +812,12 @@ void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuar
 }
 void ProcessModelPrivate::endMoveRow()
 {
+    Q_ASSERT(!mInsertingRow);
+    Q_ASSERT(!mRemovingRow);
+    if(!mMovingRow)
+        return;
+    mMovingRow = false;
+
     emit q->layoutChanged();
 }
 

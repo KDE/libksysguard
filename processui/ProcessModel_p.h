@@ -33,6 +33,7 @@
 #include <QHash>
 #include <QSet>
 #include <QTime>
+#include <QDebug>
 
 #ifdef Q_WS_X11
 #include <kwindowsystem.h>
@@ -202,6 +203,10 @@ class ProcessModelPrivate : public QObject
         bool mHaveXRes; ///< True if the XRes extension is available at run time
         QMap<qlonglong, XID> mXResClientResources;
 #endif
+
+        bool mMovingRow;
+        bool mRemovingRow;
+        bool mInsertingRow;
 
         ProcessModel* q;
 };
