@@ -1246,7 +1246,7 @@ void KSysGuardProcessList::killSelectedProcesses()
                 count);
 
         int res = KMessageBox::warningContinueCancelList(this, msg, selectedAsStrings,
-                i18np("End process", "End %1 processes", count),
+                i18np("End Process", "End %1 Processes", count),
                 KGuiItem(i18n("End"), "process-stop"),
                 KStandardGuiItem::cancel(),
                 "endconfirmation");
