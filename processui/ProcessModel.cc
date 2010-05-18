@@ -302,7 +302,6 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
     WindowInfo *window = mWIdToWindowInfo.take(wid);
     if(!window) return;
     qlonglong pid = window->pid;
-    delete window;
 
     QMultiHash<qlonglong, WindowInfo*>::iterator i = mPidToWindowInfo.find(pid);
     while (i != mPidToWindowInfo.end() && i.key() == pid) {
@@ -312,6 +311,7 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
         } else
             i++;
     }
+    delete window;
 
     //Update the model so that it redraws and resorts
     KSysGuard::Process *process = mProcesses->getProcess(pid);
