@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Detailed Memory Information
+Name[es]=Información detallada sobre la memoria
 Name[ia]=Information de memoria detaliate
 Name[ja]=メモリの詳細情報
 Name[km]=ព័ត៌មាន​សតិ​លម្អិត
@@ -11,6 +12,7 @@ Name[pt_BR]=Informações detalhadas da memória
 Name[sv]=Detaljerad minnesinformation
 Name[uk]=Докладні відомості щодо пам'яті
 Name[x-test]=xxDetailed Memory Informationxx
+Name[zh_TW]=詳細記憶體資訊
 X-KDE-ServiceTypes=KSysGuard/Script
 Type=Service
 
