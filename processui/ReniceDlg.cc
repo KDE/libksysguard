@@ -38,7 +38,6 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	setModal( true );
 	setCaption( i18n("Set Priority") );
 	setButtons( Ok | Cancel );
-	showButtonSeparator( true );
 	previous_cpuscheduler = 0;
 
 	connect( this, SIGNAL(okClicked() ), SLOT(slotOk() ) );
