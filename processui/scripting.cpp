@@ -50,7 +50,6 @@ class ScriptingHtmlDialog : public KDialog {
             setButtonGuiItem( KDialog::Close, KStandardGuiItem::close() );
             setDefaultButton( KDialog::Close );
             setEscapeButton( KDialog::Close );
-            showButtonSeparator( false );
             setMainWidget(&m_webView);
             (void)minimumSizeHint(); //Force the dialog to be laid out now
             layout()->setContentsMargins(0,0,0,0);

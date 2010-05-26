@@ -35,7 +35,6 @@ LsofSearchWidget::LsofSearchWidget(QWidget* parent, int pid )
 	setModal( true );
 	setCaption( i18n("Renice Process") );
 	setButtons( Close );
-	showButtonSeparator( false );
 	QWidget *widget = new QWidget(this);
 	setMainWidget(widget);
 	ui = new Ui_LsofSearchWidget();
