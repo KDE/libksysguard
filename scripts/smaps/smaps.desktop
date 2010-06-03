@@ -21,6 +21,7 @@ Name[pt_BR]=Informações detalhadas da memória
 Name[sv]=Detaljerad minnesinformation
 Name[uk]=Докладні відомості щодо пам'яті
 Name[x-test]=xxDetailed Memory Informationxx
+Name[zh_CN]=详细内存信息
 Name[zh_TW]=詳細記憶體資訊
 X-KDE-ServiceTypes=KSysGuard/Script
 Type=Service
