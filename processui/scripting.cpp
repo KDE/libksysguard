@@ -68,18 +68,10 @@ class ScriptingHtmlDialog : public KDialog {
     protected:
         QWebView m_webView;
 };
-ProcessObject::ProcessObject(KSysGuard::Process *process) {
-    setProperty("pid", (int)process->pid);
-    setProperty("ppid", (int)process->parent_pid);
-    setProperty("name", process->name.section(' ', 0,0));
-    setProperty("fullname", process->name);
-    setProperty("command", process->command);
-    update(process);
-}
-void ProcessObject::update(KSysGuard::Process *process) {
-    setProperty("pixmapBytes", (qulonglong) process->pixmapBytes);
-    setProperty("rss", process->vmRSS);
-    setProperty("urss", process->vmURSS);
+
+ProcessObject::ProcessObject(ProcessModel *model, int pid) {
+    mModel = model;
+    mPid = pid;
 }
 
 bool ProcessObject::fileExists(const QString &filename)
@@ -144,19 +136,14 @@ void Scripting::zoomOut() {
 
 void Scripting::refreshScript() {
     //Call any refresh function, if it exists
+    mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
     if(mScriptingHtmlDialog && mScriptingHtmlDialog->webView() && mScriptingHtmlDialog->webView()->page() && mScriptingHtmlDialog->webView()->page()->mainFrame()) {
-        KSysGuard::Process *process = mProcessList->processModel()->getProcess(mPid);
-        if(process) {
-            mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
-            mProcessObject->update(process);
-        }
         mScriptingHtmlDialog->webView()->page()->mainFrame()->evaluateJavaScript("refresh();");
     }
 }
 void Scripting::setupJavascriptObjects() {
-    KSysGuard::Process *process = mProcessList->processModel()->getProcess(mPid);
     mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
-    mProcessObject = new ProcessObject(process);
+    mProcessObject = new ProcessObject(mProcessList->processModel(), mPid);
     mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject("process", mProcessObject, QScriptEngine::ScriptOwnership);
 }
 void Scripting::stopAllScripts()
