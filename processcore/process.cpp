@@ -92,6 +92,7 @@ void KSysGuard::Process::clear() {
     parent_pid = 0;
     uid = 0;
     gid = -1;
+    numThreads = 0;
     suid = euid = fsuid = -1;
     sgid = egid = fsgid = -1;
     tracerpid = 0;
@@ -321,5 +322,10 @@ void KSysGuard::Process::setIoCharactersActuallyWrittenRate(long number) {
     if(number == ioCharactersActuallyWrittenRate) return;
     ioCharactersActuallyWrittenRate = number;
     changes |= Process::IO;
+}
+void KSysGuard::Process::setNumThreads(int number) {
+    if(number == numThreads) return;
+    numThreads = number;
+    changes |= Process::NumThreads;
 }
 

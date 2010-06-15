@@ -233,6 +233,7 @@ bool ProcessesATop::updateProcessInfo( long pid, Process *process)
     process->setSgid(p.gen.rgid);
     process->setFsgid(p.gen.rgid);
     process->setTracerpid(0);
+    process->setNumThreads(p.gen.nthr);
 //    process->setTty
     process->setUserTime(p.cpu.utime * 100/d->rh.hertz);//check - divide by interval maybe?
     process->setSysTime(p.cpu.stime * 100/d->rh.hertz); //check

@@ -52,6 +52,7 @@ namespace KSysGuard
      */
     Process *parent;
 
+    void setNumThreads(int number); ///< The number of threads that this process has, including this process.
     void setLogin(QString login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
     void setUid(qlonglong uid); ///< The user id that the process is running as
     void setEuid(qlonglong euid); ///< The effective user id that the process is running as
@@ -173,7 +174,8 @@ namespace KSysGuard
         Command = 0x800,
         Status = 0x1000,
         Login = 0x2000,
-        IO = 0x4000
+        IO = 0x4000,
+        NumThreads = 0x8000
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
@@ -188,6 +190,8 @@ namespace KSysGuard
      *  OS dependant classes.
      */
     int elapsedTimeMilliSeconds;
+
+    int numThreads; ///< Number of threads that this process has, including the main one.  0 if not known
 
   private:
     void clear();

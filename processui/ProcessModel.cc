@@ -1318,8 +1318,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     tooltip    = i18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: <numid>%2</numid><br />Parent's ID: <numid>%3</numid>", process->name, (long int)process->pid, (long int)process->parent_pid);
                 }
             }
+            if(process->numThreads >= 1)
+                tooltip += i18n("<br/>Number of threads: %1", process->numThreads);
             if(!process->command.isEmpty()) {
-                tooltip+= i18n("<br/>Command: %1", process->command);
+                tooltip += i18n("<br/>Command: %1", process->command);
             }
             if(!process->tty.isEmpty())
                 tooltip += i18n( "<br />Running on: %1", QString(process->tty));
@@ -1380,6 +1382,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                         .subs((float)(process->sysUsage) / divideby)
                         .toString();
 
+            if(process->numThreads >= 1)
+                tooltip += i18n("<br/>Number of threads: %1", process->numThreads);
             if(process->numChildren > 0) {
                 tooltip += ki18n("<br />Number of children: %1<br />Total User CPU usage: %2%<br />"
                         "Total System CPU usage: %3%<br />Total CPU usage: %4%")

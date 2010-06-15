@@ -217,7 +217,12 @@ function translate() {
     document.getElementById('SummaryHeading').innerHTML = 'Summary';
     document.getElementById('LibraryUsageHeading').innerHTML = 'Library Usage';
     document.getElementById('showFullDetailsLink').innerHTML = 'Show Full Details';
-    document.getElementById('libraryusageintro').innerHTML = "The memory usage of a process is found by adding up the memory usage of each of its libraries, plus the process's own heap, stack and any other mappings, plus the stack of any of its threads.";
+    if(window.process.numThreads > 2)
+        document.getElementById('libraryusageintro').innerHTML = "The memory usage of a process is found by adding up the memory usage of each of its libraries, plus the process's own heap, stack and any other mappings, plus the stack of its " + (window.process.numThreads-1) + " threads.";
+    else if(window.process.numThreads == 2)
+        document.getElementById('libraryusageintro').innerHTML = "The memory usage of a process is found by adding up the memory usage of each of its libraries, plus the process's own heap, stack and any other mappings, plus the stack of its one other thread.";
+    else
+        document.getElementById('libraryusageintro').innerHTML = "The memory usage of a process is found by adding up the memory usage of each of its libraries, plus the process's own heap, stack and any other mappings.";
     document.getElementById('TotalsHeading').innerHTML = "Totals";
     document.getElementById('FullDetailsHeading').innerHTML = "Full Details";
     document.getElementById('linkPrivate').innerHTML = "more";
