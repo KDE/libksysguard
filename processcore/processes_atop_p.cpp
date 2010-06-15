@@ -167,7 +167,7 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
         dataRead += ret;
     } while(dataRead < rr.pcomplen);
     Q_ASSERT(dataRead == rr.pcomplen);
-    Q_ASSERT( (index + 1 ==historyTimes.count()) || atopLog.pos() == historyTimes.at(index+1));
+    //Q_ASSERT( (index + 1 ==historyTimes.count()) || atopLog.pos() == historyTimes.at(index+1));
 
     pstats = new PStat[ rr.nlist ];
     unsigned long uncompressedLength= sizeof(struct PStat) * rr.nlist;
