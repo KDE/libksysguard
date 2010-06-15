@@ -23,6 +23,7 @@
 #include "processes_base_p.h"
 #include "processes_local_p.h"
 #include "processes_remote_p.h"
+#include "processes_atop_p.h"
 #include "process.h"
 
 #include <klocale.h>
@@ -43,18 +44,18 @@
 
 namespace KSysGuard
 {
-  Processes::StaticPrivate *Processes::d2 = 0;
-
   class Processes::Private
   {
     public:
       Private(Processes *q_ptr) {
         mAbstractProcesses = 0;
+        mHistoricProcesses = 0;
+        mIsLocalHost = true;
         mProcesses.insert(0, &mFakeProcess);
         mElapsedTimeMilliSeconds = 0;
-        ref = 1;
         mHavePreviousIoValues = false;
         mUpdateFlags = 0;
+        mUsingHistoricalData = false;
         q = q_ptr;
     }
       ~Private();
@@ -69,22 +70,16 @@ namespace KSysGuard
       Process mFakeProcess; ///< A fake process with pid 0 just so that even init points to a parent
 
       AbstractProcesses *mAbstractProcesses; ///< The OS specific code to get the process information
+      ProcessesATop *mHistoricProcesses; ///< A way to get historic information about processes
+      bool mIsLocalHost; ///< Whether this is localhost or not
+
       QTime mLastUpdated; ///< This is the time we last updated.  Used to calculate cpu usage.
       long mElapsedTimeMilliSeconds; ///< The number of milliseconds  (1000ths of a second) that passed since the last update
 
-      int ref; /// <Reference counter.  When it reaches 0, delete.
       Processes::UpdateFlags mUpdateFlags;
       bool mHavePreviousIoValues; ///< This is whether we updated the IO value on the last update
+      bool mUsingHistoricalData; ///< Whether to return historical data for updateProcess() etc
       Processes *q;
-  };
-
-  class Processes::StaticPrivate
-  {
-    public:
-      StaticPrivate() { processesLocal = 0; ref =1; }
-      Processes *processesLocal;
-      QHash<QString, Processes*> processesRemote;
-      int ref; //Reference counter.  When it reaches 0, delete.
   };
 
 Processes::Private::~Private() {
@@ -98,78 +93,19 @@ Processes::Private::~Private() {
   mAbstractProcesses = NULL;
 }
 
-Processes *Processes::getInstance(const QString &host) { //static
-    if(!d2) {
-        d2 = new StaticPrivate();
-    } else {
-        d2->ref++;
-    }
-    if(host.isEmpty()) {
-        //Localhost processes
-        if(!d2->processesLocal) {
-            KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
-            d2->processesLocal = new Processes(new ProcessesLocal());
-        } else {
-            d2->processesLocal->d->ref++;
-        }
-        return d2->processesLocal;
-    } else {
-        Processes *processes = d2->processesRemote.value(host, NULL);
-        if( !processes ) {
-            //connect to it
-            KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
-            ProcessesRemote *remote = new ProcessesRemote(host);
-            processes = new Processes( remote );
-            d2->processesRemote.insert(host, processes);
-            connect(remote, SIGNAL(runCommand(QString,int)), processes, SIGNAL(runCommand(QString,int)));
-        } else {
-            processes->d->ref++;
-        }
-        return processes;
-    }
-}
-
-void Processes::returnInstance(const QString &host) { //static
-    if(!d2) {
-        kDebug() << "Internal error - static class does not exist";
-        return;
-    }
-    if(host.isEmpty()) {
-        //Localhost processes
-        if(!d2->processesLocal) {
-            //Serious error.  Returning instance we don't have.
-            kDebug() << "Internal error - returning instance we do not have";
-            return;
-        } else {
-            if(--(d2->processesLocal->d->ref) == 0) {
-                delete d2->processesLocal;
-                d2->processesLocal = NULL;
-            }
-        }
-    } else {
-        Processes *processes = d2->processesRemote.value(host, NULL);
-        if( !processes ) {
-            kDebug() << "Internal error - returning instance we do not have";
-            return;
-        } else {
-            if(--(processes->d->ref) == 0) {
-                delete processes;
-                d2->processesRemote.remove(host);
-            }
-        }
-    }
-    if(--(d2->ref) == 0) {
-        delete d2;
-        d2 = NULL;
-    }
-
-}
-Processes::Processes(AbstractProcesses *abstractProcesses) : d(new Private(this))
+Processes::Processes(const QString &host, QObject *parent) : QObject(parent), d(new Private(this))
 {
-    d->mAbstractProcesses = abstractProcesses;
-    connect( abstractProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
+    KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
+    if(host.isEmpty()) {
+        d->mAbstractProcesses = new ProcessesLocal();
+    } else {
+        ProcessesRemote *remote = new ProcessesRemote(host);
+        d->mAbstractProcesses = remote;
+        connect(remote, SIGNAL(runCommand(QString,int)), this, SIGNAL(runCommand(QString,int)));
+    }
+    d->mIsLocalHost = host.isEmpty();
+    connect( d->mAbstractProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
 }
-
 Processes::~Processes()
 {
     delete d;
@@ -247,10 +183,14 @@ bool Processes::updateProcessInfo(Process *ps) {
     }
 
     ps->changes = Process::Nothing;
-    bool success = d->mAbstractProcesses->updateProcessInfo(ps->pid, ps);
+    bool success;
+    if(d->mUsingHistoricalData)
+        success = d->mHistoricProcesses->updateProcessInfo(ps->pid, ps);
+    else
+        success = d->mAbstractProcesses->updateProcessInfo(ps->pid, ps);
 
     //Now we have the process info.  Calculate the cpu usage and total cpu usage for itself and all its parents
-    if(d->mElapsedTimeMilliSeconds != 0) {  //Update the user usage and sys usage
+    if(!d->mUsingHistoricalData && d->mElapsedTimeMilliSeconds != 0) {  //Update the user usage and sys usage
 #ifndef Q_OS_NETBSD
         /* The elapsed time is the d->mElapsedTimeMilliSeconds
          * (which is of the order 2 seconds or so) plus a small
@@ -265,17 +205,6 @@ bool Processes::updateProcessInfo(Process *ps) {
             ps->setSysUsage((int)(((ps->sysTime - oldSysTime)*1000.0) / elapsedTime));
         }
 #endif
-        ps->setTotalUserUsage(ps->userUsage);
-        ps->setTotalSysUsage(ps->sysUsage);
-        if(ps->userUsage != 0 || ps->sysUsage != 0) {
-            Process *p = ps->parent;
-            while(p->pid != 0) {
-                p->totalUserUsage += ps->userUsage;
-                p->totalSysUsage += ps->sysUsage;
-                emit processChanged(p, true);
-                p= p->parent;
-            }
-        }
         if(d->mUpdateFlags.testFlag(Processes::IOStatistics)) {
             if( d->mHavePreviousIoValues ) {
                 ps->setIoCharactersReadRate((ps->ioCharactersRead - oldIoCharactersRead) * 1000.0 / elapsedTime);
@@ -296,6 +225,20 @@ bool Processes::updateProcessInfo(Process *ps) {
             ps->setIoCharactersActuallyWrittenRate(0);
         }
     }
+    if(d->mUsingHistoricalData || d->mElapsedTimeMilliSeconds != 0) {
+        ps->setTotalUserUsage(ps->userUsage);
+        ps->setTotalSysUsage(ps->sysUsage);
+        if(ps->userUsage != 0 || ps->sysUsage != 0) {
+            Process *p = ps->parent;
+            while(p->pid != 0) {
+                p->totalUserUsage += ps->userUsage;
+                p->totalSysUsage += ps->sysUsage;
+                emit processChanged(p, true);
+                p = p->parent;
+            }
+        }
+    }
+
     return success;
 }
 
@@ -334,7 +277,11 @@ bool Processes::addProcess(long pid, long ppid)
 }
 bool Processes::updateOrAddProcess( long pid)
 {
-    long ppid = d->mAbstractProcesses->getParentPid(pid);
+    long ppid;
+    if(d->mUsingHistoricalData)
+        ppid = d->mHistoricProcesses->getParentPid(pid);
+    else
+        ppid = d->mAbstractProcesses->getParentPid(pid);
 
     if(d->mToBeProcessed.contains(ppid)) {
         //Make sure that we update the parent before we update this one.  Just makes things a bit easier.
@@ -352,14 +299,14 @@ bool Processes::updateOrAddProcess( long pid)
 
 void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags updateFlags)
 {
-    if(d->ref == 1)
-        d->mUpdateFlags = updateFlags;
-    else
-        d->mUpdateFlags |= updateFlags;
+    d->mUpdateFlags = updateFlags;
 
-    if(d->mLastUpdated.elapsed() >= updateDurationMS || !d->mLastUpdated.isValid())  {
+    if(d->mUsingHistoricalData || d->mLastUpdated.elapsed() >= updateDurationMS || !d->mLastUpdated.isValid())  {
         d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
-        d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags);  //For a local machine, this will directly call Processes::processesUpdated()
+        if(d->mUsingHistoricalData)
+            d->mHistoricProcesses->updateAllProcesses(d->mUpdateFlags);
+        else
+            d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags);  //For a local machine, this will directly call Processes::processesUpdated()
     }
 }
 
@@ -374,7 +321,11 @@ void Processes::processesUpdated() {
         }
     }
 
-    d->mToBeProcessed = d->mAbstractProcesses->getAllPids();
+    if(d->mUsingHistoricalData)
+        d->mToBeProcessed = d->mHistoricProcesses->getAllPids();
+    else
+        d->mToBeProcessed = d->mAbstractProcesses->getAllPids();
+
 
     QSet<long> beingProcessed(d->mToBeProcessed); //keep a copy so that we can replace mProcessedLastTime with this at the end of this function
 
@@ -449,26 +400,38 @@ void Processes::deleteProcess(long pid)
 
 
 bool Processes::killProcess(long pid) {
+    if(d->mUsingHistoricalData)
+        return false;
     return sendSignal(pid, SIGTERM);
 }
 
 bool Processes::sendSignal(long pid, int sig) {
+    if(d->mUsingHistoricalData)
+        return false;
     return d->mAbstractProcesses->sendSignal(pid, sig);
 }
 
 bool Processes::setNiceness(long pid, int priority) {
+    if(d->mUsingHistoricalData)
+        return false;
     return d->mAbstractProcesses->setNiceness(pid, priority);
 }
 
 bool Processes::setScheduler(long pid, KSysGuard::Process::Scheduler priorityClass, int priority) {
+    if(d->mUsingHistoricalData)
+        return false;
     return d->mAbstractProcesses->setScheduler(pid, priorityClass, priority);
 }
 
 bool Processes::setIoNiceness(long pid, KSysGuard::Process::IoPriorityClass priorityClass, int priority) {
+    if(d->mUsingHistoricalData)
+        return false;
     return d->mAbstractProcesses->setIoNiceness(pid, priorityClass, priority);
 }
 
 bool Processes::supportsIoNiceness() {
+    if(d->mUsingHistoricalData)
+        return false;
     return d->mAbstractProcesses->supportsIoNiceness();
 }
 
@@ -484,6 +447,73 @@ void Processes::answerReceived( int id, const QList<QByteArray>& answer ) {
     KSysGuard::ProcessesRemote *processes = qobject_cast<KSysGuard::ProcessesRemote *>(d->mAbstractProcesses);
     if(processes)
         processes->answerReceived(id, answer);
+}
+
+QList< QPair<QDateTime,uint> > Processes::historiesAvailable() const
+{
+    if(!d->mIsLocalHost)
+        return QList< QPair<QDateTime,uint> >();
+    if(!d->mHistoricProcesses)
+        d->mHistoricProcesses = new ProcessesATop();
+
+    return d->mHistoricProcesses->historiesAvailable();
+}
+
+void Processes::useCurrentData()
+{
+    if(d->mUsingHistoricalData) {
+        delete d->mHistoricProcesses;
+        d->mHistoricProcesses = NULL;
+        connect( d->mAbstractProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
+        d->mUsingHistoricalData = false;
+    }
+}
+
+bool Processes::setViewingTime(const QDateTime &when)
+{
+    if(!d->mIsLocalHost)
+        return false;
+    if(!d->mUsingHistoricalData) {
+        if(!d->mHistoricProcesses)
+            d->mHistoricProcesses = new ProcessesATop();
+        disconnect( d->mAbstractProcesses, SIGNAL(processesUpdated()), this, SLOT(processesUpdated()));
+        connect( d->mHistoricProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
+        d->mUsingHistoricalData = true;
+    }
+    return d->mHistoricProcesses->setViewingTime(when);
+}
+
+bool Processes::loadHistoryFile(const QString &filename)
+{
+    if(!d->mIsLocalHost)
+        return false;
+    if(!d->mHistoricProcesses)
+        d->mHistoricProcesses = new ProcessesATop(false);
+
+    return d->mHistoricProcesses->loadHistoryFile(filename);
+}
+
+QString Processes::historyFileName() const
+{
+    if(!d->mIsLocalHost || !d->mHistoricProcesses)
+        return QString::null;
+    return d->mHistoricProcesses->historyFileName();
+}
+QDateTime Processes::viewingTime() const
+{
+    if(!d->mIsLocalHost || !d->mHistoricProcesses)
+        return QDateTime();
+    return d->mHistoricProcesses->viewingTime();
+}
+
+bool Processes::isHistoryAvailable() const
+{
+    if(!d->mIsLocalHost)
+        return false;
+    if(!d->mHistoricProcesses)
+        d->mHistoricProcesses = new ProcessesATop();
+
+    return d->mHistoricProcesses->isHistoryAvailable();
 }
 
 }

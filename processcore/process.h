@@ -63,7 +63,7 @@ namespace KSysGuard
     void setSgid(qlonglong sgid); ///< The set group id that the process is running as
     void setFsgid(qlonglong fsgid); ///< The file system group id that the process is running as
 
-    void setTracerpid(qlonglong tracerpid); ///< If this is being debugged, this is the process that is debugging it
+    void setTracerpid(qlonglong tracerpid); ///< If this is being debugged, this is the process that is debugging it, or 0 otherwise
     void setTty(QByteArray tty); ///< The name of the tty the process owns
     void setUserTime(qlonglong userTime); ///< The time, in 100ths of a second, spent in total on user calls. -1 if not known
     void setSysTime(qlonglong sysTime);  ///< The time, in 100ths of a second, spent in total on system calls.  -1 if not known

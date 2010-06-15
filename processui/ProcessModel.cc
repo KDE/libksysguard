@@ -82,9 +82,8 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 
 ProcessModelPrivate::~ProcessModelPrivate()
 {
-    if(mProcesses)
-        KSysGuard::Processes::returnInstance(mHostName);
     qDeleteAll(mPidToWindowInfo);
+    delete mProcesses;
     mProcesses = NULL;
 }
 ProcessModel::ProcessModel(QObject* parent, const QString &host)
@@ -415,11 +414,12 @@ void ProcessModelPrivate::setupProcesses() {
     if(mProcesses) {
         mWIdToWindowInfo.clear();
         mPidToWindowInfo.clear();
-        KSysGuard::Processes::returnInstance(mHostName);
+        delete mProcesses;
+        mProcesses = 0;
         q->reset();
     }
 
-    mProcesses = KSysGuard::Processes::getInstance(mHostName);
+    mProcesses = new KSysGuard::Processes(mHostName);
 
     connect( mProcesses, SIGNAL(processChanged(KSysGuard::Process *, bool)), this, SLOT(processChanged(KSysGuard::Process *, bool)));
     connect( mProcesses, SIGNAL(beginAddProcess(KSysGuard::Process *)), this, SLOT(beginInsertRow( KSysGuard::Process *)));

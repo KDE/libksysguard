@@ -25,7 +25,7 @@ namespace KSysGuard
 {
     class Process;
 }
-class testProcess: public QObject
+class testProcess : public QObject
 {
     Q_OBJECT
     private:
@@ -36,6 +36,8 @@ class testProcess: public QObject
         void testProcesses();
         void testProcessesTreeStructure();
         void testProcessesModification();
+        void testHistories();
+        void testHistoriesWithWidget();
 };
 #endif
 

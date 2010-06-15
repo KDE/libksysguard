@@ -39,12 +39,12 @@ namespace KSysGuard
      *   #include <ksysguard/processes.h>
      *   #include <ksysguard/process.h>
      *
-     *   KSysGuard::Processes *processes = KSysGuard::Processes::getInstance();
+     *   KSysGuard::Processes *processes = new KSysGuard::Processes()
      *   QHash<long, Process *> processlist = processes->getProcesses();
      *   foreach( Process * process, processlist) {
      *     kDebug() << "Process with pid " << process->pid << " is called " << process->name;
      *   }
-     *   KSysGuard::Processes::returnInstance(processes);
+     *   delete processes;
      *   processes = NULL;
      * \endcode
      *
@@ -59,25 +59,15 @@ namespace KSysGuard
         Q_OBJECT
 
     public:
+
+        Processes(const QString &hostname = QString::null, QObject * parent = 0);
+        virtual ~Processes();
         enum UpdateFlag {
             StandardInformation = 1,
             IOStatistics = 2,
             XMemory = 4
         };
         Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
-
-        /**
-         *  Singleton pattern to return the instance associated with @p host.
-         *  Leave as the default for the current machine
-         */
-        static Processes *getInstance(const QString &host = QString());
-
-        /**
-         *  Call when you are finished with the Processes pointer from getInstance.
-         *  The pointer from getInstance may not be valid after calling this.
-         *  This is reference counted - once all the instances are returned, the object is deleted
-         */
-        static void returnInstance(const QString &host = QString());
 
         /**
          *  Update all the process information.  After calling this, /proc or equivalent is scanned and
@@ -180,6 +170,24 @@ namespace KSysGuard
 
         /** Update/add process for given pid immediately */
         bool updateOrAddProcess( long pid);
+
+        /** Whether we can get historic process and system data */
+        bool isHistoryAvailable() const;
+
+        /** Stop using historical data and use the most recent up-to-date data */
+        void useCurrentData();
+
+        /** Return a list of end times and intervals for all the available history */
+        QList< QPair<QDateTime, uint> > historiesAvailable() const;
+
+        /** Use historical process data closest to the given date-time.
+         *  Returns false if it is outside the range available or there is a problem
+         *  getting the data. */
+        bool setViewingTime(const QDateTime &when);
+        QDateTime viewingTime() const;
+        bool loadHistoryFile(const QString &filename);
+        QString historyFileName() const;
+        
     public Q_SLOTS:
         /** The abstract processes has updated its list of processes */
         void processesUpdated();
@@ -223,12 +231,8 @@ namespace KSysGuard
          */
         void endMoveProcess();
     protected:
-        Processes(AbstractProcesses *abstractProcesses);
-        ~Processes();
         class Private;
         Private *d;
-        class StaticPrivate;
-        static StaticPrivate *d2;
     private:
         inline void deleteProcess(long pid);
         bool updateProcess( Process *process, long ppid);
