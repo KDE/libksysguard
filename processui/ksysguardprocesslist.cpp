@@ -408,7 +408,7 @@ void KSysGuardProcessList::selectionChanged()
     d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
 
     d->renice->setText(i18np("Set Priority...", "Set Priority...", numSelected));
-    d->kill->setText(i18np("End Process", "End Processes", numSelected));
+    d->kill->setText(i18ncp("Context menu", "End Process", "End Processes", numSelected));
 }
 void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
     if(!index.isValid()) return;
@@ -1246,7 +1246,7 @@ void KSysGuardProcessList::killSelectedProcesses()
                 count);
 
         int res = KMessageBox::warningContinueCancelList(this, msg, selectedAsStrings,
-                i18np("End Process", "End %1 Processes", count),
+                i18ncp("Dialog title", "End Process", "End %1 Processes", count),
                 KGuiItem(i18n("End"), "process-stop"),
                 KStandardGuiItem::cancel(),
                 "endconfirmation");
