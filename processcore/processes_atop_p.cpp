@@ -243,7 +243,10 @@ bool ProcessesATop::updateProcessInfo( long pid, Process *process)
 //    process->setscheduler(p.cpu.policy);
     process->setVmSize(p.mem.vmem);
     process->setVmRSS(p.mem.rmem);
+    process->vmSizeChange = p.mem.vgrow;
+    process->vmRSSChange = p.mem.rgrow;
     process->setVmURSS(0);
+    process->vmURSSChange = 0;
 
     /* Fill in name and command */
     QString name = QString::fromUtf8(p.gen.name, qstrnlen(p.gen.name,PNAMLEN));

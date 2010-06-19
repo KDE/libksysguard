@@ -122,9 +122,15 @@ namespace KSysGuard
     Scheduler scheduler;
     IoPriorityClass ioPriorityClass;
     int ioniceLevel;
+
     qlonglong vmSize;
     qlonglong vmRSS;
     qlonglong vmURSS;
+
+    qlonglong vmSizeChange; ///< The change in vmSize since last update, in KiB
+    qlonglong vmRSSChange;  ///< The change in vmRSS since last update, in KiB
+    qlonglong vmURSSChange; ///< The change in vmURSS since last update, in KiB
+
     unsigned long pixmapBytes; ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
     bool hasManagedGuiWindow;
     QString name;

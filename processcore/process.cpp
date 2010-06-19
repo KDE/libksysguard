@@ -108,6 +108,9 @@ void KSysGuard::Process::clear() {
     vmSize=0;
     vmRSS = 0;
     vmURSS = 0;
+    vmSizeChange = 0;
+    vmRSSChange = 0;
+    vmURSSChange = 0;
     pixmapBytes = 0;
     hasManagedGuiWindow = false;
     status=OtherStatus;
@@ -234,16 +237,22 @@ void KSysGuard::Process::setIoniceLevel(int _ioniceLevel) {
     changes |= Process::NiceLevels;
 }
 void KSysGuard::Process::setVmSize(qlonglong _vmSize) {
+    if(vmSizeChange != 0 || vmSize != 0)
+        vmSizeChange = _vmSize - vmSize;
     if(vmSize == _vmSize) return;
     vmSize = _vmSize;
     changes |= Process::VmSize;
 }
 void KSysGuard::Process::setVmRSS(qlonglong _vmRSS) {
+    if(vmRSSChange != 0 || vmRSS != 0)
+        vmRSSChange = _vmRSS - vmRSS;
     if(vmRSS == _vmRSS) return;
     vmRSS = _vmRSS;
     changes |= Process::VmRSS;
 }
 void KSysGuard::Process::setVmURSS(qlonglong _vmURSS) {
+    if(vmURSSChange != 0 || vmURSSChange != 0)
+        vmURSSChange = _vmURSS - vmURSS;
     if(vmURSS == _vmURSS) return;
     vmURSS = _vmURSS;
     changes |= Process::VmURSS;
