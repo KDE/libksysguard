@@ -20,14 +20,14 @@ function removeItem(items, item) {
 function readSmapsFile() {
     if( !window.process.fileExists("/proc/" + window.process.pid + "/smaps" ) ) {
         if( window.process.fileExists("/proc/" + window.process.pid ) ) {  //Check that it's not just a timing issue - the process might have already ended
-            setHtml("<h1>Sorry</h1>Your system is not currently supported (/proc/"+window.process.pid+"/smaps was not found)");
+            document.getElementById('errorMessage').innerHTML = "<h1>Sorry</h1>Your system is not currently supported (/proc/"+window.process.pid+"/smaps was not found)";
         }
         return;
     }
     var smaps = window.process.readFile("/proc/" + window.process.pid + "/smaps");
     if(!smaps) {
         if( window.process.fileExists("/proc/" + window.process.pid ) ) {  //Check that it's not just a timing issue - the process might have already ended
-            setHtml("<h1>Sorry</h1>Could not read detailed memory information (/proc/"+window.process.pid+"/smaps could not be read)");
+            document.getElementById('errorMessage').innerHTML = "<h1>Sorry</h1>You do not have permissions to read detailed memory information about this process (/proc/"+window.process.pid+"/smaps could not be read)";
         }
         return;
     }
