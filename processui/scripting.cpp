@@ -148,7 +148,8 @@ void Scripting::setupJavascriptObjects() {
 }
 void Scripting::stopAllScripts()
 {
-    mScriptingHtmlDialog->deleteLater();
+    if (mScriptingHtmlDialog)
+        mScriptingHtmlDialog->deleteLater();
     mScriptingHtmlDialog = NULL;
     mProcessObject = NULL;
     mScriptPath.clear();
