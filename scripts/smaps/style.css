@@ -51,6 +51,9 @@ table {
     margin-left: auto;
     margin-right: auto;
 }
+table.sortable th {
+    cursor:default;
+}
 tbody.hidden {
     display:none;
 }
