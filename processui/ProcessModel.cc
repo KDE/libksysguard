@@ -82,7 +82,9 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 
 ProcessModelPrivate::~ProcessModelPrivate()
 {
+#ifdef Q_WS_X11
     qDeleteAll(mPidToWindowInfo);
+#endif
     delete mProcesses;
     mProcesses = NULL;
 }
@@ -105,7 +107,9 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
     }
     setupHeader();
     d->setupProcesses();
+#ifdef Q_WS_X11
     d->setupWindows();
+#endif
     d->mUnits = UnitsKB;
     d->mIoUnits = UnitsKB;
 
@@ -296,8 +300,8 @@ KSysGuard::Processes *ProcessModel::processController() const
     return d->mProcesses;
 }
 
-void ProcessModelPrivate::windowRemoved(WId wid) {
 #ifdef Q_WS_X11
+void ProcessModelPrivate::windowRemoved(WId wid) {
     WindowInfo *window = mWIdToWindowInfo.take(wid);
     if(!window) return;
     qlonglong pid = window->pid;
@@ -323,11 +327,11 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
         row = process->parent->children.indexOf(process);
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
     emit q->dataChanged(index2, index2);
-#endif
 }
+#endif
 
-void ProcessModelPrivate::setupWindows() {
 #ifdef Q_WS_X11
+void ProcessModelPrivate::setupWindows() {
     connect( KWindowSystem::self(), SIGNAL(windowChanged (WId, unsigned int )), this, SLOT(windowChanged(WId, unsigned int)));
     connect( KWindowSystem::self(), SIGNAL(windowAdded (WId )), this, SLOT(windowAdded(WId)));
     connect( KWindowSystem::self(), SIGNAL(windowRemoved (WId )), this, SLOT(windowRemoved(WId)));
@@ -337,8 +341,8 @@ void ProcessModelPrivate::setupWindows() {
     for ( it = KWindowSystem::windows().begin(); it != KWindowSystem::windows().end(); ++it ) {
         updateWindowInfo(*it, ~0u, true);
     }
-#endif
 }
+#endif
 #ifdef HAVE_XRES
 bool ProcessModelPrivate::updateXResClientData() {
     XResClient *clients;
@@ -412,8 +416,10 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
 #endif
 void ProcessModelPrivate::setupProcesses() {
     if(mProcesses) {
+#ifdef Q_WS_X11_DISABLE
         mWIdToWindowInfo.clear();
         mPidToWindowInfo.clear();
+#endif
         delete mProcesses;
         mProcesses = 0;
         q->reset();
@@ -730,8 +736,9 @@ void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
     Q_ASSERT(!mMovingRow);
     mInsertingRow = true;
 
-    if(!process->hasManagedGuiWindow && mPidToWindowInfo.contains(process->pid))
-        process->hasManagedGuiWindow = true;
+#ifdef Q_WS_X11
+    process->hasManagedGuiWindow = mPidToWindowInfo.contains(process->pid);
+#endif
     if(mSimple) {
         int row = mProcesses->processCount();
         q->beginInsertRows( QModelIndex(), row, row );
@@ -1639,6 +1646,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     }
     case Qt::DecorationRole: {
         if(index.column() == HeadingName) {
+#ifdef Q_WS_X11
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
             if(!process->hasManagedGuiWindow) {
                 if(d->mSimple) //When not in tree mode, we need to pad the name column where we do not have an icon
@@ -1646,11 +1654,13 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 else  //When in tree mode, the padding looks bad, so do not pad in this case
                     return QVariant();
             }
-
             WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
-            if(!w || w->icon.isNull())
-                return QIcon(d->mBlankPixmap);
-            return w->icon;
+            if(w && !w->icon.isNull())
+                return w->icon;
+            return QIcon(d->mBlankPixmap);
+#else
+            return QVariant();
+#endif
 
         } else if (index.column() == HeadingCPUUsage) {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
@@ -1701,7 +1711,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 
 bool ProcessModel::hasGUIWindow(qlonglong pid) const
 {
+#ifdef Q_WS_X11
     return d->mPidToWindowInfo.contains(pid);
+#else
+    return false;
+#endif
 }
 
 bool ProcessModel::isLocalhost() const

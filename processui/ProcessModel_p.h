@@ -23,6 +23,7 @@
 #define PROCESSMODEL_P_H_
 
 #include "processcore/process.h"
+#include "ProcessModel.h"
 
 #include <kapplication.h>
 #include <kuser.h>
@@ -57,8 +58,8 @@ struct WindowInfo {
 #include "../config-ksysguard.h"
 #endif
 
+namespace KSysGuard { class Processes; }
 
-class ProcessModel;
 class ProcessModelPrivate : public QObject
 {
     Q_OBJECT
@@ -109,8 +110,6 @@ class ProcessModelPrivate : public QObject
         void endMoveRow();
 
     public:
-        /** On X11 system, connects to the signals emitted when windows are created/destroyed */
-        void setupWindows();
         /** Connects to the host */
         void setupProcesses();
         /** A mapping of running,stopped,etc  to a friendly description like 'Stopped, either by a job control signal or because it is being traced.'*/
@@ -137,7 +136,11 @@ class ProcessModelPrivate : public QObject
          */
         inline QString getGroupnameForGroup(long gid) const;
 #ifdef Q_WS_X11
+        /** On X11 system, connects to the signals emitted when windows are created/destroyed */
+        void setupWindows();
         void updateWindowInfo(WId wid, unsigned int properties, bool newWindow);
+        QMultiHash< long long, WindowInfo *> mPidToWindowInfo;  ///< Map a process pid to X window info if available
+        QHash< WId, WindowInfo *> mWIdToWindowInfo; ///< Map an X window id to window info
 #ifdef HAVE_XRES
         bool updateXResClientData();
         void queryForAndUpdateAllXWindows();
@@ -168,9 +171,6 @@ class ProcessModelPrivate : public QObject
 
         /** A translated list of headings (column titles) in the order we want to display them. Used in headerData() */
         QStringList mHeadings;
-
-        QMultiHash< long long, WindowInfo *> mPidToWindowInfo;  ///< Map a process pid to X window info if available
-        QHash< WId, WindowInfo *> mWIdToWindowInfo; ///< Map an X window id to window info
 
         bool mShowChildTotals; ///< If set to true, a parent will return the CPU usage of all its children recursively
 
