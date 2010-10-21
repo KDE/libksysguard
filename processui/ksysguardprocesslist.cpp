@@ -329,7 +329,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     retranslateUi();
 
     d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
-    d->mUi->btnKillProcess->setToolTip(i18n("<qt>End the selected process. Warning - you may lose unsaved work.<br>Right click on a process to send other signals.<br>See What's This for technical information.<br>To target a specific window to kill, press ctrl+alt+esc at any time."));
+    d->mUi->btnKillProcess->setToolTip(i18n("<qt>End the selected process. Warning - you may lose unsaved work.<br>Right click on a process to send other signals.<br>See What's This for technical information.<br>To target a specific window to kill, press Ctrl+Alt+Esc at any time."));
 }
 
 KSysGuardProcessList::~KSysGuardProcessList()
