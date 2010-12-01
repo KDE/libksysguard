@@ -1868,15 +1868,15 @@ QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool r
     double amount;
     switch(units) {
       case UnitsKB:
-        return kbString.arg(amountInKB);
+        return kbString.arg(KGlobal::locale()->formatNumber(amountInKB, 0));
       case UnitsMB:
         amount = amountInKB/1024.0;
         if(amount < 0.1) amount = 0.1;
-        return mbString.arg(amount, 0, 'f', 1);
+        return mbString.arg(KGlobal::locale()->formatNumber(amount, 1));
       case UnitsGB:
         amount = amountInKB/(1024.0*1024.0);
         if(amount < 0.1) amount = 0.1;
-        return gbString.arg(amount, 0, 'f', 1);
+        return gbString.arg(KGlobal::locale()->formatNumber(amount, 1));
       case UnitsPercentage:
         if(d->mMemTotal == 0)
             return ""; //memory total not determined yet.  Shouldn't happen, but don't crash if it does
