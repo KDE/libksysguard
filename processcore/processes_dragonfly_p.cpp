@@ -1,5 +1,6 @@
 /*  This file is part of the KDE project
     Copyright (C) 2007 Manolo Valdes <nolis71cu@gmail.com>
+    Copyright (C) 2010 Alex Hornung <ahornung@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -29,12 +30,16 @@
 #include <sys/types.h>
 #include <sys/user.h>
 #include <sys/resource.h>
+#include <sys/resourcevar.h>
+#include <err.h>
 #include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <sched.h>
 
-
+#define PP(pp, field) ((pp)->kp_ ## field)
+#define LP(pp, field) ((pp)->kp_lwp.kl_ ## field)
+#define VP(pp, field) ((pp)->kp_vm_ ## field)
 
 namespace KSysGuard
 {
@@ -42,8 +47,8 @@ namespace KSysGuard
   class ProcessesLocal::Private
   {
     public:
-      Private() {;}
-      ~Private() {;}
+      Private() {}
+      ~Private() {}
       inline bool readProc(long pid, struct kinfo_proc *p);
       inline void readProcStatus(struct kinfo_proc *p, Process *process);
       inline void readProcStat(struct kinfo_proc *p, Process *process);
@@ -73,45 +78,38 @@ void ProcessesLocal::Private::readProcStatus(struct kinfo_proc *p, Process *proc
     process->setGid(0);
     process->setTracerpid(0);
 
-    process->setEuid(p->ki_uid);
-    process->setUid(p->ki_ruid);
-    process->setEgid(p->ki_svgid);
-    process->setGid(p->ki_rgid);
-    process->setName(QString(p->ki_comm ? p->ki_comm : "????"));
+    process->setEuid(PP(p, uid));
+    process->setUid(PP(p, ruid));
+    process->setEgid(PP(p, svgid));
+    process->setGid(PP(p, rgid));
+    process->setName(QString(PP(p, comm)));
 }
 
 void ProcessesLocal::Private::readProcStat(struct kinfo_proc *p, Process *ps)
 {
-    int status;
-    struct rusage pru;
-
-        ps->setUserTime(p->ki_rusage.ru_utime.tv_sec * 100 + p->ki_rusage.ru_utime.tv_usec / 10000);
-        ps->setSysTime(p->ki_rusage.ru_stime.tv_sec * 100 + p->ki_rusage.ru_stime.tv_usec / 10000);
-        ps->setNiceLevel(p->ki_nice);
-        ps->setVmSize(p->ki_size / 1024);
-        ps->setVmRSS(p->ki_rssize * getpagesize() / 1024);
-        status = p->ki_stat;
+    ps->setUserTime(LP(p, uticks) / 10000);
+    ps->setSysTime((LP(p, sticks) + LP(p, iticks)) / 10000);
+    ps->setNiceLevel(PP(p, nice));
+    ps->setVmSize(VP(p, map_size) / 1024); /* convert to KiB */
+    ps->setVmRSS(VP(p, prssize) * getpagesize() / 1024); /* convert to KiB */
 
 // "idle","run","sleep","stop","zombie"
-    switch( status ) {
-      case SRUN:
-         ps->setStatus(Process::Running);
-	 break;
-      case SSLEEP:
-      case SWAIT:
-      case SLOCK:
-         ps->setStatus(Process::Sleeping);
-	 break;
-      case SSTOP:
-         ps->setStatus(Process::Stopped);
-         break;
-      case SZOMB:
-         ps->setStatus(Process::Zombie);
-         break;
+    switch( LP(p, stat) ) {
+      case LSRUN:
+        ps->setStatus(Process::Running);
+        break;
+      case LSSLEEP:
+        ps->setStatus(Process::Sleeping);
+        break;
+      case LSSTOP:
+        ps->setStatus(Process::Stopped);
+        break;
       default:
-         ps->setStatus(Process::OtherStatus);
-         break;
+        ps->setStatus(Process::OtherStatus);
+        break;
     }
+    if (PP(p, stat) == SZOMB)
+        ps->setStatus(Process::Zombie);
 }
 
 void ProcessesLocal::Private::readProcStatm(struct kinfo_proc *p, Process *process)
@@ -122,7 +120,6 @@ void ProcessesLocal::Private::readProcStatm(struct kinfo_proc *p, Process *proce
 bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
 {
     int mib[4];
-    struct kinfo_proc p;
     size_t buflen = 256;
     char buf[256];
 
@@ -131,7 +128,7 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
     mib[2] = KERN_PROC_ARGS;
     mib[3] = pid;
 
-    if (sysctl(mib, 4, buf, &buflen, NULL, 0) == -1 || !buflen)
+    if (sysctl(mib, 4, buf, &buflen, NULL, 0) == -1 || (buflen == 0))
         return false;
     QString command = QString(buf);
 
@@ -144,27 +141,33 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
 
 ProcessesLocal::ProcessesLocal() : d(new Private())
 {
-
 }
 
-long ProcessesLocal::getParentPid(long pid) {
+long ProcessesLocal::getParentPid(long pid)
+{
     long long ppid = 0;
     struct kinfo_proc p;
+
     if(d->readProc(pid, &p))
-    {
-        ppid = p.ki_ppid;
-    }
+        ppid = PP(&p, ppid);
+
     return ppid;
 }
 
 bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 {
     struct kinfo_proc p;
-    if(!d->readProc(pid, &p)) return false;
+
+    if(!d->readProc(pid, &p)) {
+        return false;
+    }
+
     d->readProcStat(&p, process);
     d->readProcStatus(&p, process);
     d->readProcStatm(&p, process);
-    if(!d->readProcCmdline(pid, process)) return false;
+    if(!d->readProcCmdline(pid, process)) {
+        return false;
+    }
 
     return true;
 }
@@ -191,8 +194,8 @@ QSet<long> ProcessesLocal::getAllPids( )
 
     for (num = 0; num < len / sizeof(struct kinfo_proc); num++)
     {
-        long pid = p[num].ki_pid;
-        long long ppid = p[num].ki_ppid;
+        long pid = PP((&p[num]), pid);
+        long long ppid = PP((&p[num]), ppid);
 
         //skip all process with parent id = 0 but init
         if(ppid == 0 && pid != 1)
@@ -259,7 +262,8 @@ long long ProcessesLocal::totalPhysicalMemory() {
     if (sysctlbyname("hw.physmem", &Total, &len, NULL, 0) == -1)
         return 0;
 
-    return Total /= 1024;
+    Total *= getpagesize() / 1024;
+    return Total;
 }
 
 ProcessesLocal::~ProcessesLocal()

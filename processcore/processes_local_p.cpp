@@ -21,8 +21,10 @@
 
 #if defined __linux__
 #include "processes_linux_p.cpp"
-#elif defined __FreeBSD__ || defined __FreeBSD_kernel__ || defined __DragonFly__
+#elif defined __FreeBSD__ || defined __FreeBSD_kernel__
 #include "processes_freebsd_p.cpp"
+#elif defined __DragonFly__
+#include "processes_dragonfly_p.cpp"
 #elif defined __OpenBSD__
 #include "processes_openbsd_p.cpp"
 #elif defined __NetBSD__
