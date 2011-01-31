@@ -21,6 +21,5 @@ add_subdirectory( processui )
 add_subdirectory( signalplotter )
 add_subdirectory( tests )
 
-install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts PATTERN .svn EXCLUDE)
-
+install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts)
 
