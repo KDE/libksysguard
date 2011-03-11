@@ -49,7 +49,7 @@ function parseSmaps() {
     var headingRegex = /^([0-9A-Fa-f]+-[0-9A-Fa-f]+) +([^ ]*) +([0-9A-Fa-f]+) +([0-9A-Fa-f]+:[0-9A-Fa-f]+) +(\d+) +(.*)$/;
     var lineRegex = /^([^ ]+): +(\d+) kB$/;
     for(var i = 0; i < smaps.length; i++) {
-        lineMatch = lineRegex.exec(smaps[i]);
+        var lineMatch = lineRegex.exec(smaps[i]);
         if(lineMatch) {
             var key = lineMatch[1];
             dataBlock[ key ] = parseInt(lineMatch[2], 10);  /* E.g.  dataBlock.Size = 84 */
