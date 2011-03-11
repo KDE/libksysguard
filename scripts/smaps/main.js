@@ -50,6 +50,7 @@ function parseSmaps() {
     var lineRegex = /^([^ ]+): +(\d+) kB$/;
     for(var i = 0; i < smaps.length; i++) {
         var lineMatch = lineRegex.exec(smaps[i]);
+        var headingMatch;
         if(lineMatch) {
             var key = lineMatch[1];
             dataBlock[ key ] = parseInt(lineMatch[2], 10);  /* E.g.  dataBlock.Size = 84 */
