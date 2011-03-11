@@ -980,6 +980,7 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
 
 
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.renice");
+    action->setParentWidget(window());
     d->setupKAuthAction( action, unreniced_pids);
     action->addArgument("nicevalue", niceValue);
     KAuth::ActionReply reply = action->execute();
@@ -987,14 +988,13 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
         delete action;
-        return true;
-    }
-    else {
+    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to renice the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         delete action;
         return false;
     }
+    return true;
 }
 
 QList<KSysGuard::Process *> KSysGuardProcessList::selectedProcesses() const
@@ -1096,7 +1096,6 @@ void KSysGuardProcessList::reniceSelectedProcesses()
     if(!changeCPUSchedulerPids.isEmpty()) {
         Q_ASSERT(reniceDlg->newCPUSched >= 0);
         if(!changeCpuScheduler(changeCPUSchedulerPids, (KSysGuard::Process::Scheduler) reniceDlg->newCPUSched, reniceDlg->newCPUPriority)) {
-            KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU scheduler. Aborting."));
             delete reniceDlg;
             return;
         }
@@ -1105,14 +1104,12 @@ void KSysGuardProcessList::reniceSelectedProcesses()
     if(!renicePids.isEmpty()) {
         Q_ASSERT(reniceDlg->newCPUPriority <= 20 && reniceDlg->newCPUPriority >= -20);
         if(!reniceProcesses(renicePids, reniceDlg->newCPUPriority)) {
-            KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU priority. Aborting."));
             delete reniceDlg;
             return;
         }
     }
     if(!changeIOSchedulerPids.isEmpty()) {
         if(!changeIoScheduler(changeIOSchedulerPids, (KSysGuard::Process::IoPriorityClass) reniceDlg->newIOSched, reniceDlg->newIOPriority)) {
-            KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the IO scheduler and priority. Aborting."));
             delete reniceDlg;
             return;
         }
@@ -1136,6 +1133,7 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to affect non-localhost processes
 
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.changeioscheduler");
+    action->setParentWidget(window());
 
     d->setupKAuthAction( action, unchanged_pids);
     action->addArgument("ioScheduler", (int)newIoSched);
@@ -1146,14 +1144,13 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
         delete action;
-        return true;
-    }
-    else {
+    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to change the I/O priority of the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         delete action;
         return false;
     }
+    return true;
 }
 
 bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSysGuard::Process::Scheduler newCpuSched, int newCpuSchedPriority)
@@ -1170,6 +1167,7 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
     if(!d->mModel.isLocalhost()) return false; //We can't use KAuth to affect non-localhost processes
 
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.changecpuscheduler");
+    action->setParentWidget(window());
     d->setupKAuthAction( action, unchanged_pids);
     action->addArgument("cpuScheduler", (int)newCpuSched);
     action->addArgument("cpuSchedulerPriority", newCpuSchedPriority);
@@ -1178,14 +1176,13 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
         delete action;
-        return true;
-    }
-    else {
+    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to change the CPU Scheduler for the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         delete action;
         return false;
     }
+    return true;
 }
 
 bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
@@ -1201,6 +1198,7 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.sendsignal");
+    action->setParentWidget(window());
     d->setupKAuthAction( action, unkilled_pids);
     action->addArgument("signal", sig);
     KAuth::ActionReply reply = action->execute();
@@ -1208,14 +1206,13 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
         delete action;
-        return true;
-    }
-    else {
+    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         delete action;
         return false;
     }
+    return true;
 }
 
 void KSysGuardProcessList::killSelectedProcesses()
