@@ -575,21 +575,20 @@ void KSysGuardProcessList::selectAndJumpToProcess(int pid) {
 }
 
 void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
-    QMenu *menu = new QMenu();
+    QMenu menu;
 
     QAction *action;
     int index = d->mUi->treeView->header()->logicalIndexAt(point);
     if(index >= 0) {
         //selected a column.  Give the option to hide it
-        action = new QAction(menu);
+        action = new QAction(&menu);
         action->setData(-index-1); //We set data to be negative (and minus 1) to hide a column, and positive to show a column
         action->setText(i18n("Hide Column '%1'", d->mFilterModel.headerData(index, Qt::Horizontal, Qt::DisplayRole).toString()));
-        menu->addAction(action);
+        menu.addAction(action);
         if(d->mUi->treeView->header()->sectionsHidden()) {
-            menu->addSeparator();
+            menu.addSeparator();
         }
     }
-
 
     if(d->mUi->treeView->header()->sectionsHidden()) {
         int num_headings = d->mFilterModel.columnCount();
@@ -599,10 +598,10 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
                 if(i == ProcessModel::HeadingXMemory)
                     continue;
 #endif
-                action = new QAction(menu);
+                action = new QAction(&menu);
                 action->setText(i18n("Show Column '%1'", d->mFilterModel.headerData(i, Qt::Horizontal, Qt::DisplayRole).toString()));
                 action->setData(i); //We set data to be negative (and minus 1) to hide a column, and positive to show a column
-                menu->addAction(action);
+                menu.addAction(action);
             }
         }
     }
@@ -627,31 +626,31 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory || index == ProcessModel::HeadingXMemory || index == ProcessModel::HeadingSharedMemory || ( (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) && d->mModel.ioInformation() != ProcessModel::Syscalls)) {
         //If the user right clicks on a column that contains a memory size, show a toggle option for displaying
         //the memory in different units.  e.g.  "2000 k" or "2 m"
-        menu->addSeparator()->setText(i18n("Display Units"));
-        QActionGroup *unitsGroup = new QActionGroup(menu);
-        actionKB = new QAction(menu);
+        menu.addSeparator()->setText(i18n("Display Units"));
+        QActionGroup *unitsGroup = new QActionGroup(&menu);
+        actionKB = new QAction(&menu);
         actionKB->setText((showIoRate)?i18n("Kilobytes per second"):i18n("Kilobytes"));
         actionKB->setCheckable(true);
-        menu->addAction(actionKB);
+        menu.addAction(actionKB);
         unitsGroup->addAction(actionKB);
-        actionMB = new QAction(menu);
+        actionMB = new QAction(&menu);
         actionMB->setText((showIoRate)?i18n("Megabytes per second"):i18n("Megabytes"));
         actionMB->setCheckable(true);
-        menu->addAction(actionMB);
+        menu.addAction(actionMB);
         unitsGroup->addAction(actionMB);
-        actionGB = new QAction(menu);
+        actionGB = new QAction(&menu);
         actionGB->setText((showIoRate)?i18n("Gigabytes per second"):i18n("Gigabytes"));
         actionGB->setCheckable(true);
-        menu->addAction(actionGB);
+        menu.addAction(actionGB);
         unitsGroup->addAction(actionGB);
         ProcessModel::Units currentUnit;
         if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
             currentUnit = d->mModel.ioUnits();
         } else {
-            actionPercentage = new QAction(menu);
+            actionPercentage = new QAction(&menu);
             actionPercentage->setText(i18n("Percentage"));
             actionPercentage->setCheckable(true);
-            menu->addAction(actionPercentage);
+            menu.addAction(actionPercentage);
             unitsGroup->addAction(actionPercentage);
             currentUnit = d->mModel.units();
         }
@@ -673,45 +672,45 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         }
         unitsGroup->setExclusive(true);
     } else if(index == ProcessModel::HeadingName) {
-        menu->addSeparator();
-        actionShowCmdlineOptions = new QAction(menu);
+        menu.addSeparator();
+        actionShowCmdlineOptions = new QAction(&menu);
         actionShowCmdlineOptions->setText(i18n("Display command line options"));
         actionShowCmdlineOptions->setCheckable(true);
         actionShowCmdlineOptions->setChecked(d->mModel.isShowCommandLineOptions());
-        menu->addAction(actionShowCmdlineOptions);
+        menu.addAction(actionShowCmdlineOptions);
     } else if(index == ProcessModel::HeadingCPUUsage) {
-        menu->addSeparator();
-        actionNormalizeCPUUsage = new QAction(menu);
+        menu.addSeparator();
+        actionNormalizeCPUUsage = new QAction(&menu);
         actionNormalizeCPUUsage->setText(i18n("Divide CPU usage by number of CPUs"));
         actionNormalizeCPUUsage->setCheckable(true);
         actionNormalizeCPUUsage->setChecked(d->mModel.isNormalizedCPUUsage());
-        menu->addAction(actionNormalizeCPUUsage);
+        menu.addAction(actionNormalizeCPUUsage);
     }
 
     if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
-        menu->addSeparator()->setText(i18n("Displayed Information"));
-        QActionGroup *ioInformationGroup = new QActionGroup(menu);
-        actionIoCharacters = new QAction(menu);
+        menu.addSeparator()->setText(i18n("Displayed Information"));
+        QActionGroup *ioInformationGroup = new QActionGroup(&menu);
+        actionIoCharacters = new QAction(&menu);
         actionIoCharacters->setText(i18n("Characters read/written"));
         actionIoCharacters->setCheckable(true);
-        menu->addAction(actionIoCharacters);
+        menu.addAction(actionIoCharacters);
         ioInformationGroup->addAction(actionIoCharacters);
-        actionIoSyscalls = new QAction(menu);
+        actionIoSyscalls = new QAction(&menu);
         actionIoSyscalls->setText(i18n("Number of Read/Write operations"));
         actionIoSyscalls->setCheckable(true);
-        menu->addAction(actionIoSyscalls);
+        menu.addAction(actionIoSyscalls);
         ioInformationGroup->addAction(actionIoSyscalls);
-        actionIoActualCharacters = new QAction(menu);
+        actionIoActualCharacters = new QAction(&menu);
         actionIoActualCharacters->setText(i18n("Bytes actually read/written"));
         actionIoActualCharacters->setCheckable(true);
-        menu->addAction(actionIoActualCharacters);
+        menu.addAction(actionIoActualCharacters);
         ioInformationGroup->addAction(actionIoActualCharacters);
 
-        actionIoShowRate = new QAction(menu);
+        actionIoShowRate = new QAction(&menu);
         actionIoShowRate->setText(i18n("Show I/O rate"));
         actionIoShowRate->setCheckable(true);
         actionIoShowRate->setChecked(showIoRate);
-        menu->addAction(actionIoShowRate);
+        menu.addAction(actionIoShowRate);
 
         switch(d->mModel.ioInformation()) {
             case ProcessModel::Bytes:
@@ -731,15 +730,15 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         }
     }
 
-    menu->addSeparator();
-    actionShowTooltips = new QAction(menu);
+    menu.addSeparator();
+    actionShowTooltips = new QAction(&menu);
     actionShowTooltips->setCheckable(true);
     actionShowTooltips->setChecked(d->mModel.isShowingTooltips());
     actionShowTooltips->setText(i18n("Show Tooltips"));
-    menu->addAction(actionShowTooltips);
+    menu.addAction(actionShowTooltips);
 
 
-    QAction *result = menu->exec(d->mUi->treeView->header()->mapToGlobal(point));
+    QAction *result = menu.exec(d->mUi->treeView->header()->mapToGlobal(point));
     if(!result) return; //Menu cancelled
     if(result == actionKB) {
         if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
@@ -810,7 +809,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         d->mUi->treeView->resizeColumnToContents(i);
         d->mUi->treeView->resizeColumnToContents(d->mFilterModel.columnCount());
     }
-    menu->deleteLater();
+    menu.deleteLater();
 }
 
 void KSysGuardProcessList::expandAllChildren(const QModelIndex &parent)
