@@ -917,7 +917,7 @@ void KSysGuardProcessList::updateList()
         if(d->mUpdateTimer)
             d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
         emit updated();
-        if(QToolTip::isVisible()) {
+        if (QToolTip::isVisible() && qApp->topLevelAt(QCursor::pos()) == window()) {
             QWidget *w = d->mUi->treeView->viewport();
             if(w->geometry().contains(d->mUi->treeView->mapFromGlobal( QCursor::pos() ))) {
                 QHelpEvent event(QEvent::ToolTip, w->mapFromGlobal( QCursor::pos() ), QCursor::pos());
