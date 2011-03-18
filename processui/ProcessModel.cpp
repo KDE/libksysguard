@@ -1827,7 +1827,8 @@ ProcessModel::Units ProcessModel::units() const
 void ProcessModel::setIoUnits(Units units)
 {
     if(d->mIoUnits == units)
-        d->mIoUnits = units;
+        return;
+    d->mIoUnits = units;
 
     QModelIndex index;
     foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
