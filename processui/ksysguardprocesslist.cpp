@@ -605,6 +605,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
             }
         }
     }
+    QAction *actionAuto = NULL;
     QAction *actionKB = NULL;
     QAction *actionMB = NULL;
     QAction *actionGB = NULL;
@@ -628,16 +629,25 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         //the memory in different units.  e.g.  "2000 k" or "2 m"
         menu.addSeparator()->setText(i18n("Display Units"));
         QActionGroup *unitsGroup = new QActionGroup(&menu);
+        /* Automatic (human readable)*/
+        actionAuto = new QAction(&menu);
+        actionAuto->setText(i18n("Mixed"));
+        actionAuto->setCheckable(true);
+        menu.addAction(actionAuto);
+        unitsGroup->addAction(actionAuto);
+        /* Kilobytes */
         actionKB = new QAction(&menu);
         actionKB->setText((showIoRate)?i18n("Kilobytes per second"):i18n("Kilobytes"));
         actionKB->setCheckable(true);
         menu.addAction(actionKB);
         unitsGroup->addAction(actionKB);
+        /* Megabytes */
         actionMB = new QAction(&menu);
         actionMB->setText((showIoRate)?i18n("Megabytes per second"):i18n("Megabytes"));
         actionMB->setCheckable(true);
         menu.addAction(actionMB);
         unitsGroup->addAction(actionMB);
+        /* Gigabytes */
         actionGB = new QAction(&menu);
         actionGB->setText((showIoRate)?i18n("Gigabytes per second"):i18n("Gigabytes"));
         actionGB->setCheckable(true);
@@ -655,6 +665,9 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
             currentUnit = d->mModel.units();
         }
         switch(currentUnit) {
+            case ProcessModel::UnitsAuto:
+                actionAuto->setChecked(true);
+                break;
             case ProcessModel::UnitsKB:
                 actionKB->setChecked(true);
                 break;
@@ -740,7 +753,13 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
 
     QAction *result = menu.exec(d->mUi->treeView->header()->mapToGlobal(point));
     if(!result) return; //Menu cancelled
-    if(result == actionKB) {
+    if(result == actionAuto) {
+        if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+            d->mModel.setIoUnits(ProcessModel::UnitsAuto);
+        else
+            d->mModel.setUnits(ProcessModel::UnitsAuto);
+        return;
+    } else if(result == actionKB) {
         if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
             d->mModel.setIoUnits(ProcessModel::UnitsKB);
         else

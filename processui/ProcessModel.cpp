@@ -59,6 +59,51 @@
 
 extern KApplication* Kapp;
 
+static QString formatByteSize(qlonglong amountInKB, int units) {
+    enum { UnitsAuto, UnitsKB, UnitsMB, UnitsGB, UnitsTB, UnitsPB };
+    static QString kString = i18n("%1 K", QString::fromLatin1("%1"));
+    static QString mString = i18n("%1 M", QString::fromLatin1("%1"));
+    static QString gString = i18n("%1 G", QString::fromLatin1("%1"));
+    static QString tString = i18n("%1 T", QString::fromLatin1("%1"));
+    static QString pString = i18n("%1 P", QString::fromLatin1("%1"));
+    double amount;
+
+    if (units == UnitsAuto) {
+        if (amountInKB < 1024.0*0.9)
+            units = UnitsKB; // amount < 0.9 MiB == KiB
+        else if (amountInKB < 1024.0*1024.0*0.9)
+            units = UnitsMB; // amount < 0.9 GiB == MiB
+        else if (amountInKB < 1024.0*1024.0*1024.0*0.9)
+            units = UnitsGB; // amount < 0.9 TiB == GiB
+        else if (amountInKB < 1024.0*1024.0*1024.0*1024.0*0.9)
+            units = UnitsTB; // amount < 0.9 PiB == TiB
+        else
+            units = UnitsPB;
+    }
+
+    switch(units) {
+      case UnitsKB:
+        return kString.arg(KGlobal::locale()->formatNumber(amountInKB, 0));
+      case UnitsMB:
+        amount = amountInKB/1024.0;
+        return mString.arg(KGlobal::locale()->formatNumber(amount, 1));
+      case UnitsGB:
+        amount = amountInKB/(1024.0*1024.0);
+        if(amount < 0.1 && amount > 0.05) amount = 0.1;
+        return gString.arg(KGlobal::locale()->formatNumber(amount, 1));
+      case UnitsTB:
+        amount = amountInKB/(1024.0*1024.0*1024.0);
+        if(amount < 0.1 && amount > 0.05) amount = 0.1;
+        return tString.arg(KGlobal::locale()->formatNumber(amount, 1));
+      case UnitsPB:
+        amount = amountInKB/(1024.0*1024.0*1024.0*1024.0);
+        if(amount < 0.1 && amount > 0.05) amount = 0.1;
+        return pString.arg(KGlobal::locale()->formatNumber(amount, 1));
+      default:
+          return "";  // error
+    }
+}
+
 ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1)
 {
     mBlankPixmap.fill(QColor(0,0,0,0));
@@ -1862,30 +1907,15 @@ QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool r
     //hundreds of times, every second or so
     if(returnEmptyIfValueIsZero && amountInKB == 0)
         return QString();
-    static QString kbString = i18n("%1 K", QString::fromLatin1("%1"));
-    static QString mbString = i18n("%1 M", QString::fromLatin1("%1"));
-    static QString gbString = i18n("%1 G", QString::fromLatin1("%1"));
     static QString percentageString = i18n("%1%", QString::fromLatin1("%1"));
-    double amount;
-    switch(units) {
-      case UnitsKB:
-        return kbString.arg(KGlobal::locale()->formatNumber(amountInKB, 0));
-      case UnitsMB:
-        amount = amountInKB/1024.0;
-        if(amount < 0.1) amount = 0.1;
-        return mbString.arg(KGlobal::locale()->formatNumber(amount, 1));
-      case UnitsGB:
-        amount = amountInKB/(1024.0*1024.0);
-        if(amount < 0.1) amount = 0.1;
-        return gbString.arg(KGlobal::locale()->formatNumber(amount, 1));
-      case UnitsPercentage:
+    if (units == UnitsPercentage) {
         if(d->mMemTotal == 0)
             return ""; //memory total not determined yet.  Shouldn't happen, but don't crash if it does
         float percentage = amountInKB*100.0/d->mMemTotal;
         if(percentage < 0.1) percentage = 0.1;
         return percentageString.arg(percentage, 0, 'f', 1);
-    }
-    return "";  //error
+    } else
+        return formatByteSize(amountInKB, units);
 }
 
 QString ProcessModel::hostName() const {
