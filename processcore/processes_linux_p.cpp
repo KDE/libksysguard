@@ -136,7 +136,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 
     process->uid = 0;
     process->gid = 0;
-    process->tracerpid = 0;
+    process->tracerpid = -1;
     process->numThreads = 0;
 
     int size;
@@ -162,11 +162,13 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 	        if(++found == 5) goto finish;
 	    }
 	    break;
-	  case 'T':
-	    if((unsigned int)size > sizeof("TracerPid:") && qstrncmp(mBuffer, "TracerPid:", sizeof("TracerPid:")-1) == 0) {
+      case 'T':
+        if((unsigned int)size > sizeof("TracerPid:") && qstrncmp(mBuffer, "TracerPid:", sizeof("TracerPid:")-1) == 0) {
             process->tracerpid = atol(mBuffer + sizeof("TracerPid:")-1);
-	        if(++found == 5) goto finish;
-	    } else if((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:")-1) == 0) {
+            if (process->tracerpid == 0)
+                process->tracerpid = -1;
+            if(++found == 5) goto finish;
+        } else if((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:")-1) == 0) {
             process->setNumThreads(atol(mBuffer + sizeof("Threads:")-1));
 	        if(++found == 5) goto finish;
 	    }
@@ -185,12 +187,12 @@ long ProcessesLocal::getParentPid(long pid) {
     Q_ASSERT(pid != 0);
     d->mFile.setFileName("/proc/" + QString::number(pid) + "/stat");
     if(!d->mFile.open(QIODevice::ReadOnly))
-        return 0;      /* process has terminated in the meantime */
+        return -1;      /* process has terminated in the meantime */
 
     int size; //amount of data read in
     if( (size = d->mFile.readLine( d->mBuffer, sizeof(d->mBuffer))) <= 0) { //-1 indicates nothing read
         d->mFile.close();
-        return 0;
+        return -1;
     }
 
     d->mFile.close();
@@ -198,15 +200,18 @@ long ProcessesLocal::getParentPid(long pid) {
     char *word = d->mBuffer;
 
     while(true) {
-	    if(word[0] == ' ' ) {
-		    if(++current_word == 3)
-			    break;
-	    } else if(word[0] == 0) {
-	    	return 0; //end of data - serious problem
-	    }
-	    word++;
+        if(word[0] == ' ' ) {
+            if(++current_word == 3)
+                break;
+        } else if(word[0] == 0) {
+            return -1; //end of data - serious problem
+        }
+        word++;
     }
-    return atol(++word);
+    long ppid = atol(++word);
+    if (ppid == 0)
+        return -1;
+    return ppid;
 }
 
 bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
@@ -490,8 +495,8 @@ QSet<long> ProcessesLocal::getAllPids( )
     struct dirent* entry;
     rewinddir(d->mProcDir);
     while ( ( entry = readdir( d->mProcDir ) ) )
-	    if ( entry->d_name[ 0 ] >= '0' && entry->d_name[ 0 ] <= '9' )
-		    pids.insert(atol( entry->d_name ));
+        if ( entry->d_name[ 0 ] >= '0' && entry->d_name[ 0 ] <= '9' )
+            pids.insert(atol( entry->d_name ));
     return pids;
 }
 

@@ -181,9 +181,9 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
                We then sort by cpu usage to sort by that, then finally sort by memory usage */
 
             /* First, place traced processes at the very top, ignoring any other sorting criteria */
-            if(processLeft->tracerpid > 0)
+            if(processLeft->tracerpid >= 0)
                 return true;
-            if(processRight->tracerpid > 0)
+            if(processRight->tracerpid >= 0)
                 return false;
 
             /* Sort by username.  First group into own user, normal users, system users */
@@ -619,7 +619,7 @@ int ProcessModel::rowCount(const QModelIndex &parent) const
         if(parent.column() != 0) return 0;  //For a treeview we say that only the first column has children
         process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer()); //when parent is invalid, it must be the root level which we set as 0
     } else {
-        process = d->mProcesses->getProcess(0);
+        process = d->mProcesses->getProcess(-1);
     }
     Q_ASSERT(process);
     int num_rows = process->children.count();
@@ -645,7 +645,7 @@ bool ProcessModel::hasChildren ( const QModelIndex & parent = QModelIndex() ) co
         if(parent.column() != 0) return false;  //For a treeview we say that only the first column has children
         process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer()); //when parent is invalid, it must be the root level which we set as 0
     } else {
-        process = d->mProcesses->getProcess(0);
+        process = d->mProcesses->getProcess(-1);
     }
     Q_ASSERT(process);
     bool has_children = !process->children.isEmpty();
@@ -671,7 +671,7 @@ QModelIndex ProcessModel::index ( int row, int column, const QModelIndex & paren
     if(parent.isValid()) //not valid for init or children without parents, so use our special item with pid of 0
         parent_process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer());
     else
-        parent_process = d->mProcesses->getProcess(0);
+        parent_process = d->mProcesses->getProcess(-1);
     Q_ASSERT(parent_process);
 
     if(parent_process->children.count() > row)
@@ -808,7 +808,7 @@ void ProcessModelPrivate::endInsertRow() {
 void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
 {
     Q_ASSERT(process);
-    Q_ASSERT(process->pid > 0);
+    Q_ASSERT(process->pid >= 0);
     Q_ASSERT(!mRemovingRow);
     Q_ASSERT(!mInsertingRow);
     Q_ASSERT(!mMovingRow);
@@ -872,7 +872,7 @@ QModelIndex ProcessModel::getQModelIndex( KSysGuard::Process *process, int colum
 {
     Q_ASSERT(process);
     int pid = process->pid;
-    if(pid == 0) return QModelIndex(); //pid 0 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means the top element
+    if (pid == -1) return QModelIndex(); //pid -1 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means the top element
     int row = 0;
     if(d->mSimple) {
         row = process->index;
@@ -1332,7 +1332,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return QVariant();
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         QString tracer;
-        if(process->tracerpid > 0) {
+        if(process->tracerpid >= 0) {
             KSysGuard::Process *process_tracer = d->mProcesses->getProcess(process->tracerpid);
             if(process_tracer) //it is possible for this to be not the case in certain race conditions
                 tracer = i18nc("tooltip. name,pid ","This process is being debugged by %1 (<numid>%2</numid>)", process_tracer->name, (long int)process->tracerpid);
@@ -1353,7 +1353,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip = i18n("<qt><table><tr><td>%1", icon);
             }
             */
-            if(process->parent_pid == 0) {
+            if(process->parent_pid == -1) {
                 //Give a quick explanation of init and kthreadd
                 if(process->name == "init") {
                     tooltip += i18n("<b>Init</b> is the parent of all other processes and cannot be killed.<br/>");
@@ -1724,7 +1724,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         if(process->status == KSysGuard::Process::Ended) {
             return QColor(Qt::lightGray);
         }
-        if(process->tracerpid >0) {
+        if(process->tracerpid >= 0) {
             //It's being debugged, so probably important.  Let's mark it as such
             return QColor(Qt::yellow);
         }

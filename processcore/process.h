@@ -29,7 +29,6 @@
 
 #include <klocale.h>
 
-
 namespace KSysGuard
 {
 
@@ -41,13 +40,13 @@ namespace KSysGuard
     Process();
     Process(qlonglong _pid, qlonglong _ppid, Process *_parent);
 
-    long pid;    ///< The system's ID for this process.  1 for init.  0 for our virtual 'parent of init' process used just for convenience.
-    long parent_pid;  ///< The system's ID for the parent of this process.  0 for init.
+    long pid;    ///< The system's ID for this process.  1 for init.  -1 for our virtual 'parent of init' process used just for convenience.
+    long parent_pid;  ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
 
-    /** A guaranteed NON-NULL pointer for all real processes to the parent process except for the fake process with pid 0.
+    /** A guaranteed NON-NULL pointer for all real processes to the parent process except for the fake process with pid -1.
      *  The Parent's pid is the same value as the parent_pid.  The parent process will be also pointed
      *  to by ProcessModel::mPidToProcess to there is no need to worry about mem management in using parent.
-     *  For init process, parent will point to a (fake) process with pid 0 to simplify things.
+     *  For process without a parent (such as 'init' on Linux, parent will point to a (fake) process with pid -1 to simplify things.
      *  For the fake process, this will point to NULL
      */
     Process *parent;

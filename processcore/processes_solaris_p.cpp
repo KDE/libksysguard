@@ -107,7 +107,7 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 
     process->uid = 0;
     process->gid = 0;
-    process->tracerpid = 0;
+    process->tracerpid = -1;
     process->pid = pid;
 
     if( read( fd, &psinfo, sizeof( psinfo_t )) != sizeof( psinfo_t )) {

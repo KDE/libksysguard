@@ -458,7 +458,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
         }
     }
 
-    if(numProcesses == 1 && process->tracerpid > 0) {
+    if(numProcesses == 1 && process->tracerpid >= 0) {
         //If the process is being debugged, offer to select it
         d->mProcessContextMenu->addAction(d->selectTracer);
     }
