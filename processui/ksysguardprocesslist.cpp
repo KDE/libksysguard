@@ -1215,19 +1215,22 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-    KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.sendsignal");
-    action->setParentWidget(window());
-    d->setupKAuthAction( action, unkilled_pids);
-    action->addArgument("signal", sig);
-    KAuth::ActionReply reply = action->execute();
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
+    action.setParentWidget(window());
+    d->setupKAuthAction( &action, unkilled_pids);
+    action.addArgument("signal", sig);
+    KAuth::ActionReply reply = action.execute();
 
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
-        delete action;
+    } else if (reply.type() == KAuth::ActionReply::HelperError) {
+        if (reply.errorCode() > 0)
+            KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
+                        "was a problem trying to run as root. %1", reply.errorDescription()));
+        return false;
     } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
-        delete action;
         return false;
     }
     return true;
