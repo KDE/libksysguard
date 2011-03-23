@@ -44,7 +44,7 @@ namespace KSysGuard
 
         public:
 
-            AbstractProcesses() {}
+            AbstractProcesses() { errorCode = Processes::Unknown; }
             virtual ~AbstractProcesses() {}
 
             /** \brief Get a set of the currently running process PIDs.
@@ -139,6 +139,7 @@ namespace KSysGuard
              */
             virtual void updateAllProcesses( Processes::UpdateFlags updateFlags ) = 0;
 
+            Processes::Error errorCode;
 Q_SIGNALS:
             /** \brief This is emitted when the processes have been updated, and the view should be refreshed.
              */

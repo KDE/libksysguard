@@ -326,19 +326,23 @@ QSet<long> ProcessesATop::getAllPids( )
 }
 
 bool ProcessesATop::sendSignal(long pid, int sig) {
+    errorCode = Processes::NotSupported;
     return false;
 }
 
 bool ProcessesATop::setNiceness(long pid, int priority) {
+    errorCode = Processes::NotSupported;
     return false;
 }
 
 bool ProcessesATop::setScheduler(long pid, int priorityClass, int priority) {
+    errorCode = Processes::NotSupported;
     return false;
 }
 
 
 bool ProcessesATop::setIoNiceness(long pid, int priorityClass, int priority) {
+    errorCode = Processes::NotSupported;
     return false;
 }
 

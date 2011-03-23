@@ -1208,7 +1208,9 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     QList< long long> unkilled_pids;
     for (int i = 0; i < pids.size(); ++i) {
         bool success = d->mModel.processController()->sendSignal(pids.at(i), sig);
-        if(!success) {
+        // If we failed due to a reason other than insufficient permissions, elevating to root can't
+        // help us
+        if(!success && (d->mModel.processController()->lastError() == KSysGuard::Processes::InsufficientPermissions || d->mModel.processController()->lastError() == KSysGuard::Processes::Unknown)) {
             unkilled_pids << pids.at(i);
         }
     }
