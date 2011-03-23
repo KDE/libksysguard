@@ -1271,11 +1271,15 @@ void KSysGuardProcessList::killSelectedProcesses()
         }
     }
 
+    //We have shown a GUI dialog box, which processes events etc.
+    //So processes is NO LONGER VALID
 
     Q_ASSERT(selectedPids.size() == selectedAsStrings.size());
-    if(!killProcesses(selectedPids, SIGTERM)) return;
-    foreach(KSysGuard::Process *process, processes) {
-        process->timeKillWasSent.start();
+    if (!killProcesses(selectedPids, SIGTERM)) return;
+    foreach (long long pid, selectedPids) {
+        KSysGuard::Process *process = d->mModel.getProcess(pid);
+        if (process)
+            process->timeKillWasSent.start();
     }
     updateList();
 }
