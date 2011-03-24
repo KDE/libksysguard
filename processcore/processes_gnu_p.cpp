@@ -49,7 +49,7 @@ ProcessesLocal::~ProcessesLocal()
 
 long ProcessesLocal::getParentPid(long pid)
 {
-    long ppid = 0;
+    long ppid = -1;
     return ppid;
 }
 

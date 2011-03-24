@@ -76,7 +76,7 @@ void ProcessesLocal::Private::readProcStatus(struct kinfo_proc *p, Process *proc
 {
     process->setUid(0);
     process->setGid(0);
-    process->setTracerpid(0);
+    process->setTracerpid(-1);
 
     process->setEuid(PP(p, uid));
     process->setUid(PP(p, ruid));
@@ -145,7 +145,7 @@ ProcessesLocal::ProcessesLocal() : d(new Private())
 
 long ProcessesLocal::getParentPid(long pid)
 {
-    long long ppid = 0;
+    long long ppid = -1;
     struct kinfo_proc p;
 
     if(d->readProc(pid, &p))
@@ -198,7 +198,7 @@ QSet<long> ProcessesLocal::getAllPids( )
         long long ppid = PP((&p[num]), ppid);
 
         //skip all process with parent id = 0 but init
-        if(ppid == 0 && pid != 1)
+        if(ppid <= 0 && pid != 1)
             continue;
         pids.insert(pid);
     }

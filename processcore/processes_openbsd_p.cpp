@@ -75,7 +75,7 @@ void ProcessesLocal::Private::readProcStatus(struct kinfo_proc *p, Process *proc
 {
     process->setUid(0);
     process->setGid(0);
-    process->setTracerpid(0);
+    process->setTracerpid(-1);
 
 
 #if defined(__FreeBSD__) && __FreeBSD_version >= 500015
