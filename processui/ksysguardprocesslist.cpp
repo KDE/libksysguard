@@ -556,7 +556,6 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         else
             return;
         sendSignalToSelectedProcesses(sig, false);
-        updateList();
     }
 }
 
@@ -1318,6 +1317,7 @@ void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
             KSysGuard::Process *process = d->mModel.getProcess(pid);
             if (process)
                 process->timeKillWasSent.start();
+            d->mUi->treeView->selectionModel()->clearSelection();
         }
     }
     updateList();

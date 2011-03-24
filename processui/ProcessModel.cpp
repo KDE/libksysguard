@@ -29,6 +29,7 @@
 #include "processcore/process.h"
 
 #include <kapplication.h>
+#include <kcolorscheme.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <klocale.h>
@@ -41,7 +42,7 @@
 #include <QTextDocument>
 
 #define HEADING_X_ICON_SIZE 16
-
+#define MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS 2000
 #define GET_OWN_ID
 
 #ifdef GET_OWN_ID
@@ -120,6 +121,8 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 #ifdef HAVE_XRES
     mHaveXRes = false;
 #endif
+    mHaveTimer = false,
+    mTimerId = -1,
     mMovingRow = false;
     mRemovingRow = false;
     mInsertingRow = false;
@@ -695,6 +698,20 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
     else
         row = process->parent->children.indexOf(process);
 
+    if (!process->timeKillWasSent.isNull()) {
+        int elapsed = process->timeKillWasSent.elapsed();
+        if (elapsed < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {
+            if (!mPidsToUpdate.contains(process->pid))
+                mPidsToUpdate.append(process->pid);
+            QModelIndex index1 = q->createIndex(row, 0, process);
+            QModelIndex index2 = q->createIndex(row, mHeadings.count()-1, process);
+            emit q->dataChanged(index1, index2);
+            if (!mHaveTimer) {
+                mHaveTimer = true;
+                mTimerId = startTimer(100);
+            }
+        }
+    }
     int totalUpdated = 0;
     Q_ASSERT(row != -1);  //Something has gone very wrong
     if(onlyTotalCpu) {
@@ -1719,7 +1736,25 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
     case Qt::BackgroundRole: {
-        if(index.column() != HeadingUser) return QVariant();
+        if (index.column() != HeadingUser) {
+            if (!d->mHaveTimer) //If there is no timer, then no processes are being killed, so no point looking for one
+                return QVariant();
+            KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+            if (!process->timeKillWasSent.isNull()) {
+                int elapsed = process->timeKillWasSent.elapsed();
+                if (elapsed < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {//Only show red for about 7 seconds
+                    int transparency = 255 - elapsed*250/MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS;
+
+                    KColorScheme scheme(QPalette::Active, KColorScheme::Selection);
+                    QBrush brush = scheme.background(KColorScheme::NegativeBackground);
+                    QColor color = brush.color();
+                    color.setAlpha(transparency);
+                    brush.setColor(color);
+                    return brush;
+                }
+            }
+            return QVariant();
+        }
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         if(process->status == KSysGuard::Process::Ended) {
             return QColor(Qt::lightGray);
@@ -2024,5 +2059,32 @@ bool ProcessModel::isNormalizedCPUUsage() const
 void ProcessModel::setNormalizedCPUUsage(bool normalizeCPUUsage)
 {
     d->mNormalizeCPUUsage = normalizeCPUUsage;
+}
+
+void ProcessModelPrivate::timerEvent( QTimerEvent * event )
+{
+    Q_UNUSED(event);
+    foreach (qlonglong pid, mPidsToUpdate) {
+        KSysGuard::Process *process = mProcesses->getProcess(pid);
+        if (process && !process->timeKillWasSent.isNull() && process->timeKillWasSent.elapsed() < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {
+            int row;
+            if(mSimple)
+                row = process->index;
+            else
+                row = process->parent->children.indexOf(process);
+
+            QModelIndex index1 = q->createIndex(row, 0, process);
+            QModelIndex index2 = q->createIndex(row, mHeadings.count()-1, process);
+            emit q->dataChanged(index1, index2);
+        } else {
+            mPidsToUpdate.removeAll(pid);
+        }
+    }
+
+    if (mPidsToUpdate.isEmpty()) {
+        mHaveTimer = false;
+        killTimer(mTimerId);
+        mTimerId = -1;
+    }
 }
 
