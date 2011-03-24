@@ -1029,41 +1029,51 @@ QList<KSysGuard::Process *> KSysGuardProcessList::selectedProcesses() const
 
 void KSysGuardProcessList::reniceSelectedProcesses()
 {
-    QList<KSysGuard::Process *> processes = selectedProcesses();
-    QStringList selectedAsStrings;
-
-    if (processes.isEmpty())
+    QList<long long> pids;
+    QPointer<ReniceDlg> reniceDlg;
     {
-        KMessageBox::sorry(this, i18n("You must select a process first."));
-        return;
+        QList<KSysGuard::Process *> processes = selectedProcesses();
+        QStringList selectedAsStrings;
+
+        if (processes.isEmpty()) {
+            KMessageBox::sorry(this, i18n("You must select a process first."));
+            return;
+        }
+
+        int sched = -2;
+        int iosched = -2;
+        foreach(KSysGuard::Process *process, processes) {
+            pids << process->pid;
+            selectedAsStrings << d->mModel.getStringForProcess(process);
+            if(sched == -2) sched = (int)process->scheduler;
+            else if(sched != -1 && sched != (int)process->scheduler) sched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
+            if(iosched == -2) iosched = (int)process->ioPriorityClass;
+            else if(iosched != -1 && iosched != (int)process->ioPriorityClass) iosched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
+
+        }
+        int firstPriority = processes.first()->niceLevel;
+        int firstIOPriority = processes.first()->ioniceLevel;
+
+        bool supportsIoNice = d->mModel.processController()->supportsIoNiceness();
+        if(!supportsIoNice) { iosched = -2; firstIOPriority = -2; }
+        reniceDlg = new ReniceDlg(d->mUi->treeView, selectedAsStrings, firstPriority, sched, firstIOPriority, iosched);
+        if(reniceDlg->exec() == QDialog::Rejected) {
+            delete reniceDlg;
+            return;
+        }
     }
 
-    int sched = -2;
-    int iosched = -2;
-    foreach(KSysGuard::Process *process, processes) {
-        selectedAsStrings << d->mModel.getStringForProcess(process);
-        if(sched == -2) sched = (int)process->scheduler;
-        else if(sched != -1 && sched != (int)process->scheduler) sched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
-        if(iosched == -2) iosched = (int)process->ioPriorityClass;
-        else if(iosched != -1 && iosched != (int)process->ioPriorityClass) iosched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
-
-    }
-
-    int firstPriority = processes.first()->niceLevel;
-    int firstIOPriority = processes.first()->ioniceLevel;
-
-    bool supportsIoNice = d->mModel.processController()->supportsIoNiceness();
-    if(!supportsIoNice) { iosched = -2; firstIOPriority = -2; }
-    QPointer<ReniceDlg> reniceDlg = new ReniceDlg(d->mUi->treeView, selectedAsStrings, firstPriority, sched, firstIOPriority, iosched);
-    if(reniceDlg->exec() == QDialog::Rejected) {
-        delete reniceDlg;
-        return;
-    }
+    //Because we've done into ReniceDlg, which calls processEvents etc, our processes list is no
+    //longer valid
 
     QList<long long> renicePids;
     QList<long long> changeCPUSchedulerPids;
     QList<long long> changeIOSchedulerPids;
-    foreach(KSysGuard::Process *process, processes) {
+    foreach (long long pid, pids) {
+        KSysGuard::Process *process = d->mModel.getProcess(pid);
+        if (!process)
+            continue;
+
         switch(reniceDlg->newCPUSched) {
             case -2:
             case -1:  //Invalid, not changed etc.
@@ -1071,16 +1081,16 @@ void KSysGuardProcessList::reniceSelectedProcesses()
             case KSysGuard::Process::Other:
             case KSysGuard::Process::Fifo:
                 if(reniceDlg->newCPUSched != (int)process->scheduler) {
-                    changeCPUSchedulerPids << process->pid;
-                    renicePids << process->pid;
+                    changeCPUSchedulerPids << pid;
+                    renicePids << pid;
                 } else if(reniceDlg->newCPUPriority != process->niceLevel)
-                    renicePids << process->pid;
+                    renicePids << pid;
                 break;
 
             case KSysGuard::Process::RoundRobin:
             case KSysGuard::Process::Batch:
                 if(reniceDlg->newCPUSched != (int)process->scheduler || reniceDlg->newCPUPriority != process->niceLevel) {
-                    changeCPUSchedulerPids << process->pid;
+                    changeCPUSchedulerPids << pid;
                 }
                 break;
         }
@@ -1092,12 +1102,12 @@ void KSysGuardProcessList::reniceSelectedProcesses()
                 if(reniceDlg->newIOSched != (int)process->ioPriorityClass) {
                     // Unfortunately linux doesn't actually let us set the ioniceness back to none after being set to something else
                     if(process->ioPriorityClass != KSysGuard::Process::BestEffort || reniceDlg->newIOPriority != process->ioniceLevel)
-                        changeIOSchedulerPids << process->pid;
+                        changeIOSchedulerPids << pid;
                 }
                 break;
             case KSysGuard::Process::Idle:
                 if(reniceDlg->newIOSched != (int)process->ioPriorityClass) {
-                    changeIOSchedulerPids << process->pid;
+                    changeIOSchedulerPids << pid;
                 }
                 break;
             case KSysGuard::Process::BestEffort:
@@ -1105,7 +1115,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
                     break;  //Don't set to BestEffort if it's on None and the nicelevel wouldn't change
             case KSysGuard::Process::RealTime:
                 if(reniceDlg->newIOSched != (int)process->ioPriorityClass || reniceDlg->newIOPriority != process->ioniceLevel) {
-                    changeIOSchedulerPids << process->pid;
+                    changeIOSchedulerPids << pid;
                 }
                 break;
         }
@@ -1208,26 +1218,31 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     QList< long long> unkilled_pids;
     for (int i = 0; i < pids.size(); ++i) {
         bool success = d->mModel.processController()->sendSignal(pids.at(i), sig);
-        if(!success) {
+        // If we failed due to a reason other than insufficient permissions, elevating to root can't
+        // help us
+        if(!success && (d->mModel.processController()->lastError() == KSysGuard::Processes::InsufficientPermissions || d->mModel.processController()->lastError() == KSysGuard::Processes::Unknown)) {
             unkilled_pids << pids.at(i);
         }
     }
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-    KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.sendsignal");
-    action->setParentWidget(window());
-    d->setupKAuthAction( action, unkilled_pids);
-    action->addArgument("signal", sig);
-    KAuth::ActionReply reply = action->execute();
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
+    action.setParentWidget(window());
+    d->setupKAuthAction( &action, unkilled_pids);
+    action.addArgument("signal", sig);
+    KAuth::ActionReply reply = action.execute();
 
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
-        delete action;
+    } else if (reply.type() == KAuth::ActionReply::HelperError) {
+        if (reply.errorCode() > 0)
+            KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
+                        "was a problem trying to run as root. %1", reply.errorDescription()));
+        return false;
     } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
-        delete action;
         return false;
     }
     return true;
@@ -1271,11 +1286,15 @@ void KSysGuardProcessList::killSelectedProcesses()
         }
     }
 
+    //We have shown a GUI dialog box, which processes events etc.
+    //So processes is NO LONGER VALID
 
     Q_ASSERT(selectedPids.size() == selectedAsStrings.size());
-    if(!killProcesses(selectedPids, SIGTERM)) return;
-    foreach(KSysGuard::Process *process, processes) {
-        process->timeKillWasSent.start();
+    if (!killProcesses(selectedPids, SIGTERM)) return;
+    foreach (long long pid, selectedPids) {
+        KSysGuard::Process *process = d->mModel.getProcess(pid);
+        if (process)
+            process->timeKillWasSent.start();
     }
     updateList();
 }

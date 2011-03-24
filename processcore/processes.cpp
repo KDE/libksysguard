@@ -111,6 +111,10 @@ Processes::~Processes()
     delete d;
 }
 
+Processes::Error Processes::lastError() const
+{
+    return d->mAbstractProcesses->errorCode;
+}
 Process *Processes::getProcess(long pid) const
 {
     return d->mProcesses.value(pid);
@@ -407,32 +411,42 @@ void Processes::deleteProcess(long pid)
 
 
 bool Processes::killProcess(long pid) {
-    if(d->mUsingHistoricalData)
-        return false;
     return sendSignal(pid, SIGTERM);
 }
 
 bool Processes::sendSignal(long pid, int sig) {
-    if(d->mUsingHistoricalData)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(d->mUsingHistoricalData) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     return d->mAbstractProcesses->sendSignal(pid, sig);
 }
 
 bool Processes::setNiceness(long pid, int priority) {
-    if(d->mUsingHistoricalData)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(d->mUsingHistoricalData) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     return d->mAbstractProcesses->setNiceness(pid, priority);
 }
 
 bool Processes::setScheduler(long pid, KSysGuard::Process::Scheduler priorityClass, int priority) {
-    if(d->mUsingHistoricalData)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(d->mUsingHistoricalData) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     return d->mAbstractProcesses->setScheduler(pid, priorityClass, priority);
 }
 
 bool Processes::setIoNiceness(long pid, KSysGuard::Process::IoPriorityClass priorityClass, int priority) {
-    if(d->mUsingHistoricalData)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(d->mUsingHistoricalData) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     return d->mAbstractProcesses->setIoNiceness(pid, priorityClass, priority);
 }
 
@@ -478,8 +492,11 @@ void Processes::useCurrentData()
 
 bool Processes::setViewingTime(const QDateTime &when)
 {
-    if(!d->mIsLocalHost)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(!d->mIsLocalHost) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     if(!d->mUsingHistoricalData) {
         if(!d->mHistoricProcesses)
             d->mHistoricProcesses = new ProcessesATop();
@@ -492,8 +509,11 @@ bool Processes::setViewingTime(const QDateTime &when)
 
 bool Processes::loadHistoryFile(const QString &filename)
 {
-    if(!d->mIsLocalHost)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(!d->mIsLocalHost) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     if(!d->mHistoricProcesses)
         d->mHistoricProcesses = new ProcessesATop(false);
 

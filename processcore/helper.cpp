@@ -31,21 +31,37 @@ KSysGuardProcessListHelper::KSysGuardProcessListHelper()
 /* The functions here run as ROOT.  So be careful.  DO NOT TRUST THE INPUTS TO BE SANE. */
 #define GET_PID(i) parameters.value(QString("pid%1").arg(i), -1).toULongLong(); if(pid < 0) return KAuth::ActionReply::HelperErrorReply;
 KAuth::ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters) {
-    if(!parameters.contains("signal") || !parameters.contains("pidcount"))
-        return KAuth::ActionReply::HelperErrorReply;
+    KAuth::ActionReply errorReply(KAuth::ActionReply::HelperError);
+    if(!parameters.contains("signal")) {
+        errorReply.setErrorDescription("Internal error - no signal parameter was passed to the helper");
+        errorReply.setErrorCode(1);
+        return errorReply;
+    }
+    if(!parameters.contains("pidcount")) {
+        errorReply.setErrorDescription("Internal error - no pidcount parameter was passed to the helper");
+        errorReply.setErrorCode(2);
+        return errorReply;
+    }
 
     KSysGuard::ProcessesLocal processes;
     int signal = qvariant_cast<int>(parameters.value("signal"));
     bool success = true;
     int numProcesses = parameters.value("pidcount").toInt();
+    QStringList errorList;
     for (int i = 0; i < numProcesses; ++i) {
         qlonglong pid = GET_PID(i);
-        success = processes.sendSignal(pid, signal) && success;
+        bool successForThisPid = processes.sendSignal(pid, signal);
+        if (!successForThisPid)
+            errorList << QString::number(pid);
+        success = successForThisPid && success;
     }
-    if(success)
+    if(success) {
         return KAuth::ActionReply::SuccessReply;
-    else
-        return KAuth::ActionReply::HelperErrorReply;
+    } else {
+        errorReply.setErrorDescription(QString("Could not send signal to: ") + errorList.join(", "));
+        errorReply.setErrorCode(0);
+        return errorReply;
+    }
 }
 
 KAuth::ActionReply KSysGuardProcessListHelper::renice(QVariantMap parameters) {
