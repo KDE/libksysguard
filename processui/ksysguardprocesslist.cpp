@@ -162,9 +162,12 @@ struct KSysGuardProcessListPrivate {
         selectTracer = new KAction(i18n("Jump to Process Debugging This One"), q);
         window = new KAction(i18n("Show Application Window"), q);
         resume = new KAction(i18n("Resume Stopped Process"), q);
-        kill = new KAction(i18np("End Process...", "End Processes...", 1), q);
+        terminate = new KAction(i18np("End Process", "End Processes", 1), q);
+        terminate->setIcon(KIcon("process-stop"));
+        terminate->setShortcut(Qt::Key_Delete);
+        kill = new KAction(i18np("Forcibly Kill Process", "Forcibly Kill Processes", 1), q);
         kill->setIcon(KIcon("process-stop"));
-        kill->setShortcut(Qt::Key_Delete);
+        kill->setShortcut(Qt::SHIFT + Qt::Key_Delete);
 
         sigStop = new KAction(i18n("Suspend (STOP)"), q);
         sigCont = new KAction(i18n("Continue (CONT)"), q);
@@ -224,6 +227,7 @@ struct KSysGuardProcessListPrivate {
     bool mNeedToExpandInit;
 
     KAction *renice;
+    KAction *terminate;
     KAction *kill;
     KAction *selectParent;
     KAction *selectTracer;
@@ -316,7 +320,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     // Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked
     QSignalMapper *signalMapper = new QSignalMapper(this);
     QList<QAction *> actions;
-    actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window << d->jumpToSearchFilter;
+    actions << d->renice << d->kill << d->terminate << d->selectParent << d->selectTracer << d->window << d->jumpToSearchFilter;
     actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
 
     foreach(QAction *action, actions) {
@@ -408,7 +412,8 @@ void KSysGuardProcessList::selectionChanged()
     d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
 
     d->renice->setText(i18np("Set Priority...", "Set Priority...", numSelected));
-    d->kill->setText(i18ncp("Context menu", "End Process", "End Processes", numSelected));
+    d->kill->setText(i18np("Forcibly Kill Process", "Forcibly Kill Processes", numSelected));
+    d->terminate->setText(i18ncp("Context menu", "End Process", "End Processes", numSelected));
 }
 void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
     if(!index.isValid()) return;
@@ -479,7 +484,9 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     }
     if (showSignalingEntries) {
         d->mProcessContextMenu->addSeparator();
-        d->mProcessContextMenu->addAction(d->kill);
+        d->mProcessContextMenu->addAction(d->terminate);
+        if (numProcesses == 1 && !process->timeKillWasSent.isNull())
+            d->mProcessContextMenu->addAction(d->kill);
     }
 
     d->mProcessContextMenu->popup(d->mUi->treeView->viewport()->mapToGlobal(point));
@@ -494,8 +501,10 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         //Escape was pressed. Do nothing.
     } else if(result == d->renice) {
         reniceSelectedProcesses();
+    } else if(result == d->terminate) {
+        sendSignalToSelectedProcesses(SIGTERM, true);
     } else if(result == d->kill) {
-        killSelectedProcesses();
+        sendSignalToSelectedProcesses(SIGKILL, true);
     } else if(result == d->selectParent) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();
@@ -527,32 +536,26 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
     } else if(result == d->jumpToSearchFilter) {
         d->mUi->txtFilter->setFocus();
     } else {
-        QList< long long > pidlist;
-        QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
-        int numProcesses = selectedIndexes.size();
-        if(numProcesses == 0) return;  //No processes selected
-        foreach( const QModelIndex &index, selectedIndexes) {
-            QModelIndex realIndex = d->mFilterModel.mapToSource(index);
-            KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
-            if(process)
-                pidlist << process->pid;
-        }
+        int sig;
         if(result == d->resume || result == d->sigCont)
-            killProcesses(pidlist, SIGCONT);  //Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
+            sig = SIGCONT;  //Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
         else if(result == d->sigStop)
-            killProcesses(pidlist, SIGSTOP);
+            sig = SIGSTOP;
         else if(result == d->sigHup)
-            killProcesses(pidlist, SIGHUP);
+            sig = SIGHUP;
         else if(result == d->sigInt)
-            killProcesses(pidlist, SIGINT);
+            sig = SIGINT;
         else if(result == d->sigTerm)
-            killProcesses(pidlist, SIGTERM);
+            sig = SIGTERM;
         else if(result == d->sigKill)
-            killProcesses(pidlist, SIGKILL);
+            sig = SIGKILL;
         else if(result == d->sigUsr1)
-            killProcesses(pidlist, SIGUSR1);
+            sig = SIGUSR1;
         else if(result == d->sigUsr2)
-            killProcesses(pidlist, SIGUSR2);
+            sig = SIGUSR2;
+        else
+            return;
+        sendSignalToSelectedProcesses(sig, false);
         updateList();
     }
 }
@@ -1250,6 +1253,11 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
 
 void KSysGuardProcessList::killSelectedProcesses()
 {
+    sendSignalToSelectedProcesses(SIGTERM, true);
+}
+
+void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
+{
     QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
     QStringList selectedAsStrings;
     QList< long long> selectedPids;
@@ -1257,44 +1265,60 @@ void KSysGuardProcessList::killSelectedProcesses()
     QList<KSysGuard::Process *> processes = selectedProcesses();
     foreach(KSysGuard::Process *process, processes) {
         selectedPids << process->pid;
+        if (!confirm)
+            continue;
         QString name = d->mModel.getStringForProcess(process);
         if(name.size() > 100)
             name = name.left(95) + QString::fromUtf8("…");
         selectedAsStrings << name;
     }
 
-    if (selectedAsStrings.isEmpty())
-    {
-        KMessageBox::sorry(this, i18n("You must select a process first."));
+    if (selectedPids.isEmpty()) {
+        if (confirm)
+            KMessageBox::sorry(this, i18n("You must select a process first."));
         return;
-    }
-    else
-    {
+    } else if (confirm && (sig == SIGTERM || sig == SIGKILL)) {
         int count = selectedAsStrings.count();
-        QString  msg = i18np("Are you sure you want to end this process?  Any unsaved work may be lost.",
+        QString msg;
+        QString title;
+        QString dontAskAgainKey;
+        QString closeButton;
+        if (sig == SIGTERM) {
+            msg = i18np("Are you sure you want to end this process?  Any unsaved work may be lost.",
                 "Are you sure you want to end these %1 processes?  Any unsaved work may be lost",
                 count);
+            title =  i18ncp("Dialog title", "End Process", "End %1 Processes", count);
+            dontAskAgainKey = "endconfirmation";
+            closeButton = i18n("End");
+        } else if (sig == SIGKILL) {
+            msg = i18np("<qt>Are you sure you want to <b>immediately and forcibly kill</b> this process?  Any unsaved work may be lost.",
+                "<qt>Are you sure you want to <b>immediately and forcibly kill</b> these %1 processes?  Any unsaved work may be lost",
+                count);
+            title =  i18ncp("Dialog title", "Forcibly Kill Process", "Forcibly Kill %1 Processes", count);
+            dontAskAgainKey = "killconfirmation";
+            closeButton = i18n("Kill");
+        }
 
         int res = KMessageBox::warningContinueCancelList(this, msg, selectedAsStrings,
-                i18ncp("Dialog title", "End Process", "End %1 Processes", count),
-                KGuiItem(i18n("End"), "process-stop"),
+                title,
+                KGuiItem(closeButton, "process-stop"),
                 KStandardGuiItem::cancel(),
-                "endconfirmation");
+                dontAskAgainKey);
         if (res != KMessageBox::Continue)
-        {
             return;
-        }
     }
 
     //We have shown a GUI dialog box, which processes events etc.
     //So processes is NO LONGER VALID
 
-    Q_ASSERT(selectedPids.size() == selectedAsStrings.size());
-    if (!killProcesses(selectedPids, SIGTERM)) return;
-    foreach (long long pid, selectedPids) {
-        KSysGuard::Process *process = d->mModel.getProcess(pid);
-        if (process)
-            process->timeKillWasSent.start();
+    if (!killProcesses(selectedPids, sig))
+        return;
+    if (sig == SIGTERM || sig == SIGKILL) {
+        foreach (long long pid, selectedPids) {
+            KSysGuard::Process *process = d->mModel.getProcess(pid);
+            if (process)
+                process->timeKillWasSent.start();
+        }
     }
     updateList();
 }
