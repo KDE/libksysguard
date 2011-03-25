@@ -11,9 +11,9 @@ target_link_libraries(processtest processui ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIB
 
 
 # KSignalPlotter benchmark
-# set( signalplotterbenchmark_SRCS signalplotterbenchmark.cpp ../signalplotter/ksignalplotter.cpp)
-# kde4_add_unit_test( signalplotterbenchmark TESTNAME ksubmodule-signalplottertest ${signalplotterbenchmark_SRCS} )
-# target_link_libraries( signalplotterbenchmark ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} ${QT_QTBENCHMARK_LIBRARY} )
+set( signalplotterbenchmark_SRCS signalplotterbenchmark.cpp ../signalplotter/ksignalplotter.cpp)
+kde4_add_unit_test( signalplotterbenchmark TESTNAME ksubmodule-signalplottertest ${signalplotterbenchmark_SRCS} )
+target_link_libraries( signalplotterbenchmark ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} ${QT_QTBENCHMARK_LIBRARY} )
 
 
 # KGraphicsSignalPlotter benchmark
