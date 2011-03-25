@@ -32,7 +32,24 @@ void BenchmarkSignalPlotter::addData()
     }
 
 }
+void BenchmarkSignalPlotter::stackedData()
+{
+    s->addBeam(Qt::blue);
+    s->addBeam(Qt::green);
+    s->addBeam(Qt::red);
+    s->addBeam(Qt::yellow);
+    s->setStackGraph(true);
+    s->show();
+    s->setMaxAxisTextWidth(5);
+    s->resize(1000,500);
+    QTest::qWaitForWindowShown(s);
 
+    QBENCHMARK {
+        s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
+        qApp->processEvents();
+    }
+
+}
 void BenchmarkSignalPlotter::addDataWhenHidden()
 {
     s->addBeam(Qt::blue);

@@ -906,18 +906,21 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
     qreal x0 = boundingBox.right();
     qreal x1 = qMax(boundingBox.right() - horizontalScale, 0);
 
-    qreal y0 = 0;
-    qreal y1 = 0;
-    qreal y2 = 0;
     qreal xaxis = boundingBox.bottom();
     if( mNiceMinValue < 0)
        xaxis = qMax(qreal(xaxis + mNiceMinValue*scaleFac), qreal(boundingBox.top()));
 
     const int count = qMin(datapoints.size(), mBeamColors.size());
     QVector<QPainterPath> paths(count);
-    for (int j = count - 1; j >=0 ; --j) {
-        if(!mStackBeams)
-            y0 = y1 = y2 = 0;
+    QPointF previous_c0;
+    QPointF previous_c1;
+    QPointF previous_c2;
+    QPointF previous_c3;
+    qreal previous_point0 = 0;
+    qreal previous_point1 = 0;
+    qreal previous_point2 = 0;
+    bool firstLine = true;
+    for (int j = 0; j < count; ++j) {
         qreal point0 = datapoints[j];
         if( isnan(point0) )
             continue; //Just do not draw points with nans. skip them
@@ -938,31 +941,50 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
         if(isnan(point2))
             point2 = point1;
 
-        y0 += qBound((qreal)boundingBox.top(), qreal(boundingBox.bottom() - (point0 - mNiceMinValue)*scaleFac), (qreal)boundingBox.bottom());
-        y1 += qBound((qreal)boundingBox.top(), qreal(boundingBox.bottom() - (point1 - mNiceMinValue)*scaleFac), (qreal)boundingBox.bottom());
-        y2 += qBound((qreal)boundingBox.top(), qreal(boundingBox.bottom() - (point2 - mNiceMinValue)*scaleFac), (qreal)boundingBox.bottom());
+        if (mStackBeams) {
+            point0 = previous_point0 = previous_point0 + point0;
+            point1 = previous_point1 = previous_point1 + point1;
+            point2 = previous_point2 = previous_point2 + point2;
+        }
+
+        qreal y0 = qBound((qreal)boundingBox.top(), boundingBox.bottom() - (point0 - mNiceMinValue)*scaleFac, (qreal)boundingBox.bottom());
+        qreal y1 = qBound((qreal)boundingBox.top(), boundingBox.bottom() - (point1 - mNiceMinValue)*scaleFac, (qreal)boundingBox.bottom());
+        qreal y2 = qBound((qreal)boundingBox.top(), boundingBox.bottom() - (point2 - mNiceMinValue)*scaleFac, (qreal)boundingBox.bottom());
 
         QPainterPath &path = paths[j];
         path.moveTo( x1, y1);
         QPointF c1( x1 + horizontalScale/3.0, (4* y1 - y2)/3.0 );//Control point 1 - same gradient as prev_prev_datapoint to prev_datapoint
         QPointF c2( x1 + 2*horizontalScale/3.0, (2* y0 + y1)/3.0);//Control point 2 - same gradient as prev_datapoint to datapoint
-        path.cubicTo( c1, c2, QPointF(x0, y0) );
+        QPointF c3(x0,y0);
+        path.cubicTo( c1, c2, c3 );
         if(mFillOpacity) {
             QPainterPath fillPath = path; //Make a copy to do our fill
-            fillPath.lineTo(x0, xaxis);
-            fillPath.lineTo(x1, xaxis);
-            fillPath.lineTo(x1,y1);
+            if (!mStackBeams || firstLine) {
+                fillPath.lineTo(x0, xaxis);
+                fillPath.lineTo(x1, xaxis);
+                fillPath.lineTo(x1,y1);
+            } else {
+                fillPath.lineTo(x0, previous_c3.y());
+                fillPath.cubicTo(previous_c2, previous_c1, previous_c0);
+                fillPath.lineTo(x1, y1);
+            }
+            if (mStackBeams) {
+                previous_c0 = QPointF(x1,y1);
+                previous_c1 = c1;
+                previous_c2 = c2;
+                previous_c3 = c3;
+            }
             QColor fillColor = mBeamColors[j];
             fillColor.setAlpha(mFillOpacity);
             p->fillPath(fillPath, fillColor);
         }
+        firstLine = false;
     }
     for(int j = count-1; j >= 0 ; --j) {
         if(mFillOpacity)
             pen.setColor(mBeamColorsLight.at(j));
         else
             pen.setColor(mBeamColors.at(j));
-
         p->strokePath(paths.at(j),pen);
     }
 }

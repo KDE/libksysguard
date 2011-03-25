@@ -11,6 +11,7 @@ class BenchmarkSignalPlotter : public QObject
         void cleanup();
 
         void addData();
+        void stackedData();
         void addDataWhenHidden();
     private:
         KSignalPlotter *s;
