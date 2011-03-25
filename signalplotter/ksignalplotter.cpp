@@ -121,7 +121,7 @@ void KSignalPlotter::setBeamColor( int index, const QColor &color ) {
     Q_ASSERT(d->mBeamColors.count() == d->mBeamColorsLight.count());
 
     d->mBeamColors[ index ] = color;
-    d->mBeamColorsLight[ index ] = color.darker(150);
+    d->mBeamColorsLight[ index ] = color.lighter();
 }
 
 int KSignalPlotter::numBeams() const {
