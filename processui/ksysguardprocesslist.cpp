@@ -162,9 +162,12 @@ struct KSysGuardProcessListPrivate {
         selectTracer = new KAction(i18n("Jump to Process Debugging This One"), q);
         window = new KAction(i18n("Show Application Window"), q);
         resume = new KAction(i18n("Resume Stopped Process"), q);
-        kill = new KAction(i18np("End Process...", "End Processes...", 1), q);
+        terminate = new KAction(i18np("End Process", "End Processes", 1), q);
+        terminate->setIcon(KIcon("process-stop"));
+        terminate->setShortcut(Qt::Key_Delete);
+        kill = new KAction(i18np("Forcibly Kill Process", "Forcibly Kill Processes", 1), q);
         kill->setIcon(KIcon("process-stop"));
-        kill->setShortcut(Qt::Key_Delete);
+        kill->setShortcut(Qt::SHIFT + Qt::Key_Delete);
 
         sigStop = new KAction(i18n("Suspend (STOP)"), q);
         sigCont = new KAction(i18n("Continue (CONT)"), q);
@@ -224,6 +227,7 @@ struct KSysGuardProcessListPrivate {
     bool mNeedToExpandInit;
 
     KAction *renice;
+    KAction *terminate;
     KAction *kill;
     KAction *selectParent;
     KAction *selectTracer;
@@ -316,7 +320,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     // Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked
     QSignalMapper *signalMapper = new QSignalMapper(this);
     QList<QAction *> actions;
-    actions << d->renice << d->kill << d->selectParent << d->selectTracer << d->window << d->jumpToSearchFilter;
+    actions << d->renice << d->kill << d->terminate << d->selectParent << d->selectTracer << d->window << d->jumpToSearchFilter;
     actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
 
     foreach(QAction *action, actions) {
@@ -408,7 +412,8 @@ void KSysGuardProcessList::selectionChanged()
     d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
 
     d->renice->setText(i18np("Set Priority...", "Set Priority...", numSelected));
-    d->kill->setText(i18ncp("Context menu", "End Process", "End Processes", numSelected));
+    d->kill->setText(i18np("Forcibly Kill Process", "Forcibly Kill Processes", numSelected));
+    d->terminate->setText(i18ncp("Context menu", "End Process", "End Processes", numSelected));
 }
 void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
     if(!index.isValid()) return;
@@ -458,7 +463,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
         }
     }
 
-    if(numProcesses == 1 && process->tracerpid > 0) {
+    if(numProcesses == 1 && process->tracerpid >= 0) {
         //If the process is being debugged, offer to select it
         d->mProcessContextMenu->addAction(d->selectTracer);
     }
@@ -479,7 +484,9 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     }
     if (showSignalingEntries) {
         d->mProcessContextMenu->addSeparator();
-        d->mProcessContextMenu->addAction(d->kill);
+        d->mProcessContextMenu->addAction(d->terminate);
+        if (numProcesses == 1 && !process->timeKillWasSent.isNull())
+            d->mProcessContextMenu->addAction(d->kill);
     }
 
     d->mProcessContextMenu->popup(d->mUi->treeView->viewport()->mapToGlobal(point));
@@ -494,8 +501,10 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         //Escape was pressed. Do nothing.
     } else if(result == d->renice) {
         reniceSelectedProcesses();
+    } else if(result == d->terminate) {
+        sendSignalToSelectedProcesses(SIGTERM, true);
     } else if(result == d->kill) {
-        killSelectedProcesses();
+        sendSignalToSelectedProcesses(SIGKILL, true);
     } else if(result == d->selectParent) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();
@@ -527,33 +536,26 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
     } else if(result == d->jumpToSearchFilter) {
         d->mUi->txtFilter->setFocus();
     } else {
-        QList< long long > pidlist;
-        QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
-        int numProcesses = selectedIndexes.size();
-        if(numProcesses == 0) return;  //No processes selected
-        foreach( const QModelIndex &index, selectedIndexes) {
-            QModelIndex realIndex = d->mFilterModel.mapToSource(index);
-            KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
-            if(process)
-                pidlist << process->pid;
-        }
+        int sig;
         if(result == d->resume || result == d->sigCont)
-            killProcesses(pidlist, SIGCONT);  //Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
+            sig = SIGCONT;  //Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
         else if(result == d->sigStop)
-            killProcesses(pidlist, SIGSTOP);
+            sig = SIGSTOP;
         else if(result == d->sigHup)
-            killProcesses(pidlist, SIGHUP);
+            sig = SIGHUP;
         else if(result == d->sigInt)
-            killProcesses(pidlist, SIGINT);
+            sig = SIGINT;
         else if(result == d->sigTerm)
-            killProcesses(pidlist, SIGTERM);
+            sig = SIGTERM;
         else if(result == d->sigKill)
-            killProcesses(pidlist, SIGKILL);
+            sig = SIGKILL;
         else if(result == d->sigUsr1)
-            killProcesses(pidlist, SIGUSR1);
+            sig = SIGUSR1;
         else if(result == d->sigUsr2)
-            killProcesses(pidlist, SIGUSR2);
-        updateList();
+            sig = SIGUSR2;
+        else
+            return;
+        sendSignalToSelectedProcesses(sig, false);
     }
 }
 
@@ -575,21 +577,20 @@ void KSysGuardProcessList::selectAndJumpToProcess(int pid) {
 }
 
 void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
-    QMenu *menu = new QMenu();
+    QMenu menu;
 
     QAction *action;
     int index = d->mUi->treeView->header()->logicalIndexAt(point);
     if(index >= 0) {
         //selected a column.  Give the option to hide it
-        action = new QAction(menu);
+        action = new QAction(&menu);
         action->setData(-index-1); //We set data to be negative (and minus 1) to hide a column, and positive to show a column
         action->setText(i18n("Hide Column '%1'", d->mFilterModel.headerData(index, Qt::Horizontal, Qt::DisplayRole).toString()));
-        menu->addAction(action);
+        menu.addAction(action);
         if(d->mUi->treeView->header()->sectionsHidden()) {
-            menu->addSeparator();
+            menu.addSeparator();
         }
     }
-
 
     if(d->mUi->treeView->header()->sectionsHidden()) {
         int num_headings = d->mFilterModel.columnCount();
@@ -599,13 +600,14 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
                 if(i == ProcessModel::HeadingXMemory)
                     continue;
 #endif
-                action = new QAction(menu);
+                action = new QAction(&menu);
                 action->setText(i18n("Show Column '%1'", d->mFilterModel.headerData(i, Qt::Horizontal, Qt::DisplayRole).toString()));
                 action->setData(i); //We set data to be negative (and minus 1) to hide a column, and positive to show a column
-                menu->addAction(action);
+                menu.addAction(action);
             }
         }
     }
+    QAction *actionAuto = NULL;
     QAction *actionKB = NULL;
     QAction *actionMB = NULL;
     QAction *actionGB = NULL;
@@ -627,35 +629,47 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory || index == ProcessModel::HeadingXMemory || index == ProcessModel::HeadingSharedMemory || ( (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) && d->mModel.ioInformation() != ProcessModel::Syscalls)) {
         //If the user right clicks on a column that contains a memory size, show a toggle option for displaying
         //the memory in different units.  e.g.  "2000 k" or "2 m"
-        menu->addSeparator()->setText(i18n("Display Units"));
-        QActionGroup *unitsGroup = new QActionGroup(menu);
-        actionKB = new QAction(menu);
+        menu.addSeparator()->setText(i18n("Display Units"));
+        QActionGroup *unitsGroup = new QActionGroup(&menu);
+        /* Automatic (human readable)*/
+        actionAuto = new QAction(&menu);
+        actionAuto->setText(i18n("Mixed"));
+        actionAuto->setCheckable(true);
+        menu.addAction(actionAuto);
+        unitsGroup->addAction(actionAuto);
+        /* Kilobytes */
+        actionKB = new QAction(&menu);
         actionKB->setText((showIoRate)?i18n("Kilobytes per second"):i18n("Kilobytes"));
         actionKB->setCheckable(true);
-        menu->addAction(actionKB);
+        menu.addAction(actionKB);
         unitsGroup->addAction(actionKB);
-        actionMB = new QAction(menu);
+        /* Megabytes */
+        actionMB = new QAction(&menu);
         actionMB->setText((showIoRate)?i18n("Megabytes per second"):i18n("Megabytes"));
         actionMB->setCheckable(true);
-        menu->addAction(actionMB);
+        menu.addAction(actionMB);
         unitsGroup->addAction(actionMB);
-        actionGB = new QAction(menu);
+        /* Gigabytes */
+        actionGB = new QAction(&menu);
         actionGB->setText((showIoRate)?i18n("Gigabytes per second"):i18n("Gigabytes"));
         actionGB->setCheckable(true);
-        menu->addAction(actionGB);
+        menu.addAction(actionGB);
         unitsGroup->addAction(actionGB);
         ProcessModel::Units currentUnit;
         if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
             currentUnit = d->mModel.ioUnits();
         } else {
-            actionPercentage = new QAction(menu);
+            actionPercentage = new QAction(&menu);
             actionPercentage->setText(i18n("Percentage"));
             actionPercentage->setCheckable(true);
-            menu->addAction(actionPercentage);
+            menu.addAction(actionPercentage);
             unitsGroup->addAction(actionPercentage);
             currentUnit = d->mModel.units();
         }
         switch(currentUnit) {
+            case ProcessModel::UnitsAuto:
+                actionAuto->setChecked(true);
+                break;
             case ProcessModel::UnitsKB:
                 actionKB->setChecked(true);
                 break;
@@ -673,45 +687,45 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         }
         unitsGroup->setExclusive(true);
     } else if(index == ProcessModel::HeadingName) {
-        menu->addSeparator();
-        actionShowCmdlineOptions = new QAction(menu);
+        menu.addSeparator();
+        actionShowCmdlineOptions = new QAction(&menu);
         actionShowCmdlineOptions->setText(i18n("Display command line options"));
         actionShowCmdlineOptions->setCheckable(true);
         actionShowCmdlineOptions->setChecked(d->mModel.isShowCommandLineOptions());
-        menu->addAction(actionShowCmdlineOptions);
+        menu.addAction(actionShowCmdlineOptions);
     } else if(index == ProcessModel::HeadingCPUUsage) {
-        menu->addSeparator();
-        actionNormalizeCPUUsage = new QAction(menu);
+        menu.addSeparator();
+        actionNormalizeCPUUsage = new QAction(&menu);
         actionNormalizeCPUUsage->setText(i18n("Divide CPU usage by number of CPUs"));
         actionNormalizeCPUUsage->setCheckable(true);
         actionNormalizeCPUUsage->setChecked(d->mModel.isNormalizedCPUUsage());
-        menu->addAction(actionNormalizeCPUUsage);
+        menu.addAction(actionNormalizeCPUUsage);
     }
 
     if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
-        menu->addSeparator()->setText(i18n("Displayed Information"));
-        QActionGroup *ioInformationGroup = new QActionGroup(menu);
-        actionIoCharacters = new QAction(menu);
+        menu.addSeparator()->setText(i18n("Displayed Information"));
+        QActionGroup *ioInformationGroup = new QActionGroup(&menu);
+        actionIoCharacters = new QAction(&menu);
         actionIoCharacters->setText(i18n("Characters read/written"));
         actionIoCharacters->setCheckable(true);
-        menu->addAction(actionIoCharacters);
+        menu.addAction(actionIoCharacters);
         ioInformationGroup->addAction(actionIoCharacters);
-        actionIoSyscalls = new QAction(menu);
+        actionIoSyscalls = new QAction(&menu);
         actionIoSyscalls->setText(i18n("Number of Read/Write operations"));
         actionIoSyscalls->setCheckable(true);
-        menu->addAction(actionIoSyscalls);
+        menu.addAction(actionIoSyscalls);
         ioInformationGroup->addAction(actionIoSyscalls);
-        actionIoActualCharacters = new QAction(menu);
+        actionIoActualCharacters = new QAction(&menu);
         actionIoActualCharacters->setText(i18n("Bytes actually read/written"));
         actionIoActualCharacters->setCheckable(true);
-        menu->addAction(actionIoActualCharacters);
+        menu.addAction(actionIoActualCharacters);
         ioInformationGroup->addAction(actionIoActualCharacters);
 
-        actionIoShowRate = new QAction(menu);
+        actionIoShowRate = new QAction(&menu);
         actionIoShowRate->setText(i18n("Show I/O rate"));
         actionIoShowRate->setCheckable(true);
         actionIoShowRate->setChecked(showIoRate);
-        menu->addAction(actionIoShowRate);
+        menu.addAction(actionIoShowRate);
 
         switch(d->mModel.ioInformation()) {
             case ProcessModel::Bytes:
@@ -731,17 +745,23 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         }
     }
 
-    menu->addSeparator();
-    actionShowTooltips = new QAction(menu);
+    menu.addSeparator();
+    actionShowTooltips = new QAction(&menu);
     actionShowTooltips->setCheckable(true);
     actionShowTooltips->setChecked(d->mModel.isShowingTooltips());
     actionShowTooltips->setText(i18n("Show Tooltips"));
-    menu->addAction(actionShowTooltips);
+    menu.addAction(actionShowTooltips);
 
 
-    QAction *result = menu->exec(d->mUi->treeView->header()->mapToGlobal(point));
+    QAction *result = menu.exec(d->mUi->treeView->header()->mapToGlobal(point));
     if(!result) return; //Menu cancelled
-    if(result == actionKB) {
+    if(result == actionAuto) {
+        if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+            d->mModel.setIoUnits(ProcessModel::UnitsAuto);
+        else
+            d->mModel.setUnits(ProcessModel::UnitsAuto);
+        return;
+    } else if(result == actionKB) {
         if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
             d->mModel.setIoUnits(ProcessModel::UnitsKB);
         else
@@ -810,7 +830,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
         d->mUi->treeView->resizeColumnToContents(i);
         d->mUi->treeView->resizeColumnToContents(d->mFilterModel.columnCount());
     }
-    menu->deleteLater();
+    menu.deleteLater();
 }
 
 void KSysGuardProcessList::expandAllChildren(const QModelIndex &parent)
@@ -918,7 +938,7 @@ void KSysGuardProcessList::updateList()
         if(d->mUpdateTimer)
             d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
         emit updated();
-        if(QToolTip::isVisible()) {
+        if (QToolTip::isVisible() && qApp->topLevelAt(QCursor::pos()) == window()) {
             QWidget *w = d->mUi->treeView->viewport();
             if(w->geometry().contains(d->mUi->treeView->mapFromGlobal( QCursor::pos() ))) {
                 QHelpEvent event(QEvent::ToolTip, w->mapFromGlobal( QCursor::pos() ), QCursor::pos());
@@ -980,6 +1000,7 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
 
 
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.renice");
+    action->setParentWidget(window());
     d->setupKAuthAction( action, unreniced_pids);
     action->addArgument("nicevalue", niceValue);
     KAuth::ActionReply reply = action->execute();
@@ -987,14 +1008,13 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
         delete action;
-        return true;
-    }
-    else {
+    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to renice the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         delete action;
         return false;
     }
+    return true;
 }
 
 QList<KSysGuard::Process *> KSysGuardProcessList::selectedProcesses() const
@@ -1011,41 +1031,51 @@ QList<KSysGuard::Process *> KSysGuardProcessList::selectedProcesses() const
 
 void KSysGuardProcessList::reniceSelectedProcesses()
 {
-    QList<KSysGuard::Process *> processes = selectedProcesses();
-    QStringList selectedAsStrings;
-
-    if (processes.isEmpty())
+    QList<long long> pids;
+    QPointer<ReniceDlg> reniceDlg;
     {
-        KMessageBox::sorry(this, i18n("You must select a process first."));
-        return;
+        QList<KSysGuard::Process *> processes = selectedProcesses();
+        QStringList selectedAsStrings;
+
+        if (processes.isEmpty()) {
+            KMessageBox::sorry(this, i18n("You must select a process first."));
+            return;
+        }
+
+        int sched = -2;
+        int iosched = -2;
+        foreach(KSysGuard::Process *process, processes) {
+            pids << process->pid;
+            selectedAsStrings << d->mModel.getStringForProcess(process);
+            if(sched == -2) sched = (int)process->scheduler;
+            else if(sched != -1 && sched != (int)process->scheduler) sched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
+            if(iosched == -2) iosched = (int)process->ioPriorityClass;
+            else if(iosched != -1 && iosched != (int)process->ioPriorityClass) iosched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
+
+        }
+        int firstPriority = processes.first()->niceLevel;
+        int firstIOPriority = processes.first()->ioniceLevel;
+
+        bool supportsIoNice = d->mModel.processController()->supportsIoNiceness();
+        if(!supportsIoNice) { iosched = -2; firstIOPriority = -2; }
+        reniceDlg = new ReniceDlg(d->mUi->treeView, selectedAsStrings, firstPriority, sched, firstIOPriority, iosched);
+        if(reniceDlg->exec() == QDialog::Rejected) {
+            delete reniceDlg;
+            return;
+        }
     }
 
-    int sched = -2;
-    int iosched = -2;
-    foreach(KSysGuard::Process *process, processes) {
-        selectedAsStrings << d->mModel.getStringForProcess(process);
-        if(sched == -2) sched = (int)process->scheduler;
-        else if(sched != -1 && sched != (int)process->scheduler) sched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
-        if(iosched == -2) iosched = (int)process->ioPriorityClass;
-        else if(iosched != -1 && iosched != (int)process->ioPriorityClass) iosched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
-
-    }
-
-    int firstPriority = processes.first()->niceLevel;
-    int firstIOPriority = processes.first()->ioniceLevel;
-
-    bool supportsIoNice = d->mModel.processController()->supportsIoNiceness();
-    if(!supportsIoNice) { iosched = -2; firstIOPriority = -2; }
-    QPointer<ReniceDlg> reniceDlg = new ReniceDlg(d->mUi->treeView, selectedAsStrings, firstPriority, sched, firstIOPriority, iosched);
-    if(reniceDlg->exec() == QDialog::Rejected) {
-        delete reniceDlg;
-        return;
-    }
+    //Because we've done into ReniceDlg, which calls processEvents etc, our processes list is no
+    //longer valid
 
     QList<long long> renicePids;
     QList<long long> changeCPUSchedulerPids;
     QList<long long> changeIOSchedulerPids;
-    foreach(KSysGuard::Process *process, processes) {
+    foreach (long long pid, pids) {
+        KSysGuard::Process *process = d->mModel.getProcess(pid);
+        if (!process)
+            continue;
+
         switch(reniceDlg->newCPUSched) {
             case -2:
             case -1:  //Invalid, not changed etc.
@@ -1053,16 +1083,16 @@ void KSysGuardProcessList::reniceSelectedProcesses()
             case KSysGuard::Process::Other:
             case KSysGuard::Process::Fifo:
                 if(reniceDlg->newCPUSched != (int)process->scheduler) {
-                    changeCPUSchedulerPids << process->pid;
-                    renicePids << process->pid;
+                    changeCPUSchedulerPids << pid;
+                    renicePids << pid;
                 } else if(reniceDlg->newCPUPriority != process->niceLevel)
-                    renicePids << process->pid;
+                    renicePids << pid;
                 break;
 
             case KSysGuard::Process::RoundRobin:
             case KSysGuard::Process::Batch:
                 if(reniceDlg->newCPUSched != (int)process->scheduler || reniceDlg->newCPUPriority != process->niceLevel) {
-                    changeCPUSchedulerPids << process->pid;
+                    changeCPUSchedulerPids << pid;
                 }
                 break;
         }
@@ -1074,12 +1104,12 @@ void KSysGuardProcessList::reniceSelectedProcesses()
                 if(reniceDlg->newIOSched != (int)process->ioPriorityClass) {
                     // Unfortunately linux doesn't actually let us set the ioniceness back to none after being set to something else
                     if(process->ioPriorityClass != KSysGuard::Process::BestEffort || reniceDlg->newIOPriority != process->ioniceLevel)
-                        changeIOSchedulerPids << process->pid;
+                        changeIOSchedulerPids << pid;
                 }
                 break;
             case KSysGuard::Process::Idle:
                 if(reniceDlg->newIOSched != (int)process->ioPriorityClass) {
-                    changeIOSchedulerPids << process->pid;
+                    changeIOSchedulerPids << pid;
                 }
                 break;
             case KSysGuard::Process::BestEffort:
@@ -1087,7 +1117,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
                     break;  //Don't set to BestEffort if it's on None and the nicelevel wouldn't change
             case KSysGuard::Process::RealTime:
                 if(reniceDlg->newIOSched != (int)process->ioPriorityClass || reniceDlg->newIOPriority != process->ioniceLevel) {
-                    changeIOSchedulerPids << process->pid;
+                    changeIOSchedulerPids << pid;
                 }
                 break;
         }
@@ -1096,7 +1126,6 @@ void KSysGuardProcessList::reniceSelectedProcesses()
     if(!changeCPUSchedulerPids.isEmpty()) {
         Q_ASSERT(reniceDlg->newCPUSched >= 0);
         if(!changeCpuScheduler(changeCPUSchedulerPids, (KSysGuard::Process::Scheduler) reniceDlg->newCPUSched, reniceDlg->newCPUPriority)) {
-            KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU scheduler. Aborting."));
             delete reniceDlg;
             return;
         }
@@ -1105,14 +1134,12 @@ void KSysGuardProcessList::reniceSelectedProcesses()
     if(!renicePids.isEmpty()) {
         Q_ASSERT(reniceDlg->newCPUPriority <= 20 && reniceDlg->newCPUPriority >= -20);
         if(!reniceProcesses(renicePids, reniceDlg->newCPUPriority)) {
-            KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the CPU priority. Aborting."));
             delete reniceDlg;
             return;
         }
     }
     if(!changeIOSchedulerPids.isEmpty()) {
         if(!changeIoScheduler(changeIOSchedulerPids, (KSysGuard::Process::IoPriorityClass) reniceDlg->newIOSched, reniceDlg->newIOPriority)) {
-            KMessageBox::sorry(this, i18n("You do not have sufficient privileges to change the IO scheduler and priority. Aborting."));
             delete reniceDlg;
             return;
         }
@@ -1136,6 +1163,7 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to affect non-localhost processes
 
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.changeioscheduler");
+    action->setParentWidget(window());
 
     d->setupKAuthAction( action, unchanged_pids);
     action->addArgument("ioScheduler", (int)newIoSched);
@@ -1146,14 +1174,13 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
         delete action;
-        return true;
-    }
-    else {
+    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to change the I/O priority of the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         delete action;
         return false;
     }
+    return true;
 }
 
 bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSysGuard::Process::Scheduler newCpuSched, int newCpuSchedPriority)
@@ -1170,6 +1197,7 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
     if(!d->mModel.isLocalhost()) return false; //We can't use KAuth to affect non-localhost processes
 
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.changecpuscheduler");
+    action->setParentWidget(window());
     d->setupKAuthAction( action, unchanged_pids);
     action->addArgument("cpuScheduler", (int)newCpuSched);
     action->addArgument("cpuSchedulerPriority", newCpuSchedPriority);
@@ -1178,14 +1206,13 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
         delete action;
-        return true;
-    }
-    else {
+    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to change the CPU Scheduler for the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         delete action;
         return false;
     }
+    return true;
 }
 
 bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
@@ -1193,32 +1220,42 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     QList< long long> unkilled_pids;
     for (int i = 0; i < pids.size(); ++i) {
         bool success = d->mModel.processController()->sendSignal(pids.at(i), sig);
-        if(!success) {
+        // If we failed due to a reason other than insufficient permissions, elevating to root can't
+        // help us
+        if(!success && (d->mModel.processController()->lastError() == KSysGuard::Processes::InsufficientPermissions || d->mModel.processController()->lastError() == KSysGuard::Processes::Unknown)) {
             unkilled_pids << pids.at(i);
         }
     }
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-    KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.sendsignal");
-    d->setupKAuthAction( action, unkilled_pids);
-    action->addArgument("signal", sig);
-    KAuth::ActionReply reply = action->execute();
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
+    action.setParentWidget(window());
+    d->setupKAuthAction( &action, unkilled_pids);
+    action.addArgument("signal", sig);
+    KAuth::ActionReply reply = action.execute();
 
     if (reply == KAuth::ActionReply::SuccessReply) {
         updateList();
-        delete action;
-        return true;
-    }
-    else {
+    } else if (reply.type() == KAuth::ActionReply::HelperError) {
+        if (reply.errorCode() > 0)
+            KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
+                        "was a problem trying to run as root. %1", reply.errorDescription()));
+        return false;
+    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
         KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
-        delete action;
         return false;
     }
+    return true;
 }
 
 void KSysGuardProcessList::killSelectedProcesses()
+{
+    sendSignalToSelectedProcesses(SIGTERM, true);
+}
+
+void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
 {
     QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
     QStringList selectedAsStrings;
@@ -1227,40 +1264,61 @@ void KSysGuardProcessList::killSelectedProcesses()
     QList<KSysGuard::Process *> processes = selectedProcesses();
     foreach(KSysGuard::Process *process, processes) {
         selectedPids << process->pid;
+        if (!confirm)
+            continue;
         QString name = d->mModel.getStringForProcess(process);
         if(name.size() > 100)
             name = name.left(95) + QString::fromUtf8("…");
         selectedAsStrings << name;
     }
 
-    if (selectedAsStrings.isEmpty())
-    {
-        KMessageBox::sorry(this, i18n("You must select a process first."));
+    if (selectedPids.isEmpty()) {
+        if (confirm)
+            KMessageBox::sorry(this, i18n("You must select a process first."));
         return;
-    }
-    else
-    {
+    } else if (confirm && (sig == SIGTERM || sig == SIGKILL)) {
         int count = selectedAsStrings.count();
-        QString  msg = i18np("Are you sure you want to end this process?  Any unsaved work may be lost.",
+        QString msg;
+        QString title;
+        QString dontAskAgainKey;
+        QString closeButton;
+        if (sig == SIGTERM) {
+            msg = i18np("Are you sure you want to end this process?  Any unsaved work may be lost.",
                 "Are you sure you want to end these %1 processes?  Any unsaved work may be lost",
                 count);
+            title =  i18ncp("Dialog title", "End Process", "End %1 Processes", count);
+            dontAskAgainKey = "endconfirmation";
+            closeButton = i18n("End");
+        } else if (sig == SIGKILL) {
+            msg = i18np("<qt>Are you sure you want to <b>immediately and forcibly kill</b> this process?  Any unsaved work may be lost.",
+                "<qt>Are you sure you want to <b>immediately and forcibly kill</b> these %1 processes?  Any unsaved work may be lost",
+                count);
+            title =  i18ncp("Dialog title", "Forcibly Kill Process", "Forcibly Kill %1 Processes", count);
+            dontAskAgainKey = "killconfirmation";
+            closeButton = i18n("Kill");
+        }
 
         int res = KMessageBox::warningContinueCancelList(this, msg, selectedAsStrings,
-                i18ncp("Dialog title", "End Process", "End %1 Processes", count),
-                KGuiItem(i18n("End"), "process-stop"),
+                title,
+                KGuiItem(closeButton, "process-stop"),
                 KStandardGuiItem::cancel(),
-                "endconfirmation");
+                dontAskAgainKey);
         if (res != KMessageBox::Continue)
-        {
             return;
-        }
     }
 
+    //We have shown a GUI dialog box, which processes events etc.
+    //So processes is NO LONGER VALID
 
-    Q_ASSERT(selectedPids.size() == selectedAsStrings.size());
-    if(!killProcesses(selectedPids, SIGTERM)) return;
-    foreach(KSysGuard::Process *process, processes) {
-        process->timeKillWasSent.start();
+    if (!killProcesses(selectedPids, sig))
+        return;
+    if (sig == SIGTERM || sig == SIGKILL) {
+        foreach (long long pid, selectedPids) {
+            KSysGuard::Process *process = d->mModel.getProcess(pid);
+            if (process)
+                process->timeKillWasSent.start();
+            d->mUi->treeView->selectionModel()->clearSelection();
+        }
     }
     updateList();
 }

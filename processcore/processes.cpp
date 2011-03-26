@@ -51,7 +51,7 @@ namespace KSysGuard
         mAbstractProcesses = 0;
         mHistoricProcesses = 0;
         mIsLocalHost = true;
-        mProcesses.insert(0, &mFakeProcess);
+        mProcesses.insert(-1, &mFakeProcess);
         mElapsedTimeMilliSeconds = 0;
         mHavePreviousIoValues = false;
         mUpdateFlags = 0;
@@ -65,9 +65,9 @@ namespace KSysGuard
       QSet<long> mProcessedLastTime;
       QSet<long> mEndedProcesses; ///< Processes that have finished
 
-      QHash<long, Process *> mProcesses; ///< This must include mFakeProcess at pid 0
+      QHash<long, Process *> mProcesses; ///< This must include mFakeProcess at pid -1
       QList<Process *> mListProcesses;   ///< A list of the processes.  Does not include mFakeProcesses
-      Process mFakeProcess; ///< A fake process with pid 0 just so that even init points to a parent
+      Process mFakeProcess; ///< A fake process with pid -1 just so that even init points to a parent
 
       AbstractProcesses *mAbstractProcesses; ///< The OS specific code to get the process information
       ProcessesATop *mHistoricProcesses; ///< A way to get historic information about processes
@@ -111,6 +111,10 @@ Processes::~Processes()
     delete d;
 }
 
+Processes::Error Processes::lastError() const
+{
+    return d->mAbstractProcesses->errorCode;
+}
 Process *Processes::getProcess(long pid) const
 {
     return d->mProcesses.value(pid);
@@ -130,7 +134,7 @@ bool Processes::updateProcess( Process *ps, long ppid)
 {
     Process *parent = d->mProcesses.value(ppid);
     if(!parent)
-        parent = d->mProcesses.value(0);
+        parent = &d->mFakeProcess;
     Q_ASSERT(parent);  //even init has a non-null parent - the mFakeProcess
 
     if(ps->parent != parent) {
@@ -140,7 +144,8 @@ bool Processes::updateProcess( Process *ps, long ppid)
         do {
             p = p->parent;
             p->numChildren--;
-        } while (p->pid!= 0);
+        } while (p->pid!= -1);
+        Q_ASSERT(ps != parent);
         ps->parent->children.removeAll(ps);
         ps->parent = parent;  //the parent has changed
         parent->children.append(ps);
@@ -148,8 +153,9 @@ bool Processes::updateProcess( Process *ps, long ppid)
         do {
             p = p->parent;
             p->numChildren++;
-        } while (p->pid!= 0);
+        } while (p->pid!= -1);
         emit endMoveProcess();
+        Q_ASSERT(ps != parent);
         ps->parent = parent;
     }
 
@@ -230,7 +236,7 @@ bool Processes::updateProcessInfo(Process *ps) {
         ps->setTotalSysUsage(ps->sysUsage);
         if(ps->userUsage != 0 || ps->sysUsage != 0) {
             Process *p = ps->parent;
-            while(p->pid != 0) {
+            while(p->pid != -1) {
                 p->totalUserUsage += ps->userUsage;
                 p->totalSysUsage += ps->sysUsage;
                 emit processChanged(p, true);
@@ -248,7 +254,7 @@ bool Processes::addProcess(long pid, long ppid)
     if(!parent) {
         //Under race conditions, the parent could have already quit
         //In this case, attach to top leaf
-        parent = d->mProcesses.value(0);
+        parent = &d->mFakeProcess;
         Q_ASSERT(parent);  //even init has a non-null parent - the mFakeProcess
     }
     //it's a new process - we need to set it up
@@ -264,9 +270,10 @@ bool Processes::addProcess(long pid, long ppid)
     ps->parent->children.append(ps);
     Process *p = ps;
     do {
+        Q_ASSERT(p);
         p = p->parent;
         p->numChildren++;
-    } while (p->pid!= 0);
+    } while (p->pid != -1);
     ps->parent_pid = ppid;
 
     //Now we can actually get the process info
@@ -283,6 +290,9 @@ bool Processes::updateOrAddProcess( long pid)
     else
         ppid = d->mAbstractProcesses->getParentPid(pid);
 
+    if (ppid == pid) //Shouldn't ever happen
+        ppid = -1;
+
     if(d->mToBeProcessed.contains(ppid)) {
         //Make sure that we update the parent before we update this one.  Just makes things a bit easier.
         d->mToBeProcessed.remove(ppid);
@@ -290,7 +300,7 @@ bool Processes::updateOrAddProcess( long pid)
         updateOrAddProcess(ppid);
     }
 
-    Process *ps = d->mProcesses.value(pid, 0);
+    Process *ps = d->mProcesses.value(pid);
     if(!ps)
         return addProcess(pid, ppid);
     else
@@ -355,7 +365,7 @@ void Processes::processesUpdated() {
 
 void Processes::Private::markProcessesAsEnded(long pid)
 {
-    Q_ASSERT(pid > 0);
+    Q_ASSERT(pid >= 0);
 
     Process *process = mProcesses.value(pid);
     if(!process)
@@ -365,7 +375,7 @@ void Processes::Private::markProcessesAsEnded(long pid)
 }
 void Processes::deleteProcess(long pid)
 {
-    Q_ASSERT(pid > 0);
+    Q_ASSERT(pid >= 0);
 
     Process *process = d->mProcesses.value(pid);
     if(!process)
@@ -382,9 +392,10 @@ void Processes::deleteProcess(long pid)
     process->parent->children.removeAll(process);
     Process *p = process;
     do {
+        Q_ASSERT(p);
         p = p->parent;
         p->numChildren--;
-    } while (p->pid!= 0);
+    } while (p->pid != -1);
 #ifndef QT_NO_DEBUG
     int i = 0;
 #endif
@@ -400,32 +411,42 @@ void Processes::deleteProcess(long pid)
 
 
 bool Processes::killProcess(long pid) {
-    if(d->mUsingHistoricalData)
-        return false;
     return sendSignal(pid, SIGTERM);
 }
 
 bool Processes::sendSignal(long pid, int sig) {
-    if(d->mUsingHistoricalData)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(d->mUsingHistoricalData) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     return d->mAbstractProcesses->sendSignal(pid, sig);
 }
 
 bool Processes::setNiceness(long pid, int priority) {
-    if(d->mUsingHistoricalData)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(d->mUsingHistoricalData) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     return d->mAbstractProcesses->setNiceness(pid, priority);
 }
 
 bool Processes::setScheduler(long pid, KSysGuard::Process::Scheduler priorityClass, int priority) {
-    if(d->mUsingHistoricalData)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(d->mUsingHistoricalData) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     return d->mAbstractProcesses->setScheduler(pid, priorityClass, priority);
 }
 
 bool Processes::setIoNiceness(long pid, KSysGuard::Process::IoPriorityClass priorityClass, int priority) {
-    if(d->mUsingHistoricalData)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(d->mUsingHistoricalData) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     return d->mAbstractProcesses->setIoNiceness(pid, priorityClass, priority);
 }
 
@@ -471,8 +492,11 @@ void Processes::useCurrentData()
 
 bool Processes::setViewingTime(const QDateTime &when)
 {
-    if(!d->mIsLocalHost)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(!d->mIsLocalHost) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     if(!d->mUsingHistoricalData) {
         if(!d->mHistoricProcesses)
             d->mHistoricProcesses = new ProcessesATop();
@@ -485,8 +509,11 @@ bool Processes::setViewingTime(const QDateTime &when)
 
 bool Processes::loadHistoryFile(const QString &filename)
 {
-    if(!d->mIsLocalHost)
+    d->mAbstractProcesses->errorCode = Unknown;
+    if(!d->mIsLocalHost) {
+        d->mAbstractProcesses->errorCode = NotSupported;
         return false;
+    }
     if(!d->mHistoricProcesses)
         d->mHistoricProcesses = new ProcessesATop(false);
 

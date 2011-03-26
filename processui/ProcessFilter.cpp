@@ -53,7 +53,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		       	Q_ASSERT(parent_process);
 		} else {
 			//if(!model->isSimpleMode()) {
-				parent_process = model->getProcess(0); //Get our 'special' process which should have the root init child
+				parent_process = model->getProcess(-1); //Get our 'special' process which should have the root init child
 		        	Q_ASSERT(parent_process);
 			//}
 		}
