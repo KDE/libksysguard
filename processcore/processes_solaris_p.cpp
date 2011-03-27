@@ -69,18 +69,18 @@ ProcessesLocal::ProcessesLocal() : d(new Private())
 }
 
 long ProcessesLocal::getParentPid(long pid) {
-    long long ppid = 0;
-    int		fd;
-    psinfo_t	psinfo;
+    long long ppid = -1;
+    int        fd;
+    psinfo_t    psinfo;
 
     snprintf( d->mBuf, PROCESS_BUFFER_SIZE - 1, "%s/%ld/psinfo", PROCDIR, pid );
     if( (fd = open( d->mBuf, O_RDONLY )) < 0 ) {
-	return 0; /* process has terminated in the meantime */
+        return -1; /* process has terminated in the meantime */
     }
 
     if( read( fd, &psinfo, sizeof( psinfo_t )) != sizeof( psinfo_t )) {
-	close( fd );
-	return 0;
+        close( fd );
+        return -1;
     }
     close( fd );
     ppid = psinfo.pr_ppid;
@@ -90,35 +90,35 @@ long ProcessesLocal::getParentPid(long pid) {
 
 bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 {
-    int		fd, pfd;
-    psinfo_t	psinfo;
-    prusage_t	prusage;
+    int        fd, pfd;
+    psinfo_t    psinfo;
+    prusage_t    prusage;
 
     snprintf( d->mBuf, PROCESS_BUFFER_SIZE - 1, "%s/%ld/psinfo", PROCDIR, pid );
     if( (fd = open( d->mBuf, O_RDONLY )) < 0 ) {
-	return false; /* process has terminated in the meantime */
+        return false; /* process has terminated in the meantime */
     }
 
     snprintf( d->mBuf, PROCESS_BUFFER_SIZE - 1, "%s/%ld/usage", PROCDIR, pid );
     if( (pfd = open( d->mBuf, O_RDONLY )) < 0 ) {
-	close( fd );
-	return false; /* process has terminated in the meantime */
+        close( fd );
+        return false; /* process has terminated in the meantime */
     }
 
     process->uid = 0;
     process->gid = 0;
-    process->tracerpid = 0;
+    process->tracerpid = -1;
     process->pid = pid;
 
     if( read( fd, &psinfo, sizeof( psinfo_t )) != sizeof( psinfo_t )) {
-	close( fd );
-	return false;
+        close( fd );
+        return false;
     }
     close( fd );
 
     if( read( pfd, &prusage, sizeof( prusage_t )) != sizeof( prusage_t )) {
-	close( pfd );
-	return false;
+    close( pfd );
+    return false;
     }
     close( pfd );
 
@@ -128,24 +128,24 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
     process->setEgid( psinfo.pr_egid );
 
     switch( (int) psinfo.pr_lwp.pr_state ) {
-	case SIDL:
-	case SWAIT:
-	case SSLEEP:
-	    process->setStatus(Process::Sleeping);
-	    break;
-	case SONPROC:
-	case SRUN:
-	    process->setStatus(Process::Running);
-	    break;
-	case SZOMB:
-	    process->setStatus(Process::Zombie);
-	    break;
-	case SSTOP:
-	    process->setStatus(Process::Stopped);
-	    break;
-	default:
-	    process->setStatus(Process::OtherStatus);
-	    break;
+    case SIDL:
+    case SWAIT:
+    case SSLEEP:
+        process->setStatus(Process::Sleeping);
+        break;
+    case SONPROC:
+    case SRUN:
+        process->setStatus(Process::Running);
+        break;
+    case SZOMB:
+        process->setStatus(Process::Zombie);
+        break;
+    case SSTOP:
+        process->setStatus(Process::Stopped);
+        break;
+    default:
+        process->setStatus(Process::OtherStatus);
+        break;
     }
 
     process->setVmRSS(psinfo.pr_rssize);
@@ -153,16 +153,16 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
     process->setVmURSS(-1);
 
     if (process->command.isNull()) {
-	QString name(psinfo.pr_fname);
+    QString name(psinfo.pr_fname);
 
-	name = name.trimmed();
-	if(!name.isEmpty()) {
-	    name.remove(QRegExp("^[^ ]*/"));
-	}
-	process->setName(name);
-	name = psinfo.pr_fname;
-	name.append(psinfo.pr_psargs);
-	process->setCommand(name);
+    name = name.trimmed();
+    if(!name.isEmpty()) {
+        name.remove(QRegExp("^[^ ]*/"));
+    }
+    process->setName(name);
+    name = psinfo.pr_fname;
+    name.append(psinfo.pr_psargs);
+    process->setCommand(name);
     }
 
     // Approximations, not quite accurate. Needs more changes in ksysguard to map
@@ -192,19 +192,19 @@ QSet<long> ProcessesLocal::getAllPids( )
     struct dirent* entry;
     rewinddir(d->mProcDir);
     while ( ( entry = readdir( d->mProcDir ) ) )
-	    if ( entry->d_name[ 0 ] >= '0' && entry->d_name[ 0 ] <= '9' ) {
-		    pid = atol( entry->d_name );
-		    // Skip all processes with parent id = 0 except init
-		    if (pid == 1 || getParentPid(pid) > 0) {
-			pids.insert(pid);
-		    }
-	    }
+        if ( entry->d_name[ 0 ] >= '0' && entry->d_name[ 0 ] <= '9' ) {
+            pid = atol( entry->d_name );
+            // Skip all processes with parent id = 0 except init
+            if (pid == 1 || getParentPid(pid) > 0) {
+            pids.insert(pid);
+            }
+        }
     return pids;
 }
 
 bool ProcessesLocal::sendSignal(long pid, int sig) {
     if ( kill( (pid_t)pid, sig ) ) {
-	//Kill failed
+        //Kill failed
         return false;
     }
     return false;

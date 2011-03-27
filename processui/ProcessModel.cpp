@@ -29,6 +29,7 @@
 #include "processcore/process.h"
 
 #include <kapplication.h>
+#include <kcolorscheme.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <klocale.h>
@@ -41,7 +42,7 @@
 #include <QTextDocument>
 
 #define HEADING_X_ICON_SIZE 16
-
+#define MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS 2000
 #define GET_OWN_ID
 
 #ifdef GET_OWN_ID
@@ -59,6 +60,51 @@
 
 extern KApplication* Kapp;
 
+static QString formatByteSize(qlonglong amountInKB, int units) {
+    enum { UnitsAuto, UnitsKB, UnitsMB, UnitsGB, UnitsTB, UnitsPB };
+    static QString kString = i18n("%1 K", QString::fromLatin1("%1"));
+    static QString mString = i18n("%1 M", QString::fromLatin1("%1"));
+    static QString gString = i18n("%1 G", QString::fromLatin1("%1"));
+    static QString tString = i18n("%1 T", QString::fromLatin1("%1"));
+    static QString pString = i18n("%1 P", QString::fromLatin1("%1"));
+    double amount;
+
+    if (units == UnitsAuto) {
+        if (amountInKB < 1024.0*0.9)
+            units = UnitsKB; // amount < 0.9 MiB == KiB
+        else if (amountInKB < 1024.0*1024.0*0.9)
+            units = UnitsMB; // amount < 0.9 GiB == MiB
+        else if (amountInKB < 1024.0*1024.0*1024.0*0.9)
+            units = UnitsGB; // amount < 0.9 TiB == GiB
+        else if (amountInKB < 1024.0*1024.0*1024.0*1024.0*0.9)
+            units = UnitsTB; // amount < 0.9 PiB == TiB
+        else
+            units = UnitsPB;
+    }
+
+    switch(units) {
+      case UnitsKB:
+        return kString.arg(KGlobal::locale()->formatNumber(amountInKB, 0));
+      case UnitsMB:
+        amount = amountInKB/1024.0;
+        return mString.arg(KGlobal::locale()->formatNumber(amount, 1));
+      case UnitsGB:
+        amount = amountInKB/(1024.0*1024.0);
+        if(amount < 0.1 && amount > 0.05) amount = 0.1;
+        return gString.arg(KGlobal::locale()->formatNumber(amount, 1));
+      case UnitsTB:
+        amount = amountInKB/(1024.0*1024.0*1024.0);
+        if(amount < 0.1 && amount > 0.05) amount = 0.1;
+        return tString.arg(KGlobal::locale()->formatNumber(amount, 1));
+      case UnitsPB:
+        amount = amountInKB/(1024.0*1024.0*1024.0*1024.0);
+        if(amount < 0.1 && amount > 0.05) amount = 0.1;
+        return pString.arg(KGlobal::locale()->formatNumber(amount, 1));
+      default:
+          return "";  // error
+    }
+}
+
 ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1)
 {
     mBlankPixmap.fill(QColor(0,0,0,0));
@@ -75,6 +121,8 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 #ifdef HAVE_XRES
     mHaveXRes = false;
 #endif
+    mHaveTimer = false,
+    mTimerId = -1,
     mMovingRow = false;
     mRemovingRow = false;
     mInsertingRow = false;
@@ -136,9 +184,9 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
                We then sort by cpu usage to sort by that, then finally sort by memory usage */
 
             /* First, place traced processes at the very top, ignoring any other sorting criteria */
-            if(processLeft->tracerpid > 0)
+            if(processLeft->tracerpid >= 0)
                 return true;
-            if(processRight->tracerpid > 0)
+            if(processRight->tracerpid >= 0)
                 return false;
 
             /* Sort by username.  First group into own user, normal users, system users */
@@ -574,7 +622,7 @@ int ProcessModel::rowCount(const QModelIndex &parent) const
         if(parent.column() != 0) return 0;  //For a treeview we say that only the first column has children
         process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer()); //when parent is invalid, it must be the root level which we set as 0
     } else {
-        process = d->mProcesses->getProcess(0);
+        process = d->mProcesses->getProcess(-1);
     }
     Q_ASSERT(process);
     int num_rows = process->children.count();
@@ -600,7 +648,7 @@ bool ProcessModel::hasChildren ( const QModelIndex & parent = QModelIndex() ) co
         if(parent.column() != 0) return false;  //For a treeview we say that only the first column has children
         process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer()); //when parent is invalid, it must be the root level which we set as 0
     } else {
-        process = d->mProcesses->getProcess(0);
+        process = d->mProcesses->getProcess(-1);
     }
     Q_ASSERT(process);
     bool has_children = !process->children.isEmpty();
@@ -626,7 +674,7 @@ QModelIndex ProcessModel::index ( int row, int column, const QModelIndex & paren
     if(parent.isValid()) //not valid for init or children without parents, so use our special item with pid of 0
         parent_process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer());
     else
-        parent_process = d->mProcesses->getProcess(0);
+        parent_process = d->mProcesses->getProcess(-1);
     Q_ASSERT(parent_process);
 
     if(parent_process->children.count() > row)
@@ -650,6 +698,20 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
     else
         row = process->parent->children.indexOf(process);
 
+    if (!process->timeKillWasSent.isNull()) {
+        int elapsed = process->timeKillWasSent.elapsed();
+        if (elapsed < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {
+            if (!mPidsToUpdate.contains(process->pid))
+                mPidsToUpdate.append(process->pid);
+            QModelIndex index1 = q->createIndex(row, 0, process);
+            QModelIndex index2 = q->createIndex(row, mHeadings.count()-1, process);
+            emit q->dataChanged(index1, index2);
+            if (!mHaveTimer) {
+                mHaveTimer = true;
+                mTimerId = startTimer(100);
+            }
+        }
+    }
     int totalUpdated = 0;
     Q_ASSERT(row != -1);  //Something has gone very wrong
     if(onlyTotalCpu) {
@@ -763,7 +825,7 @@ void ProcessModelPrivate::endInsertRow() {
 void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
 {
     Q_ASSERT(process);
-    Q_ASSERT(process->pid > 0);
+    Q_ASSERT(process->pid >= 0);
     Q_ASSERT(!mRemovingRow);
     Q_ASSERT(!mInsertingRow);
     Q_ASSERT(!mMovingRow);
@@ -827,7 +889,7 @@ QModelIndex ProcessModel::getQModelIndex( KSysGuard::Process *process, int colum
 {
     Q_ASSERT(process);
     int pid = process->pid;
-    if(pid == 0) return QModelIndex(); //pid 0 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means the top element
+    if (pid == -1) return QModelIndex(); //pid -1 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means the top element
     int row = 0;
     if(d->mSimple) {
         row = process->index;
@@ -1054,7 +1116,7 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
         else {
             if(!user.property(KUser::FullName).isValid())
                 userTooltip += i18n("<b>%1</b><br/>", user.property(KUser::FullName).toString());
-            userTooltip += i18n("Login Name: %1 (uid: %2)<br/>", user.loginName(), ps->uid);
+            userTooltip += i18n("Login Name: %1 (uid: %2)<br/>", user.loginName(), QString::number(ps->uid));
             if(!user.property(KUser::RoomNumber).isValid())
                 userTooltip += i18n("  Room Number: %1<br/>", user.property(KUser::RoomNumber).toString());
             if(!user.property(KUser::WorkPhone).isValid())
@@ -1287,7 +1349,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return QVariant();
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         QString tracer;
-        if(process->tracerpid > 0) {
+        if(process->tracerpid >= 0) {
             KSysGuard::Process *process_tracer = d->mProcesses->getProcess(process->tracerpid);
             if(process_tracer) //it is possible for this to be not the case in certain race conditions
                 tracer = i18nc("tooltip. name,pid ","This process is being debugged by %1 (<numid>%2</numid>)", process_tracer->name, (long int)process->tracerpid);
@@ -1308,7 +1370,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip = i18n("<qt><table><tr><td>%1", icon);
             }
             */
-            if(process->parent_pid == 0) {
+            if(process->parent_pid == -1) {
                 //Give a quick explanation of init and kthreadd
                 if(process->name == "init") {
                     tooltip += i18n("<b>Init</b> is the parent of all other processes and cannot be killed.<br/>");
@@ -1674,12 +1736,30 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
     case Qt::BackgroundRole: {
-        if(index.column() != HeadingUser) return QVariant();
+        if (index.column() != HeadingUser) {
+            if (!d->mHaveTimer) //If there is no timer, then no processes are being killed, so no point looking for one
+                return QVariant();
+            KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+            if (!process->timeKillWasSent.isNull()) {
+                int elapsed = process->timeKillWasSent.elapsed();
+                if (elapsed < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {//Only show red for about 7 seconds
+                    int transparency = 255 - elapsed*250/MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS;
+
+                    KColorScheme scheme(QPalette::Active, KColorScheme::Selection);
+                    QBrush brush = scheme.background(KColorScheme::NegativeBackground);
+                    QColor color = brush.color();
+                    color.setAlpha(transparency);
+                    brush.setColor(color);
+                    return brush;
+                }
+            }
+            return QVariant();
+        }
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         if(process->status == KSysGuard::Process::Ended) {
             return QColor(Qt::lightGray);
         }
-        if(process->tracerpid >0) {
+        if(process->tracerpid >= 0) {
             //It's being debugged, so probably important.  Let's mark it as such
             return QColor(Qt::yellow);
         }
@@ -1827,7 +1907,8 @@ ProcessModel::Units ProcessModel::units() const
 void ProcessModel::setIoUnits(Units units)
 {
     if(d->mIoUnits == units)
-        d->mIoUnits = units;
+        return;
+    d->mIoUnits = units;
 
     QModelIndex index;
     foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
@@ -1861,30 +1942,15 @@ QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool r
     //hundreds of times, every second or so
     if(returnEmptyIfValueIsZero && amountInKB == 0)
         return QString();
-    static QString kbString = i18n("%1 K", QString::fromLatin1("%1"));
-    static QString mbString = i18n("%1 M", QString::fromLatin1("%1"));
-    static QString gbString = i18n("%1 G", QString::fromLatin1("%1"));
     static QString percentageString = i18n("%1%", QString::fromLatin1("%1"));
-    double amount;
-    switch(units) {
-      case UnitsKB:
-        return kbString.arg(KGlobal::locale()->formatNumber(amountInKB, 0));
-      case UnitsMB:
-        amount = amountInKB/1024.0;
-        if(amount < 0.1) amount = 0.1;
-        return mbString.arg(KGlobal::locale()->formatNumber(amount, 1));
-      case UnitsGB:
-        amount = amountInKB/(1024.0*1024.0);
-        if(amount < 0.1) amount = 0.1;
-        return gbString.arg(KGlobal::locale()->formatNumber(amount, 1));
-      case UnitsPercentage:
+    if (units == UnitsPercentage) {
         if(d->mMemTotal == 0)
             return ""; //memory total not determined yet.  Shouldn't happen, but don't crash if it does
         float percentage = amountInKB*100.0/d->mMemTotal;
         if(percentage < 0.1) percentage = 0.1;
         return percentageString.arg(percentage, 0, 'f', 1);
-    }
-    return "";  //error
+    } else
+        return formatByteSize(amountInKB, units);
 }
 
 QString ProcessModel::hostName() const {
@@ -1993,5 +2059,32 @@ bool ProcessModel::isNormalizedCPUUsage() const
 void ProcessModel::setNormalizedCPUUsage(bool normalizeCPUUsage)
 {
     d->mNormalizeCPUUsage = normalizeCPUUsage;
+}
+
+void ProcessModelPrivate::timerEvent( QTimerEvent * event )
+{
+    Q_UNUSED(event);
+    foreach (qlonglong pid, mPidsToUpdate) {
+        KSysGuard::Process *process = mProcesses->getProcess(pid);
+        if (process && !process->timeKillWasSent.isNull() && process->timeKillWasSent.elapsed() < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {
+            int row;
+            if(mSimple)
+                row = process->index;
+            else
+                row = process->parent->children.indexOf(process);
+
+            QModelIndex index1 = q->createIndex(row, 0, process);
+            QModelIndex index2 = q->createIndex(row, mHeadings.count()-1, process);
+            emit q->dataChanged(index1, index2);
+        } else {
+            mPidsToUpdate.removeAll(pid);
+        }
+    }
+
+    if (mPidsToUpdate.isEmpty()) {
+        mHaveTimer = false;
+        killTimer(mTimerId);
+        mTimerId = -1;
+    }
 }
 

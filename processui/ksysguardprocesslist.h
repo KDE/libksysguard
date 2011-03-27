@@ -129,6 +129,11 @@ class KDE_EXPORT KSysGuardProcessList : public QWidget
         /** Send a kill signal to all the processes that the user has selected.  Pops up a dialog box to confirm with the user */
         void killSelectedProcesses();
 
+        /** Send a signal to all the processes that the user has selected.
+         * @p confirm - If true, pops up a dialog box to confirm with the user
+         */
+        void sendSignalToSelectedProcesses(int sig, bool confirm);
+
         /** Send a signal to a list of given processes.
          *   @p pids A list of PIDs that should be sent the signal
          *   @p sig  The signal to send.
