@@ -180,7 +180,7 @@ struct KSysGuardProcessListPrivate {
 
         //Set up '/' as a shortcut to jump to the quick search text widget
         jumpToSearchFilter = new KAction(i18n("Focus on Quick Search"), q);
-        jumpToSearchFilter->setShortcut('/');
+        jumpToSearchFilter->setShortcuts(QList<QKeySequence>() << QKeySequence::Find << '/');
     }
 
     ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
