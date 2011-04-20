@@ -88,14 +88,14 @@ QString KSysGuard::Process::schedulerAsString() const {
 }
 
 void KSysGuard::Process::clear() {
-    pid = 0;
-    parent_pid = 0;
+    pid = -1;
+    parent_pid = -1;
     uid = 0;
     gid = -1;
     numThreads = 0;
     suid = euid = fsuid = -1;
     sgid = egid = fsgid = -1;
-    tracerpid = 0;
+    tracerpid = -1;
     userTime = 0;
     sysTime = 0;
     elapsedTimeMilliSeconds = 0;

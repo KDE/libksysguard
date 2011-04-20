@@ -232,7 +232,7 @@ bool ProcessesATop::updateProcessInfo( long pid, Process *process)
     process->setEgid(p.gen.rgid);
     process->setSgid(p.gen.rgid);
     process->setFsgid(p.gen.rgid);
-    process->setTracerpid(0);
+    process->setTracerpid(-1);
     process->setNumThreads(p.gen.nthr);
 //    process->setTty
     process->setUserTime(p.cpu.utime * 100/d->rh.hertz);//check - divide by interval maybe?
@@ -326,19 +326,23 @@ QSet<long> ProcessesATop::getAllPids( )
 }
 
 bool ProcessesATop::sendSignal(long pid, int sig) {
+    errorCode = Processes::NotSupported;
     return false;
 }
 
 bool ProcessesATop::setNiceness(long pid, int priority) {
+    errorCode = Processes::NotSupported;
     return false;
 }
 
 bool ProcessesATop::setScheduler(long pid, int priorityClass, int priority) {
+    errorCode = Processes::NotSupported;
     return false;
 }
 
 
 bool ProcessesATop::setIoNiceness(long pid, int priorityClass, int priority) {
+    errorCode = Processes::NotSupported;
     return false;
 }
 

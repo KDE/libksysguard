@@ -33,6 +33,7 @@
 //for sysconf
 #include <unistd.h>
 //for kill and setNice
+#include <errno.h>
 #include <sys/types.h>
 #include <signal.h>
 #include <sys/resource.h>
@@ -136,7 +137,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 
     process->uid = 0;
     process->gid = 0;
-    process->tracerpid = 0;
+    process->tracerpid = -1;
     process->numThreads = 0;
 
     int size;
@@ -162,11 +163,13 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 	        if(++found == 5) goto finish;
 	    }
 	    break;
-	  case 'T':
-	    if((unsigned int)size > sizeof("TracerPid:") && qstrncmp(mBuffer, "TracerPid:", sizeof("TracerPid:")-1) == 0) {
+      case 'T':
+        if((unsigned int)size > sizeof("TracerPid:") && qstrncmp(mBuffer, "TracerPid:", sizeof("TracerPid:")-1) == 0) {
             process->tracerpid = atol(mBuffer + sizeof("TracerPid:")-1);
-	        if(++found == 5) goto finish;
-	    } else if((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:")-1) == 0) {
+            if (process->tracerpid == 0)
+                process->tracerpid = -1;
+            if(++found == 5) goto finish;
+        } else if((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:")-1) == 0) {
             process->setNumThreads(atol(mBuffer + sizeof("Threads:")-1));
 	        if(++found == 5) goto finish;
 	    }
@@ -185,12 +188,12 @@ long ProcessesLocal::getParentPid(long pid) {
     Q_ASSERT(pid != 0);
     d->mFile.setFileName("/proc/" + QString::number(pid) + "/stat");
     if(!d->mFile.open(QIODevice::ReadOnly))
-        return 0;      /* process has terminated in the meantime */
+        return -1;      /* process has terminated in the meantime */
 
     int size; //amount of data read in
     if( (size = d->mFile.readLine( d->mBuffer, sizeof(d->mBuffer))) <= 0) { //-1 indicates nothing read
         d->mFile.close();
-        return 0;
+        return -1;
     }
 
     d->mFile.close();
@@ -198,15 +201,18 @@ long ProcessesLocal::getParentPid(long pid) {
     char *word = d->mBuffer;
 
     while(true) {
-	    if(word[0] == ' ' ) {
-		    if(++current_word == 3)
-			    break;
-	    } else if(word[0] == 0) {
-	    	return 0; //end of data - serious problem
-	    }
-	    word++;
+        if(word[0] == ' ' ) {
+            if(++current_word == 3)
+                break;
+        } else if(word[0] == 0) {
+            return -1; //end of data - serious problem
+        }
+        word++;
     }
-    return atol(++word);
+    long ppid = atol(++word);
+    if (ppid == 0)
+        return -1;
+    return ppid;
 }
 
 bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
@@ -490,63 +496,147 @@ QSet<long> ProcessesLocal::getAllPids( )
     struct dirent* entry;
     rewinddir(d->mProcDir);
     while ( ( entry = readdir( d->mProcDir ) ) )
-	    if ( entry->d_name[ 0 ] >= '0' && entry->d_name[ 0 ] <= '9' )
-		    pids.insert(atol( entry->d_name ));
+        if ( entry->d_name[ 0 ] >= '0' && entry->d_name[ 0 ] <= '9' )
+            pids.insert(atol( entry->d_name ));
     return pids;
 }
 
 bool ProcessesLocal::sendSignal(long pid, int sig) {
-    if ( kill( (pid_t)pid, sig ) ) {
-	//Kill failed
+    errno = 0;
+    if (pid <= 0) {
+        errorCode = Processes::InvalidPid;
+        return false;
+    }
+    if (kill( (pid_t)pid, sig )) {
+        switch (errno) {
+            case ESRCH:
+                errorCode = Processes::ProcessDoesNotExistOrZombie;
+                break;
+            case EINVAL:
+                errorCode = Processes::InvalidParameter;
+                break;
+            case EPERM:
+                errorCode = Processes::InsufficientPermissions;
+                break;
+            default:
+                break;
+        }
+        //Kill failed
         return false;
     }
     return true;
 }
 
 bool ProcessesLocal::setNiceness(long pid, int priority) {
-    if(pid <= 0) return false; // check the parameters
-    if ( setpriority( PRIO_PROCESS, pid, priority ) ) {
-	    //set niceness failed
-	    return false;
+    errno = 0;
+    if (pid <= 0) {
+        errorCode = Processes::InvalidPid;
+        return false;
+    }
+    if (setpriority( PRIO_PROCESS, pid, priority )) {
+        switch (errno) {
+            case ESRCH:
+                errorCode = Processes::ProcessDoesNotExistOrZombie;
+                break;
+            case EINVAL:
+                errorCode = Processes::InvalidParameter;
+                break;
+            case EACCES:
+            case EPERM:
+                errorCode = Processes::InsufficientPermissions;
+                break;
+            default:
+                break;
+        }
+        //set niceness failed
+        return false;
     }
     return true;
 }
 
 bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) {
+    errno = 0;
     if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch || priorityClass == KSysGuard::Process::SchedulerIdle)
-	    priority = 0;
-    if(pid <= 0) return false; // check the parameters
+        priority = 0;
+    if (pid <= 0) {
+        errorCode = Processes::InvalidPid;
+        return false;
+    }
     struct sched_param params;
     params.sched_priority = priority;
+    int policy;
     switch(priorityClass) {
       case (KSysGuard::Process::Other):
-	    return (sched_setscheduler( pid, SCHED_OTHER, &params) == 0);
+          policy = SCHED_OTHER;
+          break;
       case (KSysGuard::Process::RoundRobin):
-	    return (sched_setscheduler( pid, SCHED_RR, &params) == 0);
+          policy = SCHED_RR;
+          break;
       case (KSysGuard::Process::Fifo):
-	    return (sched_setscheduler( pid, SCHED_FIFO, &params) == 0);
+          policy = SCHED_FIFO;
+          break;
 #ifdef SCHED_IDLE
       case (KSysGuard::Process::SchedulerIdle):
-	    return (sched_setscheduler( pid, SCHED_IDLE, &params) == 0);
+          policy = SCHED_IDLE;
+          break;
 #endif
 #ifdef SCHED_BATCH
       case (KSysGuard::Process::Batch):
-	    return (sched_setscheduler( pid, SCHED_BATCH, &params) == 0);
+          policy = SCHED_BATCH;
+          break;
 #endif
       default:
-	    return false;
+          errorCode = Processes::NotSupported;
+          return false;
     }
+
+    if (sched_setscheduler( pid, policy, &params) != 0) {
+        switch (errno) {
+            case ESRCH:
+                errorCode = Processes::ProcessDoesNotExistOrZombie;
+                break;
+            case EINVAL:
+                errorCode = Processes::InvalidParameter;
+                break;
+            case EPERM:
+                errorCode = Processes::InsufficientPermissions;
+                break;
+            default:
+                break;
+        }
+        return false;
+    }
+    return true;
 }
 
 
 bool ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority) {
+    errno = 0;
+    if (pid <= 0) {
+        errorCode = Processes::InvalidPid;
+        return false;
+    }
 #ifdef HAVE_IONICE
     if (ioprio_set(IOPRIO_WHO_PROCESS, pid, priority | priorityClass << IOPRIO_CLASS_SHIFT) == -1) {
-	    //set io niceness failed
-	    return false;
+        //set io niceness failed
+        switch (errno) {
+            case ESRCH:
+                errorCode = Processes::ProcessDoesNotExistOrZombie;
+                break;
+            case EINVAL:
+                errorCode = Processes::InvalidParameter;
+                break;
+            case EPERM:
+                errorCode = Processes::InsufficientPermissions;
+                break;
+            default:
+                break;
+        }
+        return false;
     }
     return true;
 #else
+    errorCode = Processes::NotSupported;
     return false;
 #endif
 }

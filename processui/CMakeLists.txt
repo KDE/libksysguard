@@ -8,9 +8,9 @@ set(ksysguard_WIDGETS "ksysguard.widgets")
 
 set(processui_LIB_SRCS
    ksysguardprocesslist.cpp
-   ProcessFilter.cc
-   ProcessModel.cc
-   ReniceDlg.cc
+   ProcessFilter.cpp
+   ProcessModel.cpp
+   ReniceDlg.cpp
    KTextEditVT.cpp
    scripting.cpp
 )
@@ -27,7 +27,7 @@ if(X11_XRes_FOUND)
   include_directories(${X11_XRes_INCLUDE_PATH})
 endif(X11_XRes_FOUND)
 
-target_link_libraries(processui ${KDE4_KDEUI_LIBS} ${QT_QTWEBKIT_LIBRARY} processcore)
+target_link_libraries(processui ${KDE4_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTWEBKIT_LIBRARY} processcore)
 target_link_libraries(processui LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} processcore)
 
 

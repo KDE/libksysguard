@@ -69,6 +69,15 @@ namespace KSysGuard
         };
         Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
 
+        enum Error {
+            Unknown = 0,
+            InvalidPid,
+            InvalidParameter,
+            InsufficientPermissions,
+            ProcessDoesNotExistOrZombie,
+            NotSupported,
+        };
+
         /**
          *  Update all the process information.  After calling this, /proc or equivalent is scanned and
          *  the signals processChanged, etc  are emitted.
@@ -86,6 +95,11 @@ namespace KSysGuard
          *  Call updateAllProcesses() to actually fetch the process information.
          */
         Process *getProcess(long pid) const;
+
+        /**
+         *  Get the error code for the last command that failed.
+         */
+        Error lastError() const;
 
         /**
          *  Kill the specified process.  You may not have the privilege to kill the process.

@@ -146,6 +146,7 @@ class ProcessModelPrivate : public QObject
         void queryForAndUpdateAllXWindows();
 #endif
 #endif
+        virtual void timerEvent ( QTimerEvent * event ); ///< Call dataChanged() for all the processes in mPidsToUpdate
         /** @see setIsLocalhost */
         bool mIsLocalhost;
 
@@ -198,6 +199,9 @@ class ProcessModelPrivate : public QObject
 
         /** The hostname */
         QString mHostName;
+        bool mHaveTimer;
+        int mTimerId;
+        QList<long> mPidsToUpdate;  ///< A list of pids that we need to emit dataChanged() for regularly
 
 #ifdef HAVE_XRES
         bool mHaveXRes; ///< True if the XRes extension is available at run time
