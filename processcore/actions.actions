@@ -529,6 +529,7 @@ Description[pa]=CPU ਸੈਡੀਊਲਰ ਬਦਲੋ, ਜੋ ਕਿ ਦਿੱ�
 Description[pl]=Zmiana planisty, który jest używany do określania sposobu uruchamiania podanego procesu
 Description[pt]=Mudar o escalonador do CPU que é usado para agendar a execução de um dado processo
 Description[pt_BR]=Altera o escalonador do CPU que é usado para agendar a execução de um processo específico
+Description[ro]=Schimbă planificatorul de procesor care să planifice rularea unui anumit proces
 Description[ru]=Смена планировщика и приоритета для выбранного процесса
 Description[si]=දෙනලද සැකසුම කාර්‍ය්ය සටහන් කිරීම සඳහා CPU කාර්‍යය සටහන වෙනස් කරන්න
 Description[sk]=Zmeniť CPU plánovač pre daný proces
