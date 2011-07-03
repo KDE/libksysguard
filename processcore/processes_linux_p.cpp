@@ -373,10 +373,15 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
 
     //cmdline separates parameters with the NULL character
     if(!process->command.isEmpty()) {
-        if(process->command.startsWith(process->name)) {
-            int index = process->command.indexOf(QChar('\0'));
-            process->name = process->command.left(index);
-        }
+        //extract non-truncated name from cmdline
+        int zeroIndex = process->command.indexOf(QChar('\0'));
+        int processNameStart = process->command.lastIndexOf(QChar('/'), zeroIndex);
+        if(processNameStart == -1)
+            processNameStart = 0;
+        else
+            processNameStart++;
+        process->name = process->command.mid(processNameStart, zeroIndex - processNameStart);
+
         process->command.replace('\0', ' ');
     }
 
