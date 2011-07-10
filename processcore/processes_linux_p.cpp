@@ -380,7 +380,9 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
             processNameStart = 0;
         else
             processNameStart++;
-        process->name = process->command.mid(processNameStart, zeroIndex - processNameStart);
+        QString nameFromCmdLine = process->command.mid(processNameStart, zeroIndex - processNameStart);
+        if(nameFromCmdLine.startsWith(process->name))
+            process->name = nameFromCmdLine;
 
         process->command.replace('\0', ' ');
     }
