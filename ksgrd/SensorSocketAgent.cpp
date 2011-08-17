@@ -35,10 +35,10 @@ SensorSocketAgent::SensorSocketAgent( SensorManager *sm )
   : SensorAgent( sm )
 {
 
-  connect( &mSocket, SIGNAL( error( QAbstractSocket::SocketError ) ), SLOT( error( QAbstractSocket::SocketError ) ) );
-  connect( &mSocket, SIGNAL( bytesWritten( qint64 ) ), SLOT( msgSent( ) ) );
-  connect( &mSocket, SIGNAL( readyRead() ), SLOT( msgRcvd() ) );
-  connect( &mSocket, SIGNAL( disconnected() ), SLOT( connectionClosed() ) );
+  connect( &mSocket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(error(QAbstractSocket::SocketError)) );
+  connect( &mSocket, SIGNAL(bytesWritten(qint64)), SLOT(msgSent()) );
+  connect( &mSocket, SIGNAL(readyRead()), SLOT(msgRcvd()) );
+  connect( &mSocket, SIGNAL(disconnected()), SLOT(connectionClosed()) );
 }
 
 SensorSocketAgent::~SensorSocketAgent()

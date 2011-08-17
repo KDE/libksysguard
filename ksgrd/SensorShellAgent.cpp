@@ -57,14 +57,14 @@ bool SensorShellAgent::start( const QString &host, const QString &shell,
   mShell = shell;
   mCommand = command;
 
-  connect( mDaemon, SIGNAL(  error ( QProcess::ProcessError  ) ),
-           SLOT( daemonError( QProcess::ProcessError ) ) );
-  connect( mDaemon, SIGNAL(  finished ( int, QProcess::ExitStatus ) ),
-           SLOT( daemonExited( int, QProcess::ExitStatus ) ) );
-  connect( mDaemon, SIGNAL( readyReadStandardOutput() ),
-           SLOT( msgRcvd() ) );
-  connect( mDaemon, SIGNAL( readyReadStandardError() ),
-           SLOT( errMsgRcvd() ) );
+  connect( mDaemon, SIGNAL(error(QProcess::ProcessError)),
+           SLOT(daemonError(QProcess::ProcessError)) );
+  connect( mDaemon, SIGNAL(finished(int,QProcess::ExitStatus)),
+           SLOT(daemonExited(int,QProcess::ExitStatus)) );
+  connect( mDaemon, SIGNAL(readyReadStandardOutput()),
+           SLOT(msgRcvd()) );
+  connect( mDaemon, SIGNAL(readyReadStandardError()),
+           SLOT(errMsgRcvd()) );
 
   if ( !command.isEmpty() ) {
     *mDaemon << KShell::splitArgs(command);

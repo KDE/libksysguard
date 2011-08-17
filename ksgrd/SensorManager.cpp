@@ -253,8 +253,8 @@ bool SensorManager::engage( const QString &hostName, const QString &shell,
     }
 
     mAgents.insert( hostName, agent );
-    connect( agent, SIGNAL( reconfigure( const SensorAgent* ) ),
-             SLOT( reconfigure( const SensorAgent* ) ) );
+    connect( agent, SIGNAL(reconfigure(const SensorAgent*)),
+             SLOT(reconfigure(const SensorAgent*)) );
 
     emit hostAdded(agent,hostName);
     return true;
