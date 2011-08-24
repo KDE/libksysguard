@@ -535,6 +535,7 @@ Description[el]=
 Description[en_GB]=Change which CPU scheduler is to schedule the running of a given process
 Description[es]=Cambiar cómo el planificador de CPU decidirá la ejecución de un proceso dado
 Description[et]=Määramine, kuidas CPU planeerija ajastab määratud protsessi töö
+Description[eu]=Aldatu zein PUZ antolatzailek antolatuko duen emandako prozesu baten exekuzioa
 Description[fi]=Vaihda minkä suoritinajoittajan on ajoitettava tietty suoritettava prosessi
 Description[fr]=Modifie quel ordonnanceur de processeur doit gérer l'exécution d'un processus donné
 Description[fy]=Oanjaan hokker CPU de oantsjutte proses foar syn rekkening nimme moat
