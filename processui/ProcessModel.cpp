@@ -380,9 +380,9 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
 
 #ifdef Q_WS_X11
 void ProcessModelPrivate::setupWindows() {
-    connect( KWindowSystem::self(), SIGNAL(windowChanged (WId, unsigned int )), this, SLOT(windowChanged(WId, unsigned int)));
-    connect( KWindowSystem::self(), SIGNAL(windowAdded (WId )), this, SLOT(windowAdded(WId)));
-    connect( KWindowSystem::self(), SIGNAL(windowRemoved (WId )), this, SLOT(windowRemoved(WId)));
+    connect( KWindowSystem::self(), SIGNAL(windowChanged(WId,uint)), this, SLOT(windowChanged(WId,uint)));
+    connect( KWindowSystem::self(), SIGNAL(windowAdded(WId)), this, SLOT(windowAdded(WId)));
+    connect( KWindowSystem::self(), SIGNAL(windowRemoved(WId)), this, SLOT(windowRemoved(WId)));
 
     //Add all the windows that KWin is managing - i.e. windows that the user can see
     QList<WId>::ConstIterator it;
@@ -475,13 +475,13 @@ void ProcessModelPrivate::setupProcesses() {
 
     mProcesses = new KSysGuard::Processes(mHostName);
 
-    connect( mProcesses, SIGNAL(processChanged(KSysGuard::Process *, bool)), this, SLOT(processChanged(KSysGuard::Process *, bool)));
-    connect( mProcesses, SIGNAL(beginAddProcess(KSysGuard::Process *)), this, SLOT(beginInsertRow( KSysGuard::Process *)));
+    connect( mProcesses, SIGNAL(processChanged(KSysGuard::Process*,bool)), this, SLOT(processChanged(KSysGuard::Process*,bool)));
+    connect( mProcesses, SIGNAL(beginAddProcess(KSysGuard::Process*)), this, SLOT(beginInsertRow(KSysGuard::Process*)));
     connect( mProcesses, SIGNAL(endAddProcess()), this, SLOT(endInsertRow()));
-    connect( mProcesses, SIGNAL(beginRemoveProcess(KSysGuard::Process *)), this, SLOT(beginRemoveRow( KSysGuard::Process *)));
+    connect( mProcesses, SIGNAL(beginRemoveProcess(KSysGuard::Process*)), this, SLOT(beginRemoveRow(KSysGuard::Process*)));
     connect( mProcesses, SIGNAL(endRemoveProcess()), this, SLOT(endRemoveRow()));
-    connect( mProcesses, SIGNAL(beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)), this,
-            SLOT(beginMoveProcess(KSysGuard::Process *, KSysGuard::Process *)));
+    connect( mProcesses, SIGNAL(beginMoveProcess(KSysGuard::Process*,KSysGuard::Process*)), this,
+            SLOT(beginMoveProcess(KSysGuard::Process*,KSysGuard::Process*)));
     connect( mProcesses, SIGNAL(endMoveProcess()), this, SLOT(endMoveRow()));
     mNumProcessorCores = mProcesses->numberProcessorCores();
     if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
@@ -1211,7 +1211,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->uid == process->euid)
                 return d->getUsernameForUser(process->uid, false);
             else
-                return d->getUsernameForUser(process->uid, false) + ", " + d->getUsernameForUser(process->euid, false);
+                return QString(d->getUsernameForUser(process->uid, false) + ", " + d->getUsernameForUser(process->euid, false));
         case HeadingNiceness:
             switch(process->scheduler) {
               case KSysGuard::Process::Other:
@@ -1245,7 +1245,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 if(total < 0.5)
                     return "";
 
-                return QString::number((int)(total+0.5)) + '%';
+                return QString(QString::number((int)(total+0.5)) + '%');
             }
         case HeadingCPUTime: {
             qlonglong seconds = (process->userTime + process->sysTime)/100;
@@ -1395,7 +1395,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(!process->tty.isEmpty())
                 tooltip += i18n( "<br />Running on: %1", QString(process->tty));
             if(!tracer.isEmpty())
-                return tooltip + "<br />" + tracer;
+                return QString::fromLatin1("%1<br />%2").arg(tooltip).arg(tracer);
             return tooltip;
         }
 
@@ -1405,11 +1405,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(!process->tty.isEmpty())
                 tooltip += i18n( "<br /><br />Running on: %1", QString(process->tty));
             if(tracer.isEmpty()) return tooltip;
-            return tooltip + "<br />" + tracer;
+            return QString::fromLatin1("%1<br />%2").arg(tooltip).arg(tracer);
         }
         case HeadingUser: {
             if(!tracer.isEmpty())
-                return d->getTooltipForUser(process) + "<br />" + tracer;
+                return QString(d->getTooltipForUser(process) + "<br />" + tracer);
             return d->getTooltipForUser(process);
         }
         case HeadingNiceness: {
@@ -1436,7 +1436,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip += i18n("<br/>I/O Class: %1", process->ioPriorityClassAsString() );
             }
                 if(tracer.isEmpty()) return tooltip;
-            return tooltip + "<br />" + tracer;
+            return QString(tooltip + "<br />" + tracer);
         }
         case HeadingCPUUsage:
         case HeadingCPUTime: {
@@ -1479,7 +1479,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
 
             if(!tracer.isEmpty())
-                return tooltip + "<br />" + tracer;
+                return QString(tooltip + "<br />" + tracer);
             return tooltip;
         }
         case HeadingVmSize: {
@@ -1542,7 +1542,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     tooltip += "<li>" + values.at(i)->name + "</li>";
             }
             if(!tooltip.isEmpty())
-                return "<qt><p style='white-space:pre'><ul>" + tooltip + "</ul>";
+                return QString("<qt><p style='white-space:pre'><ul>" + tooltip + "</ul>");
             return QVariant(QVariant::String);
         }
 
@@ -1586,7 +1586,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->uid == process->euid)
                 return d->getUsernameForUser(process->uid, false);
             else
-                return d->getUsernameForUser(process->uid, false) + ", " + d->getUsernameForUser(process->euid, false);
+                return QString(d->getUsernameForUser(process->uid, false) + ", " + d->getUsernameForUser(process->euid, false));
         case HeadingNiceness:
             return process->niceLevel;
         case HeadingTty:
