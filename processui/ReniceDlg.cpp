@@ -40,7 +40,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	setButtons( Ok | Cancel );
 	previous_cpuscheduler = 0;
 
-	connect( this, SIGNAL(okClicked() ), SLOT(slotOk() ) );
+	connect( this, SIGNAL(okClicked()), SLOT(slotOk()) );
 
 	if(currentIoSched == KSysGuard::Process::None) {
 		// CurrentIoSched == 0 means that the priority is set automatically.
