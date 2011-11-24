@@ -183,6 +183,21 @@ void testProcess::testHistories() {
     delete processController;
 }
 
+void testProcess::testUpdateOrAddProcess() {
+    KSysGuard::Processes *processController = new KSysGuard::Processes();
+    processController->updateAllProcesses();
+    KSysGuard::Process *process;
+    // Make sure that this doesn't crash at least
+    process = processController->getProcess(0);
+    process = processController->getProcess(1);
+    if (process)
+        QCOMPARE(process->pid, 1l);
+
+    // Make sure that this doesn't crash at least
+    processController->updateOrAddProcess(1);
+    processController->updateOrAddProcess(0);
+    processController->updateOrAddProcess(-1);
+}
 void testProcess::testHistoriesWithWidget() {
     KSysGuardProcessList *processList = new KSysGuardProcessList;
     processList->treeView()->setColumnHidden(13, false);

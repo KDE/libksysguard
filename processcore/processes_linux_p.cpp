@@ -185,7 +185,8 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 }
 
 long ProcessesLocal::getParentPid(long pid) {
-    Q_ASSERT(pid != 0);
+    if (pid <= 0)
+        return -1;
     d->mFile.setFileName("/proc/" + QString::number(pid) + "/stat");
     if(!d->mFile.open(QIODevice::ReadOnly))
         return -1;      /* process has terminated in the meantime */
