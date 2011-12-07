@@ -1266,7 +1266,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return formatMemoryInfo(process->vmRSS - process->vmURSS, d->mUnits);
         case HeadingCommand:
             {
-                return process->command;
+		return process->command.replace('\n',' ');
 // It would be nice to embolden the process name in command, but this requires that the itemdelegate to support html text
 //                QString command = process->command;
 //                command.replace(process->name, "<b>" + process->name + "</b>");
