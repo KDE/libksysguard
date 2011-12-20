@@ -99,7 +99,7 @@ void Scripting::runScript(const QString &path, const QString &name) {
     mScriptPath = path;
     mScriptName = name;
 
-    QString fileName = path + "index.html";
+    QUrl fileName = QUrl::fromLocalFile(path + "index.html");
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
         connect(mScriptingHtmlDialog, SIGNAL(closeClicked()), SLOT(stopAllScripts()));
@@ -169,7 +169,7 @@ void Scripting::loadContextMenu() {
             action->setIcon(QIcon(desktopFile.readIcon()));
             QString scriptPath = script;
             scriptPath.truncate(scriptPath.lastIndexOf('/'));
-            action->setProperty("scriptPath", scriptPath + '/');
+            action->setProperty("scriptPath", QString(scriptPath + QLatin1Char('/')));
             connect(action, SIGNAL(triggered(bool)), SLOT(runScriptSlot()));
             mProcessList->addAction(action);
             mActions << action;
