@@ -421,11 +421,11 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
         return;
     for (uint i=0; i < count; ++i) {
         WId wid = children[i];
-        QMap<qlonglong, XID>::iterator i = mXResClientResources.lowerBound(-(qlonglong)(wid));
-        if(i == mXResClientResources.end())
+        QMap<qlonglong, XID>::iterator iter = mXResClientResources.lowerBound(-(qlonglong)(wid));
+        if(iter == mXResClientResources.end())
             continue; //We couldn't find it this time :-/
 
-        if(-i.key() != (qlonglong)(wid & ~i.value()))
+        if(-iter.key() != (qlonglong)(wid & ~iter.value()))
             continue; //Already added this window
 
         //Get the PID for this window if we do not know it
@@ -438,7 +438,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
         if(!pid)
             continue;
         //We found a window with this client
-        mXResClientResources.erase(i);
+        mXResClientResources.erase(iter);
         KSysGuard::Process *process = mProcesses->getProcess(pid);
         if(!process) return; //shouldn't really happen.. maybe race condition etc
         unsigned long previousPixmapBytes = process->pixmapBytes;
