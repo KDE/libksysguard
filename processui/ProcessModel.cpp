@@ -421,11 +421,11 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
         return;
     for (uint i=0; i < count; ++i) {
         WId wid = children[i];
-        QMap<qlonglong, XID>::iterator i = mXResClientResources.lowerBound(-(qlonglong)(wid));
-        if(i == mXResClientResources.end())
+        QMap<qlonglong, XID>::iterator iter = mXResClientResources.lowerBound(-(qlonglong)(wid));
+        if(iter == mXResClientResources.end())
             continue; //We couldn't find it this time :-/
 
-        if(-i.key() != (qlonglong)(wid & ~i.value()))
+        if(-iter.key() != (qlonglong)(wid & ~iter.value()))
             continue; //Already added this window
 
         //Get the PID for this window if we do not know it
@@ -438,7 +438,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
         if(!pid)
             continue;
         //We found a window with this client
-        mXResClientResources.erase(i);
+        mXResClientResources.erase(iter);
         KSysGuard::Process *process = mProcesses->getProcess(pid);
         if(!process) return; //shouldn't really happen.. maybe race condition etc
         unsigned long previousPixmapBytes = process->pixmapBytes;
@@ -1266,7 +1266,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return formatMemoryInfo(process->vmRSS - process->vmURSS, d->mUnits);
         case HeadingCommand:
             {
-                return process->command;
+		return process->command.replace('\n',' ');
 // It would be nice to embolden the process name in command, but this requires that the itemdelegate to support html text
 //                QString command = process->command;
 //                command.replace(process->name, "<b>" + process->name + "</b>");
