@@ -99,7 +99,7 @@ void Scripting::runScript(const QString &path, const QString &name) {
     mScriptPath = path;
     mScriptName = name;
 
-    QString fileName = path + "index.html";
+    QUrl fileName = QUrl::fromLocalFile(path + "index.html");
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
         connect(mScriptingHtmlDialog, SIGNAL(closeClicked()), SLOT(stopAllScripts()));
