@@ -132,11 +132,7 @@ int Processes::processCount() const
 
 bool Processes::updateProcess( Process *ps, long ppid)
 {
-    if (ppid < 0)
-        return false;
-    Process *parent = d->mProcesses.value(ppid);
-    if(!parent)
-        parent = &d->mFakeProcess;
+    Process *parent = d->mProcesses.value(ppid, &d->mFakeProcess);
     Q_ASSERT(parent);  //even init has a non-null parent - the mFakeProcess
 
     if(ps->parent != parent) {
