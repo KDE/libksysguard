@@ -427,7 +427,18 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
     int numProcesses = selectedIndexes.size();
 
-    if(numProcesses == 0) return;  //No processes selected, so no context menu
+    if(numProcesses == 0) {
+        //No processes selected, so no process context menu
+
+        //Check just incase we have no columns visible.  In which case show the column context menu
+        //so that users can unhide columns if there are no columns visible
+        for(int i = 0; i < d->mFilterModel.columnCount(); ++i) {
+            if(!d->mUi->treeView->header()->isSectionHidden(i))
+                return;
+        }
+        showColumnContextMenu(point);
+        return;
+    }
 
     QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
     KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
@@ -580,20 +591,31 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     QMenu menu;
 
     QAction *action;
+
+    int num_headings = d->mFilterModel.columnCount();
+
     int index = d->mUi->treeView->header()->logicalIndexAt(point);
     if(index >= 0) {
-        //selected a column.  Give the option to hide it
-        action = new QAction(&menu);
-        action->setData(-index-1); //We set data to be negative (and minus 1) to hide a column, and positive to show a column
-        action->setText(i18n("Hide Column '%1'", d->mFilterModel.headerData(index, Qt::Horizontal, Qt::DisplayRole).toString()));
-        menu.addAction(action);
-        if(d->mUi->treeView->header()->sectionsHidden()) {
-            menu.addSeparator();
+        bool anyOtherVisibleColumns = false;
+        for(int i = 0; i < num_headings; ++i) {
+            if(i != index && !d->mUi->treeView->header()->isSectionHidden(i)) {
+                anyOtherVisibleColumns = true;
+                break;
+            }
+        }
+        if(anyOtherVisibleColumns) {
+            //selected a column.  Give the option to hide it
+            action = new QAction(&menu);
+            action->setData(-index-1); //We set data to be negative (and minus 1) to hide a column, and positive to show a column
+            action->setText(i18n("Hide Column '%1'", d->mFilterModel.headerData(index, Qt::Horizontal, Qt::DisplayRole).toString()));
+            menu.addAction(action);
+            if(d->mUi->treeView->header()->sectionsHidden()) {
+                menu.addSeparator();
+            }
         }
     }
 
     if(d->mUi->treeView->header()->sectionsHidden()) {
-        int num_headings = d->mFilterModel.columnCount();
         for(int i = 0; i < num_headings; ++i) {
             if(d->mUi->treeView->header()->isSectionHidden(i)) {
 #ifndef HAVE_XRES
