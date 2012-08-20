@@ -128,7 +128,6 @@ ProcessesLocal::ProcessesLocal() : d(new Private())
 {
 
 }
-
 bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *process)
 {
     mFile.setFileName(dir + "status");
@@ -147,7 +146,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 	  case 'N':
 	    if((unsigned int)size > sizeof("Name:") && qstrncmp(mBuffer, "Name:", sizeof("Name:")-1) == 0) {
 	        if(process->command.isEmpty())
-                process->name = QString::fromLocal8Bit(mBuffer + sizeof("Name:")-1, size-sizeof("Name:")+1).trimmed();
+                process->setName(QString::fromLocal8Bit(mBuffer + sizeof("Name:")-1, size-sizeof("Name:")+1).trimmed());
 	        if(++found == 5) goto finish;
 	    }
 	    break;
@@ -198,8 +197,14 @@ long ProcessesLocal::getParentPid(long pid) {
     }
 
     d->mFile.close();
-    int current_word = 0;
     char *word = d->mBuffer;
+    //The command name is the second parameter, and this ends with a closing bracket.  So find the last
+    //closing bracket and start from there
+    word = strrchr(word, ')');
+    if (!word)
+        return -1;
+    word++; //Nove to the space after the last ")"
+    int current_word = 1;
 
     while(true) {
         if(word[0] == ' ' ) {
@@ -231,8 +236,14 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
         mFile.close();
     }
 
-    int current_word = 0;  //count from 0
     char *word = mBuffer;
+    //The command name is the second parameter, and this ends with a closing bracket.  So find the last
+    //closing bracket and start from there
+    word = strrchr(word, ')');
+    if (!word)
+        return false;
+    word++; //Nove to the space after the last ")"
+    int current_word = 1; //We've skipped the process ID and now at the end of the command name
     char status='\0';
     unsigned long long vmSize = 0;
     unsigned long long vmRSS = 0;
@@ -383,7 +394,7 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
             processNameStart++;
         QString nameFromCmdLine = process->command.mid(processNameStart, zeroIndex - processNameStart);
         if(nameFromCmdLine.startsWith(process->name))
-            process->name = nameFromCmdLine;
+            process->setName(nameFromCmdLine);
 
         process->command.replace('\0', ' ');
     }
