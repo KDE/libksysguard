@@ -30,7 +30,7 @@
 
 class QModelIndex;
 
-#ifdef Q_CC_MSVC
+#ifdef Q_OS_WIN
 // this workaround is needed to make krunner link under msvc
 // please keep it this way even if you port this library to have a _export.h header file
 #define KSYSGUARD_EXPORT
