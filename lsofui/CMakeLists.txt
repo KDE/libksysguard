@@ -23,7 +23,7 @@ set(ksysguardlsofwidgets_PART_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/ksysguardlsofwidgets.cpp
 )
 
-kde4_add_widget_files(${ksysguardlsofwidgets_PART_SRCS} ksysguardlsof.widgets)
+kde4_add_widget_files(ksysguardlsofwidgets_PART_SRCS ksysguardlsof.widgets)
 
 kde4_add_plugin(ksysguardlsofwidgets ${ksysguardlsofwidgets_PART_SRCS})
 
