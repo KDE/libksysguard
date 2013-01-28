@@ -113,6 +113,7 @@ Name[ko]=프로세스를 죽이거나 멈추기
 Name[lt]=Nužudyti arba sustabdyti (ir t.t.) procesą
 Name[lv]=Nokaut vai apturēt procesus
 Name[ml]=ഒരു പ്രക്രിയയെ കൊല്ലുക അല്ലെങ്കില്‍ നിര്‍ത്തുക
+Name[mr]=प्रक्रीया बंद करा
 Name[nb]=Drep eller stopp osv. en prosess
 Name[nds]=En Perzess anhollen oder afscheten
 Name[nl]=Breek af of stop etc. een proces
@@ -178,6 +179,7 @@ Description[lt]=Siunčia nurodytą signalą nurodytam procesui
 Description[lv]=Nosūta norādītajam procesam norādīto signālu 
 Description[mk]=Испраќа даден сигнал до одреден процес
 Description[ml]=ഒരു പ്രക്രിയയിലേക്ക് ഒരു സൂചന അയയ്ക്കുക
+Description[mr]=दिलेल्या प्रक्रीयेस दिलेला संकेत पाठवितो
 Description[nb]=Sender et gitt signal til en prosess
 Description[nds]=Stüert en angeven Perzess en angeven Signaal to
 Description[nl]=Stuurt een gegeven signaal naar een gegeven proces
@@ -246,6 +248,7 @@ Name[lt]=Proceso prioriteto keitimas
 Name[lv]=Maina procesa prioritāti
 Name[mk]=Промена на приоритетот на процес
 Name[ml]=ഒരു പ്രക്രിയയുടെ മുന്‍ഗണന മാറ്റുക
+Name[mr]=प्रक्रीयेची प्राधान्यता बदला
 Name[nb]=Endre kjøreprioritet for en prosess
 Name[nds]=De Prioriteet vun en Perzess ännern
 Name[nl]=Wijzig de prioriteit van een proces
@@ -310,6 +313,7 @@ Description[lt]=Pakeičia nurodyto proceso „nice“ vertę
 Description[lv]=Maina procesa nice parametru
 Description[mk]=Го менува приоритетот на даден процес
 Description[ml]=ഒരു പ്രക്രിയയുടെ നൈസ് വില മാറ്റുക
+Description[mr]=दिलेल्या प्रक्रीयेचा चांगुलपणा बदला
 Description[nb]=Endre snillverdien for en gitt prosess
 Description[nds]=Den "nice"-Weert vun en angeven Perzess ännern
 Description[nl]=Wijzig de nice-waarde van een gegeven proces
@@ -375,6 +379,7 @@ Name[ko]=입출력 스케줄러와 우선 순위 바꾸기
 Name[lt]=Pakeičia įvesties/išvesties planavimą ir prioritetą
 Name[lv]=Maina IO plānotāju un prioritāti
 Name[ml]=ഐഒ ഷെഡ്യൂളറും മുന്‍ഗണനയും മാറ്റുക
+Name[mr]=IO नियोजक व प्राधान्यता बदला
 Name[nb]=Endre IU-fordeler og prioritet
 Name[nds]=Den In-/Utgaavplaner un de Prioriteet ännern
 Name[nl]=Wijzig IO-scheduler en prioriteit
@@ -436,6 +441,7 @@ Description[ko]=프로세스의 읽기 및 쓰기 우선 순위 바꾸기
 Description[lt]=Keičia konkretaus proceso įvesties ir išvesties prioritetus
 Description[lv]=Maina kā tiek priotarizēti procesa lasīšanas un rakstīšanas pieprasījumi
 Description[ml]=ഒരു പ്രക്രിയയുടെ എഴുതാനും വായിക്കാനുള്ള മുന്‍ഗണന മാറ്റുക
+Description[mr]=दिलेल्या प्रक्रीयेचे वाचन व लिखाण यांना कशी प्राधान्यता द्यायची ते बदला
 Description[nb]=Endre hvordan lesing og skriving for en gitt prosess prioriteres
 Description[nds]=Topassen, wodennig en Perzess sien Lees- un Schrievopgaven en Prioriteet towiest warrt
 Description[nl]=Wijzig hoe de lees- en schrijfopdrachten van een gegeven proces hun prioriteit krijgen
@@ -561,6 +567,7 @@ Description[ko]=주어진 프로세스를 실행할 때 사용할 CPU 스케줄�
 Description[lt]=Su CPU planuokliu keisti nurodyto proceso veikimo tvarką
 Description[lv]=Maina dotā procesa CPU plānotāju 
 Description[ml]=ഒരു പ്രക്രിയ പ്രവര്‍ത്തിപ്പിയ്ക്കേണ്ടതു് ഏതു് സിപിയു ഷെഡ്യൂളറാണെന്നു് മാറ്റുക
+Description[mr]=कोणता CPU नियोजक दिलेल्या प्रक्रीयेचे नियोजन करेल ते बदला
 Description[nb]=Endre hvilken prosessor-fordeler som brukes til å styre kjøringen for en gitt prosess
 Description[nds]=Den bruukten CPU-Planer för't Utföhren vun en angeven Perzess ännern
 Description[nl]=Wijzig welke CPU-scheduler het draaien van een gegeven proces verdeelt
