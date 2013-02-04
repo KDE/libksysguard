@@ -23,6 +23,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
+#include <kglobal.h>
 
 #include "SensorClient.h"
 #include "SensorManager.h"
@@ -34,6 +35,8 @@
   Should be set to 0 in any production version.
 */
 #define SA_TRACE 0
+
+static const KCatalogLoader loader("ksrgd");
 
 using namespace KSGRD;
 
