@@ -36,7 +36,7 @@
 */
 #define SA_TRACE 0
 
-static const KCatalogLoader loader("ksrgd");
+static const KCatalogLoader loader("ksgrd");
 
 using namespace KSGRD;
 
