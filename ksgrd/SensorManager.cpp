@@ -143,8 +143,12 @@ void SensorManager::retranslate()
   mDict.insert( QLatin1String( "list" ), i18n( "Table" ) );
   mDict.insert( QLatin1String( "apm" ), i18n( "Advanced Power Management" ) );
   mDict.insert( QLatin1String( "acpi" ), i18n( "ACPI" ) );
+  mDict.insert( QLatin1String( "Cooling_Device" ), i18n( "Cooling Device" ) );
+  mDict.insert( QLatin1String( "Current State" ), i18n( "Current State" ) );
   mDict.insert( QLatin1String( "thermal_zone" ), i18n( "Thermal Zone" ) );
+  mDict.insert( QLatin1String( "Thermal_Zone" ), i18n( "Thermal Zone" ) );
   mDict.insert( QLatin1String( "temperature" ), i18n( "Temperature" ) );
+  mDict.insert( QLatin1String( "Temperature" ), i18n( "Temperature" ) );
   mDict.insert( QLatin1String( "AverageTemperature" ), i18n( "Average CPU Temperature" ) );
   mDict.insert( QLatin1String( "fan" ), i18n( "Fan" ) );
   mDict.insert( QLatin1String( "state" ), i18n( "State" ) );
