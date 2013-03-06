@@ -48,6 +48,7 @@ namespace KSysGuard
   {
     public:
       Private(Processes *q_ptr) {
+        mFakeProcess.parent = &mFakeProcess;
         mAbstractProcesses = 0;
         mHistoricProcesses = 0;
         mIsLocalHost = true;
