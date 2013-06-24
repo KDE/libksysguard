@@ -251,7 +251,7 @@ void KSysGuard::Process::setVmRSS(qlonglong _vmRSS) {
     changes |= Process::VmRSS;
 }
 void KSysGuard::Process::setVmURSS(qlonglong _vmURSS) {
-    if(vmURSSChange != 0 || vmURSSChange != 0)
+    if(vmURSSChange != 0 || vmURSS != 0)
         vmURSSChange = _vmURSS - vmURSS;
     if(vmURSS == _vmURSS) return;
     vmURSS = _vmURSS;

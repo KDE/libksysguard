@@ -70,9 +70,8 @@ function parseSmaps() {
             dataBlock.dev = headingMatch[4];     /* Device (major,minor) */
             dataBlock.inode = headingMatch[5];   /* inode on the device - 0 means no inode for the memory region - e.g bss */
             dataBlock.pathname = headingMatch[6];
-        } else if(smaps[i] !== "") {
-            throw("Could not parse '" + smaps[i]) + "'";
         }
+        // ignore unknown lines
     }
     if(dataBlock)
         data.push(dataBlock);

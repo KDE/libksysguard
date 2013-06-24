@@ -326,22 +326,36 @@ QSet<long> ProcessesATop::getAllPids( )
 }
 
 bool ProcessesATop::sendSignal(long pid, int sig) {
+    Q_UNUSED(pid);
+    Q_UNUSED(sig);
+
     errorCode = Processes::NotSupported;
     return false;
 }
 
 bool ProcessesATop::setNiceness(long pid, int priority) {
+    Q_UNUSED(pid);
+    Q_UNUSED(priority);
+
     errorCode = Processes::NotSupported;
     return false;
 }
 
 bool ProcessesATop::setScheduler(long pid, int priorityClass, int priority) {
+    Q_UNUSED(pid);
+    Q_UNUSED(priorityClass);
+    Q_UNUSED(priority);
+
     errorCode = Processes::NotSupported;
     return false;
 }
 
 
 bool ProcessesATop::setIoNiceness(long pid, int priorityClass, int priority) {
+    Q_UNUSED(pid);
+    Q_UNUSED(priorityClass);
+    Q_UNUSED(priority);
+
     errorCode = Processes::NotSupported;
     return false;
 }
