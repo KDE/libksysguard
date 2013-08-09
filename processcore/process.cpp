@@ -20,6 +20,7 @@
 */
 
 #include "process.h"
+#include <KDE/KLocalizedString>
 
 
 KSysGuard::Process::Process() {

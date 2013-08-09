@@ -96,7 +96,6 @@ Processes::Private::~Private() {
 
 Processes::Processes(const QString &host, QObject *parent) : QObject(parent), d(new Private(this))
 {
-    KGlobal::locale()->insertCatalog("processcore");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
     if(host.isEmpty()) {
         d->mAbstractProcesses = new ProcessesLocal();
     } else {
