@@ -1404,21 +1404,58 @@ bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
         if(obj == d->mUi->treeView) {
-            if(  keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return) {
+            if(keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return) {
                 d->mUi->treeView->selectionModel()->select(d->mUi->treeView->currentIndex(), QItemSelectionModel::Select | QItemSelectionModel::Rows);
                 showProcessContextMenu(d->mUi->treeView->currentIndex());
-            }
-        } else {
-            // obj must be txtFilter
-            if(keyEvent->matches(QKeySequence::MoveToNextLine) || keyEvent->matches(QKeySequence::SelectNextLine) ||
-                    keyEvent->matches(QKeySequence::MoveToPreviousLine) || keyEvent->matches(QKeySequence::SelectPreviousLine) ||
-                    keyEvent->matches(QKeySequence::MoveToNextPage) ||  keyEvent->matches(QKeySequence::SelectNextPage) ||
-                    keyEvent->matches(QKeySequence::MoveToPreviousPage) ||  keyEvent->matches(QKeySequence::SelectPreviousPage) ||
-                    keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
-            {
-                QApplication::sendEvent(d->mUi->treeView, event);
+                return true;
+
+            } else if(keyEvent->matches(QKeySequence::MoveToPreviousLine) || keyEvent->matches(QKeySequence::SelectPreviousLine) ||
+                    keyEvent->matches(QKeySequence::MoveToPreviousPage) ||  keyEvent->matches(QKeySequence::SelectPreviousPage)) {
+
+                if (d->mUi->treeView->selectionModel()->selectedRows().size() == 1 &&
+                        d->mUi->treeView->selectionModel()->selectedRows().first().row() == 0) {
+                    // when first row is selected, pressing up or pgup moves to the textfield
+                    d->mUi->txtFilter->setFocus();
+                    return true;
+                }
+
+            } else if (!keyEvent->text().isEmpty() && keyEvent->key() != Qt::Key_Tab) {
+                // move to textfield and forward keyevent if user starts typing from treeview
+                d->mUi->txtFilter->setFocus();
+                QApplication::sendEvent(d->mUi->txtFilter, event);
                 return true;
             }
+        } else {
+            Q_ASSERT(obj == d->mUi->txtFilter);
+            if (d->mUi->treeView->model()->rowCount() == 0) {
+                // treeview is empty, do nothing
+                return false;
+            }
+
+            if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return) {
+                // pressing enter will send enter to the first row in the list
+                // the focusin eventfilter will make sure the first row is selected if there was
+                // no previous selection
+                d->mUi->treeView->setFocus();
+                QApplication::sendEvent(d->mUi->treeView, event);
+                return true;
+
+            } else if(keyEvent->matches(QKeySequence::MoveToNextLine) || keyEvent->matches(QKeySequence::SelectNextLine) ||
+                    keyEvent->matches(QKeySequence::MoveToNextPage) ||  keyEvent->matches(QKeySequence::SelectNextPage)) {
+                // attempting to move down by down-key or pgdown, or pressing enter will move focus
+                // to the treeview
+                d->mUi->treeView->setFocus();
+                return true;
+            }
+        }
+    } else if (event->type() == QEvent::FocusIn) {
+        if (obj == d->mUi->treeView && !d->mUi->treeView->selectionModel()->hasSelection()) {
+            // treeview is focused, but there is no current selection. select the first row
+            d->mUi->treeView->setCurrentIndex(d->mUi->treeView->model()->index(0, 0));
+        } else if (obj == d->mUi->txtFilter) {
+            // text field is focused, so clear treeview selection to communicate that you will not
+            // interact with any elements in the view until the view is focused explicitly
+            d->mUi->treeView->setCurrentIndex(QModelIndex());
         }
     }
     return false;
