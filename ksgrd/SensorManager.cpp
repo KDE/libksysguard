@@ -20,7 +20,7 @@
 */
 
 #include <QApplication>
-#include <kdebug.h>
+#include <QDebug>
 #include <klocale.h>
 #include <QWidget>
 #include <QEvent>
@@ -303,7 +303,7 @@ bool SensorManager::resynchronize( const QString &hostName )
 
   mAgents.remove( hostName );
 
-  kDebug (1215) << "Re-synchronizing connection to " << hostName;
+  qDebug() << "Re-synchronizing connection to " << hostName;
 
   return engage( hostName, shell, command );
 }

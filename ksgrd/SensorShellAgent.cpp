@@ -19,7 +19,7 @@
 
 */
 
-#include <kdebug.h>
+#include <QDebug>
 #include <kprocess.h>
 #include <kshell.h>
 #include <klocale.h>
@@ -100,14 +100,14 @@ void SensorShellAgent::errMsgRcvd( )
   // But if this is extended, we will need to handle this better
   QString buf = QString::fromUtf8( buffer );
 
-  kDebug(1215) << "SensorShellAgent: Warning, received text over stderr!"
+  qDebug() << "SensorShellAgent: Warning, received text over stderr!"
                 << endl << buf << endl;
 }
 
 void SensorShellAgent::daemonExited(  int exitCode, QProcess::ExitStatus exitStatus )
 {
   Q_UNUSED(exitCode);
-  kDebug(1215) << "daemon exited, exit status "  << exitStatus;
+  qDebug() << "daemon exited, exit status "  << exitStatus;
   if ( mRetryCount--  <= 0 || (mDaemon->start(), !mDaemon->waitForStarted()) )
   {
     setDaemonOnLine( false );
@@ -122,7 +122,7 @@ void SensorShellAgent::daemonError( QProcess::ProcessError errorStatus )
   QString error;
   switch(errorStatus) {
     case QProcess::FailedToStart:
-      kDebug(1215) << "failed to run" <<  mDaemon->program().join(" ");
+      qDebug() << "failed to run" <<  mDaemon->program().join(" ");
       error = i18n("Could not run daemon program '%1'.", mDaemon->program().join(" "));
       break;
     case QProcess::Crashed:
@@ -133,7 +133,7 @@ void SensorShellAgent::daemonError( QProcess::ProcessError errorStatus )
       error = i18n("The daemon program '%1' failed.", mDaemon->program().join(" "));
   }
   setReasonForOffline(error);
-  kDebug(1215) << "Error received " << error << "(" << errorStatus << ")";
+  qDebug() << "Error received " << error << "(" << errorStatus << ")";
   setDaemonOnLine( false );
   if(sensorManager())
     sensorManager()->disengage( this ); //delete ourselves

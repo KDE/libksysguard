@@ -21,7 +21,7 @@
 
 //#include <stdlib.h>
 
-#include <kdebug.h>
+#include <QDebug>
 #include <klocale.h>
 
 #include "SensorClient.h"
@@ -51,7 +51,7 @@ bool SensorSocketAgent::start( const QString &host, const QString&,
                                const QString&, int port )
 {
   if ( port <= 0 )
-    kDebug(1215) << "SensorSocketAgent::start: Invalid port " << port;
+    qDebug() << "SensorSocketAgent::start: Invalid port " << port;
 
   setHostName( host );
   mPort = port;

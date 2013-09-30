@@ -21,7 +21,7 @@
 
 //#include <stdlib.h>
 
-#include <kdebug.h>
+#include <QDebug>
 #include <klocale.h>
 #include <kglobal.h>
 
@@ -75,7 +75,7 @@ void SensorAgent::sendRequest( const QString &req, SensorClient *client, int id 
   mInputFIFO.enqueue( new SensorRequest( req, client, id ) );
 
 #if SA_TRACE
-  kDebug(1215) << "-> " << req << "(" << mInputFIFO.count() << "/"
+  qDebug() << "-> " << req << "(" << mInputFIFO.count() << "/"
                 << mProcessingFIFO.count() << ")" << endl;
 #endif
   executeCommand();
@@ -93,7 +93,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
   }
   
 #if SA_TRACE
-  kDebug(1215) << "<- " << QString::fromUtf8(buffer, buffer.size());
+  qDebug() << "<- " << QString::fromUtf8(buffer, buffer.size());
 #endif
   int startOfAnswer = 0;  //This can become >= buffer.size(), so check before using!
   for ( int i = 0; i < buffer.size(); ++i ) {
@@ -136,7 +136,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 	if(!answer.isEmpty())
 		mAnswerBuffer << answer;
 #if SA_TRACE
-	kDebug(1215) << "<= " << mAnswerBuffer
+	qDebug() << "<= " << mAnswerBuffer
 		<< "(" << mInputFIFO.count() << "/"
 		<< mProcessingFIFO.count() << ")" << endl;
 #endif
@@ -152,7 +152,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 	  	 * ready to serve requests now. */
 		mDaemonOnLine = true;
 #if SA_TRACE
-		kDebug(1215) << "Daemon now online!";
+		qDebug() << "Daemon now online!";
 #endif
 		mAnswerBuffer.clear();
 		continue;
@@ -162,7 +162,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 
 	// remove pending request from FIFO
 	if ( mProcessingFIFO.isEmpty() ) {
-		kDebug(1215)	<< "ERROR: Received answer but have no pending "
+		qDebug()	<< "ERROR: Received answer but have no pending "
 				<< "request!" << endl;
 		mAnswerBuffer.clear();
 		continue;
@@ -180,7 +180,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 		
 	if(!mAnswerBuffer.isEmpty() && mAnswerBuffer[0] == "UNKNOWN COMMAND") {
 		/* Notify client that the sensor seems to be no longer available. */
-        kDebug(1215) << "Received UNKNOWN COMMAND for: " << req->request(); 
+        qDebug() << "Received UNKNOWN COMMAND for: " << req->request();
 		req->client()->sensorLost( req->id() );
 	} else {
 		// Notify client of newly arrived answer.
@@ -208,13 +208,13 @@ void SensorAgent::executeCommand()
     SensorRequest *req = mInputFIFO.dequeue();
 
 #if SA_TRACE
-    kDebug(1215) << ">> " << req->request().toAscii() << "(" << mInputFIFO.count()
+    qDebug() << ">> " << req->request().toAscii() << "(" << mInputFIFO.count()
                   << "/" << mProcessingFIFO.count() << ")" << endl;
 #endif
     // send request to daemon
     QString cmdWithNL = req->request() + '\n';
     if ( !writeMsg( cmdWithNL.toLatin1(), cmdWithNL.length() ) )
-      kDebug(1215) << "SensorAgent::writeMsg() failed";
+      qDebug() << "SensorAgent::writeMsg() failed";
 
     // add request to processing FIFO.
     // Note that this means that mProcessingFIFO is now responsible for managing the memory for it.
