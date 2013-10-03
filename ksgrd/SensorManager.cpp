@@ -21,7 +21,7 @@
 
 #include <QApplication>
 #include <QDebug>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <QWidget>
 #include <QEvent>
 #include <kconfiggroup.h>

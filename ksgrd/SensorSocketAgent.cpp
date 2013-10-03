@@ -22,7 +22,7 @@
 //#include <stdlib.h>
 
 #include <QDebug>
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 #include "SensorClient.h"
 #include "SensorManager.h"

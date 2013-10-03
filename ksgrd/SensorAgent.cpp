@@ -22,8 +22,8 @@
 //#include <stdlib.h>
 
 #include <QDebug>
-#include <klocale.h>
-#include <kglobal.h>
+#define TRANSLATION_DOMAIN "ksgrd"
+#include <KLocalizedString>
 
 #include "SensorClient.h"
 #include "SensorManager.h"
@@ -35,8 +35,6 @@
   Should be set to 0 in any production version.
 */
 #define SA_TRACE 0
-
-static const KCatalogLoader loader("ksgrd");
 
 using namespace KSGRD;
 
@@ -212,9 +210,9 @@ void SensorAgent::executeCommand()
                   << "/" << mProcessingFIFO.count() << ")" << endl;
 #endif
     // send request to daemon
-    QString cmdWithNL = req->request() + '\n';
-    if ( !writeMsg( cmdWithNL.toLatin1(), cmdWithNL.length() ) )
-      qDebug() << "SensorAgent::writeMsg() failed";
+     QString cmdWithNL = req->request() + '\n';
+     if ( !writeMsg( cmdWithNL.toLatin1(), cmdWithNL.length() ) )
+       qDebug() << "SensorAgent::writeMsg() failed";
 
     // add request to processing FIFO.
     // Note that this means that mProcessingFIFO is now responsible for managing the memory for it.

@@ -22,7 +22,7 @@
 #include <QDebug>
 #include <kprocess.h>
 #include <kshell.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 //#include "SensorClient.h"
 #include "SensorManager.h"
