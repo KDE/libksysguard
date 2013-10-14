@@ -21,12 +21,13 @@
 #include "processes_remote_p.h"
 #include "process.h"
 
+#include <QDebug>
 #include <QString>
 #include <QSet>
 #include <QTimer>
 
 #include <klocale.h>
-#include <kdebug.h>
+//#include <kdebug.h>
 
 
 
@@ -94,11 +95,11 @@ void ProcessesRemote::setup() {
 
 long ProcessesRemote::getParentPid(long pid) {
     if(!d->processByPid.contains(pid)) {
-        kDebug() << "Parent pid requested for pid that we do not have info on " << pid;
+        qDebug() << "Parent pid requested for pid that we do not have info on " << pid;
         return 0;
     }
     if(d->ppidColumn == -1) {
-        kDebug() << "ppid column not known ";
+        qDebug() << "ppid column not known ";
         return 0;
     }
     return d->processByPid[pid].at(d->ppidColumn).toLong();
@@ -107,7 +108,7 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
 {
     Q_CHECK_PTR(process);
     if(!d->processByPid.contains(pid)) {
-	kDebug() << "update request for pid that we do not have info on " << pid;
+	qDebug() << "update request for pid that we do not have info on " << pid;
         return false;
     }
     QList<QByteArray> p = d->processByPid[pid];

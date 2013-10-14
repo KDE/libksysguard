@@ -15,8 +15,17 @@ set(ksysguard_LIB_SRCS
 
 kde4_add_library(processcore SHARED ${ksysguard_LIB_SRCS})
 
-target_link_libraries(processcore ${Qt5Core_LIBRARIES} ${KDE4Support_LIBRARIES} KF5::KI18n ${ZLIB_LIBRARIES} )
-target_link_libraries(processcore LINK_INTERFACE_LIBRARIES ${Qt5Core_LIBRARIES} ${KDE4Support_LIBRARIES} KF5::KI18n)
+target_link_libraries(processcore
+    ${Qt5Core_LIBRARIES}
+    KF5::KI18n
+    ${ZLIB_LIBRARIES}
+)
+target_link_libraries( processcore
+    LINK_INTERFACE_LIBRARIES
+    ${Qt5Core_LIBRARIES}
+    KF5::KI18n
+)
+
 if( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
   message(STATUS "Adding kvm library on NetBSD")
   target_link_libraries(processcore kvm)
