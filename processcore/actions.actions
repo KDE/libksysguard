@@ -542,7 +542,6 @@ Description[ca@valencia]=Canvia el planificador de CPU que planificarà l'execuc
 Description[cs]=Změní CPU plánovač který bude plánovat běh daného procesu
 Description[da]=Ændr hvilken CPU-skemalægning der skal skemalægge kørslen af en given proces
 Description[de]=Legt fest, welcher CPU-Planer für einen bestimmten Prozess verwendet werden soll.
-Description[el]= 
 Description[en_GB]=Change which CPU scheduler is to schedule the running of a given process
 Description[es]=Cambiar cómo el planificador de CPU decidirá la ejecución de un proceso dado
 Description[et]=Määramine, kuidas CPU planeerija ajastab määratud protsessi töö
