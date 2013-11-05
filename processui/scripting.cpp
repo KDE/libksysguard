@@ -57,7 +57,7 @@ class ScriptingHtmlDialog : public KDialog {
             m_webView.settings()->setOfflineWebApplicationCachePath(QString());
             m_webView.settings()->setObjectCacheCapacities(0,0,0);
             m_webView.settings()->setAttribute(QWebSettings::PluginsEnabled, false);
-            m_webView.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+            m_webView.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, false);
             m_webView.page()->setNetworkAccessManager(NULL); //Disable talking to remote servers
             m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAsNeeded);
             m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAsNeeded);
