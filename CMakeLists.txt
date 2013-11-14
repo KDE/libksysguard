@@ -7,8 +7,8 @@ if(Q_WS_X11)
 
     if(X11_XRes_LIB AND X11_XRes_INCLUDE_PATH)
         set(X11_XRes_FOUND TRUE)
-    endif(X11_XRes_LIB AND X11_XRes_INCLUDE_PATH)
-endif(Q_WS_X11)
+    endif()
+endif()
 
 macro_bool_to_01(X11_XRes_FOUND HAVE_XRES)
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )

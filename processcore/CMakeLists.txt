@@ -26,7 +26,7 @@ target_link_libraries(processcore
 if( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
   message(STATUS "Adding kvm library on NetBSD")
   target_link_libraries(processcore kvm)
-endif( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
+endif()
 
 set_target_properties(processcore PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 install(TARGETS processcore EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
