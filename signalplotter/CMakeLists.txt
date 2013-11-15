@@ -5,8 +5,8 @@ set(ksignalplotter_LIB_SRCS
     ksignalplotter.cpp
     kgraphicssignalplotter.cpp
 )
-KDE4_MOC_HEADERS(ksignalplotter ksignalplotter.h kgraphicssignalplotter.h)
-kde4_add_library(ksignalplotter SHARED ${ksignalplotter_LIB_SRCS})
+kde4_moc_headers(ksignalplotter ksignalplotter.h kgraphicssignalplotter.h)
+add_library(ksignalplotter SHARED ${ksignalplotter_LIB_SRCS})
 
 target_link_libraries(ksignalplotter ${KDE4_KDEUI_LIBS})
 target_link_libraries(ksignalplotter LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
@@ -22,7 +22,7 @@ install(TARGETS ksignalplotter EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGE
 
 kde4_add_widget_files(ksignalplotterwidgets_PART_SRCS ${ksignalplotter_WIDGETS})
 
-kde4_add_plugin(ksignalplotterwidgets ${ksignalplotterwidgets_PART_SRCS})
+add_library(ksignalplotterwidgets MODULE ${ksignalplotterwidgets_PART_SRCS})
 
 target_link_libraries(ksignalplotterwidgets ${KDE4_KDEUI_LIBS} ksignalplotter)
 

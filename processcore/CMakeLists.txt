@@ -13,7 +13,7 @@ set(ksysguard_LIB_SRCS
 
 
 
-kde4_add_library(processcore SHARED ${ksysguard_LIB_SRCS})
+add_library(processcore SHARED ${ksysguard_LIB_SRCS})
 
 target_link_libraries(processcore
    PUBLIC
@@ -44,8 +44,8 @@ install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguar
 #     processes_local_p.cpp
 #     processes_base_p.cpp)
 #
-# kde4_add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
-# target_link_libraries(ksysguardprocesslist_helper ${KDE4_KDECORE_LIBS})
+# add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
+# target_link_libraries(ksysguardprocesslist_helper )
 # install(TARGETS ksysguardprocesslist_helper DESTINATION ${LIBEXEC_INSTALL_DIR})
 #
 # kde4_install_auth_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)

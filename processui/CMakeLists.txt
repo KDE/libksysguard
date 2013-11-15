@@ -20,7 +20,7 @@ kde4_add_ui_files( processui_LIB_SRCS
    ProcessWidgetUI.ui
 )
 
-kde4_add_library(processui SHARED ${processui_LIB_SRCS})
+add_library(processui SHARED ${processui_LIB_SRCS})
 
 if(X11_XRes_FOUND)
   target_link_libraries(processui ${X11_XRes_LIB} ${X11_LIBRARIES})
@@ -42,7 +42,7 @@ install(TARGETS processui EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DE
 
 kde4_add_widget_files(ksysguardwidgets_PART_SRCS ${ksysguard_WIDGETS})
 
-kde4_add_plugin(ksysguardwidgets ${ksysguardwidgets_PART_SRCS})
+add_library(ksysguardwidgets MODULE ${ksysguardwidgets_PART_SRCS})
 
 target_link_libraries(ksysguardwidgets ${KDE4_KDEUI_LIBS} processui)
 

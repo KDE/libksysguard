@@ -13,7 +13,7 @@ set(ksgrd_LIB_SRCS
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
-kde4_add_library(ksgrd SHARED ${ksgrd_LIB_SRCS})
+add_library(ksgrd SHARED ${ksgrd_LIB_SRCS})
 
 target_link_libraries(ksgrd
     Qt5::Core
