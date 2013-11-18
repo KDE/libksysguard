@@ -48,8 +48,8 @@ install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguar
 # target_link_libraries(ksysguardprocesslist_helper )
 # install(TARGETS ksysguardprocesslist_helper DESTINATION ${LIBEXEC_INSTALL_DIR})
 #
-# kde4_install_auth_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)
-# kde4_install_auth_actions(org.kde.ksysguard.processlisthelper actions.actions)
+# kauth_install_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)
+# kauth_install_actions(org.kde.ksysguard.processlisthelper actions.actions)
 #
 # set_target_properties(ksysguardprocesslist_helper PROPERTIES COMPILE_FLAGS "-Wall -ggdb")
 
