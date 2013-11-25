@@ -1,7 +1,7 @@
 
 ########### next target ###############
 
-if(Q_WS_X11)
+if(HAVE_X11)
     find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
     find_path(X11_XRes_INCLUDE_PATH X11/extensions/XRes.h ${X11_INC_SEARCH_PATH})
 
