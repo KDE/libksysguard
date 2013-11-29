@@ -394,7 +394,7 @@ int KSysGuardProcessListPrivate::totalRowCount(const QModelIndex &parent ) const
 
 void KSysGuardProcessListPrivate::setupKAuthAction(KAuth::Action *action, const QList<long long> & pids) const
 {
-    action->setHelperID("org.kde.ksysguard.processlisthelper");
+    action->setHelperId("org.kde.ksysguard.processlisthelper");
 
     int processCount = pids.count();
     for(int i = 0; i < processCount; i++) {
@@ -1020,6 +1020,8 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to renice non-localhost processes
 
 
+#warning KAuth needs porting, but docu is not adjusted, no idea how to do it
+#if 0
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.renice");
     action->setParentWidget(window());
     d->setupKAuthAction( action, unreniced_pids);
@@ -1035,6 +1037,7 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
         delete action;
         return false;
     }
+#endif
     return true;
 }
 
@@ -1183,6 +1186,8 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
     if(unchanged_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to affect non-localhost processes
 
+#warning KAuth needs porting, but docu is not adjusted, no idea how to do it
+#if 0
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.changeioscheduler");
     action->setParentWidget(window());
 
@@ -1201,6 +1206,7 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
         delete action;
         return false;
     }
+#endif
     return true;
 }
 
@@ -1217,6 +1223,8 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
     if(unchanged_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't use KAuth to affect non-localhost processes
 
+#warning KAuth needs porting, but docu is not adjusted, no idea how to do it
+#if 0
     KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.changecpuscheduler");
     action->setParentWidget(window());
     d->setupKAuthAction( action, unchanged_pids);
@@ -1233,6 +1241,7 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
         delete action;
         return false;
     }
+#endif
     return true;
 }
 
@@ -1250,6 +1259,8 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
+#warning KAuth needs porting, but docu is not adjusted, no idea how to do it
+#if 0
     KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
     action.setParentWidget(window());
     d->setupKAuthAction( &action, unkilled_pids);
@@ -1268,6 +1279,7 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
                     "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
         return false;
     }
+#endif
     return true;
 }
 
