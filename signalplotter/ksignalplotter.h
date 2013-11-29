@@ -29,6 +29,7 @@
 #include <QWidget>
 #include <klocalizedstring.h>
 #include <kcomponentdata.h>
+#include <kdemacros.h>
 
 class QPaintEvent;
 class QResizeEvent;
