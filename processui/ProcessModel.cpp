@@ -32,7 +32,8 @@
 #include <kcolorscheme.h>
 #include <kiconloader.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <KGlobal>
+#include <KLocalizedString>
 #include <QBitmap>
 #include <QFont>
 #include <QIcon>
@@ -52,7 +53,6 @@
 #endif
 
 #include "ProcessModel.moc"
-#include "ProcessModel_p.moc"
 
 #ifdef HAVE_XRES
 #include <X11/extensions/XRes.h>

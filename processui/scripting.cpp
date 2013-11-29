@@ -36,6 +36,7 @@
 #include "processes.h"
 #include "ksysguardprocesslist.h"
 #include <KDialog>
+#include <KGlobal>
 #include <KMessageBox>
 #include <KDesktopFile>
 #include <KStandardDirs>

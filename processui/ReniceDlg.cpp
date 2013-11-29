@@ -21,6 +21,7 @@
 
 
 */
+#include "ReniceDlg.h"
 
 #include <klocale.h>
 #include <kdebug.h>
