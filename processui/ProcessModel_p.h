@@ -41,7 +41,7 @@
 #include <netwm.h>
 #include <QX11Info>
 #include <X11/Xatom.h>
-#include <kxerrorhandler.h>
+#include <fixx11h.h>
 
 struct WindowInfo {
 

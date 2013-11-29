@@ -515,11 +515,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         return;
     }
     /* Get PID for window */
-    KXErrorHandler handler;
-    NETWinInfo info( QX11Info::display(), wid, QX11Info::appRootWindow(), properties & ~NET::WMIcon );
-    if (handler.error( false ) ) {
-        return;  //info is invalid - window just closed or something probably
-    }
+    NETWinInfo info( QX11Info::connection(), wid, QX11Info::appRootWindow(), properties & ~NET::WMIcon );
 
     if(!w) {
         //We know that this must be a newWindow
