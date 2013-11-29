@@ -13,7 +13,7 @@ endif()
 macro_bool_to_01(X11_XRes_FOUND HAVE_XRES)
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )
 
-# add_subdirectory( lsofui )
+add_subdirectory( lsofui )
 add_subdirectory( processcore )
 # add_subdirectory( processui )
 # add_subdirectory( signalplotter )
