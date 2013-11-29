@@ -22,10 +22,11 @@
 #ifndef LSOFWIDGET_H_
 #define LSOFWIDGET_H_
 
-#include <QtCore/QObject>
-#include <QtCore/QProcess>
-#include <QtGui/QTreeWidget>
+#include <QObject>
+#include <QProcess>
+#include <QTreeWidget>
 #include <kapplication.h>
+#include <kdemacros.h>
 
 struct KLsofWidgetPrivate;
 

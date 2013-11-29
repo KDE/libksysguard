@@ -1,6 +1,6 @@
 #include <QString>
 #include <QProcess>
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include "lsof.h"
 
