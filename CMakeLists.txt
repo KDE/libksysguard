@@ -15,7 +15,7 @@ configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysg
 
 add_subdirectory( lsofui )
 add_subdirectory( processcore )
-# add_subdirectory( processui )
+add_subdirectory( processui )
 # add_subdirectory( signalplotter )
 add_subdirectory( ksgrd )
 # add_subdirectory( tests )

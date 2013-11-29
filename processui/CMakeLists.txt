@@ -27,9 +27,12 @@ if(X11_XRes_FOUND)
   include_directories(${X11_XRes_INCLUDE_PATH})
 endif()
 
-target_link_libraries(processui ${KDE4_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTWEBKIT_LIBRARY} processcore)
-target_link_libraries(processui LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} processcore)
+target_link_libraries(processui Qt5::Script Qt5::WebKitWidgets KF5::KDE4Support processcore)
+# target_link_libraries(processui LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} processcore)
 
+if(HAVE_X11)
+    target_link_libraries(processui Qt5::X11Extras KF5::KWindowSystem)
+endif()
 
 set_target_properties(processui
    PROPERTIES VERSION ${GENERIC_LIB_VERSION}
@@ -40,13 +43,13 @@ install(TARGETS processui EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DE
 
 #----------------------
 
-kde4_add_widget_files(ksysguardwidgets_PART_SRCS ${ksysguard_WIDGETS})
-
-add_library(ksysguardwidgets MODULE ${ksysguardwidgets_PART_SRCS})
-
-target_link_libraries(ksysguardwidgets ${KDE4_KDEUI_LIBS} processui)
-
-install(TARGETS ksysguardwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
+# kde4_add_widget_files(ksysguardwidgets_PART_SRCS ${ksysguard_WIDGETS})
+#
+# add_library(ksysguardwidgets MODULE ${ksysguardwidgets_PART_SRCS})
+#
+# target_link_libraries(ksysguardwidgets ${KDE4_KDEUI_LIBS} processui)
+#
+# install(TARGETS ksysguardwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
 install( FILES ProcessModel.h ProcessFilter.h KTextEditVT.h ksysguardprocesslist.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard COMPONENT Devel)
 
