@@ -24,7 +24,7 @@
 #ifndef _KSysGuardProcessList_h_
 #define _KSysGuardProcessList_h_
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QMetaType>
 #include <kapplication.h>
 #include "ProcessModel.h"

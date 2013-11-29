@@ -24,8 +24,8 @@
 #ifndef PROCESSFILTER_H_
 #define PROCESSFILTER_H_
 
-#include <QtGui/QSortFilterProxyModel>
-#include <QtCore/QObject>
+#include <QSortFilterProxyModel>
+#include <QObject>
 #include <kdemacros.h>
 
 class QModelIndex;

@@ -23,7 +23,7 @@
 #ifndef _KTextEditVT_h_
 #define _KTextEditVT_h_
 
-#include <QtGui/QTextEdit>
+#include <QTextEdit>
 #include <kdemacros.h>
 
 /*

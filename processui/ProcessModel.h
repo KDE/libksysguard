@@ -24,7 +24,7 @@
 #ifndef PROCESSMODEL_H_
 #define PROCESSMODEL_H_
 
-#include <QtCore/QAbstractItemModel>
+#include <QAbstractItemModel>
 
 #include <kdemacros.h>
 #include "processes.h"

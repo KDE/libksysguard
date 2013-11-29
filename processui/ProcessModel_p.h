@@ -39,7 +39,7 @@
 #ifdef Q_WS_X11
 #include <kwindowsystem.h>
 #include <netwm.h>
-#include <QtGui/QX11Info>
+#include <QX11Info>
 #include <X11/Xatom.h>
 #include <kxerrorhandler.h>
 
