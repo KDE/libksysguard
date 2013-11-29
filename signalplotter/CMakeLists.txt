@@ -8,7 +8,7 @@ set(ksignalplotter_LIB_SRCS
 # kde4_moc_headers(ksignalplotter ksignalplotter.h kgraphicssignalplotter.h)
 add_library(ksignalplotter SHARED ${ksignalplotter_LIB_SRCS})
 
-target_link_libraries(ksignalplotter KF5::KDE4Support)
+target_link_libraries(ksignalplotter KF5::KDE4Support KF5::Plasma)
 
 set_target_properties(ksignalplotter
    PROPERTIES VERSION ${GENERIC_LIB_VERSION}
