@@ -430,7 +430,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
 
         //Get the PID for this window if we do not know it
         KXErrorHandler handler;
-        NETWinInfo info( QX11Info::display(), wid, QX11Info::appRootWindow(), NET::WMPid );
+        NETWinInfo info( QX11Info::connection(), wid, QX11Info::appRootWindow(), NET::WMPid );
         if (handler.error( false ) )
             continue;  //info is invalid - window just closed or something probably
 
