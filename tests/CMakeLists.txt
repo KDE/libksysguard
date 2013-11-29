@@ -19,7 +19,7 @@ target_link_libraries( signalplotterbenchmark Qt5::Test Qt5::Widgets KF5::KDE4Su
 # KGraphicsSignalPlotter benchmark
 set( graphicssignalplotterbenchmark_SRCS graphicssignalplotterbenchmark.cpp ../signalplotter/kgraphicssignalplotter.cpp)
 kde4_add_unit_test( graphicssignalplotterbenchmark TESTNAME ksysguard-signalplottertest ${graphicssignalplotterbenchmark_SRCS} )
-target_link_libraries( graphicssignalplotterbenchmark Qt5::Test Qt5::Widgets KF5::KDE4Support )
+target_link_libraries( graphicssignalplotterbenchmark Qt5::Test Qt5::Widgets KF5::KDE4Support KF5::Plasma )
 
 
 # KSignalPlotter unit test
