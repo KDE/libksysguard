@@ -97,8 +97,8 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 		ui->sliderIO->setValue(currentIoPrio);
 	ui->sliderCPU->setValue(currentCpuPrio);
 
-	ui->imgCPU->setPixmap( KIcon("cpu").pixmap(128, 128) );
-	ui->imgIO->setPixmap( KIcon("drive-harddisk").pixmap(128, 128) );
+	ui->imgCPU->setPixmap( QIcon::fromTheme("cpu").pixmap(128, 128) );
+	ui->imgIO->setPixmap( QIcon::fromTheme("drive-harddisk").pixmap(128, 128) );
 
 	newCPUPriority = 40;
 
