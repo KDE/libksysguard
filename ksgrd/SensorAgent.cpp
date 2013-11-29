@@ -211,7 +211,7 @@ void SensorAgent::executeCommand()
 #endif
     // send request to daemon
      QString cmdWithNL = req->request() + '\n';
-     if ( !writeMsg( cmdWithNL.toLatin1(), cmdWithNL.length() ) )
+     if ( !writeMsg( cmdWithNL.toLatin1().constData(), cmdWithNL.length() ) )
        qDebug() << "SensorAgent::writeMsg() failed";
 
     // add request to processing FIFO.
