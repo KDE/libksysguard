@@ -13,19 +13,19 @@ target_link_libraries(processtest processui  Qt5::Test)
 # KSignalPlotter benchmark
 set( signalplotterbenchmark_SRCS signalplotterbenchmark.cpp ../signalplotter/ksignalplotter.cpp)
 kde4_add_unit_test( signalplotterbenchmark TESTNAME ksysguard-signalplottertest ${signalplotterbenchmark_SRCS} )
-target_link_libraries( signalplotterbenchmark ${KDE4_KDEUI_LIBS} Qt5::Test ${QT_QTBENCHMARK_LIBRARY} )
+target_link_libraries( signalplotterbenchmark Qt5::Test Qt5::Widgets KF5::KDE4Support )
 
 
 # KGraphicsSignalPlotter benchmark
 set( graphicssignalplotterbenchmark_SRCS graphicssignalplotterbenchmark.cpp ../signalplotter/kgraphicssignalplotter.cpp)
 kde4_add_unit_test( graphicssignalplotterbenchmark TESTNAME ksysguard-signalplottertest ${graphicssignalplotterbenchmark_SRCS} )
-target_link_libraries( graphicssignalplotterbenchmark ${KDE4_KDEUI_LIBS} Qt5::Test ${QT_QTBENCHMARK_LIBRARY} )
+target_link_libraries( graphicssignalplotterbenchmark Qt5::Test Qt5::Widgets KF5::KDE4Support )
 
 
 # KSignalPlotter unit test
 set( signalplottertest_SRCS signalplottertest.cpp ../signalplotter/ksignalplotter.cpp)
 kde4_add_unit_test( signalplottertest TESTNAME ksysguard-signalplottertest ${signalplottertest_SRCS} )
-target_link_libraries( signalplottertest ${KDE4_KDEUI_LIBS} Qt5::Test )
+target_link_libraries( signalplottertest Qt5::Test Qt5::Widgets KF5::KI18n KF5::KDE4Support )
 
 
 
