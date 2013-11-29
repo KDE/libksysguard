@@ -36,7 +36,7 @@
 #include <QTime>
 #include <QDebug>
 
-#ifdef Q_WS_X11
+#if HAVE_X11
 #include <kwindowsystem.h>
 #include <netwm.h>
 #include <QX11Info>
@@ -68,7 +68,7 @@ class ProcessModelPrivate : public QObject
         ~ProcessModelPrivate();
     public Q_SLOTS:
 
-#ifdef Q_WS_X11
+#if HAVE_X11
         /** When an X window is changed, this is called */
         void windowChanged(WId wid, unsigned int properties);
         /** When an X window is created, this is called
@@ -135,7 +135,7 @@ class ProcessModelPrivate : public QObject
          *  "groupname (Uid: gid)" if known.
          */
         inline QString getGroupnameForGroup(long gid) const;
-#ifdef Q_WS_X11
+#if HAVE_X11
         /** On X11 system, connects to the signals emitted when windows are created/destroyed */
         void setupWindows();
         void updateWindowInfo(WId wid, unsigned int properties, bool newWindow);

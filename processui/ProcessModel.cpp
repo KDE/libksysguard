@@ -130,7 +130,7 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
 
 ProcessModelPrivate::~ProcessModelPrivate()
 {
-#ifdef Q_WS_X11
+#if HAVE_X11
     qDeleteAll(mPidToWindowInfo);
 #endif
     delete mProcesses;
@@ -155,7 +155,7 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
     }
     setupHeader();
     d->setupProcesses();
-#ifdef Q_WS_X11
+#if HAVE_X11
     d->setupWindows();
 #endif
     d->mUnits = UnitsKB;
@@ -348,7 +348,7 @@ KSysGuard::Processes *ProcessModel::processController() const
     return d->mProcesses;
 }
 
-#ifdef Q_WS_X11
+#if HAVE_X11
 void ProcessModelPrivate::windowRemoved(WId wid) {
     WindowInfo *window = mWIdToWindowInfo.take(wid);
     if(!window) return;
@@ -378,7 +378,7 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
 }
 #endif
 
-#ifdef Q_WS_X11
+#if HAVE_X11
 void ProcessModelPrivate::setupWindows() {
     connect( KWindowSystem::self(), SIGNAL(windowChanged(WId,uint)), this, SLOT(windowChanged(WId,uint)));
     connect( KWindowSystem::self(), SIGNAL(windowAdded(WId)), this, SLOT(windowAdded(WId)));
@@ -487,7 +487,7 @@ void ProcessModelPrivate::setupProcesses() {
     if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
 }
 
-#ifdef Q_WS_X11
+#if HAVE_X11
 void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
 {
     updateWindowInfo(wid, properties, false);
@@ -798,7 +798,7 @@ void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
     Q_ASSERT(!mMovingRow);
     mInsertingRow = true;
 
-#ifdef Q_WS_X11
+#if HAVE_X11
     process->hasManagedGuiWindow = mPidToWindowInfo.contains(process->pid);
 #endif
     if(mSimple) {
@@ -1324,7 +1324,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 }
                 return QVariant();
             }
-#ifdef Q_WS_X11
+#if HAVE_X11
         case HeadingXMemory:
             return formatMemoryInfo(process->pixmapBytes/1024, d->mUnits, true);
         case HeadingXTitle:
@@ -1534,6 +1534,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return tooltip;
         }
         case HeadingXTitle: {
+#if HAVE_X11
             QString tooltip;
             QList<WindowInfo *> values = d->mPidToWindowInfo.values(process->pid);
             if(values.isEmpty()) return QVariant(QVariant::String);
@@ -1543,6 +1544,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
             if(!tooltip.isEmpty())
                 return QString("<qt><p style='white-space:pre'><ul>" + tooltip + "</ul>");
+#endif
             return QVariant(QVariant::String);
         }
 
@@ -1652,7 +1654,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
         case HeadingXMemory:
             return (qulonglong)process->pixmapBytes;
-#ifdef Q_WS_X11
+#if HAVE_X11
         case HeadingXTitle:
             {
                 WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
@@ -1666,7 +1668,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         break;
     }
-#ifdef Q_WS_X11
+#if HAVE_X11
         case WindowIdRole: {
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
@@ -1708,7 +1710,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     }
     case Qt::DecorationRole: {
         if(index.column() == HeadingName) {
-#ifdef Q_WS_X11
+#if HAVE_X11
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
             if(!process->hasManagedGuiWindow) {
                 if(d->mSimple) //When not in tree mode, we need to pad the name column where we do not have an icon
@@ -1791,7 +1793,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 
 bool ProcessModel::hasGUIWindow(qlonglong pid) const
 {
-#ifdef Q_WS_X11
+#if HAVE_X11
     return d->mPidToWindowInfo.contains(pid);
 #else
     return false;
@@ -1821,7 +1823,7 @@ void ProcessModel::setupHeader() {
     headings << i18nc("process heading", "Memory");
     headings << i18nc("process heading", "Shared Mem");
     headings << i18nc("process heading", "Command");
-#ifdef Q_WS_X11
+#if HAVE_X11
     headings << i18nc("process heading", "X11 Memory");
     headings << i18nc("process heading", "Window Title");
 #endif
