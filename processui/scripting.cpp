@@ -144,7 +144,7 @@ void Scripting::refreshScript() {
 void Scripting::setupJavascriptObjects() {
     mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
     mProcessObject = new ProcessObject(mProcessList->processModel(), mPid);
-    mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject("process", mProcessObject, QScriptEngine::ScriptOwnership);
+    mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject("process", mProcessObject, QWebFrame::ScriptOwnership);
 }
 void Scripting::stopAllScripts()
 {
