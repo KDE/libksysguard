@@ -35,7 +35,6 @@
 
 #include "processes.h"
 #include "ksysguardprocesslist.h"
-#include <KAction>
 #include <KDialog>
 #include <KMessageBox>
 #include <KDesktopFile>
@@ -104,15 +103,15 @@ void Scripting::runScript(const QString &path, const QString &name) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
         connect(mScriptingHtmlDialog, SIGNAL(closeClicked()), SLOT(stopAllScripts()));
 
-        KAction *refreshAction = new KAction("refresh", mScriptingHtmlDialog);
+        QAction *refreshAction = new QAction("refresh", mScriptingHtmlDialog);
         refreshAction->setShortcut(QKeySequence::Refresh);
         connect(refreshAction, SIGNAL(triggered()), SLOT(refreshScript()));
         mScriptingHtmlDialog->addAction(refreshAction);
 
-        KAction *zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), mScriptingHtmlDialog);
+        QAction *zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), mScriptingHtmlDialog);
         mScriptingHtmlDialog->addAction(zoomInAction);
 
-        KAction *zoomOutAction = KStandardAction::zoomOut(this, SLOT(zoomOut()), mScriptingHtmlDialog);
+        QAction *zoomOutAction = KStandardAction::zoomOut(this, SLOT(zoomOut()), mScriptingHtmlDialog);
         mScriptingHtmlDialog->addAction(zoomOutAction);
     }
 
@@ -164,7 +163,7 @@ void Scripting::loadContextMenu() {
     foreach(const QString &script, scripts) {
         KDesktopFile desktopFile(script);
         if(!desktopFile.name().isEmpty() && !desktopFile.noDisplay()) {
-            KAction *action = new KAction(desktopFile.readName(), this);
+            QAction *action = new QAction(desktopFile.readName(), this);
             action->setToolTip(desktopFile.readComment());
             action->setIcon(QIcon(desktopFile.readIcon()));
             QString scriptPath = script;
@@ -178,7 +177,7 @@ void Scripting::loadContextMenu() {
 }
 
 void Scripting::runScriptSlot() {
-    KAction *action = static_cast<KAction*>(sender());
+    QAction *action = static_cast<QAction*>(sender());
     //All the files for the script should be in the scriptPath
     QString path = action->property("scriptPath").toString();
 

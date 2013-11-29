@@ -48,7 +48,6 @@
 #include <signal.h> //For SIGTERM
 
 #include <kauth.h>
-#include <kaction.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
@@ -155,31 +154,31 @@ struct KSysGuardProcessListPrivate {
         mNeedToExpandInit = false;
         mNumItemsSelected = -1;
         mResortCountDown = 2; //The items added initially will be already sorted, but without CPU info.  On the second refresh we will have CPU usage, so /then/ we can resort
-        renice = new KAction(i18np("Set Priority...", "Set Priority...", 1), q);
+        renice = new QAction(i18np("Set Priority...", "Set Priority...", 1), q);
         renice->setShortcut(Qt::Key_F8);
-        selectParent = new KAction(i18n("Jump to Parent Process"), q);
+        selectParent = new QAction(i18n("Jump to Parent Process"), q);
 
-        selectTracer = new KAction(i18n("Jump to Process Debugging This One"), q);
-        window = new KAction(i18n("Show Application Window"), q);
-        resume = new KAction(i18n("Resume Stopped Process"), q);
-        terminate = new KAction(i18np("End Process", "End Processes", 1), q);
+        selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
+        window = new QAction(i18n("Show Application Window"), q);
+        resume = new QAction(i18n("Resume Stopped Process"), q);
+        terminate = new QAction(i18np("End Process", "End Processes", 1), q);
         terminate->setIcon(KIcon("process-stop"));
         terminate->setShortcut(Qt::Key_Delete);
-        kill = new KAction(i18np("Forcibly Kill Process", "Forcibly Kill Processes", 1), q);
+        kill = new QAction(i18np("Forcibly Kill Process", "Forcibly Kill Processes", 1), q);
         kill->setIcon(KIcon("process-stop"));
         kill->setShortcut(Qt::SHIFT + Qt::Key_Delete);
 
-        sigStop = new KAction(i18n("Suspend (STOP)"), q);
-        sigCont = new KAction(i18n("Continue (CONT)"), q);
-        sigHup = new KAction(i18n("Hangup (HUP)"), q);
-        sigInt = new KAction(i18n("Interrupt (INT)"), q);
-        sigTerm = new KAction(i18n("Terminate (TERM)"), q);
-        sigKill = new KAction(i18n("Kill (KILL)"), q);
-        sigUsr1 = new KAction(i18n("User 1 (USR1)"), q);
-        sigUsr2 = new KAction(i18n("User 2 (USR2)"), q);
+        sigStop = new QAction(i18n("Suspend (STOP)"), q);
+        sigCont = new QAction(i18n("Continue (CONT)"), q);
+        sigHup = new QAction(i18n("Hangup (HUP)"), q);
+        sigInt = new QAction(i18n("Interrupt (INT)"), q);
+        sigTerm = new QAction(i18n("Terminate (TERM)"), q);
+        sigKill = new QAction(i18n("Kill (KILL)"), q);
+        sigUsr1 = new QAction(i18n("User 1 (USR1)"), q);
+        sigUsr2 = new QAction(i18n("User 2 (USR2)"), q);
 
         //Set up '/' as a shortcut to jump to the quick search text widget
-        jumpToSearchFilter = new KAction(i18n("Focus on Quick Search"), q);
+        jumpToSearchFilter = new QAction(i18n("Focus on Quick Search"), q);
         jumpToSearchFilter->setShortcuts(QList<QKeySequence>() << QKeySequence::Find << '/');
     }
 
@@ -226,22 +225,22 @@ struct KSysGuardProcessListPrivate {
 
     bool mNeedToExpandInit;
 
-    KAction *renice;
-    KAction *terminate;
-    KAction *kill;
-    KAction *selectParent;
-    KAction *selectTracer;
-    KAction *jumpToSearchFilter;
-    KAction *window;
-    KAction *resume;
-    KAction *sigStop;
-    KAction *sigCont;
-    KAction *sigHup;
-    KAction *sigInt;
-    KAction *sigTerm;
-    KAction *sigKill;
-    KAction *sigUsr1;
-    KAction *sigUsr2;
+    QAction *renice;
+    QAction *terminate;
+    QAction *kill;
+    QAction *selectParent;
+    QAction *selectTracer;
+    QAction *jumpToSearchFilter;
+    QAction *window;
+    QAction *resume;
+    QAction *sigStop;
+    QAction *sigCont;
+    QAction *sigHup;
+    QAction *sigInt;
+    QAction *sigTerm;
+    QAction *sigKill;
+    QAction *sigUsr1;
+    QAction *sigUsr2;
 };
 
 KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
