@@ -396,10 +396,7 @@ bool ProcessModelPrivate::updateXResClientData() {
     XResClient *clients;
     int count;
 
-    KXErrorHandler handler;
     XResQueryClients(QX11Info::display(), &count, &clients);
-    if (handler.error( false ) )
-        return false;
 
     mXResClientResources.clear();
     for (int i=0; i < count; i++)
@@ -429,10 +426,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
             continue; //Already added this window
 
         //Get the PID for this window if we do not know it
-        KXErrorHandler handler;
         NETWinInfo info( QX11Info::connection(), wid, QX11Info::appRootWindow(), NET::WMPid );
-        if (handler.error( false ) )
-            continue;  //info is invalid - window just closed or something probably
 
         qlonglong pid = info.pid();
         if(!pid)
