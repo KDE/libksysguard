@@ -22,11 +22,11 @@
 #ifndef KGRAPHICSSIGNALPLOTTER_H
 #define KGRAPHICSSIGNALPLOTTER_H
 
-#include <QtCore/QList>
-#include <QtCore/QString>
-#include <QtGui/QColor>
-#include <QtGui/QFont>
-#include <QtGui/QGraphicsWidget>
+#include <QList>
+#include <QString>
+#include <QColor>
+#include <QFont>
+#include <QGraphicsWidget>
 #include <klocalizedstring.h>
 #include <kcomponentdata.h>
 

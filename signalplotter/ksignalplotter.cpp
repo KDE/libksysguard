@@ -33,15 +33,15 @@
 
 #include <math.h>  //For floor, ceil, log10 etc for calculating ranges
 
-#include <QtGui/QPainter>
-#include <QtGui/QPixmap>
-#include <QtGui/QPainterPath>
-#include <QtGui/QPaintEvent>
+#include <QPainter>
+#include <QPixmap>
+#include <QPainterPath>
+#include <QPaintEvent>
 #include <QEvent>
 
 #ifdef GRAPHICS_SIGNAL_PLOTTER
-#include <QtGui/QGraphicsSceneResizeEvent>
-#include <QtGui/QStyleOptionGraphicsItem>
+#include <QGraphicsSceneResizeEvent>
+#include <QStyleOptionGraphicsItem>
 #include <plasma/theme.h>
 #endif
 

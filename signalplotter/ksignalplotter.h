@@ -22,11 +22,11 @@
 #ifndef KSIGNALPLOTTER_H
 #define KSIGNALPLOTTER_H
 
-#include <QtCore/QList>
-#include <QtCore/QString>
-#include <QtGui/QColor>
-#include <QtGui/QFont>
-#include <QtGui/QWidget>
+#include <QList>
+#include <QString>
+#include <QColor>
+#include <QFont>
+#include <QWidget>
 #include <klocalizedstring.h>
 #include <kcomponentdata.h>
 
