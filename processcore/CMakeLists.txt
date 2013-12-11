@@ -18,7 +18,7 @@ add_library(processcore SHARED ${ksysguard_LIB_SRCS})
 target_link_libraries(processcore
    PUBLIC
     ${Qt5Core_LIBRARIES}
-    KF5::KI18n
+    KF5::I18n
    PRIVATE
     ${ZLIB_LIBRARIES}
 )

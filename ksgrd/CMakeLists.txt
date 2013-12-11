@@ -18,9 +18,9 @@ add_library(ksgrd SHARED ${ksgrd_LIB_SRCS})
 target_link_libraries(ksgrd
     Qt5::Core
     Qt5::Network
-    KF5::KI18n
-    KF5::KCoreAddons
-    KF5::KConfigWidgets
+    KF5::I18n
+    KF5::CoreAddons
+    KF5::ConfigWidgets
 )
 
 set_target_properties(ksgrd PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
