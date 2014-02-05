@@ -509,7 +509,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         return;
     }
     /* Get PID for window */
-    NETWinInfo info( QX11Info::connection(), wid, QX11Info::appRootWindow(), properties & ~NET::WMIcon );
+    NETWinInfo info( QX11Info::connection(), wid, QX11Info::appRootWindow(), NET::Properties(properties) & ~NET::WMIcon );
 
     if(!w) {
         //We know that this must be a newWindow
