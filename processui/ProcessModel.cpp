@@ -385,8 +385,8 @@ void ProcessModelPrivate::setupWindows() {
     connect( KWindowSystem::self(), SIGNAL(windowRemoved(WId)), this, SLOT(windowRemoved(WId)));
 
     //Add all the windows that KWin is managing - i.e. windows that the user can see
-    QList<WId>::ConstIterator it;
-    for ( it = KWindowSystem::windows().begin(); it != KWindowSystem::windows().end(); ++it ) {
+    const QList<WId> windows = KWindowSystem::windows();
+    for (auto it = windows.begin(); it != windows.end(); ++it ) {
         updateWindowInfo(*it, ~0u, true);
     }
 }
