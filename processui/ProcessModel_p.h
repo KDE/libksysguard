@@ -35,6 +35,7 @@
 #include <QSet>
 #include <QTime>
 #include <QDebug>
+#include <config-workspace.h>
 
 #if HAVE_X11
 #include <kwindowsystem.h>
