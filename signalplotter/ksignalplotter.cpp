@@ -42,7 +42,7 @@
 #ifdef GRAPHICS_SIGNAL_PLOTTER
 #include <QGraphicsSceneResizeEvent>
 #include <QStyleOptionGraphicsItem>
-#include <KDE/Plasma/Theme>
+#include <Plasma/Theme>
 #endif
 
 #include <kdebug.h>
@@ -53,7 +53,7 @@
 #include <limits>
 
 #ifdef SVG_SUPPORT
-#include <KDE/Plasma/Svg>
+#include <Plasma/Svg>
 #endif
 
 
