@@ -13,13 +13,13 @@ set(ksysguard_LIB_SRCS
 
 
 
-add_library(processcore SHARED ${ksysguard_LIB_SRCS})
+add_library(processcore ${ksysguard_LIB_SRCS})
 
 target_link_libraries(processcore
    PUBLIC
-    ${Qt5Core_LIBRARIES}
     KF5::I18n
    PRIVATE
+    KF5::KDE4Support
     ${ZLIB_LIBRARIES}
 )
 

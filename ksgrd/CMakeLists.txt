@@ -21,6 +21,7 @@ target_link_libraries(ksgrd
     KF5::I18n
     KF5::CoreAddons
     KF5::ConfigWidgets
+    KF5::KDE4Support
 )
 
 set_target_properties(ksgrd PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
