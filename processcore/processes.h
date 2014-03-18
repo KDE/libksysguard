@@ -53,7 +53,7 @@ namespace KSysGuard
 #ifdef Q_WS_WIN
     class Processes : public QObject
 #else
-    class KDE_EXPORT Processes : public QObject
+    class Q_DECL_EXPORT Processes : public QObject
 #endif
     {
         Q_OBJECT

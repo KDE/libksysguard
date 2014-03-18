@@ -21,18 +21,14 @@
 #ifndef PROCESS_H_
 #define PROCESS_H_
 
-#include <kdemacros.h>
-
 #include <QtCore/QList>
 #include <QtCore/QTime>
 #include <QtCore/QFlags>
 
-#include <klocale.h>
-
 namespace KSysGuard
 {
 
-  class KDE_EXPORT Process {
+  class Q_DECL_EXPORT Process {
     public:
     enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, Ended, OtherStatus=99 };
     enum IoPriorityClass { None, RealTime, BestEffort, Idle };

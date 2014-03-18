@@ -35,7 +35,7 @@ class QModelIndex;
 // please keep it this way even if you port this library to have a _export.h header file
 #define KSYSGUARD_EXPORT
 #else
-#define KSYSGUARD_EXPORT KDE_EXPORT
+#define KSYSGUARD_EXPORT Q_DECL_EXPORT
 #endif
 
 class KSYSGUARD_EXPORT ProcessFilter : public QSortFilterProxyModel

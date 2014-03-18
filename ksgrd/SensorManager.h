@@ -42,14 +42,14 @@ class SensorManagerIterator;
   SensorAgents. Use engage() to establish a connection and
   disengage() to terminate the connection.
  */
-class KDE_EXPORT SensorManager : public QObject
+class Q_DECL_EXPORT SensorManager : public QObject
 {
   Q_OBJECT
 
   friend class SensorManagerIterator;
 
   public:
-    class KDE_EXPORT MessageEvent : public QEvent
+    class Q_DECL_EXPORT MessageEvent : public QEvent
     {
       public:
         MessageEvent( const QString &message );
@@ -125,9 +125,9 @@ class KDE_EXPORT SensorManager : public QObject
     QPointer<QWidget> mBroadcaster;
 };
 
-KDE_EXPORT extern SensorManager* SensorMgr;
+Q_DECL_EXPORT extern SensorManager* SensorMgr;
 
-class KDE_EXPORT SensorManagerIterator : public QHashIterator<QString, SensorAgent*>
+class Q_DECL_EXPORT SensorManagerIterator : public QHashIterator<QString, SensorAgent*>
 {
   public:
     explicit SensorManagerIterator( const SensorManager *sm )

@@ -69,7 +69,7 @@ Q_DECLARE_METATYPE(KLocalizedString)
  *
  *  \image KSignalPlotter.png  Example KSignalPlotter with two beams
  */
-class KDE_EXPORT KSignalPlotter : public QWidget
+class Q_DECL_EXPORT KSignalPlotter : public QWidget
 {
   Q_OBJECT
   Q_PROPERTY(qreal minimumValue READ minimumValue WRITE setMinimumValue)

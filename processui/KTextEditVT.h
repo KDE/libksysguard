@@ -52,7 +52,7 @@
  *    will insert the text  "Hello" at the current character position.
  *    (Character 08 is the literal backspace character.  Treated as equivalent to character 127)
  */
-class KDE_EXPORT KTextEditVT : public QTextEdit
+class Q_DECL_EXPORT KTextEditVT : public QTextEdit
 {
 	Q_OBJECT
 	Q_PROPERTY( bool parseAnsiEscapeCodes READ parseAnsiEscapeCodes WRITE setParseAnsiEscapeCodes )
