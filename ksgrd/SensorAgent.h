@@ -26,7 +26,6 @@
 #include <QtCore/QQueue>
 #include <QtCore/QPointer>
 
-#include <kdemacros.h>
 
 class QString;
 

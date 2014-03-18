@@ -22,8 +22,6 @@
 #ifndef PROCESSES_H_
 #define PROCESSES_H_
 
-#include <kdemacros.h>
-
 #include "process.h"
 #include <QtCore/QHash>
 
