@@ -18,6 +18,7 @@ add_library(ksgrd SHARED ${ksgrd_LIB_SRCS})
 target_link_libraries(ksgrd
     Qt5::Core
     Qt5::Network
+    Qt5::Widgets
     KF5::I18n
     KF5::CoreAddons
     KF5::ConfigWidgets
