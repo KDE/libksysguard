@@ -1,4 +1,33 @@
 project(libksysguard)
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+
+include(FeatureSummary)
+include(WriteBasicConfigVersionFile)
+
+find_package(ECM 0.0.9 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets WebKitWidgets)
+find_package(KF5 REQUIRED CONFIG COMPONENTS I18n KDE4Support Plasma Config)
+find_package(ZLIB REQUIRED)
+set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"
+                       URL "http://www.zlib.net"
+                       TYPE REQUIRED
+                      )
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+
+include(ECMInstallIcons)
+include(CheckIncludeFiles)
+
+set(LIBKSYSGUARD_VERSION_MAJOR 4)
+set(LIBKSYSGUARD_VERSION_MINOR 90)
+set(LIBKSYSGUARD_VERSION_PATCH 1)
+set(LIBKSYSGUARD_VERSION ${LIBKSYSGUARD_VERSION_MAJOR}.${LIBKSYSGUARD_VERSION_MINOR}.${LIBKSYSGUARD_VERSION_PATCH} )
+write_basic_config_version_file(${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake VERSION
+                                     "${LIBKSYSGUARD_VERSION}" COMPATIBILITY AnyNewerVersion)
 
 if(HAVE_X11)
     find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
@@ -22,4 +51,16 @@ add_subdirectory( ksgrd )
 add_subdirectory( tests )
 
 install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts)
+
+set(CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/KF5SysGuard)
+
+configure_file(KF5SysGuardConfig.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake" @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake
+        DESTINATION ${CMAKECONFIG_INSTALL_DIR})
+
+install(EXPORT libksysguardLibraryTargets
+        NAMESPACE KF5::
+        DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+        FILE KF5SysGuardLibraryTargets.cmake )
 

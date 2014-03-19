@@ -6,16 +6,18 @@ set(ksignalplotter_LIB_SRCS
     kgraphicssignalplotter.cpp
 )
 # kde4_moc_headers(ksignalplotter ksignalplotter.h kgraphicssignalplotter.h)
-add_library(ksignalplotter SHARED ${ksignalplotter_LIB_SRCS})
+add_library(ksignalplotter ${ksignalplotter_LIB_SRCS})
+add_library(KF5::SignalPlotter ALIAS ksignalplotter)
 
 target_link_libraries(ksignalplotter KF5::KDE4Support KF5::Plasma)
 
 set_target_properties(ksignalplotter
-   PROPERTIES VERSION ${GENERIC_LIB_VERSION}
-   SOVERSION ${GENERIC_LIB_SOVERSION}
-   )
+   PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_MAJOR}
+   SOVERSION ${LIBKSYSGUARD_VERSION_MINOR}
+   EXPORT_NAME SignalPlotter
+)
 
-install(TARGETS ksignalplotter EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS ksignalplotter EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 #----------------------
 

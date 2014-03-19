@@ -20,7 +20,8 @@ qt5_wrap_ui( processui_LIB_SRCS
    ProcessWidgetUI.ui
 )
 
-add_library(processui SHARED ${processui_LIB_SRCS})
+add_library(processui ${processui_LIB_SRCS})
+add_library(KF5::ProcessUi ALIAS processui)
 
 if(X11_XRes_FOUND)
   target_link_libraries(processui ${X11_XRes_LIB} ${X11_LIBRARIES})
@@ -35,11 +36,12 @@ if(HAVE_X11)
 endif()
 
 set_target_properties(processui
-   PROPERTIES VERSION ${GENERIC_LIB_VERSION}
-   SOVERSION ${GENERIC_LIB_SOVERSION}
-   )
+   PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_MAJOR}
+   SOVERSION ${LIBKSYSGUARD_VERSION_MINOR}
+   EXPORT_NAME ProcessUi
+)
 
-install(TARGETS processui EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS processui EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 #----------------------
 

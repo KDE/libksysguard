@@ -1,13 +1,9 @@
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../
-${CMAKE_CURRENT_SOURCE_DIR}/../processcore/
-${CMAKE_CURRENT_SOURCE_DIR}/../processui/ )
-
 if(Qt5WebKitWidgets_FOUND)
-# Process unit test
-kde4_add_unit_test(processtest TESTNAME ksysguard-processtest processtest.cpp)
-target_link_libraries(processtest processui  Qt5::Test)
+    # Process unit test
+    kde4_add_unit_test(processtest TESTNAME ksysguard-processtest processtest.cpp)
+    target_link_libraries(processtest KF5::ProcessUi Qt5::Test)
 endif()
 
 # KSignalPlotter benchmark
