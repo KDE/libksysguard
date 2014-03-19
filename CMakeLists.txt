@@ -7,7 +7,7 @@ include(WriteBasicConfigVersionFile)
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets WebKitWidgets)
+find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets WebKitWidgets Script Test)
 find_package(KF5 REQUIRED CONFIG COMPONENTS I18n KDE4Support Plasma Config)
 find_package(ZLIB REQUIRED)
 set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"
@@ -29,7 +29,14 @@ set(LIBKSYSGUARD_VERSION ${LIBKSYSGUARD_VERSION_MAJOR}.${LIBKSYSGUARD_VERSION_MI
 write_basic_config_version_file(${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake VERSION
                                      "${LIBKSYSGUARD_VERSION}" COMPATIBILITY AnyNewerVersion)
 
-if(HAVE_X11)
+find_package(X11)
+set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
+                        URL "http://www.x.org"
+                        TYPE OPTIONAL
+                        PURPOSE "Required for building the X11 based workspace"
+                    )
+if(X11_FOUND)
+    find_package(Qt5X11Extras REQUIRED)
     find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
     find_path(X11_XRes_INCLUDE_PATH X11/extensions/XRes.h ${X11_INC_SEARCH_PATH})
 

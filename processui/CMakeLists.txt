@@ -31,7 +31,7 @@ endif()
 target_link_libraries(processui Qt5::Script Qt5::WebKitWidgets KF5::KDE4Support processcore)
 # target_link_libraries(processui LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} processcore)
 
-if(HAVE_X11)
+if(X11_FOUND)
     target_link_libraries(processui Qt5::X11Extras KF5::WindowSystem)
 endif()
 

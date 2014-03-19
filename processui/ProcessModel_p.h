@@ -35,7 +35,7 @@
 #include <QSet>
 #include <QTime>
 #include <QDebug>
-#include <config-X11.h>
+#include "../config-ksysguard.h"
 
 #if HAVE_X11
 #include <kwindowsystem.h>
@@ -57,7 +57,6 @@ struct WindowInfo {
     WId wid;
     QString name;
 };
-#include "../config-ksysguard.h"
 #endif
 
 namespace KSysGuard { class Processes; }
