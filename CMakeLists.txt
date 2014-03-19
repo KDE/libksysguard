@@ -1,5 +1,4 @@
-
-########### next target ###############
+project(libksysguard)
 
 if(HAVE_X11)
     find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
@@ -10,7 +9,7 @@ if(HAVE_X11)
     endif()
 endif()
 
-macro_bool_to_01(X11_XRes_FOUND HAVE_XRES)
+set(HAVE_XRES ${X11_XRes_FOUND})
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )
 
 add_subdirectory( lsofui )

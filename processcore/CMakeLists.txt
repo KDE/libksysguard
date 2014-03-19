@@ -28,6 +28,7 @@ if( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
   target_link_libraries(processcore kvm)
 endif()
 
+target_include_directories(processcore PUBLIC $<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>)
 set_target_properties(processcore PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 install(TARGETS processcore EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

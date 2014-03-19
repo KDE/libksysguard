@@ -34,8 +34,8 @@ namespace KSysGuard
      * To use, do something like:
      *
      * \code
-     *   #include <ksysguard/processes.h>
-     *   #include <ksysguard/process.h>
+     *   #include "processes.h>
+     *   #include "process.h>
      *
      *   KSysGuard::Processes *processes = new KSysGuard::Processes()
      *   QHash<long, Process *> processlist = processes->getProcesses();

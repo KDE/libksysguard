@@ -1,5 +1,5 @@
 #include "signalplottertest.h"
-#include "../../../libs/ksysguard/signalplotter/ksignalplotter.h"
+#include "signalplotter/ksignalplotter.h"
 
 #include <qtest_kde.h>
 #include <QtTest>

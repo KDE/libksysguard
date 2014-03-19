@@ -5,7 +5,7 @@ set(lsofui_LIB_SRCS
    lsof.cpp
 )
 
-kde4_add_ui_files( lsofui_LIB_SRCS
+qt5_wrap_ui( lsofui_LIB_SRCS
    LsofSearchWidget.ui 
 )
 

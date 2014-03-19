@@ -15,7 +15,7 @@ set(processui_LIB_SRCS
    scripting.cpp
 )
 
-kde4_add_ui_files( processui_LIB_SRCS
+qt5_wrap_ui( processui_LIB_SRCS
    ReniceDlgUi.ui
    ProcessWidgetUI.ui
 )
