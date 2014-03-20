@@ -13,7 +13,7 @@ add_library(lsofui ${lsofui_LIB_SRCS})
 add_library(KF5::LsofUi ALIAS lsofui)
 
 target_link_libraries(lsofui KF5::KDE4Support KF5::I18n Qt5::Widgets)
-set_target_properties(lsofui PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_MAJOR} SOVERSION ${LIBKSYSGUARD_VERSION_MINOR} EXPORT_NAME LsofUi)
+set_target_properties(lsofui PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_STRING} SOVERSION ${LIBKSYSGUARD_VERSION_MINOR} EXPORT_NAME LsofUi)
 install(TARGETS lsofui EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############

@@ -27,7 +27,7 @@ target_link_libraries(ksgrd
     KF5::KDE4Support
 )
 
-set_target_properties(ksgrd PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_MAJOR} SOVERSION ${LIBKSYSGUARD_VERSION_MINOR} EXPORT_NAME SysGuard)
+set_target_properties(ksgrd PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_STRING} SOVERSION ${LIBKSYSGUARD_VERSION_MINOR} EXPORT_NAME SysGuard)
 install(TARGETS ksgrd EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES SensorAgent.h SensorClient.h SensorManager.h SensorShellAgent.h SensorSocketAgent.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksgrd COMPONENT Devel)

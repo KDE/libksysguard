@@ -12,7 +12,7 @@ add_library(KF5::SignalPlotter ALIAS ksignalplotter)
 target_link_libraries(ksignalplotter KF5::KDE4Support KF5::Plasma)
 
 set_target_properties(ksignalplotter
-   PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_MAJOR}
+   PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_STRING}
    SOVERSION ${LIBKSYSGUARD_VERSION_MINOR}
    EXPORT_NAME SignalPlotter
 )
