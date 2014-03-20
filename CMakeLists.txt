@@ -19,6 +19,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
+include(ECMAddTests)
 include(ECMInstallIcons)
 include(CheckIncludeFiles)
 
