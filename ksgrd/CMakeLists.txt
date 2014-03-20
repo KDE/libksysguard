@@ -15,6 +15,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 
 add_library(ksgrd ${ksgrd_LIB_SRCS})
 add_library(KF5::SysGuard ALIAS ksgrd)
+target_include_directories(ksgrd PUBLIC "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>")
 
 target_link_libraries(ksgrd
     Qt5::Core
