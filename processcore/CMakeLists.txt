@@ -29,13 +29,13 @@ if( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
   target_link_libraries(processcore kvm)
 endif()
 
-target_include_directories(processcore PUBLIC $<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>)
+target_include_directories(processcore PUBLIC "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>" "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/ksysguard>")
 set_target_properties(processcore PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_STRING} SOVERSION ${LIBKSYSGUARD_VERSION_MINOR} EXPORT_NAME ProcessCore)
 install(TARGETS processcore EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
-install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard COMPONENT Devel)
+install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard/processcore COMPONENT Devel)
 
 #------ KAuth stuff
 

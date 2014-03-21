@@ -15,7 +15,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 
 add_library(ksgrd ${ksgrd_LIB_SRCS})
 add_library(KF5::SysGuard ALIAS ksgrd)
-target_include_directories(ksgrd PUBLIC "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>")
+target_include_directories(ksgrd PUBLIC "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>" "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/ksysguard/>")
 
 target_link_libraries(ksgrd
     Qt5::Core
@@ -30,7 +30,7 @@ target_link_libraries(ksgrd
 set_target_properties(ksgrd PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_STRING} SOVERSION ${LIBKSYSGUARD_VERSION_MINOR} EXPORT_NAME SysGuard)
 install(TARGETS ksgrd EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install(FILES SensorAgent.h SensorClient.h SensorManager.h SensorShellAgent.h SensorSocketAgent.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksgrd COMPONENT Devel)
+install(FILES SensorAgent.h SensorClient.h SensorManager.h SensorShellAgent.h SensorSocketAgent.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard/ksgrd COMPONENT Devel)
 
 
 
