@@ -26,7 +26,7 @@
 #include <QList>
 #include <QString>
 #include <QWidget>
-#include "processes.h"
+#include <processcore/processes.h>
 #include "ProcessModel.h"
 
 class QAction;

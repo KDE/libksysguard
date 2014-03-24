@@ -29,7 +29,7 @@
 #include <kapplication.h>
 #include "ProcessModel.h"
 #include "ProcessFilter.h"
-#include "processes.h"
+#include <processcore/processes.h>
 
 class QShowEvent;
 class QHideEvent;

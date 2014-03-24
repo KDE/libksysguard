@@ -22,7 +22,7 @@
 #ifndef PROCESSMODEL_P_H_
 #define PROCESSMODEL_P_H_
 
-#include "processcore/process.h"
+#include <processcore/process.h>
 #include "ProcessModel.h"
 
 #include <kapplication.h>

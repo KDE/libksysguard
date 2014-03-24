@@ -2,7 +2,7 @@ include_directories(${libksysguard_SOURCE_DIR})
 if(Qt5WebKitWidgets_FOUND)
     # Process unit test
     ecm_add_test(processtest.cpp TEST_NAME processtest
-                 LINK_LIBRARIES KF5::ProcessUi Qt5::Test)
+            LINK_LIBRARIES KF5::KDE4Support KF5::ProcessUi Qt5::Test)
 endif()
 
 ecm_add_test(signalplotterbenchmark.cpp ../signalplotter/ksignalplotter.cpp

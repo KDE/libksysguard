@@ -27,7 +27,7 @@
 #include <QAbstractItemModel>
 
 #include <kdemacros.h>
-#include "processes.h"
+#include <processcore/processes.h>
 
 namespace KSysGuard {
 	class Processes;

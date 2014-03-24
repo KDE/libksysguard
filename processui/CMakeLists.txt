@@ -1,6 +1,4 @@
 
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../  ../processcore/)
-
 check_include_files(sys/endian.h HAVE_SYS_ENDIAN_H)
 check_include_files(byteswap.h HAVE_BYTESWAP_H)
 
@@ -24,15 +22,26 @@ add_library(processui ${processui_LIB_SRCS})
 add_library(KF5::ProcessUi ALIAS processui)
 
 if(X11_XRes_FOUND)
-  target_link_libraries(processui ${X11_XRes_LIB} ${X11_LIBRARIES})
-  include_directories(${X11_XRes_INCLUDE_PATH})
+    target_link_libraries(processui PRIVATE ${X11_XRes_LIB} ${X11_LIBRARIES})
+    include_directories(${X11_XRes_INCLUDE_PATH})
 endif()
 
-target_link_libraries(processui Qt5::Script Qt5::WebKitWidgets KF5::KDE4Support processcore)
-# target_link_libraries(processui LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} processcore)
+target_link_libraries(processui
+    # FIXME: make some of these private?
+    PUBLIC
+        Qt5::Script
+        Qt5::WebKitWidgets
+        KF5::KDE4Support
+        processcore
+)
+target_include_directories(processui
+    PUBLIC
+        "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
+        "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/ksysguard>"
+)
 
 if(X11_FOUND)
-    target_link_libraries(processui Qt5::X11Extras KF5::WindowSystem)
+    target_link_libraries(processui PRIVATE Qt5::X11Extras KF5::WindowSystem)
 endif()
 
 set_target_properties(processui
