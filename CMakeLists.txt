@@ -7,7 +7,8 @@ include(WriteBasicConfigVersionFile)
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets WebKitWidgets Script Test)
+find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets  Script Test)
+find_package(Qt5 COMPONENTS WebKitWidgets)
 find_package(KF5 REQUIRED CONFIG COMPONENTS I18n KDE4Support Plasma Config)
 find_package(ZLIB REQUIRED)
 set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"
