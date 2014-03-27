@@ -22,7 +22,9 @@ include(KDECompilerSettings)
 
 include(ECMAddTests)
 include(ECMInstallIcons)
+include(ECMPackageConfigHelpers)
 include(CheckIncludeFiles)
+
 
 set(LIBKSYSGUARD_VERSION_MAJOR 4)
 set(LIBKSYSGUARD_VERSION_MINOR 90)
@@ -62,10 +64,11 @@ add_subdirectory( tests )
 install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts)
 
 set(CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/KF5SysGuard)
+ecm_configure_package_config_file(KF5SysGuardConfig.cmake.in
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake"
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR})
 
-configure_file(KF5SysGuardConfig.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake" @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake
         DESTINATION ${CMAKECONFIG_INSTALL_DIR})
 
 install(EXPORT libksysguardLibraryTargets
