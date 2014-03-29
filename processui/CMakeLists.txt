@@ -27,12 +27,13 @@ if(X11_XRes_FOUND)
 endif()
 
 target_link_libraries(processui
-    # FIXME: make some of these private?
     PUBLIC
+        KF5::ProcessCore
+        Qt5::Widgets
+    PRIVATE
         Qt5::Script
         Qt5::WebKitWidgets
         KF5::KDE4Support
-        processcore
 )
 target_include_directories(processui
     PUBLIC

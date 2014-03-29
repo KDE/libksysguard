@@ -18,8 +18,9 @@ add_library(KF5::ProcessCore ALIAS processcore)
 
 target_link_libraries(processcore
    PUBLIC
-    KF5::I18n
+    Qt5::Core
    PRIVATE
+    KF5::I18n
     KF5::KDE4Support
     ${ZLIB_LIBRARIES}
 )

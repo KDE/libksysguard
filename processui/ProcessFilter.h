@@ -26,7 +26,6 @@
 
 #include <QSortFilterProxyModel>
 #include <QObject>
-#include <kdemacros.h>
 
 class QModelIndex;
 

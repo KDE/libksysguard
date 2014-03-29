@@ -9,7 +9,14 @@ set(ksignalplotter_LIB_SRCS
 add_library(ksignalplotter ${ksignalplotter_LIB_SRCS})
 add_library(KF5::SignalPlotter ALIAS ksignalplotter)
 
-target_link_libraries(ksignalplotter KF5::KDE4Support KF5::Plasma)
+target_link_libraries(ksignalplotter
+    PUBLIC
+        Qt5::Widgets
+        KF5::I18n # klocalizedstring.h
+    PRIVATE
+        KF5::Plasma
+        KF5::KDE4Support
+)
 
 set_target_properties(ksignalplotter
    PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_STRING}

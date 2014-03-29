@@ -18,13 +18,16 @@ add_library(KF5::SysGuard ALIAS ksgrd)
 target_include_directories(ksgrd PUBLIC "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>" "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/ksysguard/>")
 
 target_link_libraries(ksgrd
-    Qt5::Core
-    Qt5::Network
-    Qt5::Widgets
-    KF5::I18n
-    KF5::CoreAddons
-    KF5::ConfigWidgets
-    KF5::KDE4Support
+    PUBLIC
+        Qt5::Core
+        Qt5::Widgets # QWidget in SensorManager.h
+        Qt5::Network # QTcpSocket in SensorSocketAgent.h
+        KF5::ConfigCore # KConfigGroup in SensorManager.h
+    PRIVATE
+        KF5::I18n
+        KF5::CoreAddons
+        KF5::ConfigWidgets
+        KF5::KDE4Support
 )
 
 set_target_properties(ksgrd PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_STRING} SOVERSION ${LIBKSYSGUARD_VERSION_MINOR} EXPORT_NAME SysGuard)

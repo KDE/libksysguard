@@ -12,7 +12,13 @@ qt5_wrap_ui( lsofui_LIB_SRCS
 add_library(lsofui ${lsofui_LIB_SRCS})
 add_library(KF5::LsofUi ALIAS lsofui)
 
-target_link_libraries(lsofui KF5::KDE4Support KF5::I18n Qt5::Widgets)
+target_link_libraries(lsofui
+    PUBLIC
+        Qt5::Widgets
+        KF5::KDE4Support
+    PRIVATE
+        KF5::I18n
+)
 set_target_properties(lsofui PROPERTIES VERSION ${LIBKSYSGUARD_VERSION_STRING} SOVERSION ${LIBKSYSGUARD_VERSION_MINOR} EXPORT_NAME LsofUi)
 install(TARGETS lsofui EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

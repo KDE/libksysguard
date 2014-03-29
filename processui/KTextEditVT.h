@@ -24,7 +24,6 @@
 #define _KTextEditVT_h_
 
 #include <QTextEdit>
-#include <kdemacros.h>
 
 /*
  *    \class KTextEditVT

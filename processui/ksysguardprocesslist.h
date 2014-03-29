@@ -26,7 +26,9 @@
 
 #include <QWidget>
 #include <QMetaType>
-#include <kapplication.h>
+
+#include <KConfigGroup>
+
 #include "ProcessModel.h"
 #include "ProcessFilter.h"
 #include <processcore/processes.h>
