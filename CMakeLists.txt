@@ -7,7 +7,7 @@ include(WriteBasicConfigVersionFile)
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets  Script Test)
+find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets  Script)
 find_package(Qt5 COMPONENTS WebKitWidgets)
 find_package(KF5 REQUIRED CONFIG COMPONENTS I18n KDE4Support Plasma Config)
 find_package(ZLIB REQUIRED)
@@ -59,7 +59,10 @@ if(Qt5WebKitWidgets_FOUND)
 endif()
 add_subdirectory( signalplotter )
 add_subdirectory( ksgrd )
+
+if(BUILD_TESTING)
 add_subdirectory( tests )
+endif()
 
 install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts)
 

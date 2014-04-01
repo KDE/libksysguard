@@ -1,3 +1,5 @@
+find_package(Qt5 REQUIRED CONFIG COMPONENTS Test)
+
 include_directories(${libksysguard_SOURCE_DIR})
 if(Qt5WebKitWidgets_FOUND)
     # Process unit test
