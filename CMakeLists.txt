@@ -49,6 +49,7 @@ if(X11_FOUND)
     endif()
 endif()
 
+set(HAVE_X11 ${X11_FOUND})
 set(HAVE_XRES ${X11_XRes_FOUND})
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )
 
