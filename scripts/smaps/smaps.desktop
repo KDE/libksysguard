@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Detailed Memory Information
+Name[nl]=Gedetailleerde geheugeninformatie
 Name[uk]=Докладні відомості щодо пам'яті
 Name[x-test]=xxDetailed Memory Informationxx
 X-KDE-ServiceTypes=KSysGuard/Script
