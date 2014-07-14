@@ -1148,9 +1148,6 @@ QSize KSignalPlotter::sizeHint() const
 #ifdef USE_SEPERATE_WIDGET
 GraphWidget::GraphWidget(QWidget *parent) : QWidget(parent)
 {
-    setAttribute(Qt::WA_PaintOnScreen);
-    setAttribute(Qt::WA_NoSystemBackground);
-    setAttribute(Qt::WA_OpaquePaintEvent);
 }
 #endif
 
