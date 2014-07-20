@@ -1,4 +1,5 @@
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_FROM_BYTEARRAY)
+add_definitions(-DTRANSLATION_DOMAIN=\"processcore\")
 
 ########### next target ###############
 

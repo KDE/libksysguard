@@ -1,3 +1,4 @@
+add_definitions(-DTRANSLATION_DOMAIN=\"processui\")
 
 check_include_files(sys/endian.h HAVE_SYS_ENDIAN_H)
 check_include_files(byteswap.h HAVE_BYTESWAP_H)
@@ -13,7 +14,7 @@ set(processui_LIB_SRCS
    scripting.cpp
 )
 
-qt5_wrap_ui( processui_LIB_SRCS
+ki18n_wrap_ui( processui_LIB_SRCS
    ReniceDlgUi.ui
    ProcessWidgetUI.ui
 )
