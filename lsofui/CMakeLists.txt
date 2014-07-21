@@ -5,7 +5,7 @@ set(lsofui_LIB_SRCS
    lsof.cpp
 )
 
-qt5_wrap_ui( lsofui_LIB_SRCS
+ki18n_wrap_ui( lsofui_LIB_SRCS
    LsofSearchWidget.ui 
 )
 
