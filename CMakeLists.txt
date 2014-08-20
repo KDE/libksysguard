@@ -1,4 +1,6 @@
 project(libksysguard)
+set(PROJECT_VERSION "5.0.95")
+set(PROJECT_VERSION_MAJOR 5)
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 include(FeatureSummary)
@@ -25,14 +27,8 @@ include(ECMInstallIcons)
 include(ECMPackageConfigHelpers)
 include(CheckIncludeFiles)
 
-
-set(LIBKSYSGUARD_VERSION_MAJOR 4)
-set(LIBKSYSGUARD_VERSION_MINOR 98)
-set(LIBKSYSGUARD_VERSION_PATCH 0)
-set(LIBKSYSGUARD_SOVERSION 5)
-set(LIBKSYSGUARD_VERSION_STRING "${LIBKSYSGUARD_VERSION_MAJOR}.${LIBKSYSGUARD_VERSION_MINOR}.${LIBKSYSGUARD_VERSION_PATCH}" )
 write_basic_config_version_file(${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake VERSION
-                                     "${LIBKSYSGUARD_VERSION_STRING}" COMPATIBILITY AnyNewerVersion)
+                                     "${PROJECT_VERSION}" COMPATIBILITY AnyNewerVersion)
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
