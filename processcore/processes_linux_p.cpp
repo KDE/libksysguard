@@ -22,7 +22,7 @@
 #include "processes_local_p.h"
 #include "process.h"
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 #include <QFile>
 #include <QHash>

@@ -47,7 +47,10 @@
 
 #include <signal.h> //For SIGTERM
 
-#include <kauth.h>
+#include <KAuth>
+#include <KAuthAction>
+#include <KAuthActionReply>
+#include <KAuthObjectDecorator>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
@@ -188,7 +191,7 @@ struct KSysGuardProcessListPrivate {
     int totalRowCount(const QModelIndex &parent) const;
 
     /** Helper function to setup 'action' with the given pids */
-    void setupKAuthAction(KAuth::Action *action, const QList<long long> & pids) const;
+    void setupKAuthAction(KAuth::Action &action, const QList<long long> & pids) const;
 
     /** fire a timer event if we are set to use our internal timer*/
     void fireTimerEvent();
@@ -392,15 +395,15 @@ int KSysGuardProcessListPrivate::totalRowCount(const QModelIndex &parent ) const
     return total;
 }
 
-void KSysGuardProcessListPrivate::setupKAuthAction(KAuth::Action *action, const QList<long long> & pids) const
+void KSysGuardProcessListPrivate::setupKAuthAction(KAuth::Action &action, const QList<long long> & pids) const
 {
-    action->setHelperId("org.kde.ksysguard.processlisthelper");
+    action.setHelperId("org.kde.ksysguard.processlisthelper");
 
     int processCount = pids.count();
     for(int i = 0; i < processCount; i++) {
-        action->addArgument(QString("pid%1").arg(i), pids[i]);
+        action.addArgument(QString("pid%1").arg(i), pids[i]);
     }
-    action->addArgument("pidcount", processCount);
+    action.addArgument("pidcount", processCount);
 }
 void KSysGuardProcessList::selectionChanged()
 {
@@ -1022,24 +1025,19 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to renice non-localhost processes
 
 
-#warning KAuth needs porting, but docu is not adjusted, no idea how to do it
-#if 0
-    KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.renice");
-    action->setParentWidget(window());
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.renice");
+    action.setParentWidget(window());
     d->setupKAuthAction( action, unreniced_pids);
-    action->addArgument("nicevalue", niceValue);
-    KAuth::ActionReply reply = action->execute();
+    action.addArgument("nicevalue", niceValue);
+    KAuth::ExecuteJob *job  = action.execute();
 
-    if (reply == KAuth::ActionReply::SuccessReply) {
+    if (job->exec()) {
         updateList();
-        delete action;
-    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
+    } else if (!job->exec()) {
         KMessageBox::sorry(this, i18n("You do not have the permission to renice the process and there "
-                    "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
-        delete action;
+                    "was a problem trying to run as root.  Error %1 %2", job->error(), job->errorString()));
         return false;
     }
-#endif
     return true;
 }
 
@@ -1188,27 +1186,22 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
     if(unchanged_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to affect non-localhost processes
 
-#warning KAuth needs porting, but docu is not adjusted, no idea how to do it
-#if 0
-    KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.changeioscheduler");
-    action->setParentWidget(window());
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.changeioscheduler");
+    action.setParentWidget(window());
 
     d->setupKAuthAction( action, unchanged_pids);
-    action->addArgument("ioScheduler", (int)newIoSched);
-    action->addArgument("ioSchedulerPriority", newIoSchedPriority);
+    action.addArgument("ioScheduler", (int)newIoSched);
+    action.addArgument("ioSchedulerPriority", newIoSchedPriority);
 
-    KAuth::ActionReply reply = action->execute();
+    KAuth::ExecuteJob *job  = action.execute();
 
-    if (reply == KAuth::ActionReply::SuccessReply) {
+    if (job->exec()) {
         updateList();
-        delete action;
-    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
+    } else if (!job->exec()) {
         KMessageBox::sorry(this, i18n("You do not have the permission to change the I/O priority of the process and there "
-                    "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
-        delete action;
+                    "was a problem trying to run as root.  Error %1 %2", job->error(), job->errorString()));
         return false;
     }
-#endif
     return true;
 }
 
@@ -1225,25 +1218,20 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
     if(unchanged_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't use KAuth to affect non-localhost processes
 
-#warning KAuth needs porting, but docu is not adjusted, no idea how to do it
-#if 0
-    KAuth::Action *action = new KAuth::Action("org.kde.ksysguard.processlisthelper.changecpuscheduler");
-    action->setParentWidget(window());
+    KAuth::Action action("org.kde.ksysguard.processlisthelper.changecpuscheduler");
+    action.setParentWidget(window());
     d->setupKAuthAction( action, unchanged_pids);
-    action->addArgument("cpuScheduler", (int)newCpuSched);
-    action->addArgument("cpuSchedulerPriority", newCpuSchedPriority);
-    KAuth::ActionReply reply = action->execute();
+    action.addArgument("cpuScheduler", (int)newCpuSched);
+    action.addArgument("cpuSchedulerPriority", newCpuSchedPriority);
+    KAuth::ExecuteJob *job  = action.execute();
 
-    if (reply == KAuth::ActionReply::SuccessReply) {
+    if (job->exec()) {
         updateList();
-        delete action;
-    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
+    } else if (!job->exec()) {
         KMessageBox::sorry(this, i18n("You do not have the permission to change the CPU Scheduler for the process and there "
-                    "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
-        delete action;
+                    "was a problem trying to run as root.  Error %1 %2", job->error(), job->errorString()));
         return false;
     }
-#endif
     return true;
 }
 
@@ -1261,27 +1249,19 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-#warning KAuth needs porting, but docu is not adjusted, no idea how to do it
-#if 0
     KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
     action.setParentWidget(window());
-    d->setupKAuthAction( &action, unkilled_pids);
+    d->setupKAuthAction( action, unkilled_pids);
     action.addArgument("signal", sig);
-    KAuth::ActionReply reply = action.execute();
+    KAuth::ExecuteJob *job  = action.execute();
 
-    if (reply == KAuth::ActionReply::SuccessReply) {
+    if (job->exec()) {
         updateList();
-    } else if (reply.type() == KAuth::ActionReply::HelperError) {
-        if (reply.errorCode() > 0)
-            KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
-                        "was a problem trying to run as root. %1", reply.errorDescription()));
-        return false;
-    } else if (reply != KAuth::ActionReply::UserCancelled && reply != KAuth::ActionReply::AuthorizationDenied) {
+    } else if (!job->exec()) {
         KMessageBox::sorry(this, i18n("You do not have the permission to kill the process and there "
-                    "was a problem trying to run as root.  Error %1 %2", reply.errorCode(), reply.errorDescription()));
+                    "was a problem trying to run as root.  Error %1 %2", job->error(), job->errorString()));
         return false;
     }
-#endif
     return true;
 }
 

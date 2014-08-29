@@ -42,18 +42,18 @@ install( FILES processes.h process.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguar
 #------ KAuth stuff
 
 # Auth example helper
-# set(ksysguardprocesslist_helper_srcs
-#     helper.cpp
-#     process.cpp
-#     processes_local_p.cpp
-#     processes_base_p.cpp)
-#
-# add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
-# target_link_libraries(ksysguardprocesslist_helper )
-# install(TARGETS ksysguardprocesslist_helper DESTINATION ${LIBEXEC_INSTALL_DIR})
-#
-# kauth_install_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)
-# kauth_install_actions(org.kde.ksysguard.processlisthelper actions.actions)
-#
-# set_target_properties(ksysguardprocesslist_helper PROPERTIES COMPILE_FLAGS "-Wall -ggdb")
+set(ksysguardprocesslist_helper_srcs
+    helper.cpp
+    process.cpp
+    processes_local_p.cpp
+    processes_base_p.cpp)
+
+add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
+target_link_libraries(ksysguardprocesslist_helper Qt5::Core KF5::Auth KF5::I18n)
+install(TARGETS ksysguardprocesslist_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
+
+kauth_install_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)
+kauth_install_actions(org.kde.ksysguard.processlisthelper actions.actions)
+
+set_target_properties(ksysguardprocesslist_helper PROPERTIES COMPILE_FLAGS "-Wall -ggdb")
 
