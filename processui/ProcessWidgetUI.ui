@@ -53,7 +53,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="KLineEdit" name="txtFilter">
+      <widget class="QLineEdit" name="txtFilter">
        <property name="whatsThis">
         <string>Filter which processes are shown by the text given here.  The text can be a partial string match of the Name, Command or Window Title of the process.  It can also be a Username or a Process ID number.&lt;p&gt;
 For example:
@@ -65,13 +65,10 @@ For example:
 &lt;/table&gt;
 </string>
        </property>
-       <property name="urlDropsEnabled">
-        <bool>false</bool>
-       </property>
-       <property name="clickMessage">
+       <property name="placeholderText">
         <string>Quick search</string>
        </property>
-       <property name="showClearButton" stdset="0">
+       <property name="clearButtonEnabled" stdset="0">
         <bool>true</bool>
        </property>
       </widget>
@@ -176,13 +173,6 @@ Kernel threads are shown as normal processes, but are actually running inside th
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
