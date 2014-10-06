@@ -15,7 +15,7 @@ target_link_libraries(ksignalplotter
         KF5::I18n # klocalizedstring.h
     PRIVATE
         KF5::Plasma
-        KF5::KDE4Support
+        KF5::KDELibs4Support
 )
 
 set_target_properties(ksignalplotter

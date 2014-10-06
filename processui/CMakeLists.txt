@@ -34,7 +34,7 @@ target_link_libraries(processui
     PRIVATE
         Qt5::Script
         Qt5::WebKitWidgets
-        KF5::KDE4Support
+        KF5::KDELibs4Support
 )
 target_include_directories(processui
     PUBLIC

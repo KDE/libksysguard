@@ -15,7 +15,7 @@ add_library(KF5::LsofUi ALIAS lsofui)
 target_link_libraries(lsofui
     PUBLIC
         Qt5::Widgets
-        KF5::KDE4Support
+        KF5::KDELibs4Support
     PRIVATE
         KF5::I18n
 )
