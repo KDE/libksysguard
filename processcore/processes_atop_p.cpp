@@ -23,7 +23,6 @@
 #include "process.h"
 #include "atop_p.h"
 
-#include <klocale.h>
 #include <zlib.h>
 
 #include <QFile>

@@ -13,9 +13,9 @@ target_link_libraries(ksignalplotter
     PUBLIC
         Qt5::Widgets
         KF5::I18n # klocalizedstring.h
+        KF5::IconThemes
     PRIVATE
         KF5::Plasma
-        KF5::KDELibs4Support
 )
 
 set_target_properties(ksignalplotter

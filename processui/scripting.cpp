@@ -25,6 +25,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QDir>
+#include <QDirIterator>
 #include <QFile>
 #include <QFileInfo>
 #include <QScriptValue>
@@ -32,27 +33,33 @@
 #include <QTextStream>
 #include <QWebView>
 #include <QWebFrame>
+#include <QDialog>
 
 #include "processes.h"
 #include "ksysguardprocesslist.h"
-#include <KDialog>
-#include <KGlobal>
+
 #include <KMessageBox>
 #include <KDesktopFile>
-#include <KStandardDirs>
 #include <KStandardAction>
 #include <QVBoxLayout>
 
-class ScriptingHtmlDialog : public KDialog {
+class ScriptingHtmlDialog : public QDialog {
     public:
-        ScriptingHtmlDialog(QWidget *parent) : KDialog(parent) {
-            setButtons( KDialog::Close );
-            setButtonGuiItem( KDialog::Close, KStandardGuiItem::close() );
-            setDefaultButton( KDialog::Close );
-            setEscapeButton( KDialog::Close );
-            setMainWidget(&m_webView);
+        ScriptingHtmlDialog(QWidget *parent) : QDialog(parent) {
+
+            QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+            buttonBox->setStandardButtons(QDialogButtonBox::Close);
+            connect(buttonBox, SIGNAL(accepted()), this, SLOT(slotClose()));
+            connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+            connect(buttonBox, SIGNAL(rejected()), this, SLOT(slotClose()));
+            connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+            QVBoxLayout *layout = new QVBoxLayout;
+            layout->addWidget(&m_webView);
+            layout->addWidget(buttonBox);
+            setLayout(layout);
             (void)minimumSizeHint(); //Force the dialog to be laid out now
-            layout()->setContentsMargins(0,0,0,0);
+            layout->setContentsMargins(0,0,0,0);
             m_webView.settings()->setOfflineStoragePath(QString());
             m_webView.settings()->setOfflineWebApplicationCachePath(QString());
             m_webView.settings()->setObjectCacheCapacities(0,0,0);
@@ -160,7 +167,15 @@ void Scripting::loadContextMenu() {
     qDeleteAll(mActions);
     mActions.clear();
 
-    QStringList scripts = KGlobal::dirs()->findAllResources("data", "ksysguard/scripts/*/*.desktop", KStandardDirs::NoDuplicates);
+    QStringList scripts;
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "ksysguard/scripts/", QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+        QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);
+        while (it.hasNext()) {
+            scripts.append(it.next());
+        }
+    }
+
     foreach(const QString &script, scripts) {
         KDesktopFile desktopFile(script);
         if(!desktopFile.name().isEmpty() && !desktopFile.noDisplay()) {

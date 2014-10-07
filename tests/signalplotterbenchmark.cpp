@@ -1,8 +1,7 @@
 #include "signalplotterbenchmark.h"
 #include "signalplotter/ksignalplotter.h"
 
-#include <qtest_kde.h>
-#include <QtTest>
+#include <QtTestGui>
 #include <QtGui>
 #include <limits>
 
@@ -24,7 +23,7 @@ void BenchmarkSignalPlotter::addData()
     s->show();
     s->setMaxAxisTextWidth(5);
     s->resize(1000,500);
-    QTest::qWaitForWindowShown(s);
+    QTest::qWaitForWindowExposed(s);
 
     QBENCHMARK {
         s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
@@ -42,7 +41,7 @@ void BenchmarkSignalPlotter::stackedData()
     s->show();
     s->setMaxAxisTextWidth(5);
     s->resize(1000,500);
-    QTest::qWaitForWindowShown(s);
+    QTest::qWaitForWindowExposed(s);
 
     QBENCHMARK {
         s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
@@ -64,5 +63,5 @@ void BenchmarkSignalPlotter::addDataWhenHidden()
 
 }
 
-QTEST_KDEMAIN(BenchmarkSignalPlotter, GUI)
+QTEST_MAIN(BenchmarkSignalPlotter)
 

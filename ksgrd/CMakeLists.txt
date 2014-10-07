@@ -27,7 +27,6 @@ target_link_libraries(ksgrd
         KF5::I18n
         KF5::CoreAddons
         KF5::ConfigWidgets
-        KF5::KDELibs4Support
 )
 
 set_target_properties(ksgrd PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR} EXPORT_NAME SysGuard)

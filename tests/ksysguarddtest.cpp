@@ -106,7 +106,6 @@ void TestKsysguardd::testFormatting()
     //Query the monitor for its information
     if(client->haveAnswer || client->isSensorLost)
         return; //Skip rest of tests
-   //qDebug() << "Sending request for " << monitorInfoName;
     int id = nextId++;
     bool success = manager.sendRequest("", monitorInfoName, client, id);
     QVERIFY(success);

@@ -31,10 +31,18 @@ target_link_libraries(processui
     PUBLIC
         KF5::ProcessCore
         Qt5::Widgets
+        KF5::ConfigCore
     PRIVATE
+        Qt5::DBus
         Qt5::Script
         Qt5::WebKitWidgets
-        KF5::KDELibs4Support
+        KF5::I18n
+        KF5::WindowSystem
+        KF5::Auth
+        KF5::Completion
+        KF5::ConfigWidgets
+        KF5::WidgetsAddons
+        KF5::IconThemes
 )
 target_include_directories(processui
     PUBLIC

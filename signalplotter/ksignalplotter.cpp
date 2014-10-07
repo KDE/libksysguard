@@ -38,6 +38,7 @@
 #include <QPainterPath>
 #include <QPaintEvent>
 #include <QEvent>
+#include <QDebug>
 
 #ifdef GRAPHICS_SIGNAL_PLOTTER
 #include <QGraphicsSceneResizeEvent>
@@ -45,9 +46,7 @@
 #include <Plasma/Theme>
 #endif
 
-#include <kdebug.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kiconloader.h>
 #include <math.h>
 #include <limits>
@@ -111,11 +110,11 @@ QColor KSignalPlotter::beamColor( int index ) const {
 
 void KSignalPlotter::setBeamColor( int index, const QColor &color ) {
     if(!color.isValid()) {
-        kDebug(1215) << "Invalid color";
+        qDebug() << "Invalid color";
         return;
     }
     if( index >= d->mBeamColors.count() ) {
-        kDebug(1215) << "Invalid index" << index;
+        qDebug() << "Invalid index" << index;
         return;
     }
     Q_ASSERT(d->mBeamColors.count() == d->mBeamColorsLight.count());
@@ -517,7 +516,7 @@ void KSignalPlotterPrivate::rescale() {
 void KSignalPlotterPrivate::addSample( const QList<qreal>& sampleBuf )
 {
     if(sampleBuf.count() != mBeamColors.count()) {
-        kDebug(1215) << "Sample data discarded - contains wrong number of beams";
+        qDebug() << "Sample data discarded - contains wrong number of beams";
         return;
     }
     mBeamData.prepend(sampleBuf);
@@ -553,7 +552,7 @@ void KSignalPlotterPrivate::reorderBeams( const QList<int>& newOrder )
     QList< QList<qreal> >::Iterator it;
     for(it = mBeamData.begin(); it != mBeamData.end(); ++it) {
         if(newOrder.count() != (*it).count()) {
-            kWarning(1215) << "Serious problem in move sample.  beamdata[i] has " << (*it).count() << " and neworder has " << newOrder.count();
+            qWarning() << "Serious problem in move sample.  beamdata[i] has " << (*it).count() << " and neworder has " << newOrder.count();
         } else {
             QList<qreal> newBeam;
             for(int i = 0; i < newOrder.count(); i++) {

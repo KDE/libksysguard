@@ -23,7 +23,7 @@
 #ifndef _ReniceDlg_h_
 #define _ReniceDlg_h_
 
-#include <kdialog.h>
+#include <QDialog>
 
 class Ui_ReniceDlgUi;
 class QButtonGroup;
@@ -32,7 +32,7 @@ class QButtonGroup;
  * This class creates and handles a simple dialog to change the scheduling
  * priority of a process.
  */
-class ReniceDlg : public KDialog
+class ReniceDlg : public QDialog
 {
 	Q_OBJECT
 

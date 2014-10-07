@@ -26,10 +26,6 @@
 #include "processes_atop_p.h"
 #include "process.h"
 
-#include <klocale.h>
-#include <kglobal.h>
-#include <kdebug.h>
-
 #include <QHash>
 #include <QSet>
 #include <QMutableSetIterator>

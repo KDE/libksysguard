@@ -44,6 +44,8 @@
 #include <QToolTip>
 #include <QAbstractItemModel>
 #include <QtDBus>
+#include <QDialog>
+#include <QIcon>
 
 #include <signal.h> //For SIGTERM
 
@@ -51,11 +53,8 @@
 #include <KAuthAction>
 #include <KAuthActionReply>
 #include <KAuthObjectDecorator>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kmessagebox.h>
-#include <kdialog.h>
-#include <kicon.h>
-#include <kdebug.h>
 #include <KWindowSystem>
 
 #include "ReniceDlg.h"
@@ -165,10 +164,10 @@ struct KSysGuardProcessListPrivate {
         window = new QAction(i18n("Show Application Window"), q);
         resume = new QAction(i18n("Resume Stopped Process"), q);
         terminate = new QAction(i18np("End Process", "End Processes", 1), q);
-        terminate->setIcon(KIcon("process-stop"));
+        terminate->setIcon(QIcon::fromTheme("process-stop"));
         terminate->setShortcut(Qt::Key_Delete);
         kill = new QAction(i18np("Forcibly Kill Process", "Forcibly Kill Processes", 1), q);
-        kill->setIcon(KIcon("process-stop"));
+        kill->setIcon(QIcon::fromTheme("process-stop"));
         kill->setShortcut(Qt::SHIFT + Qt::Key_Delete);
 
         sigStop = new QAction(i18n("Suspend (STOP)"), q);
@@ -268,7 +267,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(d->mUi->treeView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showProcessContextMenu(QPoint)));
 
-    d->mUi->treeView->header()->setClickable(true);
+    d->mUi->treeView->header()->setSectionsClickable(true);
     d->mUi->treeView->header()->setSortIndicatorShown(true);
     d->mUi->treeView->header()->setCascadingSectionResizes(false);
     connect(d->mUi->btnKillProcess, SIGNAL(clicked()), this, SLOT(killSelectedProcesses()));
@@ -302,7 +301,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingCPUUsage, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingCPUUsage));
     d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingMemory, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingMemory));
     d->mUi->treeView->header()->resizeSection(ProcessModel::HeadingSharedMemory, d->mUi->treeView->header()->sectionSizeHint(ProcessModel::HeadingSharedMemory));
-    d->mUi->treeView->header()->setResizeMode(0, QHeaderView::Interactive);
+    d->mUi->treeView->header()->setSectionResizeMode(0, QHeaderView::Interactive);
     d->mUi->treeView->header()->setStretchLastSection(true);
 
     //Process names can have mixed case. Make the filter case insensitive.
@@ -334,7 +333,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
     retranslateUi();
 
-    d->mUi->btnKillProcess->setIcon(KIcon("process-stop"));
+    d->mUi->btnKillProcess->setIcon(QIcon::fromTheme("process-stop"));
     d->mUi->btnKillProcess->setToolTip(i18n("<qt>End the selected process. Warning - you may lose unsaved work.<br>Right click on a process to send other signals.<br>See What's This for technical information.<br>To target a specific window to kill, press Ctrl+Alt+Esc at any time."));
 }
 
@@ -944,12 +943,12 @@ void KSysGuardProcessList::changeEvent( QEvent * event )
 }
 void KSysGuardProcessList::retranslateUi()
 {
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::AllProcesses, KIcon("view-process-all"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::AllProcessesInTreeForm, KIcon("view-process-all-tree"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::SystemProcesses, KIcon("view-process-system"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::UserProcesses, KIcon("view-process-users"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::OwnProcesses, KIcon("view-process-own"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::ProgramsOnly, KIcon("view-process-all"));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::AllProcesses, QIcon::fromTheme("view-process-all"));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::AllProcessesInTreeForm, QIcon::fromTheme("view-process-all-tree"));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::SystemProcesses, QIcon::fromTheme("view-process-system"));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::UserProcesses, QIcon::fromTheme("view-process-users"));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::OwnProcesses, QIcon::fromTheme("view-process-own"));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::ProgramsOnly, QIcon::fromTheme("view-process-all"));
 }
 
 void KSysGuardProcessList::updateList()

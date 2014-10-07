@@ -22,7 +22,6 @@ target_link_libraries(processcore
     Qt5::Core
    PRIVATE
     KF5::I18n
-    KF5::KDELibs4Support
     ${ZLIB_LIBRARIES}
 )
 

@@ -28,15 +28,16 @@
 #include "processcore/processes.h"
 #include "processcore/process.h"
 
-#include <kapplication.h>
 #include <kcolorscheme.h>
 #include <kiconloader.h>
-#include <kdebug.h>
-#include <KGlobal>
 #include <KLocalizedString>
+#include <KFormat>
+#include <QApplication>
 #include <QBitmap>
+#include <QDebug>
 #include <QFont>
 #include <QIcon>
+#include <QLocale>
 #include <QPixmap>
 #include <QList>
 #include <QMimeData>
@@ -58,7 +59,7 @@
 #include <X11/extensions/XRes.h>
 #endif
 
-extern KApplication* Kapp;
+extern QApplication* Qapp;
 
 static QString formatByteSize(qlonglong amountInKB, int units) {
     enum { UnitsAuto, UnitsKB, UnitsMB, UnitsGB, UnitsTB, UnitsPB };
@@ -84,22 +85,22 @@ static QString formatByteSize(qlonglong amountInKB, int units) {
 
     switch(units) {
       case UnitsKB:
-        return kString.arg(KGlobal::locale()->formatNumber(amountInKB, 0));
+        return kString.arg(QLocale().toString(amountInKB));
       case UnitsMB:
         amount = amountInKB/1024.0;
-        return mString.arg(KGlobal::locale()->formatNumber(amount, 1));
+        return mString.arg(QLocale().toString(amount, 'f', 1));
       case UnitsGB:
         amount = amountInKB/(1024.0*1024.0);
         if(amount < 0.1 && amount > 0.05) amount = 0.1;
-        return gString.arg(KGlobal::locale()->formatNumber(amount, 1));
+        return gString.arg(QLocale().toString(amount, 'f', 1));
       case UnitsTB:
         amount = amountInKB/(1024.0*1024.0*1024.0);
         if(amount < 0.1 && amount > 0.05) amount = 0.1;
-        return tString.arg(KGlobal::locale()->formatNumber(amount, 1));
+        return tString.arg(QLocale().toString(amount, 'f', 1));
       case UnitsPB:
         amount = amountInKB/(1024.0*1024.0*1024.0*1024.0);
         if(amount < 0.1 && amount > 0.05) amount = 0.1;
-        return pString.arg(KGlobal::locale()->formatNumber(amount, 1));
+        return pString.arg(QLocale().toString(amount, 'f', 1));
       default:
           return "";  // error
     }
@@ -139,7 +140,6 @@ ProcessModelPrivate::~ProcessModelPrivate()
 ProcessModel::ProcessModel(QObject* parent, const QString &host)
     : QAbstractItemModel(parent), d(new ProcessModelPrivate)
 {
-    KGlobal::locale()->insertCatalog("processui");  //Make sure we include the translation stuff.  This needs to be run before any i18n call here
     d->q=this;
 #ifdef HAVE_XRES
     int event, error, major, minor;
@@ -407,7 +407,6 @@ bool ProcessModelPrivate::updateXResClientData() {
     return true;
 }
 void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
-//    qDebug() << "updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
     updateXResClientData();
     Window       *children, dummy;
     unsigned int  count;
@@ -453,7 +452,6 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
     }
     if(children)
         XFree((char*)children);
-//    qDebug() << "done updating xres info:" << QTime::currentTime().toString("hh:mm:ss.zzz");
 }
 #endif
 void ProcessModelPrivate::setupProcesses() {
@@ -464,7 +462,8 @@ void ProcessModelPrivate::setupProcesses() {
 #endif
         delete mProcesses;
         mProcesses = 0;
-        q->reset();
+        q->beginResetModel();
+        q->endResetModel();
     }
 
     mProcesses = new KSysGuard::Processes(mHostName);
@@ -560,14 +559,12 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
 #endif
 
 void ProcessModel::update(long updateDurationMSecs, KSysGuard::Processes::UpdateFlags updateFlags) {
-//    kDebug() << "update all processes: " << QTime::currentTime().toString("hh:mm:ss.zzz");
     if(updateFlags != KSysGuard::Processes::XMemory) {
         d->mProcesses->updateAllProcesses(updateDurationMSecs, updateFlags);
         if(d->mMemTotal <= 0)
             d->mMemTotal = d->mProcesses->totalPhysicalMemory();
     }
 
-//    kDebug() << "finished:             " << QTime::currentTime().toString("hh:mm:ss.zzz");
 #ifdef HAVE_XRES
     //Add all the rest of the windows
     if(d->mHaveXRes && updateFlags.testFlag(KSysGuard::Processes::XMemory))
@@ -826,7 +823,7 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
     } else  {
         int row = process->parent->children.indexOf(process);
         if(row == -1) {
-            kDebug(1215) << "A serious problem occurred in remove row.";
+            qDebug() << "A serious problem occurred in remove row.";
             mRemovingRow = false;
             return;
         }
@@ -1178,6 +1175,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     //This function must be super duper ultra fast because it's called thousands of times every few second :(
     //I think it should be optomised for role first, hence the switch statement (fastest possible case)
 
+    KFormat format;
+
     if (!index.isValid()) {
         return QVariant();
     }
@@ -1480,14 +1479,14 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->vmURSS != -1) {
                 //We don't have information about the URSS, so just fallback to RSS
                 if(d->mMemTotal > 0)
-                    tooltip += i18n("Memory usage: %1 out of %2  (%3 %)<br />", KGlobal::locale()->formatByteSize(process->vmURSS * 1024), KGlobal::locale()->formatByteSize(d->mMemTotal*1024), process->vmURSS*100/d->mMemTotal);
+                    tooltip += i18n("Memory usage: %1 out of %2  (%3 %)<br />", format.formatByteSize(process->vmURSS * 1024), format.formatByteSize(d->mMemTotal*1024), process->vmURSS*100/d->mMemTotal);
                 else
-                    tooltip += i18n("Memory usage: %1<br />", KGlobal::locale()->formatByteSize(process->vmURSS * 1024));
+                    tooltip += i18n("Memory usage: %1<br />", format.formatByteSize(process->vmURSS * 1024));
             }
             if(d->mMemTotal > 0)
-                tooltip += i18n("RSS Memory usage: %1 out of %2  (%3 %)", KGlobal::locale()->formatByteSize(process->vmRSS * 1024), KGlobal::locale()->formatByteSize(d->mMemTotal*1024), process->vmRSS*100/d->mMemTotal);
+                tooltip += i18n("RSS Memory usage: %1 out of %2  (%3 %)", format.formatByteSize(process->vmRSS * 1024), format.formatByteSize(d->mMemTotal*1024), process->vmRSS*100/d->mMemTotal);
             else
-                tooltip += i18n("RSS Memory usage: %1", KGlobal::locale()->formatByteSize(process->vmRSS * 1024));
+                tooltip += i18n("RSS Memory usage: %1", format.formatByteSize(process->vmRSS * 1024));
             return tooltip;
         }
         case HeadingSharedMemory: {
@@ -1497,9 +1496,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 return tooltip;
             }
             if(d->mMemTotal >0)
-                tooltip += i18n("Shared library memory usage: %1 out of %2  (%3 %)", KGlobal::locale()->formatByteSize((process->vmRSS - process->vmURSS) * 1024), KGlobal::locale()->formatByteSize(d->mMemTotal*1024), (process->vmRSS-process->vmURSS)*100/d->mMemTotal);
+                tooltip += i18n("Shared library memory usage: %1 out of %2  (%3 %)", format.formatByteSize((process->vmRSS - process->vmURSS) * 1024), format.formatByteSize(d->mMemTotal*1024), (process->vmRSS-process->vmURSS)*100/d->mMemTotal);
             else
-                tooltip += i18n("Shared library memory usage: %1", KGlobal::locale()->formatByteSize((process->vmRSS - process->vmURSS) * 1024));
+                tooltip += i18n("Shared library memory usage: %1", format.formatByteSize((process->vmRSS - process->vmURSS) * 1024));
 
             return tooltip;
         }
@@ -1508,17 +1507,17 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             QString tooltip = "<qt><p style='white-space:pre'>";
             //FIXME - use the formatByteRate functions when added
             tooltip += ki18n("Characters read: %1 (%2 KiB/s)<br>Characters written: %3 (%4 KiB/s)<br>Read syscalls: %5 (%6 s⁻¹)<br>Write syscalls: %7 (%8 s⁻¹)<br>Actual bytes read: %9 (%10 KiB/s)<br>Actual bytes written: %11 (%12 KiB/s)")
-                .subs(KGlobal::locale()->formatByteSize(process->ioCharactersRead))
+                .subs(format.formatByteSize(process->ioCharactersRead))
                 .subs(QString::number(process->ioCharactersReadRate/1024))
-                .subs(KGlobal::locale()->formatByteSize(process->ioCharactersWritten))
+                .subs(format.formatByteSize(process->ioCharactersWritten))
                 .subs(QString::number(process->ioCharactersWrittenRate/1024))
                 .subs(QString::number(process->ioReadSyscalls))
                 .subs(QString::number(process->ioReadSyscallsRate))
                 .subs(QString::number(process->ioWriteSyscalls))
                 .subs(QString::number(process->ioWriteSyscallsRate))
-                .subs(KGlobal::locale()->formatByteSize(process->ioCharactersActuallyRead))
+                .subs(format.formatByteSize(process->ioCharactersActuallyRead))
                 .subs(QString::number(process->ioCharactersActuallyReadRate/1024 ))
-                .subs(KGlobal::locale()->formatByteSize(process->ioCharactersActuallyWritten))
+                .subs(format.formatByteSize(process->ioCharactersActuallyWritten))
                 .subs(QString::number(process->ioCharactersActuallyWrittenRate/1024))
                 .toString();
             return tooltip;
@@ -1998,7 +1997,7 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
                     textCsv += ',';
                     textPlain += ", ";
                 }
-                textHtml += "<td>" + Qt::escape(display) + "</td>";
+                textHtml += "<td>" +  QString(display).toHtmlEscaped() + "</td>";
                 textPlain += display;
                 display.replace('"',"\"\"");
                 textCsv += '"' + display + '"';

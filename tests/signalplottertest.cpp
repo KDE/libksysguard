@@ -1,8 +1,7 @@
 #include "signalplottertest.h"
 #include "signalplotter/ksignalplotter.h"
 
-#include <qtest_kde.h>
-#include <QtTest>
+#include <QtTestGui>
 #include <QtGui>
 #include <limits>
 
@@ -570,5 +569,5 @@ void TestSignalPlotter::testAddingData()
             s->render(&pixmap);
         }
 }
-QTEST_KDEMAIN(TestSignalPlotter, GUI)
+QTEST_MAIN(TestSignalPlotter)
 

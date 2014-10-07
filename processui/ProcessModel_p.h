@@ -25,7 +25,6 @@
 #include <processcore/process.h>
 #include "ProcessModel.h"
 
-#include <kapplication.h>
 #include <kuser.h>
 #include <QPixmap>
 #include <QObject>

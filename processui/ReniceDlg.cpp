@@ -23,22 +23,25 @@
 */
 #include "ReniceDlg.h"
 
-#include <klocale.h>
-#include <kdebug.h>
+#include <klocalizedstring.h>
 
 #include "ReniceDlg.moc"
 #include <QListWidget>
 #include <QButtonGroup>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 #include "ui_ReniceDlgUi.h"
 #include "processcore/process.h"
 
 ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentCpuPrio, int currentCpuSched, int currentIoPrio, int currentIoSched )
-	: KDialog( parent )
+	: QDialog( parent )
 {
 	setObjectName( "Renice Dialog" );
 	setModal( true );
-	setCaption( i18n("Set Priority") );
-	setButtons( Ok | Cancel );
+	setWindowTitle( i18n("Set Priority") );
+	QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
 	previous_cpuscheduler = 0;
 
 	connect( this, SIGNAL(okClicked()), SLOT(slotOk()) );
@@ -55,8 +58,17 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	ioniceSupported = (currentIoPrio != -2);
 
 
+	QVBoxLayout *mainLayout = new QVBoxLayout;
+	setLayout(mainLayout);
+
+	QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+	okButton->setDefault(true);
+	okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+	connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
 	QWidget *widget = new QWidget(this);
-	setMainWidget(widget);
+	mainLayout->addWidget(widget);
 	ui = new Ui_ReniceDlgUi();
 	ui->setupUi(widget);
 	ui->listWidget->insertItems(0, processes);

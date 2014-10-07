@@ -26,9 +26,6 @@
 #include <QSet>
 #include <QTimer>
 
-#include <klocale.h>
-//#include <kdebug.h>
-
 
 
 

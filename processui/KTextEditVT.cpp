@@ -22,11 +22,11 @@
 
 */
 
-#include <klocale.h>
 #include "KTextEditVT.h"
 
 #include "KTextEditVT.moc"
-#include <kglobalsettings.h>
+
+#include <QFontDatabase>
 
 KTextEditVT::KTextEditVT(QWidget* parent)
 	: QTextEdit( parent )
@@ -39,7 +39,7 @@ KTextEditVT::KTextEditVT(QWidget* parent)
 	escape_number_seperator = false;
 	escape_number2 = -1;
 	escape_code = 0;
-	setFont( KGlobalSettings::fixedFont() );
+	setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 
@@ -138,7 +138,7 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 	} else if(!c.isNull()) {
 		insertPlainText("[");
 		QByteArray num;
-		num.setNum(c.toAscii());
+		num.setNum(c.toLatin1());
 		insertPlainText(num);
 		insertPlainText("]");
 	}
