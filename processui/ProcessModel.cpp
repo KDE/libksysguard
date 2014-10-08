@@ -27,6 +27,7 @@
 
 #include "processcore/processes.h"
 #include "processcore/process.h"
+#include "processcore/processcore_debug.h"
 
 #include <kcolorscheme.h>
 #include <kiconloader.h>
@@ -823,7 +824,7 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
     } else  {
         int row = process->parent->children.indexOf(process);
         if(row == -1) {
-            qDebug() << "A serious problem occurred in remove row.";
+            qCDebug(LIBKSYSGUARD) << "A serious problem occurred in remove row.";
             mRemovingRow = false;
             return;
         }

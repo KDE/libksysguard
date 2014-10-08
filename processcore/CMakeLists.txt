@@ -4,6 +4,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"processcore\")
 ########### next target ###############
 
 set(ksysguard_LIB_SRCS
+   processcore_debug.cpp
    processes.cpp
    process.cpp
    processes_local_p.cpp

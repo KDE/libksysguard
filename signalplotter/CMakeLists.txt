@@ -2,6 +2,7 @@
 set(ksignalplotter_WIDGETS "ksignalplotter.widgets")
 
 set(ksignalplotter_LIB_SRCS
+    ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp
     ksignalplotter.cpp
     kgraphicssignalplotter.cpp
 )
@@ -15,6 +16,7 @@ target_link_libraries(ksignalplotter
         KF5::I18n # klocalizedstring.h
         KF5::IconThemes
     PRIVATE
+        KF5::ProcessCore
         KF5::Plasma
 )
 

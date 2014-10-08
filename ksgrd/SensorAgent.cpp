@@ -21,6 +21,7 @@
 
 //#include <stdlib.h>
 
+#include "processcore/processcore_debug.h"
 #include <QDebug>
 #define TRANSLATION_DOMAIN "ksgrd"
 #include <KLocalizedString>
@@ -73,7 +74,7 @@ void SensorAgent::sendRequest( const QString &req, SensorClient *client, int id 
   mInputFIFO.enqueue( new SensorRequest( req, client, id ) );
 
 #if SA_TRACE
-  qDebug() << "-> " << req << "(" << mInputFIFO.count() << "/"
+  qCDebug(LIBKSYSGUARD) << "-> " << req << "(" << mInputFIFO.count() << "/"
                 << mProcessingFIFO.count() << ")" << endl;
 #endif
   executeCommand();
@@ -91,7 +92,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
   }
   
 #if SA_TRACE
-  qDebug() << "<- " << QString::fromUtf8(buffer, buffer.size());
+  qCDebug(LIBKSYSGUARD) << "<- " << QString::fromUtf8(buffer, buffer.size());
 #endif
   int startOfAnswer = 0;  //This can become >= buffer.size(), so check before using!
   for ( int i = 0; i < buffer.size(); ++i ) {
@@ -134,7 +135,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 	if(!answer.isEmpty())
 		mAnswerBuffer << answer;
 #if SA_TRACE
-	qDebug() << "<= " << mAnswerBuffer
+	qCDebug(LIBKSYSGUARD) << "<= " << mAnswerBuffer
 		<< "(" << mInputFIFO.count() << "/"
 		<< mProcessingFIFO.count() << ")" << endl;
 #endif
@@ -150,7 +151,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 	  	 * ready to serve requests now. */
 		mDaemonOnLine = true;
 #if SA_TRACE
-		qDebug() << "Daemon now online!";
+		qCDebug(LIBKSYSGUARD) << "Daemon now online!";
 #endif
 		mAnswerBuffer.clear();
 		continue;
@@ -160,7 +161,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 
 	// remove pending request from FIFO
 	if ( mProcessingFIFO.isEmpty() ) {
-		qDebug()	<< "ERROR: Received answer but have no pending "
+		qCDebug(LIBKSYSGUARD)	<< "ERROR: Received answer but have no pending "
 				<< "request!" << endl;
 		mAnswerBuffer.clear();
 		continue;
@@ -178,7 +179,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 		
 	if(!mAnswerBuffer.isEmpty() && mAnswerBuffer[0] == "UNKNOWN COMMAND") {
 		/* Notify client that the sensor seems to be no longer available. */
-        qDebug() << "Received UNKNOWN COMMAND for: " << req->request();
+        qCDebug(LIBKSYSGUARD) << "Received UNKNOWN COMMAND for: " << req->request();
 		req->client()->sensorLost( req->id() );
 	} else {
 		// Notify client of newly arrived answer.
@@ -206,13 +207,13 @@ void SensorAgent::executeCommand()
     SensorRequest *req = mInputFIFO.dequeue();
 
 #if SA_TRACE
-    qDebug() << ">> " << req->request().toAscii() << "(" << mInputFIFO.count()
+    qCDebug(LIBKSYSGUARD) << ">> " << req->request().toAscii() << "(" << mInputFIFO.count()
                   << "/" << mProcessingFIFO.count() << ")" << endl;
 #endif
     // send request to daemon
      QString cmdWithNL = req->request() + '\n';
      if ( !writeMsg( cmdWithNL.toLatin1().constData(), cmdWithNL.length() ) )
-       qDebug() << "SensorAgent::writeMsg() failed";
+       qCDebug(LIBKSYSGUARD) << "SensorAgent::writeMsg() failed";
 
     // add request to processing FIFO.
     // Note that this means that mProcessingFIFO is now responsible for managing the memory for it.

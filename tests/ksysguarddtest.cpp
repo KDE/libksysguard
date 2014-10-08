@@ -1,6 +1,7 @@
 #include "ksysguarddtest.h"
 #include <QtTest>
 #include <Qt>
+#include "processcore/processcore_debug.h"
 
 KSGRD::SensorAgent *agent;
 
@@ -204,7 +205,7 @@ void TestKsysguardd::testFormatting()
     QVERIFY(!client->isSensorLost);
     QCOMPARE(client->answers[id].id, id);
     if(timer.elapsed() > 200)
-        qDebug() << monitorName << "took" << timer.elapsed() << "ms";
+        qCDebug(LIBKSYSGUARD) << monitorName << "took" << timer.elapsed() << "ms";
 
     if(monitorType == "integer") {
         QList<QByteArray> answer = client->answers[id].answer[0].split('\t');

@@ -26,6 +26,7 @@
 #include "processcore/processes.h"
 #include "processcore/process.h"
 #include "processcore/processes_base_p.h"
+#include "processcore/processcore_debug.h"
 
 #include "processui/ksysguardprocesslist.h"
 
@@ -54,7 +55,7 @@ void testProcess::testProcesses() {
 
         //test all the pids are unique
         if(!pids.contains(process->pid)) {
-            qDebug() << process->pid << " not found. " << process->name;
+            qCDebug(LIBKSYSGUARD) << process->pid << " not found. " << process->name;
         }
         pids.remove(process->pid);
     }
@@ -103,7 +104,7 @@ void testProcess::testProcessesModification() {
     QVERIFY(initProcess);
     QVERIFY(initProcess->children[0]);
     QVERIFY(initProcess->children[1]);
-    qDebug() << initProcess->numChildren;
+    qCDebug(LIBKSYSGUARD) << initProcess->numChildren;
     initProcess->children[0]->parent = initProcess->children[1];
     initProcess->children[1]->children.append(initProcess->children[0]);
     initProcess->children[1]->numChildren++;
@@ -205,7 +206,7 @@ void testProcess::testHistoriesWithWidget() {
     QList< QPair<QDateTime, uint> > history = processController->historiesAvailable();
 
     for(int i = 0; i < history.size(); i++) {
-        qDebug() << "Viewing time" << history[i].first;
+        qCDebug(LIBKSYSGUARD) << "Viewing time" << history[i].first;
         bool success = processController->setViewingTime(history[i].first);
         QVERIFY(success);
         QCOMPARE(processController->viewingTime(), history[i].first);

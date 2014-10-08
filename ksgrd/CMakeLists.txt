@@ -4,6 +4,7 @@
 ########### next target ###############
 
 set(ksgrd_LIB_SRCS
+   ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp
    SensorAgent.cpp
    SensorManager.cpp
    SensorShellAgent.cpp
@@ -27,6 +28,7 @@ target_link_libraries(ksgrd
         KF5::I18n
         KF5::CoreAddons
         KF5::ConfigWidgets
+        KF5::ProcessCore
 )
 
 set_target_properties(ksgrd PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR} EXPORT_NAME SysGuard)

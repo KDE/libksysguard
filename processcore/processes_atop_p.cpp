@@ -22,6 +22,7 @@
 #include "processes_atop_p.h"
 #include "process.h"
 #include "atop_p.h"
+#include "processcore_debug.h"
 
 #include <zlib.h>
 
@@ -309,7 +310,7 @@ bool ProcessesATop::setViewingTime(const QDateTime &when)
         d->currentlySelectedIndex = i - d->historyTimes.begin();
         bool success = d->loadDataForHistory(d->currentlySelectedIndex);
         if(!success)
-            qWarning() << d->lastError;
+            qCWarning(LIBKSYSGUARD) << d->lastError;
         return success;
     }
     return false;

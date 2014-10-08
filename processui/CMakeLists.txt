@@ -6,6 +6,7 @@ check_include_files(byteswap.h HAVE_BYTESWAP_H)
 set(ksysguard_WIDGETS "ksysguard.widgets")
 
 set(processui_LIB_SRCS
+   ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp
    ksysguardprocesslist.cpp
    ProcessFilter.cpp
    ProcessModel.cpp
