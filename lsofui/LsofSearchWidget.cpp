@@ -22,8 +22,7 @@
 
 */
 
-#include <klocale.h>
-#include <kdebug.h>
+#include <KLocalizedString>
 
 
 #include "ui_LsofSearchWidget.h"
