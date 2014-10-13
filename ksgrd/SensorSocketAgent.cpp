@@ -129,4 +129,4 @@ bool SensorSocketAgent::writeMsg( const char *msg, int len )
   return writtenLength == len;
 }
 
-#include "SensorSocketAgent.moc"
+

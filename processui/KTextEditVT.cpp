@@ -24,7 +24,7 @@
 
 #include "KTextEditVT.h"
 
-#include "KTextEditVT.moc"
+
 
 #include <QFontDatabase>
 

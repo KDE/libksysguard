@@ -54,7 +54,7 @@
 #include <sys/types.h>
 #endif
 
-#include "ProcessModel.moc"
+
 
 #ifdef HAVE_XRES
 #include <X11/extensions/XRes.h>

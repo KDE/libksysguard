@@ -43,5 +43,5 @@ void testGuiProcess::testGUI() {
 
 QTEST_KDEMAIN(testGuiProcess, GUI)
 
-#include "guitest.moc"
+
 

@@ -538,5 +538,5 @@ bool Processes::isHistoryAvailable() const
 }
 
 }
-#include "processes.moc"
+
 

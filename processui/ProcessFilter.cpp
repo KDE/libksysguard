@@ -145,4 +145,4 @@ void ProcessFilter::setFilter(State filter) {
 	mFilter = filter;
 	filterChanged();//Tell the proxy view to refresh all its information
 }
-#include "ProcessFilter.moc"
+

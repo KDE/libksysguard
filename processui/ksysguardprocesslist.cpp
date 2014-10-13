@@ -21,7 +21,7 @@
 
 */
 
-#include "ksysguardprocesslist.moc"
+
 #include "ksysguardprocesslist.h"
 
 #include "../config-ksysguard.h"

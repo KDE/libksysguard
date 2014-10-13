@@ -217,5 +217,5 @@ void testProcess::testHistoriesWithWidget() {
 }
 QTEST_MAIN(testProcess)
 
-#include "processtest.moc"
+
 

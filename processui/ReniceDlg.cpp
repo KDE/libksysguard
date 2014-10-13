@@ -25,7 +25,7 @@
 
 #include <klocalizedstring.h>
 
-#include "ReniceDlg.moc"
+
 #include <QListWidget>
 #include <QButtonGroup>
 #include <QDialog>

@@ -269,5 +269,5 @@ ProcessesRemote::~ProcessesRemote()
 
 }
 
-#include "processes_remote_p.moc"
+
 

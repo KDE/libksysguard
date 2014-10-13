@@ -86,4 +86,4 @@ void KLsofWidget::finished ( int exitCode, QProcess::ExitStatus exitStatus )
 	}
 }
 
-#include "lsof.moc"
+

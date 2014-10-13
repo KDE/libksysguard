@@ -25,7 +25,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include "LsofSearchWidget.moc"
+
 #include "ui_LsofSearchWidget.h"
 
 LsofSearchWidget::LsofSearchWidget(QWidget* parent, int pid )
