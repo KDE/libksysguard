@@ -23,19 +23,30 @@
 */
 
 #include <KLocalizedString>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 
 #include "ui_LsofSearchWidget.h"
 
 LsofSearchWidget::LsofSearchWidget(QWidget* parent, int pid )
-	: KDialog( parent )
+	: QDialog( parent )
 {
 	setObjectName( "Renice Dialog" );
 	setModal( true );
-	setCaption( i18n("Renice Process") );
-	setButtons( Close );
+	setWindowTitle( i18n("Renice Process") );
+	QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+	QWidget *mainWidget = new QWidget(this);
+	QVBoxLayout *mainLayout = new QVBoxLayout;
+	setLayout(mainLayout);
+	mainLayout->addWidget(mainWidget);
+	connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 	QWidget *widget = new QWidget(this);
-	setMainWidget(widget);
+	mainLayout->addWidget(widget);
+        mainLayout->addWidget(buttonBox);
 	ui = new Ui_LsofSearchWidget();
 	ui->setupUi(widget);
 	ui->klsofwidget->setPid(pid);

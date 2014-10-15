@@ -20,10 +20,8 @@
 
 #include <QtTest>
 #include <QtCore>
-
-#include <klocale.h>
-#include <kdebug.h>
-#include <qtest_kde.h>
+#include <QDebug>
+#include <qtest.h>
 
 #include <processui/ksysguardprocesslist.h>
 
@@ -38,10 +36,10 @@ void testGuiProcess::testGUI() {
     for(int i =0; i < 10; i++) {
       processlist.updateList();
     }
-    kDebug() << "time taken: " << t.elapsed() << "ms";
+    qDebug() << "time taken: " << t.elapsed() << "ms";
 }
 
-QTEST_KDEMAIN(testGuiProcess, GUI)
+QTEST_MAIN(testGuiProcess)
 
 
 

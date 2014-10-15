@@ -21,7 +21,7 @@
 #include "processes_local_p.h"
 #include "process.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QSet>
 

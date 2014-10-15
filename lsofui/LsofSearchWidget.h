@@ -23,7 +23,7 @@
 #ifndef _LsofSearchWidget_h_
 #define _LsofSearchWidget_h_
 
-#include <kdialog.h>
+#include <QDialog>
 
 class Ui_LsofSearchWidget;
 
@@ -31,7 +31,7 @@ class Ui_LsofSearchWidget;
  * This class creates and handles a simple dialog to change the scheduling
  * priority of a process.
  */
-class LsofSearchWidget : public KDialog
+class LsofSearchWidget : public QDialog
 {
 	Q_OBJECT
 
