@@ -23,6 +23,7 @@
 #define PROCESSES_H_
 
 #include "process.h"
+#include <QtCore/QObject>
 #include <QtCore/QHash>
 
 namespace KSysGuard
