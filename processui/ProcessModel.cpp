@@ -54,8 +54,6 @@
 #include <sys/types.h>
 #endif
 
-
-
 #ifdef HAVE_XRES
 #include <X11/extensions/XRes.h>
 #endif
@@ -138,6 +136,7 @@ ProcessModelPrivate::~ProcessModelPrivate()
     delete mProcesses;
     mProcesses = NULL;
 }
+
 ProcessModel::ProcessModel(QObject* parent, const QString &host)
     : QAbstractItemModel(parent), d(new ProcessModelPrivate)
 {
@@ -161,8 +160,6 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
 #endif
     d->mUnits = UnitsKB;
     d->mIoUnits = UnitsKB;
-
-
 }
 
 bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
@@ -392,6 +389,7 @@ void ProcessModelPrivate::setupWindows() {
     }
 }
 #endif
+
 #ifdef HAVE_XRES
 bool ProcessModelPrivate::updateXResClientData() {
     XResClient *clients;
@@ -407,6 +405,7 @@ bool ProcessModelPrivate::updateXResClientData() {
         XFree(clients);
     return true;
 }
+
 void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
     updateXResClientData();
     Window       *children, dummy;
@@ -455,6 +454,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
         XFree((char*)children);
 }
 #endif
+
 void ProcessModelPrivate::setupProcesses() {
     if(mProcesses) {
 #ifdef Q_WS_X11_DISABLE
@@ -571,7 +571,6 @@ void ProcessModel::update(long updateDurationMSecs, KSysGuard::Processes::Update
     if(d->mHaveXRes && updateFlags.testFlag(KSysGuard::Processes::XMemory))
         d->queryForAndUpdateAllXWindows();
 #endif
-
 }
 
 QString ProcessModelPrivate::getStatusDescription(KSysGuard::Process::ProcessStatus status) const
@@ -597,6 +596,7 @@ KSysGuard::Process *ProcessModel::getProcessAtIndex(int index) const
     Q_ASSERT(d->mSimple);
     return d->mProcesses->getAllProcesses().at(index);
 }
+
 int ProcessModel::rowCount(const QModelIndex &parent) const
 {
     if(d->mSimple) {
@@ -802,6 +802,7 @@ void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
     //Only here can we actually change the model.  First notify the view/proxy models then modify
     q->beginInsertRows(parentModelIndex, row, row);
 }
+
 void ProcessModelPrivate::endInsertRow() {
     Q_ASSERT(!mRemovingRow);
     Q_ASSERT(mInsertingRow);
@@ -832,6 +833,7 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
         return q->beginRemoveRows(q->getQModelIndex(process->parent,0), row, row);
     }
 }
+
 void ProcessModelPrivate::endRemoveRow()
 {
     Q_ASSERT(!mInsertingRow);
@@ -842,7 +844,6 @@ void ProcessModelPrivate::endRemoveRow()
 
     q->endRemoveRows();
 }
-
 
 void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuard::Process *new_parent)
 {
@@ -861,6 +862,7 @@ void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuar
     mMovingRow = q->beginMoveRows(sourceParent, current_row, current_row, destinationParent, new_row);
     Q_ASSERT(mMovingRow);
 }
+
 void ProcessModelPrivate::endMoveRow()
 {
     Q_ASSERT(!mInsertingRow);
@@ -871,7 +873,6 @@ void ProcessModelPrivate::endMoveRow()
 
     q->endMoveRows();
 }
-
 
 QModelIndex ProcessModel::getQModelIndex( KSysGuard::Process *process, int column) const
 {
@@ -1030,6 +1031,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
         return QVariant();
     }
 }
+
 void ProcessModel::setSimpleMode(bool simple)
 {
     if(d->mSimple == simple) return;
@@ -1795,7 +1797,6 @@ bool ProcessModel::isLocalhost() const
     return d->mIsLocalhost;
 }
 
-
 void ProcessModel::setupHeader() {
     //These must be in the same order that they are in in the header file
     QStringList headings;
@@ -1869,6 +1870,7 @@ qlonglong ProcessModel::totalMemory() const
 {
     return d->mMemTotal;
 }
+
 void ProcessModel::setUnits(Units units)
 {
     if(d->mUnits == units)
@@ -1892,10 +1894,12 @@ void ProcessModel::setUnits(Units units)
         emit dataChanged(index, index);
     }
 }
+
 ProcessModel::Units ProcessModel::units() const
 {
     return (Units) d->mUnits;
 }
+
 void ProcessModel::setIoUnits(Units units)
 {
     if(d->mIoUnits == units)
@@ -1916,18 +1920,22 @@ void ProcessModel::setIoUnits(Units units)
     }
 
 }
+
 ProcessModel::Units ProcessModel::ioUnits() const
 {
     return (Units) d->mIoUnits;
 }
+
 void ProcessModel::setIoInformation( ProcessModel::IoInformation ioInformation )
 {
     d->mIoInformation = ioInformation;
 }
+
 ProcessModel::IoInformation ProcessModel::ioInformation() const
 {
     return d->mIoInformation;
 }
+
 QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool returnEmptyIfValueIsZero) const
 {
     //We cache the result of i18n for speed reasons.  We call this function
@@ -1948,6 +1956,7 @@ QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool r
 QString ProcessModel::hostName() const {
     return d->mHostName;
 }
+
 QStringList ProcessModel::mimeTypes() const
 {
     QStringList types;
@@ -1956,6 +1965,7 @@ QStringList ProcessModel::mimeTypes() const
     types << "text/html";
     return types;
 }
+
 QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
 {
     QMimeData *mimeData = new QMimeData();
@@ -2015,6 +2025,7 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
     return mimeData;
 
 }
+
 Qt::ItemFlags ProcessModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
@@ -2032,22 +2043,27 @@ bool ProcessModel::isShowCommandLineOptions() const
 {
     return d->mShowCommandLineOptions;
 }
+
 void ProcessModel::setShowCommandLineOptions(bool showCommandLineOptions)
 {
     d->mShowCommandLineOptions = showCommandLineOptions;
 }
+
 bool ProcessModel::isShowingTooltips() const
 {
     return d->mShowingTooltips;
 }
+
 void ProcessModel::setShowingTooltips(bool showTooltips)
 {
     d->mShowingTooltips = showTooltips;
 }
+
 bool ProcessModel::isNormalizedCPUUsage() const
 {
     return d->mNormalizeCPUUsage;
 }
+
 void ProcessModel::setNormalizedCPUUsage(bool normalizeCPUUsage)
 {
     d->mNormalizeCPUUsage = normalizeCPUUsage;
@@ -2079,4 +2095,3 @@ void ProcessModelPrivate::timerEvent( QTimerEvent * event )
         mTimerId = -1;
     }
 }
-
