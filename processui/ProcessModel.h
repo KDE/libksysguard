@@ -133,7 +133,22 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
          *  that old saved settings won't be used
          */
 #define PROCESSHEADERVERSION 5
-        enum { HeadingName=0, HeadingUser, HeadingPid, HeadingTty, HeadingNiceness, HeadingCPUUsage, HeadingCPUTime, HeadingIoRead, HeadingIoWrite, HeadingVmSize, HeadingMemory, HeadingSharedMemory, HeadingCommand, HeadingXMemory, HeadingXTitle };
+        enum { HeadingName=0,
+            HeadingUser,
+            HeadingPid,
+            HeadingTty,
+            HeadingNiceness,
+            HeadingCPUUsage,
+            HeadingCPUTime,
+            HeadingIoRead,
+            HeadingIoWrite,
+            HeadingVmSize,
+            HeadingMemory,
+            HeadingSharedMemory,
+            HeadingCommand,
+            HeadingXMemory,
+            HeadingXTitle
+        };
 
         enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, PlainValueRole, PercentageRole };
 
@@ -185,4 +200,5 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
 };
 
 #endif
+
 
