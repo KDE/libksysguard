@@ -9,7 +9,7 @@ include(WriteBasicConfigVersionFile)
 find_package(ECM 1.2.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-find_package(Qt5 REQUIRED CONFIG COMPONENTS DBus Widgets Script)
+find_package(Qt5 REQUIRED CONFIG COMPONENTS DBus Network Widgets Script)
 find_package(Qt5 COMPONENTS WebKitWidgets)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service Plasma)
 find_package(ZLIB REQUIRED)
