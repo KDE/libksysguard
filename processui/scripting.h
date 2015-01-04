@@ -72,6 +72,7 @@ class Scripting : public QWidget {
     qlonglong mPid;
 };
 #define PROPERTY(Type,Name) Type Name() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->Name; else return Type();}
+#define PROPERTY_F(Type,Name) Type Name() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->Name(); else return Type();}
 
 class ProcessObject : public QObject {
     Q_OBJECT
@@ -85,9 +86,9 @@ class ProcessObject : public QObject {
        Q_PROPERTY(int numThreads READ numThreads)                      PROPERTY(int, numThreads)
        Q_PROPERTY(qlonglong fsgid READ fsgid)                          PROPERTY(qlonglong, fsgid)
        Q_PROPERTY(qlonglong parent_pid READ parent_pid)                PROPERTY(qlonglong, parent_pid)
-       Q_PROPERTY(QString login READ login)                            PROPERTY(QString, login)
-       Q_PROPERTY(qlonglong uid READ uid)                              PROPERTY(qlonglong, uid)
-       Q_PROPERTY(qlonglong euid READ euid)                            PROPERTY(qlonglong, euid)
+       Q_PROPERTY(QString login READ login)                            PROPERTY_F(QString, login)
+       Q_PROPERTY(qlonglong uid READ uid)                              PROPERTY_F(qlonglong, uid)
+       Q_PROPERTY(qlonglong euid READ euid)                            PROPERTY_F(qlonglong, euid)
        Q_PROPERTY(qlonglong suid READ suid)                            PROPERTY(qlonglong, suid)
        Q_PROPERTY(qlonglong fsuid READ fsuid)                          PROPERTY(qlonglong, fsuid)
        Q_PROPERTY(qlonglong gid READ gid)                              PROPERTY(qlonglong, gid)

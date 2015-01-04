@@ -65,8 +65,8 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		process = parent_process->children.at(source_row);
 	}
 	Q_ASSERT(process);
-	long uid = process->uid;
-	long euid = process->euid;
+	long uid = process->uid();
+	long euid = process->euid();
 
 	bool accepted = true;
 	switch(mFilter) {

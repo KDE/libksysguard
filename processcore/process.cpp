@@ -91,10 +91,10 @@ QString KSysGuard::Process::schedulerAsString() const {
 void KSysGuard::Process::clear() {
     pid = -1;
     parent_pid = -1;
-    uid = 0;
+    _uid = 0;
     gid = -1;
     numThreads = 0;
-    suid = euid = fsuid = -1;
+    suid = _euid = fsuid = -1;
     sgid = egid = fsgid = -1;
     tracerpid = -1;
     userTime = 0;
@@ -135,19 +135,19 @@ void KSysGuard::Process::clear() {
 
     changes = Process::Nothing;
 }
-void KSysGuard::Process::setLogin(QString _login) {
-    if(login == _login) return;
-    login = _login;
+void KSysGuard::Process::setLogin(QString login) {
+    if(_login == login) return;
+    _login = login;
     changes |= Process::Login;
 }
-void KSysGuard::Process::setUid(qlonglong _uid) {
-    if(uid == _uid) return;
-    uid = _uid;
+void KSysGuard::Process::setUid(qlonglong uid) {
+    if(_uid == uid) return;
+    _uid = uid;
     changes |= Process::Uids;
 }
-void KSysGuard::Process::setEuid(qlonglong _euid) {
-    if(euid == _euid) return;
-    euid = _euid;
+void KSysGuard::Process::setEuid(qlonglong euid) {
+    if(_euid == euid) return;
+    _euid = euid;
     changes |= Process::Uids;
 }
 void KSysGuard::Process::setSuid(qlonglong _suid) {

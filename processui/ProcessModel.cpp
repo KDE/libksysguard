@@ -189,24 +189,24 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
                 return false;
 
             /* Sort by username.  First group into own user, normal users, system users */
-            if(processLeft->uid != processRight->uid) {
+            if(processLeft->uid() != processRight->uid()) {
                 //We primarily sort by username
                 if(d->mIsLocalhost) {
                     int ownUid = getuid();
-                    if(processLeft->uid == ownUid)
+                    if(processLeft->uid() == ownUid)
                         return true; //Left is our user, right is not.  So left is above right
-                    if(processRight->uid == ownUid)
+                    if(processRight->uid() == ownUid)
                         return false; //Left is not our user, right is.  So right is above left
                 }
-                bool isLeftSystemUser = processLeft->uid < 100 || !canUserLogin(processLeft->uid);
-                bool isRightSystemUser = processRight->uid < 100 || !canUserLogin(processRight->uid);
+                bool isLeftSystemUser = processLeft->uid() < 100 || !canUserLogin(processLeft->uid());
+                bool isRightSystemUser = processRight->uid() < 100 || !canUserLogin(processRight->uid());
                 if(isLeftSystemUser && !isRightSystemUser)
                     return false; //System users are less than non-system users
                 if(!isLeftSystemUser && isRightSystemUser)
                     return true;
                 //They are either both system users, or both non-system users.
                 //So now sort by username
-                return d->getUsernameForUser(processLeft->uid, false) < d->getUsernameForUser(processRight->uid, false);
+                return d->getUsernameForUser(processLeft->uid(), false) < d->getUsernameForUser(processRight->uid(), false);
             }
 
             /* 2nd sort order - Graphics Windows */
@@ -1106,26 +1106,26 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
 {
     QString userTooltip = "<qt><p style='white-space:pre'>";
     if(!mIsLocalhost) {
-        userTooltip += i18n("Login Name: %1<br/>", getUsernameForUser(ps->uid, true));
+        userTooltip += i18n("Login Name: %1<br/>", getUsernameForUser(ps->uid(), true));
     } else {
-        KUser user(ps->uid);
+        KUser user(ps->uid());
         if(!user.isValid())
             userTooltip += i18n("This user is not recognized for some reason.");
         else {
             if(!user.property(KUser::FullName).isValid())
                 userTooltip += i18n("<b>%1</b><br/>", user.property(KUser::FullName).toString());
-            userTooltip += i18n("Login Name: %1 (uid: %2)<br/>", user.loginName(), QString::number(ps->uid));
+            userTooltip += i18n("Login Name: %1 (uid: %2)<br/>", user.loginName(), QString::number(ps->uid()));
             if(!user.property(KUser::RoomNumber).isValid())
                 userTooltip += i18n("  Room Number: %1<br/>", user.property(KUser::RoomNumber).toString());
             if(!user.property(KUser::WorkPhone).isValid())
                 userTooltip += i18n("  Work Phone: %1<br/>", user.property(KUser::WorkPhone).toString());
         }
     }
-    if( (ps->uid != ps->euid && ps->euid != -1) ||
-                   (ps->uid != ps->suid && ps->suid != -1) ||
-                   (ps->uid != ps->fsuid && ps->fsuid != -1)) {
-        if(ps->euid != -1)
-            userTooltip += i18n("Effective User: %1<br/>", getUsernameForUser(ps->euid, true));
+    if( (ps->uid() != ps->euid() && ps->euid() != -1) ||
+                   (ps->uid() != ps->suid && ps->suid != -1) ||
+                   (ps->uid() != ps->fsuid && ps->fsuid != -1)) {
+        if(ps->euid() != -1)
+            userTooltip += i18n("Effective User: %1<br/>", getUsernameForUser(ps->euid(), true));
         if(ps->suid != -1)
             userTooltip += i18n("Setuid User: %1<br/>", getUsernameForUser(ps->suid, true));
         if(ps->fsuid != -1)
@@ -1149,7 +1149,7 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
 }
 
 QString ProcessModel::getStringForProcess(KSysGuard::Process *process) const {
-    return xi18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid), process->name, d->getUsernameForUser(process->uid, false));
+    return xi18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid), process->name, d->getUsernameForUser(process->uid(), false));
 }
 
 QString ProcessModelPrivate::getGroupnameForGroup(long gid) const {
@@ -1207,11 +1207,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingPid:
             return (qlonglong)process->pid;
         case HeadingUser:
-            if(!process->login.isEmpty()) return process->login;
-            if(process->uid == process->euid)
-                return d->getUsernameForUser(process->uid, false);
+            if(!process->login().isEmpty()) return process->login();
+            if(process->uid() == process->euid())
+                return d->getUsernameForUser(process->uid(), false);
             else
-                return QString(d->getUsernameForUser(process->uid, false) + ", " + d->getUsernameForUser(process->euid, false));
+                return QString(d->getUsernameForUser(process->uid(), false) + ", " + d->getUsernameForUser(process->euid(), false));
         case HeadingNiceness:
             switch(process->scheduler) {
               case KSysGuard::Process::Other:
@@ -1599,7 +1599,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     case UidRole: {
         if(index.column() != 0) return QVariant();  //If we query with this role, then we want the raw UID for this.
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-        return process->uid;
+        return process->uid();
     }
     case PlainValueRole:  //Used to return a plain value.  For copying to a clipboard etc
     {
@@ -1610,11 +1610,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingPid:
             return (qlonglong)process->pid;
         case HeadingUser:
-            if(!process->login.isEmpty()) return process->login;
-            if(process->uid == process->euid)
-                return d->getUsernameForUser(process->uid, false);
+            if(!process->login().isEmpty()) return process->login();
+            if(process->uid() == process->euid())
+                return d->getUsernameForUser(process->uid(), false);
             else
-                return QString(d->getUsernameForUser(process->uid, false) + ", " + d->getUsernameForUser(process->euid, false));
+                return QString(d->getUsernameForUser(process->uid(), false) + ", " + d->getUsernameForUser(process->euid(), false));
         case HeadingNiceness:
             return process->niceLevel;
         case HeadingTty:
@@ -1793,10 +1793,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             //It's being debugged, so probably important.  Let's mark it as such
             return QColor(Qt::yellow);
         }
-        if(d->mIsLocalhost && process->uid == getuid()) { //own user
+        if(d->mIsLocalhost && process->uid() == getuid()) { //own user
             return QColor(0, 208, 214, 50);
         }
-        if(process->uid < 100 || !canUserLogin(process->uid))
+        if(process->uid() < 100 || !canUserLogin(process->uid()))
             return QColor(218, 220,215, 50); //no color for system tasks
         //other users
         return QColor(2, 154, 54, 50);

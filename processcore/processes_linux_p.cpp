@@ -134,7 +134,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
-    process->uid = 0;
+    process->setUid(0);
     process->gid = 0;
     process->tracerpid = -1;
     process->numThreads = 0;
@@ -152,7 +152,11 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 	    break;
 	  case 'U':
 	    if((unsigned int)size > sizeof("Uid:") && qstrncmp(mBuffer, "Uid:", sizeof("Uid:")-1) == 0) {
-            sscanf(mBuffer + sizeof("Uid:") -1, "%Ld %Ld %Ld %Ld", &process->uid, &process->euid, &process->suid, &process->fsuid );
+            qlonglong uid;
+            qlonglong euid;
+            sscanf(mBuffer + sizeof("Uid:") -1, "%Ld %Ld %Ld %Ld", &uid, &euid, &process->suid, &process->fsuid );
+            process->setUid(uid);
+            process->setEuid(euid);
 	        if(++found == 5) goto finish;
 	    }
 	    break;

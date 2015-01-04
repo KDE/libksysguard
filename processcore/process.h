@@ -93,10 +93,17 @@ namespace KSysGuard
     void setIoCharactersActuallyReadRate(long number); ///< Number of bytes per second which this process really did cause to be fetched from the storage layer.
     void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
 
-    /* The member variables are made to public for efficiency, but should only be read from. */
-    QString login;
-    qlonglong uid;
-    qlonglong euid;
+    /* The member variables are made to public for efficiency, but should only be read from.
+     * (But in private implementations it is also written to, e.g. uid)
+     */
+#define PROCESS_DEF_PROP(Type, Name) \
+    private: Type _##Name; \
+    public: Type Name() const { return _##Name; }
+
+    PROCESS_DEF_PROP(QString, login)
+
+    PROCESS_DEF_PROP(qlonglong, uid)
+    PROCESS_DEF_PROP(qlonglong, euid)
     qlonglong suid;
     qlonglong fsuid;
 
@@ -203,7 +210,6 @@ namespace KSysGuard
 
   private:
     void clear();
-
   };
   Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
 }
