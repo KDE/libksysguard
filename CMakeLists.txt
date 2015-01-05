@@ -10,7 +10,14 @@ find_package(ECM 1.2.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 find_package(Qt5 REQUIRED CONFIG COMPONENTS DBus Network Widgets Script)
-find_package(Qt5 COMPONENTS WebKitWidgets)
+find_package(Qt5WebKitWidgets CONFIG)
+set_package_properties(Qt5WebKitWidgets PROPERTIES
+                       URL "git://gitorious.org/qt/qtwebkit.git"
+                       DESCRIPTION "Qt Webkit module (web browsing engine)"
+                       TYPE OPTIONAL
+                       PURPOSE "Used by the HTML-based GUI ksysguard library"
+                      )
+
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service Plasma)
 find_package(ZLIB REQUIRED)
 set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"
