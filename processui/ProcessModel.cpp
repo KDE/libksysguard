@@ -1265,6 +1265,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->vmRSS - process->vmURSS <= 0 || process->vmURSS == -1) return QVariant(QVariant::String);
             return formatMemoryInfo(process->vmRSS - process->vmURSS, d->mUnits);
         case HeadingStartTime: {
+            // NOTE: the next 6 lines are the same as in the next occurence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
             const auto clockTicksSinceSystemBoot = process->startTime;
             const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK); // see man proc or http://superuser.com/questions/101183/what-is-a-cpu-tick
             const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
@@ -1408,6 +1409,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return tooltip;
         }
         case HeadingStartTime: {
+            // NOTE: the next 6 lines are the same as in the previous occurence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
             const auto clockTicksSinceSystemBoot = process->startTime;
             const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK);
             const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
