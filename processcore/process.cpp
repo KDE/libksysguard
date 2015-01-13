@@ -100,6 +100,7 @@ void KSysGuard::Process::clear() {
     userTime = 0;
     sysTime = 0;
     elapsedTimeMilliSeconds = 0;
+    startTime = 0;
     userUsage=0;
     sysUsage=0;
     totalUserUsage=0;
@@ -197,6 +198,12 @@ void KSysGuard::Process::setUserTime(qlonglong _userTime) {
 void KSysGuard::Process::setSysTime(qlonglong _sysTime) {
     sysTime = _sysTime;
 }
+
+void KSysGuard::Process::setStartTime(qlonglong _startTime)
+{
+    startTime = _startTime;
+}
+
 void KSysGuard::Process::setUserUsage(int _userUsage) {
     if(userUsage == _userUsage) return;
     userUsage = _userUsage;
@@ -338,4 +345,5 @@ void KSysGuard::Process::setNumThreads(int number) {
     numThreads = number;
     changes |= Process::NumThreads;
 }
+
 

@@ -63,6 +63,7 @@ namespace KSysGuard
     void setTty(QByteArray tty); ///< The name of the tty the process owns
     void setUserTime(qlonglong userTime); ///< The time, in 100ths of a second, spent in total on user calls. -1 if not known
     void setSysTime(qlonglong sysTime);  ///< The time, in 100ths of a second, spent in total on system calls.  -1 if not known
+    void setStartTime(qlonglong startTime); /// The time the process started after system boot. Since Linux 2.6, the value is expressed in clock ticks. See man proc.
     void setUserUsage(int userUsage); ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
     void setSysUsage(int sysUsage);  ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
     void setTotalUserUsage(int totalUserUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
@@ -108,6 +109,12 @@ namespace KSysGuard
     QByteArray tty;
     qlonglong userTime;
     qlonglong sysTime;
+
+    /**
+     * the value is expressed in clock ticks (since Linux 2.6; we only handle this case) since system boot
+     */
+    qlonglong startTime;
+
     int userUsage;
     int sysUsage;
     int totalUserUsage;

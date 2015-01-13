@@ -24,6 +24,7 @@
 
 #include "ProcessModel.h"
 #include "ProcessModel_p.h"
+#include "timeutil.h"
 
 #include "processcore/processes.h"
 #include "processcore/process.h"
@@ -250,6 +251,9 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmURSS:processLeft->vmRSS;
             qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmURSS:processRight->vmRSS;
             return memoryLeft > memoryRight;
+        }
+        case HeadingStartTime: {
+            return processLeft->startTime > processRight->startTime;
         }
         case HeadingXMemory:
             return processLeft->pixmapBytes > processRight->pixmapBytes;
@@ -959,6 +963,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt>This is the amount of real physical memory that this process is using by itself, and approximates the Private memory usage of the process.<br>It does not include any swapped out memory, nor the code size of its shared libraries.<br>This is often the most useful figure to judge the memory use of a program.  See What's This for more information.</qt>");
             case HeadingSharedMemory:
                 return i18n("<qt>This is approximately the amount of real physical memory that this process's shared libraries are using.<br>This memory is shared among all processes that use this library.</qt>");
+            case HeadingStartTime:
+                return i18n("<qt>The elapsed time since the process was started.</qt>");
             case HeadingCommand:
                 return i18n("<qt>The command with which this process was launched.</qt>");
             case HeadingXMemory:
@@ -1000,6 +1006,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt>The total system and user time that a process and all of its threads have been running on the CPU for. This can be greater than the wall clock time if the process has been across multiple CPU cores.");
             case HeadingSharedMemory:
                 return i18n("<qt><i>Technical information: </i>This is an approximation of the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt).  For an individual process, see \"Detailed Memory Information\" for a more accurate, but slower, calculation of the true Shared memory usage.");
+            case HeadingStartTime:
+                return i18n("<qt><i>Technical information: </i>The underlying value (clock ticks since system boot) is retrieved from /proc/[pid]/stat");
             case HeadingCommand:
                 return i18n("<qt><i>Technical information: </i>This is from /proc/*/cmdline");
             case HeadingXMemory:
@@ -1256,6 +1264,15 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingSharedMemory:
             if(process->vmRSS - process->vmURSS <= 0 || process->vmURSS == -1) return QVariant(QVariant::String);
             return formatMemoryInfo(process->vmRSS - process->vmURSS, d->mUnits);
+        case HeadingStartTime: {
+            const auto clockTicksSinceSystemBoot = process->startTime;
+            const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK); // see man proc or http://superuser.com/questions/101183/what-is-a-cpu-tick
+            const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
+            const auto systemBootTime = TimeUtil::systemUptimeAbsolute();
+            const auto absoluteStartTime = systemBootTime.addSecs(secondsSinceSystemBoot);
+            const auto relativeStartTime = absoluteStartTime.secsTo(QDateTime::currentDateTime());
+            return TimeUtil::secondsToHumanElapsedString(relativeStartTime);
+        }
         case HeadingCommand:
             {
 		return process->command.replace('\n',' ');
@@ -1390,7 +1407,21 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 return QString::fromLatin1("%1<br />%2").arg(tooltip).arg(tracer);
             return tooltip;
         }
-
+        case HeadingStartTime: {
+            const auto clockTicksSinceSystemBoot = process->startTime;
+            const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK);
+            const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
+            const auto systemBootTime = TimeUtil::systemUptimeAbsolute();
+            const auto absoluteStartTime = systemBootTime.addSecs(secondsSinceSystemBoot);
+            const auto relativeStartTime = absoluteStartTime.secsTo(QDateTime::currentDateTime());
+            const auto tooltip = i18n("Clock ticks since system boot: %1<br/>Seconds since system boot: %2 (System boot time: %3)<br/>Absolute start time: %4<br/>Relative start time: %5",
+                                clockTicksSinceSystemBoot,
+                                secondsSinceSystemBoot,
+                                systemBootTime.toString(),
+                                absoluteStartTime.toString(),
+                                TimeUtil::secondsToHumanElapsedString(relativeStartTime));
+            return tooltip;
+        }
         case HeadingCommand: {
             QString tooltip =
                 i18n("<qt>This process was run with the following command:<br />%1", process->command);
@@ -1551,6 +1582,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 return QVariant(Qt::AlignCenter);
             case HeadingNiceness:
             case HeadingCPUTime:
+            case HeadingStartTime:
             case HeadingPid:
             case HeadingMemory:
             case HeadingXMemory:
@@ -1610,6 +1642,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingSharedMemory:
             if(process->vmRSS - process->vmURSS < 0 || process->vmURSS == -1) return QVariant(QVariant::String);
             return (qlonglong)(process->vmRSS - process->vmURSS);
+        case HeadingStartTime:
+            return process->startTime; // 2015-01-03, gregormi: can maybe be replaced with something better later
         case HeadingCommand:
             return process->command;
         case HeadingIoRead:
@@ -1813,6 +1847,7 @@ void ProcessModel::setupHeader() {
     headings << i18nc("process heading", "Virtual Size");
     headings << i18nc("process heading", "Memory");
     headings << i18nc("process heading", "Shared Mem");
+    headings << i18nc("process heading", "Relative Start Time");
     headings << i18nc("process heading", "Command");
 #if HAVE_X11
     headings << i18nc("process heading", "X11 Memory");

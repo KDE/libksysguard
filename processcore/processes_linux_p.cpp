@@ -286,6 +286,9 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
                 case 18: //niceLevel
                     ps->setNiceLevel(atoi(word+1));  /*Or should we use getPriority instead? */
                     break;
+                case 21: // startTime
+                    ps->setStartTime(atoll(word+1));
+                    break;
                 case 22: //vmSize
                     vmSize = atoll(word+1);
                     break;

@@ -21,6 +21,10 @@ ecm_add_test(signalplottertest.cpp ${libksysguard_SOURCE_DIR}/processcore/proces
     LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes
 )
 
+ecm_add_test(chronotest.cpp
+    TEST_NAME chronotest
+    LINK_LIBRARIES Qt5::Test KF5::I18n
+)
 
 # set( ksysguarddtest_SRCS ksysguarddtest.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorManager.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorSocketAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorShellAgent.cpp)
 #
@@ -34,5 +38,3 @@ ecm_add_test(signalplottertest.cpp ${libksysguard_SOURCE_DIR}/processcore/proces
 #     KF5::CoreAddons
 #     KF5::I18n
 # )
-
-

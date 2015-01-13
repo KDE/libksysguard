@@ -285,6 +285,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingVmSize);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingNiceness);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingTty);
+    d->mUi->treeView->header()->hideSection(ProcessModel::HeadingStartTime);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCommand);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingPid);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCPUTime);
