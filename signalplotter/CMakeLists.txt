@@ -21,8 +21,8 @@ target_link_libraries(ksignalplotter
 )
 
 set_target_properties(ksignalplotter
-   PROPERTIES VERSION ${PROJECT_VERSION}
-   SOVERSION ${PROJECT_VERSION_MAJOR}
+   PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING}
+   SOVERSION ${KSYSGUARD_SOVERSION}
    EXPORT_NAME SignalPlotter
 )
 

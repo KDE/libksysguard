@@ -31,7 +31,7 @@ target_link_libraries(ksgrd
         KF5::ProcessCore
 )
 
-set_target_properties(ksgrd PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR} EXPORT_NAME SysGuard)
+set_target_properties(ksgrd PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING} SOVERSION ${KSYSGUARD_SOVERSION} EXPORT_NAME SysGuard)
 install(TARGETS ksgrd EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES SensorAgent.h SensorClient.h SensorManager.h SensorShellAgent.h SensorSocketAgent.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard/ksgrd COMPONENT Devel)

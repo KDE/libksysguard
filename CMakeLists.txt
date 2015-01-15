@@ -33,9 +33,14 @@ include(ECMAddTests)
 include(ECMInstallIcons)
 include(ECMPackageConfigHelpers)
 include(CheckIncludeFiles)
+include(ECMSetupVersion)
 
-write_basic_config_version_file(${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake VERSION
-                                     "${PROJECT_VERSION}" COMPATIBILITY AnyNewerVersion)
+ecm_setup_version(${PROJECT_VERSION}
+                  VARIABLE_PREFIX KSYSGUARD
+                  VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/ksysguard_version.h"
+                  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake"
+                  SOVERSION 6
+)
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
