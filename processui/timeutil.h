@@ -23,6 +23,7 @@
 #ifndef TIMEUTIL_H
 #define TIMEUTIL_H
 
+#include <cmath> // floor
 #include <time.h>
 
 #include <QDateTime>
