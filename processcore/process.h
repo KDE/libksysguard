@@ -97,7 +97,6 @@ public:
     void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
 
     QString login() const;
-
     qlonglong uid() const;
     qlonglong euid() const;
     qlonglong suid;

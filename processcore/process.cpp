@@ -169,7 +169,6 @@ qlonglong KSysGuard::Process::euid() const
     return d->euid;
 }
 
-
 void KSysGuard::Process::setLogin(QString login) {
     Q_D(Process);
     if(d->login == login) return;
@@ -247,7 +246,8 @@ void KSysGuard::Process::setSysTime(qlonglong _sysTime) {
     sysTime = _sysTime;
 }
 
-void KSysGuard::Process::setStartTime(qlonglong _startTime) {
+void KSysGuard::Process::setStartTime(qlonglong _startTime)
+{
     startTime = _startTime;
 }
 
