@@ -22,15 +22,28 @@
 #include "process.h"
 #include <KLocalizedString>
 
+class KSysGuard::ProcessPrivate {
+public:
+    QString login;
+    qlonglong uid;
+    qlonglong euid;
+};
 
-KSysGuard::Process::Process() {
+KSysGuard::Process::Process() : d_ptr(new ProcessPrivate()) {
     clear();
 }
-KSysGuard::Process::Process(qlonglong _pid, qlonglong _ppid, Process *_parent)  {
+
+KSysGuard::Process::Process(qlonglong _pid, qlonglong _ppid, Process *_parent) : d_ptr(new ProcessPrivate())
+{
     clear();
     pid = _pid;
     parent_pid = _ppid;
     parent = _parent;
+}
+
+KSysGuard::Process::~Process()
+{
+    delete d_ptr; // todo: needed?
 }
 
 QString KSysGuard::Process::niceLevelAsString() const {
@@ -89,12 +102,14 @@ QString KSysGuard::Process::schedulerAsString() const {
 }
 
 void KSysGuard::Process::clear() {
+    Q_D(Process);
+
     pid = -1;
     parent_pid = -1;
-    _uid = 0;
+    d->uid = 0;
     gid = -1;
     numThreads = 0;
-    suid = _euid = fsuid = -1;
+    suid = d->euid = fsuid = -1;
     sgid = egid = fsgid = -1;
     tracerpid = -1;
     userTime = 0;
@@ -135,26 +150,53 @@ void KSysGuard::Process::clear() {
 
     changes = Process::Nothing;
 }
+
+QString KSysGuard::Process::login() const
+{
+    Q_D(const Process);
+    return d->login;
+}
+
+qlonglong KSysGuard::Process::uid() const
+{
+    Q_D(const Process);
+    return d->uid;
+}
+
+qlonglong KSysGuard::Process::euid() const
+{
+    Q_D(const Process);
+    return d->euid;
+}
+
+
 void KSysGuard::Process::setLogin(QString login) {
-    if(_login == login) return;
-    _login = login;
+    Q_D(Process);
+    if(d->login == login) return;
+    d->login = login;
     changes |= Process::Login;
 }
+
 void KSysGuard::Process::setUid(qlonglong uid) {
-    if(_uid == uid) return;
-    _uid = uid;
+    Q_D(Process);
+    if(d->uid == uid) return;
+    d->uid = uid;
     changes |= Process::Uids;
 }
+
 void KSysGuard::Process::setEuid(qlonglong euid) {
-    if(_euid == euid) return;
-    _euid = euid;
+    Q_D(Process);
+    if(d->euid == euid) return;
+    d->euid = euid;
     changes |= Process::Uids;
 }
+
 void KSysGuard::Process::setSuid(qlonglong _suid) {
     if(suid == _suid) return;
     suid = _suid;
     changes |= Process::Uids;
 }
+
 void KSysGuard::Process::setFsuid(qlonglong _fsuid) {
     if(fsuid == _fsuid) return;
     fsuid = _fsuid;
@@ -166,16 +208,19 @@ void KSysGuard::Process::setGid(qlonglong _gid) {
     gid = _gid;
     changes |= Process::Gids;
 }
+
 void KSysGuard::Process::setEgid(qlonglong _egid) {
     if(egid == _egid) return;
     egid = _egid;
     changes |= Process::Gids;
 }
+
 void KSysGuard::Process::setSgid(qlonglong _sgid) {
     if(sgid == _sgid) return;
     sgid = _sgid;
     changes |= Process::Gids;
 }
+
 void KSysGuard::Process::setFsgid(qlonglong _fsgid) {
     if(fsgid == _fsgid) return;
     fsgid = _fsgid;
@@ -187,20 +232,22 @@ void KSysGuard::Process::setTracerpid(qlonglong _tracerpid) {
     tracerpid = _tracerpid;
     changes |= Process::Tracerpid;
 }
+
 void KSysGuard::Process::setTty(QByteArray _tty) {
     if(tty == _tty) return;
     tty = _tty;
     changes |= Process::Tty;
 }
+
 void KSysGuard::Process::setUserTime(qlonglong _userTime) {
     userTime = _userTime;
 }
+
 void KSysGuard::Process::setSysTime(qlonglong _sysTime) {
     sysTime = _sysTime;
 }
 
-void KSysGuard::Process::setStartTime(qlonglong _startTime)
-{
+void KSysGuard::Process::setStartTime(qlonglong _startTime) {
     startTime = _startTime;
 }
 
@@ -209,41 +256,49 @@ void KSysGuard::Process::setUserUsage(int _userUsage) {
     userUsage = _userUsage;
     changes |= Process::Usage;
 }
+
 void KSysGuard::Process::setSysUsage(int _sysUsage) {
     if(sysUsage == _sysUsage) return;
     sysUsage = _sysUsage;
     changes |= Process::Usage;
 }
+
 void KSysGuard::Process::setTotalUserUsage(int _totalUserUsage) {
     if(totalUserUsage == _totalUserUsage) return;
     totalUserUsage = _totalUserUsage;
     changes |= Process::TotalUsage;
 }
+
 void KSysGuard::Process::setTotalSysUsage(int _totalSysUsage) {
     if(totalSysUsage == _totalSysUsage) return;
     totalSysUsage = _totalSysUsage;
     changes |= Process::TotalUsage;
 }
+
 void KSysGuard::Process::setNiceLevel(int _niceLevel) {
     if(niceLevel == _niceLevel) return;
     niceLevel = _niceLevel;
     changes |= Process::NiceLevels;
 }
+
 void KSysGuard::Process::setscheduler(Scheduler _scheduler) {
     if(scheduler == _scheduler) return;
     scheduler = _scheduler;
     changes |= Process::NiceLevels;
 }
+
 void KSysGuard::Process::setIoPriorityClass(IoPriorityClass _ioPriorityClass) {
     if(ioPriorityClass == _ioPriorityClass) return;
     ioPriorityClass = _ioPriorityClass;
     changes |= Process::NiceLevels;
 }
+
 void KSysGuard::Process::setIoniceLevel(int _ioniceLevel) {
     if(ioniceLevel == _ioniceLevel) return;
     ioniceLevel = _ioniceLevel;
     changes |= Process::NiceLevels;
 }
+
 void KSysGuard::Process::setVmSize(qlonglong _vmSize) {
     if(vmSizeChange != 0 || vmSize != 0)
         vmSizeChange = _vmSize - vmSize;
@@ -251,6 +306,7 @@ void KSysGuard::Process::setVmSize(qlonglong _vmSize) {
     vmSize = _vmSize;
     changes |= Process::VmSize;
 }
+
 void KSysGuard::Process::setVmRSS(qlonglong _vmRSS) {
     if(vmRSSChange != 0 || vmRSS != 0)
         vmRSSChange = _vmRSS - vmRSS;
@@ -258,6 +314,7 @@ void KSysGuard::Process::setVmRSS(qlonglong _vmRSS) {
     vmRSS = _vmRSS;
     changes |= Process::VmRSS;
 }
+
 void KSysGuard::Process::setVmURSS(qlonglong _vmURSS) {
     if(vmURSSChange != 0 || vmURSS != 0)
         vmURSSChange = _vmURSS - vmURSS;
@@ -265,85 +322,99 @@ void KSysGuard::Process::setVmURSS(qlonglong _vmURSS) {
     vmURSS = _vmURSS;
     changes |= Process::VmURSS;
 }
+
 void KSysGuard::Process::setName(QString _name) {
     if(name == _name) return;
     name = _name;
     changes |= Process::Name;
 }
+
 void KSysGuard::Process::setCommand(QString _command) {
     if(command == _command) return;
     command = _command;
     changes |= Process::Command;
 }
+
 void KSysGuard::Process::setStatus(ProcessStatus _status) {
     if(status == _status) return;
     status = _status;
     changes |= Process::Status;
 }
+
 void KSysGuard::Process::setIoCharactersRead(qlonglong number) {
     if(number == ioCharactersRead) return;
     ioCharactersRead = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoCharactersWritten(qlonglong number) {
     if(number == ioCharactersWritten) return;
     ioCharactersWritten = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoReadSyscalls(qlonglong number) {
     if(number == ioReadSyscalls) return;
     ioReadSyscalls = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoWriteSyscalls(qlonglong number) {
     if(number == ioWriteSyscalls) return;
     ioWriteSyscalls = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoCharactersActuallyRead(qlonglong number) {
     if(number == ioCharactersActuallyRead) return;
     ioCharactersActuallyRead = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoCharactersActuallyWritten(qlonglong number) {
     if(number == ioCharactersActuallyWritten) return;
     ioCharactersActuallyWritten = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoCharactersReadRate(long number) {
     if(number == ioCharactersReadRate) return;
     ioCharactersReadRate = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoCharactersWrittenRate(long number) {
     if(number == ioCharactersWrittenRate) return;
     ioCharactersWrittenRate = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoReadSyscallsRate(long number) {
     if(number == ioReadSyscallsRate) return;
     ioReadSyscallsRate = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoWriteSyscallsRate(long number) {
     if(number == ioWriteSyscallsRate) return;
     ioWriteSyscallsRate = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoCharactersActuallyReadRate(long number) {
     if(number == ioCharactersActuallyReadRate) return;
     ioCharactersActuallyReadRate = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setIoCharactersActuallyWrittenRate(long number) {
     if(number == ioCharactersActuallyWrittenRate) return;
     ioCharactersActuallyWrittenRate = number;
     changes |= Process::IO;
 }
+
 void KSysGuard::Process::setNumThreads(int number) {
     if(number == numThreads) return;
     numThreads = number;
     changes |= Process::NumThreads;
 }
-
-

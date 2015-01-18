@@ -27,14 +27,17 @@
 
 namespace KSysGuard
 {
+class ProcessPrivate; // forward decl d-ptr
 
-  class Q_DECL_EXPORT Process {
-    public:
+class Q_DECL_EXPORT Process {
+public:
     enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, Ended, OtherStatus=99 };
     enum IoPriorityClass { None, RealTime, BestEffort, Idle };
     enum Scheduler { Other = 0, Fifo, RoundRobin, Batch, SchedulerIdle, Interactive }; ///< Interactive is Solaris only
+
     Process();
     Process(qlonglong _pid, qlonglong _ppid, Process *_parent);
+    virtual ~Process();
 
     long pid;    ///< The system's ID for this process.  1 for init.  -1 for our virtual 'parent of init' process used just for convenience.
     long parent_pid;  ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
@@ -93,17 +96,10 @@ namespace KSysGuard
     void setIoCharactersActuallyReadRate(long number); ///< Number of bytes per second which this process really did cause to be fetched from the storage layer.
     void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
 
-    /* The member variables are made to public for efficiency, but should only be read from.
-     * (But in private implementations it is also written to, e.g. uid)
-     */
-#define PROCESS_DEF_PROP(Type, Name) \
-    private: Type _##Name; \
-    public: Type Name() const { return _##Name; }
+    QString login() const;
 
-    PROCESS_DEF_PROP(QString, login)
-
-    PROCESS_DEF_PROP(qlonglong, uid)
-    PROCESS_DEF_PROP(qlonglong, euid)
+    qlonglong uid() const;
+    qlonglong euid() const;
     qlonglong suid;
     qlonglong fsuid;
 
@@ -210,8 +206,14 @@ namespace KSysGuard
 
   private:
     void clear();
+
+  private:
+      ProcessPrivate* const d_ptr;
+      Q_DECLARE_PRIVATE(Process); // todo: this one vs. https://techbase.kde.org/Policies/Binary_Compatibility_Issues_With_C++#Using_a_d-Pointer ?
   };
+
   Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
 }
 
 #endif
+
