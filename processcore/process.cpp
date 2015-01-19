@@ -27,6 +27,17 @@ public:
     QString login;
     qlonglong uid;
     qlonglong euid;
+    qlonglong suid;
+    qlonglong fsuid;
+    qlonglong gid;
+    qlonglong egid;
+    qlonglong sgid;
+    qlonglong fsgid;
+    qlonglong tracerpid;
+    QByteArray tty;
+    qlonglong userTime;
+    qlonglong sysTime;
+    qlonglong startTime;
 };
 
 KSysGuard::Process::Process() : d_ptr(new ProcessPrivate()) {
@@ -107,15 +118,15 @@ void KSysGuard::Process::clear() {
     pid = -1;
     parent_pid = -1;
     d->uid = 0;
-    gid = -1;
+    d->gid = -1;
     numThreads = 0;
-    suid = d->euid = fsuid = -1;
-    sgid = egid = fsgid = -1;
-    tracerpid = -1;
-    userTime = 0;
-    sysTime = 0;
+    d->suid = d->euid = d->fsuid = -1;
+    d->sgid = d->egid = d->fsgid = -1;
+    d->tracerpid = -1;
+    d->userTime = 0;
+    d->sysTime = 0;
     elapsedTimeMilliSeconds = 0;
-    startTime = 0;
+    d->startTime = 0;
     userUsage=0;
     sysUsage=0;
     totalUserUsage=0;
@@ -169,6 +180,72 @@ qlonglong KSysGuard::Process::euid() const
     return d->euid;
 }
 
+qlonglong KSysGuard::Process::suid() const
+{
+    Q_D(const Process);
+    return d->suid;
+}
+
+qlonglong KSysGuard::Process::fsuid() const
+{
+    Q_D(const Process);
+    return d->fsuid;
+}
+
+qlonglong KSysGuard::Process::gid() const
+{
+    Q_D(const Process);
+    return d->gid;
+}
+
+qlonglong KSysGuard::Process::egid() const
+{
+    Q_D(const Process);
+    return d->egid;
+}
+
+qlonglong KSysGuard::Process::sgid() const
+{
+    Q_D(const Process);
+    return d->sgid;
+}
+
+qlonglong KSysGuard::Process::fsgid() const
+{
+    Q_D(const Process);
+    return d->fsgid;
+}
+
+qlonglong KSysGuard::Process::tracerpid() const
+{
+    Q_D(const Process);
+    return d->tracerpid;
+}
+
+QByteArray KSysGuard::Process::tty() const
+{
+    Q_D(const Process);
+    return d->tty;
+}
+
+qlonglong KSysGuard::Process::userTime() const
+{
+    Q_D(const Process);
+    return d->userTime;
+}
+
+qlonglong KSysGuard::Process::sysTime() const
+{
+    Q_D(const Process);
+    return d->sysTime;
+}
+
+qlonglong KSysGuard::Process::startTime() const
+{
+    Q_D(const Process);
+    return d->startTime;
+}
+
 void KSysGuard::Process::setLogin(QString login) {
     Q_D(Process);
     if(d->login == login) return;
@@ -190,65 +267,76 @@ void KSysGuard::Process::setEuid(qlonglong euid) {
     changes |= Process::Uids;
 }
 
-void KSysGuard::Process::setSuid(qlonglong _suid) {
-    if(suid == _suid) return;
-    suid = _suid;
+void KSysGuard::Process::setSuid(qlonglong suid) {
+    Q_D(Process);
+    if(d->suid == suid) return;
+    d->suid = suid;
     changes |= Process::Uids;
 }
 
-void KSysGuard::Process::setFsuid(qlonglong _fsuid) {
-    if(fsuid == _fsuid) return;
-    fsuid = _fsuid;
+void KSysGuard::Process::setFsuid(qlonglong fsuid) {
+    Q_D(Process);
+    if(d->fsuid == fsuid) return;
+    d->fsuid = fsuid;
     changes |= Process::Uids;
 }
 
-void KSysGuard::Process::setGid(qlonglong _gid) {
-    if(gid == _gid) return;
-    gid = _gid;
+void KSysGuard::Process::setGid(qlonglong gid) {
+    Q_D(Process);
+    if(d->gid == gid) return;
+    d->gid = gid;
     changes |= Process::Gids;
 }
 
-void KSysGuard::Process::setEgid(qlonglong _egid) {
-    if(egid == _egid) return;
-    egid = _egid;
+void KSysGuard::Process::setEgid(qlonglong egid) {
+    Q_D(Process);
+    if(d->egid == egid) return;
+    d->egid = egid;
     changes |= Process::Gids;
 }
 
-void KSysGuard::Process::setSgid(qlonglong _sgid) {
-    if(sgid == _sgid) return;
-    sgid = _sgid;
+void KSysGuard::Process::setSgid(qlonglong sgid) {
+    Q_D(Process);
+    if(d->sgid == sgid) return;
+    d->sgid = sgid;
     changes |= Process::Gids;
 }
 
-void KSysGuard::Process::setFsgid(qlonglong _fsgid) {
-    if(fsgid == _fsgid) return;
-    fsgid = _fsgid;
+void KSysGuard::Process::setFsgid(qlonglong fsgid) {
+    Q_D(Process);
+    if(d->fsgid == fsgid) return;
+    d->fsgid = fsgid;
     changes |= Process::Gids;
 }
 
-void KSysGuard::Process::setTracerpid(qlonglong _tracerpid) {
-    if(tracerpid == _tracerpid) return;
-    tracerpid = _tracerpid;
+void KSysGuard::Process::setTracerpid(qlonglong tracerpid) {
+    Q_D(Process);
+    if(d->tracerpid == d->tracerpid) return;
+    d->tracerpid = tracerpid;
     changes |= Process::Tracerpid;
 }
 
-void KSysGuard::Process::setTty(QByteArray _tty) {
-    if(tty == _tty) return;
-    tty = _tty;
+void KSysGuard::Process::setTty(QByteArray tty) {
+    Q_D(Process);
+    if(d->tty == tty) return;
+    d->tty = tty;
     changes |= Process::Tty;
 }
 
-void KSysGuard::Process::setUserTime(qlonglong _userTime) {
-    userTime = _userTime;
+void KSysGuard::Process::setUserTime(qlonglong userTime) {
+    Q_D(Process);
+    d->userTime = userTime;
 }
 
-void KSysGuard::Process::setSysTime(qlonglong _sysTime) {
-    sysTime = _sysTime;
+void KSysGuard::Process::setSysTime(qlonglong sysTime) {
+    Q_D(Process);
+    d->sysTime = sysTime;
 }
 
-void KSysGuard::Process::setStartTime(qlonglong _startTime)
+void KSysGuard::Process::setStartTime(qlonglong startTime)
 {
-    startTime = _startTime;
+    Q_D(Process);
+    d->startTime = startTime;
 }
 
 void KSysGuard::Process::setUserUsage(int _userUsage) {

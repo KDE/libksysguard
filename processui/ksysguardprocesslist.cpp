@@ -474,7 +474,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
         }
     }
 
-    if(numProcesses == 1 && process->tracerpid >= 0) {
+    if(numProcesses == 1 && process->tracerpid() >= 0) {
         //If the process is being debugged, offer to select it
         d->mProcessContextMenu->addAction(d->selectTracer);
     }
@@ -531,7 +531,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
         KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
         if(process)
-            selectAndJumpToProcess(process->tracerpid);
+            selectAndJumpToProcess(process->tracerpid());
     } else if(result == d->window) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();

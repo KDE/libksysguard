@@ -237,8 +237,8 @@ bool ProcessesATop::updateProcessInfo( long pid, Process *process)
 //    process->setTty
     process->setUserTime(p.cpu.utime * 100/d->rh.hertz);//check - divide by interval maybe?
     process->setSysTime(p.cpu.stime * 100/d->rh.hertz); //check
-    process->setUserUsage( process->userTime / d->rr.interval );
-    process->setSysUsage( process->sysTime / d->rr.interval );
+    process->setUserUsage(process->userTime() / d->rr.interval);
+    process->setSysUsage(process->sysTime() / d->rr.interval);
     process->setNiceLevel(p.cpu.nice);
 //    process->setscheduler(p.cpu.policy);
     process->setVmSize(p.mem.vmem);

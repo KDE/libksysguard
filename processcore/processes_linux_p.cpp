@@ -135,8 +135,8 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
         return false;      /* process has terminated in the meantime */
 
     process->setUid(0);
-    process->gid = 0;
-    process->tracerpid = -1;
+    process->setGid(0);
+    process->setTracerpid(-1);
     process->numThreads = 0;
 
     int size;
@@ -154,23 +154,32 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 	    if((unsigned int)size > sizeof("Uid:") && qstrncmp(mBuffer, "Uid:", sizeof("Uid:")-1) == 0) {
             qlonglong uid;
             qlonglong euid;
-            sscanf(mBuffer + sizeof("Uid:") -1, "%Ld %Ld %Ld %Ld", &uid, &euid, &process->suid, &process->fsuid );
+            qlonglong suid;
+            qlonglong fsuid;
+            sscanf(mBuffer + sizeof("Uid:") -1, "%Ld %Ld %Ld %Ld", &uid, &euid, &suid, &fsuid);
             process->setUid(uid);
             process->setEuid(euid);
+            process->setSuid(suid);
+            process->setFsuid(fsuid);
 	        if(++found == 5) goto finish;
 	    }
 	    break;
 	  case 'G':
 	    if((unsigned int)size > sizeof("Gid:") && qstrncmp(mBuffer, "Gid:", sizeof("Gid:")-1) == 0) {
-            sscanf(mBuffer + sizeof("Gid:")-1, "%Ld %Ld %Ld %Ld", &process->gid, &process->egid, &process->sgid, &process->fsgid );
+            qlonglong gid, egid, sgid, fsgid;
+            sscanf(mBuffer + sizeof("Gid:")-1, "%Ld %Ld %Ld %Ld", &gid, &egid, &sgid, &fsgid);
+            process->setGid(gid);
+            process->setEgid(egid);
+            process->setSgid(sgid);
+            process->setFsgid(fsgid);
 	        if(++found == 5) goto finish;
 	    }
 	    break;
       case 'T':
         if((unsigned int)size > sizeof("TracerPid:") && qstrncmp(mBuffer, "TracerPid:", sizeof("TracerPid:")-1) == 0) {
-            process->tracerpid = atol(mBuffer + sizeof("TracerPid:")-1);
-            if (process->tracerpid == 0)
-                process->tracerpid = -1;
+            process->setTracerpid(atol(mBuffer + sizeof("TracerPid:")-1));
+            if (process->tracerpid() == 0)
+                process->setTracerpid(-1);
             if(++found == 5) goto finish;
         } else if((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:")-1) == 0) {
             process->setNumThreads(atol(mBuffer + sizeof("Threads:")-1));

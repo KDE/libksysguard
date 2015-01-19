@@ -183,9 +183,9 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
                We then sort by cpu usage to sort by that, then finally sort by memory usage */
 
             /* First, place traced processes at the very top, ignoring any other sorting criteria */
-            if(processLeft->tracerpid >= 0)
+            if(processLeft->tracerpid() >= 0)
                 return true;
-            if(processRight->tracerpid >= 0)
+            if(processRight->tracerpid() >= 0)
                 return false;
 
             /* Sort by username.  First group into own user, normal users, system users */
@@ -245,7 +245,7 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             return leftCpu > rightCpu;
          }
         case HeadingCPUTime: {
-            return (processLeft->userTime + processLeft->sysTime) > (processRight->userTime + processRight->sysTime);
+            return (processLeft->userTime() + processLeft->sysTime()) > (processRight->userTime() + processRight->sysTime());
         }
         case HeadingMemory: {
             qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmURSS:processLeft->vmRSS;
@@ -253,7 +253,7 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             return memoryLeft > memoryRight;
         }
         case HeadingStartTime: {
-            return processLeft->startTime > processRight->startTime;
+            return processLeft->startTime() > processRight->startTime();
         }
         case HeadingXMemory:
             return processLeft->pixmapBytes > processRight->pixmapBytes;
@@ -284,19 +284,19 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
                 return processLeft->pid < processRight->pid; //Subsort by pid if the niceLevel is the same
             return processLeft->niceLevel < processRight->niceLevel;
         case HeadingTty: {
-            if( processLeft->tty == processRight->tty)
+            if(processLeft->tty() == processRight->tty())
                 return processLeft->pid < processRight->pid; //Both ttys are the same.  Sort by pid
-            if(processLeft->tty.isEmpty())
+            if(processLeft->tty().isEmpty())
                 return false; //Only left is empty (since they aren't the same)
-            else if(processRight->tty.isEmpty())
+            else if(processRight->tty().isEmpty())
                 return true; //Only right is empty
 
             //Neither left or right is empty. The tty string is like  "tty10"  so split this into "tty" and "10"
             //and sort by the string first, then sort by the number
             QRegExp regexpLeft("^(\\D*)(\\d*)$");
             QRegExp regexpRight(regexpLeft);
-            if(regexpLeft.indexIn(processLeft->tty) == -1 || regexpRight.indexIn(processRight->tty) == -1)
-                return processLeft->tty < processRight->tty;
+            if(regexpLeft.indexIn(processLeft->tty()) == -1 || regexpRight.indexIn(processRight->tty()) == -1)
+                return processLeft->tty() < processRight->tty();
             int nameMatch = regexpLeft.cap(1).compare(regexpRight.cap(1));
             if(nameMatch < 0)
                 return true;
@@ -1122,27 +1122,27 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
         }
     }
     if( (ps->uid() != ps->euid() && ps->euid() != -1) ||
-                   (ps->uid() != ps->suid && ps->suid != -1) ||
-                   (ps->uid() != ps->fsuid && ps->fsuid != -1)) {
+                   (ps->uid() != ps->suid() && ps->suid() != -1) ||
+                   (ps->uid() != ps->fsuid() && ps->fsuid() != -1)) {
         if(ps->euid() != -1)
             userTooltip += i18n("Effective User: %1<br/>", getUsernameForUser(ps->euid(), true));
-        if(ps->suid != -1)
-            userTooltip += i18n("Setuid User: %1<br/>", getUsernameForUser(ps->suid, true));
-        if(ps->fsuid != -1)
-            userTooltip += i18n("File System User: %1<br/>", getUsernameForUser(ps->fsuid, true));
+        if(ps->suid() != -1)
+            userTooltip += i18n("Setuid User: %1<br/>", getUsernameForUser(ps->suid(), true));
+        if(ps->fsuid() != -1)
+            userTooltip += i18n("File System User: %1<br/>", getUsernameForUser(ps->fsuid(), true));
         userTooltip += "<br/>";
     }
-    if(ps->gid != -1) {
-        userTooltip += i18n("Group: %1", getGroupnameForGroup(ps->gid));
-        if( (ps->gid != ps->egid && ps->egid != -1) ||
-                       (ps->gid != ps->sgid && ps->sgid != -1) ||
-                       (ps->gid != ps->fsgid && ps->fsgid != -1)) {
-            if(ps->egid != -1)
-                userTooltip += i18n("<br/>Effective Group: %1", getGroupnameForGroup(ps->egid));
-            if(ps->sgid != -1)
-                userTooltip += i18n("<br/>Setuid Group: %1", getGroupnameForGroup(ps->sgid));
-            if(ps->fsgid != -1)
-                userTooltip += i18n("<br/>File System Group: %1", getGroupnameForGroup(ps->fsgid));
+    if(ps->gid() != -1) {
+        userTooltip += i18n("Group: %1", getGroupnameForGroup(ps->gid()));
+        if( (ps->gid() != ps->egid() && ps->egid() != -1) ||
+                       (ps->gid() != ps->sgid() && ps->sgid() != -1) ||
+                       (ps->gid() != ps->fsgid() && ps->fsgid() != -1)) {
+            if(ps->egid() != -1)
+                userTooltip += i18n("<br/>Effective Group: %1", getGroupnameForGroup(ps->egid()));
+            if(ps->sgid() != -1)
+                userTooltip += i18n("<br/>Setuid Group: %1", getGroupnameForGroup(ps->sgid()));
+            if(ps->fsgid() != -1)
+                userTooltip += i18n("<br/>File System Group: %1", getGroupnameForGroup(ps->fsgid()));
         }
     }
     return userTooltip;
@@ -1231,7 +1231,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                   return i18nc("scheduler", "(IA) %1", process->niceLevel);
             }
         case HeadingTty:
-            return process->tty;
+            return process->tty();
         case HeadingCPUUsage:
             {
                 double total;
@@ -1248,7 +1248,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 return QString(QString::number((int)(total+0.5)) + '%');
             }
         case HeadingCPUTime: {
-            qlonglong seconds = (process->userTime + process->sysTime)/100;
+            qlonglong seconds = (process->userTime() + process->sysTime())/100;
             return QString("%1:%2").arg(seconds/60).arg((int)seconds%60, 2, 10, QLatin1Char('0'));
         }
         case HeadingMemory:
@@ -1266,7 +1266,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return formatMemoryInfo(process->vmRSS - process->vmURSS, d->mUnits);
         case HeadingStartTime: {
             // NOTE: the next 6 lines are the same as in the next occurence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
-            const auto clockTicksSinceSystemBoot = process->startTime;
+            const auto clockTicksSinceSystemBoot = process->startTime();
             const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK); // see man proc or http://superuser.com/questions/101183/what-is-a-cpu-tick
             const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
             const auto systemBootTime = TimeUtil::systemUptimeAbsolute();
@@ -1359,10 +1359,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return QVariant();
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         QString tracer;
-        if(process->tracerpid >= 0) {
-            KSysGuard::Process *process_tracer = d->mProcesses->getProcess(process->tracerpid);
+        if(process->tracerpid() >= 0) {
+            KSysGuard::Process *process_tracer = d->mProcesses->getProcess(process->tracerpid());
             if(process_tracer) //it is possible for this to be not the case in certain race conditions
-                tracer = xi18nc("tooltip. name,pid ","This process is being debugged by %1 (%2)", process_tracer->name, (long int)process->tracerpid);
+                tracer = xi18nc("tooltip. name,pid ","This process is being debugged by %1 (%2)", process_tracer->name, (long int)process->tracerpid());
         }
         switch(index.column()) {
         case HeadingName: {
@@ -1402,15 +1402,15 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(!process->command.isEmpty()) {
                 tooltip += i18n("<br/>Command: %1", process->command);
             }
-            if(!process->tty.isEmpty())
-                tooltip += i18n( "<br />Running on: %1", QString(process->tty));
+            if(!process->tty().isEmpty())
+                tooltip += i18n( "<br />Running on: %1", QString(process->tty()));
             if(!tracer.isEmpty())
                 return QString::fromLatin1("%1<br />%2").arg(tooltip).arg(tracer);
             return tooltip;
         }
         case HeadingStartTime: {
             // NOTE: the next 6 lines are the same as in the previous occurence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
-            const auto clockTicksSinceSystemBoot = process->startTime;
+            const auto clockTicksSinceSystemBoot = process->startTime();
             const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK);
             const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
             const auto systemBootTime = TimeUtil::systemUptimeAbsolute();
@@ -1427,8 +1427,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingCommand: {
             QString tooltip =
                 i18n("<qt>This process was run with the following command:<br />%1", process->command);
-            if(!process->tty.isEmpty())
-                tooltip += i18n( "<br /><br />Running on: %1", QString(process->tty));
+            if(!process->tty().isEmpty())
+                tooltip += i18n( "<br /><br />Running on: %1", QString(process->tty()));
             if(tracer.isEmpty()) return tooltip;
             return QString::fromLatin1("%1<br />%2").arg(tooltip).arg(tracer);
         }
@@ -1487,13 +1487,13 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                         .subs((float)(process->totalUserUsage + process->totalSysUsage) / divideby)
                         .toString();
             }
-            if(process->userTime > 0)
+            if(process->userTime() > 0)
                 tooltip += ki18n("<br /><br />CPU time spent running as user: %1 seconds")
-                        .subs(process->userTime / 100.0, 0, 'f', 1)
+                        .subs(process->userTime() / 100.0, 0, 'f', 1)
                         .toString();
-            if(process->sysTime > 0)
+            if(process->sysTime() > 0)
                 tooltip += ki18n("<br />CPU time spent running in kernel: %1 seconds")
-                        .subs(process->sysTime / 100.0, 0, 'f', 1)
+                        .subs(process->sysTime() / 100.0, 0, 'f', 1)
                         .toString();
             if(process->niceLevel != 0)
                 tooltip += i18n("<br />Nice level: %1 (%2)", process->niceLevel, process->niceLevelAsString() );
@@ -1618,7 +1618,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingNiceness:
             return process->niceLevel;
         case HeadingTty:
-            return process->tty;
+            return process->tty();
         case HeadingCPUUsage:
             {
                 double total;
@@ -1631,7 +1631,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return total;
             }
         case HeadingCPUTime:
-            return (qlonglong)(process->userTime + process->sysTime);
+            return (qlonglong)(process->userTime() + process->sysTime());
         case HeadingMemory:
             if(process->vmRSS == 0) return QVariant(QVariant::String);
             if(process->vmURSS == -1) {
@@ -1645,7 +1645,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->vmRSS - process->vmURSS < 0 || process->vmURSS == -1) return QVariant(QVariant::String);
             return (qlonglong)(process->vmRSS - process->vmURSS);
         case HeadingStartTime:
-            return process->startTime; // 2015-01-03, gregormi: can maybe be replaced with something better later
+            return process->startTime(); // 2015-01-03, gregormi: can maybe be replaced with something better later
         case HeadingCommand:
             return process->command;
         case HeadingIoRead:
@@ -1789,7 +1789,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         if(process->status == KSysGuard::Process::Ended) {
             return QColor(Qt::lightGray);
         }
-        if(process->tracerpid >= 0) {
+        if(process->tracerpid() >= 0) {
             //It's being debugged, so probably important.  Let's mark it as such
             return QColor(Qt::yellow);
         }

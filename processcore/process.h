@@ -99,23 +99,23 @@ public:
     QString login() const;
     qlonglong uid() const;
     qlonglong euid() const;
-    qlonglong suid;
-    qlonglong fsuid;
+    qlonglong suid() const;
+    qlonglong fsuid() const;
 
-    qlonglong gid;
-    qlonglong egid;
-    qlonglong sgid;
-    qlonglong fsgid;
+    qlonglong gid() const;
+    qlonglong egid() const;
+    qlonglong sgid() const;
+    qlonglong fsgid() const;
 
-    qlonglong tracerpid;
-    QByteArray tty;
-    qlonglong userTime;
-    qlonglong sysTime;
+    qlonglong tracerpid() const;
+    QByteArray tty() const;
+    qlonglong userTime() const;
+    qlonglong sysTime() const;
 
     /**
      * the value is expressed in clock ticks (since Linux 2.6; we only handle this case) since system boot
      */
-    qlonglong startTime;
+    qlonglong startTime() const;
 
     int userUsage;
     int sysUsage;

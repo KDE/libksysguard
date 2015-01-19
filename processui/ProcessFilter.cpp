@@ -83,12 +83,12 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		break;
         case OwnProcesses: {
 		long ownuid = getuid();
-                if(uid != ownuid && process->suid != ownuid && process->fsuid != ownuid && euid != ownuid)
+                if(uid != ownuid && process->suid() != ownuid && process->fsuid() != ownuid && euid != ownuid)
 			accepted = false;
 		break;
 	}
 	case ProgramsOnly:
-		if(process->tty.isEmpty()) {
+		if(process->tty().isEmpty()) {
 			if(!model->hasGUIWindow(process->pid))
 				accepted = false;
 		} else {

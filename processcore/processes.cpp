@@ -163,8 +163,8 @@ bool Processes::updateProcess( Process *ps, long ppid)
 
 bool Processes::updateProcessInfo(Process *ps) {
     //Now we can actually get the process info
-    qlonglong oldUserTime = ps->userTime;
-    qlonglong oldSysTime = ps->sysTime;
+    qlonglong oldUserTime = ps->userTime();
+    qlonglong oldSysTime = ps->sysTime();
 
     qlonglong oldIoCharactersRead = 0;
     qlonglong oldIoCharactersWritten = 0;
@@ -201,8 +201,8 @@ bool Processes::updateProcessInfo(Process *ps) {
         ps->elapsedTimeMilliSeconds = d->mLastUpdated.elapsed();
         elapsedTime = ps->elapsedTimeMilliSeconds - elapsedTime + d->mElapsedTimeMilliSeconds;
         if(elapsedTime) {
-            ps->setUserUsage((int)(((ps->userTime - oldUserTime)*1000.0) / elapsedTime));
-            ps->setSysUsage((int)(((ps->sysTime - oldSysTime)*1000.0) / elapsedTime));
+            ps->setUserUsage((int)(((ps->userTime() - oldUserTime)*1000.0) / elapsedTime));
+            ps->setSysUsage((int)(((ps->sysTime() - oldSysTime)*1000.0) / elapsedTime));
         }
 #endif
         if(d->mUpdateFlags.testFlag(Processes::IOStatistics)) {
