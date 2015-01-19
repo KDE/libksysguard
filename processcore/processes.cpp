@@ -396,7 +396,9 @@ void Processes::deleteProcess(long pid)
     Q_FOREACH( Process *it, d->mListProcesses ) {
         if(it->index > process->index)
             it->index--;
+#ifndef QT_NO_DEBUG
         Q_ASSERT(it->index == i++);
+#endif
     }
 
     delete process;
