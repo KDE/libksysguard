@@ -138,7 +138,7 @@ bool Processes::updateProcess( Process *ps, long ppid)
         do {
             p = p->parent;
             p->numChildren--;
-        } while (p->pid!= -1);
+        } while (p->pid()!= -1);
         Q_ASSERT(ps != parent);
         ps->parent->children.removeAll(ps);
         ps->parent = parent;  //the parent has changed
@@ -147,7 +147,7 @@ bool Processes::updateProcess( Process *ps, long ppid)
         do {
             p = p->parent;
             p->numChildren++;
-        } while (p->pid!= -1);
+        } while (p->pid()!= -1);
         emit endMoveProcess();
         Q_ASSERT(ps != parent);
         ps->parent = parent;
@@ -185,9 +185,9 @@ bool Processes::updateProcessInfo(Process *ps) {
     ps->changes = Process::Nothing;
     bool success;
     if(d->mUsingHistoricalData)
-        success = d->mHistoricProcesses->updateProcessInfo(ps->pid, ps);
+        success = d->mHistoricProcesses->updateProcessInfo(ps->pid(), ps);
     else
-        success = d->mAbstractProcesses->updateProcessInfo(ps->pid, ps);
+        success = d->mAbstractProcesses->updateProcessInfo(ps->pid(), ps);
 
     //Now we have the process info.  Calculate the cpu usage and total cpu usage for itself and all its parents
     if(!d->mUsingHistoricalData && d->mElapsedTimeMilliSeconds != 0) {  //Update the user usage and sys usage
@@ -230,7 +230,7 @@ bool Processes::updateProcessInfo(Process *ps) {
         ps->setTotalSysUsage(ps->sysUsage);
         if(ps->userUsage != 0 || ps->sysUsage != 0) {
             Process *p = ps->parent;
-            while(p->pid != -1) {
+            while(p->pid() != -1) {
                 p->totalUserUsage += ps->userUsage;
                 p->totalSysUsage += ps->sysUsage;
                 emit processChanged(p, true);
@@ -267,7 +267,7 @@ bool Processes::addProcess(long pid, long ppid)
         Q_ASSERT(p);
         p = p->parent;
         p->numChildren++;
-    } while (p->pid != -1);
+    } while (p->pid() != -1);
     ps->parent_pid = ppid;
 
     //Now we can actually get the process info
@@ -375,8 +375,8 @@ void Processes::deleteProcess(long pid)
     if(!process)
         return;
     Q_FOREACH( Process *it, process->children) {
-        d->mProcessedLastTime.remove(it->pid);
-        deleteProcess(it->pid);
+        d->mProcessedLastTime.remove(it->pid());
+        deleteProcess(it->pid());
     }
 
     emit beginRemoveProcess(process);
@@ -389,7 +389,7 @@ void Processes::deleteProcess(long pid)
         Q_ASSERT(p);
         p = p->parent;
         p->numChildren--;
-    } while (p->pid != -1);
+    } while (p->pid() != -1);
 #ifndef QT_NO_DEBUG
     int i = 0;
 #endif

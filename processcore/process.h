@@ -39,7 +39,7 @@ public:
     Process(qlonglong _pid, qlonglong _ppid, Process *_parent);
     virtual ~Process();
 
-    long pid;    ///< The system's ID for this process.  1 for init.  -1 for our virtual 'parent of init' process used just for convenience.
+    long pid() const;    ///< The system's ID for this process.  1 for init.  -1 for our virtual 'parent of init' process used just for convenience.
     long parent_pid;  ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
 
     /** A guaranteed NON-NULL pointer for all real processes to the parent process except for the fake process with pid -1.

@@ -40,7 +40,7 @@ namespace KSysGuard
      *   KSysGuard::Processes *processes = new KSysGuard::Processes()
      *   QHash<long, Process *> processlist = processes->getProcesses();
      *   foreach( Process * process, processlist) {
-     *     kDebug() << "Process with pid " << process->pid << " is called " << process->name;
+     *     kDebug() << "Process with pid " << process->pid() << " is called " << process->name;
      *   }
      *   delete processes;
      *   processes = NULL;

@@ -58,7 +58,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 			//}
 		}
 		if(!model->isSimpleMode() && source_row >= parent_process->children.size()) {
-			qCDebug(LIBKSYSGUARD) << "Serious error with data.  Source row requested for a non existent row. Requested " << source_row << " of " << parent_process->children.size() << " for " << parent_process->pid;
+			qCDebug(LIBKSYSGUARD) << "Serious error with data.  Source row requested for a non existent row. Requested " << source_row << " of " << parent_process->children.size() << " for " << parent_process->pid();
 			return true;
 		}
 
@@ -89,7 +89,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 	}
 	case ProgramsOnly:
 		if(process->tty().isEmpty()) {
-			if(!model->hasGUIWindow(process->pid))
+			if(!model->hasGUIWindow(process->pid()))
 				accepted = false;
 		} else {
 			// login and getty kinda _are_ the tty, so I do not really count them as 'programs'. So make a special case and hide them
@@ -107,7 +107,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		if(filterRegExp().isEmpty()) return true;
 
 		//Allow the user to search by PID
-		if(QString::number(process->pid).contains(filterRegExp())) return true;
+		if(QString::number(process->pid()).contains(filterRegExp())) return true;
 
 		//None of our tests have rejected it.  Pass it on to qsortfilterproxymodel's filter
 		if(QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))

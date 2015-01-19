@@ -67,7 +67,7 @@ namespace KSysGuard
              *
              *  This will be called for every PID, after getParentPid() has been called for the same parameter.
              *
-             *  The process->pid process->ppid and process->parent  are all guaranteed
+             *  The process->pid() process->ppid and process->parent  are all guaranteed
              *  to be filled in correctly and process->parent will be non null.
              */
             virtual bool updateProcessInfo(long pid, Process *process) = 0;

@@ -1067,7 +1067,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
         int sched = -2;
         int iosched = -2;
         foreach(KSysGuard::Process *process, processes) {
-            pids << process->pid;
+            pids << process->pid();
             selectedAsStrings << d->mModel.getStringForProcess(process);
             if(sched == -2) sched = (int)process->scheduler;
             else if(sched != -1 && sched != (int)process->scheduler) sched = -1;  //If two processes have different schedulers, disable the cpu scheduler stuff
@@ -1276,7 +1276,7 @@ void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
 
     QList<KSysGuard::Process *> processes = selectedProcesses();
     foreach(KSysGuard::Process *process, processes) {
-        selectedPids << process->pid;
+        selectedPids << process->pid();
         if (!confirm)
             continue;
         QString name = d->mModel.getStringForProcess(process);

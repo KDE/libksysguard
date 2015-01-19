@@ -24,6 +24,8 @@
 
 class KSysGuard::ProcessPrivate {
 public:
+    long pid;
+
     QString login;
     qlonglong uid;
     qlonglong euid;
@@ -46,8 +48,9 @@ KSysGuard::Process::Process() : d_ptr(new ProcessPrivate()) {
 
 KSysGuard::Process::Process(qlonglong _pid, qlonglong _ppid, Process *_parent) : d_ptr(new ProcessPrivate())
 {
+    Q_D(Process);
     clear();
-    pid = _pid;
+    d->pid = _pid;
     parent_pid = _ppid;
     parent = _parent;
 }
@@ -115,7 +118,7 @@ QString KSysGuard::Process::schedulerAsString() const {
 void KSysGuard::Process::clear() {
     Q_D(Process);
 
-    pid = -1;
+    d->pid = -1;
     parent_pid = -1;
     d->uid = 0;
     d->gid = -1;
@@ -160,6 +163,12 @@ void KSysGuard::Process::clear() {
     ioCharactersActuallyWrittenRate = 0;
 
     changes = Process::Nothing;
+}
+
+long int KSysGuard::Process::pid() const
+{
+    Q_D(const Process);
+    return d->pid;
 }
 
 QString KSysGuard::Process::login() const

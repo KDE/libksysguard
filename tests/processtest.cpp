@@ -38,26 +38,26 @@ void testProcess::testProcesses() {
     QList<KSysGuard::Process *> processes = processController->getAllProcesses();
     QSet<long> pids;
     Q_FOREACH( KSysGuard::Process *process, processes) {
-        if(process->pid == 0) continue;
-        QVERIFY(process->pid > 0);
+        if(process->pid() == 0) continue;
+        QVERIFY(process->pid() > 0);
         QVERIFY(!process->name.isEmpty());
 
         //test all the pids are unique
-        QVERIFY(!pids.contains(process->pid));
-        pids.insert(process->pid);
+        QVERIFY(!pids.contains(process->pid()));
+        pids.insert(process->pid());
     }
     processController->updateAllProcesses();
     QList<KSysGuard::Process *> processes2 = processController->getAllProcesses();
     Q_FOREACH( KSysGuard::Process *process, processes2) {
-        if(process->pid == 0) continue;
-        QVERIFY(process->pid > 0);
+        if(process->pid() == 0) continue;
+        QVERIFY(process->pid() > 0);
         QVERIFY(!process->name.isEmpty());
 
         //test all the pids are unique
-        if(!pids.contains(process->pid)) {
-            qCDebug(LIBKSYSGUARD) << process->pid << " not found. " << process->name;
+        if(!pids.contains(process->pid())) {
+            qCDebug(LIBKSYSGUARD) << process->pid() << " not found. " << process->name;
         }
-        pids.remove(process->pid);
+        pids.remove(process->pid());
     }
 
     QVERIFY(processes2.size() == processes.size());
@@ -171,12 +171,12 @@ void testProcess::testHistories() {
     //test all the pids are unique
     QSet<long> pids;
     Q_FOREACH( KSysGuard::Process *process, processes) {
-        if(process->pid == 0) continue;
-        QVERIFY(process->pid > 0);
+        if(process->pid() == 0) continue;
+        QVERIFY(process->pid() > 0);
         QVERIFY(!process->name.isEmpty());
 
-        QVERIFY(!pids.contains(process->pid));
-        pids.insert(process->pid);
+        QVERIFY(!pids.contains(process->pid()));
+        pids.insert(process->pid());
     }
     delete processController;
 }
@@ -189,7 +189,7 @@ void testProcess::testUpdateOrAddProcess() {
     process = processController->getProcess(0);
     process = processController->getProcess(1);
     if (process)
-        QCOMPARE(process->pid, 1l);
+        QCOMPARE(process->pid(), 1l);
 
     // Make sure that this doesn't crash at least
     processController->updateOrAddProcess(1);

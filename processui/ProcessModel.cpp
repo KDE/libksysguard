@@ -265,7 +265,7 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             return memoryLeft > memoryRight;
         }
         case HeadingPid:
-            return processLeft->pid > processRight->pid;
+            return processLeft->pid() > processRight->pid();
         case HeadingNiceness:
             //Sort by scheduler first
             if(processLeft->scheduler != processRight->scheduler) {
@@ -281,11 +281,11 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
                     return true;
             }
             if(processLeft->niceLevel == processRight->niceLevel)
-                return processLeft->pid < processRight->pid; //Subsort by pid if the niceLevel is the same
+                return processLeft->pid() < processRight->pid(); //Subsort by pid if the niceLevel is the same
             return processLeft->niceLevel < processRight->niceLevel;
         case HeadingTty: {
             if(processLeft->tty() == processRight->tty())
-                return processLeft->pid < processRight->pid; //Both ttys are the same.  Sort by pid
+                return processLeft->pid() < processRight->pid(); //Both ttys are the same.  Sort by pid
             if(processLeft->tty().isEmpty())
                 return false; //Only left is empty (since they aren't the same)
             else if(processRight->tty().isEmpty())
@@ -693,8 +693,8 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
     if (!process->timeKillWasSent.isNull()) {
         int elapsed = process->timeKillWasSent.elapsed();
         if (elapsed < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {
-            if (!mPidsToUpdate.contains(process->pid))
-                mPidsToUpdate.append(process->pid);
+            if (!mPidsToUpdate.contains(process->pid()))
+                mPidsToUpdate.append(process->pid());
             QModelIndex index1 = q->createIndex(row, 0, process);
             QModelIndex index2 = q->createIndex(row, mHeadings.count()-1, process);
             emit q->dataChanged(index1, index2);
@@ -791,7 +791,7 @@ void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
     mInsertingRow = true;
 
 #if HAVE_X11
-    process->hasManagedGuiWindow = mPidToWindowInfo.contains(process->pid);
+    process->hasManagedGuiWindow = mPidToWindowInfo.contains(process->pid());
 #endif
     if(mSimple) {
         int row = mProcesses->processCount();
@@ -818,7 +818,7 @@ void ProcessModelPrivate::endInsertRow() {
 void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
 {
     Q_ASSERT(process);
-    Q_ASSERT(process->pid >= 0);
+    Q_ASSERT(process->pid() >= 0);
     Q_ASSERT(!mRemovingRow);
     Q_ASSERT(!mInsertingRow);
     Q_ASSERT(!mMovingRow);
@@ -881,7 +881,7 @@ void ProcessModelPrivate::endMoveRow()
 QModelIndex ProcessModel::getQModelIndex( KSysGuard::Process *process, int column) const
 {
     Q_ASSERT(process);
-    int pid = process->pid;
+    int pid = process->pid();
     if (pid == -1) return QModelIndex(); //pid -1 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means the top element
     int row = 0;
     if(d->mSimple) {
@@ -1149,7 +1149,7 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
 }
 
 QString ProcessModel::getStringForProcess(KSysGuard::Process *process) const {
-    return xi18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid), process->name, d->getUsernameForUser(process->uid(), false));
+    return xi18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid()), process->name, d->getUsernameForUser(process->uid(), false));
 }
 
 QString ProcessModelPrivate::getGroupnameForGroup(long gid) const {
@@ -1205,7 +1205,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             else
                 return process->name.section(' ', 0,0);
         case HeadingPid:
-            return (qlonglong)process->pid;
+            return (qlonglong)process->pid();
         case HeadingUser:
             if(!process->login().isEmpty()) return process->login();
             if(process->uid() == process->euid())
@@ -1342,7 +1342,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 if(!process->hasManagedGuiWindow)
                     return QVariant(QVariant::String);
 
-                WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+                WindowInfo *w = d->mPidToWindowInfo.value(process->pid(), NULL);
                 if(!w)
                     return QVariant(QVariant::String);
                 else
@@ -1371,9 +1371,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
              *   a picture in a tooltip :(
 
             QIcon icon;
-            if(mPidToWindowInfo.contains(process->pid)) {
+            if(mPidToWindowInfo.contains(process->pid())) {
                 WId wid;
-                wid = mPidToWindowInfo[process->pid].wid;
+                wid = mPidToWindowInfo[process->pid()].wid;
                 icon = KWindowSystem::icon(wid);
             }
             if(icon.isValid()) {
@@ -1387,14 +1387,14 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 } else if(process->name == "kthreadd") {
                     tooltip += i18n("<b>KThreadd</b> manages kernel threads. The children processes run in the kernel, controlling hard disk access, etc.<br/>");
                 }
-                tooltip    += xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2", process->name, (long int)process->pid);
+                tooltip    += xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2", process->name, (long int)process->pid());
             }
             else {
                 KSysGuard::Process *parent_process = d->mProcesses->getProcess(process->parent_pid);
                 if(parent_process) { //In race conditions, it's possible for this process to not exist
-                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent: %3<br />Parent's ID: %4", process->name, (long int)process->pid, parent_process->name, (long int)process->parent_pid);
+                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent: %3<br />Parent's ID: %4", process->name, (long int)process->pid(), parent_process->name, (long int)process->parent_pid);
                 } else {
-                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent's ID: %3", process->name, (long int)process->pid, (long int)process->parent_pid);
+                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent's ID: %3", process->name, (long int)process->pid(), (long int)process->parent_pid);
                 }
             }
             if(process->numThreads >= 1)
@@ -1561,7 +1561,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingXTitle: {
 #if HAVE_X11
             QString tooltip;
-            QList<WindowInfo *> values = d->mPidToWindowInfo.values(process->pid);
+            QList<WindowInfo *> values = d->mPidToWindowInfo.values(process->pid());
             if(values.isEmpty()) return QVariant(QVariant::String);
             for(int i = 0; i < values.size(); i++) {
                 if(!values.at(i)->name.isEmpty())
@@ -1608,7 +1608,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingName:
             return process->name;
         case HeadingPid:
-            return (qlonglong)process->pid;
+            return (qlonglong)process->pid();
         case HeadingUser:
             if(!process->login().isEmpty()) return process->login();
             if(process->uid() == process->euid())
@@ -1685,7 +1685,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #if HAVE_X11
         case HeadingXTitle:
             {
-                WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+                WindowInfo *w = d->mPidToWindowInfo.value(process->pid(), NULL);
                 if(!w)
                     return QString();
                 return w->name;
@@ -1699,7 +1699,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #if HAVE_X11
         case WindowIdRole: {
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-        WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+        WindowInfo *w = d->mPidToWindowInfo.value(process->pid(), NULL);
         if(!w)
             return (int)0;
         else
@@ -1746,7 +1746,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 else  //When in tree mode, the padding looks bad, so do not pad in this case
                     return QVariant();
             }
-            WindowInfo *w = d->mPidToWindowInfo.value(process->pid, NULL);
+            WindowInfo *w = d->mPidToWindowInfo.value(process->pid(), NULL);
             if(w && !w->icon.isNull())
                 return w->icon;
             return QIcon(d->mBlankPixmap);

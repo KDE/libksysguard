@@ -200,7 +200,7 @@ void Scripting::runScriptSlot() {
     QList<KSysGuard::Process *> selectedProcesses = mProcessList->selectedProcesses();
     if(selectedProcesses.isEmpty())
         return;
-    mPid = selectedProcesses[0]->pid;
+    mPid = selectedProcesses[0]->pid();
 
     runScript(path, action->text());
 }
