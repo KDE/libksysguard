@@ -207,8 +207,7 @@ public:
     void clear();
 
   private:
-      ProcessPrivate* const d_ptr;
-      Q_DECLARE_PRIVATE(Process); // todo: this one vs. https://techbase.kde.org/Policies/Binary_Compatibility_Issues_With_C++#Using_a_d-Pointer ?
+      ProcessPrivate* const d;
   };
 
   Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
