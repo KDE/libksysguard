@@ -1380,7 +1380,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip = i18n("<qt><table><tr><td>%1", icon);
             }
             */
-            if(process->parent_pid() == -1) {
+            if(process->parentPid() == -1) {
                 //Give a quick explanation of init and kthreadd
                 if(process->name() == "init") {
                     tooltip += i18n("<b>Init</b> is the parent of all other processes and cannot be killed.<br/>");
@@ -1390,11 +1390,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip    += xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2", process->name(), (long int)process->pid());
             }
             else {
-                KSysGuard::Process *parent_process = d->mProcesses->getProcess(process->parent_pid());
+                KSysGuard::Process *parent_process = d->mProcesses->getProcess(process->parentPid());
                 if(parent_process) { //In race conditions, it's possible for this process to not exist
-                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent: %3<br />Parent's ID: %4", process->name(), (long int)process->pid(), parent_process->name(), (long int)process->parent_pid());
+                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent: %3<br />Parent's ID: %4", process->name(), (long int)process->pid(), parent_process->name(), (long int)process->parentPid());
                 } else {
-                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent's ID: %3", process->name(), (long int)process->pid(), (long int)process->parent_pid());
+                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent's ID: %3", process->name(), (long int)process->pid(), (long int)process->parentPid());
                 }
             }
             if(process->numThreads() >= 1)

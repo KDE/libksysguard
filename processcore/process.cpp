@@ -211,7 +211,7 @@ long int Process::pid() const
     return d->pid;
 }
 
-long int Process::parent_pid() const
+long int Process::parentPid() const
 {
     return d->parent_pid;
 }
@@ -481,7 +481,7 @@ int Process::elapsedTimeMilliSeconds() const
     return d->elapsedTimeMilliSeconds;
 }
 
-void Process::setParent_pid(long int parent_pid)
+void Process::setParentPid(long int parent_pid)
 {
     d->parent_pid = parent_pid;
 }

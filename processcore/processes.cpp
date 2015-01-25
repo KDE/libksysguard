@@ -153,7 +153,7 @@ bool Processes::updateProcess( Process *ps, long ppid)
         ps->setParent(parent);
     }
 
-    ps->setParent_pid(ppid);
+    ps->setParentPid(ppid);
 
     bool success = updateProcessInfo(ps);
     emit processChanged(ps, false);
@@ -268,7 +268,7 @@ bool Processes::addProcess(long pid, long ppid)
         p = p->parent();
         p->numChildren()++;
     } while (p->pid() != -1);
-    ps->setParent_pid(ppid);
+    ps->setParentPid(ppid);
 
     //Now we can actually get the process info
     bool success = updateProcessInfo(ps);

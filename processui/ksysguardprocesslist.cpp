@@ -462,11 +462,11 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
         signalMenu->addAction(d->sigUsr2);
     }
 
-    if(numProcesses == 1 && process->parent_pid() > 1) {
+    if(numProcesses == 1 && process->parentPid() > 1) {
         //As a design decision, I do not show the 'Jump to parent process' option when the
         //parent is just 'init'.
 
-        KSysGuard::Process *parent_process = d->mModel.getProcess(process->parent_pid());
+        KSysGuard::Process *parent_process = d->mModel.getProcess(process->parentPid());
         if(parent_process) { //it should not be possible for this process to not exist, but check just incase
             QString parent_name = parent_process->name();
             d->selectParent->setText(i18n("Jump to Parent Process (%1)", parent_name));
@@ -523,7 +523,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
         QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
         KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *> (realIndex.internalPointer());
         if(process)
-            selectAndJumpToProcess(process->parent_pid());
+            selectAndJumpToProcess(process->parentPid());
     } else if(result == d->selectTracer) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();

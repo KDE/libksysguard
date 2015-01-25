@@ -1,6 +1,7 @@
 /*  This file is part of the KDE project
 
     Copyright (C) 2007 John Tapsell <tapsell@kde.org>
+    Copyright (C) 2015 Gregor Mi <codestruct@posteo.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -18,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef PROCESS_H_
-#define PROCESS_H_
+#ifndef PROCESS_H
+#define PROCESS_H
 
 #include <QtCore/QList>
 #include <QtCore/QTime>
@@ -31,7 +32,7 @@ class ProcessPrivate; // forward decl d-ptr
 
 class Q_DECL_EXPORT Process {
 public:
-    enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, Ended, OtherStatus=99 };
+    enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, Ended, OtherStatus = 99 };
     enum IoPriorityClass { None, RealTime, BestEffort, Idle };
     enum Scheduler { Other = 0, Fifo, RoundRobin, Batch, SchedulerIdle, Interactive }; ///< Interactive is Solaris only
 
@@ -40,7 +41,7 @@ public:
     virtual ~Process();
 
     long pid() const;    ///< The system's ID for this process.  1 for init.  -1 for our virtual 'parent of init' process used just for convenience.
-    long parent_pid() const;  ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
+    long parentPid() const;  ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
 
     /** A guaranteed NON-NULL pointer for all real processes to the parent process except for the fake process with pid -1.
      *  The Parent's pid is the same value as the parent_pid.  The parent process will be also pointed
@@ -49,60 +50,6 @@ public:
      *  For the fake process, this will point to NULL
      */
     Process *parent() const;
-
-    void setParent_pid(long parent_pid);
-    void setParent(Process *parent);
-
-    void setLogin(QString login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
-    void setUid(qlonglong uid); ///< The user id that the process is running as
-    void setEuid(qlonglong euid); ///< The effective user id that the process is running as
-    void setSuid(qlonglong suid); ///< The set user id that the process is running as
-    void setFsuid(qlonglong fsuid); ///< The file system user id that the process is running as.
-
-    void setGid(qlonglong gid); ///< The process group id that the process is running as
-    void setEgid(qlonglong egid); ///< The effective group id that the process is running as
-    void setSgid(qlonglong sgid); ///< The set group id that the process is running as
-    void setFsgid(qlonglong fsgid); ///< The file system group id that the process is running as
-
-    void setTracerpid(qlonglong tracerpid); ///< If this is being debugged, this is the process that is debugging it, or 0 otherwise
-    void setTty(QByteArray tty); ///< The name of the tty the process owns
-    void setUserTime(qlonglong userTime); ///< The time, in 100ths of a second, spent in total on user calls. -1 if not known
-    void setSysTime(qlonglong sysTime);  ///< The time, in 100ths of a second, spent in total on system calls.  -1 if not known
-    void setStartTime(qlonglong startTime); /// The time the process started after system boot. Since Linux 2.6, the value is expressed in clock ticks. See man proc.
-    void setUserUsage(int userUsage); ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
-    void setSysUsage(int sysUsage);  ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
-    void setTotalUserUsage(int totalUserUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
-    void setTotalSysUsage(int totalSysUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's equal to sysUsage. It might be more than 100% on multiple cpu core systems
-    void setNiceLevel(int niceLevel);      ///< If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.  Otherwise sched priority (1 to 99)
-    void setScheduler(Scheduler scheduler); ///< The scheduler this process is running in.  See man sched_getscheduler for more info
-    void setIoPriorityClass(IoPriorityClass ioPriorityClass); ///< The IO priority class.  See man ionice for detailed information.
-    void setIoniceLevel(int ioniceLevel);    ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
-    void setVmSize(qlonglong vmSize);   ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
-    void setVmRSS(qlonglong vmRSS);    ///< Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
-    void setVmURSS(qlonglong vmURSS);   ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
-    void setName(QString name);  ///< The name (e.g. "ksysguard", "konversation", "init")
-    void setCommand(QString command); ///< The command the process was launched with
-    void setStatus( ProcessStatus status); ///< Whether the process is running/sleeping/etc
-
-    void setIoCharactersRead(qlonglong number); ///< The number of bytes which this task has caused to be read from storage
-    void setIoCharactersWritten(qlonglong number); ///< The number of bytes which this task has caused, or shall cause to be written to disk.
-    void setIoReadSyscalls(qlonglong number); ///< Number of read I/O operations, i.e. syscalls like read() and pread().
-    void setIoWriteSyscalls(qlonglong number); ///< Number of write I/O operations, i.e. syscalls like write() and pwrite().
-    void setIoCharactersActuallyRead(qlonglong number); ///< Number of bytes which this process really did cause to be fetched from the storage layer.
-    void setIoCharactersActuallyWritten(qlonglong number); ///< Attempt to count the number of bytes which this process caused to be sent to the storage layer.
-
-    void setIoCharactersReadRate(long number); ///< The rate, in bytes per second, which this task has caused to be read from storage
-    void setIoCharactersWrittenRate(long number); ///< The rate, in bytes per second, which this task has caused, or shall cause to be written to disk.
-    void setIoReadSyscallsRate(long number); ///< Number of read I/O operations per second, i.e. syscalls like read() and pread().
-    void setIoWriteSyscallsRate(long number); ///< Number of write I/O operations per second, i.e. syscalls like write() and pwrite().
-    void setIoCharactersActuallyReadRate(long number); ///< Number of bytes per second which this process really did cause to be fetched from the storage layer.
-    void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
-
-    void setNumThreads(int number); ///< The number of threads that this process has, including this process.
-
-    void setIndex(int index);
-
-    void setElapsedTimeMilliSeconds(int value);
 
     QString login() const;
     qlonglong uid() const;
@@ -175,6 +122,71 @@ public:
 
     int index() const;  ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
 
+    /** This is the number of 1/1000ths of a second since this
+     *  particular process was last updated compared to when all the processes
+     *  were updated. The purpose is to allow a more fine tracking of the time
+     *  a process has been running for.
+     *
+     *  This is updated in processes.cpp and so shouldn't be touched by the
+     *  OS dependant classes.
+     */
+    int elapsedTimeMilliSeconds() const;
+
+
+    void setParentPid(long parent_pid);
+    void setParent(Process *parent);
+
+    void setLogin(QString login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
+    void setUid(qlonglong uid); ///< The user id that the process is running as
+    void setEuid(qlonglong euid); ///< The effective user id that the process is running as
+    void setSuid(qlonglong suid); ///< The set user id that the process is running as
+    void setFsuid(qlonglong fsuid); ///< The file system user id that the process is running as.
+
+    void setGid(qlonglong gid); ///< The process group id that the process is running as
+    void setEgid(qlonglong egid); ///< The effective group id that the process is running as
+    void setSgid(qlonglong sgid); ///< The set group id that the process is running as
+    void setFsgid(qlonglong fsgid); ///< The file system group id that the process is running as
+
+    void setTracerpid(qlonglong tracerpid); ///< If this is being debugged, this is the process that is debugging it, or 0 otherwise
+    void setTty(QByteArray tty); ///< The name of the tty the process owns
+    void setUserTime(qlonglong userTime); ///< The time, in 100ths of a second, spent in total on user calls. -1 if not known
+    void setSysTime(qlonglong sysTime);  ///< The time, in 100ths of a second, spent in total on system calls.  -1 if not known
+    void setStartTime(qlonglong startTime); /// The time the process started after system boot. Since Linux 2.6, the value is expressed in clock ticks. See man proc.
+    void setUserUsage(int userUsage); ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
+    void setSysUsage(int sysUsage);  ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
+    void setTotalUserUsage(int totalUserUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
+    void setTotalSysUsage(int totalSysUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's equal to sysUsage. It might be more than 100% on multiple cpu core systems
+    void setNiceLevel(int niceLevel);      ///< If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.  Otherwise sched priority (1 to 99)
+    void setScheduler(Scheduler scheduler); ///< The scheduler this process is running in.  See man sched_getscheduler for more info
+    void setIoPriorityClass(IoPriorityClass ioPriorityClass); ///< The IO priority class.  See man ionice for detailed information.
+    void setIoniceLevel(int ioniceLevel);    ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
+    void setVmSize(qlonglong vmSize);   ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
+    void setVmRSS(qlonglong vmRSS);    ///< Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
+    void setVmURSS(qlonglong vmURSS);   ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
+    void setName(QString name);  ///< The name (e.g. "ksysguard", "konversation", "init")
+    void setCommand(QString command); ///< The command the process was launched with
+    void setStatus( ProcessStatus status); ///< Whether the process is running/sleeping/etc
+
+    void setIoCharactersRead(qlonglong number); ///< The number of bytes which this task has caused to be read from storage
+    void setIoCharactersWritten(qlonglong number); ///< The number of bytes which this task has caused, or shall cause to be written to disk.
+    void setIoReadSyscalls(qlonglong number); ///< Number of read I/O operations, i.e. syscalls like read() and pread().
+    void setIoWriteSyscalls(qlonglong number); ///< Number of write I/O operations, i.e. syscalls like write() and pwrite().
+    void setIoCharactersActuallyRead(qlonglong number); ///< Number of bytes which this process really did cause to be fetched from the storage layer.
+    void setIoCharactersActuallyWritten(qlonglong number); ///< Attempt to count the number of bytes which this process caused to be sent to the storage layer.
+
+    void setIoCharactersReadRate(long number); ///< The rate, in bytes per second, which this task has caused to be read from storage
+    void setIoCharactersWrittenRate(long number); ///< The rate, in bytes per second, which this task has caused, or shall cause to be written to disk.
+    void setIoReadSyscallsRate(long number); ///< Number of read I/O operations per second, i.e. syscalls like read() and pread().
+    void setIoWriteSyscallsRate(long number); ///< Number of write I/O operations per second, i.e. syscalls like write() and pwrite().
+    void setIoCharactersActuallyReadRate(long number); ///< Number of bytes per second which this process really did cause to be fetched from the storage layer.
+    void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
+
+    void setNumThreads(int number); ///< The number of threads that this process has, including this process.
+
+    void setIndex(int index);
+
+    void setElapsedTimeMilliSeconds(int value);
+
     /** An enum to keep track of what changed since the last update.  Note that we
      * the maximum we can use is 0x4000, so some of the enums represent multiple variables
      */
@@ -202,16 +214,6 @@ public:
     Changes changes() const;  /**< A QFlags representing what has changed */
     void setChanges(Change changes);
 
-    /** This is the number of 1/1000ths of a second since this
-     *  particular process was last updated compared to when all the processes
-     *  were updated. The purpose is to allow a more fine tracking of the time
-     *  a process has been running for.
-     *
-     *  This is updated in processes.cpp and so shouldn't be touched by the
-     *  OS dependant classes.
-     */
-    int elapsedTimeMilliSeconds() const;
-
   private:
     void clear();
 
@@ -223,5 +225,3 @@ public:
 }
 
 #endif
-
-
