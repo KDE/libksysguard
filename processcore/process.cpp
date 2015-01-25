@@ -77,6 +77,8 @@ public:
     long ioCharactersActuallyReadRate;
     long ioCharactersActuallyWrittenRate;
     int numThreads;
+    QList<Process *> children;
+    QTime timeKillWasSent;
     int index;
     Process::Changes changes;
     int elapsedTimeMilliSeconds;
@@ -452,6 +454,16 @@ long int Process::ioCharactersActuallyWrittenRate() const
 int Process::numThreads() const
 {
     return d->numThreads;
+}
+
+QList< Process* > Process::children() const
+{
+    return d->children;
+}
+
+QTime Process::timeKillWasSent() const
+{
+    return d->timeKillWasSent;
 }
 
 int Process::index() const

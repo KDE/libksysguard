@@ -57,12 +57,12 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		        	Q_ASSERT(parent_process);
 			//}
 		}
-		if(!model->isSimpleMode() && source_row >= parent_process->children.size()) {
-			qCDebug(LIBKSYSGUARD) << "Serious error with data.  Source row requested for a non existent row. Requested " << source_row << " of " << parent_process->children.size() << " for " << parent_process->pid();
+		if(!model->isSimpleMode() && source_row >= parent_process->children().size()) {
+			qCDebug(LIBKSYSGUARD) << "Serious error with data.  Source row requested for a non existent row. Requested " << source_row << " of " << parent_process->children().size() << " for " << parent_process->pid();
 			return true;
 		}
 
-		process = parent_process->children.at(source_row);
+		process = parent_process->children().at(source_row);
 	}
 	Q_ASSERT(process);
 	long uid = process->uid();

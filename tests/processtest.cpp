@@ -67,9 +67,9 @@ void testProcess::testProcesses() {
 
 
 unsigned long testProcess::countNumChildren(KSysGuard::Process *p) {
-    unsigned long total = p->children.size();
-    for(int i =0; i < p->children.size(); i++) {
-        total += countNumChildren(p->children[i]);
+    unsigned long total = p->children().size();
+    for(int i =0; i < p->children().size(); i++) {
+        total += countNumChildren(p->children()[i]);
     }
     return total;
 }
@@ -82,9 +82,9 @@ void testProcess::testProcessesTreeStructure() {
     Q_FOREACH( KSysGuard::Process *process, processes) {
         QCOMPARE(countNumChildren(process), process->numChildren());
 
-        for(int i =0; i < process->children.size(); i++) {
-            QVERIFY(process->children[i]->parent());
-            QCOMPARE(process->children[i]->parent(), process);
+        for(int i =0; i < process->children().size(); i++) {
+            QVERIFY(process->children()[i]->parent());
+            QCOMPARE(process->children()[i]->parent(), process);
         }
     }
     delete processController;
@@ -102,14 +102,14 @@ void testProcess::testProcessesModification() {
     }
 
     QVERIFY(initProcess);
-    QVERIFY(initProcess->children[0]);
-    QVERIFY(initProcess->children[1]);
+    QVERIFY(initProcess->children()[0]);
+    QVERIFY(initProcess->children()[1]);
     qCDebug(LIBKSYSGUARD) << initProcess->numChildren();
-    initProcess->children[0]->setParent(initProcess->children[1]);
-    initProcess->children[1]->children.append(initProcess->children[0]);
-    initProcess->children[1]->numChildren()++;
+    initProcess->children()[0]->setParent(initProcess->children()[1]);
+    initProcess->children()[1]->children().append(initProcess->children()[0]);
+    initProcess->children()[1]->numChildren()++;
     initProcess->numChildren()--;
-    initProcess->children.removeAt(0);
+    initProcess->children().removeAt(0);
     delete processController;
 }
 
@@ -162,9 +162,9 @@ void testProcess::testHistories() {
     Q_FOREACH( KSysGuard::Process *process, processes) {
         QCOMPARE(countNumChildren(process), process->numChildren());
 
-        for(int i =0; i < process->children.size(); i++) {
-            QVERIFY(process->children[i]->parent());
-            QCOMPARE(process->children[i]->parent(), process);
+        for(int i =0; i < process->children().size(); i++) {
+            QVERIFY(process->children()[i]->parent());
+            QCOMPARE(process->children()[i]->parent(), process);
         }
     }
 

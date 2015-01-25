@@ -164,8 +164,8 @@ public:
 
     int numThreads() const; ///< Number of threads that this process has, including the main one.  0 if not known
 
-    QList<Process *> children;  ///< A list of all the direct children that the process has.  Children of children are not listed here, so note that children_pids <= numChildren
-    QTime timeKillWasSent; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.
+    QList<Process *> children() const;  ///< A list of all the direct children that the process has.  Children of children are not listed here, so note that children_pids <= numChildren
+    QTime timeKillWasSent() const; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.
 
     QString translatedStatus() const;  ///< Returns a translated string of the status. e.g. "Running" etc
     QString niceLevelAsString() const; ///< Returns a simple translated string of the nice priority.  e.g. "Normal", "High", etc

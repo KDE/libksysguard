@@ -140,9 +140,9 @@ bool Processes::updateProcess( Process *ps, long ppid)
             p->numChildren()--;
         } while (p->pid()!= -1);
         Q_ASSERT(ps != parent);
-        ps->parent()->children.removeAll(ps);
+        ps->parent()->children().removeAll(ps);
         ps->setParent(parent);  //the parent has changed
-        parent->children.append(ps);
+        parent->children().append(ps);
         p = ps;
         do {
             p = p->parent();
@@ -261,7 +261,7 @@ bool Processes::addProcess(long pid, long ppid)
     ps->setIndex(d->mListProcesses.count());
     d->mListProcesses.append(ps);
 
-    ps->parent()->children.append(ps);
+    ps->parent()->children().append(ps);
     Process *p = ps;
     do {
         Q_ASSERT(p);
@@ -374,7 +374,7 @@ void Processes::deleteProcess(long pid)
     Process *process = d->mProcesses.value(pid);
     if(!process)
         return;
-    Q_FOREACH( Process *it, process->children) {
+    Q_FOREACH( Process *it, process->children()) {
         d->mProcessedLastTime.remove(it->pid());
         deleteProcess(it->pid());
     }
@@ -383,7 +383,7 @@ void Processes::deleteProcess(long pid)
 
     d->mProcesses.remove(pid);
     d->mListProcesses.removeAll(process);
-    process->parent()->children.removeAll(process);
+    process->parent()->children().removeAll(process);
     Process *p = process;
     do {
         Q_ASSERT(p);

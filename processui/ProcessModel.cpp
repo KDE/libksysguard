@@ -374,7 +374,7 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
     if(mSimple)
         row = process->index();
     else
-        row = process->parent()->children.indexOf(process);
+        row = process->parent()->children().indexOf(process);
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
     emit q->dataChanged(index2, index2);
 }
@@ -449,7 +449,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
             if(mSimple)
                 row = process->index();
             else
-                row = process->parent()->children.indexOf(process);
+                row = process->parent()->children().indexOf(process);
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingXMemory, process);
             emit q->dataChanged(index, index);
         }
@@ -550,7 +550,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
     if(mSimple)
         row = process->index();
     else
-        row = process->parent()->children.indexOf(process);
+        row = process->parent()->children().indexOf(process);
     if(!process->hasManagedGuiWindow()) {
         process->hasManagedGuiWindow() = true;
         //Since this is the first window for a process, invalidate HeadingName so that
@@ -617,7 +617,7 @@ int ProcessModel::rowCount(const QModelIndex &parent) const
         process = d->mProcesses->getProcess(-1);
     }
     Q_ASSERT(process);
-    int num_rows = process->children.count();
+    int num_rows = process->children().count();
     return num_rows;
 }
 
@@ -643,7 +643,7 @@ bool ProcessModel::hasChildren ( const QModelIndex & parent = QModelIndex() ) co
         process = d->mProcesses->getProcess(-1);
     }
     Q_ASSERT(process);
-    bool has_children = !process->children.isEmpty();
+    bool has_children = !process->children().isEmpty();
 
     Q_ASSERT((rowCount(parent) > 0) == has_children);
     return has_children;
@@ -669,8 +669,8 @@ QModelIndex ProcessModel::index ( int row, int column, const QModelIndex & paren
         parent_process = d->mProcesses->getProcess(-1);
     Q_ASSERT(parent_process);
 
-    if(parent_process->children.count() > row)
-        return createIndex(row,column, parent_process->children[row]);
+    if(parent_process->children().count() > row)
+        return createIndex(row,column, parent_process->children()[row]);
     else
     {
         return QModelIndex();
@@ -688,10 +688,10 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
     if(mSimple)
         row = process->index();
     else
-        row = process->parent()->children.indexOf(process);
+        row = process->parent()->children().indexOf(process);
 
-    if (!process->timeKillWasSent.isNull()) {
-        int elapsed = process->timeKillWasSent.elapsed();
+    if (!process->timeKillWasSent().isNull()) {
+        int elapsed = process->timeKillWasSent().elapsed();
         if (elapsed < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {
             if (!mPidsToUpdate.contains(process->pid()))
                 mPidsToUpdate.append(process->pid());
@@ -800,7 +800,7 @@ void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
     }
 
     //Deal with the case that we are showing it as a tree
-    int row = process->parent()->children.count();
+    int row = process->parent()->children().count();
     QModelIndex parentModelIndex = q->getQModelIndex(process->parent(), 0);
 
     //Only here can we actually change the model.  First notify the view/proxy models then modify
@@ -827,7 +827,7 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
     if(mSimple) {
         return q->beginRemoveRows(QModelIndex(), process->index(), process->index());
     } else  {
-        int row = process->parent()->children.indexOf(process);
+        int row = process->parent()->children().indexOf(process);
         if(row == -1) {
             qCDebug(LIBKSYSGUARD) << "A serious problem occurred in remove row.";
             mRemovingRow = false;
@@ -858,9 +858,9 @@ void ProcessModelPrivate::beginMoveProcess(KSysGuard::Process *process, KSysGuar
     if(mSimple) return;  //We don't need to move processes when in simple mode
     mMovingRow = true;
 
-    int current_row = process->parent()->children.indexOf(process);
+    int current_row = process->parent()->children().indexOf(process);
     Q_ASSERT(current_row != -1);
-    int new_row = new_parent->children.count();
+    int new_row = new_parent->children().count();
     QModelIndex sourceParent = q->getQModelIndex( process->parent(), 0);
     QModelIndex destinationParent = q->getQModelIndex( new_parent, 0 );
     mMovingRow = q->beginMoveRows(sourceParent, current_row, current_row, destinationParent, new_row);
@@ -887,7 +887,7 @@ QModelIndex ProcessModel::getQModelIndex( KSysGuard::Process *process, int colum
     if(d->mSimple) {
         row = process->index();
     } else {
-        row = process->parent()->children.indexOf(process);
+        row = process->parent()->children().indexOf(process);
     }
     Q_ASSERT(row != -1);
     return createIndex(row, column, process);
@@ -1054,7 +1054,7 @@ void ProcessModel::setSimpleMode(bool simple)
     QList<QModelIndex> treeIndexes;
     foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
         flatrow = process->index();
-        treerow = process->parent()->children.indexOf(process);
+        treerow = process->parent()->children().indexOf(process);
         flatIndexes.clear();
         treeIndexes.clear();
 
@@ -1778,8 +1778,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if (!d->mHaveTimer) //If there is no timer, then no processes are being killed, so no point looking for one
                 return QVariant();
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            if (!process->timeKillWasSent.isNull()) {
-                int elapsed = process->timeKillWasSent.elapsed();
+            if (!process->timeKillWasSent().isNull()) {
+                int elapsed = process->timeKillWasSent().elapsed();
                 if (elapsed < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {//Only show red for about 7 seconds
                     int transparency = 255 - elapsed*250/MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS;
 
@@ -1904,7 +1904,7 @@ void ProcessModel::setShowTotals(bool showTotals)  //slot
             if(d->mSimple)
                 row = process->index();
             else
-                row = process->parent()->children.indexOf(process);
+                row = process->parent()->children().indexOf(process);
             index = createIndex(row, HeadingCPUUsage, process);
             emit dataChanged(index, index);
         }
@@ -1928,7 +1928,7 @@ void ProcessModel::setUnits(Units units)
         if(d->mSimple)
             row = process->index();
         else
-            row = process->parent()->children.indexOf(process);
+            row = process->parent()->children().indexOf(process);
         index = createIndex(row, HeadingMemory, process);
         emit dataChanged(index, index);
         index = createIndex(row, HeadingXMemory, process);
@@ -1957,7 +1957,7 @@ void ProcessModel::setIoUnits(Units units)
         if(d->mSimple)
             row = process->index();
         else
-            row = process->parent()->children.indexOf(process);
+            row = process->parent()->children().indexOf(process);
         index = createIndex(row, HeadingIoRead, process);
         emit dataChanged(index, index);
         index = createIndex(row, HeadingIoWrite, process);
@@ -2118,12 +2118,12 @@ void ProcessModelPrivate::timerEvent( QTimerEvent * event )
     Q_UNUSED(event);
     foreach (qlonglong pid, mPidsToUpdate) {
         KSysGuard::Process *process = mProcesses->getProcess(pid);
-        if (process && !process->timeKillWasSent.isNull() && process->timeKillWasSent.elapsed() < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {
+        if (process && !process->timeKillWasSent().isNull() && process->timeKillWasSent().elapsed() < MILLISECONDS_TO_SHOW_RED_FOR_KILLED_PROCESS) {
             int row;
             if(mSimple)
                 row = process->index();
             else
-                row = process->parent()->children.indexOf(process);
+                row = process->parent()->children().indexOf(process);
 
             QModelIndex index1 = q->createIndex(row, 0, process);
             QModelIndex index2 = q->createIndex(row, mHeadings.count()-1, process);

@@ -496,7 +496,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     if (showSignalingEntries) {
         d->mProcessContextMenu->addSeparator();
         d->mProcessContextMenu->addAction(d->terminate);
-        if (numProcesses == 1 && !process->timeKillWasSent.isNull())
+        if (numProcesses == 1 && !process->timeKillWasSent().isNull())
             d->mProcessContextMenu->addAction(d->kill);
     }
 
@@ -1327,7 +1327,7 @@ void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
         foreach (long long pid, selectedPids) {
             KSysGuard::Process *process = d->mModel.getProcess(pid);
             if (process)
-                process->timeKillWasSent.start();
+                process->timeKillWasSent().start();
             d->mUi->treeView->selectionModel()->clearSelection();
         }
     }
