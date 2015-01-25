@@ -98,42 +98,42 @@ class ProcessObject : public QObject {
        Q_PROPERTY(QByteArray tty READ tty)                             PROPERTY_F(QByteArray, tty)
        Q_PROPERTY(qlonglong userTime READ userTime)                    PROPERTY_F(qlonglong, userTime)
        Q_PROPERTY(qlonglong sysTime READ sysTime)                      PROPERTY_F(qlonglong, sysTime)
-       Q_PROPERTY(int userUsage READ userUsage)                        PROPERTY(int, userUsage)
-       Q_PROPERTY(int sysUsage READ sysUsage)                          PROPERTY(int, sysUsage)
-       Q_PROPERTY(int totalUserUsage READ totalUserUsage)              PROPERTY(int, totalUserUsage)
-       Q_PROPERTY(int totalSysUsage READ totalSysUsage)                PROPERTY(int, totalSysUsage)
-       Q_PROPERTY(int numChildren READ numChildren)                    PROPERTY(int, numChildren)
-       Q_PROPERTY(int niceLevel READ niceLevel)                        PROPERTY(int, niceLevel)
-       Q_PROPERTY(int scheduler READ scheduler)                        PROPERTY(int, scheduler)
-       Q_PROPERTY(int ioPriorityClass READ ioPriorityClass)            PROPERTY(int, ioPriorityClass)
-       Q_PROPERTY(int ioniceLevel READ ioniceLevel)                    PROPERTY(int, ioniceLevel)
-       Q_PROPERTY(qlonglong vmSize READ vmSize)                        PROPERTY(qlonglong, vmSize)
-       Q_PROPERTY(qlonglong vmRSS READ vmRSS)                          PROPERTY(qlonglong, vmRSS)
-       Q_PROPERTY(qlonglong vmURSS READ vmURSS)                        PROPERTY(qlonglong, vmURSS)
-       Q_PROPERTY(qlonglong pixmapBytes READ pixmapBytes)              PROPERTY(qlonglong, pixmapBytes)
-       Q_PROPERTY(bool hasManagedGuiWindow READ hasManagedGuiWindow)   PROPERTY(bool, hasManagedGuiWindow)
-       Q_PROPERTY(QString command READ command)                        PROPERTY(QString, command)
-       Q_PROPERTY(qlonglong status READ status)                        PROPERTY(qlonglong, status)
-       Q_PROPERTY(qlonglong ioCharactersRead READ ioCharactersRead)    PROPERTY(qlonglong, ioCharactersRead)
-       Q_PROPERTY(qlonglong ioCharactersWritten READ ioCharactersWritten)  PROPERTY(qlonglong, ioCharactersWritten)
-       Q_PROPERTY(qlonglong ioReadSyscalls READ ioReadSyscalls)        PROPERTY(qlonglong, ioReadSyscalls)
-       Q_PROPERTY(qlonglong ioWriteSyscalls READ ioWriteSyscalls)      PROPERTY(qlonglong, ioWriteSyscalls)
-       Q_PROPERTY(qlonglong ioCharactersActuallyRead READ ioCharactersActuallyRead)        PROPERTY(qlonglong, ioCharactersActuallyRead)
-       Q_PROPERTY(qlonglong ioCharactersActuallyWritten READ ioCharactersActuallyWritten)  PROPERTY(qlonglong, ioCharactersActuallyWritten)
-       Q_PROPERTY(qlonglong ioCharactersReadRate READ ioCharactersReadRate)                PROPERTY(qlonglong, ioCharactersReadRate)
-       Q_PROPERTY(qlonglong ioCharactersWrittenRate READ ioCharactersWrittenRate)          PROPERTY(qlonglong, ioCharactersWrittenRate)
-       Q_PROPERTY(qlonglong ioReadSyscallsRate READ ioReadSyscallsRate)                    PROPERTY(qlonglong, ioReadSyscallsRate)
-       Q_PROPERTY(qlonglong ioWriteSyscallsRate READ ioWriteSyscallsRate)                  PROPERTY(qlonglong, ioWriteSyscallsRate)
-       Q_PROPERTY(qlonglong ioCharactersActuallyReadRate READ ioCharactersActuallyReadRate)          PROPERTY(qlonglong, ioCharactersActuallyReadRate)
-       Q_PROPERTY(qlonglong ioCharactersActuallyWrittenRate READ ioCharactersActuallyWrittenRate)    PROPERTY(qlonglong, ioCharactersActuallyWrittenRate)
+       Q_PROPERTY(int userUsage READ userUsage)                        PROPERTY_F(int, userUsage)
+       Q_PROPERTY(int sysUsage READ sysUsage)                          PROPERTY_F(int, sysUsage)
+       Q_PROPERTY(int totalUserUsage READ totalUserUsage)              PROPERTY_F(int, totalUserUsage)
+       Q_PROPERTY(int totalSysUsage READ totalSysUsage)                PROPERTY_F(int, totalSysUsage)
+       Q_PROPERTY(int numChildren READ numChildren)                    PROPERTY_F(int, numChildren)
+       Q_PROPERTY(int niceLevel READ niceLevel)                        PROPERTY_F(int, niceLevel)
+       Q_PROPERTY(int scheduler READ scheduler)                        PROPERTY_F(int, scheduler)
+       Q_PROPERTY(int ioPriorityClass READ ioPriorityClass)            PROPERTY_F(int, ioPriorityClass)
+       Q_PROPERTY(int ioniceLevel READ ioniceLevel)                    PROPERTY_F(int, ioniceLevel)
+       Q_PROPERTY(qlonglong vmSize READ vmSize)                        PROPERTY_F(qlonglong, vmSize)
+       Q_PROPERTY(qlonglong vmRSS READ vmRSS)                          PROPERTY_F(qlonglong, vmRSS)
+       Q_PROPERTY(qlonglong vmURSS READ vmURSS)                        PROPERTY_F(qlonglong, vmURSS)
+       Q_PROPERTY(qlonglong pixmapBytes READ pixmapBytes)              PROPERTY_F(qlonglong, pixmapBytes)
+       Q_PROPERTY(bool hasManagedGuiWindow READ hasManagedGuiWindow)   PROPERTY_F(bool, hasManagedGuiWindow)
+       Q_PROPERTY(QString command READ command)                        PROPERTY_F(QString, command)
+       Q_PROPERTY(qlonglong status READ status)                        PROPERTY_F(qlonglong, status)
+       Q_PROPERTY(qlonglong ioCharactersRead READ ioCharactersRead)    PROPERTY_F(qlonglong, ioCharactersRead)
+       Q_PROPERTY(qlonglong ioCharactersWritten READ ioCharactersWritten)  PROPERTY_F(qlonglong, ioCharactersWritten)
+       Q_PROPERTY(qlonglong ioReadSyscalls READ ioReadSyscalls)        PROPERTY_F(qlonglong, ioReadSyscalls)
+       Q_PROPERTY(qlonglong ioWriteSyscalls READ ioWriteSyscalls)      PROPERTY_F(qlonglong, ioWriteSyscalls)
+       Q_PROPERTY(qlonglong ioCharactersActuallyRead READ ioCharactersActuallyRead)        PROPERTY_F(qlonglong, ioCharactersActuallyRead)
+       Q_PROPERTY(qlonglong ioCharactersActuallyWritten READ ioCharactersActuallyWritten)  PROPERTY_F(qlonglong, ioCharactersActuallyWritten)
+       Q_PROPERTY(qlonglong ioCharactersReadRate READ ioCharactersReadRate)                PROPERTY_F(qlonglong, ioCharactersReadRate)
+       Q_PROPERTY(qlonglong ioCharactersWrittenRate READ ioCharactersWrittenRate)          PROPERTY_F(qlonglong, ioCharactersWrittenRate)
+       Q_PROPERTY(qlonglong ioReadSyscallsRate READ ioReadSyscallsRate)                    PROPERTY_F(qlonglong, ioReadSyscallsRate)
+       Q_PROPERTY(qlonglong ioWriteSyscallsRate READ ioWriteSyscallsRate)                  PROPERTY_F(qlonglong, ioWriteSyscallsRate)
+       Q_PROPERTY(qlonglong ioCharactersActuallyReadRate READ ioCharactersActuallyReadRate)          PROPERTY_F(qlonglong, ioCharactersActuallyReadRate)
+       Q_PROPERTY(qlonglong ioCharactersActuallyWrittenRate READ ioCharactersActuallyWrittenRate)    PROPERTY_F(qlonglong, ioCharactersActuallyWrittenRate)
 
         ProcessObject(ProcessModel * processModel, int pid);
         void update(KSysGuard::Process *process);
 
         int pid() const { return mPid; }
         void setPid(int pid) { mPid = pid; }
-        QString name() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->name.section(' ', 0,0); else return QString(); }
-        QString fullname() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->name; else return QString(); }
+        QString name() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->name().section(' ', 0,0); else return QString(); }
+        QString fullname() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->name(); else return QString(); }
 
         public Q_SLOTS:
         bool fileExists(const QString &filename);

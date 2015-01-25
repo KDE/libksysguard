@@ -40,6 +40,38 @@ public:
     qlonglong userTime;
     qlonglong sysTime;
     qlonglong startTime;
+    int userUsage;
+    int sysUsage;
+    int totalUserUsage;
+    int totalSysUsage;
+    unsigned long numChildren;
+    int niceLevel;
+    KSysGuard::Process::Scheduler scheduler;
+    KSysGuard::Process::IoPriorityClass ioPriorityClass;
+    int ioniceLevel;
+    qlonglong vmSize;
+    qlonglong vmRSS;
+    qlonglong vmURSS;
+    qlonglong vmSizeChange;
+    qlonglong vmRSSChange;
+    qlonglong vmURSSChange;
+    unsigned long pixmapBytes;
+    bool hasManagedGuiWindow;
+    QString name;
+    QString command;
+    KSysGuard::Process::ProcessStatus status;
+    qlonglong ioCharactersRead;
+    qlonglong ioCharactersWritten;
+    qlonglong ioReadSyscalls;
+    qlonglong ioWriteSyscalls;
+    qlonglong ioCharactersActuallyRead;
+    qlonglong ioCharactersActuallyWritten;
+    long ioCharactersReadRate;
+    long ioCharactersWrittenRate;
+    long ioReadSyscallsRate;
+    long ioWriteSyscallsRate;
+    long ioCharactersActuallyReadRate;
+    long ioCharactersActuallyWrittenRate;
 };
 
 KSysGuard::Process::Process()
@@ -64,27 +96,26 @@ KSysGuard::Process::~Process()
 
 QString KSysGuard::Process::niceLevelAsString() const {
     // Just some rough heuristic to map a number to how nice it is
-    if( niceLevel == 0) return i18nc("Process Niceness", "Normal");
-    if( niceLevel >= 10) return i18nc("Process Niceness", "Very low priority");
-    if( niceLevel > 0) return i18nc("Process Niceness", "Low priority");
-    if( niceLevel <= -10) return i18nc("Process Niceness", "Very high priority");
-    if( niceLevel < 0) return i18nc("Process Niceness", "High priority");
+    if (d->niceLevel == 0) return i18nc("Process Niceness", "Normal");
+    if (d->niceLevel >= 10) return i18nc("Process Niceness", "Very low priority");
+    if (d->niceLevel > 0) return i18nc("Process Niceness", "Low priority");
+    if (d->niceLevel <= -10) return i18nc("Process Niceness", "Very high priority");
+    if (d->niceLevel < 0) return i18nc("Process Niceness", "High priority");
     return QString(); //impossible;
 }
 
 QString KSysGuard::Process::ioniceLevelAsString() const {
     // Just some rough heuristic to map a number to how nice it is
-    if( ioniceLevel == 4) return i18nc("Process Niceness", "Normal");
-    if( ioniceLevel >= 6) return i18nc("Process Niceness", "Very low priority");
-    if( ioniceLevel > 4) return i18nc("Process Niceness", "Low priority");
-    if( ioniceLevel <= 2) return i18nc("Process Niceness", "Very high priority");
-    if( ioniceLevel < 4) return i18nc("Process Niceness", "High priority");
+    if (d->ioniceLevel == 4) return i18nc("Process Niceness", "Normal");
+    if (d->ioniceLevel >= 6) return i18nc("Process Niceness", "Very low priority");
+    if (d->ioniceLevel > 4) return i18nc("Process Niceness", "Low priority");
+    if (d->ioniceLevel <= 2) return i18nc("Process Niceness", "Very high priority");
+    if (d->ioniceLevel < 4) return i18nc("Process Niceness", "High priority");
     return QString(); //impossible;
-
 }
 
 QString KSysGuard::Process::ioPriorityClassAsString() const {
-    switch( ioPriorityClass ) {
+    switch (d->ioPriorityClass) {
         case None: return i18nc("Priority Class", "None");
         case RealTime: return i18nc("Priority Class", "Real Time");
         case BestEffort: return i18nc("Priority Class", "Best Effort");
@@ -94,7 +125,7 @@ QString KSysGuard::Process::ioPriorityClassAsString() const {
 }
 
 QString KSysGuard::Process::translatedStatus() const {
-    switch( status ) {
+    switch (d->status) {
         case Running: return i18nc("process status", "running");
         case Sleeping: return i18nc("process status", "sleeping");
         case DiskSleep: return i18nc("process status", "disk sleep");
@@ -107,7 +138,7 @@ QString KSysGuard::Process::translatedStatus() const {
 }
 
 QString KSysGuard::Process::schedulerAsString() const {
-    switch( scheduler ) {
+    switch (d->scheduler) {
         case Fifo: return i18nc("Scheduler", "FIFO");
         case RoundRobin: return i18nc("Scheduler", "Round Robin");
         case Interactive: return i18nc("Scheduler", "Interactive");
@@ -120,48 +151,48 @@ QString KSysGuard::Process::schedulerAsString() const {
 void KSysGuard::Process::clear() {
     d->pid = -1;
     parent_pid = -1;
+    parent = nullptr;
     d->uid = 0;
     d->gid = -1;
-    numThreads = 0;
     d->suid = d->euid = d->fsuid = -1;
     d->sgid = d->egid = d->fsgid = -1;
     d->tracerpid = -1;
     d->userTime = 0;
     d->sysTime = 0;
-    elapsedTimeMilliSeconds = 0;
     d->startTime = 0;
-    userUsage=0;
-    sysUsage=0;
-    totalUserUsage=0;
-    totalSysUsage=0;
-    numChildren=0;
-    niceLevel=0;
-    vmSize=0;
-    vmRSS = 0;
-    vmURSS = 0;
-    vmSizeChange = 0;
-    vmRSSChange = 0;
-    vmURSSChange = 0;
-    pixmapBytes = 0;
-    hasManagedGuiWindow = false;
-    status=OtherStatus;
-    parent = NULL;
-    ioPriorityClass = None;
-    ioniceLevel = -1;
-    scheduler = Other;
-    ioCharactersRead = 0;
-    ioCharactersWritten = 0;
-    ioReadSyscalls = 0;
-    ioWriteSyscalls = 0;
-    ioCharactersActuallyRead = 0;
-    ioCharactersActuallyWritten = 0;
-    ioCharactersReadRate = 0;
-    ioCharactersWrittenRate = 0;
-    ioReadSyscallsRate = 0;
-    ioWriteSyscallsRate = 0;
-    ioCharactersActuallyReadRate = 0;
-    ioCharactersActuallyWrittenRate = 0;
+    d->userUsage=0;
+    d->sysUsage=0;
+    d->totalUserUsage=0;
+    d->totalSysUsage=0;
+    d->numChildren=0;
+    d->niceLevel=0;
+    d->vmSize=0;
+    d->vmRSS = 0;
+    d->vmURSS = 0;
+    d->vmSizeChange = 0;
+    d->vmRSSChange = 0;
+    d->vmURSSChange = 0;
+    d->pixmapBytes = 0;
+    d->hasManagedGuiWindow = false;
+    d->status=OtherStatus;
+    d->ioPriorityClass = None;
+    d->ioniceLevel = -1;
+    d->scheduler = Other;
+    d->ioCharactersRead = 0;
+    d->ioCharactersWritten = 0;
+    d->ioReadSyscalls = 0;
+    d->ioWriteSyscalls = 0;
+    d->ioCharactersActuallyRead = 0;
+    d->ioCharactersActuallyWritten = 0;
+    d->ioCharactersReadRate = 0;
+    d->ioCharactersWrittenRate = 0;
+    d->ioReadSyscallsRate = 0;
+    d->ioWriteSyscallsRate = 0;
+    d->ioCharactersActuallyReadRate = 0;
+    d->ioCharactersActuallyWrittenRate = 0;
 
+    elapsedTimeMilliSeconds = 0;
+    numThreads = 0;
     changes = Process::Nothing;
 }
 
@@ -238,6 +269,166 @@ qlonglong KSysGuard::Process::sysTime() const
 qlonglong KSysGuard::Process::startTime() const
 {
     return d->startTime;
+}
+
+int KSysGuard::Process::userUsage() const
+{
+    return d->userUsage;
+}
+
+int KSysGuard::Process::sysUsage() const
+{
+    return d->sysUsage;
+}
+
+int & KSysGuard::Process::totalUserUsage() const
+{
+    return d->totalUserUsage;
+}
+
+int & KSysGuard::Process::totalSysUsage() const
+{
+    return d->totalSysUsage;
+}
+
+long unsigned & KSysGuard::Process::numChildren() const
+{
+    return d->numChildren;
+}
+
+int KSysGuard::Process::niceLevel() const
+{
+    return d->niceLevel;
+}
+
+KSysGuard::Process::Scheduler KSysGuard::Process::scheduler() const
+{
+    return d->scheduler;
+}
+
+KSysGuard::Process::IoPriorityClass KSysGuard::Process::ioPriorityClass() const
+{
+    return d->ioPriorityClass;
+}
+
+int KSysGuard::Process::ioniceLevel() const
+{
+    return d->ioniceLevel;
+}
+
+qlonglong KSysGuard::Process::vmSize() const
+{
+    return d->vmSize;
+}
+
+qlonglong KSysGuard::Process::vmRSS() const
+{
+    return d->vmRSS;
+}
+
+qlonglong KSysGuard::Process::vmURSS() const
+{
+    return d->vmURSS;
+}
+
+qlonglong& KSysGuard::Process::vmSizeChange() const
+{
+    return d->vmSizeChange;
+}
+
+qlonglong& KSysGuard::Process::vmRSSChange() const
+{
+    return d->vmRSSChange;
+}
+
+qlonglong& KSysGuard::Process::vmURSSChange() const
+{
+    return d->vmURSSChange;
+}
+
+unsigned long& KSysGuard::Process::pixmapBytes() const
+{
+    return d->pixmapBytes;
+}
+
+bool& KSysGuard::Process::hasManagedGuiWindow() const
+{
+    return d->hasManagedGuiWindow;
+}
+
+QString KSysGuard::Process::name() const
+{
+    return d->name;
+}
+
+QString& KSysGuard::Process::command() const
+{
+    return d->command;
+}
+
+KSysGuard::Process::ProcessStatus KSysGuard::Process::status() const
+{
+    return d->status;
+}
+
+qlonglong KSysGuard::Process::ioCharactersRead() const
+{
+    return d->ioCharactersRead;
+}
+
+qlonglong KSysGuard::Process::ioCharactersWritten() const
+{
+    return d->ioCharactersWritten;
+}
+
+qlonglong KSysGuard::Process::ioReadSyscalls() const
+{
+    return d->ioReadSyscalls;
+}
+
+qlonglong KSysGuard::Process::ioWriteSyscalls() const
+{
+    return d->ioWriteSyscalls;
+}
+
+qlonglong KSysGuard::Process::ioCharactersActuallyRead() const
+{
+    return d->ioCharactersActuallyRead;
+}
+
+qlonglong KSysGuard::Process::ioCharactersActuallyWritten() const
+{
+    return d->ioCharactersActuallyWritten;
+}
+
+long int KSysGuard::Process::ioCharactersReadRate() const
+{
+    return d->ioCharactersReadRate;
+}
+
+long int KSysGuard::Process::ioCharactersWrittenRate() const
+{
+    return d->ioCharactersWrittenRate;
+}
+
+long int KSysGuard::Process::ioReadSyscallsRate() const
+{
+    return d->ioReadSyscallsRate;
+}
+
+long int KSysGuard::Process::ioWriteSyscallsRate() const
+{
+    return d->ioWriteSyscallsRate;
+}
+
+long int KSysGuard::Process::ioCharactersActuallyReadRate() const
+{
+    return d->ioCharactersActuallyReadRate;
+}
+
+long int KSysGuard::Process::ioCharactersActuallyWrittenRate() const
+{
+    return d->ioCharactersActuallyWrittenRate;
 }
 
 void KSysGuard::Process::setLogin(QString login)
@@ -332,169 +523,169 @@ void KSysGuard::Process::setStartTime(qlonglong startTime)
 }
 
 void KSysGuard::Process::setUserUsage(int _userUsage) {
-    if(userUsage == _userUsage) return;
-    userUsage = _userUsage;
+    if(d->userUsage == _userUsage) return;
+    d->userUsage = _userUsage;
     changes |= Process::Usage;
 }
 
 void KSysGuard::Process::setSysUsage(int _sysUsage) {
-    if(sysUsage == _sysUsage) return;
-    sysUsage = _sysUsage;
+    if(d->sysUsage == _sysUsage) return;
+    d->sysUsage = _sysUsage;
     changes |= Process::Usage;
 }
 
 void KSysGuard::Process::setTotalUserUsage(int _totalUserUsage) {
-    if(totalUserUsage == _totalUserUsage) return;
-    totalUserUsage = _totalUserUsage;
+    if(d->totalUserUsage == _totalUserUsage) return;
+    d->totalUserUsage = _totalUserUsage;
     changes |= Process::TotalUsage;
 }
 
 void KSysGuard::Process::setTotalSysUsage(int _totalSysUsage) {
-    if(totalSysUsage == _totalSysUsage) return;
-    totalSysUsage = _totalSysUsage;
+    if(d->totalSysUsage == _totalSysUsage) return;
+    d->totalSysUsage = _totalSysUsage;
     changes |= Process::TotalUsage;
 }
 
 void KSysGuard::Process::setNiceLevel(int _niceLevel) {
-    if(niceLevel == _niceLevel) return;
-    niceLevel = _niceLevel;
+    if(d->niceLevel == _niceLevel) return;
+    d->niceLevel = _niceLevel;
     changes |= Process::NiceLevels;
 }
 
-void KSysGuard::Process::setscheduler(Scheduler _scheduler) {
-    if(scheduler == _scheduler) return;
-    scheduler = _scheduler;
+void KSysGuard::Process::setScheduler(Scheduler _scheduler) {
+    if(d->scheduler == _scheduler) return;
+    d->scheduler = _scheduler;
     changes |= Process::NiceLevels;
 }
 
 void KSysGuard::Process::setIoPriorityClass(IoPriorityClass _ioPriorityClass) {
-    if(ioPriorityClass == _ioPriorityClass) return;
-    ioPriorityClass = _ioPriorityClass;
+    if(d->ioPriorityClass == _ioPriorityClass) return;
+    d->ioPriorityClass = _ioPriorityClass;
     changes |= Process::NiceLevels;
 }
 
 void KSysGuard::Process::setIoniceLevel(int _ioniceLevel) {
-    if(ioniceLevel == _ioniceLevel) return;
-    ioniceLevel = _ioniceLevel;
+    if(d->ioniceLevel == _ioniceLevel) return;
+    d->ioniceLevel = _ioniceLevel;
     changes |= Process::NiceLevels;
 }
 
 void KSysGuard::Process::setVmSize(qlonglong _vmSize) {
-    if(vmSizeChange != 0 || vmSize != 0)
-        vmSizeChange = _vmSize - vmSize;
-    if(vmSize == _vmSize) return;
-    vmSize = _vmSize;
+    if(d->vmSizeChange != 0 || d->vmSize != 0)
+        d->vmSizeChange = _vmSize - d->vmSize;
+    if(d->vmSize == _vmSize) return;
+    d->vmSize = _vmSize;
     changes |= Process::VmSize;
 }
 
 void KSysGuard::Process::setVmRSS(qlonglong _vmRSS) {
-    if(vmRSSChange != 0 || vmRSS != 0)
-        vmRSSChange = _vmRSS - vmRSS;
-    if(vmRSS == _vmRSS) return;
-    vmRSS = _vmRSS;
+    if(d->vmRSSChange != 0 || d->vmRSS != 0)
+        d->vmRSSChange = _vmRSS - d->vmRSS;
+    if(d->vmRSS == _vmRSS) return;
+    d->vmRSS = _vmRSS;
     changes |= Process::VmRSS;
 }
 
 void KSysGuard::Process::setVmURSS(qlonglong _vmURSS) {
-    if(vmURSSChange != 0 || vmURSS != 0)
-        vmURSSChange = _vmURSS - vmURSS;
-    if(vmURSS == _vmURSS) return;
-    vmURSS = _vmURSS;
+    if(d->vmURSSChange != 0 || d->vmURSS != 0)
+        d->vmURSSChange = _vmURSS - d->vmURSS;
+    if(d->vmURSS == _vmURSS) return;
+    d->vmURSS = _vmURSS;
     changes |= Process::VmURSS;
 }
 
 void KSysGuard::Process::setName(QString _name) {
-    if(name == _name) return;
-    name = _name;
+    if(d->name == _name) return;
+    d->name = _name;
     changes |= Process::Name;
 }
 
 void KSysGuard::Process::setCommand(QString _command) {
-    if(command == _command) return;
-    command = _command;
+    if(d->command == _command) return;
+    d->command = _command;
     changes |= Process::Command;
 }
 
 void KSysGuard::Process::setStatus(ProcessStatus _status) {
-    if(status == _status) return;
-    status = _status;
+    if(d->status == _status) return;
+    d->status = _status;
     changes |= Process::Status;
 }
 
 void KSysGuard::Process::setIoCharactersRead(qlonglong number) {
-    if(number == ioCharactersRead) return;
-    ioCharactersRead = number;
+    if(d->ioCharactersRead == number) return;
+    d->ioCharactersRead = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoCharactersWritten(qlonglong number) {
-    if(number == ioCharactersWritten) return;
-    ioCharactersWritten = number;
+    if(d->ioCharactersWritten == number) return;
+    d->ioCharactersWritten = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoReadSyscalls(qlonglong number) {
-    if(number == ioReadSyscalls) return;
-    ioReadSyscalls = number;
+    if(d->ioReadSyscalls == number) return;
+    d->ioReadSyscalls = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoWriteSyscalls(qlonglong number) {
-    if(number == ioWriteSyscalls) return;
-    ioWriteSyscalls = number;
+    if(d->ioWriteSyscalls == number) return;
+    d->ioWriteSyscalls = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoCharactersActuallyRead(qlonglong number) {
-    if(number == ioCharactersActuallyRead) return;
-    ioCharactersActuallyRead = number;
+    if(d->ioCharactersActuallyRead == number) return;
+    d->ioCharactersActuallyRead = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoCharactersActuallyWritten(qlonglong number) {
-    if(number == ioCharactersActuallyWritten) return;
-    ioCharactersActuallyWritten = number;
+    if(d->ioCharactersActuallyWritten == number) return;
+    d->ioCharactersActuallyWritten = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoCharactersReadRate(long number) {
-    if(number == ioCharactersReadRate) return;
-    ioCharactersReadRate = number;
+    if(d->ioCharactersReadRate == number) return;
+    d->ioCharactersReadRate = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoCharactersWrittenRate(long number) {
-    if(number == ioCharactersWrittenRate) return;
-    ioCharactersWrittenRate = number;
+    if(d->ioCharactersWrittenRate == number) return;
+    d->ioCharactersWrittenRate = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoReadSyscallsRate(long number) {
-    if(number == ioReadSyscallsRate) return;
-    ioReadSyscallsRate = number;
+    if(d->ioReadSyscallsRate == number) return;
+    d->ioReadSyscallsRate = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoWriteSyscallsRate(long number) {
-    if(number == ioWriteSyscallsRate) return;
-    ioWriteSyscallsRate = number;
+    if(d->ioWriteSyscallsRate == number) return;
+    d->ioWriteSyscallsRate = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoCharactersActuallyReadRate(long number) {
-    if(number == ioCharactersActuallyReadRate) return;
-    ioCharactersActuallyReadRate = number;
+    if(d->ioCharactersActuallyReadRate == number) return;
+    d->ioCharactersActuallyReadRate = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setIoCharactersActuallyWrittenRate(long number) {
-    if(number == ioCharactersActuallyWrittenRate) return;
-    ioCharactersActuallyWrittenRate = number;
+    if(d->ioCharactersActuallyWrittenRate == number) return;
+    d->ioCharactersActuallyWrittenRate = number;
     changes |= Process::IO;
 }
 
 void KSysGuard::Process::setNumThreads(int number) {
-    if(number == numThreads) return;
+    if(numThreads == number) return;
     numThreads = number;
     changes |= Process::NumThreads;
 }

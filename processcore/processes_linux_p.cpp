@@ -145,7 +145,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
         switch( mBuffer[0]) {
 	  case 'N':
 	    if((unsigned int)size > sizeof("Name:") && qstrncmp(mBuffer, "Name:", sizeof("Name:")-1) == 0) {
-	        if(process->command.isEmpty())
+	        if(process->command().isEmpty())
                 process->setName(QString::fromLocal8Bit(mBuffer + sizeof("Name:")-1, size-sizeof("Name:")+1).trimmed());
 	        if(++found == 5) goto finish;
 	    }
@@ -381,9 +381,9 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
     long shared = atol(word+1);
 
     /* we use the rss - shared  to find the amount of memory just this app uses */
-    process->vmURSS = process->vmRSS - (shared * sysconf(_SC_PAGESIZE) / 1024);
+    process->setVmURSS(process->vmRSS() - (shared * sysconf(_SC_PAGESIZE) / 1024));
 #else
-    process->vmURSS = 0;
+    process->setVmURSS(0);
 #endif
     return true;
 }
@@ -391,28 +391,28 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
 
 bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *process)
 {
-    if(!process->command.isNull()) return true; //only parse the cmdline once.  This function takes up 25% of the CPU time :-/
+    if(!process->command().isNull()) return true; //only parse the cmdline once.  This function takes up 25% of the CPU time :-/
     mFile.setFileName(dir + "cmdline");
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
     QTextStream in(&mFile);
-    process->command = in.readAll();
+    process->setCommand(in.readAll());
 
     //cmdline separates parameters with the NULL character
-    if(!process->command.isEmpty()) {
+    if(!process->command().isEmpty()) {
         //extract non-truncated name from cmdline
-        int zeroIndex = process->command.indexOf(QChar('\0'));
-        int processNameStart = process->command.lastIndexOf(QChar('/'), zeroIndex);
+        int zeroIndex = process->command().indexOf(QChar('\0'));
+        int processNameStart = process->command().lastIndexOf(QChar('/'), zeroIndex);
         if(processNameStart == -1)
             processNameStart = 0;
         else
             processNameStart++;
-        QString nameFromCmdLine = process->command.mid(processNameStart, zeroIndex - processNameStart);
-        if(nameFromCmdLine.startsWith(process->name))
+        QString nameFromCmdLine = process->command().mid(processNameStart, zeroIndex - processNameStart);
+        if(nameFromCmdLine.startsWith(process->name()))
             process->setName(nameFromCmdLine);
 
-        process->command.replace('\0', ' ');
+        process->command().replace('\0', ' ');
     }
 
     mFile.close();
@@ -423,25 +423,25 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
   int sched = sched_getscheduler(pid);
   switch(sched) {
       case (SCHED_OTHER):
-	    process->scheduler = KSysGuard::Process::Other;
+	    process->setScheduler(KSysGuard::Process::Other);
             break;
       case (SCHED_RR):
-	    process->scheduler = KSysGuard::Process::RoundRobin;
+	    process->setScheduler(KSysGuard::Process::RoundRobin);
             break;
       case (SCHED_FIFO):
-	    process->scheduler = KSysGuard::Process::Fifo;
+	    process->setScheduler(KSysGuard::Process::Fifo);
             break;
 #ifdef SCHED_IDLE
       case (SCHED_IDLE):
-	    process->scheduler = KSysGuard::Process::SchedulerIdle;
+	    process->setScheduler(KSysGuard::Process::SchedulerIdle);
 #endif
 #ifdef SCHED_BATCH
       case (SCHED_BATCH):
-	    process->scheduler = KSysGuard::Process::Batch;
+	    process->setScheduler(KSysGuard::Process::Batch);
             break;
 #endif
       default:
-	    process->scheduler = KSysGuard::Process::Other;
+	    process->setScheduler(KSysGuard::Process::Other);
     }
   if(sched == SCHED_FIFO || sched == SCHED_RR) {
     struct sched_param param;
@@ -454,12 +454,12 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
 #ifdef HAVE_IONICE
   int ioprio = ioprio_get(IOPRIO_WHO_PROCESS, pid);  /* Returns from 0 to 7 for the iopriority, and -1 if there's an error */
   if(ioprio == -1) {
-	  process->ioniceLevel = -1;
-	  process->ioPriorityClass = KSysGuard::Process::None;
+	  process->setIoniceLevel(-1);
+	  process->setIoPriorityClass(KSysGuard::Process::None);
 	  return false; /* Error. Just give up. */
   }
-  process->ioniceLevel = ioprio & 0xff;  /* Bottom few bits are the priority */
-  process->ioPriorityClass = (KSysGuard::Process::IoPriorityClass)(ioprio >> IOPRIO_CLASS_SHIFT); /* Top few bits are the class */
+  process->setIoniceLevel(ioprio & 0xff);  /* Bottom few bits are the priority */
+  process->setIoPriorityClass((KSysGuard::Process::IoPriorityClass)(ioprio >> IOPRIO_CLASS_SHIFT)); /* Top few bits are the class */
   return true;
 #else
   return false;  /* Do nothing, if we do not support this architecture */

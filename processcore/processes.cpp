@@ -137,7 +137,7 @@ bool Processes::updateProcess( Process *ps, long ppid)
         Process *p = ps;
         do {
             p = p->parent;
-            p->numChildren--;
+            p->numChildren()--;
         } while (p->pid()!= -1);
         Q_ASSERT(ps != parent);
         ps->parent->children.removeAll(ps);
@@ -146,7 +146,7 @@ bool Processes::updateProcess( Process *ps, long ppid)
         p = ps;
         do {
             p = p->parent;
-            p->numChildren++;
+            p->numChildren()++;
         } while (p->pid()!= -1);
         emit endMoveProcess();
         Q_ASSERT(ps != parent);
@@ -174,12 +174,12 @@ bool Processes::updateProcessInfo(Process *ps) {
     qlonglong oldIoCharactersActuallyWritten = 0;
 
     if(d->mUpdateFlags.testFlag(Processes::IOStatistics)) {
-        oldIoCharactersRead = ps->ioCharactersRead;
-        oldIoCharactersWritten = ps->ioCharactersWritten;
-        oldIoReadSyscalls = ps->ioReadSyscalls;
-        oldIoWriteSyscalls = ps->ioWriteSyscalls;
-        oldIoCharactersActuallyRead = ps->ioCharactersActuallyRead;
-        oldIoCharactersActuallyWritten = ps->ioCharactersActuallyWritten;
+        oldIoCharactersRead = ps->ioCharactersRead();
+        oldIoCharactersWritten = ps->ioCharactersWritten();
+        oldIoReadSyscalls = ps->ioReadSyscalls();
+        oldIoWriteSyscalls = ps->ioWriteSyscalls();
+        oldIoCharactersActuallyRead = ps->ioCharactersActuallyRead();
+        oldIoCharactersActuallyWritten = ps->ioCharactersActuallyWritten();
     }
 
     ps->changes = Process::Nothing;
@@ -207,12 +207,12 @@ bool Processes::updateProcessInfo(Process *ps) {
 #endif
         if(d->mUpdateFlags.testFlag(Processes::IOStatistics)) {
             if( d->mHavePreviousIoValues ) {
-                ps->setIoCharactersReadRate((ps->ioCharactersRead - oldIoCharactersRead) * 1000.0 / elapsedTime);
-                ps->setIoCharactersWrittenRate((ps->ioCharactersWritten - oldIoCharactersWritten) * 1000.0 / elapsedTime);
-                ps->setIoReadSyscallsRate((ps->ioReadSyscalls - oldIoReadSyscalls) * 1000.0 / elapsedTime);
-                ps->setIoWriteSyscallsRate((ps->ioWriteSyscalls - oldIoWriteSyscalls) * 1000.0 / elapsedTime);
-                ps->setIoCharactersActuallyReadRate((ps->ioCharactersActuallyRead - oldIoCharactersActuallyRead) * 1000.0 / elapsedTime);
-                ps->setIoCharactersActuallyWrittenRate((ps->ioCharactersActuallyWritten - oldIoCharactersActuallyWritten) * 1000.0 / elapsedTime);
+                ps->setIoCharactersReadRate((ps->ioCharactersRead() - oldIoCharactersRead) * 1000.0 / elapsedTime);
+                ps->setIoCharactersWrittenRate((ps->ioCharactersWritten() - oldIoCharactersWritten) * 1000.0 / elapsedTime);
+                ps->setIoReadSyscallsRate((ps->ioReadSyscalls() - oldIoReadSyscalls) * 1000.0 / elapsedTime);
+                ps->setIoWriteSyscallsRate((ps->ioWriteSyscalls() - oldIoWriteSyscalls) * 1000.0 / elapsedTime);
+                ps->setIoCharactersActuallyReadRate((ps->ioCharactersActuallyRead() - oldIoCharactersActuallyRead) * 1000.0 / elapsedTime);
+                ps->setIoCharactersActuallyWrittenRate((ps->ioCharactersActuallyWritten() - oldIoCharactersActuallyWritten) * 1000.0 / elapsedTime);
             } else
                 d->mHavePreviousIoValues = true;
         } else if(d->mHavePreviousIoValues) {
@@ -226,13 +226,13 @@ bool Processes::updateProcessInfo(Process *ps) {
         }
     }
     if(d->mUsingHistoricalData || d->mElapsedTimeMilliSeconds != 0) {
-        ps->setTotalUserUsage(ps->userUsage);
-        ps->setTotalSysUsage(ps->sysUsage);
-        if(ps->userUsage != 0 || ps->sysUsage != 0) {
+        ps->setTotalUserUsage(ps->userUsage());
+        ps->setTotalSysUsage(ps->sysUsage());
+        if(ps->userUsage() != 0 || ps->sysUsage() != 0) {
             Process *p = ps->parent;
             while(p->pid() != -1) {
-                p->totalUserUsage += ps->userUsage;
-                p->totalSysUsage += ps->sysUsage;
+                p->totalUserUsage() += ps->userUsage();
+                p->totalSysUsage() += ps->sysUsage();
                 emit processChanged(p, true);
                 p = p->parent;
             }
@@ -266,7 +266,7 @@ bool Processes::addProcess(long pid, long ppid)
     do {
         Q_ASSERT(p);
         p = p->parent;
-        p->numChildren++;
+        p->numChildren()++;
     } while (p->pid() != -1);
     ps->parent_pid = ppid;
 
@@ -364,7 +364,7 @@ void Processes::Private::markProcessesAsEnded(long pid)
     Process *process = mProcesses.value(pid);
     if(!process)
         return;
-    process->status = Process::Ended;
+    process->setStatus(Process::Ended);
     emit q->processChanged(process, false);
 }
 void Processes::deleteProcess(long pid)
@@ -388,7 +388,7 @@ void Processes::deleteProcess(long pid)
     do {
         Q_ASSERT(p);
         p = p->parent;
-        p->numChildren--;
+        p->numChildren()--;
     } while (p->pid() != -1);
 #ifndef QT_NO_DEBUG
     int i = 0;

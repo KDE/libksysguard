@@ -72,7 +72,7 @@ public:
     void setTotalUserUsage(int totalUserUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
     void setTotalSysUsage(int totalSysUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's equal to sysUsage. It might be more than 100% on multiple cpu core systems
     void setNiceLevel(int niceLevel);      ///< If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.  Otherwise sched priority (1 to 99)
-    void setscheduler(Scheduler scheduler); ///< The scheduler this process is running in.  See man sched_getscheduler for more info
+    void setScheduler(Scheduler scheduler); ///< The scheduler this process is running in.  See man sched_getscheduler for more info
     void setIoPriorityClass(IoPriorityClass ioPriorityClass); ///< The IO priority class.  See man ionice for detailed information.
     void setIoniceLevel(int ioniceLevel);    ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
     void setVmSize(qlonglong vmSize);   ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
@@ -117,42 +117,42 @@ public:
      */
     qlonglong startTime() const;
 
-    int userUsage;
-    int sysUsage;
-    int totalUserUsage;
-    int totalSysUsage;
-    unsigned long numChildren;
-    int niceLevel;
-    Scheduler scheduler;
-    IoPriorityClass ioPriorityClass;
-    int ioniceLevel;
+    int userUsage() const;
+    int sysUsage() const;
+    int & totalUserUsage() const; // REF!
+    int & totalSysUsage() const; // REF!
+    unsigned long & numChildren() const; // REF!
+    int niceLevel() const;
+    Scheduler scheduler() const;
+    IoPriorityClass ioPriorityClass() const;
+    int ioniceLevel() const;
 
-    qlonglong vmSize;
-    qlonglong vmRSS;
-    qlonglong vmURSS;
+    qlonglong vmSize() const;
+    qlonglong vmRSS() const;
+    qlonglong vmURSS() const;
 
-    qlonglong vmSizeChange; ///< The change in vmSize since last update, in KiB
-    qlonglong vmRSSChange;  ///< The change in vmRSS since last update, in KiB
-    qlonglong vmURSSChange; ///< The change in vmURSS since last update, in KiB
+    qlonglong& vmSizeChange() const; // REF!  ///< The change in vmSize since last update, in KiB
+    qlonglong& vmRSSChange() const; // REF!   ///< The change in vmRSS since last update, in KiB
+    qlonglong& vmURSSChange() const; // REF!  ///< The change in vmURSS since last update, in KiB
 
-    unsigned long pixmapBytes; ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
-    bool hasManagedGuiWindow;
-    QString name;
-    QString command;
-    ProcessStatus status;
-    qlonglong ioCharactersRead;
-    qlonglong ioCharactersWritten;
-    qlonglong ioReadSyscalls;
-    qlonglong ioWriteSyscalls;
-    qlonglong ioCharactersActuallyRead;
-    qlonglong ioCharactersActuallyWritten;
+    unsigned long& pixmapBytes() const; // REF! ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
+    bool& hasManagedGuiWindow() const; // REF!
+    QString name() const;
+    QString& command() const; // REF!
+    ProcessStatus status() const;
+    qlonglong ioCharactersRead() const;
+    qlonglong ioCharactersWritten() const;
+    qlonglong ioReadSyscalls() const;
+    qlonglong ioWriteSyscalls() const;
+    qlonglong ioCharactersActuallyRead() const;
+    qlonglong ioCharactersActuallyWritten() const;
 
-    long ioCharactersReadRate;
-    long ioCharactersWrittenRate;
-    long ioReadSyscallsRate;
-    long ioWriteSyscallsRate;
-    long ioCharactersActuallyReadRate;
-    long ioCharactersActuallyWrittenRate;
+    long ioCharactersReadRate() const;
+    long ioCharactersWrittenRate() const;
+    long ioReadSyscallsRate() const;
+    long ioWriteSyscallsRate() const;
+    long ioCharactersActuallyReadRate() const;
+    long ioCharactersActuallyWrittenRate() const;
 
     QList<Process *> children;  ///< A list of all the direct children that the process has.  Children of children are not listed here, so note that children_pids <= numChildren
     QTime timeKillWasSent; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.

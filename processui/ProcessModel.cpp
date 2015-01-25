@@ -211,36 +211,36 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
 
             /* 2nd sort order - Graphics Windows */
             //Both columns have the same user.  Place processes with windows at the top
-            if(processLeft->hasManagedGuiWindow && !processRight->hasManagedGuiWindow)
+            if(processLeft->hasManagedGuiWindow() && !processRight->hasManagedGuiWindow())
                 return true;
-            if(!processLeft->hasManagedGuiWindow && processRight->hasManagedGuiWindow)
+            if(!processLeft->hasManagedGuiWindow() && processRight->hasManagedGuiWindow())
                 return false;
 
             /* 3rd sort order - CPU Usage */
             int leftCpu, rightCpu;
             if(d->mSimple || !d->mShowChildTotals) {
-                leftCpu = processLeft->userUsage + processLeft->sysUsage;
-                rightCpu = processRight->userUsage + processRight->sysUsage;
+                leftCpu = processLeft->userUsage() + processLeft->sysUsage();
+                rightCpu = processRight->userUsage() + processRight->sysUsage();
             } else {
-                leftCpu = processLeft->totalUserUsage + processLeft->totalSysUsage;
-                rightCpu = processRight->totalUserUsage + processRight->totalSysUsage;
+                leftCpu = processLeft->totalUserUsage() + processLeft->totalSysUsage();
+                rightCpu = processRight->totalUserUsage() + processRight->totalSysUsage();
             }
             if(leftCpu != rightCpu)
                 return leftCpu > rightCpu;
 
             /* 4th sort order - Memory Usage */
-            qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmURSS:processLeft->vmRSS;
-            qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmURSS:processRight->vmRSS;
+            qlonglong memoryLeft = (processLeft->vmURSS() != -1) ? processLeft->vmURSS() : processLeft->vmRSS();
+            qlonglong memoryRight = (processRight->vmURSS() != -1) ? processRight->vmURSS() : processRight->vmRSS();
             return memoryLeft > memoryRight;
         }
         case HeadingCPUUsage: {
             int leftCpu, rightCpu;
             if(d->mSimple || !d->mShowChildTotals) {
-                leftCpu = processLeft->userUsage + processLeft->sysUsage;
-                rightCpu = processRight->userUsage + processRight->sysUsage;
+                leftCpu = processLeft->userUsage() + processLeft->sysUsage();
+                rightCpu = processRight->userUsage() + processRight->sysUsage();
             } else {
-                leftCpu = processLeft->totalUserUsage + processLeft->totalSysUsage;
-                rightCpu = processRight->totalUserUsage + processRight->totalSysUsage;
+                leftCpu = processLeft->totalUserUsage() + processLeft->totalSysUsage();
+                rightCpu = processRight->totalUserUsage() + processRight->totalSysUsage();
             }
             return leftCpu > rightCpu;
          }
@@ -248,41 +248,41 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             return (processLeft->userTime() + processLeft->sysTime()) > (processRight->userTime() + processRight->sysTime());
         }
         case HeadingMemory: {
-            qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmURSS:processLeft->vmRSS;
-            qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmURSS:processRight->vmRSS;
+            qlonglong memoryLeft = (processLeft->vmURSS() != -1) ? processLeft->vmURSS() : processLeft->vmRSS();
+            qlonglong memoryRight = (processRight->vmURSS() != -1) ? processRight->vmURSS() : processRight->vmRSS();
             return memoryLeft > memoryRight;
         }
         case HeadingStartTime: {
             return processLeft->startTime() > processRight->startTime();
         }
         case HeadingXMemory:
-            return processLeft->pixmapBytes > processRight->pixmapBytes;
+            return processLeft->pixmapBytes() > processRight->pixmapBytes();
         case HeadingVmSize:
-            return processLeft->vmSize > processRight->vmSize;
+            return processLeft->vmSize() > processRight->vmSize();
         case HeadingSharedMemory: {
-            qlonglong memoryLeft = (processLeft->vmURSS != -1)?processLeft->vmRSS - processLeft->vmURSS:0;
-            qlonglong memoryRight = (processRight->vmURSS != -1)?processRight->vmRSS - processRight->vmURSS:0;
+            qlonglong memoryLeft = (processLeft->vmURSS() != -1) ? processLeft->vmRSS() - processLeft->vmURSS() : 0;
+            qlonglong memoryRight = (processRight->vmURSS() != -1) ? processRight->vmRSS() - processRight->vmURSS() : 0;
             return memoryLeft > memoryRight;
         }
         case HeadingPid:
             return processLeft->pid() > processRight->pid();
         case HeadingNiceness:
             //Sort by scheduler first
-            if(processLeft->scheduler != processRight->scheduler) {
-                if(processLeft->scheduler == KSysGuard::Process::RoundRobin || processLeft->scheduler == KSysGuard::Process::Fifo)
+            if(processLeft->scheduler() != processRight->scheduler()) {
+                if(processLeft->scheduler() == KSysGuard::Process::RoundRobin || processLeft->scheduler() == KSysGuard::Process::Fifo)
                     return true;
-                if(processRight->scheduler == KSysGuard::Process::RoundRobin || processRight->scheduler == KSysGuard::Process::Fifo)
+                if(processRight->scheduler() == KSysGuard::Process::RoundRobin || processRight->scheduler() == KSysGuard::Process::Fifo)
                     return false;
-                if(processLeft->scheduler == KSysGuard::Process::Other)
+                if(processLeft->scheduler() == KSysGuard::Process::Other)
                     return true;
-                if(processRight->scheduler == KSysGuard::Process::Other)
+                if(processRight->scheduler() == KSysGuard::Process::Other)
                     return false;
-                if(processLeft->scheduler == KSysGuard::Process::Batch)
+                if(processLeft->scheduler() == KSysGuard::Process::Batch)
                     return true;
             }
-            if(processLeft->niceLevel == processRight->niceLevel)
+            if(processLeft->niceLevel() == processRight->niceLevel())
                 return processLeft->pid() < processRight->pid(); //Subsort by pid if the niceLevel is the same
-            return processLeft->niceLevel < processRight->niceLevel;
+            return processLeft->niceLevel() < processRight->niceLevel();
         case HeadingTty: {
             if(processLeft->tty() == processRight->tty())
                 return processLeft->pid() < processRight->pid(); //Both ttys are the same.  Sort by pid
@@ -307,33 +307,33 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
         case HeadingIoRead:
             switch(d->mIoInformation) {
                 case ProcessModel::Bytes:
-                    return processLeft->ioCharactersRead > processRight->ioCharactersRead;
+                    return processLeft->ioCharactersRead() > processRight->ioCharactersRead();
                 case ProcessModel::Syscalls:
-                    return processLeft->ioReadSyscalls > processRight->ioReadSyscalls;
+                    return processLeft->ioReadSyscalls() > processRight->ioReadSyscalls();
                 case ProcessModel::ActualBytes:
-                    return processLeft->ioCharactersActuallyRead > processRight->ioCharactersActuallyRead;
+                    return processLeft->ioCharactersActuallyRead() > processRight->ioCharactersActuallyRead();
                 case ProcessModel::BytesRate:
-                    return processLeft->ioCharactersReadRate > processRight->ioCharactersReadRate;
+                    return processLeft->ioCharactersReadRate() > processRight->ioCharactersReadRate();
                 case ProcessModel::SyscallsRate:
-                    return processLeft->ioReadSyscallsRate > processRight->ioReadSyscallsRate;
+                    return processLeft->ioReadSyscallsRate() > processRight->ioReadSyscallsRate();
                 case ProcessModel::ActualBytesRate:
-                    return processLeft->ioCharactersActuallyReadRate > processRight->ioCharactersActuallyReadRate;
+                    return processLeft->ioCharactersActuallyReadRate() > processRight->ioCharactersActuallyReadRate();
 
             }
         case HeadingIoWrite:
             switch(d->mIoInformation) {
                 case ProcessModel::Bytes:
-                    return processLeft->ioCharactersWritten > processRight->ioCharactersWritten;
+                    return processLeft->ioCharactersWritten() > processRight->ioCharactersWritten();
                 case ProcessModel::Syscalls:
-                    return processLeft->ioWriteSyscalls > processRight->ioWriteSyscalls;
+                    return processLeft->ioWriteSyscalls() > processRight->ioWriteSyscalls();
                 case ProcessModel::ActualBytes:
-                    return processLeft->ioCharactersActuallyWritten > processRight->ioCharactersActuallyWritten;
+                    return processLeft->ioCharactersActuallyWritten() > processRight->ioCharactersActuallyWritten();
                 case ProcessModel::BytesRate:
-                    return processLeft->ioCharactersWrittenRate > processRight->ioCharactersWrittenRate;
+                    return processLeft->ioCharactersWrittenRate() > processRight->ioCharactersWrittenRate();
                 case ProcessModel::SyscallsRate:
-                    return processLeft->ioWriteSyscallsRate > processRight->ioWriteSyscallsRate;
+                    return processLeft->ioWriteSyscallsRate() > processRight->ioWriteSyscallsRate();
                 case ProcessModel::ActualBytesRate:
-                    return processLeft->ioCharactersActuallyWrittenRate > processRight->ioCharactersActuallyWrittenRate;
+                    return processLeft->ioCharactersActuallyWrittenRate() > processRight->ioCharactersActuallyWrittenRate();
         }
     }
     //Sort by the display string if we do not have an explicit sorting here
@@ -438,13 +438,13 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
         mXResClientResources.erase(iter);
         KSysGuard::Process *process = mProcesses->getProcess(pid);
         if(!process) return; //shouldn't really happen.. maybe race condition etc
-        unsigned long previousPixmapBytes = process->pixmapBytes;
+        unsigned long previousPixmapBytes = process->pixmapBytes();
         //Now update the pixmap bytes for this window
-        bool success = XResQueryClientPixmapBytes(QX11Info::display(), wid, &process->pixmapBytes);
+        bool success = XResQueryClientPixmapBytes(QX11Info::display(), wid, &process->pixmapBytes());
         if(!success)
-            process->pixmapBytes = 0;
+            process->pixmapBytes() = 0;
 
-        if(previousPixmapBytes != process->pixmapBytes) {
+        if(previousPixmapBytes != process->pixmapBytes()) {
             int row;
             if(mSimple)
                 row = process->index;
@@ -551,8 +551,8 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         row = process->index;
     else
         row = process->parent->children.indexOf(process);
-    if(!process->hasManagedGuiWindow) {
-        process->hasManagedGuiWindow = true;;
+    if(!process->hasManagedGuiWindow()) {
+        process->hasManagedGuiWindow() = true;
         //Since this is the first window for a process, invalidate HeadingName so that
         //if we are sorting by name this gets taken into account
         QModelIndex index1 = q->createIndex(row, ProcessModel::HeadingName, process);
@@ -791,7 +791,7 @@ void ProcessModelPrivate::beginInsertRow( KSysGuard::Process *process)
     mInsertingRow = true;
 
 #if HAVE_X11
-    process->hasManagedGuiWindow = mPidToWindowInfo.contains(process->pid());
+    process->hasManagedGuiWindow() = mPidToWindowInfo.contains(process->pid());
 #endif
     if(mSimple) {
         int row = mProcesses->processCount();
@@ -1149,7 +1149,7 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
 }
 
 QString ProcessModel::getStringForProcess(KSysGuard::Process *process) const {
-    return xi18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid()), process->name, d->getUsernameForUser(process->uid(), false));
+    return xi18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid()), process->name(), d->getUsernameForUser(process->uid(), false));
 }
 
 QString ProcessModelPrivate::getGroupnameForGroup(long gid) const {
@@ -1201,9 +1201,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         switch(index.column()) {
         case HeadingName:
             if(d->mShowCommandLineOptions)
-                return process->name;
+                return process->name();
             else
-                return process->name.section(' ', 0,0);
+                return process->name().section(' ', 0,0);
         case HeadingPid:
             return (qlonglong)process->pid();
         case HeadingUser:
@@ -1213,34 +1213,34 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             else
                 return QString(d->getUsernameForUser(process->uid(), false) + ", " + d->getUsernameForUser(process->euid(), false));
         case HeadingNiceness:
-            switch(process->scheduler) {
+            switch(process->scheduler()) {
               case KSysGuard::Process::Other:
-                  return process->niceLevel;
+                  return process->niceLevel();
               case KSysGuard::Process::SchedulerIdle:
                   return i18nc("scheduler", "Idle"); //neither static nor dynamic priority matter
               case KSysGuard::Process::Batch:
-                  return i18nc("scheduler", "(Batch) %1", process->niceLevel); //only dynamic priority matters
+                  return i18nc("scheduler", "(Batch) %1", process->niceLevel()); //only dynamic priority matters
               case KSysGuard::Process::RoundRobin:
-                  return i18nc("Round robin scheduler", "RR %1", process->niceLevel);
+                  return i18nc("Round robin scheduler", "RR %1", process->niceLevel());
               case KSysGuard::Process::Fifo:
-                  if(process->niceLevel == 99)
+                  if(process->niceLevel() == 99)
                       return i18nc("Real Time scheduler", "RT");
                   else
-                      return i18nc("First in first out scheduler", "FIFO %1", process->niceLevel);
+                      return i18nc("First in first out scheduler", "FIFO %1", process->niceLevel());
               case KSysGuard::Process::Interactive:
-                  return i18nc("scheduler", "(IA) %1", process->niceLevel);
+                  return i18nc("scheduler", "(IA) %1", process->niceLevel());
             }
         case HeadingTty:
             return process->tty();
         case HeadingCPUUsage:
             {
                 double total;
-                if(d->mShowChildTotals && !d->mSimple) total = process->totalUserUsage + process->totalSysUsage;
-                else total = process->userUsage + process->sysUsage;
+                if(d->mShowChildTotals && !d->mSimple) total = process->totalUserUsage() + process->totalSysUsage();
+                else total = process->userUsage() + process->sysUsage();
                 if(d->mNormalizeCPUUsage)
                     total = total / d->mNumProcessorCores;
 
-                if(total < 1 && process->status != KSysGuard::Process::Sleeping && process->status != KSysGuard::Process::Running && process->status != KSysGuard::Process::Ended)
+                if(total < 1 && process->status() != KSysGuard::Process::Sleeping && process->status() != KSysGuard::Process::Running && process->status() != KSysGuard::Process::Ended)
                     return process->translatedStatus();  //tell the user when the process is a zombie or stopped
                 if(total < 0.5)
                     return "";
@@ -1252,18 +1252,18 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return QString("%1:%2").arg(seconds/60).arg((int)seconds%60, 2, 10, QLatin1Char('0'));
         }
         case HeadingMemory:
-            if(process->vmURSS == -1) {
+            if(process->vmURSS() == -1) {
                 //If we don't have the URSS (the memory used by only the process, not the shared libraries)
                 //then return the RSS (physical memory used by the process + shared library) as the next best thing
-                return formatMemoryInfo(process->vmRSS, d->mUnits, true);
+                return formatMemoryInfo(process->vmRSS(), d->mUnits, true);
             } else {
-                return formatMemoryInfo(process->vmURSS, d->mUnits, true);
+                return formatMemoryInfo(process->vmURSS(), d->mUnits, true);
             }
         case HeadingVmSize:
-            return formatMemoryInfo(process->vmSize, d->mUnits, true);
+            return formatMemoryInfo(process->vmSize(), d->mUnits, true);
         case HeadingSharedMemory:
-            if(process->vmRSS - process->vmURSS <= 0 || process->vmURSS == -1) return QVariant(QVariant::String);
-            return formatMemoryInfo(process->vmRSS - process->vmURSS, d->mUnits);
+            if(process->vmRSS() - process->vmURSS() <= 0 || process->vmURSS() == -1) return QVariant(QVariant::String);
+            return formatMemoryInfo(process->vmRSS() - process->vmURSS(), d->mUnits);
         case HeadingStartTime: {
             // NOTE: the next 6 lines are the same as in the next occurence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
             const auto clockTicksSinceSystemBoot = process->startTime();
@@ -1276,7 +1276,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingCommand:
             {
-		return process->command.replace('\n',' ');
+		return process->command().replace('\n',' ');
 // It would be nice to embolden the process name in command, but this requires that the itemdelegate to support html text
 //                QString command = process->command;
 //                command.replace(process->name, "<b>" + process->name + "</b>");
@@ -1286,24 +1286,24 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             {
                 switch(d->mIoInformation) {
                     case ProcessModel::Bytes:  //divide by 1024 to convert to kB
-                        return formatMemoryInfo(process->ioCharactersRead/1024, d->mIoUnits, true);
+                        return formatMemoryInfo(process->ioCharactersRead() / 1024, d->mIoUnits, true);
                     case ProcessModel::Syscalls:
-                        if( process->ioReadSyscalls )
-                            return QString::number(process->ioReadSyscalls);
+                        if( process->ioReadSyscalls())
+                            return QString::number(process->ioReadSyscalls());
                         break;
                     case ProcessModel::ActualBytes:
-                        return formatMemoryInfo(process->ioCharactersActuallyRead/1024, d->mIoUnits, true);
+                        return formatMemoryInfo(process->ioCharactersActuallyRead() / 1024, d->mIoUnits, true);
                     case ProcessModel::BytesRate:
-                        if( process->ioCharactersReadRate/1024 )
-                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersReadRate/1024, d->mIoUnits, true));
+                        if( process->ioCharactersReadRate() / 1024)
+                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersReadRate() / 1024, d->mIoUnits, true));
                         break;
                     case ProcessModel::SyscallsRate:
-                        if( process->ioReadSyscallsRate )
-                            return QString::number(process->ioReadSyscallsRate);
+                        if( process->ioReadSyscallsRate())
+                            return QString::number(process->ioReadSyscallsRate());
                         break;
                     case ProcessModel::ActualBytesRate:
-                        if( process->ioCharactersActuallyReadRate/1024 )
-                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersActuallyReadRate/1024, d->mIoUnits, true));
+                        if( process->ioCharactersActuallyReadRate() / 1024)
+                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersActuallyReadRate() / 1024, d->mIoUnits, true));
                         break;
                 }
                 return QVariant();
@@ -1312,34 +1312,34 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             {
                 switch(d->mIoInformation) {
                     case ProcessModel::Bytes:
-                        return formatMemoryInfo(process->ioCharactersWritten/1024, d->mIoUnits, true);
+                        return formatMemoryInfo(process->ioCharactersWritten() / 1024, d->mIoUnits, true);
                     case ProcessModel::Syscalls:
-                        if( process->ioWriteSyscalls )
-                            return QString::number(process->ioWriteSyscalls);
+                        if( process->ioWriteSyscalls())
+                            return QString::number(process->ioWriteSyscalls());
                         break;
                     case ProcessModel::ActualBytes:
-                        return formatMemoryInfo(process->ioCharactersActuallyWritten/1024, d->mIoUnits, true);
+                        return formatMemoryInfo(process->ioCharactersActuallyWritten() / 1024, d->mIoUnits, true);
                     case ProcessModel::BytesRate:
-                        if(process->ioCharactersWrittenRate/1024)
-                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersWrittenRate/1024, d->mIoUnits, true));
+                        if(process->ioCharactersWrittenRate() / 1024)
+                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersWrittenRate() / 1024, d->mIoUnits, true));
                         break;
                     case ProcessModel::SyscallsRate:
-                        if( process->ioWriteSyscallsRate )
-                            return QString::number(process->ioWriteSyscallsRate);
+                        if( process->ioWriteSyscallsRate())
+                            return QString::number(process->ioWriteSyscallsRate());
                         break;
                     case ProcessModel::ActualBytesRate:
-                        if(process->ioCharactersActuallyWrittenRate/1024)
-                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersActuallyWrittenRate/1024, d->mIoUnits, true));
+                        if(process->ioCharactersActuallyWrittenRate() / 1024)
+                            return i18n("%1/s", formatMemoryInfo(process->ioCharactersActuallyWrittenRate() / 1024, d->mIoUnits, true));
                         break;
                 }
                 return QVariant();
             }
 #if HAVE_X11
         case HeadingXMemory:
-            return formatMemoryInfo(process->pixmapBytes/1024, d->mUnits, true);
+            return formatMemoryInfo(process->pixmapBytes() / 1024, d->mUnits, true);
         case HeadingXTitle:
             {
-                if(!process->hasManagedGuiWindow)
+                if(!process->hasManagedGuiWindow())
                     return QVariant(QVariant::String);
 
                 WindowInfo *w = d->mPidToWindowInfo.value(process->pid(), NULL);
@@ -1362,7 +1362,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         if(process->tracerpid() >= 0) {
             KSysGuard::Process *process_tracer = d->mProcesses->getProcess(process->tracerpid());
             if(process_tracer) //it is possible for this to be not the case in certain race conditions
-                tracer = xi18nc("tooltip. name,pid ","This process is being debugged by %1 (%2)", process_tracer->name, (long int)process->tracerpid());
+                tracer = xi18nc("tooltip. name,pid ","This process is being debugged by %1 (%2)", process_tracer->name(), (long int)process->tracerpid());
         }
         switch(index.column()) {
         case HeadingName: {
@@ -1382,25 +1382,25 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             */
             if(process->parent_pid == -1) {
                 //Give a quick explanation of init and kthreadd
-                if(process->name == "init") {
+                if(process->name() == "init") {
                     tooltip += i18n("<b>Init</b> is the parent of all other processes and cannot be killed.<br/>");
-                } else if(process->name == "kthreadd") {
+                } else if(process->name() == "kthreadd") {
                     tooltip += i18n("<b>KThreadd</b> manages kernel threads. The children processes run in the kernel, controlling hard disk access, etc.<br/>");
                 }
-                tooltip    += xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2", process->name, (long int)process->pid());
+                tooltip    += xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2", process->name(), (long int)process->pid());
             }
             else {
                 KSysGuard::Process *parent_process = d->mProcesses->getProcess(process->parent_pid);
                 if(parent_process) { //In race conditions, it's possible for this process to not exist
-                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent: %3<br />Parent's ID: %4", process->name, (long int)process->pid(), parent_process->name, (long int)process->parent_pid);
+                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent: %3<br />Parent's ID: %4", process->name(), (long int)process->pid(), parent_process->name(), (long int)process->parent_pid);
                 } else {
-                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent's ID: %3", process->name, (long int)process->pid(), (long int)process->parent_pid);
+                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent's ID: %3", process->name(), (long int)process->pid(), (long int)process->parent_pid);
                 }
             }
             if(process->numThreads >= 1)
                 tooltip += i18n("<br/>Number of threads: %1", process->numThreads);
-            if(!process->command.isEmpty()) {
-                tooltip += i18n("<br/>Command: %1", process->command);
+            if(!process->command().isEmpty()) {
+                tooltip += i18n("<br/>Command: %1", process->command());
             }
             if(!process->tty().isEmpty())
                 tooltip += i18n( "<br />Running on: %1", QString(process->tty()));
@@ -1426,7 +1426,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingCommand: {
             QString tooltip =
-                i18n("<qt>This process was run with the following command:<br />%1", process->command);
+                i18n("<qt>This process was run with the following command:<br />%1", process->command());
             if(!process->tty().isEmpty())
                 tooltip += i18n( "<br /><br />Running on: %1", QString(process->tty()));
             if(tracer.isEmpty()) return tooltip;
@@ -1439,26 +1439,26 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingNiceness: {
             QString tooltip = "<qt><p style='white-space:pre'>";
-            switch(process->scheduler) {
+            switch(process->scheduler()) {
               case KSysGuard::Process::Other:
               case KSysGuard::Process::Batch:
               case KSysGuard::Process::Interactive:
-                  tooltip += i18n("Nice level: %1 (%2)", process->niceLevel, process->niceLevelAsString() );
+                  tooltip += i18n("Nice level: %1 (%2)", process->niceLevel(), process->niceLevelAsString());
                   break;
               case KSysGuard::Process::RoundRobin:
               case KSysGuard::Process::Fifo:
-                  tooltip += i18n("This is a real time process.<br>Scheduler priority: %1", process->niceLevel);
+                  tooltip += i18n("This is a real time process.<br>Scheduler priority: %1", process->niceLevel());
                   break;
               case KSysGuard::Process::SchedulerIdle:
                   break; //has neither dynamic (niceness) or static (scheduler priority) priotiy
             }
-            if(process->scheduler != KSysGuard::Process::Other)
+            if(process->scheduler() != KSysGuard::Process::Other)
                 tooltip += i18n("<br/>Scheduler: %1", process->schedulerAsString());
 
-            if(process->ioPriorityClass != KSysGuard::Process::None) {
-                if((process->ioPriorityClass == KSysGuard::Process::RealTime || process->ioPriorityClass == KSysGuard::Process::BestEffort) && process->ioniceLevel != -1)
-                    tooltip += i18n("<br/>I/O Nice level: %1 (%2)", process->ioniceLevel, process->ioniceLevelAsString() );
-                tooltip += i18n("<br/>I/O Class: %1", process->ioPriorityClassAsString() );
+            if(process->ioPriorityClass() != KSysGuard::Process::None) {
+                if((process->ioPriorityClass() == KSysGuard::Process::RealTime || process->ioPriorityClass() == KSysGuard::Process::BestEffort) && process->ioniceLevel() != -1)
+                    tooltip += i18n("<br/>I/O Nice level: %1 (%2)", process->ioniceLevel(), process->ioniceLevelAsString());
+                tooltip += i18n("<br/>I/O Class: %1", process->ioPriorityClassAsString());
             }
                 if(tracer.isEmpty()) return tooltip;
             return QString(tooltip + "<br />" + tracer);
@@ -1471,20 +1471,20 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                         "User CPU usage: %3%<br />"
                         "System CPU usage: %4%")  /* Please do not add </qt> here - the tooltip is appended to */
                         .subs(process->translatedStatus())
-                        .subs(d->getStatusDescription(process->status))
-                        .subs((float)(process->userUsage) / divideby)
-                        .subs((float)(process->sysUsage) / divideby)
+                        .subs(d->getStatusDescription(process->status()))
+                        .subs((float)(process->userUsage()) / divideby)
+                        .subs((float)(process->sysUsage()) / divideby)
                         .toString();
 
             if(process->numThreads >= 1)
                 tooltip += i18n("<br/>Number of threads: %1", process->numThreads);
-            if(process->numChildren > 0) {
+            if(process->numChildren() > 0) {
                 tooltip += ki18n("<br />Number of children: %1<br />Total User CPU usage: %2%<br />"
                         "Total System CPU usage: %3%<br />Total CPU usage: %4%")
-                        .subs(process->numChildren)
-                        .subs((float)(process->totalUserUsage)/ divideby)
-                        .subs((float)(process->totalSysUsage) / divideby)
-                        .subs((float)(process->totalUserUsage + process->totalSysUsage) / divideby)
+                        .subs(process->numChildren())
+                        .subs((float)(process->totalUserUsage())/ divideby)
+                        .subs((float)(process->totalSysUsage()) / divideby)
+                        .subs((float)(process->totalUserUsage() + process->totalSysUsage()) / divideby)
                         .toString();
             }
             if(process->userTime() > 0)
@@ -1495,11 +1495,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip += ki18n("<br />CPU time spent running in kernel: %1 seconds")
                         .subs(process->sysTime() / 100.0, 0, 'f', 1)
                         .toString();
-            if(process->niceLevel != 0)
-                tooltip += i18n("<br />Nice level: %1 (%2)", process->niceLevel, process->niceLevelAsString() );
-            if(process->ioPriorityClass != KSysGuard::Process::None) {
-                if((process->ioPriorityClass == KSysGuard::Process::RealTime || process->ioPriorityClass == KSysGuard::Process::BestEffort) && process->ioniceLevel != -1)
-                    tooltip += i18n("<br/>I/O Nice level: %1 (%2)", process->ioniceLevel, process->ioniceLevelAsString() );
+            if(process->niceLevel() != 0)
+                tooltip += i18n("<br />Nice level: %1 (%2)", process->niceLevel(), process->niceLevelAsString() );
+            if(process->ioPriorityClass() != KSysGuard::Process::None) {
+                if((process->ioPriorityClass() == KSysGuard::Process::RealTime || process->ioPriorityClass() == KSysGuard::Process::BestEffort) && process->ioniceLevel() != -1)
+                    tooltip += i18n("<br/>I/O Nice level: %1 (%2)", process->ioniceLevel(), process->ioniceLevelAsString() );
                 tooltip += i18n("<br/>I/O Class: %1", process->ioPriorityClassAsString() );
             }
 
@@ -1512,29 +1512,37 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingMemory: {
             QString tooltip = "<qt><p style='white-space:pre'>";
-            if(process->vmURSS != -1) {
+            if(process->vmURSS() != -1) {
                 //We don't have information about the URSS, so just fallback to RSS
                 if(d->mMemTotal > 0)
-                    tooltip += i18n("Memory usage: %1 out of %2  (%3 %)<br />", format.formatByteSize(process->vmURSS * 1024), format.formatByteSize(d->mMemTotal*1024), process->vmURSS*100/d->mMemTotal);
+                    tooltip += i18n("Memory usage: %1 out of %2  (%3 %)<br />",
+                                    format.formatByteSize(process->vmURSS() * 1024),
+                                        format.formatByteSize(d->mMemTotal * 1024),
+                                            process->vmURSS() * 100 / d->mMemTotal);
                 else
-                    tooltip += i18n("Memory usage: %1<br />", format.formatByteSize(process->vmURSS * 1024));
+                    tooltip += i18n("Memory usage: %1<br />", format.formatByteSize(process->vmURSS() * 1024));
             }
             if(d->mMemTotal > 0)
-                tooltip += i18n("RSS Memory usage: %1 out of %2  (%3 %)", format.formatByteSize(process->vmRSS * 1024), format.formatByteSize(d->mMemTotal*1024), process->vmRSS*100/d->mMemTotal);
+                tooltip += i18n("RSS Memory usage: %1 out of %2  (%3 %)",
+                                format.formatByteSize(process->vmRSS() * 1024), format.formatByteSize(d->mMemTotal * 1024),
+                                    process->vmRSS() * 100 / d->mMemTotal);
             else
-                tooltip += i18n("RSS Memory usage: %1", format.formatByteSize(process->vmRSS * 1024));
+                tooltip += i18n("RSS Memory usage: %1", format.formatByteSize(process->vmRSS() * 1024));
             return tooltip;
         }
         case HeadingSharedMemory: {
             QString tooltip = "<qt><p style='white-space:pre'>";
-            if(process->vmURSS == -1) {
+            if(process->vmURSS() == -1) {
                 tooltip += i18n("Your system does not seem to have this information available to be read.");
                 return tooltip;
             }
             if(d->mMemTotal >0)
-                tooltip += i18n("Shared library memory usage: %1 out of %2  (%3 %)", format.formatByteSize((process->vmRSS - process->vmURSS) * 1024), format.formatByteSize(d->mMemTotal*1024), (process->vmRSS-process->vmURSS)*100/d->mMemTotal);
+                tooltip += i18n("Shared library memory usage: %1 out of %2  (%3 %)",
+                                format.formatByteSize((process->vmRSS() - process->vmURSS()) * 1024),
+                                    format.formatByteSize(d->mMemTotal * 1024),
+                                        (process->vmRSS() - process->vmURSS()) * 100 / d->mMemTotal);
             else
-                tooltip += i18n("Shared library memory usage: %1", format.formatByteSize((process->vmRSS - process->vmURSS) * 1024));
+                tooltip += i18n("Shared library memory usage: %1", format.formatByteSize((process->vmRSS() - process->vmURSS()) * 1024));
 
             return tooltip;
         }
@@ -1543,18 +1551,18 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             QString tooltip = "<qt><p style='white-space:pre'>";
             //FIXME - use the formatByteRate functions when added
             tooltip += ki18n("Characters read: %1 (%2 KiB/s)<br>Characters written: %3 (%4 KiB/s)<br>Read syscalls: %5 (%6 s⁻¹)<br>Write syscalls: %7 (%8 s⁻¹)<br>Actual bytes read: %9 (%10 KiB/s)<br>Actual bytes written: %11 (%12 KiB/s)")
-                .subs(format.formatByteSize(process->ioCharactersRead))
-                .subs(QString::number(process->ioCharactersReadRate/1024))
-                .subs(format.formatByteSize(process->ioCharactersWritten))
-                .subs(QString::number(process->ioCharactersWrittenRate/1024))
-                .subs(QString::number(process->ioReadSyscalls))
-                .subs(QString::number(process->ioReadSyscallsRate))
-                .subs(QString::number(process->ioWriteSyscalls))
-                .subs(QString::number(process->ioWriteSyscallsRate))
-                .subs(format.formatByteSize(process->ioCharactersActuallyRead))
-                .subs(QString::number(process->ioCharactersActuallyReadRate/1024 ))
-                .subs(format.formatByteSize(process->ioCharactersActuallyWritten))
-                .subs(QString::number(process->ioCharactersActuallyWrittenRate/1024))
+                .subs(format.formatByteSize(process->ioCharactersRead()))
+                .subs(QString::number(process->ioCharactersReadRate() / 1024))
+                .subs(format.formatByteSize(process->ioCharactersWritten()))
+                .subs(QString::number(process->ioCharactersWrittenRate() / 1024))
+                .subs(QString::number(process->ioReadSyscalls()))
+                .subs(QString::number(process->ioReadSyscallsRate()))
+                .subs(QString::number(process->ioWriteSyscalls()))
+                .subs(QString::number(process->ioWriteSyscallsRate()))
+                .subs(format.formatByteSize(process->ioCharactersActuallyRead()))
+                .subs(QString::number(process->ioCharactersActuallyReadRate() / 1024))
+                .subs(format.formatByteSize(process->ioCharactersActuallyWritten()))
+                .subs(QString::number(process->ioCharactersActuallyWrittenRate() / 1024))
                 .toString();
             return tooltip;
         }
@@ -1606,7 +1614,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         switch(index.column()) {
         case HeadingName:
-            return process->name;
+            return process->name();
         case HeadingPid:
             return (qlonglong)process->pid();
         case HeadingUser:
@@ -1616,14 +1624,14 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             else
                 return QString(d->getUsernameForUser(process->uid(), false) + ", " + d->getUsernameForUser(process->euid(), false));
         case HeadingNiceness:
-            return process->niceLevel;
+            return process->niceLevel();
         case HeadingTty:
             return process->tty();
         case HeadingCPUUsage:
             {
                 double total;
-                if(d->mShowChildTotals && !d->mSimple) total = process->totalUserUsage + process->totalSysUsage;
-                else total = process->userUsage + process->sysUsage;
+                if(d->mShowChildTotals && !d->mSimple) total = process->totalUserUsage() + process->totalSysUsage();
+                else total = process->userUsage() + process->sysUsage();
 
                 if(d->mNormalizeCPUUsage)
                     return total / d->mNumProcessorCores;
@@ -1633,55 +1641,55 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingCPUTime:
             return (qlonglong)(process->userTime() + process->sysTime());
         case HeadingMemory:
-            if(process->vmRSS == 0) return QVariant(QVariant::String);
-            if(process->vmURSS == -1) {
-                return (qlonglong)process->vmRSS;
+            if(process->vmRSS() == 0) return QVariant(QVariant::String);
+            if(process->vmURSS() == -1) {
+                return (qlonglong)process->vmRSS();
             } else {
-                return (qlonglong)process->vmURSS;
+                return (qlonglong)process->vmURSS();
             }
         case HeadingVmSize:
-            return (qlonglong)process->vmSize;
+            return (qlonglong)process->vmSize();
         case HeadingSharedMemory:
-            if(process->vmRSS - process->vmURSS < 0 || process->vmURSS == -1) return QVariant(QVariant::String);
-            return (qlonglong)(process->vmRSS - process->vmURSS);
+            if(process->vmRSS() - process->vmURSS() < 0 || process->vmURSS() == -1) return QVariant(QVariant::String);
+            return (qlonglong)(process->vmRSS() - process->vmURSS());
         case HeadingStartTime:
             return process->startTime(); // 2015-01-03, gregormi: can maybe be replaced with something better later
         case HeadingCommand:
-            return process->command;
+            return process->command();
         case HeadingIoRead:
             switch(d->mIoInformation) {
                 case ProcessModel::Bytes:
-                    return process->ioCharactersRead;
+                    return process->ioCharactersRead();
                 case ProcessModel::Syscalls:
-                    return process->ioReadSyscalls;
+                    return process->ioReadSyscalls();
                 case ProcessModel::ActualBytes:
-                    return process->ioCharactersActuallyRead;
+                    return process->ioCharactersActuallyRead();
                 case ProcessModel::BytesRate:
-                    return (qlonglong)process->ioCharactersReadRate;
+                    return (qlonglong)process->ioCharactersReadRate();
                 case ProcessModel::SyscallsRate:
-                    return (qlonglong)process->ioReadSyscallsRate;
+                    return (qlonglong)process->ioReadSyscallsRate();
                 case ProcessModel::ActualBytesRate:
-                    return (qlonglong)process->ioCharactersActuallyReadRate;
+                    return (qlonglong)process->ioCharactersActuallyReadRate();
 
             }
         case HeadingIoWrite:
             switch(d->mIoInformation) {
                 case ProcessModel::Bytes:
-                    return process->ioCharactersWritten;
+                    return process->ioCharactersWritten();
                 case ProcessModel::Syscalls:
-                    return process->ioWriteSyscalls;
+                    return process->ioWriteSyscalls();
                 case ProcessModel::ActualBytes:
-                    return process->ioCharactersActuallyWritten;
+                    return process->ioCharactersActuallyWritten();
                 case ProcessModel::BytesRate:
-                    return (qlonglong)process->ioCharactersWrittenRate;
+                    return (qlonglong)process->ioCharactersWrittenRate();
                 case ProcessModel::SyscallsRate:
-                    return (qlonglong)process->ioWriteSyscallsRate;
+                    return (qlonglong)process->ioWriteSyscallsRate();
                 case ProcessModel::ActualBytesRate:
-                    return (qlonglong)process->ioCharactersActuallyWrittenRate;
+                    return (qlonglong)process->ioCharactersActuallyWrittenRate();
 
             }
         case HeadingXMemory:
-            return (qulonglong)process->pixmapBytes;
+            return (qulonglong)process->pixmapBytes();
 #if HAVE_X11
         case HeadingXTitle:
             {
@@ -1713,9 +1721,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingCPUUsage: {
                 float cpu;
                 if(d->mSimple || !d->mShowChildTotals)
-                    cpu = process->userUsage + process->sysUsage;
+                    cpu = process->userUsage() + process->sysUsage();
                 else
-                    cpu = process->totalUserUsage + process->totalSysUsage;
+                    cpu = process->totalUserUsage() + process->totalSysUsage();
                 cpu = cpu / 100.0;
                 if(!d->mNormalizeCPUUsage)
                     return cpu;
@@ -1724,14 +1732,14 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingMemory:
                 if(d->mMemTotal <= 0)
                     return -1;
-                if(process->vmURSS != -1)
-                    return float(process->vmURSS) / d->mMemTotal;
+                if(process->vmURSS() != -1)
+                    return float(process->vmURSS()) / d->mMemTotal;
                 else
-                    return float(process->vmRSS) / d->mMemTotal;
+                    return float(process->vmRSS()) / d->mMemTotal;
             case HeadingSharedMemory:
-                if(process->vmURSS == -1 || d->mMemTotal <= 0)
+                if(process->vmURSS() == -1 || d->mMemTotal <= 0)
                     return -1;
-                return float(process->vmRSS - process->vmURSS)/d->mMemTotal;
+                return float(process->vmRSS() - process->vmURSS())/d->mMemTotal;
             default:
                 return -1;
         }
@@ -1740,7 +1748,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         if(index.column() == HeadingName) {
 #if HAVE_X11
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            if(!process->hasManagedGuiWindow) {
+            if(!process->hasManagedGuiWindow()) {
                 if(d->mSimple) //When not in tree mode, we need to pad the name column where we do not have an icon
                     return QIcon(d->mBlankPixmap);
                 else  //When in tree mode, the padding looks bad, so do not pad in this case
@@ -1756,7 +1764,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 
         } else if (index.column() == HeadingCPUUsage) {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            if(process->status == KSysGuard::Process::Stopped || process->status == KSysGuard::Process::Zombie) {
+            if(process->status() == KSysGuard::Process::Stopped || process->status() == KSysGuard::Process::Zombie) {
             //        QPixmap pix = KIconLoader::global()->loadIcon("button_cancel", KIconLoader::Small,
         //                    KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(),
         //                0L, true);
@@ -1786,7 +1794,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return QVariant();
         }
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-        if(process->status == KSysGuard::Process::Ended) {
+        if(process->status() == KSysGuard::Process::Ended) {
             return QColor(Qt::lightGray);
         }
         if(process->tracerpid() >= 0) {
@@ -1804,7 +1812,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     case Qt::FontRole: {
         if(index.column() == HeadingCPUUsage) {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            if(process->userUsage == 0) {
+            if(process->userUsage() == 0) {
                 QFont font;
                 font.setItalic(true);
                 return font;
@@ -1891,7 +1899,7 @@ void ProcessModel::setShowTotals(bool showTotals)  //slot
 
     QModelIndex index;
     foreach( KSysGuard::Process *process, d->mProcesses->getAllProcesses()) {
-        if(process->numChildren > 0) {
+        if(process->numChildren() > 0) {
             int row;
             if(d->mSimple)
                 row = process->index;
@@ -2069,11 +2077,10 @@ Qt::ItemFlags ProcessModel::flags(const QModelIndex &index) const
         return Qt::NoItemFlags; //Would this ever happen?
 
     KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-    if(process->status == KSysGuard::Process::Ended)
+    if(process->status() == KSysGuard::Process::Ended)
         return Qt::ItemIsDragEnabled | Qt::ItemIsSelectable;
     else
         return Qt::ItemIsDragEnabled | Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-
 }
 
 bool ProcessModel::isShowCommandLineOptions() const

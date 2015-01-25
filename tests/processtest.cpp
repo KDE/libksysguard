@@ -40,7 +40,7 @@ void testProcess::testProcesses() {
     Q_FOREACH( KSysGuard::Process *process, processes) {
         if(process->pid() == 0) continue;
         QVERIFY(process->pid() > 0);
-        QVERIFY(!process->name.isEmpty());
+        QVERIFY(!process->name().isEmpty());
 
         //test all the pids are unique
         QVERIFY(!pids.contains(process->pid()));
@@ -51,11 +51,11 @@ void testProcess::testProcesses() {
     Q_FOREACH( KSysGuard::Process *process, processes2) {
         if(process->pid() == 0) continue;
         QVERIFY(process->pid() > 0);
-        QVERIFY(!process->name.isEmpty());
+        QVERIFY(!process->name().isEmpty());
 
         //test all the pids are unique
         if(!pids.contains(process->pid())) {
-            qCDebug(LIBKSYSGUARD) << process->pid() << " not found. " << process->name;
+            qCDebug(LIBKSYSGUARD) << process->pid() << " not found. " << process->name();
         }
         pids.remove(process->pid());
     }
@@ -80,7 +80,7 @@ void testProcess::testProcessesTreeStructure() {
     QList<KSysGuard::Process *> processes = processController->getAllProcesses();
     
     Q_FOREACH( KSysGuard::Process *process, processes) {
-        QCOMPARE(countNumChildren(process), process->numChildren);
+        QCOMPARE(countNumChildren(process), process->numChildren());
 
         for(int i =0; i < process->children.size(); i++) {
             QVERIFY(process->children[i]->parent);
@@ -96,7 +96,7 @@ void testProcess::testProcessesModification() {
     processController->updateAllProcesses();
     KSysGuard::Process *initProcess = processController->getProcess(1);
 
-    if(!initProcess || initProcess->numChildren < 3) {
+    if(!initProcess || initProcess->numChildren() < 3) {
         delete processController;
         return;
     }
@@ -104,11 +104,11 @@ void testProcess::testProcessesModification() {
     QVERIFY(initProcess);
     QVERIFY(initProcess->children[0]);
     QVERIFY(initProcess->children[1]);
-    qCDebug(LIBKSYSGUARD) << initProcess->numChildren;
+    qCDebug(LIBKSYSGUARD) << initProcess->numChildren();
     initProcess->children[0]->parent = initProcess->children[1];
     initProcess->children[1]->children.append(initProcess->children[0]);
-    initProcess->children[1]->numChildren++;
-    initProcess->numChildren--;
+    initProcess->children[1]->numChildren()++;
+    initProcess->numChildren()--;
     initProcess->children.removeAt(0);
     delete processController;
 }
@@ -160,7 +160,7 @@ void testProcess::testHistories() {
     QList<KSysGuard::Process *> processes = processController->getAllProcesses();
     
     Q_FOREACH( KSysGuard::Process *process, processes) {
-        QCOMPARE(countNumChildren(process), process->numChildren);
+        QCOMPARE(countNumChildren(process), process->numChildren());
 
         for(int i =0; i < process->children.size(); i++) {
             QVERIFY(process->children[i]->parent);
@@ -173,7 +173,7 @@ void testProcess::testHistories() {
     Q_FOREACH( KSysGuard::Process *process, processes) {
         if(process->pid() == 0) continue;
         QVERIFY(process->pid() > 0);
-        QVERIFY(!process->name.isEmpty());
+        QVERIFY(!process->name().isEmpty());
 
         QVERIFY(!pids.contains(process->pid()));
         pids.insert(process->pid());
