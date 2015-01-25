@@ -456,7 +456,7 @@ int Process::numThreads() const
     return d->numThreads;
 }
 
-QList< Process* > Process::children() const
+QList< Process* > & Process::children() const
 {
     return d->children;
 }
