@@ -223,7 +223,7 @@ bool ProcessesATop::updateProcessInfo( long pid, Process *process)
     if(index < 0)
         return false;
     PStat &p = d->pstats[index];
-    process->parent_pid = p.gen.ppid;
+    process->setParent_pid(p.gen.ppid);
     process->setUid(p.gen.ruid);
     process->setEuid(p.gen.ruid);
     process->setSuid(p.gen.ruid);

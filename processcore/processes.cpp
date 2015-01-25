@@ -44,7 +44,7 @@ namespace KSysGuard
   {
     public:
       Private(Processes *q_ptr) {
-        mFakeProcess.parent = &mFakeProcess;
+        mFakeProcess.setParent(&mFakeProcess);
         mAbstractProcesses = 0;
         mHistoricProcesses = 0;
         mIsLocalHost = true;
@@ -131,29 +131,29 @@ bool Processes::updateProcess( Process *ps, long ppid)
     Process *parent = d->mProcesses.value(ppid, &d->mFakeProcess);
     Q_ASSERT(parent);  //even init has a non-null parent - the mFakeProcess
 
-    if(ps->parent != parent) {
+    if(ps->parent() != parent) {
         emit beginMoveProcess(ps, parent/*new parent*/);
         //Processes has been reparented
         Process *p = ps;
         do {
-            p = p->parent;
+            p = p->parent();
             p->numChildren()--;
         } while (p->pid()!= -1);
         Q_ASSERT(ps != parent);
-        ps->parent->children.removeAll(ps);
-        ps->parent = parent;  //the parent has changed
+        ps->parent()->children.removeAll(ps);
+        ps->setParent(parent);  //the parent has changed
         parent->children.append(ps);
         p = ps;
         do {
-            p = p->parent;
+            p = p->parent();
             p->numChildren()++;
         } while (p->pid()!= -1);
         emit endMoveProcess();
         Q_ASSERT(ps != parent);
-        ps->parent = parent;
+        ps->setParent(parent);
     }
 
-    ps->parent_pid = ppid;
+    ps->setParent_pid(ppid);
 
     bool success = updateProcessInfo(ps);
     emit processChanged(ps, false);
@@ -182,7 +182,7 @@ bool Processes::updateProcessInfo(Process *ps) {
         oldIoCharactersActuallyWritten = ps->ioCharactersActuallyWritten();
     }
 
-    ps->changes = Process::Nothing;
+    ps->setChanges(Process::Nothing);
     bool success;
     if(d->mUsingHistoricalData)
         success = d->mHistoricProcesses->updateProcessInfo(ps->pid(), ps);
@@ -197,9 +197,9 @@ bool Processes::updateProcessInfo(Process *ps) {
          * correction where we get the amount of time elapsed since
          * we start processing. This is because the processing itself
          * can take a non-trivial amount of time.  */
-        int elapsedTime = ps->elapsedTimeMilliSeconds;
-        ps->elapsedTimeMilliSeconds = d->mLastUpdated.elapsed();
-        elapsedTime = ps->elapsedTimeMilliSeconds - elapsedTime + d->mElapsedTimeMilliSeconds;
+        int elapsedTime = ps->elapsedTimeMilliSeconds();
+        ps->setElapsedTimeMilliSeconds(d->mLastUpdated.elapsed());
+        elapsedTime = ps->elapsedTimeMilliSeconds() - elapsedTime + d->mElapsedTimeMilliSeconds;
         if(elapsedTime) {
             ps->setUserUsage((int)(((ps->userTime() - oldUserTime)*1000.0) / elapsedTime));
             ps->setSysUsage((int)(((ps->sysTime() - oldSysTime)*1000.0) / elapsedTime));
@@ -229,12 +229,12 @@ bool Processes::updateProcessInfo(Process *ps) {
         ps->setTotalUserUsage(ps->userUsage());
         ps->setTotalSysUsage(ps->sysUsage());
         if(ps->userUsage() != 0 || ps->sysUsage() != 0) {
-            Process *p = ps->parent;
+            Process *p = ps->parent();
             while(p->pid() != -1) {
                 p->totalUserUsage() += ps->userUsage();
                 p->totalSysUsage() += ps->sysUsage();
                 emit processChanged(p, true);
-                p = p->parent;
+                p = p->parent();
             }
         }
     }
@@ -258,17 +258,17 @@ bool Processes::addProcess(long pid, long ppid)
 
     d->mProcesses.insert(pid, ps);
 
-    ps->index = d->mListProcesses.count();
+    ps->setIndex(d->mListProcesses.count());
     d->mListProcesses.append(ps);
 
-    ps->parent->children.append(ps);
+    ps->parent()->children.append(ps);
     Process *p = ps;
     do {
         Q_ASSERT(p);
-        p = p->parent;
+        p = p->parent();
         p->numChildren()++;
     } while (p->pid() != -1);
-    ps->parent_pid = ppid;
+    ps->setParent_pid(ppid);
 
     //Now we can actually get the process info
     bool success = updateProcessInfo(ps);
@@ -383,21 +383,21 @@ void Processes::deleteProcess(long pid)
 
     d->mProcesses.remove(pid);
     d->mListProcesses.removeAll(process);
-    process->parent->children.removeAll(process);
+    process->parent()->children.removeAll(process);
     Process *p = process;
     do {
         Q_ASSERT(p);
-        p = p->parent;
+        p = p->parent();
         p->numChildren()--;
     } while (p->pid() != -1);
 #ifndef QT_NO_DEBUG
     int i = 0;
 #endif
     Q_FOREACH( Process *it, d->mListProcesses ) {
-        if(it->index > process->index)
-            it->index--;
+        if(it->index() > process->index())
+            it->setIndex(it->index() - 1);
 #ifndef QT_NO_DEBUG
-        Q_ASSERT(it->index == i++);
+        Q_ASSERT(it->index() == i++);
 #endif
     }
 

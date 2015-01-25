@@ -83,9 +83,9 @@ class ProcessObject : public QObject {
        Q_PROPERTY(QString fullname READ fullname)                      /* Defined below to return 'name' */
        Q_PROPERTY(qlonglong rss READ vmRSS)                            /* Map 'rss' to 'vmRSS' just to give it a nicer scripting name */
        Q_PROPERTY(qlonglong urss READ vmURSS)                          /* Map 'urss' to 'vmURSS' just to give it a nicer scripting name */
-       Q_PROPERTY(int numThreads READ numThreads)                      PROPERTY(int, numThreads)
+       Q_PROPERTY(int numThreads READ numThreads)                      PROPERTY_F(int, numThreads)
        Q_PROPERTY(qlonglong fsgid READ fsgid)                          PROPERTY_F(qlonglong, fsgid)
-       Q_PROPERTY(qlonglong parent_pid READ parent_pid)                PROPERTY(qlonglong, parent_pid)
+       Q_PROPERTY(qlonglong parent_pid READ parent_pid)                PROPERTY_F(qlonglong, parent_pid)
        Q_PROPERTY(QString login READ login)                            PROPERTY_F(QString, login)
        Q_PROPERTY(qlonglong uid READ uid)                              PROPERTY_F(qlonglong, uid)
        Q_PROPERTY(qlonglong euid READ euid)                            PROPERTY_F(qlonglong, euid)

@@ -137,7 +137,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
     process->setUid(0);
     process->setGid(0);
     process->setTracerpid(-1);
-    process->numThreads = 0;
+    process->setNumThreads(0);
 
     int size;
     int found = 0; //count how many fields we found

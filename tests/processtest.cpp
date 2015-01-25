@@ -83,8 +83,8 @@ void testProcess::testProcessesTreeStructure() {
         QCOMPARE(countNumChildren(process), process->numChildren());
 
         for(int i =0; i < process->children.size(); i++) {
-            QVERIFY(process->children[i]->parent);
-            QCOMPARE(process->children[i]->parent, process);
+            QVERIFY(process->children[i]->parent());
+            QCOMPARE(process->children[i]->parent(), process);
         }
     }
     delete processController;
@@ -105,7 +105,7 @@ void testProcess::testProcessesModification() {
     QVERIFY(initProcess->children[0]);
     QVERIFY(initProcess->children[1]);
     qCDebug(LIBKSYSGUARD) << initProcess->numChildren();
-    initProcess->children[0]->parent = initProcess->children[1];
+    initProcess->children[0]->setParent(initProcess->children[1]);
     initProcess->children[1]->children.append(initProcess->children[0]);
     initProcess->children[1]->numChildren()++;
     initProcess->numChildren()--;
@@ -163,8 +163,8 @@ void testProcess::testHistories() {
         QCOMPARE(countNumChildren(process), process->numChildren());
 
         for(int i =0; i < process->children.size(); i++) {
-            QVERIFY(process->children[i]->parent);
-            QCOMPARE(process->children[i]->parent, process);
+            QVERIFY(process->children[i]->parent());
+            QCOMPARE(process->children[i]->parent(), process);
         }
     }
 

@@ -40,7 +40,7 @@ public:
     virtual ~Process();
 
     long pid() const;    ///< The system's ID for this process.  1 for init.  -1 for our virtual 'parent of init' process used just for convenience.
-    long parent_pid;  ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
+    long parent_pid() const;  ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
 
     /** A guaranteed NON-NULL pointer for all real processes to the parent process except for the fake process with pid -1.
      *  The Parent's pid is the same value as the parent_pid.  The parent process will be also pointed
@@ -48,9 +48,11 @@ public:
      *  For process without a parent (such as 'init' on Linux, parent will point to a (fake) process with pid -1 to simplify things.
      *  For the fake process, this will point to NULL
      */
-    Process *parent;
+    Process *parent() const;
 
-    void setNumThreads(int number); ///< The number of threads that this process has, including this process.
+    void setParent_pid(long parent_pid);
+    void setParent(Process *parent);
+
     void setLogin(QString login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
     void setUid(qlonglong uid); ///< The user id that the process is running as
     void setEuid(qlonglong euid); ///< The effective user id that the process is running as
@@ -96,6 +98,12 @@ public:
     void setIoCharactersActuallyReadRate(long number); ///< Number of bytes per second which this process really did cause to be fetched from the storage layer.
     void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
 
+    void setNumThreads(int number); ///< The number of threads that this process has, including this process.
+
+    void setIndex(int index);
+
+    void setElapsedTimeMilliSeconds(int value);
+
     QString login() const;
     qlonglong uid() const;
     qlonglong euid() const;
@@ -119,9 +127,9 @@ public:
 
     int userUsage() const;
     int sysUsage() const;
-    int & totalUserUsage() const; // REF!
-    int & totalSysUsage() const; // REF!
-    unsigned long & numChildren() const; // REF!
+    int & totalUserUsage() const; // REF, make non-ref later!
+    int & totalSysUsage() const; // REF, make non-ref later!
+    unsigned long & numChildren() const; // REF, make non-ref later!
     int niceLevel() const;
     Scheduler scheduler() const;
     IoPriorityClass ioPriorityClass() const;
@@ -131,14 +139,14 @@ public:
     qlonglong vmRSS() const;
     qlonglong vmURSS() const;
 
-    qlonglong& vmSizeChange() const; // REF!  ///< The change in vmSize since last update, in KiB
-    qlonglong& vmRSSChange() const; // REF!   ///< The change in vmRSS since last update, in KiB
-    qlonglong& vmURSSChange() const; // REF!  ///< The change in vmURSS since last update, in KiB
+    qlonglong& vmSizeChange() const; // REF, make non-ref later!  ///< The change in vmSize since last update, in KiB
+    qlonglong& vmRSSChange() const; // REF, make non-ref later!   ///< The change in vmRSS since last update, in KiB
+    qlonglong& vmURSSChange() const; // REF, make non-ref later!  ///< The change in vmURSS since last update, in KiB
 
-    unsigned long& pixmapBytes() const; // REF! ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
-    bool& hasManagedGuiWindow() const; // REF!
+    unsigned long& pixmapBytes() const; // REF, make non-ref later! ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
+    bool& hasManagedGuiWindow() const; // REF, make non-ref later!
     QString name() const;
-    QString& command() const; // REF!
+    QString& command() const; // REF, make non-ref later!
     ProcessStatus status() const;
     qlonglong ioCharactersRead() const;
     qlonglong ioCharactersWritten() const;
@@ -154,6 +162,8 @@ public:
     long ioCharactersActuallyReadRate() const;
     long ioCharactersActuallyWrittenRate() const;
 
+    int numThreads() const; ///< Number of threads that this process has, including the main one.  0 if not known
+
     QList<Process *> children;  ///< A list of all the direct children that the process has.  Children of children are not listed here, so note that children_pids <= numChildren
     QTime timeKillWasSent; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.
 
@@ -163,7 +173,7 @@ public:
     QString ioPriorityClassAsString() const; ///< Returns a translated string of the io nice class.  i.e. "None", "Real Time", "Best Effort", "Idle"
     QString schedulerAsString() const; ///< Returns a translated string of the scheduler class.  e.g. "FIFO", "Round Robin", "Batch"
 
-    int index;  ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
+    int index() const;  ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
 
     /** An enum to keep track of what changed since the last update.  Note that we
      * the maximum we can use is 0x4000, so some of the enums represent multiple variables
@@ -189,7 +199,8 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    Changes changes;  /**< A QFlags representing what has changed */
+    Changes changes() const;  /**< A QFlags representing what has changed */
+    void setChanges(Change changes);
 
     /** This is the number of 1/1000ths of a second since this
      *  particular process was last updated compared to when all the processes
@@ -199,9 +210,7 @@ public:
      *  This is updated in processes.cpp and so shouldn't be touched by the
      *  OS dependant classes.
      */
-    int elapsedTimeMilliSeconds;
-
-    int numThreads; ///< Number of threads that this process has, including the main one.  0 if not known
+    int elapsedTimeMilliSeconds() const;
 
   private:
     void clear();
@@ -214,4 +223,5 @@ public:
 }
 
 #endif
+
 
