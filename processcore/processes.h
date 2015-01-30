@@ -28,7 +28,6 @@
 
 namespace KSysGuard
 {
-    class AbstractProcesses;
     /**
      * This class retrieves the processes currently running in an OS independent way.
      *

@@ -33,7 +33,6 @@
 
 class QPaintEvent;
 class QResizeEvent;
-class QGraphicsSceneResizeEvent;
 class KSignalPlotterPrivate;
 
 //Make sure only declare KLocalizedString once
