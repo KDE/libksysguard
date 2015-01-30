@@ -31,8 +31,6 @@
 #include <QGraphicsWidget>
 #include <klocalizedstring.h>
 
-class QPaintEvent;
-class QResizeEvent;
 class QGraphicsSceneResizeEvent;
 class KGraphicsSignalPlotterPrivate;
 
