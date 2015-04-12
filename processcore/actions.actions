@@ -1,6 +1,6 @@
 [Domain]
 Name=KSysGuard
-Name[ar]=حارس نظام كيدي
+Name[ar]=حارس نظامك
 Name[bg]=Системна защита
 Name[br]=KSysGuard
 Name[bs]=KSysGuard
@@ -77,7 +77,7 @@ Icon=utilities-system-monitor
 
 [org.kde.ksysguard.processlisthelper.sendsignal]
 Name=Kill or stop etc a process
-Name[ar]=اقتل أو أوقف عملية
+Name[ar]=اقتل أو أوقف عمليّة
 Name[bg]=Прекратяване на процес
 Name[bs]=Ukini, zaustavi, itd. proces
 Name[ca]=Mata o atura un procés
@@ -141,7 +141,7 @@ Name[x-test]=xxKill or stop etc a processxx
 Name[zh_CN]=杀死或停止一个进程
 Name[zh_TW]=砍掉或停止行程
 Description=Sends a given signal to a given process
-Description[ar]=يرسل إشارة معينة إلى عمليّة معينة
+Description[ar]=يرسل إشارة معيّنة إلى عمليّة معطاة
 Description[bg]=Изпращане на сигнал до процес
 Description[bs]=Šalje dati signal datom procesu
 Description[ca]=Envia un senyal determinat a un procés indicat
@@ -208,7 +208,7 @@ Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.renice]
 Name=Change the priority of a process
-Name[ar]=غيِّر أولوية عمليّة
+Name[ar]=غيّر أولويّة عمليّة
 Name[bg]=Промяна приоритета на процес
 Name[bs]=Promijeni prioritet procesa
 Name[ca]=Canvia la prioritat d'un procés
@@ -274,7 +274,7 @@ Name[x-test]=xxChange the priority of a processxx
 Name[zh_CN]=更改一个进程的优先级
 Name[zh_TW]=變更行程的優先權
 Description=Change the niceness of a given process
-Description[ar]=غيِّر لطف عمليّة معيّنة
+Description[ar]=غيّر لطف العمليّة المعطاة
 Description[bs]=Mijenja finoću datog procesa
 Description[ca]=Canvia la prioritat «niceness» d'un procés indicat
 Description[ca@valencia]=Canvia la prioritat «niceness» d'un procés indicat
@@ -339,7 +339,7 @@ Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.changeioscheduler]
 Name=Change IO Scheduler and priority
-Name[ar]=غيِّر مجدوِل و أولوية الدخل و الخرج
+Name[ar]=غيّر مجدول وأولويّة الدّخل والخرج
 Name[bg]=Промяна на планирането на входно-изходните операции и приоритети
 Name[bs]=Promijeni raspoređivač U/I‑ja i prioritet
 Name[ca]=Canvia el planificador d'E/S i la prioritat
@@ -401,7 +401,7 @@ Name[x-test]=xxChange IO Scheduler and priorityxx
 Name[zh_CN]=更改 IO 调度方式和优先级
 Name[zh_TW]=變更 IO 排程器與優先權
 Description=Change how the read and writes of a given process are prioritized
-Description[ar]=غيِّر كيفية تصنيف عمليات القراءة والكتابة لعمليَّة معيّنة
+Description[ar]=غيّر أولويّة قراءة وكتابة عمليّة معطاة.
 Description[bg]=Промяна на приоритета на действията за четене и писане на процес
 Description[bs]=Mijenja prioritet čitanja i pisanja za dati proces
 Description[ca]=Canvia com es prioritzen les lectures i les escriptures d'un procés indicat
@@ -465,7 +465,7 @@ Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.changecpuscheduler]
 Name=Change CPU Scheduler and priority
-Name[ar]=غيِّر مجدول وأولوية وحدة المعالجة المركزية
+Name[ar]=غيّر مجدول وأولويّة المعالج
 Name[bs]=Promijeni raspoređivač CPU‑a i prioritet
 Name[ca]=Canvia el planificador de la CPU i la prioritat
 Name[ca@valencia]=Canvia el planificador de la CPU i la prioritat
@@ -526,7 +526,6 @@ Name[x-test]=xxChange CPU Scheduler and priorityxx
 Name[zh_CN]=更改 CPU 调度方式和优先级
 Name[zh_TW]=變更 CPU 排程器與優先權
 Description=Change which CPU scheduler is to schedule the running of a given process
-Description[ar]=غيِّر مجدول وحدة المعالجة المركزية المستخدم لجدولة تشغيل عمليَّة معيّنة
 Description[bs]=Mijenja raspoređivač CPU‑a kojem se pokorava dati proces
 Description[ca]=Canvia el planificador de CPU que planificarà l'execució d'un procés indicat
 Description[ca@valencia]=Canvia el planificador de CPU que planificarà l'execució d'un procés indicat
