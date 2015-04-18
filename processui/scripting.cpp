@@ -61,7 +61,6 @@ class ScriptingHtmlDialog : public QDialog {
             (void)minimumSizeHint(); //Force the dialog to be laid out now
             layout->setContentsMargins(0,0,0,0);
             m_webView.settings()->setOfflineStoragePath(QString());
-            m_webView.settings()->setOfflineWebApplicationCachePath(QString());
             m_webView.settings()->setObjectCacheCapacities(0,0,0);
             m_webView.settings()->setAttribute(QWebSettings::PluginsEnabled, false);
             m_webView.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, false);
