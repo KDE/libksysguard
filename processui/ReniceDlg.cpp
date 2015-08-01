@@ -44,8 +44,6 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
 	previous_cpuscheduler = 0;
 
-	connect( this, SIGNAL(okClicked()), SLOT(slotOk()) );
-
 	if(currentIoSched == KSysGuard::Process::None) {
 		// CurrentIoSched == 0 means that the priority is set automatically.
 		// Using the formula given by the linux kernel Documentation/block/ioprio
@@ -64,7 +62,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
 	okButton->setDefault(true);
 	okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-	connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+	connect(buttonBox, SIGNAL(accepted()), this, SLOT(slotOk()));
 	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
 	QWidget *widget = new QWidget(this);
@@ -121,6 +119,8 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	connect(ui->sliderIO, SIGNAL(valueChanged(int)), this, SLOT(ioSliderChanged(int)));
 
 	updateUi();
+
+	mainLayout->addWidget(buttonBox);
 }
 
 void ReniceDlg::ioSliderChanged(int value) {
@@ -202,4 +202,5 @@ void ReniceDlg::slotOk()
 	newIOPriority = ui->sliderIO->value();
 	newCPUSched = cpuScheduler->checkedId();
 	newIOSched = ioScheduler->checkedId();
+	accept();
 }
