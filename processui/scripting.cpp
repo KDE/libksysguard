@@ -49,9 +49,7 @@ class ScriptingHtmlDialog : public QDialog {
 
             QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
             buttonBox->setStandardButtons(QDialogButtonBox::Close);
-            connect(buttonBox, SIGNAL(accepted()), this, SLOT(slotClose())); // NOTE 2015-01-25: no such slot
             connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-            connect(buttonBox, SIGNAL(rejected()), this, SLOT(slotClose())); // NOTE 2015-01-25: no such slot
             connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
             QVBoxLayout *layout = new QVBoxLayout;
@@ -108,7 +106,7 @@ void Scripting::runScript(const QString &path, const QString &name) {
     QUrl fileName = QUrl::fromLocalFile(path + "index.html");
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
-        connect(mScriptingHtmlDialog, SIGNAL(closeClicked()), SLOT(stopAllScripts()));  // NOTE 2015-01-25: no such signal
+        connect(mScriptingHtmlDialog, SIGNAL(rejected()), SLOT(stopAllScripts()));
 
         QAction *refreshAction = new QAction("refresh", mScriptingHtmlDialog);
         refreshAction->setShortcut(QKeySequence::Refresh);
