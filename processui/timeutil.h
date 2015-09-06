@@ -24,7 +24,13 @@
 #define TIMEUTIL_H
 
 #include <cmath> // floor
+
+#ifdef Q_OS_OSX
+#include <mach/clock.h>
+#include <mach/mach.h>
+#else
 #include <time.h>
+#endif
 
 #include <QDateTime>
 
@@ -38,9 +44,18 @@ public:
      */
     static long systemUptimeSeconds()
     {
+#ifdef Q_OS_OSX
+        clock_serv_t cclock;
+        mach_timespec_t tp;
+
+        host_get_clock_service(mach_host_self(), SYSTEM_CLOCK, &cclock);
+        clock_get_time(cclock, &tp);
+        mach_port_deallocate(mach_task_self(), cclock);
+#else
         timespec tp;
         int isSuccess = clock_gettime(CLOCK_MONOTONIC, &tp); // see http://stackoverflow.com/questions/8357073/get-uptime-in-seconds-or-miliseconds-on-unix-like-systems
         Q_ASSERT(isSuccess == 0);
+#endif
         return tp.tv_sec;
     }
 

@@ -29,7 +29,7 @@
 #include "processes_openbsd_p.cpp"
 #elif defined __NetBSD__
 #include "processes_netbsd_p.cpp"
-#elif defined __GNU__
+#elif defined __GNU__ || defined __APPLE__
 #include "processes_gnu_p.cpp"
 #else
 // Use Qt's OS detection
