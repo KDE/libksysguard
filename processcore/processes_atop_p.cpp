@@ -112,7 +112,7 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename) {
         lastError = "File " + filename + " has incompatible format";
         if (rh.aversion & 0x8000) {
             lastError = QString("(created by version %1.%2. This program understands the format written by version 1.23")
-                        .arg((rh.aversion >> 8) & 0x7f, rh.aversion & 0xff);
+                        .arg((rh.aversion >> 8) & 0x7f).arg(rh.aversion & 0xff);
         }
         return false;
     }
