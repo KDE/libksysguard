@@ -216,6 +216,22 @@ void SensorManager::retranslate()
     mDict.insert( QLatin1String( "int" ) + num, ki18n( "Int %1" ).subs( i + 255, 4 ).toString() );
   }
 
+  mDict.insert( QLatin1String( "quality" ), i18n( "Link Quality" ) );
+  mDict.insert( QLatin1String( "signal" ), i18n( "Signal Level" ) );
+  mDict.insert( QLatin1String( "noise" ), i18n( "Noise Level" ) );
+  mDict.insert( QLatin1String( "nwid" ), i18n( "Rx Invalid Nwid Packets") );
+  mDict.insert( QLatin1String( "nwidTotal" ), i18n( "Total Rx Invalid Nwid Packets") );
+  mDict.insert( QLatin1String( "crypt" ), i18n( "Rx Invalid Crypt Packets") );
+  mDict.insert( QLatin1String( "cryptTotal" ), i18n( "Total Rx Invalid Crypt Packets") );
+  mDict.insert( QLatin1String( "frag" ), i18n( "Rx Invalid Frag Packets") );
+  mDict.insert( QLatin1String( "fragTotal" ), i18n( "Total Rx Invalid Frag Packets") );
+  mDict.insert( QLatin1String( "retry" ), i18n( "Tx Excessive Retries Packets") );
+  mDict.insert( QLatin1String( "retryTotal" ), i18n( "Total Tx Excessive Retries Packets") );
+  mDict.insert( QLatin1String( "misc" ), i18n( "Invalid Misc Packets") );
+  mDict.insert( QLatin1String( "miscTotal" ), i18n( "Total Invalid Misc Packets") );
+  mDict.insert( QLatin1String( "beacon" ), i18n( "Missed Beacons") );
+  mDict.insert( QLatin1String( "beaconTotal" ), i18n( "Total Missed Beacons") );
+
   // TODO: translated descriptions not yet implemented.
   mUnits.clear();
   mUnits.insert( QLatin1String( "1/s" ), i18nc( "the unit 1 per second", "1/s" ) );
