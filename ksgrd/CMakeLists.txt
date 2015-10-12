@@ -11,6 +11,8 @@ set(ksgrd_LIB_SRCS
    SensorSocketAgent.cpp
 )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"ksgrd\")
+
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
