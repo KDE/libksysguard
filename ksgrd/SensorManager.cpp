@@ -232,6 +232,8 @@ void SensorManager::retranslate()
   mDict.insert( QLatin1String( "beacon" ), i18n( "Missed Beacons") );
   mDict.insert( QLatin1String( "beaconTotal" ), i18n( "Total Missed Beacons") );
 
+  mDict.insert( QLatin1String( "logfiles" ), i18n( "Log Files") );
+
   // TODO: translated descriptions not yet implemented.
   mUnits.clear();
   mUnits.insert( QLatin1String( "1/s" ), i18nc( "the unit 1 per second", "1/s" ) );
@@ -250,6 +252,7 @@ void SensorManager::retranslate()
   mTypes.insert( QLatin1String( "float" ), i18n( "Floating Point Value" ) );
   mTypes.insert( QLatin1String( "table" ), i18n( "Process Controller" ) );
   mTypes.insert( QLatin1String( "listview" ), i18n( "Table" ) );
+  mTypes.insert( QLatin1String( "logfile" ), i18n( "Log File") );
 
   mBroadcaster = NULL;
 
