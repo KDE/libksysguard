@@ -25,7 +25,6 @@
 
 #include "processcore/processcore_debug.h"
 #include <QDebug>
-#define TRANSLATION_DOMAIN "ksgrd"
 #include <KLocalizedString>
 
 #include "SensorClient.h"
