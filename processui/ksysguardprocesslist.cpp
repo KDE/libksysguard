@@ -164,10 +164,10 @@ struct KSysGuardProcessListPrivate {
         window = new QAction(i18n("Show Application Window"), q);
         resume = new QAction(i18n("Resume Stopped Process"), q);
         terminate = new QAction(i18np("End Process", "End Processes", 1), q);
-        terminate->setIcon(QIcon::fromTheme("process-stop"));
+        terminate->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
         terminate->setShortcut(Qt::Key_Delete);
         kill = new QAction(i18np("Forcibly Kill Process", "Forcibly Kill Processes", 1), q);
-        kill->setIcon(QIcon::fromTheme("process-stop"));
+        kill->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
         kill->setShortcut(Qt::SHIFT + Qt::Key_Delete);
 
         sigStop = new QAction(i18n("Suspend (STOP)"), q);
@@ -261,7 +261,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->setItemDelegate(new ProgressBarItemDelegate(d->mUi->treeView));
 
     d->mUi->treeView->header()->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(d->mUi->treeView->header(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showColumnContextMenu(QPoint)));
+    connect(d->mUi->treeView->header(), &QWidget::customContextMenuRequested, this, &KSysGuardProcessList::showColumnContextMenu);
 
     d->mProcessContextMenu = new QMenu(d->mUi->treeView);
     d->mUi->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -270,13 +270,13 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->header()->setSectionsClickable(true);
     d->mUi->treeView->header()->setSortIndicatorShown(true);
     d->mUi->treeView->header()->setCascadingSectionResizes(false);
-    connect(d->mUi->btnKillProcess, SIGNAL(clicked()), this, SLOT(killSelectedProcesses()));
-    connect(d->mUi->txtFilter, SIGNAL(textChanged(QString)), this, SLOT(filterTextChanged(QString)));
+    connect(d->mUi->btnKillProcess, &QAbstractButton::clicked, this, &KSysGuardProcessList::killSelectedProcesses);
+    connect(d->mUi->txtFilter, &QLineEdit::textChanged, this, &KSysGuardProcessList::filterTextChanged);
     connect(d->mUi->cmbFilter, SIGNAL(currentIndexChanged(int)), this, SLOT(setStateInt(int)));
-    connect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
-    connect(d->mUi->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(selectionChanged()));
-    connect(&d->mFilterModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(rowsInserted(QModelIndex,int,int)));
-    connect(&d->mFilterModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SIGNAL(processListChanged()));
+    connect(d->mUi->treeView, &QTreeView::expanded, this, &KSysGuardProcessList::expandAllChildren);
+    connect(d->mUi->treeView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &KSysGuardProcessList::selectionChanged);
+    connect(&d->mFilterModel, &QAbstractItemModel::rowsInserted, this, &KSysGuardProcessList::rowsInserted);
+    connect(&d->mFilterModel, &QAbstractItemModel::rowsRemoved, this, &KSysGuardProcessList::processListChanged);
     setMinimumSize(sizeHint());
 
     d->mFilterModel.setFilterKeyColumn(-1);
@@ -334,7 +334,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
 
     retranslateUi();
 
-    d->mUi->btnKillProcess->setIcon(QIcon::fromTheme("process-stop"));
+    d->mUi->btnKillProcess->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
     d->mUi->btnKillProcess->setToolTip(i18n("<qt>End the selected process. Warning - you may lose unsaved work.<br>Right click on a process to send other signals.<br>See What's This for technical information.<br>To target a specific window to kill, press Ctrl+Alt+Esc at any time."));
 }
 
@@ -397,13 +397,13 @@ int KSysGuardProcessListPrivate::totalRowCount(const QModelIndex &parent ) const
 
 void KSysGuardProcessListPrivate::setupKAuthAction(KAuth::Action &action, const QList<long long> & pids) const
 {
-    action.setHelperId("org.kde.ksysguard.processlisthelper");
+    action.setHelperId(QStringLiteral("org.kde.ksysguard.processlisthelper"));
 
     int processCount = pids.count();
     for(int i = 0; i < processCount; i++) {
-        action.addArgument(QString("pid%1").arg(i), pids[i]);
+        action.addArgument(QStringLiteral("pid%1").arg(i), pids[i]);
     }
-    action.addArgument("pidcount", processCount);
+    action.addArgument(QStringLiteral("pidcount"), processCount);
 }
 void KSysGuardProcessList::selectionChanged()
 {
@@ -871,14 +871,14 @@ void KSysGuardProcessList::rowsInserted(const QModelIndex & parent, int start, i
         emit processListChanged();
         return; //No tree or not a root node - no need to expand init
     }
-    disconnect(&d->mFilterModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(rowsInserted(QModelIndex,int,int)));
+    disconnect(&d->mFilterModel, &QAbstractItemModel::rowsInserted, this, &KSysGuardProcessList::rowsInserted);
     //It is a root node that we just inserted - expand it
     bool expanded = false;
     for(int i = start; i <= end; i++) {
         QModelIndex index = d->mFilterModel.index(i, 0, QModelIndex());
         if(!d->mUi->treeView->isExpanded(index)) {
             if(!expanded) {
-                disconnect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
+                disconnect(d->mUi->treeView, &QTreeView::expanded, this, &KSysGuardProcessList::expandAllChildren);
                 expanded = true;
             }
             d->mUi->treeView->expand(index);
@@ -886,8 +886,8 @@ void KSysGuardProcessList::rowsInserted(const QModelIndex & parent, int start, i
         }
     }
     if(expanded)
-        connect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
-    connect(&d->mFilterModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(rowsInserted(QModelIndex,int,int)));
+        connect(d->mUi->treeView, &QTreeView::expanded, this, &KSysGuardProcessList::expandAllChildren);
+    connect(&d->mFilterModel, &QAbstractItemModel::rowsInserted, this, &KSysGuardProcessList::rowsInserted);
     emit processListChanged();
 }
 
@@ -900,7 +900,7 @@ void KSysGuardProcessList::expandInit()
         QModelIndex index = d->mFilterModel.index(i, 0, QModelIndex());
         if(!d->mUi->treeView->isExpanded(index)) {
             if(!expanded) {
-                disconnect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
+                disconnect(d->mUi->treeView, &QTreeView::expanded, this, &KSysGuardProcessList::expandAllChildren);
                 expanded = true;
             }
 
@@ -908,7 +908,7 @@ void KSysGuardProcessList::expandInit()
         }
     }
     if(expanded)
-        connect(d->mUi->treeView, SIGNAL(expanded(QModelIndex)), this, SLOT(expandAllChildren(QModelIndex)));
+        connect(d->mUi->treeView, &QTreeView::expanded, this, &KSysGuardProcessList::expandAllChildren);
 }
 
 void KSysGuardProcessList::hideEvent ( QHideEvent * event )  //virtual protected from QWidget
@@ -942,12 +942,12 @@ void KSysGuardProcessList::changeEvent( QEvent * event )
 }
 void KSysGuardProcessList::retranslateUi()
 {
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::AllProcesses, QIcon::fromTheme("view-process-all"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::AllProcessesInTreeForm, QIcon::fromTheme("view-process-all-tree"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::SystemProcesses, QIcon::fromTheme("view-process-system"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::UserProcesses, QIcon::fromTheme("view-process-users"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::OwnProcesses, QIcon::fromTheme("view-process-own"));
-    d->mUi->cmbFilter->setItemIcon(ProcessFilter::ProgramsOnly, QIcon::fromTheme("view-process-all"));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::AllProcesses, QIcon::fromTheme(QStringLiteral("view-process-all")));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::AllProcessesInTreeForm, QIcon::fromTheme(QStringLiteral("view-process-all-tree")));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::SystemProcesses, QIcon::fromTheme(QStringLiteral("view-process-system")));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::UserProcesses, QIcon::fromTheme(QStringLiteral("view-process-users")));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::OwnProcesses, QIcon::fromTheme(QStringLiteral("view-process-own")));
+    d->mUi->cmbFilter->setItemIcon(ProcessFilter::ProgramsOnly, QIcon::fromTheme(QStringLiteral("view-process-all")));
 }
 
 void KSysGuardProcessList::updateList()
@@ -1003,7 +1003,7 @@ void KSysGuardProcessList::setUpdateIntervalMSecs(int intervalMSecs)
         //intervalMSecs is a valid time, so set up a timer
         d->mUpdateTimer = new QTimer(this);
         d->mUpdateTimer->setSingleShot(true);
-        connect(d->mUpdateTimer, SIGNAL(timeout()), SLOT(updateList()));
+        connect(d->mUpdateTimer, &QTimer::timeout, this, &KSysGuardProcessList::updateList);
         if(isVisible())
             d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
     } else
@@ -1023,10 +1023,10 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to renice non-localhost processes
 
 
-    KAuth::Action action("org.kde.ksysguard.processlisthelper.renice");
+    KAuth::Action action(QStringLiteral("org.kde.ksysguard.processlisthelper.renice"));
     action.setParentWidget(window());
     d->setupKAuthAction( action, unreniced_pids);
-    action.addArgument("nicevalue", niceValue);
+    action.addArgument(QStringLiteral("nicevalue"), niceValue);
     KAuth::ExecuteJob *job  = action.execute();
 
     if (job->exec()) {
@@ -1184,12 +1184,12 @@ bool KSysGuardProcessList::changeIoScheduler(const QList< long long> &pids, KSys
     if(unchanged_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't use kauth to affect non-localhost processes
 
-    KAuth::Action action("org.kde.ksysguard.processlisthelper.changeioscheduler");
+    KAuth::Action action(QStringLiteral("org.kde.ksysguard.processlisthelper.changeioscheduler"));
     action.setParentWidget(window());
 
     d->setupKAuthAction( action, unchanged_pids);
-    action.addArgument("ioScheduler", (int)newIoSched);
-    action.addArgument("ioSchedulerPriority", newIoSchedPriority);
+    action.addArgument(QStringLiteral("ioScheduler"), (int)newIoSched);
+    action.addArgument(QStringLiteral("ioSchedulerPriority"), newIoSchedPriority);
 
     KAuth::ExecuteJob *job  = action.execute();
 
@@ -1216,11 +1216,11 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList< long long> &pids, KSy
     if(unchanged_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't use KAuth to affect non-localhost processes
 
-    KAuth::Action action("org.kde.ksysguard.processlisthelper.changecpuscheduler");
+    KAuth::Action action(QStringLiteral("org.kde.ksysguard.processlisthelper.changecpuscheduler"));
     action.setParentWidget(window());
     d->setupKAuthAction( action, unchanged_pids);
-    action.addArgument("cpuScheduler", (int)newCpuSched);
-    action.addArgument("cpuSchedulerPriority", newCpuSchedPriority);
+    action.addArgument(QStringLiteral("cpuScheduler"), (int)newCpuSched);
+    action.addArgument(QStringLiteral("cpuSchedulerPriority"), newCpuSchedPriority);
     KAuth::ExecuteJob *job  = action.execute();
 
     if (job->exec()) {
@@ -1247,10 +1247,10 @@ bool KSysGuardProcessList::killProcesses(const QList< long long> &pids, int sig)
     if(unkilled_pids.isEmpty()) return true;
     if(!d->mModel.isLocalhost()) return false; //We can't elevate privileges to kill non-localhost processes
 
-    KAuth::Action action("org.kde.ksysguard.processlisthelper.sendsignal");
+    KAuth::Action action(QStringLiteral("org.kde.ksysguard.processlisthelper.sendsignal"));
     action.setParentWidget(window());
     d->setupKAuthAction( action, unkilled_pids);
-    action.addArgument("signal", sig);
+    action.addArgument(QStringLiteral("signal"), sig);
     KAuth::ExecuteJob *job  = action.execute();
 
     if (job->exec()) {
@@ -1298,20 +1298,20 @@ void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
                 "Are you sure you want to end these %1 processes?  Any unsaved work may be lost",
                 count);
             title =  i18ncp("Dialog title", "End Process", "End %1 Processes", count);
-            dontAskAgainKey = "endconfirmation";
+            dontAskAgainKey = QStringLiteral("endconfirmation");
             closeButton = i18n("End");
         } else if (sig == SIGKILL) {
             msg = i18np("<qt>Are you sure you want to <b>immediately and forcibly kill</b> this process?  Any unsaved work may be lost.",
                 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> these %1 processes?  Any unsaved work may be lost",
                 count);
             title =  i18ncp("Dialog title", "Forcibly Kill Process", "Forcibly Kill %1 Processes", count);
-            dontAskAgainKey = "killconfirmation";
+            dontAskAgainKey = QStringLiteral("killconfirmation");
             closeButton = i18n("Kill");
         }
 
         int res = KMessageBox::warningContinueCancelList(this, msg, selectedAsStrings,
                 title,
-                KGuiItem(closeButton, "process-stop"),
+                KGuiItem(closeButton, QStringLiteral("process-stop")),
                 KStandardGuiItem::cancel(),
                 dontAskAgainKey);
         if (res != KMessageBox::Continue)

@@ -54,7 +54,7 @@ class Q_DECL_EXPORT SensorAgent : public QObject
     virtual ~SensorAgent();
 
     virtual bool start( const QString &host, const QString &shell,
-                        const QString &command = "", int port = -1 ) = 0;
+                        const QString &command = QLatin1String(""), int port = -1 ) = 0;
 
     /**
       This function should only be used by the SensorManager and

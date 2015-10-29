@@ -38,7 +38,7 @@
 ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentCpuPrio, int currentCpuSched, int currentIoPrio, int currentIoSched )
 	: QDialog( parent )
 {
-	setObjectName( "Renice Dialog" );
+	setObjectName( QStringLiteral("Renice Dialog") );
 	setModal( true );
 	setWindowTitle( i18n("Set Priority") );
 	QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
@@ -62,8 +62,8 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
 	okButton->setDefault(true);
 	okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-	connect(buttonBox, SIGNAL(accepted()), this, SLOT(slotOk()));
-	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+	connect(buttonBox, &QDialogButtonBox::accepted, this, &ReniceDlg::slotOk);
+	connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
 	QWidget *widget = new QWidget(this);
 	mainLayout->addWidget(widget);
@@ -108,15 +108,15 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 		ui->sliderIO->setValue(currentIoPrio);
 	ui->sliderCPU->setValue(currentCpuPrio);
 
-	ui->imgCPU->setPixmap( QIcon::fromTheme("cpu").pixmap(128, 128) );
-	ui->imgIO->setPixmap( QIcon::fromTheme("drive-harddisk").pixmap(128, 128) );
+	ui->imgCPU->setPixmap( QIcon::fromTheme(QStringLiteral("cpu")).pixmap(128, 128) );
+	ui->imgIO->setPixmap( QIcon::fromTheme(QStringLiteral("drive-harddisk")).pixmap(128, 128) );
 
 	newCPUPriority = 40;
 
 	connect(cpuScheduler, SIGNAL(buttonClicked(int)), this, SLOT(cpuSchedulerChanged(int)));
 	connect(ioScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
-	connect(ui->sliderCPU, SIGNAL(valueChanged(int)), this, SLOT(cpuSliderChanged(int)));
-	connect(ui->sliderIO, SIGNAL(valueChanged(int)), this, SLOT(ioSliderChanged(int)));
+	connect(ui->sliderCPU, &QAbstractSlider::valueChanged, this, &ReniceDlg::cpuSliderChanged);
+	connect(ui->sliderIO, &QAbstractSlider::valueChanged, this, &ReniceDlg::ioSliderChanged);
 
 	updateUi();
 

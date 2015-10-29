@@ -95,7 +95,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 			// login and getty kinda _are_ the tty, so I do not really count them as 'programs'. So make a special case and hide them
 			// Their ppid are 1 (init) so by checking we try to avoid false matches, and speed up checking overall
 			QString name = process->name().section(' ', 0,0);
-			if(process->parentPid() == 1 && (name == "login" || name.endsWith("getty")))
+			if(process->parentPid() == 1 && (name == QLatin1String("login") || name.endsWith(QLatin1String("getty"))))
 				accepted = false;
 		}
 		break;

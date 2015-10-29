@@ -49,8 +49,8 @@ class ScriptingHtmlDialog : public QDialog {
 
             QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
             buttonBox->setStandardButtons(QDialogButtonBox::Close);
-            connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-            connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+            connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+            connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
             QVBoxLayout *layout = new QVBoxLayout;
             layout->addWidget(&m_webView);
@@ -106,11 +106,11 @@ void Scripting::runScript(const QString &path, const QString &name) {
     QUrl fileName = QUrl::fromLocalFile(path + "index.html");
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
-        connect(mScriptingHtmlDialog, SIGNAL(rejected()), SLOT(stopAllScripts()));
+        connect(mScriptingHtmlDialog, &QDialog::rejected, this, &Scripting::stopAllScripts);
 
-        QAction *refreshAction = new QAction("refresh", mScriptingHtmlDialog);
+        QAction *refreshAction = new QAction(QStringLiteral("refresh"), mScriptingHtmlDialog);
         refreshAction->setShortcut(QKeySequence::Refresh);
-        connect(refreshAction, SIGNAL(triggered()), SLOT(refreshScript()));
+        connect(refreshAction, &QAction::triggered, this, &Scripting::refreshScript);
         mScriptingHtmlDialog->addAction(refreshAction);
 
         QAction *zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), mScriptingHtmlDialog);
@@ -123,7 +123,7 @@ void Scripting::runScript(const QString &path, const QString &name) {
     //Make the process information available to the script
     mScriptingHtmlDialog->webView()->load(fileName);
     mScriptingHtmlDialog->show();
-    connect(mScriptingHtmlDialog->webView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), SLOT(setupJavascriptObjects()));
+    connect(mScriptingHtmlDialog->webView()->page()->mainFrame(), &QWebFrame::javaScriptWindowObjectCleared, this, &Scripting::setupJavascriptObjects);
     setupJavascriptObjects();
 
 //    connect(mProcessList, SIGNAL(updated()), SLOT(refreshScript()));
@@ -142,13 +142,13 @@ void Scripting::refreshScript() {
     //Call any refresh function, if it exists
     mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
     if(mScriptingHtmlDialog && mScriptingHtmlDialog->webView() && mScriptingHtmlDialog->webView()->page() && mScriptingHtmlDialog->webView()->page()->mainFrame()) {
-        mScriptingHtmlDialog->webView()->page()->mainFrame()->evaluateJavaScript("refresh();");
+        mScriptingHtmlDialog->webView()->page()->mainFrame()->evaluateJavaScript(QStringLiteral("refresh();"));
     }
 }
 void Scripting::setupJavascriptObjects() {
     mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
     mProcessObject = new ProcessObject(mProcessList->processModel(), mPid);
-    mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject("process", mProcessObject, QWebFrame::ScriptOwnership);
+    mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject(QStringLiteral("process"), mProcessObject, QWebFrame::ScriptOwnership);
 }
 void Scripting::stopAllScripts()
 {
@@ -165,7 +165,7 @@ void Scripting::loadContextMenu() {
     mActions.clear();
 
     QStringList scripts;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "ksysguard/scripts/", QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("ksysguard/scripts/"), QStandardPaths::LocateDirectory);
     Q_FOREACH (const QString& dir, dirs) {
         QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);
         while (it.hasNext()) {
@@ -182,7 +182,7 @@ void Scripting::loadContextMenu() {
             QString scriptPath = script;
             scriptPath.truncate(scriptPath.lastIndexOf('/'));
             action->setProperty("scriptPath", QString(scriptPath + QLatin1Char('/')));
-            connect(action, SIGNAL(triggered(bool)), SLOT(runScriptSlot()));
+            connect(action, &QAction::triggered, this, &Scripting::runScriptSlot);
             mProcessList->addAction(action);
             mActions << action;
         }

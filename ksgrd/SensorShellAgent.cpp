@@ -64,16 +64,16 @@ bool SensorShellAgent::start( const QString &host, const QString &shell,
            SLOT(daemonError(QProcess::ProcessError)) );
   connect( mDaemon, SIGNAL(finished(int,QProcess::ExitStatus)),
            SLOT(daemonExited(int,QProcess::ExitStatus)) );
-  connect( mDaemon, SIGNAL(readyReadStandardOutput()),
-           SLOT(msgRcvd()) );
-  connect( mDaemon, SIGNAL(readyReadStandardError()),
-           SLOT(errMsgRcvd()) );
+  connect( mDaemon.data(), &QProcess::readyReadStandardOutput,
+           this, &SensorShellAgent::msgRcvd );
+  connect( mDaemon.data(), &QProcess::readyReadStandardError,
+           this, &SensorShellAgent::errMsgRcvd );
 
   if ( !command.isEmpty() ) {
     *mDaemon << KShell::splitArgs(command);
   }
   else
-    *mDaemon << mShell << hostName() << "ksysguardd";
+    *mDaemon << mShell << hostName() << QStringLiteral("ksysguardd");
   mDaemon->start();
 
   return true;
@@ -125,7 +125,7 @@ void SensorShellAgent::daemonError( QProcess::ProcessError errorStatus )
   QString error;
   switch(errorStatus) {
     case QProcess::FailedToStart:
-      qCDebug(LIBKSYSGUARD) << "failed to run" <<  mDaemon->program().join(" ");
+      qCDebug(LIBKSYSGUARD) << "failed to run" <<  mDaemon->program().join(QStringLiteral(" "));
       error = i18n("Could not run daemon program '%1'.", mDaemon->program().join(" "));
       break;
     case QProcess::Crashed:

@@ -97,10 +97,10 @@ Processes::Processes(const QString &host, QObject *parent) : QObject(parent), d(
     } else {
         ProcessesRemote *remote = new ProcessesRemote(host);
         d->mAbstractProcesses = remote;
-        connect(remote, SIGNAL(runCommand(QString,int)), this, SIGNAL(runCommand(QString,int)));
+        connect(remote, &ProcessesRemote::runCommand, this, &Processes::runCommand);
     }
     d->mIsLocalHost = host.isEmpty();
-    connect( d->mAbstractProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
+    connect( d->mAbstractProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
 }
 Processes::~Processes()
 {
@@ -481,7 +481,7 @@ void Processes::useCurrentData()
     if(d->mUsingHistoricalData) {
         delete d->mHistoricProcesses;
         d->mHistoricProcesses = NULL;
-        connect( d->mAbstractProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
+        connect( d->mAbstractProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
         d->mUsingHistoricalData = false;
     }
 }
@@ -496,8 +496,8 @@ bool Processes::setViewingTime(const QDateTime &when)
     if(!d->mUsingHistoricalData) {
         if(!d->mHistoricProcesses)
             d->mHistoricProcesses = new ProcessesATop();
-        disconnect( d->mAbstractProcesses, SIGNAL(processesUpdated()), this, SLOT(processesUpdated()));
-        connect( d->mHistoricProcesses, SIGNAL(processesUpdated()), SLOT(processesUpdated()));
+        disconnect( d->mAbstractProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
+        connect( d->mHistoricProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
         d->mUsingHistoricalData = true;
     }
     return d->mHistoricProcesses->setViewingTime(when);

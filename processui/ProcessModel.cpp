@@ -102,7 +102,7 @@ static QString formatByteSize(qlonglong amountInKB, int units) {
         if(amount < 0.1 && amount > 0.05) amount = 0.1;
         return pString.arg(QLocale().toString(amount, 'f', 1));
       default:
-          return "";  // error
+          return QLatin1String("");  // error
     }
 }
 
@@ -147,7 +147,7 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
     d->mHaveXRes = XResQueryExtension(QX11Info::display(), &event, &error) && XResQueryVersion(QX11Info::display(), &major, &minor);
 #endif
 
-    if(host.isEmpty() || host == "localhost") {
+    if(host.isEmpty() || host == QLatin1String("localhost")) {
         d->mHostName = QString();
         d->mIsLocalhost = true;
     } else {
@@ -293,7 +293,7 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
 
             //Neither left or right is empty. The tty string is like  "tty10"  so split this into "tty" and "10"
             //and sort by the string first, then sort by the number
-            QRegExp regexpLeft("^(\\D*)(\\d*)$");
+            QRegExp regexpLeft(QStringLiteral("^(\\D*)(\\d*)$"));
             QRegExp regexpRight(regexpLeft);
             if(regexpLeft.indexIn(processLeft->tty()) == -1 || regexpRight.indexIn(processRight->tty()) == -1)
                 return processLeft->tty() < processRight->tty();
@@ -383,8 +383,8 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
 #if HAVE_X11
 void ProcessModelPrivate::setupWindows() {
     connect( KWindowSystem::self(), SIGNAL(windowChanged(WId,uint)), this, SLOT(windowChanged(WId,uint)));
-    connect( KWindowSystem::self(), SIGNAL(windowAdded(WId)), this, SLOT(windowAdded(WId)));
-    connect( KWindowSystem::self(), SIGNAL(windowRemoved(WId)), this, SLOT(windowRemoved(WId)));
+    connect( KWindowSystem::self(), &KWindowSystem::windowAdded, this, &ProcessModelPrivate::windowAdded);
+    connect( KWindowSystem::self(), &KWindowSystem::windowRemoved, this, &ProcessModelPrivate::windowRemoved);
 
     //Add all the windows that KWin is managing - i.e. windows that the user can see
     const QList<WId> windows = KWindowSystem::windows();
@@ -473,14 +473,14 @@ void ProcessModelPrivate::setupProcesses() {
 
     mProcesses = new KSysGuard::Processes(mHostName);
 
-    connect( mProcesses, SIGNAL(processChanged(KSysGuard::Process*,bool)), this, SLOT(processChanged(KSysGuard::Process*,bool)));
-    connect( mProcesses, SIGNAL(beginAddProcess(KSysGuard::Process*)), this, SLOT(beginInsertRow(KSysGuard::Process*)));
-    connect( mProcesses, SIGNAL(endAddProcess()), this, SLOT(endInsertRow()));
-    connect( mProcesses, SIGNAL(beginRemoveProcess(KSysGuard::Process*)), this, SLOT(beginRemoveRow(KSysGuard::Process*)));
-    connect( mProcesses, SIGNAL(endRemoveProcess()), this, SLOT(endRemoveRow()));
-    connect( mProcesses, SIGNAL(beginMoveProcess(KSysGuard::Process*,KSysGuard::Process*)), this,
-            SLOT(beginMoveProcess(KSysGuard::Process*,KSysGuard::Process*)));
-    connect( mProcesses, SIGNAL(endMoveProcess()), this, SLOT(endMoveRow()));
+    connect( mProcesses, &KSysGuard::Processes::processChanged, this, &ProcessModelPrivate::processChanged);
+    connect( mProcesses, &KSysGuard::Processes::beginAddProcess, this, &ProcessModelPrivate::beginInsertRow);
+    connect( mProcesses, &KSysGuard::Processes::endAddProcess, this, &ProcessModelPrivate::endInsertRow);
+    connect( mProcesses, &KSysGuard::Processes::beginRemoveProcess, this, &ProcessModelPrivate::beginRemoveRow);
+    connect( mProcesses, &KSysGuard::Processes::endRemoveProcess, this, &ProcessModelPrivate::endRemoveRow);
+    connect( mProcesses, &KSysGuard::Processes::beginMoveProcess, this,
+            &ProcessModelPrivate::beginMoveProcess);
+    connect( mProcesses, &KSysGuard::Processes::endMoveProcess, this, &ProcessModelPrivate::endMoveRow);
     mNumProcessorCores = mProcesses->numberProcessorCores();
     if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
 }
@@ -1093,7 +1093,7 @@ bool ProcessModel::canUserLogin(long uid ) const
         return true;
     }
     QString shell = user.shell();
-    if(shell == "/bin/false" )  //FIXME - add in any other shells it could be for false
+    if(shell == QLatin1String("/bin/false") )  //FIXME - add in any other shells it could be for false
     {
         d->mUidCanLogin[uid] = 0;
         return false;
@@ -1104,7 +1104,7 @@ bool ProcessModel::canUserLogin(long uid ) const
 
 QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) const
 {
-    QString userTooltip = "<qt><p style='white-space:pre'>";
+    QString userTooltip = QStringLiteral("<qt><p style='white-space:pre'>");
     if(!mIsLocalhost) {
         userTooltip += i18n("Login Name: %1<br/>", getUsernameForUser(ps->uid(), true));
     } else {
@@ -1130,7 +1130,7 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
             userTooltip += i18n("Setuid User: %1<br/>", getUsernameForUser(ps->suid(), true));
         if(ps->fsuid() != -1)
             userTooltip += i18n("File System User: %1<br/>", getUsernameForUser(ps->fsuid(), true));
-        userTooltip += "<br/>";
+        userTooltip += QLatin1String("<br/>");
     }
     if(ps->gid() != -1) {
         userTooltip += i18n("Group: %1", getGroupnameForGroup(ps->gid()));
@@ -1165,11 +1165,11 @@ QString ProcessModelPrivate::getUsernameForUser(long uid, bool withuid) const {
     QString &username = mUserUsername[uid];
     if(username.isNull()) {
         if(!mIsLocalhost) {
-            username = ""; //empty, but not null
+            username = QLatin1String(""); //empty, but not null
         } else {
             KUser user(uid);
             if(!user.isValid())
-                username = "";
+                username = QLatin1String("");
             else
                 username = user.loginName();
         }
@@ -1249,7 +1249,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
         case HeadingCPUTime: {
             qlonglong seconds = (process->userTime() + process->sysTime())/100;
-            return QString("%1:%2").arg(seconds/60).arg((int)seconds%60, 2, 10, QLatin1Char('0'));
+            return QStringLiteral("%1:%2").arg(seconds/60).arg((int)seconds%60, 2, 10, QLatin1Char('0'));
         }
         case HeadingMemory:
             if(process->vmURSS() == -1) {
@@ -1366,7 +1366,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         switch(index.column()) {
         case HeadingName: {
-            QString tooltip = "<qt><p style='white-space:pre'>";
+            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
             /*   It would be nice to be able to show the icon in the tooltip, but Qt4 won't let us put
              *   a picture in a tooltip :(
 
@@ -1382,9 +1382,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             */
             if(process->parentPid() == -1) {
                 //Give a quick explanation of init and kthreadd
-                if(process->name() == "init") {
+                if(process->name() == QLatin1String("init")) {
                     tooltip += i18n("<b>Init</b> is the parent of all other processes and cannot be killed.<br/>");
-                } else if(process->name() == "kthreadd") {
+                } else if(process->name() == QLatin1String("kthreadd")) {
                     tooltip += i18n("<b>KThreadd</b> manages kernel threads. The children processes run in the kernel, controlling hard disk access, etc.<br/>");
                 }
                 tooltip    += xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2", process->name(), (long int)process->pid());
@@ -1405,7 +1405,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(!process->tty().isEmpty())
                 tooltip += i18n( "<br />Running on: %1", QString(process->tty()));
             if(!tracer.isEmpty())
-                return QString::fromLatin1("%1<br />%2").arg(tooltip).arg(tracer);
+                return QStringLiteral("%1<br />%2").arg(tooltip).arg(tracer);
             return tooltip;
         }
         case HeadingStartTime: {
@@ -1430,7 +1430,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(!process->tty().isEmpty())
                 tooltip += i18n( "<br /><br />Running on: %1", QString(process->tty()));
             if(tracer.isEmpty()) return tooltip;
-            return QString::fromLatin1("%1<br />%2").arg(tooltip).arg(tracer);
+            return QStringLiteral("%1<br />%2").arg(tooltip).arg(tracer);
         }
         case HeadingUser: {
             if(!tracer.isEmpty())
@@ -1438,7 +1438,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return d->getTooltipForUser(process);
         }
         case HeadingNiceness: {
-            QString tooltip = "<qt><p style='white-space:pre'>";
+            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
             switch(process->scheduler()) {
               case KSysGuard::Process::Other:
               case KSysGuard::Process::Batch:
@@ -1511,7 +1511,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return QVariant();
         }
         case HeadingMemory: {
-            QString tooltip = "<qt><p style='white-space:pre'>";
+            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
             if(process->vmURSS() != -1) {
                 //We don't have information about the URSS, so just fallback to RSS
                 if(d->mMemTotal > 0)
@@ -1531,7 +1531,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return tooltip;
         }
         case HeadingSharedMemory: {
-            QString tooltip = "<qt><p style='white-space:pre'>";
+            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
             if(process->vmURSS() == -1) {
                 tooltip += i18n("Your system does not seem to have this information available to be read.");
                 return tooltip;
@@ -1548,7 +1548,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingIoWrite:
         case HeadingIoRead: {
-            QString tooltip = "<qt><p style='white-space:pre'>";
+            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
             //FIXME - use the formatByteRate functions when added
             tooltip += ki18n("Characters read: %1 (%2 KiB/s)<br>Characters written: %3 (%4 KiB/s)<br>Read syscalls: %5 (%6 s⁻¹)<br>Write syscalls: %7 (%8 s⁻¹)<br>Actual bytes read: %9 (%10 KiB/s)<br>Actual bytes written: %11 (%12 KiB/s)")
                 .subs(format.formatByteSize(process->ioCharactersRead()))
@@ -1990,7 +1990,7 @@ QString ProcessModel::formatMemoryInfo(qlonglong amountInKB, Units units, bool r
     static QString percentageString = i18n("%1%", QString::fromLatin1("%1"));
     if (units == UnitsPercentage) {
         if(d->mMemTotal == 0)
-            return ""; //memory total not determined yet.  Shouldn't happen, but don't crash if it does
+            return QLatin1String(""); //memory total not determined yet.  Shouldn't happen, but don't crash if it does
         float percentage = amountInKB*100.0/d->mMemTotal;
         if(percentage < 0.1) percentage = 0.1;
         return percentageString.arg(percentage, 0, 'f', 1);
@@ -2005,9 +2005,9 @@ QString ProcessModel::hostName() const {
 QStringList ProcessModel::mimeTypes() const
 {
     QStringList types;
-    types << "text/plain";
-    types << "text/csv";
-    types << "text/html";
+    types << QStringLiteral("text/plain");
+    types << QStringLiteral("text/csv");
+    types << QStringLiteral("text/html");
     return types;
 }
 
@@ -2032,7 +2032,7 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
             else {
                 textCsv += '\n';
                 textPlain += '\n';
-                textHtml += "</tr><tr>";
+                textHtml += QLatin1String("</tr><tr>");
                 firstrow = false;
             }
             for(int i = 0; i < d->mHeadings.size(); i++) {
@@ -2041,21 +2041,21 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
                     textHtmlHeaders += "<th>" + heading + "</th>";
                     if(i) {
                         textCsvHeaders += ',';
-                        textPlainHeaders += ", ";
+                        textPlainHeaders += QLatin1String(", ");
                     }
                     textPlainHeaders += heading;
-                    heading.replace('"', "\"\"");
+                    heading.replace('"', QLatin1String("\"\""));
                     textCsvHeaders += '"' + heading + '"';
                 }
                 QModelIndex index2 = createIndex(index.row(), i, reinterpret_cast< KSysGuard::Process * > (index.internalPointer()));
                 QString display = data(index2, PlainValueRole).toString();
                 if(i) {
                     textCsv += ',';
-                    textPlain += ", ";
+                    textPlain += QLatin1String(", ");
                 }
                 textHtml += "<td>" +  QString(display).toHtmlEscaped() + "</td>";
                 textPlain += display;
-                display.replace('"',"\"\"");
+                display.replace('"',QLatin1String("\"\""));
                 textCsv += '"' + display + '"';
             }
         }
@@ -2066,7 +2066,7 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
 
     mimeData->setText(textPlain);
     mimeData->setHtml(textHtml);
-    mimeData->setData("text/csv", textCsv.toUtf8());
+    mimeData->setData(QStringLiteral("text/csv"), textCsv.toUtf8());
     return mimeData;
 
 }

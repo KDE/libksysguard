@@ -49,7 +49,7 @@ class SensorSocketAgent : public SensorAgent
     ~SensorSocketAgent();
 
     bool start( const QString &host, const QString &shell,
-                const QString &command = "", int port = -1 );
+                const QString &command = QLatin1String(""), int port = -1 );
 
     void hostInfo( QString &shell, QString &command, int &port ) const;
 

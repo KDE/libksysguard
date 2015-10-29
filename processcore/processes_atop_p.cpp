@@ -111,7 +111,7 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename) {
     {
         lastError = "File " + filename + " has incompatible format";
         if (rh.aversion & 0x8000) {
-            lastError = QString("(created by version %1.%2. This program understands the format written by version 1.23")
+            lastError = QStringLiteral("(created by version %1.%2. This program understands the format written by version 1.23")
                         .arg((rh.aversion >> 8) & 0x7f).arg(rh.aversion & 0xff);
         }
         return false;
@@ -142,13 +142,13 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
     atopLog.seek(historyOffsets.at(index));
     /*Read the first data header */
     if( atopLog.read((char*)(&rr), sizeof(RawRecord)) != sizeof(RawRecord) ) {
-        lastError = "Could not read data header";
+        lastError = QStringLiteral("Could not read data header");
         return false;
     }
 
     if( historyTimes.at(index).first != QDateTime::fromTime_t(rr.curtime) ||
            historyTimes.at(index).second != rr.interval) {
-        lastError = "INTERNAL ERROR WITH loadDataForHistory";
+        lastError = QStringLiteral("INTERNAL ERROR WITH loadDataForHistory");
         ready = false;
         return false;
     }
@@ -161,7 +161,7 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
     do {
         int ret = atopLog.read( processRecord.data() + dataRead, rr.pcomplen - dataRead);
         if(ret == -1) {
-            lastError = "Stream interrupted while being read";
+            lastError = QStringLiteral("Stream interrupted while being read");
             return false;
         }
         dataRead += ret;
@@ -175,13 +175,13 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
     if(ret != Z_OK && ret != Z_STREAM_END && ret != Z_NEED_DICT) {
         switch(ret) {
             case Z_MEM_ERROR:
-                lastError = "Could not uncompress record data due to lack of memory";
+                lastError = QStringLiteral("Could not uncompress record data due to lack of memory");
                 break;
             case Z_BUF_ERROR:
-                lastError = "Could not uncompress record data due to lack of room in buffer";
+                lastError = QStringLiteral("Could not uncompress record data due to lack of room in buffer");
                 break;
             case Z_DATA_ERROR:
-                lastError = "Could not uncompress record data due to corrupted data";
+                lastError = QStringLiteral("Could not uncompress record data due to corrupted data");
                 break;
             default:
                 lastError = "Could not uncompress record data due to unexpected error: " + QString::number(ret);
@@ -202,7 +202,7 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
 ProcessesATop::ProcessesATop(bool loadDefaultFile) : d(new Private())
 {
     if(loadDefaultFile)
-        loadHistoryFile("/var/log/atop.log");
+        loadHistoryFile(QStringLiteral("/var/log/atop.log"));
 }
 
 bool ProcessesATop::isHistoryAvailable() const

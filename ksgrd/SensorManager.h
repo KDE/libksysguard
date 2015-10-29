@@ -68,8 +68,8 @@ class Q_DECL_EXPORT SensorManager : public QObject
     /*! Number of hosts connected to */
     int count() const;
 
-    bool engage( const QString &hostName, const QString &shell = "ssh",
-                 const QString &command = "", int port = -1 );
+    bool engage( const QString &hostName, const QString &shell = QStringLiteral("ssh"),
+                 const QString &command = QLatin1String(""), int port = -1 );
     /* Returns true if we are connected or trying to connect to the host given
      */
     bool isConnected( const QString &hostName );

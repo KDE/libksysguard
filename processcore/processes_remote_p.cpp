@@ -80,14 +80,14 @@ namespace KSysGuard
 ProcessesRemote::ProcessesRemote(const QString &hostname) : d(new Private())
 {
   d->host = hostname;
-  QTimer::singleShot(0, this, SLOT(setup()));
+  QTimer::singleShot(0, this, &ProcessesRemote::setup);
 }
 
 void ProcessesRemote::setup() {
-  emit runCommand("mem/physical/used", (int)UsedMemory);
-  emit runCommand("mem/physical/free", (int)FreeMemory);
-  emit runCommand("ps?", (int)PsInfo);
-  emit runCommand("ps", (int)Ps);
+  emit runCommand(QStringLiteral("mem/physical/used"), (int)UsedMemory);
+  emit runCommand(QStringLiteral("mem/physical/free"), (int)FreeMemory);
+  emit runCommand(QStringLiteral("ps?"), (int)PsInfo);
+  emit runCommand(QStringLiteral("ps"), (int)Ps);
 }
 
 
@@ -145,8 +145,8 @@ void ProcessesRemote::updateAllProcesses( Processes::UpdateFlags updateFlags )
 {
     d->updateFlags = updateFlags;
     if(!d->havePsInfo)
-    	emit runCommand("ps?", (int)PsInfo);
-    emit runCommand("ps", (int)Ps);
+    	emit runCommand(QStringLiteral("ps?"), (int)PsInfo);
+    emit runCommand(QStringLiteral("ps"), (int)Ps);
 }
 QSet<long> ProcessesRemote::getAllPids( )
 {

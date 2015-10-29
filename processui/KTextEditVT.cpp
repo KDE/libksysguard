@@ -136,11 +136,11 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 		}
 
 	} else if(!c.isNull()) {
-		insertPlainText("[");
+		insertPlainText(QStringLiteral("["));
 		QByteArray num;
 		num.setNum(c.toLatin1());
 		insertPlainText(num);
-		insertPlainText("]");
+		insertPlainText(QStringLiteral("]"));
 	}
 }
 

@@ -39,9 +39,9 @@ SensorSocketAgent::SensorSocketAgent( SensorManager *sm )
 {
 
   connect( &mSocket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(error(QAbstractSocket::SocketError)) );
-  connect( &mSocket, SIGNAL(bytesWritten(qint64)), SLOT(msgSent()) );
-  connect( &mSocket, SIGNAL(readyRead()), SLOT(msgRcvd()) );
-  connect( &mSocket, SIGNAL(disconnected()), SLOT(connectionClosed()) );
+  connect( &mSocket, &QIODevice::bytesWritten, this, &SensorSocketAgent::msgSent );
+  connect( &mSocket, &QIODevice::readyRead, this, &SensorSocketAgent::msgRcvd );
+  connect( &mSocket, &QAbstractSocket::disconnected, this, &SensorSocketAgent::connectionClosed );
 }
 
 SensorSocketAgent::~SensorSocketAgent()
