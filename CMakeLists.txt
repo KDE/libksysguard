@@ -60,13 +60,12 @@ endif()
 
 set(HAVE_X11 ${X11_FOUND})
 set(HAVE_XRES ${X11_XRes_FOUND})
+set(HAVE_QTWEBKITWIDGETS ${Qt5WebKitWidgets_FOUND})
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )
 
 add_subdirectory( lsofui )
 add_subdirectory( processcore )
-if(Qt5WebKitWidgets_FOUND)
-    add_subdirectory( processui )
-endif()
+add_subdirectory( processui )
 add_subdirectory( signalplotter )
 add_subdirectory( ksgrd )
 

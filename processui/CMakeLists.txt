@@ -36,7 +36,6 @@ target_link_libraries(processui
     PRIVATE
         Qt5::DBus
         Qt5::Script
-        Qt5::WebKitWidgets
         KF5::I18n
         KF5::WindowSystem
         KF5::Auth
@@ -53,6 +52,10 @@ target_include_directories(processui
 
 if(X11_FOUND)
     target_link_libraries(processui PRIVATE Qt5::X11Extras KF5::WindowSystem)
+endif()
+
+if(Qt5WebKitWidgets_FOUND)
+    target_link_libraries(processui PRIVATE Qt5::WebKitWidgets)
 endif()
 
 set_target_properties(processui

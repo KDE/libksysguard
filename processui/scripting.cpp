@@ -31,17 +31,23 @@
 #include <QScriptValue>
 #include <QScriptContext>
 #include <QTextStream>
-#include <QWebView>
-#include <QWebFrame>
 #include <QDialog>
+#include <QUrl>
 
 #include "processes.h"
 #include "ksysguardprocesslist.h"
 
-#include <KMessageBox>
 #include <KDesktopFile>
 #include <KStandardAction>
+#include <KLocalizedString>
 #include <QVBoxLayout>
+#include <QMessageBox>
+#include <QDialogButtonBox>
+
+#if HAVE_QTWEBKITWIDGETS
+#include <QWebView>
+#include <QWebFrame>
+#endif
 
 class ScriptingHtmlDialog : public QDialog {
     public:
@@ -52,6 +58,7 @@ class ScriptingHtmlDialog : public QDialog {
             connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
             connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
+#if HAVE_QTWEBKITWIDGETS
             QVBoxLayout *layout = new QVBoxLayout;
             layout->addWidget(&m_webView);
             layout->addWidget(buttonBox);
@@ -65,12 +72,15 @@ class ScriptingHtmlDialog : public QDialog {
             m_webView.page()->setNetworkAccessManager(NULL); //Disable talking to remote servers
             m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAsNeeded);
             m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAsNeeded);
+#endif
         }
+#if HAVE_QTWEBKITWIDGETS
         QWebView *webView() {
             return &m_webView;
         }
     protected:
         QWebView m_webView;
+#endif
 };
 
 ProcessObject::ProcessObject(ProcessModel *model, int pid) {
@@ -103,6 +113,7 @@ void Scripting::runScript(const QString &path, const QString &name) {
     mScriptPath = path;
     mScriptName = name;
 
+#if HAVE_QTWEBKITWIDGETS
     QUrl fileName = QUrl::fromLocalFile(path + "index.html");
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
@@ -125,9 +136,12 @@ void Scripting::runScript(const QString &path, const QString &name) {
     mScriptingHtmlDialog->show();
     connect(mScriptingHtmlDialog->webView()->page()->mainFrame(), &QWebFrame::javaScriptWindowObjectCleared, this, &Scripting::setupJavascriptObjects);
     setupJavascriptObjects();
-
-//    connect(mProcessList, SIGNAL(updated()), SLOT(refreshScript()));
+#else
+    QMessageBox::critical(this, i18n("QtWebKitWidgets not available"),
+            i18n("KSysGuard library was compiled without QtWebKitWidgets, please contact your distribution."));
+#endif
 }
+#if HAVE_QTWEBKITWIDGETS
 void Scripting::zoomIn() {
     QWebView *webView = mScriptingHtmlDialog->webView();
     webView->setZoomFactor( webView->zoomFactor() * 1.1 );
@@ -150,6 +164,7 @@ void Scripting::setupJavascriptObjects() {
     mProcessObject = new ProcessObject(mProcessList->processModel(), mPid);
     mScriptingHtmlDialog->webView()->page()->mainFrame()->addToJavaScriptWindowObject(QStringLiteral("process"), mProcessObject, QWebFrame::ScriptOwnership);
 }
+#endif
 void Scripting::stopAllScripts()
 {
     if (mScriptingHtmlDialog)

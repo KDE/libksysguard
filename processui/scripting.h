@@ -28,6 +28,7 @@
 #include <QWidget>
 #include <processcore/processes.h>
 #include "ProcessModel.h"
+#include "../config-ksysguard.h"
 
 class QAction;
 class ScriptingHtmlDialog; //Defined in scripting.cpp file
@@ -54,10 +55,12 @@ class Scripting : public QWidget {
   private Q_SLOTS:
     /** Run the script associated with the QAction that called this slot */
     void runScriptSlot();
+#if HAVE_QTWEBKITWIDGETS
     void setupJavascriptObjects();
     void refreshScript();
     void zoomIn();
     void zoomOut();
+#endif
   private:
     /** This is created on the fly as needed, and deleted when no longer used */
     ScriptingHtmlDialog *mScriptingHtmlDialog;
