@@ -127,6 +127,11 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
     mMovingRow = false;
     mRemovingRow = false;
     mInsertingRow = false;
+#if HAVE_X11
+    mIsX11 = QX11Info::isPlatformX11();
+#else
+    mIsX11 = false;
+#endif
 }
 
 ProcessModelPrivate::~ProcessModelPrivate()
@@ -143,8 +148,10 @@ ProcessModel::ProcessModel(QObject* parent, const QString &host)
 {
     d->q=this;
 #ifdef HAVE_XRES
-    int event, error, major, minor;
-    d->mHaveXRes = XResQueryExtension(QX11Info::display(), &event, &error) && XResQueryVersion(QX11Info::display(), &major, &minor);
+    if (d->mIsX11) {
+        int event, error, major, minor;
+        d->mHaveXRes = XResQueryExtension(QX11Info::display(), &event, &error) && XResQueryVersion(QX11Info::display(), &major, &minor);
+    }
 #endif
 
     if(host.isEmpty() || host == QLatin1String("localhost")) {
@@ -382,6 +389,9 @@ void ProcessModelPrivate::windowRemoved(WId wid) {
 
 #if HAVE_X11
 void ProcessModelPrivate::setupWindows() {
+    if (!mIsX11) {
+        return;
+    }
     connect( KWindowSystem::self(), SIGNAL(windowChanged(WId,uint)), this, SLOT(windowChanged(WId,uint)));
     connect( KWindowSystem::self(), &KWindowSystem::windowAdded, this, &ProcessModelPrivate::windowAdded);
     connect( KWindowSystem::self(), &KWindowSystem::windowRemoved, this, &ProcessModelPrivate::windowRemoved);
@@ -396,6 +406,9 @@ void ProcessModelPrivate::setupWindows() {
 
 #ifdef HAVE_XRES
 bool ProcessModelPrivate::updateXResClientData() {
+    if (!mIsX11) {
+        return false;
+    }
     XResClient *clients;
     int count;
 
@@ -411,6 +424,9 @@ bool ProcessModelPrivate::updateXResClientData() {
 }
 
 void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
+    if (!mIsX11) {
+        return;
+    }
     updateXResClientData();
     Window       *children, dummy;
     unsigned int  count;
@@ -498,6 +514,9 @@ void ProcessModelPrivate::windowAdded(WId wid)
 
 void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, bool newWindow)
 {
+    if (!mIsX11) {
+        return;
+    }
     properties &= (NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMIcon);
 
     if(!properties)
@@ -1860,8 +1879,10 @@ void ProcessModel::setupHeader() {
     headings << i18nc("process heading", "Relative Start Time");
     headings << i18nc("process heading", "Command");
 #if HAVE_X11
-    headings << i18nc("process heading", "X11 Memory");
-    headings << i18nc("process heading", "Window Title");
+    if (d->mIsX11) {
+        headings << i18nc("process heading", "X11 Memory");
+        headings << i18nc("process heading", "Window Title");
+    }
 #endif
 
     if(d->mHeadings.isEmpty()) { // If it's empty, this is the first time this has been called, so insert the headings

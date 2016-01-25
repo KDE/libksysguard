@@ -212,6 +212,8 @@ class ProcessModelPrivate : public QObject
         bool mRemovingRow;
         bool mInsertingRow;
 
+        bool mIsX11;
+
         ProcessModel* q;
 };
 
