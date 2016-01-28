@@ -27,7 +27,7 @@ set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed 
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDECompilerSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
 include(ECMAddTests)
 include(ECMInstallIcons)
