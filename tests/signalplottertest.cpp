@@ -56,8 +56,8 @@ void TestSignalPlotter::testAddRemoveBeamsWithData()
     s->addBeam(Qt::blue);
     s->addBeam(Qt::red);
 
-    QVERIFY( isnan(s->lastValue(0)) ); //unset, so should default to NaN
-    QVERIFY( isnan(s->lastValue(1)) ); //unset, so should default to NaN
+    QVERIFY( std::isnan(s->lastValue(0)) ); //unset, so should default to NaN
+    QVERIFY( std::isnan(s->lastValue(1)) ); //unset, so should default to NaN
     QCOMPARE(s->numBeams(), 2);
     QVERIFY(s->beamColor(0) == Qt::blue);
     QVERIFY(s->beamColor(1) == Qt::red);
@@ -92,7 +92,7 @@ void TestSignalPlotter::testAddRemoveBeamsWithData()
     QVERIFY(s->beamColor(0) == Qt::blue);
     QVERIFY(s->beamColor(1) == Qt::red);
     QCOMPARE(s->lastValue(0), 1.0);
-    QVERIFY( isnan(s->lastValue(1)) ); //unset, so should default to NaN
+    QVERIFY( std::isnan(s->lastValue(1)) ); //unset, so should default to NaN
 }
 
 void TestSignalPlotter::testReorderBeams()
@@ -153,8 +153,8 @@ void TestSignalPlotter::testReorderBeamsWithData()
     s->addBeam(Qt::blue);
     s->addBeam(Qt::red);
     QCOMPARE(s->numBeams(), 2);
-    QVERIFY(isnan(s->lastValue(0))); //unset, so should default to NaN
-    QVERIFY(isnan(s->lastValue(1))); //unset, so should default to NaN
+    QVERIFY(std::isnan(s->lastValue(0))); //unset, so should default to NaN
+    QVERIFY(std::isnan(s->lastValue(1))); //unset, so should default to NaN
     //Add some data
     QList<qreal> data;
     data << 1.0 << 2.0;
@@ -189,13 +189,13 @@ void TestSignalPlotter::testReorderBeamsWithData()
     QCOMPARE(s->numBeams(), 3);
     QCOMPARE(s->lastValue(0), 2.0);
     QCOMPARE(s->lastValue(1), 1.0);
-    QVERIFY(isnan(s->lastValue(2))); //unset, so should default to NaN
+    QVERIFY(std::isnan(s->lastValue(2))); //unset, so should default to NaN
 
     newOrder.clear();
     newOrder << 2 << 0 << 1;
     s->reorderBeams(newOrder);
     QCOMPARE(s->numBeams(), 3);
-    QVERIFY(isnan(s->lastValue(0))); //unset, so should default to NaN
+    QVERIFY(std::isnan(s->lastValue(0))); //unset, so should default to NaN
     QCOMPARE(s->lastValue(1), 2.0);
     QCOMPARE(s->lastValue(2), 1.0);
 }
