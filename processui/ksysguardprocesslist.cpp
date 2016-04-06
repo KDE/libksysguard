@@ -1407,8 +1407,8 @@ bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
                     d->mUi->txtFilter->setFocus();
                     return true;
                 }
-
-            } else if (!keyEvent->text().isEmpty() && keyEvent->key() != Qt::Key_Tab) {
+            } else if (!keyEvent->text().isEmpty() && keyEvent->key() != Qt::Key_Tab
+                       && (!keyEvent->modifiers() || keyEvent->modifiers() == Qt::ShiftModifier)) {
                 // move to textfield and forward keyevent if user starts typing from treeview
                 d->mUi->txtFilter->setFocus();
                 QApplication::sendEvent(d->mUi->txtFilter, event);
