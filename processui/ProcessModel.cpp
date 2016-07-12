@@ -1122,59 +1122,59 @@ bool ProcessModel::canUserLogin(long uid ) const
 
 QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) const
 {
-    QString userTooltip = QStringLiteral("<qt><p style='white-space:pre'>");
+    QString userTooltip;
     if(!mIsLocalhost) {
-        userTooltip += i18n("Login Name: %1<br/>", getUsernameForUser(ps->uid(), true));
+        return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Login Name:</emphasis> %1</para>", getUsernameForUser(ps->uid(), true));
     } else {
         KUser user(ps->uid());
         if(!user.isValid())
-            userTooltip += i18n("This user is not recognized for some reason.");
+            userTooltip += xi18nc("@info:tooltip", "<para>This user is not recognized for some reason.</para>");
         else {
             if(!user.property(KUser::FullName).isValid())
-                userTooltip += i18n("<b>%1</b><br/>", user.property(KUser::FullName).toString());
-            userTooltip += i18n("Login Name: %1 (uid: %2)<br/>", user.loginName(), QString::number(ps->uid()));
+                userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>%1</emphasis></para>", user.property(KUser::FullName).toString());
+            userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Login Name:</emphasis> %1 (uid: %2)</para>", user.loginName(), QString::number(ps->uid()));
             if(!user.property(KUser::RoomNumber).isValid())
-                userTooltip += i18n("  Room Number: %1<br/>", user.property(KUser::RoomNumber).toString());
+                userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>  Room Number:</emphasis> %1</para>", user.property(KUser::RoomNumber).toString());
             if(!user.property(KUser::WorkPhone).isValid())
-                userTooltip += i18n("  Work Phone: %1<br/>", user.property(KUser::WorkPhone).toString());
+                userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>  Work Phone:</emphasis> %1</para>", user.property(KUser::WorkPhone).toString());
         }
     }
     if( (ps->uid() != ps->euid() && ps->euid() != -1) ||
                    (ps->uid() != ps->suid() && ps->suid() != -1) ||
                    (ps->uid() != ps->fsuid() && ps->fsuid() != -1)) {
         if(ps->euid() != -1)
-            userTooltip += i18n("Effective User: %1<br/>", getUsernameForUser(ps->euid(), true));
+            userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Effective User:</emphasis> %1</para>", getUsernameForUser(ps->euid(), true));
         if(ps->suid() != -1)
-            userTooltip += i18n("Setuid User: %1<br/>", getUsernameForUser(ps->suid(), true));
+            userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Setuid User:</emphasis> %1</para>", getUsernameForUser(ps->suid(), true));
         if(ps->fsuid() != -1)
-            userTooltip += i18n("File System User: %1<br/>", getUsernameForUser(ps->fsuid(), true));
+            userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>File System User:</emphasis> %1</para>", getUsernameForUser(ps->fsuid(), true));
         userTooltip += QLatin1String("<br/>");
     }
     if(ps->gid() != -1) {
-        userTooltip += i18n("Group: %1", getGroupnameForGroup(ps->gid()));
+        userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Group:</emphasis> %1</para>", getGroupnameForGroup(ps->gid()));
         if( (ps->gid() != ps->egid() && ps->egid() != -1) ||
                        (ps->gid() != ps->sgid() && ps->sgid() != -1) ||
                        (ps->gid() != ps->fsgid() && ps->fsgid() != -1)) {
             if(ps->egid() != -1)
-                userTooltip += i18n("<br/>Effective Group: %1", getGroupnameForGroup(ps->egid()));
+                userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Effective Group:</emphasis> %1</para>", getGroupnameForGroup(ps->egid()));
             if(ps->sgid() != -1)
-                userTooltip += i18n("<br/>Setuid Group: %1", getGroupnameForGroup(ps->sgid()));
+                userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Setuid Group:</emphasis> %1</para>", getGroupnameForGroup(ps->sgid()));
             if(ps->fsgid() != -1)
-                userTooltip += i18n("<br/>File System Group: %1", getGroupnameForGroup(ps->fsgid()));
+                userTooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>File System Group:</emphasis> %1</para>", getGroupnameForGroup(ps->fsgid()));
         }
     }
     return userTooltip;
 }
 
 QString ProcessModel::getStringForProcess(KSysGuard::Process *process) const {
-    return xi18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid()), process->name(), d->getUsernameForUser(process->uid(), false));
+    return i18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid()), process->name(), d->getUsernameForUser(process->uid(), false));
 }
 
 QString ProcessModelPrivate::getGroupnameForGroup(long gid) const {
     if(mIsLocalhost) {
         QString groupname = KUserGroup(gid).name();
         if(!groupname.isEmpty())
-            return xi18n("%1 (gid: %2)", groupname, gid);
+            return i18nc("Group name and group id", "%1 (gid: %2)", groupname, gid);
     }
     return QString::number(gid);
 }
@@ -1195,7 +1195,7 @@ QString ProcessModelPrivate::getUsernameForUser(long uid, bool withuid) const {
     if(username.isEmpty())
         return QString::number(uid);
     if(withuid)
-        return i18n("%1 (uid: %2)", username, (long int)uid);
+        return i18nc("User name and user id", "%1 (uid: %2)", username, (long int)uid);
     return username;
 }
 
@@ -1384,7 +1384,6 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         switch(index.column()) {
         case HeadingName: {
-            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
             /*   It would be nice to be able to show the icon in the tooltip, but Qt4 won't let us put
              *   a picture in a tooltip :(
 
@@ -1398,32 +1397,44 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip = i18n("<qt><table><tr><td>%1", icon);
             }
             */
+            QString tooltip;
             if(process->parentPid() == -1) {
                 //Give a quick explanation of init and kthreadd
-                if(process->name() == QLatin1String("init")) {
-                    tooltip += i18n("<b>Init</b> is the parent of all other processes and cannot be killed.<br/>");
+                if(process->name() == QLatin1String("init") || process->name() == QLatin1String("systemd")) {
+                    tooltip = xi18nc("@info:tooltip", "<title>%1</title><para>The parent of all other processes and cannot be killed.</para><para><emphasis strong='true'>Process ID:</emphasis> %2</para>", process->name(), (long int)process->pid());
                 } else if(process->name() == QLatin1String("kthreadd")) {
-                    tooltip += i18n("<b>KThreadd</b> manages kernel threads. The children processes run in the kernel, controlling hard disk access, etc.<br/>");
+                    tooltip = xi18nc("@info:tooltip", "<title>KThreadd</title><para>Manages kernel threads. The children processes run in the kernel, controlling hard disk access, etc.</para>");
+                } else {
+                    tooltip = xi18nc("@info:tooltip","<title>%1</title><para><emphasis strong='true'>Process ID:</emphasis> %2</para>",process->name(), (long int)process->pid());
                 }
-                tooltip    += xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2", process->name(), (long int)process->pid());
             }
             else {
                 KSysGuard::Process *parent_process = d->mProcesses->getProcess(process->parentPid());
                 if(parent_process) { //In race conditions, it's possible for this process to not exist
-                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent: %3<br />Parent's ID: %4", process->name(), (long int)process->pid(), parent_process->name(), (long int)process->parentPid());
+                    tooltip    = xi18nc("@info:tooltip",
+                                        "<title>%1</title>"
+                                        "<para><emphasis strong='true'>Process ID:</emphasis> %2</para>"
+                                        "<para><emphasis strong='true'>Parent:</emphasis> %3</para>"
+                                        "<para><emphasis strong='true'>Parent's ID:</emphasis> %4</para>",
+                                        process->name(), (long int)process->pid(), parent_process->name(), (long int)process->parentPid());
                 } else {
-                    tooltip    = xi18nc("name column tooltip. first item is the name","<b>%1</b><br />Process ID: %2<br />Parent's ID: %3", process->name(), (long int)process->pid(), (long int)process->parentPid());
+                    tooltip    = xi18nc("@info:tooltip",
+                                        "<title>%1</title>"
+                                        "<para><emphasis strong='true'>Process ID:</emphasis> %2</para>"
+                                        "<para><emphasis strong='true'>Parent's ID:</emphasis> %3</para>",
+                                        process->name(), (long int)process->pid(), (long int)process->parentPid());
                 }
             }
             if(process->numThreads() >= 1)
-                tooltip += i18n("<br/>Number of threads: %1", process->numThreads());
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Number of threads:</emphasis> %1</para>", process->numThreads());
             if(!process->command().isEmpty()) {
-                tooltip += i18n("<br/>Command: %1", process->command());
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Command:</emphasis> %1</para>", process->command());
             }
             if(!process->tty().isEmpty())
-                tooltip += i18n( "<br />Running on: %1", QString(process->tty()));
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Running on:</emphasis> %1</para>", QString(process->tty()));
             if(!tracer.isEmpty())
                 return QStringLiteral("%1<br />%2").arg(tooltip).arg(tracer);
+
             return tooltip;
         }
         case HeadingStartTime: {
@@ -1434,141 +1445,149 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             const auto systemBootTime = TimeUtil::systemUptimeAbsolute();
             const auto absoluteStartTime = systemBootTime.addSecs(secondsSinceSystemBoot);
             const auto relativeStartTime = absoluteStartTime.secsTo(QDateTime::currentDateTime());
-            const auto tooltip = i18n("Clock ticks since system boot: %1<br/>Seconds since system boot: %2 (System boot time: %3)<br/>Absolute start time: %4<br/>Relative start time: %5",
-                                clockTicksSinceSystemBoot,
-                                secondsSinceSystemBoot,
-                                systemBootTime.toString(),
-                                absoluteStartTime.toString(),
-                                TimeUtil::secondsToHumanElapsedString(relativeStartTime));
-            return tooltip;
+            return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Clock ticks since system boot:</emphasis> %1</para>"
+                                           "<para><emphasis strong='true'>Seconds since system boot:</emphasis> %2 (System boot time: %3)</para>"
+                                           "<para><emphasis strong='true'>Absolute start time:</emphasis> %4</para>"
+                                           "<para><emphasis strong='true'>Relative start time:</emphasis> %5</para>",
+                          clockTicksSinceSystemBoot,
+                          secondsSinceSystemBoot,
+                          systemBootTime.toString(),
+                          absoluteStartTime.toString(),
+                          TimeUtil::secondsToHumanElapsedString(relativeStartTime));
         }
         case HeadingCommand: {
             QString tooltip =
-                i18n("<qt>This process was run with the following command:<br />%1", process->command());
+                xi18nc("@info:tooltip", "<para><emphasis strong='true'>This process was run with the following command:</emphasis></para>"
+                                        "<para>%1</para>", process->command());
             if(!process->tty().isEmpty())
-                tooltip += i18n( "<br /><br />Running on: %1", QString(process->tty()));
-            if(tracer.isEmpty()) return tooltip;
-            return QStringLiteral("%1<br />%2").arg(tooltip).arg(tracer);
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Running on:</emphasis> %1</para>", QString(process->tty()));
+            if (!tracer.isEmpty()) {
+                return QStringLiteral("%1<br/>%2").arg(tooltip).arg(tracer);
+            }
+            return tooltip;
         }
         case HeadingUser: {
-            if(!tracer.isEmpty())
-                return QString(d->getTooltipForUser(process) + "<br />" + tracer);
-            return d->getTooltipForUser(process);
+            QString tooltip = d->getTooltipForUser(process);
+            if(tracer.isEmpty()) {
+                return tooltip;
+            }
+
+            return tooltip + "<br/>" + tracer;
         }
         case HeadingNiceness: {
-            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
+            QString tooltip;
             switch(process->scheduler()) {
               case KSysGuard::Process::Other:
               case KSysGuard::Process::Batch:
               case KSysGuard::Process::Interactive:
-                  tooltip += i18n("Nice level: %1 (%2)", process->niceLevel(), process->niceLevelAsString());
+                  tooltip = xi18nc("@info:tooltip", "<para><emphasis strong='true'>Nice level:</emphasis> %1 (%2)</para>", process->niceLevel(), process->niceLevelAsString());
                   break;
               case KSysGuard::Process::RoundRobin:
               case KSysGuard::Process::Fifo:
-                  tooltip += i18n("This is a real time process.<br>Scheduler priority: %1", process->niceLevel());
+                  tooltip = xi18nc("@info:tooltip", "<para><emphasis strong='true'>This is a real time process.</emphasis></para>"
+                                                    "<para><emphasis strong='true'>Scheduler priority:</emphasis> %1</para>", process->niceLevel());
                   break;
               case KSysGuard::Process::SchedulerIdle:
                   break; //has neither dynamic (niceness) or static (scheduler priority) priotiy
             }
             if(process->scheduler() != KSysGuard::Process::Other)
-                tooltip += i18n("<br/>Scheduler: %1", process->schedulerAsString());
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Scheduler:</emphasis> %1</para>", process->schedulerAsString());
 
             if(process->ioPriorityClass() != KSysGuard::Process::None) {
                 if((process->ioPriorityClass() == KSysGuard::Process::RealTime || process->ioPriorityClass() == KSysGuard::Process::BestEffort) && process->ioniceLevel() != -1)
-                    tooltip += i18n("<br/>I/O Nice level: %1 (%2)", process->ioniceLevel(), process->ioniceLevelAsString());
-                tooltip += i18n("<br/>I/O Class: %1", process->ioPriorityClassAsString());
+                    tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>I/O Nice level:</emphasis> %1 (%2)</para>", process->ioniceLevel(), process->ioniceLevelAsString());
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>I/O Class:</emphasis> %1</para>", process->ioPriorityClassAsString());
             }
-                if(tracer.isEmpty()) return tooltip;
-            return QString(tooltip + "<br />" + tracer);
+            if(tracer.isEmpty()) return tooltip;
+            return QString(tooltip + "<br/>" + tracer);
         }
         case HeadingCPUUsage:
         case HeadingCPUTime: {
             int divideby = (d->mNormalizeCPUUsage?d->mNumProcessorCores:1);
-            QString tooltip = ki18n("<qt><p style='white-space:pre'>"
-                        "Process status: %1 %2<br />"
-                        "User CPU usage: %3%<br />"
-                        "System CPU usage: %4%")  /* Please do not add </qt> here - the tooltip is appended to */
-                        .subs(process->translatedStatus())
-                        .subs(d->getStatusDescription(process->status()))
-                        .subs((float)(process->userUsage()) / divideby)
-                        .subs((float)(process->sysUsage()) / divideby)
-                        .toString();
+            QString tooltip = xi18nc("@info:tooltip",
+                        "<para><emphasis strong='true'>Process status:</emphasis> %1 %2</para>"
+                        "<para><emphasis strong='true'>User CPU usage:</emphasis> %3%</para>"
+                        "<para><emphasis strong='true'>System CPU usage:</emphasis> %4%</para>",  /* Please do not add </qt> here - the tooltip is appended to */
+                        process->translatedStatus(),
+                        d->getStatusDescription(process->status()),
+                        (float)(process->userUsage()) / divideby,
+                        (float)(process->sysUsage()) / divideby);
 
             if(process->numThreads() >= 1)
-                tooltip += i18n("<br/>Number of threads: %1", process->numThreads());
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Number of threads:</emphasis> %1</para>", process->numThreads());
             if(process->numChildren() > 0) {
-                tooltip += ki18n("<br />Number of children: %1<br />Total User CPU usage: %2%<br />"
-                        "Total System CPU usage: %3%<br />Total CPU usage: %4%")
-                        .subs(process->numChildren())
-                        .subs((float)(process->totalUserUsage())/ divideby)
-                        .subs((float)(process->totalSysUsage()) / divideby)
-                        .subs((float)(process->totalUserUsage() + process->totalSysUsage()) / divideby)
-                        .toString();
+                tooltip += xi18nc("@info:tooltip",
+                                  "<para><emphasis strong='true'>Number of children:</emphasis> %1</para>"
+                                  "<para><emphasis strong='true'>Total User CPU usage:</emphasis> %2%</para>"
+                                  "<para><emphasis strong='true'>Total System CPU usage:</emphasis> %3%</para>"
+                                  "<para><emphasis strong='true'>Total CPU usage:</emphasis> %4%</para>",
+                        process->numChildren(),
+                        (float)(process->totalUserUsage())/ divideby,
+                        (float)(process->totalSysUsage()) / divideby,
+                        (float)(process->totalUserUsage() + process->totalSysUsage()) / divideby);
             }
             if(process->userTime() > 0)
-                tooltip += ki18n("<br /><br />CPU time spent running as user: %1 seconds")
-                        .subs(process->userTime() / 100.0, 0, 'f', 1)
-                        .toString();
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>CPU time spent running as user:</emphasis> %1 seconds</para>",
+                        process->userTime() / 100.0, 0, 'f', 1);
             if(process->sysTime() > 0)
-                tooltip += ki18n("<br />CPU time spent running in kernel: %1 seconds")
-                        .subs(process->sysTime() / 100.0, 0, 'f', 1)
-                        .toString();
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>CPU time spent running in kernel:</emphasis> %1 seconds</para>",
+                        process->sysTime() / 100.0, 0, 'f', 1);
             if(process->niceLevel() != 0)
-                tooltip += i18n("<br />Nice level: %1 (%2)", process->niceLevel(), process->niceLevelAsString() );
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Nice level:</emphasis> %1 (%2)</para>", process->niceLevel(), process->niceLevelAsString() );
             if(process->ioPriorityClass() != KSysGuard::Process::None) {
                 if((process->ioPriorityClass() == KSysGuard::Process::RealTime || process->ioPriorityClass() == KSysGuard::Process::BestEffort) && process->ioniceLevel() != -1)
-                    tooltip += i18n("<br/>I/O Nice level: %1 (%2)", process->ioniceLevel(), process->ioniceLevelAsString() );
-                tooltip += i18n("<br/>I/O Class: %1", process->ioPriorityClassAsString() );
+                    tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>I/O Nice level:</emphasis> %1 (%2)</para>", process->ioniceLevel(), process->ioniceLevelAsString() );
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>I/O Class:</emphasis> %1</para>", process->ioPriorityClassAsString() );
             }
 
             if(!tracer.isEmpty())
-                return QString(tooltip + "<br />" + tracer);
+                return QString(tooltip + "<br/>" + tracer);
             return tooltip;
         }
         case HeadingVmSize: {
             return QVariant();
         }
         case HeadingMemory: {
-            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
+            QString tooltip;
             if(process->vmURSS() != -1) {
                 //We don't have information about the URSS, so just fallback to RSS
                 if(d->mMemTotal > 0)
-                    tooltip += i18n("Memory usage: %1 out of %2  (%3 %)<br />",
+                    tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Memory usage:</emphasis> %1 out of %2  (%3 %)</para>",
                                     format.formatByteSize(process->vmURSS() * 1024),
                                         format.formatByteSize(d->mMemTotal * 1024),
                                             process->vmURSS() * 100 / d->mMemTotal);
                 else
-                    tooltip += i18n("Memory usage: %1<br />", format.formatByteSize(process->vmURSS() * 1024));
+                    tooltip += xi18nc("@info:tooltip", "Memory usage:</emphasis> %1<br />", format.formatByteSize(process->vmURSS() * 1024));
             }
             if(d->mMemTotal > 0)
-                tooltip += i18n("RSS Memory usage: %1 out of %2  (%3 %)",
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1 out of %2  (%3 %)</para>",
                                 format.formatByteSize(process->vmRSS() * 1024), format.formatByteSize(d->mMemTotal * 1024),
                                     process->vmRSS() * 100 / d->mMemTotal);
             else
-                tooltip += i18n("RSS Memory usage: %1", format.formatByteSize(process->vmRSS() * 1024));
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1</para>", format.formatByteSize(process->vmRSS() * 1024));
             return tooltip;
         }
         case HeadingSharedMemory: {
-            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
             if(process->vmURSS() == -1) {
-                tooltip += i18n("Your system does not seem to have this information available to be read.");
-                return tooltip;
+                return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Your system does not seem to have this information available to be read.</para>");
             }
             if(d->mMemTotal >0)
-                tooltip += i18n("Shared library memory usage: %1 out of %2  (%3 %)",
+                return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Shared library memory usage:</emphasis> %1 out of %2  (%3 %)</para>",
                                 format.formatByteSize((process->vmRSS() - process->vmURSS()) * 1024),
                                     format.formatByteSize(d->mMemTotal * 1024),
                                         (process->vmRSS() - process->vmURSS()) * 100 / d->mMemTotal);
             else
-                tooltip += i18n("Shared library memory usage: %1", format.formatByteSize((process->vmRSS() - process->vmURSS()) * 1024));
-
-            return tooltip;
+                return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Shared library memory usage:</emphasis> %1</para>", format.formatByteSize((process->vmRSS() - process->vmURSS()) * 1024));
         }
         case HeadingIoWrite:
         case HeadingIoRead: {
-            QString tooltip = QStringLiteral("<qt><p style='white-space:pre'>");
             //FIXME - use the formatByteRate functions when added
-            tooltip += ki18n("Characters read: %1 (%2 KiB/s)<br>Characters written: %3 (%4 KiB/s)<br>Read syscalls: %5 (%6 s⁻¹)<br>Write syscalls: %7 (%8 s⁻¹)<br>Actual bytes read: %9 (%10 KiB/s)<br>Actual bytes written: %11 (%12 KiB/s)")
+            return kxi18nc("@info:tooltip", "<para><emphasis strong='true'>Characters read:</emphasis> %1 (%2 KiB/s)</para>"
+                                            "<para><emphasis strong='true'>Characters written:</emphasis> %3 (%4 KiB/s)</para>"
+                                            "<para><emphasis strong='true'>Read syscalls:</emphasis> %5 (%6 s⁻¹)</para>"
+                                            "<para><emphasis strong='true'>Write syscalls:</emphasis> %7 (%8 s⁻¹)</para>"
+                                            "<para><emphasis strong='true'>Actual bytes read:</emphasis> %9 (%10 KiB/s)</para>"
+                                            "<para><emphasis strong='true'>Actual bytes written:</emphasis> %11 (%12 KiB/s)</para>")
                 .subs(format.formatByteSize(process->ioCharactersRead()))
                 .subs(QString::number(process->ioCharactersReadRate() / 1024))
                 .subs(format.formatByteSize(process->ioCharactersWritten()))
@@ -1582,7 +1601,6 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 .subs(format.formatByteSize(process->ioCharactersActuallyWritten()))
                 .subs(QString::number(process->ioCharactersActuallyWrittenRate() / 1024))
                 .toString();
-            return tooltip;
         }
         case HeadingXTitle: {
 #if HAVE_X11
