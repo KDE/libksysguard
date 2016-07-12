@@ -561,7 +561,6 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
 
     KSysGuard::Process *process = mProcesses->getProcess(w->pid);
     if(!process) {
-        mProcesses->updateOrAddProcess(w->pid);
         return; //This happens when a new window is detected before we've read in the process
     }
 
