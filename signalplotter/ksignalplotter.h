@@ -33,7 +33,8 @@
 
 class QPaintEvent;
 class QResizeEvent;
-class KSignalPlotterPrivate;
+
+struct KSignalPlotterPrivate;
 
 //Make sure only declare KLocalizedString once
 #ifndef KGRAPHICSSIGNALPLOTTER_H
@@ -455,7 +456,7 @@ class Q_DECL_EXPORT KSignalPlotter : public QWidget
 
   private:
     KSignalPlotterPrivate * const d;
-    friend class KSignalPlotterPrivate;
+    friend struct KSignalPlotterPrivate;
 };
 
 #endif
