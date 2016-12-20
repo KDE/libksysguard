@@ -143,7 +143,6 @@ Name[zh_CN]=杀死或停止一个进程
 Name[zh_TW]=砍掉或停止行程
 Description=Sends a given signal to a given process
 Description[ar]=يرسل إشارة معيّنة إلى عمليّة معطاة
-Description[ast]=Unvia una señal dada al procesu dau
 Description[bg]=Изпращане на сигнал до процес
 Description[bs]=Šalje dati signal datom procesu
 Description[ca]=Envia un senyal determinat a un procés indicat
@@ -211,7 +210,6 @@ Policy=auth_admin
 [org.kde.ksysguard.processlisthelper.renice]
 Name=Change the priority of a process
 Name[ar]=غيّر أولويّة عمليّة
-Name[ast]=Camudar la prioridá d'un procesu
 Name[bg]=Промяна приоритета на процес
 Name[bs]=Promijeni prioritet procesa
 Name[ca]=Canvia la prioritat d'un procés
