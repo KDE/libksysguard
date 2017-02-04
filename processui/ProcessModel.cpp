@@ -1557,7 +1557,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                                         format.formatByteSize(d->mMemTotal * 1024),
                                             process->vmURSS() * 100 / d->mMemTotal);
                 else
-                    tooltip += xi18nc("@info:tooltip", "Memory usage:</emphasis> %1<br />", format.formatByteSize(process->vmURSS() * 1024));
+                    tooltip += xi18nc("@info:tooltip", "<emphasis strong='true'>Memory usage:</emphasis> %1<br />", format.formatByteSize(process->vmURSS() * 1024));
             }
             if(d->mMemTotal > 0)
                 tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1 out of %2  (%3 %)</para>",
@@ -1569,7 +1569,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingSharedMemory: {
             if(process->vmURSS() == -1) {
-                return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Your system does not seem to have this information available to be read.</para>");
+                return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Your system does not seem to have this information available to be read.</emphasis></para>");
             }
             if(d->mMemTotal >0)
                 return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Shared library memory usage:</emphasis> %1 out of %2  (%3 %)</para>",
@@ -1878,7 +1878,7 @@ bool ProcessModel::isLocalhost() const
 }
 
 void ProcessModel::setupHeader() {
-    //These must be in the same order that they are in in the header file
+    //These must be in the same order that they are in the header file
     QStringList headings;
     headings << i18nc("process heading", "Name");
     headings << i18nc("process heading", "Username");
