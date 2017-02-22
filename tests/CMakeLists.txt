@@ -7,19 +7,22 @@ if(Qt5WebKitWidgets_FOUND)
             LINK_LIBRARIES KF5::ProcessUi Qt5::Test)
 endif()
 
-ecm_add_test(signalplotterbenchmark.cpp ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp ../signalplotter/ksignalplotter.cpp
-    TEST_NAME signalplotterbenchmark
-    LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes)
+if (KF5Plasma_FOUND)
+    ecm_add_test(signalplotterbenchmark.cpp ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp ../signalplotter/ksignalplotter.cpp
+        TEST_NAME signalplotterbenchmark
+        LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes
+    )
 
-ecm_add_test(graphicssignalplotterbenchmark.cpp ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp ../signalplotter/kgraphicssignalplotter.cpp
-    TEST_NAME graphicssignalplotterbenchmark
-    LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes KF5::Plasma
-)
+    ecm_add_test(graphicssignalplotterbenchmark.cpp ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp ../signalplotter/kgraphicssignalplotter.cpp
+        TEST_NAME graphicssignalplotterbenchmark
+        LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes KF5::Plasma
+    )
 
-ecm_add_test(signalplottertest.cpp ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp ../signalplotter/ksignalplotter.cpp
-    TEST_NAME signalplottertest
-    LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes
-)
+    ecm_add_test(signalplottertest.cpp ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp ../signalplotter/ksignalplotter.cpp
+        TEST_NAME signalplottertest
+        LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes
+    )
+endif()
 
 ecm_add_test(chronotest.cpp
     TEST_NAME chronotest

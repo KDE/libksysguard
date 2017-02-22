@@ -18,7 +18,15 @@ set_package_properties(Qt5WebKitWidgets PROPERTIES
                        PURPOSE "Used by the HTML-based GUI ksysguard library"
                       )
 
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service Plasma)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service)
+find_package(KF5 OPTIONAL_COMPONENTS Plasma)
+set_package_properties(KF5Plasma PROPERTIES
+                       URL "https://cgit.kde.org/plasma-framework.git/"
+                       DESCRIPTION "The library of the plasma project"
+                       TYPE OPTIONAL
+                       PURPOSE "Used by signalplotter to use Plasma themes"
+                      )
+
 find_package(ZLIB REQUIRED)
 set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"
                        URL "http://www.zlib.net"
@@ -66,7 +74,9 @@ configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysg
 add_subdirectory( lsofui )
 add_subdirectory( processcore )
 add_subdirectory( processui )
-add_subdirectory( signalplotter )
+if (KF5Plasma_FOUND)
+    add_subdirectory( signalplotter )
+endif()
 add_subdirectory( ksgrd )
 
 if(BUILD_TESTING)
