@@ -1437,15 +1437,6 @@ bool KSysGuardProcessList::eventFilter(QObject *obj, QEvent *event) {
                 return true;
             }
         }
-    } else if (event->type() == QEvent::FocusIn) {
-        if (obj == d->mUi->treeView && !d->mUi->treeView->selectionModel()->hasSelection()) {
-            // treeview is focused, but there is no current selection. select the first row
-            d->mUi->treeView->setCurrentIndex(d->mUi->treeView->model()->index(0, 0));
-        } else if (obj == d->mUi->txtFilter) {
-            // text field is focused, so clear treeview selection to communicate that you will not
-            // interact with any elements in the view until the view is focused explicitly
-            d->mUi->treeView->setCurrentIndex(QModelIndex());
-        }
     }
     return false;
 }
