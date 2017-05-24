@@ -41,7 +41,10 @@ include(ECMAddTests)
 include(ECMInstallIcons)
 include(ECMPackageConfigHelpers)
 include(CheckIncludeFiles)
+include(CheckLibraryExists)
 include(ECMSetupVersion)
+
+check_library_exists(c clock_gettime "time.h" HAVE_CLOCK_GETTIME_C)
 
 ecm_setup_version(${PROJECT_VERSION}
                   VARIABLE_PREFIX KSYSGUARD

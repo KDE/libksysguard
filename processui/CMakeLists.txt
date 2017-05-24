@@ -58,6 +58,10 @@ if(Qt5WebKitWidgets_FOUND)
     target_link_libraries(processui PRIVATE Qt5::WebKitWidgets)
 endif()
 
+if(NOT HAVE_CLOCK_GETTIME_C)
+    target_link_libraries(processui PRIVATE rt)
+endif()
+
 set_target_properties(processui
    PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING}
    SOVERSION ${KSYSGUARD_SOVERSION}
