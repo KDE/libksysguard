@@ -144,7 +144,7 @@ struct KSignalPlotterPrivate {
 class GraphWidget : public QWidget {
   public:
     GraphWidget(QWidget *parent);
-    virtual void paintEvent ( QPaintEvent * event );
+    void paintEvent ( QPaintEvent * event ) Q_DECL_OVERRIDE;
 
     KSignalPlotterPrivate *signalPlotterPrivate;
 };

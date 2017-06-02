@@ -49,9 +49,9 @@ class SensorSocketAgent : public SensorAgent
     ~SensorSocketAgent();
 
     bool start( const QString &host, const QString &shell,
-                const QString &command = QLatin1String(""), int port = -1 );
+                const QString &command = QLatin1String(""), int port = -1 ) Q_DECL_OVERRIDE;
 
-    void hostInfo( QString &shell, QString &command, int &port ) const;
+    void hostInfo( QString &shell, QString &command, int &port ) const Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
     void connectionClosed();
@@ -60,7 +60,7 @@ class SensorSocketAgent : public SensorAgent
     void error( QAbstractSocket::SocketError );
 
   private:
-    bool writeMsg( const char *msg, int len );
+    bool writeMsg( const char *msg, int len ) Q_DECL_OVERRIDE;
 
     QTcpSocket mSocket;
     int mPort;

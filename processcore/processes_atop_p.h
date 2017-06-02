@@ -40,22 +40,22 @@ namespace KSysGuard
         public:
             explicit ProcessesATop(bool loadDefaultFile = true);
             virtual ~ProcessesATop();
-            virtual QSet<long> getAllPids();
-            virtual long getParentPid(long pid);
-            virtual bool updateProcessInfo(long pid, Process *process);
-            virtual bool sendSignal(long pid, int sig);
-            virtual bool setNiceness(long pid, int priority);
-            virtual bool setScheduler(long pid, int priorityClass, int priority);
-            virtual long long totalPhysicalMemory();
-            virtual bool setIoNiceness(long pid, int priorityClass, int priority);
-            virtual bool supportsIoNiceness();
-            virtual long numberProcessorCores()
+            QSet<long> getAllPids() Q_DECL_OVERRIDE;
+            long getParentPid(long pid) Q_DECL_OVERRIDE;
+            bool updateProcessInfo(long pid, Process *process) Q_DECL_OVERRIDE;
+            bool sendSignal(long pid, int sig) Q_DECL_OVERRIDE;
+            bool setNiceness(long pid, int priority) Q_DECL_OVERRIDE;
+            bool setScheduler(long pid, int priorityClass, int priority) Q_DECL_OVERRIDE;
+            long long totalPhysicalMemory() Q_DECL_OVERRIDE;
+            bool setIoNiceness(long pid, int priorityClass, int priority) Q_DECL_OVERRIDE;
+            bool supportsIoNiceness() Q_DECL_OVERRIDE;
+            long numberProcessorCores() Q_DECL_OVERRIDE
 #ifdef _SC_NPROCESSORS_ONLN
             { return sysconf(_SC_NPROCESSORS_ONLN); } // Should work on any recent posix system
 #else
             ;
 #endif
-            virtual void updateAllProcesses(Processes::UpdateFlags updateFlags) { mUpdateFlags = updateFlags; emit processesUpdated(); } //For local machine, there is no delay
+            void updateAllProcesses(Processes::UpdateFlags updateFlags) Q_DECL_OVERRIDE { mUpdateFlags = updateFlags; emit processesUpdated(); } //For local machine, there is no delay
 
             bool isHistoryAvailable() const;
             QDateTime viewingTime() const;

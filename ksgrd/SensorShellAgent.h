@@ -54,9 +54,9 @@ class SensorShellAgent : public SensorAgent
     ~SensorShellAgent();
 
     bool start( const QString &host, const QString &shell,
-                const QString &command = QLatin1String(QLatin1String("")), int port = -1 );
+                const QString &command = QLatin1String(QLatin1String("")), int port = -1 ) Q_DECL_OVERRIDE;
 
-    void hostInfo( QString &shell, QString &command, int &port) const;
+    void hostInfo( QString &shell, QString &command, int &port) const Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
     void msgRcvd( );
@@ -65,7 +65,7 @@ class SensorShellAgent : public SensorAgent
     void daemonError( QProcess::ProcessError errorStatus );
 
   private:
-    bool writeMsg( const char *msg, int len );
+    bool writeMsg( const char *msg, int len ) Q_DECL_OVERRIDE;
     int mRetryCount;
     QPointer<KProcess> mDaemon;
     QString mShell;

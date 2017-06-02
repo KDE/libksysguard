@@ -34,17 +34,17 @@ namespace KSysGuard
       public:
 	ProcessesRemote(const QString &hostname);
 	virtual ~ProcessesRemote();
-	virtual QSet<long> getAllPids();
-	virtual long getParentPid(long pid);
-	virtual bool updateProcessInfo(long pid, Process *process);
-	virtual bool sendSignal(long pid, int sig);
-        virtual bool setNiceness(long pid, int priority);
-	virtual bool setScheduler(long pid, int priorityClass, int priority);
-	virtual long long totalPhysicalMemory();
-	virtual bool setIoNiceness(long pid, int priorityClass, int priority);
-	virtual bool supportsIoNiceness();
-	virtual long numberProcessorCores();
-    virtual void updateAllProcesses( Processes::UpdateFlags updateFlags );
+	QSet<long> getAllPids() Q_DECL_OVERRIDE;
+	long getParentPid(long pid) Q_DECL_OVERRIDE;
+	bool updateProcessInfo(long pid, Process *process) Q_DECL_OVERRIDE;
+	bool sendSignal(long pid, int sig) Q_DECL_OVERRIDE;
+        bool setNiceness(long pid, int priority) Q_DECL_OVERRIDE;
+	bool setScheduler(long pid, int priorityClass, int priority) Q_DECL_OVERRIDE;
+	long long totalPhysicalMemory() Q_DECL_OVERRIDE;
+	bool setIoNiceness(long pid, int priorityClass, int priority) Q_DECL_OVERRIDE;
+	bool supportsIoNiceness() Q_DECL_OVERRIDE;
+	long numberProcessorCores() Q_DECL_OVERRIDE;
+    void updateAllProcesses( Processes::UpdateFlags updateFlags ) Q_DECL_OVERRIDE;
 
 
       Q_SIGNALS:
