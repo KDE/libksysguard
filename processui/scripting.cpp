@@ -72,6 +72,22 @@ class ScriptingHtmlDialog : public QDialog {
             m_webView.page()->setNetworkAccessManager(NULL); //Disable talking to remote servers
             m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAsNeeded);
             m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAsNeeded);
+
+            // inject a style sheet that follows system colors, otherwise we might end up with black text on dark gray background
+            const QString styleSheet = QStringLiteral(
+                "body { background: %1; color: %2; }" \
+                "a { color: %3; }" \
+                "a:visited { color: %4; } "
+            ).arg(palette().background().color().name(),
+                  palette().text().color().name(),
+                  palette().link().color().name(),
+                  palette().linkVisited().color().name());
+
+            // you can only provide a user style sheet url, so we turn it into a data url here
+            const QUrl dataUrl(QStringLiteral("data:text/css;charset=utf-8;base64,") + QString::fromLatin1(styleSheet.toUtf8().toBase64()));
+
+            m_webView.settings()->setUserStyleSheetUrl(dataUrl);
+
 #endif
         }
 #if HAVE_QTWEBKITWIDGETS
