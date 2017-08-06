@@ -9,7 +9,7 @@ include(WriteBasicConfigVersionFile)
 find_package(ECM 1.2.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-find_package(Qt5 REQUIRED CONFIG COMPONENTS DBus Network Widgets Script)
+find_package(Qt5 REQUIRED CONFIG COMPONENTS DBus Network Widgets)
 find_package(Qt5WebKitWidgets CONFIG)
 set_package_properties(Qt5WebKitWidgets PROPERTIES
                        URL "git://gitorious.org/qt/qtwebkit.git"

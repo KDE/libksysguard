@@ -28,8 +28,6 @@
 #include <QDirIterator>
 #include <QFile>
 #include <QFileInfo>
-#include <QScriptValue>
-#include <QScriptContext>
 #include <QTextStream>
 #include <QDialog>
 #include <QUrl>
