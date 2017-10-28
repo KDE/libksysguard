@@ -46,8 +46,8 @@ class GraphWidget;
 
 class KSignalPlotter;
 
-struct KSignalPlotterPrivate {
-
+class KSignalPlotterPrivate {
+public:
     KSignalPlotterPrivate( KSignalPlotter * q_ptr );
 
     void drawWidget(QPainter *p, const QRect &boundingBox);
