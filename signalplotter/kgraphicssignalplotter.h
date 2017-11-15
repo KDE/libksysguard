@@ -447,11 +447,11 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
 
   protected:
     /* Reimplemented */
-    void resizeEvent( QGraphicsSceneResizeEvent* event ) Q_DECL_OVERRIDE;
-    void paint( QPainter * p, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 ) Q_DECL_OVERRIDE;
-    QSizeF sizeHint( Qt::SizeHint which, const QSizeF & constraint = QSizeF() ) const Q_DECL_OVERRIDE;
-    void changeEvent ( QEvent * event ) Q_DECL_OVERRIDE;
-    QPainterPath opaqueArea() const Q_DECL_OVERRIDE;
+    void resizeEvent( QGraphicsSceneResizeEvent* event ) override;
+    void paint( QPainter * p, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 ) override;
+    QSizeF sizeHint( Qt::SizeHint which, const QSizeF & constraint = QSizeF() ) const override;
+    void changeEvent ( QEvent * event ) override;
+    QPainterPath opaqueArea() const override;
 
 
   private:

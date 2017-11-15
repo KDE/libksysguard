@@ -53,21 +53,21 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         ~ProcessModel() override;
 
         /* Functions for our Model for QAbstractItemModel*/
-        int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
-        int columnCount ( const QModelIndex & parent = QModelIndex() ) const Q_DECL_OVERRIDE;
-        QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
-        QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-        QModelIndex index ( int row, int column, const QModelIndex & parent = QModelIndex() ) const Q_DECL_OVERRIDE;
-        QModelIndex parent ( const QModelIndex & index ) const Q_DECL_OVERRIDE;
+        int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+        int columnCount ( const QModelIndex & parent = QModelIndex() ) const override;
+        QVariant data(const QModelIndex &index, int role) const override;
+        QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+        QModelIndex index ( int row, int column, const QModelIndex & parent = QModelIndex() ) const override;
+        QModelIndex parent ( const QModelIndex & index ) const override;
 
-        bool hasChildren ( const QModelIndex & parent) const Q_DECL_OVERRIDE;
+        bool hasChildren ( const QModelIndex & parent) const override;
         /** Returns if (left < right), used by the sort-filter proxy model to sort the columns */
         bool lessThan( const QModelIndex & left, const QModelIndex & right) const;
 
         /* Functions for drag and drop and copying to clipboard, inherited from QAbstractItemModel */
-        QStringList mimeTypes() const Q_DECL_OVERRIDE;
-        QMimeData *mimeData(const QModelIndexList &indexes) const Q_DECL_OVERRIDE;
-        Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
+        QStringList mimeTypes() const override;
+        QMimeData *mimeData(const QModelIndexList &indexes) const override;
+        Qt::ItemFlags flags(const QModelIndex &index) const override;
 
         /* Functions for setting the model */
 

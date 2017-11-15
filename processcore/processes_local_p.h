@@ -39,22 +39,22 @@ namespace KSysGuard
         public:
             ProcessesLocal();
             ~ProcessesLocal() override;
-            QSet<long> getAllPids() Q_DECL_OVERRIDE;
-            long getParentPid(long pid) Q_DECL_OVERRIDE;
-            bool updateProcessInfo(long pid, Process *process) Q_DECL_OVERRIDE;
-            bool sendSignal(long pid, int sig) Q_DECL_OVERRIDE;
-            bool setNiceness(long pid, int priority) Q_DECL_OVERRIDE;
-            bool setScheduler(long pid, int priorityClass, int priority) Q_DECL_OVERRIDE;
-            long long totalPhysicalMemory() Q_DECL_OVERRIDE;
-            bool setIoNiceness(long pid, int priorityClass, int priority) Q_DECL_OVERRIDE;
-            bool supportsIoNiceness() Q_DECL_OVERRIDE;
-            long numberProcessorCores() Q_DECL_OVERRIDE
+            QSet<long> getAllPids() override;
+            long getParentPid(long pid) override;
+            bool updateProcessInfo(long pid, Process *process) override;
+            bool sendSignal(long pid, int sig) override;
+            bool setNiceness(long pid, int priority) override;
+            bool setScheduler(long pid, int priorityClass, int priority) override;
+            long long totalPhysicalMemory() override;
+            bool setIoNiceness(long pid, int priorityClass, int priority) override;
+            bool supportsIoNiceness() override;
+            long numberProcessorCores() override
 #ifdef _SC_NPROCESSORS_ONLN
             { return sysconf(_SC_NPROCESSORS_ONLN); } // Should work on any recent posix system
 #else
             ;
 #endif
-            void updateAllProcesses(Processes::UpdateFlags updateFlags) Q_DECL_OVERRIDE { mUpdateFlags = updateFlags; emit processesUpdated(); } //For local machine, there is no delay
+            void updateAllProcesses(Processes::UpdateFlags updateFlags) override { mUpdateFlags = updateFlags; emit processesUpdated(); } //For local machine, there is no delay
 
         private:
             /**

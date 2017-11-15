@@ -75,7 +75,7 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
         ProgressBarItemDelegate(QObject *parent) : QStyledItemDelegate(parent) {
         }
 
-        void paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const Q_DECL_OVERRIDE
+        void paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const override
         {
             QStyleOptionViewItemV4 option = opt;
             initStyleOption(&option,index);

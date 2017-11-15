@@ -449,10 +449,10 @@ class Q_DECL_EXPORT KSignalPlotter : public QWidget
 
   protected:
     /* Reimplemented */
-    void resizeEvent( QResizeEvent* ) Q_DECL_OVERRIDE;
-    void paintEvent( QPaintEvent* ) Q_DECL_OVERRIDE;
-    QSize sizeHint() const Q_DECL_OVERRIDE;
-    void changeEvent ( QEvent * event ) Q_DECL_OVERRIDE;
+    void resizeEvent( QResizeEvent* ) override;
+    void paintEvent( QPaintEvent* ) override;
+    QSize sizeHint() const override;
+    void changeEvent ( QEvent * event ) override;
 
   private:
     KSignalPlotterPrivate * const d;

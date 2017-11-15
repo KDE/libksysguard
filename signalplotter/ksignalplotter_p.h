@@ -144,7 +144,7 @@ public:
 class GraphWidget : public QWidget {
   public:
     GraphWidget(QWidget *parent);
-    void paintEvent ( QPaintEvent * event ) Q_DECL_OVERRIDE;
+    void paintEvent ( QPaintEvent * event ) override;
 
     KSignalPlotterPrivate *signalPlotterPrivate;
 };

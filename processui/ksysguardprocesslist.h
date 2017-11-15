@@ -212,15 +212,15 @@ class Q_DECL_EXPORT KSysGuardProcessList : public QWidget
 
     protected:
         /** Inherit QWidget::showEvent(QShowEvent *) to enable the timer, for updates, when visible */
-        void showEvent(QShowEvent*) Q_DECL_OVERRIDE;
+        void showEvent(QShowEvent*) override;
 
         /** Inherit QWidget::hideEvent(QShowEvent *) to disable the timer, for updates, when not visible */
-        void hideEvent(QHideEvent*) Q_DECL_OVERRIDE;
+        void hideEvent(QHideEvent*) override;
 
         /** Capture any change events sent to this widget.  In particular QEvent::LanguageChange */
-        void changeEvent ( QEvent * event ) Q_DECL_OVERRIDE;
+        void changeEvent ( QEvent * event ) override;
 
-        bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
+        bool eventFilter(QObject *obj, QEvent *event) override;
 
         /** Retranslate the Ui as needed */
         void retranslateUi();
