@@ -89,7 +89,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
   Q_PROPERTY(int fillOpacity READ fillOpacity WRITE setFillOpacity)
 
   public:
-    KGraphicsSignalPlotter( QGraphicsItem *parent = 0);
+    KGraphicsSignalPlotter( QGraphicsItem *parent = nullptr);
     ~KGraphicsSignalPlotter() override;
 
     /** \brief Add a new line to the graph plotter, with the specified color.
@@ -448,7 +448,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
   protected:
     /* Reimplemented */
     void resizeEvent( QGraphicsSceneResizeEvent* event ) override;
-    void paint( QPainter * p, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 ) override;
+    void paint( QPainter * p, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr ) override;
     QSizeF sizeHint( Qt::SizeHint which, const QSizeF & constraint = QSizeF() ) const override;
     void changeEvent ( QEvent * event ) override;
     QPainterPath opaqueArea() const override;

@@ -58,7 +58,7 @@ namespace KSysGuard
 
     public:
 
-        Processes(const QString &hostname = QString::null, QObject * parent = 0);
+        Processes(const QString &hostname = QString::null, QObject * parent = nullptr);
         ~Processes() override;
         enum UpdateFlag {
             StandardInformation = 1,
@@ -84,7 +84,7 @@ namespace KSysGuard
          *  For example, if you update every 2000ms, set this to 2000.  That way it won't update
          *  more often than needed.
          */
-        void updateAllProcesses(long updateDurationMS = 0, Processes::UpdateFlags updateFlags = 0);
+        void updateAllProcesses(long updateDurationMS = 0, Processes::UpdateFlags updateFlags = nullptr);
 
         /**
          *  Return information for one specific process.  Call getProcess(0) to get the

@@ -45,13 +45,13 @@ namespace KSysGuard
     public:
       Private(Processes *q_ptr) {
         mFakeProcess.setParent(&mFakeProcess);
-        mAbstractProcesses = 0;
-        mHistoricProcesses = 0;
+        mAbstractProcesses = nullptr;
+        mHistoricProcesses = nullptr;
         mIsLocalHost = true;
         mProcesses.insert(-1, &mFakeProcess);
         mElapsedTimeMilliSeconds = 0;
         mHavePreviousIoValues = false;
-        mUpdateFlags = 0;
+        mUpdateFlags = nullptr;
         mUsingHistoricalData = false;
         q = q_ptr;
     }
@@ -87,7 +87,7 @@ Processes::Private::~Private() {
   mProcesses.clear();
   mListProcesses.clear();
   delete mAbstractProcesses;
-  mAbstractProcesses = NULL;
+  mAbstractProcesses = nullptr;
 }
 
 Processes::Processes(const QString &host, QObject *parent) : QObject(parent), d(new Private(this))
@@ -480,7 +480,7 @@ void Processes::useCurrentData()
 {
     if(d->mUsingHistoricalData) {
         delete d->mHistoricProcesses;
-        d->mHistoricProcesses = NULL;
+        d->mHistoricProcesses = nullptr;
         connect( d->mAbstractProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
         d->mUsingHistoricalData = false;
     }

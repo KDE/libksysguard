@@ -254,7 +254,7 @@ void SensorManager::retranslate()
   mTypes.insert( QStringLiteral( "listview" ), i18n( "Table" ) );
   mTypes.insert( QStringLiteral( "logfile" ), i18n( "Log File") );
 
-  mBroadcaster = NULL;
+  mBroadcaster = nullptr;
 
 }
 
@@ -266,7 +266,7 @@ bool SensorManager::engage( const QString &hostName, const QString &shell,
                             const QString &command, int port )
 {
   if ( !mAgents.contains( hostName ) ) {
-    SensorAgent *agent = 0;
+    SensorAgent *agent = nullptr;
 
 
     if ( port == -1 )

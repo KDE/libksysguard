@@ -44,7 +44,7 @@ class KSYSGUARD_EXPORT ProcessFilter : public QSortFilterProxyModel
 
   public:
 	enum State {AllProcesses=0,AllProcessesInTreeForm, SystemProcesses, UserProcesses, OwnProcesses, ProgramsOnly};
-	ProcessFilter(QObject *parent=0) : QSortFilterProxyModel(parent) {mFilter = AllProcesses;}
+	ProcessFilter(QObject *parent=nullptr) : QSortFilterProxyModel(parent) {mFilter = AllProcesses;}
 	~ProcessFilter() override {}
 	bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 	State filter() const {return mFilter; }

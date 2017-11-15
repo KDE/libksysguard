@@ -67,7 +67,7 @@ class ScriptingHtmlDialog : public QDialog {
             m_webView.settings()->setObjectCacheCapacities(0,0,0);
             m_webView.settings()->setAttribute(QWebSettings::PluginsEnabled, false);
             m_webView.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, false);
-            m_webView.page()->setNetworkAccessManager(NULL); //Disable talking to remote servers
+            m_webView.page()->setNetworkAccessManager(nullptr); //Disable talking to remote servers
             m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAsNeeded);
             m_webView.page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAsNeeded);
 
@@ -119,7 +119,7 @@ QString ProcessObject::readFile(const QString &filename)
 }
 
 Scripting::Scripting(KSysGuardProcessList * parent) : QWidget(parent), mProcessList(parent) {
-    mScriptingHtmlDialog = NULL;
+    mScriptingHtmlDialog = nullptr;
     loadContextMenu();
 }
 void Scripting::runScript(const QString &path, const QString &name) {
@@ -183,8 +183,8 @@ void Scripting::stopAllScripts()
 {
     if (mScriptingHtmlDialog)
         mScriptingHtmlDialog->deleteLater();
-    mScriptingHtmlDialog = NULL;
-    mProcessObject = NULL;
+    mScriptingHtmlDialog = nullptr;
+    mProcessObject = nullptr;
     mScriptPath.clear();
     mScriptName.clear();
 }

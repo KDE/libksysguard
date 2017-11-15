@@ -56,7 +56,7 @@ SensorAgent::~SensorAgent()
 
 void SensorAgent::sendRequest( const QString &req, SensorClient *client, int id )
 {
-  SensorRequest *sensorreq = 0;
+  SensorRequest *sensorreq = nullptr;
   for(int i =0; i < mInputFIFO.size(); ++i) {
     sensorreq = mInputFIFO.at(i);
     if(id == sensorreq->id() && client == sensorreq->client() && req == sensorreq->request()) {
@@ -226,10 +226,10 @@ void SensorAgent::disconnectClient( SensorClient *client )
 {
   for (int i = 0; i < mInputFIFO.size(); ++i)
     if ( mInputFIFO[i]->client() == client )
-      mInputFIFO[i]->setClient(0);
+      mInputFIFO[i]->setClient(nullptr);
   for (int i = 0; i < mProcessingFIFO.size(); ++i)
     if ( mProcessingFIFO[i]->client() == client )
-      mProcessingFIFO[i]->setClient( 0 );
+      mProcessingFIFO[i]->setClient( nullptr );
   
 }
 

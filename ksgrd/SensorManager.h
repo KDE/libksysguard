@@ -62,7 +62,7 @@ class Q_DECL_EXPORT SensorManager : public QObject
         QString mMessage;
     };
 
-    explicit SensorManager(QObject * parent = 0);
+    explicit SensorManager(QObject * parent = nullptr);
     ~SensorManager() override;
 
     /*! Number of hosts connected to */

@@ -47,7 +47,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		}
 		process = model->getProcessAtIndex(source_row);
 	} else {
-		KSysGuard::Process *parent_process = NULL;
+		KSysGuard::Process *parent_process = nullptr;
 		if(source_parent.isValid()) {
 			parent_process = reinterpret_cast<KSysGuard::Process *>(source_parent.internalPointer());
 		       	Q_ASSERT(parent_process);

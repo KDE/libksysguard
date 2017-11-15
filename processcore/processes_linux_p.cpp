@@ -527,7 +527,7 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 QSet<long> ProcessesLocal::getAllPids( )
 {
     QSet<long> pids;
-    if(d->mProcDir==NULL) return pids; //There's not much we can do without /proc
+    if(d->mProcDir==nullptr) return pids; //There's not much we can do without /proc
     struct dirent* entry;
     rewinddir(d->mProcDir);
     while ( ( entry = readdir( d->mProcDir ) ) )

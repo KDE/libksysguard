@@ -150,9 +150,9 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 struct KSysGuardProcessListPrivate {
 
     KSysGuardProcessListPrivate(KSysGuardProcessList* q, const QString &hostName)
-        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(NULL), mUpdateTimer(NULL)
+        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(nullptr), mUpdateTimer(nullptr)
     {
-        mScripting = NULL;
+        mScripting = nullptr;
         mNeedToExpandInit = false;
         mNumItemsSelected = -1;
         mResortCountDown = 2; //The items added initially will be already sorted, but without CPU info.  On the second refresh we will have CPU usage, so /then/ we can resort
@@ -184,7 +184,7 @@ struct KSysGuardProcessListPrivate {
         jumpToSearchFilter->setShortcuts(QList<QKeySequence>() << QKeySequence::Find << '/');
     }
 
-    ~KSysGuardProcessListPrivate() { delete mUi; mUi = NULL; }
+    ~KSysGuardProcessListPrivate() { delete mUi; mUi = nullptr; }
 
     /** The number rows and their children for the given parent in the mFilterModel model */
     int totalRowCount(const QModelIndex &parent) const;
@@ -508,7 +508,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object) {
     //Reset the text back to normal
     d->selectParent->setText(i18n("Jump to Parent Process"));
     QAction *result = qobject_cast<QAction *>(object);
-    if(result == 0) {
+    if(result == nullptr) {
         //Escape was pressed. Do nothing.
     } else if(result == d->renice) {
         reniceSelectedProcesses();
@@ -629,19 +629,19 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
             }
         }
     }
-    QAction *actionAuto = NULL;
-    QAction *actionKB = NULL;
-    QAction *actionMB = NULL;
-    QAction *actionGB = NULL;
-    QAction *actionPercentage = NULL;
-    QAction *actionShowCmdlineOptions = NULL;
-    QAction *actionShowTooltips = NULL;
-    QAction *actionNormalizeCPUUsage = NULL;
+    QAction *actionAuto = nullptr;
+    QAction *actionKB = nullptr;
+    QAction *actionMB = nullptr;
+    QAction *actionGB = nullptr;
+    QAction *actionPercentage = nullptr;
+    QAction *actionShowCmdlineOptions = nullptr;
+    QAction *actionShowTooltips = nullptr;
+    QAction *actionNormalizeCPUUsage = nullptr;
 
-    QAction *actionIoCharacters = NULL;
-    QAction *actionIoSyscalls = NULL;
-    QAction *actionIoActualCharacters = NULL;
-    QAction *actionIoShowRate = NULL;
+    QAction *actionIoCharacters = nullptr;
+    QAction *actionIoSyscalls = nullptr;
+    QAction *actionIoActualCharacters = nullptr;
+    QAction *actionIoShowRate = nullptr;
     bool showIoRate = false;
     if(index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
         showIoRate = d->mModel.ioInformation() == ProcessModel::BytesRate ||
@@ -995,7 +995,7 @@ void KSysGuardProcessList::setUpdateIntervalMSecs(int intervalMSecs)
     d->mUpdateIntervalMSecs = intervalMSecs;
     if(intervalMSecs <= 0) { //no point keep the timer around if we aren't updating automatically
         delete d->mUpdateTimer;
-        d->mUpdateTimer = NULL;
+        d->mUpdateTimer = nullptr;
         return;
     }
 
@@ -1464,7 +1464,7 @@ void KSysGuardProcessList::setScriptingEnabled(bool enabled)
         return;  //Nothing changed
     if(!enabled) {
         delete d->mScripting;
-        d->mScripting = NULL;
+        d->mScripting = nullptr;
     } else {
         d->mScripting = new Scripting(this);
         d->mScripting->hide();

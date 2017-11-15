@@ -113,7 +113,7 @@ ProcessModelPrivate::ProcessModelPrivate() :  mBlankPixmap(HEADING_X_ICON_SIZE,1
     mIsLocalhost = true;
     mMemTotal = -1;
     mNumProcessorCores = 1;
-    mProcesses = NULL;
+    mProcesses = nullptr;
     mShowChildTotals = true;
     mShowCommandLineOptions = false;
     mShowingTooltips = true;
@@ -140,7 +140,7 @@ ProcessModelPrivate::~ProcessModelPrivate()
     qDeleteAll(mPidToWindowInfo);
 #endif
     delete mProcesses;
-    mProcesses = NULL;
+    mProcesses = nullptr;
 }
 
 ProcessModel::ProcessModel(QObject* parent, const QString &host)
@@ -482,7 +482,7 @@ void ProcessModelPrivate::setupProcesses() {
         mPidToWindowInfo.clear();
 #endif
         delete mProcesses;
-        mProcesses = 0;
+        mProcesses = nullptr;
         q->beginResetModel();
         q->endResetModel();
     }
@@ -679,7 +679,7 @@ QModelIndex ProcessModel::index ( int row, int column, const QModelIndex & paren
     }
 
     //Deal with the case that we are showing it as a tree
-    KSysGuard::Process *parent_process = 0;
+    KSysGuard::Process *parent_process = nullptr;
 
     if(parent.isValid()) //not valid for init or children without parents, so use our special item with pid of 0
         parent_process = reinterpret_cast< KSysGuard::Process * > (parent.internalPointer());

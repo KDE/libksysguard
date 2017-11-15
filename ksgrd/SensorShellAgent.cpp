@@ -35,7 +35,7 @@
 using namespace KSGRD;
 
 SensorShellAgent::SensorShellAgent( SensorManager *sm )
-  : SensorAgent( sm ), mDaemon( 0 )
+  : SensorAgent( sm ), mDaemon( nullptr )
 {
 }
 
@@ -46,7 +46,7 @@ SensorShellAgent::~SensorShellAgent()
     mDaemon->disconnect();
     mDaemon->waitForFinished();
     delete mDaemon;
-    mDaemon = 0;
+    mDaemon = nullptr;
   }
 }
 	

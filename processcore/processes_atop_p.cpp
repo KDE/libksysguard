@@ -63,7 +63,7 @@ namespace KSysGuard
 
 ProcessesATop::Private::Private() :
     ready(false),
-    pstats(NULL),
+    pstats(nullptr),
     currentlySelectedIndex(-1)
 {
 }
@@ -138,7 +138,7 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename) {
 bool ProcessesATop::Private::loadDataForHistory(int index)
 {
     delete [] pstats;
-    pstats = NULL;
+    pstats = nullptr;
     atopLog.seek(historyOffsets.at(index));
     /*Read the first data header */
     if( atopLog.read((char*)(&rr), sizeof(RawRecord)) != sizeof(RawRecord) ) {
@@ -188,7 +188,7 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
                 break;
         }
         delete [] pstats;
-        pstats = NULL;
+        pstats = nullptr;
         return false;
     }
 

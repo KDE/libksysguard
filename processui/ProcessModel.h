@@ -49,7 +49,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
     Q_ENUMS(Units)
 
     public:
-        ProcessModel(QObject* parent = 0, const QString &host = QString() );
+        ProcessModel(QObject* parent = nullptr, const QString &host = QString() );
         ~ProcessModel() override;
 
         /* Functions for our Model for QAbstractItemModel*/
