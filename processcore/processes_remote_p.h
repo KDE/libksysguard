@@ -33,7 +33,7 @@ namespace KSysGuard
       Q_OBJECT
       public:
 	ProcessesRemote(const QString &hostname);
-	virtual ~ProcessesRemote();
+	~ProcessesRemote() override;
 	QSet<long> getAllPids() Q_DECL_OVERRIDE;
 	long getParentPid(long pid) Q_DECL_OVERRIDE;
 	bool updateProcessInfo(long pid, Process *process) Q_DECL_OVERRIDE;

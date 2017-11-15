@@ -33,7 +33,7 @@ class Q_DECL_EXPORT KLsofWidget : public QTreeWidget {
   Q_PROPERTY( qlonglong pid READ pid WRITE setPid )
 	public:
 		KLsofWidget(QWidget *parent = NULL);
-                ~KLsofWidget();
+                ~KLsofWidget() override;
 		bool update();
 
 	private Q_SLOTS:

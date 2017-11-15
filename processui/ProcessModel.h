@@ -50,7 +50,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
 
     public:
         ProcessModel(QObject* parent = 0, const QString &host = QString() );
-        virtual ~ProcessModel();
+        ~ProcessModel() override;
 
         /* Functions for our Model for QAbstractItemModel*/
         int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;

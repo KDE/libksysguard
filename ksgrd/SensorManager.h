@@ -63,7 +63,7 @@ class Q_DECL_EXPORT SensorManager : public QObject
     };
 
     explicit SensorManager(QObject * parent = 0);
-    ~SensorManager();
+    ~SensorManager() override;
 
     /*! Number of hosts connected to */
     int count() const;

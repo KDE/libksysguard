@@ -92,7 +92,7 @@ class Q_DECL_EXPORT KSignalPlotter : public QWidget
 
   public:
     KSignalPlotter( QWidget *parent = 0);
-    virtual ~KSignalPlotter();
+    ~KSignalPlotter() override;
 
     /** \brief Add a new line to the graph plotter, with the specified color.
      *

@@ -65,7 +65,7 @@ class ProcessModelPrivate : public QObject
     Q_OBJECT
     public:
         ProcessModelPrivate();
-        ~ProcessModelPrivate();
+        ~ProcessModelPrivate() override;
     public Q_SLOTS:
 
 #if HAVE_X11
@@ -146,7 +146,7 @@ class ProcessModelPrivate : public QObject
         void queryForAndUpdateAllXWindows();
 #endif
 #endif
-        virtual void timerEvent ( QTimerEvent * event ); ///< Call dataChanged() for all the processes in mPidsToUpdate
+        void timerEvent ( QTimerEvent * event ) override; ///< Call dataChanged() for all the processes in mPidsToUpdate
         /** @see setIsLocalhost */
         bool mIsLocalhost;
 

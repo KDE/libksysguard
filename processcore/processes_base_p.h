@@ -45,7 +45,7 @@ namespace KSysGuard
         public:
 
             AbstractProcesses() { errorCode = Processes::Unknown; }
-            virtual ~AbstractProcesses() {}
+            ~AbstractProcesses() override {}
 
             /** \brief Get a set of the currently running process PIDs.
              *

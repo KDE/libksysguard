@@ -38,7 +38,7 @@ namespace KSysGuard
     class ProcessesLocal : public AbstractProcesses {
         public:
             ProcessesLocal();
-            virtual ~ProcessesLocal();
+            ~ProcessesLocal() override;
             QSet<long> getAllPids() Q_DECL_OVERRIDE;
             long getParentPid(long pid) Q_DECL_OVERRIDE;
             bool updateProcessInfo(long pid, Process *process) Q_DECL_OVERRIDE;

@@ -46,7 +46,7 @@ class SensorSocketAgent : public SensorAgent
 
   public:
     explicit SensorSocketAgent( SensorManager *sm );
-    ~SensorSocketAgent();
+    ~SensorSocketAgent() override;
 
     bool start( const QString &host, const QString &shell,
                 const QString &command = QLatin1String(""), int port = -1 ) Q_DECL_OVERRIDE;

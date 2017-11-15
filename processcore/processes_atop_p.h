@@ -39,7 +39,7 @@ namespace KSysGuard
     class ProcessesATop : public AbstractProcesses {
         public:
             explicit ProcessesATop(bool loadDefaultFile = true);
-            virtual ~ProcessesATop();
+            ~ProcessesATop() override;
             QSet<long> getAllPids() Q_DECL_OVERRIDE;
             long getParentPid(long pid) Q_DECL_OVERRIDE;
             bool updateProcessInfo(long pid, Process *process) Q_DECL_OVERRIDE;

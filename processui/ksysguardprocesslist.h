@@ -60,7 +60,7 @@ class Q_DECL_EXPORT KSysGuardProcessList : public QWidget
 
     public:
         KSysGuardProcessList(QWidget* parent = NULL, const QString &hostName = QString());
-        virtual ~KSysGuardProcessList();
+        ~KSysGuardProcessList() override;
 
         QLineEdit *filterLineEdit() const;
         QTreeView *treeView() const;

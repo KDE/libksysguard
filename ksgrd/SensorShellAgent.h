@@ -51,7 +51,7 @@ class SensorShellAgent : public SensorAgent
 
   public:
     explicit SensorShellAgent( SensorManager *sm );
-    ~SensorShellAgent();
+    ~SensorShellAgent() override;
 
     bool start( const QString &host, const QString &shell,
                 const QString &command = QLatin1String(QLatin1String("")), int port = -1 ) Q_DECL_OVERRIDE;

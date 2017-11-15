@@ -51,7 +51,7 @@ class Q_DECL_EXPORT SensorAgent : public QObject
 
   public:
     explicit SensorAgent( SensorManager *sm );
-    virtual ~SensorAgent();
+    ~SensorAgent() override;
 
     virtual bool start( const QString &host, const QString &shell,
                         const QString &command = QLatin1String(""), int port = -1 ) = 0;

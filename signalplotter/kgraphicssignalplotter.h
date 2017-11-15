@@ -90,7 +90,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
 
   public:
     KGraphicsSignalPlotter( QGraphicsItem *parent = 0);
-    virtual ~KGraphicsSignalPlotter();
+    ~KGraphicsSignalPlotter() override;
 
     /** \brief Add a new line to the graph plotter, with the specified color.
      *
