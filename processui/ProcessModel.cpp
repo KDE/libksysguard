@@ -1204,8 +1204,6 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
     //This function must be super duper ultra fast because it's called thousands of times every few second :(
     //I think it should be optomised for role first, hence the switch statement (fastest possible case)
 
-    KFormat format;
-
     if (!index.isValid()) {
         return QVariant();
     }
@@ -1213,6 +1211,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
+    KFormat format;
     switch (role){
     case Qt::DisplayRole: {
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
