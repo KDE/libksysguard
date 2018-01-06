@@ -196,6 +196,7 @@ void testProcess::testUpdateOrAddProcess() {
     processController->updateOrAddProcess(0);
     processController->updateOrAddProcess(-1);
 }
+
 void testProcess::testHistoriesWithWidget() {
     KSysGuardProcessList *processList = new KSysGuardProcessList;
     processList->treeView()->setColumnHidden(13, false);
@@ -215,6 +216,30 @@ void testProcess::testHistoriesWithWidget() {
     }
     delete processList;
 }
+
+void testProcess::testCPUGraphHistory() {
+    KSysGuardProcessList processList;
+    processList.show();
+    QTest::qWaitForWindowExposed(&processList);
+    auto model = processList.processModel();
+    // Access the PercentageHistoryRole to enable collection
+    for(int i = 0; i < model->rowCount(); i++) {
+        auto index = model->index(i, ProcessModel::HeadingCPUUsage, {});
+        auto percentageHist = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
+    }
+
+    processList.updateList();
+
+    // Verify that the current value is the newest history entry
+    for(int i = 0; i < model->rowCount(); i++) {
+        auto index = model->index(i, ProcessModel::HeadingCPUUsage, {});
+        auto percentage = index.data(ProcessModel::PercentageRole).toFloat();
+        auto percentageHist = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
+        QVERIFY(percentageHist.size() > 0);
+        QCOMPARE(percentage, percentageHist.constLast().value);
+    }
+}
+
 QTEST_MAIN(testProcess)
 
 

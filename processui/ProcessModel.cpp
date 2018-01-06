@@ -797,6 +797,24 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             index = q->createIndex(row, ProcessModel::HeadingIoWrite, process);
             emit q->dataChanged(index, index);
         }
+
+        /* Normally this would only be called if changes() tells
+         * us to. We need to update the timestamp even if the value
+         * didn't change though. */
+        auto historyMapEntry = mMapProcessCPUHistory.find(process);
+        if(historyMapEntry != mMapProcessCPUHistory.end()) {
+            auto &history = *historyMapEntry;
+            unsigned long timestamp = QDateTime::currentMSecsSinceEpoch();
+            // Only add an entry if the latest one is older than MIN_HIST_AGE
+            if(history.isEmpty() || timestamp - history.constLast().timestamp > MIN_HIST_AGE) {
+                if(history.size() == MAX_HIST_ENTRIES) {
+                    history.removeFirst();
+                }
+
+                float usage = (process->totalUserUsage() + process->totalSysUsage()) / (100.0f * mNumProcessorCores);
+                history.push_back({static_cast<unsigned long>(QDateTime::currentMSecsSinceEpoch()), usage});
+            }
+        }
     }
 }
 
@@ -841,6 +859,8 @@ void ProcessModelPrivate::beginRemoveRow( KSysGuard::Process *process )
     Q_ASSERT(!mInsertingRow);
     Q_ASSERT(!mMovingRow);
     mRemovingRow = true;
+
+    mMapProcessCPUHistory.remove(process);
 
     if(mSimple) {
         return q->beginRemoveRows(QModelIndex(), process->index(), process->index());
@@ -1778,6 +1798,22 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             default:
                 return -1;
         }
+    }
+    case PercentageHistoryRole: {
+        KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+        Q_CHECK_PTR(process);
+        switch(index.column()) {
+            case HeadingCPUUsage: {
+                auto it = d->mMapProcessCPUHistory.find(process);
+                if (it == d->mMapProcessCPUHistory.end()) {
+                    it = d->mMapProcessCPUHistory.insert(process, {});
+                    it->reserve(ProcessModelPrivate::MAX_HIST_ENTRIES);
+                }
+                return QVariant::fromValue(*it);
+            }
+            default: {}
+        }
+        return QVariant::fromValue(QVector<PercentageHistoryEntry>{});
     }
     case Qt::DecorationRole: {
         if(index.column() == HeadingName) {

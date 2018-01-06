@@ -39,6 +39,7 @@ class testProcess : public QObject
         void testHistories();
         void testHistoriesWithWidget();
         void testUpdateOrAddProcess();
+        void testCPUGraphHistory();
 };
 #endif
 

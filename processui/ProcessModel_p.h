@@ -203,6 +203,11 @@ class ProcessModelPrivate : public QObject
         int mTimerId;
         QList<long> mPidsToUpdate;  ///< A list of pids that we need to emit dataChanged() for regularly
 
+        static const int MAX_HIST_ENTRIES = 100;
+        static const int MIN_HIST_AGE = 200; ///< If the latest history entry is at least this ms old, a new one gets added
+        /** Storage for the history entries. We need one per percentage column. */
+        QHash<KSysGuard::Process *, QVector<ProcessModel::PercentageHistoryEntry>> mMapProcessCPUHistory;
+
 #ifdef HAVE_XRES
         bool mHaveXRes; ///< True if the XRes extension is available at run time
         QMap<qlonglong, XID> mXResClientResources;

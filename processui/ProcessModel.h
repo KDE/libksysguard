@@ -49,6 +49,12 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
     Q_ENUMS(Units)
 
     public:
+        /** Storage for history values. PercentageHistoryRole returns a QVector of this. */
+        struct PercentageHistoryEntry {
+            unsigned long timestamp; // in ms, origin undefined as only the delta matters
+            float value;
+        };
+
         ProcessModel(QObject* parent = nullptr, const QString &host = QString() );
         ~ProcessModel() override;
 
@@ -151,7 +157,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
             HeadingXTitle
         };
 
-        enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, PlainValueRole, PercentageRole };
+        enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, PlainValueRole, PercentageRole, PercentageHistoryRole };
 
         bool showTotals() const;
 
@@ -199,6 +205,9 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         ProcessModelPrivate*  const d;
         friend class ProcessModelPrivate;
 };
+
+Q_DECLARE_METATYPE(QVector<ProcessModel::PercentageHistoryEntry>);
+Q_DECLARE_TYPEINFO(ProcessModel::PercentageHistoryEntry, Q_PRIMITIVE_TYPE);
 
 #endif
 

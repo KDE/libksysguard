@@ -81,16 +81,26 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
             initStyleOption(&option,index);
 
             float percentage = index.data(ProcessModel::PercentageRole).toFloat();
-            if (percentage >= 0)
-                drawPercentageDisplay(painter,option, percentage);
+            auto history = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
+            if (percentage >= 0 || history.size() > 1)
+                drawPercentageDisplay(painter, option, percentage, history);
             else
                 QStyledItemDelegate::paint(painter, option, index);
         }
 
     private:
-        inline void drawPercentageDisplay(QPainter *painter, QStyleOptionViewItemV4 &option, float percentage) const
+        inline void drawPercentageDisplay(QPainter *painter, QStyleOptionViewItemV4 &option, float percentage, const QVector<ProcessModel::PercentageHistoryEntry> &history) const
         {
             QStyle *style = option.widget ? option.widget->style() : QApplication::style();
+            const QRect &rect = option.rect;
+
+            const int HIST_MS_PER_PX = 100; // 100 ms = 1 px -> 1 s = 10 px
+            bool hasHistory = history.size() > 1;
+            // Make sure that more than one entry is visible
+            if (hasHistory) {
+                int width = (history.crbegin()->timestamp - (history.crbegin() + 1)->timestamp) / HIST_MS_PER_PX;
+                hasHistory = width < rect.width();
+            }
 
             // draw the background
             style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
@@ -101,14 +111,46 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
                 cg = QPalette::Inactive;
 
             //Now draw our percentage thingy
-            const QRect &rect = option.rect;
-            int size = qMin(percentage,1.0f) * rect.width();
+            int size = qMin(int(percentage * rect.height()), rect.height());
             if(size > 2 ) { //make sure the line will have a width of more than 1 pixel
                 painter->setPen(Qt::NoPen);
                 QColor color = option.palette.color(cg, QPalette::Link);
-                color.setAlpha(50);
+                color.setAlpha(33);
 
-                painter->fillRect( rect.x(), rect.y(), size, rect.height(), color);
+                painter->fillRect( rect.x(), rect.y() + rect.height() - size, rect.width(), size, color);
+            }
+
+            // Draw the history graph
+            if(hasHistory) {
+                QColor color = option.palette.color(cg, QPalette::Link);
+                color.setAlpha(66);
+                painter->setPen(Qt::NoPen);
+
+                QPainterPath path;
+                // From right to left
+                path.moveTo(rect.right(), rect.bottom());
+
+                int xNow = rect.right();
+                auto now = history.constLast();
+                int height = qMin(int(rect.height() * now.value), rect.height());
+                path.lineTo(xNow, rect.bottom() - height);
+
+                for(int index = history.size() - 2; index >= 0 && xNow > rect.left(); --index) {
+                    auto next = history.at(index);
+                    int width = (now.timestamp - next.timestamp) / HIST_MS_PER_PX;
+                    int xNext = qMax(xNow - width, rect.left());
+
+                    now = next;
+                    xNow = xNext;
+                    int height = qMin(int(rect.height() * now.value), rect.height());
+
+                    path.lineTo(xNow, rect.bottom() - height);
+                }
+
+                path.lineTo(xNow, rect.bottom());
+                path.lineTo(rect.right(), rect.bottom());
+
+                painter->fillPath(path, color);
             }
 
             // draw the text
