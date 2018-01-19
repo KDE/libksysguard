@@ -135,7 +135,7 @@ class ProcessObject : public QObject {
 
         int pid() const { return mPid; }
         void setPid(int pid) { mPid = pid; }
-        QString name() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->name().section(' ', 0,0); else return QString(); }
+        QString name() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->name().section(QLatin1Char(' '), 0,0); else return QString(); }
         QString fullname() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->name(); else return QString(); }
 
         public Q_SLOTS:

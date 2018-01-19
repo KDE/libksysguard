@@ -55,7 +55,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
             float value;
         };
 
-        ProcessModel(QObject* parent = nullptr, const QString &host = QString() );
+        explicit ProcessModel(QObject* parent = nullptr, const QString &host = QString() );
         ~ProcessModel() override;
 
         /* Functions for our Model for QAbstractItemModel*/

@@ -302,7 +302,7 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             //and sort by the string first, then sort by the number
             QRegExp regexpLeft(QStringLiteral("^(\\D*)(\\d*)$"));
             QRegExp regexpRight(regexpLeft);
-            if(regexpLeft.indexIn(processLeft->tty()) == -1 || regexpRight.indexIn(processRight->tty()) == -1)
+            if(regexpLeft.indexIn(QString::fromUtf8(processLeft->tty())) == -1 || regexpRight.indexIn(QString::fromUtf8(processRight->tty())) == -1)
                 return processLeft->tty() < processRight->tty();
             int nameMatch = regexpLeft.cap(1).compare(regexpRight.cap(1));
             if(nameMatch < 0)
@@ -1240,7 +1240,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(d->mShowCommandLineOptions)
                 return process->name();
             else
-                return process->name().section(' ', 0,0);
+                return process->name().section(QLatin1Char(' '), 0,0);
         case HeadingPid:
             return (qlonglong)process->pid();
         case HeadingUser:
@@ -1248,7 +1248,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->uid() == process->euid())
                 return d->getUsernameForUser(process->uid(), false);
             else
-                return QString(d->getUsernameForUser(process->uid(), false) + ", " + d->getUsernameForUser(process->euid(), false));
+                return QString(d->getUsernameForUser(process->uid(), false) + QStringLiteral(", ") + d->getUsernameForUser(process->euid(), false));
         case HeadingNiceness:
             switch(process->scheduler()) {
               case KSysGuard::Process::Other:
@@ -1280,9 +1280,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 if(total < 1 && process->status() != KSysGuard::Process::Sleeping && process->status() != KSysGuard::Process::Running && process->status() != KSysGuard::Process::Ended)
                     return process->translatedStatus();  //tell the user when the process is a zombie or stopped
                 if(total < 0.5)
-                    return "";
+                    return QString();
 
-                return QString(QString::number((int)(total+0.5)) + '%');
+                return QString(QString::number((int)(total+0.5)) + QLatin1Char('%'));
             }
         case HeadingCPUTime: {
             qlonglong seconds = (process->userTime() + process->sysTime())/100;
@@ -1313,7 +1313,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingCommand:
             {
-		return process->command().replace('\n',' ');
+        return process->command().replace(QLatin1Char('\n'),QLatin1Char(' '));
 // It would be nice to embolden the process name in command, but this requires that the itemdelegate to support html text
 //                QString command = process->command;
 //                command.replace(process->name, "<b>" + process->name + "</b>");
@@ -1450,7 +1450,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Command:</emphasis> %1</para>", process->command());
             }
             if(!process->tty().isEmpty())
-                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Running on:</emphasis> %1</para>", QString(process->tty()));
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Running on:</emphasis> %1</para>", QString::fromUtf8(process->tty()));
             if(!tracer.isEmpty())
                 return QStringLiteral("%1<br />%2").arg(tooltip).arg(tracer);
 
@@ -1479,7 +1479,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 xi18nc("@info:tooltip", "<para><emphasis strong='true'>This process was run with the following command:</emphasis></para>"
                                         "<para>%1</para>", process->command());
             if(!process->tty().isEmpty())
-                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Running on:</emphasis> %1</para>", QString(process->tty()));
+                tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Running on:</emphasis> %1</para>", QString::fromUtf8(process->tty()));
             if (!tracer.isEmpty()) {
                 return QStringLiteral("%1<br/>%2").arg(tooltip).arg(tracer);
             }
@@ -1491,7 +1491,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 return tooltip;
             }
 
-            return tooltip + "<br/>" + tracer;
+            return QString(tooltip + QStringLiteral("<br/>") + tracer);
         }
         case HeadingNiceness: {
             QString tooltip;
@@ -1518,7 +1518,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>I/O Class:</emphasis> %1</para>", process->ioPriorityClassAsString());
             }
             if(tracer.isEmpty()) return tooltip;
-            return QString(tooltip + "<br/>" + tracer);
+            return QString(tooltip + QStringLiteral("<br/>") + tracer);
         }
         case HeadingCPUUsage:
         case HeadingCPUTime: {
@@ -1560,7 +1560,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
 
             if(!tracer.isEmpty())
-                return QString(tooltip + "<br/>" + tracer);
+                return QString(tooltip + QStringLiteral("<br/>") + tracer);
             return tooltip;
         }
         case HeadingVmSize: {
@@ -1628,10 +1628,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(values.isEmpty()) return QVariant(QVariant::String);
             for(int i = 0; i < values.size(); i++) {
                 if(!values.at(i)->name.isEmpty())
-                    tooltip += "<li>" + values.at(i)->name + "</li>";
+                    tooltip += QStringLiteral("<li>") + values.at(i)->name + QStringLiteral("</li>");
             }
             if(!tooltip.isEmpty())
-                return QString("<qt><p style='white-space:pre'><ul>" + tooltip + "</ul>");
+                return QString(QStringLiteral("<qt><p style='white-space:pre'><ul>") + tooltip + QStringLiteral("</ul>"));
 #endif
             return QVariant(QVariant::String);
         }
@@ -1677,7 +1677,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->uid() == process->euid())
                 return d->getUsernameForUser(process->uid(), false);
             else
-                return QString(d->getUsernameForUser(process->uid(), false) + ", " + d->getUsernameForUser(process->euid(), false));
+                return QString(d->getUsernameForUser(process->uid(), false) + QStringLiteral(", ") + d->getUsernameForUser(process->euid(), false));
         case HeadingNiceness:
             return process->niceLevel();
         case HeadingTty:
@@ -2103,39 +2103,39 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
             else if(firstColumn != index.column())
                 continue;
             else {
-                textCsv += '\n';
-                textPlain += '\n';
+                textCsv += QLatin1Char('\n');
+                textPlain += QLatin1Char('\n');
                 textHtml += QLatin1String("</tr><tr>");
                 firstrow = false;
             }
             for(int i = 0; i < d->mHeadings.size(); i++) {
                 if(firstrow) {
                     QString heading = d->mHeadings[i];
-                    textHtmlHeaders += "<th>" + heading + "</th>";
+                    textHtmlHeaders += QStringLiteral("<th>") + heading + QStringLiteral("</th>");
                     if(i) {
-                        textCsvHeaders += ',';
+                        textCsvHeaders += QLatin1Char(',');
                         textPlainHeaders += QLatin1String(", ");
                     }
                     textPlainHeaders += heading;
-                    heading.replace('"', QLatin1String("\"\""));
-                    textCsvHeaders += '"' + heading + '"';
+                    heading.replace(QLatin1Char('"'), QLatin1String("\"\""));
+                    textCsvHeaders += QLatin1Char('"') + heading + QLatin1Char('"');
                 }
                 QModelIndex index2 = createIndex(index.row(), i, reinterpret_cast< KSysGuard::Process * > (index.internalPointer()));
                 QString display = data(index2, PlainValueRole).toString();
                 if(i) {
-                    textCsv += ',';
+                    textCsv += QLatin1Char(',');
                     textPlain += QLatin1String(", ");
                 }
-                textHtml += "<td>" +  QString(display).toHtmlEscaped() + "</td>";
+                textHtml += QStringLiteral("<td>") +  display.toHtmlEscaped() + QStringLiteral("</td>");
                 textPlain += display;
-                display.replace('"',QLatin1String("\"\""));
-                textCsv += '"' + display + '"';
+                display.replace(QLatin1Char('"'),QLatin1String("\"\""));
+                textCsv += QLatin1Char('"') + display + QLatin1Char('"');
             }
         }
     }
-    textHtml = "<html><table><tr>" + textHtmlHeaders + "</tr><tr>" + textHtml + "</tr></table>";
-    textCsv = textCsvHeaders + '\n' + textCsv;
-    textPlain = textPlainHeaders + '\n' + textPlain;
+    textHtml = QStringLiteral("<html><table><tr>") + textHtmlHeaders + QStringLiteral("</tr><tr>") + textHtml + QStringLiteral("</tr></table>");
+    textCsv = textCsvHeaders + QLatin1Char('\n') + textCsv;
+    textPlain = textPlainHeaders + QLatin1Char('\n') + textPlain;
 
     mimeData->setText(textPlain);
     mimeData->setHtml(textHtml);

@@ -44,7 +44,7 @@ namespace KSysGuard
 	      tracerPidColumn = ttyColumn = ioprioClassColumn = ioprioColumn =
 	      vmURSSColumn = -1;
               usedMemory = freeMemory;}
-      ~Private() {;}
+      ~Private() {}
       QString host;
       QList<QByteArray> lastAnswer;
       QSet<long> pids;

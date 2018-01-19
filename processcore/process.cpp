@@ -560,7 +560,7 @@ void Process::setTracerpid(qlonglong tracerpid)
     d->changes |= Process::Tracerpid;
 }
 
-void Process::setTty(QByteArray tty)
+void Process::setTty(const QByteArray &tty)
 {
     if(d->tty == tty) return;
     d->tty = tty;
@@ -654,13 +654,13 @@ void Process::setVmURSS(qlonglong _vmURSS) {
     d->changes |= Process::VmURSS;
 }
 
-void Process::setName(QString _name) {
+void Process::setName(const QString &_name) {
     if(d->name == _name) return;
     d->name = _name;
     d->changes |= Process::Name;
 }
 
-void Process::setCommand(QString _command) {
+void Process::setCommand(const QString &_command) {
     if(d->command == _command) return;
     d->command = _command;
     d->changes |= Process::Command;

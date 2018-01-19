@@ -129,7 +129,7 @@ class SensorRequest
 
   private:
     QString mRequest;
-    SensorClient *mClient;
+    SensorClient *mClient = nullptr;
     int mId;
 };
 

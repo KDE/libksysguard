@@ -45,7 +45,7 @@ bool KLsofWidget::update()
 	d->process->waitForFinished();
 	args << QStringLiteral("-Fftn");
 	if(d->pid > 0)
-		args << ("-p" + QString::number(d->pid));
+        args << (QStringLiteral("-p") + QString::number(d->pid));
 	d->process->start(QStringLiteral("lsof"), args);
 	return true;
 }

@@ -53,3 +53,8 @@ LsofSearchWidget::LsofSearchWidget(QWidget* parent, int pid )
 	ktreewidgetsearchline
 }
 
+
+LsofSearchWidget::~LsofSearchWidget()
+{
+    delete ui;
+}

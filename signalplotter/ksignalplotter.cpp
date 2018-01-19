@@ -93,10 +93,9 @@ void KSignalPlotter::setUnit(const KLocalizedString &unit) {
 
 void KSignalPlotter::addBeam( const QColor &color )
 {
-    QList< QList<qreal> >::Iterator it;
     //When we add a new beam, go back and set the data for this beam to NaN for all the other times, to pad it out.
     //This is because it makes it easier for moveSensors
-    for(it = d->mBeamData.begin(); it != d->mBeamData.end(); ++it) {
+    for(QList< QList<qreal> >::Iterator it = d->mBeamData.begin(), total = d->mBeamData.end(); it != total; ++it) {
         (*it).append( std::numeric_limits<qreal>::quiet_NaN() );
     }
     d->mBeamColors.append(color);

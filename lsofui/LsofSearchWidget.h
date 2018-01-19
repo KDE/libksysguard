@@ -36,7 +36,8 @@ class LsofSearchWidget : public QDialog
 	Q_OBJECT
 
 public:
-	LsofSearchWidget(QWidget *parent);
+    explicit LsofSearchWidget(QWidget *parent);
+    ~LsofSearchWidget();
 
 private:
 	Ui_LsofSearchWidget *ui;

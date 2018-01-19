@@ -209,7 +209,7 @@ void Scripting::loadContextMenu() {
             action->setToolTip(desktopFile.readComment());
             action->setIcon(QIcon(desktopFile.readIcon()));
             QString scriptPath = script;
-            scriptPath.truncate(scriptPath.lastIndexOf('/'));
+            scriptPath.truncate(scriptPath.lastIndexOf(QLatin1Char('/')));
             action->setProperty("scriptPath", QString(scriptPath + QLatin1Char('/')));
             connect(action, &QAction::triggered, this, &Scripting::runScriptSlot);
             mProcessList->addAction(action);

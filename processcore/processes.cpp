@@ -519,7 +519,7 @@ bool Processes::loadHistoryFile(const QString &filename)
 QString Processes::historyFileName() const
 {
     if(!d->mIsLocalHost || !d->mHistoricProcesses)
-        return QString::null;
+        return QString();
     return d->mHistoricProcesses->historyFileName();
 }
 QDateTime Processes::viewingTime() const

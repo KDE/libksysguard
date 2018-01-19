@@ -89,7 +89,7 @@ public:
     void setTracerpid(qlonglong tracerpid); ///< If this is being debugged, this is the process that is debugging it, or 0 otherwise
 
     QByteArray tty() const;
-    void setTty(QByteArray tty); ///< The name of the tty the process owns
+    void setTty(const QByteArray &tty); ///< The name of the tty the process owns
 
     qlonglong userTime() const;
     void setUserTime(qlonglong userTime); ///< The time, in 100ths of a second, spent in total on user calls. -1 if not known
@@ -137,10 +137,10 @@ public:
     void setVmURSS(qlonglong vmURSS);   ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
 
     QString name() const;
-    void setName(QString name);  ///< The name (e.g. "ksysguard", "konversation", "init")
+    void setName(const QString &name);  ///< The name (e.g. "ksysguard", "konversation", "init")
 
     QString& command() const; // REF, make non-ref later!
-    void setCommand(QString command); ///< The command the process was launched with
+    void setCommand(const QString &command); ///< The command the process was launched with
 
     ProcessStatus status() const;
     void setStatus( ProcessStatus status); ///< Whether the process is running/sleeping/etc

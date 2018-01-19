@@ -23,7 +23,7 @@ void BenchmarkSignalPlotter::addData()
     s->show();
     s->setMaxAxisTextWidth(5);
     s->resize(1000,500);
-    QTest::qWaitForWindowExposed(s);
+    QVERIFY(QTest::qWaitForWindowExposed(s));
 
     QBENCHMARK {
         s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
@@ -41,7 +41,7 @@ void BenchmarkSignalPlotter::stackedData()
     s->show();
     s->setMaxAxisTextWidth(5);
     s->resize(1000,500);
-    QTest::qWaitForWindowExposed(s);
+    QVERIFY(QTest::qWaitForWindowExposed(s));
 
     QBENCHMARK {
         s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);

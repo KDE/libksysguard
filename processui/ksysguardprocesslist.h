@@ -59,7 +59,7 @@ class Q_DECL_EXPORT KSysGuardProcessList : public QWidget
         Q_ENUMS( ProcessModel::Units )
 
     public:
-        KSysGuardProcessList(QWidget* parent = nullptr, const QString &hostName = QString());
+        explicit KSysGuardProcessList(QWidget* parent = nullptr, const QString &hostName = QString());
         ~KSysGuardProcessList() override;
 
         QLineEdit *filterLineEdit() const;

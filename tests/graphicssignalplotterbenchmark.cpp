@@ -29,7 +29,7 @@ void BenchmarkGraphicsSignalPlotter::addData()
     view->resize(1010,510);
     view->show();
     s->setMaxAxisTextWidth(5);
-    QTest::qWaitForWindowExposed(view);
+    QVERIFY(QTest::qWaitForWindowExposed(view));
 
     QBENCHMARK {
         s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);

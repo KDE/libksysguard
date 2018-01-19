@@ -41,7 +41,8 @@ public:
 	 *  @p currentCpuSched The current Cpu Scheduler of the processes.  Set to -1 to they have different schedulers
 	 *  @p currentIoSched The current I/O Scheduler of the processes.  Set to -1 to they have different schedulers.  Leave as the default -2 if not supported
 	 */
-	ReniceDlg(QWidget* parent, const QStringList& processes, int currentCpuPrio, int currentCpuSched, int currentIoPrio=-2, int currentIoSched=-2);
+    explicit ReniceDlg(QWidget* parent, const QStringList& processes, int currentCpuPrio, int currentCpuSched, int currentIoPrio=-2, int currentIoSched=-2);
+    ~ReniceDlg();
 	int newCPUPriority;
 	int newIOPriority;
 	int newCPUSched;

@@ -54,7 +54,7 @@ class SensorShellAgent : public SensorAgent
     ~SensorShellAgent() override;
 
     bool start( const QString &host, const QString &shell,
-                const QString &command = QLatin1String(QLatin1String("")), int port = -1 ) override;
+                const QString &command = QLatin1String(""), int port = -1 ) override;
 
     void hostInfo( QString &shell, QString &command, int &port) const override;
 

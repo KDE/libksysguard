@@ -57,7 +57,7 @@ class Q_DECL_EXPORT KTextEditVT : public QTextEdit
 	Q_PROPERTY( bool parseAnsiEscapeCodes READ parseAnsiEscapeCodes WRITE setParseAnsiEscapeCodes )
 
 public:
-	KTextEditVT(QWidget* parent);
+    explicit KTextEditVT(QWidget* parent);
 
 	/** Whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
 	bool parseAnsiEscapeCodes() const;

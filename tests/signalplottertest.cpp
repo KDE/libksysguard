@@ -354,8 +354,8 @@ void TestSignalPlotter::testNegativeMinimumRange()
     QCOMPARE(s->currentMaximumRangeValue(), 4014.08); //The given range was -0.976KB to 3.906KB.  This was rounded as: -0.98KB to  3.92KB
     QCOMPARE(s->currentMinimumRangeValue(), -1003.52);
 
-    QCOMPARE(s->valueAsString(4096,1), QString("4.0"));
-    QCOMPARE(s->valueAsString(-4096,1), QString("-4.0"));
+    QCOMPARE(s->valueAsString(4096,1), QStringLiteral("4.0"));
+    QCOMPARE(s->valueAsString(-4096,1), QStringLiteral("-4.0"));
 
     s->addBeam(Qt::red);
     s->addSample(QList<qreal>() << -1024.0);
@@ -393,30 +393,30 @@ void TestSignalPlotter::testSetBeamColor() {
 
 void TestSignalPlotter::testSetUnit() {
     //Test default
-    QCOMPARE(s->valueAsString(3e20,1), QString("3e+20"));
-    QCOMPARE(s->valueAsString(-3e20,1), QString("-3e+20"));
+    QCOMPARE(s->valueAsString(3e20,1), QStringLiteral("3e+20"));
+    QCOMPARE(s->valueAsString(-3e20,1), QStringLiteral("-3e+20"));
 
     s->setUnit(ki18ncp("Units", "%1 second", "%1 seconds") );
 
     QSKIP("I18n problems");
-    QCOMPARE(s->valueAsString(3e20,1), QString("3e+20 seconds"));
-    QCOMPARE(s->valueAsString(-3e20,1), QString("-3e+20 seconds"));
-    QCOMPARE(s->valueAsString(3.4,1), QString("3.4 seconds"));
-    QCOMPARE(s->valueAsString(-3.4,1), QString("-3.4 seconds"));
-    QCOMPARE(s->valueAsString(1), QString("1.0 seconds"));
-    QCOMPARE(s->valueAsString(-1), QString("-1.0 seconds"));
-    QCOMPARE(s->valueAsString(1,0), QString("1 second"));
-    QCOMPARE(s->valueAsString(-1,0), QString("-1 second"));
+    QCOMPARE(s->valueAsString(3e20,1), QStringLiteral("3e+20 seconds"));
+    QCOMPARE(s->valueAsString(-3e20,1), QStringLiteral("-3e+20 seconds"));
+    QCOMPARE(s->valueAsString(3.4,1), QStringLiteral("3.4 seconds"));
+    QCOMPARE(s->valueAsString(-3.4,1), QStringLiteral("-3.4 seconds"));
+    QCOMPARE(s->valueAsString(1), QStringLiteral("1.0 seconds"));
+    QCOMPARE(s->valueAsString(-1), QStringLiteral("-1.0 seconds"));
+    QCOMPARE(s->valueAsString(1,0), QStringLiteral("1 second"));
+    QCOMPARE(s->valueAsString(-1,0), QStringLiteral("-1 second"));
 
     //now switch to minutes
     s->setScaleDownBy(60);
     s->setUnit(ki18ncp("Units", "%1 minute", "%1 minutes") );
-    QCOMPARE(s->valueAsString(3.4), QString("0.06 minutes"));
-    QCOMPARE(s->valueAsString(-3.4), QString("-0.06 minutes"));
-    QCOMPARE(s->valueAsString(60), QString("1.0 minutes"));
-    QCOMPARE(s->valueAsString(-60), QString("-1.0 minutes"));
-    QCOMPARE(s->valueAsString(60,0), QString("1 minute"));
-    QCOMPARE(s->valueAsString(-60,0), QString("-1 minute"));
+    QCOMPARE(s->valueAsString(3.4), QStringLiteral("0.06 minutes"));
+    QCOMPARE(s->valueAsString(-3.4), QStringLiteral("-0.06 minutes"));
+    QCOMPARE(s->valueAsString(60), QStringLiteral("1.0 minutes"));
+    QCOMPARE(s->valueAsString(-60), QStringLiteral("-1.0 minutes"));
+    QCOMPARE(s->valueAsString(60,0), QStringLiteral("1 minute"));
+    QCOMPARE(s->valueAsString(-60,0), QStringLiteral("-1 minute"));
 }
 
 void TestSignalPlotter::testGettersSetters() {

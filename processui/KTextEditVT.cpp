@@ -59,23 +59,23 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 						escape_number2 = escape_number2*10 + c.digitValue();
 
 				}
-			} else if(c == ';') {
+            } else if(c == QLatin1Char(';')) {
 				escape_number_seperator = true;
 			} else if(escape_OSC && c==7) { //Throw away any letters that are not OSC
 				escape_code = c;
 			} else if(escape_CSI)
 				escape_code = c;
-		} else if(c=='[') {
+        } else if(c==QLatin1Char('[')) {
 			escape_CSI = true;
-		} else if(c==']') {
+        } else if(c==QLatin1Char(']')) {
 			escape_OSC = true;
 		}
-		else if(c=='(' || c==')') {}
+        else if(c==QLatin1Char('(') || c==QLatin1Char(')')) {}
 		else
 			escape_code = c;
 		if(!escape_code.isNull()) {
 			//We've read in the whole escape sequence.  Now parse it
-			if(escape_code == 'm') { // change color
+            if(escape_code == QLatin1Char('m')) { // change color
 				switch(escape_number2){
 					case 0: //all off
 						setFontWeight(QFont::Normal);
@@ -119,9 +119,9 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 			escape_number_seperator = false;
 		}
 	} else if(c == 0x0d) {
-		insertPlainText(QChar('\n'));
-	} else if(c.isPrint() || c == '\n') {
-		insertPlainText(QChar(c));
+        insertPlainText(QStringLiteral("\n"));
+    } else if(c.isPrint() || c == QLatin1Char('\n')) {
+        insertPlainText(c);
 	} else if(mParseAnsi) {
 		if(c == 127 || c == 8) { // delete or backspace, respectively
 			textCursor().deletePreviousChar();
@@ -137,8 +137,8 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 
 	} else if(!c.isNull()) {
 		insertPlainText(QStringLiteral("["));
-		QByteArray num;
-		num.setNum(c.toLatin1());
+        QString num;
+        num = c;
 		insertPlainText(num);
 		insertPlainText(QStringLiteral("]"));
 	}
@@ -148,7 +148,7 @@ void KTextEditVT::insertVTText(const QByteArray & string)
 {
 	int size= string.size();
 	for(int i =0; i < size; i++)
-		insertVTChar(QChar(string.at(i)));
+        insertVTChar(QLatin1Char(string.at(i)));
 }
 
 void KTextEditVT::insertVTText(const QString & string)

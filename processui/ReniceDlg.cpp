@@ -120,7 +120,12 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 
 	updateUi();
 
-	mainLayout->addWidget(buttonBox);
+    mainLayout->addWidget(buttonBox);
+}
+
+ReniceDlg::~ReniceDlg()
+{
+    delete ui;
 }
 
 void ReniceDlg::ioSliderChanged(int value) {
