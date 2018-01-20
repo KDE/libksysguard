@@ -128,7 +128,7 @@ void Scripting::runScript(const QString &path, const QString &name) {
     mScriptName = name;
 
 #if HAVE_QTWEBKITWIDGETS
-    QUrl fileName = QUrl::fromLocalFile(path + "index.html");
+    QUrl fileName = QUrl::fromLocalFile(path + QStringLiteral("index.html"));
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
         connect(mScriptingHtmlDialog, &QDialog::rejected, this, &Scripting::stopAllScripts);
