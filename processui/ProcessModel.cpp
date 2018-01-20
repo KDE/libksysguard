@@ -1547,10 +1547,10 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
             if(process->userTime() > 0)
                 tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>CPU time spent running as user:</emphasis> %1 seconds</para>",
-                        process->userTime() / 100.0, 0, 'f', 1);
+                        QString::number(process->userTime() / 100.0, 'f', 1));
             if(process->sysTime() > 0)
                 tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>CPU time spent running in kernel:</emphasis> %1 seconds</para>",
-                        process->sysTime() / 100.0, 0, 'f', 1);
+                        QString::number(process->sysTime() / 100.0, 'f', 1));
             if(process->niceLevel() != 0)
                 tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Nice level:</emphasis> %1 (%2)</para>", process->niceLevel(), process->niceLevelAsString() );
             if(process->ioPriorityClass() != KSysGuard::Process::None) {
