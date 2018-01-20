@@ -92,7 +92,7 @@ ActionReply KSysGuardProcessListHelper::changeioscheduler(QVariantMap parameters
     int ioScheduler = qvariant_cast<int>(parameters.value(QStringLiteral("ioScheduler")));
     int ioSchedulerPriority = qvariant_cast<int>(parameters.value(QStringLiteral("ioSchedulerPriority")));
     bool success = true;
-    int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
+    const int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
     for (int i = 0; i < numProcesses; ++i) {
         qlonglong pid = GET_PID(i);
         success = processes.setIoNiceness(pid, ioScheduler, ioSchedulerPriority) && success;
@@ -112,7 +112,7 @@ ActionReply KSysGuardProcessListHelper::changecpuscheduler(QVariantMap parameter
     int cpuSchedulerPriority = qvariant_cast<int>(parameters.value(QStringLiteral("cpuSchedulerPriority")));
     bool success = true;
 
-    int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
+    const int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
     for (int i = 0; i < numProcesses; ++i) {
         qlonglong pid = GET_PID(i);
         success = processes.setScheduler(pid, cpuScheduler, cpuSchedulerPriority) && success;

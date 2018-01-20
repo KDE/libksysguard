@@ -27,7 +27,6 @@
 #include <klocalizedstring.h>
 
 #include "processcore/processcore_debug.h"
-//#include "SensorClient.h"
 #include "SensorManager.h"
 
 #include "SensorShellAgent.h"
@@ -96,12 +95,12 @@ void SensorShellAgent::msgRcvd( )
 
 void SensorShellAgent::errMsgRcvd( )
 {
-  QByteArray buffer = mDaemon->readAllStandardOutput();
+  const QByteArray buffer = mDaemon->readAllStandardOutput();
 
   // Because we read the error buffer in chunks, we may not have a proper utf8 string.
   // We should never get input over stderr anyway, so no need to worry too much about it.
   // But if this is extended, we will need to handle this better
-  QString buf = QString::fromUtf8( buffer );
+  const QString buf = QString::fromUtf8( buffer );
 
   qCDebug(LIBKSYSGUARD) << "SensorShellAgent: Warning, received text over stderr!"
                 << endl << buf << endl;

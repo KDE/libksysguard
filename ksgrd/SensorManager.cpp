@@ -412,12 +412,12 @@ QString SensorManager::translateSensorType( const QString &type ) const
 
 QString SensorManager::translateSensor( const QString &sensor ) const
 {
-  QString token, out;
+  QString out;
   int start = 0, end = 0;
   for ( ; ; ) {
-    end = sensor.indexOf( '/', start );
+    end = sensor.indexOf( QLatin1Char('/'), start );
     if ( end > 0 )
-      out += translateSensorPath( sensor.mid( start, end - start ) ) + '/';
+      out += translateSensorPath( sensor.mid( start, end - start ) ) + QLatin1Char('/');
     else {
       out += translateSensorPath( sensor.right( sensor.length() - start ) );
       break;
@@ -434,8 +434,7 @@ void SensorManager::readProperties( const KConfigGroup& cfg )
   mCommandList = cfg.readEntry( "CommandList",QStringList() );
 }
 
-void
-SensorManager::saveProperties( KConfigGroup &cfg )
+void SensorManager::saveProperties( KConfigGroup &cfg )
 {
   cfg.writeEntry( "HostList", mHostList );
   cfg.writeEntry( "CommandList", mCommandList );

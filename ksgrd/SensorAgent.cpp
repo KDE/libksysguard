@@ -57,14 +57,14 @@ SensorAgent::~SensorAgent()
 void SensorAgent::sendRequest( const QString &req, SensorClient *client, int id )
 {
   SensorRequest *sensorreq = nullptr;
-  for(int i =0; i < mInputFIFO.size(); ++i) {
+  for(int i =0, total = mInputFIFO.size(); i < total; ++i) {
     sensorreq = mInputFIFO.at(i);
     if(id == sensorreq->id() && client == sensorreq->client() && req == sensorreq->request()) {
       executeCommand();
       return; //don't bother to resend the same request if we already have it in our queue to send
     }
   }
-  for(int i =0; i < mProcessingFIFO.size(); ++i) {
+  for(int i =0, total = mProcessingFIFO.size(); i < total; ++i) {
     sensorreq = mProcessingFIFO.at(i);
     if(id == sensorreq->id() && client == sensorreq->client() && req == sensorreq->request())
       return; //don't bother to resend the same request if we have already sent the request to client and just waiting for an answer
@@ -224,10 +224,10 @@ void SensorAgent::executeCommand()
 
 void SensorAgent::disconnectClient( SensorClient *client )
 {
-  for (int i = 0; i < mInputFIFO.size(); ++i)
+  for (int i = 0, total = mInputFIFO.size(); i < total; ++i)
     if ( mInputFIFO[i]->client() == client )
       mInputFIFO[i]->setClient(nullptr);
-  for (int i = 0; i < mProcessingFIFO.size(); ++i)
+  for (int i = 0, total = mProcessingFIFO.size(); i < total; ++i)
     if ( mProcessingFIFO[i]->client() == client )
       mProcessingFIFO[i]->setClient( nullptr );
   
