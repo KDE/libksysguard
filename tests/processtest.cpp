@@ -142,7 +142,7 @@ void testProcess::testHistories() {
             return;
         }
     }
-    QCOMPARE(processController->historyFileName(), QString("/var/log/atop.log"));
+    QCOMPARE(processController->historyFileName(), QStringLiteral("/var/log/atop.log"));
     QList< QPair<QDateTime, uint> > history = processController->historiesAvailable();
     bool success = processController->setViewingTime(history[0].first);
     QVERIFY(success);
@@ -153,7 +153,7 @@ void testProcess::testHistories() {
     success = processController->setViewingTime(history[0].first.addSecs(-history[0].second -1));
     QVERIFY(!success);
     QVERIFY(processController->viewingTime() == history[0].first);
-    QCOMPARE(processController->historyFileName(), QString("/var/log/atop.log"));
+    QCOMPARE(processController->historyFileName(), QStringLiteral("/var/log/atop.log"));
     
     //Test the tree structure
     processController->updateAllProcesses();
