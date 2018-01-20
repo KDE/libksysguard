@@ -59,7 +59,7 @@ public:
     unsigned long& numChildren() const; // REF, make non-ref later!
 
     QString login() const;
-    void setLogin(QString login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
+    void setLogin(const QString &login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
 
     qlonglong uid() const;
     void setUid(qlonglong uid); ///< The user id that the process is running as

@@ -491,7 +491,7 @@ void Process::setParent(Process* parent)
     d->parent = parent;
 }
 
-void Process::setLogin(QString login)
+void Process::setLogin(const QString &login)
 {
     if(d->login == login) return;
     d->login = login;
