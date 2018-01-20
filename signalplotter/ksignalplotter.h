@@ -91,7 +91,7 @@ class Q_DECL_EXPORT KSignalPlotter : public QWidget
   Q_PROPERTY(int fillOpacity READ fillOpacity WRITE setFillOpacity)
 
   public:
-    KSignalPlotter( QWidget *parent = nullptr);
+    explicit KSignalPlotter( QWidget *parent = nullptr);
     ~KSignalPlotter() override;
 
     /** \brief Add a new line to the graph plotter, with the specified color.

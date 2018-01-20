@@ -25,9 +25,9 @@
 #ifndef KSG_SENSORCLIENT_H
 #define KSG_SENSORCLIENT_H
 
-#include <QtCore/QByteArray>
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QByteArray>
+#include <QList>
+#include <QString>
 
 namespace KSGRD {
 

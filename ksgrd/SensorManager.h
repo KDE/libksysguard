@@ -26,11 +26,11 @@
 
 #include <kconfig.h>
 
-#include <QtCore/QEvent>
-#include <QtCore/QHash>
-#include <QtCore/QStringList>
-#include <QtCore/QObject>
-#include <QtCore/QPointer>
+#include <QEvent>
+#include <QHash>
+#include <QStringList>
+#include <QObject>
+#include <QPointer>
 
 #include "SensorAgent.h"
 

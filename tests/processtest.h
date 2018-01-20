@@ -20,7 +20,7 @@
 #ifndef TESTPROCESS_H
 #define TESTPROCESS_H
 
-#include <QtCore/QObject>
+#include <QObject>
 namespace KSysGuard
 {
     class Process;

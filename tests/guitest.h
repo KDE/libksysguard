@@ -20,7 +20,7 @@
 #ifndef GUITESTPROCESS_H
 #define GUITESTPROCESS_H
 
-#include <QtCore/QObject>
+#include <QObject>
 class testGuiProcess: public QObject
 {
     Q_OBJECT

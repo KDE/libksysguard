@@ -20,7 +20,7 @@
 #ifndef CHRONOTEST_H
 #define CHRONOTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 class testChrono : public QObject
 {
     Q_OBJECT

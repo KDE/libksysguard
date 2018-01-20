@@ -143,7 +143,7 @@ public:
 /* A class to draw the actual widget.  This is used for the QWidget version of KSignalPlotter in order to speed up redraws */
 class GraphWidget : public QWidget {
   public:
-    GraphWidget(QWidget *parent);
+    explicit GraphWidget(QWidget *parent);
     void paintEvent ( QPaintEvent * event ) override;
 
     KSignalPlotterPrivate *signalPlotterPrivate;

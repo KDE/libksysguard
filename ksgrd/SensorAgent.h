@@ -24,9 +24,9 @@
 #ifndef KSG_SENSORAGENT_H
 #define KSG_SENSORAGENT_H
 
-#include <QtCore/QObject>
-#include <QtCore/QQueue>
-#include <QtCore/QPointer>
+#include <QObject>
+#include <QQueue>
+#include <QPointer>
 
 
 class QString;

@@ -39,8 +39,7 @@ LsofSearchWidget::LsofSearchWidget(QWidget* parent, int pid )
 	setWindowTitle( i18n("Renice Process") );
 	QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
 	QWidget *mainWidget = new QWidget(this);
-	QVBoxLayout *mainLayout = new QVBoxLayout;
-	setLayout(mainLayout);
+        QVBoxLayout *mainLayout = new QVBoxLayout(this);
 	mainLayout->addWidget(mainWidget);
 	connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
 	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));

@@ -22,9 +22,9 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-#include <QtCore/QList>
-#include <QtCore/QTime>
-#include <QtCore/QFlags>
+#include <QList>
+#include <QTime>
+#include <QFlags>
 
 namespace KSysGuard
 {
