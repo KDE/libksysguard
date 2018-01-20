@@ -32,7 +32,7 @@ KSysGuardProcessListHelper::KSysGuardProcessListHelper()
 
 /* The functions here run as ROOT.  So be careful.  DO NOT TRUST THE INPUTS TO BE SANE. */
 #define GET_PID(i) parameters.value(QString("pid%1").arg(i), -1).toULongLong(); if(pid < 0) return ActionReply(ActionReply::HelperErrorType);
-ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters) {
+ActionReply KSysGuardProcessListHelper::sendsignal(const QVariantMap &parameters) {
     ActionReply reply(ActionReply::HelperErrorType);
     if(!parameters.contains(QStringLiteral("signal"))) {
         reply.setErrorDescription(QStringLiteral("Internal error - no signal parameter was passed to the helper"));
@@ -66,7 +66,7 @@ ActionReply KSysGuardProcessListHelper::sendsignal(QVariantMap parameters) {
     }
 }
 
-ActionReply KSysGuardProcessListHelper::renice(QVariantMap parameters) {
+ActionReply KSysGuardProcessListHelper::renice(const QVariantMap &parameters) {
     if(!parameters.contains(QStringLiteral("nicevalue")) || !parameters.contains(QStringLiteral("pidcount")))
         return ActionReply(ActionReply::HelperErrorType);
 
@@ -84,7 +84,7 @@ ActionReply KSysGuardProcessListHelper::renice(QVariantMap parameters) {
         return ActionReply(ActionReply::HelperErrorType);
 }
 
-ActionReply KSysGuardProcessListHelper::changeioscheduler(QVariantMap parameters) {
+ActionReply KSysGuardProcessListHelper::changeioscheduler(const QVariantMap &parameters) {
     if(!parameters.contains(QStringLiteral("ioScheduler")) || !parameters.contains(QStringLiteral("ioSchedulerPriority")) || !parameters.contains(QStringLiteral("pidcount")))
         return ActionReply(ActionReply::HelperErrorType);
 
@@ -103,7 +103,7 @@ ActionReply KSysGuardProcessListHelper::changeioscheduler(QVariantMap parameters
         return ActionReply(ActionReply::HelperErrorType);
 
 }
-ActionReply KSysGuardProcessListHelper::changecpuscheduler(QVariantMap parameters) {
+ActionReply KSysGuardProcessListHelper::changecpuscheduler(const QVariantMap &parameters) {
     if(!parameters.contains(QStringLiteral("cpuScheduler")) || !parameters.contains(QStringLiteral("cpuSchedulerPriority")) || !parameters.contains(QStringLiteral("pidcount")))
         return ActionReply(ActionReply::HelperErrorType);
 

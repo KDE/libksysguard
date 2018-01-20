@@ -144,14 +144,14 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 	}
 }
 
-void KTextEditVT::insertVTText(const QByteArray & string)
+void KTextEditVT::insertVTText(const QByteArray &string)
 {
-	int size= string.size();
+    const int size= string.size();
 	for(int i =0; i < size; i++)
         insertVTChar(QLatin1Char(string.at(i)));
 }
 
-void KTextEditVT::insertVTText(const QString & string)
+void KTextEditVT::insertVTText(const QString &string)
 {
 	int size= string.size();
 	for(int i =0; i < size; i++)

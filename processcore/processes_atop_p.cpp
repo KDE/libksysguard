@@ -86,22 +86,22 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename) {
     ready = false;
     currentlySelectedIndex = -1;
     if(!atopLog.exists()) {
-        lastError = "File " + filename + " does not exist";
+        lastError = QStringLiteral("File ") + filename + QStringLiteral(" does not exist");
         return false;
     }
 
     if(!atopLog.open(QIODevice::ReadOnly)) {
-        lastError = "Could not open file" + filename;
+        lastError = QStringLiteral("Could not open file ") + filename;
         return false;
     }
 
     int sizeRead = atopLog.read((char*)(&rh), sizeof(RawHeader));
     if(sizeRead != sizeof(RawHeader)) {
-        lastError = "Could not read header from file" + filename;
+        lastError = QStringLiteral("Could not read header from file ") + filename;
         return false;
     }
     if(rh.magic != ATOPLOGMAGIC) {
-        lastError = "File " + filename + " does not contain raw atop/atopsar output (wrong magic number)";
+        lastError = QStringLiteral("File ") + filename + QStringLiteral(" does not contain raw atop/atopsar output (wrong magic number)");
         return false;
     }
     if (/*rh.sstatlen   != sizeof(SStat)    ||*/
@@ -109,7 +109,7 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename) {
         rh.rawheadlen != sizeof(RawHeader)  ||
         rh.rawreclen  != sizeof(RawRecord)  )
     {
-        lastError = "File " + filename + " has incompatible format";
+        lastError = QStringLiteral("File ") + filename + QStringLiteral(" has incompatible format");
         if (rh.aversion & 0x8000) {
             lastError = QStringLiteral("(created by version %1.%2. This program understands the format written by version 1.23")
                         .arg((rh.aversion >> 8) & 0x7f).arg(rh.aversion & 0xff);
@@ -184,7 +184,7 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
                 lastError = QStringLiteral("Could not uncompress record data due to corrupted data");
                 break;
             default:
-                lastError = "Could not uncompress record data due to unexpected error: " + QString::number(ret);
+                lastError = QStringLiteral("Could not uncompress record data due to unexpected error: ") + QString::number(ret);
                 break;
         }
         delete [] pstats;
@@ -254,10 +254,10 @@ bool ProcessesATop::updateProcessInfo( long pid, Process *process)
     //cmdline separates parameters with the NULL character
     if(!command.isEmpty()) {
         if(command.startsWith(name)) {
-            int index = command.indexOf(QChar('\0'));
+            int index = command.indexOf(QLatin1Char('\0'));
             name = command.left(index);
         }
-        command.replace('\0', ' ');
+        command.replace(QLatin1Char('\0'), QLatin1Char(' '));
     }
     process->setName(name);
     process->setCommand(command);
@@ -351,7 +351,8 @@ bool ProcessesATop::setScheduler(long pid, int priorityClass, int priority) {
 }
 
 
-bool ProcessesATop::setIoNiceness(long pid, int priorityClass, int priority) {
+bool ProcessesATop::setIoNiceness(long pid, int priorityClass, int priority)
+{
     Q_UNUSED(pid);
     Q_UNUSED(priorityClass);
     Q_UNUSED(priority);
@@ -360,13 +361,16 @@ bool ProcessesATop::setIoNiceness(long pid, int priorityClass, int priority) {
     return false;
 }
 
-bool ProcessesATop::supportsIoNiceness() {
+bool ProcessesATop::supportsIoNiceness()
+{
     return false;
 }
 
-long long ProcessesATop::totalPhysicalMemory() {
+long long ProcessesATop::totalPhysicalMemory()
+{
     return 0;
 }
+
 ProcessesATop::~ProcessesATop()
 {
   delete d;

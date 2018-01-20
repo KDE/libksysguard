@@ -441,7 +441,7 @@ void KSysGuardProcessListPrivate::setupKAuthAction(KAuth::Action &action, const 
 {
     action.setHelperId(QStringLiteral("org.kde.ksysguard.processlisthelper"));
 
-    int processCount = pids.count();
+    const int processCount = pids.count();
     for(int i = 0; i < processCount; i++) {
         action.addArgument(QStringLiteral("pid%1").arg(i), pids[i]);
     }
@@ -468,8 +468,8 @@ void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index) {
 void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     d->mProcessContextMenu->clear();
 
-    QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
-    int numProcesses = selectedIndexes.size();
+    const QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
+    const int numProcesses = selectedIndexes.size();
 
     if(numProcesses == 0) {
         //No processes selected, so no process context menu

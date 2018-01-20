@@ -41,7 +41,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	setObjectName( QStringLiteral("Renice Dialog") );
 	setModal( true );
 	setWindowTitle( i18n("Set Priority") );
-	QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, this);
 	previous_cpuscheduler = 0;
 
 	if(currentIoSched == KSysGuard::Process::None) {
@@ -56,8 +56,7 @@ ReniceDlg::ReniceDlg(QWidget* parent, const QStringList& processes, int currentC
 	ioniceSupported = (currentIoPrio != -2);
 
 
-	QVBoxLayout *mainLayout = new QVBoxLayout;
-	setLayout(mainLayout);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
 	QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
 	okButton->setDefault(true);
