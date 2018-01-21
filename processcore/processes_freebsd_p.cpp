@@ -77,7 +77,7 @@ void ProcessesLocal::Private::readProcStatus(struct kinfo_proc *p, Process *proc
     process->setUid(p->ki_ruid);
     process->setEgid(p->ki_svgid);
     process->setGid(p->ki_rgid);
-    process->setName(QStringLiteral(p->ki_comm ? p->ki_comm : "????"));
+    process->setName(QString::fromUtf8(p->ki_comm ? p->ki_comm : "????"));
 }
 
 void ProcessesLocal::Private::readProcStat(struct kinfo_proc *p, Process *ps)
@@ -136,7 +136,7 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
     QString command = QString::fromUtf8(buf);
 
     //cmdline seperates parameters with the NULL character
-    command = command.replace('\0', ' ');
+    command = command.replace(QLatin1Char('\0'), QLatin1Char(' '));
     process->setCommand(command.trimmed());
 
     return true;
