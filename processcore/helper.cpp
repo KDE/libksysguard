@@ -31,7 +31,7 @@ KSysGuardProcessListHelper::KSysGuardProcessListHelper()
 }
 
 /* The functions here run as ROOT.  So be careful.  DO NOT TRUST THE INPUTS TO BE SANE. */
-#define GET_PID(i) parameters.value(QString("pid%1").arg(i), -1).toULongLong(); if(pid < 0) return ActionReply(ActionReply::HelperErrorType);
+#define GET_PID(i) parameters.value(QStringLiteral("pid%1").arg(i), -1).toULongLong(); if(pid < 0) return ActionReply(ActionReply::HelperErrorType);
 ActionReply KSysGuardProcessListHelper::sendsignal(const QVariantMap &parameters) {
     ActionReply reply(ActionReply::HelperErrorType);
     if(!parameters.contains(QStringLiteral("signal"))) {

@@ -130,7 +130,7 @@ ProcessesLocal::ProcessesLocal() : d(new Private())
 }
 bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *process)
 {
-    mFile.setFileName(dir + "status");
+    mFile.setFileName(dir + QStringLiteral("status"));
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
@@ -199,7 +199,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 long ProcessesLocal::getParentPid(long pid) {
     if (pid <= 0)
         return -1;
-    d->mFile.setFileName("/proc/" + QString::number(pid) + "/stat");
+    d->mFile.setFileName(QStringLiteral("/proc/") + QString::number(pid) + QStringLiteral("/stat"));
     if(!d->mFile.open(QIODevice::ReadOnly))
         return -1;      /* process has terminated in the meantime */
 
@@ -236,7 +236,7 @@ long ProcessesLocal::getParentPid(long pid) {
 
 bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
 {
-    QString filename = dir + "stat";
+    QString filename = dir + QStringLiteral("stat");
     // As an optimization, if the last file read in was stat, then we already have this info in memory
     if(mFile.fileName() != filename) {
         mFile.setFileName(filename);
@@ -356,7 +356,7 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
 bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process)
 {
 #ifdef _SC_PAGESIZE
-    mFile.setFileName(dir + "statm");
+    mFile.setFileName(dir + QStringLiteral("statm"));
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
@@ -392,7 +392,7 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
 bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *process)
 {
     if(!process->command().isNull()) return true; //only parse the cmdline once.  This function takes up 25% of the CPU time :-/
-    mFile.setFileName(dir + "cmdline");
+    mFile.setFileName(dir + QStringLiteral("cmdline"));
     if(!mFile.open(QIODevice::ReadOnly))
         return false;      /* process has terminated in the meantime */
 
@@ -402,8 +402,8 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
     //cmdline separates parameters with the NULL character
     if(!process->command().isEmpty()) {
         //extract non-truncated name from cmdline
-        int zeroIndex = process->command().indexOf(QChar('\0'));
-        int processNameStart = process->command().lastIndexOf(QChar('/'), zeroIndex);
+        int zeroIndex = process->command().indexOf(QLatin1Char('\0'));
+        int processNameStart = process->command().lastIndexOf(QLatin1Char('/'), zeroIndex);
         if(processNameStart == -1)
             processNameStart = 0;
         else
@@ -412,7 +412,7 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
         if(nameFromCmdLine.startsWith(process->name()))
             process->setName(nameFromCmdLine);
 
-        process->command().replace('\0', ' ');
+        process->command().replace(QLatin1Char('\0'), QLatin1Char(' '));
     }
 
     mFile.close();
@@ -468,7 +468,7 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
 
 bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *process)
 {
-    QString filename = dir + "io";
+    QString filename = dir + QStringLiteral("io");
     // As an optimization, if the last file read in was io, then we already have this info in memory
     mFile.setFileName(filename);
     if(!mFile.open(QIODevice::ReadOnly))
@@ -513,7 +513,7 @@ bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *proce
 bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 {
     bool success = true;
-    QString dir = "/proc/" + QString::number(pid) + '/';
+    QString dir = QStringLiteral("/proc/") + QString::number(pid) + QLatin1Char('/');
     if(!d->readProcStat(dir, process)) success = false;
     if(!d->readProcStatus(dir, process)) success = false;
     if(!d->readProcStatm(dir, process)) success = false;

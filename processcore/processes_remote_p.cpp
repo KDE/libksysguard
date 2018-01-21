@@ -111,7 +111,7 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
     }
     QList<QByteArray> p = d->processByPid[pid];
 
-    if(d->nameColumn!= -1) process->setName(p.at(d->nameColumn));
+    if(d->nameColumn!= -1) process->setName(QString::fromUtf8(p.at(d->nameColumn)));
     if(d->uidColumn!= -1) process->setUid(p.at(d->uidColumn).toLong());
     if(d->gidColumn!= -1) process->setGid(p.at(d->gidColumn).toLong());
     if(d->statusColumn!= -1) {
@@ -166,16 +166,16 @@ QSet<long> ProcessesRemote::getAllPids( )
 
 bool ProcessesRemote::sendSignal(long pid, int sig) {
 	//TODO run the proper command for all these functions below
-    emit runCommand("kill " + QString::number(pid) + " " + QString::number(sig), (int)Kill);
+    emit runCommand(QStringLiteral("kill ") + QString::number(pid) + QStringLiteral(" ") + QString::number(sig), (int)Kill);
     return true;
 }
 bool ProcessesRemote::setNiceness(long pid, int priority) {
-    emit runCommand("setpriority " + QString::number(pid) + " " + QString::number(priority), (int)Renice);
+    emit runCommand(QStringLiteral("setpriority ") + QString::number(pid) + QStringLiteral(" ") + QString::number(priority), (int)Renice);
     return true;
 }
 
 bool ProcessesRemote::setIoNiceness(long pid, int priorityClass, int priority) {
-    emit runCommand("ionice " + QString::number(pid) + " " + QString::number(priorityClass) + " " + QString::number(priority), (int)Ionice);
+    emit runCommand(QStringLiteral("ionice ") + QString::number(pid) + QStringLiteral(" ") + QString::number(priorityClass) + QStringLiteral(" ") + QString::number(priority), (int)Ionice);
     return true;
 }
 

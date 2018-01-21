@@ -1,12 +1,13 @@
+cmake_minimum_required(VERSION 3.0)
+
 project(libksysguard)
 set(PROJECT_VERSION "5.12.80")
 set(PROJECT_VERSION_MAJOR 5)
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 include(FeatureSummary)
 include(WriteBasicConfigVersionFile)
 
-find_package(ECM 1.2.0 REQUIRED NO_MODULE)
+find_package(ECM 5.30 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 find_package(Qt5 REQUIRED CONFIG COMPONENTS DBus Network Widgets)
@@ -90,7 +91,7 @@ endif()
 add_subdirectory( ksgrd )
 
 if(BUILD_TESTING)
-add_subdirectory( tests )
+    add_subdirectory( tests )
 endif()
 
 install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts)
