@@ -26,7 +26,7 @@
 #include "processcore/processes.h"
 #include "processcore/process.h"
 #include "processcore/processes_base_p.h"
-#include "processcore/processcore_debug.h"
+#include "processcore_debug.h"
 
 #include "processui/ksysguardprocesslist.h"
 

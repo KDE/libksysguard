@@ -1,0 +1,5 @@
+org.kde.libksysguard.ksgrd libksysguard (ksgrd)
+org.kde.libksysguard.processcore libksysguard (processcore)
+org.kde.libksysguard.processui libksysguard (processui)
+org.kde.libksysguard.ksignalplotter libksysguard (ksignalplotter)
+

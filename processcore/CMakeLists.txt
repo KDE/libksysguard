@@ -3,7 +3,6 @@ add_definitions(-DTRANSLATION_DOMAIN=\"processcore\")
 ########### next target ###############
 
 set(ksysguard_LIB_SRCS
-   processcore_debug.cpp
    processes.cpp
    process.cpp
    processes_local_p.cpp
@@ -11,7 +10,7 @@ set(ksysguard_LIB_SRCS
    processes_base_p.cpp
    processes_atop_p.cpp
 )
-
+ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
 
 
 add_library(processcore ${ksysguard_LIB_SRCS})

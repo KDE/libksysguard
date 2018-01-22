@@ -23,8 +23,7 @@
 
 //#include <stdlib.h>
 
-#include "processcore/processcore_debug.h"
-#include <QDebug>
+#include "ksgrd_debug.h"
 #include <klocalizedstring.h>
 
 #include "SensorClient.h"
@@ -54,7 +53,7 @@ bool SensorSocketAgent::start( const QString &host, const QString&,
                                const QString&, int port )
 {
   if ( port <= 0 )
-    qCDebug(LIBKSYSGUARD) << "SensorSocketAgent::start: Invalid port " << port;
+    qCDebug(LIBKSYSGUARD_KSGRD) << "SensorSocketAgent::start: Invalid port " << port;
 
   setHostName( host );
   mPort = port;

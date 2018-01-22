@@ -44,6 +44,7 @@ include(ECMPackageConfigHelpers)
 include(CheckIncludeFiles)
 include(CheckLibraryExists)
 include(ECMSetupVersion)
+include(ECMQtDeclareLoggingCategory)
 
 check_library_exists(c clock_gettime "time.h" HAVE_CLOCK_GETTIME_C)
 
@@ -110,5 +111,7 @@ install(EXPORT libksysguardLibraryTargets
         NAMESPACE KF5::
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
         FILE KF5SysGuardLibraryTargets.cmake )
+
+install(FILES libksysguard.categories DESTINATION ${KDE_INSTALL_CONFDIR})
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

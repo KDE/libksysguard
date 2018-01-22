@@ -2,11 +2,10 @@
 set(ksignalplotter_WIDGETS "ksignalplotter.widgets")
 
 set(ksignalplotter_LIB_SRCS
-    ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp
     ksignalplotter.cpp
     kgraphicssignalplotter.cpp
 )
-# kde4_moc_headers(ksignalplotter ksignalplotter.h kgraphicssignalplotter.h)
+ecm_qt_declare_logging_category(ksignalplotter_LIB_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter)
 add_library(ksignalplotter ${ksignalplotter_LIB_SRCS})
 add_library(KF5::SignalPlotter ALIAS ksignalplotter)
 

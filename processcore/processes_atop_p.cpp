@@ -310,7 +310,7 @@ bool ProcessesATop::setViewingTime(const QDateTime &when)
         d->currentlySelectedIndex = i - d->historyTimes.begin();
         bool success = d->loadDataForHistory(d->currentlySelectedIndex);
         if(!success)
-            qCWarning(LIBKSYSGUARD) << d->lastError;
+            qCWarning(LIBKSYSGUARD_PROCESSCORE) << d->lastError;
         return success;
     }
     return false;

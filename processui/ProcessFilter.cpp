@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 
 */
-#include "processcore/processcore_debug.h"
+#include "processui_debug.h"
 
 /* For getuid() */
 #include <unistd.h>
@@ -42,7 +42,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 	const KSysGuard::Process *process;
         if(model->isSimpleMode()) {
 		if(source_parent.isValid()) {
-			qCDebug(LIBKSYSGUARD) << "Serious error with data.  In simple mode, there should be no children";
+            qCDebug(LIBKSYSGUARD_PROCESSUI) << "Serious error with data.  In simple mode, there should be no children";
 			return true;
 		}
 		process = model->getProcessAtIndex(source_row);
@@ -58,7 +58,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 			//}
 		}
 		if(!model->isSimpleMode() && source_row >= parent_process->children().size()) {
-			qCDebug(LIBKSYSGUARD) << "Serious error with data.  Source row requested for a non existent row. Requested " << source_row << " of " << parent_process->children().size() << " for " << parent_process->pid();
+            qCDebug(LIBKSYSGUARD_PROCESSUI) << "Serious error with data.  Source row requested for a non existent row. Requested " << source_row << " of " << parent_process->children().size() << " for " << parent_process->pid();
 			return true;
 		}
 

@@ -30,7 +30,7 @@
 #endif
 
 #include "ksignalplotter_p.h"
-#include "processcore/processcore_debug.h"
+#include "ksignalplotter_debug.h"
 
 #include <QPainter>
 #include <QPixmap>
@@ -108,11 +108,11 @@ QColor KSignalPlotter::beamColor( int index ) const {
 
 void KSignalPlotter::setBeamColor( int index, const QColor &color ) {
     if(!color.isValid()) {
-        qCDebug(LIBKSYSGUARD) << "Invalid color";
+        qCDebug(LIBKSYSGUARD_KSIGNALPLOTTER) << "Invalid color";
         return;
     }
     if( index >= d->mBeamColors.count() ) {
-        qCDebug(LIBKSYSGUARD) << "Invalid index" << index;
+        qCDebug(LIBKSYSGUARD_KSIGNALPLOTTER) << "Invalid index" << index;
         return;
     }
     Q_ASSERT(d->mBeamColors.count() == d->mBeamColorsLight.count());
@@ -514,7 +514,7 @@ void KSignalPlotterPrivate::rescale() {
 void KSignalPlotterPrivate::addSample( const QList<qreal>& sampleBuf )
 {
     if(sampleBuf.count() != mBeamColors.count()) {
-        qCDebug(LIBKSYSGUARD) << "Sample data discarded - contains wrong number of beams";
+        qCDebug(LIBKSYSGUARD_KSIGNALPLOTTER) << "Sample data discarded - contains wrong number of beams";
         return;
     }
     mBeamData.prepend(sampleBuf);
@@ -550,7 +550,7 @@ void KSignalPlotterPrivate::reorderBeams( const QList<int>& newOrder )
     QList< QList<qreal> >::Iterator it;
     for(it = mBeamData.begin(); it != mBeamData.end(); ++it) {
         if(newOrder.count() != (*it).count()) {
-            qCWarning(LIBKSYSGUARD) << "Serious problem in move sample.  beamdata[i] has " << (*it).count() << " and neworder has " << newOrder.count();
+            qCWarning(LIBKSYSGUARD_KSIGNALPLOTTER) << "Serious problem in move sample.  beamdata[i] has " << (*it).count() << " and neworder has " << newOrder.count();
         } else {
             QList<qreal> newBeam;
             for(int i = 0; i < newOrder.count(); i++) {

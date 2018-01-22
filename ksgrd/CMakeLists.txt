@@ -4,13 +4,13 @@
 ########### next target ###############
 
 set(ksgrd_LIB_SRCS
-   ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp
    SensorAgent.cpp
    SensorManager.cpp
    SensorShellAgent.cpp
    SensorSocketAgent.cpp
 )
 
+ecm_qt_declare_logging_category(ksgrd_LIB_SRCS HEADER ksgrd_debug.h IDENTIFIER LIBKSYSGUARD_KSGRD CATEGORY_NAME org.kde.libksysguard.ksgrd)
 add_definitions(-DTRANSLATION_DOMAIN=\"ksgrd\")
 
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)

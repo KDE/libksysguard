@@ -6,7 +6,6 @@ check_include_files(byteswap.h HAVE_BYTESWAP_H)
 set(ksysguard_WIDGETS "ksysguard.widgets")
 
 set(processui_LIB_SRCS
-   ${libksysguard_SOURCE_DIR}/processcore/processcore_debug.cpp
    ksysguardprocesslist.cpp
    ProcessFilter.cpp
    ProcessModel.cpp
@@ -14,6 +13,9 @@ set(processui_LIB_SRCS
    KTextEditVT.cpp
    scripting.cpp
 )
+
+ecm_qt_declare_logging_category(processui_LIB_SRCS HEADER processui_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSUI CATEGORY_NAME org.kde.libksysguard.processui)
+
 
 ki18n_wrap_ui( processui_LIB_SRCS
    ReniceDlgUi.ui

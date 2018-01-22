@@ -26,7 +26,7 @@
 #include <kshell.h>
 #include <klocalizedstring.h>
 
-#include "processcore/processcore_debug.h"
+#include "ksgrd_debug.h"
 #include "SensorManager.h"
 
 #include "SensorShellAgent.h"
@@ -102,14 +102,14 @@ void SensorShellAgent::errMsgRcvd( )
   // But if this is extended, we will need to handle this better
   const QString buf = QString::fromUtf8( buffer );
 
-  qCDebug(LIBKSYSGUARD) << "SensorShellAgent: Warning, received text over stderr!"
+  qCDebug(LIBKSYSGUARD_KSGRD) << "SensorShellAgent: Warning, received text over stderr!"
                 << endl << buf << endl;
 }
 
 void SensorShellAgent::daemonExited(  int exitCode, QProcess::ExitStatus exitStatus )
 {
   Q_UNUSED(exitCode);
-  qCDebug(LIBKSYSGUARD) << "daemon exited, exit status "  << exitStatus;
+  qCDebug(LIBKSYSGUARD_KSGRD) << "daemon exited, exit status "  << exitStatus;
   if ( mRetryCount--  <= 0 || (mDaemon->start(), !mDaemon->waitForStarted()) )
   {
     setDaemonOnLine( false );
@@ -124,7 +124,7 @@ void SensorShellAgent::daemonError( QProcess::ProcessError errorStatus )
   QString error;
   switch(errorStatus) {
     case QProcess::FailedToStart:
-      qCDebug(LIBKSYSGUARD) << "failed to run" <<  mDaemon->program().join(QStringLiteral(" "));
+      qCDebug(LIBKSYSGUARD_KSGRD) << "failed to run" <<  mDaemon->program().join(QStringLiteral(" "));
       error = i18n("Could not run daemon program '%1'.", mDaemon->program().join(" "));
       break;
     case QProcess::Crashed:
@@ -135,7 +135,7 @@ void SensorShellAgent::daemonError( QProcess::ProcessError errorStatus )
       error = i18n("The daemon program '%1' failed.", mDaemon->program().join(" "));
   }
   setReasonForOffline(error);
-  qCDebug(LIBKSYSGUARD) << "Error received " << error << "(" << errorStatus << ")";
+  qCDebug(LIBKSYSGUARD_KSGRD) << "Error received " << error << "(" << errorStatus << ")";
   setDaemonOnLine( false );
   if(sensorManager())
     sensorManager()->disengage( this ); //delete ourselves

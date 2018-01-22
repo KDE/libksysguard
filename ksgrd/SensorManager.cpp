@@ -27,8 +27,7 @@
 #include <QWidget>
 #include <QEvent>
 #include <kconfiggroup.h>
-
-#include "processcore/processcore_debug.h"
+#include "ksgrd_debug.h"
 
 #include "SensorShellAgent.h"
 #include "SensorSocketAgent.h"
@@ -326,7 +325,7 @@ bool SensorManager::resynchronize( const QString &hostName )
 
   mAgents.remove( hostName );
 
-  qCDebug(LIBKSYSGUARD) << "Re-synchronizing connection to " << hostName;
+  qCDebug(LIBKSYSGUARD_KSGRD) << "Re-synchronizing connection to " << hostName;
 
   return engage( hostName, shell, command );
 }
