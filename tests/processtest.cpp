@@ -124,7 +124,7 @@ void testProcess::testTimeToUpdateModel() {
     KSysGuardProcessList *processList = new KSysGuardProcessList;
     processList->treeView()->setColumnHidden(13, false);
     processList->show();
-    QTest::qWaitForWindowExposed(processList);
+    QVERIFY(QTest::qWaitForWindowExposed(processList));
 
     QBENCHMARK {
         processList->updateList();
@@ -201,7 +201,7 @@ void testProcess::testHistoriesWithWidget() {
     KSysGuardProcessList *processList = new KSysGuardProcessList;
     processList->treeView()->setColumnHidden(13, false);
     processList->show();
-    QTest::qWaitForWindowExposed(processList);
+    QVERIFY(QTest::qWaitForWindowExposed(processList));
     KSysGuard::Processes *processController = processList->processModel()->processController();
         
     QList< QPair<QDateTime, uint> > history = processController->historiesAvailable();
@@ -220,7 +220,7 @@ void testProcess::testHistoriesWithWidget() {
 void testProcess::testCPUGraphHistory() {
     KSysGuardProcessList processList;
     processList.show();
-    QTest::qWaitForWindowExposed(&processList);
+    QVERIFY(QTest::qWaitForWindowExposed(&processList));
     auto model = processList.processModel();
     // Access the PercentageHistoryRole to enable collection
     for(int i = 0; i < model->rowCount(); i++) {
