@@ -445,7 +445,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows() {
             continue; //Already added this window
 
         //Get the PID for this window if we do not know it
-        NETWinInfo info( QX11Info::connection(), wid, QX11Info::appRootWindow(), NET::WMPid );
+        NETWinInfo info(QX11Info::connection(), wid, QX11Info::appRootWindow(), NET::WMPid, NET::Properties2());
 
         qlonglong pid = info.pid();
         if(!pid)
@@ -532,7 +532,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         return;
     }
     /* Get PID for window */
-    NETWinInfo info( QX11Info::connection(), wid, QX11Info::appRootWindow(), NET::Properties(properties) & ~NET::WMIcon );
+    NETWinInfo info(QX11Info::connection(), wid, QX11Info::appRootWindow(), NET::Properties(properties) & ~NET::WMIcon, NET::Properties2());
 
     if(!w) {
         //We know that this must be a newWindow
