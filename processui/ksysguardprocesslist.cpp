@@ -43,7 +43,8 @@
 #include <QSignalMapper>
 #include <QToolTip>
 #include <QAbstractItemModel>
-#include <QtDBus>
+#include <QDBusMetaType>
+#include <QPointer>
 #include <QDialog>
 #include <QIcon>
 
