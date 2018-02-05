@@ -40,7 +40,7 @@
 
 namespace KSysGuard
 {
-  class Processes::Private
+  class Q_DECL_HIDDEN Processes::Private
   {
     public:
       Private(Processes *q_ptr) {
