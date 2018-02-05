@@ -4,11 +4,22 @@ project(libksysguard)
 set(PROJECT_VERSION "5.12.80")
 set(PROJECT_VERSION_MAJOR 5)
 
-include(FeatureSummary)
-include(WriteBasicConfigVersionFile)
-
 find_package(ECM 5.30 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+
+include(ECMAddTests)
+include(ECMInstallIcons)
+include(ECMSetupVersion)
+include(ECMQtDeclareLoggingCategory)
+
+include(CMakePackageConfigHelpers)
+include(CheckIncludeFiles)
+include(CheckLibraryExists)
+include(FeatureSummary)
 
 find_package(Qt5 REQUIRED CONFIG COMPONENTS DBus Network Widgets)
 find_package(Qt5WebKitWidgets CONFIG)
@@ -33,18 +44,6 @@ set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed 
                        URL "http://www.zlib.net"
                        TYPE REQUIRED
                       )
-
-include(KDEInstallDirs)
-include(KDECMakeSettings)
-include(KDECompilerSettings NO_POLICY_SCOPE)
-
-include(ECMAddTests)
-include(ECMInstallIcons)
-include(CheckIncludeFiles)
-include(CheckLibraryExists)
-include(ECMSetupVersion)
-include(ECMQtDeclareLoggingCategory)
-include(CMakePackageConfigHelpers)
 
 check_library_exists(c clock_gettime "time.h" HAVE_CLOCK_GETTIME_C)
 
