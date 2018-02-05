@@ -40,11 +40,11 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 
 include(ECMAddTests)
 include(ECMInstallIcons)
-include(ECMPackageConfigHelpers)
 include(CheckIncludeFiles)
 include(CheckLibraryExists)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
+include(CMakePackageConfigHelpers)
 
 check_library_exists(c clock_gettime "time.h" HAVE_CLOCK_GETTIME_C)
 
@@ -98,7 +98,7 @@ endif()
 install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts)
 
 set(CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/KF5SysGuard)
-ecm_configure_package_config_file(KF5SysGuardConfig.cmake.in
+configure_package_config_file(KF5SysGuardConfig.cmake.in
     "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake"
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR})
 

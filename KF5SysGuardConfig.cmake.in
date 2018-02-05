@@ -1,5 +1,6 @@
 @PACKAGE_INIT@
 
+include(CMakeFindDependencyMacro)
 find_dependency(Qt5Core)
 find_dependency(Qt5Network)
 find_dependency(Qt5Widgets)
