@@ -18,7 +18,11 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 
 add_library(ksgrd ${ksgrd_LIB_SRCS})
 add_library(KF5::SysGuard ALIAS ksgrd)
-target_include_directories(ksgrd PUBLIC "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>" "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/ksysguard/>")
+target_include_directories(ksgrd
+    PUBLIC
+        "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
+        "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard/>"
+)
 
 target_link_libraries(ksgrd
     PUBLIC
@@ -34,9 +38,17 @@ target_link_libraries(ksgrd
 )
 
 set_target_properties(ksgrd PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING} SOVERSION ${KSYSGUARD_SOVERSION} EXPORT_NAME SysGuard)
-install(TARGETS ksgrd EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS ksgrd EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install(FILES SensorAgent.h SensorClient.h SensorManager.h SensorShellAgent.h SensorSocketAgent.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard/ksgrd COMPONENT Devel)
+install(FILES
+    SensorAgent.h
+    SensorClient.h
+    SensorManager.h
+    SensorShellAgent.h
+    SensorSocketAgent.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/ksgrd
+    COMPONENT Devel
+)
 
 
 

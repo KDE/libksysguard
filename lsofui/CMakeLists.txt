@@ -19,11 +19,11 @@ target_link_libraries(lsofui
         KF5::I18n
 )
 set_target_properties(lsofui PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING} SOVERSION ${KSYSGUARD_SOVERSION} EXPORT_NAME LsofUi)
-install(TARGETS lsofui EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS lsofui EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
-install( FILES lsof.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard COMPONENT Devel)
+install( FILES lsof.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard COMPONENT Devel)
 
 # set(ksysguardlsofwidgets_PART_SRCS
 #    ${CMAKE_CURRENT_BINARY_DIR}/ksysguardlsofwidgets.cpp

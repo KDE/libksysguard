@@ -48,7 +48,7 @@ target_link_libraries(processui
 target_include_directories(processui
     PUBLIC
         "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
-        "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/ksysguard>"
+        "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard>"
 )
 
 if(X11_FOUND)
@@ -69,7 +69,7 @@ set_target_properties(processui
    EXPORT_NAME ProcessUi
 )
 
-install(TARGETS processui EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS processui EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 #----------------------
 
@@ -81,5 +81,11 @@ install(TARGETS processui EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DE
 #
 # install(TARGETS ksysguardwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
-install( FILES ProcessModel.h ProcessFilter.h KTextEditVT.h ksysguardprocesslist.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard/processui COMPONENT Devel)
-
+install( FILES
+    ProcessModel.h
+    ProcessFilter.h
+    KTextEditVT.h
+    ksysguardprocesslist.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/processui
+    COMPONENT Devel
+)

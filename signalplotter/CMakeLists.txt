@@ -25,7 +25,7 @@ set_target_properties(ksignalplotter
    EXPORT_NAME SignalPlotter
 )
 
-install(TARGETS ksignalplotter EXPORT libksysguardLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS ksignalplotter EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 #----------------------
 
@@ -37,4 +37,4 @@ install(TARGETS ksignalplotter EXPORT libksysguardLibraryTargets ${INSTALL_TARGE
 #
 # install(TARGETS ksignalplotterwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer)
 
-install(FILES ksignalplotter.h DESTINATION ${INCLUDE_INSTALL_DIR}/ksysguard COMPONENT Devel)
+install(FILES ksignalplotter.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard COMPONENT Devel)

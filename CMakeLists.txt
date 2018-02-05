@@ -98,9 +98,9 @@ if(BUILD_TESTING)
     add_subdirectory( tests )
 endif()
 
-install(DIRECTORY scripts/ DESTINATION ${DATA_INSTALL_DIR}/ksysguard/scripts)
+install(DIRECTORY scripts/ DESTINATION ${KDE_INSTALL_DATADIR}/ksysguard/scripts)
 
-set(CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/KF5SysGuard)
+set(CMAKECONFIG_INSTALL_DIR ${KDE_INSTALL_LIBDIR}/cmake/KF5SysGuard)
 configure_package_config_file(KF5SysGuardConfig.cmake.in
     "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake"
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR})
