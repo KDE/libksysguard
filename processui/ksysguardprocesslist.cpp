@@ -414,8 +414,8 @@ void KSysGuardProcessList::filterTextChanged(const QString &newText) {
     d->mFilterModel.setFilterRegExp(newText.trimmed());
     if(isVisible())
         expandInit();
-    d->mUi->btnKillProcess->setEnabled( d->mUi->treeView->selectionModel()->hasSelection() );
-    d->mUi->treeView->scrollTo( d->mUi->treeView->currentIndex());
+    d->mUi->btnKillProcess->setEnabled(d->mUi->treeView->selectionModel()->hasSelection());
+    d->mUi->treeView->scrollTo(d->mUi->treeView->currentIndex());
 }
 
 int KSysGuardProcessList::visibleProcessesCount() const  {
@@ -454,7 +454,7 @@ void KSysGuardProcessList::selectionChanged()
     if(numSelected == d->mNumItemsSelected)
         return;
     d->mNumItemsSelected = numSelected;
-    d->mUi->btnKillProcess->setEnabled( numSelected != 0 );
+    d->mUi->btnKillProcess->setEnabled(numSelected != 0);
 
     d->renice->setText(i18np("Set Priority...", "Set Priority...", numSelected));
     d->kill->setText(i18np("Forcibly Kill Process", "Forcibly Kill Processes", numSelected));
