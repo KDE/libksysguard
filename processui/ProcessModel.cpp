@@ -1764,7 +1764,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
         WindowInfo *w = d->mPidToWindowInfo.value(process->pid(), NULL);
         if(!w)
-            return (int)0;
+            return QVariant();
         else
             return (int)w->wid;
     }
