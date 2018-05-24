@@ -955,9 +955,11 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
       {
         switch(section) {
             case HeadingPid:
+            case HeadingTty:
             case HeadingMemory:
             case HeadingXMemory:
             case HeadingSharedMemory:
+            case HeadingStartTime:
             case HeadingIoRead:
             case HeadingIoWrite:
             case HeadingVmSize:
@@ -965,6 +967,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
     //            return QVariant(Qt::AlignRight);
             case HeadingUser:
             case HeadingCPUUsage:
+            case HeadingCPUTime:
                 return QVariant(Qt::AlignCenter);
 
         }
