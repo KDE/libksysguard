@@ -44,6 +44,7 @@
 #include <QToolTip>
 #include <QAbstractItemModel>
 #include <QDBusMetaType>
+#include <QtDBus>
 #include <QPointer>
 #include <QDialog>
 #include <QIcon>
@@ -57,6 +58,9 @@
 #include <klocalizedstring.h>
 #include <kmessagebox.h>
 #include <KWindowSystem>
+#include <KService>
+#include <KRun>
+#include <KGlobalAccel>
 
 #include "ReniceDlg.h"
 #include "ui_ProcessWidgetUI.h"
@@ -193,7 +197,7 @@ class ProgressBarItemDelegate : public QStyledItemDelegate
 struct KSysGuardProcessListPrivate {
 
     KSysGuardProcessListPrivate(KSysGuardProcessList* q, const QString &hostName)
-        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(nullptr), mUpdateTimer(nullptr)
+        : mModel(q, hostName), mFilterModel(q), mUi(new Ui::ProcessWidget()), mProcessContextMenu(nullptr), mUpdateTimer(nullptr), mToolsMenu(new QMenu(q))
     {
         mScripting = nullptr;
         mNeedToExpandInit = false;
@@ -286,6 +290,8 @@ struct KSysGuardProcessListPrivate {
     QAction *sigKill;
     QAction *sigUsr1;
     QAction *sigUsr2;
+
+    QMenu* mToolsMenu;
 };
 
 KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostName)
@@ -378,7 +384,76 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     retranslateUi();
 
     d->mUi->btnKillProcess->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
-    d->mUi->btnKillProcess->setToolTip(i18n("<qt>End the selected process. Warning - you may lose unsaved work.<br>Right click on a process to send other signals.<br>See What's This for technical information.<br>To target a specific window to kill, press Ctrl+Alt+Esc at any time."));
+    d->mUi->btnKillProcess->setToolTip(i18n("<qt>End the selected process. Warning - you may lose unsaved work.<br>Right click on a process to send other signals.<br>See What's This for technical information."));
+
+    auto addByDesktopName = [this](const QString& desktopName)
+    {
+        auto kService = KService::serviceByDesktopName(desktopName);
+        if (kService) {
+            auto action = new QAction(QIcon::fromTheme(kService->icon()),
+                            kService->name(), nullptr);
+
+            connect(action, &QAction::triggered, this,
+                [kService](bool) {
+                KRun::runService(*kService, { }, nullptr);
+            });
+            d->mToolsMenu->addAction(action);
+        }
+    };
+
+    addByDesktopName(QStringLiteral("org.kde.konsole"));
+
+    const QString ksysguardDesktopName = QStringLiteral("org.kde.ksysguard");
+    // The following expression is true when the libksysguard process list is _not_ embedded in KSysGuard.
+    // Only then we add KSysGuard to the menu
+    if (qApp->desktopFileName() != ksysguardDesktopName) {
+        addByDesktopName(ksysguardDesktopName);
+    }
+
+    addByDesktopName(QStringLiteral("org.kde.ksystemlog"));
+    addByDesktopName(QStringLiteral("org.kde.kinfocenter"));
+    addByDesktopName(QStringLiteral("org.kde.filelight"));
+    addByDesktopName(QStringLiteral("org.kde.sweeper"));
+    addByDesktopName(QStringLiteral("org.kde.kmag"));
+    addByDesktopName(QStringLiteral("htop"));
+
+    // Add Run Command...
+    //
+    auto runCommandAction = new QAction(i18nc("@action:inmenu", "Run Command"), this);
+    // //INFO: This is one way of how to find out the two required parameters for the globalShortcut method:
+    //     auto list = KGlobalAccel::getGlobalShortcutsByKey(QKeySequence(QStringLiteral("Alt+Space")));
+    //     foreach (auto item, list) {
+    //         qDebug() << item.componentUniqueName() << item.uniqueName();
+    //         //prints: 'krunner', 'run command'
+    //     }
+    const auto runCommandShortcutList = KGlobalAccel::self()->globalShortcut(QStringLiteral("krunner"), QStringLiteral("run command"));
+    runCommandAction->setShortcuts(runCommandShortcutList);
+    runCommandAction->setIcon(QIcon::fromTheme(QStringLiteral("system-run")));
+    connect(runCommandAction, &QAction::triggered, this, [](){
+        KRun::runCommand(QStringLiteral("krunner"), nullptr);
+    });
+    d->mToolsMenu->addAction(runCommandAction);
+
+    // Add the xkill functionality...
+    auto killWindowAction = new QAction(QIcon::fromTheme(QStringLiteral("document-close")),
+                                        i18nc("@action:inmenu", "Kill a Window"), this);
+    // Find shortcut of xkill functionality which is defined in KWin
+    const auto killWindowShortcutList = KGlobalAccel::self()->globalShortcut(QStringLiteral("kwin"), QStringLiteral("Kill Window"));
+    killWindowAction->setShortcuts(killWindowShortcutList);
+    // We don't use xkill directly but the method in KWin which allows to press Esc to abort.
+    auto killWindowKwinMethod = new QDBusInterface(QStringLiteral("org.kde.KWin"), QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"));
+    // If KWin is not the window manager, then we disable the entry:
+    if (!killWindowKwinMethod->isValid()) {
+        killWindowAction->setEnabled(false);
+    }
+    connect(killWindowAction, &QAction::triggered, this, [this, killWindowKwinMethod](bool) {
+        // with DBus call, always use the async method.
+        // Otherwise it could wait up to 30 seconds in certain situations.
+        killWindowKwinMethod->asyncCall(QStringLiteral("killWindow"));
+    });
+    d->mToolsMenu->addAction(killWindowAction);
+
+    d->mUi->btnTools->setMenu(d->mToolsMenu);
 }
 
 KSysGuardProcessList::~KSysGuardProcessList()
