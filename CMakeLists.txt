@@ -26,10 +26,10 @@ include(CheckLibraryExists)
 include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets)
-find_package(Qt5WebKitWidgets ${QT_MIN_VERSION} CONFIG)
-set_package_properties(Qt5WebKitWidgets PROPERTIES
-                       URL "git://gitorious.org/qt/qtwebkit.git"
-                       DESCRIPTION "Qt Webkit module (web browsing engine)"
+find_package(Qt5WebEngineWidgets ${QT_MIN_VERSION} CONFIG)
+set_package_properties(Qt5WebEngineWidgets PROPERTIES
+                       URL "git://code.qt.org/qt/qtwebenginewidgets.git"
+                       DESCRIPTION "Qt WebEngine module (web browsing engine)"
                        TYPE OPTIONAL
                        PURPOSE "Used by the HTML-based GUI ksysguard library"
                       )
@@ -76,7 +76,7 @@ endif()
 
 set(HAVE_X11 ${X11_FOUND})
 set(HAVE_XRES ${X11_XRes_FOUND})
-set(HAVE_QTWEBKITWIDGETS ${Qt5WebKitWidgets_FOUND})
+set(HAVE_QTWEBENGINEWIDGETS ${Qt5WebEngineWidgets_FOUND})
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )
 
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)

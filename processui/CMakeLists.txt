@@ -58,8 +58,8 @@ if(X11_FOUND)
     target_link_libraries(processui PRIVATE Qt5::X11Extras KF5::WindowSystem)
 endif()
 
-if(Qt5WebKitWidgets_FOUND)
-    target_link_libraries(processui PRIVATE Qt5::WebKitWidgets)
+if(Qt5WebEngineWidgets_FOUND)
+    target_link_libraries(processui PRIVATE Qt5::WebEngineWidgets)
 endif()
 
 if(NOT HAVE_CLOCK_GETTIME_C)
