@@ -40,7 +40,6 @@
 #include <QStyledItemDelegate>
 #include <QPainter>
 #include <QLineEdit>
-#include <QSignalMapper>
 #include <QToolTip>
 #include <QAbstractItemModel>
 #include <QDBusMetaType>
@@ -369,17 +368,14 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->sortByColumn(ProcessModel::HeadingUser, Qt::AscendingOrder);
 
     // Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked
-    QSignalMapper *signalMapper = new QSignalMapper(this);
     QList<QAction *> actions;
     actions << d->renice << d->kill << d->terminate << d->selectParent << d->selectTracer << d->window << d->jumpToSearchFilter;
     actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
 
     foreach(QAction *action, actions) {
         addAction(action);
-        connect(action, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
-        signalMapper->setMapping(action, action);
+        connect(action, &QAction::triggered, this, [this, action]() { actionTriggered(action); });
     }
-    connect(signalMapper, SIGNAL(mapped(QObject*)), SLOT(actionTriggered(QObject*)));
 
     retranslateUi();
 
