@@ -52,6 +52,7 @@
 #include <QWebEngineUrlRequestInterceptor>
 #endif
 
+#if HAVE_QTWEBENGINEWIDGETS
 class RemoteUrlInterceptor : public QWebEngineUrlRequestInterceptor {
 public:
     RemoteUrlInterceptor(QObject *parent) : QWebEngineUrlRequestInterceptor(parent) {}
@@ -68,6 +69,7 @@ public:
             info.block(true);
     }
 };
+#endif
 
 class ScriptingHtmlDialog : public QDialog {
     public:
