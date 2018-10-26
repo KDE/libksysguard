@@ -36,7 +36,7 @@ namespace KSGRD {
 /**
   The SensorSocketAgent connects to a ksysguardd via a TCP
   connection. It keeps a list of pending requests that have not been
-  answered yet by ksysguard. The current implementation only allowes
+  answered yet by ksysguard. The current implementation only allows
   one pending requests. Incoming requests are queued in an input
   FIFO.
  */

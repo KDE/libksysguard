@@ -132,7 +132,7 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
         return false;
     QString command = QString(buf);
 
-    //cmdline seperates parameters with the NULL character
+    //cmdline separates parameters with the NULL character
     command = command.replace('\0', ' ');
     process->setCommand(command.trimmed());
 

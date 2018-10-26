@@ -25,7 +25,7 @@
 
 // SVG support causes it to crash at the moment :(
 //#define SVG_SUPPORT
-// Use a seperate child widget to draw the graph in
+// Use a separate child widget to draw the graph in
 
 #ifndef GRAPHICS_SIGNAL_PLOTTER
 #define USE_SEPERATE_WIDGET

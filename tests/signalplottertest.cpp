@@ -500,7 +500,7 @@ void TestSignalPlotter::testAddingData()
     s->setGeometry(0,0,500,500);
     //Test adding sample without any beams.  It should just ignore this
     s->addSample(QList<qreal>() << 1.0 << 2.0);
-    //Test setting the beam color of a non-existant beam.  It should just ignore this too.
+    //Test setting the beam color of a non-existent beam.  It should just ignore this too.
 //    s->setBeamColor(0, Qt::blue);
 
     //Add an empty sample.  This should just be ignored?

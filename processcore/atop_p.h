@@ -11,7 +11,7 @@
 **
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
-** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 */
 /*
 ** structure which describes the raw file contents
@@ -139,14 +139,14 @@ struct PStat {
     struct net {
         count_t tcpsnd;     /* number of TCP-packets sent   */
         count_t tcpssz;     /* cumulative size packets sent */
-        count_t tcprcv;     /* number of TCP-packets recved */
+        count_t tcprcv;     /* number of TCP-packets received */
         count_t tcprsz;     /* cumulative size packets rcvd */
         count_t udpsnd;     /* number of UDP-packets sent   */
         count_t udpssz;     /* cumulative size packets sent */
-        count_t udprcv;     /* number of UDP-packets recved */
+        count_t udprcv;     /* number of UDP-packets received */
         count_t udprsz;     /* cumulative size packets sent */
         count_t rawsnd;     /* number of raw packets sent   */
-        count_t rawrcv;     /* number of raw packets recved */
+        count_t rawrcv;     /* number of raw packets received */
         count_t cfuture[4]; /* reserved for future use  */
     } net;
 };

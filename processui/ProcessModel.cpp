@@ -1305,7 +1305,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->vmRSS() - process->vmURSS() <= 0 || process->vmURSS() == -1) return QVariant(QVariant::String);
             return formatMemoryInfo(process->vmRSS() - process->vmURSS(), d->mUnits);
         case HeadingStartTime: {
-            // NOTE: the next 6 lines are the same as in the next occurence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
+            // NOTE: the next 6 lines are the same as in the next occurrence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
             const auto clockTicksSinceSystemBoot = process->startTime();
             const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK); // see man proc or http://superuser.com/questions/101183/what-is-a-cpu-tick
             const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
@@ -1460,7 +1460,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return tooltip;
         }
         case HeadingStartTime: {
-            // NOTE: the next 6 lines are the same as in the previous occurence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
+            // NOTE: the next 6 lines are the same as in the previous occurrence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
             const auto clockTicksSinceSystemBoot = process->startTime();
             const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK);
             const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
@@ -1510,7 +1510,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                                                     "<para><emphasis strong='true'>Scheduler priority:</emphasis> %1</para>", process->niceLevel());
                   break;
               case KSysGuard::Process::SchedulerIdle:
-                  break; //has neither dynamic (niceness) or static (scheduler priority) priotiy
+                  break; //has neither dynamic (niceness) or static (scheduler priority) priority
             }
             if(process->scheduler() != KSysGuard::Process::Other)
                 tooltip += xi18nc("@info:tooltip", "<para><emphasis strong='true'>Scheduler:</emphasis> %1</para>", process->schedulerAsString());

@@ -158,7 +158,7 @@ void Scripting::runScript(const QString &path, const QString &name) {
     QString webChannelJs = QString::fromUtf8(webChannelJsFile.readAll());
 
     /* Warning: Awful hack ahead!
-     * WebChannel does not allow synchonous calls so we need to make
+     * WebChannel does not allow synchronous calls so we need to make
      * asynchronous calls synchronous.
      * The conversion is achieved by caching the result of all readFile
      * and fileExists calls and restarting the script on every result until

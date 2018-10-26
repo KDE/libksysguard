@@ -54,7 +54,7 @@ void TestKsysguardd::testSetup()
     QCOMPARE(command, QString("../../ksysguardd/ksysguardd"));
     QCOMPARE(port, -1);
 
-    success = manager.hostInfo("nonexistant host", shell, command, port );
+    success = manager.hostInfo("nonexistent host", shell, command, port );
     QCOMPARE(success, false);
 }
 

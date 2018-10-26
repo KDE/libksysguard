@@ -95,7 +95,7 @@ private:
 	bool escape_OSC;
 	int escape_number1;
 	int escape_number2;
-	bool escape_number_seperator;
+	bool escape_number_separator;
 	QChar escape_code;
 
 };

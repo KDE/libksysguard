@@ -42,7 +42,7 @@ class SensorManager;
   The SensorShellAgent starts a ksysguardd process and handles the
   asynchronous communication. It keeps a list of pending requests
   that have not been answered yet by ksysguard. The current
-  implementation only allowes one pending requests. Incoming requests
+  implementation only allows one pending requests. Incoming requests
   are queued in an input FIFO.
  */
 class SensorShellAgent : public SensorAgent

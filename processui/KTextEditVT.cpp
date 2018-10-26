@@ -36,7 +36,7 @@ KTextEditVT::KTextEditVT(QWidget* parent)
 	escape_CSI = false;
 	escape_OSC = false;
 	escape_number1 = -1;
-	escape_number_seperator = false;
+	escape_number_separator = false;
 	escape_number2 = -1;
 	escape_code = 0;
 	setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
@@ -47,7 +47,7 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 	if(escape_sequence) {
 		if(escape_CSI || escape_OSC) {
 			if(c.isDigit()) {
-				if(!escape_number_seperator) {
+				if(!escape_number_separator) {
 					if(escape_number1 == -1)
 						escape_number1 = c.digitValue();
 					else
@@ -60,7 +60,7 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 
 				}
             } else if(c == QLatin1Char(';')) {
-				escape_number_seperator = true;
+				escape_number_separator = true;
 			} else if(escape_OSC && c==7) { //Throw away any letters that are not OSC
 				escape_code = c;
 			} else if(escape_CSI)
@@ -116,7 +116,7 @@ void KTextEditVT::insertVTChar(const QChar & c) {
 			escape_CSI = false;
 			escape_OSC = false;
 			escape_sequence = false;
-			escape_number_seperator = false;
+			escape_number_separator = false;
 		}
 	} else if(c == 0x0d) {
         insertPlainText(QStringLiteral("\n"));

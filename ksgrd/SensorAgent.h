@@ -42,7 +42,7 @@ class SensorRequest;
   starts a ksysguardd process or connects through a tcp connection to
   a running ksysguardd and handles the asynchronous communication. It
   keeps a list of pending requests that have not been answered yet by
-  ksysguardd. The current implementation only allowes one pending
+  ksysguardd. The current implementation only allows one pending
   requests. Incoming requests are queued in an input FIFO.
 */
 class Q_DECL_EXPORT SensorAgent : public QObject
@@ -110,7 +110,7 @@ class Q_DECL_EXPORT SensorAgent : public QObject
 };
 
 /**
-  This auxilliary class is used to store requests during their processing.
+  This auxiliary class is used to store requests during their processing.
 */
 class SensorRequest
 {

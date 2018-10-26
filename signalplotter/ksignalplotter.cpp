@@ -56,7 +56,7 @@
 
 
 #define VERTICAL_LINE_OFFSET 1
-//Never store less 1000 samples if not visible.  This is kinda arbituary
+//Never store less 1000 samples if not visible.  This is kinda arbitrary
 #define NUM_SAMPLES_WHEN_INVISIBLE ((uint)1000)
 
 #ifdef GRAPHICS_SIGNAL_PLOTTER
