@@ -1,5 +1,5 @@
-org.kde.libksysguard.ksgrd libksysguard (ksgrd)
-org.kde.libksysguard.processcore libksysguard (processcore)
-org.kde.libksysguard.processui libksysguard (processui)
-org.kde.libksysguard.ksignalplotter libksysguard (ksignalplotter)
+org.kde.libksysguard.ksgrd libksysguard (ksgrd) IDENTIFIER [LIBKSYSGUARD_KSGRD]
+org.kde.libksysguard.processcore libksysguard (processcore) IDENTIFIER [LIBKSYSGUARD_PROCESSCORE]
+org.kde.libksysguard.processui libksysguard (processui) IDENTIFIER [LIBKSYSGUARD_PROCESSUI]
+org.kde.libksysguard.ksignalplotter libksysguard (ksignalplotter) IDENTIFIER [LIBKSYSGUARD_KSIGNALPLOTTER]
 
