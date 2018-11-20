@@ -387,7 +387,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
         auto kService = KService::serviceByDesktopName(desktopName);
         if (kService) {
             auto action = new QAction(QIcon::fromTheme(kService->icon()),
-                            kService->name(), nullptr);
+                            kService->name(), this);
 
             connect(action, &QAction::triggered, this,
                 [kService](bool) {
