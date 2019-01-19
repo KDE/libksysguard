@@ -141,7 +141,7 @@ Kernel threads are shown as normal processes, but are actually running inside th
         <string>Tools</string>
        </property>
        <property name="icon">
-        <iconset theme="application-menu"/>
+        <iconset theme="tools"/>
        </property>
       </widget>
      </item>
