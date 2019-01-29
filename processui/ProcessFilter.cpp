@@ -107,13 +107,20 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		if(filterRegExp().isEmpty()) return true;
 
 		//Allow the user to search by PID
-		if(QString::number(process->pid()).contains(filterRegExp())) return true;
-
+		if(QString::number(process->pid()).contains(filterRegExp()))
+			 return true;
 		//None of our tests have rejected it.  Pass it on to qsortfilterproxymodel's filter
 		if(QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
 			return true;
-	}
 
+		auto strings = filterRegExp().pattern().split(QLatin1Char(','), QString::SplitBehavior::SkipEmptyParts);
+		for (auto string : strings) {
+			string = string.trimmed();
+			if (process->name().indexOf(string) != -1 || QString::number(process->pid()).indexOf(string) != -1) {
+				return true;
+			}
+		}
+	}
 
 	//We did not accept this row at all.
 
