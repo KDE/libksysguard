@@ -1626,15 +1626,21 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
         case HeadingXTitle: {
 #if HAVE_X11
-            QString tooltip;
-            QList<WindowInfo *> values = d->mPidToWindowInfo.values(process->pid());
-            if(values.isEmpty()) return QVariant(QVariant::String);
-            for(int i = 0; i < values.size(); i++) {
-                if(!values.at(i)->name.isEmpty())
-                    tooltip += QStringLiteral("<li>") + values.at(i)->name + QStringLiteral("</li>");
+            const auto values = d->mPidToWindowInfo.values(process->pid());
+            if (values.count() == 1) {
+                return values.first()->name;
             }
-            if(!tooltip.isEmpty())
-                return QString(QStringLiteral("<qt><p style='white-space:pre'><ul>") + tooltip + QStringLiteral("</ul>"));
+
+            QString tooltip;
+
+            for (const auto &value : values) {
+                if (!tooltip.isEmpty()) {
+                    tooltip += QLatin1Char('\n');
+                }
+                tooltip += QStringLiteral("• ") + value->name;
+            }
+
+            return tooltip;
 #endif
             return QVariant(QVariant::String);
         }
