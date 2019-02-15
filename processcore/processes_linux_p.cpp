@@ -434,6 +434,7 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
 #ifdef SCHED_IDLE
       case (SCHED_IDLE):
 	    process->setScheduler(KSysGuard::Process::SchedulerIdle);
+            break;
 #endif
 #ifdef SCHED_BATCH
       case (SCHED_BATCH):
