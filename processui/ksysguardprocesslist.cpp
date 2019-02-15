@@ -53,7 +53,6 @@
 #include <KAuth>
 #include <KAuthAction>
 #include <KAuthActionReply>
-#include <KAuthObjectDecorator>
 #include <klocalizedstring.h>
 #include <kmessagebox.h>
 #include <KWindowSystem>
