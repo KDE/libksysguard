@@ -327,6 +327,7 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
                     return processLeft->ioCharactersActuallyReadRate() > processRight->ioCharactersActuallyReadRate();
 
             }
+            return {}; // It actually never gets here since all cases are handled in the switch, but makes gcc not complain about a possible fall through
         case HeadingIoWrite:
             switch(d->mIoInformation) {
                 case ProcessModel::Bytes:
@@ -1270,6 +1271,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
               case KSysGuard::Process::Interactive:
                   return i18nc("scheduler", "(IA) %1", process->niceLevel());
             }
+            return {}; // It actually never gets here since all cases are handled in the switch, but makes gcc not complain about a possible fall through
         case HeadingTty:
             return process->tty();
         case HeadingCPUUsage:
@@ -1736,6 +1738,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return (qlonglong)process->ioCharactersActuallyReadRate();
 
             }
+            return {}; // It actually never gets here since all cases are handled in the switch, but makes gcc not complain about a possible fall through
         case HeadingIoWrite:
             switch(d->mIoInformation) {
                 case ProcessModel::Bytes:
@@ -1752,6 +1755,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return (qlonglong)process->ioCharactersActuallyWrittenRate();
 
             }
+            return {}; // It actually never gets here since all cases are handled in the switch, but makes gcc not complain about a possible fall through
         case HeadingXMemory:
             return (qulonglong)process->pixmapBytes();
 #if HAVE_X11
