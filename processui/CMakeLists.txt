@@ -39,7 +39,7 @@ target_link_libraries(processui
         Qt5::DBus
         KF5::I18n
         KF5::WindowSystem
-        KF5::Auth
+        KF5::AuthCore
         KF5::Completion
         KF5::ConfigWidgets
         KF5::WidgetsAddons

@@ -6,7 +6,7 @@ set(PROJECT_VERSION_MAJOR 5)
 
 # check with non-Plasma consumers (e.g. KDevelop) before bumping these versions
 set(QT_MIN_VERSION "5.5.0")
-set(KF5_MIN_VERSION "5.54.0")
+set(KF5_MIN_VERSION "5.56.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
