@@ -54,6 +54,9 @@ p, li { white-space: pre-wrap; }
      </item>
      <item>
       <widget class="QLineEdit" name="txtFilter">
+       <property name="toolTip">
+        <string>Type comma separated search terms or regular expressions to filter the process list</string>
+       </property>
        <property name="whatsThis">
         <string>Filter which processes are shown by the text given here.  The text can be a partial string match of the Name, Command or Window Title of the process.  It can also be a Username or a Process ID number.&lt;p&gt;
 For example:
