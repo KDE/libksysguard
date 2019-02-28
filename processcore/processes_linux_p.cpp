@@ -279,6 +279,7 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
                                 break;
                             case 5:
                                 ps->setTty(QByteArray("tty"));
+                                break;
                             case 4:
                                 if(minor < 64)
                                     ps->setTty(QByteArray("tty") + QByteArray::number(minor));
