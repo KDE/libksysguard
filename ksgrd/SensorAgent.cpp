@@ -207,7 +207,7 @@ void SensorAgent::executeCommand()
     SensorRequest *req = mInputFIFO.dequeue();
 
 #if SA_TRACE
-    qCDebug(LIBKSYSGUARD_KSGRD) << ">> " << req->request().toAscii() << "(" << mInputFIFO.count()
+    qCDebug(LIBKSYSGUARD_KSGRD) << ">> " << req->request() << "(" << mInputFIFO.count()
                   << "/" << mProcessingFIFO.count() << ")" << endl;
 #endif
     // send request to daemon
