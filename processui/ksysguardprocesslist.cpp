@@ -207,7 +207,7 @@ struct KSysGuardProcessListPrivate {
 
         selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
         window = new QAction(i18n("Show Application Window"), q);
-        resume = new QAction(i18n("Resume Stopped Process"), q);
+        resume = new QAction(QIcon::fromTheme(QStringLiteral("media-playback-start")), i18n("Resume Stopped Process"), q);
         terminate = new QAction(i18np("End Process", "End Processes", 1), q);
         terminate->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
         terminate->setShortcut(Qt::Key_Delete);
