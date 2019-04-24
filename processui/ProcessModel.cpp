@@ -759,8 +759,10 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             emit q->dataChanged(index, index);
         }
         if(process->changes() & KSysGuard::Process::Status) {
-            totalUpdated++;
+            totalUpdated+=2;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingNoNewPrivileges, process);
+            emit q->dataChanged(index, index);
+            index = q->createIndex(row, ProcessModel::HeadingCGroup, process);
             emit q->dataChanged(index, index);
         }
         if(process->changes() & KSysGuard::Process::NiceLevels) {
@@ -1029,6 +1031,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("The number of bytes read.  See What's This for more information.");
             case HeadingIoWrite:
                 return i18n("The number of bytes written.  See What's This for more information.");
+            case HeadingCGroup:
+                return i18n("<qt>The control group (cgroup) where this process belongs.</qt>");
             default:
                 return QVariant();
           }
@@ -1083,6 +1087,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                         "</table><p>"
                         "The number in brackets shows the rate at which each value is changing, determined from taking the difference between the previous value and the new value, and dividing by the update interval.<p>"
                         "<i>Technical information: </i>This data is collected from /proc/*/io and is documented further in Documentation/accounting and Documentation/filesystems/proc.txt in the kernel source.");
+            case HeadingCGroup:
+                return i18n("<qt><i>Technical information: </i>This shows Linux Control Group (cgroup) membership, retrieved from /proc/[pid]/cgroup. Control groups are used by Systemd and containers for limiting process group's usage of resources and to monitor them.");
             default:
                 return QVariant();
           }
@@ -1405,6 +1411,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                     return w->name;
             }
 #endif
+        case HeadingCGroup:
+            return process->cGroup();
         default:
             return QVariant();
         }
@@ -1784,6 +1792,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 return w->name;
             }
 #endif
+        case HeadingCGroup:
+            return process->cGroup();
         default:
             return QVariant();
         }
@@ -1967,6 +1977,7 @@ void ProcessModel::setupHeader() {
         headings << i18nc("process heading", "Window Title");
     }
 #endif
+    headings << i18nc("process heading", "CGroup");
 
     if(d->mHeadings.isEmpty()) { // If it's empty, this is the first time this has been called, so insert the headings
         beginInsertColumns(QModelIndex(), 0, headings.count()-1);

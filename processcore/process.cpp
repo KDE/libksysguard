@@ -83,6 +83,7 @@ public:
     Process::Changes changes;
     int elapsedTimeMilliSeconds;
     int noNewPrivileges;
+    QString cGroup;
 };
 
 Process::Process()
@@ -487,6 +488,11 @@ int Process::elapsedTimeMilliSeconds() const
     return d->elapsedTimeMilliSeconds;
 }
 
+QString Process::cGroup() const
+{
+    return d->cGroup;
+}
+
 void Process::setParentPid(long int parent_pid)
 {
     d->parent_pid = parent_pid;
@@ -775,6 +781,12 @@ void Process::setElapsedTimeMilliSeconds(int value)
 void Process::setChanges(KSysGuard::Process::Change changes)
 {
     d->changes = changes;
+}
+
+void Process::setCGroup(const QString &_cGroup) {
+    if(d->cGroup == _cGroup) return;
+    d->cGroup = _cGroup;
+    d->changes |= Process::Status;
 }
 
 }

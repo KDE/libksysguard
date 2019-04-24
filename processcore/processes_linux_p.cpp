@@ -112,6 +112,7 @@ namespace KSysGuard
       inline bool readProcStat(const QString &dir, Process *process);
       inline bool readProcStatm(const QString &dir, Process *process);
       inline bool readProcCmdline(const QString &dir, Process *process);
+      inline bool readProcCGroup(const QString &dir, Process *process);
       inline bool getNiceness(long pid, Process *process);
       inline bool getIOStatistics(const QString &dir, Process *process);
       QFile mFile;
@@ -196,6 +197,22 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
     }
 
     finish:
+    mFile.close();
+    return true;
+}
+
+bool ProcessesLocal::Private::readProcCGroup(const QString &dir, Process *process)
+{
+    mFile.setFileName(dir + QStringLiteral("cgroup"));
+    if(!mFile.open(QIODevice::ReadOnly))
+        return false;      /* process has terminated in the meantime */
+
+    while( mFile.readLine( mBuffer, sizeof(mBuffer)) > 0) {  //-1 indicates an error
+	    if ( mBuffer[0] == '0' && mBuffer[1] == ':' && mBuffer[2] == ':' ) {
+	       process->setCGroup(QString::fromLocal8Bit(&mBuffer[3]).trimmed());
+	       break;
+	    }
+    }
     mFile.close();
     return true;
 }
@@ -524,6 +541,7 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
     if(!d->readProcStatus(dir, process)) success = false;
     if(!d->readProcStatm(dir, process)) success = false;
     if(!d->readProcCmdline(dir, process)) success = false;
+    if(!d->readProcCGroup(dir, process)) success = false;
     if(!d->getNiceness(pid, process)) success = false;
     if(mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(dir, process)) success = false;
 
