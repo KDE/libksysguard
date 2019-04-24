@@ -82,6 +82,7 @@ public:
     int index;
     Process::Changes changes;
     int elapsedTimeMilliSeconds;
+    int noNewPrivileges;
 };
 
 Process::Process()
@@ -289,6 +290,11 @@ qlonglong Process::sysTime() const
 qlonglong Process::startTime() const
 {
     return d->startTime;
+}
+
+int Process::noNewPrivileges() const
+{
+    return d->noNewPrivileges;
 }
 
 int Process::userUsage() const
@@ -580,6 +586,12 @@ void Process::setSysTime(qlonglong sysTime)
 void Process::setStartTime(qlonglong startTime)
 {
     d->startTime = startTime;
+}
+
+void Process::setNoNewPrivileges(int number) {
+    if(d->noNewPrivileges == number) return;
+    d->noNewPrivileges = number;
+    d->changes |= Process::Status;
 }
 
 void Process::setUserUsage(int _userUsage) {

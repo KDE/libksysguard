@@ -138,6 +138,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
     process->setGid(0);
     process->setTracerpid(-1);
     process->setNumThreads(0);
+    process->setNoNewPrivileges(0);
 
     int size;
     int found = 0; //count how many fields we found
@@ -147,7 +148,10 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 	    if((unsigned int)size > sizeof("Name:") && qstrncmp(mBuffer, "Name:", sizeof("Name:")-1) == 0) {
 	        if(process->command().isEmpty())
                 process->setName(QString::fromLocal8Bit(mBuffer + sizeof("Name:")-1, size-sizeof("Name:")+1).trimmed());
-	        if(++found == 5) goto finish;
+	        if(++found == 6) goto finish;
+	    } else if((unsigned int)size > sizeof("NoNewPrivs:") && qstrncmp(mBuffer, "NoNewPrivs:", sizeof("NoNewPrivs:")-1) == 0) {
+                process->setNoNewPrivileges(atol(mBuffer + sizeof("NoNewPrivs:")-1));
+	        if(++found == 6) goto finish;
 	    }
 	    break;
 	  case 'U':
@@ -161,7 +165,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
             process->setEuid(euid);
             process->setSuid(suid);
             process->setFsuid(fsuid);
-	        if(++found == 5) goto finish;
+	        if(++found == 6) goto finish;
 	    }
 	    break;
 	  case 'G':
@@ -172,7 +176,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
             process->setEgid(egid);
             process->setSgid(sgid);
             process->setFsgid(fsgid);
-	        if(++found == 5) goto finish;
+	        if(++found == 6) goto finish;
 	    }
 	    break;
       case 'T':
@@ -180,10 +184,10 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
             process->setTracerpid(atol(mBuffer + sizeof("TracerPid:")-1));
             if (process->tracerpid() == 0)
                 process->setTracerpid(-1);
-            if(++found == 5) goto finish;
+            if(++found == 6) goto finish;
         } else if((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:")-1) == 0) {
             process->setNumThreads(atol(mBuffer + sizeof("Threads:")-1));
-	        if(++found == 5) goto finish;
+	        if(++found == 6) goto finish;
 	    }
 	    break;
 	  default:

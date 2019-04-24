@@ -184,6 +184,9 @@ public:
     int numThreads() const; ///< Number of threads that this process has, including the main one.  0 if not known
     void setNumThreads(int number); ///< The number of threads that this process has, including this process.
 
+    int noNewPrivileges() const;
+    void setNoNewPrivileges(int number); ///< Linux process flag NoNewPrivileges
+
     int index() const;  ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
     void setIndex(int index);
 

@@ -262,6 +262,8 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
         case HeadingStartTime: {
             return processLeft->startTime() > processRight->startTime();
         }
+        case HeadingNoNewPrivileges:
+            return processLeft->noNewPrivileges() > processRight->noNewPrivileges();
         case HeadingXMemory:
             return processLeft->pixmapBytes() > processRight->pixmapBytes();
         case HeadingVmSize:
@@ -756,6 +758,11 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             index = q->createIndex(row, ProcessModel::HeadingUser, process);
             emit q->dataChanged(index, index);
         }
+        if(process->changes() & KSysGuard::Process::Status) {
+            totalUpdated++;
+            QModelIndex index = q->createIndex(row, ProcessModel::HeadingNoNewPrivileges, process);
+            emit q->dataChanged(index, index);
+        }
         if(process->changes() & KSysGuard::Process::NiceLevels) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingNiceness, process);
@@ -961,6 +968,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingXMemory:
             case HeadingSharedMemory:
             case HeadingStartTime:
+            case HeadingNoNewPrivileges:
             case HeadingIoRead:
             case HeadingIoWrite:
             case HeadingVmSize:
@@ -1007,6 +1015,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt>This is approximately the amount of real physical memory that this process's shared libraries are using.<br>This memory is shared among all processes that use this library.</qt>");
             case HeadingStartTime:
                 return i18n("<qt>The elapsed time since the process was started.</qt>");
+            case HeadingNoNewPrivileges:
+                return i18n("<qt>Linux flag NoNewPrivileges, if set the process can't gain further privileges via setuid etc.</qt>");
             case HeadingCommand:
                 return i18n("<qt>The command with which this process was launched.</qt>");
             case HeadingXMemory:
@@ -1050,6 +1060,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt><i>Technical information: </i>This is an approximation of the Shared memory, called SHR in top.  It is the number of pages that are backed by a file (see kernel Documentation/filesystems/proc.txt).  For an individual process, see \"Detailed Memory Information\" for a more accurate, but slower, calculation of the true Shared memory usage.");
             case HeadingStartTime:
                 return i18n("<qt><i>Technical information: </i>The underlying value (clock ticks since system boot) is retrieved from /proc/[pid]/stat");
+            case HeadingNoNewPrivileges:
+                return i18n("<qt><i>Technical information: </i>The flag is retrieved from /proc/[pid]/status");
             case HeadingCommand:
                 return i18n("<qt><i>Technical information: </i>This is from /proc/*/cmdline");
             case HeadingXMemory:
@@ -1316,6 +1328,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             const auto relativeStartTime = absoluteStartTime.secsTo(QDateTime::currentDateTime());
             return TimeUtil::secondsToHumanElapsedString(relativeStartTime);
         }
+        case HeadingNoNewPrivileges:
+            return QString::number(process->noNewPrivileges());
         case HeadingCommand:
             {
         return process->command().replace(QLatin1Char('\n'),QLatin1Char(' '));
@@ -1659,6 +1673,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingNiceness:
             case HeadingCPUTime:
             case HeadingStartTime:
+            case HeadingNoNewPrivileges:
             case HeadingPid:
             case HeadingMemory:
             case HeadingXMemory:
@@ -1720,6 +1735,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return (qlonglong)(process->vmRSS() - process->vmURSS());
         case HeadingStartTime:
             return process->startTime(); // 2015-01-03, gregormi: can maybe be replaced with something better later
+        case HeadingNoNewPrivileges:
+            return process->noNewPrivileges();
         case HeadingCommand:
             return process->command();
         case HeadingIoRead:
@@ -1942,6 +1959,7 @@ void ProcessModel::setupHeader() {
     headings << i18nc("process heading", "Memory");
     headings << i18nc("process heading", "Shared Mem");
     headings << i18nc("process heading", "Relative Start Time");
+    headings << i18nc("process heading", "NNP");
     headings << i18nc("process heading", "Command");
 #if HAVE_X11
     if (d->mIsX11) {

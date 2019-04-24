@@ -42,7 +42,7 @@ namespace KSysGuard
 	      statusColumn = userColumn = systemColumn = niceColumn =
 	      vmSizeColumn = vmRSSColumn = loginColumn = commandColumn =
 	      tracerPidColumn = ttyColumn = ioprioClassColumn = ioprioColumn =
-	      vmURSSColumn = -1;
+	      vmURSSColumn = noNewPrivilegesColumn = -1;
               usedMemory = freeMemory;}
       ~Private() {}
       QString host;
@@ -69,6 +69,7 @@ namespace KSysGuard
       int ioprioClassColumn;
       int ioprioColumn;
       int ttyColumn;
+      int noNewPrivilegesColumn;
 
       int numColumns;
 
@@ -137,6 +138,7 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
     if(d->ttyColumn!= -1) process->setTty(p.at(d->ttyColumn));
     if(d->ioprioColumn!= -1) process->setIoniceLevel(p.at(d->ioprioColumn).toInt());
     if(d->ioprioClassColumn!= -1) process->setIoPriorityClass((KSysGuard::Process::IoPriorityClass)(p.at(d->ioprioClassColumn).toInt()));
+    if(d->noNewPrivilegesColumn!= -1) process->setNoNewPrivileges(p.at(d->noNewPrivilegesColumn).toLong());
 
     return true;
 }
@@ -242,6 +244,8 @@ void ProcessesRemote::answerReceived( int id, const QList<QByteArray>& answer ) 
 			d->ioprioClassColumn = i;
 		else if(info[i] == "IO Priority")
 			d->ioprioColumn = i;
+		else if(info[i] == "NNP")
+			d->noNewPrivilegesColumn = i;
 	    }
 	    d->havePsInfo = true;
 	    break;
