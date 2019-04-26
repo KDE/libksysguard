@@ -764,6 +764,8 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             emit q->dataChanged(index, index);
             index = q->createIndex(row, ProcessModel::HeadingCGroup, process);
             emit q->dataChanged(index, index);
+            index = q->createIndex(row, ProcessModel::HeadingMACContext, process);
+            emit q->dataChanged(index, index);
         }
         if(process->changes() & KSysGuard::Process::NiceLevels) {
             totalUpdated++;
@@ -1033,6 +1035,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("The number of bytes written.  See What's This for more information.");
             case HeadingCGroup:
                 return i18n("<qt>The control group (cgroup) where this process belongs.</qt>");
+            case HeadingMACContext:
+                return i18n("<qt>Mandatory Access Control (SELinux or AppArmor) context for this process.</qt>");
             default:
                 return QVariant();
           }
@@ -1089,6 +1093,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                         "<i>Technical information: </i>This data is collected from /proc/*/io and is documented further in Documentation/accounting and Documentation/filesystems/proc.txt in the kernel source.");
             case HeadingCGroup:
                 return i18n("<qt><i>Technical information: </i>This shows Linux Control Group (cgroup) membership, retrieved from /proc/[pid]/cgroup. Control groups are used by Systemd and containers for limiting process group's usage of resources and to monitor them.");
+            case HeadingMACContext:
+                return i18n("<qt><i>Technical information: </i>This shows Mandatory Access Control (SELinux or AppArmor) context, retrieved from /proc/[pid]/attr/current.");
             default:
                 return QVariant();
           }
@@ -1413,6 +1419,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #endif
         case HeadingCGroup:
             return process->cGroup();
+        case HeadingMACContext:
+            return process->macContext();
         default:
             return QVariant();
         }
@@ -1794,6 +1802,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #endif
         case HeadingCGroup:
             return process->cGroup();
+        case HeadingMACContext:
+            return process->macContext();
         default:
             return QVariant();
         }
@@ -1978,6 +1988,7 @@ void ProcessModel::setupHeader() {
     }
 #endif
     headings << i18nc("process heading", "CGroup");
+    headings << i18nc("process heading", "MAC Context");
 
     if(d->mHeadings.isEmpty()) { // If it's empty, this is the first time this has been called, so insert the headings
         beginInsertColumns(QModelIndex(), 0, headings.count()-1);

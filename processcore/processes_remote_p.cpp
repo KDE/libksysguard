@@ -42,7 +42,8 @@ namespace KSysGuard
 	      statusColumn = userColumn = systemColumn = niceColumn =
 	      vmSizeColumn = vmRSSColumn = loginColumn = commandColumn =
 	      tracerPidColumn = ttyColumn = ioprioClassColumn = ioprioColumn =
-	      vmURSSColumn = noNewPrivilegesColumn = cGroupColumn = -1;
+	      vmURSSColumn = noNewPrivilegesColumn = cGroupColumn =
+	      macContextColumn = -1;
               usedMemory = freeMemory;}
       ~Private() {}
       QString host;
@@ -71,6 +72,7 @@ namespace KSysGuard
       int ttyColumn;
       int noNewPrivilegesColumn;
       int cGroupColumn;
+      int macContextColumn;
 
       int numColumns;
 
@@ -141,6 +143,7 @@ bool ProcessesRemote::updateProcessInfo( long pid, Process *process)
     if(d->ioprioClassColumn!= -1) process->setIoPriorityClass((KSysGuard::Process::IoPriorityClass)(p.at(d->ioprioClassColumn).toInt()));
     if(d->noNewPrivilegesColumn!= -1) process->setNoNewPrivileges(p.at(d->noNewPrivilegesColumn).toLong());
     if(d->cGroupColumn!= -1) process->setCGroup(QString::fromUtf8(p.at(d->cGroupColumn)));
+    if(d->macContextColumn!= -1) process->setMACContext(QString::fromUtf8(p.at(d->macContextColumn)));
 
     return true;
 }
@@ -250,6 +253,8 @@ void ProcessesRemote::answerReceived( int id, const QList<QByteArray>& answer ) 
 			d->noNewPrivilegesColumn = i;
 		else if(info[i] == "CGroup")
 			d->cGroupColumn = i;
+		else if(info[i] == "MAC Context")
+			d->macContextColumn = i;
 	    }
 	    d->havePsInfo = true;
 	    break;

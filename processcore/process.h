@@ -215,6 +215,9 @@ public:
     QString cGroup() const;
     void setCGroup(const QString &cGroup); ///< Linux Control Group (cgroup)
 
+    QString macContext() const;
+    void setMACContext(const QString &macContext); ///< Mandatory Access Control (SELinux or AppArmor) Context
+
     /** This is the number of 1/1000ths of a second since this
      *  particular process was last updated compared to when all the processes
      *  were updated. The purpose is to allow a more fine tracking of the time

@@ -341,6 +341,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingIoWrite);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingXMemory);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCGroup);
+    d->mUi->treeView->header()->hideSection(ProcessModel::HeadingMACContext);
     // NOTE!  After this is all setup, the settings for the header are restored
     // from the user's last run.  (in restoreHeaderState)
     // So making changes here only affects the default settings.  To
