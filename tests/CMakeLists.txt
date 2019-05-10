@@ -1,7 +1,7 @@
 find_package(Qt5 REQUIRED CONFIG COMPONENTS Test)
 
 include_directories(${libksysguard_SOURCE_DIR})
-if(Qt5WebKitWidgets_FOUND)
+if(Qt5WebEngineWidgets_FOUND)
     # Process unit test
     ecm_qt_declare_logging_category(processtest_debug_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
     ecm_add_test(processtest.cpp ${processtest_debug_SRCS} TEST_NAME processtest
