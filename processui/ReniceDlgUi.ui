@@ -385,6 +385,9 @@ p, li { white-space: pre-wrap; }
          <property name="invertedAppearance">
           <bool>true</bool>
          </property>
+         <property name="invertedControls">
+          <bool>true</bool>
+         </property>
          <property name="tickPosition">
           <enum>QSlider::TicksBelow</enum>
          </property>
@@ -448,6 +451,9 @@ p, li { white-space: pre-wrap; }
           <enum>Qt::Horizontal</enum>
          </property>
          <property name="invertedAppearance">
+          <bool>true</bool>
+         </property>
+         <property name="invertedControls">
           <bool>true</bool>
          </property>
          <property name="tickPosition">
