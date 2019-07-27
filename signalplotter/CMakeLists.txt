@@ -26,14 +26,8 @@ set_target_properties(ksignalplotter
 
 install(TARGETS ksignalplotter EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-#----------------------
-
-# kde4_add_widget_files(ksignalplotterwidgets_PART_SRCS ${ksignalplotter_WIDGETS})
-#
-# add_library(ksignalplotterwidgets MODULE ${ksignalplotterwidgets_PART_SRCS})
-#
-# target_link_libraries(ksignalplotterwidgets ${KDE4_KDEUI_LIBS} ksignalplotter)
-#
-# install(TARGETS ksignalplotterwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer)
-
 install(FILES ksignalplotter.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard COMPONENT Devel)
+
+if(BUILD_DESIGNERPLUGIN)
+    add_subdirectory(designer)
+endif()

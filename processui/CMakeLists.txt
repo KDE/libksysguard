@@ -75,16 +75,6 @@ set_target_properties(processui
 
 install(TARGETS processui EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
-#----------------------
-
-# kde4_add_widget_files(ksysguardwidgets_PART_SRCS ${ksysguard_WIDGETS})
-#
-# add_library(ksysguardwidgets MODULE ${ksysguardwidgets_PART_SRCS})
-#
-# target_link_libraries(ksysguardwidgets ${KDE4_KDEUI_LIBS} processui)
-#
-# install(TARGETS ksysguardwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
-
 install( FILES
     ProcessModel.h
     ProcessFilter.h
@@ -93,3 +83,7 @@ install( FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/processui
     COMPONENT Devel
 )
+
+if(BUILD_DESIGNERPLUGIN)
+    add_subdirectory(designer)
+endif()

@@ -88,6 +88,10 @@ set(HAVE_X11 ${X11_FOUND})
 set(HAVE_XRES ${X11_XRes_FOUND})
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )
 
+option(BUILD_DESIGNERPLUGIN "Build plugin for Qt Designer" ON)
+add_feature_info(DESIGNERPLUGIN ${BUILD_DESIGNERPLUGIN} "Build plugin for Qt Designer")
+
+
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_CAST_FROM_ASCII)

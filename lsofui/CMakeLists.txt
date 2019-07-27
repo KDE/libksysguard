@@ -25,15 +25,6 @@ install(TARGETS lsofui EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_D
 
 install( FILES lsof.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard COMPONENT Devel)
 
-# set(ksysguardlsofwidgets_PART_SRCS
-#    ${CMAKE_CURRENT_BINARY_DIR}/ksysguardlsofwidgets.cpp
-# )
-#
-# kde4_add_widget_files(ksysguardlsofwidgets_PART_SRCS ksysguardlsof.widgets)
-#
-# add_library(ksysguardlsofwidgets MODULE ${ksysguardlsofwidgets_PART_SRCS})
-#
-# target_link_libraries(ksysguardlsofwidgets lsofui)
-#
-# install(TARGETS ksysguardlsofwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
-
+if(BUILD_DESIGNERPLUGIN)
+    add_subdirectory(designer)
+endif()
