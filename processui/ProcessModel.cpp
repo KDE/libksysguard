@@ -26,8 +26,12 @@
 #include "ProcessModel_p.h"
 #include "timeutil.h"
 
-#include "processcore/processes.h"
+#include "processcore/extended_process_list.h"
+#include "processcore/formatter.h"
 #include "processcore/process.h"
+#include "processcore/process_attribute.h"
+#include "processcore/process_data_provider.h"
+
 #include "processui_debug.h"
 
 #include <kcolorscheme.h>
@@ -350,7 +354,11 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
         }
     }
     //Sort by the display string if we do not have an explicit sorting here
-    return data(left, Qt::DisplayRole).toString() < data(right, Qt::DisplayRole).toString();
+
+    if (data(left, ProcessModel::PlainValueRole).toInt() == data(right, ProcessModel::PlainValueRole).toInt()) {
+        return data(left, Qt::DisplayRole).toString() < data(right, Qt::DisplayRole).toString();
+    }
+    return data(left, ProcessModel::PlainValueRole).toInt() < data(right, ProcessModel::PlainValueRole).toInt();
 }
 
 ProcessModel::~ProcessModel()
@@ -493,7 +501,7 @@ void ProcessModelPrivate::setupProcesses() {
         q->endResetModel();
     }
 
-    mProcesses = new KSysGuard::Processes(mHostName);
+    mProcesses = new KSysGuard::ExtendedProcesses();
 
     connect( mProcesses, &KSysGuard::Processes::processChanged, this, &ProcessModelPrivate::processChanged);
     connect( mProcesses, &KSysGuard::Processes::beginAddProcess, this, &ProcessModelPrivate::beginInsertRow);
@@ -505,6 +513,16 @@ void ProcessModelPrivate::setupProcesses() {
     connect( mProcesses, &KSysGuard::Processes::endMoveProcess, this, &ProcessModelPrivate::endMoveRow);
     mNumProcessorCores = mProcesses->numberProcessorCores();
     if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
+
+    mExtraAttributes = mProcesses->attributes();
+    for (int i = 0 ; i < mExtraAttributes.count(); i ++) {
+        mExtraAttributes[i]->setEnabled(true); // In future we will toggle this based on column visibility
+
+        connect(mExtraAttributes[i], &KSysGuard::ProcessAttribute::dataChanged, this, [this, i](KSysGuard::Process *process) {
+            const QModelIndex index = q->getQModelIndex(process, mHeadings.count() + i);
+            emit q->dataChanged(index, index);
+        });
+    }
 }
 
 #if HAVE_X11
@@ -647,7 +665,7 @@ int ProcessModel::rowCount(const QModelIndex &parent) const
 
 int ProcessModel::columnCount ( const QModelIndex & ) const
 {
-    return d->mHeadings.count();
+    return d->mHeadings.count() + d->mExtraAttributes.count();
 }
 
 bool ProcessModel::hasChildren ( const QModelIndex & parent = QModelIndex() ) const
@@ -676,7 +694,7 @@ bool ProcessModel::hasChildren ( const QModelIndex & parent = QModelIndex() ) co
 QModelIndex ProcessModel::index ( int row, int column, const QModelIndex & parent ) const
 {
     if(row<0) return QModelIndex();
-    if(column<0 || column >= d->mHeadings.count() ) return QModelIndex();
+    if(column<0 || column >= columnCount() ) return QModelIndex();
 
     if(d->mSimple) {
         if( parent.isValid()) return QModelIndex();
@@ -968,8 +986,18 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
 {
     if(orientation != Qt::Horizontal)
         return QVariant();
-    if(section < 0 || section >= d->mHeadings.count())
+    if(section < 0)
         return QVariant(); //is this needed?
+
+    if (section >= d->mHeadings.count() && section < columnCount()) {
+        int attr = section - d->mHeadings.count();
+        switch (role) {
+            case Qt::DisplayRole:
+                return d->mExtraAttributes[attr]->shortName();
+        }
+        return QVariant();
+    }
+
     switch( role ) {
       case Qt::TextAlignmentRole:
       {
@@ -1263,12 +1291,39 @@ QString ProcessModelPrivate::getUsernameForUser(long uid, bool withuid) const {
 QVariant ProcessModel::data(const QModelIndex &index, int role) const
 {
     //This function must be super duper ultra fast because it's called thousands of times every few second :(
-    //I think it should be optomised for role first, hence the switch statement (fastest possible case)
+    //I think it should be optimised for role first, hence the switch statement (fastest possible case)
 
     if (!index.isValid()) {
         return QVariant();
     }
+
+    if (index.column() > columnCount()) {
+        return QVariant();
+    }
+    //plugin stuff first
     if (index.column() >= d->mHeadings.count()) {
+        int attr = index.column() - d->mHeadings.count();
+        switch (role) {
+        case ProcessModel::PlainValueRole: {
+            KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+            const QVariant value = d->mExtraAttributes[attr]->data(process);
+            return value;
+        }
+        case Qt::DisplayRole: {
+            KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+            const QVariant value = d->mExtraAttributes[attr]->data(process);
+            return KSysGuard::Formatter::formatValue(value, d->mExtraAttributes[attr]->unit());
+        }
+        case Qt::TextAlignmentRole: {
+            KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
+            const QVariant value = d->mExtraAttributes[attr]->data(process);
+            if (value.canConvert(QMetaType::LongLong)
+                && static_cast<QMetaType::Type>(value.type()) != QMetaType::QString) {
+                return Qt::AlignRight + Qt::AlignVCenter;
+            }
+            return Qt::AlignLeft + Qt::AlignVCenter;
+        }
+        }
         return QVariant();
     }
 
@@ -2033,11 +2088,7 @@ void ProcessModel::setupHeader() {
     headings << i18nc("process heading", "Total Memory");
 
     if(d->mHeadings.isEmpty()) { // If it's empty, this is the first time this has been called, so insert the headings
-        beginInsertColumns(QModelIndex(), 0, headings.count()-1);
-        {
-            d->mHeadings = headings;
-        }
-        endInsertColumns();
+        d->mHeadings = headings;
     } else {
         // This was called to retranslate the headings.  Just use the new translations and call headerDataChanged
         Q_ASSERT(d->mHeadings.count() == headings.count());
