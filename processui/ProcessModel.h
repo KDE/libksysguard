@@ -138,7 +138,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
          *  setup header function, and make sure you increase PROCESSHEADERVERSION.  This will ensure
          *  that old saved settings won't be used
          */
-#define PROCESSHEADERVERSION 9
+#define PROCESSHEADERVERSION 10
         enum { HeadingName=0,
             HeadingUser,
             HeadingPid,
@@ -157,7 +157,8 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
             HeadingXMemory,
             HeadingXTitle,
             HeadingCGroup,
-            HeadingMACContext
+            HeadingMACContext,
+            HeadingVmPSS,
         };
 
         enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, PlainValueRole, PercentageRole, PercentageHistoryRole };

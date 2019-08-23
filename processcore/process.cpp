@@ -56,9 +56,11 @@ public:
     qlonglong vmSize;
     qlonglong vmRSS;
     qlonglong vmURSS;
+    qlonglong vmPSS;
     qlonglong vmSizeChange;
     qlonglong vmRSSChange;
     qlonglong vmURSSChange;
+    qlonglong vmPSSChange;
     unsigned long pixmapBytes;
     bool hasManagedGuiWindow;
     QString name;
@@ -182,9 +184,11 @@ void Process::clear() {
     d->vmSize=0;
     d->vmRSS = 0;
     d->vmURSS = 0;
+    d->vmPSS = 0;
     d->vmSizeChange = 0;
     d->vmRSSChange = 0;
     d->vmURSSChange = 0;
+    d->vmPSSChange = 0;
     d->pixmapBytes = 0;
     d->hasManagedGuiWindow = false;
     d->status=OtherStatus;
@@ -359,6 +363,11 @@ qlonglong Process::vmURSS() const
     return d->vmURSS;
 }
 
+qlonglong Process::vmPSS() const
+{
+    return d->vmPSS;
+}
+
 qlonglong& Process::vmSizeChange() const
 {
     return d->vmSizeChange;
@@ -372,6 +381,11 @@ qlonglong& Process::vmRSSChange() const
 qlonglong& Process::vmURSSChange() const
 {
     return d->vmURSSChange;
+}
+
+qlonglong Process::vmPSSChange() const
+{
+    return d->vmPSSChange;
 }
 
 unsigned long& Process::pixmapBytes() const
@@ -676,6 +690,20 @@ void Process::setVmURSS(qlonglong _vmURSS) {
     if(d->vmURSS == _vmURSS) return;
     d->vmURSS = _vmURSS;
     d->changes |= Process::VmURSS;
+}
+
+void Process::setVmPSS(qlonglong pss)
+{
+    if (d->vmPSSChange != 0 || d->vmPSS != 0) {
+        d->vmPSSChange = pss - d->vmPSS;
+    }
+
+    if (d->vmPSS == pss) {
+        return;
+    }
+
+    d->vmPSS = pss;
+    d->changes |= Process::VmPSS;
 }
 
 void Process::setName(const QString &_name) {

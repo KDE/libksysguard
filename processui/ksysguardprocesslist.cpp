@@ -342,6 +342,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingXMemory);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingCGroup);
     d->mUi->treeView->header()->hideSection(ProcessModel::HeadingMACContext);
+    d->mUi->treeView->header()->hideSection(ProcessModel::HeadingVmPSS);
     // NOTE!  After this is all setup, the settings for the header are restored
     // from the user's last run.  (in restoreHeaderState)
     // So making changes here only affects the default settings.  To
@@ -764,7 +765,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
                      d->mModel.ioInformation() == ProcessModel::SyscallsRate ||
                      d->mModel.ioInformation() == ProcessModel::ActualBytesRate;
 
-    if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory || index == ProcessModel::HeadingXMemory || index == ProcessModel::HeadingSharedMemory || ( (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) && d->mModel.ioInformation() != ProcessModel::Syscalls)) {
+    if( index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory || index == ProcessModel::HeadingXMemory || index == ProcessModel::HeadingSharedMemory || index == ProcessModel::HeadingVmPSS || ( (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) && d->mModel.ioInformation() != ProcessModel::Syscalls)) {
         //If the user right clicks on a column that contains a memory size, show a toggle option for displaying
         //the memory in different units.  e.g.  "2000 k" or "2 m"
         menu.addSeparator()->setText(i18n("Display Units"));

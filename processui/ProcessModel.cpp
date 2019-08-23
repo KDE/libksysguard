@@ -259,6 +259,9 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             qlonglong memoryRight = (processRight->vmURSS() != -1) ? processRight->vmURSS() : processRight->vmRSS();
             return memoryLeft > memoryRight;
         }
+        case HeadingVmPSS: {
+            return processLeft->vmPSS() > processRight->vmPSS();
+        }
         case HeadingStartTime: {
             return processLeft->startTime() > processRight->startTime();
         }
@@ -787,6 +790,11 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
             index = q->createIndex(row, ProcessModel::HeadingUser, process);
             emit q->dataChanged(index, index);
         }
+        if (process->changes() & KSysGuard::Process::VmPSS) {
+            totalUpdated++;
+            auto index = q->createIndex(row, ProcessModel::HeadingVmPSS, process);
+            emit q->dataChanged(index, index);
+        }
         if(process->changes() & KSysGuard::Process::Name) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingName, process);
@@ -981,6 +989,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
             case HeadingUser:
             case HeadingCPUUsage:
             case HeadingCPUTime:
+            case HeadingVmPSS:
                 return QVariant(Qt::AlignCenter);
 
         }
@@ -1037,6 +1046,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt>The control group (cgroup) where this process belongs.</qt>");
             case HeadingMACContext:
                 return i18n("<qt>Mandatory Access Control (SELinux or AppArmor) context for this process.</qt>");
+            case HeadingVmPSS:
+                return i18n("The amount of private physical memory used by a process, with the amount of shared memory divided by the amount of processes using that shared memory added.");
             default:
                 return QVariant();
           }
@@ -1095,6 +1106,8 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                 return i18n("<qt><i>Technical information: </i>This shows Linux Control Group (cgroup) membership, retrieved from /proc/[pid]/cgroup. Control groups are used by Systemd and containers for limiting process group's usage of resources and to monitor them.");
             case HeadingMACContext:
                 return i18n("<qt><i>Technical information: </i>This shows Mandatory Access Control (SELinux or AppArmor) context, retrieved from /proc/[pid]/attr/current.");
+            case HeadingVmPSS:
+                return i18n("<i>Technical information:</i> This is often referred to as \"Proportional Set Size\" and is the closest approximation of the real amount of total memory used by a process. Note that the number of applications sharing shared memory is determined per shared memory section and thus can vary per memory section.");
             default:
                 return QVariant();
           }
@@ -1421,6 +1434,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return process->cGroup();
         case HeadingMACContext:
             return process->macContext();
+        case HeadingVmPSS:
+            return process->vmPSS() >= 0 ? formatMemoryInfo(process->vmPSS(), d->mUnits, true) : QVariant{};
         default:
             return QVariant();
         }
@@ -1676,7 +1691,25 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
 #endif
             return QVariant(QVariant::String);
         }
-
+        case HeadingVmPSS: {
+            if(process->vmPSS() == -1) {
+                return xi18nc("@info:tooltip", "<para><emphasis strong='true'>Your system does not seem to have this information available to be read.</emphasis></para>");
+            }
+            if(d->mMemTotal > 0 ) {
+                return xi18nc(
+                    "@info:tooltip",
+                    "<para><emphasis strong='true'>Total memory usage:</emphasis> %1 out of %2  (%3 %)</para>",
+                    format.formatByteSize(process->vmPSS() * 1024),
+                    format.formatByteSize(d->mMemTotal * 1024),
+                    qRound(process->vmPSS() * 1000.0 / d->mMemTotal) / 10.0
+                );
+            } else {
+                return xi18nc(
+                    "@info:tooltip",
+                    "<para><emphasis strong='true'>Shared library memory usage:</emphasis> %1</para>", format.formatByteSize(process->vmPSS() * 1024)
+                );
+            }
+        }
         default:
             return QVariant(QVariant::String);
         }
@@ -1697,6 +1730,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             case HeadingVmSize:
             case HeadingIoWrite:
             case HeadingIoRead:
+            case HeadingVmPSS:
                 return QVariant(Qt::AlignRight | Qt::AlignVCenter);
             default:
                 return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
@@ -1804,6 +1838,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             return process->cGroup();
         case HeadingMACContext:
             return process->macContext();
+        case HeadingVmPSS:
+            return process->vmPSS() >= 0 ? process->vmPSS() : QVariant{};
         default:
             return QVariant();
         }
@@ -1845,6 +1881,11 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 if(process->vmURSS() == -1 || d->mMemTotal <= 0)
                     return -1;
                 return float(process->vmRSS() - process->vmURSS())/d->mMemTotal;
+            case HeadingVmPSS:
+                if (process->vmPSS() == -1 || d->mMemTotal <= 0) {
+                    return -1;
+                }
+                return float(process->vmPSS()) / d->mMemTotal;
             default:
                 return -1;
         }
@@ -1989,6 +2030,7 @@ void ProcessModel::setupHeader() {
 #endif
     headings << i18nc("process heading", "CGroup");
     headings << i18nc("process heading", "MAC Context");
+    headings << i18nc("process heading", "Total Memory");
 
     if(d->mHeadings.isEmpty()) { // If it's empty, this is the first time this has been called, so insert the headings
         beginInsertColumns(QModelIndex(), 0, headings.count()-1);

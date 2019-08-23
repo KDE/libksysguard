@@ -114,6 +114,7 @@ namespace KSysGuard
       inline bool readProcCmdline(const QString &dir, Process *process);
       inline bool readProcCGroup(const QString &dir, Process *process);
       inline bool readProcAttr(const QString &dir, Process *process);
+      inline bool readProcSmaps(const QString &dir, Process *process);
       inline bool getNiceness(long pid, Process *process);
       inline bool getIOStatistics(const QString &dir, Process *process);
       QFile mFile;
@@ -455,6 +456,27 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
     return true;
 }
 
+bool ProcessesLocal::Private::readProcSmaps(const QString &dir, Process *process)
+{
+    mFile.setFileName(dir + QStringLiteral("smaps_rollup"));
+    if (!mFile.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+
+    auto totalPss = -1LL;
+    while (mFile.readLine(mBuffer, sizeof(mBuffer)) > 0) {
+        if (qstrncmp(mBuffer, "Pss:", strlen("Pss:")) == 0) {
+            totalPss += atoll(mBuffer + sizeof("Pss:") - 1);
+        }
+    }
+
+    mFile.close();
+
+    process->setVmPSS(totalPss);
+
+    return true;
+}
+
 bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
   int sched = sched_getscheduler(pid);
   switch(sched) {
@@ -557,6 +579,7 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
     if(!d->readProcCmdline(dir, process)) success = false;
     if(!d->readProcCGroup(dir, process)) success = false;
     if(!d->readProcAttr(dir, process)) success = false;
+    if(!d->readProcSmaps(dir, process)) success = false;
     if(!d->getNiceness(pid, process)) success = false;
     if(mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(dir, process)) success = false;
 
