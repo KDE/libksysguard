@@ -86,6 +86,9 @@ add_definitions(-DQT_NO_CAST_TO_ASCII)
 add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 #add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
 add_subdirectory( lsofui )
 add_subdirectory( processcore )
 add_subdirectory( processui )

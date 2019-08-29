@@ -9,6 +9,7 @@ set(ksysguard_LIB_SRCS
    processes_remote_p.cpp
    processes_base_p.cpp
    processes_atop_p.cpp
+   process_controller.cpp
 )
 ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
 
@@ -21,6 +22,7 @@ target_link_libraries(processcore
     Qt5::Core
    PRIVATE
     KF5::I18n
+    KF5::AuthCore
     ${ZLIB_LIBRARIES}
 )
 
@@ -42,6 +44,7 @@ install(TARGETS processcore EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARG
 install( FILES
     processes.h
     process.h
+    process_controller.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/processcore
     COMPONENT Devel
 )
