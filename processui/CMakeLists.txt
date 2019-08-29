@@ -9,6 +9,7 @@ set(processui_LIB_SRCS
    ksysguardprocesslist.cpp
    ProcessFilter.cpp
    ProcessModel.cpp
+   ProcessDataModel.cpp
    ReniceDlg.cpp
    KTextEditVT.cpp
    scripting.cpp
