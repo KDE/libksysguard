@@ -124,7 +124,7 @@ void SensorShellAgent::daemonError( QProcess::ProcessError errorStatus )
   QString error;
   switch(errorStatus) {
     case QProcess::FailedToStart:
-      qCDebug(LIBKSYSGUARD_KSGRD) << "failed to run" <<  mDaemon->program().join(QLatin1String(" "));
+      qCDebug(LIBKSYSGUARD_KSGRD) << "failed to run" <<  mDaemon->program().join(QLatin1Char(' '));
       error = i18n("Could not run daemon program '%1'.", mDaemon->program().join(" "));
       break;
     case QProcess::Crashed:

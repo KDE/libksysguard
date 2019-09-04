@@ -572,7 +572,7 @@ bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *proce
 bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 {
     bool success = true;
-    QString dir = QStringLiteral("/proc/") + QString::number(pid) + QLatin1Char('/');
+    QString dir = QLatin1String("/proc/") + QString::number(pid) + QLatin1Char('/');
     if(!d->readProcStat(dir, process)) success = false;
     if(!d->readProcStatus(dir, process)) success = false;
     if(!d->readProcStatm(dir, process)) success = false;

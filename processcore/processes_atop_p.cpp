@@ -86,22 +86,22 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename) {
     ready = false;
     currentlySelectedIndex = -1;
     if(!atopLog.exists()) {
-        lastError = QStringLiteral("File ") + filename + QStringLiteral(" does not exist");
+        lastError = QLatin1String("File ") + filename + QLatin1String(" does not exist");
         return false;
     }
 
     if(!atopLog.open(QIODevice::ReadOnly)) {
-        lastError = QStringLiteral("Could not open file ") + filename;
+        lastError = QLatin1String("Could not open file ") + filename;
         return false;
     }
 
     int sizeRead = atopLog.read((char*)(&rh), sizeof(RawHeader));
     if(sizeRead != sizeof(RawHeader)) {
-        lastError = QStringLiteral("Could not read header from file ") + filename;
+        lastError = QLatin1String("Could not read header from file ") + filename;
         return false;
     }
     if(rh.magic != ATOPLOGMAGIC) {
-        lastError = QStringLiteral("File ") + filename + QStringLiteral(" does not contain raw atop/atopsar output (wrong magic number)");
+        lastError = QLatin1String("File ") + filename + QLatin1String(" does not contain raw atop/atopsar output (wrong magic number)");
         return false;
     }
     if (/*rh.sstatlen   != sizeof(SStat)    ||*/
@@ -109,7 +109,7 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename) {
         rh.rawheadlen != sizeof(RawHeader)  ||
         rh.rawreclen  != sizeof(RawRecord)  )
     {
-        lastError = QStringLiteral("File ") + filename + QStringLiteral(" has incompatible format");
+        lastError = QLatin1String("File ") + filename + QLatin1String(" has incompatible format");
         if (rh.aversion & 0x8000) {
             lastError = QStringLiteral("(created by version %1.%2. This program understands the format written by version 1.23")
                         .arg((rh.aversion >> 8) & 0x7f).arg(rh.aversion & 0xff);
@@ -184,7 +184,7 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
                 lastError = QStringLiteral("Could not uncompress record data due to corrupted data");
                 break;
             default:
-                lastError = QStringLiteral("Could not uncompress record data due to unexpected error: ") + QString::number(ret);
+                lastError = QLatin1String("Could not uncompress record data due to unexpected error: ") + QString::number(ret);
                 break;
         }
         delete [] pstats;

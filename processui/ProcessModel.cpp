@@ -1684,7 +1684,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 if (!tooltip.isEmpty()) {
                     tooltip += QLatin1Char('\n');
                 }
-                tooltip += QStringLiteral("• ") + value->name;
+                tooltip += QLatin1String("• ") + value->name;
             }
 
             return tooltip;
@@ -2206,7 +2206,7 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
             for(int i = 0; i < d->mHeadings.size(); i++) {
                 if(firstrow) {
                     QString heading = d->mHeadings[i];
-                    textHtmlHeaders += QStringLiteral("<th>") + heading + QStringLiteral("</th>");
+                    textHtmlHeaders += QLatin1String("<th>") + heading + QLatin1String("</th>");
                     if(i) {
                         textCsvHeaders += QLatin1Char(',');
                         textPlainHeaders += QLatin1String(", ");
@@ -2221,14 +2221,14 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
                     textCsv += QLatin1Char(',');
                     textPlain += QLatin1String(", ");
                 }
-                textHtml += QStringLiteral("<td>") +  display.toHtmlEscaped() + QStringLiteral("</td>");
+                textHtml += QLatin1String("<td>") +  display.toHtmlEscaped() + QLatin1String("</td>");
                 textPlain += display;
                 display.replace(QLatin1Char('"'),QLatin1String("\"\""));
                 textCsv += QLatin1Char('"') + display + QLatin1Char('"');
             }
         }
     }
-    textHtml = QStringLiteral("<html><table><tr>") + textHtmlHeaders + QStringLiteral("</tr><tr>") + textHtml + QStringLiteral("</tr></table>");
+    textHtml = QLatin1String("<html><table><tr>") + textHtmlHeaders + QLatin1String("</tr><tr>") + textHtml + QLatin1String("</tr></table>");
     textCsv = textCsvHeaders + QLatin1Char('\n') + textCsv;
     textPlain = textPlainHeaders + QLatin1Char('\n') + textPlain;
 
