@@ -529,12 +529,16 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         return; //Nothing interesting changed
 
     WindowInfo *w = mWIdToWindowInfo.value(wid);
+    const qreal dpr = qApp->devicePixelRatio();
+
     if(!w && !newWindow)
         return; //We do not have a record of this window and this is not a new window
 
     if(properties == NET::WMIcon) {
-        if(w)
-            w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE, HEADING_X_ICON_SIZE, true);
+        if(w) {
+            w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE * dpr, HEADING_X_ICON_SIZE * dpr, true);
+            w->icon.setDevicePixelRatio(dpr);
+        }
         return;
     }
     /* Get PID for window */
@@ -556,8 +560,10 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         mWIdToWindowInfo.insert(wid, w);
     }
 
-    if(w && (properties & NET::WMIcon))
-        w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE, HEADING_X_ICON_SIZE, true);
+    if(w && (properties & NET::WMIcon)) {
+        w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE * dpr, HEADING_X_ICON_SIZE * dpr, true);
+        w->icon.setDevicePixelRatio(dpr);
+    }
     if(properties & NET::WMVisibleName && info.visibleName())
         w->name = QString::fromUtf8(info.visibleName());
     else if(properties & NET::WMName)
