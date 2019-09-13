@@ -242,6 +242,8 @@ namespace KSysGuard
          *  We have finished moving the process
          */
         void endMoveProcess();
+
+        void updated();
     protected:
         class Private;
         Private *d;

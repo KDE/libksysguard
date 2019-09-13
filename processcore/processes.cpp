@@ -354,7 +354,7 @@ void Processes::processesUpdated() {
     }
 
     d->mProcessedLastTime = beingProcessed;  //update the set for next time this function is called
-    return;
+    emit updated();
 }
 
 void Processes::Private::markProcessesAsEnded(long pid)

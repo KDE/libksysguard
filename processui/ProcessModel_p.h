@@ -22,7 +22,7 @@
 #ifndef PROCESSMODEL_P_H_
 #define PROCESSMODEL_P_H_
 
-#include <processcore/process.h>
+#include <processcore/extended_process_list.h>
 #include "ProcessModel.h"
 
 #include <kuser.h>
@@ -182,7 +182,7 @@ class ProcessModelPrivate : public QObject
         long long mMemTotal; ///< the total amount of physical memory in kb in the machine.  We can used this to determine the percentage of memory an app is using
         int mNumProcessorCores;  ///< The number of (enabled) processor cores in the this machine
 
-        KSysGuard::Processes *mProcesses;  ///< The processes instance
+        KSysGuard::ExtendedProcesses *mProcesses;  ///< The processes instance
 
         QPixmap mBlankPixmap; ///< Used to pad out process names which don't have an icon
 
@@ -207,6 +207,8 @@ class ProcessModelPrivate : public QObject
         static const int MIN_HIST_AGE = 200; ///< If the latest history entry is at least this ms old, a new one gets added
         /** Storage for the history entries. We need one per percentage column. */
         QHash<KSysGuard::Process *, QVector<ProcessModel::PercentageHistoryEntry>> mMapProcessCPUHistory;
+
+        QVector<KSysGuard::ProcessAttribute*> mExtraAttributes;
 
 #ifdef HAVE_XRES
         bool mHaveXRes; ///< True if the XRes extension is available at run time
