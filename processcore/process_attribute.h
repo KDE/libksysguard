@@ -86,6 +86,14 @@ public:
     void setUnit(KSysGuard::Unit unit);
 
     /**
+     * A hint to UIs that this sensor would like to be visible by default.
+     *
+     * Defaults to false.
+     */
+    bool isVisibleByDefault() const;
+    void setVisibleByDefault(bool visible);
+
+    /**
      * The last stored value for a given process
      */
     QVariant data(KSysGuard::Process *process);

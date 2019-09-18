@@ -371,6 +371,11 @@ KSysGuard::Processes *ProcessModel::processController() const
     return d->mProcesses;
 }
 
+const QVector<KSysGuard::ProcessAttribute *> ProcessModel::extraAttributes() const
+{
+    return d->mExtraAttributes;
+}
+
 #if HAVE_X11
 void ProcessModelPrivate::windowRemoved(WId wid) {
     WindowInfo *window = mWIdToWindowInfo.take(wid);
@@ -516,8 +521,6 @@ void ProcessModelPrivate::setupProcesses() {
 
     mExtraAttributes = mProcesses->attributes();
     for (int i = 0 ; i < mExtraAttributes.count(); i ++) {
-        mExtraAttributes[i]->setEnabled(true); // In future we will toggle this based on column visibility
-
         connect(mExtraAttributes[i], &KSysGuard::ProcessAttribute::dataChanged, this, [this, i](KSysGuard::Process *process) {
             const QModelIndex index = q->getQModelIndex(process, mHeadings.count() + i);
             emit q->dataChanged(index, index);

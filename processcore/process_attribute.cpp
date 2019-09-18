@@ -36,6 +36,8 @@ public:
 
     QHash<KSysGuard::Process *, QVariant> m_data;
     bool m_enabled = false;
+
+    bool m_defaultVisible = false;
 };
 
 ProcessAttribute::ProcessAttribute(const QString &id, QObject *parent)
@@ -132,6 +134,16 @@ KSysGuard::Unit ProcessAttribute::unit() const
 void ProcessAttribute::setUnit(KSysGuard::Unit unit)
 {
     d->m_unit = unit;
+}
+
+bool KSysGuard::ProcessAttribute::isVisibleByDefault() const
+{
+    return d->m_defaultVisible;
+}
+
+void KSysGuard::ProcessAttribute::setVisibleByDefault(bool visible)
+{
+    d->m_defaultVisible = visible;
 }
 
 QVariant ProcessAttribute::data(KSysGuard::Process *process)

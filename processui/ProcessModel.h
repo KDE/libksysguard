@@ -31,6 +31,7 @@
 namespace KSysGuard {
 	class Processes;
 	class Process;
+    class ProcessAttribute;
 }
 
 class ProcessModelPrivate;
@@ -128,6 +129,9 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
         /** Returns for process controller pointer for this model */
         KSysGuard::Processes *processController() const;   //The processes instance
 
+        /** Returns the list of extra attributes provided by plugins */
+        const QVector<KSysGuard::ProcessAttribute *> extraAttributes() const;
+
         /** Convenience function to get the number of processes.
          *
          *  Equivalent to processController->processCount() */
@@ -159,6 +163,9 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
             HeadingCGroup,
             HeadingMACContext,
             HeadingVmPSS,
+            // This entry should always match the actual last entry in this enum + 1.
+            // It is used to determine where plugin-provided headings start.
+            HeadingPluginStart = HeadingVmPSS + 1,
         };
 
         enum { UidRole = Qt::UserRole, SortingValueRole, WindowIdRole, PlainValueRole, PercentageRole, PercentageHistoryRole };
