@@ -80,7 +80,7 @@ public:
     long ioCharactersActuallyWrittenRate;
     int numThreads;
     QList<Process *> children;
-    QTime timeKillWasSent;
+    QElapsedTimer timeKillWasSent;
     int index;
     Process::Changes changes;
     int elapsedTimeMilliSeconds;
@@ -483,7 +483,7 @@ QList< Process* > & Process::children() const
     return d->children;
 }
 
-QTime Process::timeKillWasSent() const
+QElapsedTimer Process::timeKillWasSent() const
 {
     return d->timeKillWasSent;
 }

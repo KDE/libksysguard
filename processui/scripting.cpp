@@ -87,7 +87,11 @@ class ScriptingHtmlDialog : public QDialog {
             setLayout(layout);
             layout->setContentsMargins(0,0,0,0);
             m_webView.settings()->setAttribute(QWebEngineSettings::PluginsEnabled, false);
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
             m_webView.page()->profile()->setRequestInterceptor(new RemoteUrlInterceptor(this));
+#else
+            m_webView.page()->profile()->setUrlRequestInterceptor(new RemoteUrlInterceptor(this));
+#endif
 #endif
         }
 #if HAVE_QTWEBENGINEWIDGETS
@@ -219,7 +223,7 @@ new QWebChannel(window.qt.webChannelTransport, function(channel) {
         "body { background: %1; color: %2; }" \
         "a { color: %3; }" \
         "a:visited { color: %4; } "
-    ).arg(palette().background().color().name(),
+    ).arg(palette().window().color().name(),
           palette().text().color().name(),
           palette().link().color().name(),
           palette().linkVisited().color().name());
