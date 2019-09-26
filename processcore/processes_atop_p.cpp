@@ -124,7 +124,7 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename) {
     historyOffsets.clear();
     while( !atopLog.atEnd() && atopLog.read((char*)(&rr), sizeof(RawRecord)) == sizeof(RawRecord) ) {
         historyOffsets << offset;
-        historyTimes << QPair<QDateTime,uint>(QDateTime::fromTime_t(rr.curtime), rr.interval);
+        historyTimes << QPair<QDateTime,uint>(QDateTime::fromSecsSinceEpoch(rr.curtime), rr.interval);
         offset +=  sizeof(RawRecord) + rr.scomplen + rr.pcomplen;
         atopLog.seek(offset);
     }
@@ -146,7 +146,7 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
         return false;
     }
 
-    if( historyTimes.at(index).first != QDateTime::fromTime_t(rr.curtime) ||
+    if( historyTimes.at(index).first != QDateTime::fromSecsSinceEpoch(rr.curtime) ||
            historyTimes.at(index).second != rr.interval) {
         lastError = QStringLiteral("INTERNAL ERROR WITH loadDataForHistory");
         ready = false;
