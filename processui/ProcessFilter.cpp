@@ -150,6 +150,6 @@ bool ProcessFilter::lessThan(const QModelIndex &left, const QModelIndex &right) 
 
 void ProcessFilter::setFilter(State filter) {
 	mFilter = filter;
-    invalidateFilter();//Tell the proxy view to refresh all its information
+	filterChanged();//Tell the proxy view to refresh all its information
 }
 

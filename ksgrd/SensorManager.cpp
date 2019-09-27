@@ -209,9 +209,9 @@ void SensorManager::retranslate()
 
   QString num;
   for ( int i = 1; i < 25; i++ ) {
-    num = QString::asprintf( "%.2d", i );
+    num.sprintf( "%.2d", i );
     mDict.insert( QLatin1String( "int" ) + num, ki18n( "Int %1" ).subs( i - 1, 3 ).toString() );
-    num = QString::asprintf( "%.3d", i + 255);
+    num.sprintf( "%.3d", i + 255);
     mDict.insert( QLatin1String( "int" ) + num, ki18n( "Int %1" ).subs( i + 255, 4 ).toString() );
   }
 

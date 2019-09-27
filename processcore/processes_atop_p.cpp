@@ -303,7 +303,7 @@ QDateTime ProcessesATop::viewingTime() const
 bool ProcessesATop::setViewingTime(const QDateTime &when)
 {
     QPair<QDateTime, uint> tmpWhen(when, 0);
-    QList< QPair<QDateTime,uint> >::iterator i = std::upper_bound(d->historyTimes.begin(), d->historyTimes.end(), tmpWhen);
+    QList< QPair<QDateTime,uint> >::iterator i = qUpperBound(d->historyTimes.begin(), d->historyTimes.end(), tmpWhen);
 
     if(i->first == when || (i->first > when && i->first.addSecs(-i->second) <= when)) {
         //We found the time :)

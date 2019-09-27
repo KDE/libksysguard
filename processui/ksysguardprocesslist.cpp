@@ -629,7 +629,7 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
     if (showSignalingEntries) {
         d->mProcessContextMenu->addSeparator();
         d->mProcessContextMenu->addAction(d->terminate);
-        if (numProcesses == 1 && process->timeKillWasSent().isValid())
+        if (numProcesses == 1 && !process->timeKillWasSent().isNull())
             d->mProcessContextMenu->addAction(d->kill);
     }
 
