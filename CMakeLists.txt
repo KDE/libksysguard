@@ -118,10 +118,6 @@ install(EXPORT libksysguardLibraryTargets
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
         FILE KF5SysGuardLibraryTargets.cmake )
 
-if (${ECM_VERSION} STRGREATER "5.58.0")
-    install(FILES libksysguard.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
-else()
-    install(FILES libksysguard.categories  DESTINATION ${KDE_INSTALL_CONFDIR})
-endif()
+install(FILES libksysguard.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
