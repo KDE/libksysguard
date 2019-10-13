@@ -230,7 +230,7 @@ public:
      *  a process has been running for.
      *
      *  This is updated in processes.cpp and so shouldn't be touched by the
-     *  OS dependant classes.
+     *  OS dependent classes.
      */
     int elapsedTimeMilliSeconds() const;
     void setElapsedTimeMilliSeconds(int value);

@@ -47,7 +47,7 @@ public:
     /**
      * Returns the scale factor suitable for display.
      *
-     * @param value The maximium output value.
+     * @param value The maximum output value.
      * @param unit The unit of the value.
      * @param targetPrefix Preferred metric prefix.
      */

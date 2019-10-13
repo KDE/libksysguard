@@ -86,7 +86,7 @@ public:
 protected:
     /**
      * Register a new process attribute
-     * Process attributes should be created in the plugin constuctor and must live for the duration the plugin
+     * Process attributes should be created in the plugin constructor and must live for the duration the plugin
      */
     void addProcessAttribute(ProcessAttribute *attribute);
 
