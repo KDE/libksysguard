@@ -36,6 +36,10 @@ if( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
   target_link_libraries(processcore kvm)
 endif()
 
+if(NOT HAVE_CLOCK_GETTIME_C)
+    target_link_libraries(processcore PRIVATE rt)
+endif()
+
 target_include_directories(processcore
     PUBLIC
         "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
