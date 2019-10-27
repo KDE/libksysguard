@@ -1,3 +1,5 @@
+#ifndef KSYSGUARD_KSYSGUARDDTEST_H
+#define KSYSGUARD_KSYSGUARDDTEST_H
 
 #include <QtTest>
 #include <Qt>
@@ -65,3 +67,5 @@ struct SensorClientTest : public KSGRD::SensorClient
     bool haveAnswer;
     QList<Answer> answers;
 };
+
+#endif // KSYSGUARD_KSYSGUARDDTEST_H

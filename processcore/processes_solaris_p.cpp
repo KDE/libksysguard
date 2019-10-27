@@ -47,7 +47,6 @@
 #include <pwd.h>
 #include <procfs.h>
 #include <sys/proc.h>
-#include <sys/resource.h>
 
 #define PROCESS_BUFFER_SIZE 512
 #define PROCDIR "/proc"

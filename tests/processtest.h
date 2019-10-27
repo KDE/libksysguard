@@ -17,8 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef TESTPROCESS_H
-#define TESTPROCESS_H
+#ifndef PROCESSTEST_H
+#define PROCESSTEST_H
 
 #include <QObject>
 namespace KSysGuard

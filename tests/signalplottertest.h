@@ -1,3 +1,5 @@
+#ifndef KSYSGUARD_SIGNALPLOTTERTEST_H
+#define KSYSGUARD_SIGNALPLOTTERTEST_H
 
 #include <QtTest>
 #include <Qt>
@@ -27,3 +29,5 @@ class TestSignalPlotter : public QObject
     private:
         KSignalPlotter *s;
 };
+
+#endif // KSYSGUARD_SIGNALPLOTTERTEST_H

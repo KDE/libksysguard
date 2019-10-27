@@ -1,3 +1,5 @@
+#ifndef GRAPHICSSIGNALPLOTTERBENCHMARK_H
+#define GRAPHICSSIGNALPLOTTERBENCHMARK_H
 
 #include <QtTest>
 #include <Qt>
@@ -20,3 +22,5 @@ class BenchmarkGraphicsSignalPlotter : public QObject
         QGraphicsScene *scene;
 
 };
+
+#endif // GRAPHICSSIGNALPLOTTERBENCHMARK_H

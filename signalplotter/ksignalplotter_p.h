@@ -26,6 +26,8 @@
 // SVG support causes it to crash at the moment :(
 //#define SVG_SUPPORT
 // Use a separate child widget to draw the graph in
+#ifndef KSYSGUARD_KSIGNALPLOTTER_P_H
+#define KSYSGUARD_KSIGNALPLOTTER_P_H
 
 #ifndef GRAPHICS_SIGNAL_PLOTTER
 #define USE_SEPERATE_WIDGET
@@ -150,3 +152,4 @@ class GraphWidget : public QWidget {
 };
 #endif
 
+#endif //KSYSGUARD_KSIGNALPLOTTER_P_H

@@ -20,6 +20,9 @@
 
 */
 
+#ifndef KSYSGUARD_HELPER_H
+#define KSYSGUARD_HELPER_H
+
 #include <kauth.h>
 #include <QObject>
 
@@ -40,3 +43,5 @@ class KSysGuardProcessListHelper : public QObject {
 };
 
 Q_DECLARE_METATYPE( QList<long long> )
+
+#endif // KSYSGUARD_HELPER_H

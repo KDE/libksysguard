@@ -28,6 +28,9 @@
 **
 ** etcetera .....
 */
+#ifndef KSYSGUARD_ATOP_P_H
+#define KSYSGUARD_ATOP_P_H
+
 #define ATOPLOGMAGIC     (unsigned int) 0xfeedbeef
 #define PNAMLEN     15
 #define CMDLEN      68
@@ -159,4 +162,4 @@ struct PInfo {
     PStat    pstat;      /* per-process statistics        */
 };
 
-
+#endif // KSYSGUARD_ATOP_P_H
