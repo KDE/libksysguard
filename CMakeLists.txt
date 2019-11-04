@@ -14,6 +14,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDEClangFormat)
 
 include(ECMAddTests)
 include(ECMInstallIcons)
@@ -100,6 +101,10 @@ add_subdirectory( ksgrd )
 if(BUILD_TESTING)
     add_subdirectory( tests )
 endif()
+
+# add clang-format target for all our real source files
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 install(DIRECTORY scripts/ DESTINATION ${KDE_INSTALL_DATADIR}/ksysguard/scripts)
 
