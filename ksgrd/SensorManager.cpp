@@ -71,14 +71,18 @@ void SensorManager::retranslate()
   mDict.insert( QStringLiteral( "wait" ), i18n( "Waiting" ) );
   mDict.insert( QStringLiteral( "intr" ), i18n( "Interrupt Load" ) );
   mDict.insert( QStringLiteral( "TotalLoad" ), i18n( "Total Load" ) );
+
   mDict.insert( QStringLiteral( "mem" ), i18n( "Memory" ) );
   mDict.insert( QStringLiteral( "physical" ), i18n( "Physical Memory" ) );
+  mDict.insert( QStringLiteral( "total" ), i18n( "Total Memory" ) );
   mDict.insert( QStringLiteral( "swap" ), i18n( "Swap Memory" ) );
   mDict.insert( QStringLiteral( "cached" ), i18n( "Cached Memory" ) );
   mDict.insert( QStringLiteral( "buf" ), i18n( "Buffered Memory" ) );
   mDict.insert( QStringLiteral( "used" ), i18n( "Used Memory" ) );
   mDict.insert( QStringLiteral( "application" ), i18n( "Application Memory" ) );
+  mDict.insert( QStringLiteral( "allocated" ), i18n( "Allocated Memory" ) );
   mDict.insert( QStringLiteral( "free" ), i18n( "Free Memory" ) );
+  mDict.insert( QStringLiteral( "available" ), i18n( "Available Memory" ) );
   mDict.insert( QStringLiteral( "active" ), i18n( "Active Memory" ) );
   mDict.insert( QStringLiteral( "inactive" ), i18n( "Inactive Memory" ) );
   mDict.insert( QStringLiteral( "wired" ), i18n( "Wired Memory" ) );
