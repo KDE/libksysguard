@@ -26,7 +26,7 @@ include(CheckIncludeFiles)
 include(CheckLibraryExists)
 include(FeatureSummary)
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets WebChannel)
 find_package(Qt5WebEngineWidgets ${QT_MIN_VERSION} CONFIG)
 set_package_properties(Qt5WebEngineWidgets PROPERTIES
                        URL "git://code.qt.org/qt/qtwebenginewidgets.git"
