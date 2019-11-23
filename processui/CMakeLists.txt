@@ -37,6 +37,7 @@ target_link_libraries(processui
         KF5::ConfigCore
     PRIVATE
         Qt5::DBus
+        Qt5::WebChannel
         KF5::I18n
         KF5::WindowSystem
         KF5::AuthCore
