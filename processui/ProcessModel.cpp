@@ -1410,7 +1410,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         case HeadingStartTime: {
             // NOTE: the next 6 lines are the same as in the next occurrence of 'case HeadingStartTime:' => keep in sync or remove duplicate code
             const auto clockTicksSinceSystemBoot = process->startTime();
-            const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK); // see man proc or http://superuser.com/questions/101183/what-is-a-cpu-tick
+            const auto clockTicksPerSecond = sysconf(_SC_CLK_TCK); // see man proc or https://superuser.com/questions/101183/what-is-a-cpu-tick
             const auto secondsSinceSystemBoot = (double)clockTicksSinceSystemBoot / clockTicksPerSecond;
             const auto systemBootTime = TimeUtil::systemUptimeAbsolute();
             const auto absoluteStartTime = systemBootTime.addSecs(secondsSinceSystemBoot);

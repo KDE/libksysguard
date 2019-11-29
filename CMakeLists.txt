@@ -61,7 +61,7 @@ ecm_setup_version(${PROJECT_VERSION}
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
-                        URL "http://www.x.org"
+                        URL "https://www.x.org"
                         TYPE OPTIONAL
                         PURPOSE "Required for building the X11 based workspace"
                     )

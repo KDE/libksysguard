@@ -53,7 +53,7 @@ public:
         mach_port_deallocate(mach_task_self(), cclock);
 #else
         timespec tp;
-        int isSuccess = clock_gettime(CLOCK_MONOTONIC, &tp); // see http://stackoverflow.com/questions/8357073/get-uptime-in-seconds-or-miliseconds-on-unix-like-systems
+        int isSuccess = clock_gettime(CLOCK_MONOTONIC, &tp); // see https://stackoverflow.com/questions/8357073/get-uptime-in-seconds-or-miliseconds-on-unix-like-systems
         Q_ASSERT(isSuccess == 0);
 #endif
         return tp.tv_sec;
