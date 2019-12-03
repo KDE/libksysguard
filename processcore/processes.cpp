@@ -52,7 +52,7 @@ namespace KSysGuard
         mProcesses.insert(-1, &mFakeProcess);
         mElapsedTimeMilliSeconds = 0;
         mHavePreviousIoValues = false;
-        mUpdateFlags = nullptr;
+        mUpdateFlags = {};
         mUsingHistoricalData = false;
         q = q_ptr;
     }
