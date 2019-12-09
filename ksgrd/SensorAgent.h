@@ -13,7 +13,7 @@
 #include <QObject>
 #include <QQueue>
 #include <QPointer>
-
+#include <QSet>
 
 class QString;
 
@@ -93,6 +93,7 @@ class Q_DECL_EXPORT SensorAgent : public QObject
 
     bool mDaemonOnLine;
     QString mHostName;
+    QSet<SensorRequest> mUnderwayRequests;
 };
 
 /**
@@ -113,6 +114,14 @@ class SensorRequest
     void setId( int );
     int id();
 
+  friend uint qHash(const SensorRequest& sr, uint seed=0) {
+    return qHash(qMakePair(sr.mRequest, qMakePair(sr.mClient, sr.mId)), seed);
+  }
+  friend bool operator==(const SensorRequest& a, const SensorRequest& b) {
+    return a.mRequest == b.mRequest &&
+      a.mClient == b.mClient &&
+      a.mId == b.mId;
+  }
   private:
     QString mRequest;
     SensorClient *mClient = nullptr;

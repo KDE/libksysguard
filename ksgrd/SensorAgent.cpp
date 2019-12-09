@@ -42,18 +42,10 @@ SensorAgent::~SensorAgent()
 void SensorAgent::sendRequest( const QString &req, SensorClient *client, int id )
 {
   SensorRequest *sensorreq = nullptr;
-  for(int i =0, total = mInputFIFO.size(); i < total; ++i) {
-    sensorreq = mInputFIFO.at(i);
-    if(id == sensorreq->id() && client == sensorreq->client() && req == sensorreq->request()) {
-      executeCommand();
-      return; //don't bother to resend the same request if we already have it in our queue to send
-    }
-  }
-  for(int i =0, total = mProcessingFIFO.size(); i < total; ++i) {
-    sensorreq = mProcessingFIFO.at(i);
-    if(id == sensorreq->id() && client == sensorreq->client() && req == sensorreq->request())
-      return; //don't bother to resend the same request if we have already sent the request to client and just waiting for an answer
-  }
+  SensorRequest nRequest { req, client, id };
+  if (mUnderwayRequests.contains(nRequest))
+    return;
+  mUnderwayRequests.insert(nRequest);
 
   /* The request is registered with the FIFO so that the answer can be
    * routed back to the requesting client. */
@@ -154,6 +146,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 	}
 		
 	SensorRequest *req = mProcessingFIFO.dequeue();
+	mUnderwayRequests.remove(*req);
 	// we are now responsible for the memory of req - we must delete it!
 	if ( !req->client() ) {
 		/* The client has disappeared before receiving the answer
