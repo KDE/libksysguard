@@ -577,7 +577,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
             return;
 
         w = new WindowInfo(wid, pid);
-        mPidToWindowInfo.insertMulti(pid, w);
+        mPidToWindowInfo.insert(pid, w);
         mWIdToWindowInfo.insert(wid, w);
     }
 
