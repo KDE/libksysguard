@@ -1,6 +1,7 @@
 #include "signalplotterbenchmark.h"
 #include "signalplotter/ksignalplotter.h"
 
+#include <QRandomGenerator>
 #include <QtTestGui>
 #include <QtGui>
 #include <limits>
@@ -25,8 +26,9 @@ void BenchmarkSignalPlotter::addData()
     s->resize(1000,500);
     QVERIFY(QTest::qWaitForWindowExposed(s));
 
+    auto *generator = QRandomGenerator::global();
     QBENCHMARK {
-        s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
+        s->addSample(QList<qreal>() << generator->bounded(10) << generator->bounded(10) << generator->bounded(10) << generator->bounded(10));
         qApp->processEvents();
     }
 
@@ -43,8 +45,9 @@ void BenchmarkSignalPlotter::stackedData()
     s->resize(1000,500);
     QVERIFY(QTest::qWaitForWindowExposed(s));
 
+    auto *generator = QRandomGenerator::global();
     QBENCHMARK {
-        s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
+        s->addSample(QList<qreal>() << generator->bounded(10) << generator->bounded(10) << generator->bounded(10) << generator->bounded(10));
         qApp->processEvents();
     }
 
@@ -56,8 +59,9 @@ void BenchmarkSignalPlotter::addDataWhenHidden()
     s->addBeam(Qt::red);
     s->addBeam(Qt::yellow);
 
+    auto *generator = QRandomGenerator::global();
     QBENCHMARK {
-        s->addSample(QList<qreal>() << qrand()%10 << qrand()%10 << qrand()%10 << qrand()%10);
+        s->addSample(QList<qreal>() << generator->bounded(10) << generator->bounded(10) << generator->bounded(10) << generator->bounded(10));
         qApp->processEvents();
     }
 
