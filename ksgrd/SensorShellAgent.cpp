@@ -103,7 +103,7 @@ void SensorShellAgent::errMsgRcvd( )
   const QString buf = QString::fromUtf8( buffer );
 
   qCDebug(LIBKSYSGUARD_KSGRD) << "SensorShellAgent: Warning, received text over stderr!"
-                << endl << buf << endl;
+                << "\n" << buf;
 }
 
 void SensorShellAgent::daemonExited(  int exitCode, QProcess::ExitStatus exitStatus )

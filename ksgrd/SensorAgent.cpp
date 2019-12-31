@@ -162,7 +162,7 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
 	// remove pending request from FIFO
 	if ( mProcessingFIFO.isEmpty() ) {
         qCDebug(LIBKSYSGUARD_KSGRD)	<< "ERROR: Received answer but have no pending "
-				<< "request!" << endl;
+                                << "request!";
 		mAnswerBuffer.clear();
 		continue;
 	}
