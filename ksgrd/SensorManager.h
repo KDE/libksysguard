@@ -78,7 +78,7 @@ class Q_DECL_EXPORT SensorManager : public QObject
     bool resynchronize( const QString &hostName );
     void notify( const QString &msg ) const;
 
-    void setBroadcaster( QWidget *wdg );
+    void setBroadcaster( QObject *wdg );
 
     bool sendRequest( const QString &hostName, const QString &request,
                       SensorClient *client, int id = 0 );
@@ -124,7 +124,7 @@ class Q_DECL_EXPORT SensorManager : public QObject
     QStringList mHostList;
     QStringList mCommandList;
 
-    QPointer<QWidget> mBroadcaster;
+    QPointer<QObject> mBroadcaster;
 };
 
 Q_DECL_EXPORT extern SensorManager* SensorMgr;

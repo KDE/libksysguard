@@ -26,13 +26,11 @@ target_include_directories(ksgrd
 target_link_libraries(ksgrd
     PUBLIC
         Qt5::Core
-        Qt5::Widgets # QWidget in SensorManager.h
         Qt5::Network # QTcpSocket in SensorSocketAgent.h
         KF5::ConfigCore # KConfigGroup in SensorManager.h
     PRIVATE
         KF5::I18n
         KF5::CoreAddons
-        KF5::ConfigWidgets
         KF5::ProcessCore
 )
 

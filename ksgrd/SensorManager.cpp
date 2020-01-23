@@ -21,10 +21,9 @@
 
 */
 
-#include <QApplication>
+#include <QCoreApplication>
 #include <QDebug>
 #include <klocalizedstring.h>
-#include <QWidget>
 #include <QEvent>
 #include <kconfiggroup.h>
 #include "ksgrd_debug.h"
@@ -345,7 +344,7 @@ void SensorManager::notify( const QString &msg ) const
   }
 }
 
-void SensorManager::setBroadcaster( QWidget *wdg )
+void SensorManager::setBroadcaster( QObject *wdg )
 {
   mBroadcaster = wdg;
 }
