@@ -56,7 +56,7 @@ class Scripting : public QWidget {
   private Q_SLOTS:
     /** Run the script associated with the QAction that called this slot */
     void runScriptSlot();
-#if HAVE_QTWEBENGINEWIDGETS
+#if WEBENGINE_SCRIPTING_ENABLED
     void setupJavascriptObjects();
     void refreshScript();
     void zoomIn();
