@@ -43,7 +43,7 @@
 #include <QMessageBox>
 #include <QDialogButtonBox>
 
-#if HAVE_QTWEBENGINEWIDGETS
+#if WEBENGINE_SCRIPTING_ENABLED
 #include <QWebChannel>
 #include <QWebEngineSettings>
 #include <QWebEngineView>
@@ -53,7 +53,7 @@
 #include <qtwebenginewidgetsversion.h>
 #endif
 
-#if HAVE_QTWEBENGINEWIDGETS
+#if WEBENGINE_SCRIPTING_ENABLED
 class RemoteUrlInterceptor : public QWebEngineUrlRequestInterceptor {
 public:
     RemoteUrlInterceptor(QObject *parent) : QWebEngineUrlRequestInterceptor(parent) {}
@@ -81,7 +81,7 @@ class ScriptingHtmlDialog : public QDialog {
             connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
             connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-#if HAVE_QTWEBENGINEWIDGETS
+#if WEBENGINE_SCRIPTING_ENABLED
             QVBoxLayout *layout = new QVBoxLayout;
             layout->addWidget(&m_webView);
             layout->addWidget(buttonBox);
@@ -95,7 +95,7 @@ class ScriptingHtmlDialog : public QDialog {
 #endif
 #endif
         }
-#if HAVE_QTWEBENGINEWIDGETS
+#if WEBENGINE_SCRIPTING_ENABLED
         QWebEngineView *webView() {
             return &m_webView;
         }
@@ -134,7 +134,7 @@ void Scripting::runScript(const QString &path, const QString &name) {
     mScriptPath = path;
     mScriptName = name;
 
-#if HAVE_QTWEBENGINEWIDGETS
+#if WEBENGINE_SCRIPTING_ENABLED
     QUrl fileName = QUrl::fromLocalFile(path + QStringLiteral("index.html"));
     if(!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
@@ -250,7 +250,7 @@ new QWebChannel(window.qt.webChannelTransport, function(channel) {
             i18n("KSysGuard library was compiled without QtWebEngineWidgets, please contact your distribution."));
 #endif
 }
-#if HAVE_QTWEBENGINEWIDGETS
+#if WEBENGINE_SCRIPTING_ENABLED
 void Scripting::zoomIn() {
     QWebEngineView *webView = mScriptingHtmlDialog->webView();
     webView->setZoomFactor( webView->zoomFactor() * 1.1 );

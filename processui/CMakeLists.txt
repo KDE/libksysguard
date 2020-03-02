@@ -37,7 +37,6 @@ target_link_libraries(processui
         KF5::ConfigCore
     PRIVATE
         Qt5::DBus
-        Qt5::WebChannel
         KF5::I18n
         KF5::WindowSystem
         KF5::AuthCore
@@ -59,8 +58,8 @@ if(X11_FOUND)
     target_link_libraries(processui PRIVATE Qt5::X11Extras KF5::WindowSystem)
 endif()
 
-if(Qt5WebEngineWidgets_FOUND)
-    target_link_libraries(processui PRIVATE Qt5::WebEngineWidgets)
+if(WEBENGINE_SCRIPTING_ENABLED)
+    target_link_libraries(processui PRIVATE Qt5::WebEngineWidgets Qt5::WebChannel)
 endif()
 
 if(NOT HAVE_CLOCK_GETTIME_C)
