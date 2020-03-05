@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 Vlad Zagorodniy <vladzzag@gmail.com>
+    Copyright (C) 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,4 +17,20 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "formatter/Formatter.h"
+#include "FormatterWrapper.h"
+
+#include "Formatter.h"
+
+namespace KSysGuard {
+
+QString FormatterWrapper::formatValue(const QVariant &value, KSysGuard::Unit unit, KSysGuard::MetricPrefix targetPrefix)
+{
+    return Formatter::formatValue(value, unit, targetPrefix);
+}
+
+QString FormatterWrapper::formatValueShowNull(const QVariant &value, KSysGuard::Unit unit, KSysGuard::MetricPrefix targetPrefix)
+{
+    return Formatter::formatValue(value, unit, targetPrefix, FormatOptionShowNull);
+}
+
+}

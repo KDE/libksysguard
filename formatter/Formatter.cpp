@@ -20,7 +20,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "formatter.h"
+#include "Formatter.h"
 
 #include <KLocalizedString>
 

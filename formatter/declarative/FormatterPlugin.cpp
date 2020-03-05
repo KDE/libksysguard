@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 Vlad Zagorodniy <vladzzag@gmail.com>
+    Copyright (C) 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,4 +17,21 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "formatter/Formatter.h"
+#include "FormatterPlugin.h"
+
+#include "Unit.h"
+#include "FormatterWrapper.h"
+
+#include <QQmlEngine>
+
+using namespace KSysGuard;
+
+void FormatterPlugin::registerTypes(const char *uri)
+{
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.ksysguard.formatter"));
+
+    qRegisterMetaType<KSysGuard::Unit>();
+    qRegisterMetaType<KSysGuard::MetricPrefix>();
+    qmlRegisterSingletonType<KSysGuard::FormatterWrapper>(uri, 1, 0, "Formatter", [](QQmlEngine*, QJSEngine*) -> QObject* { return new FormatterWrapper(); });
+    qmlRegisterUncreatableMetaObject(KSysGuard::staticMetaObject, uri, 1, 0, "Units", QStringLiteral("Contains unit enums"));
+}
