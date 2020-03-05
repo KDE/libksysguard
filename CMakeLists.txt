@@ -113,7 +113,7 @@ endif()
 add_subdirectory( ksgrd )
 
 if(BUILD_TESTING)
-    add_subdirectory( tests )
+    add_subdirectory( autotests )
 endif()
 
 # add clang-format target for all our real source files
