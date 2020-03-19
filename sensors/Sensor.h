@@ -37,6 +37,12 @@ namespace KSysGuard
 class SensorData;
 class SensorInfo;
 
+/**
+ * An object encapsulating a backend sensor.
+ *
+ * This class represents a sensor as exposed by the backend. It allows querying
+ * various metadata properties of the sensor as well as the current value.
+ */
 class SENSORS_EXPORT Sensor : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
@@ -73,10 +79,18 @@ class SENSORS_EXPORT Sensor : public QObject, public QQmlParserStatus
      */
     Q_PROPERTY(qreal maximum READ maximum NOTIFY metaDataChanged)
     /**
-     * The
+     * The QVariant type for this sensor.
+     *
+     * This is used to create proper default values.
      */
     Q_PROPERTY(QVariant::Type type READ type NOTIFY metaDataChanged)
     /**
+     * The status of the sensor.
+     *
+     * Due to the asynchronous nature of the underlying code, sensors are not
+     * immediately available on construction. Instead, they need to request data
+     * from the daemon and wait for it to arrive. This property reflects where
+     * in that process this sensor is.
      */
     Q_PROPERTY(Status status READ status NOTIFY statusChanged)
     /**
@@ -89,6 +103,9 @@ class SENSORS_EXPORT Sensor : public QObject, public QQmlParserStatus
     Q_PROPERTY(QString formattedValue READ formattedValue NOTIFY valueChanged)
     /**
      * Should this Sensor check for changes?
+     *
+     * Note that if set to true, the sensor will only be enabled when the parent
+     * is also enabled.
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 

@@ -31,29 +31,43 @@ namespace KSysGuard
 
 class SensorInfo;
 
+/**
+ * A model representing a table of sensors.
+ *
+ * This model will expose the metadata and values of a list of sensors as a
+ * table, using one column for each sensor. The metadata and values are
+ * represented as different roles.
+ */
 class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
 
+    /**
+     * The list of sensors to watch.
+     */
     Q_PROPERTY(QStringList sensors READ sensors WRITE setSensors NOTIFY sensorsChanged)
-    // The minimum value of all sensors' minimum property.
+    /**
+     * The minimum value of all sensors' minimum property.
+     */
     Q_PROPERTY(qreal minimum READ minimum NOTIFY sensorMetaDataChanged)
-    // The maximum value of all sensors' maximum property.
+    /**
+     * The maximum value of all sensors' maximum property.
+     */
     Q_PROPERTY(qreal maximum READ maximum NOTIFY sensorMetaDataChanged)
 
 public:
     enum AdditionalRoles {
-        SensorId = Qt::UserRole + 1,
-        Name,
-        ShortName,
-        Description,
-        Unit,
-        Minimum,
-        Maximum,
-        Type,
-        Value,
-        FormattedValue,
+        SensorId = Qt::UserRole + 1, //< The backend path to the sensor.
+        Name, //< The name of the sensor.
+        ShortName, //< A shorter name for the sensor. This is equal to name if not set.
+        Description, //< A description for the sensor.
+        Unit, //< The unit of the sensor.
+        Minimum, //< The minimum value this sensor can have.
+        Maximum, //< The maximum value this sensor can have.
+        Type, //< The QVariant::Type of the sensor.
+        Value, //< The value of the sensor.
+        FormattedValue, //< A formatted string of the value of the sensor.
     };
     Q_ENUM(AdditionalRoles)
 

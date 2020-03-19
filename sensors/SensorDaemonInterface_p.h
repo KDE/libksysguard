@@ -27,6 +27,12 @@ class QDBusPendingCallWatcher;
 
 namespace KSysGuard {
 
+/**
+ * Internal helper class to communicate with the daemon.
+ *
+ * This is mostly for convenience on top of the auto-generated KSysGuardDaemon
+ * D-Bus interface.
+ */
 class SensorDaemonInterface : public QObject
 {
     Q_OBJECT

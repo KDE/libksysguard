@@ -29,6 +29,14 @@ namespace KSysGuard
 
 class SensorInfo;
 
+/**
+ * A model representing a tree of sensors that are available from the daemon.
+ *
+ * This model exposes the daemon's sensors as a tree, based on their path. Each
+ * sensor is assumed to be structured in a format similar to
+ * `category/object/sensor`. This model will then expose a tree, with `category`
+ * as top level, `object` below it and finally `sensor` itself.
+ */
 class SENSORS_EXPORT SensorTreeModel : public QAbstractItemModel
 {
     Q_OBJECT
