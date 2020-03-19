@@ -1,0 +1,62 @@
+set(KSYSGUARD_SENSORS_SOVERSION 1)
+
+add_subdirectory(declarative)
+
+add_definitions(-DTRANSLATION_DOMAIN=\"ksysguard_sensors\")
+
+set(sensors_LIB_SRCS
+    Sensor.cpp
+    SensorDataModel.cpp
+    SensorTreeModel.cpp
+    SensorQuery.cpp
+    SensorDaemonInterface.cpp
+)
+
+set(sensors_LIB_HEADERS
+    Sensor.h
+    SensorDataModel.h
+    SensorTreeModel.h
+    SensorQuery.h
+    types.h
+    ${CMAKE_CURRENT_BINARY_DIR}/KSysGuardSensors_export.h
+)
+
+ecm_qt_declare_logging_category(sensors_LIB_SRCS
+    HEADER sensors_logging.h
+    IDENTIFIER LIBKSYSGUARD_SENSORS
+    CATEGORY_NAME org.kde.libksysguard.sensors
+)
+
+set_source_files_properties(org.kde.KSysGuardDaemon.xml PROPERTIES INCLUDE SensorInfo_p.h)
+qt5_add_dbus_interface(sensors_LIB_SRCS org.kde.KSysGuardDaemon.xml ksysguarddaemon)
+
+add_library(Sensors ${sensors_LIB_SRCS})
+add_library(KSysGuard::Sensors ALIAS Sensors)
+
+target_include_directories(Sensors
+    PUBLIC
+    "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
+    "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard/>"
+)
+
+generate_export_header(Sensors)
+
+target_link_libraries(Sensors
+    PUBLIC
+        Qt5::Qml
+        KSysGuard::Formatter
+    PRIVATE
+        Qt5::Core
+        Qt5::DBus
+        KF5::I18n
+)
+
+set_target_properties(Sensors PROPERTIES
+    LIBRARY_OUTPUT_NAME KSysGuardSensors
+    VERSION ${KSYSGUARD_VERSION_STRING}
+    SOVERSION ${KSYSGUARD_SENSORS_SOVERSION}
+    PUBLIC_HEADER "${sensors_LIB_HEADERS}"
+)
+
+install(TARGETS Sensors EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS Sensors PUBLIC_HEADER DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/sensors COMPONENT Devel)
