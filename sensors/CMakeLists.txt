@@ -17,8 +17,7 @@ set(sensors_LIB_HEADERS
     SensorDataModel.h
     SensorTreeModel.h
     SensorQuery.h
-    types.h
-    ${CMAKE_CURRENT_BINARY_DIR}/KSysGuardSensors_export.h
+    SensorInfo_p.h
 )
 
 ecm_qt_declare_logging_category(sensors_LIB_SRCS
@@ -55,7 +54,7 @@ set_target_properties(Sensors PROPERTIES
     LIBRARY_OUTPUT_NAME KSysGuardSensors
     VERSION ${KSYSGUARD_VERSION_STRING}
     SOVERSION ${KSYSGUARD_SENSORS_SOVERSION}
-    PUBLIC_HEADER "${sensors_LIB_HEADERS}"
+    PUBLIC_HEADER "${sensors_LIB_HEADERS};${CMAKE_CURRENT_BINARY_DIR}/sensors_export.h"
 )
 
 install(TARGETS Sensors EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
