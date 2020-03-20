@@ -27,7 +27,7 @@ set_target_properties(Formatter PROPERTIES
     LIBRARY_OUTPUT_NAME KSysGuardFormatter
     VERSION ${KSYSGUARD_VERSION_STRING}
     SOVERSION ${Formatter_SOVERSION}
-    PUBLIC_HEADER "${formatter_HDRS}"
+    PUBLIC_HEADER "${formatter_HDRS};${CMAKE_CURRENT_BINARY_DIR}/formatter_export.h"
 )
 
 add_subdirectory(declarative)
