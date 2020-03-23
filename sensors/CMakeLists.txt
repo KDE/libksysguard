@@ -54,8 +54,12 @@ set_target_properties(Sensors PROPERTIES
     LIBRARY_OUTPUT_NAME KSysGuardSensors
     VERSION ${KSYSGUARD_VERSION_STRING}
     SOVERSION ${KSYSGUARD_SENSORS_SOVERSION}
-    PUBLIC_HEADER "${sensors_LIB_HEADERS};${CMAKE_CURRENT_BINARY_DIR}/sensors_export.h"
 )
 
 install(TARGETS Sensors EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(TARGETS Sensors PUBLIC_HEADER DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/sensors COMPONENT Devel)
+install(FILES
+    ${sensors_LIB_HEADERS}
+    ${CMAKE_CURRENT_BINARY_DIR}/sensors_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/sensors
+    COMPONENT Devel
+)
