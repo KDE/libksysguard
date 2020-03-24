@@ -47,6 +47,7 @@
 #include <QPointer>
 #include <QDialog>
 #include <QIcon>
+#include <QPainterPath>
 
 #include <signal.h> //For SIGTERM
 
