@@ -20,6 +20,7 @@ ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h ID
 
 add_library(processcore ${ksysguard_LIB_SRCS})
 add_library(KF5::ProcessCore ALIAS processcore)
+add_library(KSysGuard::ProcessCore ALIAS processcore)
 
 target_link_libraries(processcore
    PUBLIC
@@ -48,6 +49,8 @@ target_include_directories(processcore
 )
 set_target_properties(processcore PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING} SOVERSION ${KSYSGUARD_SOVERSION} EXPORT_NAME ProcessCore)
 install(TARGETS processcore EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
+add_subdirectory(declarative)
 
 ########### install files ###############
 

@@ -23,6 +23,7 @@
 
 #include <functional>
 
+#include <KLocalizedString>
 #include <KAuth/KAuthAction>
 #include <KAuth/KAuthExecuteJob>
 
@@ -43,6 +44,7 @@ public:
     ApplyResult applyToPids(const QVector<int> &pids, const std::function<bool(int)> &function);
     ProcessController::Result runKAuthAction(const QString &actionId, const QVector<int> &pids, const QVariantMap &options);
     QVector<int> listToVector(const QList<long long> &list);
+    QVector<int> listToVector(const QVariantList &list);
 
     QWidget *widget;
 
@@ -98,6 +100,11 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::sendSignal(co
     return sendSignal(d->listToVector(pids), signal);
 }
 
+KSysGuard::ProcessController::Result KSysGuard::ProcessController::sendSignal(const QVariantList &pids, int signal)
+{
+    return sendSignal(d->listToVector(pids), signal);
+}
+
 ProcessController::Result ProcessController::setPriority(const QVector<int>& pids, int priority)
 {
     auto result = d->applyToPids(pids, [this, priority](int pid) { return d->localProcesses->setNiceness(pid, priority); });
@@ -113,6 +120,11 @@ ProcessController::Result ProcessController::setPriority(const QVector<int>& pid
 }
 
 KSysGuard::ProcessController::Result KSysGuard::ProcessController::setPriority(const QList<long long>& pids, int priority)
+{
+    return setPriority(d->listToVector(pids), priority);
+}
+
+KSysGuard::ProcessController::Result KSysGuard::ProcessController::setPriority(const QVariantList &pids, int priority)
 {
     return setPriority(d->listToVector(pids), priority);
 }
@@ -138,6 +150,11 @@ ProcessController::Result ProcessController::setCPUScheduler(const QVector<int>&
 }
 
 KSysGuard::ProcessController::Result KSysGuard::ProcessController::setCPUScheduler(const QList<long long>& pids, Process::Scheduler scheduler, int priority)
+{
+    return setCPUScheduler(d->listToVector(pids), scheduler, priority);
+}
+
+KSysGuard::ProcessController::Result KSysGuard::ProcessController::setCPUScheduler(const QVariantList &pids, Process::Scheduler scheduler, int priority)
 {
     return setCPUScheduler(d->listToVector(pids), scheduler, priority);
 }
@@ -175,18 +192,46 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::setIOSchedule
     return setIOScheduler(d->listToVector(pids), priorityClass, priority);
 }
 
+KSysGuard::ProcessController::Result KSysGuard::ProcessController::setIOScheduler(const QVariantList &pids, Process::IoPriorityClass priorityClass, int priority)
+{
+    return setIOScheduler(d->listToVector(pids), priorityClass, priority);
+}
+
+QString ProcessController::resultToString(Result result)
+{
+    switch(result) {
+    case Result::Success:
+        return i18n("Success");
+    case Result::InsufficientPermissions:
+        return i18n("Insufficient permissions.");
+    case Result::NoSuchProcess:
+        return i18n("No matching process was found.");
+    case Result::Unsupported:
+        return i18n("Not supported on the current system.");
+    case Result::UserCancelled:
+        return i18n("The user cancelled.");
+    case Result::Error:
+        return i18n("An unspecified error occurred.");
+    default:
+        return i18n("An unknown error occurred.");
+    }
+}
+
 ApplyResult KSysGuard::ProcessController::Private::applyToPids(const QVector<int>& pids, const std::function<bool(int)>& function)
 {
     ApplyResult result;
+
+    localProcesses->errorCode = KSysGuard::Processes::Unknown;
+
     for (auto pid : pids) {
         auto success = function(pid);
-        if (!success
-            && (localProcesses->errorCode == KSysGuard::Processes::InsufficientPermissions
-            || localProcesses->errorCode == KSysGuard::Processes::Unknown)) {
-            result.unchanged << pid;
-            result.resultCode = Result::InsufficientPermissions;
-        } else if (result.resultCode == Result::Success) {
+        if (!success) {
             switch (localProcesses->errorCode) {
+            case KSysGuard::Processes::InsufficientPermissions:
+            case KSysGuard::Processes::Unknown:
+                result.unchanged << pid;
+                result.resultCode = Result::InsufficientPermissions;
+                break;
             case Processes::InvalidPid:
             case Processes::ProcessDoesNotExistOrZombie:
             case Processes::InvalidParameter:
@@ -247,5 +292,12 @@ QVector<int> KSysGuard::ProcessController::Private::listToVector(const QList<lon
 {
     QVector<int> vector;
     std::transform(list.cbegin(), list.cend(), std::back_inserter(vector), [](long long entry) { return entry; });
+    return vector;
+}
+
+QVector<int> KSysGuard::ProcessController::Private::listToVector(const QVariantList &list)
+{
+    QVector<int> vector;
+    std::transform(list.cbegin(), list.cend(), std::back_inserter(vector), [](const QVariant &entry) { return entry.toInt(); });
     return vector;
 }
