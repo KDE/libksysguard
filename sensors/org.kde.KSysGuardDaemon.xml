@@ -8,10 +8,8 @@
       <arg name="sensorId" type="s" direction="out"/>
     </signal>
     <signal name="newSensorData">
-      <arg name="newEntities" type="as" direction="out" />
-      <arg name="sensorData" type="a(xssv)" direction="out"/>
-      <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="KSysGuard::SensorDataList"/>
-      <arg name="removedEntities" type="as" direction="out" />
+      <arg name="sensorData" type="a(sv)" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="KSysGuard::SensorDataList"/>
     </signal>
     <signal name="sensorMetaDataChanged">
       <arg name="metaData" type="a{s(sssuuddi)}" direction="out"/>
@@ -34,7 +32,7 @@
     </method>
     <method name="sensorData">
       <arg name="sensorIds" type="as" direction="in"/>
-      <arg name="sensorData" type="a(xssv)" direction="out"/>
+      <arg name="sensorData" type="a(sv)" direction="out"/>
       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="KSysGuard::SensorDataList"/>
     </method>
   </interface>

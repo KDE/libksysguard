@@ -32,10 +32,6 @@ namespace KSysGuard {
 class SensorInfo
 {
 public:
-    enum Type {
-        Singular,
-        List
-    };
     SensorInfo() = default;
     QString name; //translated?
     QString shortName; // translated
@@ -44,7 +40,6 @@ public:
     KSysGuard::Unit unit = KSysGuard::UnitInvalid; //Both a format hint and implies data type (i.e double/string)
     qreal min = 0;
     qreal max = 0;
-    Type type = Singular;
 };
 // this stuff could come from .desktop files (for the DBus case) or hardcoded (eg. for example nvidia-smi case) or come from current "ksysgrd monitors"
 
@@ -52,16 +47,12 @@ class Q_DECL_EXPORT SensorData
 {
 public:
     SensorData() = default;
-    SensorData(const QDateTime &_timeStamp, const QString &_attribute, const QString &_entity, const QVariant &_payload)
-        : timestamp(_timeStamp)
-        , attribute(_attribute)
-        , entity(_entity)
+    SensorData(const QString &_attribute, const QVariant &_payload)
+        : attribute(_attribute)
         , payload(_payload)
     {
     }
-    QDateTime timestamp;
     QString attribute;
-    QString entity;
     QVariant payload;
 };
 
@@ -78,7 +69,6 @@ inline QDBusArgument &operator<<(QDBusArgument &argument, const SensorInfo &s)
     argument << s.unit;
     argument << s.min;
     argument << s.max;
-    argument << s.type;
     argument.endStructure();
     return argument;
 }
@@ -96,8 +86,6 @@ inline const QDBusArgument &operator>>(const QDBusArgument &argument, SensorInfo
     s.unit = static_cast<KSysGuard::Unit>(t);
     argument >> s.min;
     argument >> s.max;
-    argument >> t;
-    s.type = static_cast<SensorInfo::Type>(t);
     argument.endStructure();
     return argument;
 }
@@ -105,9 +93,7 @@ inline const QDBusArgument &operator>>(const QDBusArgument &argument, SensorInfo
 inline QDBusArgument &operator<<(QDBusArgument &argument, const SensorData &s)
 {
     argument.beginStructure();
-    argument << s.timestamp.toMSecsSinceEpoch();
     argument << s.attribute;
-    argument << s.entity;
     argument << QDBusVariant(s.payload);
     argument.endStructure();
     return argument;
@@ -116,11 +102,7 @@ inline QDBusArgument &operator<<(QDBusArgument &argument, const SensorData &s)
 inline const QDBusArgument &operator>>(const QDBusArgument &argument, SensorData &s)
 {
     argument.beginStructure();
-    qint64 t;
-    argument >> t;
-    s.timestamp = QDateTime::fromMSecsSinceEpoch(t, Qt::UTC);
     argument >> s.attribute;
-    argument >> s.entity;
     argument >> s.payload;
     argument.endStructure();
     return argument;

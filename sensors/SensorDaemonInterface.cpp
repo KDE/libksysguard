@@ -137,7 +137,7 @@ void SensorDaemonInterface::onMetaDataChanged(const QHash<QString, SensorInfo>& 
     }
 }
 
-void SensorDaemonInterface::onValueChanged(const QStringList &, const SensorDataList &values, const QStringList &)
+void SensorDaemonInterface::onValueChanged(const SensorDataList &values)
 {
     for (auto entry : values) {
         Q_EMIT valueChanged(entry.attribute, entry.payload);

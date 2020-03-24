@@ -160,7 +160,7 @@ QVariant::Type Sensor::type() const
 QVariant Sensor::value() const
 {
     if (!d->value.isValid()) {
-        return QVariant{d->sensorInfo.type};
+        return QVariant{d->sensorInfo.variantType};
     }
     return d->value;
 }
