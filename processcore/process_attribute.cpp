@@ -146,7 +146,7 @@ void KSysGuard::ProcessAttribute::setVisibleByDefault(bool visible)
     d->m_defaultVisible = visible;
 }
 
-QVariant ProcessAttribute::data(KSysGuard::Process *process)
+QVariant ProcessAttribute::data(KSysGuard::Process *process) const
 {
     return d->m_data.value(process);
 }

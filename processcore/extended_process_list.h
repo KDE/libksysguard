@@ -33,6 +33,7 @@ public:
     ~ExtendedProcesses() override;
 
     QVector<ProcessAttribute *> attributes() const;
+    QVector<ProcessAttribute *> extendedAttributes() const;
 
 private:
     class Private;

@@ -96,7 +96,7 @@ public:
     /**
      * The last stored value for a given process
      */
-    QVariant data(KSysGuard::Process *process);
+    virtual QVariant data(KSysGuard::Process *process) const;
 
     /**
      * Updates the stored value for a given process

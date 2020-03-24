@@ -12,6 +12,8 @@ set(ksysguard_LIB_SRCS
    processes_base_p.cpp
    processes_atop_p.cpp
    process_controller.cpp
+   process_attribute_model.cpp
+   process_data_model.cpp
    process_data_provider.cpp
 )
 ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
@@ -55,6 +57,8 @@ install( FILES
     process_controller.h
     process_attribute.h
     process_data_provider.h
+    process_data_model.h
+    process_attribute_model.h
     formatter.h
     unit.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/processcore

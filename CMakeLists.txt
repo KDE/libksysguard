@@ -64,7 +64,7 @@ ecm_setup_version(${PROJECT_VERSION}
                   VARIABLE_PREFIX KSYSGUARD
                   VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/ksysguard_version.h"
                   PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake"
-                  SOVERSION 8
+                  SOVERSION 9
 )
 
 find_package(X11)

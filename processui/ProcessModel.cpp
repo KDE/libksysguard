@@ -519,7 +519,7 @@ void ProcessModelPrivate::setupProcesses() {
     mNumProcessorCores = mProcesses->numberProcessorCores();
     if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
 
-    mExtraAttributes = mProcesses->attributes();
+    mExtraAttributes = mProcesses->extendedAttributes();
     for (int i = 0 ; i < mExtraAttributes.count(); i ++) {
         connect(mExtraAttributes[i], &KSysGuard::ProcessAttribute::dataChanged, this, [this, i](KSysGuard::Process *process) {
             const QModelIndex index = q->getQModelIndex(process, mHeadings.count() + i);
