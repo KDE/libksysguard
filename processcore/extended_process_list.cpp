@@ -344,7 +344,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     d->m_coreAttributes << ioCharactersActuallyReadSensor;
 
     auto ioCharactersReadRateSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersReadRate"), i18n("IO Characters Read Rate"), &KSysGuard::Process::ioCharactersReadRate, KSysGuard::Process::IO);
-    ioCharactersReadRateSensor->setDescription(i18n("The read rate for all of a process' IO, including disk cache and other non-physical IO."));
+    ioCharactersReadRateSensor->setDescription(i18n("The read rate for all of a process' IO, including disk cache and other nonphysical IO."));
     ioCharactersReadRateSensor->setUnit(KSysGuard::UnitByteRate);
     d->m_coreAttributes << ioCharactersReadRateSensor;
 
