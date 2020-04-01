@@ -1,3 +1,3 @@
-module org.kde.ksgrd2
-plugin ksgrd2plugin
-ExtendedLegend 0.1 ExtendedLegend.qml
+module org.kde.ksysguard.sensors
+plugin SensorsPlugin
+ExtendedLegend 1.0 ExtendedLegend.qml
