@@ -43,7 +43,7 @@ set_package_properties(Qt5WebChannel PROPERTIES
                        PURPOSE "Used by the HTML-based GUI ksysguard library"
                       )
 
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package Declarative)
 find_package(KF5 OPTIONAL_COMPONENTS Plasma)
 set_package_properties(KF5Plasma PROPERTIES
                        URL "https://cgit.kde.org/plasma-framework.git/"

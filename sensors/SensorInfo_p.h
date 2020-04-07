@@ -26,6 +26,8 @@
 
 #include "formatter/Unit.h"
 
+#include "sensors_export.h"
+
 namespace KSysGuard {
 
 //Data that is static for the lifespan of the sensor

@@ -10,6 +10,8 @@ set(sensors_LIB_SRCS
     SensorTreeModel.cpp
     SensorQuery.cpp
     SensorDaemonInterface.cpp
+    SensorFaceController.cpp
+    SensorFace.cpp
 )
 
 set(sensors_LIB_HEADERS
@@ -18,6 +20,7 @@ set(sensors_LIB_HEADERS
     SensorTreeModel.h
     SensorQuery.h
     SensorInfo_p.h
+    SensorFaceController.h
 )
 
 ecm_qt_declare_logging_category(sensors_LIB_SRCS
@@ -43,11 +46,16 @@ generate_export_header(Sensors)
 target_link_libraries(Sensors
     PUBLIC
         Qt5::Qml
+        Qt5::Quick
         KSysGuard::Formatter
     PRIVATE
         Qt5::Core
         Qt5::DBus
         KF5::I18n
+        KF5::Package
+        KF5::ConfigCore
+        KF5::ConfigGui
+        KF5::Declarative
 )
 
 set_target_properties(Sensors PROPERTIES

@@ -108,8 +108,8 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     auto userNameSensor = new ProcessSensor<QString>(
     this, QStringLiteral("username"), i18n("Username"), [this](KSysGuard::Process *p) {
         const K_UID uid = p->uid();
-        auto userIt = d->m_userCache.constFind(uid);
-        if (userIt == d->m_userCache.constEnd()) {
+        auto userIt = d->m_userCache.find(uid);
+        if (userIt == d->m_userCache.end()) {
             userIt = d->m_userCache.insert(uid, KUser(uid));
         }
         return userIt->loginName();
@@ -123,8 +123,8 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
         if (uid == 65534) { // special value meaning nobody
             return false;
         }
-        auto userIt = d->m_userCache.constFind(uid);
-        if (userIt == d->m_userCache.constEnd()) {
+        auto userIt = d->m_userCache.find(uid);
+        if (userIt == d->m_userCache.end()) {
             userIt = d->m_userCache.insert(uid, KUser(uid));
         }
 

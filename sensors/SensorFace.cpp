@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
+    Copyright (C) 2020 Marco Martin <mart@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,23 +17,30 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "SensorsPlugin.h"
-
-#include "SensorDataModel.h"
-#include "SensorTreeModel.h"
-#include "Sensor.h"
 #include "SensorFace_p.h"
+#include "SensorFaceController.h"
 
-#include <QQmlEngine>
+#include <QDebug>
 
-using namespace KSysGuard;
-
-void SensorsPlugin::registerTypes(const char *uri)
+SensorFace::SensorFace(QQuickItem *parent)
+    : QQuickItem(parent)
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.ksysguard.sensors"));
-
-    qmlRegisterType<SensorDataModel>(uri, 1, 0, "SensorDataModel");
-    qmlRegisterType<SensorTreeModel>(uri, 1, 0, "SensorTreeModel");
-    qmlRegisterType<SensorFace>(uri, 1, 0, "SensorFace");
-    qmlRegisterType<Sensor>(uri, 1, 0, "Sensor");
+    
 }
+
+SensorFace::~SensorFace()
+{
+}
+
+SensorFaceController *SensorFace::controller() const
+{
+    return m_controller;
+}
+
+// Not writable from QML
+void SensorFace::setController(SensorFaceController *controller)
+{
+    m_controller = controller;
+}
+
+#include "moc_SensorFace_p.cpp"
