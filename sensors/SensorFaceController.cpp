@@ -18,7 +18,7 @@
 */
 
 #include "SensorFaceController.h"
-#include "SensorFace_p.h"
+#include "SensorFace.h"
 
 #include <QtQml>
 #include <QDebug>
@@ -41,19 +41,16 @@ public:
     KDesktopFile *faceMetadata = nullptr;
     KDeclarative::ConfigPropertyMap *faceConfiguration = nullptr;
     KConfigLoader *faceConfigLoader = nullptr;
-    
 
     KPackage::Package facePackage;
     QString faceId;
     KConfigGroup configGroup;
+    KConfigGroup appearanceGroup;
+    KConfigGroup sensorsGroup;
     QPointer <SensorFace> fullRepresentation;
     QPointer <SensorFace> compactRepresentation;
 
-    QString totalSensor;
-    QString titleChanged;
-    QStringList sensorIds;
-    QStringList sensorColors;
-    QStringList textOnlySensorIds;
+    QTimer *syncTimer;
 };
 
 SensorFaceController::Private::Private()
@@ -77,7 +74,7 @@ SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
     QObject *guiObject = component->beginCreate(context);
     SensorFace *gui = qobject_cast<SensorFace *>(guiObject);
     if (!gui) {
-        qWarning()<<"ERROR: QML gui" << guiObject << "not a QQuickItem instance";
+        qWarning()<<"ERROR: QML gui" << guiObject << "not a SensorFace instance";
         guiObject->deleteLater();
         context->deleteLater();
         return nullptr;
@@ -94,13 +91,24 @@ SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
 
 
 
-SensorFaceController::SensorFaceController(const KConfigGroup &config, QQmlEngine *engine)
+SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *engine)
     : QObject(engine),
       d(std::make_unique<Private>())
 {
     d->q = this;
     d->configGroup = config;
+    d->appearanceGroup = KConfigGroup(&config, "Appearance");
+    d->sensorsGroup = KConfigGroup(&config, "Sensors");
     d->engine = engine;
+    d->syncTimer = new QTimer(this);
+    d->syncTimer->setSingleShot(true);
+    d->syncTimer->setInterval(5000);
+    connect(d->syncTimer, &QTimer::timeout, this, [this]() {
+        d->appearanceGroup.sync();
+        d->sensorsGroup.sync();
+    });
+
+    setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.piechart")));
 }
 
 SensorFaceController::~SensorFaceController()
@@ -109,76 +117,80 @@ SensorFaceController::~SensorFaceController()
 
 QString SensorFaceController::title() const
 {
-    return d->title;
+    return d->appearanceGroup.readEntry("title", name());
 }
 
 void SensorFaceController::setTitle(const QString &title)
 {
-    if (title == d->title) {
+    if (title == SensorFaceController::title()) {
         return;
     }
 
-    d->title = title;
+    d->appearanceGroup.writeEntry("title", title);
     emit titleChanged();
 }
 
 QString SensorFaceController::totalSensor() const
 {
-    return d->totalSensor;
+    return d->sensorsGroup.readEntry("totalSensor", QString());
 }
 
 void SensorFaceController::setTotalSensor(const QString &totalSensor)
 {
-    if (totalSensor == d->totalSensor) {
+    if (totalSensor == SensorFaceController::totalSensor()) {
         return;
     }
 
-    d->totalSensor = totalSensor;
+    d->sensorsGroup.writeEntry("totalSensor", totalSensor);
+    d->syncTimer->start();
     emit totalSensorChanged();
 }
 
 QStringList SensorFaceController::sensorIds() const
 {
-    return d->sensorIds;
+    return d->sensorsGroup.readEntry("sensorIds", QStringList());
 }
 
 void SensorFaceController::setSensorIds(const QStringList &sensorIds)
 {
-    if (sensorIds == d->sensorIds) {
+    if (sensorIds == SensorFaceController::sensorIds()) {
         return;
     }
 
-    d->sensorIds = sensorIds;
+    d->sensorsGroup.writeEntry("sensorIds", sensorIds);
+    d->syncTimer->start();
     emit sensorIdsChanged();
 }
 
 QStringList SensorFaceController::sensorColors() const
 {
-    return d->sensorColors;
+    return d->sensorsGroup.readEntry("sensorColors", QStringList());
 }
 
 void SensorFaceController::setSensorColors(const QStringList &sensorColors)
 {
-    if (sensorColors == d->sensorColors) {
+    if (sensorColors == SensorFaceController::sensorColors()) {
         return;
     }
 
-    d->sensorColors = sensorColors;
+    d->sensorsGroup.writeEntry("sensorColors", sensorColors);
+    d->syncTimer->start();
     emit sensorColorsChanged();
 }
 
 QStringList SensorFaceController::textOnlySensorIds() const
 {
-    return d->textOnlySensorIds;
+    return d->sensorsGroup.readEntry("textOnlySensorIds", QStringList());
 }
 
 void SensorFaceController::setTextOnlySensorIds(const QStringList &textOnlySensorIds)
 {
-    if (textOnlySensorIds == d->textOnlySensorIds) {
+    if (textOnlySensorIds == SensorFaceController::textOnlySensorIds()) {
         return;
     }
 
-    d->textOnlySensorIds = textOnlySensorIds;
+    d->sensorsGroup.writeEntry("textOnlySensorIds", textOnlySensorIds);
+    d->syncTimer->start();
     emit textOnlySensorIdsChanged();
 }
 
@@ -245,7 +257,7 @@ void SensorFaceController::setFaceId(const QString &face)
     d->faceId = face;
 
     d->facePackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/SensorApplet"), face);
-
+qWarning()<<"AAAAAAAAAA"<<d->faceId ;
     delete d->faceMetadata;
     d->faceMetadata = nullptr;
     if (d->faceConfiguration) {
@@ -258,6 +270,7 @@ void SensorFaceController::setFaceId(const QString &face)
     }
 
     if (!d->facePackage.isValid()) {
+        emit faceIdChanged();
         return;
     }
 
@@ -267,10 +280,15 @@ void SensorFaceController::setFaceId(const QString &face)
 
     if (!xmlPath.isEmpty()) {
         QFile file(xmlPath);
+        KConfigGroup cg(&d->configGroup, d->faceId);
 
-        d->faceConfigLoader = new KConfigLoader(d->configGroup, &file, this);
+        d->faceConfigLoader = new KConfigLoader(cg, &file, this);
         d->faceConfiguration = new KDeclarative::ConfigPropertyMap(d->faceConfigLoader, this);
     }
+
+    d->appearanceGroup.writeEntry("chartFace", face);
+    d->syncTimer->start();
+    emit faceIdChanged();
 }
 
 QString SensorFaceController::faceId() const

@@ -29,8 +29,16 @@ class SENSORS_EXPORT SensorFace : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(SensorFaceController *controller READ controller CONSTANT)
+    Q_PROPERTY(SensorFace::FormFactor formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
 
 public:
+    enum FormFactor {
+        Planar,
+        Vertical,
+        Horizontal
+    };
+    Q_ENUM(FormFactor)
+
     SensorFace(QQuickItem *parent = nullptr);
     ~SensorFace();
 
@@ -39,6 +47,13 @@ public:
     // Not writable from QML
     void setController(SensorFaceController *controller);
 
+    SensorFace::FormFactor formFactor() const;
+    void setFormFactor(SensorFace::FormFactor formFactor);
+
+Q_SIGNALS:
+    void formFactorChanged();
+
 private:
-    SensorFaceController *m_controller = nullptr;
+    class Private;
+    const std::unique_ptr<Private> d;
 };

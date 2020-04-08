@@ -53,10 +53,10 @@ class SENSORS_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(bool supportsSensorsColors READ supportsSensorsColors NOTIFY faceIdChanged)
     Q_PROPERTY(bool supportsTotalSensor READ supportsTotalSensor NOTIFY faceIdChanged)
     Q_PROPERTY(bool supportsTextOnlySensors READ supportsTextOnlySensors NOTIFY faceIdChanged)
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfig READ faceConfig CONSTANT)
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfig CONSTANT)
 
 public:
-    SensorFaceController(const KConfigGroup &config, QQmlEngine *engine);
+    SensorFaceController(KConfigGroup &config, QQmlEngine *engine);
     ~SensorFaceController();
 
     void setFaceId(const QString &face);

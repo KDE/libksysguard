@@ -22,7 +22,8 @@
 #include "SensorDataModel.h"
 #include "SensorTreeModel.h"
 #include "Sensor.h"
-#include "SensorFace_p.h"
+#include "SensorFace.h"
+#include "SensorFaceController.h"
 
 #include <QQmlEngine>
 
@@ -34,6 +35,7 @@ void SensorsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<SensorDataModel>(uri, 1, 0, "SensorDataModel");
     qmlRegisterType<SensorTreeModel>(uri, 1, 0, "SensorTreeModel");
-    qmlRegisterType<SensorFace>(uri, 1, 0, "SensorFace");
+    qmlRegisterType<SensorFace>(uri, 1, 0, "AbstractSensorFace");
+    qmlRegisterUncreatableType<SensorFaceController>(uri, 1, 0, "SensorFaceController", QStringLiteral("It's not possible to create objects of type SensorFaceController"));
     qmlRegisterType<Sensor>(uri, 1, 0, "Sensor");
 }

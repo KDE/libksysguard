@@ -17,13 +17,20 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "SensorFace_p.h"
+#include "SensorFace.h"
 #include "SensorFaceController.h"
 
 #include <QDebug>
 
+class SensorFace::Private {
+public:
+    SensorFaceController *controller = nullptr;
+    FormFactor formFactor = Planar;
+};
+
 SensorFace::SensorFace(QQuickItem *parent)
-    : QQuickItem(parent)
+    : QQuickItem(parent),
+      d(std::make_unique<Private>())
 {
     
 }
@@ -34,13 +41,28 @@ SensorFace::~SensorFace()
 
 SensorFaceController *SensorFace::controller() const
 {
-    return m_controller;
+    return d->controller;
 }
 
 // Not writable from QML
 void SensorFace::setController(SensorFaceController *controller)
 {
-    m_controller = controller;
+    d->controller = controller;
 }
 
-#include "moc_SensorFace_p.cpp"
+SensorFace::FormFactor SensorFace::formFactor() const
+{
+    return d->formFactor;
+}
+
+void SensorFace::setFormFactor(SensorFace::FormFactor formFactor)
+{
+    if (d->formFactor == formFactor) {
+        return;
+    }
+
+    d->formFactor = formFactor;
+    emit formFactorChanged();
+}
+
+#include "moc_SensorFace.cpp"

@@ -21,6 +21,7 @@ set(sensors_LIB_HEADERS
     SensorQuery.h
     SensorInfo_p.h
     SensorFaceController.h
+    SensorFace.h
 )
 
 ecm_qt_declare_logging_category(sensors_LIB_SRCS
