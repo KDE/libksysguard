@@ -24,6 +24,7 @@
 
 class SensorFace::Private {
 public:
+    QPointer<QQuickItem> contentItem;
     SensorFaceController *controller = nullptr;
     FormFactor formFactor = Planar;
 };
@@ -63,6 +64,39 @@ void SensorFace::setFormFactor(SensorFace::FormFactor formFactor)
 
     d->formFactor = formFactor;
     emit formFactorChanged();
+}
+
+QQuickItem * SensorFace::contentItem() const
+{
+    return d->contentItem;
+}
+
+void SensorFace::setContentItem(QQuickItem *item)
+{
+    if (d->contentItem == item) {
+        return;
+    }
+    d->contentItem = item;
+
+    if (d->contentItem) {
+        d->contentItem->setParentItem(this);
+        d->contentItem->setX(0);
+        d->contentItem->setY(0);
+        d->contentItem->setSize(size());
+    }
+
+    emit contentItemChanged();
+}
+
+void SensorFace::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+{
+    if (d->contentItem) {
+        d->contentItem->setX(0);
+        d->contentItem->setY(0);
+        d->contentItem->setSize(newGeometry.size());
+    }
+
+    QQuickItem::geometryChanged(newGeometry, oldGeometry);
 }
 
 #include "moc_SensorFace.cpp"

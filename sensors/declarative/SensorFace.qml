@@ -21,12 +21,22 @@
  */
 
 import QtQuick 2.9
+import QtQuick.Layouts 1.4
 
 import org.kde.quickcharts 1.0 as Charts
 import org.kde.ksysguard.sensors 1.0 as Sensors
 
 Sensors.AbstractSensorFace {
     id: root
+    implicitWidth: contentItem.implicitWidth
+    implicitHeight: contentItem.implicitHeight
+    Layout.minimumWidth: contentItem.Layout.minimumWidth
+    Layout.minimumHeight: contentItem.Layout.minimumHeight
+    Layout.preferredWidth: contentItem.Layout.preferredWidth
+    Layout.preferredHeight: contentItem.Layout.preferredHeight
+    Layout.maximumWidth: contentItem.Layout.maximumWidth
+    Layout.maximumHeight: contentItem.Layout.maximumHeight
+
     property alias colorSource: colorSource
 
     Charts.ColorGradientSource {
@@ -40,7 +50,7 @@ Sensors.AbstractSensorFace {
 
         function generate() {
             var colors = colorSource.colors;
-            var savedColors = root.controller.sensorColors;
+            var savedColors = root.sensorColors;
             for (var i = 0; i < root.controller.sensorIds.length; ++i) {
                 if (savedColors.length <= i) {
                     savedColors.push(colors[i]);

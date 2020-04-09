@@ -42,6 +42,7 @@ class SENSORS_EXPORT SensorFaceController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
+    Q_PROPERTY(QString faceId READ faceId WRITE setFaceId NOTIFY faceIdChanged)
     Q_PROPERTY(QString totalSensor READ totalSensor WRITE setTotalSensor NOTIFY totalSensorChanged)
     Q_PROPERTY(QStringList sensorIds READ sensorIds WRITE setSensorIds NOTIFY sensorIdsChanged)
     Q_PROPERTY(QStringList sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
@@ -53,7 +54,10 @@ class SENSORS_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(bool supportsSensorsColors READ supportsSensorsColors NOTIFY faceIdChanged)
     Q_PROPERTY(bool supportsTotalSensor READ supportsTotalSensor NOTIFY faceIdChanged)
     Q_PROPERTY(bool supportsTextOnlySensors READ supportsTextOnlySensors NOTIFY faceIdChanged)
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfig CONSTANT)
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceIdChanged)
+
+    Q_PROPERTY(SensorFace *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
+    Q_PROPERTY(SensorFace *compactRepresentation READ compactRepresentation NOTIFY faceIdChanged)
 
 public:
     SensorFaceController(KConfigGroup &config, QQmlEngine *engine);
@@ -65,7 +69,7 @@ public:
     SensorFace *fullRepresentation();
     SensorFace *compactRepresentation();
 
-    KDeclarative::ConfigPropertyMap *faceConfig() const;
+    KDeclarative::ConfigPropertyMap *faceConfiguration() const;
 
     // FIXME: should those be properties or exposed trough another ConfigPropertyMap ?
     QString title() const;

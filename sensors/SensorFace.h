@@ -30,6 +30,7 @@ class SENSORS_EXPORT SensorFace : public QQuickItem
     Q_OBJECT
     Q_PROPERTY(SensorFaceController *controller READ controller CONSTANT)
     Q_PROPERTY(SensorFace::FormFactor formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
+    Q_PROPERTY(QQuickItem *contentItem READ contentItem WRITE setContentItem NOTIFY contentItemChanged)
 
 public:
     enum FormFactor {
@@ -43,15 +44,21 @@ public:
     ~SensorFace();
 
     SensorFaceController *controller() const;
-
     // Not writable from QML
     void setController(SensorFaceController *controller);
 
     SensorFace::FormFactor formFactor() const;
     void setFormFactor(SensorFace::FormFactor formFactor);
 
+    QQuickItem * contentItem() const;
+    void setContentItem(QQuickItem *item);
+
 Q_SIGNALS:
     void formFactorChanged();
+    void contentItemChanged();
+
+protected:
+    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
 
 private:
     class Private;

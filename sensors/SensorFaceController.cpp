@@ -79,7 +79,7 @@ SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
         context->deleteLater();
         return nullptr;
     }
-    context->setParent(gui);
+   // context->setParent(gui);
 
     gui->setController(q);
 
@@ -257,7 +257,7 @@ void SensorFaceController::setFaceId(const QString &face)
     d->faceId = face;
 
     d->facePackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/SensorApplet"), face);
-qWarning()<<"AAAAAAAAAA"<<d->faceId ;
+
     delete d->faceMetadata;
     d->faceMetadata = nullptr;
     if (d->faceConfiguration) {
@@ -296,7 +296,7 @@ QString SensorFaceController::faceId() const
     return d->faceId;
 }
 
-KDeclarative::ConfigPropertyMap *SensorFaceController::faceConfig() const
+KDeclarative::ConfigPropertyMap *SensorFaceController::faceConfiguration() const
 {
     return d->faceConfiguration;
 }
