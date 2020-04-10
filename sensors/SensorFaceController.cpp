@@ -18,7 +18,9 @@
 */
 
 #include "SensorFaceController.h"
+#include "SensorFaceController_p.h"
 #include "SensorFace.h"
+#include "SensorQuery.h"
 
 #include <QtQml>
 #include <QDebug>
@@ -26,6 +28,109 @@
 #include <KDesktopFile>
 #include <KDeclarative/ConfigPropertyMap>
 #include <KPackage/PackageLoader>
+
+FacesModel::FacesModel(QObject *parent)
+    : QStandardItemModel(parent)
+{
+    reload();
+}
+
+void FacesModel::reload()
+{
+    clear();
+
+    auto list = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/SensorApplet"));
+    // NOTE: This will diable completely the internal in-memory cache 
+    KPackage::Package p;
+    p.install(QString(), QString());
+
+    for (auto plugin : list) {
+        QStandardItem *item = new QStandardItem(plugin.name());
+        item->setData(plugin.pluginId(), FacesModel::PluginIdRole);
+        appendRow(item);
+    }
+}
+
+QString FacesModel::pluginId(int row)
+{
+    return data(index(row, 0), PluginIdRole).toString();
+}
+
+QHash<int, QByteArray> FacesModel::roleNames() const
+{
+    QHash<int, QByteArray> roles = QAbstractItemModel::roleNames();
+ 
+    roles[PluginIdRole] = "pluginId";
+    return roles;
+}
+
+PresetsModel::PresetsModel(QObject *parent)
+    : QStandardItemModel(parent)
+{
+    reload();
+}
+
+QString PresetsModel::pluginId(int row) const
+{
+    return data(index(row, 0), PluginIdRole).toString();
+}
+
+void PresetsModel::reload()
+{
+    clear();
+    QList<KPluginMetaData> plugins = KPackage::PackageLoader::self()->findPackages(QStringLiteral("Plasma/Applet"), QString(), [](const KPluginMetaData &plugin) {
+        return plugin.value(QStringLiteral("X-Plasma-RootPath")) == QStringLiteral("org.kde.plasma.systemmonitor");
+    });
+
+    QSet<QString> usedNames;
+
+    // We iterate backwards because packages under ~/.local are listed first, while we want them last
+    auto it = plugins.rbegin();
+    for (; it != plugins.rend(); ++it) {
+        const auto &plugin = *it;
+        KPackage::Package p = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Applet"), plugin.pluginId());
+        KDesktopFile df(p.path() + QStringLiteral("metadata.desktop"));
+
+        QString baseName = df.readName();
+        QString name = baseName;
+        int id = 0;
+
+        while (usedNames.contains(name)) {
+            name = baseName + QStringLiteral(" (") + QString::number(++id) + QStringLiteral(")");
+        }
+        usedNames << name;
+
+        QStandardItem *item = new QStandardItem(baseName);
+
+        // TODO config
+        QVariantMap config;
+
+        KConfigGroup configGroup(df.group("Config"));
+
+        const QStringList keys = configGroup.keyList();
+        for (const QString &key : keys) {
+            // all strings for now, type conversion happens in QML side when we have the config property map
+            config.insert(key, configGroup.readEntry(key));
+        }
+
+        item->setData(plugin.pluginId(), PresetsModel::PluginIdRole);
+        item->setData(config, PresetsModel::ConfigRole);
+
+        item->setData(QFileInfo(p.path() + QStringLiteral("metadata.desktop")).isWritable(), PresetsModel::WritableRole);
+
+        appendRow(item);
+    }
+}
+
+QHash<int, QByteArray> PresetsModel::roleNames() const
+{
+    QHash<int, QByteArray> roles = QAbstractItemModel::roleNames();
+
+    roles[PluginIdRole] = "pluginId";
+    roles[ConfigRole] = "config";
+    roles[WritableRole] = "writable";
+    return roles;
+}
 
 
 class SensorFaceController::Private
@@ -42,6 +147,7 @@ public:
     KDeclarative::ConfigPropertyMap *faceConfiguration = nullptr;
     KConfigLoader *faceConfigLoader = nullptr;
 
+    QString currentPreset;
     KPackage::Package facePackage;
     QString faceId;
     KConfigGroup configGroup;
@@ -51,6 +157,8 @@ public:
     QPointer <SensorFace> compactRepresentation;
 
     QTimer *syncTimer;
+    FacesModel *availableFacesModel = nullptr;
+    PresetsModel *availablePresetsModel = nullptr;
 };
 
 SensorFaceController::Private::Private()
@@ -323,5 +431,123 @@ SensorFace *SensorFaceController::fullRepresentation()
     return d->createGui(d->facePackage.filePath("ui", QStringLiteral("FullRepresentation.qml")));   
 }
 
+QAbstractItemModel *SensorFaceController::availableFacesModel()
+{
+    if (d->availableFacesModel) {
+        return d->availableFacesModel;
+    }
+
+    d->availableFacesModel = new FacesModel(this);
+    return d->availableFacesModel;
+}
+
+QAbstractItemModel *SensorFaceController::availablePresetsModel()
+{
+    if (d->availablePresetsModel) {
+        return d->availablePresetsModel;
+    }
+
+    d->availablePresetsModel = new PresetsModel(this);
+
+   /* // TODO move that into a PresetsModel::load()
+    reloadAvailablePresetsModel();
+
+    if (d->currentPreset.isEmpty()) {
+        resetToCustomPreset();
+    }*/
+
+    return d->availablePresetsModel;
+}
+
+QString SensorFaceController::currentPreset() const
+{
+    return d->currentPreset;
+}
+
+void SensorFaceController::setCurrentPreset(const QString &preset)
+{
+    if (preset == d->currentPreset) {
+        return;
+    }
+
+    d->currentPreset = preset;
+    d->appearanceGroup.writeEntry("CurrentPreset", preset);
+
+    if (preset.isEmpty()) {
+       // resetToCustomPreset();
+        emit currentPresetChanged();
+        return;
+    }
+
+    auto presetPackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Applet"));
+
+    presetPackage.setPath(preset);
+
+    if (!presetPackage.isValid()) {
+        return;
+    }
+
+    if (presetPackage.metadata().value(QStringLiteral("X-Plasma-RootPath")) != QStringLiteral("org.kde.plasma.systemmonitor")) {
+        return;
+    }
+
+    //TODO
+    //disconnect(configScheme(), &KCoreConfigSkeleton::configChanged, this, &SystemMonitor::resetToCustomPresetUserConfiguring);
+    //disconnect(d->faceConfigLoader, &KCoreConfigSkeleton::configChanged, this, &SystemMonitor::resetToCustomPresetUserConfiguring);
+
+    KDesktopFile df(presetPackage.path() + QStringLiteral("metadata.desktop"));
+    KConfigGroup configGroup(df.group("Config"));
+
+    // Load the title
+    setTitle(df.readName());
+
+    //Remove the "custon" value from presets models
+    if (d->availablePresetsModel &&
+        d->availablePresetsModel->data(d->availablePresetsModel->index(0, 0), PresetsModel::PluginIdRole).toString().isEmpty()) {
+        d->availablePresetsModel->removeRow(0);
+    }
+
+
+    auto loadSensors = [this](const QStringList &partialEntries) {
+        QStringList sensors;
+
+        for (const QString &id : partialEntries) {
+            KSysGuard::SensorQuery query{id};
+            query.execute();
+            query.waitForFinished();
+
+            sensors.append(query.sensorIds());
+        }
+        return sensors;
+    };
+
+    setTotalSensor(configGroup.readEntry(QStringLiteral("totalSensor"), QString()));
+    setSensorIds(loadSensors(configGroup.readEntry(QStringLiteral("sensorIds"), QStringList())));
+    setTextOnlySensorIds(loadSensors(configGroup.readEntry(QStringLiteral("textOnlySensorIds"), QStringList())));
+    setSensorColors(configGroup.readEntry(QStringLiteral("sensorColors"), QStringList()));
+    setFaceId(configGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
+
+    if (d->faceConfigLoader) {
+        configGroup = KConfigGroup(df.group("FaceConfig"));
+        for (const QString &key : configGroup.keyList()) {
+            KConfigSkeletonItem *item = d->faceConfigLoader->findItemByName(key);
+            if (item) {
+                if (item->property().type() == QVariant::StringList) {
+                    item->setProperty(configGroup.readEntry(key, QStringList()));
+                } else {
+                    item->setProperty(configGroup.readEntry(key));
+                }
+                d->faceConfigLoader->save();
+                d->faceConfigLoader->read();
+            }
+        }
+    }
+
+    emit currentPresetChanged();
+
+    //TODO
+   // connect(configScheme(), &KCoreConfigSkeleton::configChanged, this, &SystemMonitor::resetToCustomPresetUserConfiguring);
+   // connect(d->faceConfigLoader, &KCoreConfigSkeleton::configChanged, this, &SystemMonitor::resetToCustomPresetUserConfiguring);
+}
 
 #include "moc_SensorFaceController.cpp"

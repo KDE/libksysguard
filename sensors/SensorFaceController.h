@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QPointer>
 #include <QQuickItem>
+#include <QAbstractItemModel>
 
 #include <KPackage/Package>
 #include <KConfigGroup>
@@ -59,6 +60,10 @@ class SENSORS_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(SensorFace *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
     Q_PROPERTY(SensorFace *compactRepresentation READ compactRepresentation NOTIFY faceIdChanged)
 
+    Q_PROPERTY(QAbstractItemModel *availableFacesModel READ availableFacesModel CONSTANT)
+    Q_PROPERTY(QAbstractItemModel *availablePresetsModel READ availablePresetsModel CONSTANT)
+    Q_PROPERTY(QString currentPreset READ currentPreset WRITE setCurrentPreset NOTIFY currentPresetChanged)
+
 public:
     SensorFaceController(KConfigGroup &config, QQmlEngine *engine);
     ~SensorFaceController();
@@ -95,6 +100,12 @@ public:
     bool supportsTotalSensor() const;
     bool supportsTextOnlySensors() const;
 
+    QAbstractItemModel *availableFacesModel();
+    QAbstractItemModel *availablePresetsModel();
+
+    QString currentPreset() const;
+    void setCurrentPreset(const QString &preset);
+
 Q_SIGNALS:
     void faceIdChanged();
     void titleChanged();
@@ -102,6 +113,7 @@ Q_SIGNALS:
     void sensorIdsChanged();
     void sensorColorsChanged();
     void textOnlySensorIdsChanged();
+    void currentPresetChanged();
 
 private:
     class Private;
