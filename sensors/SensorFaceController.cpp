@@ -28,6 +28,7 @@
 #include <KDesktopFile>
 #include <KDeclarative/ConfigPropertyMap>
 #include <KPackage/PackageLoader>
+#include <KLocalizedString>
 
 FacesModel::FacesModel(QObject *parent)
     : QStandardItemModel(parent)
@@ -138,6 +139,7 @@ class SensorFaceController::Private
 public:
     Private();
     SensorFace *createGui(const QString &qmlPath);
+    void resetToCustomPreset();
 
     SensorFaceController *q;
     QString title;
@@ -163,6 +165,15 @@ public:
 
 SensorFaceController::Private::Private()
 {}
+
+void SensorFaceController::Private::resetToCustomPreset()
+{
+    if (availablePresetsModel &&
+        !availablePresetsModel->data(availablePresetsModel->index(0, 0), PresetsModel::PluginIdRole).toString().isEmpty()) {
+        QStandardItem *item = new QStandardItem(i18n("Custom"));
+        availablePresetsModel->insertRow(0, item);
+    }
+}
 
 SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
 {
@@ -491,9 +502,7 @@ void SensorFaceController::setCurrentPreset(const QString &preset)
         return;
     }
 
-    //TODO
-    //disconnect(configScheme(), &KCoreConfigSkeleton::configChanged, this, &SystemMonitor::resetToCustomPresetUserConfiguring);
-    //disconnect(d->faceConfigLoader, &KCoreConfigSkeleton::configChanged, this, &SystemMonitor::resetToCustomPresetUserConfiguring);
+    disconnect(d->faceConfigLoader, &KCoreConfigSkeleton::configChanged, this, nullptr);
 
     KDesktopFile df(presetPackage.path() + QStringLiteral("metadata.desktop"));
     KConfigGroup configGroup(df.group("Config"));
@@ -545,9 +554,81 @@ void SensorFaceController::setCurrentPreset(const QString &preset)
 
     emit currentPresetChanged();
 
-    //TODO
-   // connect(configScheme(), &KCoreConfigSkeleton::configChanged, this, &SystemMonitor::resetToCustomPresetUserConfiguring);
-   // connect(d->faceConfigLoader, &KCoreConfigSkeleton::configChanged, this, &SystemMonitor::resetToCustomPresetUserConfiguring);
+   connect(d->faceConfigLoader, &KCoreConfigSkeleton::configChanged,
+           this, [this]() {
+       d->resetToCustomPreset();
+    });
+}
+
+void SensorFaceController::savePreset()
+{
+    QString pluginName = QStringLiteral("org.kde.plasma.systemmonitor.") + title().simplified().replace(QLatin1Char(' '), QChar()).toLower();
+    int suffix = 0;
+
+    auto presetPackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Applet"));
+
+    presetPackage.setPath(pluginName);
+    if (presetPackage.isValid()) {
+        do {
+            presetPackage.setPath(QString());
+            presetPackage.setPath(pluginName + QString::number(++suffix));
+        } while (presetPackage.isValid());
+
+        pluginName += QString::number(suffix);
+    }
+
+    QTemporaryDir dir;
+    if (!dir.isValid()) {
+        return;
+    }
+
+    KConfig c(dir.path() % QLatin1Literal("/metadata.desktop"));
+
+    KConfigGroup cg(&c, "Desktop Entry");
+    cg.writeEntry("Name", title());
+    cg.writeEntry("Icon", "ksysguardd");
+    cg.writeEntry("X-Plasma-API", "declarativeappletscript");
+    cg.writeEntry("X-Plasma-MainScript", "ui/main.qml");
+    cg.writeEntry("X-Plasma-Provides", "org.kde.plasma.systemmonitor");
+    cg.writeEntry("X-Plasma-RootPath", "org.kde.plasma.systemmonitor");
+    cg.writeEntry("X-KDE-PluginInfo-Name", pluginName);
+    cg.writeEntry("X-KDE-ServiceTypes", "Plasma/Applet");
+    cg.writeEntry("X-KDE-PluginInfo-Category", "System Information");
+    cg.writeEntry("X-KDE-PluginInfo-License", "LGPL 2.1+");
+    cg.writeEntry("X-KDE-PluginInfo-EnabledByDefault", "true");
+    cg.writeEntry("X-KDE-PluginInfo-Version", "0.1");
+    cg.sync();
+
+    KConfigGroup configGroup(&c, "Config");
+    configGroup.writeEntry(QStringLiteral("totalSensor"), totalSensor());
+    configGroup.writeEntry(QStringLiteral("sensorIds"), sensorIds());
+    configGroup.writeEntry(QStringLiteral("textOnlySensorIds"), textOnlySensorIds());
+    configGroup.writeEntry(QStringLiteral("sensorColors"), sensorColors());
+    
+
+    auto *job = presetPackage.install(dir.path());
+
+    connect(job, &KJob::finished, this, [this, pluginName] () {
+        d->availablePresetsModel->reload();
+        setCurrentPreset(pluginName);
+    });
+}
+
+void SensorFaceController::uninstallPreset(const QString &pluginId)
+{
+    auto presetPackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Applet"), pluginId);
+
+    if (presetPackage.metadata().value(QStringLiteral("X-Plasma-RootPath")) != QStringLiteral("org.kde.plasma.systemmonitor")) {
+        return;
+    }
+
+    QDir root(presetPackage.path());
+    root.cdUp();
+    auto *job = presetPackage.uninstall(pluginId, root.path());
+
+    connect(job, &KJob::finished, this, [this] () {
+        d->availablePresetsModel->reload();
+    });
 }
 
 #include "moc_SensorFaceController.cpp"

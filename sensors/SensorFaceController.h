@@ -64,6 +64,7 @@ class SENSORS_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(QAbstractItemModel *availablePresetsModel READ availablePresetsModel CONSTANT)
     Q_PROPERTY(QString currentPreset READ currentPreset WRITE setCurrentPreset NOTIFY currentPresetChanged)
 
+    
 public:
     SensorFaceController(KConfigGroup &config, QQmlEngine *engine);
     ~SensorFaceController();
@@ -105,6 +106,9 @@ public:
 
     QString currentPreset() const;
     void setCurrentPreset(const QString &preset);
+
+    void savePreset();
+    void uninstallPreset(const QString &pluginId);
 
 Q_SIGNALS:
     void faceIdChanged();
