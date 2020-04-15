@@ -44,9 +44,10 @@ target_link_libraries(processui
         KF5::ConfigWidgets
         KF5::WidgetsAddons
         KF5::IconThemes
+        KF5::JobWidgets
         KF5::GlobalAccel
         KF5::Service
-        KF5::KIOWidgets
+        KF5::KIOGui
 )
 target_include_directories(processui
     PUBLIC

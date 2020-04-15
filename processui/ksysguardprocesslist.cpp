@@ -54,11 +54,12 @@
 #include <KAuth>
 #include <KAuthAction>
 #include <KAuthActionReply>
+#include <KDialogJobUiDelegate>
+#include <KIO/ApplicationLauncherJob>
 #include <klocalizedstring.h>
 #include <kmessagebox.h>
 #include <KWindowSystem>
 #include <KService>
-#include <KRun>
 #include <KGlobalAccel>
 
 #include "ReniceDlg.h"
@@ -410,8 +411,10 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
                             kService->name(), this);
 
             connect(action, &QAction::triggered, this,
-                [kService](bool) {
-                KRun::runService(*kService, { }, nullptr);
+                [this, kService](bool) {
+                auto *job = new KIO::ApplicationLauncherJob(kService);
+                job->setUiDelegate(new KDialogJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, window()));
+                job->start();
             });
             d->mToolsMenu->addAction(action);
         }
@@ -445,8 +448,13 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     const auto runCommandShortcutList = KGlobalAccel::self()->globalShortcut(QStringLiteral("krunner"), QStringLiteral("run command"));
     runCommandAction->setShortcuts(runCommandShortcutList);
     runCommandAction->setIcon(QIcon::fromTheme(QStringLiteral("system-run")));
-    connect(runCommandAction, &QAction::triggered, this, [](){
-        KRun::runCommand(QStringLiteral("krunner"), nullptr);
+    connect(runCommandAction, &QAction::triggered, this, [this](){
+        KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("krunner"));
+        if (service) {
+            auto *job = new KIO::ApplicationLauncherJob(service);
+            job->setUiDelegate(new KDialogJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, window()));
+            job->start();
+        }
     });
     d->mToolsMenu->addAction(runCommandAction);
 
