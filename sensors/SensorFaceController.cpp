@@ -71,11 +71,6 @@ PresetsModel::PresetsModel(QObject *parent)
     reload();
 }
 
-QString PresetsModel::pluginId(int row) const
-{
-    return data(index(row, 0), PluginIdRole).toString();
-}
-
 void PresetsModel::reload()
 {
     clear();
@@ -139,7 +134,6 @@ class SensorFaceController::Private
 public:
     Private();
     SensorFace *createGui(const QString &qmlPath);
-    void resetToCustomPreset();
 
     SensorFaceController *q;
     QString title;
@@ -149,7 +143,6 @@ public:
     KDeclarative::ConfigPropertyMap *faceConfiguration = nullptr;
     KConfigLoader *faceConfigLoader = nullptr;
 
-    QString currentPreset;
     KPackage::Package facePackage;
     QString faceId;
     KConfigGroup configGroup;
@@ -165,15 +158,6 @@ public:
 
 SensorFaceController::Private::Private()
 {}
-
-void SensorFaceController::Private::resetToCustomPreset()
-{
-    if (availablePresetsModel &&
-        !availablePresetsModel->data(availablePresetsModel->index(0, 0), PresetsModel::PluginIdRole).toString().isEmpty()) {
-        QStandardItem *item = new QStandardItem(i18n("Custom"));
-        availablePresetsModel->insertRow(0, item);
-    }
-}
 
 SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
 {
@@ -207,6 +191,8 @@ SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
     component->deleteLater();
     return gui;
 }
+
+
 
 
 
@@ -246,6 +232,8 @@ void SensorFaceController::setTitle(const QString &title)
     }
 
     d->appearanceGroup.writeEntry("title", title);
+    d->syncTimer->start();
+    
     emit titleChanged();
 }
 
@@ -254,7 +242,7 @@ QString SensorFaceController::totalSensor() const
     return d->sensorsGroup.readEntry("totalSensor", QString());
 }
 
-void SensorFaceController::setTotalSensor(const QString &totalSensor)
+void  SensorFaceController::setTotalSensor(const QString &totalSensor)
 {
     if (totalSensor == SensorFaceController::totalSensor()) {
         return;
@@ -408,6 +396,7 @@ void SensorFaceController::setFaceId(const QString &face)
     d->appearanceGroup.writeEntry("chartFace", face);
     d->syncTimer->start();
     emit faceIdChanged();
+    return;
 }
 
 QString SensorFaceController::faceId() const
@@ -460,33 +449,12 @@ QAbstractItemModel *SensorFaceController::availablePresetsModel()
 
     d->availablePresetsModel = new PresetsModel(this);
 
-   /* // TODO move that into a PresetsModel::load()
-    reloadAvailablePresetsModel();
-
-    if (d->currentPreset.isEmpty()) {
-        resetToCustomPreset();
-    }*/
-
     return d->availablePresetsModel;
 }
 
-QString SensorFaceController::currentPreset() const
+void SensorFaceController::loadPreset(const QString &preset)
 {
-    return d->currentPreset;
-}
-
-void SensorFaceController::setCurrentPreset(const QString &preset)
-{
-    if (preset == d->currentPreset) {
-        return;
-    }
-
-    d->currentPreset = preset;
-    d->appearanceGroup.writeEntry("CurrentPreset", preset);
-
     if (preset.isEmpty()) {
-       // resetToCustomPreset();
-        emit currentPresetChanged();
         return;
     }
 
@@ -502,10 +470,8 @@ void SensorFaceController::setCurrentPreset(const QString &preset)
         return;
     }
 
-    disconnect(d->faceConfigLoader, &KCoreConfigSkeleton::configChanged, this, nullptr);
-
     KDesktopFile df(presetPackage.path() + QStringLiteral("metadata.desktop"));
-    KConfigGroup configGroup(df.group("Config"));
+    KConfigGroup presetGroup(df.group("Config"));
 
     // Load the title
     setTitle(df.readName());
@@ -530,34 +496,27 @@ void SensorFaceController::setCurrentPreset(const QString &preset)
         return sensors;
     };
 
-    setTotalSensor(configGroup.readEntry(QStringLiteral("totalSensor"), QString()));
-    setSensorIds(loadSensors(configGroup.readEntry(QStringLiteral("sensorIds"), QStringList())));
-    setTextOnlySensorIds(loadSensors(configGroup.readEntry(QStringLiteral("textOnlySensorIds"), QStringList())));
-    setSensorColors(configGroup.readEntry(QStringLiteral("sensorColors"), QStringList()));
-    setFaceId(configGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
+    setTotalSensor(presetGroup.readEntry(QStringLiteral("totalSensor"), QString()));
+    setSensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("sensorIds"), QStringList())));
+    setTextOnlySensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("textOnlySensorIds"), QStringList())));
+    setSensorColors(presetGroup.readEntry(QStringLiteral("sensorColors"), QStringList()));
+    setFaceId(presetGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
 
     if (d->faceConfigLoader) {
-        configGroup = KConfigGroup(df.group("FaceConfig"));
-        for (const QString &key : configGroup.keyList()) {
+        presetGroup = KConfigGroup(df.group("FaceConfig"));
+        for (const QString &key : presetGroup.keyList()) {
             KConfigSkeletonItem *item = d->faceConfigLoader->findItemByName(key);
             if (item) {
                 if (item->property().type() == QVariant::StringList) {
-                    item->setProperty(configGroup.readEntry(key, QStringList()));
+                    item->setProperty(presetGroup.readEntry(key, QStringList()));
                 } else {
-                    item->setProperty(configGroup.readEntry(key));
+                    item->setProperty(presetGroup.readEntry(key));
                 }
                 d->faceConfigLoader->save();
                 d->faceConfigLoader->read();
             }
         }
     }
-
-    emit currentPresetChanged();
-
-   connect(d->faceConfigLoader, &KCoreConfigSkeleton::configChanged,
-           this, [this]() {
-       d->resetToCustomPreset();
-    });
 }
 
 void SensorFaceController::savePreset()
@@ -610,7 +569,6 @@ void SensorFaceController::savePreset()
 
     connect(job, &KJob::finished, this, [this, pluginName] () {
         d->availablePresetsModel->reload();
-        setCurrentPreset(pluginName);
     });
 }
 

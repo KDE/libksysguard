@@ -62,7 +62,6 @@ class SENSORS_EXPORT SensorFaceController : public QObject
 
     Q_PROPERTY(QAbstractItemModel *availableFacesModel READ availableFacesModel CONSTANT)
     Q_PROPERTY(QAbstractItemModel *availablePresetsModel READ availablePresetsModel CONSTANT)
-    Q_PROPERTY(QString currentPreset READ currentPreset WRITE setCurrentPreset NOTIFY currentPresetChanged)
 
     
 public:
@@ -104,11 +103,9 @@ public:
     QAbstractItemModel *availableFacesModel();
     QAbstractItemModel *availablePresetsModel();
 
-    QString currentPreset() const;
-    void setCurrentPreset(const QString &preset);
-
-    void savePreset();
-    void uninstallPreset(const QString &pluginId);
+    Q_INVOKABLE void loadPreset(const QString &preset);
+    Q_INVOKABLE void savePreset();
+    Q_INVOKABLE void uninstallPreset(const QString &pluginId);
 
 Q_SIGNALS:
     void faceIdChanged();
@@ -117,7 +114,6 @@ Q_SIGNALS:
     void sensorIdsChanged();
     void sensorColorsChanged();
     void textOnlySensorIdsChanged();
-    void currentPresetChanged();
 
 private:
     class Private;
