@@ -59,11 +59,11 @@ class SENSORS_EXPORT SensorFaceController : public QObject
 
     Q_PROPERTY(SensorFace *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
     Q_PROPERTY(SensorFace *compactRepresentation READ compactRepresentation NOTIFY faceIdChanged)
+    Q_PROPERTY(QQuickItem *faceConfigUi READ faceConfigUi NOTIFY faceIdChanged)
 
     Q_PROPERTY(QAbstractItemModel *availableFacesModel READ availableFacesModel CONSTANT)
     Q_PROPERTY(QAbstractItemModel *availablePresetsModel READ availablePresetsModel CONSTANT)
 
-    
 public:
     SensorFaceController(KConfigGroup &config, QQmlEngine *engine);
     ~SensorFaceController();
@@ -71,12 +71,13 @@ public:
     void setFaceId(const QString &face);
     QString faceId() const;
 
+    //TODO: just QQuickItem
     SensorFace *fullRepresentation();
     SensorFace *compactRepresentation();
+    QQuickItem *faceConfigUi();
 
     KDeclarative::ConfigPropertyMap *faceConfiguration() const;
 
-    // FIXME: should those be properties or exposed trough another ConfigPropertyMap ?
     QString title() const;
     void setTitle(const QString &title);
 

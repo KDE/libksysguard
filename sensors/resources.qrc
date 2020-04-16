@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>FaceDetailsConfig.qml</file>
+    </qresource>
+</RCC>

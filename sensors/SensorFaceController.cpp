@@ -129,6 +129,7 @@ QHash<int, QByteArray> PresetsModel::roleNames() const
 }
 
 
+
 class SensorFaceController::Private
 {
 public:
@@ -143,6 +144,7 @@ public:
     KDeclarative::ConfigPropertyMap *faceConfiguration = nullptr;
     KConfigLoader *faceConfigLoader = nullptr;
 
+    bool configNeedsSave = false;
     KPackage::Package facePackage;
     QString faceId;
     KConfigGroup configGroup;
@@ -150,6 +152,7 @@ public:
     KConfigGroup sensorsGroup;
     QPointer <SensorFace> fullRepresentation;
     QPointer <SensorFace> compactRepresentation;
+    QPointer <QQuickItem> faceConfigUi;
 
     QTimer *syncTimer;
     FacesModel *availableFacesModel = nullptr;
@@ -413,11 +416,12 @@ SensorFace *SensorFaceController::compactRepresentation()
 {
     if (!d->facePackage.isValid()) {
         return nullptr;
-    } else if (d->fullRepresentation) {
-        return d->fullRepresentation;
+    } else if (d->compactRepresentation) {
+        return d->compactRepresentation;
     }
 
-    return d->createGui(d->facePackage.filePath("ui", QStringLiteral("CompactRepresentation.qml")));   
+    d->fullRepresentation = d->createGui(d->facePackage.filePath("ui", QStringLiteral("CompactRepresentation.qml")));   
+    return d->compactRepresentation;
 }
 
 SensorFace *SensorFaceController::fullRepresentation()
@@ -428,7 +432,40 @@ SensorFace *SensorFaceController::fullRepresentation()
         return d->fullRepresentation;
     }
 
-    return d->createGui(d->facePackage.filePath("ui", QStringLiteral("FullRepresentation.qml")));   
+    d->fullRepresentation = d->createGui(d->facePackage.filePath("ui", QStringLiteral("FullRepresentation.qml")));
+    return d->fullRepresentation;
+}
+
+QQuickItem *SensorFaceController::faceConfigUi()
+{
+    if (!d->facePackage.isValid()) {
+        return nullptr;
+    } else if (d->faceConfigUi) {
+        return d->faceConfigUi;
+    }
+
+    QQmlComponent *component = new QQmlComponent(d->engine, QStringLiteral(":/FaceDetailsConfig.qml"), nullptr);
+    // TODO: eventually support async  components? (only useful for qml files from http, we probably don't want that)
+    if (component->status() != QQmlComponent::Ready) {
+        qCritical() << "Error creating component:";
+        for (auto err : component->errors()) {
+            qWarning() << err.toString();
+        }
+        component->deleteLater();
+        return nullptr;
+    }
+
+    //TODO: add i18n context object
+    QQmlContext *context = new QQmlContext(d->engine);
+    QObject *guiObject = component->createWithInitialProperties(
+        {{QStringLiteral("controller"), QVariant::fromValue(this)},
+         {QStringLiteral("source"), d->facePackage.filePath("ui", QStringLiteral("Config.qml"))}}, context);
+    d->faceConfigUi = qobject_cast<QQuickItem *>(guiObject);
+    Q_ASSERT(d->faceConfigUi);
+
+    component->deleteLater();
+
+    return d->faceConfigUi;
 }
 
 QAbstractItemModel *SensorFaceController::availableFacesModel()
