@@ -57,8 +57,8 @@ class SENSORS_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(bool supportsTextOnlySensors READ supportsTextOnlySensors NOTIFY faceIdChanged)
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceIdChanged)
 
-    Q_PROPERTY(SensorFace *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
-    Q_PROPERTY(SensorFace *compactRepresentation READ compactRepresentation NOTIFY faceIdChanged)
+    Q_PROPERTY(QQuickItem *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
+    Q_PROPERTY(QQuickItem *compactRepresentation READ compactRepresentation NOTIFY faceIdChanged)
     Q_PROPERTY(QQuickItem *faceConfigUi READ faceConfigUi NOTIFY faceIdChanged)
     Q_PROPERTY(QQuickItem *appearanceConfigUi READ appearanceConfigUi NOTIFY faceIdChanged)
     Q_PROPERTY(QQuickItem *sensorsConfigUi READ sensorsConfigUi NOTIFY faceIdChanged)
@@ -74,8 +74,8 @@ public:
     QString faceId() const;
 
     //TODO: just QQuickItem
-    SensorFace *fullRepresentation();
-    SensorFace *compactRepresentation();
+    QQuickItem *fullRepresentation();
+    QQuickItem *compactRepresentation();
     QQuickItem *faceConfigUi();
     QQuickItem *appearanceConfigUi();
     QQuickItem *sensorsConfigUi();

@@ -17,7 +17,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "SensorFace.h"
+#include "SensorFace_p.h"
 #include "SensorFaceController.h"
 
 #include <QDebug>
@@ -99,4 +99,4 @@ void SensorFace::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeo
     QQuickItem::geometryChanged(newGeometry, oldGeometry);
 }
 
-#include "moc_SensorFace.cpp"
+#include "moc_SensorFace_p.cpp"

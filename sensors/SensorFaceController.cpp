@@ -19,7 +19,7 @@
 
 #include "SensorFaceController.h"
 #include "SensorFaceController_p.h"
-#include "SensorFace.h"
+#include "SensorFace_p.h"
 #include "SensorQuery.h"
 
 #include <QtQml>
@@ -440,7 +440,7 @@ KDeclarative::ConfigPropertyMap *SensorFaceController::faceConfiguration() const
     return d->faceConfiguration;
 }
 
-SensorFace *SensorFaceController::compactRepresentation()
+QQuickItem *SensorFaceController::compactRepresentation()
 {
     if (!d->facePackage.isValid()) {
         return nullptr;
@@ -452,7 +452,7 @@ SensorFace *SensorFaceController::compactRepresentation()
     return d->compactRepresentation;
 }
 
-SensorFace *SensorFaceController::fullRepresentation()
+QQuickItem *SensorFaceController::fullRepresentation()
 {
     if (!d->facePackage.isValid()) {
         return nullptr;
@@ -501,7 +501,7 @@ QQuickItem *SensorFaceController::sensorsConfigUi()
     }
 
     d->sensorsConfigUi = d->createConfigUi(QStringLiteral(":/ConfigSensors.qml"), {{QStringLiteral("controller"), QVariant::fromValue(this)}});
-qWarning()<<"SSSS"<<d->sensorsConfigUi;
+
     return d->sensorsConfigUi;
 }
 

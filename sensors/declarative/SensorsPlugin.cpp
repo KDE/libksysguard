@@ -22,7 +22,7 @@
 #include "SensorDataModel.h"
 #include "SensorTreeModel.h"
 #include "Sensor.h"
-#include "SensorFace.h"
+#include "SensorFace_p.h"
 #include "SensorFaceController.h"
 
 #include <QQmlEngine>
