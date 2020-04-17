@@ -108,6 +108,7 @@ public:
     QAbstractItemModel *availableFacesModel();
     QAbstractItemModel *availablePresetsModel();
 
+    Q_INVOKABLE void reloadConfig();
     Q_INVOKABLE void loadPreset(const QString &preset);
     Q_INVOKABLE void savePreset();
     Q_INVOKABLE void uninstallPreset(const QString &pluginId);

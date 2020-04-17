@@ -526,6 +526,21 @@ QAbstractItemModel *SensorFaceController::availablePresetsModel()
     return d->availablePresetsModel;
 }
 
+void SensorFaceController::reloadConfig()
+{
+    if (d->faceConfigLoader) {
+        d->faceConfigLoader->load();
+    }
+
+    //Force to re-read all the values
+    setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.piechart")));
+    titleChanged();
+    totalSensorChanged();
+    sensorIdsChanged();
+    sensorColorsChanged();
+    textOnlySensorIdsChanged();
+}
+
 void SensorFaceController::loadPreset(const QString &preset)
 {
     if (preset.isEmpty()) {
