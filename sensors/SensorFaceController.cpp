@@ -135,6 +135,7 @@ class SensorFaceController::Private
 public:
     Private();
     SensorFace *createGui(const QString &qmlPath);
+    QQuickItem *createConfigUi(const QString &file, const QVariantMap &initialProperties);
 
     SensorFaceController *q;
     QString title;
@@ -153,6 +154,8 @@ public:
     QPointer <SensorFace> fullRepresentation;
     QPointer <SensorFace> compactRepresentation;
     QPointer <QQuickItem> faceConfigUi;
+    QPointer <QQuickItem> appearanceConfigUi;
+    QPointer <QQuickItem> sensorsConfigUi;
 
     QTimer *syncTimer;
     FacesModel *availableFacesModel = nullptr;
@@ -192,6 +195,31 @@ SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
     component->completeCreate();
 
     component->deleteLater();
+    return gui;
+}
+
+QQuickItem *SensorFaceController::Private::createConfigUi(const QString &file, const QVariantMap &initialProperties)
+{
+    QQmlComponent *component = new QQmlComponent(engine, file, nullptr);
+    // TODO: eventually support async  components? (only useful for qml files from http, we probably don't want that)
+    if (component->status() != QQmlComponent::Ready) {
+        qCritical() << "Error creating component:";
+        for (auto err : component->errors()) {
+            qWarning() << err.toString();
+        }
+        component->deleteLater();
+        return nullptr;
+    }
+
+    //TODO: add i18n context object
+    QQmlContext *context = new QQmlContext(engine);
+    QObject *guiObject = component->createWithInitialProperties(
+        initialProperties, context);
+    QQuickItem *gui = qobject_cast<QQuickItem *>(guiObject);
+    Q_ASSERT(gui);
+
+    component->deleteLater();
+
     return gui;
 }
 
@@ -444,28 +472,37 @@ QQuickItem *SensorFaceController::faceConfigUi()
         return d->faceConfigUi;
     }
 
-    QQmlComponent *component = new QQmlComponent(d->engine, QStringLiteral(":/FaceDetailsConfig.qml"), nullptr);
-    // TODO: eventually support async  components? (only useful for qml files from http, we probably don't want that)
-    if (component->status() != QQmlComponent::Ready) {
-        qCritical() << "Error creating component:";
-        for (auto err : component->errors()) {
-            qWarning() << err.toString();
-        }
-        component->deleteLater();
-        return nullptr;
-    }
-
-    //TODO: add i18n context object
-    QQmlContext *context = new QQmlContext(d->engine);
-    QObject *guiObject = component->createWithInitialProperties(
-        {{QStringLiteral("controller"), QVariant::fromValue(this)},
-         {QStringLiteral("source"), d->facePackage.filePath("ui", QStringLiteral("Config.qml"))}}, context);
-    d->faceConfigUi = qobject_cast<QQuickItem *>(guiObject);
-    Q_ASSERT(d->faceConfigUi);
-
-    component->deleteLater();
+    d->faceConfigUi = d->createConfigUi(QStringLiteral(":/FaceDetailsConfig.qml"),
+    {{QStringLiteral("controller"), QVariant::fromValue(this)},
+         {QStringLiteral("source"), d->facePackage.filePath("ui", QStringLiteral("Config.qml"))}});
 
     return d->faceConfigUi;
+}
+
+QQuickItem *SensorFaceController::appearanceConfigUi()
+{
+    if (!d->facePackage.isValid()) {
+        return nullptr;
+    } else if (d->appearanceConfigUi) {
+        return d->appearanceConfigUi;
+    }
+
+    d->appearanceConfigUi = d->createConfigUi(QStringLiteral(":/ConfigAppearance.qml"), {{QStringLiteral("controller"), QVariant::fromValue(this)}});
+
+    return d->appearanceConfigUi;
+}
+
+QQuickItem *SensorFaceController::sensorsConfigUi()
+{
+    if (!d->facePackage.isValid()) {
+        return nullptr;
+    } else if (d->sensorsConfigUi) {
+        return d->sensorsConfigUi;
+    }
+
+    d->sensorsConfigUi = d->createConfigUi(QStringLiteral(":/ConfigSensors.qml"), {{QStringLiteral("controller"), QVariant::fromValue(this)}});
+qWarning()<<"SSSS"<<d->sensorsConfigUi;
+    return d->sensorsConfigUi;
 }
 
 QAbstractItemModel *SensorFaceController::availableFacesModel()

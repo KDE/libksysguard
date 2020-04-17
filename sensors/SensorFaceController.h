@@ -60,6 +60,8 @@ class SENSORS_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(SensorFace *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
     Q_PROPERTY(SensorFace *compactRepresentation READ compactRepresentation NOTIFY faceIdChanged)
     Q_PROPERTY(QQuickItem *faceConfigUi READ faceConfigUi NOTIFY faceIdChanged)
+    Q_PROPERTY(QQuickItem *appearanceConfigUi READ appearanceConfigUi NOTIFY faceIdChanged)
+    Q_PROPERTY(QQuickItem *sensorsConfigUi READ sensorsConfigUi NOTIFY faceIdChanged)
 
     Q_PROPERTY(QAbstractItemModel *availableFacesModel READ availableFacesModel CONSTANT)
     Q_PROPERTY(QAbstractItemModel *availablePresetsModel READ availablePresetsModel CONSTANT)
@@ -75,6 +77,8 @@ public:
     SensorFace *fullRepresentation();
     SensorFace *compactRepresentation();
     QQuickItem *faceConfigUi();
+    QQuickItem *appearanceConfigUi();
+    QQuickItem *sensorsConfigUi();
 
     KDeclarative::ConfigPropertyMap *faceConfiguration() const;
 
