@@ -20,15 +20,14 @@
 
 #pragma once
 
-#include <memory>
-#include <QAbstractTableModel>
-#include <QQmlParserStatus>
-#include <QDateTime>
 #include "sensors_export.h"
+#include <QAbstractTableModel>
+#include <QDateTime>
+#include <QQmlParserStatus>
+#include <memory>
 
 namespace KSysGuard
 {
-
 class SensorInfo;
 
 /**
@@ -59,15 +58,15 @@ class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlPa
 public:
     enum AdditionalRoles {
         SensorId = Qt::UserRole + 1, //< The backend path to the sensor.
-        Name, //< The name of the sensor.
-        ShortName, //< A shorter name for the sensor. This is equal to name if not set.
-        Description, //< A description for the sensor.
-        Unit, //< The unit of the sensor.
-        Minimum, //< The minimum value this sensor can have.
-        Maximum, //< The maximum value this sensor can have.
-        Type, //< The QVariant::Type of the sensor.
-        Value, //< The value of the sensor.
-        FormattedValue, //< A formatted string of the value of the sensor.
+        Name,                        //< The name of the sensor.
+        ShortName,                   //< A shorter name for the sensor. This is equal to name if not set.
+        Description,                 //< A description for the sensor.
+        Unit,                        //< The unit of the sensor.
+        Minimum,                     //< The minimum value this sensor can have.
+        Maximum,                     //< The maximum value this sensor can have.
+        Type,                        //< The QVariant::Type of the sensor.
+        Value,                       //< The value of the sensor.
+        FormattedValue,              //< A formatted string of the value of the sensor.
     };
     Q_ENUM(AdditionalRoles)
 

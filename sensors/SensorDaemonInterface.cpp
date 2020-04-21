@@ -38,7 +38,8 @@ const QString SensorDaemonInterface::Private::SensorServiceName = QStringLiteral
 const QString SensorDaemonInterface::Private::SensorPath = QStringLiteral("/");
 
 SensorDaemonInterface::SensorDaemonInterface(QObject *parent)
-    : QObject(parent), d(new Private)
+    : QObject(parent)
+    , d(new Private)
 {
     qDBusRegisterMetaType<SensorData>();
     qDBusRegisterMetaType<SensorInfo>();
@@ -62,7 +63,7 @@ void SensorDaemonInterface::requestMetaData(const QString &sensorId)
     requestMetaData(QStringList{sensorId});
 }
 
-void SensorDaemonInterface::requestMetaData(const QStringList& sensorIds)
+void SensorDaemonInterface::requestMetaData(const QStringList &sensorIds)
 {
     auto watcher = new QDBusPendingCallWatcher{d->dbusInterface->sensors(sensorIds), this};
     connect(watcher, &QDBusPendingCallWatcher::finished, watcher, [=](QDBusPendingCallWatcher *self) {
@@ -79,7 +80,6 @@ void SensorDaemonInterface::requestMetaData(const QStringList& sensorIds)
         }
     });
 }
-
 
 void SensorDaemonInterface::requestValue(const QString &sensorId)
 {
@@ -109,7 +109,7 @@ void SensorDaemonInterface::subscribe(const QString &sensorId)
     subscribe(QStringList{sensorId});
 }
 
-void KSysGuard::SensorDaemonInterface::subscribe(const QStringList& sensorIds)
+void KSysGuard::SensorDaemonInterface::subscribe(const QStringList &sensorIds)
 {
     d->dbusInterface->subscribe(sensorIds);
 }
@@ -119,7 +119,7 @@ void SensorDaemonInterface::unsubscribe(const QString &sensorId)
     unsubscribe(QStringList{sensorId});
 }
 
-void KSysGuard::SensorDaemonInterface::unsubscribe(const QStringList& sensorIds)
+void KSysGuard::SensorDaemonInterface::unsubscribe(const QStringList &sensorIds)
 {
     d->dbusInterface->unsubscribe(sensorIds);
 }
@@ -130,7 +130,7 @@ SensorDaemonInterface *SensorDaemonInterface::instance()
     return &instance;
 }
 
-void SensorDaemonInterface::onMetaDataChanged(const QHash<QString, SensorInfo>& metaData)
+void SensorDaemonInterface::onMetaDataChanged(const QHash<QString, SensorInfo> &metaData)
 {
     for (auto itr = metaData.begin(); itr != metaData.end(); ++itr) {
         Q_EMIT metaDataChanged(itr.key(), itr.value());

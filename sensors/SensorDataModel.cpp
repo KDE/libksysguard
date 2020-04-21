@@ -20,9 +20,9 @@
 
 #include <QMetaEnum>
 
-#include "SensorDataModel.h"
 #include "Formatter.h"
 #include "SensorDaemonInterface_p.h"
+#include "SensorDataModel.h"
 #include "SensorInfo_p.h"
 #include "sensors_logging.h"
 
@@ -31,7 +31,10 @@ using namespace KSysGuard;
 class Q_DECL_HIDDEN SensorDataModel::Private
 {
 public:
-    Private(SensorDataModel *qq) : q(qq) { }
+    Private(SensorDataModel *qq)
+        : q(qq)
+    {
+    }
 
     void sensorsChanged();
     void addSensor(const QString &id);
@@ -193,9 +196,7 @@ qreal SensorDataModel::minimum() const
         return 0;
     }
 
-    auto result = std::min_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) {
-        return first.min < second.min;
-    });
+    auto result = std::min_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) { return first.min < second.min; });
     return (*result).min;
 }
 
@@ -205,9 +206,7 @@ qreal SensorDataModel::maximum() const
         return 0;
     }
 
-    auto result = std::max_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) {
-        return first.max < second.max;
-    });
+    auto result = std::max_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) { return first.max < second.max; });
     return (*result).max;
 }
 
@@ -240,7 +239,7 @@ void SensorDataModel::removeSensor(const QString &sensorId)
     d->removeSensor(sensorId);
 }
 
-int KSysGuard::SensorDataModel::column(const QString& sensorId) const
+int KSysGuard::SensorDataModel::column(const QString &sensorId) const
 {
     return d->sensors.indexOf(sensorId);
 }

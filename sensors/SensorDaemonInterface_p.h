@@ -19,14 +19,14 @@
 
 #pragma once
 
-#include <memory>
-#include <QObject>
 #include "SensorInfo_p.h"
+#include <QObject>
+#include <memory>
 
 class QDBusPendingCallWatcher;
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 /**
  * Internal helper class to communicate with the daemon.
  *

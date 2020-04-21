@@ -20,13 +20,12 @@
 
 #pragma once
 
-#include <memory>
-#include <QAbstractItemModel>
 #include "sensors_export.h"
+#include <QAbstractItemModel>
+#include <memory>
 
 namespace KSysGuard
 {
-
 class SensorInfo;
 
 /**
@@ -64,7 +63,6 @@ public:
 
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
     QModelIndex parent(const QModelIndex &index) const override;
-
 
 private:
     void init();

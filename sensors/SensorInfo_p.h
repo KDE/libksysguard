@@ -18,26 +18,26 @@
 */
 #pragma once
 
+#include <QDBusArgument>
 #include <QDateTime>
 #include <QDebug>
 #include <QObject>
 #include <QVariant>
-#include <QDBusArgument>
 
 #include "formatter/Unit.h"
 
-namespace KSysGuard {
-
-//Data that is static for the lifespan of the sensor
+namespace KSysGuard
+{
+// Data that is static for the lifespan of the sensor
 class SensorInfo
 {
 public:
     SensorInfo() = default;
-    QString name; //translated?
-    QString shortName; // translated
+    QString name;        // translated?
+    QString shortName;   // translated
     QString description; // translated
     QVariant::Type variantType = QVariant::Invalid;
-    KSysGuard::Unit unit = KSysGuard::UnitInvalid; //Both a format hint and implies data type (i.e double/string)
+    KSysGuard::Unit unit = KSysGuard::UnitInvalid; // Both a format hint and implies data type (i.e double/string)
     qreal min = 0;
     qreal max = 0;
 };

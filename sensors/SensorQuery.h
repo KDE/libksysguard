@@ -19,12 +19,12 @@
 
 #pragma once
 
-#include <memory>
-#include <QObject>
 #include "sensors_export.h"
+#include <QObject>
+#include <memory>
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class SensorInfo;
 
 /**

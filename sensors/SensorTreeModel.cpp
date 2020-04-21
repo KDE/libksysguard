@@ -20,17 +20,17 @@
 
 #include "SensorTreeModel.h"
 
-#include <QDebug>
-#include <QMimeData>
-#include <QMetaEnum>
 #include <KLocalizedString>
+#include <QDebug>
+#include <QMetaEnum>
+#include <QMimeData>
 
 #include "formatter/Formatter.h"
 
 #include "Sensor.h"
-#include "SensorQuery.h"
-#include "SensorInfo_p.h"
 #include "SensorDaemonInterface_p.h"
+#include "SensorInfo_p.h"
+#include "SensorQuery.h"
 
 using namespace KSysGuard;
 
@@ -53,7 +53,8 @@ struct Q_DECL_HIDDEN SensorTreeItem
         return index;
     }
 
-    ~SensorTreeItem() {
+    ~SensorTreeItem()
+    {
         qDeleteAll(children);
     }
 };
@@ -61,8 +62,15 @@ struct Q_DECL_HIDDEN SensorTreeItem
 class Q_DECL_HIDDEN SensorTreeModel::Private
 {
 public:
-    Private(SensorTreeModel *qq) : rootItem(new SensorTreeItem), q(qq) { }
-    ~Private() { delete rootItem; }
+    Private(SensorTreeModel *qq)
+        : rootItem(new SensorTreeItem)
+        , q(qq)
+    {
+    }
+    ~Private()
+    {
+        delete rootItem;
+    }
 
     SensorTreeItem *rootItem;
     QHash<SensorTreeItem *, SensorInfo> sensorInfos;
@@ -82,7 +90,7 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
 {
     const QStringList &segments = sensorId.split(QLatin1Char('/'));
 
-    if (!segments.count()|| segments.at(0).isEmpty()) {
+    if (!segments.count() || segments.at(0).isEmpty()) {
         qDebug() << "Rejecting sensor" << sensorId << "- sensor id is not well-formed.";
         return;
     }
@@ -99,8 +107,7 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
             newItem->parent = item;
             newItem->name = segment;
 
-            const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex()
-                                                                : q->createIndex(item->parent->children.indexOf(item), 0, item);
+            const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex() : q->createIndex(item->parent->children.indexOf(item), 0, item);
             q->beginInsertRows(parentIndex, item->children.count(), item->children.count());
             item->children.append(newItem);
             q->endInsertRows();
@@ -132,8 +139,7 @@ void SensorTreeModel::Private::removeSensor(const QString &sensorId)
     auto remove = [this](SensorTreeItem *item, SensorTreeItem *parent) {
         const int index = item->parent->children.indexOf(item);
 
-        const QModelIndex &parentIndex = (parent == rootItem) ? QModelIndex()
-            : q->createIndex(parent->parent->children.indexOf(parent), 0, parent);
+        const QModelIndex &parentIndex = (parent == rootItem) ? QModelIndex() : q->createIndex(parent->parent->children.indexOf(parent), 0, parent);
         q->beginRemoveRows(parentIndex, index, index);
         delete item->parent->children.takeAt(index);
         q->endRemoveRows();

@@ -31,11 +31,7 @@ using namespace KSysGuard;
 class SensorQuery::Private
 {
 public:
-    enum class State {
-        Initial,
-        Running,
-        Finished
-    };
+    enum class State { Initial, Running, Finished };
 
     void updateResult(const QDBusPendingReply<SensorInfoMap> &reply);
 
@@ -46,8 +42,9 @@ public:
     QDBusPendingCallWatcher *watcher = nullptr;
 };
 
-KSysGuard::SensorQuery::SensorQuery(const QString& path, QObject* parent)
-    : QObject(parent), d(std::make_unique<Private>())
+KSysGuard::SensorQuery::SensorQuery(const QString &path, QObject *parent)
+    : QObject(parent)
+    , d(std::make_unique<Private>())
 {
     d->path = path;
 }
@@ -61,7 +58,7 @@ QString KSysGuard::SensorQuery::path() const
     return d->path;
 }
 
-void KSysGuard::SensorQuery::setPath(const QString& path)
+void KSysGuard::SensorQuery::setPath(const QString &path)
 {
     if (path == d->path) {
         return;
@@ -82,7 +79,6 @@ bool KSysGuard::SensorQuery::execute()
     }
 
     d->state = Private::State::Running;
-
 
     auto watcher = SensorDaemonInterface::instance()->allSensors();
     d->watcher = watcher;

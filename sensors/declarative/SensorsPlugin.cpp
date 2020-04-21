@@ -19,9 +19,9 @@
 
 #include "SensorsPlugin.h"
 
+#include "Sensor.h"
 #include "SensorDataModel.h"
 #include "SensorTreeModel.h"
-#include "Sensor.h"
 
 #include <QQmlEngine>
 

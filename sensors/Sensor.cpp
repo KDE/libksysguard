@@ -21,9 +21,9 @@
 #include <QEvent>
 
 #include "Sensor.h"
-#include "formatter/Formatter.h"
-#include "SensorInfo_p.h"
 #include "SensorDaemonInterface_p.h"
+#include "SensorInfo_p.h"
+#include "formatter/Formatter.h"
 
 using namespace KSysGuard;
 
@@ -47,7 +47,6 @@ public:
 Sensor::Sensor(QObject *parent)
     : Sensor(QString{}, parent)
 {
-
 }
 
 Sensor::Sensor(const QString &id, QObject *parent)
@@ -66,7 +65,7 @@ bool Sensor::event(QEvent *event)
     if (event->type() == QEvent::ParentAboutToChange && parent()) {
         parent()->disconnect(this);
     } else if (event->type() == QEvent::ParentChange && parent()) {
-        if(parent()->metaObject()->indexOfSignal("enabledChanged()") != -1) {
+        if (parent()->metaObject()->indexOfSignal("enabledChanged()") != -1) {
             connect(parent(), SIGNAL(enabledChanged()), this, SIGNAL(enabledChanged()));
         }
     }
@@ -192,7 +191,6 @@ void Sensor::setEnabled(bool newEnabled)
     Q_EMIT enabledChanged();
 }
 
-
 void Sensor::classBegin()
 {
     d->usedByQml = true;
@@ -204,7 +202,7 @@ void Sensor::componentComplete()
 
     setSensorId(d->pendingId);
 
-    if(parent() && parent()->metaObject()->indexOfSignal("enabledChanged()") != -1) {
+    if (parent() && parent()->metaObject()->indexOfSignal("enabledChanged()") != -1) {
         connect(parent(), SIGNAL(enabledChanged()), this, SIGNAL(enabledChanged()));
     }
 }
