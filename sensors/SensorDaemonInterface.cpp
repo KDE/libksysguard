@@ -66,7 +66,7 @@ void SensorDaemonInterface::requestMetaData(const QString &sensorId)
 void SensorDaemonInterface::requestMetaData(const QStringList &sensorIds)
 {
     auto watcher = new QDBusPendingCallWatcher{d->dbusInterface->sensors(sensorIds), this};
-    connect(watcher, &QDBusPendingCallWatcher::finished, watcher, [=](QDBusPendingCallWatcher *self) {
+    connect(watcher, &QDBusPendingCallWatcher::finished, watcher, [this](QDBusPendingCallWatcher *self) {
         self->deleteLater();
 
         const QDBusPendingReply<SensorInfoMap> reply = *self;
@@ -84,7 +84,7 @@ void SensorDaemonInterface::requestMetaData(const QStringList &sensorIds)
 void SensorDaemonInterface::requestValue(const QString &sensorId)
 {
     auto watcher = new QDBusPendingCallWatcher{d->dbusInterface->sensorData({sensorId}), this};
-    connect(watcher, &QDBusPendingCallWatcher::finished, watcher, [=](QDBusPendingCallWatcher *self) {
+    connect(watcher, &QDBusPendingCallWatcher::finished, watcher, [this](QDBusPendingCallWatcher *self) {
         self->deleteLater();
 
         const QDBusPendingReply<SensorDataList> reply = *self;
