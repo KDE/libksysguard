@@ -30,6 +30,7 @@ import org.kde.kquickcontrols 2.0
 import org.kde.kitemmodels 1.0 as KItemModels
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
+import org.kde.ksysguard.faces 1.0 as Faces
 
 import "./" as Local
 
@@ -44,7 +45,7 @@ ColumnLayout {
 
     property alias cfg_textOnlySensorIds: textOnlySensorsView.sensorIds
 
-    property Sensors.SensorFaceController controller
+    property Faces.SensorFaceController controller
 
     Sensors.Sensor {
         id: totalSensor

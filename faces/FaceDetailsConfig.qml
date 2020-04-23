@@ -27,11 +27,12 @@ import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kquickcontrols 2.0
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
+import org.kde.ksysguard.faces 1.0 as Faces
 
 Loader {
     id: root
 
-    property Sensors.SensorFaceController controller
+    property Faces.SensorFaceController controller
 
     signal configurationChanged
 

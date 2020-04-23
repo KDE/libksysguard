@@ -29,6 +29,7 @@ import org.kde.kconfig 1.0 // for KAuthorized
 import org.kde.newstuff 1.62 as NewStuff
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
+import org.kde.ksysguard.faces 1.0 as Faces
 
 Kirigami.FormLayout {
     id: root
@@ -46,7 +47,7 @@ Kirigami.FormLayout {
         }
     }
 
-    property Sensors.SensorFaceController controller
+    property Faces.SensorFaceController controller
     property alias cfg_title: titleField.text
     property string cfg_chartFace
 

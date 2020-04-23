@@ -25,8 +25,9 @@ import QtQuick.Layouts 1.4
 
 import org.kde.quickcharts 1.0 as Charts
 import org.kde.ksysguard.sensors 1.0 as Sensors
+import org.kde.ksysguard.faces 1.0 as Faces
 
-Sensors.AbstractSensorFace {
+Faces.AbstractSensorFace {
     id: root
     implicitWidth: contentItem.implicitWidth
     implicitHeight: contentItem.implicitHeight
