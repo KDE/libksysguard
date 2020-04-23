@@ -10,8 +10,6 @@ set(sensors_LIB_SRCS
     SensorTreeModel.cpp
     SensorQuery.cpp
     SensorDaemonInterface.cpp
-    SensorFaceController.cpp
-    SensorFace.cpp
 )
 
 set(sensors_LIB_HEADERS
@@ -20,7 +18,6 @@ set(sensors_LIB_HEADERS
     SensorTreeModel.h
     SensorQuery.h
     SensorInfo_p.h
-    SensorFaceController.h
 )
 
 ecm_qt_declare_logging_category(sensors_LIB_SRCS
@@ -31,9 +28,8 @@ ecm_qt_declare_logging_category(sensors_LIB_SRCS
 
 set_source_files_properties(org.kde.KSysGuardDaemon.xml PROPERTIES INCLUDE SensorInfo_p.h)
 qt5_add_dbus_interface(sensors_LIB_SRCS org.kde.KSysGuardDaemon.xml ksysguarddaemon)
-qt5_add_resources(RESOURCES resources.qrc)
 
-add_library(Sensors ${sensors_LIB_SRCS} ${RESOURCES})
+add_library(Sensors ${sensors_LIB_SRCS})
 add_library(KSysGuard::Sensors ALIAS Sensors)
 
 target_include_directories(Sensors

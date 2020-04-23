@@ -20,7 +20,7 @@
 #include "SensorFaceController.h"
 #include "SensorFaceController_p.h"
 #include "SensorFace_p.h"
-#include "SensorQuery.h"
+#include <SensorQuery.h>
 
 #include <QtQml>
 #include <QDebug>

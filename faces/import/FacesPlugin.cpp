@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
+    Copyright (C) 2020 Marco Martin <mart@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,21 +18,22 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "SensorsPlugin.h"
+#include "FacesPlugin.h"
 
 #include "SensorDataModel.h"
 #include "SensorTreeModel.h"
 #include "Sensor.h"
+#include "SensorFace_p.h"
+#include "SensorFaceController.h"
 
 #include <QQmlEngine>
 
 using namespace KSysGuard;
 
-void SensorsPlugin::registerTypes(const char *uri)
+void FacesPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.ksysguard.sensors"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.ksysguard.faces"));
 
-    qmlRegisterType<SensorDataModel>(uri, 1, 0, "SensorDataModel");
-    qmlRegisterType<SensorTreeModel>(uri, 1, 0, "SensorTreeModel");
-    qmlRegisterType<Sensor>(uri, 1, 0, "Sensor");
+    qmlRegisterType<SensorFace>(uri, 1, 0, "AbstractSensorFace");
+    qmlRegisterUncreatableType<SensorFaceController>(uri, 1, 0, "SensorFaceController", QStringLiteral("It's not possible to create objects of type SensorFaceController"));
 }

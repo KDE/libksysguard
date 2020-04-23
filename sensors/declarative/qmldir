@@ -1,4 +1,2 @@
 module org.kde.ksysguard.sensors
 plugin SensorsPlugin
-ExtendedLegend 1.0 ExtendedLegend.qml
-SensorFace 1.0 SensorFace.qml

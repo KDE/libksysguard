@@ -61,32 +61,4 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 };
-/*
-class ConfigUiContainer : public QQuickItem
-{
-    Q_OBJECT
-    Q_PROPERTY(bool needsSave READ needsSave NOTIFY needsSaveChanged)
 
-public:
-    ConfigUiContainer(SensorFaceController *controller, QQmlEngine *engine, const QString &filePath, QQuickItem *parent = nullptr);
-    ~ConfigUiContainer();
-
-   // QQuickItem *contentItem() const;
-   // void setContentItem(QQuickItem *item);
-
-    bool needsSave() const;
-
-    Q_INVOKABLE void save();
-    Q_INVOKABLE void reset();
-
-Q_SIGNALS:
-    void needsSaveChanged();
-
-protected:
-    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
-
-private:
-    QQuickItem *m_contentItem;
-    SensorFaceController *m_controller;
-};
-*/

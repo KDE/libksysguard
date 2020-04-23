@@ -1,0 +1,4 @@
+module org.kde.ksysguard.faces
+plugin FacesPlugin
+ExtendedLegend 1.0 ExtendedLegend.qml
+SensorFace 1.0 SensorFace.qml

@@ -28,7 +28,7 @@
 #include <KConfigGroup>
 #include <KConfigLoader>
 
-#include "sensors_export.h"
+#include "faces_export.h"
 
 namespace KDeclarative {
     class ConfigPropertyMap;
@@ -39,7 +39,7 @@ class KDesktopFile;
 class KConfigLoader;
 class SensorFace;
 
-class SENSORS_EXPORT SensorFaceController : public QObject
+class FACES_EXPORT SensorFaceController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
