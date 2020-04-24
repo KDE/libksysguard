@@ -394,7 +394,7 @@ void SensorFaceController::setFaceId(const QString &face)
 
     d->faceId = face;
 
-    d->facePackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/SensorApplet"), face);
+    d->facePackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("KSysguard/SensorFace"), face);
 
     delete d->faceMetadata;
     d->faceMetadata = nullptr;
