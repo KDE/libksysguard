@@ -40,8 +40,8 @@ void FacesModel::reload()
 {
     clear();
 
-    auto list = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/SensorApplet"));
-    // NOTE: This will diable completely the internal in-memory cache 
+    auto list = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KSysguard/SensorFace"));
+    // NOTE: This will disable completely the internal in-memory cache 
     KPackage::Package p;
     p.install(QString(), QString());
 
@@ -481,9 +481,7 @@ QQuickItem *SensorFaceController::faceConfigUi()
 
 QQuickItem *SensorFaceController::appearanceConfigUi()
 {
-    if (!d->facePackage.isValid()) {
-        return nullptr;
-    } else if (d->appearanceConfigUi) {
+    if (d->appearanceConfigUi) {
         return d->appearanceConfigUi;
     }
 
@@ -494,9 +492,7 @@ QQuickItem *SensorFaceController::appearanceConfigUi()
 
 QQuickItem *SensorFaceController::sensorsConfigUi()
 {
-    if (!d->facePackage.isValid()) {
-        return nullptr;
-    } else if (d->sensorsConfigUi) {
+    if (d->sensorsConfigUi) {
         return d->sensorsConfigUi;
     }
 

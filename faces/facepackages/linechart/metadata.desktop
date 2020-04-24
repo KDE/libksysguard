@@ -3,7 +3,7 @@ Name=Line Chart
 Icon=office-chart-line
 
 Type=Service
-X-KDE-ServiceTypes=Plasma/SensorApplet
+X-KDE-ServiceTypes=KSysguard/SensorFace
 X-KDE-ParentApp=org.kde.plasmashell
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Email=mart@kde.org

@@ -28,12 +28,13 @@ import QtQml.Models 2.12
 
 import org.kde.kirigami 2.2 as Kirigami
 
-import org.kde.ksysguard.sensors 1.0 as Sensors2
+import org.kde.ksysguard.sensors 1.0 as Sensors
+import org.kde.ksysguard.faces 1.0 as Faces
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.quickcharts 1.0 as Charts
 
-ColumnLayout {
+Faces.SensorFace {
     id: root
 
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8
@@ -44,121 +45,123 @@ ColumnLayout {
 
     opacity: y + height <= parent.height
 
-    RowLayout {
-        Layout.fillHeight: false
-        Kirigami.Heading {
-            id: heading
-            text: plasmoid.configuration.title
-            level: 2
-            elide: Text.ElideRight
-            Layout.fillHeight: true
-        }
-
-        Charts.LineChart {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            fillOpacity: 0
-
-            xRange { from: 0; to: 50; automatic: false }
-            yRange { from: 0; to: 100; automatic: false }
-
-            visible: plasmoid.configuration.totalSensor !== ""
-
-            smooth: true
-            colorSource: Charts.SingleValueSource { value: root.Kirigami.Theme.textColor}
-            lineWidth: 1
-            direction: Charts.XYChart.ZeroAtEnd
-
-            valueSources: [
-                Charts.ModelHistorySource {
-                    model: Sensors2.SensorDataModel { sensors: [ plasmoid.configuration.totalSensor ] }
-                    column: 0;
-                    row: 0
-                    roleName: "Value";
-                    maximumHistory: 50
-                }
-            ]
-        }
-    }
-
-    RowLayout {
-        id: header
-        y: -height
-        Layout.fillWidth: true
-        visible: plasmoid.nativeInterface.faceConfiguration.showTableHeaders
-        Repeater {
-            model: Sensors2.HeadingHelperModel {
-                id: headingHelperModel
-
-                sourceModel: tableView.model
-            }
+    contentItem: ColumnLayout {
+        RowLayout {
+            Layout.fillHeight: false
             Kirigami.Heading {
                 id: heading
-                level: 4
-                Layout.fillWidth: true
-                //FIXME: why +2 is necessary?
-                Layout.preferredWidth: metrics.width+2
-                Layout.maximumWidth: x > 0 ? metrics.width+2 : -1
-                TextMetrics{
-                    id: metrics
-                    font: heading.font
-                    text: heading.text
-                }
-                text: model.display
+                text: plasmoid.configuration.title
+                level: 2
                 elide: Text.ElideRight
-                horizontalAlignment: index > 0 ? Text.AlignRight : Text.AlignLeft
+                Layout.fillHeight: true
+            }
+
+            Charts.LineChart {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                fillOpacity: 0
+
+                xRange { from: 0; to: 50; automatic: false }
+                yRange { from: 0; to: 100; automatic: false }
+
+                visible: plasmoid.configuration.totalSensor !== ""
+
+                smooth: true
+                colorSource: Charts.SingleValueSource { value: root.Kirigami.Theme.textColor}
+                lineWidth: 1
+                direction: Charts.XYChart.ZeroAtEnd
+
+                valueSources: [
+                    Charts.ModelHistorySource {
+                        model: Sensors.SensorDataModel { sensors: [ plasmoid.configuration.totalSensor ] }
+                        column: 0;
+                        row: 0
+                        roleName: "Value";
+                        maximumHistory: 50
+                    }
+                ]
             }
         }
-    }
-    TableView {
-        id: tableView
 
-        Layout.fillHeight: true
-        Layout.fillWidth: true
+        RowLayout {
+            id: header
+            y: -height
+            Layout.fillWidth: true
+            visible: plasmoid.nativeInterface.faceConfiguration.showTableHeaders
+            Repeater {
+                model: Sensors.HeadingHelperModel {
+                    id: headingHelperModel
 
-        model: topModel
-        interactive: false
-        columnSpacing: Kirigami.Units.smallSpacing
-        clip: true
-
-        property int dataColumnWidth: Kirigami.Units.gridUnit * 5
-
-        columnWidthProvider: function (column) {
-            return header.children[column].width;
+                    sourceModel: tableView.model
+                }
+                Kirigami.Heading {
+                    id: heading
+                    level: 4
+                    Layout.fillWidth: true
+                    //FIXME: why +2 is necessary?
+                    Layout.preferredWidth: metrics.width+2
+                    Layout.maximumWidth: x > 0 ? metrics.width+2 : -1
+                    TextMetrics{
+                        id: metrics
+                        font: heading.font
+                        text: heading.text
+                    }
+                    text: model.display
+                    elide: Text.ElideRight
+                    horizontalAlignment: index > 0 ? Text.AlignRight : Text.AlignLeft
+                }
+            }
         }
+        TableView {
+            id: tableView
 
-        delegate: Label {
-            // Not visible to not change contentHeight
-            opacity: y + height <= tableView.height
-            text: model.display != undefined ? model.display : ""
-            horizontalAlignment: model.alignment == (Text.AlignRight + Text.AlignVCenter) ? Text.AlignRight : Text.AlignLeft
-            elide: Text.ElideRight
-            verticalAlignment: Text.AlignVCenter
-        }
+            Layout.fillHeight: true
+            Layout.fillWidth: true
 
-        //See https://codereview.qt-project.org/c/qt/qtdeclarative/+/262876
-        onWidthChanged: Qt.callLater(function() {if (tableView.columns > 0) {
-            tableView.forceLayout()
-        }});
+            model: topModel
+            interactive: false
+            columnSpacing: Kirigami.Units.smallSpacing
+            clip: true
 
-        PlasmaCore.SortFilterModel {
-            id: topModel
-            filterKeyColumn: 0 // name
-            filterRegExp: ".+"
+            property int dataColumnWidth: Kirigami.Units.gridUnit * 5
 
-            sortColumn: plasmoid.nativeInterface.faceConfiguration.sortColumn
-            sortRole: "Value"
-            sortOrder: plasmoid.nativeInterface.faceConfiguration.sortDescending ? Qt.DescendingOrder : Qt.AscendingOrder
+            columnWidthProvider: function (column) {
+                return header.children[column].width;
+            }
 
-            sourceModel:  Sensors2.SensorDataModel {
-                id: dataModel
-                sensors: plasmoid.configuration.sensorIds
-                onSensorsChanged: {
-                    //note: this re sets the models in order to make the table work with any new role
-                    tableView.model = null;
-                    topModel.sourceModel = null;
-                    topModel.sourceModel = dataModel;
-                    tableView.model = topModel;
+            delegate: Label {
+                // Not visible to not change contentHeight
+                opacity: y + height <= tableView.height
+                text: model.display != undefined ? model.display : ""
+                horizontalAlignment: model.alignment == (Text.AlignRight + Text.AlignVCenter) ? Text.AlignRight : Text.AlignLeft
+                elide: Text.ElideRight
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            //See https://codereview.qt-project.org/c/qt/qtdeclarative/+/262876
+            onWidthChanged: Qt.callLater(function() {if (tableView.columns > 0) {
+                tableView.forceLayout()
+            }});
+
+            KItemModels.KSortFilterProxyModel {
+                id: topModel
+                filterKeyColumn: 0 // name
+                filterRegExp: ".+"
+
+                sortColumn: plasmoid.nativeInterface.faceConfiguration.sortColumn
+                sortRole: "Value"
+                sortOrder: plasmoid.nativeInterface.faceConfiguration.sortDescending ? Qt.DescendingOrder : Qt.AscendingOrder
+
+                sourceModel:  Sensors.SensorDataModel {
+                    id: dataModel
+                    sensors: plasmoid.configuration.sensorIds
+                    onSensorsChanged: {
+                        //note: this re sets the models in order to make the table work with any new role
+                        tableView.model = null;
+                        topModel.sourceModel = null;
+                        topModel.sourceModel = dataModel;
+                        tableView.model = topModel;
+                    }
                 }
             }
         }

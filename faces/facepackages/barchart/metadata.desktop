@@ -3,7 +3,7 @@ Name=Bar Chart
 Icon=office-chart-bar
 
 Type=Service
-X-KDE-ServiceTypes=Plasma/SensorApplet
+X-KDE-ServiceTypes=KSysguard/SensorFace
 X-KDE-ParentApp=org.kde.plasmashell
 X-KDE-PluginInfo-Author=Kai Uwe Broulik
 X-KDE-PluginInfo-Email=kde@broulik.de

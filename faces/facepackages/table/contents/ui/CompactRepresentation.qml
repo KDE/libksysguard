@@ -24,31 +24,36 @@ import QtQuick.Layouts 1.1
 
 import org.kde.kirigami 2.8 as Kirigami
 
-import org.kde.ksysguard.sensors 1.0 as Sensors2
+import org.kde.ksysguard.sensors 1.0 as Sensors
+import org.kde.ksysguard.faces 1.0 as Faces
+
 import org.kde.quickcharts 1.0 as Charts
-import org.kde.plasma.core 2.0 as PlasmaCore
 
-Charts.LineChart {
-
+Faces.SensorFace {
+    id: root
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8
-    fillOpacity: 0
 
-    xRange { from: 0; to: 50; automatic: false }
-    yRange { from: 0; to: 100; automatic: false }
+    contentItem: Charts.LineChart {
 
-    visible: plasmoid.configuration.totalSensor !== ""
+        fillOpacity: 0
 
-    colorSource: Charts.SingleValueSource { value: Kirigami.Theme.textColor}
-    lineWidth: 1
-    direction: Charts.XYChart.ZeroAtEnd
+        xRange { from: 0; to: 50; automatic: false }
+        yRange { from: 0; to: 100; automatic: false }
 
-    valueSources: [
-        Charts.ModelHistorySource {
-            model: Sensors2.SensorDataModel { sensors: [ plasmoid.configuration.totalSensor ] }
-            column: 0;
-            row: 0
-            roleName: "Value";
-            maximumHistory: 50
-        }
-    ]
+        visible: plasmoid.configuration.totalSensor !== ""
+
+        colorSource: Charts.SingleValueSource { value: Kirigami.Theme.textColor}
+        lineWidth: 1
+        direction: Charts.XYChart.ZeroAtEnd
+
+        valueSources: [
+            Charts.ModelHistorySource {
+                model: Sensors2.SensorDataModel { sensors: [ plasmoid.configuration.totalSensor ] }
+                column: 0;
+                row: 0
+                roleName: "Value";
+                maximumHistory: 50
+            }
+        ]
+    }
 }

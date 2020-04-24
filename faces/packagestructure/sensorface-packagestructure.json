@@ -16,6 +16,5 @@
             "KPackage/PackageStructure"
         ],
         "Version": "1"
-    },
-    "X-KDE-ParentApp": "org.kde.ksysguard"
+    }
 }

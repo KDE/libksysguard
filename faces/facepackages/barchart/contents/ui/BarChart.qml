@@ -26,28 +26,30 @@ import QtQuick.Layouts 1.1
 import org.kde.kirigami 2.8 as Kirigami
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
+import org.kde.ksysguard.faces 1.0 as Faces
+
 import org.kde.quickcharts 1.0 as Charts
 
 Charts.BarChart {
-    id: root
+    id: chart
 
     readonly property int barCount: stacked ? 1 : instantiator.count
 
     readonly property alias sensorsModel: sensorsModel
 
-    stacked: plasmoid.nativeInterface.faceConfiguration.barChartStacked
+    stacked: root.controller.faceConfiguration.barChartStacked
 
     spacing: Math.round(width / 20)
 
     yRange {
-        from: plasmoid.nativeInterface.faceConfiguration.rangeFrom
-        to: plasmoid.nativeInterface.faceConfiguration.rangeTo
-        automatic: plasmoid.nativeInterface.faceConfiguration.rangeAuto
+        from: root.controller.faceConfiguration.rangeFrom
+        to: root.controller.faceConfiguration.rangeTo
+        automatic: root.controller.faceConfiguration.rangeAuto
     }
 
     Sensors.SensorDataModel {
         id: sensorsModel
-        sensors: plasmoid.configuration.sensorIds
+        sensors: root.controller.sensorIds
     }
 
     Instantiator {
@@ -59,14 +61,14 @@ Charts.BarChart {
             column: index
         }
         onObjectAdded: {
-            root.insertValueSource(index, object)
+            chart.insertValueSource(index, object)
         }
         onObjectRemoved: {
-            root.removeValueSource(object)
+            chart.removeValueSource(object)
         }
     }
 
-    colorSource: globalColorSource
+    colorSource: root.colorSource
     nameSource: Charts.ModelSource {
         model: sensorsModel
         roleName: "ShortName"
