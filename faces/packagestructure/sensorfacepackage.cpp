@@ -30,7 +30,7 @@ public:
 
     void initPackage(KPackage::Package *package) override
     {
-        package->setDefaultPackageRoot(QStringLiteral("ksysguard/sensorface"));
+        package->setDefaultPackageRoot(QStringLiteral("ksysguard/sensorfaces"));
 
         package->addDirectoryDefinition("ui", QStringLiteral("ui"), i18n("User Interface"));
 
