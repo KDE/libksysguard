@@ -46,14 +46,10 @@ public:
     QString path() const;
     void setPath(const QString &path);
 
-    QStringList sensorIds() const;
     /**
-     * The result of the query.
-     *
-     * \return a Vector of sensor ID, SensorInfo pairs that match the given path
-     * expression.
+     * A list of sensors ids that match the query.
      */
-    QVector<QPair<QString, SensorInfo>> result() const;
+    QStringList sensorIds() const;
 
     /**
      * Start processing the query.
@@ -70,6 +66,10 @@ public:
     Q_SIGNAL void finished(const SensorQuery *query);
 
 private:
+    friend class Sensor;
+    friend class SensorTreeModel;
+    QVector<QPair<QString, SensorInfo>> result() const;
+
     class Private;
     const std::unique_ptr<Private> d;
 };

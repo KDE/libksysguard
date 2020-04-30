@@ -24,6 +24,7 @@
 #include "SensorDaemonInterface_p.h"
 #include "SensorInfo_p.h"
 #include "formatter/Formatter.h"
+#include "SensorQuery.h"
 
 using namespace KSysGuard;
 
@@ -58,6 +59,17 @@ Sensor::Sensor(const QString &id, QObject *parent)
     connect(this, &Sensor::enabledChanged, this, &Sensor::onEnabledChanged);
 
     setSensorId(id);
+}
+
+Sensor::Sensor(const SensorQuery &query, int index, QObject *parent)
+    : Sensor(QString{}, parent)
+{
+    if (index > 0 && index < query.result().size()) {
+        auto result = query.result().at(index);
+        d->id = result.first;
+        onMetaDataChanged(d->id, result.second);
+        onEnabledChanged();
+    }
 }
 
 bool Sensor::event(QEvent *event)

@@ -35,6 +35,7 @@ namespace KSysGuard
 {
 class SensorData;
 class SensorInfo;
+class SensorQuery;
 
 /**
  * An object encapsulating a backend sensor.
@@ -123,6 +124,12 @@ public:
 
     explicit Sensor(QObject *parent = nullptr);
     explicit Sensor(const QString &id, QObject *parent = nullptr);
+    /**
+     * Construct a Sensor from a SensorQuery result and index.
+     *
+     * This avoids an extra lookup for the sensor metadata.
+     */
+    Sensor(const SensorQuery &query, int index, QObject *parent = nullptr);
     ~Sensor() override;
 
     bool event(QEvent *event) override;
