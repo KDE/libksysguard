@@ -40,6 +40,8 @@ target_link_libraries(SensorFaces
     PUBLIC
         Qt5::Qml
         Qt5::Quick
+        KF5::ConfigCore
+        KF5::ConfigGui
         KSysGuard::Formatter
         KSysGuard::Sensors
     PRIVATE
@@ -47,8 +49,6 @@ target_link_libraries(SensorFaces
         Qt5::DBus
         KF5::I18n
         KF5::Package
-        KF5::ConfigCore
-        KF5::ConfigGui
         KF5::Declarative
 )
 
@@ -61,7 +61,7 @@ set_target_properties(SensorFaces PROPERTIES
 install(TARGETS SensorFaces EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
     ${faces_LIB_HEADERS}
-    ${CMAKE_CURRENT_BINARY_DIR}/faces_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/sensorfaces_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/faces
     COMPONENT Devel
 )

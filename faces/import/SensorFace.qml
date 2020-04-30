@@ -51,7 +51,7 @@ Faces.AbstractSensorFace {
 
         function generate() {
             var colors = colorSource.colors;
-            var savedColors = root.sensorColors;
+            var savedColors = root.controller.sensorColors;
             for (var i = 0; i < root.controller.sensorIds.length; ++i) {
                 if (savedColors.length <= i) {
                     savedColors.push(colors[i]);

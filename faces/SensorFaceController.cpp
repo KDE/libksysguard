@@ -29,6 +29,7 @@
 #include <KDeclarative/ConfigPropertyMap>
 #include <KPackage/PackageLoader>
 #include <KLocalizedString>
+#include <KConfigLoader>
 
 FacesModel::FacesModel(QObject *parent)
     : QStandardItemModel(parent)

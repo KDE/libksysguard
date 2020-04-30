@@ -26,6 +26,8 @@
 #include "SensorFace_p.h"
 #include "SensorFaceController.h"
 
+#include <KDeclarative/ConfigPropertyMap>
+
 #include <QQmlEngine>
 
 using namespace KSysGuard;
@@ -36,4 +38,5 @@ void FacesPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<SensorFace>(uri, 1, 0, "AbstractSensorFace");
     qmlRegisterUncreatableType<SensorFaceController>(uri, 1, 0, "SensorFaceController", QStringLiteral("It's not possible to create objects of type SensorFaceController"));
+    qmlRegisterAnonymousType<KDeclarative::ConfigPropertyMap>(uri, 1);
 }

@@ -21,11 +21,11 @@
 
 #include <QQuickItem>
 
-#include "faces_export.h"
+#include "sensorfaces_export.h"
 
 class SensorFaceController;
 
-class FACES_EXPORT SensorFace : public QQuickItem
+class SENSORFACES_EXPORT SensorFace : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(SensorFaceController *controller READ controller CONSTANT)

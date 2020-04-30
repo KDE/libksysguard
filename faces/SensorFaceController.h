@@ -24,11 +24,9 @@
 #include <QQuickItem>
 #include <QAbstractItemModel>
 
-#include <KPackage/Package>
 #include <KConfigGroup>
-#include <KConfigLoader>
 
-#include "faces_export.h"
+#include "sensorfaces_export.h"
 
 namespace KDeclarative {
     class ConfigPropertyMap;
@@ -39,7 +37,7 @@ class KDesktopFile;
 class KConfigLoader;
 class SensorFace;
 
-class FACES_EXPORT SensorFaceController : public QObject
+class SENSORFACES_EXPORT SensorFaceController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
