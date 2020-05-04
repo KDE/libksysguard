@@ -22,6 +22,8 @@
 
 #include <QDebug>
 
+using namespace KSysGuard;
+
 class SensorFace::Private {
 public:
     QPointer<QQuickItem> contentItem;

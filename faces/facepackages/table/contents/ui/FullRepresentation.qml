@@ -50,7 +50,7 @@ Faces.SensorFace {
             Layout.fillHeight: false
             Kirigami.Heading {
                 id: heading
-                text: plasmoid.configuration.title
+                text: root.controller.title
                 level: 2
                 elide: Text.ElideRight
                 Layout.fillHeight: true
@@ -64,7 +64,7 @@ Faces.SensorFace {
                 xRange { from: 0; to: 50; automatic: false }
                 yRange { from: 0; to: 100; automatic: false }
 
-                visible: plasmoid.configuration.totalSensor !== ""
+                visible: root.controller.totalSensor !== ""
 
                 smooth: true
                 colorSource: Charts.SingleValueSource { value: root.Kirigami.Theme.textColor}
@@ -73,7 +73,7 @@ Faces.SensorFace {
 
                 valueSources: [
                     Charts.ModelHistorySource {
-                        model: Sensors.SensorDataModel { sensors: [ plasmoid.configuration.totalSensor ] }
+                        model: Sensors.SensorDataModel { sensors: [ root.controller.totalSensor ] }
                         column: 0;
                         row: 0
                         roleName: "Value";
@@ -154,7 +154,7 @@ Faces.SensorFace {
 
                 sourceModel:  Sensors.SensorDataModel {
                     id: dataModel
-                    sensors: plasmoid.configuration.sensorIds
+                    sensors: root.controller.sensorIds
                     onSensorsChanged: {
                         //note: this re sets the models in order to make the table work with any new role
                         tableView.model = null;

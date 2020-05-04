@@ -23,6 +23,8 @@
 
 #include "sensorfaces_export.h"
 
+namespace KSysGuard {
+
 class SensorFaceController;
 
 class SENSORFACES_EXPORT SensorFace : public QQuickItem
@@ -64,3 +66,4 @@ private:
     class Private;
     const std::unique_ptr<Private> d;
 };
+}

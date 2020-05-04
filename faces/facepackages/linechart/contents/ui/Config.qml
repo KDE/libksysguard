@@ -60,6 +60,7 @@ Kirigami.FormLayout {
     Controls.SpinBox {
         id: fillOpacitySpin
         Kirigami.FormData.label: i18n("Fill Opacity:")
+        editable: true
         from: 0
         to: 100
     }
@@ -75,9 +76,14 @@ Kirigami.FormLayout {
         id: rangeFromYSpin
         Kirigami.FormData.label: i18n("From (Y):")
         enabled: !rangeAutoYCheckbox.checked
+        editable: true
+        from: -99999
+        to: 99999
     }
     Controls.SpinBox {
         id: rangeToYSpin
+        editable: true
+        from: -99999
         to: 99999
         Kirigami.FormData.label: i18n("To (Y):")
         enabled: !rangeAutoYCheckbox.checked
@@ -88,11 +94,16 @@ Kirigami.FormLayout {
     }
     Controls.SpinBox {
         id: rangeFromXSpin
+        editable: true
+        from: -99999
+        to: 99999
         Kirigami.FormData.label: i18n("From (X):")
         enabled: !rangeAutoXCheckbox.checked
     }
     Controls.SpinBox {
         id: rangeToXSpin
+        editable: true
+        from: -99999
         to: 99999
         Kirigami.FormData.label: i18n("To (X):")
         enabled: !rangeAutoXCheckbox.checked

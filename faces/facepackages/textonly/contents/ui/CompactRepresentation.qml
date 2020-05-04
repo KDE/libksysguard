@@ -34,7 +34,7 @@ import org.kde.quickcharts.controls 1.0 as ChartsControls
 Faces.SensorFace {
     id: root
 
-    Layout.minimumWidth: plasmoid.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : Kirigami.Units.gridUnit * 2
+    Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : Kirigami.Units.gridUnit * 2
 
     contentItem: ColumnLayout {
 

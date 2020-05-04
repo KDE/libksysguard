@@ -49,7 +49,6 @@ target_link_libraries(Sensors
         Qt5::Core
         Qt5::DBus
         KF5::I18n
-        KF5::Package
         KF5::ConfigCore
         KF5::ConfigGui
         KF5::Declarative

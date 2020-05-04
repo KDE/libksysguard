@@ -31,6 +31,8 @@
 #include <KLocalizedString>
 #include <KConfigLoader>
 
+using namespace KSysGuard;
+
 FacesModel::FacesModel(QObject *parent)
     : QStandardItemModel(parent)
 {
@@ -413,7 +415,7 @@ void SensorFaceController::setFaceId(const QString &face)
         return;
     }
 
-    d->faceMetadata = new KDesktopFile(d->facePackage.path() + QStringLiteral("metadata.desktop"));
+    d->faceMetadata = new KDesktopFile(d->facePackage.filePath("metadata"));
 
     const QString xmlPath = d->facePackage.filePath("mainconfigxml");
 

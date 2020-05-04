@@ -42,7 +42,8 @@ Kirigami.FormLayout {
             textRole: "display"
             model: Sensors.HeadingHelperModel {
                 sourceModel: Sensors.SensorDataModel {
-                    sensors: plasmoid.configuration.sensorIds
+                    // FIXME: unqualified property
+                    sensors: controller.sensorIds
                 }
             }
         }

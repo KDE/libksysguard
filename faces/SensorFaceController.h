@@ -35,6 +35,9 @@ namespace KDeclarative {
 class QQmlEngine;
 class KDesktopFile;
 class KConfigLoader;
+
+namespace KSysGuard {
+
 class SensorFace;
 
 class SENSORFACES_EXPORT SensorFaceController : public QObject
@@ -71,7 +74,6 @@ public:
     void setFaceId(const QString &face);
     QString faceId() const;
 
-    //TODO: just QQuickItem
     QQuickItem *fullRepresentation();
     QQuickItem *compactRepresentation();
     QQuickItem *faceConfigUi();
@@ -123,3 +125,4 @@ private:
     class Private;
     const std::unique_ptr<Private> d;
 };
+}

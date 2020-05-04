@@ -84,6 +84,7 @@ Kirigami.FormLayout {
     }
     Controls.SpinBox {
         id: rangeToSpin
+        from: -99999
         to: 99999
         editable: true
         Kirigami.FormData.label: i18n("To:")

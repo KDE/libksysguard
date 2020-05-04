@@ -40,7 +40,7 @@ Faces.SensorFace {
         xRange { from: 0; to: 50; automatic: false }
         yRange { from: 0; to: 100; automatic: false }
 
-        visible: plasmoid.configuration.totalSensor !== ""
+        visible: root.controller.totalSensor !== ""
 
         colorSource: Charts.SingleValueSource { value: Kirigami.Theme.textColor}
         lineWidth: 1
@@ -48,7 +48,7 @@ Faces.SensorFace {
 
         valueSources: [
             Charts.ModelHistorySource {
-                model: Sensors2.SensorDataModel { sensors: [ plasmoid.configuration.totalSensor ] }
+                model: Sensors2.SensorDataModel { sensors: [ root.controller.totalSensor ] }
                 column: 0;
                 row: 0
                 roleName: "Value";

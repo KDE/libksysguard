@@ -33,7 +33,7 @@ import org.kde.quickcharts.controls 1.0 as ChartControls
 Faces.SensorFace {
     id: root
 
-    readonly property bool showLegend: plasmoid.nativeInterface.faceConfiguration.showLegend
+    readonly property bool showLegend: controller.faceConfiguration.showLegend
 
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8

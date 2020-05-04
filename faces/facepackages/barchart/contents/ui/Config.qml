@@ -50,11 +50,16 @@ Kirigami.FormLayout {
     }
     Controls.SpinBox {
         id: rangeFromSpin
+        editable: true
+        from: -99999
+        to: 99999
         Kirigami.FormData.label: i18n("From:")
         enabled: !rangeAutoCheckbox.checked
     }
     Controls.SpinBox {
         id: rangeToSpin
+        editable: true
+        from: -99999
         to: 99999
         Kirigami.FormData.label: i18n("To:")
         enabled: !rangeAutoCheckbox.checked

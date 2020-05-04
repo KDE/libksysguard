@@ -22,8 +22,11 @@
 #include <QQuickItem>
 #include <QStandardItemModel>
 
-class SensorFaceController;
 class QQmlEngine;
+
+namespace KSysGuard {
+
+class SensorFaceController;
 
 class FacesModel : public QStandardItemModel
 {
@@ -61,4 +64,4 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 };
-
+}
