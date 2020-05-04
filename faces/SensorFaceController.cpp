@@ -532,7 +532,7 @@ void SensorFaceController::reloadConfig()
     }
 
     //Force to re-read all the values
-    setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.piechart")));
+    setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.linechart")));
     titleChanged();
     totalSensorChanged();
     sensorIdsChanged();
