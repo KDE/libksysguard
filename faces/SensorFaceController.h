@@ -46,16 +46,16 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString faceId READ faceId WRITE setFaceId NOTIFY faceIdChanged)
     Q_PROPERTY(QString totalSensor READ totalSensor WRITE setTotalSensor NOTIFY totalSensorChanged)
-    Q_PROPERTY(QStringList sensorIds READ sensorIds WRITE setSensorIds NOTIFY sensorIdsChanged)
-    Q_PROPERTY(QStringList sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
-    Q_PROPERTY(QStringList textOnlySensorIds READ textOnlySensorIds WRITE setTextOnlySensorIds NOTIFY textOnlySensorIdsChanged)
+    Q_PROPERTY(QStringList highPrioritySensorIds READ highPrioritySensorIds WRITE setHighPrioritySensorIds NOTIFY highPrioritySensorIdsChanged)
+    Q_PROPERTY(QStringList highPrioritySensorColors READ highPrioritySensorColors WRITE setHighPrioritySensorColors NOTIFY highPrioritySensorColorsChanged)
+    Q_PROPERTY(QStringList lowPrioritySensorIds READ lowPrioritySensorIds WRITE setLowPrioritySensorIds NOTIFY lowPrioritySensorIdsChanged)
 
 
     Q_PROPERTY(QString name READ name NOTIFY faceIdChanged)
     Q_PROPERTY(QString icon READ icon NOTIFY faceIdChanged)
     Q_PROPERTY(bool supportsSensorsColors READ supportsSensorsColors NOTIFY faceIdChanged)
     Q_PROPERTY(bool supportsTotalSensor READ supportsTotalSensor NOTIFY faceIdChanged)
-    Q_PROPERTY(bool supportsTextOnlySensors READ supportsTextOnlySensors NOTIFY faceIdChanged)
+    Q_PROPERTY(bool supportsLowPrioritySensors READ supportsLowPrioritySensors NOTIFY faceIdChanged)
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceIdChanged)
 
     Q_PROPERTY(QQuickItem *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
@@ -88,14 +88,14 @@ public:
     QString totalSensor() const;
     void setTotalSensor(const QString &sensor);
 
-    QStringList sensorIds() const;
-    void setSensorIds(const QStringList &ids);
+    QStringList highPrioritySensorIds() const;
+    void setHighPrioritySensorIds(const QStringList &ids);
 
-    QStringList sensorColors() const;
-    void setSensorColors(const QStringList &colors);
+    QStringList highPrioritySensorColors() const;
+    void setHighPrioritySensorColors(const QStringList &colors);
 
-    QStringList textOnlySensorIds() const;
-    void setTextOnlySensorIds(const QStringList &ids);
+    QStringList lowPrioritySensorIds() const;
+    void setLowPrioritySensorIds(const QStringList &ids);
 
     // from face config, immutable by the user
     QString name() const;
@@ -103,7 +103,7 @@ public:
 
     bool supportsSensorsColors() const;
     bool supportsTotalSensor() const;
-    bool supportsTextOnlySensors() const;
+    bool supportsLowPrioritySensors() const;
 
     QAbstractItemModel *availableFacesModel();
     QAbstractItemModel *availablePresetsModel();
@@ -117,9 +117,9 @@ Q_SIGNALS:
     void faceIdChanged();
     void titleChanged();
     void totalSensorChanged();
-    void sensorIdsChanged();
-    void sensorColorsChanged();
-    void textOnlySensorIdsChanged();
+    void highPrioritySensorIdsChanged();
+    void highPrioritySensorColorsChanged();
+    void lowPrioritySensorIdsChanged();
 
 private:
     class Private;

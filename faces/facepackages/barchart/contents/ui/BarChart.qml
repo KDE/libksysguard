@@ -49,7 +49,7 @@ Charts.BarChart {
 
     Sensors.SensorDataModel {
         id: sensorsModel
-        sensors: root.controller.sensorIds
+        sensors: root.controller.highPrioritySensorIds
     }
 
     Instantiator {

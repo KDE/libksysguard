@@ -23,6 +23,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.4
 
+import org.kde.kirigami 2.8 as Kirigami
 import org.kde.quickcharts 1.0 as Charts
 import org.kde.ksysguard.sensors 1.0 as Sensors
 import org.kde.ksysguard.faces 1.0 as Faces
@@ -40,19 +41,22 @@ Faces.AbstractSensorFace {
 
     property alias colorSource: colorSource
 
-    Charts.ColorGradientSource {
+    Charts.ArraySource {
         id: colorSource
-        // originally ColorGenerator used Kirigami.Theme.highlightColor
-        baseColor: theme.highlightColor
-        itemCount: root.controller.sensorIds.length
+        array: root.controller.highPrioritySensorColors
+    }
+    Charts.ColorGradientSource {
+        id: automaticColorSource
+        baseColor: Kirigami.Theme.highlightColor
+        itemCount: root.controller.highPrioritySensorIds.length
 
         onItemCountChanged: generate()
         Component.onCompleted: generate()
 
         function generate() {
             var colors = colorSource.colors;
-            var savedColors = root.controller.sensorColors;
-            for (var i = 0; i < root.controller.sensorIds.length; ++i) {
+            var savedColors = root.controller.highPrioritySensorColors;
+            for (var i = 0; i < root.controller.highPrioritySensorIds.length; ++i) {
                 if (savedColors.length <= i) {
                     savedColors.push(colors[i]);
                 } else {
@@ -63,7 +67,7 @@ Faces.AbstractSensorFace {
                     }
                 }
             }
-            root.controller.sensorColors = savedColors;
+            root.controller.highPrioritySensorColors = savedColors;
         }
     }
 }

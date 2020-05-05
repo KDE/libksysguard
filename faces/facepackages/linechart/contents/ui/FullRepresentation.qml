@@ -60,7 +60,7 @@ Faces.SensorFace {
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
             colorSource: root.colorSource
-            textOnlySensorIds: root.showLegend ? root.controller.textOnlySensorIds : []
+            sensorIds: root.showLegend ? root.controller.lowPrioritySensorIds : []
         }
     }
 }

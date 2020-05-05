@@ -43,7 +43,7 @@ Kirigami.FormLayout {
             model: Sensors.HeadingHelperModel {
                 sourceModel: Sensors.SensorDataModel {
                     // FIXME: unqualified property
-                    sensors: controller.sensorIds
+                    sensors: controller.highPrioritySensorIds
                 }
             }
         }

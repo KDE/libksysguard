@@ -154,7 +154,7 @@ Faces.SensorFace {
 
                 sourceModel:  Sensors.SensorDataModel {
                     id: dataModel
-                    sensors: root.controller.sensorIds
+                    sensors: root.controller.highPrioritySensorIds
                     onSensorsChanged: {
                         //note: this re sets the models in order to make the table work with any new role
                         tableView.model = null;

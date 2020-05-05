@@ -39,7 +39,7 @@ Faces.SensorFace {
     contentItem: ColumnLayout {
 
         Repeater {
-            model: root.controller.sensorIds
+            model: root.controller.highPrioritySensorIds
 
             ChartsControls.LegendDelegate {
                 Layout.fillWidth: true

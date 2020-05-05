@@ -57,10 +57,12 @@ DropArea {
     }
 
     function load() {
+        usedSensorsModel.clear();
         for (var i in sensorIds) {
             usedSensorsModel.append({"sensorId": sensorIds[i], "color": (sensorColors[i] || "").toString()})
         }
     }
+
     Component {
         id: delegateComponent
         Kirigami.SwipeListItem {

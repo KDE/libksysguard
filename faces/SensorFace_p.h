@@ -30,8 +30,8 @@ class SensorFaceController;
 class SENSORFACES_EXPORT SensorFace : public QQuickItem
 {
     Q_OBJECT
-    Q_PROPERTY(SensorFaceController *controller READ controller CONSTANT)
-    Q_PROPERTY(SensorFace::FormFactor formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
+    Q_PROPERTY(KSysGuard::SensorFaceController *controller READ controller CONSTANT)
+    Q_PROPERTY(KSysGuard::SensorFace::FormFactor formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
     Q_PROPERTY(QQuickItem *contentItem READ contentItem WRITE setContentItem NOTIFY contentItemChanged)
 
 public:

@@ -34,7 +34,7 @@ import org.kde.quickcharts.controls 1.0 as ChartsControls
 ChartsControls.Legend {
     id: legend
 
-    property alias textOnlySensorIds: textOnlySensorsRepeater.model
+    property alias sensorIds: sensorsRepeater.model
     property var sourceModel
     property var colorSource
 
@@ -52,7 +52,7 @@ ChartsControls.Legend {
     }
 
     Repeater {
-        id: textOnlySensorsRepeater
+        id: sensorsRepeater
         delegate: ChartsControls.LegendDelegate {
             name: sensor.shortName
             value: sensor.formattedValue || ""

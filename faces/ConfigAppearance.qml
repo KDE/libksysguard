@@ -43,13 +43,16 @@ Kirigami.FormLayout {
         var preset = pendingPreset;
         pendingPreset = "";
         if (preset != "") {
-            controller.currentPreset = preset;
+            controller.loadPreset(preset);
         }
     }
 
     property Faces.SensorFaceController controller
     property alias cfg_title: titleField.text
     property string cfg_chartFace
+
+    onCfg_titleChanged: configurationChanged();
+    onCfg_chartFaceChanged: configurationChanged();
 
     // config keys of the selected preset to be applied on save
     property string pendingPreset
@@ -83,6 +86,7 @@ Kirigami.FormLayout {
                     }
 
                     root.configurationChanged();
+                    presetSheet.close();
                 }
             }
         }

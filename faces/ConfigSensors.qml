@@ -29,6 +29,7 @@ import org.kde.kquickcontrols 2.0
 
 import org.kde.kitemmodels 1.0 as KItemModels
 
+import org.kde.quickcharts 1.0 as Charts
 import org.kde.ksysguard.sensors 1.0 as Sensors
 import org.kde.ksysguard.faces 1.0 as Faces
 
@@ -39,11 +40,18 @@ ColumnLayout {
 
     readonly property int implicitHeight: 1 //HACK FIXME to disable external scrollbar
 
-    property string cfg_totalSensor
-    property alias cfg_sensorIds: usedSensorsView.sensorIds
-    property alias cfg_sensorColors: usedSensorsView.sensorColors
+    signal configurationChanged
 
-    property alias cfg_textOnlySensorIds: textOnlySensorsView.sensorIds
+    property string cfg_totalSensor
+    property alias cfg_highPrioritySensorIds: usedSensorsView.sensorIds
+    property alias cfg_highPrioritySensorColors: usedSensorsView.sensorColors
+
+    property alias cfg_lowPrioritySensorIds: lowPrioritySensorsView.sensorIds
+
+    onCfg_totalSensorChanged: configurationChanged();
+    onCfg_highPrioritySensorIdsChanged: configurationChanged();
+    onCfg_highPrioritySensorColorsChanged: configurationChanged();
+    onCfg_lowPrioritySensorIdsChanged: configurationChanged();
 
     property Faces.SensorFaceController controller
 
@@ -54,18 +62,29 @@ ColumnLayout {
 
     function saveConfig() {
         controller.totalSensor = cfg_totalSensor;
-        controller.sensorIds = cfg_sensorIds;
-        controller.sensorColors = cfg_sensorColors;
-        controller.textOnlySensorIds = cfg_textOnlySensorIds;
+        controller.highPrioritySensorIds = cfg_highPrioritySensorIds;
+        controller.highPrioritySensorColors = cfg_highPrioritySensorColors;
+        controller.lowPrioritySensorIds = cfg_lowPrioritySensorIds;
     }
-    Component.onCompleted: {
+
+    function loadConfig() {
         cfg_totalSensor = controller.totalSensor;
-        cfg_sensorIds = controller.sensorIds;
-        cfg_sensorColors = controller.sensorColors;
+        cfg_highPrioritySensorIds = controller.highPrioritySensorIds;
+        cfg_highPrioritySensorColors = controller.highPrioritySensorColors;
         usedSensorsView.load();
 
-        cfg_textOnlySensorIds = controller.textOnlySensorIds;
-        textOnlySensorsView.load();
+        cfg_lowPrioritySensorIds = controller.lowPrioritySensorIds;
+        lowPrioritySensorsView.load();
+    }
+
+    Component.onCompleted: loadConfig()
+
+    Connections {
+        target: controller
+        onTotalSensorChanged: Qt.callLater(root.loadConfig)
+        onHighPrioritySensorIdsChanged: Qt.callLater(root.loadConfig)
+        onHighPrioritySensorColorsChanged: Qt.callLater(root.loadConfig)
+        onLowPrioritySensorIdsChanged: Qt.callLater(root.loadConfig)
     }
 
     Component {
@@ -160,16 +179,17 @@ ColumnLayout {
             Local.UsedSensorsView {
                 id: usedSensorsView
                 showColor: controller.supportsSensorsColors
+                sensorColors: root.controller.highPrioritySensorColors
             }
             Kirigami.Heading {
                 Layout.preferredHeight: sensorListHeader.implicitHeight
                 text: i18n("Text Only Sensors")
                 level: 3
-                visible: textOnlySensorsView.visible
+                visible: lowPrioritySensorsView.visible
             }
             Local.UsedSensorsView {
-                id: textOnlySensorsView
-                visible: controller.supportsTextOnlySensors
+                id: lowPrioritySensorsView
+                visible: controller.supportsLowPrioritySensors
                 showColor: false
             }
         }

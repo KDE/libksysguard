@@ -31,7 +31,7 @@ import org.kde.quickcharts 1.0 as Charts
 Charts.LineChart {
     id: chart
     
-    //property var sensors: root.controller.sensorIds
+    //property var sensors: root.controller.highPrioritySensorIds
 
     readonly property alias sensorsModel: sensorsModel
 
@@ -59,7 +59,7 @@ Charts.LineChart {
 
     Sensors.SensorDataModel {
         id: sensorsModel
-        sensors: root.controller.sensorIds
+        sensors: root.controller.highPrioritySensorIds
     }
 
     Instantiator {

@@ -50,10 +50,10 @@ Faces.SensorFace {
         Item { Layout.fillWidth: true; Layout.fillHeight: true }
 
         Repeater {
-            model: root.controller.sensorIds.concat(root.controller.textOnlySensorIds)
+            model: root.controller.highPrioritySensorIds.concat(root.controller.lowPrioritySensorIds)
 
             ChartsControls.LegendDelegate {
-                readonly property bool isTextOnly: index >= root.controller.sensorIds.length
+                readonly property bool isTextOnly: index >= root.controller.highPrioritySensorIds.length
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: isTextOnly ? 0 : implicitHeight

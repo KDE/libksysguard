@@ -36,7 +36,7 @@ void FacesPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.ksysguard.faces"));
 
-    qmlRegisterType<SensorFace>(uri, 1, 0, "AbstractSensorFace");
-    qmlRegisterUncreatableType<SensorFaceController>(uri, 1, 0, "SensorFaceController", QStringLiteral("It's not possible to create objects of type SensorFaceController"));
+    qmlRegisterType<KSysGuard::SensorFace>(uri, 1, 0, "AbstractSensorFace");
+    qmlRegisterUncreatableType<KSysGuard::SensorFaceController>(uri, 1, 0, "SensorFaceController", QStringLiteral("It's not possible to create objects of type SensorFaceController"));
     qmlRegisterAnonymousType<KDeclarative::ConfigPropertyMap>(uri, 1);
 }

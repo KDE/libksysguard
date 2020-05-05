@@ -287,52 +287,52 @@ void  SensorFaceController::setTotalSensor(const QString &totalSensor)
     emit totalSensorChanged();
 }
 
-QStringList SensorFaceController::sensorIds() const
+QStringList SensorFaceController::highPrioritySensorIds() const
 {
-    return d->sensorsGroup.readEntry("sensorIds", QStringList());
+    return d->sensorsGroup.readEntry("highPrioritySensorIds", QStringList());
 }
 
-void SensorFaceController::setSensorIds(const QStringList &sensorIds)
+void SensorFaceController::setHighPrioritySensorIds(const QStringList &highPrioritySensorIds)
 {
-    if (sensorIds == SensorFaceController::sensorIds()) {
+    if (highPrioritySensorIds == SensorFaceController::highPrioritySensorIds()) {
         return;
     }
 
-    d->sensorsGroup.writeEntry("sensorIds", sensorIds);
+    d->sensorsGroup.writeEntry("highPrioritySensorIds", highPrioritySensorIds);
     d->syncTimer->start();
-    emit sensorIdsChanged();
+    emit highPrioritySensorIdsChanged();
 }
 
-QStringList SensorFaceController::sensorColors() const
+QStringList SensorFaceController::highPrioritySensorColors() const
 {
-    return d->sensorsGroup.readEntry("sensorColors", QStringList());
+    return d->sensorsGroup.readEntry("highPrioritySensorColors", QStringList());
 }
 
-void SensorFaceController::setSensorColors(const QStringList &sensorColors)
+void SensorFaceController::setHighPrioritySensorColors(const QStringList &highPrioritySensorColors)
 {
-    if (sensorColors == SensorFaceController::sensorColors()) {
+    if (highPrioritySensorColors == SensorFaceController::highPrioritySensorColors()) {
         return;
     }
 
-    d->sensorsGroup.writeEntry("sensorColors", sensorColors);
+    d->sensorsGroup.writeEntry("highPrioritySensorColors", highPrioritySensorColors);
     d->syncTimer->start();
-    emit sensorColorsChanged();
+    emit highPrioritySensorColorsChanged();
 }
 
-QStringList SensorFaceController::textOnlySensorIds() const
+QStringList SensorFaceController::lowPrioritySensorIds() const
 {
-    return d->sensorsGroup.readEntry("textOnlySensorIds", QStringList());
+    return d->sensorsGroup.readEntry("lowPrioritySensorIds", QStringList());
 }
 
-void SensorFaceController::setTextOnlySensorIds(const QStringList &textOnlySensorIds)
+void SensorFaceController::setLowPrioritySensorIds(const QStringList &lowPrioritySensorIds)
 {
-    if (textOnlySensorIds == SensorFaceController::textOnlySensorIds()) {
+    if (lowPrioritySensorIds == SensorFaceController::lowPrioritySensorIds()) {
         return;
     }
 
-    d->sensorsGroup.writeEntry("textOnlySensorIds", textOnlySensorIds);
+    d->sensorsGroup.writeEntry("lowPrioritySensorIds", lowPrioritySensorIds);
     d->syncTimer->start();
-    emit textOnlySensorIdsChanged();
+    emit lowPrioritySensorIdsChanged();
 }
 
 // from face config, immutable by the user
@@ -372,14 +372,14 @@ bool SensorFaceController::supportsTotalSensor() const
     return cg.readEntry("SupportsTotalSensor", false);
 }
 
-bool SensorFaceController::supportsTextOnlySensors() const
+bool SensorFaceController::supportsLowPrioritySensors() const
 {
     if (!d->faceMetadata) {
         return false;
     }
 
     KConfigGroup cg(d->faceMetadata, QStringLiteral("Config"));
-    return cg.readEntry("SupportsTextOnlySensors", false);
+    return cg.readEntry("SupportsLowPrioritySensors", false);
 }
 
 void SensorFaceController::setFaceId(const QString &face)
@@ -415,7 +415,9 @@ void SensorFaceController::setFaceId(const QString &face)
         return;
     }
 
-    d->faceMetadata = new KDesktopFile(d->facePackage.filePath("metadata"));
+    //TODO: should be in a different config file rather than metadata
+    //d->faceMetadata = new KDesktopFile(d->facePackage.filePath("metadata"));
+    d->faceMetadata = new KDesktopFile(d->facePackage.path() + QStringLiteral("metadata.desktop"));
 
     const QString xmlPath = d->facePackage.filePath("mainconfigxml");
 
@@ -535,9 +537,9 @@ void SensorFaceController::reloadConfig()
     setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.textonly")));
     titleChanged();
     totalSensorChanged();
-    sensorIdsChanged();
-    sensorColorsChanged();
-    textOnlySensorIdsChanged();
+    highPrioritySensorIdsChanged();
+    highPrioritySensorColorsChanged();
+    lowPrioritySensorIdsChanged();
 }
 
 void SensorFaceController::loadPreset(const QString &preset)
@@ -585,9 +587,9 @@ void SensorFaceController::loadPreset(const QString &preset)
     };
 
     setTotalSensor(presetGroup.readEntry(QStringLiteral("totalSensor"), QString()));
-    setSensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("sensorIds"), QStringList())));
-    setTextOnlySensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("textOnlySensorIds"), QStringList())));
-    setSensorColors(presetGroup.readEntry(QStringLiteral("sensorColors"), QStringList()));
+    setHighPrioritySensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("highPrioritySensorIds"), QStringList())));
+    setLowPrioritySensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("lowPrioritySensorIds"), QStringList())));
+    setHighPrioritySensorColors(presetGroup.readEntry(QStringLiteral("highPrioritySensorColors"), QStringList()));
     setFaceId(presetGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
 
     if (d->faceConfigLoader) {
@@ -648,9 +650,9 @@ void SensorFaceController::savePreset()
 
     KConfigGroup configGroup(&c, "Config");
     configGroup.writeEntry(QStringLiteral("totalSensor"), totalSensor());
-    configGroup.writeEntry(QStringLiteral("sensorIds"), sensorIds());
-    configGroup.writeEntry(QStringLiteral("textOnlySensorIds"), textOnlySensorIds());
-    configGroup.writeEntry(QStringLiteral("sensorColors"), sensorColors());
+    configGroup.writeEntry(QStringLiteral("highPrioritySensorIds"), highPrioritySensorIds());
+    configGroup.writeEntry(QStringLiteral("lowPrioritySensorIds"), lowPrioritySensorIds());
+    configGroup.writeEntry(QStringLiteral("highPrioritySensorColors"), highPrioritySensorColors());
     
 
     auto *job = presetPackage.install(dir.path());
