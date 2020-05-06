@@ -33,15 +33,14 @@ class SensorInfo
 {
 public:
     SensorInfo() = default;
-    QString name;        // translated?
-    QString shortName;   // translated
-    QString description; // translated
+    QString name;        // Translated name of the sensor.
+    QString shortName;   // Shorter translated name of the sensor, to use when space is constrained.
+    QString description; // Translated description of the sensor.
     QVariant::Type variantType = QVariant::Invalid;
     KSysGuard::Unit unit = KSysGuard::UnitInvalid; // Both a format hint and implies data type (i.e double/string)
     qreal min = 0;
     qreal max = 0;
 };
-// this stuff could come from .desktop files (for the DBus case) or hardcoded (eg. for example nvidia-smi case) or come from current "ksysgrd monitors"
 
 class Q_DECL_EXPORT SensorData
 {
