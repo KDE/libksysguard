@@ -369,7 +369,7 @@ bool SensorFaceController::supportsTotalSensors() const
     }
 
     KConfigGroup cg(d->faceMetadata, QStringLiteral("Config"));
-    return cg.readEntry("SupportsTotalSensor", false);
+    return cg.readEntry("SupportsTotalSensors", false);
 }
 
 bool SensorFaceController::supportsLowPrioritySensors() const

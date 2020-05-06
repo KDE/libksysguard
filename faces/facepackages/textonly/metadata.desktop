@@ -14,5 +14,5 @@ X-KDE-PluginInfo-Website=https://kde.org
 
 [Config]
 SupportsSensorsColors=true
-SupportsTotalSensor=false
+SupportsTotalSensors=false
 SupportsLowPrioritySensors=true
