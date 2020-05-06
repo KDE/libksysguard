@@ -42,13 +42,13 @@ ColumnLayout {
 
     signal configurationChanged
 
-    property string cfg_totalSensor
+    property var cfg_totalSensors
     property alias cfg_highPrioritySensorIds: usedSensorsView.sensorIds
     property alias cfg_highPrioritySensorColors: usedSensorsView.sensorColors
 
     property alias cfg_lowPrioritySensorIds: lowPrioritySensorsView.sensorIds
 
-    onCfg_totalSensorChanged: configurationChanged();
+    onCfg_totalSensorsChanged: configurationChanged();
     onCfg_highPrioritySensorIdsChanged: configurationChanged();
     onCfg_highPrioritySensorColorsChanged: configurationChanged();
     onCfg_lowPrioritySensorIdsChanged: configurationChanged();
@@ -57,18 +57,18 @@ ColumnLayout {
 
     Sensors.Sensor {
         id: totalSensor
-        sensorId: cfg_totalSensor
+        sensorId: cfg_totalSensors.length > 0 ? cfg_totalSensors[0] : ""
     }
 
     function saveConfig() {
-        controller.totalSensor = cfg_totalSensor;
+        controller.totalSensors = cfg_totalSensors;
         controller.highPrioritySensorIds = cfg_highPrioritySensorIds;
         controller.highPrioritySensorColors = cfg_highPrioritySensorColors;
         controller.lowPrioritySensorIds = cfg_lowPrioritySensorIds;
     }
 
     function loadConfig() {
-        cfg_totalSensor = controller.totalSensor;
+        cfg_totalSensors = controller.totalSensors;
         cfg_highPrioritySensorIds = controller.highPrioritySensorIds;
         cfg_highPrioritySensorColors = controller.highPrioritySensorColors;
         usedSensorsView.load();
@@ -81,7 +81,7 @@ ColumnLayout {
 
     Connections {
         target: controller
-        onTotalSensorChanged: Qt.callLater(root.loadConfig)
+        onTotalSensorsChanged: Qt.callLater(root.loadConfig)
         onHighPrioritySensorIdsChanged: Qt.callLater(root.loadConfig)
         onHighPrioritySensorColorsChanged: Qt.callLater(root.loadConfig)
         onLowPrioritySensorIdsChanged: Qt.callLater(root.loadConfig)
@@ -131,13 +131,13 @@ ColumnLayout {
 
     RowLayout {
         Layout.preferredHeight: sensorListHeader.implicitHeight
-        visible: controller.supportsTotalSensor
+        visible: controller.supportsTotalSensors
         QQC2.Label {
             text: i18n("Total Sensor:")
         }
         QQC2.Label {
             Layout.fillWidth: true
-            text: cfg_totalSensor.length > 0 ? totalSensor.name : i18n("Drop Sensor Here")
+            text: cfg_totalSensors.length > 0 ? totalSensor.name : i18n("Drop Sensor Here")
             elide: Text.ElideRight
             DropArea {
                 anchors.fill: parent
@@ -148,14 +148,14 @@ ColumnLayout {
                     }
                 }
                 onDropped: {
-                    cfg_totalSensor =  drop.getDataAsString("application/x-ksysguard")
+                    cfg_totalSensors =  drop.getDataAsString("application/x-ksysguard")
                 }
             }
         }
         QQC2.ToolButton {
             icon.name: "list-remove"
-            opacity: cfg_totalSensor.length > 0
-            onClicked: cfg_totalSensor = "";
+            opacity: cfg_totalSensors.length > 0
+            onClicked: cfg_totalSensors = [];
         }
     }
 

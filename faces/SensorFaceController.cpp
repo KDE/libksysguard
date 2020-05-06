@@ -271,20 +271,20 @@ void SensorFaceController::setTitle(const QString &title)
     emit titleChanged();
 }
 
-QString SensorFaceController::totalSensor() const
+QStringList SensorFaceController::totalSensors() const
 {
-    return d->sensorsGroup.readEntry("totalSensor", QString());
+    return d->sensorsGroup.readEntry("totalSensors", QStringList());
 }
 
-void  SensorFaceController::setTotalSensor(const QString &totalSensor)
+void  SensorFaceController::setTotalSensors(const QStringList &totalSensors)
 {
-    if (totalSensor == SensorFaceController::totalSensor()) {
+    if (totalSensors == SensorFaceController::totalSensors()) {
         return;
     }
 
-    d->sensorsGroup.writeEntry("totalSensor", totalSensor);
+    d->sensorsGroup.writeEntry("totalSensors", totalSensors);
     d->syncTimer->start();
-    emit totalSensorChanged();
+    emit totalSensorsChanged();
 }
 
 QStringList SensorFaceController::highPrioritySensorIds() const
@@ -362,7 +362,7 @@ bool SensorFaceController::supportsSensorsColors() const
     return cg.readEntry("SupportsSensorsColors", false);
 }
 
-bool SensorFaceController::supportsTotalSensor() const
+bool SensorFaceController::supportsTotalSensors() const
 {
     if (!d->faceMetadata) {
         return false;
@@ -539,7 +539,7 @@ void SensorFaceController::reloadConfig()
     //Force to re-read all the values
     setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.textonly")));
     titleChanged();
-    totalSensorChanged();
+    totalSensorsChanged();
     highPrioritySensorIdsChanged();
     highPrioritySensorColorsChanged();
     lowPrioritySensorIdsChanged();
@@ -589,7 +589,7 @@ void SensorFaceController::loadPreset(const QString &preset)
         return sensors;
     };
 
-    setTotalSensor(presetGroup.readEntry(QStringLiteral("totalSensor"), QString()));
+    setTotalSensors(presetGroup.readEntry(QStringLiteral("totalSensors"), QStringList()));
     setHighPrioritySensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("highPrioritySensorIds"), QStringList())));
     setLowPrioritySensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("lowPrioritySensorIds"), QStringList())));
     setHighPrioritySensorColors(presetGroup.readEntry(QStringLiteral("highPrioritySensorColors"), QStringList()));
@@ -652,7 +652,7 @@ void SensorFaceController::savePreset()
     cg.sync();
 
     KConfigGroup configGroup(&c, "Config");
-    configGroup.writeEntry(QStringLiteral("totalSensor"), totalSensor());
+    configGroup.writeEntry(QStringLiteral("totalSensors"), totalSensors());
     configGroup.writeEntry(QStringLiteral("highPrioritySensorIds"), highPrioritySensorIds());
     configGroup.writeEntry(QStringLiteral("lowPrioritySensorIds"), lowPrioritySensorIds());
     configGroup.writeEntry(QStringLiteral("highPrioritySensorColors"), highPrioritySensorColors());

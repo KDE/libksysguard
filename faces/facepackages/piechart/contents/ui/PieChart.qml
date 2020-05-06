@@ -76,7 +76,7 @@ ChartControls.PieChartControl {
 
     Sensors.Sensor {
         id: sensor
-        sensorId: root.controller.totalSensor
+        sensorId: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
     }
 }
 
