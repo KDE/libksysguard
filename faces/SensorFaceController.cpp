@@ -30,6 +30,7 @@
 #include <KPackage/PackageLoader>
 #include <KLocalizedString>
 #include <KConfigLoader>
+#include <KPluginMetaData>
 
 using namespace KSysGuard;
 
@@ -144,7 +145,7 @@ public:
     QString title;
     QQmlEngine *engine;
 
-    KDesktopFile *faceMetadata = nullptr;
+    KConfigGroup faceProperties;
     KDeclarative::ConfigPropertyMap *faceConfiguration = nullptr;
     KConfigLoader *faceConfigLoader = nullptr;
 
@@ -338,48 +339,27 @@ void SensorFaceController::setLowPrioritySensorIds(const QStringList &lowPriorit
 // from face config, immutable by the user
 QString SensorFaceController::name() const
 {
-    if (!d->faceMetadata) {
-        return QString();
-    }
-    return d->faceMetadata->readName();
+    return d->facePackage.metadata().name();
 }
 
 const QString SensorFaceController::icon() const
 {
-    if (!d->faceMetadata) {
-        return QString();
-    }
-    return d->faceMetadata->readIcon();
+    return d->facePackage.metadata().iconName();
 }
 
 bool SensorFaceController::supportsSensorsColors() const
 {
-    if (!d->faceMetadata) {
-        return false;
-    }
-
-    KConfigGroup cg(d->faceMetadata, QStringLiteral("Config"));
-    return cg.readEntry("SupportsSensorsColors", false);
+    return d->faceProperties.readEntry("SupportsSensorsColors", false);
 }
 
 bool SensorFaceController::supportsTotalSensors() const
 {
-    if (!d->faceMetadata) {
-        return false;
-    }
-
-    KConfigGroup cg(d->faceMetadata, QStringLiteral("Config"));
-    return cg.readEntry("SupportsTotalSensors", false);
+    return d->faceProperties.readEntry("SupportsTotalSensors", false);
 }
 
 bool SensorFaceController::supportsLowPrioritySensors() const
 {
-    if (!d->faceMetadata) {
-        return false;
-    }
-
-    KConfigGroup cg(d->faceMetadata, QStringLiteral("Config"));
-    return cg.readEntry("SupportsLowPrioritySensors", false);
+    return d->faceProperties.readEntry("SupportsLowPrioritySensors", false);
 }
 
 void SensorFaceController::setFaceId(const QString &face)
@@ -401,8 +381,6 @@ void SensorFaceController::setFaceId(const QString &face)
 
     d->facePackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("KSysguard/SensorFace"), face);
 
-    delete d->faceMetadata;
-    d->faceMetadata = nullptr;
     if (d->faceConfiguration) {
         d->faceConfiguration->deleteLater();
         d->faceConfiguration = nullptr;
@@ -418,8 +396,7 @@ void SensorFaceController::setFaceId(const QString &face)
     }
 
     //TODO: should be in a different config file rather than metadata
-    //d->faceMetadata = new KDesktopFile(d->facePackage.filePath("metadata"));
-    d->faceMetadata = new KDesktopFile(d->facePackage.path() + QStringLiteral("metadata.desktop"));
+    d->faceProperties = KConfigGroup(KSharedConfig::openConfig(d->facePackage.filePath("FaceProperties")), QStringLiteral("Config"));
 
     const QString xmlPath = d->facePackage.filePath("mainconfigxml");
 

@@ -44,6 +44,9 @@ public:
 
         package->addDirectoryDefinition("config", QStringLiteral("config"), i18n("Configuration support"));
         package->addFileDefinition("mainconfigxml", QStringLiteral("config/main.xml"), i18n("KConfigXT xml file for face-specific configuration options."));
+
+        package->addFileDefinition("FaceProperties", QStringLiteral("faceproperties"), i18n("The configuration file that describes face properties and capabilities."));
+        package->setRequired("FaceProperties", true);
     }
 };
 
