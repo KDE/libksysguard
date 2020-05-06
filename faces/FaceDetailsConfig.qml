@@ -41,7 +41,7 @@ Loader {
         }
         for (var key in root.controller.faceConfiguration) {
             if (item.hasOwnProperty("cfg_" + key)) {
-                root.controller.faceConfiguration[key] = item["cfg_"+key]
+                root.controller.faceConfiguration[key] = item["cfg_" + key]
             }
         }
     }
