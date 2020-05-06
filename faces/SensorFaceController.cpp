@@ -541,7 +541,8 @@ void SensorFaceController::loadPreset(const QString &preset)
     }
 
     KDesktopFile df(presetPackage.path() + QStringLiteral("metadata.desktop"));
-    KConfigGroup presetGroup(df.group("Config"));
+
+    KConfigGroup presetGroup(KSharedConfig::openConfig(presetPackage.filePath("config", QStringLiteral("faceproperties"))), QStringLiteral("Config"));
 
     // Load the title
     setTitle(df.readName());
@@ -551,7 +552,6 @@ void SensorFaceController::loadPreset(const QString &preset)
         d->availablePresetsModel->data(d->availablePresetsModel->index(0, 0), PresetsModel::PluginIdRole).toString().isEmpty()) {
         d->availablePresetsModel->removeRow(0);
     }
-
 
     auto loadSensors = [this](const QStringList &partialEntries) {
         QStringList sensors;
@@ -573,7 +573,8 @@ void SensorFaceController::loadPreset(const QString &preset)
     setFaceId(presetGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
 
     if (d->faceConfigLoader) {
-        presetGroup = KConfigGroup(df.group("FaceConfig"));
+        KConfigGroup presetGroup(KSharedConfig::openConfig(presetPackage.filePath("FaceProperties")), QStringLiteral("FaceConfig"));
+
         for (const QString &key : presetGroup.keyList()) {
             KConfigSkeletonItem *item = d->faceConfigLoader->findItemByName(key);
             if (item) {
@@ -628,12 +629,24 @@ void SensorFaceController::savePreset()
     cg.writeEntry("X-KDE-PluginInfo-Version", "0.1");
     cg.sync();
 
-    KConfigGroup configGroup(&c, "Config");
+    QDir subDir(dir.path());
+    subDir.mkdir(QStringLiteral("contents"));
+    KConfig faceConfig(subDir.path() % QLatin1Literal("/contents/faceproperties"));
+
+    KConfigGroup configGroup(&faceConfig, "Config");
     configGroup.writeEntry(QStringLiteral("totalSensors"), totalSensors());
     configGroup.writeEntry(QStringLiteral("highPrioritySensorIds"), highPrioritySensorIds());
     configGroup.writeEntry(QStringLiteral("lowPrioritySensorIds"), lowPrioritySensorIds());
     configGroup.writeEntry(QStringLiteral("highPrioritySensorColors"), highPrioritySensorColors());
-    
+
+    configGroup = KConfigGroup(&faceConfig, "FaceConfig");
+    if (d->faceConfigLoader) {
+        const auto &items = d->faceConfigLoader->items();
+        for (KConfigSkeletonItem *item : items) {
+            configGroup.writeEntry(item->key(), item->property());
+        }
+    }
+    configGroup.sync();
 
     auto *job = presetPackage.install(dir.path());
 
