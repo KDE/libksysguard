@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 Vlad Zagorodniy <vladzzag@gmail.com>
+    Copyright (C) 2019 Vlad Zahorodnii <vladzzag@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public

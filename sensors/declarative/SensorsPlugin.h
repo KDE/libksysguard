@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 Vlad Zahorodnii <vladzzag@gmail.com>
+    Copyright (C) 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,4 +17,15 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "formatter/Unit.h"
+#pragma once
+
+#include <QQmlExtensionPlugin>
+
+class SensorsPlugin : public QQmlExtensionPlugin
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+
+public:
+    void registerTypes(const char *uri) override;
+};

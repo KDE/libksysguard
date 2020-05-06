@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 Vlad Zahorodnii <vladzzag@gmail.com>
+    Copyright (C) 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,4 +17,21 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "formatter/Unit.h"
+#include "SensorsPlugin.h"
+
+#include "Sensor.h"
+#include "SensorDataModel.h"
+#include "SensorTreeModel.h"
+
+#include <QQmlEngine>
+
+using namespace KSysGuard;
+
+void SensorsPlugin::registerTypes(const char *uri)
+{
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.ksysguard.sensors"));
+
+    qmlRegisterType<SensorDataModel>(uri, 1, 0, "SensorDataModel");
+    qmlRegisterType<SensorTreeModel>(uri, 1, 0, "SensorTreeModel");
+    qmlRegisterType<Sensor>(uri, 1, 0, "Sensor");
+}

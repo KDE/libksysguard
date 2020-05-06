@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 Vlad Zagorodniy <vladzzag@gmail.com>
+    Copyright (C) 2019 Vlad Zahorodnii <vladzzag@gmail.com>
 
     formatBootTimestamp is based on TimeUtil class:
     Copyright (C) 2014 Gregor Mi <codestruct@posteo.org>
