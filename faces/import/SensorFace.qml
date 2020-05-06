@@ -46,7 +46,6 @@ Faces.AbstractSensorFace {
         array: root.controller.highPrioritySensorColors
     }
     Charts.ColorGradientSource {
-        id: automaticColorSource
         baseColor: Kirigami.Theme.highlightColor
         itemCount: root.controller.highPrioritySensorIds.length
 

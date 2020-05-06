@@ -21,13 +21,14 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.2 as Controls
+import QtQuick.Controls 2.2 as QQC2
 
 import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kquickcontrols 2.0
 import org.kde.kconfig 1.0 // for KAuthorized
 import org.kde.newstuff 1.62 as NewStuff
 
+import org.kde.quickcharts 1.0 as Charts
 import org.kde.ksysguard.sensors 1.0 as Sensors
 import org.kde.ksysguard.faces 1.0 as Faces
 
@@ -44,6 +45,7 @@ Kirigami.FormLayout {
         pendingPreset = "";
         if (preset != "") {
             controller.loadPreset(preset);
+            root.controller.highPrioritySensorColors = automaticColorSource.colors
         }
     }
 
@@ -62,6 +64,12 @@ Kirigami.FormLayout {
         cfg_chartFace = controller.faceId;
     }
 
+    Charts.ColorGradientSource {
+        id: automaticColorSource
+        baseColor: Kirigami.Theme.highlightColor
+        itemCount: root.controller.highPrioritySensorIds.length
+    }
+
     Kirigami.OverlaySheet {
         id: presetSheet
         parent: root
@@ -69,7 +77,7 @@ Kirigami.FormLayout {
             implicitWidth: Kirigami.Units.gridUnit * 15
             model: controller.availablePresetsModel
             delegate: Kirigami.SwipeListItem {
-                contentItem: Controls.Label {
+                contentItem: QQC2.Label {
                     Layout.fillWidth: true
                     text: model.display
                 }
@@ -94,7 +102,7 @@ Kirigami.FormLayout {
     RowLayout {
         Kirigami.FormData.label: i18n("Presets:")
         
-        Controls.Button {
+        QQC2.Button {
             icon.name: "document-open"
             text: i18n("Load Preset...")
             onClicked: presetSheet.open()
@@ -105,12 +113,12 @@ Kirigami.FormLayout {
             configFile: "systemmonitor-presets.knsrc"
             text: ""
             onChangedEntriesChanged: controller.availablePresetsModel.reload();
-            Controls.ToolTip {
+            QQC2.ToolTip {
                 text: parent.Accessible.name
             }
         }
 
-        Controls.Button {
+        QQC2.Button {
             id: saveButton
             icon.name: "document-save"
             text: i18n("Save Settings As Preset")
@@ -123,14 +131,14 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
-    Controls.TextField {
+    QQC2.TextField {
         id: titleField
         Kirigami.FormData.label: i18n("Title:")
     }
 
     RowLayout {
         Kirigami.FormData.label: i18n("Display Style:")
-        Controls.ComboBox {
+        QQC2.ComboBox {
             id: faceCombo
             model: controller.availableFacesModel
             textRole: "display"

@@ -21,7 +21,7 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.2 as Controls
+import QtQuick.Controls 2.2 as QQC2
 import QtQml.Models 2.12
 
 import org.kde.kirigami 2.5 as Kirigami
@@ -94,7 +94,7 @@ DropArea {
                         usedSensorsModel.save();
                     }
                 }
-                Controls.Label {
+                QQC2.Label {
                     Layout.fillWidth: true
                     text: sensor.name
                     Sensors.Sensor {
@@ -127,7 +127,7 @@ DropArea {
 
     onDropped: insertSensor(dropIndex(), drop.getDataAsString("application/x-ksysguard"))
 
-    Controls.Label {
+    QQC2.Label {
         anchors.centerIn: parent
         z: 2
         visible: usedSensorsView.count == 0
@@ -151,7 +151,7 @@ DropArea {
         opacity: 0.6
         z: 2
     }
-    Controls.ScrollView {
+    QQC2.ScrollView {
         id: usedSensorsScroll
         anchors.fill: parent
 
@@ -178,7 +178,7 @@ DropArea {
             }
         }
         Component.onCompleted: background.visible = true;
-        Controls.ScrollBar.horizontal.visible: false
+        QQC2.ScrollBar.horizontal.visible: false
     }
 }
 

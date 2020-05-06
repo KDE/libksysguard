@@ -19,7 +19,7 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.2 as Controls
+import QtQuick.Controls 2.2 as QQC2
 
 import org.kde.kirigami 2.8 as Kirigami
 
@@ -45,19 +45,19 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Appearance")
         Kirigami.FormData.isSection: true
     }
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: showSensorsLegendCheckbox
         text: i18n("Show Sensors Legend")
     }
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: stackedCheckbox
         text: i18n("Stacked Charts")
     }
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: smoothCheckbox
         text: i18n("Smooth Lines")
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: fillOpacitySpin
         Kirigami.FormData.label: i18n("Fill Opacity:")
         editable: true
@@ -68,11 +68,11 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Data Ranges")
         Kirigami.FormData.isSection: true
     }
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: rangeAutoYCheckbox
         text: i18n("Automatic Y Data Range")
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: rangeFromYSpin
         Kirigami.FormData.label: i18n("From (Y):")
         enabled: !rangeAutoYCheckbox.checked
@@ -80,7 +80,7 @@ Kirigami.FormLayout {
         from: -99999
         to: 99999
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: rangeToYSpin
         editable: true
         from: -99999
@@ -88,11 +88,11 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("To (Y):")
         enabled: !rangeAutoYCheckbox.checked
     }
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: rangeAutoXCheckbox
         text: i18n("Automatic X Data Range")
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: rangeFromXSpin
         editable: true
         from: -99999
@@ -100,7 +100,7 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("From (X):")
         enabled: !rangeAutoXCheckbox.checked
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: rangeToXSpin
         editable: true
         from: -99999

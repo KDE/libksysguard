@@ -390,9 +390,11 @@ void SensorFaceController::setFaceId(const QString &face)
 
     if (d->fullRepresentation) {
         d->fullRepresentation->deleteLater();
+        d->fullRepresentation.clear();
     }
     if (d->compactRepresentation) {
         d->compactRepresentation->deleteLater();
+        d->fullRepresentation.clear();
     }
 
     d->faceId = face;
@@ -466,6 +468,7 @@ QQuickItem *SensorFaceController::fullRepresentation()
     }
 
     d->fullRepresentation = d->createGui(d->facePackage.filePath("ui", QStringLiteral("FullRepresentation.qml")));
+
     return d->fullRepresentation;
 }
 

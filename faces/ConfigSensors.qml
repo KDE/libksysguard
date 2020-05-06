@@ -21,7 +21,7 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.2 as Controls
+import QtQuick.Controls 2.2 as QQC2
 import QtQml.Models 2.12
 
 import org.kde.kirigami 2.8 as Kirigami
@@ -117,7 +117,7 @@ ColumnLayout {
                         usedSensorsModel.save();
                     }
                 }
-                Controls.Label {
+                QQC2.Label {
                     Layout.fillWidth: true
                     text: sensor.name
                     Sensors.Sensor {
@@ -132,10 +132,10 @@ ColumnLayout {
     RowLayout {
         Layout.preferredHeight: sensorListHeader.implicitHeight
         visible: controller.supportsTotalSensor
-        Controls.Label {
+        QQC2.Label {
             text: i18n("Total Sensor:")
         }
-        Controls.Label {
+        QQC2.Label {
             Layout.fillWidth: true
             text: cfg_totalSensor.length > 0 ? totalSensor.name : i18n("Drop Sensor Here")
             elide: Text.ElideRight
@@ -152,7 +152,7 @@ ColumnLayout {
                 }
             }
         }
-        Controls.ToolButton {
+        QQC2.ToolButton {
             icon.name: "list-remove"
             opacity: cfg_totalSensor.length > 0
             onClicked: cfg_totalSensor = "";
@@ -198,7 +198,7 @@ ColumnLayout {
             RowLayout {
                 id: sensorListHeader
                 Layout.fillWidth: true
-                Controls.ToolButton {
+                QQC2.ToolButton {
                     icon.name: "go-previous"
                     enabled: sensorsDelegateModel.rootIndex.valid
                     onClicked: sensorsDelegateModel.rootIndex = sensorsDelegateModel.parentModelIndex()
@@ -214,7 +214,7 @@ ColumnLayout {
                 id: searchQuery
                 Layout.fillWidth: true
             }
-            Controls.ScrollView {
+            QQC2.ScrollView {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: Kirigami.Units.gridUnit * 14
@@ -278,7 +278,7 @@ ColumnLayout {
                     }
                 }
                 Component.onCompleted: background.visible = true;
-                Controls.ScrollBar.horizontal.visible: false
+                QQC2.ScrollBar.horizontal.visible: false
             }
         }
     }

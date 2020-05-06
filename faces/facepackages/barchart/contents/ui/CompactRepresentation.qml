@@ -21,7 +21,7 @@
  */
 
 import QtQuick 2.9
-import QtQuick.Controls 2.2 as Controls
+import QtQuick.Controls 2.2 as QQC2
 import QtQuick.Layouts 1.1
 
 import org.kde.kirigami 2.8 as Kirigami
@@ -40,7 +40,7 @@ Faces.SensorFace {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
         }
-        Controls.Label {
+        QQC2.Label {
             id: label
             visible: root.formFactor == PlasmaCore.Types.Planar
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop

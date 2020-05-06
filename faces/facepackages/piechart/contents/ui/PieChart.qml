@@ -22,7 +22,6 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.2
 import org.kde.kirigami 2.8 as Kirigami
 
 import org.kde.ksysguard.sensors 1.0 as Sensors

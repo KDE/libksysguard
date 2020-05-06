@@ -20,7 +20,7 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.2 as Controls
+import QtQuick.Controls 2.2 as QQC2
 
 import org.kde.kirigami 2.8 as Kirigami
 
@@ -36,19 +36,19 @@ Kirigami.FormLayout {
     property alias cfg_rangeFrom: rangeFromSpin.value
     property alias cfg_rangeTo: rangeToSpin.value
 
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: showSensorsLegendCheckbox
         text: i18n("Show Sensors Legend")
     }
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: stackedCheckbox
         text: i18n("Stacked Bars")
     }
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: rangeAutoCheckbox
         text: i18n("Automatic Data Range")
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: rangeFromSpin
         editable: true
         from: -99999
@@ -56,7 +56,7 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("From:")
         enabled: !rangeAutoCheckbox.checked
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: rangeToSpin
         editable: true
         from: -99999

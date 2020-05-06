@@ -19,7 +19,7 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.2 as Controls
+import QtQuick.Controls 2.2 as QQC2
 
 import org.kde.kirigami 2.8 as Kirigami
 
@@ -37,11 +37,11 @@ Kirigami.FormLayout {
     property alias cfg_rangeFrom: rangeFromSpin.value
     property alias cfg_rangeTo: rangeToSpin.value
 
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: showSensorsLegendCheckbox
         text: i18n("Show Sensors Legend")
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: fromAngleSpin
         Kirigami.FormData.label: i18n("Start from Angle")
         from: -180
@@ -54,7 +54,7 @@ Kirigami.FormLayout {
             return Number.fromLocaleString(locale, text.replace(i18nc("angle degrees", "°"), "")) - 180;
         }
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: toAngleSpin
         Kirigami.FormData.label: i18n("Total Pie Angle")
         from: 0
@@ -67,22 +67,22 @@ Kirigami.FormLayout {
             return Number.fromLocaleString(locale, text.replace(i18nc("angle degrees", "°"), ""));
         }
     }
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: smoothEndsCheckbox
         text: i18n("Rounded Lines")
     }
 
-    Controls.CheckBox {
+    QQC2.CheckBox {
         id: rangeAutoCheckbox
         text: i18n("Automatic Data Range")
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: rangeFromSpin
         editable: true
         Kirigami.FormData.label: i18n("From:")
         enabled: !rangeAutoCheckbox.checked
     }
-    Controls.SpinBox {
+    QQC2.SpinBox {
         id: rangeToSpin
         from: -99999
         to: 99999
