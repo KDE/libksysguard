@@ -557,11 +557,9 @@ void SensorFaceController::loadPreset(const QString &preset)
         QStringList sensors;
 
         for (const QString &id : partialEntries) {
-            qWarning()<<"AAAAAAAAAAAAAAAAA"<<id;
             KSysGuard::SensorQuery query{id};
             query.execute();
             query.waitForFinished();
-qWarning()<<"BBBBBBBBBBBBB"<<query.sensorIds();
             sensors.append(query.sensorIds());
         }
         return sensors;
