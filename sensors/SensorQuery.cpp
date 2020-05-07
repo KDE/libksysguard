@@ -128,10 +128,11 @@ void KSysGuard::SensorQuery::Private::updateResult(const QDBusPendingReply<Senso
         }
         return;
     }
-    auto regexp = QRegularExpression{QRegularExpression::wildcardToRegularExpression(path)};
+    auto regexp = QRegularExpression{path};
 
     const auto sensorIds = reply.value().keys();
     for (auto id : sensorIds) {
+        qWarning()<<"CCCCCCCCC"<<id<<path<<regexp.match(id).hasMatch();
         if (regexp.match(id).hasMatch()) {
             result.append(qMakePair(id, reply.value().value(id)));
         }
