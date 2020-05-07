@@ -63,7 +63,7 @@ check_library_exists(c clock_gettime "time.h" HAVE_CLOCK_GETTIME_C)
 ecm_setup_version(${PROJECT_VERSION}
                   VARIABLE_PREFIX KSYSGUARD
                   VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/ksysguard_version.h"
-                  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake"
+                  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfigVersion.cmake"
                   SOVERSION 9
 )
 
@@ -125,20 +125,30 @@ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 install(DIRECTORY scripts/ DESTINATION ${KDE_INSTALL_DATADIR}/ksysguard/scripts)
 
-set(CMAKECONFIG_INSTALL_DIR ${KDE_INSTALL_LIBDIR}/cmake/KF5SysGuard)
-configure_package_config_file(KF5SysGuardConfig.cmake.in
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake"
+set(CMAKECONFIG_INSTALL_DIR ${KDE_INSTALL_LIBDIR}/cmake/KSysGuard)
+configure_package_config_file(KSysGuardConfig.cmake.in
+    "${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfig.cmake"
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR})
 
+configure_package_config_file(KF5SysGuardConfig.cmake.in
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake"
+    INSTALL_DESTINATION ${KDE_INSTALL_LIBDIR}/cmake/KF5SysGuard
+)
+
 install(FILES
-		${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake
-		${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfigVersion.cmake
-        DESTINATION ${CMAKECONFIG_INSTALL_DIR})
+    ${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfigVersion.cmake
+    DESTINATION ${CMAKECONFIG_INSTALL_DIR})
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake
+    DESTINATION ${KDE_INSTALL_LIBDIR}/cmake/KF5SysGuard
+)
 
 install(EXPORT libksysguardLibraryTargets
-        NAMESPACE KF5::
+        NAMESPACE KSysGuard::
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-        FILE KF5SysGuardLibraryTargets.cmake )
+        FILE KSysGuardLibraryTargets.cmake )
 
 install(FILES libksysguard.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 

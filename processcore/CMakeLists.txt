@@ -19,7 +19,6 @@ set(ksysguard_LIB_SRCS
 ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
 
 add_library(processcore ${ksysguard_LIB_SRCS})
-add_library(KF5::ProcessCore ALIAS processcore)
 add_library(KSysGuard::ProcessCore ALIAS processcore)
 
 target_link_libraries(processcore

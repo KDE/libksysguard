@@ -23,7 +23,7 @@ ki18n_wrap_ui( processui_LIB_SRCS
 )
 
 add_library(processui ${processui_LIB_SRCS})
-add_library(KF5::ProcessUi ALIAS processui)
+add_library(KSysGuard::ProcessUi ALIAS processui)
 
 if(X11_XRes_FOUND)
     target_link_libraries(processui PRIVATE ${X11_XRes_LIB} ${X11_LIBRARIES})
@@ -32,7 +32,7 @@ endif()
 
 target_link_libraries(processui
     PUBLIC
-        KF5::ProcessCore
+        KSysGuard::ProcessCore
         Qt5::Widgets
         KF5::ConfigCore
     PRIVATE

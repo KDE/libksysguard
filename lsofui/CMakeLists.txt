@@ -10,7 +10,7 @@ ki18n_wrap_ui( lsofui_LIB_SRCS
 )
 
 add_library(lsofui ${lsofui_LIB_SRCS})
-add_library(KF5::LsofUi ALIAS lsofui)
+add_library(KSysGuard::LsofUi ALIAS lsofui)
 
 target_link_libraries(lsofui
     PUBLIC

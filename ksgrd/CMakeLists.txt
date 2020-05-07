@@ -16,7 +16,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"ksgrd\")
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
 add_library(ksgrd ${ksgrd_LIB_SRCS})
-add_library(KF5::SysGuard ALIAS ksgrd)
+add_library(KSysGuard::SysGuard ALIAS ksgrd)
 target_include_directories(ksgrd
     PUBLIC
         "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
@@ -31,7 +31,7 @@ target_link_libraries(ksgrd
     PRIVATE
         KF5::I18n
         KF5::CoreAddons
-        KF5::ProcessCore
+        KSysGuard::ProcessCore
 )
 
 set_target_properties(ksgrd PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING} SOVERSION ${KSYSGUARD_SOVERSION} EXPORT_NAME SysGuard)

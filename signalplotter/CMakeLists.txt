@@ -7,7 +7,7 @@ set(ksignalplotter_LIB_SRCS
 )
 ecm_qt_declare_logging_category(ksignalplotter_LIB_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter)
 add_library(ksignalplotter ${ksignalplotter_LIB_SRCS})
-add_library(KF5::SignalPlotter ALIAS ksignalplotter)
+add_library(KSysGuard::SignalPlotter ALIAS ksignalplotter)
 
 target_link_libraries(ksignalplotter
     PUBLIC
@@ -15,7 +15,7 @@ target_link_libraries(ksignalplotter
         KF5::I18n # klocalizedstring.h
         KF5::IconThemes
     PRIVATE
-        KF5::ProcessCore
+        KSysGuard::ProcessCore
         KF5::Plasma
 )
 

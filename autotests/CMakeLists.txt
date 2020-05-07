@@ -5,7 +5,7 @@ if(Qt5WebEngineWidgets_FOUND)
     # Process unit test
     ecm_qt_declare_logging_category(processtest_debug_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
     ecm_add_test(processtest.cpp ${processtest_debug_SRCS} TEST_NAME processtest
-            LINK_LIBRARIES KF5::ProcessUi Qt5::Test)
+            LINK_LIBRARIES KSysGuard::ProcessUi Qt5::Test)
 endif()
 
 if (KF5Plasma_FOUND)
@@ -13,17 +13,17 @@ if (KF5Plasma_FOUND)
     ecm_qt_declare_logging_category(SIGNALPLOTTER_DEBUG_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter)
     ecm_add_test(signalplotterbenchmark.cpp  ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME signalplotterbenchmark
-        LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes
+        LINK_LIBRARIES KSysGuard::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes
     )
 
     ecm_add_test(graphicssignalplotterbenchmark.cpp ../signalplotter/kgraphicssignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME graphicssignalplotterbenchmark
-        LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes KF5::Plasma
+        LINK_LIBRARIES KSysGuard::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes KF5::Plasma
     )
 
     ecm_add_test(signalplottertest.cpp ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME signalplottertest
-        LINK_LIBRARIES KF5::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes
+        LINK_LIBRARIES KSysGuard::SignalPlotter Qt5::Test Qt5::Widgets KF5::IconThemes
     )
 endif()
 
