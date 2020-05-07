@@ -54,7 +54,8 @@ Faces.SensorFace {
         }
 
         Faces.ExtendedLegend {
-            Layout.fillWidth: true
+            Layout.fillWidth: root.width < implicitWidth * 1.5
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
             Layout.fillHeight: true
             visible: root.showLegend
             chart: compactRepresentation
