@@ -272,66 +272,82 @@ void SensorFaceController::setTitle(const QString &title)
     emit titleChanged();
 }
 
-QStringList SensorFaceController::totalSensors() const
+QJsonArray SensorFaceController::totalSensors() const
 {
-    return d->sensorsGroup.readEntry("totalSensors", QStringList());
+    QJsonDocument doc = QJsonDocument::fromJson(d->sensorsGroup.readEntry("totalSensors", QString()).toUtf8());
+    return doc.array();
 }
 
-void  SensorFaceController::setTotalSensors(const QStringList &totalSensors)
+void  SensorFaceController::setTotalSensors(const QJsonArray &totalSensors)
 {
     if (totalSensors == SensorFaceController::totalSensors()) {
         return;
     }
 
-    d->sensorsGroup.writeEntry("totalSensors", totalSensors);
+    d->sensorsGroup.writeEntry("totalSensors", QJsonDocument(totalSensors).toJson(QJsonDocument::Compact));
     d->syncTimer->start();
     emit totalSensorsChanged();
 }
 
-QStringList SensorFaceController::highPrioritySensorIds() const
+QJsonArray SensorFaceController::highPrioritySensorIds() const
 {
-    return d->sensorsGroup.readEntry("highPrioritySensorIds", QStringList());
+    QJsonDocument doc = QJsonDocument::fromJson(d->sensorsGroup.readEntry("highPrioritySensorIds", QString()).toUtf8());
+    return doc.array();
 }
 
-void SensorFaceController::setHighPrioritySensorIds(const QStringList &highPrioritySensorIds)
+
+void SensorFaceController::setHighPrioritySensorIds(const QJsonArray &highPrioritySensorIds)
 {
     if (highPrioritySensorIds == SensorFaceController::highPrioritySensorIds()) {
         return;
     }
 
-    d->sensorsGroup.writeEntry("highPrioritySensorIds", highPrioritySensorIds);
+    d->sensorsGroup.writeEntry("highPrioritySensorIds", QJsonDocument(highPrioritySensorIds).toJson(QJsonDocument::Compact));
     d->syncTimer->start();
     emit highPrioritySensorIdsChanged();
 }
 
-QStringList SensorFaceController::highPrioritySensorColors() const
+QJsonArray SensorFaceController::highPrioritySensorColors() const
 {
-    return d->sensorsGroup.readEntry("highPrioritySensorColors", QStringList());
+    QJsonDocument doc = QJsonDocument::fromJson(d->sensorsGroup.readEntry("highPrioritySensorColors", QString()).toUtf8());
+    return doc.array();
 }
 
-void SensorFaceController::setHighPrioritySensorColors(const QStringList &highPrioritySensorColors)
+void SensorFaceController::setHighPrioritySensorColors(const QJsonArray &highPrioritySensorColors)
 {
     if (highPrioritySensorColors == SensorFaceController::highPrioritySensorColors()) {
         return;
     }
 
-    d->sensorsGroup.writeEntry("highPrioritySensorColors", highPrioritySensorColors);
+    // an array of colors arriving from qml will be an array of objects containing r,g and b as properties, which then isn't transposed again to QML correctly
+    QJsonArray newArray;
+    for (const auto &value : highPrioritySensorColors) {
+        const QJsonObject &object = value.toObject();
+        QColor color;
+        color.setRedF(object.value(QStringLiteral("r")).toDouble());
+        color.setGreenF(object.value(QStringLiteral("g")).toDouble());
+        color.setBlueF(object.value(QStringLiteral("b")).toDouble());
+        color.setAlphaF(object.value(QStringLiteral("a")).toDouble());
+        newArray.append(color.name(QColor::HexArgb));
+    }
+    d->sensorsGroup.writeEntry("highPrioritySensorColors", QJsonDocument(newArray).toJson(QJsonDocument::Compact));
     d->syncTimer->start();
     emit highPrioritySensorColorsChanged();
 }
 
-QStringList SensorFaceController::lowPrioritySensorIds() const
+QJsonArray SensorFaceController::lowPrioritySensorIds() const
 {
-    return d->sensorsGroup.readEntry("lowPrioritySensorIds", QStringList());
+    QJsonDocument doc = QJsonDocument::fromJson(d->sensorsGroup.readEntry("lowPrioritySensorIds", QString()).toUtf8());
+    return doc.array();
 }
 
-void SensorFaceController::setLowPrioritySensorIds(const QStringList &lowPrioritySensorIds)
+void SensorFaceController::setLowPrioritySensorIds(const QJsonArray &lowPrioritySensorIds)
 {
     if (lowPrioritySensorIds == SensorFaceController::lowPrioritySensorIds()) {
         return;
     }
 
-    d->sensorsGroup.writeEntry("lowPrioritySensorIds", lowPrioritySensorIds);
+    d->sensorsGroup.writeEntry("lowPrioritySensorIds", QJsonDocument(lowPrioritySensorIds).toJson(QJsonDocument::Compact));
     d->syncTimer->start();
     emit lowPrioritySensorIdsChanged();
 }
@@ -553,22 +569,32 @@ void SensorFaceController::loadPreset(const QString &preset)
         d->availablePresetsModel->removeRow(0);
     }
 
-    auto loadSensors = [this](const QStringList &partialEntries) {
-        QStringList sensors;
+    auto loadSensors = [this](const QJsonArray &partialEntries) {
+        QJsonArray sensors;
 
-        for (const QString &id : partialEntries) {
-            KSysGuard::SensorQuery query{id};
+        for (const auto &id : partialEntries) {
+            KSysGuard::SensorQuery query{id.toString()};
             query.execute();
             query.waitForFinished();
-            sensors.append(query.sensorIds());
+            for (const auto &fitleredId : query.sensorIds()) {
+                sensors.append(QJsonValue(fitleredId));
+            }
         }
         return sensors;
     };
 
-    setTotalSensors(presetGroup.readEntry(QStringLiteral("totalSensors"), QStringList()));
-    setHighPrioritySensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("highPrioritySensorIds"), QStringList())));
-    setLowPrioritySensorIds(loadSensors(presetGroup.readEntry(QStringLiteral("lowPrioritySensorIds"), QStringList())));
-    setHighPrioritySensorColors(presetGroup.readEntry(QStringLiteral("highPrioritySensorColors"), QStringList()));
+    QJsonDocument doc = QJsonDocument::fromJson(presetGroup.readEntry("totalSensors", QString()).toUtf8());
+    setTotalSensors(loadSensors(doc.array()));
+
+    doc = QJsonDocument::fromJson(presetGroup.readEntry("highPrioritySensorIds", QString()).toUtf8());
+    setHighPrioritySensorIds(loadSensors(doc.array()));
+
+    doc = QJsonDocument::fromJson(presetGroup.readEntry("lowPrioritySensorIds", QString()).toUtf8());
+    setLowPrioritySensorIds(loadSensors(doc.array()));
+
+    doc = QJsonDocument::fromJson(presetGroup.readEntry("highPrioritySensorColors", QString()).toUtf8());
+    setHighPrioritySensorColors(loadSensors(doc.array()));
+
     setFaceId(presetGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
 
     if (d->faceConfigLoader) {
@@ -633,10 +659,10 @@ void SensorFaceController::savePreset()
     KConfig faceConfig(subDir.path() % QLatin1Literal("/contents/faceproperties"));
 
     KConfigGroup configGroup(&faceConfig, "Config");
-    configGroup.writeEntry(QStringLiteral("totalSensors"), totalSensors());
-    configGroup.writeEntry(QStringLiteral("highPrioritySensorIds"), highPrioritySensorIds());
-    configGroup.writeEntry(QStringLiteral("lowPrioritySensorIds"), lowPrioritySensorIds());
-    configGroup.writeEntry(QStringLiteral("highPrioritySensorColors"), highPrioritySensorColors());
+    configGroup.writeEntry(QStringLiteral("totalSensors"), QJsonDocument(totalSensors()).toJson(QJsonDocument::Compact));
+    configGroup.writeEntry(QStringLiteral("highPrioritySensorIds"), QJsonDocument(highPrioritySensorIds()).toJson(QJsonDocument::Compact));
+    configGroup.writeEntry(QStringLiteral("lowPrioritySensorIds"), QJsonDocument(lowPrioritySensorIds()).toJson(QJsonDocument::Compact));
+    configGroup.writeEntry(QStringLiteral("highPrioritySensorColors"), QJsonDocument(highPrioritySensorColors()).toJson(QJsonDocument::Compact));
 
     configGroup = KConfigGroup(&faceConfig, "FaceConfig");
     if (d->faceConfigLoader) {
