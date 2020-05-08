@@ -6,8 +6,11 @@ include(CMakeFindDependencyMacro)
 find_dependency(KSysGuard REQUIRED)
 
 macro(add_sysguard_target _target)
-    set_target_properties(KSysGuard::${_target} PROPERTIES IMPORTED_GLOBAL TRUE)
-    add_library(KF5::${_target} ALIAS KSysGuard::${_target})
+    add_library(KF5::${_target} INTERFACE IMPORTED)
+    set_target_properties(KF5::${_target} PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES $<TARGET_PROPERTY:KSysGuard::${_target},INTERFACE_INCLUDE_DIRECTORIES>
+        INTERFACE_LINK_LIBRARIES KSysGuard::${_target}
+    )
 endmacro()
 
 add_sysguard_target(SysGuard)
