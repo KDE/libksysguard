@@ -84,7 +84,7 @@ Kirigami.FormLayout {
                 actions: Kirigami.Action {
                     icon.name: "delete"
                     visible: model.writable
-                    onTriggered: controller.uninstallPreset("pluginId");
+                    onTriggered: controller.uninstallPreset(model.pluginId);
                 }
                 onClicked: {
                     cfg_title = model.display;
