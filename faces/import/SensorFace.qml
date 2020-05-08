@@ -41,9 +41,12 @@ Faces.AbstractSensorFace {
 
     property alias colorSource: colorSource
 
-    Charts.ArraySource {
+    Charts.MapProxySource {
         id: colorSource
-        array: root.controller.highPrioritySensorColors
+        source: Charts.ArraySource {
+            array: root.controller.highPrioritySensorIds
+        }
+        map: root.controller.sensorColors
     }
     Charts.ColorGradientSource {
         baseColor: Kirigami.Theme.highlightColor
@@ -53,20 +56,22 @@ Faces.AbstractSensorFace {
         Component.onCompleted: generate()
 
         function generate() {
-            var colors = colorSource.colors;
-            var savedColors = root.controller.highPrioritySensorColors;
+            //var colors = colorSource.colors;
+            var savedColors = root.controller.sensorColors;
             for (var i = 0; i < root.controller.highPrioritySensorIds.length; ++i) {
                 if (savedColors.length <= i) {
-                    savedColors.push(colors[i]);
+                    savedColors[root.controller.highPrioritySensorIds[i]] = colors[i];
                 } else {
                     // Use the darker trick to make Qt validate the scring as a valid color;
                     var currentColor = Qt.darker(savedColors[i], 1);
                     if (!currentColor) {
-                        savedColors[i] = (colors[i]);
+                        savedColors[root.controller.highPrioritySensorIds[i]] = colors[i];
+                    } else {
+                        savedColors[root.controller.highPrioritySensorIds[i]] = currentColor;
                     }
                 }
             }
-            root.controller.highPrioritySensorColors = savedColors;
+            root.controller.sensorColors = savedColors;
         }
     }
 }

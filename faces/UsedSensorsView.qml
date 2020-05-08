@@ -38,7 +38,7 @@ DropArea {
     property alias count: usedSensorsView.count
     property alias delegateComponent: delegateComponent
     property var sensorIds: []
-    property var sensorColors: []
+    property var sensorColors: {}
     property bool showColor: true
 
     function appendSensor(sensorId) {
@@ -59,7 +59,7 @@ DropArea {
     function load() {
         usedSensorsModel.clear();
         for (var i in sensorIds) {
-            usedSensorsModel.append({"sensorId": sensorIds[i], "color": (sensorColors[i] || "").toString()})
+            usedSensorsModel.append({"sensorId": sensorIds[i], "color": (sensorColors[sensorIds[i]] || "").toString()})
         }
     }
 
@@ -162,10 +162,10 @@ DropArea {
                 id: usedSensorsModel
                 function save() {
                     var ids = [];
-                    var colors = [];
+                    var colors = {};
                     for (var i = 0; i < count; ++i) {
                         ids.push(get(i).sensorId);
-                        colors.push(get(i).color);
+                        colors[get(i).sensorId] = get(i).color;
                     }
                     root.sensorIds = ids;
                     root.sensorColors = colors;

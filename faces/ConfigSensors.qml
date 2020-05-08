@@ -44,13 +44,13 @@ ColumnLayout {
 
     property var cfg_totalSensors
     property alias cfg_highPrioritySensorIds: usedSensorsView.sensorIds
-    property alias cfg_highPrioritySensorColors: usedSensorsView.sensorColors
+    property alias cfg_sensorColors: usedSensorsView.sensorColors
 
     property alias cfg_lowPrioritySensorIds: lowPrioritySensorsView.sensorIds
 
     onCfg_totalSensorsChanged: configurationChanged();
     onCfg_highPrioritySensorIdsChanged: configurationChanged();
-    onCfg_highPrioritySensorColorsChanged: configurationChanged();
+    onCfg_sensorColorsChanged: configurationChanged();
     onCfg_lowPrioritySensorIdsChanged: configurationChanged();
 
     property Faces.SensorFaceController controller
@@ -63,14 +63,14 @@ ColumnLayout {
     function saveConfig() {
         controller.totalSensors = cfg_totalSensors;
         controller.highPrioritySensorIds = cfg_highPrioritySensorIds;
-        controller.highPrioritySensorColors = cfg_highPrioritySensorColors;
+        controller.sensorColors = cfg_sensorColors;
         controller.lowPrioritySensorIds = cfg_lowPrioritySensorIds;
     }
 
     function loadConfig() {
         cfg_totalSensors = controller.totalSensors;
         cfg_highPrioritySensorIds = controller.highPrioritySensorIds;
-        cfg_highPrioritySensorColors = controller.highPrioritySensorColors;
+        cfg_sensorColors = controller.sensorColors;
         usedSensorsView.load();
 
         cfg_lowPrioritySensorIds = controller.lowPrioritySensorIds;
@@ -83,7 +83,7 @@ ColumnLayout {
         target: controller
         onTotalSensorsChanged: Qt.callLater(root.loadConfig)
         onHighPrioritySensorIdsChanged: Qt.callLater(root.loadConfig)
-        onHighPrioritySensorColorsChanged: Qt.callLater(root.loadConfig)
+        onSensorColorsChanged: Qt.callLater(root.loadConfig)
         onLowPrioritySensorIdsChanged: Qt.callLater(root.loadConfig)
     }
 
@@ -179,7 +179,7 @@ ColumnLayout {
             Local.UsedSensorsView {
                 id: usedSensorsView
                 showColor: controller.supportsSensorsColors
-                sensorColors: root.controller.highPrioritySensorColors
+                sensorColors: root.controller.sensorColors
             }
             Kirigami.Heading {
                 Layout.preferredHeight: sensorListHeader.implicitHeight

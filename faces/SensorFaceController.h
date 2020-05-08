@@ -47,7 +47,7 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(QString faceId READ faceId WRITE setFaceId NOTIFY faceIdChanged)
     Q_PROPERTY(QJsonArray totalSensors READ totalSensors WRITE setTotalSensors NOTIFY totalSensorsChanged)
     Q_PROPERTY(QJsonArray highPrioritySensorIds READ highPrioritySensorIds WRITE setHighPrioritySensorIds NOTIFY highPrioritySensorIdsChanged)
-    Q_PROPERTY(QJsonArray highPrioritySensorColors READ highPrioritySensorColors WRITE setHighPrioritySensorColors NOTIFY highPrioritySensorColorsChanged)
+    Q_PROPERTY(QVariantMap sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
     Q_PROPERTY(QJsonArray lowPrioritySensorIds READ lowPrioritySensorIds WRITE setLowPrioritySensorIds NOTIFY lowPrioritySensorIdsChanged)
 
     Q_PROPERTY(QString name READ name NOTIFY faceIdChanged)
@@ -92,11 +92,11 @@ public:
 
     QJsonArray sensors() const;
 
-    QJsonArray highPrioritySensorColors() const;
-    void setHighPrioritySensorColors(const QJsonArray &colors);
-
     QJsonArray lowPrioritySensorIds() const;
     void setLowPrioritySensorIds(const QJsonArray &ids);
+
+    QVariantMap sensorColors() const;
+    void setSensorColors(const QVariantMap &colors);
 
     // from face config, immutable by the user
     QString name() const;
@@ -119,9 +119,9 @@ Q_SIGNALS:
     void titleChanged();
     void totalSensorsChanged();
     void highPrioritySensorIdsChanged();
-    void highPrioritySensorColorsChanged();
     void lowPrioritySensorIdsChanged();
     void sensorsChanged();
+    void sensorColorsChanged();
 
 private:
     class Private;

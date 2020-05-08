@@ -155,6 +155,7 @@ public:
     KConfigGroup configGroup;
     KConfigGroup appearanceGroup;
     KConfigGroup sensorsGroup;
+    KConfigGroup colorsGroup;
     QPointer <SensorFace> fullRepresentation;
     QPointer <SensorFace> compactRepresentation;
     QPointer <QQuickItem> faceConfigUi;
@@ -239,6 +240,7 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
     d->configGroup = config;
     d->appearanceGroup = KConfigGroup(&config, "Appearance");
     d->sensorsGroup = KConfigGroup(&config, "Sensors");
+    d->colorsGroup = KConfigGroup(&config, "SensorColors");
     d->engine = engine;
     d->syncTimer = new QTimer(this);
     d->syncTimer->setSingleShot(true);
@@ -307,32 +309,31 @@ void SensorFaceController::setHighPrioritySensorIds(const QJsonArray &highPriori
     emit highPrioritySensorIdsChanged();
 }
 
-QJsonArray SensorFaceController::highPrioritySensorColors() const
+QVariantMap SensorFaceController::sensorColors() const
 {
-    QJsonDocument doc = QJsonDocument::fromJson(d->sensorsGroup.readEntry("highPrioritySensorColors", QString()).toUtf8());
-    return doc.array();
+    QVariantMap colors;
+    for (const auto &key : d->colorsGroup.keyList()) {
+        QColor color = d->colorsGroup.readEntry(key, QColor());
+
+        if (color.isValid()) {
+            colors[key] = color;
+        }
+    }
+    return colors;
 }
 
-void SensorFaceController::setHighPrioritySensorColors(const QJsonArray &highPrioritySensorColors)
+void SensorFaceController::setSensorColors(const QVariantMap &colors)
 {
-    if (highPrioritySensorColors == SensorFaceController::highPrioritySensorColors()) {
-        return;
+    d->colorsGroup.deleteGroup();
+    d->colorsGroup = KConfigGroup(&d->configGroup, "SensorColors");
+
+    auto it = colors.constBegin();
+    for (; it != colors.constEnd(); ++it) {
+        d->colorsGroup.writeEntry(it.key(), it.value());
     }
 
-    // an array of colors arriving from qml will be an array of objects containing r,g and b as properties, which then isn't transposed again to QML correctly
-    QJsonArray newArray;
-    for (const auto &value : highPrioritySensorColors) {
-        const QJsonObject &object = value.toObject();
-        QColor color;
-        color.setRedF(object.value(QStringLiteral("r")).toDouble());
-        color.setGreenF(object.value(QStringLiteral("g")).toDouble());
-        color.setBlueF(object.value(QStringLiteral("b")).toDouble());
-        color.setAlphaF(object.value(QStringLiteral("a")).toDouble());
-        newArray.append(color.name(QColor::HexArgb));
-    }
-    d->sensorsGroup.writeEntry("highPrioritySensorColors", QJsonDocument(newArray).toJson(QJsonDocument::Compact));
     d->syncTimer->start();
-    emit highPrioritySensorColorsChanged();
+    emit sensorColorsChanged();
 }
 
 QJsonArray SensorFaceController::lowPrioritySensorIds() const
@@ -534,7 +535,7 @@ void SensorFaceController::reloadConfig()
     titleChanged();
     totalSensorsChanged();
     highPrioritySensorIdsChanged();
-    highPrioritySensorColorsChanged();
+    sensorColorsChanged();
     lowPrioritySensorIdsChanged();
 }
 
@@ -558,7 +559,9 @@ void SensorFaceController::loadPreset(const QString &preset)
 
     KDesktopFile df(presetPackage.path() + QStringLiteral("metadata.desktop"));
 
-    KConfigGroup presetGroup(KSharedConfig::openConfig(presetPackage.filePath("config", QStringLiteral("faceproperties"))), QStringLiteral("Config"));
+    auto c = KSharedConfig::openConfig(presetPackage.filePath("config", QStringLiteral("faceproperties")));
+    KConfigGroup presetGroup(c, QStringLiteral("Config"));
+    KConfigGroup colorsGroup(c, QStringLiteral("SensorColors"));
 
     // Load the title
     setTitle(df.readName());
@@ -592,10 +595,10 @@ void SensorFaceController::loadPreset(const QString &preset)
     doc = QJsonDocument::fromJson(presetGroup.readEntry("lowPrioritySensorIds", QString()).toUtf8());
     setLowPrioritySensorIds(loadSensors(doc.array()));
 
-    doc = QJsonDocument::fromJson(presetGroup.readEntry("highPrioritySensorColors", QString()).toUtf8());
-    setHighPrioritySensorColors(loadSensors(doc.array()));
-
     setFaceId(presetGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
+
+    colorsGroup.copyTo(&d->colorsGroup);
+    emit sensorColorsChanged();
 
     if (d->faceConfigLoader) {
         KConfigGroup presetGroup(KSharedConfig::openConfig(presetPackage.filePath("FaceProperties")), QStringLiteral("FaceConfig"));
@@ -662,7 +665,10 @@ void SensorFaceController::savePreset()
     configGroup.writeEntry(QStringLiteral("totalSensors"), QJsonDocument(totalSensors()).toJson(QJsonDocument::Compact));
     configGroup.writeEntry(QStringLiteral("highPrioritySensorIds"), QJsonDocument(highPrioritySensorIds()).toJson(QJsonDocument::Compact));
     configGroup.writeEntry(QStringLiteral("lowPrioritySensorIds"), QJsonDocument(lowPrioritySensorIds()).toJson(QJsonDocument::Compact));
-    configGroup.writeEntry(QStringLiteral("highPrioritySensorColors"), QJsonDocument(highPrioritySensorColors()).toJson(QJsonDocument::Compact));
+    
+    KConfigGroup colorsGroup(&faceConfig, "SensorColors");
+    d->colorsGroup.copyTo(&colorsGroup);
+    colorsGroup.sync();
 
     configGroup = KConfigGroup(&faceConfig, "FaceConfig");
     if (d->faceConfigLoader) {
