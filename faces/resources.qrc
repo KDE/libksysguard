@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ConfigAppearance.qml</file>
+        <file>ConfigSensors.qml</file>
+        <file>FaceDetailsConfig.qml</file>
+        <file>UsedSensorsView.qml</file>
+    </qresource>
+</RCC>

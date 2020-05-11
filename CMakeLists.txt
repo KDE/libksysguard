@@ -43,7 +43,9 @@ set_package_properties(Qt5WebChannel PROPERTIES
                        PURPOSE "Used by the HTML-based GUI ksysguard library"
                       )
 
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO)
+
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package Declarative)
+
 find_package(KF5 OPTIONAL_COMPONENTS Plasma)
 set_package_properties(KF5Plasma PROPERTIES
                        URL "https://cgit.kde.org/plasma-framework.git/"
@@ -110,6 +112,8 @@ add_subdirectory( lsofui )
 add_subdirectory( processcore )
 add_subdirectory( processui )
 add_subdirectory( sensors )
+add_subdirectory( faces )
+
 if (KF5Plasma_FOUND)
     add_subdirectory( signalplotter )
 endif()
