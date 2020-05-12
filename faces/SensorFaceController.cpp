@@ -449,7 +449,7 @@ QQuickItem *SensorFaceController::compactRepresentation()
         return d->compactRepresentation;
     }
 
-    d->fullRepresentation = d->createGui(d->facePackage.filePath("ui", QStringLiteral("CompactRepresentation.qml")));   
+    d->compactRepresentation = d->createGui(d->facePackage.filePath("ui", QStringLiteral("CompactRepresentation.qml")));   
     return d->compactRepresentation;
 }
 
