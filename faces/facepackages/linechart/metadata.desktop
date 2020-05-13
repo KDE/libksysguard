@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Line Chart
+Name[ca]=Diagrama de línies
+Name[et]=Joondiagramm
+Name[nl]=Lijngrafiek
+Name[uk]=Лінійна діаграма
+Name[x-test]=xxLine Chartxx
 Icon=office-chart-line
 
 Type=Service

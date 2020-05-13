@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Pie Chart
+Name[ca]=Diagrama de sectors
+Name[et]=Sektordiagramm
+Name[nl]=Taartgrafiek
+Name[uk]=Кругова діаграма
+Name[x-test]=xxPie Chartxx
 Icon=office-chart-pie
 
 Type=Service

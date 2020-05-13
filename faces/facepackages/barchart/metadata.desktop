@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Bar Chart
+Name[ca]=Diagrama de barres
+Name[et]=Tulpdiagramm
+Name[nl]=Balkgrafiek
+Name[uk]=Стовпчикова діаграма
+Name[x-test]=xxBar Chartxx
 Icon=office-chart-bar
 
 Type=Service

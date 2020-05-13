@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Text Only
+Name[ca]=Només el text
+Name[et]=Ainult tekst
+Name[nl]=Alleen tekst
+Name[uk]=Лише текст
+Name[x-test]=xxText Onlyxx
 Icon=view-list-text
 
 Type=Service
