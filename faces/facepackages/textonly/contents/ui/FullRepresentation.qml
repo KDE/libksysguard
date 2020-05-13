@@ -61,7 +61,7 @@ Faces.SensorFace {
                 name: sensor.shortName
                 value: sensor.formattedValue
                 colorVisible: !isTextOnly
-                color: !isTextOnly ? globalColorSource.array[index] : "transparent"
+                color: !isTextOnly ? root.colorSource.map[modelData] : "transparent"
 
                 layoutWidth: root.width
                 valueWidth: Kirigami.Units.gridUnit * 2

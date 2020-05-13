@@ -64,7 +64,7 @@ Faces.SensorFace {
             visible: root.showLegend
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
-            colorSource: globalColorSource
+            colorSource: root.colorSource
             sensorIds: root.showLegend ? root.controller.lowPrioritySensorIds : []
         }
 
