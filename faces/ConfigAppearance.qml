@@ -100,16 +100,16 @@ Kirigami.FormLayout {
         }
     }
     RowLayout {
-        Kirigami.FormData.label: i18n("Presets:")
+        Kirigami.FormData.label: i18nd("KSysGuardSensorFaces", "Presets:")
         
         QQC2.Button {
             icon.name: "document-open"
-            text: i18n("Load Preset...")
+            text: i18nd("KSysGuardSensorFaces", "Load Preset...")
             onClicked: presetSheet.open()
         }
 
         NewStuff.Button {
-            Accessible.name: i18n("Get new presets...")
+            Accessible.name: i18nd("KSysGuardSensorFaces", "Get new presets...")
             configFile: "systemmonitor-presets.knsrc"
             text: ""
             onChangedEntriesChanged: controller.availablePresetsModel.reload();
@@ -121,7 +121,7 @@ Kirigami.FormLayout {
         QQC2.Button {
             id: saveButton
             icon.name: "document-save"
-            text: i18n("Save Settings As Preset")
+            text: i18nd("KSysGuardSensorFaces", "Save Settings As Preset")
             enabled: controller.currentPreset.length == 0
             onClicked: controller.savePreset();
         }
@@ -133,11 +133,11 @@ Kirigami.FormLayout {
 
     QQC2.TextField {
         id: titleField
-        Kirigami.FormData.label: i18n("Title:")
+        Kirigami.FormData.label: i18nd("KSysGuardSensorFaces", "Title:")
     }
 
     RowLayout {
-        Kirigami.FormData.label: i18n("Display Style:")
+        Kirigami.FormData.label: i18nd("KSysGuardSensorFaces", "Display Style:")
         QQC2.ComboBox {
             id: faceCombo
             model: controller.availableFacesModel
@@ -157,7 +157,7 @@ Kirigami.FormLayout {
         }
 
         NewStuff.Button {
-            text: i18n("Get New Display Styles...")
+            text: i18nd("KSysGuardSensorFaces", "Get New Display Styles...")
             configFile: "systemmonitor-faces.knsrc"
             onChangedEntriesChanged: controller.availableFacesModel.reload();
         }

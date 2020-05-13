@@ -94,7 +94,7 @@ ColumnLayout {
             width: usedSensorsView.width
             actions: Kirigami.Action {
                 icon.name: "list-remove"
-                text: i18n("Remove")
+                text: i18nd("KSysGuardSensorFaces", "Remove")
                 onTriggered: {
                     usedSensorsModel.remove(index, 1);
                     usedSensorsModel.save();
@@ -133,11 +133,11 @@ ColumnLayout {
         Layout.preferredHeight: sensorListHeader.implicitHeight
         visible: controller.supportsTotalSensors
         QQC2.Label {
-            text: i18n("Total Sensor:")
+            text: i18nd("KSysGuardSensorFaces", "Total Sensor:")
         }
         QQC2.Label {
             Layout.fillWidth: true
-            text: cfg_totalSensors.length > 0 ? totalSensor.name : i18n("Drop Sensor Here")
+            text: cfg_totalSensors.length > 0 ? totalSensor.name : i18nd("KSysGuardSensorFaces", "Drop Sensor Here")
             elide: Text.ElideRight
             DropArea {
                 anchors.fill: parent
@@ -174,7 +174,7 @@ ColumnLayout {
             Kirigami.Heading {
                 Layout.preferredHeight: sensorListHeader.implicitHeight
                 level: 3
-                text: i18n("Chart Sensors")
+                text: i18nd("KSysGuardSensorFaces", "Chart Sensors")
             }
             Local.UsedSensorsView {
                 id: usedSensorsView
@@ -183,7 +183,7 @@ ColumnLayout {
             }
             Kirigami.Heading {
                 Layout.preferredHeight: sensorListHeader.implicitHeight
-                text: i18n("Text Only Sensors")
+                text: i18nd("KSysGuardSensorFaces", "Text Only Sensors")
                 level: 3
                 visible: lowPrioritySensorsView.visible
             }
@@ -207,7 +207,7 @@ ColumnLayout {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
                     level: 3
-                    text: i18n("All Sensors")
+                    text: i18nd("KSysGuardSensorFaces", "All Sensors")
                 }
             }
             Kirigami.SearchField {

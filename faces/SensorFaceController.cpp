@@ -152,6 +152,7 @@ public:
     bool configNeedsSave = false;
     KPackage::Package facePackage;
     QString faceId;
+    KLocalizedContext *contextObj = nullptr;
     KConfigGroup configGroup;
     KConfigGroup appearanceGroup;
     KConfigGroup sensorsGroup;
@@ -183,8 +184,8 @@ SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
         return nullptr;
     }
 
-    //TODO: add i18n context object
     QQmlContext *context = new QQmlContext(engine);
+    context->setContextObject(contextObj);
     QObject *guiObject = component->beginCreate(context);
     SensorFace *gui = qobject_cast<SensorFace *>(guiObject);
     if (!gui) {
@@ -193,7 +194,7 @@ SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
         context->deleteLater();
         return nullptr;
     }
-   // context->setParent(gui);
+    context->setParent(gui);
 
     gui->setController(q);
 
@@ -216,12 +217,13 @@ QQuickItem *SensorFaceController::Private::createConfigUi(const QString &file, c
         return nullptr;
     }
 
-    //TODO: add i18n context object
     QQmlContext *context = new QQmlContext(engine);
+    context->setContextObject(contextObj);
     QObject *guiObject = component->createWithInitialProperties(
         initialProperties, context);
     QQuickItem *gui = qobject_cast<QQuickItem *>(guiObject);
     Q_ASSERT(gui);
+    context->setParent(gui);
 
     component->deleteLater();
 
@@ -398,6 +400,7 @@ void SensorFaceController::setFaceId(const QString &face)
 
     d->facePackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("KSysguard/SensorFace"), face);
 
+    d->contextObj->deleteLater();
     if (d->faceConfiguration) {
         d->faceConfiguration->deleteLater();
         d->faceConfiguration = nullptr;
@@ -411,6 +414,9 @@ void SensorFaceController::setFaceId(const QString &face)
         emit faceIdChanged();
         return;
     }
+
+    d->contextObj = new KLocalizedContext(d->engine);
+    d->contextObj->setTranslationDomain(QLatin1String("ksysguard_face_") + face);
 
     //TODO: should be in a different config file rather than metadata
     d->faceProperties = KConfigGroup(KSharedConfig::openConfig(d->facePackage.filePath("FaceProperties")), QStringLiteral("Config"));

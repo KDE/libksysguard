@@ -69,7 +69,7 @@ DropArea {
             id: listItem
             actions: Kirigami.Action {
                 icon.name: "list-remove"
-                text: i18n("Remove")
+                text: i18nd("KSysGuardSensorFaces", "Remove")
                 onTriggered: {
                     usedSensorsModel.remove(index, 1);
                     usedSensorsModel.save();
@@ -131,7 +131,7 @@ DropArea {
         anchors.centerIn: parent
         z: 2
         visible: usedSensorsView.count == 0
-        text: i18n("Drop Sensors Here")
+        text: i18nd("KSysGuardSensorFaces", "Drop Sensors Here")
     }
     Rectangle {
         anchors {
