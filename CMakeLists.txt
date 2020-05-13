@@ -44,7 +44,7 @@ set_package_properties(Qt5WebChannel PROPERTIES
                       )
 
 
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package Declarative)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package Declarative NewStuff)
 
 find_package(KF5 OPTIONAL_COMPONENTS Plasma)
 set_package_properties(KF5Plasma PROPERTIES

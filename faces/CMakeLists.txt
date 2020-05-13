@@ -65,3 +65,5 @@ install(FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/faces
     COMPONENT Devel
 )
+
+install(FILES systemmonitor-faces.knsrc systemmonitor-presets.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})
