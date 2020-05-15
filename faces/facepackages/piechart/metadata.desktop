@@ -1,12 +1,15 @@
 [Desktop Entry]
 Name=Pie Chart
 Name[ca]=Diagrama de sectors
+Name[es]=Gráfico de tarta
 Name[et]=Sektordiagramm
 Name[nl]=Taartgrafiek
 Name[pt]=Gráfico Circular
+Name[pt_BR]=Gráfico de setores
 Name[sk]=Koláčový graf
 Name[uk]=Кругова діаграма
 Name[x-test]=xxPie Chartxx
+Name[zh_TW]=圓餅圖
 Icon=office-chart-pie
 
 Type=Service

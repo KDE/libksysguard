@@ -1,5 +1,13 @@
 [KNewStuff3]
 Name=System monitor Sensor Display Styles
+Name[ca]=Estils de visualització del sensor del monitor del sistema
+Name[es]=Estilos de visor del sensor del monitor del sistema
+Name[et]=Süsteemi jälgija sensori esitusstiilid
+Name[nl]=Stijl van tonen van systeemmonitorsensor
+Name[pt]=Estilos de Apresentação dos Sensores de Monitorização do Sistema
+Name[uk]=Стилі показу датчика нагляду за системою
+Name[x-test]=xxSystem monitor Sensor Display Stylesxx
+Name[zh_TW]=系統監視器 感測器顯示樣式
 
 Categories=Plasma Charts Face
 UploadCategories=Plasma Charts Face
