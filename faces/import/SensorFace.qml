@@ -41,13 +41,18 @@ Faces.AbstractSensorFace {
 
     property alias colorSource: colorSource
 
-    Charts.MapProxySource {
+    Charts.ArraySource {
         id: colorSource
-        source: Charts.ArraySource {
-            array: root.controller.highPrioritySensorIds
+        // TODO: Use Charts.MapProxySource once Plasma depends on KF 5.71 or higher.
+        array: {
+            result = []
+            for (var sensor of root.controller.highPrioritySensorIds) {
+                result.push(root.controller.sensorColors[sensor])
+            }
+            return result
         }
-        map: root.controller.sensorColors
     }
+
     Charts.ColorGradientSource {
         baseColor: Kirigami.Theme.highlightColor
         itemCount: root.controller.highPrioritySensorIds.length
