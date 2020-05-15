@@ -4,9 +4,11 @@ Name[ca]=Diagrama de barres
 Name[et]=Tulpdiagramm
 Name[nl]=Balkgrafiek
 Name[pt]=Gráfico de Barras
+Name[pt_BR]=Gráfico de barras
 Name[sk]=Stĺpcový graf
 Name[uk]=Стовпчикова діаграма
 Name[x-test]=xxBar Chartxx
+Name[zh_TW]=橫條圖
 Icon=office-chart-bar
 
 Type=Service
