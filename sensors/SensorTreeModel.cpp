@@ -37,20 +37,31 @@ using namespace KSysGuard;
 struct Q_DECL_HIDDEN SensorTreeItem
 {
     SensorTreeItem *parent = nullptr;
+    QString segment;
     QString name;
-    QVector<SensorTreeItem *> children;
+    QMap<QString, SensorTreeItem *> children;
 
-    inline int indexOf(const QString &name)
+    inline int indexOf(const QString &segment)
     {
-        int index = -1;
-
-        for (int i = 0; i < children.count(); ++i) {
-            if (children.at(i)->name == name) {
-                return i;
+        int index = 0;
+        for (auto child : qAsConst(children)) {
+            if (child->segment == segment) {
+                return index;
             }
+            index++;
         }
 
-        return index;
+        return -1;
+    }
+
+    inline SensorTreeItem *itemAt(int index) {
+        int currentIndex = 0;
+        for (auto child : qAsConst(children)) {
+            if (currentIndex++ == index) {
+                return child;
+            }
+        }
+        return nullptr;
     }
 
     ~SensorTreeItem()
@@ -98,18 +109,28 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
     SensorTreeItem *item = rootItem;
 
     for (auto segment : segments) {
-        int index = item->indexOf(segment);
+        auto child = item->children.value(segment, nullptr);
 
-        if (index != -1) {
-            item = item->children.at(index);
+        if (child) {
+            item = child;
         } else {
             SensorTreeItem *newItem = new SensorTreeItem();
             newItem->parent = item;
+            newItem->segment = segment;
             newItem->name = segment;
 
-            const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex() : q->createIndex(item->parent->children.indexOf(item), 0, item);
-            q->beginInsertRows(parentIndex, item->children.count(), item->children.count());
-            item->children.append(newItem);
+            const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex() : q->createIndex(item->parent->indexOf(item->segment), 0, item);
+
+            // We need the new index to be able to use beginInsertRows()
+            // but if we actually insert the new item, rowCount() will be off.
+            // So instead, insert the new item, find its index and then remove it
+            // again. That way we have both.
+            item->children.insert(segment, newItem);
+            auto index = item->indexOf(segment);
+            item->children.remove(segment);
+
+            q->beginInsertRows(parentIndex, index, index);
+            item->children.insert(segment, newItem);
             q->endInsertRows();
 
             item = newItem;
@@ -121,27 +142,22 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
 
 void SensorTreeModel::Private::removeSensor(const QString &sensorId)
 {
-    SensorTreeItem *item = rootItem;
-
-    const auto segments = sensorId.split(QLatin1Char('/'));
-    for (const QString &segment : segments) {
-        int index = item->indexOf(segment);
-        Q_ASSERT(index != -1);
-        item = item->children.at(index);
+    SensorTreeItem *item = find(sensorId);
+    if (!item) {
+        return;
     }
 
     SensorTreeItem *parent = item->parent;
-
     if (!parent) {
         return;
     }
 
     auto remove = [this](SensorTreeItem *item, SensorTreeItem *parent) {
-        const int index = item->parent->children.indexOf(item);
+        const int index = item->parent->indexOf(item->segment);
 
-        const QModelIndex &parentIndex = (parent == rootItem) ? QModelIndex() : q->createIndex(parent->parent->children.indexOf(parent), 0, parent);
+        const QModelIndex &parentIndex = (parent == rootItem) ? QModelIndex() : q->createIndex(parent->parent->indexOf(parent->segment), 0, parent);
         q->beginRemoveRows(parentIndex, index, index);
-        delete item->parent->children.takeAt(index);
+        delete item->parent->children.take(item->segment);
         q->endRemoveRows();
 
         sensorInfos.remove(item);
@@ -167,11 +183,11 @@ QString SensorTreeModel::Private::sensorId(const QModelIndex &index)
 
     SensorTreeItem *item = static_cast<SensorTreeItem *>(index.internalPointer());
 
-    segments << item->name;
+    segments << item->segment;
 
     while (item->parent && item->parent != rootItem) {
         item = item->parent;
-        segments.prepend(item->name);
+        segments.prepend(item->segment);
     }
 
     return segments.join(QLatin1Char('/'));
@@ -182,10 +198,8 @@ SensorTreeItem *KSysGuard::SensorTreeModel::Private::find(const QString &sensorI
     auto item = rootItem;
     const auto segments = sensorId.split(QLatin1Char('/'));
     for (const QString &segment : segments) {
-        int index = item->indexOf(segment);
-        if (index != -1) {
-            item = item->children.at(index);
-        } else {
+        item = item->children.value(segment, nullptr);
+        if (!item) {
             return nullptr;
         }
     }
@@ -239,11 +253,7 @@ QStringList SensorTreeModel::mimeTypes() const
 
 QVariant SensorTreeModel::data(const QModelIndex &index, int role) const
 {
-    const bool check = checkIndex(index, CheckIndexOption::IndexIsValid);
-
-    Q_ASSERT(check);
-
-    if (!check) {
+    if (!checkIndex(index, CheckIndexOption::IndexIsValid)) {
         return QVariant();
     }
 
@@ -289,11 +299,7 @@ QMimeData *SensorTreeModel::mimeData(const QModelIndexList &indexes) const
 
     const QModelIndex &index = indexes.at(0);
 
-    const bool check = checkIndex(index, CheckIndexOption::IndexIsValid);
-
-    Q_ASSERT(check);
-
-    if (!check) {
+    if (!checkIndex(index, CheckIndexOption::IndexIsValid)) {
         return mimeData;
     }
 
@@ -308,11 +314,7 @@ QMimeData *SensorTreeModel::mimeData(const QModelIndexList &indexes) const
 
 Qt::ItemFlags SensorTreeModel::flags(const QModelIndex &index) const
 {
-    const bool check = checkIndex(index, CheckIndexOption::IndexIsValid | CheckIndexOption::DoNotUseParent);
-
-    Q_ASSERT(check);
-
-    if (!check) {
+    if (!checkIndex(index, CheckIndexOption::IndexIsValid)) {
         return Qt::NoItemFlags;
     }
 
@@ -326,11 +328,7 @@ Qt::ItemFlags SensorTreeModel::flags(const QModelIndex &index) const
 int SensorTreeModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
-        const bool check = checkIndex(parent, CheckIndexOption::IndexIsValid | CheckIndexOption::DoNotUseParent);
-
-        Q_ASSERT(check);
-
-        if (!check) {
+        if (!checkIndex(parent, CheckIndexOption::IndexIsValid)) {
             return 0;
         }
 
@@ -353,8 +351,6 @@ QModelIndex SensorTreeModel::index(int row, int column, const QModelIndex &paren
     SensorTreeItem *parentItem = d->rootItem;
 
     if (parent.isValid()) {
-        Q_ASSERT(parent.model() == this);
-
         if (parent.model() != this) {
             return QModelIndex();
         }
@@ -370,16 +366,12 @@ QModelIndex SensorTreeModel::index(int row, int column, const QModelIndex &paren
         return QModelIndex();
     }
 
-    return createIndex(row, column, parentItem->children.at(row));
+    return createIndex(row, column, parentItem->itemAt(row));
 }
 
 QModelIndex SensorTreeModel::parent(const QModelIndex &index) const
 {
-    const bool check = checkIndex(index, CheckIndexOption::IndexIsValid | CheckIndexOption::DoNotUseParent);
-
-    Q_ASSERT(check);
-
-    if (!check) {
+    if (!checkIndex(index, CheckIndexOption::IndexIsValid | CheckIndexOption::DoNotUseParent)) {
         return QModelIndex();
     }
 
@@ -394,7 +386,7 @@ QModelIndex SensorTreeModel::parent(const QModelIndex &index) const
         return QModelIndex();
     }
 
-    return createIndex(parentItem->parent->children.indexOf(parentItem), 0, parentItem);
+    return createIndex(parentItem->parent->indexOf(parentItem->segment), 0, parentItem);
 }
 
 void SensorTreeModel::init()
@@ -435,10 +427,10 @@ void KSysGuard::SensorTreeModel::onMetaDataChanged(const QString &sensorId, cons
 
         auto parentIndex = QModelIndex{};
         if (parentItem != d->rootItem) {
-            parentIndex = createIndex(parentItem->parent->children.indexOf(parentItem), 0, parentItem);
+            parentIndex = createIndex(parentItem->parent->indexOf(parentItem->segment), 0, parentItem);
         }
 
-        auto itemIndex = index(parentItem->children.indexOf(item), 0, parentIndex);
+        auto itemIndex = index(parentItem->indexOf(item->segment), 0, parentIndex);
         Q_EMIT dataChanged(itemIndex, itemIndex);
     }
 }
