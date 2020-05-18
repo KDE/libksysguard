@@ -96,6 +96,7 @@ DropArea {
                 }
                 QQC2.Label {
                     Layout.fillWidth: true
+                    elide: Text.ElideRight
                     text: sensor.name
                     Sensors.Sensor {
                         id: sensor
