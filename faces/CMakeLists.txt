@@ -4,7 +4,7 @@ add_subdirectory(import)
 add_subdirectory(facepackages)
 add_subdirectory(packagestructure)
 
-add_definitions(-DTRANSLATION_DOMAIN=\"ksysguard_faces\")
+add_definitions(-DTRANSLATION_DOMAIN=\"KSysGuardSensorFaces\")
 
 set(faces_LIB_SRCS
     SensorFaceController.cpp
