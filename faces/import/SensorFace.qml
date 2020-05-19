@@ -45,7 +45,7 @@ Faces.AbstractSensorFace {
         id: colorSource
         // TODO: Use Charts.MapProxySource once Plasma depends on KF 5.71 or higher.
         array: {
-            result = []
+            var result = []
             for (var sensor of root.controller.highPrioritySensorIds) {
                 result.push(root.controller.sensorColors[sensor])
             }
