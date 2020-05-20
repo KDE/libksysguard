@@ -426,7 +426,6 @@ void KSysGuard::SensorTreeModel::onMetaDataChanged(const QString &sensorId, cons
     if (!item) {
         d->addSensor(sensorId, info);
     } else {
-        item->name = info.name;
         d->sensorInfos[item] = info;
 
         auto parentItem = item->parent;
