@@ -34,7 +34,7 @@ public:
     static const QString SensorPath;
 };
 
-const QString SensorDaemonInterface::Private::SensorServiceName = QStringLiteral("org.kde.kstats");
+const QString SensorDaemonInterface::Private::SensorServiceName = QStringLiteral("org.kde.ksystemstats");
 const QString SensorDaemonInterface::Private::SensorPath = QStringLiteral("/");
 
 SensorDaemonInterface::SensorDaemonInterface(QObject *parent)
