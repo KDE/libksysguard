@@ -42,9 +42,9 @@ Faces.SensorFace {
         }
         QQC2.Label {
             id: label
-            visible: root.formFactor == PlasmaCore.Types.Planar
+            visible: root.formFactor == Faces.SensorFace.Planar
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-            text: oot.controller.title
+            text: root.controller.title
         }
     }
 }
