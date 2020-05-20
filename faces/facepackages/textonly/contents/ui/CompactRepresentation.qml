@@ -44,7 +44,8 @@ Faces.SensorFace {
             ChartsControls.LegendDelegate {
                 Layout.fillWidth: true
 
-                name: sensor.shortName
+                name: sensor.name
+                shortName: sensor.shortName
                 value: sensor.formattedValue
                 colorVisible: false
                 colorWidth: 0

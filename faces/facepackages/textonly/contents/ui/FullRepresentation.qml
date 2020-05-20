@@ -58,7 +58,8 @@ Faces.SensorFace {
                 Layout.fillWidth: true
                 Layout.minimumHeight: isTextOnly ? 0 : implicitHeight
 
-                name: sensor.shortName
+                name: sensor.name
+                shortName: sensor.shortName
                 value: sensor.formattedValue
                 colorVisible: !isTextOnly
                 color: !isTextOnly ? root.colorSource.map[modelData] : "transparent"

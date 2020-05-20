@@ -80,9 +80,14 @@ Charts.LineChart {
     }
 
     colorSource: root.colorSource
-    nameSource: Charts.ModelSource {
+    chart.nameSource: Charts.ModelSource {
+        roleName: "Name";
         model: sensorsModel
-        roleName: "ShortName"
+        indexColumns: true
+    }
+    chart.shortNameSource: Charts.ModelSource {
+        roleName: "ShortName";
+        model: sensorsModel
         indexColumns: true
     }
 }

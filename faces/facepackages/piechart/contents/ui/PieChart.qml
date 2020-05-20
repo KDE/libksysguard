@@ -68,6 +68,11 @@ ChartControls.PieChartControl {
         indexColumns: true
     }
     chart.nameSource: Charts.ModelSource {
+        roleName: "Name";
+        model: valueSources[0].model;
+        indexColumns: true
+    }
+    chart.shortNameSource: Charts.ModelSource {
         roleName: "ShortName";
         model: valueSources[0].model;
         indexColumns: true

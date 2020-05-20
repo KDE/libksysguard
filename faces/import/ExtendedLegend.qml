@@ -54,7 +54,8 @@ ChartsControls.Legend {
     Repeater {
         id: sensorsRepeater
         delegate: ChartsControls.LegendDelegate {
-            name: sensor.shortName
+            name: sensor.name
+            shortName: sensor.shortName
             value: sensor.formattedValue || ""
             colorVisible: false
 
