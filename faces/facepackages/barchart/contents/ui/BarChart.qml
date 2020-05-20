@@ -69,12 +69,12 @@ Charts.BarChart {
     }
 
     colorSource: root.colorSource
-    chart.nameSource: Charts.ModelSource {
+    nameSource: Charts.ModelSource {
         model: sensorsModel
         roleName: "Name"
         indexColumns: true
     }
-    chart.shortNameSource: Charts.ModelSource {
+    shortNameSource: Charts.ModelSource {
         roleName: "ShortName";
         model: sensorsModel
         indexColumns: true
