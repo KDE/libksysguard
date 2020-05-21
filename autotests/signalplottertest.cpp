@@ -341,6 +341,8 @@ void TestSignalPlotter::testNiceRangeCalculation()
 
 void TestSignalPlotter::testNegativeMinimumRange()
 {
+    QLocale().setDefault(QLocale(QLocale::English, QLocale::UnitedStates));
+
     s->setMinimumValue(-1000);
     s->setMaximumValue(4000);
     QCOMPARE(s->minimumValue(), -1000.0);
