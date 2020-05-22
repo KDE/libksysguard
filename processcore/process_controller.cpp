@@ -47,21 +47,16 @@ public:
     QVector<int> listToVector(const QVariantList &list);
 
     QWidget *widget;
-
-    // Note: This instance is only to have access to the platform-specific code
-    // for sending signals, setting priority etc. Therefore, it should never be
-    // used to access information about processes.
-    static std::unique_ptr<ProcessesLocal> localProcesses;
 };
 
-std::unique_ptr<ProcessesLocal> ProcessController::Private::localProcesses;
+// Note: This instance is only to have access to the platform-specific code
+// for sending signals, setting priority etc. Therefore, it should never be
+// used to access information about processes.
+Q_GLOBAL_STATIC(ProcessesLocal, s_localProcesses);
 
 ProcessController::ProcessController(QObject* parent)
     : QObject(parent), d(new Private)
 {
-    if (!d->localProcesses) {
-        d->localProcesses = std::make_unique<ProcessesLocal>();
-    }
 }
 
 KSysGuard::ProcessController::~ProcessController()
@@ -83,7 +78,7 @@ ProcessController::Result ProcessController::sendSignal(const QVector<int>& pids
 {
     qCDebug(LIBKSYSGUARD_PROCESSCORE) << "Sending signal" << signal << "to" << pids;
 
-    auto result = d->applyToPids(pids, [this, signal](int pid) { return d->localProcesses->sendSignal(pid, signal); });
+    auto result = d->applyToPids(pids, [this, signal](int pid) { return s_localProcesses->sendSignal(pid, signal); });
     if (result.unchanged.isEmpty()) {
         return result.resultCode;
     }
@@ -107,7 +102,7 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::sendSignal(co
 
 ProcessController::Result ProcessController::setPriority(const QVector<int>& pids, int priority)
 {
-    auto result = d->applyToPids(pids, [this, priority](int pid) { return d->localProcesses->setNiceness(pid, priority); });
+    auto result = d->applyToPids(pids, [this, priority](int pid) { return s_localProcesses->setNiceness(pid, priority); });
     if (result.unchanged.isEmpty()) {
         return result.resultCode;
     }
@@ -136,7 +131,7 @@ ProcessController::Result ProcessController::setCPUScheduler(const QVector<int>&
     }
 
     auto result = d->applyToPids(pids, [this, scheduler, priority](int pid) {
-        return d->localProcesses->setScheduler(pid, scheduler, priority);
+        return s_localProcesses->setScheduler(pid, scheduler, priority);
     });
     if (result.unchanged.isEmpty()) {
         return result.resultCode;
@@ -161,7 +156,7 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::setCPUSchedul
 
 ProcessController::Result ProcessController::setIOScheduler(const QVector<int>& pids, Process::IoPriorityClass priorityClass, int priority)
 {
-    if (!d->localProcesses->supportsIoNiceness()) {
+    if (!s_localProcesses->supportsIoNiceness()) {
         return Result::Unsupported;
     }
 
@@ -174,7 +169,7 @@ ProcessController::Result ProcessController::setIOScheduler(const QVector<int>& 
     }
 
     auto result = d->applyToPids(pids, [this, priorityClass, priority](int pid) {
-        return d->localProcesses->setIoNiceness(pid, priorityClass, priority);
+        return s_localProcesses->setIoNiceness(pid, priorityClass, priority);
     });
     if (result.unchanged.isEmpty()) {
         return result.resultCode;
@@ -221,12 +216,12 @@ ApplyResult KSysGuard::ProcessController::Private::applyToPids(const QVector<int
 {
     ApplyResult result;
 
-    localProcesses->errorCode = KSysGuard::Processes::Unknown;
+    s_localProcesses->errorCode = KSysGuard::Processes::Unknown;
 
     for (auto pid : pids) {
         auto success = function(pid);
         if (!success) {
-            switch (localProcesses->errorCode) {
+            switch (s_localProcesses->errorCode) {
             case KSysGuard::Processes::InsufficientPermissions:
             case KSysGuard::Processes::Unknown:
                 result.unchanged << pid;
