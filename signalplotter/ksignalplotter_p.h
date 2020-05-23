@@ -24,7 +24,9 @@
 //#define USE_QIMAGE
 
 // SVG support causes it to crash at the moment :(
+// (when re-enabling this remember to also link against plasma-framework)
 //#define SVG_SUPPORT
+
 // Use a separate child widget to draw the graph in
 #ifndef KSYSGUARD_KSIGNALPLOTTER_P_H
 #define KSYSGUARD_KSIGNALPLOTTER_P_H

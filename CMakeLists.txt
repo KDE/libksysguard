@@ -46,14 +46,6 @@ set_package_properties(Qt5WebChannel PROPERTIES
 
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package Declarative NewStuff)
 
-find_package(KF5 OPTIONAL_COMPONENTS Plasma)
-set_package_properties(KF5Plasma PROPERTIES
-                       URL "https://cgit.kde.org/plasma-framework.git/"
-                       DESCRIPTION "The library of the plasma project"
-                       TYPE OPTIONAL
-                       PURPOSE "Used by signalplotter to use Plasma themes"
-                      )
-
 find_package(ZLIB REQUIRED)
 set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"
                        URL "http://www.zlib.net"
@@ -113,10 +105,7 @@ add_subdirectory( processcore )
 add_subdirectory( processui )
 add_subdirectory( sensors )
 add_subdirectory( faces )
-
-if (KF5Plasma_FOUND)
-    add_subdirectory( signalplotter )
-endif()
+add_subdirectory( signalplotter )
 add_subdirectory( ksgrd )
 
 if(BUILD_TESTING)

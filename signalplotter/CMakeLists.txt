@@ -16,7 +16,6 @@ target_link_libraries(ksignalplotter
         KF5::IconThemes
     PRIVATE
         KSysGuard::ProcessCore
-        KF5::Plasma
 )
 
 set_target_properties(ksignalplotter

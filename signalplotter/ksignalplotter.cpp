@@ -42,7 +42,6 @@
 #ifdef GRAPHICS_SIGNAL_PLOTTER
 #include <QGraphicsSceneResizeEvent>
 #include <QStyleOptionGraphicsItem>
-#include <Plasma/Theme>
 #endif
 
 #include <klocalizedstring.h>
@@ -52,6 +51,7 @@
 
 #ifdef SVG_SUPPORT
 #include <Plasma/Svg>
+#include <Plasma/Theme>
 #endif
 
 
