@@ -333,5 +333,3 @@ QVariant ProcessDataModel::headerData(int section, Qt::Orientation orientation, 
 
     return QVariant();
 }
-
-#include "process_data_model.moc"
