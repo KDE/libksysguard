@@ -38,7 +38,6 @@ struct Q_DECL_HIDDEN SensorTreeItem
 {
     SensorTreeItem *parent = nullptr;
     QString segment;
-    QString name;
     QMap<QString, SensorTreeItem *> children;
 
     inline int indexOf(const QString &segment)
@@ -117,7 +116,6 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
             SensorTreeItem *newItem = new SensorTreeItem();
             newItem->parent = item;
             newItem->segment = segment;
-            newItem->name = segment;
 
             const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex() : q->createIndex(item->parent->indexOf(item->segment), 0, item);
 
@@ -271,12 +269,7 @@ QVariant SensorTreeModel::data(const QModelIndex &index, int role) const
             return info.name;
         }
 
-        const QString &name = item->name;
-        if (name.isEmpty()) {
-            return i18n("EMPTY");
-        } else {
-            return name;
-        }
+        return item->segment;
     // Only leaf nodes are valid sensors
     } else if (role == SensorId) {
         if (rowCount(index)) {
