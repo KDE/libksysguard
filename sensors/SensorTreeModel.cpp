@@ -119,13 +119,7 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
 
             const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex() : q->createIndex(item->parent->indexOf(item->segment), 0, item);
 
-            // We need the new index to be able to use beginInsertRows()
-            // but if we actually insert the new item, rowCount() will be off.
-            // So instead, insert the new item, find its index and then remove it
-            // again. That way we have both.
-            item->children.insert(segment, newItem);
-            auto index = item->indexOf(segment);
-            item->children.remove(segment);
+            auto index = std::distance(item->children.begin(), item->children.upperBound(segment));
 
             q->beginInsertRows(parentIndex, index, index);
             item->children.insert(segment, newItem);
