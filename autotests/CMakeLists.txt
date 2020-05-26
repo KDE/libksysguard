@@ -34,6 +34,7 @@ ecm_add_test(chronotest.cpp
 
 ecm_add_test(formattertest.cpp LINK_LIBRARIES Qt5::Test KSysGuard::Formatter)
 ecm_add_test(sensortreemodeltest.cpp LINK_LIBRARIES Qt5::Test Qt5::DBus KSysGuard::Sensors)
+ecm_add_test(processdatamodeltest.cpp LINK_LIBRARIES Qt5::Test KSysGuard::ProcessCore)
 
 # set( ksysguarddtest_SRCS ksysguarddtest.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorManager.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorSocketAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorShellAgent.cpp)
 #
