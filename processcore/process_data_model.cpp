@@ -73,7 +73,7 @@ ProcessDataModel::Private::Private(ProcessDataModel *_q)
         beginInsertRow(process);
     });
     connect(m_processes, &KSysGuard::Processes::endAddProcess, q, [this]() {
-        endRemoveRow();
+        endInsertRow();
     });
     connect(m_processes, &KSysGuard::Processes::beginRemoveProcess, q, [this](KSysGuard::Process *process) {
         beginRemoveRow(process);

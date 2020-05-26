@@ -585,7 +585,9 @@ void SensorFaceController::loadPreset(const QString &preset)
             KSysGuard::SensorQuery query{id.toString()};
             query.execute();
             query.waitForFinished();
-            for (const auto &fitleredId : query.sensorIds()) {
+            auto ids = query.sensorIds();
+            std::stable_sort(ids.begin(), ids.end());
+            for (const auto &fitleredId : qAsConst(ids)) {
                 sensors.append(QJsonValue(fitleredId));
             }
         }

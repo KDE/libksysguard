@@ -31,8 +31,6 @@ import org.kde.ksysguard.faces 1.0 as Faces
 import org.kde.quickcharts 1.0 as Charts
 import org.kde.quickcharts.controls 1.0 as ChartControls
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-
 Faces.SensorFace {
     id: root
     contentItem: ColumnLayout {
