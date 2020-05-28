@@ -42,9 +42,31 @@ class Q_DECL_EXPORT ProcessDataModel : public QAbstractItemModel
 {
     Q_OBJECT
 
+    /**
+     * A list of ids of all available attributes.
+     */
     Q_PROPERTY(QStringList availableAttributes READ availableAttributes CONSTANT)
+    /**
+     * A list of attributes that should be displayed by this model.
+     *
+     * Each attribute will correspond to a column, assuming the attribute exists.
+     * \property availableAttributes provides a list of all attributes that are
+     * available.
+     *
+     * By default, this is empty and thus nothing will be shown.
+     */
     Q_PROPERTY(QStringList enabledAttributes READ enabledAttributes WRITE setEnabledAttributes NOTIFY enabledAttributesChanged)
+    /**
+     * Provides an instance of a model that lists all available attributes for this model.
+     *
+     * It provides extra information on top of the list of ids in availableAttributes.
+     *
+     * \sa ProcessAttributeModel
+     */
     Q_PROPERTY(QAbstractItemModel *attributesModel READ attributesModel CONSTANT)
+    /**
+     * Should this model be updated or not. Defaults to true.
+     */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
 public:
