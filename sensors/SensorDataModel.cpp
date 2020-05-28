@@ -51,7 +51,7 @@ public:
     bool usedByQml = false;
     bool componentComplete = false;
     bool loaded = false;
-    bool enabled = false;
+    bool enabled = true;
 
 private:
     SensorDataModel *q;
