@@ -45,6 +45,7 @@ class Q_DECL_EXPORT ProcessDataModel : public QAbstractItemModel
     Q_PROPERTY(QStringList availableAttributes READ availableAttributes CONSTANT)
     Q_PROPERTY(QStringList enabledAttributes READ enabledAttributes WRITE setEnabledAttributes NOTIFY enabledAttributesChanged)
     Q_PROPERTY(QAbstractItemModel *attributesModel READ attributesModel CONSTANT)
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
 public:
     enum AdditionalRoles {
@@ -87,6 +88,10 @@ public:
      * The default value is empty
      */
     void setEnabledAttributes(const QStringList &enabledAttributes);
+
+    bool enabled() const;
+    void setEnabled(bool newEnabled);
+    Q_SIGNAL void enabledChanged();
 
     QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

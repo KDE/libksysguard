@@ -205,6 +205,26 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
     emit enabledAttributesChanged();
 }
 
+bool ProcessDataModel::enabled() const
+{
+    return d->m_timer->isActive();
+}
+
+void ProcessDataModel::setEnabled(bool newEnabled)
+{
+    if (newEnabled == d->m_timer->isActive()) {
+        return;
+    }
+
+    if (newEnabled) {
+        d->m_timer->start();
+    } else {
+        d->m_timer->stop();
+    }
+
+    Q_EMIT enabledChanged();
+}
+
 QModelIndex ProcessDataModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (row < 0) {
