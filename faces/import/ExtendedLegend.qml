@@ -46,7 +46,7 @@ ChartsControls.Legend {
     spacing: Kirigami.Units.smallSpacing
 
     valueVisible: true
-    valueWidth: units.gridUnit * 2
+    valueWidth: Kirigami.Units.gridUnit * 2
     formatValue: function(input, index) {
         if (!sourceModel) {
             return input
@@ -63,7 +63,7 @@ ChartsControls.Legend {
             colorVisible: false
 
             layoutWidth: legend.width
-            valueWidth: units.gridUnit * 2
+            valueWidth: Kirigami.Units.gridUnit * 2
 
             Sensor {
                 id: sensor
