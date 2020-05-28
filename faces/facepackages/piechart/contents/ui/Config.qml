@@ -45,13 +45,13 @@ Kirigami.FormLayout {
         id: fromAngleSpin
         Kirigami.FormData.label: i18n("Start from Angle")
         from: -180
-        to: 180
+        to: 360
         editable: true
         textFromValue: function(value, locale) {
-            return i18nc("angle degrees", "%1°", value + 180);
+            return i18nc("angle degrees", "%1°", value);
         }
         valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text.replace(i18nc("angle degrees", "°"), "")) - 180;
+            return Number.fromLocaleString(locale, text.replace(i18nc("angle degrees", "°"), ""));
         }
     }
     QQC2.SpinBox {
