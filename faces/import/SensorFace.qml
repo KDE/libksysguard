@@ -30,6 +30,10 @@ import org.kde.ksysguard.faces 1.0 as Faces
 
 Faces.AbstractSensorFace {
     id: root
+
+    property list<Kirigami.Action> primaryActions
+    property list<Kirigami.Action> secondaryActions
+
     implicitWidth: contentItem.implicitWidth
     implicitHeight: contentItem.implicitHeight
     Layout.minimumWidth: contentItem.Layout.minimumWidth
