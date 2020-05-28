@@ -54,6 +54,10 @@ class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlPa
      * The maximum value of all sensors' maximum property.
      */
     Q_PROPERTY(qreal maximum READ maximum NOTIFY sensorMetaDataChanged)
+    /**
+     * Should this model be updated or not.
+     */
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
 public:
     enum AdditionalRoles {
@@ -85,6 +89,10 @@ public:
     void setSensors(const QStringList &sensorIds);
     Q_SIGNAL void sensorsChanged() const;
     Q_SIGNAL void sensorMetaDataChanged();
+
+    bool enabled() const;
+    void setEnabled(bool newEnabled);
+    Q_SIGNAL void enabledChanged();
 
     qreal minimum() const;
     qreal maximum() const;

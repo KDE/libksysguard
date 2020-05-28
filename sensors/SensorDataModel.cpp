@@ -51,6 +51,7 @@ public:
     bool usedByQml = false;
     bool componentComplete = false;
     bool loaded = false;
+    bool enabled = false;
 
 private:
     SensorDataModel *q;
@@ -229,6 +230,29 @@ void SensorDataModel::setSensors(const QStringList &sensorIds)
     Q_EMIT sensorsChanged();
 }
 
+bool SensorDataModel::enabled() const
+{
+    return d->enabled;
+}
+
+void SensorDataModel::setEnabled(bool newEnabled)
+{
+    if (newEnabled == d->enabled) {
+        return;
+    }
+
+    d->enabled = newEnabled;
+    if (d->enabled) {
+        SensorDaemonInterface::instance()->subscribe(d->sensorInfos.keys());
+        SensorDaemonInterface::instance()->requestMetaData(d->sensorInfos.keys());
+    } else {
+        SensorDaemonInterface::instance()->unsubscribe(d->sensorInfos.keys());
+    }
+
+    Q_EMIT enabledChanged();
+}
+
+
 void SensorDataModel::addSensor(const QString &sensorId)
 {
     d->addSensor(sensorId);
@@ -289,16 +313,28 @@ void SensorDataModel::Private::removeSensor(const QString &id)
 
 void SensorDataModel::onSensorAdded(const QString &sensorId)
 {
+    if (!d->enabled) {
+        return;
+    }
+
     d->addSensor(sensorId);
 }
 
 void SensorDataModel::onSensorRemoved(const QString &sensorId)
 {
+    if (!d->enabled) {
+        return;
+    }
+
     d->removeSensor(sensorId);
 }
 
 void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInfo &info)
 {
+    if (!d->enabled) {
+        return;
+    }
+
     auto column = d->sensors.indexOf(sensorId);
     if (column == -1) {
         return;
@@ -325,7 +361,7 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
 
 void SensorDataModel::onValueChanged(const QString &sensorId, const QVariant &value)
 {
-    if (!d->sensorData.contains(sensorId)) {
+    if (!d->sensorData.contains(sensorId) || !d->enabled) {
         return;
     }
 
