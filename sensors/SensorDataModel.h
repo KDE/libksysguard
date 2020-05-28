@@ -55,7 +55,7 @@ class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlPa
      */
     Q_PROPERTY(qreal maximum READ maximum NOTIFY sensorMetaDataChanged)
     /**
-     * Should this model be updated or not.
+     * Should this model be updated or not. Defaults to true.
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
