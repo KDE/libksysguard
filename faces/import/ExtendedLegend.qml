@@ -48,6 +48,10 @@ ChartsControls.Legend {
     valueVisible: true
     valueWidth: units.gridUnit * 2
     formatValue: function(input, index) {
+        if (!sourceModel) {
+            return input
+        }
+
         return Formatter.formatValueShowNull(input, sourceModel.data(sourceModel.index(0, index), SensorDataModel.Unit))
     }
 
