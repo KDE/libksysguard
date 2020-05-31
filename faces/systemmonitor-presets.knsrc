@@ -1,8 +1,11 @@
 [KNewStuff3]
 Name=System monitor Sensor Presets
 Name[ca]=Valors predefinits de sensor del monitor del sistema
+Name[es]=Ajustes automáticos del sensor del monitor del sistema
 Name[et]=Süsteemi jälgija sensori valmisvalikud
 Name[nl]=Voorinstellingen van systeemmonitorsensor
+Name[sk]=Predvoľby senzoru monitorovania systému
+Name[sv]=Förinställningar för systemövervakningssensorer
 Name[uk]=Набори налаштувань датчика нагляду за системою
 Name[x-test]=xxSystem monitor Sensor Presetsxx
 Name[zh_TW]=系統監視器 感測器預設
