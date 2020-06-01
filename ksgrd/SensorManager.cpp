@@ -144,6 +144,7 @@ void SensorManager::retranslate()
   mDict.insert( QStringLiteral( "carrierTotal" ), i18nc( "@item sensor description ('carrier' is a type of network signal)", "Carrier Losses" ) );
   mDict.insert( QStringLiteral( "collisionsTotal" ), i18n( "Collisions" ) );
 
+  /* Hardware monitors */
   mDict.insert( QStringLiteral( "sockets" ), i18n( "Sockets" ) );
   mDict.insert( QStringLiteral( "count" ), i18n( "Total Number" ) );
   mDict.insert( QStringLiteral( "list" ), i18n( "Table" ) );
@@ -194,13 +195,25 @@ void SensorManager::retranslate()
   mDict.insert( QStringLiteral( "DeviceNumber" ), i18n( "Number of Devices" ) );
   mDict.insert( QStringLiteral( "ResyncingPercent" ), i18n( "Resyncing Percent" ) );
   mDict.insert( QStringLiteral( "DiskInfo" ), i18n( "Disk Information" ) );
+  mDict.insert( QStringLiteral( "CPUTIN" ), i18n( "CPU Temperature" ) );
+  mDict.insert( QStringLiteral( "SYSTIN" ), i18n( "Motherboard Temperature" ) );
+  mDict.insert( QStringLiteral( "AUXTIN" ), i18n( "Power Supply Temperature" ) );
+
+  for ( int i = 0; i < 5; i++ ) {
+    mDict.insert( QLatin1String( "AUXTIN" ) + QString::number( i ), i18n( "Extra Temperature Sensor %1", i+1 ) );
+  }
+
+  for ( int i = 0; i < 3; i++ ) {
+    mDict.insert( QLatin1String( "PECI Agent " ) + QString::number( i ), i18n( "PECI Temperature Sensor %1", i+1 ) );
+    mDict.insert( QLatin1String( "PECI Agent %1 Calibration" ).arg( i ), i18n( "PECI Temperature Calibration %1", i+1 ) );
+  }
 
   for ( int i = 0; i < 32; i++ ) {
     mDict.insert( QLatin1String( "cpu" ) + QString::number( i ), i18n( "CPU %1", i+1 ) );
     mDict.insert( QLatin1String( "disk" ) + QString::number( i ), i18n( "Disk %1", i+1 ) );
   }
 
-  for ( int i = 1; i < 6; i++) {
+  for ( int i = 1; i < 10; i++) {
     mDict.insert( QLatin1String( "batt" ) + QString::number( i ), i18n( "Battery %1", i ) );
     mDict.insert( QLatin1String( "fan" ) + QString::number( i ), i18n( "Fan %1", i ) );
     mDict.insert( QLatin1String( "temp" ) + QString::number( i ), i18n( "Temperature %1", i ) );
