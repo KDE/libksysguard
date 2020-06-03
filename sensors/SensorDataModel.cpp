@@ -372,28 +372,18 @@ void SensorDataModel::onValueChanged(const QString &sensorId, const QVariant &va
 
 void SensorDataModel::Private::sensorsChanged()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    auto newSet = QSet<QString>{requestedSensors.begin(), requestedSensors.end()};
-    auto currentSet = QSet<QString>{sensors.begin(), sensors.end()};
-#else
-    auto newSet = requestedSensors.toSet();
-    auto currentSet = sensors.toSet();
-#endif
+    q->beginResetModel();
 
-    const auto addedSensors = newSet - currentSet;
-    const auto removedSensors = currentSet - newSet;
+    SensorDaemonInterface::instance()->unsubscribe(sensors);
 
-    sensors.append(addedSensors.values());
+    sensors.clear();
+    sensorData.clear();
+    sensorInfos.clear();
 
-    SensorDaemonInterface::instance()->subscribe(addedSensors.values());
-    SensorDaemonInterface::instance()->requestMetaData(addedSensors.values());
+    sensors = requestedSensors;
 
-    bool itemsRemoved = false;
-    for (auto sensor : removedSensors) {
-        removeSensor(sensor);
-        itemsRemoved = true;
-    }
-    if (itemsRemoved) {
-        emit q->sensorMetaDataChanged();
-    }
+    SensorDaemonInterface::instance()->subscribe(requestedSensors);
+    SensorDaemonInterface::instance()->requestMetaData(requestedSensors);
+
+    q->endResetModel();
 }
