@@ -68,7 +68,7 @@ Faces.AbstractSensorFace {
                     savedColors[root.controller.highPrioritySensorIds[i]] = colors[i];
                 } else {
                     // Use the darker trick to make Qt validate the scring as a valid color;
-                    var currentColor = Qt.darker(savedColors[i], 1);
+                    var currentColor = Qt.darker(savedColors[root.controller.highPrioritySensorIds[i]], 1);
                     if (!currentColor) {
                         savedColors[root.controller.highPrioritySensorIds[i]] = colors[i];
                     } else {
