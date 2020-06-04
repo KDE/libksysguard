@@ -3,6 +3,9 @@ add_definitions(-DTRANSLATION_DOMAIN=\"processcore\")
 ########### next target ###############
 
 set(ksysguard_LIB_SRCS
+   application.cpp
+   applications.cpp
+   applications_data_model.cpp
    extended_process_list.cpp
    processes.cpp
    process.cpp
@@ -29,6 +32,7 @@ target_link_libraries(processcore
     KF5::I18n
     KF5::AuthCore
     KF5::CoreAddons
+    KF5::Service
     ${ZLIB_LIBRARIES}
 )
 

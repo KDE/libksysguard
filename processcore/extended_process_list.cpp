@@ -24,6 +24,7 @@
 #include <KPluginMetaData>
 #include <KUser>
 
+#include "application.h"
 #include "process.h"
 #include "process_attribute.h"
 #include "process_data_provider.h"
