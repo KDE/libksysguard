@@ -19,6 +19,7 @@
 
 #include "process_attribute.h"
 #include "processes.h"
+#include "cgroup.h"
 
 using namespace KSysGuard;
 
@@ -161,4 +162,12 @@ void ProcessAttribute::clearData(KSysGuard::Process *process)
 {
     d->m_data.remove(process);
     emit dataChanged(process);
+}
+
+QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup) const
+{
+    qreal total = std::accumulate(cgroup->processes().constBegin(), cgroup->processes().constEnd(), 0.0, [this](qreal total, KSysGuard::Process *process) {
+        return total + data(process).toDouble();
+    });
+    return QVariant(total);
 }

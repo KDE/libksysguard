@@ -26,6 +26,7 @@
 namespace KSysGuard {
 
 class Process;
+class CGroup;
 
 class Q_DECL_EXPORT ProcessAttribute : public QObject
 {
@@ -107,6 +108,8 @@ public:
      * Remove an attribute from our local cache
      */
     void clearData(KSysGuard::Process *process);
+
+    virtual QVariant cgroupData(KSysGuard::CGroup *cgroup) const;
 
 Q_SIGNALS:
     void dataChanged(KSysGuard::Process *process);
