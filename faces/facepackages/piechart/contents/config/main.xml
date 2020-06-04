@@ -10,7 +10,7 @@
             <default>-180</default>
         </entry>
         <entry name="toAngle" type="Int">
-            <default>180</default>
+            <default>360</default>
         </entry>
         <entry name="smoothEnds" type="Bool">
             <default>true</default>
