@@ -38,7 +38,7 @@ ChartsControls.Legend {
     property var sourceModel
     property var colorSource
 
-    flow: GridLayout.TopToBottom
+    flow: parent.width > parent.height * 1.5 ? GridLayout.LeftToRight : GridLayout.TopToBottom
 
     Layout.maximumHeight: implicitHeight
     Layout.maximumWidth: parent.width
