@@ -49,7 +49,7 @@ find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSys
 
 find_package(ZLIB REQUIRED)
 set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"
-                       URL "http://www.zlib.net"
+                       URL "https://zlib.net/"
                        TYPE REQUIRED
                       )
 
