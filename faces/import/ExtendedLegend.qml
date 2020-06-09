@@ -43,7 +43,7 @@ ChartsControls.Legend {
     Layout.maximumHeight: implicitHeight
     Layout.maximumWidth: parent.width
 
-    spacing: Kirigami.Units.smallSpacing
+    spacing: flow == GridLayout.TopToBottom ? Kirigami.Units.smallSpacing : Kirigami.Units.gridUnit
 
     valueVisible: true
     valueWidth: Kirigami.Units.gridUnit * 2
