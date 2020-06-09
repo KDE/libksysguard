@@ -331,7 +331,7 @@ void SensorFaceController::setHighPrioritySensorIds(const QJsonArray &highPriori
 {
     QJsonArray resolvedSensors = d->resolveSensors(highPrioritySensorIds);
 
-    if (resolvedSensors == SensorFaceController::highPrioritySensorIds()) {
+    if (resolvedSensors == d->highPrioritySensorIds) {
         return;
     }
     d->highPrioritySensorIds = resolvedSensors;
@@ -376,8 +376,7 @@ QJsonArray SensorFaceController::lowPrioritySensorIds() const
 void SensorFaceController::setLowPrioritySensorIds(const QJsonArray &lowPrioritySensorIds)
 {
     QJsonArray resolvedSensors = d->resolveSensors(lowPrioritySensorIds);
-
-    if (d->lowPrioritySensorIds == SensorFaceController::lowPrioritySensorIds()) {
+    if (resolvedSensors == d->lowPrioritySensorIds) {
         return;
     }
     d->lowPrioritySensorIds = lowPrioritySensorIds;
