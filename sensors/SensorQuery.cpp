@@ -125,7 +125,7 @@ void KSysGuard::SensorQuery::Private::updateResult(const QDBusPendingReply<Senso
         return;
     }
 
-    auto regexp = QRegularExpression{path};
+    auto regexp = QRegularExpression{QStringLiteral("^") % path % QStringLiteral("$")};
 
     const auto sensorIds = reply.value().keys();
     for (auto id : sensorIds) {
