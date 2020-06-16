@@ -274,6 +274,8 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
         d->sensorsGroup.sync();
     });
 
+    d->contextObj = new KLocalizedContext(this);
+
     d->totalSensors = d->resolveSensors(QJsonDocument::fromJson(d->sensorsGroup.readEntry("totalSensors", QString()).toUtf8()).array());
     d->lowPrioritySensorIds = d->resolveSensors(QJsonDocument::fromJson(d->sensorsGroup.readEntry("lowPrioritySensorIds", QString()).toUtf8()).array());
     d->highPrioritySensorIds = d->resolveSensors(QJsonDocument::fromJson(d->sensorsGroup.readEntry("highPrioritySensorIds", QString()).toUtf8()).array());
@@ -431,7 +433,6 @@ void SensorFaceController::setFaceId(const QString &face)
 
     d->facePackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("KSysguard/SensorFace"), face);
 
-    d->contextObj->deleteLater();
     if (d->faceConfiguration) {
         d->faceConfiguration->deleteLater();
         d->faceConfiguration = nullptr;
@@ -446,7 +447,6 @@ void SensorFaceController::setFaceId(const QString &face)
         return;
     }
 
-    d->contextObj = new KLocalizedContext(d->engine);
     d->contextObj->setTranslationDomain(QLatin1String("ksysguard_face_") + face);
 
     //TODO: should be in a different config file rather than metadata
