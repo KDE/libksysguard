@@ -77,6 +77,15 @@ ColumnLayout {
         lowPrioritySensorsView.load();
     }
 
+    // When the ui is open in systemsettings and the page is switched around,
+    // it gets reparented to null. use this to reload its config every time the
+    // page is current again. So any non saved change to the sensor list gets forgotten.
+    onParentChanged: {
+        if (parent) {
+            loadConfig()
+        }
+    }
+
     Component.onCompleted: loadConfig()
 
     Connections {
