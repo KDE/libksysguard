@@ -11,10 +11,12 @@ Name[ko]=시스템 모니터 센서 사전 설정
 Name[lt]=Sistemos prižiūryklės jutiklio išankstinės nuostatos
 Name[nl]=Voorinstellingen van systeemmonitorsensor
 Name[pt]=Predefinições dos Sensores de Monitorização do Sistema
+Name[pt_BR]=Predefinições do sensor do monitor do sistema
 Name[sk]=Predvoľby senzoru monitorovania systému
 Name[sl]=Sistemski nadzornik prednastavitev senzorjev
 Name[sv]=Förinställningar för systemövervakningssensorer
 Name[uk]=Набори налаштувань датчика нагляду за системою
+Name[x-test]=xxSystem monitor Sensor Presetsxx
 Name[zh_TW]=系統監視器 感測器預設
 
 Categories=Plasma Charts Preset
