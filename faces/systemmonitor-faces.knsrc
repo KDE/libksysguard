@@ -10,9 +10,11 @@ Name[it]=Stili di visualizzazione dei sensori di monitoraggio del sistema
 Name[ko]=시스템 모니터 센서 표시 스타일
 Name[nl]=Stijl van tonen van systeemmonitorsensor
 Name[pt]=Estilos de Apresentação do Sensor de Monitorização do Sistema
+Name[pt_BR]=Estilos de exibição do sensor do monitor do sistema
 Name[sk]=Štýly zobrazenia senzoru monitorovania systému
 Name[sv]=Visningsstilar för systemövervakningssensorer
 Name[uk]=Стилі показу датчика нагляду за системою
+Name[x-test]=xxSystem monitor Sensor Display Stylesxx
 Name[zh_TW]=系統監視器 感測器顯示樣式
 
 Categories=Plasma Charts Face
