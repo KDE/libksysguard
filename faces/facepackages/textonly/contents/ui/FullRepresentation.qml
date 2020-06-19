@@ -35,6 +35,7 @@ Faces.SensorFace {
 
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8
+    Layout.preferredWidth: titleMetrics.width + leftPadding + rightPadding
 
     contentItem: ColumnLayout {
 
@@ -45,6 +46,11 @@ Faces.SensorFace {
             text: root.controller.title
             visible: text.length > 0
             level: 2
+            TextMetrics {
+                id: titleMetrics
+                font: heading.font
+                text: heading.text
+            }
         }
 
         Item { Layout.fillWidth: true; Layout.fillHeight: true }

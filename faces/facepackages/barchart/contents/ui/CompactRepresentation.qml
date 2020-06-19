@@ -34,8 +34,10 @@ import org.kde.quickcharts.controls 1.0 as ChartControls
 
 Faces.SensorFace {
     id: root
+    Layout.minimumWidth: formFactor == Faces.SensorFace.Horizontal ? Kirigami.Units.gridUnit / 2 * barChart.barCount : 1
     contentItem: ColumnLayout {
         BarChart {
+            id: barChart
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
