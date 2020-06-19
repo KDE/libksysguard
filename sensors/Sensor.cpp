@@ -140,7 +140,7 @@ QString Sensor::shortName() const
         return d->sensorInfo.name;
     }
 
-    return d->sensorInfo.name;
+    return d->sensorInfo.shortName;
 }
 
 QString Sensor::description() const
