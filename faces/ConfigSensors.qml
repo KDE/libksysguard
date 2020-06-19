@@ -234,8 +234,9 @@ ColumnLayout {
                         filterCaseSensitivity: Qt.CaseInsensitive
                         filterString: searchQuery.text
                         sourceModel: KItemModels.KSortFilterProxyModel {
-                            filterRole: "SensorId"
-                            filterRowCallback: function(row, value) {
+                            filterRowCallback: function(source_row, source_parent) {
+                                //filter only items which were leaf nodes from before we squashed everything
+                                var value = sourceModel.data(sourceModel.index(source_row, 0, source_parent), Sensors.SensorTreeModel.SensorId)
                                 return (value && value.length)
                             }
                             sourceModel: KItemModels.KDescendantsProxyModel {

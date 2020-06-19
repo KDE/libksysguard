@@ -382,9 +382,11 @@ void SensorTreeModel::init()
     connect(query, &SensorQuery::finished, [query, this]() {
         query->deleteLater();
         const auto result = query->result();
+        beginResetModel();
         for (auto pair : result) {
             d->addSensor(pair.first, pair.second);
         }
+        endResetModel();
     });
     query->execute();
 }
