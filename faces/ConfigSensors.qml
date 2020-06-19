@@ -77,6 +77,15 @@ ColumnLayout {
         lowPrioritySensorsView.load();
     }
 
+    // When the ui is open in systemsettings and the page is switched around,
+    // it gets reparented to null. use this to reload its config every time the
+    // page is current again. So any non saved change to the sensor list gets forgotten.
+    onParentChanged: {
+        if (parent) {
+            loadConfig()
+        }
+    }
+
     Component.onCompleted: loadConfig()
 
     Connections {
@@ -225,8 +234,9 @@ ColumnLayout {
                         filterCaseSensitivity: Qt.CaseInsensitive
                         filterString: searchQuery.text
                         sourceModel: KItemModels.KSortFilterProxyModel {
-                            filterRole: "SensorId"
-                            filterRowCallback: function(row, value) {
+                            filterRowCallback: function(source_row, source_parent) {
+                                //filter only items which were leaf nodes from before we squashed everything
+                                var value = sourceModel.data(sourceModel.index(source_row, 0, source_parent), Sensors.SensorTreeModel.SensorId)
                                 return (value && value.length)
                             }
                             sourceModel: KItemModels.KDescendantsProxyModel {

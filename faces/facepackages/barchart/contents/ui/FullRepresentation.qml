@@ -36,16 +36,23 @@ Faces.SensorFace {
     readonly property bool showLegend: controller.faceConfiguration.showLegend
 
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
-    Layout.minimumWidth: Kirigami.Units.gridUnit * 8
+    Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * compactRepresentation.barCount, Kirigami.Units.gridUnit * 8)
+    Layout.preferredWidth: titleMetrics.width + leftPadding + rightPadding
 
     contentItem: ColumnLayout {
         Kirigami.Heading {
+            id: heading
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             text: root.controller.title
             visible: text.length > 0
             level: 2
+            TextMetrics {
+                id: titleMetrics
+                font: heading.font
+                text: heading.text
+            }
         }
 
         BarChart {
@@ -61,6 +68,7 @@ Faces.SensorFace {
             Layout.fillWidth: root.width < implicitWidth * 1.5
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
             Layout.fillHeight: true
+            Layout.minimumHeight: root.formFactor !== Faces.SensorFace.Planar ? implicitHeight : -1
             visible: root.showLegend
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null

@@ -35,11 +35,10 @@ Faces.SensorFace {
     id: root
     readonly property bool showLegend: controller.faceConfiguration.showLegend
 
-    contentItem: ColumnLayout {
-        // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 8
-        Layout.preferredWidth: Kirigami.Units.gridUnit * 8
+    Layout.minimumWidth: Kirigami.Units.gridUnit * 8
+    Layout.preferredWidth: titleMetrics.width + leftPadding + rightPadding
 
+    contentItem: ColumnLayout {
         spacing: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
         Kirigami.Heading {
             Layout.fillWidth: true
@@ -48,6 +47,11 @@ Faces.SensorFace {
             text: root.controller.title
             visible: text.length > 0
             level: 2
+            TextMetrics {
+                id: titleMetrics
+                font: heading.font
+                text: heading.text
+            }
         }
 
         PieChart {
@@ -63,6 +67,7 @@ Faces.SensorFace {
             Layout.fillWidth: root.width < implicitWidth * 1.5
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
             Layout.fillHeight: true
+            Layout.minimumHeight: root.formFactor !== Faces.SensorFace.Planar ? implicitHeight : -1
             visible: root.showLegend
             chart: compactRepresentation.chart
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
