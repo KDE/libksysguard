@@ -58,7 +58,8 @@ ChartControls.PieChartControl {
 
     chart.backgroundColor: Qt.rgba(0.0, 0.0, 0.0, 0.2)
 
-    text: sensor.formattedValue
+    text: root.controller.totalSensors.length == 1 ? sensor.formattedValue : ""
+
     valueSources: Charts.ModelSource {
         model: Sensors.SensorDataModel {
             id: sensorsModel
@@ -82,6 +83,15 @@ ChartControls.PieChartControl {
     Sensors.Sensor {
         id: sensor
         sensorId: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
+    }
+
+    UsedTotalDisplay {
+        anchors.centerIn: parent
+
+        visible: root.controller.totalSensors.length == 2
+
+        usedSensor: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
+        totalSensor: root.controller.totalSensors.length > 1 ? root.controller.totalSensors[1] : ""
     }
 }
 
