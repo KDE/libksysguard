@@ -36,11 +36,12 @@ Faces.SensorFace {
     readonly property bool showLegend: controller.faceConfiguration.showLegend
 
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8
-    Layout.preferredWidth: titleMetrics.width + leftPadding + rightPadding
+    Layout.preferredWidth: titleMetrics.width
 
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
         Kirigami.Heading {
+            id: heading
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight

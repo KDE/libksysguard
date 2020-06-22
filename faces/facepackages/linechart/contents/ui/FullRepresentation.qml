@@ -34,10 +34,11 @@ Faces.SensorFace {
     readonly property bool showLegend: controller.faceConfiguration.showLegend
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8
-    Layout.preferredWidth: titleMetrics.width + leftPadding + rightPadding
+    Layout.preferredWidth: titleMetrics.width
 
     contentItem: ColumnLayout {
         Kirigami.Heading {
+            id: heading
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
