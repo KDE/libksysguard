@@ -41,6 +41,7 @@ Faces.SensorFace {
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
         Kirigami.Heading {
+            id: heading
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
