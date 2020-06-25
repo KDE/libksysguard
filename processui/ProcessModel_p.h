@@ -182,7 +182,7 @@ class ProcessModelPrivate : public QObject
         long long mMemTotal; ///< the total amount of physical memory in kb in the machine.  We can used this to determine the percentage of memory an app is using
         int mNumProcessorCores;  ///< The number of (enabled) processor cores in the this machine
 
-        KSysGuard::ExtendedProcesses *mProcesses;  ///< The processes instance
+        QSharedPointer<KSysGuard::ExtendedProcesses> mProcesses;  ///< The processes instance
 
         QPixmap mBlankPixmap; ///< Used to pad out process names which don't have an icon
 

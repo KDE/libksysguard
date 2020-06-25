@@ -378,9 +378,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     auto extraAttributes = d->mModel.extraAttributes();
     for (int i = 0; i < extraAttributes.count(); ++i) {
         auto attribute = extraAttributes.at(i);
-        if (attribute->isVisibleByDefault()) {
-            attribute->setEnabled(true);
-        } else {
+        if (!attribute->isVisibleByDefault()) {
             d->mUi->treeView->header()->hideSection(ProcessModel::HeadingPluginStart + i);
         }
     }
@@ -967,15 +965,8 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
     if(i < 0) {
         auto index = -1 - i;
         d->mUi->treeView->hideColumn(index);
-
-        if (index >= ProcessModel::HeadingPluginStart) {
-            d->mModel.extraAttributes().at(index - ProcessModel::HeadingPluginStart)->setEnabled(false);
-        }
     } else {
         d->mUi->treeView->showColumn(i);
-        if (i >= ProcessModel::HeadingPluginStart) {
-            d->mModel.extraAttributes().at(i - ProcessModel::HeadingPluginStart)->setEnabled(true);
-        }
         updateList();
         d->mUi->treeView->resizeColumnToContents(i);
         d->mUi->treeView->resizeColumnToContents(d->mFilterModel.columnCount());
@@ -1048,11 +1039,6 @@ void KSysGuardProcessList::hideEvent ( QHideEvent * event )  //virtual protected
     if(d->mScripting)
         d->mScripting->stopAllScripts();
 
-    //Disable all plugin-provided attributes
-    for (auto attribute : d->mModel.extraAttributes()) {
-        attribute->setEnabled(false);
-    }
-
     QWidget::hideEvent(event);
 }
 
@@ -1062,13 +1048,6 @@ void KSysGuardProcessList::showEvent ( QShowEvent * event )  //virtual protected
     updateList();
     QHeaderView *header = d->mUi->treeView->header();
     d->mUi->treeView->sortByColumn(header->sortIndicatorSection(), header->sortIndicatorOrder());
-
-    auto attributes = d->mModel.extraAttributes();
-    for (int i = 0; i < attributes.count(); ++i) {
-        if (!header->isSectionHidden(ProcessModel::HeadingPluginStart + i)) {
-            attributes.at(i)->setEnabled(true);
-        }
-    }
 
     QWidget::showEvent(event);
 }

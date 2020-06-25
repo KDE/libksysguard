@@ -43,10 +43,9 @@ public:
     QString id() const;
 
     /**
-     * Controls whether we should fetch process attributes
+     * States whether we should update process attributes
      */
     bool enabled() const;
-    void setEnabled(const bool enable);
 
     /**
      * A translated user facing name for the attribute.
@@ -115,9 +114,14 @@ Q_SIGNALS:
     void dataChanged(KSysGuard::Process *process);
     void enabledChanged(bool enabled);
 
+protected:
+    void connectNotify(const QMetaMethod &signal) override;
+    void disconnectNotify(const QMetaMethod &signal) override;
+
 private:
     class Private;
     QScopedPointer<Private> d;
+
 };
 
 }

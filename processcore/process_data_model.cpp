@@ -44,8 +44,8 @@ public:
     QModelIndex getQModelIndex(Process *process, int column) const;
 
     ProcessDataModel *q;
-    KSysGuard::ExtendedProcesses *m_processes;
     KSysGuard::Process *m_rootProcess;
+    QSharedPointer<ExtendedProcesses> m_processes;
     QTimer *m_timer;
     ProcessAttributeModel *m_attributeModel = nullptr;
     const int m_updateInterval = 2000;
@@ -68,20 +68,20 @@ ProcessDataModel::~ProcessDataModel()
 
 ProcessDataModel::Private::Private(ProcessDataModel *_q)
     : q(_q)
-    , m_processes(new KSysGuard::ExtendedProcesses(_q))
+    , m_processes(KSysGuard::ExtendedProcesses::instance())
     , m_timer(new QTimer(_q))
 {
     m_rootProcess = m_processes->getProcess(-1);
-    connect(m_processes, &KSysGuard::Processes::beginAddProcess, q, [this](KSysGuard::Process *process) {
+    connect(m_processes.get(), &KSysGuard::Processes::beginAddProcess, q, [this](KSysGuard::Process *process) {
         beginInsertRow(process);
     });
-    connect(m_processes, &KSysGuard::Processes::endAddProcess, q, [this]() {
+    connect(m_processes.get(), &KSysGuard::Processes::endAddProcess, q, [this]() {
         endInsertRow();
     });
-    connect(m_processes, &KSysGuard::Processes::beginRemoveProcess, q, [this](KSysGuard::Process *process) {
+    connect(m_processes.get(), &KSysGuard::Processes::beginRemoveProcess, q, [this](KSysGuard::Process *process) {
         beginRemoveRow(process);
     });
-    connect(m_processes, &KSysGuard::Processes::endRemoveProcess, q, [this]() {
+    connect(m_processes.get(), &KSysGuard::Processes::endRemoveProcess, q, [this]() {
         endRemoveRow();
     });
 
@@ -220,13 +220,10 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
                 }
             }
         });
-
-        attribute->setEnabled(true);
     }
 
     for (auto *unusedAttribute : qAsConst(unusedAttributes)) {
         disconnect(unusedAttribute, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
-        unusedAttribute->setEnabled(false);
     }
 
     d->update();

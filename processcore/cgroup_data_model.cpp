@@ -42,7 +42,7 @@ class KSysGuard::CGroupDataModelPrivate
 public:
     QVector<KSysGuard::Process*> processesFor(CGroup *app);
 
-    ExtendedProcesses *m_processes;
+    QSharedPointer<ExtendedProcesses> m_processes;
     QTimer *m_updateTimer;
     ProcessAttributeModel *m_attributeModel = nullptr;
     QHash<QString, KSysGuard::ProcessAttribute* > m_availableAttributes;
@@ -104,7 +104,7 @@ CGroupDataModel::CGroupDataModel(const QString &root, QObject *parent)
     , d(new CGroupDataModelPrivate)
 {
     d->m_updateTimer = new QTimer(this);
-    d->m_processes = new ExtendedProcesses(this);
+    d->m_processes = ExtendedProcesses::instance();
 
     QVector<ProcessAttribute *> attributes = d->m_processes->attributes();
     attributes.reserve(attributes.count() + 3);
@@ -209,12 +209,10 @@ void CGroupDataModel::setEnabledAttributes(const QStringList &enabledAttributes)
              emit dataChanged(index, index);
          });
 
-         attr->setEnabled(true);
      }
 
      for (auto unusedAttr : qAsConst(unusedAttributes)) {
          disconnect(unusedAttr, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
-         unusedAttr->setEnabled(false);
      }
 
      endResetModel();

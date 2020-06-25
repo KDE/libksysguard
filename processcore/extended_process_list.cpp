@@ -423,3 +423,14 @@ void ExtendedProcesses::Private::loadPlugins()
         m_providers << provider;
     }
 }
+
+QSharedPointer<ExtendedProcesses> ExtendedProcesses::instance()
+{
+    static QWeakPointer<ExtendedProcesses> instance;
+    auto processes = instance.lock();
+    if (!processes) {
+        processes = QSharedPointer<ExtendedProcesses>(new ExtendedProcesses, [] (ExtendedProcesses *p) {delete p;});
+        instance = processes;
+    }
+    return processes;
+}

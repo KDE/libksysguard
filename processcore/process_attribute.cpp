@@ -21,6 +21,8 @@
 #include "processes.h"
 #include "cgroup.h"
 
+#include <QMetaMethod>
+
 using namespace KSysGuard;
 
 class Q_DECL_HIDDEN KSysGuard::ProcessAttribute::Private
@@ -36,7 +38,7 @@ public:
     KSysGuard::Unit m_unit = KSysGuard::UnitInvalid; //Both a format hint and implies data type (i.e double/string)
 
     QHash<KSysGuard::Process *, QVariant> m_data;
-    bool m_enabled = false;
+    int m_watchCount = 0;
 
     bool m_defaultVisible = false;
 };
@@ -65,16 +67,7 @@ QString ProcessAttribute::id() const
 
 bool ProcessAttribute::enabled() const
 {
-    return d->m_enabled;
-}
-
-void ProcessAttribute::setEnabled(const bool enabled)
-{
-    if (d->m_enabled == enabled) {
-        return;
-    }
-    d->m_enabled = enabled;
-    emit enabledChanged(enabled);
+    return d->m_watchCount > 0;
 }
 
 QString ProcessAttribute::name() const
@@ -176,4 +169,26 @@ QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup, const QVector<K
         return total + data(process).toDouble();
     });
     return QVariant(total);
+}
+
+void ProcessAttribute::connectNotify(const QMetaMethod &signal)
+{
+    if (signal != QMetaMethod::fromSignal(&ProcessAttribute::dataChanged)) {
+        return;
+    }
+    d->m_watchCount++;
+    if (d->m_watchCount == 1) {
+        emit enabledChanged(true);
+    }
+}
+
+void ProcessAttribute::disconnectNotify(const QMetaMethod &signal)
+{
+    if (signal.isValid() && signal != QMetaMethod::fromSignal(&ProcessAttribute::dataChanged)) {
+        return;
+    }
+    d->m_watchCount--;
+    if (d->m_watchCount == 0) {
+        emit enabledChanged(false);
+    }
 }

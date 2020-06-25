@@ -143,8 +143,7 @@ ProcessModelPrivate::~ProcessModelPrivate()
 #if HAVE_X11
     qDeleteAll(mPidToWindowInfo);
 #endif
-    delete mProcesses;
-    mProcesses = nullptr;
+    mProcesses.clear();
 }
 
 ProcessModel::ProcessModel(QObject* parent, const QString &host)
@@ -368,7 +367,7 @@ ProcessModel::~ProcessModel()
 
 KSysGuard::Processes *ProcessModel::processController() const
 {
-    return d->mProcesses;
+    return d->mProcesses.get();
 }
 
 const QVector<KSysGuard::ProcessAttribute *> ProcessModel::extraAttributes() const
@@ -503,22 +502,21 @@ void ProcessModelPrivate::setupProcesses() {
         mWIdToWindowInfo.clear();
         mPidToWindowInfo.clear();
 #endif
-        delete mProcesses;
-        mProcesses = nullptr;
+        mProcesses.clear();
         q->beginResetModel();
         q->endResetModel();
     }
 
-    mProcesses = new KSysGuard::ExtendedProcesses();
+    mProcesses = KSysGuard::ExtendedProcesses::instance();
 
-    connect( mProcesses, &KSysGuard::Processes::processChanged, this, &ProcessModelPrivate::processChanged);
-    connect( mProcesses, &KSysGuard::Processes::beginAddProcess, this, &ProcessModelPrivate::beginInsertRow);
-    connect( mProcesses, &KSysGuard::Processes::endAddProcess, this, &ProcessModelPrivate::endInsertRow);
-    connect( mProcesses, &KSysGuard::Processes::beginRemoveProcess, this, &ProcessModelPrivate::beginRemoveRow);
-    connect( mProcesses, &KSysGuard::Processes::endRemoveProcess, this, &ProcessModelPrivate::endRemoveRow);
-    connect( mProcesses, &KSysGuard::Processes::beginMoveProcess, this,
+    connect( mProcesses.get(), &KSysGuard::Processes::processChanged, this, &ProcessModelPrivate::processChanged);
+    connect( mProcesses.get(), &KSysGuard::Processes::beginAddProcess, this, &ProcessModelPrivate::beginInsertRow);
+    connect( mProcesses.get(), &KSysGuard::Processes::endAddProcess, this, &ProcessModelPrivate::endInsertRow);
+    connect( mProcesses.get(), &KSysGuard::Processes::beginRemoveProcess, this, &ProcessModelPrivate::beginRemoveRow);
+    connect( mProcesses.get(), &KSysGuard::Processes::endRemoveProcess, this, &ProcessModelPrivate::endRemoveRow);
+    connect( mProcesses.get(), &KSysGuard::Processes::beginMoveProcess, this,
             &ProcessModelPrivate::beginMoveProcess);
-    connect( mProcesses, &KSysGuard::Processes::endMoveProcess, this, &ProcessModelPrivate::endMoveRow);
+    connect( mProcesses.get(), &KSysGuard::Processes::endMoveProcess, this, &ProcessModelPrivate::endMoveRow);
     mNumProcessorCores = mProcesses->numberProcessorCores();
     if(mNumProcessorCores < 1) mNumProcessorCores=1;  //Default to 1 if there was an error getting the number
 

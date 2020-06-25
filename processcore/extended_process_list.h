@@ -21,6 +21,7 @@
 #include <processcore/processes.h>
 
 #include <QObject>
+#include <QSharedPointer>
 
 namespace KSysGuard {
 class ProcessAttribute;
@@ -29,13 +30,17 @@ class Q_DECL_EXPORT ExtendedProcesses : public KSysGuard::Processes
 {
     Q_OBJECT
 public:
-    ExtendedProcesses(QObject *parent = nullptr);
-    ~ExtendedProcesses() override;
-
     QVector<ProcessAttribute *> attributes() const;
     QVector<ProcessAttribute *> extendedAttributes() const;
 
+    /**
+     * Returns a single shared instance of the process list for when used in multiple views
+     */
+    static QSharedPointer<ExtendedProcesses> instance();
+
 private:
+    ExtendedProcesses(QObject *parent = nullptr);
+    ~ExtendedProcesses() override;
     class Private;
     QScopedPointer<Private> d;
 };
