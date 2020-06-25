@@ -56,7 +56,9 @@ Faces.SensorFace {
             id: compactRepresentation
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.minimumHeight: 3 * Kirigami.Units.gridUnit
+            Layout.minimumHeight: root.formFactor === Faces.SensorFace.Constrained 
+                ? Kirigami.Units.gridUnit
+                : 3 * Kirigami.Units.gridUnit
             Layout.preferredHeight: 5 * Kirigami.Units.gridUnit
         }
 
@@ -64,7 +66,10 @@ Faces.SensorFace {
             Layout.fillWidth: root.width < implicitWidth * 1.5
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
             Layout.fillHeight: true
-            Layout.minimumHeight: root.formFactor !== Faces.SensorFace.Planar ? implicitHeight : -1
+            Layout.minimumHeight: root.formFactor === Faces.SensorFace.Horizontal
+                || root.formFactor === Faces.SensorFace.Vertical
+                ? implicitHeight
+                : -1
             visible: root.showLegend
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null

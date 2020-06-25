@@ -38,7 +38,8 @@ public:
     enum FormFactor {
         Planar,
         Vertical,
-        Horizontal
+        Horizontal,
+        Constrained
     };
     Q_ENUM(FormFactor)
 
