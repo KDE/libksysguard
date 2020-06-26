@@ -26,6 +26,7 @@ namespace KSysGuard
 {
 
 class ExtendedProcesses;
+class ProcessAttribute;
 
 /**
  * Presents a list of available attributes that can be
@@ -44,7 +45,7 @@ public:
     };
     Q_ENUM(Role);
 
-    ProcessAttributeModel(ExtendedProcesses *processes, QObject *parent = nullptr);
+    ProcessAttributeModel(const QVector<ProcessAttribute *> &attributes, QObject *parent = nullptr);
     ~ProcessAttributeModel() override;
 
     int rowCount(const QModelIndex &parent) const override;

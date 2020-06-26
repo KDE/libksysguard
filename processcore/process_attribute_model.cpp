@@ -31,11 +31,11 @@ public:
     QVector<ProcessAttribute *> m_attributes;
 };
 
-ProcessAttributeModel::ProcessAttributeModel(ExtendedProcesses *processes, QObject *parent)
+ProcessAttributeModel::ProcessAttributeModel(const QVector<ProcessAttribute *> & attributes, QObject *parent)
     : QAbstractListModel(parent)
     , d(new Private)
 {
-    d->m_attributes = processes->attributes();
+    d->m_attributes = attributes;
 }
 
 ProcessAttributeModel::~ProcessAttributeModel()

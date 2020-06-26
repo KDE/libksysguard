@@ -323,7 +323,7 @@ ProcessAttributeModel *CGroupDataModel::attributesModel()
 {
     //lazy load
     if (!d->m_attributeModel) {
-        d->m_attributeModel = new KSysGuard::ProcessAttributeModel(d->m_processes, this);
+        d->m_attributeModel = new KSysGuard::ProcessAttributeModel(d->m_availableAttributes.values().toVector(), this);
     }
     return d->m_attributeModel;
 }
