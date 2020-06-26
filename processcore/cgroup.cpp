@@ -20,10 +20,11 @@
 #include "cgroup.h"
 
 #include <QDebug>
+#include <QDir>
+#include <QFile>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QFile>
-#include <QDir>
+#include <QStringView>
 
 #include "process.h"
 
@@ -43,7 +44,7 @@ public:
     static KService::Ptr serviceFromAppId(const QString &appId);
 
     static QRegularExpression s_appIdFromProcessGroupPattern;
-
+    static QString unescapeName(const QString &cgroupId);
     QVector<Process *> procs;
 };
 
@@ -107,6 +108,30 @@ QVector<pid_t> KSysGuard::CGroup::getPids() const
     return procs;
 }
 
+QString CGroupPrivate::unescapeName(const QString &name) {
+    // strings are escaped in the form of \xZZ where ZZ is a two digits in hex representing an ascii code
+    QString rc = name;
+    while (true) {
+        int escapeCharIndex = rc.indexOf(QLatin1Char('\\'));
+        if (escapeCharIndex < 0) {
+            break;
+        }
+        const QStringView sequence = rc.mid(escapeCharIndex, 4);
+        if (sequence.length() != 4 || sequence.at(1) != QLatin1Char('x')) {
+            qWarning() << "Badly formed cgroup name" << name;
+            return name;
+        }
+        bool ok;
+        int character = sequence.mid(2).toString().toInt(&ok, 16);
+        if (ok) {
+            rc.replace(escapeCharIndex, 4, QLatin1Char(character));
+        }
+    }
+    return rc;
+}
+
+
+
 KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
 {
     const int lastSlash = processGroup.lastIndexOf(QLatin1Char('/'));
@@ -115,6 +140,7 @@ KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
     if (lastSlash != -1) {
         serviceName = processGroup.mid(lastSlash + 1);
     }
+    serviceName = unescapeName(serviceName);
 
     const QRegularExpressionMatch &appIdMatch = s_appIdFromProcessGroupPattern.match(serviceName);
 
