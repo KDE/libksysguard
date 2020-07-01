@@ -990,6 +990,32 @@ QModelIndex ProcessModel::parent ( const QModelIndex & index ) const
         return getQModelIndex(process->parent(), 0);
 }
 
+static inline QVariant columnAlignment(const int section)
+{
+    switch(section) {
+        case ProcessModel::HeadingUser:
+        case ProcessModel::HeadingCPUUsage:
+        case ProcessModel::HeadingNoNewPrivileges:
+            return QVariant(Qt::AlignHCenter | Qt::AlignVCenter);
+        case ProcessModel::HeadingPid:
+        case ProcessModel::HeadingNiceness:
+        case ProcessModel::HeadingCPUTime:
+        case ProcessModel::HeadingStartTime:
+        case ProcessModel::HeadingMemory:
+        case ProcessModel::HeadingXMemory:
+        case ProcessModel::HeadingSharedMemory:
+        case ProcessModel::HeadingVmSize:
+        case ProcessModel::HeadingIoWrite:
+        case ProcessModel::HeadingIoRead:
+        case ProcessModel::HeadingVmPSS:
+            return QVariant(Qt::AlignRight | Qt::AlignVCenter);
+        case ProcessModel::HeadingTty:
+            return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+        default:
+            return QVariant();
+    }
+}
+
 QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
                                   int role) const
 {
@@ -1010,27 +1036,7 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation,
     switch( role ) {
       case Qt::TextAlignmentRole:
       {
-        switch(section) {
-            case HeadingPid:
-            case HeadingTty:
-            case HeadingMemory:
-            case HeadingXMemory:
-            case HeadingSharedMemory:
-            case HeadingStartTime:
-            case HeadingNoNewPrivileges:
-            case HeadingIoRead:
-            case HeadingIoWrite:
-            case HeadingVmSize:
-            case HeadingNiceness:
-    //            return QVariant(Qt::AlignRight);
-            case HeadingUser:
-            case HeadingCPUUsage:
-            case HeadingCPUTime:
-            case HeadingVmPSS:
-                return QVariant(Qt::AlignCenter);
-
-        }
-        return QVariant();
+          return columnAlignment(section);
       }
       case Qt::ToolTipRole:
       {
@@ -1779,26 +1785,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         }
     }
     case Qt::TextAlignmentRole:
-        switch(index.column() ) {
-            case HeadingUser:
-            case HeadingCPUUsage:
-                return QVariant(Qt::AlignCenter);
-            case HeadingNiceness:
-            case HeadingCPUTime:
-            case HeadingStartTime:
-            case HeadingNoNewPrivileges:
-            case HeadingPid:
-            case HeadingMemory:
-            case HeadingXMemory:
-            case HeadingSharedMemory:
-            case HeadingVmSize:
-            case HeadingIoWrite:
-            case HeadingIoRead:
-            case HeadingVmPSS:
-                return QVariant(Qt::AlignRight | Qt::AlignVCenter);
-            default:
-                return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
-        }
+        return columnAlignment(index.column());
     case UidRole: {
         if(index.column() != 0) return QVariant();  //If we query with this role, then we want the raw UID for this.
         KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
