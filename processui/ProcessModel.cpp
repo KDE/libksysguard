@@ -1271,14 +1271,16 @@ QString ProcessModelPrivate::getTooltipForUser(const KSysGuard::Process *ps) con
 }
 
 QString ProcessModel::getStringForProcess(KSysGuard::Process *process) const {
-    return i18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3", (long)(process->pid()), process->name(), d->getUsernameForUser(process->uid(), false));
+    return i18nc("Short description of a process. PID, name, user", "%1: %2, owned by user %3",
+                 QString::number(process->pid()), process->name(),
+                 d->getUsernameForUser(process->uid(), false));
 }
 
 QString ProcessModelPrivate::getGroupnameForGroup(long gid) const {
     if(mIsLocalhost) {
         QString groupname = KUserGroup(gid).name();
         if(!groupname.isEmpty())
-            return i18nc("Group name and group id", "%1 (gid: %2)", groupname, gid);
+            return i18nc("Group name and group id", "%1 (gid: %2)", groupname, QString::number(gid));
     }
     return QString::number(gid);
 }
@@ -1299,7 +1301,7 @@ QString ProcessModelPrivate::getUsernameForUser(long uid, bool withuid) const {
     if(username.isEmpty())
         return QString::number(uid);
     if(withuid)
-        return i18nc("User name and user id", "%1 (uid: %2)", username, (long int)uid);
+        return i18nc("User name and user id", "%1 (uid: %2)", username, QString::number(uid));
     return username;
 }
 
@@ -1519,7 +1521,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         if(process->tracerpid() >= 0) {
             KSysGuard::Process *process_tracer = d->mProcesses->getProcess(process->tracerpid());
             if(process_tracer) //it is possible for this to be not the case in certain race conditions
-                tracer = xi18nc("tooltip. name,pid ","This process is being debugged by %1 (%2)", process_tracer->name(), (long int)process->tracerpid());
+                tracer = xi18nc("tooltip. name,pid ","This process is being debugged by %1 (%2)",
+                                process_tracer->name(), QString::number(process->tracerpid()));
         }
         switch(index.column()) {
         case HeadingName: {
@@ -1540,11 +1543,13 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if(process->parentPid() == -1) {
                 //Give a quick explanation of init and kthreadd
                 if(process->name() == QLatin1String("init") || process->name() == QLatin1String("systemd")) {
-                    tooltip = xi18nc("@info:tooltip", "<title>%1</title><para>The parent of all other processes and cannot be killed.</para><para><emphasis strong='true'>Process ID:</emphasis> %2</para>", process->name(), (long int)process->pid());
+                    tooltip = xi18nc("@info:tooltip", "<title>%1</title><para>The parent of all other processes and cannot be killed.</para><para><emphasis strong='true'>Process ID:</emphasis> %2</para>",
+                                     process->name(), QString::number(process->pid()));
                 } else if(process->name() == QLatin1String("kthreadd")) {
                     tooltip = xi18nc("@info:tooltip", "<title>KThreadd</title><para>Manages kernel threads. The children processes run in the kernel, controlling hard disk access, etc.</para>");
                 } else {
-                    tooltip = xi18nc("@info:tooltip","<title>%1</title><para><emphasis strong='true'>Process ID:</emphasis> %2</para>",process->name(), (long int)process->pid());
+                    tooltip = xi18nc("@info:tooltip","<title>%1</title><para><emphasis strong='true'>Process ID:</emphasis> %2</para>",
+                                     process->name(), QString::number(process->pid()));
                 }
             }
             else {
@@ -1555,13 +1560,15 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                                         "<para><emphasis strong='true'>Process ID:</emphasis> %2</para>"
                                         "<para><emphasis strong='true'>Parent:</emphasis> %3</para>"
                                         "<para><emphasis strong='true'>Parent's ID:</emphasis> %4</para>",
-                                        process->name(), (long int)process->pid(), parent_process->name(), (long int)process->parentPid());
+                                        process->name(), QString::number(process->pid()),
+                                        parent_process->name(), QString::number(process->parentPid()));
                 } else {
                     tooltip    = xi18nc("@info:tooltip",
                                         "<title>%1</title>"
                                         "<para><emphasis strong='true'>Process ID:</emphasis> %2</para>"
                                         "<para><emphasis strong='true'>Parent's ID:</emphasis> %3</para>",
-                                        process->name(), (long int)process->pid(), (long int)process->parentPid());
+                                        process->name(), QString::number(process->pid()),
+                                        QString::number(process->parentPid()));
                 }
             }
             if(process->numThreads() >= 1)
