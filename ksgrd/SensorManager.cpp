@@ -198,6 +198,8 @@ void SensorManager::retranslate()
   mDict.insert( QStringLiteral( "CPUTIN" ), i18n( "CPU Temperature" ) );
   mDict.insert( QStringLiteral( "SYSTIN" ), i18n( "Motherboard Temperature" ) );
   mDict.insert( QStringLiteral( "AUXTIN" ), i18n( "Power Supply Temperature" ) );
+  
+  mDict.insert( QStringLiteral( "__root__" ), i18n( "Filesystem Root" ) );
 
   for ( int i = 0; i < 5; i++ ) {
     mDict.insert( QLatin1String( "AUXTIN" ) + QString::number( i ), i18n( "Extra Temperature Sensor %1", i+1 ) );
