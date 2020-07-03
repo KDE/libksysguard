@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QMetaEnum>
 #include <QMimeData>
+#include <QRegularExpression>
 
 #include "formatter/Formatter.h"
 
@@ -92,6 +93,8 @@ public:
 
     SensorTreeItem *find(const QString &sensorId);
 
+    QHash<QString, int> m_groupMatches;
+
 private:
     SensorTreeModel *q;
 };
@@ -105,13 +108,42 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
         return;
     }
 
+    if (sensorId.contains(QRegularExpression(QStringLiteral("\\d+")))) {
+        QString sensorIdExpr = sensorId;
+        sensorIdExpr.replace(QRegularExpression(QStringLiteral("(\\d+)")), QStringLiteral("\\d+"));
+        
+        if (m_groupMatches.contains(sensorIdExpr)) {
+            m_groupMatches[sensorIdExpr]++;
+        } else {
+            m_groupMatches[sensorIdExpr] = 1;
+        }
+        
+        if (m_groupMatches[sensorIdExpr] == 2) {
+            SensorInfo newInfo;
+            newInfo.name = info.name;
+            newInfo.name.replace(QRegularExpression(QStringLiteral("(\\d+)")), QStringLiteral("*"));
+            newInfo.name = i18nc("Show that this item is not a single sensor but a group of sensors", "[Group] %1", newInfo.name);
+            newInfo.shortName = info.shortName;
+            newInfo.shortName.replace(QRegularExpression(QStringLiteral("(\\d+)")), QStringLiteral("*"));
+            newInfo.shortName = i18nc("Show that this item is not a single sensor but a group of sensors", "[Group] %1", newInfo.shortName);
+            newInfo.description = info.description;
+            newInfo.variantType = info.variantType;
+            KSysGuard::Unit unit = info.unit;
+            newInfo.min = info.min;
+            newInfo.max = info.max;
+            
+            addSensor(sensorIdExpr, newInfo);
+        }
+    }
     SensorTreeItem *item = rootItem;
 
     for (auto segment : segments) {
         auto child = item->children.value(segment, nullptr);
 
+        
         if (child) {
             item = child;
+
         } else {
             SensorTreeItem *newItem = new SensorTreeItem();
             newItem->parent = item;
@@ -134,6 +166,18 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
 
 void SensorTreeModel::Private::removeSensor(const QString &sensorId)
 {
+    if (sensorId.contains(QRegularExpression(QStringLiteral("\\d+")))) {
+        QString sensorIdExpr = sensorId;
+        sensorIdExpr.replace(QRegularExpression(QStringLiteral("(\\d+)")), QStringLiteral("\\d+"));
+        
+        if (m_groupMatches[sensorIdExpr] == 1) {
+            m_groupMatches.remove(sensorIdExpr);
+            removeSensor(sensorIdExpr);
+        } else if (m_groupMatches.contains(sensorIdExpr)) {
+            m_groupMatches[sensorIdExpr]--;
+        }
+    }
+
     SensorTreeItem *item = find(sensorId);
     if (!item) {
         return;
