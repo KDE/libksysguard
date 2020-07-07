@@ -56,29 +56,13 @@ Faces.SensorFace {
 
         Item { Layout.fillWidth: true; Layout.fillHeight: true }
 
-        Repeater {
-            model: root.controller.highPrioritySensorIds.concat(root.controller.lowPrioritySensorIds)
-
-            ChartsControls.LegendDelegate {
-                readonly property bool isTextOnly: index >= root.controller.highPrioritySensorIds.length
-
-                Layout.fillWidth: true
-                Layout.minimumHeight: isTextOnly ? 0 : implicitHeight
-
-                name: sensor.name
-                shortName: sensor.shortName
-                value: sensor.formattedValue
-                colorVisible: !isTextOnly
-                color: !isTextOnly ? root.colorSource.map[modelData] : "transparent"
-
-                layoutWidth: root.width
-                valueWidth: Kirigami.Units.gridUnit * 2
-
-                Sensors.Sensor {
-                    id: sensor
-                    sensorId: modelData
-                }
-            }
+        GroupedText {
+            totalSensorIds: root.controller.totalSensors
+            highPrioritySensorIds: root.controller.highPrioritySensorIds
+            lowPrioritySensorIds: root.controller.lowPrioritySensorIds
+            showGroups: root.controller.faceConfiguration.groupByTotal
+            colorSource: root.colorSource
+            totalHeight: root.height
         }
 
         Item { Layout.fillWidth: true; Layout.fillHeight: true }
