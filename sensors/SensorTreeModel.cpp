@@ -32,6 +32,7 @@
 #include "SensorDaemonInterface_p.h"
 #include "SensorInfo_p.h"
 #include "SensorQuery.h"
+#include "SensorGroup_p.h"
 
 using namespace KSysGuard;
 
@@ -108,10 +109,9 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
         return;
     }
 
-    if (sensorId.contains(QRegularExpression(QStringLiteral("\\d+")))) {
-        QString sensorIdExpr = sensorId;
-        sensorIdExpr.replace(QRegularExpression(QStringLiteral("(\\d+)")), QStringLiteral("\\d+"));
-        
+    QString sensorIdExpr = groupRegexForId(sensorId);
+
+    if (!sensorIdExpr.isEmpty()) {
         if (m_groupMatches.contains(sensorIdExpr)) {
             m_groupMatches[sensorIdExpr]++;
         } else {
@@ -120,12 +120,7 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
         
         if (m_groupMatches[sensorIdExpr] == 2) {
             SensorInfo newInfo;
-            newInfo.name = info.name;
-            newInfo.name.replace(QRegularExpression(QStringLiteral("(\\d+)")), QStringLiteral("*"));
-            newInfo.name = i18nc("Show that this item is not a single sensor but a group of sensors", "[Group] %1", newInfo.name);
-            newInfo.shortName = info.shortName;
-            newInfo.shortName.replace(QRegularExpression(QStringLiteral("(\\d+)")), QStringLiteral("*"));
-            newInfo.shortName = i18nc("Show that this item is not a single sensor but a group of sensors", "[Group] %1", newInfo.shortName);
+            newInfo.name = sensorNameForRegEx(sensorIdExpr);
             newInfo.description = info.description;
             newInfo.variantType = info.variantType;
             KSysGuard::Unit unit = info.unit;
@@ -140,7 +135,6 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
     for (auto segment : segments) {
         auto child = item->children.value(segment, nullptr);
 
-        
         if (child) {
             item = child;
 
@@ -307,7 +301,7 @@ QVariant SensorTreeModel::data(const QModelIndex &index, int role) const
             return info.name;
         }
 
-        return item->segment;
+        return segmentNameForRegEx(item->segment);
     // Only leaf nodes are valid sensors
     } else if (role == SensorId) {
         if (rowCount(index)) {

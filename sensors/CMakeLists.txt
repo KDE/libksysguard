@@ -8,6 +8,7 @@ set(sensors_LIB_SRCS
     Sensor.cpp
     SensorDataModel.cpp
     SensorTreeModel.cpp
+    SensorGroup.cpp
     SensorQuery.cpp
     SensorDaemonInterface.cpp
 )
