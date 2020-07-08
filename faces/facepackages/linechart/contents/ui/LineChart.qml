@@ -34,6 +34,7 @@ Charts.LineChart {
     //property var sensors: root.controller.highPrioritySensorIds
 
     readonly property alias sensorsModel: sensorsModel
+    property int maximumHistory: root.controller.faceConfiguration.rangeToX - root.controller.faceConfiguration.rangeFromX
 
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8
 
@@ -69,7 +70,7 @@ Charts.LineChart {
             column: index
             row: 0
             roleName: "Value"
-            maximumHistory: 50
+            maximumHistory: chart.maximumHistory
         }
         onObjectAdded: {
             chart.insertValueSource(index, object)
