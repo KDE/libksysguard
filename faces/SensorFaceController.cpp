@@ -395,6 +395,10 @@ void SensorFaceController::setFaceId(const QString &face)
         d->compactRepresentation->deleteLater();
         d->fullRepresentation.clear();
     }
+    if (d->faceConfigUi) {
+        d->faceConfigUi->deleteLater();
+        d->faceConfigUi.clear();
+    }
 
     d->faceId = face;
 
@@ -480,10 +484,20 @@ QQuickItem *SensorFaceController::faceConfigUi()
         return d->faceConfigUi;
     }
 
+    const QString filePath = d->facePackage.filePath("ui", QStringLiteral("Config.qml"));
+
+    if (filePath.isEmpty()) {
+        return nullptr;
+    }
+
     d->faceConfigUi = d->createConfigUi(QStringLiteral(":/FaceDetailsConfig.qml"),
     {{QStringLiteral("controller"), QVariant::fromValue(this)},
-         {QStringLiteral("source"), d->facePackage.filePath("ui", QStringLiteral("Config.qml"))}});
+         {QStringLiteral("source"), filePath}});
 
+    if (d->faceConfigUi && !d->faceConfigUi->property("item").value<QQuickItem *>()) {
+        d->faceConfigUi->deleteLater();
+        d->faceConfigUi.clear();
+    }
     return d->faceConfigUi;
 }
 
