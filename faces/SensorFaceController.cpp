@@ -169,6 +169,7 @@ public:
     QJsonArray lowPrioritySensorIds;
 
     QTimer *syncTimer;
+    bool shouldSync = true;
     FacesModel *availableFacesModel = nullptr;
     PresetsModel *availablePresetsModel = nullptr;
 };
@@ -270,6 +271,9 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
     d->syncTimer->setSingleShot(true);
     d->syncTimer->setInterval(5000);
     connect(d->syncTimer, &QTimer::timeout, this, [this]() {
+        if (!d->shouldSync) {
+            return;
+        }
         d->appearanceGroup.sync();
         d->sensorsGroup.sync();
     });
@@ -738,5 +742,19 @@ void SensorFaceController::uninstallPreset(const QString &pluginId)
         d->availablePresetsModel->reload();
     });
 }
+
+bool SensorFaceController::shouldSync() const
+{
+    return d->shouldSync;
+}
+
+void SensorFaceController::setShouldSync(bool sync)
+{
+    d->shouldSync = sync;
+    if (!d->shouldSync && d->syncTimer->isActive()) {
+        d->syncTimer->stop();
+    }
+}
+
 
 #include "moc_SensorFaceController.cpp"

@@ -114,6 +114,9 @@ public:
     Q_INVOKABLE void savePreset();
     Q_INVOKABLE void uninstallPreset(const QString &pluginId);
 
+    bool shouldSync() const;
+    void setShouldSync(bool sync);
+
 Q_SIGNALS:
     void faceIdChanged();
     void titleChanged();
