@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "SensorGroup_p.h"
+
 #include <QRegularExpression>
 #include <QDebug>
 #include <KLocalizedString>
@@ -24,13 +26,80 @@
 namespace KSysGuard
 {
 
-QString groupRegexForId(const QString &key)
+SensorGroup::SensorGroup()
+{
+    retranslate();
+}
+
+SensorGroup::~SensorGroup()
+{}
+
+void SensorGroup::retranslate()
+{
+    m_sensorNames.clear();
+    m_segmentNames.clear();
+
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/TotalLoad")] = i18nc("Total load sensor of all cores", "[Group] CPU");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/user")] = i18nc("All cores user load sensors", "[Group] User Load");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/nice")] = i18nc("All cores nice load sensors", "[Group] Nice Load");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/sys")] = i18nc("All cores user system sensors", "[Group] System Load");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/idle")] = i18nc("All cores idle load sensors", "[Group] Idle Load");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/wait")] = i18nc("All cores wait load sensors", "[Group] Wait Load");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/clock")] = i18nc("All cores clock frequency sensors", "[Group] Clock Frequency");
+
+    m_sensorNames[QStringLiteral("partitions/(?!all).*/usedspace")] = i18n("[Group] Used");
+    m_sensorNames[QStringLiteral("partitions/(?!all).*/freespace")] = i18n("[Group] Available");
+    m_sensorNames[QStringLiteral("partitions/(?!all).*/filllevel")] = i18n("[Group] Percentage Used");
+    m_sensorNames[QStringLiteral("partitions/(?!all).*/total")] = i18n("[Group] Total Size");
+
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/data")] = i18n("[Group] Received Data Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/dataTotal")] = i18n("[Group] Received Data");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/packets")] = i18n("[Group] Received Packets Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/packetsTotal")] = i18n("[Group] Received Packets");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/errors")] = i18n("[Group] Receiver Errors Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/errorsTotal")] = i18n("[Group] Receiver Errors");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/drops")] = i18n("[Group] Receiver Drops Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/dropsTotal")] = i18n("[Group] Receiver Drops");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/fifo")] = i18n("[Group] Receiver Fifo Overruns Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/fifoTotal")] = i18n("[Group] Receiver Fifo Overruns");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/frame")] = i18n("[Group] Receiver Frame Errors Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/frameTotal")] = i18n("[Group] Receiver Frame Errors");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/compressed")] = i18n("[Group] Compressed Packets Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/compressedTotal")] = i18n("[Group] Compressed Packets");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/multicast")] = i18n("[Group] Received Multicast Packets Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/multicastTotal")] = i18n("[Group] Multicast Packets");
+
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/data")] = i18n("[Group] Sent Data Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/dataTotal")] = i18n("[Group] Sent Data ");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/packets")] = i18n("[Group] Sent Packets Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/packetsTotal")] = i18n("[Group] Sent Packets");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/errors")] = i18n("[Group] Transmitter Errors Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/errorsTotal")] = i18n("[Group] Transmitter Errors");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/drops")] = i18n("[Group] Transmitter Drops Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/dropsTotal")] = i18n("[Group] Transmitter Drops");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/fifo")] = i18n("[Group] Transmitter FIFO Overruns Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/fifoTotal")] = i18n("[Group] FIFO Overruns");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/collisions")] = i18n("[Group] Transmitter Collisions Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/collisionsTotal")] = i18n("[Group] Transmitter Collisions");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/carrier")] = i18n("[Group] Transmitter Carrier Losses Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/carrierTotal")] = i18n("[Group] Transmitter Carrier Losses");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/compressed")] = i18n("[Group] Transmitter Compressed Packets Rate");
+    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/compressedTotal")] = i18n("[Group] Transmitter Compressed Packets");
+
+
+
+    m_segmentNames[QLatin1String("cpu\\d+")] = i18n("[Group] CPU");
+    m_segmentNames[QLatin1String("disk\\d+")] = i18n("[Group] Disk");
+    m_segmentNames[QLatin1String("(?!all).*")] = i18n("[Group]");
+}
+
+QString SensorGroup::groupRegexForId(const QString &key)
 {
 
     QRegularExpression cpuExpr(QStringLiteral("cpu/cpu\\d+/(.*)"));
-    QRegularExpression netRecExpr(QStringLiteral("network/interfaces/.*/receiver/(.*)"));
-    QRegularExpression netTransExpr(QStringLiteral("network/interfaces/.*/transmitter/(.*)"));
-    QRegularExpression partitionsExpr(QStringLiteral("partitions/.*/(.*)$"));
+    QRegularExpression netRecExpr(QStringLiteral("network/interfaces/(?!all).*/receiver/(.*)"));
+    QRegularExpression netTransExpr(QStringLiteral("network/interfaces/(?!all).*/transmitter/(.*)"));
+    QRegularExpression partitionsExpr(QStringLiteral("partitions/(?!all).*/(.*)$"));
 
     if (key.contains(cpuExpr)) {
         QString expr = key;
@@ -38,124 +107,33 @@ QString groupRegexForId(const QString &key)
 
     } else if (key.contains(netRecExpr)) {
         QString expr = key;
-        return expr.replace(netRecExpr, QStringLiteral("network/interfaces/.*/receiver/\\1"));
+        return expr.replace(netRecExpr, QStringLiteral("network/interfaces/(?!all).*/receiver/\\1"));
 
     } else if (key.contains(netTransExpr)) {
         QString expr = key;
-        return expr.replace(netTransExpr, QStringLiteral("network/interfaces/.*/transmitter/\\1"));
+        return expr.replace(netTransExpr, QStringLiteral("network/interfaces/(?!all).*/transmitter/\\1"));
 
     } else if (key.contains(partitionsExpr)) {
         QString expr = key;
-        return expr.replace(partitionsExpr, QStringLiteral("partitions/.*/\\1"));
+        return expr.replace(partitionsExpr, QStringLiteral("partitions/(?!all).*/\\1"));
     }
 
     return QString();
 }
 
-QString sensorNameForRegEx(const QString &expr)
+QString SensorGroup::sensorNameForRegEx(const QString &expr)
 {
-    if (expr == QStringLiteral("cpu/cpu\\d+/TotalLoad")) {
-        return i18nc("Total load sensor of all cores", "[Group] CPU (%)");
-    } else if (expr == QStringLiteral("cpu/cpu\\d+/user")) {
-        return i18nc("All cores user load sensors", "[Group] User Load (%)");
-    } else if (expr == QStringLiteral("cpu/cpu\\d+/nice")) {
-        return i18nc("All cores nice load sensors", "[Group] Nice Load (%)");
-    } else if (expr == QStringLiteral("cpu/cpu\\d+/sys")) {
-        return i18nc("All cores user system sensors", "[Group] System Load (%)");
-    } else if (expr == QStringLiteral("cpu/cpu\\d+/idle")) {
-        return i18nc("All cores idle load sensors", "[Group] Idle Load (%)");
-    } else if (expr == QStringLiteral("cpu/cpu\\d+/wait")) {
-        return i18nc("All cores wait load sensors", "[Group] Wait Load (%)");
-    } else if (expr == QStringLiteral("cpu/cpu\\d+/clock")) {
-        return i18nc("All cores clock frequency sensors", "[Group] Clock Frequency (MHz)");
-
-    } else if (expr == QStringLiteral("partitions/.*/usedspace")) {
-        return i18n("[Group] Used (KiB)");
-    } else if (expr == QStringLiteral("partitions/.*/freespace")) {
-        return i18n("[Group] Available (KiB)");
-    } else if (expr == QStringLiteral("partitions/.*/filllevel")) {
-        return i18n("[Group] Percentage Used (%)");
-    } else if (expr == QStringLiteral("partitions/.*/total")) {
-        return i18n("[Group] Total Size (KiB)");
-
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/data")) {
-        return i18n("[Group] Received Data Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/dataTotal")) {
-        return i18n("[Group] Received Data");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/packets")) {
-        return i18n("[Group] Received Packets Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/packetsTotal")) {
-        return i18n("[Group] Received Packets");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/errors")) {
-        return i18n("[Group] Receiver Errors Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/errorsTotal")) {
-        return i18n("[Group] Receiver Errors");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/drops")) {
-        return i18n("[Group] Receiver Drops Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/dropsTotal")) {
-        return i18n("[Group] Receiver Drops");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/fifo")) {
-        return i18n("[Group] Receiver Fifo Overruns Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/fifoTotal")) {
-        return i18n("[Group] Receiver Fifo Overruns");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/frame")) {
-        return i18n("[Group] Receiver Frame Errors Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/frameTotal")) {
-        return i18n("[Group] Receiver Frame Errors");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/compressed")) {
-        return i18n("[Group] Compressed Packets Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/compressedTotal")) {
-        return i18n("[Group] Compressed Packets");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/multicast")) {
-        return i18n("[Group] Received Multicast Packets Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/receiver/multicastTotal")) {
-        return i18n("[Group] Multicast Packets");
-
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/data")) {
-        return i18n("[Group] Sent Data Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/dataTotal")) {
-        return i18n("[Group] Sent Data ");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/packets")) {
-        return i18n("[Group] Sent Packets Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/packetsTotal")) {
-        return i18n("[Group] Sent Packets");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/errors")) {
-        return i18n("[Group] Transmitter Errors Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/errorsTotal")) {
-        return i18n("[Group] Transmitter Errors");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/drops")) {
-        return i18n("[Group] Transmitter Drops Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/dropsTotal")) {
-        return i18n("[Group] Transmitter Drops");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/fifo")) {
-        return i18n("[Group] Transmitter FIFO Overruns Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/fifoTotal")) {
-        return i18n("[Group] FIFO Overruns");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/collisions")) {
-        return i18n("[Group] Transmitter Collisions Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/collisionsTotal")) {
-        return i18n("[Group] Transmitter Collisions");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/carrier")) {
-        return i18n("[Group] Transmitter Carrier Losses Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/carrierTotal")) {
-        return i18n("[Group] Transmitter Carrier Losses");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/compressed")) {
-        return i18n("[Group] Transmitter Compressed Packets Rate");
-    } else if (expr == QStringLiteral("network/interfaces/.*/transmitter/compressedTotal")) {
-        return i18n("[Group] Transmitter Compressed Packets");
+    if (m_sensorNames.contains(expr)) {
+        return m_sensorNames.value(expr);
     }
 
-    return QString();
+    return expr;
 }
 
-QString segmentNameForRegEx(const QString &expr)
+QString SensorGroup::segmentNameForRegEx(const QString &expr)
 {
-    if (expr == QLatin1String("cpu\\d+")) {
-        return i18n("[Group] CPU");
-    } else if (expr == QLatin1String("disk\\d+")) {
-        return i18n("[Group] Disk");
-    } else if (expr == QLatin1String(".*")) {
-        return i18n("[Group]");
+    if (m_segmentNames.contains(expr)) {
+        return m_segmentNames.value(expr);
     }
 
     return expr;

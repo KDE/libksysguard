@@ -78,10 +78,12 @@ public:
         : rootItem(new SensorTreeItem)
         , q(qq)
     {
+        m_sensorGroup = new SensorGroup;
     }
     ~Private()
     {
         delete rootItem;
+        delete m_sensorGroup;
     }
 
     SensorTreeItem *rootItem;
@@ -93,6 +95,8 @@ public:
     QString sensorId(const QModelIndex &index);
 
     SensorTreeItem *find(const QString &sensorId);
+
+    SensorGroup *m_sensorGroup;
 
     QHash<QString, int> m_groupMatches;
 
@@ -109,7 +113,7 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
         return;
     }
 
-    QString sensorIdExpr = groupRegexForId(sensorId);
+    QString sensorIdExpr = m_sensorGroup->groupRegexForId(sensorId);
 
     if (!sensorIdExpr.isEmpty()) {
         if (m_groupMatches.contains(sensorIdExpr)) {
@@ -120,10 +124,10 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
         
         if (m_groupMatches[sensorIdExpr] == 2) {
             SensorInfo newInfo;
-            newInfo.name = sensorNameForRegEx(sensorIdExpr);
+            newInfo.name = m_sensorGroup->sensorNameForRegEx(sensorIdExpr);
             newInfo.description = info.description;
             newInfo.variantType = info.variantType;
-            KSysGuard::Unit unit = info.unit;
+            newInfo.unit = info.unit;
             newInfo.min = info.min;
             newInfo.max = info.max;
             
@@ -160,10 +164,8 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
 
 void SensorTreeModel::Private::removeSensor(const QString &sensorId)
 {
-    if (sensorId.contains(QRegularExpression(QStringLiteral("\\d+")))) {
-        QString sensorIdExpr = sensorId;
-        sensorIdExpr.replace(QRegularExpression(QStringLiteral("(\\d+)")), QStringLiteral("\\d+"));
-        
+    QString sensorIdExpr = m_sensorGroup->groupRegexForId(sensorId);
+    if (!sensorIdExpr.isEmpty()) {
         if (m_groupMatches[sensorIdExpr] == 1) {
             m_groupMatches.remove(sensorIdExpr);
             removeSensor(sensorIdExpr);
@@ -301,7 +303,7 @@ QVariant SensorTreeModel::data(const QModelIndex &index, int role) const
             return info.name;
         }
 
-        return segmentNameForRegEx(item->segment);
+        return d->m_sensorGroup->segmentNameForRegEx(item->segment);
     // Only leaf nodes are valid sensors
     } else if (role == SensorId) {
         if (rowCount(index)) {

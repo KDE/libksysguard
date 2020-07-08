@@ -20,11 +20,25 @@
 #pragma once
 
 #include <QString>
-
+#include <QHash>
 
 namespace KSysGuard
 {
+
+class SensorGroup
+{
+public:
+    SensorGroup();
+    ~SensorGroup();
+
+    void retranslate();
+
     QString groupRegexForId(const QString &key);
     QString sensorNameForRegEx(const QString &expr);
     QString segmentNameForRegEx(const QString &expr);
+
+private:
+    QHash <QString, QString> m_sensorNames;
+    QHash <QString, QString> m_segmentNames;
+};
 } // namespace KSysGuard
