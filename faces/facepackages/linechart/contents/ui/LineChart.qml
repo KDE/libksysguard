@@ -71,6 +71,7 @@ Charts.LineChart {
             row: 0
             roleName: "Value"
             maximumHistory: chart.maximumHistory
+            interval: 2000
         }
         onObjectAdded: {
             chart.insertValueSource(index, object)
