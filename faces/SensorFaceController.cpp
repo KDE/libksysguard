@@ -105,7 +105,7 @@ void PresetsModel::reload()
         // TODO config
         QVariantMap config;
 
-        KConfigGroup configGroup(df.group("Config"));
+        KConfigGroup configGroup(KSharedConfig::openConfig(p.filePath("config", QStringLiteral("faceproperties"))), QStringLiteral("Config"));
 
         const QStringList keys = configGroup.keyList();
         for (const QString &key : keys) {
@@ -453,7 +453,6 @@ void SensorFaceController::setFaceId(const QString &face)
 
     d->contextObj->setTranslationDomain(QLatin1String("ksysguard_face_") + face);
 
-    //TODO: should be in a different config file rather than metadata
     d->faceProperties = KConfigGroup(KSharedConfig::openConfig(d->facePackage.filePath("FaceProperties")), QStringLiteral("Config"));
 
     const QString xmlPath = d->facePackage.filePath("mainconfigxml");
