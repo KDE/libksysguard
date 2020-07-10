@@ -502,7 +502,6 @@ QQuickItem *SensorFaceController::fullRepresentation()
     }
 
     d->fullRepresentation = d->createGui(d->facePackage.filePath("ui", QStringLiteral("FullRepresentation.qml")));
-
     return d->fullRepresentation;
 }
 
