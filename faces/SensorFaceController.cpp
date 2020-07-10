@@ -657,7 +657,7 @@ void SensorFaceController::loadPreset(const QString &preset)
 
 void SensorFaceController::savePreset()
 {
-    QString pluginName = QStringLiteral("org.kde.plasma.systemmonitor.") + title().simplified().replace(QLatin1Char(' '), QChar()).toLower();
+    QString pluginName = QStringLiteral("org.kde.plasma.systemmonitor.") + title().simplified().replace(QLatin1Char(' '), QStringLiteral("")).toLower();
     int suffix = 0;
 
     auto presetPackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Applet"));
