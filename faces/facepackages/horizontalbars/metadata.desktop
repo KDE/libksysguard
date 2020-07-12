@@ -1,5 +1,11 @@
 [Desktop Entry]
 Name=Horizontal Bars
+Name[ca]=Barres horitzontals
+Name[nl]=Horizontale balken
+Name[pt]=Barras Horizontais
+Name[sv]=Horisontella staplar
+Name[uk]=Горизонтальні смуги
+Name[x-test]=xxHorizontal Barsxx
 Icon=view-list-text
 
 Type=Service
