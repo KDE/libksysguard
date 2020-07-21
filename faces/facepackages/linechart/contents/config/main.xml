@@ -18,6 +18,12 @@
         <entry name="lineChartSmooth" type="Bool">
             <default>true</default>
         </entry>
+         <entry name="showGridLines" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showYAxisLabels" type="Bool">
+            <default>true</default>
+        </entry>
         <entry name="rangeFromX" type="Int">
             <default>0</default>
         </entry>
@@ -37,5 +43,5 @@
             <default>true</default>
         </entry>
     </group>
-    
+
 </kcfg>
