@@ -193,17 +193,19 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     startTimeSensor->setUnit(KSysGuard::UnitTime);
     d->m_coreAttributes << startTimeSensor;
 
+    const int maximumCpuPercent = 100 * numberProcessorCores();
+
     auto userUsageSensor = new ProcessSensor<int>(this, QStringLiteral("userUsage"), i18n("User CPU Usage"), &KSysGuard::Process::userUsage, KSysGuard::Process::Usage);
     userUsageSensor->setShortName(i18n("User CPU"));
     userUsageSensor->setMin(0);
-    userUsageSensor->setMax(100);
+    userUsageSensor->setMax(maximumCpuPercent);
     userUsageSensor->setUnit(KSysGuard::UnitPercent);
     d->m_coreAttributes << userUsageSensor;
 
     auto sysUsageSensor = new ProcessSensor<int>(this, QStringLiteral("sysUsage"), i18n("System CPU Usage"), &KSysGuard::Process::sysUsage, KSysGuard::Process::Usage);
     sysUsageSensor->setShortName(i18n("System CPU"));
     sysUsageSensor->setMin(0);
-    sysUsageSensor->setMax(100);
+    sysUsageSensor->setMax(maximumCpuPercent);
     sysUsageSensor->setUnit(KSysGuard::UnitPercent);
     d->m_coreAttributes << sysUsageSensor;
 
@@ -214,7 +216,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     KSysGuard::Process::Usage, Accumulate);
     usageSensor->setShortName(i18n("CPU"));
     usageSensor->setMin(0);
-    usageSensor->setMax(100);
+    usageSensor->setMax(maximumCpuPercent);
     usageSensor->setUnit(KSysGuard::UnitPercent);
     usageSensor->setDescription(i18n("The current total CPU usage of the process."));
     d->m_coreAttributes << usageSensor;
@@ -222,14 +224,14 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     auto totalUserUsageSensor = new ProcessSensor<int>(this, QStringLiteral("totalUserUsage"), i18n("Group User CPU Usage"), &KSysGuard::Process::totalUserUsage, KSysGuard::Process::TotalUsage, Average);
     totalUserUsageSensor->setDescription(i18n("The amount of userspace CPU used by this process and all its children."));
     totalUserUsageSensor->setMin(0);
-    totalUserUsageSensor->setMax(100);
+    totalUserUsageSensor->setMax(maximumCpuPercent);
     totalUserUsageSensor->setUnit(KSysGuard::UnitPercent);
     d->m_coreAttributes << totalUserUsageSensor;
 
     auto totalSysUsageSensor = new ProcessSensor<int>(this, QStringLiteral("totalSysUsage"), i18n("Group System CPU Usage"), &KSysGuard::Process::totalSysUsage, KSysGuard::Process::TotalUsage, Average);
     totalUserUsageSensor->setDescription(i18n("The amount of system CPU used by this process and all its children."));
     totalSysUsageSensor->setMin(0);
-    totalSysUsageSensor->setMax(100);
+    totalSysUsageSensor->setMax(maximumCpuPercent);
     totalSysUsageSensor->setUnit(KSysGuard::UnitPercent);
     d->m_coreAttributes << totalSysUsageSensor;
 
@@ -241,7 +243,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     totalUsageSensor->setShortName(i18n("Group CPU"));
     totalUserUsageSensor->setDescription(i18n("The total amount of CPU used by this process and all its children."));
     totalUsageSensor->setMin(0);
-    totalUsageSensor->setMax(100);
+    totalUsageSensor->setMax(maximumCpuPercent);
     totalUsageSensor->setUnit(KSysGuard::UnitPercent);
     d->m_coreAttributes << totalUsageSensor;
 
