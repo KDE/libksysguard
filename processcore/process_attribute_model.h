@@ -42,6 +42,8 @@ public:
         ShortName = Qt::UserRole + 1, /// A shorter human readable translated name of the attribute
         Description, /// A longer, sentence-based description of the attribute
         Unit, /// The unit, of type KSysGuard::Unit
+        Minimum, /// Smallest value this attribute can be in normal situations. A hint for graphing utilities
+        Maximum, /// Largest value this attribute can be in normal situations. A hint for graphing utilities
     };
     Q_ENUM(Role);
 

@@ -71,6 +71,10 @@ QVariant ProcessAttributeModel::data(const QModelIndex &index, int role) const
         return attribute->description();
     case Role::Unit:
         return attribute->unit();
+    case Role::Minimum:
+        return attribute->min();
+    case Role::Maximum:
+        return attribute->max();
     }
     return QVariant();
 }
@@ -83,5 +87,7 @@ QHash<int, QByteArray> ProcessAttributeModel::roleNames() const
         { static_cast<int>(Role::ShortName), "shortName" },
         { static_cast<int>(Role::Description), "description" },
         { static_cast<int>(Role::Unit), "unit" },
+        { static_cast<int>(Role::Minimum), "minimum" },
+        { static_cast<int>(Role::Maximum), "maximum" },
     });
 }
