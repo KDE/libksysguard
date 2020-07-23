@@ -53,14 +53,39 @@ Charts.LineChart {
         automatic: root.controller.faceConfiguration.rangeAutoX
     }
     yRange {
-        from: root.controller.faceConfiguration.rangeFromY
-        to: root.controller.faceConfiguration.rangeToY
-        automatic: root.controller.faceConfiguration.rangeAutoY
+        readonly property bool stackedAuto: root.controller.faceConfiguration.rangeAutoY && root.controller.faceConfiguration.lineChartStacked
+        from: stackedAuto ? Math.min(sensorsModel.minimum, 0) :  root.controller.faceConfiguration.rangeFromY
+        to: stackedAuto ? sensorsModel.stackedMaximum :  root.controller.faceConfiguration.rangeToY
+        automatic: (root.controller.faceConfiguration.rangeAutoY && !root.controller.faceConfiguration.lineChartStacked)
+            || stackedAuto && yRange.from == yRange.to
     }
 
     Sensors.SensorDataModel {
         id: sensorsModel
         sensors: root.controller.highPrioritySensorIds
+        property double stackedMaximum: yRange.stackedAuto ? calcStackedMaximum() : 0
+
+        function calcStackedMaximum() {
+            let max = 0
+            for (let i = 0; i < sensorsModel.sensors.length; ++i) {
+                max += sensorsModel.data(sensorsModel.index(0, i), Sensors.SensorDataModel.Maximum)
+            }
+            return max
+        }
+    }
+
+    Connections {
+        target: sensorsModel
+        enabled: yRange.stackedAuto
+        function onColumnsInserted() {
+            sensorsModel.stackedMaximum = sensorsModel.calcStackedMaximum()
+        }
+        function onColumnsRemoved() {
+            sensorsModel.stackedMaximum = sensorsModel.calcStackedMaximum()
+        }
+        function onSensorMetaDataChanged() {
+            sensorsModel.stackedMaximum = sensorsModel.calcStackedMaximum()
+        }
     }
 
     Instantiator {
