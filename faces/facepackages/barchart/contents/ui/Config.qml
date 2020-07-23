@@ -32,6 +32,8 @@ Kirigami.FormLayout {
 
     property alias cfg_showLegend: showSensorsLegendCheckbox.checked
     property alias cfg_barChartStacked: stackedCheckbox.checked
+    property alias cfg_showGridLines: showGridLinesCheckBox.checked
+    property alias cfg_showYAxisLabels: showYAxisLabelsCheckbox.checked
     property alias cfg_rangeAuto: rangeAutoCheckbox.checked
     property alias cfg_rangeFrom: rangeFromSpin.value
     property alias cfg_rangeTo: rangeToSpin.value
@@ -43,6 +45,14 @@ Kirigami.FormLayout {
     QQC2.CheckBox {
         id: stackedCheckbox
         text: i18n("Stacked Bars")
+    }
+    QQC2.CheckBox {
+        id: showGridLinesCheckBox
+        text: i18n("Show Grid Lines")
+    }
+    QQC2.CheckBox {
+        id: showYAxisLabelsCheckbox
+        text: i18n("Show Y Axis Labels")
     }
     QQC2.CheckBox {
         id: rangeAutoCheckbox

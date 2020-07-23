@@ -63,7 +63,7 @@ Kirigami.FormLayout {
         id: showGridLinesCheckbox
         text: i18n("Show Grid Lines")
     }
-     QQC2.CheckBox {
+    QQC2.CheckBox {
         id: showYAxisLabelsCheckbox
         text: i18n("Show Y Axis Labels")
     }

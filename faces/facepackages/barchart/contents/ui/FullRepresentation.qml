@@ -2,6 +2,7 @@
  *   Copyright 2019 Marco Martin <mart@kde.org>
  *   Copyright 2019 David Edmundson <davidedmundson@kde.org>
  *   Copyright 2019 Arjen Hiemstra <ahiemstra@heimr.nl>
+ *   Copyright 2020 David Redondo <kde@david-redondo.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -20,12 +21,14 @@
  */
 
 import QtQuick 2.9
+import QtQuick.Controls 2.9 as QQC2
 import QtQuick.Layouts 1.1
 
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
 import org.kde.ksysguard.faces 1.0 as Faces
+import org.kde.ksysguard.formatter 1.0 as Formatter
 
 import org.kde.quickcharts 1.0 as Charts
 import org.kde.quickcharts.controls 1.0 as ChartControls
@@ -34,6 +37,8 @@ Faces.SensorFace {
     id: root
 
     readonly property bool showLegend: controller.faceConfiguration.showLegend
+    readonly property bool showGridLines: root.controller.faceConfiguration.showGridLines
+    readonly property bool showYAxisLabels: root.controller.faceConfiguration.showYAxisLabels
 
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
     Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * compactRepresentation.barCount, Kirigami.Units.gridUnit * 8)
@@ -54,22 +59,68 @@ Faces.SensorFace {
                 text: heading.text
             }
         }
-
-        BarChart {
-            id: compactRepresentation
-            Layout.fillWidth: true
+        RowLayout {
+            spacing: Kirigami.Units.smallSpacing
             Layout.fillHeight: true
-            Layout.minimumHeight: root.formFactor === Faces.SensorFace.Constrained 
-                ? Kirigami.Units.gridUnit
-                : 5 * Kirigami.Units.gridUnit
-            Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
-            Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
+            Layout.topMargin: showYAxisLabels ? axisMetrics.height / 2 : 0
+            Layout.bottomMargin: Layout.topMargin
+            Charts.AxisLabels {
+                id: axisLabels
+                visible: showYAxisLabels
+                Layout.fillHeight: true
+                constrainToBounds: false
+                delegate: QQC2.Label {
+                    anchors.right: parent.right
+                    font: Kirigami.Theme.smallFont
+                    text: Formatter.Formatter.formatValueShowNull(Charts.AxisLabels.label,
+                        compactRepresentation.sensorsModel.data(compactRepresentation.sensorsModel.index(0, 0), Sensors.SensorDataModel.Unit))
+                    color: Kirigami.Theme.disabledTextColor
+                }
+                direction: Charts.AxisLabels.VerticalBottomTop
+                source: Charts.ChartAxisSource {
+                    chart: compactRepresentation
+                    axis: Charts.ChartAxisSource.YAxis
+                    itemCount: 5
+                }
+                TextMetrics {
+                    id: axisMetrics
+                    font: Kirigami.Theme.smallFont
+                    text: Formatter.Formatter.formatValueShowNull("0",
+                        compactRepresentation.sensorsModel.data(compactRepresentation.sensorsModel.index(0, 0), Sensors.SensorDataModel.Unit))
+                }
+            }
+            BarChart {
+                id: compactRepresentation
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumHeight: root.formFactor === Faces.SensorFace.Constrained
+                    ? Kirigami.Units.gridUnit
+                    : 5 * Kirigami.Units.gridUnit
+                Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
+                Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
+
+                Charts.GridLines {
+                    id: horizontalLines
+                    visible: showGridLines
+                    direction: Charts.GridLines.Vertical
+                    anchors.fill: compactRepresentation
+                    z: compactRepresentation.z - 1
+                    chart: compactRepresentation
+
+                    major.count: 3
+                    major.lineWidth: 1
+                    // The same color as Kirigami.Separator
+                    major.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
+                    minor.visible: false
+                }
+            }
         }
 
         Faces.ExtendedLegend {
             Layout.fillWidth: root.width < implicitWidth * 1.5
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
             Layout.fillHeight: true
+            Layout.leftMargin: compactRepresentation.x
             Layout.minimumHeight: root.formFactor === Faces.SensorFace.Horizontal
                 || root.formFactor === Faces.SensorFace.Vertical
                 ? implicitHeight
