@@ -1,5 +1,6 @@
 /*
     Copyright (c) 2019 David Edmundson <davidedmundson@kde.org>
+    Copyright (c) 2020 David Redondo <kde@david-redondo.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -57,10 +58,13 @@ public:
 
 Q_GLOBAL_STATIC(CGroupSystemInformation, s_cGroupSystemInformation)
 
+// The spec says that the two following schemes are allowed
+// - app[-<launcher>]-<ApplicationID>-<RANDOM>.scope
+// - app[-<launcher>]-<ApplicationID>[@<RANDOM>].service
 // Flatpak's are currently in a cgroup, but they don't follow the specification
 // this has been fixed, but this provides some compatability till that lands
 // app vs apps exists because the spec changed.
-QRegularExpression CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("[apps|app|flatpak]-([^-]+)-.*"));
+QRegularExpression CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("[app|apps|flatpak]-(?:[^-]*-)?([^-]+(?=-.*\\.scope)|[^@]+(?=(?:@.*)?\\.service))"));
 
 CGroup::CGroup(const QString &id)
     : d(new CGroupPrivate(id))
