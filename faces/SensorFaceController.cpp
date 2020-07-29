@@ -418,6 +418,11 @@ bool SensorFaceController::supportsLowPrioritySensors() const
     return d->faceProperties.readEntry("SupportsLowPrioritySensors", false);
 }
 
+int SensorFaceController::maxTotalSensors() const
+{
+    return d->faceProperties.readEntry("MaxTotalSensors", 1);
+}
+
 void SensorFaceController::setFaceId(const QString &face)
 {
     if (d->faceId == face) {

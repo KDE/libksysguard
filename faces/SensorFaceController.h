@@ -55,6 +55,7 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(bool supportsSensorsColors READ supportsSensorsColors NOTIFY faceIdChanged)
     Q_PROPERTY(bool supportsTotalSensors READ supportsTotalSensors NOTIFY faceIdChanged)
     Q_PROPERTY(bool supportsLowPrioritySensors READ supportsLowPrioritySensors NOTIFY faceIdChanged)
+    Q_PROPERTY(int maxTotalSensors READ maxTotalSensors  NOTIFY faceIdChanged)
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceIdChanged)
 
     Q_PROPERTY(QQuickItem *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
@@ -105,6 +106,8 @@ public:
     bool supportsSensorsColors() const;
     bool supportsTotalSensors() const;
     bool supportsLowPrioritySensors() const;
+
+    int maxTotalSensors() const;
 
     QAbstractItemModel *availableFacesModel();
     QAbstractItemModel *availablePresetsModel();

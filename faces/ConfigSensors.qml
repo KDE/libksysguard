@@ -24,6 +24,8 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.2 as QQC2
 import QtQml.Models 2.12
 
+import Qt.labs.platform 1.1 as Platform
+
 import org.kde.kirigami 2.8 as Kirigami
 import org.kde.kquickcontrols 2.0
 
@@ -42,11 +44,11 @@ ColumnLayout {
 
     signal configurationChanged
 
-    property var cfg_totalSensors
-    property alias cfg_highPrioritySensorIds: usedSensorsView.sensorIds
-    property alias cfg_sensorColors: usedSensorsView.sensorColors
+    property var cfg_totalSensors: []
+    property var cfg_highPrioritySensorIds: []
+    property var cfg_sensorColors: {}
 
-    property alias cfg_lowPrioritySensorIds: lowPrioritySensorsView.sensorIds
+    property var cfg_lowPrioritySensorIds: []
 
     onCfg_totalSensorsChanged: configurationChanged();
     onCfg_highPrioritySensorIdsChanged: configurationChanged();
@@ -54,11 +56,6 @@ ColumnLayout {
     onCfg_lowPrioritySensorIdsChanged: configurationChanged();
 
     property Faces.SensorFaceController controller
-
-    Sensors.Sensor {
-        id: totalSensor
-        sensorId: cfg_totalSensors.length > 0 ? cfg_totalSensors[0] : ""
-    }
 
     function saveConfig() {
         controller.totalSensors = cfg_totalSensors;
@@ -69,12 +66,15 @@ ColumnLayout {
 
     function loadConfig() {
         cfg_totalSensors = controller.totalSensors;
+        totalChoice.selected = controller.totalSensors;
+
         cfg_highPrioritySensorIds = controller.highPrioritySensorIds;
+        highPriorityChoice.selected = controller.highPrioritySensorIds;
+
         cfg_sensorColors = controller.sensorColors;
-        usedSensorsView.load();
 
         cfg_lowPrioritySensorIds = controller.lowPrioritySensorIds;
-        lowPrioritySensorsView.load();
+        lowPriorityChoice.selected = controller.lowPrioritySensorIds;
     }
 
     // When the ui is open in systemsettings and the page is switched around,
@@ -90,206 +90,81 @@ ColumnLayout {
 
     Connections {
         target: controller
-        onTotalSensorsChanged: Qt.callLater(root.loadConfig)
-        onHighPrioritySensorIdsChanged: Qt.callLater(root.loadConfig)
-        onSensorColorsChanged: Qt.callLater(root.loadConfig)
-        onLowPrioritySensorIdsChanged: Qt.callLater(root.loadConfig)
-    }
-
-    Component {
-        id: delegateComponent
-        Kirigami.SwipeListItem {
-            id: listItem
-            width: usedSensorsView.width
-            actions: Kirigami.Action {
-                icon.name: "list-remove"
-                text: i18nd("KSysGuardSensorFaces", "Remove")
-                onTriggered: {
-                    usedSensorsModel.remove(index, 1);
-                    usedSensorsModel.save();
-                }
-            }
-            contentItem: RowLayout {
-                Kirigami.ListItemDragHandle {
-                    listItem: listItem
-                    listView: usedSensorsView
-                    onMoveRequested: {
-                        usedSensorsModel.move(oldIndex, newIndex, 1)
-                        usedSensorsModel.save();
-                    }
-                }
-                ColorButton {
-                    id: textColorButton
-                    color: model.color
-                    onColorChanged: {
-                        usedSensorsModel.setProperty(index, "color", color.toString());
-                        usedSensorsModel.save();
-                    }
-                }
-                QQC2.Label {
-                    Layout.fillWidth: true
-                    text: sensor.name
-                    Sensors.Sensor {
-                        id: sensor
-                        sensorId: model.sensorId
-                    }
-                }
-            }
+        function onTotalSensorsChanged() {
+            Qt.callLater(root.loadConfig);
+        }
+        function onHighPrioritySensorIdsChanged() {
+            Qt.callLater(root.loadConfig);
+        }
+        function onSensorColorsChanged() {
+            Qt.callLater(root.loadConfig);
+        }
+        function onLowPrioritySensorIdsChanged() {
+            Qt.callLater(root.loadConfig);
         }
     }
 
-    RowLayout {
-        Layout.preferredHeight: sensorListHeader.implicitHeight
+    Platform.ColorDialog {
+        id: colorDialog
+        property string destinationSensor
+
+        currentColor: destinationSensor != "" ? controller.sensorColors[destinationSensor] : ""
+        onAccepted: {
+            cfg_sensorColors[destinationSensor] = color
+            root.cfg_sensorColorsChanged();
+        }
+    }
+
+
+    QQC2.Label {
+        text: i18ndp("KSysGuardSensorFaces", "Total Sensor", "Total Sensors", controller.maxTotalSensors)
         visible: controller.supportsTotalSensors
-        QQC2.Label {
-            text: i18nd("KSysGuardSensorFaces", "Total Sensor:")
+    }
+    Local.Choices {
+        id: totalChoice
+        Layout.fillWidth: true
+        visible: controller.supportsTotalSensors
+        supportsColors: false
+        maxAllowedSensors: controller.maxTotalSensors
+
+        onSelectedChanged: root.cfg_totalSensors = selected
+    }
+
+    QQC2.Label {
+        text: i18nd("KSysGuardSensorFaces", "Sensors")
+    }
+    Local.Choices {
+        id: highPriorityChoice
+        Layout.fillWidth: true
+        supportsColors: controller.supportsSensorsColors
+
+        onSelectedChanged: root.cfg_highPrioritySensorIds = selected
+
+        colors: root.cfg_sensorColors
+        onSelectColor: {
+            colorDialog.destinationSensor = sensorId
+            colorDialog.open()
         }
-        QQC2.Label {
-            Layout.fillWidth: true
-            text: cfg_totalSensors.length > 0 ? totalSensor.name : i18nd("KSysGuardSensorFaces", "Drop Sensor Here")
-            elide: Text.ElideRight
-            DropArea {
-                anchors.fill: parent
-                onEntered: {
-                    if (drag.formats.indexOf("application/x-ksysguard") == -1) {
-                        drag.accepted = false;
-                        return;
-                    }
-                }
-                onDropped: {
-                    cfg_totalSensors =  drop.getDataAsString("application/x-ksysguard")
-                }
-            }
-        }
-        QQC2.ToolButton {
-            icon.name: "list-remove"
-            opacity: cfg_totalSensors.length > 0
-            onClicked: cfg_totalSensors = [];
+        onColorForSensorGenerated: {
+            cfg_sensorColors[sensorId] = color
+            root.cfg_sensorColorsChanged();
         }
     }
 
-    RowLayout {
+    QQC2.Label {
+        text: i18nd("KSysGuardSensorFaces", "Text-Only Sensors")
+        visible: controller.supportsLowPrioritySensors
+    }
+    Local.Choices {
+        id: lowPriorityChoice
         Layout.fillWidth: true
+        visible: controller.supportsLowPrioritySensors
+        supportsColors: false
+
+        onSelectedChanged: root.cfg_lowPrioritySensorIds = selected
+    }
+
+    Item {
         Layout.fillHeight: true
-        Layout.minimumHeight: 0
-        Layout.preferredHeight: 0
-
-        ColumnLayout {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.preferredHeight: 0
-            Layout.preferredWidth: Kirigami.Units.gridUnit * 14
-
-            Kirigami.Heading {
-                Layout.preferredHeight: sensorListHeader.implicitHeight
-                level: 3
-                text: i18nd("KSysGuardSensorFaces", "Chart Sensors")
-            }
-            Local.UsedSensorsView {
-                id: usedSensorsView
-                showColor: controller.supportsSensorsColors
-                sensorColors: root.controller.sensorColors
-            }
-            Kirigami.Heading {
-                Layout.preferredHeight: sensorListHeader.implicitHeight
-                text: i18nd("KSysGuardSensorFaces", "Text Only Sensors")
-                level: 3
-                visible: lowPrioritySensorsView.visible
-            }
-            Local.UsedSensorsView {
-                id: lowPrioritySensorsView
-                visible: controller.supportsLowPrioritySensors
-                showColor: false
-            }
-        }
-
-        ColumnLayout {
-            RowLayout {
-                id: sensorListHeader
-                Layout.fillWidth: true
-                QQC2.ToolButton {
-                    icon.name: "go-previous"
-                    enabled: sensorsDelegateModel.rootIndex.valid
-                    onClicked: sensorsDelegateModel.rootIndex = sensorsDelegateModel.parentModelIndex()
-                }
-                Kirigami.Heading {
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignVCenter
-                    level: 3
-                    text: i18nd("KSysGuardSensorFaces", "All Sensors")
-                }
-            }
-            Kirigami.SearchField {
-                id: searchQuery
-                Layout.fillWidth: true
-            }
-            QQC2.ScrollView {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.preferredWidth: Kirigami.Units.gridUnit * 14
-
-                ListView {
-                    KItemModels.KSortFilterProxyModel {
-                        id: sensorsSearchableModel
-                        filterCaseSensitivity: Qt.CaseInsensitive
-                        filterString: searchQuery.text
-                        sourceModel: KItemModels.KSortFilterProxyModel {
-                            filterRowCallback: function(source_row, source_parent) {
-                                //filter only items which were leaf nodes from before we squashed everything
-                                var value = sourceModel.data(sourceModel.index(source_row, 0, source_parent), Sensors.SensorTreeModel.SensorId)
-                                return (value && value.length)
-                            }
-                            sourceModel: KItemModels.KDescendantsProxyModel {
-                                model: allSensorsTreeModel
-                            }
-                        }
-                    }
-
-                    Sensors.SensorTreeModel {
-                        id: allSensorsTreeModel
-                    }
-
-                    model: DelegateModel {
-                        id: sensorsDelegateModel
-
-                        model: searchQuery.text.length == 0 ?  allSensorsTreeModel : sensorsSearchableModel
-
-                        delegate: Kirigami.BasicListItem {
-                            id: sensorTreeDelegate
-                            text: model.display
-                            icon: (model.SensorId.length == 0) ? "folder" : ""
-
-                            Drag.active: model.SensorId.length > 0 && sensorTreeDelegate.pressed
-                            Drag.dragType: Drag.Automatic
-                            Drag.supportedActions: Qt.CopyAction
-                            Drag.hotSpot.x: sensorTreeDelegate.pressX
-                            Drag.hotSpot.y: sensorTreeDelegate.pressY
-                            Drag.mimeData: {
-                                "application/x-ksysguard": model.SensorId
-                            }
-                            //FIXME: better handling of Drag
-                            onPressed: {
-                                onPressed: grabToImage(function(result) {
-                                    Drag.imageSource = result.url
-                                })
-                            }
-                            onClicked: {
-                                if (model.SensorId.length == 0) {
-                                    sensorsDelegateModel.rootIndex = sensorsDelegateModel.modelIndex(index);
-                                }
-                            }
-                            onDoubleClicked: {
-                                if (model.SensorId) {
-                                    usedSensorsView.appendSensor(model.SensorId);
-                                    usedSensorsView.positionViewAtIndex(usedSensorsView.count - 1, ListView.Contain);
-                                }
-                            }
-                        }
-                    }
-                }
-                Component.onCompleted: background.visible = true;
-                QQC2.ScrollBar.horizontal.visible: false
-            }
-        }
     }
 }
