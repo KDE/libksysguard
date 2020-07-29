@@ -52,41 +52,14 @@ void SensorGroup::retranslate()
     m_sensorNames[QStringLiteral("partitions/(?!all).*/filllevel")] = i18n("[Group] Percentage Used");
     m_sensorNames[QStringLiteral("partitions/(?!all).*/total")] = i18n("[Group] Total Size");
 
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/data")] = i18n("[Group] Received Data Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/dataTotal")] = i18n("[Group] Received Data");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/packets")] = i18n("[Group] Received Packets Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/packetsTotal")] = i18n("[Group] Received Packets");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/errors")] = i18n("[Group] Receiver Errors Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/errorsTotal")] = i18n("[Group] Receiver Errors");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/drops")] = i18n("[Group] Receiver Drops Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/dropsTotal")] = i18n("[Group] Receiver Drops");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/fifo")] = i18n("[Group] Receiver Fifo Overruns Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/fifoTotal")] = i18n("[Group] Receiver Fifo Overruns");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/frame")] = i18n("[Group] Receiver Frame Errors Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/frameTotal")] = i18n("[Group] Receiver Frame Errors");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/compressed")] = i18n("[Group] Compressed Packets Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/compressedTotal")] = i18n("[Group] Compressed Packets");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/multicast")] = i18n("[Group] Received Multicast Packets Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/receiver/multicastTotal")] = i18n("[Group] Multicast Packets");
-
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/data")] = i18n("[Group] Sent Data Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/dataTotal")] = i18n("[Group] Sent Data ");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/packets")] = i18n("[Group] Sent Packets Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/packetsTotal")] = i18n("[Group] Sent Packets");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/errors")] = i18n("[Group] Transmitter Errors Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/errorsTotal")] = i18n("[Group] Transmitter Errors");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/drops")] = i18n("[Group] Transmitter Drops Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/dropsTotal")] = i18n("[Group] Transmitter Drops");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/fifo")] = i18n("[Group] Transmitter FIFO Overruns Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/fifoTotal")] = i18n("[Group] FIFO Overruns");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/collisions")] = i18n("[Group] Transmitter Collisions Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/collisionsTotal")] = i18n("[Group] Transmitter Collisions");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/carrier")] = i18n("[Group] Transmitter Carrier Losses Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/carrierTotal")] = i18n("[Group] Transmitter Carrier Losses");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/compressed")] = i18n("[Group] Transmitter Compressed Packets Rate");
-    m_sensorNames[QStringLiteral("network/interfaces/(?!all).*/transmitter/compressedTotal")] = i18n("[Group] Transmitter Compressed Packets");
-
-
+    m_sensorNames[QStringLiteral("network/(?!all).*/network")] = i18n("[Group] Network Name");
+    m_sensorNames[QStringLiteral("network/(?!all).*/ipv4address")] = i18n("[Group] IPv4 Address");
+    m_sensorNames[QStringLiteral("network/(?!all).*/ipv6address")] = i18n("[Group] IPv6 Address");
+    m_sensorNames[QStringLiteral("network/(?!all).*/signal")] = i18n("[Group] Signal Strength");
+    m_sensorNames[QStringLiteral("network/(?!all).*/download")] = i18n("[Group] Download Rate");
+    m_sensorNames[QStringLiteral("network/(?!all).*/totalDownload")] = i18n("[Group] Total Downloaded");
+    m_sensorNames[QStringLiteral("network/(?!all).*/upload")] = i18n("[Group] Upload Rate");
+    m_sensorNames[QStringLiteral("network/(?!all).*/totalUpload")] = i18n("[Group] Total Uploaded");
 
     m_segmentNames[QLatin1String("cpu\\d+")] = i18n("[Group] CPU");
     m_segmentNames[QLatin1String("disk\\d+")] = i18n("[Group] Disk");
@@ -97,21 +70,16 @@ QString SensorGroup::groupRegexForId(const QString &key)
 {
 
     QRegularExpression cpuExpr(QStringLiteral("cpu/cpu\\d+/(.*)"));
-    QRegularExpression netRecExpr(QStringLiteral("network/interfaces/(?!all).*/receiver/(.*)"));
-    QRegularExpression netTransExpr(QStringLiteral("network/interfaces/(?!all).*/transmitter/(.*)"));
+    QRegularExpression netExpr(QStringLiteral("network/(?!all).*/(.*)$"));
     QRegularExpression partitionsExpr(QStringLiteral("partitions/(?!all).*/(.*)$"));
 
     if (key.contains(cpuExpr)) {
         QString expr = key;
         return expr.replace(cpuExpr, QStringLiteral("cpu/cpu\\d+/\\1"));
 
-    } else if (key.contains(netRecExpr)) {
+    } else if (key.contains(netExpr)) {
         QString expr = key;
-        return expr.replace(netRecExpr, QStringLiteral("network/interfaces/(?!all).*/receiver/\\1"));
-
-    } else if (key.contains(netTransExpr)) {
-        QString expr = key;
-        return expr.replace(netTransExpr, QStringLiteral("network/interfaces/(?!all).*/transmitter/\\1"));
+        return expr.replace(netExpr, QStringLiteral("network/(?!all).*/\\1"));
 
     } else if (key.contains(partitionsExpr)) {
         QString expr = key;
