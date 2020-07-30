@@ -362,6 +362,10 @@ QVariantMap SensorFaceController::sensorColors() const
 
 void SensorFaceController::setSensorColors(const QVariantMap &colors)
 {
+    if (colors == this->sensorColors()) {
+        return;
+    }
+
     d->colorsGroup.deleteGroup();
     d->colorsGroup = KConfigGroup(&d->configGroup, "SensorColors");
 
