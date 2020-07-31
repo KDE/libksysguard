@@ -37,6 +37,17 @@ ecm_add_test(sensordatamodeltest.cpp LINK_LIBRARIES Qt5::Test Qt5::DBus KSysGuar
 ecm_add_test(processdatamodeltest.cpp LINK_LIBRARIES Qt5::Test KSysGuard::ProcessCore)
 ecm_add_test(cgrouptest.cpp LINK_LIBRARIES Qt5::Test KF5::Service KSysGuard::ProcessCore)
 
+include_directories(../faces)
+ecm_add_test(sensorfacecontrollertest.cpp LINK_LIBRARIES
+    Qt5::Test
+    KF5::ConfigCore
+    KF5::ConfigGui
+    KF5::I18n
+    KF5::Package
+    KF5::Declarative
+    KSysGuard::SensorFaces
+)
+
 # set( ksysguarddtest_SRCS ksysguarddtest.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorManager.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorSocketAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorShellAgent.cpp)
 #
 # ecm_add_test(${ksysguarddtest_SRCS}
