@@ -689,7 +689,7 @@ void SensorFaceController::savePreset()
         return;
     }
 
-    KConfig c(dir.path() % QLatin1Literal("/metadata.desktop"));
+    KConfig c(dir.path() % QStringLiteral("/metadata.desktop"));
 
     KConfigGroup cg(&c, "Desktop Entry");
     cg.writeEntry("Name", title());
@@ -708,7 +708,7 @@ void SensorFaceController::savePreset()
 
     QDir subDir(dir.path());
     subDir.mkdir(QStringLiteral("contents"));
-    KConfig faceConfig(subDir.path() % QLatin1Literal("/contents/faceproperties"));
+    KConfig faceConfig(subDir.path() % QStringLiteral("/contents/faceproperties"));
 
     KConfigGroup configGroup(&faceConfig, "Config");
     configGroup.writeEntry(QStringLiteral("totalSensors"), QJsonDocument(totalSensors()).toJson(QJsonDocument::Compact));
