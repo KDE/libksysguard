@@ -19,6 +19,7 @@ target_link_libraries(Formatter
     Qt5::Core
     PRIVATE
     KF5::I18n
+    KF5::CoreAddons
 )
 
 generate_export_header(Formatter)

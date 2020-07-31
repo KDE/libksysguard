@@ -45,25 +45,6 @@ Q_DECLARE_FLAGS(FormatOptions, FormatOption)
 class FORMATTER_EXPORT Formatter
 {
 public:
-    /**
-     * Returns the scale factor suitable for display.
-     *
-     * @param value The maximum output value.
-     * @param unit The unit of the value.
-     * @param targetPrefix Preferred metric prefix.
-     */
-    static qreal scaleDownFactor(const QVariant &value, Unit unit,
-        MetricPrefix targetPrefix = MetricPrefixAutoAdjust);
-
-    /**
-     * Returns localized string that is suitable for display.
-     *
-     * @param value The maximum output value.
-     * @param unit The unit of the value.
-     * @param targetPrefix Preferred metric prefix.
-     */
-    static KLocalizedString localizedString(const QVariant &value, Unit unit,
-        MetricPrefix targetPrefix = MetricPrefixAutoAdjust);
 
     /**
      * Converts @p value to the appropriate displayable string.
