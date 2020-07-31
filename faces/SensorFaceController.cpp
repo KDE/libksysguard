@@ -133,51 +133,17 @@ QHash<int, QByteArray> PresetsModel::roleNames() const
 }
 
 
-
-class SensorFaceController::Private
+SensorFaceControllerPrivate::SensorFaceControllerPrivate()
 {
-public:
-    Private();
-    QJsonArray resolveSensors(const QJsonArray &partialEntries);
-    SensorFace *createGui(const QString &qmlPath);
-    QQuickItem *createConfigUi(const QString &file, const QVariantMap &initialProperties);
+}
 
-    SensorFaceController *q;
-    QString title;
-    QQmlEngine *engine;
 
-    KConfigGroup faceProperties;
-    KDeclarative::ConfigPropertyMap *faceConfiguration = nullptr;
-    KConfigLoader *faceConfigLoader = nullptr;
 
-    bool configNeedsSave = false;
-    KPackage::Package facePackage;
-    QString faceId;
-    KLocalizedContext *contextObj = nullptr;
-    KConfigGroup configGroup;
-    KConfigGroup appearanceGroup;
-    KConfigGroup sensorsGroup;
-    KConfigGroup colorsGroup;
-    QPointer <SensorFace> fullRepresentation;
-    QPointer <SensorFace> compactRepresentation;
-    QPointer <QQuickItem> faceConfigUi;
-    QPointer <QQuickItem> appearanceConfigUi;
-    QPointer <QQuickItem> sensorsConfigUi;
 
-    QJsonArray totalSensors;
-    QJsonArray highPrioritySensorIds;
-    QJsonArray lowPrioritySensorIds;
 
-    QTimer *syncTimer;
-    bool shouldSync = true;
-    FacesModel *availableFacesModel = nullptr;
-    PresetsModel *availablePresetsModel = nullptr;
-};
 
-SensorFaceController::Private::Private()
-{}
 
-QJsonArray SensorFaceController::Private::resolveSensors(const QJsonArray &partialEntries)
+QJsonArray SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partialEntries)
 {
     QJsonArray sensors;
 
@@ -194,7 +160,7 @@ QJsonArray SensorFaceController::Private::resolveSensors(const QJsonArray &parti
     return sensors;
 };
 
-SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
+SensorFace *SensorFaceControllerPrivate::createGui(const QString &qmlPath)
 {
     QQmlComponent *component = new QQmlComponent(engine, qmlPath, nullptr);
     // TODO: eventually support async  components? (only useful for qml files from http, we probably don't want that)
@@ -227,7 +193,7 @@ SensorFace *SensorFaceController::Private::createGui(const QString &qmlPath)
     return gui;
 }
 
-QQuickItem *SensorFaceController::Private::createConfigUi(const QString &file, const QVariantMap &initialProperties)
+QQuickItem *SensorFaceControllerPrivate::createConfigUi(const QString &file, const QVariantMap &initialProperties)
 {
     QQmlComponent *component = new QQmlComponent(engine, file, nullptr);
     // TODO: eventually support async  components? (only useful for qml files from http, we probably don't want that)
@@ -254,12 +220,9 @@ QQuickItem *SensorFaceController::Private::createConfigUi(const QString &file, c
 }
 
 
-
-
-
 SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *engine)
     : QObject(engine),
-      d(std::make_unique<Private>())
+      d(std::make_unique<SensorFaceControllerPrivate>())
 {
     d->q = this;
     d->configGroup = config;

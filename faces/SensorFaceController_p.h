@@ -21,13 +21,21 @@
 
 #include <QQuickItem>
 #include <QStandardItemModel>
+#include <QJsonArray>
 #include <KLocalizedContext>
+#include <KPackage/PackageLoader>
+#include <KConfigGroup>
+#include <KConfigLoader>
+#include <KDeclarative/ConfigPropertyMap>
+
+#include "sensorfaces_export.h"
 
 class QQmlEngine;
 
 namespace KSysGuard {
 
 class SensorFaceController;
+class SensorFace;
 
 class FacesModel : public QStandardItemModel
 {
@@ -65,4 +73,47 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 };
+
+// This is exported so we can use it in autotests
+class SENSORFACES_EXPORT SensorFaceControllerPrivate
+{
+public:
+    SensorFaceControllerPrivate();
+
+    QJsonArray resolveSensors(const QJsonArray &partialEntries);
+    SensorFace *createGui(const QString &qmlPath);
+    QQuickItem *createConfigUi(const QString &file, const QVariantMap &initialProperties);
+
+    SensorFaceController *q;
+    QString title;
+    QQmlEngine *engine;
+
+    KConfigGroup faceProperties;
+    KDeclarative::ConfigPropertyMap *faceConfiguration = nullptr;
+    KConfigLoader *faceConfigLoader = nullptr;
+
+    bool configNeedsSave = false;
+    KPackage::Package facePackage;
+    QString faceId;
+    KLocalizedContext *contextObj = nullptr;
+    KConfigGroup configGroup;
+    KConfigGroup appearanceGroup;
+    KConfigGroup sensorsGroup;
+    KConfigGroup colorsGroup;
+    QPointer <SensorFace> fullRepresentation;
+    QPointer <SensorFace> compactRepresentation;
+    QPointer <QQuickItem> faceConfigUi;
+    QPointer <QQuickItem> appearanceConfigUi;
+    QPointer <QQuickItem> sensorsConfigUi;
+
+    QJsonArray totalSensors;
+    QJsonArray highPrioritySensorIds;
+    QJsonArray lowPrioritySensorIds;
+
+    QTimer *syncTimer;
+    bool shouldSync = true;
+    FacesModel *availableFacesModel = nullptr;
+    PresetsModel *availablePresetsModel = nullptr;
+};
+
 }

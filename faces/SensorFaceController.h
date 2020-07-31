@@ -39,6 +39,7 @@ class KConfigLoader;
 namespace KSysGuard {
 
 class SensorFace;
+class SensorFaceControllerPrivate;
 
 class SENSORFACES_EXPORT SensorFaceController : public QObject
 {
@@ -130,7 +131,6 @@ Q_SIGNALS:
     void sensorColorsChanged();
 
 private:
-    class Private;
-    const std::unique_ptr<Private> d;
+    const std::unique_ptr<SensorFaceControllerPrivate> d;
 };
 }
