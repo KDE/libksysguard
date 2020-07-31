@@ -156,7 +156,6 @@ KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
     const QString appId = appIdMatch.captured(1);
 
     KService::Ptr service = KService::serviceByMenuId(appId + QStringLiteral(".desktop"));
-
     if (!service) {
         service = new KService(appId, QString(), QString());
     }

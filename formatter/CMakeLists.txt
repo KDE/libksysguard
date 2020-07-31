@@ -23,6 +23,12 @@ target_link_libraries(Formatter
 
 generate_export_header(Formatter)
 
+target_include_directories(Formatter
+    PUBLIC
+    "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
+    "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard/>"
+)
+
 set_target_properties(Formatter PROPERTIES
     LIBRARY_OUTPUT_NAME KSysGuardFormatter
     VERSION ${KSYSGUARD_VERSION_STRING}
@@ -32,6 +38,7 @@ set_target_properties(Formatter PROPERTIES
 add_subdirectory(declarative)
 
 install(TARGETS Formatter EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
 install(FILES
     ${formatter_HDRS}
     ${CMAKE_CURRENT_BINARY_DIR}/formatter_export.h
