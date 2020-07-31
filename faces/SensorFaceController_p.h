@@ -80,6 +80,8 @@ class SENSORFACES_EXPORT SensorFaceControllerPrivate
 public:
     SensorFaceControllerPrivate();
 
+    QJsonArray readSensors(const KConfigGroup &config, const QString &entryName);
+    QJsonArray readAndUpdateSensors(KConfigGroup &config, const QString &entryName);
     QJsonArray resolveSensors(const QJsonArray &partialEntries);
     SensorFace *createGui(const QString &qmlPath);
     QQuickItem *createConfigUi(const QString &file, const QVariantMap &initialProperties);
@@ -114,6 +116,8 @@ public:
     bool shouldSync = true;
     FacesModel *availableFacesModel = nullptr;
     PresetsModel *availablePresetsModel = nullptr;
+
+    static QVector<QPair<QRegularExpression, QString>> sensorIdReplacements;
 };
 
 }

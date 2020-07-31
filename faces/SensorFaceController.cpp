@@ -132,16 +132,60 @@ QHash<int, QByteArray> PresetsModel::roleNames() const
     return roles;
 }
 
+QVector<QPair<QRegularExpression, QString>> KSysGuard::SensorFaceControllerPrivate::sensorIdReplacements;
 
 SensorFaceControllerPrivate::SensorFaceControllerPrivate()
 {
+    if (SensorFaceControllerPrivate::sensorIdReplacements.isEmpty()) {
+        // A list of conversion rules to convert old sensor ids to new ones.
+        // When loading, each regular expression tries to match to the sensor
+        // id. If it matches, it will be be used to replace the sensor id with
+        // the second argument.
+        sensorIdReplacements = {
+            { QRegularExpression(QStringLiteral("network/interfaces/(.*)")), QStringLiteral("network/\\1")},
+            { QRegularExpression(QStringLiteral("network/all/receivedDataRate$")), QStringLiteral("network/all/download")},
+            { QRegularExpression(QStringLiteral("network/all/sentDataRate$")), QStringLiteral("network/all/upload")},
+            { QRegularExpression(QStringLiteral("network/all/totalReceivedData$")), QStringLiteral("network/all/totalDownload")},
+            { QRegularExpression(QStringLiteral("network/all/totalSentData$")), QStringLiteral("network/all/totalUpload")},
+            { QRegularExpression(QStringLiteral("(.*)/receiver/data$")), QStringLiteral("\\1/download")},
+            { QRegularExpression(QStringLiteral("(.*)/transmitter/data$")), QStringLiteral("\\1/upload")},
+            { QRegularExpression(QStringLiteral("(.*)/receiver/dataTotal$")), QStringLiteral("\\1/totalDownload")},
+            { QRegularExpression(QStringLiteral("(.*)/transmitter/dataTotal$")), QStringLiteral("\\1/totalUpload")},
+        };
+    }
 }
 
+QJsonArray SensorFaceControllerPrivate::readSensors(const KConfigGroup &read, const QString &entryName)
+{
+    auto original = QJsonDocument::fromJson(read.readEntry(entryName, QString()).toUtf8()).array();
+    QJsonArray newSensors;
+    for (auto entry : original) {
+        QString sensorId = entry.toString();
+        for (auto replacement : qAsConst(sensorIdReplacements)) {
+            auto match = replacement.first.match(sensorId);
+            if (match.hasMatch()) {
+                sensorId.replace(replacement.first, replacement.second);
+            }
+        }
+        newSensors.append(sensorId);
+    }
 
+    return newSensors;
+}
 
+QJsonArray SensorFaceControllerPrivate::readAndUpdateSensors(KConfigGroup& config, const QString& entryName)
+{
+    auto original = QJsonDocument::fromJson(config.readEntry(entryName, QString()).toUtf8()).array();
 
+    const KConfigGroup &group = config;
+    auto newSensors = readSensors(group, entryName);
 
+    if (newSensors != original) {
+        config.writeEntry(entryName, QJsonDocument(newSensors).toJson(QJsonDocument::Compact));
+    }
 
+    return newSensors;
+}
 
 QJsonArray SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partialEntries)
 {
@@ -243,9 +287,9 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
 
     d->contextObj = new KLocalizedContext(this);
 
-    d->totalSensors = d->resolveSensors(QJsonDocument::fromJson(d->sensorsGroup.readEntry("totalSensors", QString()).toUtf8()).array());
-    d->lowPrioritySensorIds = d->resolveSensors(QJsonDocument::fromJson(d->sensorsGroup.readEntry("lowPrioritySensorIds", QString()).toUtf8()).array());
-    d->highPrioritySensorIds = d->resolveSensors(QJsonDocument::fromJson(d->sensorsGroup.readEntry("highPrioritySensorIds", QString()).toUtf8()).array());
+    d->totalSensors = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")));
+    d->lowPrioritySensorIds = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")));
+    d->highPrioritySensorIds = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")));
 
     setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.piechart")));
 }
@@ -585,8 +629,8 @@ void SensorFaceController::loadPreset(const QString &preset)
     KDesktopFile df(presetPackage.path() + QStringLiteral("metadata.desktop"));
 
     auto c = KSharedConfig::openConfig(presetPackage.filePath("config", QStringLiteral("faceproperties")));
-    KConfigGroup presetGroup(c, QStringLiteral("Config"));
-    KConfigGroup colorsGroup(c, QStringLiteral("SensorColors"));
+    const KConfigGroup presetGroup(c, QStringLiteral("Config"));
+    const KConfigGroup colorsGroup(c, QStringLiteral("SensorColors"));
 
     // Load the title
     setTitle(df.readName());
@@ -597,15 +641,9 @@ void SensorFaceController::loadPreset(const QString &preset)
         d->availablePresetsModel->removeRow(0);
     }
 
-
-    QJsonDocument doc = QJsonDocument::fromJson(presetGroup.readEntry("totalSensors", QString()).toUtf8());
-    setTotalSensors(doc.array());
-
-    doc = QJsonDocument::fromJson(presetGroup.readEntry("highPrioritySensorIds", QString()).toUtf8());
-    setHighPrioritySensorIds(doc.array());
-
-    doc = QJsonDocument::fromJson(presetGroup.readEntry("lowPrioritySensorIds", QString()).toUtf8());
-    setLowPrioritySensorIds(doc.array());
+    setTotalSensors(d->readSensors(presetGroup, QStringLiteral("totalSensors")));
+    setHighPrioritySensorIds(d->readSensors(presetGroup, QStringLiteral("highPrioritySensorIds")));
+    setLowPrioritySensorIds(d->readSensors(presetGroup, QStringLiteral("lowPrioritySensorIds")));
 
     setFaceId(presetGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
 
