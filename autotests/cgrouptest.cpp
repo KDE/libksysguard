@@ -44,10 +44,10 @@ void CGroupTest::testAppUnitRegex()
     QFETCH(QString, desktopName);
     KSysGuard::CGroup c(id);
     if (c.service()->menuId().isEmpty()) {
-        // The service is not known on d machine an we constructed a service with the id as name
+        // The service is not known on this machine and we constructed a service with the id as name
         QCOMPARE(c.service()->name(), desktopName);
     } else {
-        QCOMPARE(c.service()->desktopEntryName(), desktopName);
+        QCOMPARE(c.service()->desktopEntryName(), desktopName.toLower());
     }
 }
 
