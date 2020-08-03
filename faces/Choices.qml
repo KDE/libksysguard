@@ -258,7 +258,11 @@ Control {
             }
         }
 
-        Item { width: Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2; height: width; visible: control.maxAllowedSensors <= 0 }
+        Item {
+            width: Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
+            height: width
+            visible: control.maxAllowedSensors <= 0 || control.selected.length < control.maxAllowedSensors
+        }
     }
 
     Popup {
