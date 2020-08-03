@@ -355,9 +355,11 @@ Control {
                                     if (control.selected === undefined || control.selected === null) {
                                         control.selected = []
                                     }
-                                    control.selected.push(model.SensorId)
+                                    const length = control.selected.push(model.SensorId)
                                     control.selectedChanged()
-                                    popup.close()
+                                    if (control.maxAllowedSensors == length) {
+                                        popup.close();
+                                    }
                                 }
                             }
                         }
