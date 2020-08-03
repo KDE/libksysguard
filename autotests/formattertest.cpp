@@ -62,6 +62,27 @@ private Q_SLOTS:
         auto formatted = KSysGuard::Formatter::formatValue(input, unit);
         QCOMPARE(formatted, output);
     }
+
+    void testFormatTime_data()
+    {
+        QTest::addColumn<int>("input");
+        QTest::addColumn<QString>("output");
+        QTest::newRow("1 s") << 1 << QSL("0:01");
+        QTest::newRow("10 s") << 10 << QSL("0:10");
+        QTest::newRow("1 m") << 60 << QSL("1:00");
+        QTest::newRow("10m") << 60 * 10 << QSL("10:00");
+        QTest::newRow("1h") << 60 * 60 << QSL("60:00");
+        QTest::newRow("1h 1 m 1s") << (60 * 60) + 60 + 1 << QSL("61:01");
+    }
+
+    void testFormatTime()
+    {
+        QFETCH(int, input);
+        QFETCH(QString, output);
+        auto formatted =  KSysGuard::Formatter::formatValue(input, KSysGuard::UnitTime);
+        QCOMPARE(formatted, output);
+    }
+
 };
 
 QTEST_MAIN(FormatterTest);
