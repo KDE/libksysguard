@@ -24,6 +24,12 @@
 #include "Formatter.h"
 #include "Unit.h"
 
+#include <unistd.h>
+#ifdef Q_OS_OSX
+#include <mach/clock.h>
+#include <mach/mach.h>
+#endif
+
 #define QSL QStringLiteral
 
 class FormatterTest : public QObject
@@ -62,6 +68,69 @@ private Q_SLOTS:
         auto formatted = KSysGuard::Formatter::formatValue(input, unit);
         QCOMPARE(formatted, output);
     }
+
+    void testBootTimeStampAgo_data()
+    {
+        QTest::addColumn<int>("inputms");
+        QTest::addColumn<QString>("outputago");
+        QTest::newRow("1 ms") <<  1 << QSL("0s ago");
+        QTest::newRow("1 s") << 1000 << QSL("1s ago");
+        QTest::newRow("10 s") << 10 * 1000 << QSL("10s ago");
+        QTest::newRow("1 s 500ms") << 1000 + 500 << QSL("1s ago");
+        QTest::newRow("1 m") << 60 * 1000 << QSL("1m 0s ago");
+        QTest::newRow("1 m 1s") << 60 * 1000 + 1000 << QSL("1m 1s ago");
+        QTest::newRow("1h") << (60 * 60 * 1000) << QSL("1h 0m 0s ago");
+        QTest::newRow("1h 1 m 1s") << (60 * 60 * 1000) + 60  * 1000 + 1000 << QSL("1h 1m 1s ago");
+        QTest::newRow("24h") << (60 * 60 * 1000) * 24  << QSL("1 day 0h 0m ago");
+        QTest::newRow("25h 1 m") << (60 * 60 * 1000) * 25 + 60  * 1000 + 1000 << QSL("1 day 1h 1m ago");
+        QTest::newRow("25h 1 m 1s") << (60 * 60 * 1000) * 25 + 60  * 1000 + 1000 << QSL("1 day 1h 1m ago");
+        QTest::newRow("48h") << (60 * 60 * 1000) * 48 << QSL("2 days 0h 0m ago");
+    }
+
+    void testBootTimeStampAgo()
+    {
+        QFETCH(int, inputms);
+        QFETCH(QString, outputago);
+        const long clockTicksPerSecond = sysconf(_SC_CLK_TCK);
+#ifdef Q_OS_OSX
+        clock_serv_t cclock;
+        mach_timespec_t tp;
+        host_get_clock_service(mach_host_self(), SYSTEM_CLOCK, &cclock);
+        clock_get_time(cclock, &tp);
+        mach_port_deallocate(mach_task_self(), cclock);
+#else
+        timespec tp;
+        clock_gettime(CLOCK_MONOTONIC, &tp);
+#endif
+        long ticks = clockTicksPerSecond * (tp.tv_sec - inputms / 1000);
+        auto formatted = KSysGuard::Formatter::formatValue(QVariant::fromValue<long>(ticks),
+            KSysGuard::UnitBootTimestamp);
+        QCOMPARE(formatted, QDateTime::currentDateTime().addMSecs(-inputms).toString(Qt::DefaultLocaleLongDate));
+        formatted = KSysGuard::Formatter::formatValue(QVariant::fromValue<long>(ticks),
+            KSysGuard::UnitBootTimestamp, KSysGuard::MetricPrefixAutoAdjust, KSysGuard::FormatOptionAgo);
+        QCOMPARE(formatted, outputago);
+    }
+
+    void testFormatTime_data()
+    {
+        QTest::addColumn<int>("input");
+        QTest::addColumn<QString>("output");
+        QTest::newRow("1 s") << 1 << QSL("0:01");
+        QTest::newRow("10 s") << 10 << QSL("0:10");
+        QTest::newRow("1 m") << 60 << QSL("1:00");
+        QTest::newRow("10m") << 60 * 10 << QSL("10:00");
+        QTest::newRow("1h") << 60 * 60 << QSL("60:00");
+        QTest::newRow("1h 1 m 1s") << (60 * 60) + 60 + 1 << QSL("61:01");
+    }
+
+    void testFormatTime()
+    {
+        QFETCH(int, input);
+        QFETCH(QString, output);
+        auto formatted =  KSysGuard::Formatter::formatValue(input, KSysGuard::UnitTime);
+        QCOMPARE(formatted, output);
+    }
+
 };
 
 QTEST_MAIN(FormatterTest);
