@@ -38,6 +38,8 @@
 
 #include <unistd.h>
 
+#include "formatter_debug.h"
+
 namespace KSysGuard
 {
 
@@ -255,61 +257,6 @@ static QString formatTime(const QVariant &value)
     return minutesString + QLatin1Char(':') + secondsScring;
 }
 
-static QString formatBootTimestamp(const QVariant &value, FormatOptions options)
-{
-    const qlonglong clockTicksSinceSystemBoot = value.toLongLong();
-    const QDateTime now = QDateTime::currentDateTime();
-
-#ifdef Q_OS_OSX
-    clock_serv_t cclock;
-    mach_timespec_t tp;
-
-    host_get_clock_service(mach_host_self(), SYSTEM_CLOCK, &cclock);
-    clock_get_time(cclock, &tp);
-    mach_port_deallocate(mach_task_self(), cclock);
-#else
-    timespec tp;
-
-    clock_gettime(CLOCK_MONOTONIC, &tp);
-#endif
-    const QDateTime systemBootTime = now.addSecs(-tp.tv_sec);
-
-    const long clockTicksPerSecond = sysconf(_SC_CLK_TCK);
-    const qreal secondsSinceSystemBoot = qreal(clockTicksSinceSystemBoot) / clockTicksPerSecond;
-    const QDateTime absoluteStartTime = systemBootTime.addSecs(secondsSinceSystemBoot);
-
-    if (!options.testFlag(FormatOptionAgo)) {
-        return QLocale().toString(absoluteStartTime);
-    }
-
-    const qint64 totalSeconds = absoluteStartTime.secsTo(now);
-    const qint64 totalMinutes = totalSeconds / 60.0;
-    const qint64 totalHours = totalSeconds / 60.0 / 60.0;
-    const qint64 totalDays = totalSeconds / 60.0 / 60.0 / 24.0;
-
-    if (!totalMinutes) {
-        return i18nc("contains a abbreviated time unit: (s)econds", "%1s ago", totalSeconds);
-    }
-
-    if (!totalHours) {
-        const int seconds = totalSeconds - totalMinutes * 60;
-        return i18nc("contains abbreviated time units: (m)inutes and (s)econds", "%1m %2s ago",
-            totalMinutes, seconds);
-    }
-
-    if (!totalDays) {
-        const int seconds = totalSeconds - totalMinutes * 60;
-        const int minutes = totalMinutes - totalHours * 60;
-        return i18nc("contains abbreviated time units: (h)ours, (m)inutes and (s)econds)",
-            "%1h %2m %3s ago", totalHours, minutes, seconds);
-    }
-
-    const int minutes = totalMinutes - totalHours * 60;
-    const int hours = totalHours - totalDays * 24;
-    return i18ncp("contains also abbreviated time units: (h)ours and (m)inutes",
-        "%1 day %2h %3m ago", "%1 days %2h %3m ago", totalDays, hours, minutes);
-}
-
 qreal Formatter::scaleDownFactor(const QVariant &value, Unit unit, MetricPrefix targetPrefix)
 {
     const Unit adjusted = adjustedUnit(value.toDouble(), unit, targetPrefix);
@@ -358,7 +305,8 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
         return formatNumber(value, unit, targetPrefix, options);
 
     case UnitBootTimestamp:
-        return formatBootTimestamp(value, options);
+        qCWarning(FORMATTER) << "UnitBootTimestamp is deprecated and is not formatted anymore";
+        return value.toString();
     case UnitTime:
         return formatTime(value);
 

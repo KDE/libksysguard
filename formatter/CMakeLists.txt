@@ -11,6 +11,12 @@ set(formatter_HDRS
     Unit.h
 )
 
+ecm_qt_declare_logging_category(formatter_SRCS
+    HEADER formatter_debug.h
+    IDENTIFIER FORMATTER
+    CATEGORY_NAME org.kde.libksysguard.formatter
+)
+
 add_library(Formatter ${formatter_SRCS})
 add_library(KSysGuard::Formatter ALIAS Formatter)
 
