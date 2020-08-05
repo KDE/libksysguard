@@ -158,24 +158,24 @@ static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefi
     }
     int order = unitOrder(unit);
 
-    if (order) {
-        amount /= std::pow(order, unitBase(unit) - unit);
-    } else {
+    if (!order) {
         prefix = MetricPrefixUnity;
     }
 
     const int precision = (value.type() != QVariant::Double) ? 0 : 1;
     KFormat::Unit kfUnit = kformatUnit(unit);
     KFormat::BinaryUnitDialect dialect = order == 1024 ? KFormat::IECBinaryDialect : KFormat::MetricBinaryDialect;
-    KFormat::UnitPrefix kFPrefix = kFormatPrefix(prefix);
+    KFormat::UnitPrefix kFToPrefix = kFormatPrefix(prefix);
+    KFormat::UnitPrefix  kFFromPrefix = kFormatPrefix(MetricPrefix(unit - unitBase(unit)));
 
     KFormat format;
     if (kfUnit == KFormat::Unit::Byte) {
+        amount /= std::pow(order, unitBase(unit) - unit);
         return format.formatByteSize(amount, precision, dialect);
     } else if (kfUnit != KFormat::Unit::Other) {
-        return format.formatValue(amount, kfUnit, precision, kFPrefix, dialect);
+        return format.formatValue(amount, kfUnit, precision, kFFromPrefix, kFToPrefix, dialect);
     } else {
-        return format.formatValue(amount, Formatter::symbol(unitBase(unit)), precision,  kFPrefix, dialect);
+        return format.formatValue(amount, Formatter::symbol(unitBase(unit)), precision, kFFromPrefix, kFToPrefix, dialect);
     }
 }
 

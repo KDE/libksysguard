@@ -48,12 +48,13 @@ private Q_SLOTS:
         QTest::addColumn<KSysGuard::Unit>("unit");
         QTest::addColumn<QString>("output");
 
-        QTest::newRow("1.0, B") << 1.0 << KSysGuard::UnitByte << QSL("1.0 B");
+        QTest::newRow("1.0, B") << 1.0 << KSysGuard::UnitByte << QSL("1 B");
         QTest::newRow("1.0, KiB") << 1.0 << KSysGuard::UnitKiloByte << QSL("1.0 KiB");
         QTest::newRow("1.0, KiB/s") << 1.0 << KSysGuard::UnitKiloByteRate << QSL("1.0 KiB/s");
         QTest::newRow("1.0, %") << 1.0 << KSysGuard::UnitPercent << QSL("1.0%");
 
-        QTest::newRow("0.213, B") << 0.213 << KSysGuard::UnitByte << QString::number(0.2) + QSL(" B");
+        QTest::newRow("0.213, B") << 0.213 << KSysGuard::UnitByte << QString::number(0) + QSL(" B");
+        QTest::newRow("0.213, kHZ") << 0.213 << KSysGuard::UnitKiloHertz << QString::number(213.0, 'f', 1) + QSL(" Hz");
         QTest::newRow("5.647, KiB") << 5.647 << KSysGuard::UnitKiloByte << QString::number(5.6) + QSL(" KiB");
         QTest::newRow("99.99, KiB/s") << 99.99 << KSysGuard::UnitKiloByteRate << QString::number(100.0, 'f', 1) + QSL(" KiB/s");
         QTest::newRow("0.2567, %") << 0.2567 << KSysGuard::UnitPercent << QString::number(0.3) + QSL("%");
