@@ -169,10 +169,7 @@ static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefi
     KFormat::UnitPrefix  kFFromPrefix = kFormatPrefix(MetricPrefix(unit - unitBase(unit)));
 
     KFormat format;
-    if (kfUnit == KFormat::Unit::Byte) {
-        amount /= std::pow(order, unitBase(unit) - unit);
-        return format.formatByteSize(amount, precision, dialect);
-    } else if (kfUnit != KFormat::Unit::Other) {
+    if (kfUnit != KFormat::Unit::Other) {
         return format.formatValue(amount, kfUnit, precision, kFFromPrefix, kFToPrefix, dialect);
     } else {
         return format.formatValue(amount, Formatter::symbol(unitBase(unit)), precision, kFFromPrefix, kFToPrefix, dialect);
