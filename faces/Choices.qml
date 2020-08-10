@@ -286,7 +286,7 @@ Control {
             } else {
                 y = control.height
             }
-            implicitHeight = Math.min(contentItem.implicitHeight + 2, Kirigami.Units.gridUnit * 20)
+
             searchField.forceActiveFocus();
         }
         onClosed: delegateModel.rootIndex = delegateModel.parentModelIndex()
