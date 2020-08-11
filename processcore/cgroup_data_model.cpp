@@ -399,15 +399,24 @@ void CGroupDataModel::update(CGroup *node)
 
     // Update our own stat info
     // This may trigger some dataChanged
-    const QVector<pid_t> pids = node->getPids();
-    QVector<Process*> processes;
-    for (const pid_t pid : pids) {
-        auto proc = d->m_processes->getProcess(pid);
-        if (proc) { // as potentially this is racey with when kprocess fetched data
-            processes << proc;
-        }
-    }
-    node->setProcesses(processes);
+    node->requestPids([this, node](const QVector<pid_t> pids) {
+        // The callback is called from a different thread, to avoid needing to
+        // make the entire thing thread safe, we do the actual data update on the
+        // main thread.
+        QMetaObject::invokeMethod(this, [this, node, pids]() {
+            QVector<Process*> processes;
+            for (const pid_t pid : pids) {
+                auto proc = d->m_processes->getProcess(pid);
+                if (proc) { // as potentially this is racey with when kprocess fetched data
+                    processes << proc;
+                }
+            }
+            node->setProcesses(processes);
+
+            auto row = d->m_cGroups.indexOf(node);
+            Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, 0, QModelIndex()),{ ProcessDataModel::PIDs });
+        }, Qt::QueuedConnection);
+    });
 
     const auto entries = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
     for (auto subDir : entries) {

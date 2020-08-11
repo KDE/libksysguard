@@ -58,14 +58,18 @@ public:
      * @return A Vector of pids
      * @note This reloads the data on every fetch
      */
-    QVector<pid_t> getPids() const;
+    QVector<Process*> processes() const;
 
     /**
-     * @brief updates and fetches the list of processes associated with the process
-     * @return A Vector of pids
-     * @note This reloads the data on every fetch
+     * Request fetching the list of processes associated with this cgroup.
+     *
+     * This is done in a separate thread. Once it has completed, \p callback is
+     * called with the list of pids of this cgroup.
+     *
+     * \param callback A callback that gets called once the list of pids has
+     *                 been retrieved.
      */
-    QVector<Process*> processes() const;
+    void requestPids(std::function<void(const QVector<pid_t>&)> callback);
 
     /**
      * Returns the base path to exposed cgroup information. Either /sys/fs/cgroup or /sys/fs/cgroup/unified as applicable

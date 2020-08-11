@@ -26,6 +26,7 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QStringView>
+#include <QThreadPool>
 
 #include "process.h"
 
@@ -95,21 +96,24 @@ void CGroup::setProcesses(QVector<Process *> procs)
     d->procs = procs;
 }
 
-QVector<pid_t> KSysGuard::CGroup::getPids() const
+void KSysGuard::CGroup::requestPids(std::function<void (const QVector<pid_t>&)> callback)
 {
-    const QString pidFilePath = cgroupSysBasePath() + d->processGroupId + QLatin1String("/cgroup.procs");
-    QFile pidFile(pidFilePath);
-    pidFile.open(QFile::ReadOnly | QIODevice::Text);
-    QTextStream stream(&pidFile);
+    QString path = cgroupSysBasePath() + d->processGroupId + QLatin1String("/cgroup.procs");
+    auto runnable = [path, callback]() {
+        QFile pidFile(path);
+        pidFile.open(QFile::ReadOnly | QIODevice::Text);
+        QTextStream stream(&pidFile);
 
-    QVector<pid_t> procs;
-    QString line = stream.readLine();
-    while (!line.isNull()) {
-        procs.append(line.toLong());
-        line = stream.readLine();
-    }
+        QVector<pid_t> pids;
+        QString line = stream.readLine();
+        while (!line.isNull()) {
+            pids.append(line.toLong());
+            line = stream.readLine();
+        }
 
-    return procs;
+        callback(pids);
+    };
+    QThreadPool::globalInstance()->start(runnable);
 }
 
 QString CGroupPrivate::unescapeName(const QString &name) {
