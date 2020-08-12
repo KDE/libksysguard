@@ -54,11 +54,10 @@ public:
     KService::Ptr service() const;
 
     /**
-     * @brief updates and fetches the list of processes associated with the process
+     * @brief The list of pids contained in this group.
      * @return A Vector of pids
-     * @note This reloads the data on every fetch
      */
-    QVector<Process*> processes() const;
+    QVector<pid_t> pids() const;
 
     /**
      * Request fetching the list of processes associated with this cgroup.
@@ -66,10 +65,11 @@ public:
      * This is done in a separate thread. Once it has completed, \p callback is
      * called with the list of pids of this cgroup.
      *
+     * \param context An object that is used to track if the caller still exists.
      * \param callback A callback that gets called once the list of pids has
      *                 been retrieved.
      */
-    void requestPids(std::function<void(const QVector<pid_t>&)> callback);
+    void requestPids(QPointer<QObject> context, std::function<void()> callback);
 
     /**
      * Returns the base path to exposed cgroup information. Either /sys/fs/cgroup or /sys/fs/cgroup/unified as applicable
@@ -86,10 +86,10 @@ private:
     CGroup(const QString &id);
 
     /**
-     * Set the updated processes of this cgroup object.
-     * Managed by CgroupDataModel exclusively
+     * Set the list of PIDs of this cgroup object.
      */
-    void setProcesses(QVector<Process*> procs);
+    void setPids(const QVector<pid_t> &pids);
+
     QScopedPointer<CGroupPrivate> d;
     friend class CGroupDataModel;
     friend class CGroupDataModelPrivate;

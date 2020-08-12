@@ -109,7 +109,7 @@ public:
      */
     void clearData(KSysGuard::Process *process);
 
-    virtual QVariant cgroupData(KSysGuard::CGroup *cgroup) const;
+    virtual QVariant cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process*> &groupProcesses = {}) const;
 
 Q_SIGNALS:
     void dataChanged(KSysGuard::Process *process);

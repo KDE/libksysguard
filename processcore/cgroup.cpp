@@ -42,12 +42,13 @@ public:
     }
     const QString processGroupId;
     const KService::Ptr service;
-    QVector<Process *> processes;
+    QVector<pid_t> pids;
+    std::mutex pidsLock;
+
     static KService::Ptr serviceFromAppId(const QString &appId);
 
     static QRegularExpression s_appIdFromProcessGroupPattern;
     static QString unescapeName(const QString &cgroupId);
-    QVector<Process *> procs;
 };
 
 class CGroupSystemInformation
@@ -86,20 +87,22 @@ KService::Ptr KSysGuard::CGroup::service() const
     return d->service;
 }
 
-QVector<Process *> CGroup::processes() const
+QVector<pid_t> CGroup::pids() const
 {
-    return d->procs;
+    std::lock_guard<std::mutex> lock{d->pidsLock};
+    return d->pids;
 }
 
-void CGroup::setProcesses(QVector<Process *> procs)
+void CGroup::setPids(const QVector<pid_t>& pids)
 {
-    d->procs = procs;
+    std::lock_guard<std::mutex> lock{d->pidsLock};
+    d->pids = pids;
 }
 
-void KSysGuard::CGroup::requestPids(std::function<void (const QVector<pid_t>&)> callback)
+void CGroup::requestPids(QPointer<QObject> context, std::function<void()> callback)
 {
     QString path = cgroupSysBasePath() + d->processGroupId + QLatin1String("/cgroup.procs");
-    auto runnable = [path, callback]() {
+    auto runnable = [this, path, callback, context]() {
         QFile pidFile(path);
         pidFile.open(QFile::ReadOnly | QIODevice::Text);
         QTextStream stream(&pidFile);
@@ -110,8 +113,12 @@ void KSysGuard::CGroup::requestPids(std::function<void (const QVector<pid_t>&)> 
             pids.append(line.toLong());
             line = stream.readLine();
         }
+        setPids(pids);
 
-        callback(pids);
+        // Ensure we call the callback on the thread the context object lives on.
+        if (context) {
+            QMetaObject::invokeMethod(context, callback);
+        }
     };
     QThreadPool::globalInstance()->start(runnable);
 }

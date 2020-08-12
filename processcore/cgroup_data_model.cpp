@@ -39,6 +39,8 @@ using namespace  KSysGuard;
 class KSysGuard::CGroupDataModelPrivate
 {
 public:
+    QVector<KSysGuard::Process*> processesFor(CGroup *app);
+
     ExtendedProcesses *m_processes;
     QTimer *m_updateTimer;
     ProcessAttributeModel *m_attributeModel = nullptr;
@@ -51,6 +53,7 @@ public:
     QVector<CGroup *> m_cGroups; // an ordered list of unfiltered cgroups from our root
     QHash<QString, CGroup *> m_cgroupMap; // all known cgroups from our root
     QHash<QString, CGroup *> m_oldGroups;
+    QHash<CGroup*, QVector<Process*>> m_processMap; // cached mapping of cgroup to list of processes of that group
 };
 
 class GroupNameAttribute : public ProcessAttribute
@@ -59,7 +62,8 @@ public:
     GroupNameAttribute(QObject *parent) :
         KSysGuard::ProcessAttribute(QStringLiteral("menuId"), i18nc("@title", "Desktop ID"), parent) {
     }
-    QVariant cgroupData(CGroup *app) const override {
+    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
+        Q_UNUSED(processes)
         return app->service()->menuId();
     }
 };
@@ -70,7 +74,8 @@ public:
     AppIconAttribute(QObject *parent) :
         KSysGuard::ProcessAttribute(QStringLiteral("iconName"), i18nc("@title", "Icon"), parent) {
     }
-    QVariant cgroupData(CGroup *app) const override {
+    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
+        Q_UNUSED(processes)
         return app->service()->icon();
     }
 };
@@ -81,7 +86,8 @@ public:
     AppNameAttribute(QObject *parent) :
         KSysGuard::ProcessAttribute(QStringLiteral("appName"), i18nc("@title", "Name"), parent) {
     }
-    QVariant cgroupData(CGroup *app) const override {
+    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
+        Q_UNUSED(processes)
         return app->service()->name();
     }
 };
@@ -235,12 +241,12 @@ QVariant CGroupDataModel::data(const QModelIndex &index, int role) const
         case Qt::DisplayRole:
         case ProcessDataModel::FormattedValue: {
             KSysGuard::CGroup *app = reinterpret_cast< KSysGuard::CGroup* > (index.internalPointer());
-            const QVariant value = attribute->cgroupData(app);
+            const QVariant value = attribute->cgroupData(app, d->processesFor(app));
             return KSysGuard::Formatter::formatValue(value, attribute->unit());
         }
         case ProcessDataModel::Value: {
             KSysGuard::CGroup *app = reinterpret_cast< KSysGuard::CGroup* > (index.internalPointer());
-            const QVariant value = attribute->cgroupData(app);
+            const QVariant value = attribute->cgroupData(app, d->processesFor(app));
             return value;
         }
         case ProcessDataModel::Attribute: {
@@ -266,11 +272,7 @@ QVariant CGroupDataModel::data(const QModelIndex &index, int role) const
         }
         case ProcessDataModel::PIDs: {
             KSysGuard::CGroup *app = reinterpret_cast< KSysGuard::CGroup* > (index.internalPointer());
-            QVariantList pidList;
-            std::transform(app->processes().constBegin(), app->processes().constEnd(), std::back_inserter(pidList), [](Process* process) -> QVariant {
-                return QVariant::fromValue(process->pid());
-            });
-            return pidList;
+            return QVariant::fromValue(app->pids());
         }
     }
     return QVariant();
@@ -366,6 +368,11 @@ void CGroupDataModel::update()
 
     d->m_oldGroups = d->m_cgroupMap;
 
+    // updateAllProcesses will delete processes that no longer exist, so clear
+    // out our cache of the processes before that happens so we have no dangling
+    // processes.
+    d->m_processMap.clear();
+
     // In an ideal world we would only the relevant process
     // but Ksysguard::Processes doesn't handle that very well
     d->m_processes->updateAllProcesses();
@@ -399,23 +406,9 @@ void CGroupDataModel::update(CGroup *node)
 
     // Update our own stat info
     // This may trigger some dataChanged
-    node->requestPids([this, node](const QVector<pid_t> pids) {
-        // The callback is called from a different thread, to avoid needing to
-        // make the entire thing thread safe, we do the actual data update on the
-        // main thread.
-        QMetaObject::invokeMethod(this, [this, node, pids]() {
-            QVector<Process*> processes;
-            for (const pid_t pid : pids) {
-                auto proc = d->m_processes->getProcess(pid);
-                if (proc) { // as potentially this is racey with when kprocess fetched data
-                    processes << proc;
-                }
-            }
-            node->setProcesses(processes);
-
-            auto row = d->m_cGroups.indexOf(node);
-            Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, 0, QModelIndex()),{ ProcessDataModel::PIDs });
-        }, Qt::QueuedConnection);
+    node->requestPids(this, [this, node]() {
+        auto row = d->m_cGroups.indexOf(node);
+        Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, 0, QModelIndex()));
     });
 
     const auto entries = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
@@ -436,4 +429,24 @@ void CGroupDataModel::update(CGroup *node)
         update(childNode);
         d->m_oldGroups.remove(childId);
     }
+}
+
+QVector<Process*> CGroupDataModelPrivate::processesFor(CGroup *app)
+{
+    if (m_processMap.contains(app)) {
+        return m_processMap.value(app);
+    }
+
+    QVector<Process*> result;
+    const auto pids = app->pids();
+    std::for_each(pids.begin(), pids.end(), [this, &result](pid_t pid) {
+        auto process = m_processes->getProcess(pid);
+        if (process) {
+            result.append(process);
+        }
+    });
+
+    m_processMap.insert(app, result);
+
+    return result;
 }

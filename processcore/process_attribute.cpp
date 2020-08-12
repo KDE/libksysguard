@@ -164,9 +164,15 @@ void ProcessAttribute::clearData(KSysGuard::Process *process)
     emit dataChanged(process);
 }
 
-QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup) const
+QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process*> &groupProcesses) const
 {
-    qreal total = std::accumulate(cgroup->processes().constBegin(), cgroup->processes().constEnd(), 0.0, [this](qreal total, KSysGuard::Process *process) {
+    Q_UNUSED(cgroup)
+
+    if (groupProcesses.isEmpty()) {
+        return QVariant{};
+    }
+
+    qreal total = std::accumulate(groupProcesses.constBegin(), groupProcesses.constEnd(), 0.0, [this](qreal total, KSysGuard::Process *process) {
         return total + data(process).toDouble();
     });
     return QVariant(total);
