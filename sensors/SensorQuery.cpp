@@ -129,7 +129,7 @@ void KSysGuard::SensorQuery::Private::updateResult(const QDBusPendingReply<Senso
 
     const auto sensorIds = reply.value().keys();
     for (auto id : sensorIds) {
-        if (regexp.match(id).hasMatch()) {
+        if (id == path || regexp.match(id).hasMatch()) {
             result.append(qMakePair(id, reply.value().value(id)));
         }
     }
