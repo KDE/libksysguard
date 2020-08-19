@@ -483,6 +483,7 @@ void SensorFaceController::setFaceId(const QString &face)
 
         d->faceConfigLoader = new KConfigLoader(cg, &file, this);
         d->faceConfiguration = new KDeclarative::ConfigPropertyMap(d->faceConfigLoader, this);
+        d->faceConfiguration->setAutosave(d->shouldSync);
     }
 
     d->appearanceGroup.writeEntry("chartFace", face);
@@ -761,6 +762,9 @@ bool SensorFaceController::shouldSync() const
 void SensorFaceController::setShouldSync(bool sync)
 {
     d->shouldSync = sync;
+    if (d->faceConfiguration) {
+        d->faceConfiguration->setAutosave(sync);
+    }
     if (!d->shouldSync && d->syncTimer->isActive()) {
         d->syncTimer->stop();
     }
