@@ -32,6 +32,21 @@
 
 using namespace KSysGuard;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+class FunctionRunnable : public QRunnable
+{
+    std::function<void()> m_functionToRun;
+public:
+    FunctionRunnable(std::function<void()> functionToRun) : m_functionToRun(std::move(functionToRun))
+    {
+    }
+    void run() override
+    {
+        m_functionToRun();
+    }
+};
+#endif
+
 class KSysGuard::CGroupPrivate
 {
 public:
@@ -120,7 +135,12 @@ void CGroup::requestPids(QPointer<QObject> context, std::function<void()> callba
             QMetaObject::invokeMethod(context, callback);
         }
     };
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     QThreadPool::globalInstance()->start(runnable);
+#else
+    QThreadPool::globalInstance()->start(new FunctionRunnable(std::move(runnable)));
+#endif
 }
 
 QString CGroupPrivate::unescapeName(const QString &name) {
