@@ -1,5 +1,22 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"processcore\")
 
+set(processcore_linux_SRCS
+   linux_threaded/Task.cpp
+   linux_threaded/ReadProcStatusTask.cpp
+   linux_threaded/ReadProcCGroupTask.cpp
+   linux_threaded/ReadProcAttrTask.cpp
+   linux_threaded/ReadProcCmdlineTask.cpp
+   linux_threaded/ReadProcSmapsTask.cpp
+   linux_threaded/ReadProcStatmTask.cpp
+   linux_threaded/ReadProcStatTask.cpp
+   linux_threaded/ReadProcIoTask.cpp
+   linux_threaded/GetNicenessTask.cpp
+)
+
+add_library(processcore_linux STATIC ${processcore_linux_SRCS})
+target_link_libraries(processcore_linux Qt5::Core)
+set_target_properties(processcore_linux PROPERTIES CXX_VISIBILITY_PRESET default)
+
 ########### next target ###############
 
 set(ksysguard_LIB_SRCS
@@ -29,6 +46,7 @@ target_link_libraries(processcore
     Qt5::Core
     KSysGuard::Formatter
    PRIVATE
+    processcore_linux
     KF5::I18n
     KF5::AuthCore
     KF5::CoreAddons
@@ -81,11 +99,11 @@ set(ksysguardprocesslist_helper_srcs
     processes_base_p.cpp)
 
 add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
-target_link_libraries(ksysguardprocesslist_helper Qt5::Core KF5::AuthCore KF5::I18n)
+target_link_libraries(ksysguardprocesslist_helper Qt5::Core KF5::AuthCore KF5::I18n processcore_linux)
 install(TARGETS ksysguardprocesslist_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
-kauth_install_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)
-kauth_install_actions(org.kde.ksysguard.processlisthelper actions.actions)
+# kauth_install_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)
+# kauth_install_actions(org.kde.ksysguard.processlisthelper actions.actions)
 
 set_target_properties(ksysguardprocesslist_helper PROPERTIES COMPILE_FLAGS "-Wall -ggdb")
 

@@ -117,7 +117,8 @@ void testProcess::testTimeToUpdateAllProcesses() {
     //See how long it takes to get process information
     KSysGuard::Processes *processController = new KSysGuard::Processes();
     QBENCHMARK {
-        processController->updateAllProcesses();
+        processController->updateAllProcesses(0, KSysGuard::Processes::StandardInformation | KSysGuard::Processes::IOStatistics);
+//         processController->updateAllProcesses();
     }
 }
 void testProcess::testTimeToUpdateModel() {

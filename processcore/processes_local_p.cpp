@@ -20,7 +20,8 @@
 */
 
 #if defined __linux__
-#include "processes_linux_p.cpp"
+#include "processes_linux_threaded_p.cpp"
+// #include "processes_linux_p.cpp"
 #elif defined __FreeBSD__ || defined __FreeBSD_kernel__
 #include "processes_freebsd_p.cpp"
 #elif defined __DragonFly__

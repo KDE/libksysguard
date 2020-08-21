@@ -48,6 +48,8 @@ ecm_add_test(sensorfacecontrollertest.cpp LINK_LIBRARIES
     KSysGuard::SensorFaces
 )
 
+add_subdirectory(processcore_linux)
+
 # set( ksysguarddtest_SRCS ksysguarddtest.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorManager.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorSocketAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorShellAgent.cpp)
 #
 # ecm_add_test(${ksysguarddtest_SRCS}
