@@ -90,6 +90,7 @@ CGroup::CGroup(const QString &id)
 
 CGroup::~CGroup()
 {
+    std::lock_guard<std::mutex>{d->pidsLock};
 }
 
 QString KSysGuard::CGroup::id() const
