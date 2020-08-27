@@ -144,6 +144,8 @@ Q_SIGNALS:
             /** \brief This is emitted when the processes have been updated, and the view should be refreshed.
              */
             void processesUpdated();
+
+            void processUpdated(long pid, const KSysGuard::Process::Updates &changes);
     };
 }
 

@@ -21,6 +21,7 @@
 
 #include "processes_local_p.h"
 #include "process.h"
+#include "read_procsmaps_runnable.h"
 
 #include <klocalizedstring.h>
 
@@ -29,6 +30,7 @@
 #include <QSet>
 #include <QByteArray>
 #include <QTextStream>
+#include <QThreadPool>
 
 //for sysconf
 #include <unistd.h>
@@ -97,9 +99,6 @@ static int ioprio_get(int which, int who)
 }
 #endif
 
-
-
-
 namespace KSysGuard
 {
 
@@ -114,7 +113,6 @@ namespace KSysGuard
       inline bool readProcCmdline(const QString &dir, Process *process);
       inline bool readProcCGroup(const QString &dir, Process *process);
       inline bool readProcAttr(const QString &dir, Process *process);
-      inline bool readProcSmaps(const QString &dir, Process *process);
       inline bool getNiceness(long pid, Process *process);
       inline bool getIOStatistics(const QString &dir, Process *process);
       QFile mFile;
@@ -456,27 +454,6 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
     return true;
 }
 
-bool ProcessesLocal::Private::readProcSmaps(const QString &dir, Process *process)
-{
-    mFile.setFileName(dir + QStringLiteral("smaps_rollup"));
-    if (!mFile.open(QIODevice::ReadOnly)) {
-        return false;
-    }
-
-    auto totalPss = -1LL;
-    while (mFile.readLine(mBuffer, sizeof(mBuffer)) > 0) {
-        if (qstrncmp(mBuffer, "Pss:", strlen("Pss:")) == 0) {
-            totalPss += atoll(mBuffer + sizeof("Pss:") - 1);
-        }
-    }
-
-    mFile.close();
-
-    process->setVmPSS(totalPss);
-
-    return true;
-}
-
 bool ProcessesLocal::Private::getNiceness(long pid, Process *process) {
   int sched = sched_getscheduler(pid);
   switch(sched) {
@@ -569,17 +546,25 @@ bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *proce
     }
     return true;
 }
+
 bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 {
     bool success = true;
     QString dir = QLatin1String("/proc/") + QString::number(pid) + QLatin1Char('/');
+
+    auto runnable = new ReadProcSmapsRunnable{dir};
+    connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid, runnable]() {
+        Q_EMIT processUpdated(pid, { { Process::VmPSS, runnable->pss() } });
+        runnable->deleteLater();
+    }, Qt::DirectConnection);
+    QThreadPool::globalInstance()->start(runnable);
+
     if(!d->readProcStat(dir, process)) success = false;
     if(!d->readProcStatus(dir, process)) success = false;
     if(!d->readProcStatm(dir, process)) success = false;
     if(!d->readProcCmdline(dir, process)) success = false;
     if(!d->readProcCGroup(dir, process)) success = false;
     if(!d->readProcAttr(dir, process)) success = false;
-    if(!d->readProcSmaps(dir, process)) success = false;
     if(!d->getNiceness(pid, process)) success = false;
     if(mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(dir, process)) success = false;
 

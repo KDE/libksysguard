@@ -31,6 +31,7 @@
 #include <QMutableSetIterator>
 #include <QByteArray>
 #include <QElapsedTimer>
+#include <QVariantMap>
 
 //for sysconf
 #include <unistd.h>
@@ -93,6 +94,8 @@ Processes::Private::~Private() {
 
 Processes::Processes(const QString &host, QObject *parent) : QObject(parent), d(new Private(this))
 {
+    qRegisterMetaType<KSysGuard::Process::Updates>();
+
     if(host.isEmpty()) {
         d->mAbstractProcesses = new ProcessesLocal();
     } else {
@@ -102,6 +105,7 @@ Processes::Processes(const QString &host, QObject *parent) : QObject(parent), d(
     }
     d->mIsLocalHost = host.isEmpty();
     connect( d->mAbstractProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
+    connect( d->mAbstractProcesses, &AbstractProcesses::processUpdated, this, &Processes::processUpdated);
 }
 Processes::~Processes()
 {
@@ -356,6 +360,26 @@ void Processes::processesUpdated() {
 
     d->mProcessedLastTime = beingProcessed;  //update the set for next time this function is called
     emit updated();
+}
+
+void Processes::processUpdated(long pid, const Process::Updates &changes)
+{
+    auto process = d->mProcesses.value(pid);
+    if (!process) {
+        return;
+    }
+
+    for (auto entry : changes) {
+        switch (entry.first) {
+            case Process::VmPSS:
+                process->setVmPSS(entry.second.toLongLong());
+                break;
+            default:
+                break;
+        }
+    }
+
+    Q_EMIT processChanged(process, false);
 }
 
 void Processes::Private::markProcessesAsEnded(long pid)
