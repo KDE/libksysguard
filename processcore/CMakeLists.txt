@@ -35,6 +35,7 @@ set(ksysguard_LIB_SRCS
    process_attribute_model.cpp
    process_data_model.cpp
    process_data_provider.cpp
+   read_procsmaps_runnable.cpp
 )
 ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
 
@@ -96,7 +97,9 @@ set(ksysguardprocesslist_helper_srcs
     helper.cpp
     process.cpp
     processes_local_p.cpp
-    processes_base_p.cpp)
+    processes_base_p.cpp
+    read_procsmaps_runnable.cpp
+)
 
 add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
 target_link_libraries(ksysguardprocesslist_helper Qt5::Core KF5::AuthCore KF5::I18n processcore_linux)

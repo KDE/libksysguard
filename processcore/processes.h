@@ -25,6 +25,7 @@
 #include "process.h"
 #include <QObject>
 #include <QHash>
+#include <QVariant>
 
 namespace KSysGuard
 {
@@ -203,6 +204,7 @@ namespace KSysGuard
     public Q_SLOTS:
         /** The abstract processes has updated its list of processes */
         void processesUpdated();
+        void processUpdated(long pid, const Process::Updates &changes);
 
     Q_SIGNALS:
         /** The data for a process has changed.
@@ -267,4 +269,5 @@ namespace KSysGuard
     };
     Q_DECLARE_OPERATORS_FOR_FLAGS(Processes::UpdateFlags)
 }
+
 #endif

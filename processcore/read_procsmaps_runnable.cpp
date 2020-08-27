@@ -1,0 +1,44 @@
+/*
+ * SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
+ * 
+ * SPDX-License-Identifier: LGPL-2.0-or-later
+ */
+
+#include "read_procsmaps_runnable.h"
+
+#include <QFile>
+#include <QDebug>
+
+using namespace KSysGuard;
+
+ReadProcSmapsRunnable::ReadProcSmapsRunnable(const QString &dir)
+    : QObject()
+    , m_dir(dir)
+{
+    setAutoDelete(false);
+}
+
+void ReadProcSmapsRunnable::run()
+{
+    QFile file{m_dir + QStringLiteral("smaps_rollup")};
+    if (!file.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    m_pss = 0LL;
+    auto buffer = QByteArray{1024, '\0'};
+    while (file.readLine(buffer.data(), buffer.size()) > 0) {
+        if (buffer.startsWith("Pss:")) {
+            m_pss += std::stoll(buffer.mid(sizeof("Pss:")).toStdString());
+        }
+    }
+
+    file.close();
+
+    Q_EMIT finished();
+}
+
+qlonglong ReadProcSmapsRunnable::pss() const
+{
+    return m_pss;
+}
