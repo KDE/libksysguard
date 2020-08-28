@@ -26,5 +26,5 @@ UploadCategories=Plasma Charts Preset
 
 ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml
 StandardResource=tmp
-InstallationCommand=kpackagetool5 -t Plasma/Applet -i %f
-UninstallCommand=kpackagetool5 -t Plasma/Applet -r %f
+Uncompress=kpackage
+KPackageType=Plasma/Applet
