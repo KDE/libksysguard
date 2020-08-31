@@ -62,6 +62,7 @@ public:
 private:
     void onMetaDataChanged(const QHash<QString, SensorInfo> &metaData);
     void onValueChanged(const SensorDataList &values);
+    void reconnect();
 
     class Private;
     const std::unique_ptr<Private> d;
