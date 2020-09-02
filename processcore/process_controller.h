@@ -24,6 +24,8 @@
 
 #include <memory>
 
+#include <signal.h>
+
 #include <QObject>
 #include <QVariant>
 
@@ -53,14 +55,14 @@ public:
      * A signal that can be sent to a process.
      */
     enum Signal {
-        StopSignal,
-        ContinueSignal,
-        HangupSignal,
-        InterruptSignal,
-        TerminateSignal,
-        KillSignal,
-        User1Signal,
-        User2Signal
+        StopSignal = SIGSTOP,
+        ContinueSignal = SIGCONT,
+        HangupSignal = SIGHUP,
+        InterruptSignal = SIGINT,
+        TerminateSignal = SIGTERM,
+        KillSignal = SIGKILL,
+        User1Signal = SIGUSR1,
+        User2Signal = SIGUSR2
     };
     Q_ENUM(Signal)
 
