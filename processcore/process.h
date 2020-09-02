@@ -26,6 +26,7 @@
 #include <QTime>
 #include <QElapsedTimer>
 #include <QFlags>
+#include <QVariant>
 
 namespace KSysGuard
 {
@@ -263,6 +264,8 @@ public:
     Changes changes() const;  /**< A QFlags representing what has changed */
     void setChanges(Change changes);
 
+    using Updates = QVector<QPair<Change, QVariant>>;
+
 private:
     void clear();
 
@@ -272,5 +275,7 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)
 }
+
+Q_DECLARE_METATYPE(KSysGuard::Process::Updates)
 
 #endif
