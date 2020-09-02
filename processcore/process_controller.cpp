@@ -78,7 +78,7 @@ ProcessController::Result ProcessController::sendSignal(const QVector<int>& pids
 {
     qCDebug(LIBKSYSGUARD_PROCESSCORE) << "Sending signal" << signal << "to" << pids;
 
-    auto result = d->applyToPids(pids, [this, signal](int pid) { return s_localProcesses->sendSignal(pid, signal); });
+    auto result = d->applyToPids(pids, [signal](int pid) { return s_localProcesses->sendSignal(pid, signal); });
     if (result.unchanged.isEmpty()) {
         return result.resultCode;
     }
@@ -102,7 +102,7 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::sendSignal(co
 
 ProcessController::Result ProcessController::setPriority(const QVector<int>& pids, int priority)
 {
-    auto result = d->applyToPids(pids, [this, priority](int pid) { return s_localProcesses->setNiceness(pid, priority); });
+    auto result = d->applyToPids(pids, [priority](int pid) { return s_localProcesses->setNiceness(pid, priority); });
     if (result.unchanged.isEmpty()) {
         return result.resultCode;
     }
@@ -130,7 +130,7 @@ ProcessController::Result ProcessController::setCPUScheduler(const QVector<int>&
         priority = 0;
     }
 
-    auto result = d->applyToPids(pids, [this, scheduler, priority](int pid) {
+    auto result = d->applyToPids(pids, [scheduler, priority](int pid) {
         return s_localProcesses->setScheduler(pid, scheduler, priority);
     });
     if (result.unchanged.isEmpty()) {
@@ -168,7 +168,7 @@ ProcessController::Result ProcessController::setIOScheduler(const QVector<int>& 
         priority = 0;
     }
 
-    auto result = d->applyToPids(pids, [this, priorityClass, priority](int pid) {
+    auto result = d->applyToPids(pids, [priorityClass, priority](int pid) {
         return s_localProcesses->setIoNiceness(pid, priorityClass, priority);
     });
     if (result.unchanged.isEmpty()) {
