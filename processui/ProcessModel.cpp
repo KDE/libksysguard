@@ -765,9 +765,6 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
         }
         return;
     } else {
-        if(process->changes() == KSysGuard::Process::Nothing) {
-            return; //Nothing changed
-        }
         if(process->changes() & KSysGuard::Process::Uids) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingUser, process);
