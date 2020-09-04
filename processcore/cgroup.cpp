@@ -32,21 +32,6 @@
 
 using namespace KSysGuard;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-class FunctionRunnable : public QRunnable
-{
-    std::function<void()> m_functionToRun;
-public:
-    FunctionRunnable(std::function<void()> functionToRun) : m_functionToRun(std::move(functionToRun))
-    {
-    }
-    void run() override
-    {
-        m_functionToRun();
-    }
-};
-#endif
-
 class KSysGuard::CGroupPrivate
 {
 public:
@@ -64,6 +49,62 @@ public:
 
     static QRegularExpression s_appIdFromProcessGroupPattern;
     static QString unescapeName(const QString &cgroupId);
+
+    class ReadPidsRunnable;
+    ReadPidsRunnable *readPids = nullptr;
+};
+
+class CGroupPrivate::ReadPidsRunnable : public QRunnable
+{
+public:
+    ReadPidsRunnable(CGroupPrivate *cgroup, QPointer<QObject> context, const QString &path, std::function<void()> callback)
+        : m_cgroupPrivate(cgroup)
+        , m_context(context)
+        , m_path(path)
+        , m_callback(callback)
+    {
+    }
+
+    void run() override
+    {
+        QFile pidFile(m_path);
+        pidFile.open(QFile::ReadOnly | QIODevice::Text);
+        QTextStream stream(&pidFile);
+
+        QVector<pid_t> pids;
+        QString line = stream.readLine();
+        while (!line.isNull()) {
+            pids.append(line.toLong());
+            line = stream.readLine();
+        }
+        m_cgroupPrivate->pids = pids;
+
+        // Ensure we call the callback on the thread the context object lives on.
+        if (m_context) {
+            QMetaObject::invokeMethod(m_context, m_callback);
+        }
+
+        std::lock_guard<std::mutex> lock{m_lock};
+        m_finished = true;
+        m_cgroupPrivate->readPids = nullptr;
+        m_condition.notify_all();
+    }
+
+    void wait()
+    {
+        std::unique_lock<std::mutex> lock{m_lock};
+        m_condition.wait(lock, [this]() { return m_finished; });
+    }
+
+private:
+    CGroupPrivate *m_cgroupPrivate;
+    QPointer<QObject> m_context;
+    QString m_path;
+    std::function<void()> m_callback;
+
+    std::mutex m_lock;
+    std::condition_variable m_condition;
+    bool m_finished = false;
 };
 
 class CGroupSystemInformation
@@ -90,7 +131,9 @@ CGroup::CGroup(const QString &id)
 
 CGroup::~CGroup()
 {
-    std::lock_guard<std::mutex>{d->pidsLock};
+    if (d->readPids) {
+        d->readPids->wait();
+    }
 }
 
 QString KSysGuard::CGroup::id() const
@@ -105,43 +148,21 @@ KService::Ptr KSysGuard::CGroup::service() const
 
 QVector<pid_t> CGroup::pids() const
 {
-    std::lock_guard<std::mutex> lock{d->pidsLock};
+    if (d->readPids) {
+        d->readPids->wait();
+    }
     return d->pids;
-}
-
-void CGroup::setPids(const QVector<pid_t>& pids)
-{
-    std::lock_guard<std::mutex> lock{d->pidsLock};
-    d->pids = pids;
 }
 
 void CGroup::requestPids(QPointer<QObject> context, std::function<void()> callback)
 {
+    if (d->readPids) {
+        d->readPids->wait();
+    }
+
     QString path = cgroupSysBasePath() + d->processGroupId + QLatin1String("/cgroup.procs");
-    auto runnable = [this, path, callback, context]() {
-        QFile pidFile(path);
-        pidFile.open(QFile::ReadOnly | QIODevice::Text);
-        QTextStream stream(&pidFile);
-
-        QVector<pid_t> pids;
-        QString line = stream.readLine();
-        while (!line.isNull()) {
-            pids.append(line.toLong());
-            line = stream.readLine();
-        }
-        setPids(pids);
-
-        // Ensure we call the callback on the thread the context object lives on.
-        if (context) {
-            QMetaObject::invokeMethod(context, callback);
-        }
-    };
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-    QThreadPool::globalInstance()->start(runnable);
-#else
-    QThreadPool::globalInstance()->start(new FunctionRunnable(std::move(runnable)));
-#endif
+    d->readPids = new CGroupPrivate::ReadPidsRunnable(d.get(), context, path, callback);
+    QThreadPool::globalInstance()->start(d->readPids);
 }
 
 QString CGroupPrivate::unescapeName(const QString &name) {
