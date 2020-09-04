@@ -152,13 +152,13 @@ QString CGroupPrivate::unescapeName(const QString &name) {
         if (escapeCharIndex < 0) {
             break;
         }
-        const QStringView sequence = rc.mid(escapeCharIndex, 4);
+        const QStringRef sequence = rc.midRef(escapeCharIndex, 4);
         if (sequence.length() != 4 || sequence.at(1) != QLatin1Char('x')) {
             qWarning() << "Badly formed cgroup name" << name;
             return name;
         }
         bool ok;
-        int character = sequence.mid(2).toString().toInt(&ok, 16);
+        int character = sequence.mid(2).toInt(&ok, 16);
         if (ok) {
             rc.replace(escapeCharIndex, 4, QLatin1Char(character));
         }
