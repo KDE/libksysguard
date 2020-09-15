@@ -248,12 +248,17 @@ void Sensor::onValueChanged(const QString &sensorId, const QVariant &value)
 void Sensor::onEnabledChanged()
 {
     if (enabled()) {
+        connect(SensorDaemonInterface::instance(), &SensorDaemonInterface::metaDataChanged, this, &Sensor::onMetaDataChanged, Qt::UniqueConnection);
+        connect(SensorDaemonInterface::instance(), &SensorDaemonInterface::valueChanged, this, &Sensor::onValueChanged, Qt::UniqueConnection);
+
         SensorDaemonInterface::instance()->subscribe(d->id);
         // Force an update of metadata and data, since that may have changed
         // while we were disabled.
         SensorDaemonInterface::instance()->requestMetaData(d->id);
         SensorDaemonInterface::instance()->requestValue(d->id);
     } else {
+        disconnect(SensorDaemonInterface::instance(), &SensorDaemonInterface::metaDataChanged, this, &Sensor::onMetaDataChanged);
+        disconnect(SensorDaemonInterface::instance(), &SensorDaemonInterface::valueChanged, this, &Sensor::onValueChanged);
         SensorDaemonInterface::instance()->unsubscribe(d->id);
     }
 }
