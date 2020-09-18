@@ -122,7 +122,7 @@ Q_GLOBAL_STATIC(CGroupSystemInformation, s_cGroupSystemInformation)
 // Flatpak's are currently in a cgroup, but they don't follow the specification
 // this has been fixed, but this provides some compatability till that lands
 // app vs apps exists because the spec changed.
-QRegularExpression CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("[app|apps|flatpak]-(?:[^-]*-)?([^-]+(?=-.*\\.scope)|[^@]+(?=(?:@.*)?\\.service))"));
+QRegularExpression CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("(apps|app|flatpak)-(?:[^-]*-)?([^-]+(?=-.*\\.scope)|[^@]+(?=(?:@.*)?\\.service))"));
 
 CGroup::CGroup(const QString &id)
     : d(new CGroupPrivate(id))
@@ -197,7 +197,6 @@ KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
     if (lastSlash != -1) {
         serviceName = processGroup.mid(lastSlash + 1);
     }
-    serviceName = unescapeName(serviceName);
 
     const QRegularExpressionMatch &appIdMatch = s_appIdFromProcessGroupPattern.match(serviceName);
 
@@ -206,7 +205,7 @@ KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
         return KService::Ptr(new KService(serviceName, QString(), QString()));
     }
 
-    const QString appId = appIdMatch.captured(1);
+    const QString appId = unescapeName(appIdMatch.captured(2));
 
     KService::Ptr service = KService::serviceByMenuId(appId + QStringLiteral(".desktop"));
     if (!service) {
