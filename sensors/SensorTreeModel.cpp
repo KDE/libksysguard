@@ -135,27 +135,28 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
         }
     }
     SensorTreeItem *item = rootItem;
+    if (item) {
+        for (auto segment : segments) {
+            auto child = item->children.value(segment, nullptr);
 
-    for (auto segment : segments) {
-        auto child = item->children.value(segment, nullptr);
+            if (child) {
+                item = child;
 
-        if (child) {
-            item = child;
+            } else {
+                SensorTreeItem *newItem = new SensorTreeItem();
+                newItem->parent = item;
+                newItem->segment = segment;
 
-        } else {
-            SensorTreeItem *newItem = new SensorTreeItem();
-            newItem->parent = item;
-            newItem->segment = segment;
+                const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex() : q->createIndex(item->parent->indexOf(item->segment), 0, item);
 
-            const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex() : q->createIndex(item->parent->indexOf(item->segment), 0, item);
+                auto index = std::distance(item->children.begin(), item->children.upperBound(segment));
 
-            auto index = std::distance(item->children.begin(), item->children.upperBound(segment));
+                q->beginInsertRows(parentIndex, index, index);
+                item->children.insert(segment, newItem);
+                q->endInsertRows();
 
-            q->beginInsertRows(parentIndex, index, index);
-            item->children.insert(segment, newItem);
-            q->endInsertRows();
-
-            item = newItem;
+                item = newItem;
+            }
         }
     }
 

@@ -844,7 +844,8 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point){
                 actionGB->setChecked(true);
                 break;
             case ProcessModel::UnitsPercentage:
-                actionPercentage->setChecked(true);
+                if (actionPercentage)
+                    actionPercentage->setChecked(true);
                 break;
             default:
                 break;

@@ -585,14 +585,16 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE * dpr, HEADING_X_ICON_SIZE * dpr, true);
         w->icon.setDevicePixelRatio(dpr);
     }
-    if(properties & NET::WMVisibleName && info.visibleName())
+    if(w && (properties & NET::WMVisibleName && info.visibleName()))
         w->name = QString::fromUtf8(info.visibleName());
-    else if(properties & NET::WMName)
+    else if(w && (properties & NET::WMName))
         w->name = QString::fromUtf8(info.name());
-    else if(properties & (NET::WMName | NET::WMVisibleName))
+    else if(w && (properties & (NET::WMName | NET::WMVisibleName)))
         w->name.clear();
 
-    KSysGuard::Process *process = mProcesses->getProcess(w->pid);
+    KSysGuard::Process *process = nullptr;
+    if (w)
+        process = mProcesses->getProcess(w->pid);
     if(!process) {
         return; //This happens when a new window is detected before we've read in the process
     }
