@@ -75,6 +75,7 @@ static KLocalizedString unitFormat(Unit unit)
     const static KLocalizedString s = ki18nc("Seconds unit symbol", "%1s");
     const static KLocalizedString V = ki18nc("Volts unit symbol", "%1 V");
     const static KLocalizedString W = ki18nc("Watts unit symbol", "%1 W");
+    const static KLocalizedString Wh = ki18nc("Watt-hours unit symbol", "%1 Wh");
     const static KLocalizedString rate = ki18nc("Rate unit symbol", "%1 s⁻¹");
     const static KLocalizedString unitless = ki18nc("Unitless", "%1");
 
@@ -134,6 +135,8 @@ static KLocalizedString unitFormat(Unit unit)
         return V;
     case UnitWatt:
         return W;
+    case UnitWattHour:
+        return Wh;
 
     default:
         return unitless;
@@ -163,6 +166,8 @@ static int unitOrder(Unit unit)
     case UnitGigaHertz:
     case UnitTeraHertz:
     case UnitPetaHertz:
+    case UnitWatt:
+    case UnitWattHour:
         return 1000;
 
     default:
@@ -372,6 +377,8 @@ QString Formatter::symbol(Unit unit)
         return i18nc("Volts unit symbol", "V");
     case UnitWatt:
         return i18nc("Watts unit symbol", "W");
+    case UnitWattHour:
+        return i18nc("Watt-hours unit symbol", "Wh");
     case UnitRate:
         return i18nc("Rate unit symbol", "s⁻¹");
 
