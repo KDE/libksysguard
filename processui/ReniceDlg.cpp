@@ -188,8 +188,8 @@ void ReniceDlg::setSliderRange() {
 		//The slider is setting the priority, so goes from 19 to -20.  We cannot actually do this with a slider, so instead we go from -19 to 20, and negate later
 		if(ui->sliderCPU->value() > 20) ui->sliderCPU->setValue(20);
 		ui->sliderCPU->setInvertedAppearance(true);
-		ui->sliderCPU->setMinimum(-19);
-		ui->sliderCPU->setMaximum(20);
+		ui->sliderCPU->setMinimum(-20);
+		ui->sliderCPU->setMaximum(19);
 		ui->sliderCPU->setTickInterval(5);
 	} else {
 		if(ui->sliderCPU->value() < 1) ui->sliderCPU->setValue(1);
