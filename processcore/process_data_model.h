@@ -69,6 +69,11 @@ class Q_DECL_EXPORT ProcessDataModel : public QAbstractItemModel
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
+    /**
+     * If true this model is a flat list, otherwise is a tree following the process tree structure. Default is true
+     */
+    Q_PROPERTY(bool flatList READ flatList WRITE setFlatList NOTIFY flatListChanged)
+
 public:
     enum AdditionalRoles {
         Value = Qt::UserRole, /// The raw value of the attribute. This is unformatted and could represent an int, real or string
@@ -114,6 +119,10 @@ public:
     bool enabled() const;
     void setEnabled(bool newEnabled);
     Q_SIGNAL void enabledChanged();
+
+    bool flatList() const;
+    void setFlatList(bool flat);
+    Q_SIGNAL void flatListChanged();
 
     QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

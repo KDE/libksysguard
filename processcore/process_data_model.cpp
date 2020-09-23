@@ -45,9 +45,11 @@ public:
 
     ProcessDataModel *q;
     KSysGuard::ExtendedProcesses *m_processes;
+    KSysGuard::Process *m_rootProcess;
     QTimer *m_timer;
     ProcessAttributeModel *m_attributeModel = nullptr;
     const int m_updateInterval = 2000;
+    bool m_flatList = true;
 
     QHash<QString, KSysGuard::ProcessAttribute *> m_availableAttributes;
     QVector<KSysGuard::ProcessAttribute *> m_enabledAttributes;
@@ -69,6 +71,7 @@ ProcessDataModel::Private::Private(ProcessDataModel *_q)
     , m_processes(new KSysGuard::ExtendedProcesses(_q))
     , m_timer(new QTimer(_q))
 {
+    m_rootProcess = m_processes->getProcess(-1);
     connect(m_processes, &KSysGuard::Processes::beginAddProcess, q, [this](KSysGuard::Process *process) {
         beginInsertRow(process);
     });
@@ -142,15 +145,35 @@ QVariant ProcessDataModel::data(const QModelIndex &index, int role) const
 
 int ProcessDataModel::rowCount(const QModelIndex &parent) const
 {
-    if (parent.isValid())
-        return 0; //In flat mode, none of the processes have children
-    return d->m_processes->processCount();
+    if (d->m_flatList) {
+        if (parent.isValid()) {
+            return 0;
+        } else {
+            return d->m_processes->processCount();
+        }
+    }
+
+    if (!parent.isValid()) {
+        return d->m_rootProcess->children().count();
+    } else if (parent.column() != 0) {
+        return 0;
+    }
+
+    KSysGuard::Process *proc = reinterpret_cast<KSysGuard::Process *>(parent.internalPointer());
+    Q_ASSERT(proc);
+    return proc->children().count();
 }
 
 QModelIndex ProcessDataModel::parent(const QModelIndex &index) const
 {
     Q_UNUSED(index)
-    return QModelIndex();
+    if (d->m_flatList || !index.isValid()) {
+        return QModelIndex();
+    }
+
+    KSysGuard::Process *proc = reinterpret_cast<KSysGuard::Process *>(index.internalPointer());
+    Q_ASSERT(proc);
+    return d->getQModelIndex(proc->parent(), 0);
 }
 
 QStringList ProcessDataModel::availableAttributes() const
@@ -187,8 +210,10 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
         // reconnect as using the columnIndex in the lambda makes everything super fast
         disconnect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
         connect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](KSysGuard::Process *process) {
-            const QModelIndex index = d->getQModelIndex(process, columnIndex);
-            emit dataChanged(index, index);
+            if (process->pid() != -1) {
+                const QModelIndex index = d->getQModelIndex(process, columnIndex);
+                emit dataChanged(index, index);
+            }
         });
 
         attribute->setEnabled(true);
@@ -225,29 +250,74 @@ void ProcessDataModel::setEnabled(bool newEnabled)
     Q_EMIT enabledChanged();
 }
 
+bool ProcessDataModel::flatList() const
+{
+    return d->m_flatList;
+}
+
+void ProcessDataModel::setFlatList(bool flat)
+{
+    if (d->m_flatList == flat) {
+        return;
+    }
+    beginResetModel();
+    // NOTE: layoutAboutToBeChanged doesn't play well with TableView delegate recycling
+    // emit layoutAboutToBeChanged();
+
+    d->m_flatList = flat;
+    endResetModel();
+    emit flatListChanged();
+}
+
 QModelIndex ProcessDataModel::index(int row, int column, const QModelIndex &parent) const
 {
-    if (row < 0) {
-        return QModelIndex();
-    }
-    if (column < 0 || column >= columnCount()) {
+    if (row < 0 || column < 0 || column >= columnCount()) {
         return QModelIndex();
     }
 
+    // Flat List
+    if (d->m_flatList) {
+        if (parent.isValid()) {
+            return QModelIndex();
+        }
+
+        if (d->m_processes->processCount() <= row) {
+            return QModelIndex();
+        }
+
+        return createIndex( row, column, d->m_processes->getAllProcesses().at(row));
+    }
+
+    // Tree mode
+    KSysGuard::Process *process;
+
     if (parent.isValid()) {
-        return QModelIndex();
+        process = reinterpret_cast<KSysGuard::Process *>(parent.internalPointer());
+    } else {
+        process = d->m_rootProcess;
     }
-    if (row >= d->m_processes->processCount()) {
+
+    if (row >= process->children().count()) {
         return QModelIndex();
+    } else {
+        return createIndex(row, column, process->children()[row]);
     }
-    return createIndex(row, column, d->m_processes->getAllProcesses().at(row));
 }
 
 void ProcessDataModel::Private::beginInsertRow(KSysGuard::Process *process)
 {
     Q_ASSERT(process);
-    const int row = m_processes->processCount();
-    q->beginInsertRows(QModelIndex(), row, row);
+
+    // Flat List
+    if (m_flatList) {
+        const int row = m_processes->processCount();
+        q->beginInsertRows(QModelIndex(), row, row);
+        return;
+    }
+
+    // Tree mode
+    const int row = process->parent()->children().count();
+    q->beginInsertRows(getQModelIndex(process->parent(), 0), row, row);
 }
 
 void ProcessDataModel::Private::endInsertRow()
@@ -257,7 +327,13 @@ void ProcessDataModel::Private::endInsertRow()
 
 void ProcessDataModel::Private::beginRemoveRow(KSysGuard::Process *process)
 {
-    q->beginRemoveRows(QModelIndex(), process->index(), process->index());
+    int row = process->parent()->children().indexOf(process);
+    Q_ASSERT(row >= 0);
+    if (m_flatList) {
+        q->beginRemoveRows(QModelIndex(), process->index(), process->index());
+    } else {
+        q->beginRemoveRows(getQModelIndex(process->parent(), 0), row, row);
+    }
 }
 
 void ProcessDataModel::Private::endRemoveRow()
@@ -275,7 +351,15 @@ QModelIndex ProcessDataModel::Private::getQModelIndex(KSysGuard::Process *proces
     Q_ASSERT(process);
     if (process->pid() == -1)
         return QModelIndex(); // pid -1 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means the top element
-    const int row = process->index();
+
+    int row;
+
+    if (m_flatList) {
+        row = process->index();
+    } else {
+        row = process->parent()->children().indexOf(process);
+    }
+
     Q_ASSERT(row != -1);
     return q->createIndex(row, column, process);
 }
@@ -291,10 +375,6 @@ ProcessAttributeModel *ProcessDataModel::attributesModel()
 
 int ProcessDataModel::columnCount(const QModelIndex &parent) const
 {
-    if (parent.isValid()) {
-        return 0;
-    }
-
     return d->m_enabledAttributes.count();
 }
 
