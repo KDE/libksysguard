@@ -284,7 +284,7 @@ void KSysGuard::SensorDataModel::componentComplete()
 
 void SensorDataModel::Private::addSensor(const QString &id)
 {
-    if (requestedSensors.indexOf(id) != -1) {
+    if (!requestedSensors.contains(id)) {
         return;
     }
 
