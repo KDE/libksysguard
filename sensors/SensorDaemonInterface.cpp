@@ -29,7 +29,7 @@ class SensorDaemonInterface::Private
 {
 public:
     std::unique_ptr<org::kde::KSysGuardDaemon> dbusInterface;
-    QDBusServiceWatcher *serviceWatcher;
+    std::unique_ptr<QDBusServiceWatcher> serviceWatcher;
     QStringList subscribedSensors;
     static const QString SensorServiceName;
     static const QString SensorPath;
