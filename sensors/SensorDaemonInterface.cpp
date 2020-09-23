@@ -54,7 +54,7 @@ SensorDaemonInterface::SensorDaemonInterface(QObject *parent)
 
 void KSysGuard::SensorDaemonInterface::reconnect()
 {
-    d->dbusInterface.reset(new org::kde::KSysGuardDaemon(Private::SensorServiceName, Private::SensorPath, QDBusConnection::sessionBus()));
+    d->dbusInterface = std::make_unique<org::kde::KSysGuardDaemon>(Private::SensorServiceName, Private::SensorPath, QDBusConnection::sessionBus());
     connect(d->dbusInterface.get(), &org::kde::KSysGuardDaemon::sensorMetaDataChanged, this, &SensorDaemonInterface::onMetaDataChanged);
     connect(d->dbusInterface.get(), &org::kde::KSysGuardDaemon::newSensorData, this, &SensorDaemonInterface::onValueChanged);
     connect(d->dbusInterface.get(), &org::kde::KSysGuardDaemon::sensorAdded, this, &SensorDaemonInterface::sensorAdded);
