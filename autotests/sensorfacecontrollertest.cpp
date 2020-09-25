@@ -22,7 +22,13 @@
 
 #include <QJsonDocument>
 #include <QJsonArray>
+
 #include <KConfig>
+#include <Solid/Block>
+#include <Solid/Device>
+#include <Solid/Predicate>
+#include <Solid/StorageAccess>
+#include <Solid/StorageVolume>
 
 #include "SensorFaceController.h"
 
@@ -32,37 +38,80 @@ class SensorFaceControllerTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
-    void testSensorIdConversion()
+    void testSensorIdConversion_data()
     {
-        QJsonArray originalTotalSensors = {
+        QTest::addColumn<QJsonArray>("oldSensors");
+        QTest::addColumn<QJsonArray>("expectedSensors");
+
+        QTest::addRow("network")
+        << QJsonArray {
             QStringLiteral("network/all/sentDataRate"),
             QStringLiteral("network/all/totalReceivedData"),
             QStringLiteral("network/interfaces/test/receiver/data"),
             QStringLiteral("network/interfaces/test/transmitter/dataTotal"),
-        };
-        QJsonArray expectedTotalSensors = {
+        }
+        << QJsonArray {
             QStringLiteral("network/all/upload"),
             QStringLiteral("network/all/totalDownload"),
             QStringLiteral("network/test/download"),
             QStringLiteral("network/test/totalUpload"),
         };
 
+        const auto storageAccesses = Solid::Device::listFromQuery(Solid::Predicate(Solid::DeviceInterface::StorageAccess, QStringLiteral("accessible"), true));
+        for (int i = 0; i < storageAccesses.size(); ++i) {
+            const auto storageAccess = storageAccesses[i].as<Solid::StorageAccess>();
+            const auto blockDevice = storageAccesses[i].as<Solid::Block>();
+            const auto storageVolume = storageAccesses[i].as<Solid::StorageVolume>();
+            const QString newPrefix = QStringLiteral("disk/") + (storageVolume->uuid().isEmpty() ? storageVolume->label() : storageVolume->uuid());
+            // Old code uses "disk/sdc2_(8:34)/..."
+            QString device = blockDevice->device().mid(strlen("/dev/"));
+            const QString diskPrefix = QStringLiteral("disk/%1_(%2:%3)").arg(device).arg(blockDevice->deviceMajor()).arg(blockDevice->deviceMinor());
+            QTest::addRow("disk%d",i)
+            << QJsonArray {
+                {diskPrefix + QStringLiteral("/Rate/rio")},
+                {diskPrefix + QStringLiteral("/Rate/wio")},
+            }
+            << QJsonArray {
+                {newPrefix + QStringLiteral("/read")},
+                {newPrefix + QStringLiteral("/write")},
+            };
+            // Old code uses "partitions/mountPath/..."
+            const QString mountPath = storageAccess->filePath() == QLatin1String("/") ? QStringLiteral("/__root__") : storageAccess->filePath();
+            QString partitionPrefix = QStringLiteral("partitions") + mountPath;
+            QTest::addRow("partition%d", i)
+            << QJsonArray {
+                {partitionPrefix + QStringLiteral("/total")},
+                {partitionPrefix + QStringLiteral("/freespace")},
+                {partitionPrefix + QStringLiteral("/filllevel")},
+                {partitionPrefix + QStringLiteral("/usedspace")},
+            } << QJsonArray {
+                {newPrefix + QStringLiteral("/total")},
+                {newPrefix + QStringLiteral("/free")},
+                {newPrefix + QStringLiteral("/usedPercent")},
+                {newPrefix + QStringLiteral("/used")},
+            };
+        }
+    }
+    void testSensorIdConversion()
+    {
+        QFETCH(QJsonArray, oldSensors);
+        QFETCH(QJsonArray, expectedSensors);
         KConfig config;
         auto sensorsGroup = config.group("Sensors");
-        sensorsGroup.writeEntry("totalSensors", QJsonDocument{originalTotalSensors}.toJson(QJsonDocument::Compact));
+        sensorsGroup.writeEntry("sensors", QJsonDocument{oldSensors}.toJson(QJsonDocument::Compact));
 
         KSysGuard::SensorFaceControllerPrivate d;
 
-        auto sensors = d.readAndUpdateSensors(sensorsGroup, QStringLiteral("totalSensors"));
+        auto sensors = d.readAndUpdateSensors(sensorsGroup, QStringLiteral("sensors"));
 
-        QCOMPARE(sensors.size(), 4);
-        QCOMPARE(sensors.at(0), expectedTotalSensors.at(0));
-        QCOMPARE(sensors.at(1), expectedTotalSensors.at(1));
-        QCOMPARE(sensors.at(2), expectedTotalSensors.at(2));
-        QCOMPARE(sensors.at(3), expectedTotalSensors.at(3));
+        QCOMPARE(sensors.size(), expectedSensors.size());
 
-        auto newEntry = sensorsGroup.readEntry("totalSensors");
-        QCOMPARE(newEntry.toUtf8(), QJsonDocument{expectedTotalSensors}.toJson(QJsonDocument::Compact));
+        for (int i = 0; i < sensors.size(); ++i) {
+            QCOMPARE(sensors.at(i), expectedSensors.at(i));
+        }
+
+        auto newEntry = sensorsGroup.readEntry("sensors");
+        QCOMPARE(newEntry.toUtf8(), QJsonDocument{expectedSensors}.toJson(QJsonDocument::Compact));
     }
 };
 

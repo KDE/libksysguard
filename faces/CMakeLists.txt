@@ -50,6 +50,7 @@ target_link_libraries(SensorFaces
         KF5::I18n
         KF5::Package
         KF5::Declarative
+        KF5::Solid
 )
 
 set_target_properties(SensorFaces PROPERTIES

@@ -82,6 +82,8 @@ public:
 
     QJsonArray readSensors(const KConfigGroup &config, const QString &entryName);
     QJsonArray readAndUpdateSensors(KConfigGroup &config, const QString &entryName);
+    QString replaceDiskId(const QString &entryname) const;
+    QString replacePartitionId(const QString &entryname) const;
     QJsonArray resolveSensors(const QJsonArray &partialEntries);
     SensorFace *createGui(const QString &qmlPath);
     QQuickItem *createConfigUi(const QString &file, const QVariantMap &initialProperties);
@@ -118,6 +120,8 @@ public:
     PresetsModel *availablePresetsModel = nullptr;
 
     static QVector<QPair<QRegularExpression, QString>> sensorIdReplacements;
+    static QRegularExpression oldDiskSensor;
+    static QRegularExpression oldPartitionSensor;
 };
 
 }

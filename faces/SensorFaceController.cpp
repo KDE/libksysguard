@@ -31,6 +31,11 @@
 #include <KLocalizedString>
 #include <KConfigLoader>
 #include <KPluginMetaData>
+#include <Solid/Block>
+#include <Solid/Device>
+#include <Solid/Predicate>
+#include <Solid/StorageAccess>
+#include <Solid/StorageVolume>
 
 using namespace KSysGuard;
 
@@ -133,6 +138,8 @@ QHash<int, QByteArray> PresetsModel::roleNames() const
 }
 
 QVector<QPair<QRegularExpression, QString>> KSysGuard::SensorFaceControllerPrivate::sensorIdReplacements;
+QRegularExpression SensorFaceControllerPrivate::oldDiskSensor = QRegularExpression(QStringLiteral("^disk\\/(.+)_\\(\\d+:\\d+\\)"));
+QRegularExpression SensorFaceControllerPrivate::oldPartitionSensor = QRegularExpression(QStringLiteral("^partitions(\\/.+)\\/"));
 
 SensorFaceControllerPrivate::SensorFaceControllerPrivate()
 {
@@ -151,8 +158,50 @@ SensorFaceControllerPrivate::SensorFaceControllerPrivate()
             { QRegularExpression(QStringLiteral("(.*)/transmitter/data$")), QStringLiteral("\\1/upload")},
             { QRegularExpression(QStringLiteral("(.*)/receiver/dataTotal$")), QStringLiteral("\\1/totalDownload")},
             { QRegularExpression(QStringLiteral("(.*)/transmitter/dataTotal$")), QStringLiteral("\\1/totalUpload")},
+            { QRegularExpression(QStringLiteral("(.*)/Rate/rio")), QStringLiteral("\\1/read")},
+            { QRegularExpression(QStringLiteral("(.*)/Rate/wio$")), QStringLiteral("\\1/write")},
+            { QRegularExpression(QStringLiteral("(.*)/freespace$")), QStringLiteral("\\1/free")},
+            { QRegularExpression(QStringLiteral("(.*)/filllevel$")), QStringLiteral("\\1/usedPercent")},
+            { QRegularExpression(QStringLiteral("(.*)/usedspace$")), QStringLiteral("\\1/used")},
         };
     }
+}
+
+QString SensorFaceControllerPrivate::replaceDiskId(const QString &entryName) const
+{
+    const auto match = oldDiskSensor.match(entryName);
+    if (!match.hasMatch()) {
+        return entryName;
+    }
+    const QString device = match.captured(1);
+    Solid::Predicate predicate(Solid::DeviceInterface::StorageAccess);
+    predicate &= Solid::Predicate(Solid::DeviceInterface::Block, QStringLiteral("device"), QStringLiteral("/dev/%1").arg(device));
+    const auto devices = Solid::Device::listFromQuery(predicate);
+    if (devices.empty()) {
+        return QString();
+    }
+    QString sensorId = entryName;
+    const auto volume = devices[0].as<Solid::StorageVolume>();
+    const QString id = volume->uuid().isEmpty() ? volume->label() : volume->uuid();
+    return sensorId.replace(match.captured(0), QStringLiteral("disk/") + id);
+}
+
+QString SensorFaceControllerPrivate::replacePartitionId(const QString &entryName) const
+{
+    const auto match = oldPartitionSensor.match(entryName);
+    if (!match.hasMatch()) {
+        return entryName;
+    }
+    const QString filePath = match.captured(1) == QLatin1String("/__root__") ? QStringLiteral("/") : match.captured(1);
+    const Solid::Predicate predicate(Solid::DeviceInterface::StorageAccess, QStringLiteral("filePath"), filePath);
+    const auto devices = Solid::Device::listFromQuery(predicate);
+    if (devices.empty()) {
+        return entryName;
+    }
+    QString sensorId = entryName;
+    const auto volume = devices[0].as<Solid::StorageVolume>();
+    const QString id = volume->uuid().isEmpty() ? volume->label() : volume->uuid();
+    return sensorId.replace(match.captured(0), QStringLiteral("disk/%1/").arg(id));
 }
 
 QJsonArray SensorFaceControllerPrivate::readSensors(const KConfigGroup &read, const QString &entryName)
@@ -167,6 +216,8 @@ QJsonArray SensorFaceControllerPrivate::readSensors(const KConfigGroup &read, co
                 sensorId.replace(replacement.first, replacement.second);
             }
         }
+        sensorId = replaceDiskId(sensorId);
+        sensorId = replacePartitionId(sensorId);
         newSensors.append(sensorId);
     }
 
