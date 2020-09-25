@@ -61,8 +61,17 @@ void SensorGroup::retranslate()
     m_sensorNames[QStringLiteral("network/(?!all).*/upload")] = i18n("[Group] Upload Rate");
     m_sensorNames[QStringLiteral("network/(?!all).*/totalUpload")] = i18n("[Group] Total Uploaded");
 
+    m_sensorNames[QStringLiteral("disk/(?!all).*/name")] = i18n("[Group] Name");
+    m_sensorNames[QStringLiteral("disk/(?!all).*/total")] = i18n("[Group] Total Space");
+    m_sensorNames[QStringLiteral("disk/(?!all).*/used")] = i18n("[Group] Used Space");
+    m_sensorNames[QStringLiteral("disk/(?!all).*/free")] = i18n("[Group] Free Space");
+    m_sensorNames[QStringLiteral("disk/(?!all).*/read")] = i18n("[Group] Read Rate");
+    m_sensorNames[QStringLiteral("disk/(?!all).*/write")] = i18n("[Group] Write Rate");
+    m_sensorNames[QStringLiteral("disk/(?!all).*/usedPercent")] = i18n("[Group] Percentage Used");
+    m_sensorNames[QStringLiteral("disk/(?!all).*/freePercent")] = i18n("[Group] Percentage Free");
+
     m_segmentNames[QLatin1String("cpu\\d+")] = i18n("[Group] CPU");
-    m_segmentNames[QLatin1String("disk\\d+")] = i18n("[Group] Disk");
+    m_segmentNames[QLatin1String("disk/(?!all).*")] = i18n("[Group] Disk");
     m_segmentNames[QLatin1String("(?!all).*")] = i18n("[Group]");
 }
 
@@ -72,6 +81,7 @@ QString SensorGroup::groupRegexForId(const QString &key)
     QRegularExpression cpuExpr(QStringLiteral("cpu/cpu\\d+/(.*)"));
     QRegularExpression netExpr(QStringLiteral("network/(?!all).*/(.*)$"));
     QRegularExpression partitionsExpr(QStringLiteral("partitions/(?!all).*/(.*)$"));
+    QRegularExpression diskExpr(QStringLiteral("disk/(?!all).*/(.*)"));
 
     if (key.contains(cpuExpr)) {
         QString expr = key;
@@ -84,6 +94,10 @@ QString SensorGroup::groupRegexForId(const QString &key)
     } else if (key.contains(partitionsExpr)) {
         QString expr = key;
         return expr.replace(partitionsExpr, QStringLiteral("partitions/(?!all).*/\\1"));
+
+    } else if (key.contains(diskExpr)) {
+        QString expr = key;
+        return expr.replace(diskExpr, QStringLiteral("disk/(?!all).*/\\1"));
     }
 
     return QString();
