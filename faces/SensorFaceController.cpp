@@ -600,6 +600,10 @@ void SensorFaceController::reloadConfig()
         d->faceConfigLoader->load();
     }
 
+    d->totalSensors = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")));
+    d->lowPrioritySensorIds = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")));
+    d->highPrioritySensorIds = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")));
+
     //Force to re-read all the values
     setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.textonly")));
     titleChanged();
