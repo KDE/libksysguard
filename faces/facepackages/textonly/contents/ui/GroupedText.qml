@@ -104,8 +104,14 @@ ColumnLayout {
 
         Sensors.Sensor { sensorId: modelData }
 
-        onObjectAdded: root.highPrioritySensors.push(object)
-        onObjectRemoved: root.highPrioritySensors.splice(root.highPrioritySensors.indexOf(object), 1)
+        onObjectAdded: {
+            root.highPrioritySensors.push(object)
+            root.highPrioritySensors = root.highPrioritySensors
+        }
+        onObjectRemoved: {
+            root.highPrioritySensors.splice(root.highPrioritySensors.indexOf(object), 1)
+            root.highPrioritySensors = root.highPrioritySensors
+        }
     }
 
     Instantiator {
@@ -113,7 +119,13 @@ ColumnLayout {
 
         Sensors.Sensor { sensorId: modelData }
 
-        onObjectAdded: root.lowPrioritySensors.push(object)
-        onObjectRemoved: root.lowPrioritySensors.splice(root.lowPrioritySensors.indexOf(object), 1)
+        onObjectAdded: {
+            root.lowPrioritySensors.push(object)
+            root.lowPrioritySensors = root.lowPrioritySensors
+        }
+        onObjectRemoved: {
+            root.lowPrioritySensors.splice(root.lowPrioritySensors.indexOf(object), 1)
+            root.lowPrioritySensors = root.lowPrioritySensors
+        }
     }
 }
