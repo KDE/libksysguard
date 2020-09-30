@@ -48,7 +48,7 @@ SensorDaemonInterface::SensorDaemonInterface(QObject *parent)
     qDBusRegisterMetaType<SensorInfoMap>();
 
     d->serviceWatcher = std::make_unique<QDBusServiceWatcher>(d->SensorServiceName, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForUnregistration);
-    connect(d->serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, &SensorDaemonInterface::reconnect);
+    connect(d->serviceWatcher.get(), &QDBusServiceWatcher::serviceUnregistered, this, &SensorDaemonInterface::reconnect);
     reconnect();
 }
 
