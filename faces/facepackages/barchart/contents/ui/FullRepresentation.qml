@@ -97,7 +97,6 @@ Faces.SensorFace {
                     ? Kirigami.Units.gridUnit
                     : 5 * Kirigami.Units.gridUnit
                 Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
-                Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
 
                 Charts.GridLines {
                     id: horizontalLines
