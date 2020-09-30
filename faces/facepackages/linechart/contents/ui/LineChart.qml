@@ -36,8 +36,6 @@ Charts.LineChart {
     readonly property alias sensorsModel: sensorsModel
     property int maximumHistory: root.controller.faceConfiguration.rangeToX - root.controller.faceConfiguration.rangeFromX
 
-    Layout.minimumWidth: Kirigami.Units.gridUnit * 8
-
     direction: Charts.XYChart.ZeroAtEnd
 
     fillOpacity: root.controller.faceConfiguration.lineChartFillOpacity / 100
