@@ -119,7 +119,6 @@ Faces.SensorFace {
             Layout.fillWidth: root.width < implicitWidth * 1.5
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
             Layout.fillHeight: true
-            Layout.leftMargin: compactRepresentation.x
             Layout.minimumHeight: root.formFactor === Faces.SensorFace.Horizontal
                 || root.formFactor === Faces.SensorFace.Vertical
                 ? implicitHeight
