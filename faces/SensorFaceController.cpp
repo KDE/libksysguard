@@ -192,13 +192,18 @@ QString SensorFaceControllerPrivate::replacePartitionId(const QString &entryName
     if (!match.hasMatch()) {
         return entryName;
     }
+    QString sensorId = entryName;
+
+    if (match.captured(1) == QLatin1String("/all")) {
+        return sensorId.replace(match.captured(0), QStringLiteral("disk/all/"));
+    }
+
     const QString filePath = match.captured(1) == QLatin1String("/__root__") ? QStringLiteral("/") : match.captured(1);
     const Solid::Predicate predicate(Solid::DeviceInterface::StorageAccess, QStringLiteral("filePath"), filePath);
     const auto devices = Solid::Device::listFromQuery(predicate);
     if (devices.empty()) {
         return entryName;
     }
-    QString sensorId = entryName;
     const auto volume = devices[0].as<Solid::StorageVolume>();
     const QString id = volume->uuid().isEmpty() ? volume->label() : volume->uuid();
     return sensorId.replace(match.captured(0), QStringLiteral("disk/%1/").arg(id));

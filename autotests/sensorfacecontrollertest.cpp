@@ -91,6 +91,18 @@ private Q_SLOTS:
                 {newPrefix + QStringLiteral("/used")},
             };
         }
+        QTest::addRow("paritionsall")
+        << QJsonArray {
+            QStringLiteral("partitions/all/total"),
+            QStringLiteral("partitions/all/freespace"),
+            QStringLiteral("partitions/all/filllevel"),
+            QStringLiteral("partitions/all/usedspace"),
+        } <<  QJsonArray {
+            QStringLiteral("disk/all/total"),
+            QStringLiteral("disk/all/free"),
+            QStringLiteral("disk/all/usedPercent"),
+            QStringLiteral("disk/all/used"),
+        };
     }
     void testSensorIdConversion()
     {
