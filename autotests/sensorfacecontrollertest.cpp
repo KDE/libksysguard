@@ -91,6 +91,7 @@ private Q_SLOTS:
                 {newPrefix + QStringLiteral("/used")},
             };
         }
+
         QTest::addRow("paritionsall")
         << QJsonArray {
             QStringLiteral("partitions/all/total"),
@@ -103,7 +104,28 @@ private Q_SLOTS:
             QStringLiteral("disk/all/usedPercent"),
             QStringLiteral("disk/all/used"),
         };
+
+        QTest::addRow("cpu")
+         << QJsonArray {
+            QStringLiteral("cpu/cpu1/clock"),
+            QStringLiteral("cpu/cpu1/sys"),
+            QStringLiteral("cpu/cpu1/TotalLoad"),
+            QStringLiteral("cpu/system/sys"),
+            QStringLiteral("cpu/system/TotalLoad"),
+            QStringLiteral("cpu/system/user"),
+            QStringLiteral("cpu/system/wait"),
+        }
+        << QJsonArray {
+            QStringLiteral("cpu/cpu1/frequency"),
+            QStringLiteral("cpu/cpu1/system"),
+            QStringLiteral("cpu/cpu1/usage"),
+            QStringLiteral("cpu/all/system"),
+            QStringLiteral("cpu/all/usage"),
+            QStringLiteral("cpu/all/user"),
+            QStringLiteral("cpu/all/wait"),
+        };
     }
+
     void testSensorIdConversion()
     {
         QFETCH(QJsonArray, oldSensors);

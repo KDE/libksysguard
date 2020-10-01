@@ -163,6 +163,10 @@ SensorFaceControllerPrivate::SensorFaceControllerPrivate()
             { QRegularExpression(QStringLiteral("(.*)/freespace$")), QStringLiteral("\\1/free")},
             { QRegularExpression(QStringLiteral("(.*)/filllevel$")), QStringLiteral("\\1/usedPercent")},
             { QRegularExpression(QStringLiteral("(.*)/usedspace$")), QStringLiteral("\\1/used")},
+            { QRegularExpression(QStringLiteral("cpu/system/(.*)$")), QStringLiteral("cpu/all/\\1")},
+            { QRegularExpression(QStringLiteral("cpu/(.*)/sys$")), QStringLiteral("cpu/\\1/system")},
+            { QRegularExpression(QStringLiteral("cpu/(.*)/TotalLoad$")), QStringLiteral("cpu/\\1/usage")},
+            { QRegularExpression(QStringLiteral("cpu/cpu(\\d+)/clock$")), QStringLiteral("cpu/cpu\\1/frequency")},
         };
     }
 }
