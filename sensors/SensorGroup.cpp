@@ -39,13 +39,13 @@ void SensorGroup::retranslate()
     m_sensorNames.clear();
     m_segmentNames.clear();
 
-    m_sensorNames[QStringLiteral("cpu/cpu\\d+/TotalLoad")] = i18nc("Total load sensor of all cores", "[Group] CPU");
-    m_sensorNames[QStringLiteral("cpu/cpu\\d+/user")] = i18nc("All cores user load sensors", "[Group] User Load");
-    m_sensorNames[QStringLiteral("cpu/cpu\\d+/nice")] = i18nc("All cores nice load sensors", "[Group] Nice Load");
-    m_sensorNames[QStringLiteral("cpu/cpu\\d+/sys")] = i18nc("All cores user system sensors", "[Group] System Load");
-    m_sensorNames[QStringLiteral("cpu/cpu\\d+/idle")] = i18nc("All cores idle load sensors", "[Group] Idle Load");
-    m_sensorNames[QStringLiteral("cpu/cpu\\d+/wait")] = i18nc("All cores wait load sensors", "[Group] Wait Load");
-    m_sensorNames[QStringLiteral("cpu/cpu\\d+/clock")] = i18nc("All cores clock frequency sensors", "[Group] Clock Frequency");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/usage")] = i18nc("Total load sensor of all cores", "[Group] Total Usage");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/user")] = i18nc("All cores user load sensors", "[Group] User Usage");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/system")] = i18nc("All cores user system sensors", "[Group] System Usage");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/wait")] = i18nc("All cores wait load sensors", "[Group] Wait Usage");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/frequency")] = i18nc("All cores clock frequency sensors", "[Group] Clock Frequency");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/temperature")] = i18nc("All cores temperature sensors", "[Group] Temperature");
+    m_sensorNames[QStringLiteral("cpu/cpu\\d+/name")] = i18nc("All cores names", "[Group] Name");
 
     m_sensorNames[QStringLiteral("partitions/(?!all).*/usedspace")] = i18n("[Group] Used");
     m_sensorNames[QStringLiteral("partitions/(?!all).*/freespace")] = i18n("[Group] Available");
