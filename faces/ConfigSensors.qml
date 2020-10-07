@@ -40,8 +40,6 @@ import "./" as Local
 ColumnLayout {
     id: root
 
-    readonly property int implicitHeight: 1 //HACK FIXME to disable external scrollbar
-
     signal configurationChanged
 
     property var cfg_totalSensors: []
