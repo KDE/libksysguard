@@ -108,6 +108,10 @@ CGroupDataModel::CGroupDataModel(QObject *parent)
         d->m_availableAttributes[attr->id()] = attr;
     }
 
+    if (CGroup::cgroupSysBasePath().isEmpty()) {
+        return;
+    }
+
     connect(d->m_updateTimer, &QTimer::timeout, this, [this]() {
         update();
     });
