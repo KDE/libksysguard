@@ -375,6 +375,24 @@ void SensorFaceController::setTitle(const QString &title)
     emit titleChanged();
 }
 
+bool SensorFaceController::showTitle() const
+{
+    return d->appearanceGroup.readEntry("showTitle", true);
+}
+
+void SensorFaceController::setShowTitle(bool show)
+{
+    if (show == showTitle()) {
+        return;
+    }
+
+    d->appearanceGroup.writeEntry("showTitle", show);
+    d->syncTimer->start();
+
+    emit showTitleChanged();
+}
+
+
 QJsonArray SensorFaceController::totalSensors() const
 {
     return d->totalSensors;

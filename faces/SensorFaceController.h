@@ -45,6 +45,7 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
+    Q_PROPERTY(bool showTitle READ showTitle WRITE setShowTitle NOTIFY showTitleChanged)
     Q_PROPERTY(QString faceId READ faceId WRITE setFaceId NOTIFY faceIdChanged)
     Q_PROPERTY(QJsonArray totalSensors READ totalSensors WRITE setTotalSensors NOTIFY totalSensorsChanged)
     Q_PROPERTY(QJsonArray highPrioritySensorIds READ highPrioritySensorIds WRITE setHighPrioritySensorIds NOTIFY highPrioritySensorIdsChanged)
@@ -86,6 +87,9 @@ public:
     QString title() const;
     void setTitle(const QString &title);
 
+    bool showTitle() const;
+    void setShowTitle(bool show);
+
     QJsonArray totalSensors() const;
     void setTotalSensors(const QJsonArray &sensor);
 
@@ -124,6 +128,7 @@ public:
 Q_SIGNALS:
     void faceIdChanged();
     void titleChanged();
+    void showTitleChanged();
     void totalSensorsChanged();
     void highPrioritySensorIdsChanged();
     void lowPrioritySensorIdsChanged();
