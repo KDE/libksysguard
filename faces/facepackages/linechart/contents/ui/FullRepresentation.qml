@@ -48,7 +48,7 @@ Faces.SensorFace {
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             text: root.controller.title
-            visible: text.length > 0
+            visible: root.controller.showTitle && text.length > 0
             level: 2
             TextMetrics {
                 id: titleMetrics
