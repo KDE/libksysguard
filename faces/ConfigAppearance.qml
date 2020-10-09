@@ -40,6 +40,7 @@ Kirigami.FormLayout {
     function saveConfig() {
         controller.title = cfg_title;
         controller.faceId = cfg_chartFace;
+        controller.showTitle = cfg_showTitle
 
         var preset = pendingPreset;
         pendingPreset = "";
@@ -51,9 +52,11 @@ Kirigami.FormLayout {
 
     property Faces.SensorFaceController controller
     property alias cfg_title: titleField.text
+    property alias cfg_showTitle: showTitleCheckbox.checked
     property string cfg_chartFace
 
     onCfg_titleChanged: configurationChanged();
+    onCfg_showTitleChanged: configurationChanged()
     onCfg_chartFaceChanged: configurationChanged();
 
     // config keys of the selected preset to be applied on save
@@ -62,6 +65,7 @@ Kirigami.FormLayout {
     Component.onCompleted: {
         cfg_title = controller.title;
         cfg_chartFace = controller.faceId;
+        cfg_showTitle = controller.showTitle
     }
 
     Charts.ColorGradientSource {
@@ -131,9 +135,15 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
-    QQC2.TextField {
-        id: titleField
+    RowLayout {
         Kirigami.FormData.label: i18nd("KSysGuardSensorFaces", "Title:")
+        QQC2.TextField {
+            id: titleField
+        }
+        QQC2.CheckBox {
+            id: showTitleCheckbox
+            text: i18nd("KSysGuardSensorFaces", "Show Title")
+        }
     }
 
     RowLayout {
