@@ -1,5 +1,6 @@
 /*
  * Copyright 2020  Arjen Hiemstra <ahiemstra@heimr.nl>
+ * Copyright 2020  David Redondo <kde@david-redondo.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -106,7 +107,7 @@ private Q_SLOTS:
         };
 
         QTest::addRow("cpu")
-         << QJsonArray {
+        << QJsonArray {
             QStringLiteral("cpu/cpu1/clock"),
             QStringLiteral("cpu/cpu1/sys"),
             QStringLiteral("cpu/cpu1/TotalLoad"),
@@ -123,6 +124,45 @@ private Q_SLOTS:
             QStringLiteral("cpu/all/usage"),
             QStringLiteral("cpu/all/user"),
             QStringLiteral("cpu/all/wait"),
+        };
+
+        QTest::addRow("memory")
+        << QJsonArray{
+            QStringLiteral("mem/physical/allocated"),
+            QStringLiteral("mem/physical/allocatedlevel"),
+            QStringLiteral("mem/physical/application"),
+            QStringLiteral("mem/physical/applicationlevel"),
+            QStringLiteral("mem/physical/available"),
+            QStringLiteral("mem/physical/availablelevel"),
+            QStringLiteral("mem/physical/buf"),
+            QStringLiteral("mem/physical/buflevel"),
+            QStringLiteral("mem/physical/cached"),
+            QStringLiteral("mem/physical/cachedlevel"),
+            QStringLiteral("mem/physical/free"),
+            QStringLiteral("mem/physical/freelevel"),
+            QStringLiteral("mem/physical/total"),
+            QStringLiteral("mem/physical/used"),
+            QStringLiteral("mem/physical/usedlevel"),
+            QStringLiteral("mem/swap/free"),
+            QStringLiteral("mem/swap/used"),
+        } << QJsonArray {
+            QStringLiteral("memory/physical/used"),
+            QStringLiteral("memory/physical/usedPercent"),
+            QStringLiteral("memory/physical/application"),
+            QStringLiteral("memory/physical/applicationPercent"),
+            QStringLiteral("memory/physical/free"),
+            QStringLiteral("memory/physical/freePercent"),
+            QStringLiteral("memory/physical/buffer"),
+            QStringLiteral("memory/physical/bufferPercent"),
+            QStringLiteral("memory/physical/cache"),
+            QStringLiteral("memory/physical/cachePercent"),
+            QStringLiteral("memory/physical/free"),
+            QStringLiteral("memory/physical/freePercent"),
+            QStringLiteral("memory/physical/total"),
+            QStringLiteral("memory/physical/used"),
+            QStringLiteral("memory/physical/usedPercent"),
+            QStringLiteral("memory/swap/free"),
+            QStringLiteral("memory/swap/used"),
         };
     }
 

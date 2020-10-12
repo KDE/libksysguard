@@ -167,6 +167,12 @@ SensorFaceControllerPrivate::SensorFaceControllerPrivate()
             { QRegularExpression(QStringLiteral("cpu/(.*)/sys$")), QStringLiteral("cpu/\\1/system")},
             { QRegularExpression(QStringLiteral("cpu/(.*)/TotalLoad$")), QStringLiteral("cpu/\\1/usage")},
             { QRegularExpression(QStringLiteral("cpu/cpu(\\d+)/clock$")), QStringLiteral("cpu/cpu\\1/frequency")},
+            { QRegularExpression(QStringLiteral("mem/(.*)level")), QStringLiteral("mem/\\1Percent")},
+            { QRegularExpression(QStringLiteral("mem/physical/allocated")), QStringLiteral("memory/physical/used")},
+            { QRegularExpression(QStringLiteral("mem/physical/available")), QStringLiteral("memory/physical/free")},
+            { QRegularExpression(QStringLiteral("mem/physical/buf")), QStringLiteral("memory/physical/buffer")},
+            { QRegularExpression(QStringLiteral("mem/physical/cached")), QStringLiteral("memory/physical/cache")},
+            { QRegularExpression(QStringLiteral("^mem/(.*)")), QStringLiteral("memory/\\1")},
         };
     }
 }
