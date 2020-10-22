@@ -88,11 +88,7 @@ class ScriptingHtmlDialog : public QDialog {
             setLayout(layout);
             layout->setContentsMargins(0,0,0,0);
             m_webView.settings()->setAttribute(QWebEngineSettings::PluginsEnabled, false);
-#if QTWEBENGINEWIDGETS_VERSION < QT_VERSION_CHECK(5, 13, 0)
-            m_webView.page()->profile()->setRequestInterceptor(new RemoteUrlInterceptor(this));
-#else
             m_webView.page()->profile()->setUrlRequestInterceptor(new RemoteUrlInterceptor(this));
-#endif
 #endif
         }
 #if WEBENGINE_SCRIPTING_ENABLED
