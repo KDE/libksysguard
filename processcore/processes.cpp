@@ -24,9 +24,7 @@
 #include "processes_local_p.h"
 #include "processes_remote_p.h"
 #include "processes_atop_p.h"
-#include "process.h"
 
-#include <QHash>
 #include <QSet>
 #include <QMutableSetIterator>
 #include <QByteArray>

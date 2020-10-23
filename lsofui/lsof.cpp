@@ -1,5 +1,4 @@
 #include <QString>
-#include <QProcess>
 #include <KLocalizedString>
 
 #include "lsof.h"

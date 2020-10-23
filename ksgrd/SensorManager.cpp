@@ -24,7 +24,6 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <klocalizedstring.h>
-#include <QEvent>
 #include <kconfiggroup.h>
 #include "ksgrd_debug.h"
 

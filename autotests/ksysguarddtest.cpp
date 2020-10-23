@@ -1,6 +1,4 @@
 #include "ksysguarddtest.h"
-#include <QtTest>
-#include <Qt>
 #include "processcore/processcore_debug.h"
 
 KSGRD::SensorAgent *agent;

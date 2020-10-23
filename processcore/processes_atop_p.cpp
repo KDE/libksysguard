@@ -28,7 +28,6 @@
 
 #include <QFile>
 #include <QHash>
-#include <QSet>
 #include <QByteArray>
 #include <QTextStream>
 #include <QtEndian>

@@ -28,7 +28,6 @@
 
 #include <QListWidget>
 #include <QButtonGroup>
-#include <QDialog>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>

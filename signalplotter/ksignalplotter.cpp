@@ -44,7 +44,6 @@
 #include <QStyleOptionGraphicsItem>
 #endif
 
-#include <klocalizedstring.h>
 #include <kiconloader.h>
 #include <cmath>
 #include <limits>
