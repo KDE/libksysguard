@@ -24,20 +24,15 @@ void ReadProcSmapsRunnable::run()
         return;
     }
 
-    m_pss = 0LL;
+    qulonglong pss = 0LL;
     auto buffer = QByteArray{1024, '\0'};
     while (file.readLine(buffer.data(), buffer.size()) > 0) {
         if (buffer.startsWith("Pss:")) {
-            m_pss += std::stoll(buffer.mid(sizeof("Pss:")).toStdString());
+            pss += std::stoll(buffer.mid(sizeof("Pss:")).toStdString());
         }
     }
 
     file.close();
 
-    Q_EMIT finished();
-}
-
-qlonglong ReadProcSmapsRunnable::pss() const
-{
-    return m_pss;
+    Q_EMIT finished(pss);
 }

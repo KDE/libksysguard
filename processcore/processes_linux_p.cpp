@@ -550,13 +550,16 @@ bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *proce
 bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
 {
     bool success = true;
-    QString dir = QLatin1String("/proc/") + QString::number(pid) + QLatin1Char('/');
+    const QString dir = QLatin1String("/proc/") + QString::number(pid) + QLatin1Char('/');
 
     auto runnable = new ReadProcSmapsRunnable{dir};
-    connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid, runnable]() {
-        Q_EMIT processUpdated(pid, { { Process::VmPSS, runnable->pss() } });
-        runnable->deleteLater();
-    }, Qt::DirectConnection);
+
+    connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid, runnable](qulonglong pss) {
+        Q_EMIT processUpdated(pid, { { Process::VmPSS, pss } });
+    });
+
+    connect(runnable, &ReadProcSmapsRunnable::finished, runnable, &QObject::deleteLater);
+
     QThreadPool::globalInstance()->start(runnable);
 
     if(!d->readProcStat(dir, process)) success = false;
