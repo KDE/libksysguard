@@ -19,13 +19,10 @@ public:
 
     void run() override;
 
-    qlonglong pss() const;
-
-    Q_SIGNAL void finished();
+    Q_SIGNAL void finished(qulonglong pss);
 
 private:
     QString m_dir;
-    qlonglong m_pss = 0;
 };
 
 } // namespace KSysGuard
