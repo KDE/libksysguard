@@ -558,8 +558,6 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
         Q_EMIT processUpdated(pid, { { Process::VmPSS, pss } });
     });
 
-    connect(runnable, &ReadProcSmapsRunnable::finished, runnable, &QObject::deleteLater);
-
     QThreadPool::globalInstance()->start(runnable);
 
     if(!d->readProcStat(dir, process)) success = false;
