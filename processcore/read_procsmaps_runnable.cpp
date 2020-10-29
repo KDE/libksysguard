@@ -14,7 +14,7 @@ ReadProcSmapsRunnable::ReadProcSmapsRunnable(const QString &dir)
     : QObject()
     , m_dir(dir)
 {
-    setAutoDelete(false);
+    setAutoDelete(true);
 }
 
 void ReadProcSmapsRunnable::run()
