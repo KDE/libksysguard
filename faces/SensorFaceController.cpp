@@ -360,7 +360,13 @@ SensorFaceController::~SensorFaceController()
 
 QString SensorFaceController::title() const
 {
-    return d->appearanceGroup.readEntry("title", name());
+    // both Title and title can exist to allow i18n of Title
+    if (d->appearanceGroup.hasKey("title")) {
+        return d->appearanceGroup.readEntry("title");
+    } else {
+        // if neither exist fall back to name
+        return d->appearanceGroup.readEntry("Title", name());
+    }
 }
 
 void SensorFaceController::setTitle(const QString &title)
