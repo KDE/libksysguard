@@ -436,28 +436,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget* parent, const QString &hostN
     addByDesktopName(QStringLiteral("org.kde.kmag"));
     addByDesktopName(QStringLiteral("htop"));
 
-    // Add Run Command...
-    //
-    auto runCommandAction = new QAction(i18nc("@action:inmenu", "Run Command"), this);
-    // //INFO: This is one way of how to find out the two required parameters for the globalShortcut method:
-    //     auto list = KGlobalAccel::getGlobalShortcutsByKey(QKeySequence(QStringLiteral("Alt+Space")));
-    //     foreach (auto item, list) {
-    //         qDebug() << item.componentUniqueName() << item.uniqueName();
-    //         //prints: 'krunner', 'run command'
-    //     }
-    const auto runCommandShortcutList = KGlobalAccel::self()->globalShortcut(QStringLiteral("krunner"), QStringLiteral("run command"));
-    runCommandAction->setShortcuts(runCommandShortcutList);
-    runCommandAction->setIcon(QIcon::fromTheme(QStringLiteral("system-run")));
-    connect(runCommandAction, &QAction::triggered, this, [this](){
-        KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("krunner"));
-        if (service) {
-            auto *job = new KIO::ApplicationLauncherJob(service);
-            job->setUiDelegate(new KDialogJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, window()));
-            job->start();
-        }
-    });
-    d->mToolsMenu->addAction(runCommandAction);
-
     // Add the xkill functionality...
     auto killWindowAction = new QAction(QIcon::fromTheme(QStringLiteral("document-close")),
                                         i18nc("@action:inmenu", "Kill a Window"), this);
