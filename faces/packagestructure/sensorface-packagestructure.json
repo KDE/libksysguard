@@ -25,6 +25,7 @@
                 "Name[ru]": "Marco Martin",
                 "Name[sk]": "Marco Martin",
                 "Name[sl]": "Marco Martin",
+                "Name[sv]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[x-test]": "xxMarco Martinxx"
             },
@@ -53,6 +54,7 @@
                 "Name[ru]": "Aaron Seigo",
                 "Name[sk]": "Aaron Seigo",
                 "Name[sl]": "Aaron Seigo",
+                "Name[sv]": "Aaron Seigo",
                 "Name[uk]": "Aaron Seigo",
                 "Name[x-test]": "xxAaron Seigoxx"
             }
@@ -77,6 +79,7 @@
         "Name[ro]": "Față pentru „Fețe de senzori KSysguard”",
         "Name[sk]": "Tvár pre senzor KSysguard",
         "Name[sl]": "Obraz za obraz senzorja KSysguard",
+        "Name[sv]": "Front för systemövervakaren",
         "Name[uk]": "Оболонка для датчиків KSysguard",
         "Name[x-test]": "xxFace for the KSysguard Sensor Facexx",
         "ServiceTypes": [
