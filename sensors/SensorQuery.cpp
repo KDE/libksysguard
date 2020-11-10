@@ -19,6 +19,7 @@
 
 #include "SensorQuery.h"
 
+#include <QCollator>
 #include <QDBusPendingCallWatcher>
 #include <QDBusReply>
 #include <QRegularExpression>
@@ -108,6 +109,15 @@ QStringList KSysGuard::SensorQuery::sensorIds() const
     QStringList ids;
     std::transform(d->result.cbegin(), d->result.cend(), std::back_inserter(ids), [](auto entry) { return entry.first; });
     return ids;
+}
+
+void KSysGuard::SensorQuery::sortByName()
+{
+    QCollator collator;
+    collator.setNumericMode(true);
+    std::sort(d->result.begin(), d->result.end(), [this, &collator] (const QPair<QString, SensorInfo> &left, const QPair<QString, SensorInfo> &right) {
+        return collator.compare(left.second.name, right.second.name) < 0;
+    });
 }
 
 QVector<QPair<QString, SensorInfo>> KSysGuard::SensorQuery::result() const

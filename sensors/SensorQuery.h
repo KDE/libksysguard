@@ -50,6 +50,10 @@ public:
      * A list of sensors ids that match the query.
      */
     QStringList sensorIds() const;
+    /**
+     * Sort the retrieved sensors by their user visible names.
+     */
+    void sortByName();
 
     /**
      * Start processing the query.

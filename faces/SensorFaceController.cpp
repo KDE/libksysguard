@@ -20,10 +20,10 @@
 #include "SensorFaceController.h"
 #include "SensorFaceController_p.h"
 #include "SensorFace_p.h"
+#include <Sensor.h>
 #include <SensorQuery.h>
 
 #include <QtQml>
-#include <QDebug>
 
 #include <KDesktopFile>
 #include <KDeclarative/ConfigPropertyMap>
@@ -255,11 +255,11 @@ QJsonArray SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partial
         KSysGuard::SensorQuery query{id.toString()};
         query.execute();
         query.waitForFinished();
-        auto ids = query.sensorIds();
-        std::stable_sort(ids.begin(), ids.end());
-        for (const auto &fitleredId : qAsConst(ids)) {
-            sensors.append(QJsonValue(fitleredId));
-        }
+        query.sortByName();
+        const auto ids = query.sensorIds();
+        std::transform(ids.begin(), ids.end(), std::back_inserter(sensors), [] (const QString &id) {
+            return QJsonValue(id);
+        });
     }
     return sensors;
 };
