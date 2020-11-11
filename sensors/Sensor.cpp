@@ -64,7 +64,7 @@ Sensor::Sensor(const QString &id, QObject *parent)
 Sensor::Sensor(const SensorQuery &query, int index, QObject *parent)
     : Sensor(QString{}, parent)
 {
-    if (index > 0 && index < query.result().size()) {
+    if (index >= 0 && index < query.result().size()) {
         auto result = query.result().at(index);
         d->id = result.first;
         onMetaDataChanged(d->id, result.second);
