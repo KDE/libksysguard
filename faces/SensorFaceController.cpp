@@ -446,7 +446,7 @@ void SensorFaceController::setFaceId(const QString &face)
     }
     if (d->compactRepresentation) {
         d->compactRepresentation->deleteLater();
-        d->fullRepresentation.clear();
+        d->compactRepresentation.clear();
     }
     if (d->faceConfigUi) {
         d->faceConfigUi->deleteLater();
