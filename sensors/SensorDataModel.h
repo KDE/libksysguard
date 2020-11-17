@@ -65,18 +65,22 @@ class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlPa
     Q_PROPERTY(QVariantMap sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
 
 public:
+    /**
+     * The roles that this model exposes
+     * @see Sensor
+     */
     enum AdditionalRoles {
-        SensorId = Qt::UserRole + 1, //< The backend path to the sensor.
-        Name,                        //< The name of the sensor.
-        ShortName,                   //< A shorter name for the sensor. This is equal to name if not set.
-        Description,                 //< A description for the sensor.
-        Unit,                        //< The unit of the sensor.
-        Minimum,                     //< The minimum value this sensor can have.
-        Maximum,                     //< The maximum value this sensor can have.
-        Type,                        //< The QVariant::Type of the sensor.
-        Value,                       //< The value of the sensor.
-        FormattedValue,              //< A formatted string of the value of the sensor.
-        Color,                       //< A color of the sensor, if sensorColors is set
+        SensorId = Qt::UserRole + 1, ///< The backend path to the sensor.
+        Name,                        ///< The name of the sensor.
+        ShortName,                   ///< A shorter name for the sensor. This is equal to name if not set.
+        Description,                 ///< A description for the sensor.
+        Unit,                        ///< The unit of the sensor.
+        Minimum,                     ///< The minimum value this sensor can have.
+        Maximum,                     ///< The maximum value this sensor can have.
+        Type,                        ///< The QVariant::Type of the sensor.
+        Value,                       ///< The value of the sensor.
+        FormattedValue,              ///< A formatted string of the value of the sensor.
+        Color,                       ///< A color of the sensor, if sensorColors is set
     };
     Q_ENUM(AdditionalRoles)
 

@@ -33,6 +33,9 @@ namespace KSysGuard {
  *
  * This effectively wraps Formatter::formatValue, removing the FormatOptions flag
  * that I couldn't get to work.
+ *
+ * It is accessible as `Formatter` inside the `org.kde.ksysguard.formatter` package
+ * @see Formatter
  */
 class FormatterWrapper : public QObject
 {

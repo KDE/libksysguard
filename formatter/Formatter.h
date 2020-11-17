@@ -42,6 +42,10 @@ enum FormatOption {
 };
 Q_DECLARE_FLAGS(FormatOptions, FormatOption)
 
+/**
+ * A class for formatting sensor values
+ * @see FormatterWrapper, for using it from Qml
+ */
 class FORMATTER_EXPORT Formatter
 {
 public:
