@@ -32,10 +32,25 @@ import org.kde.ksysguard.sensors 1.0
 import org.kde.quickcharts 1.0 as Charts
 import org.kde.quickcharts.controls 1.0 as ChartsControls
 
+/**
+ * A legend control to be used in faces based on org.kde.quickcharts.Controls.Legend.
+ * It handles
+ * layouting and display of information depending on the available space. By default the current
+ * value of a sensor and its name are displayed, if it is shrunk the shortName is displayed instead.
+ *
+ * @since 5.19
+ */
 ChartsControls.Legend {
     id: legend
 
+    /**
+     * A list of sensor ids that should be displayed in addition to those from sourceModel. Typically
+     * set to lowPrioritySensorIds from FaceController
+     */
     property alias sensorIds: sensorsRepeater.model
+    /**
+     * The SensorDataModel that should be used to retrieve data about the sensors.
+     */
     property SensorDataModel sourceModel
     /**
      * @deprecated since 5.21

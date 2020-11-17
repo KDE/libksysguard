@@ -41,35 +41,138 @@ namespace KSysGuard {
 class SensorFace;
 class SensorFaceControllerPrivate;
 
+/**
+ * The SensorFaceController links sensor faces and applications in which these faces are shown. It
+ * abstracts the configuration and properties of faces.
+ *
+ * For faces it offers information about which sensors should be displayed and hints set by the
+ * application about how the information should be displayed. It can be accessed by faces  using
+ * the `SensorFace::controller` property.
+ *
+ * Applications can use this class to instantiate faces from a given config and for querying the
+ * capabilities of faces.
+ *
+ * @since 5.19
+ */
 class SENSORFACES_EXPORT SensorFaceController : public QObject
 {
     Q_OBJECT
+    /**
+     * A title for the face.
+     * @see showTitle
+     */
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
+    /** Whether the title should be displayed or if it should be hidden instead
+     * @see title
+     */
     Q_PROPERTY(bool showTitle READ showTitle WRITE setShowTitle NOTIFY showTitleChanged)
+    /**
+     * The id of the current face. For example `org.kde.ksysguard.textonly`
+     */
     Q_PROPERTY(QString faceId READ faceId WRITE setFaceId NOTIFY faceIdChanged)
+    /**
+     * Sensors that are typically used to display a total in some way or form. For example in the pie
+     * char face they are not drawn as part of the chart but appear in the centre of it.
+     */
     Q_PROPERTY(QJsonArray totalSensors READ totalSensors WRITE setTotalSensors NOTIFY totalSensorsChanged)
+    /**
+     * Sensors that should always be shown in the face. This is the main list of sensors that are of
+     * the most interest.
+     */
     Q_PROPERTY(QJsonArray highPrioritySensorIds READ highPrioritySensorIds WRITE setHighPrioritySensorIds NOTIFY highPrioritySensorIdsChanged)
+    /**
+     * Maps sensorIds to colors that can be used when a color for something relating to a
+     * specific sensor is needed.
+     */
     Q_PROPERTY(QVariantMap sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
+    /**
+     * Secondary list of sensors. These sensors do not necessarily appear in main part of the face.
+     * For example in most faces they are just added to the legend.
+     */
     Q_PROPERTY(QJsonArray lowPrioritySensorIds READ lowPrioritySensorIds WRITE setLowPrioritySensorIds NOTIFY lowPrioritySensorIdsChanged)
 
+    /**
+     * The name of the current face
+     */
     Q_PROPERTY(QString name READ name NOTIFY faceIdChanged)
+    /**
+     * The icon of the current face
+     */
     Q_PROPERTY(QString icon READ icon NOTIFY faceIdChanged)
+    /**
+     * Whether the current face supports sensor colors
+     */
     Q_PROPERTY(bool supportsSensorsColors READ supportsSensorsColors NOTIFY faceIdChanged)
+    /**
+     * Whether the current face can display total sensors
+     */
     Q_PROPERTY(bool supportsTotalSensors READ supportsTotalSensors NOTIFY faceIdChanged)
+    /**
+     * Whether the current face can display low priority sensors
+     */
     Q_PROPERTY(bool supportsLowPrioritySensors READ supportsLowPrioritySensors NOTIFY faceIdChanged)
+    /**
+     * The amount of total sensors the current face supports
+     */
     Q_PROPERTY(int maxTotalSensors READ maxTotalSensors  NOTIFY faceIdChanged)
+    /**
+     * A map of config options and values that are specific to the current face as defined by the 
+     * `main.xml` of the face.
+     * @see faceConfigUi
+     */
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceIdChanged)
 
+    /**
+     * The full represenation of the current face. Typically includes additional elements like
+     * a legend or title
+     */
     Q_PROPERTY(QQuickItem *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
+    /**
+     * The compact represenation of the current face. Typically only includes the main visualization
+     * of the data without legend, title, etc.
+     */
     Q_PROPERTY(QQuickItem *compactRepresentation READ compactRepresentation NOTIFY faceIdChanged)
+    /**
+     * A user interace that is suited for configuring the face specific options.
+     * Emits `configurationChanged` if a config value changed. To apply the changes call `saveConfig`
+     * on it.
+     * @see faceConfiguration
+     */
     Q_PROPERTY(QQuickItem *faceConfigUi READ faceConfigUi NOTIFY faceIdChanged)
+    /**
+     * A user interface for configuring the general appearance of a face like the title and the used
+     * face.
+     * Emits `configurationChanged` if a config value changed. To apply the changes call `saveConfig`
+     * on it.
+     */
     Q_PROPERTY(QQuickItem *appearanceConfigUi READ appearanceConfigUi NOTIFY faceIdChanged)
+    /**
+    * A user interface for configuring which sensors are displayed in a face
+    * Emits `configurationChanged` if a config value changed. To apply the changes call `saveConfig`
+    * on it.
+    */
     Q_PROPERTY(QQuickItem *sensorsConfigUi READ sensorsConfigUi NOTIFY faceIdChanged)
 
+    /**
+     * A list of all available faces. The name is available as the display role and the id as `pluginId`
+     */
     Q_PROPERTY(QAbstractItemModel *availableFacesModel READ availableFacesModel CONSTANT)
+    /**
+     * A list of available face presets. The name is available as the display role, the id as `pluginId`.
+     * The properties of the preset can be accessed via the `config` role.
+     */
     Q_PROPERTY(QAbstractItemModel *availablePresetsModel READ availablePresetsModel CONSTANT)
 
 public:
+    /**
+     * Creates a new SensorFaceController.
+     * This is only useful for applications that want display SensorFaces.
+     *
+     * SensorFaces  can acces the controller that created them using their `SensorFace::controller`
+     * property.
+     * @param config The controller uses this config group to read and save the face configuration
+     * @param engine This engine will be used for creating the Qml components
+     */
     SensorFaceController(KConfigGroup &config, QQmlEngine *engine);
     ~SensorFaceController();
 
@@ -117,12 +220,36 @@ public:
     QAbstractItemModel *availableFacesModel();
     QAbstractItemModel *availablePresetsModel();
 
+    /**
+     * Reload the configuration.
+     */
     Q_INVOKABLE void reloadConfig();
+    /**
+     * Loads a specific preset
+     * @see availablePresetsModel
+     */
     Q_INVOKABLE void loadPreset(const QString &preset);
+    /**
+     * Save the current configuration as a preset
+     */
     Q_INVOKABLE void savePreset();
+    /**
+     * Uninstall a specific preset
+     */
     Q_INVOKABLE void uninstallPreset(const QString &pluginId);
 
+    /**
+     * Whether the controller should sync configuration changes
+     * @see setShouldSync
+     */
     bool shouldSync() const;
+    /**
+     * Specifies if the controller should automatically sync configuration changes.
+     * @param sync If `true` applied config changes are written to the KConfigGroup that was
+     *   specified in the @ref SensorFaceController::SensorFaceController "constructor". If `false`
+     *   config changes are applied after calling `saveConfig` on a configuration ui  but not written
+     *   to the KConfigGroup.
+     */
     void setShouldSync(bool sync);
 
 Q_SIGNALS:
