@@ -34,7 +34,7 @@ Charts.LineChart {
     //property var sensors: root.controller.highPrioritySensorIds
 
     readonly property alias sensorsModel: sensorsModel
-    property int maximumHistory: root.controller.faceConfiguration.rangeToX - root.controller.faceConfiguration.rangeFromX
+    readonly property int historyAmount: root.controller.faceConfiguration.historyAmount
 
     direction: Charts.XYChart.ZeroAtEnd
 
@@ -45,11 +45,6 @@ Charts.LineChart {
     //TODO: Have a central heading here too?
     //TODO: Have a plasmoid config value for line thickness?
 
-    xRange {
-        from: root.controller.faceConfiguration.rangeFromX
-        to: root.controller.faceConfiguration.rangeToX
-        automatic: root.controller.faceConfiguration.rangeAutoX
-    }
     yRange {
         readonly property bool stackedAuto: root.controller.faceConfiguration.rangeAutoY && root.controller.faceConfiguration.lineChartStacked
         from: stackedAuto ? Math.min(sensorsModel.minimum, 0) :  root.controller.faceConfiguration.rangeFromY
@@ -88,13 +83,16 @@ Charts.LineChart {
 
     Instantiator {
         model: sensorsModel.sensors
-        delegate: Charts.ModelHistorySource {
-            model: sensorsModel
-            column: index
-            row: 0
-            roleName: "Value"
-            maximumHistory: chart.maximumHistory
-            interval: 2000
+        delegate: Charts.HistoryProxySource {
+            source: Charts.ModelSource {
+                model: sensorsModel
+                column: index
+                roleName: "Value"
+            }
+
+            interval: sensorsModel.ready ? sensorsModel.headerData(index, Qt.Horizontal, Sensors.SensorDataModel.UpdateInterval) : 0
+            maximumHistory: interval > 0 ? (chart.historyAmount * 1000) / interval : 100
+            fillMode: Charts.HistoryProxySource.FillFromEnd
         }
         onObjectAdded: {
             chart.insertValueSource(index, object)

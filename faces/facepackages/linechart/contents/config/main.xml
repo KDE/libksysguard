@@ -42,6 +42,9 @@
         <entry name="rangeAutoY" type="Bool">
             <default>true</default>
         </entry>
+        <entry name="historyAmount" type="Int">
+            <default>300</default>
+        </entry>
     </group>
 
 </kcfg>

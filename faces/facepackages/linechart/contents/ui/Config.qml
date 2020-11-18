@@ -39,9 +39,12 @@ Kirigami.FormLayout {
     property alias cfg_rangeAutoY: rangeAutoYCheckbox.checked
     property alias cfg_rangeFromY: rangeFromYSpin.value
     property alias cfg_rangeToY: rangeToYSpin.value
-    property alias cfg_rangeAutoX: rangeAutoXCheckbox.checked
-    property alias cfg_rangeFromX: rangeFromXSpin.value
-    property alias cfg_rangeToX: rangeToXSpin.value
+    property alias cfg_historyAmount: historySpin.value
+
+    // For backward compatibility
+    property real cfg_rangeAutoX
+    property real cfg_rangeFromX
+    property real cfg_rangeToX
 
     Item {
         Kirigami.FormData.label: i18n("Appearance")
@@ -98,25 +101,22 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("To (Y):")
         enabled: !rangeAutoYCheckbox.checked
     }
-    QQC2.CheckBox {
-        id: rangeAutoXCheckbox
-        text: i18n("Automatic X Data Range")
-    }
     QQC2.SpinBox {
-        id: rangeFromXSpin
+        id: historySpin
         editable: true
-        from: -99999
-        to: 99999
-        Kirigami.FormData.label: i18n("From (X):")
-        enabled: !rangeAutoXCheckbox.checked
-    }
-    QQC2.SpinBox {
-        id: rangeToXSpin
-        editable: true
-        from: -99999
-        to: 99999
-        Kirigami.FormData.label: i18n("To (X):")
-        enabled: !rangeAutoXCheckbox.checked
+        from: 0
+        to: 999999999
+        Kirigami.FormData.label: i18n("Amount of History to Keep:")
+
+        textFromValue: function(value, locale) {
+            return i18ncp("%1 is seconds of history", "%1 second", "%1 seconds", Number(value).toLocaleString(locale, "f", 0));
+        }
+        valueFromText: function(value, locale) {
+            // Don't use fromLocaleString here since it will error out on extra
+            // characters like the (potentially translated) seconds that gets
+            // added above. Instead parseInt ignores non-numeric characters.
+            return parseInt(value)
+        }
     }
 }
 
