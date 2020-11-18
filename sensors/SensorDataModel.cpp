@@ -238,6 +238,7 @@ void SensorDataModel::setSensors(const QStringList &sensorIds)
     if (!d->usedByQml || d->componentComplete) {
         d->sensorsChanged();
     }
+    Q_EMIT readyChanged();
     Q_EMIT sensorsChanged();
 }
 
@@ -275,6 +276,11 @@ void SensorDataModel::setSensorColors(const QVariantMap &sensorColors)
     }
     d->sensorColors = sensorColors;
     Q_EMIT sensorColorsChanged();
+}
+
+bool KSysGuard::SensorDataModel::isReady() const
+{
+    return d->sensors.size() == d->requestedSensors.size();
 }
 
 void SensorDataModel::addSensor(const QString &sensorId)
@@ -382,6 +388,7 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
 
     SensorDaemonInterface::instance()->requestValue(sensorId);
     emit sensorMetaDataChanged();
+    Q_EMIT readyChanged();
 }
 
 void SensorDataModel::onValueChanged(const QString &sensorId, const QVariant &value)

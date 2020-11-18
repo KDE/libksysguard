@@ -58,6 +58,13 @@ class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlPa
      * Should this model be updated or not. Defaults to true.
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    /**
+     * Is this model ready?
+     *
+     * Ready means it has retrieved the metadata for the sensors specified in
+     * \ref sensors.
+     */
+    Q_PROPERTY(bool ready READ isReady NOTIFY readyChanged)
 
     /**
      * Used by the model to provide data for the Color role if set.
@@ -111,6 +118,9 @@ public:
     QVariantMap sensorColors() const;
     void setSensorColors(const QVariantMap &sensorColors);
     Q_SIGNAL void sensorColorsChanged();
+
+    bool isReady() const;
+    Q_SIGNAL void readyChanged();
 
     Q_INVOKABLE void addSensor(const QString &sensorId);
     Q_INVOKABLE void removeSensor(const QString &sensorId);
