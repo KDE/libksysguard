@@ -108,6 +108,17 @@ class SENSORS_EXPORT Sensor : public QObject, public QQmlParserStatus
      * is also enabled.
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    /**
+     * The time in milliseconds between each update of the sensor.
+     *
+     * This is primarily intended to match sampling rate to the update rate of
+     * the sensor, like when used by KQuickCharts's HistorySource.
+     *
+     * \note Currently, the update rate of the backend is fixed and this method
+     *       simply matches the value from the backend. Eventually the idea is
+     *       that we can support per-sensor update rates.
+     */
+    Q_PROPERTY(uint updateInterval READ updateInterval NOTIFY updateIntervalChanged)
 
 public:
     /**
@@ -172,6 +183,9 @@ public:
     bool enabled() const;
     void setEnabled(bool newEnabled);
     Q_SIGNAL void enabledChanged();
+
+    uint updateInterval() const;
+    Q_SIGNAL void updateIntervalChanged();
 
     void classBegin() override;
     void componentComplete() override;

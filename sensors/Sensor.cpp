@@ -203,6 +203,12 @@ void Sensor::setEnabled(bool newEnabled)
     Q_EMIT enabledChanged();
 }
 
+uint Sensor::updateInterval() const
+{
+    //TODO: Make this dynamic once the backend supports that.
+    return BackendUpdateInterval;
+}
+
 void Sensor::classBegin()
 {
     d->usedByQml = true;

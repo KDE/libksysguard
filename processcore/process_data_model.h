@@ -87,6 +87,8 @@ public:
         Name, /// The full name of this attribute
         ShortName, /// A shorter name of this attribute, compressed for viewing
         Unit, /// The unit associated with this attribute. Returned value is of the type KSysGuard::Unit
+
+        UpdateInterval, /// The amount of time in milliseconds between each update of the model.
     };
     Q_ENUM(AdditionalRoles)
 

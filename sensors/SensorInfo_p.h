@@ -28,6 +28,8 @@
 
 namespace KSysGuard
 {
+constexpr uint BackendUpdateInterval = 500;
+
 // Data that is static for the lifespan of the sensor
 class SensorInfo
 {

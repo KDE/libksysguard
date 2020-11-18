@@ -130,6 +130,9 @@ QVariant SensorDataModel::data(const QModelIndex &index, int role) const
         if (!d->sensorColors.empty()) {
             return d->sensorColors.value(sensor);
         }
+    case UpdateInterval:
+        //TODO: Make this dynamic once the backend supports it.
+        return BackendUpdateInterval;
     default:
         break;
     }
@@ -171,6 +174,9 @@ QVariant SensorDataModel::headerData(int section, Qt::Orientation orientation, i
         return info.max;
     case Type:
         return info.variantType;
+    case UpdateInterval:
+        //TODO: Make this dynamic once the backend supports it.
+        return BackendUpdateInterval;
     default:
         break;
     }

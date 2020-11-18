@@ -139,6 +139,9 @@ QVariant ProcessDataModel::data(const QModelIndex &index, int role) const
     case Unit: {
         return attribute->unit();
     }
+    case UpdateInterval: {
+        return d->m_updateInterval;
+    }
     }
     return QVariant();
 }
@@ -426,6 +429,9 @@ QVariant ProcessDataModel::headerData(int section, Qt::Orientation orientation, 
     }
     case Maximum: {
         return attribute->max();
+    }
+    case UpdateInterval: {
+        return d->m_updateInterval;
     }
     default:
         break;

@@ -81,6 +81,7 @@ public:
         Value,                       ///< The value of the sensor.
         FormattedValue,              ///< A formatted string of the value of the sensor.
         Color,                       ///< A color of the sensor, if sensorColors is set
+        UpdateInterval,              ///< The time in milliseconds between each update of the sensor.
     };
     Q_ENUM(AdditionalRoles)
 
