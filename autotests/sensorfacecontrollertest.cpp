@@ -63,6 +63,10 @@ private Q_SLOTS:
             const auto storageAccess = storageAccesses[i].as<Solid::StorageAccess>();
             const auto blockDevice = storageAccesses[i].as<Solid::Block>();
             const auto storageVolume = storageAccesses[i].as<Solid::StorageVolume>();
+            if (!storageVolume) {
+                continue;
+            }
+
             const QString newPrefix = QStringLiteral("disk/") + (storageVolume->uuid().isEmpty() ? storageVolume->label() : storageVolume->uuid());
             // Old code uses "disk/sdc2_(8:34)/..."
             QString device = blockDevice->device().mid(strlen("/dev/"));
