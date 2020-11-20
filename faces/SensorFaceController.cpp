@@ -173,6 +173,11 @@ SensorFaceControllerPrivate::SensorFaceControllerPrivate()
             { QRegularExpression(QStringLiteral("mem/physical/buf")), QStringLiteral("memory/physical/buffer")},
             { QRegularExpression(QStringLiteral("mem/physical/cached")), QStringLiteral("memory/physical/cache")},
             { QRegularExpression(QStringLiteral("^mem/(.*)")), QStringLiteral("memory/\\1")},
+            { QRegularExpression(QStringLiteral("nvidia/(.*)/temperature$")), QStringLiteral("gpu/\\1/temperature")},
+            { QRegularExpression(QStringLiteral("nvidia/(.*)/memoryClock$")), QStringLiteral("gpu/\\1/memoryFrequency")},
+            { QRegularExpression(QStringLiteral("nvidia/(.*)/processorClock$")), QStringLiteral("gpu/\\1/coreFrequency")},
+            { QRegularExpression(QStringLiteral("nvidia/(.*)/(memory|sharedMemory)$")), QStringLiteral("gpu/\\1/usedVram")},
+            { QRegularExpression(QStringLiteral("nvidia/(.*)/(encoderUsage|decoderUsage)$")), QStringLiteral("gpu/\\1/usage")},
         };
     }
 }

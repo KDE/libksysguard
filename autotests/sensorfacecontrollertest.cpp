@@ -164,6 +164,26 @@ private Q_SLOTS:
             QStringLiteral("memory/swap/free"),
             QStringLiteral("memory/swap/used"),
         };
+
+        QTest::addRow("gpu")
+        << QJsonArray {
+            QStringLiteral("nvidia/gpu1/temperature"),
+            QStringLiteral("nvidia/gpu2/memory"),
+            QStringLiteral("nvidia/gpu3/sharedMemory"),
+            QStringLiteral("nvidia/gpu4/memoryClock"),
+            QStringLiteral("nvidia/gpu5/processorClock"),
+            QStringLiteral("nvidia/gpu6/encoderUsage"),
+            QStringLiteral("nvidia/gpu7/decoderUsage"),
+        }
+        << QJsonArray {
+            QStringLiteral("gpu/gpu1/temperature"),
+            QStringLiteral("gpu/gpu2/usedVram"),
+            QStringLiteral("gpu/gpu3/usedVram"),
+            QStringLiteral("gpu/gpu4/memoryFrequency"),
+            QStringLiteral("gpu/gpu5/coreFrequency"),
+            QStringLiteral("gpu/gpu6/usage"),
+            QStringLiteral("gpu/gpu7/usage"),
+        };
     }
 
     void testSensorIdConversion()
