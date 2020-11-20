@@ -205,7 +205,7 @@ private Q_SLOTS:
         QCOMPARE(sensors.size(), expectedSensors.size());
 
         for (int i = 0; i < sensors.size(); ++i) {
-            QCOMPARE(sensors.at(i), expectedSensors.at(i));
+            QCOMPARE(sensors.at(i).toString(), expectedSensors.at(i).toString());
         }
 
         auto newEntry = sensorsGroup.readEntry("sensors");
