@@ -669,8 +669,11 @@ QQuickItem *SensorFaceController::sensorsConfigUi()
         return d->sensorsConfigUi;
     }
 
-    d->sensorsConfigUi = d->createConfigUi(QStringLiteral(":/ConfigSensors.qml"), {{QStringLiteral("controller"), QVariant::fromValue(this)}});
-
+    if (d->faceProperties.readEntry("SupportsSensors", true)) {
+        d->sensorsConfigUi = d->createConfigUi(QStringLiteral(":/ConfigSensors.qml"),{{QStringLiteral("controller"), QVariant::fromValue(this)}});
+    } else {
+        d->sensorsConfigUi = new QQuickItem;
+    }
     return d->sensorsConfigUi;
 }
 
