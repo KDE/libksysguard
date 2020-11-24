@@ -579,6 +579,12 @@ void SensorFaceController::setFaceId(const QString &face)
         d->faceConfigLoader = new KConfigLoader(cg, &file, this);
         d->faceConfiguration = new KDeclarative::ConfigPropertyMap(d->faceConfigLoader, this);
         d->faceConfiguration->setAutosave(d->shouldSync);
+        connect(d->faceConfiguration, &KDeclarative::ConfigPropertyMap::valueChanged, this, [this] (const QString &key) {
+            auto item = d->faceConfigLoader->findItemByName(key);
+            if (item) {
+                item->writeConfig(d->faceConfigLoader->config());
+            }
+        });
     }
 
     d->appearanceGroup.writeEntry("chartFace", face);
