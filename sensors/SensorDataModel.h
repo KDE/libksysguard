@@ -59,6 +59,11 @@ class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlPa
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
+    /**
+     * Used by the model to provide data for the Color role if set.
+     */
+    Q_PROPERTY(QVariantMap sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
+
 public:
     enum AdditionalRoles {
         SensorId = Qt::UserRole + 1, //< The backend path to the sensor.
@@ -71,6 +76,7 @@ public:
         Type,                        //< The QVariant::Type of the sensor.
         Value,                       //< The value of the sensor.
         FormattedValue,              //< A formatted string of the value of the sensor.
+        Color,                       //< A color of the sensor, if sensorColors is set
     };
     Q_ENUM(AdditionalRoles)
 
@@ -96,6 +102,10 @@ public:
 
     qreal minimum() const;
     qreal maximum() const;
+
+    QVariantMap sensorColors() const;
+    void setSensorColors(const QVariantMap &sensorColors);
+    Q_SIGNAL void sensorColorsChanged();
 
     Q_INVOKABLE void addSensor(const QString &sensorId);
     Q_INVOKABLE void removeSensor(const QString &sensorId);

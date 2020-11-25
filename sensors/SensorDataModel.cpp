@@ -47,6 +47,7 @@ public:
 
     QHash<QString, SensorInfo> sensorInfos;
     QHash<QString, QVariant> sensorData;
+    QVariantMap sensorColors;
 
     bool usedByQml = false;
     bool componentComplete = false;
@@ -125,6 +126,10 @@ QVariant SensorDataModel::data(const QModelIndex &index, int role) const
         return info.variantType;
     case SensorId:
         return sensor;
+    case Color:
+        if (!d->sensorColors.empty()) {
+            return d->sensorColors.value(sensor);
+        }
     default:
         break;
     }
@@ -252,6 +257,19 @@ void SensorDataModel::setEnabled(bool newEnabled)
     Q_EMIT enabledChanged();
 }
 
+QVariantMap SensorDataModel::sensorColors() const
+{
+    return d->sensorColors;
+}
+
+void SensorDataModel::setSensorColors(const QVariantMap &sensorColors)
+{
+    if (sensorColors == d->sensorColors) {
+        return;
+    }
+    d->sensorColors = sensorColors;
+    Q_EMIT sensorColorsChanged();
+}
 
 void SensorDataModel::addSensor(const QString &sensorId)
 {

@@ -25,6 +25,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.kirigami 2.8 as Kirigami
 
+import org.kde.ksysguard.faces.private 1.0
 import org.kde.ksysguard.formatter 1.0
 import org.kde.ksysguard.sensors 1.0
 
@@ -41,7 +42,6 @@ ChartsControls.Legend {
      * Has no effect
      */
     property var colorSource
-    property var sourceModel
 
     flow: GridLayout.TopToBottom
 
@@ -58,6 +58,29 @@ ChartsControls.Legend {
         }
 
         return Formatter.formatValueShowNull(input, sourceModel.data(sourceModel.index(0, index), SensorDataModel.Unit))
+    }
+
+    Binding on model {
+        when: !chart
+        value: QTransposeProxyModel {
+            sourceModel: legend.sourceModel
+        }
+    }
+    Binding on valueRole {
+        when: !chart
+        value: "Value"
+    }
+    Binding on nameRole {
+        when: !chart
+        value: "Name"
+    }
+    Binding on shortNameRole {
+        when: !chart
+        value: "ShortName"
+    }
+    Binding on colorRole {
+        when: !chart
+        value: "Color"
     }
 
     Repeater {
