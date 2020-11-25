@@ -35,8 +35,13 @@ ChartsControls.Legend {
     id: legend
 
     property alias sensorIds: sensorsRepeater.model
-    property var sourceModel
+    property SensorDataModel sourceModel
+    /**
+     * @deprecated since 5.21
+     * Has no effect
+     */
     property var colorSource
+    property var sourceModel
 
     flow: GridLayout.TopToBottom
 

@@ -126,7 +126,6 @@ Faces.SensorFace {
             visible: root.showLegend
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
-            colorSource: root.colorSource
             sensorIds: root.showLegend ? root.controller.lowPrioritySensorIds : []
             flow: root.width > root.height * 1.5 ? GridLayout.LeftToRight : GridLayout.TopToBottom
         }
