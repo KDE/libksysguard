@@ -361,11 +361,11 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
 
 void SensorDataModel::onValueChanged(const QString &sensorId, const QVariant &value)
 {
-    if (!d->sensorData.contains(sensorId) || !d->enabled) {
+    const auto column = d->sensors.indexOf(sensorId);
+    if (column == -1 || !d->enabled) {
         return;
     }
 
-    auto column = d->sensors.indexOf(sensorId);
     d->sensorData[sensorId] = value;
     Q_EMIT dataChanged(index(0, column), index(0, column), {Qt::DisplayRole, Value, FormattedValue});
 }
@@ -381,6 +381,10 @@ void SensorDataModel::Private::sensorsChanged()
     sensorInfos.clear();
 
     sensors = requestedSensors;
+
+    for (const auto& sensor : sensors) {
+        sensorInfos[sensor] = KSysGuard::SensorInfo();
+    }
 
     SensorDaemonInterface::instance()->subscribe(requestedSensors);
     SensorDaemonInterface::instance()->requestMetaData(requestedSensors);
