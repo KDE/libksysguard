@@ -59,6 +59,7 @@ Faces.SensorFace {
             id: compactRepresentation
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.minimumWidth: root.formFactor != Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit * 4 : Kirigami.Units.gridUnit
             Layout.minimumHeight: root.formFactor === Faces.SensorFace.Constrained 
                 ? Kirigami.Units.gridUnit
                 : 5 * Kirigami.Units.gridUnit

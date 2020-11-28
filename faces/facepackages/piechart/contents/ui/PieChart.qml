@@ -38,7 +38,6 @@ ChartControls.PieChartControl {
     property alias sensors: sensorsModel.sensors
     property alias sensorsModel: sensorsModel
 
-    Layout.minimumWidth: root.formFactor != Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit * 4 : Kirigami.Units.gridUnit
     Layout.minimumHeight: root.formFactor == Faces.SensorFace.Vertical ? width : Kirigami.Units.gridUnit
 
     leftPadding: 0
