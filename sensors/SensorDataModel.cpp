@@ -346,6 +346,7 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
     if (d->sensorInfos.contains(sensorId)) {
         d->sensorInfos[sensorId] = info;
         Q_EMIT dataChanged(index(0, column), index(0, column), {Qt::DisplayRole, Name, ShortName, Description, Unit, Minimum, Maximum, Type, FormattedValue});
+        Q_EMIT sensorMetaDataChanged();
         return;
     }
 
