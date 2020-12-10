@@ -217,7 +217,7 @@ struct KSysGuardProcessListPrivate {
         terminate->setShortcut(Qt::Key_Delete);
         kill = new QAction(i18np("Forcibly Kill Process", "Forcibly Kill Processes", 1), q);
         kill->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
-        kill->setShortcut(Qt::SHIFT + Qt::Key_Delete);
+        kill->setShortcut(Qt::SHIFT | Qt::Key_Delete);
 
         sigStop = new QAction(i18n("Suspend (STOP)"), q);
         sigCont = new QAction(i18n("Continue (CONT)"), q);
