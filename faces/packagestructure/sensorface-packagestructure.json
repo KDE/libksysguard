@@ -27,7 +27,8 @@
                 "Name[sl]": "Marco Martin",
                 "Name[sv]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx"
+                "Name[x-test]": "xxMarco Martinxx",
+                "Name[zh_CN]": "Marco Martin"
             },
             {
                 "Email": "aseigo@kde.org",
@@ -56,7 +57,8 @@
                 "Name[sl]": "Aaron Seigo",
                 "Name[sv]": "Aaron Seigo",
                 "Name[uk]": "Aaron Seigo",
-                "Name[x-test]": "xxAaron Seigoxx"
+                "Name[x-test]": "xxAaron Seigoxx",
+                "Name[zh_CN]": "Aaron Seigo"
             }
         ],
         "Id": "KSysguard/SensorFace",
@@ -82,6 +84,7 @@
         "Name[sv]": "Front för systemövervakaren",
         "Name[uk]": "Оболонка для датчиків KSysguard",
         "Name[x-test]": "xxFace for the KSysguard Sensor Facexx",
+        "Name[zh_CN]": "KSysguard 传感器面板的面板",
         "ServiceTypes": [
             "KPackage/PackageStructure"
         ],

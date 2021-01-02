@@ -72,7 +72,7 @@ Name[vi]=KSysGuard
 Name[wa]=KSisGåde
 Name[xh]=KSysGuard
 Name[x-test]=xxKSysGuardxx
-Name[zh_CN]=系统卫士
+Name[zh_CN]=KSysGuard
 Name[zh_TW]=KSysGuard
 Icon=utilities-system-monitor
 
@@ -139,7 +139,7 @@ Name[uk]=Завершити чи зупинити процес
 Name[vi]=Tắt hoặc ngưng một tiến trình
 Name[wa]=Touwer oudon-bén arester on processus
 Name[x-test]=xxKill or stop etc a processxx
-Name[zh_CN]=杀死或停止一个进程
+Name[zh_CN]=终止或结束进程
 Name[zh_TW]=砍掉或停止行程
 Description=Sends a given signal to a given process
 Description[ar]=يُرسل إشارة معينة إلى عملية معطاة
