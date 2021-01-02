@@ -17,6 +17,7 @@
                 "Name[ko]": "Marco Martin",
                 "Name[nl]": "Marco Martin",
                 "Name[nn]": "Marco Martin",
+                "Name[pl]": "Marco Martin",
                 "Name[pt]": "Marco Martin",
                 "Name[pt_BR]": "Marco Martin",
                 "Name[ro]": "Marco Martin",
@@ -25,7 +26,8 @@
                 "Name[sl]": "Marco Martin",
                 "Name[sv]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx"
+                "Name[x-test]": "xxMarco Martinxx",
+                "Name[zh_CN]": "Marco Martin"
             },
             {
                 "Email": "aseigo@kde.org",
@@ -44,6 +46,7 @@
                 "Name[ko]": "Aaron Seigo",
                 "Name[nl]": "Aaron Seigo",
                 "Name[nn]": "Aaron Seigo",
+                "Name[pl]": "Aaron Seigo",
                 "Name[pt]": "Aaron Seigo",
                 "Name[pt_BR]": "Aaron Seigo",
                 "Name[ro]": "Aaron Seigo",
@@ -52,7 +55,8 @@
                 "Name[sl]": "Aaron Seigo",
                 "Name[sv]": "Aaron Seigo",
                 "Name[uk]": "Aaron Seigo",
-                "Name[x-test]": "xxAaron Seigoxx"
+                "Name[x-test]": "xxAaron Seigoxx",
+                "Name[zh_CN]": "Aaron Seigo"
             }
         ],
         "Id": "KSysguard/SensorFace",
@@ -68,6 +72,7 @@
         "Name[ko]": "KSysguard 센서 모양",
         "Name[nl]": "Gezicht voor het KSysguard Sensor gezicht",
         "Name[nn]": "Ansikt til KSysguard-sensoransikt",
+        "Name[pl]": "Twarz dla twarzy miernika KSysguard",
         "Name[pt]": "Cara do Sensor do KSysguard",
         "Name[pt_BR]": "Face para o face do sensor KSysguard",
         "Name[ro]": "Față pentru „Fețe de senzori KSysguard”",
@@ -76,6 +81,7 @@
         "Name[sv]": "Front för systemövervakaren",
         "Name[uk]": "Оболонка для датчиків KSysguard",
         "Name[x-test]": "xxFace for the KSysguard Sensor Facexx",
+        "Name[zh_CN]": "KSysguard 传感器面板的面板",
         "ServiceTypes": [
             "KPackage/PackageStructure"
         ],
