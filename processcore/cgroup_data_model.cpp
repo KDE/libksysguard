@@ -93,6 +93,11 @@ public:
 };
 
 CGroupDataModel::CGroupDataModel(QObject *parent)
+    : CGroupDataModel(QStringLiteral("/"), parent)
+{
+}
+
+CGroupDataModel::CGroupDataModel(const QString &root, QObject *parent)
     : QAbstractItemModel(parent)
     , d(new CGroupDataModelPrivate)
 {
@@ -118,7 +123,7 @@ CGroupDataModel::CGroupDataModel(QObject *parent)
     d->m_updateTimer->setInterval(2000);
     d->m_updateTimer->start();
 
-    setRoot(QStringLiteral("/"));
+    setRoot(root);
 }
 
 CGroupDataModel::~CGroupDataModel()

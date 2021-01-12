@@ -25,10 +25,8 @@
 using namespace KSysGuard;
 
 ApplicationDataModel::ApplicationDataModel(QObject *parent)
-    : CGroupDataModel(parent)
+    : CGroupDataModel(QStringLiteral("/user.slice/user-%1.slice/user@%1.service").arg(KUserId::currentEffectiveUserId().toString()), parent)
 {
-    const QString userId = KUserId::currentEffectiveUserId().toString();
-    setRoot(QStringLiteral("/user.slice/user-%1.slice/user@%1.service").arg(userId));
 }
 
 bool ApplicationDataModel::filterAcceptsCGroup(const QString &id)
