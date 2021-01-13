@@ -28,6 +28,8 @@
 #include <KConfigLoader>
 #include <KDeclarative/ConfigPropertyMap>
 
+#include <functional>
+
 #include "sensorfaces_export.h"
 
 class QQmlEngine;
@@ -84,7 +86,7 @@ public:
     QJsonArray readAndUpdateSensors(KConfigGroup &config, const QString &entryName);
     QString replaceDiskId(const QString &entryname) const;
     QString replacePartitionId(const QString &entryname) const;
-    QJsonArray resolveSensors(const QJsonArray &partialEntries);
+    void resolveSensors(const QJsonArray &partialEntries, std::function<void(const QJsonArray&)> callback);
     SensorFace *createGui(const QString &qmlPath);
     QQuickItem *createConfigUi(const QString &file, const QVariantMap &initialProperties);
 

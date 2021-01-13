@@ -258,22 +258,32 @@ QJsonArray SensorFaceControllerPrivate::readAndUpdateSensors(KConfigGroup& confi
     return newSensors;
 }
 
-QJsonArray SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partialEntries)
+void SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partialEntries, std::function<void(const QJsonArray&)> callback)
 {
-    QJsonArray sensors;
+    if (partialEntries.isEmpty()) {
+        callback(partialEntries);
+        return;
+    }
+
+    auto sensors = std::make_shared<QJsonArray>();
 
     for (const auto &id : partialEntries) {
-        KSysGuard::SensorQuery query{id.toString()};
-        query.execute();
-        query.waitForFinished();
-        query.sortByName();
-        const auto ids = query.sensorIds();
-        std::transform(ids.begin(), ids.end(), std::back_inserter(sensors), [] (const QString &id) {
-            return QJsonValue(id);
+        auto query = new KSysGuard::SensorQuery{id.toString()};
+        query->connect(query, &KSysGuard::SensorQuery::finished, q, [this, query, sensors, callback] {
+            query->sortByName();
+            const auto ids = query->sensorIds();
+            delete query;
+            std::transform(ids.begin(), ids.end(), std::back_inserter(*sensors), [] (const QString &id) {
+                return QJsonValue(id);
+            });
+            if (sensors.use_count() == 1) {
+                // We are the last query
+                callback(*sensors);
+            }
         });
+        query->execute();
     }
-    return sensors;
-};
+}
 
 SensorFace *SensorFaceControllerPrivate::createGui(const QString &qmlPath)
 {
@@ -358,9 +368,18 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
 
     d->contextObj = new KLocalizedContext(this);
 
-    d->totalSensors = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")));
-    d->lowPrioritySensorIds = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")));
-    d->highPrioritySensorIds = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")));
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")), [this] (const QJsonArray &resolvedSensors) {
+        d->totalSensors = resolvedSensors;
+        Q_EMIT totalSensorsChanged();
+    });
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")), [this] (const QJsonArray &resolvedSensors) {
+        d->lowPrioritySensorIds = resolvedSensors;
+        Q_EMIT lowPrioritySensorIdsChanged();
+    });
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")), [this] (const QJsonArray &resolvedSensors) {
+        d->highPrioritySensorIds = resolvedSensors;
+        Q_EMIT highPrioritySensorIdsChanged();
+    });
 
     setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.piechart")));
 }
@@ -417,16 +436,16 @@ QJsonArray SensorFaceController::totalSensors() const
 
 void  SensorFaceController::setTotalSensors(const QJsonArray &totalSensors)
 {
-    QJsonArray resolvedSensors = d->resolveSensors(totalSensors);
+    d->resolveSensors(totalSensors, [this, totalSensors] (const QJsonArray &resolvedSensors) {
+        if (resolvedSensors == d->totalSensors) {
+            return;
+        }
+        d->totalSensors = resolvedSensors;
 
-    if (resolvedSensors == d->totalSensors) {
-        return;
-    }
-    d->totalSensors = resolvedSensors;
-
-    d->sensorsGroup.writeEntry("totalSensors", QJsonDocument(totalSensors).toJson(QJsonDocument::Compact));
-    d->syncTimer->start();
-    emit totalSensorsChanged();
+        d->sensorsGroup.writeEntry("totalSensors", QJsonDocument(totalSensors).toJson(QJsonDocument::Compact));
+        d->syncTimer->start();
+        emit totalSensorsChanged();
+    });
 }
 
 QJsonArray SensorFaceController::highPrioritySensorIds() const
@@ -437,16 +456,16 @@ QJsonArray SensorFaceController::highPrioritySensorIds() const
 
 void SensorFaceController::setHighPrioritySensorIds(const QJsonArray &highPrioritySensorIds)
 {
-    QJsonArray resolvedSensors = d->resolveSensors(highPrioritySensorIds);
+    d->resolveSensors(highPrioritySensorIds, [this, highPrioritySensorIds] (const QJsonArray &resolvedSensors) {
+        if (resolvedSensors == d->highPrioritySensorIds) {
+            return;
+        }
+        d->highPrioritySensorIds = resolvedSensors;
 
-    if (resolvedSensors == d->highPrioritySensorIds) {
-        return;
-    }
-    d->highPrioritySensorIds = resolvedSensors;
-
-    d->sensorsGroup.writeEntry("highPrioritySensorIds", QJsonDocument(highPrioritySensorIds).toJson(QJsonDocument::Compact));
-    d->syncTimer->start();
-    emit highPrioritySensorIdsChanged();
+        d->sensorsGroup.writeEntry("highPrioritySensorIds", QJsonDocument(highPrioritySensorIds).toJson(QJsonDocument::Compact));
+        d->syncTimer->start();
+        emit highPrioritySensorIdsChanged();
+    });
 }
 
 QVariantMap SensorFaceController::sensorColors() const
@@ -487,15 +506,16 @@ QJsonArray SensorFaceController::lowPrioritySensorIds() const
 
 void SensorFaceController::setLowPrioritySensorIds(const QJsonArray &lowPrioritySensorIds)
 {
-    QJsonArray resolvedSensors = d->resolveSensors(lowPrioritySensorIds);
-    if (resolvedSensors == d->lowPrioritySensorIds) {
-        return;
-    }
-    d->lowPrioritySensorIds = lowPrioritySensorIds;
+    d->resolveSensors(lowPrioritySensorIds, [this, lowPrioritySensorIds] (const QJsonArray &resolvedSensors) {
+        if (resolvedSensors == d->lowPrioritySensorIds) {
+            return;
+        }
+        d->lowPrioritySensorIds = lowPrioritySensorIds;
 
-    d->sensorsGroup.writeEntry("lowPrioritySensorIds", QJsonDocument(lowPrioritySensorIds).toJson(QJsonDocument::Compact));
-    d->syncTimer->start();
-    emit lowPrioritySensorIdsChanged();
+        d->sensorsGroup.writeEntry("lowPrioritySensorIds", QJsonDocument(lowPrioritySensorIds).toJson(QJsonDocument::Compact));
+        d->syncTimer->start();
+        emit lowPrioritySensorIdsChanged();
+    });
 }
 
 // from face config, immutable by the user
@@ -704,17 +724,23 @@ void SensorFaceController::reloadConfig()
         d->faceConfigLoader->load();
     }
 
-    d->totalSensors = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")));
-    d->lowPrioritySensorIds = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")));
-    d->highPrioritySensorIds = d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")));
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")), [this] (const QJsonArray &resolvedSensors) {
+        d->totalSensors = resolvedSensors;
+        Q_EMIT totalSensorsChanged();
+    });
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")), [this] (const QJsonArray &resolvedSensors) {
+        d->lowPrioritySensorIds = resolvedSensors;
+        Q_EMIT lowPrioritySensorIdsChanged();
+    });
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")), [this] (const QJsonArray &resolvedSensors) {
+        d->highPrioritySensorIds = resolvedSensors;
+        Q_EMIT highPrioritySensorIdsChanged();
+    });
 
     //Force to re-read all the values
     setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.textonly")));
     titleChanged();
-    totalSensorsChanged();
-    highPrioritySensorIdsChanged();
     sensorColorsChanged();
-    lowPrioritySensorIdsChanged();
 }
 
 void SensorFaceController::loadPreset(const QString &preset)
