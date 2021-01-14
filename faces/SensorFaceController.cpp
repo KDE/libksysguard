@@ -110,7 +110,7 @@ void PresetsModel::reload()
         // TODO config
         QVariantMap config;
 
-        KConfigGroup configGroup(KSharedConfig::openConfig(p.filePath("config", QStringLiteral("faceproperties"))), QStringLiteral("Config"));
+        KConfigGroup configGroup(KSharedConfig::openConfig(p.filePath("config", QStringLiteral("faceproperties")), KConfig::SimpleConfig), QStringLiteral("Config"));
 
         const QStringList keys = configGroup.keyList();
         for (const QString &key : keys) {
@@ -568,7 +568,7 @@ void SensorFaceController::setFaceId(const QString &face)
 
     d->contextObj->setTranslationDomain(QLatin1String("ksysguard_face_") + face);
 
-    d->faceProperties = KConfigGroup(KSharedConfig::openConfig(d->facePackage.filePath("FaceProperties")), QStringLiteral("Config"));
+    d->faceProperties = KConfigGroup(KSharedConfig::openConfig(d->facePackage.filePath("FaceProperties"), KConfig::SimpleConfig), QStringLiteral("Config"));
 
     const QString xmlPath = d->facePackage.filePath("mainconfigxml");
 
@@ -737,7 +737,7 @@ void SensorFaceController::loadPreset(const QString &preset)
 
     KDesktopFile df(presetPackage.path() + QStringLiteral("metadata.desktop"));
 
-    auto c = KSharedConfig::openConfig(presetPackage.filePath("config", QStringLiteral("faceproperties")));
+    auto c = KSharedConfig::openConfig(presetPackage.filePath("config", QStringLiteral("faceproperties")), KConfig::SimpleConfig);
     const KConfigGroup presetGroup(c, QStringLiteral("Config"));
     const KConfigGroup colorsGroup(c, QStringLiteral("SensorColors"));
 
@@ -760,7 +760,7 @@ void SensorFaceController::loadPreset(const QString &preset)
     emit sensorColorsChanged();
 
     if (d->faceConfigLoader) {
-        KConfigGroup presetGroup(KSharedConfig::openConfig(presetPackage.filePath("FaceProperties")), QStringLiteral("FaceConfig"));
+        KConfigGroup presetGroup(KSharedConfig::openConfig(presetPackage.filePath("FaceProperties"), KConfig::SimpleConfig), QStringLiteral("FaceConfig"));
 
         for (const QString &key : presetGroup.keyList()) {
             KConfigSkeletonItem *item = d->faceConfigLoader->findItemByName(key);
