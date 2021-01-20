@@ -33,6 +33,7 @@
 #include <QDir>
 
 #include <algorithm>
+#include <filesystem>
 
 using namespace  KSysGuard;
 
@@ -409,11 +410,8 @@ bool CGroupDataModel::filterAcceptsCGroup(const QString &id)
 
 void CGroupDataModel::update(CGroup *node)
 {
+    namespace fs = std::filesystem;
     const QString path = CGroup::cgroupSysBasePath() + node->id();
-    QDir dir(path);
-    if (!dir.exists()) {
-        return;
-    }
 
     // Update our own stat info
     // This may trigger some dataChanged
@@ -422,9 +420,12 @@ void CGroupDataModel::update(CGroup *node)
         Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, columnCount()-1, QModelIndex()));
     });
 
-    const auto entries = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-    for (auto subDir : entries) {
-        const QString childId = node->id() % QLatin1Char('/') % subDir;
+
+    for (const auto& entry : fs::directory_iterator(path.toUtf8().data())) {
+        if (!entry.is_directory()) {
+            continue;
+        }
+        const QString childId = node->id() % QLatin1Char('/') % QString::fromUtf8(entry.path().filename().c_str());
         CGroup *childNode = d->m_cgroupMap[childId];
         if (!childNode) {
             childNode = new CGroup(childId);
