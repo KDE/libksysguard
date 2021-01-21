@@ -20,7 +20,8 @@ set(ksysguard_LIB_SRCS
    process_data_provider.cpp
    read_procsmaps_runnable.cpp
 )
-ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
+ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore
+    DESCRIPTION "libksysguard (processcore)" EXPORT LIBKSYSGUARD)
 
 add_library(processcore ${ksysguard_LIB_SRCS})
 add_library(KSysGuard::ProcessCore ALIAS processcore)

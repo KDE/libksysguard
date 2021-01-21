@@ -25,6 +25,7 @@ ecm_qt_declare_logging_category(sensors_LIB_SRCS
     HEADER sensors_logging.h
     IDENTIFIER LIBKSYSGUARD_SENSORS
     CATEGORY_NAME org.kde.libksysguard.sensors
+    DESCRIPTION "libksysguard (sensors)" EXPORT LIBKSYSGUARD
 )
 
 set_source_files_properties(org.kde.KSysGuardDaemon.xml PROPERTIES INCLUDE SensorInfo_p.h)

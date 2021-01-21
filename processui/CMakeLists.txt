@@ -14,7 +14,8 @@ set(processui_LIB_SRCS
    scripting.cpp
 )
 
-ecm_qt_declare_logging_category(processui_LIB_SRCS HEADER processui_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSUI CATEGORY_NAME org.kde.libksysguard.processui)
+ecm_qt_declare_logging_category(processui_LIB_SRCS HEADER processui_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSUI CATEGORY_NAME org.kde.libksysguard.processui
+    DESCRIPTION "libksysguard (processui)" EXPORT LIBKSYSGUARD)
 
 
 ki18n_wrap_ui( processui_LIB_SRCS

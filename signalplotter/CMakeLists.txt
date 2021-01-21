@@ -5,7 +5,8 @@ set(ksignalplotter_LIB_SRCS
     ksignalplotter.cpp
     kgraphicssignalplotter.cpp
 )
-ecm_qt_declare_logging_category(ksignalplotter_LIB_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter)
+ecm_qt_declare_logging_category(ksignalplotter_LIB_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter
+    DESCRIPTION "libksysguard (ksignalplotter)" EXPORT LIBKSYSGUARD)
 add_library(ksignalplotter ${ksignalplotter_LIB_SRCS})
 add_library(KSysGuard::SignalPlotter ALIAS ksignalplotter)
 

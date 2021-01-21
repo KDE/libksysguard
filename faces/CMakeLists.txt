@@ -20,7 +20,7 @@ ecm_qt_declare_logging_category(faces_LIB_SRCS
     HEADER faces_logging.h
     IDENTIFIER LIBKSYSGUARD_SENSORS
     CATEGORY_NAME org.kde.libksysguard.faces
-)
+    DESCRIPTION "libksysguard (faces)" EXPORT LIBKSYSGUARD)
 
 set_source_files_properties(org.kde.KSysGuardDaemon.xml PROPERTIES INCLUDE SensorInfo_p.h)
 qt5_add_resources(RESOURCES resources.qrc)

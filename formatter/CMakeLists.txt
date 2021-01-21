@@ -15,6 +15,7 @@ ecm_qt_declare_logging_category(formatter_SRCS
     HEADER formatter_debug.h
     IDENTIFIER FORMATTER
     CATEGORY_NAME org.kde.libksysguard.formatter
+    DESCRIPTION "libksysguard (formatter)" EXPORT LIBKSYSGUARD
 )
 
 add_library(Formatter ${formatter_SRCS})
