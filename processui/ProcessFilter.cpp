@@ -113,7 +113,7 @@ bool ProcessFilter::filterAcceptsRow( int source_row, const QModelIndex & source
 		if(QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
 			return true;
 
-		auto strings = filterRegExp().pattern().split(QLatin1Char(','), QString::SplitBehavior::SkipEmptyParts);
+        auto strings = filterRegExp().pattern().split(QLatin1Char(','), Qt::SkipEmptyParts);
 		for (auto string : strings) {
 			string = string.trimmed();
 			if (process->name().indexOf(string) != -1 || QString::number(process->pid()).indexOf(string) != -1) {
