@@ -386,6 +386,16 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
 
 SensorFaceController::~SensorFaceController()
 {
+    if (!d->shouldSync) {
+        // If we should not sync automatically, clear all changes before we
+        // destroy the config objects, otherwise they will be written during
+        // destruction.
+        d->appearanceGroup.markAsClean();
+        d->colorsGroup.markAsClean();
+        if (d->faceConfigLoader->isSaveNeeded()) {
+            d->faceConfigLoader->load();
+        }
+    }
 }
 
 QString SensorFaceController::title() const
