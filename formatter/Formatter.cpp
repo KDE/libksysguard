@@ -237,7 +237,7 @@ static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefi
 {
     qreal amount = value.toDouble();
 
-    if (!options.testFlag(FormatOptionShowNull) && qFuzzyIsNull(amount)) {
+    if (!options.testFlag(FormatOptionShowNull) && (qFuzzyIsNull(amount) || qIsNaN(amount))) {
         return QString();
     }
 
