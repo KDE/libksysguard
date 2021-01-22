@@ -368,7 +368,7 @@ void CGroupDataModel::setRoot(const QString &root)
     d->m_root = root;
     d->m_rootGroup.reset(new CGroup(root));
     emit rootChanged();
-    update();
+    QMetaObject::invokeMethod(this, [this] {update();}, Qt::QueuedConnection);
 }
 
 void CGroupDataModel::update()
