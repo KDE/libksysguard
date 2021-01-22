@@ -417,7 +417,7 @@ void CGroupDataModel::update(CGroup *node)
     // This may trigger some dataChanged
     node->requestPids(this, [this, node]() {
         auto row = d->m_cGroups.indexOf(node);
-        Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, 0, QModelIndex()));
+        Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, columnCount()-1, QModelIndex()));
     });
 
 
