@@ -18,11 +18,14 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "SensorDataModel.h"
+
+#include <optional>
+
 #include <QMetaEnum>
 
 #include "Formatter.h"
 #include "SensorDaemonInterface_p.h"
-#include "SensorDataModel.h"
 #include "SensorInfo_p.h"
 #include "sensors_logging.h"
 
@@ -53,6 +56,9 @@ public:
     bool componentComplete = false;
     bool loaded = false;
     bool enabled = true;
+
+    std::optional<qreal> minimum;
+    std::optional<qreal> maximum;
 
 private:
     SensorDataModel *q;
@@ -208,8 +214,13 @@ qreal SensorDataModel::minimum() const
         return 0;
     }
 
+    if (d->minimum.has_value()) {
+        return d->minimum.value();
+    }
+
     auto result = std::min_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) { return first.min < second.min; });
-    return (*result).min;
+    d->minimum = (*result).min;
+    return d->minimum.value();
 }
 
 qreal SensorDataModel::maximum() const
@@ -218,8 +229,13 @@ qreal SensorDataModel::maximum() const
         return 0;
     }
 
+    if (d->maximum.has_value()) {
+        return d->maximum.value();
+    }
+
     auto result = std::max_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) { return first.max < second.max; });
-    return (*result).max;
+    d->maximum = (*result).max;
+    return d->maximum.value();
 }
 
 QStringList SensorDataModel::sensors() const
@@ -385,6 +401,9 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
     d->sensorInfos[sensorId] = info;
     d->sensorData[sensorId] = QVariant{};
     endInsertColumns();
+
+    d->minimum.reset();
+    d->maximum.reset();
 
     SensorDaemonInterface::instance()->requestValue(sensorId);
     emit sensorMetaDataChanged();
