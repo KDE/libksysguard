@@ -388,6 +388,9 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
 
     qCDebug(LIBKSYSGUARD_SENSORS) << "Received metadata change for" << sensorId;
 
+    d->minimum.reset();
+    d->maximum.reset();
+
     // Simple case: Just an update for a sensor's metadata
     if (d->sensorInfos.contains(sensorId)) {
         d->sensorInfos[sensorId] = info;
@@ -401,9 +404,6 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
     d->sensorInfos[sensorId] = info;
     d->sensorData[sensorId] = QVariant{};
     endInsertColumns();
-
-    d->minimum.reset();
-    d->maximum.reset();
 
     SensorDaemonInterface::instance()->requestValue(sensorId);
     emit sensorMetaDataChanged();
