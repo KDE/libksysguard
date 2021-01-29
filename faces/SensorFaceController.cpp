@@ -446,15 +446,24 @@ QJsonArray SensorFaceController::totalSensors() const
 
 void  SensorFaceController::setTotalSensors(const QJsonArray &totalSensors)
 {
-    d->resolveSensors(totalSensors, [this, totalSensors] (const QJsonArray &resolvedSensors) {
+    if (totalSensors == d->totalSensors) {
+        return;
+    }
+    const auto currentEntry = QJsonDocument::fromJson(d->sensorsGroup.readEntry("totalSensors").toUtf8()).array();
+    if (totalSensors == currentEntry) {
+        return;
+    }
+    d->sensorsGroup.writeEntry("totalSensors", QJsonDocument(totalSensors).toJson(QJsonDocument::Compact));
+    // Until we have resolved
+    d->totalSensors = totalSensors;
+    d->syncTimer->start();
+    Q_EMIT totalSensorsChanged();
+    d->resolveSensors(totalSensors, [this] (const QJsonArray &resolvedSensors) {
         if (resolvedSensors == d->totalSensors) {
             return;
         }
         d->totalSensors = resolvedSensors;
-
-        d->sensorsGroup.writeEntry("totalSensors", QJsonDocument(totalSensors).toJson(QJsonDocument::Compact));
-        d->syncTimer->start();
-        emit totalSensorsChanged();
+        Q_EMIT totalSensorsChanged();
     });
 }
 
@@ -466,15 +475,24 @@ QJsonArray SensorFaceController::highPrioritySensorIds() const
 
 void SensorFaceController::setHighPrioritySensorIds(const QJsonArray &highPrioritySensorIds)
 {
-    d->resolveSensors(highPrioritySensorIds, [this, highPrioritySensorIds] (const QJsonArray &resolvedSensors) {
+    if (highPrioritySensorIds == d->highPrioritySensorIds) {
+        return;
+    }
+    const auto currentEntry = QJsonDocument::fromJson(d->sensorsGroup.readEntry("highPrioritySensorIds").toUtf8()).array();
+    if (highPrioritySensorIds == currentEntry) {
+        return;
+    }
+    d->sensorsGroup.writeEntry("highPrioritySensorIds", QJsonDocument(highPrioritySensorIds).toJson(QJsonDocument::Compact));
+    // Until we have resolved
+    d->syncTimer->start();
+    d->highPrioritySensorIds = highPrioritySensorIds;
+    Q_EMIT highPrioritySensorIdsChanged();
+    d->resolveSensors(highPrioritySensorIds, [this] (const QJsonArray &resolvedSensors) {
         if (resolvedSensors == d->highPrioritySensorIds) {
             return;
         }
         d->highPrioritySensorIds = resolvedSensors;
-
-        d->sensorsGroup.writeEntry("highPrioritySensorIds", QJsonDocument(highPrioritySensorIds).toJson(QJsonDocument::Compact));
-        d->syncTimer->start();
-        emit highPrioritySensorIdsChanged();
+        Q_EMIT highPrioritySensorIdsChanged();
     });
 }
 
@@ -516,15 +534,24 @@ QJsonArray SensorFaceController::lowPrioritySensorIds() const
 
 void SensorFaceController::setLowPrioritySensorIds(const QJsonArray &lowPrioritySensorIds)
 {
-    d->resolveSensors(lowPrioritySensorIds, [this, lowPrioritySensorIds] (const QJsonArray &resolvedSensors) {
+    if (lowPrioritySensorIds == d->lowPrioritySensorIds) {
+        return;
+    }
+    const auto currentEntry = QJsonDocument::fromJson(d->sensorsGroup.readEntry("lowPrioritySensorIds").toUtf8()).array();
+    if (lowPrioritySensorIds == currentEntry) {
+        return;
+    }
+    d->sensorsGroup.writeEntry("lowPrioritySensorIds", QJsonDocument(lowPrioritySensorIds).toJson(QJsonDocument::Compact));
+    // Until we have resolved
+    d->lowPrioritySensorIds = lowPrioritySensorIds;
+    d->syncTimer->start();
+    Q_EMIT lowPrioritySensorIdsChanged();
+    d->resolveSensors(lowPrioritySensorIds, [this] (const QJsonArray &resolvedSensors) {
         if (resolvedSensors == d->lowPrioritySensorIds) {
             return;
         }
-        d->lowPrioritySensorIds = lowPrioritySensorIds;
-
-        d->sensorsGroup.writeEntry("lowPrioritySensorIds", QJsonDocument(lowPrioritySensorIds).toJson(QJsonDocument::Compact));
-        d->syncTimer->start();
-        emit lowPrioritySensorIdsChanged();
+        d->lowPrioritySensorIds = resolvedSensors;
+        Q_EMIT lowPrioritySensorIdsChanged();
     });
 }
 
