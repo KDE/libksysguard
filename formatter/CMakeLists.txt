@@ -23,7 +23,7 @@ add_library(KSysGuard::Formatter ALIAS Formatter)
 
 target_link_libraries(Formatter
     PUBLIC
-    Qt5::Core
+    Qt::Core
     PRIVATE
     KF5::I18n
 )

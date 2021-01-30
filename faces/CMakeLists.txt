@@ -38,15 +38,15 @@ generate_export_header(SensorFaces)
 
 target_link_libraries(SensorFaces
     PUBLIC
-        Qt5::Qml
-        Qt5::Quick
+        Qt::Qml
+        Qt::Quick
         KF5::ConfigCore
         KF5::ConfigGui
         KSysGuard::Formatter
         KSysGuard::Sensors
     PRIVATE
-        Qt5::Core
-        Qt5::DBus
+        Qt::Core
+        Qt::DBus
         KF5::I18n
         KF5::Package
         KF5::Declarative

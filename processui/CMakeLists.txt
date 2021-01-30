@@ -34,10 +34,10 @@ endif()
 target_link_libraries(processui
     PUBLIC
         KSysGuard::ProcessCore
-        Qt5::Widgets
+        Qt::Widgets
         KF5::ConfigCore
     PRIVATE
-        Qt5::DBus
+        Qt::DBus
         KF5::I18n
         KF5::WindowSystem
         KF5::AuthCore
@@ -57,11 +57,11 @@ target_include_directories(processui
 )
 
 if(X11_FOUND)
-    target_link_libraries(processui PRIVATE Qt5::X11Extras KF5::WindowSystem)
+    target_link_libraries(processui PRIVATE Qt::X11Extras KF5::WindowSystem)
 endif()
 
 if(WEBENGINE_SCRIPTING_ENABLED)
-    target_link_libraries(processui PRIVATE Qt5::WebEngineWidgets Qt5::WebChannel)
+    target_link_libraries(processui PRIVATE Qt::WebEngineWidgets Qt::WebChannel)
 endif()
 
 if(NOT HAVE_CLOCK_GETTIME_C)

@@ -14,7 +14,7 @@ add_library(KSysGuard::LsofUi ALIAS lsofui)
 
 target_link_libraries(lsofui
     PUBLIC
-        Qt5::Widgets
+        Qt::Widgets
     PRIVATE
         KF5::I18n
 )

@@ -44,11 +44,11 @@ generate_export_header(Sensors)
 
 target_link_libraries(Sensors
     PUBLIC
-        Qt5::Qml
+        Qt::Qml
         KSysGuard::Formatter
     PRIVATE
-        Qt5::Core
-        Qt5::DBus
+        Qt::Core
+        Qt::DBus
         KF5::I18n
 )
 

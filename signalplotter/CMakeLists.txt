@@ -12,7 +12,7 @@ add_library(KSysGuard::SignalPlotter ALIAS ksignalplotter)
 
 target_link_libraries(ksignalplotter
     PUBLIC
-        Qt5::Widgets
+        Qt::Widgets
         KF5::I18n # klocalizedstring.h
         KF5::IconThemes
     PRIVATE

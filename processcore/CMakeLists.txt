@@ -28,7 +28,7 @@ add_library(KSysGuard::ProcessCore ALIAS processcore)
 
 target_link_libraries(processcore
    PUBLIC
-    Qt5::Core
+    Qt::Core
     KSysGuard::Formatter
    PRIVATE
     KF5::I18n
@@ -86,7 +86,7 @@ if(ENABLE_KAUTH_HELPER)
     )
 
     add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
-    target_link_libraries(ksysguardprocesslist_helper Qt5::Core KF5::AuthCore KF5::I18n)
+    target_link_libraries(ksysguardprocesslist_helper Qt::Core KF5::AuthCore KF5::I18n)
     install(TARGETS ksysguardprocesslist_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
     kauth_install_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)
