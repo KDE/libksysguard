@@ -9,6 +9,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"KSysGuardSensorFaces\")
 set(faces_LIB_SRCS
     SensorFaceController.cpp
     SensorFace.cpp
+    resources.qrc
 )
 
 set(faces_LIB_HEADERS
@@ -23,9 +24,8 @@ ecm_qt_declare_logging_category(faces_LIB_SRCS
     DESCRIPTION "libksysguard (faces)" EXPORT LIBKSYSGUARD)
 
 set_source_files_properties(org.kde.KSysGuardDaemon.xml PROPERTIES INCLUDE SensorInfo_p.h)
-qt5_add_resources(RESOURCES resources.qrc)
 
-add_library(SensorFaces ${faces_LIB_SRCS} ${RESOURCES})
+add_library(SensorFaces ${faces_LIB_SRCS})
 add_library(KSysGuard::SensorFaces ALIAS SensorFaces)
 
 target_include_directories(SensorFaces
