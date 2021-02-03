@@ -43,7 +43,7 @@
             <default>true</default>
         </entry>
         <entry name="historyAmount" type="Int">
-            <default>300</default>
+            <default>60</default>
         </entry>
     </group>
 
