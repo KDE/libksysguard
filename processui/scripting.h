@@ -47,8 +47,6 @@ class Scripting : public QWidget {
     void loadContextMenu();
     /** List of context menu actions that are created by loadContextMenu() */
     QList<QAction *> actions() { return mActions; }
-    /** Create a ScriptingHtmlDialog, if one does not already exist, and display the given html */
-    void displayHtml(const QString &html);
 
   public Q_SLOTS:
     /** Stop all scripts and delete the script engine */
