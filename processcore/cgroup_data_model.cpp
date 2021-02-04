@@ -48,6 +48,7 @@ public:
     QHash<QString, KSysGuard::ProcessAttribute* > m_availableAttributes;
     QVector<KSysGuard::ProcessAttribute* > m_enabledAttributes;
 
+    bool m_available = false;
     QString m_root;
     QScopedPointer<CGroup> m_rootGroup;
 
@@ -367,9 +368,22 @@ void CGroupDataModel::setRoot(const QString &root)
         return;
     }
     d->m_root = root;
-    d->m_rootGroup.reset(new CGroup(root));
     emit rootChanged();
     QMetaObject::invokeMethod(this, [this] {update();}, Qt::QueuedConnection);
+
+    const QString path = CGroup::cgroupSysBasePath() + root;
+    bool available = QFile::exists(path);
+
+    if (available) {
+        d->m_rootGroup.reset(new CGroup(root));
+    } else {
+        d->m_rootGroup.reset();
+    }
+
+    if (available != d->m_available) {
+        d->m_available = available;
+        emit availableChanged();
+    }
 }
 
 void CGroupDataModel::update()
@@ -441,6 +455,11 @@ void CGroupDataModel::update(CGroup *node)
         update(childNode);
         d->m_oldGroups.remove(childId);
     }
+}
+
+bool CGroupDataModel::isAvailable() const
+{
+    return d->m_available;
 }
 
 QVector<Process*> CGroupDataModelPrivate::processesFor(CGroup *app)

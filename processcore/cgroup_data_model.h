@@ -59,6 +59,8 @@ class Q_DECL_EXPORT CGroupDataModel : public QAbstractItemModel
      */
     Q_PROPERTY(QString setRoot READ root WRITE setRoot NOTIFY rootChanged)
 
+    Q_PROPERTY(bool available READ isAvailable NOTIFY availableChanged)
+
 public:
     CGroupDataModel(QObject *parent = nullptr);
     CGroupDataModel(const QString &root, QObject *parent = nullptr);
@@ -114,10 +116,13 @@ public:
      */
     void update();
 
+    bool isAvailable() const;
+
 Q_SIGNALS:
     void enabledAttributesChanged();
     void enabledChanged();
     void rootChanged();
+    void availableChanged();
 
 protected:
     virtual bool filterAcceptsCGroup(const QString &id);
