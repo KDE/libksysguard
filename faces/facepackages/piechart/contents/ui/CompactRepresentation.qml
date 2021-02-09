@@ -43,8 +43,10 @@ Faces.SensorFace {
         }
         QQC2.Label {
             id: label
-            visible: root.formFactor == Faces.SensorFace.Planar
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+            visible: root.formFactor == Faces.SensorFace.Planar && root.controller.showTitle && text.length > 0
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
             text: root.controller.title
         }
     }
