@@ -38,7 +38,7 @@ Faces.SensorFace {
         PieChart {
             Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
             Layout.fillWidth: true
-            Layout.fillHeight: !label.visible
+            Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
         }
         QQC2.Label {

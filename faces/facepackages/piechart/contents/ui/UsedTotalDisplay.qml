@@ -26,47 +26,84 @@ import org.kde.kirigami 2.4 as Kirigami
 import org.kde.ksysguard.formatter 1.0 as Formatter
 import org.kde.ksysguard.sensors 1.0 as Sensors
 
-ColumnLayout {
-    spacing: 0
+Item {
+    id: root
 
     property alias usedSensor: usedSensorObject.sensorId
     property alias totalSensor: totalSensorObject.sensorId
 
-    Label {
-        id: usedLabel
-        Layout.alignment: Text.AlignHCenter;
-        text: usedSensorObject.shortName;
-        font: Kirigami.Theme.smallFont
-        color: Kirigami.Theme.disabledTextColor
-    }
+    property real contentMargin: 10
 
-    Label {
-        id: usedValue
-        Layout.alignment: Text.AlignHCenter;
-        text: usedSensorObject.formattedValue
-    }
+    ColumnLayout {
+        id: layout
 
-    Kirigami.Separator { Layout.fillWidth: true }
+        anchors.centerIn: parent
+        width: Math.min(parent.width, parent.height) * 0.75
 
-    Label {
-        id: totalValue
-        Layout.alignment: Text.AlignHCenter;
-        text: totalSensorObject.formattedValue
-    }
+        spacing: 0
 
-    Label {
-        id: totalLabel
-        Layout.alignment: Text.AlignHCenter;
-        text: totalSensorObject.shortName
-        font: Kirigami.Theme.smallFont
-        color: Kirigami.Theme.disabledTextColor
-    }
+        Label {
+            id: usedLabel
 
-    Sensors.Sensor {
-        id: usedSensorObject
-    }
+            Layout.fillWidth: true
 
-    Sensors.Sensor {
-        id: totalSensorObject
+            text: usedSensorObject.name + (usedSensorObject.shortName.length > 0 ? "\x9C" + usedSensorObject.shortName : "")
+            horizontalAlignment: Text.AlignHCenter
+            font: Kirigami.Theme.smallFont
+            color: Kirigami.Theme.disabledTextColor
+            visible: totalValue.visible
+            elide: Text.ElideRight
+
+            opacity: layout.y > root.contentMargin ? 1 : 0
+        }
+
+        Label {
+            id: usedValue
+            Layout.fillWidth: true
+            text: usedSensorObject.formattedValue
+            horizontalAlignment: Text.AlignHCenter
+
+            fontSizeMode: Text.HorizontalFit
+            minimumPointSize: 7
+        }
+
+        Kirigami.Separator {
+            Layout.alignment: Qt.AlignHCenter;
+            Layout.preferredWidth: Math.max(usedValue.contentWidth, totalValue.contentWidth)
+            visible: totalValue.visible
+        }
+
+        Label {
+            id: totalValue
+
+            Layout.fillWidth: true
+
+            text: totalSensorObject.formattedValue
+            horizontalAlignment: Text.AlignHCenter
+            visible: root.totalSensor.length > 0 && contentWidth < layout.width
+        }
+
+        Label {
+            id: totalLabel
+
+            Layout.fillWidth: true
+
+            text: totalSensorObject.name + (totalSensorObject.shortName.length > 0 ? "\x9C" + totalSensorObject.shortName : "")
+            horizontalAlignment: Text.AlignHCenter
+            font: Kirigami.Theme.smallFont
+            color: Kirigami.Theme.disabledTextColor
+            visible: totalValue.visible
+            elide: Text.ElideRight
+
+            opacity: layout.y + layout.height < root.height - root.contentMargin ? 1 : 0
+        }
+
+        Sensors.Sensor {
+            id: usedSensorObject
+        }
+
+        Sensors.Sensor {
+            id: totalSensorObject
+        }
     }
 }
