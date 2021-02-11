@@ -215,7 +215,9 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
         connect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](KSysGuard::Process *process) {
             if (process->pid() != -1) {
                 const QModelIndex index = d->getQModelIndex(process, columnIndex);
-                emit dataChanged(index, index);
+                if (index.isValid()) {
+                    emit dataChanged(index, index);
+                }
             }
         });
 
