@@ -52,10 +52,11 @@ ActionReply KSysGuardProcessListHelper::sendsignal(const QVariantMap &parameters
     QStringList errorList;
     for (int i = 0; i < numProcesses; ++i) {
         qlonglong pid = GET_PID(i);
-        bool successForThisPid = processes.sendSignal(pid, signal);
-        if (!successForThisPid)
+        KSysGuard::Processes::Error error = processes.sendSignal(pid, signal);
+        if (error != KSysGuard::Processes::NoError) {
             errorList << QString::number(pid);
-        success = successForThisPid && success;
+            success = false;
+        }
     }
     if(success) {
         return ActionReply::SuccessReply();
@@ -76,7 +77,7 @@ ActionReply KSysGuardProcessListHelper::renice(const QVariantMap &parameters) {
     int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
     for (int i = 0; i < numProcesses; ++i) {
         qlonglong pid = GET_PID(i);
-        success = processes.setNiceness(pid, niceValue) && success;
+        success &= (processes.setNiceness(pid, niceValue) != KSysGuard::Processes::NoError);
     }
     if(success)
         return ActionReply::SuccessReply();
@@ -95,7 +96,7 @@ ActionReply KSysGuardProcessListHelper::changeioscheduler(const QVariantMap &par
     const int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
     for (int i = 0; i < numProcesses; ++i) {
         qlonglong pid = GET_PID(i);
-        success = processes.setIoNiceness(pid, ioScheduler, ioSchedulerPriority) && success;
+        success &= (processes.setIoNiceness(pid, ioScheduler, ioSchedulerPriority) != KSysGuard::Processes::NoError);
     }
     if(success)
         return ActionReply::SuccessReply();
@@ -115,7 +116,7 @@ ActionReply KSysGuardProcessListHelper::changecpuscheduler(const QVariantMap &pa
     const int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
     for (int i = 0; i < numProcesses; ++i) {
         qlonglong pid = GET_PID(i);
-        success = processes.setScheduler(pid, cpuScheduler, cpuSchedulerPriority) && success;
+        success &= (processes.setScheduler(pid, cpuScheduler, cpuSchedulerPriority) != KSysGuard::Processes::NoError);
     }
     if(success)
         return ActionReply::SuccessReply();

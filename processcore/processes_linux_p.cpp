@@ -584,66 +584,53 @@ QSet<long> ProcessesLocal::getAllPids( )
     return pids;
 }
 
-bool ProcessesLocal::sendSignal(long pid, int sig) {
+Processes::Error ProcessesLocal::sendSignal(long pid, int sig) {
     errno = 0;
     if (pid <= 0) {
-        errorCode = Processes::InvalidPid;
-        return false;
+        return Processes::InvalidPid;
     }
     if (kill( (pid_t)pid, sig )) {
         switch (errno) {
             case ESRCH:
-                errorCode = Processes::ProcessDoesNotExistOrZombie;
-                break;
+               return Processes::ProcessDoesNotExistOrZombie;
             case EINVAL:
-                errorCode = Processes::InvalidParameter;
-                break;
+                return Processes::InvalidParameter;
             case EPERM:
-                errorCode = Processes::InsufficientPermissions;
-                break;
-            default:
-                break;
+                return Processes::InsufficientPermissions;
         }
         //Kill failed
-        return false;
+        return Processes::Unknown;
     }
-    return true;
+    return Processes::NoError;
 }
 
-bool ProcessesLocal::setNiceness(long pid, int priority) {
+Processes::Error ProcessesLocal::setNiceness(long pid, int priority) {
     errno = 0;
     if (pid <= 0) {
-        errorCode = Processes::InvalidPid;
-        return false;
+        return Processes::InvalidPid;
     }
     if (setpriority( PRIO_PROCESS, pid, priority )) {
         switch (errno) {
             case ESRCH:
-                errorCode = Processes::ProcessDoesNotExistOrZombie;
-                break;
+                return Processes::ProcessDoesNotExistOrZombie;
             case EINVAL:
-                errorCode = Processes::InvalidParameter;
-                break;
+                return Processes::InvalidParameter;
             case EACCES:
             case EPERM:
-                errorCode = Processes::InsufficientPermissions;
-                break;
-            default:
-                break;
+                return Processes::InsufficientPermissions;
         }
         //set niceness failed
-        return false;
+        return Processes::Unknown;
     }
-    return true;
+    return Processes::NoError;
 }
 
-bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) {
+Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) {
     errno = 0;
     if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch || priorityClass == KSysGuard::Process::SchedulerIdle)
         priority = 0;
     if (pid <= 0) {
-        errorCode = Processes::InvalidPid;
-        return false;
+        return Processes::InvalidPid;
     }
     struct sched_param params;
     params.sched_priority = priority;
@@ -669,58 +656,46 @@ bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority) {
           break;
 #endif
       default:
-          errorCode = Processes::NotSupported;
-          return false;
+          return Processes::NotSupported;
     }
 
     if (sched_setscheduler( pid, policy, &params) != 0) {
         switch (errno) {
             case ESRCH:
-                errorCode = Processes::ProcessDoesNotExistOrZombie;
-                break;
+                return Processes::ProcessDoesNotExistOrZombie;
             case EINVAL:
-                errorCode = Processes::InvalidParameter;
-                break;
+                return Processes::InvalidParameter;
             case EPERM:
-                errorCode = Processes::InsufficientPermissions;
-                break;
-            default:
-                break;
+                return Processes::InsufficientPermissions;
         }
-        return false;
+        return Processes::Unknown;
     }
-    return true;
+    return Processes::NoError;
 }
 
 
-bool ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority) {
+Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority) {
     errno = 0;
     if (pid <= 0) {
-        errorCode = Processes::InvalidPid;
-        return false;
+        return Processes::InvalidPid;
     }
 #ifdef HAVE_IONICE
     if (ioprio_set(IOPRIO_WHO_PROCESS, pid, priority | priorityClass << IOPRIO_CLASS_SHIFT) == -1) {
         //set io niceness failed
         switch (errno) {
             case ESRCH:
-                errorCode = Processes::ProcessDoesNotExistOrZombie;
+                return Processes::ProcessDoesNotExistOrZombie;
                 break;
             case EINVAL:
-                errorCode = Processes::InvalidParameter;
-                break;
+                return Processes::InvalidParameter;
             case EPERM:
-                errorCode = Processes::InsufficientPermissions;
-                break;
-            default:
-                break;
+                return Processes::InsufficientPermissions;
         }
-        return false;
+        return Processes::Unknown;
     }
-    return true;
+    return Processes::NoError;
 #else
-    errorCode = Processes::NotSupported;
-    return false;
+    return Processes::NotSupported;
 #endif
 }
 

@@ -206,47 +206,54 @@ QSet<long> ProcessesLocal::getAllPids( )
     return pids;
 }
 
-bool ProcessesLocal::sendSignal(long pid, int sig) {
+Processes::Error ProcessesLocal::sendSignal(long pid, int sig) {
     if ( kill( (pid_t)pid, sig ) ) {
 	//Kill failed
-        return false;
+        return Processes::Unknown;
     }
-    return true;
+    return Processes::NoError;
 }
 
-bool ProcessesLocal::setNiceness(long pid, int priority) {
+Processes::Error ProcessesLocal::setNiceness(long pid, int priority) {
     if ( setpriority( PRIO_PROCESS, pid, priority ) ) {
 	    //set niceness failed
-	    return false;
+	    return Processes::Unknown;
     }
-    return true;
+    return Processes::NoError;
 }
 
-bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
+Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
 	    priority = 0;
-    if(pid <= 0) return false; // check the parameters
+    if(pid <= 0) return Processes::InvalidPid; // check the parameters
     struct sched_param params;
     params.sched_priority = priority;
+    bool success;
     switch(priorityClass) {
       case (KSysGuard::Process::Other):
-	    return (sched_setscheduler( pid, SCHED_OTHER, &params) == 0);
+	    success = (sched_setscheduler( pid, SCHED_OTHER, &params) == 0);
+        break;
       case (KSysGuard::Process::RoundRobin):
-	    return (sched_setscheduler( pid, SCHED_RR, &params) == 0);
+	    success = (sched_setscheduler( pid, SCHED_RR, &params) == 0);
+        break;
       case (KSysGuard::Process::Fifo):
-	    return (sched_setscheduler( pid, SCHED_FIFO, &params) == 0);
+	    success = (sched_setscheduler( pid, SCHED_FIFO, &params) == 0);
+        break;
 #ifdef SCHED_BATCH
       case (KSysGuard::Process::Batch):
-	    return (sched_setscheduler( pid, SCHED_BATCH, &params) == 0);
+	    success = (sched_setscheduler( pid, SCHED_BATCH, &params) == 0);
+        break;
 #endif
-      default:
-	    return false;
     }
+    if (success) {
+        return Processes::NoError;
+    }
+    return Processes::Unknown;
 }
 
-bool ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority) {
-    return false; //Not yet supported
+Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority) {
+    return Processes::NotSupported; //Not yet supported
 }
 
 bool ProcessesLocal::supportsIoNiceness() {

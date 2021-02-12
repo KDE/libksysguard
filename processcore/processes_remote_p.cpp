@@ -170,28 +170,27 @@ QSet<long> ProcessesRemote::getAllPids( )
     return d->pids;
 }
 
-bool ProcessesRemote::sendSignal(long pid, int sig) {
+Processes::Error ProcessesRemote::sendSignal(long pid, int sig) {
 	//TODO run the proper command for all these functions below
     emit runCommand(QStringLiteral("kill ") + QString::number(pid) + QStringLiteral(" ") + QString::number(sig), (int)Kill);
-    return true;
+    return Processes::NoError;
 }
-bool ProcessesRemote::setNiceness(long pid, int priority) {
+Processes::Error ProcessesRemote::setNiceness(long pid, int priority) {
     emit runCommand(QStringLiteral("setpriority ") + QString::number(pid) + QStringLiteral(" ") + QString::number(priority), (int)Renice);
-    return true;
+    return Processes::NoError;
 }
 
-bool ProcessesRemote::setIoNiceness(long pid, int priorityClass, int priority) {
+Processes::Error ProcessesRemote::setIoNiceness(long pid, int priorityClass, int priority) {
     emit runCommand(QStringLiteral("ionice ") + QString::number(pid) + QStringLiteral(" ") + QString::number(priorityClass) + QStringLiteral(" ") + QString::number(priority), (int)Ionice);
-    return true;
+    return Processes::NoError;
 }
 
-bool ProcessesRemote::setScheduler(long pid, int priorityClass, int priority) {
+Processes::Error ProcessesRemote::setScheduler(long pid, int priorityClass, int priority) {
     Q_UNUSED(pid);
     Q_UNUSED(priorityClass);
     Q_UNUSED(priority);
 
-    errorCode = Processes::NotSupported;
-    return false;
+    return Processes::NotSupported;
 }
 
 bool ProcessesRemote::supportsIoNiceness() {

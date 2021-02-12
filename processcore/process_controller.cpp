@@ -41,7 +41,7 @@ struct ApplyResult
 class ProcessController::Private
 {
 public:
-    ApplyResult applyToPids(const QVector<int> &pids, const std::function<bool(int)> &function);
+    ApplyResult applyToPids(const QVector<int> &pids, const std::function<Processes::Error(int)> &function);
     ProcessController::Result runKAuthAction(const QString &actionId, const QVector<int> &pids, const QVariantMap &options);
     QVector<int> listToVector(const QList<long long> &list);
     QVector<int> listToVector(const QVariantList &list);
@@ -212,33 +212,29 @@ QString ProcessController::resultToString(Result result)
     }
 }
 
-ApplyResult KSysGuard::ProcessController::Private::applyToPids(const QVector<int>& pids, const std::function<bool(int)>& function)
+ApplyResult KSysGuard::ProcessController::Private::applyToPids(const QVector<int>& pids, const std::function<Processes::Error(int)>& function)
 {
     ApplyResult result;
 
-    s_localProcesses->errorCode = KSysGuard::Processes::Unknown;
 
     for (auto pid : pids) {
-        auto success = function(pid);
-        if (!success) {
-            switch (s_localProcesses->errorCode) {
-            case KSysGuard::Processes::InsufficientPermissions:
-            case KSysGuard::Processes::Unknown:
-                result.unchanged << pid;
-                result.resultCode = Result::InsufficientPermissions;
-                break;
-            case Processes::InvalidPid:
-            case Processes::ProcessDoesNotExistOrZombie:
-            case Processes::InvalidParameter:
-                result.resultCode = Result::NoSuchProcess;
-                break;
-            case Processes::NotSupported:
-                result.resultCode = Result::Unsupported;
-                break;
-            default:
-                result.resultCode = Result::Unknown;
-                break;
-            }
+        auto error = function(pid);
+        switch (error) {
+        case KSysGuard::Processes::InsufficientPermissions:
+        case KSysGuard::Processes::Unknown:
+            result.unchanged << pid;
+            result.resultCode = Result::InsufficientPermissions;
+            break;
+        case Processes::InvalidPid:
+        case Processes::ProcessDoesNotExistOrZombie:
+        case Processes::InvalidParameter:
+            result.resultCode = Result::NoSuchProcess;
+            break;
+        case Processes::NotSupported:
+            result.resultCode = Result::Unsupported;
+            break;
+        case Processes::NoError:
+            break;
         }
     }
     return result;

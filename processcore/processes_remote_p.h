@@ -37,11 +37,11 @@ namespace KSysGuard
 	QSet<long> getAllPids() override;
 	long getParentPid(long pid) override;
 	bool updateProcessInfo(long pid, Process *process) override;
-	bool sendSignal(long pid, int sig) override;
-        bool setNiceness(long pid, int priority) override;
-	bool setScheduler(long pid, int priorityClass, int priority) override;
+	Processes::Error sendSignal(long pid, int sig) override;
+       Processes::Error setNiceness(long pid, int priority) override;
+	Processes::Error setScheduler(long pid, int priorityClass, int priority) override;
 	long long totalPhysicalMemory() override;
-	bool setIoNiceness(long pid, int priorityClass, int priority) override;
+	Processes::Error setIoNiceness(long pid, int priorityClass, int priority) override;
 	bool supportsIoNiceness() override;
 	long numberProcessorCores() override;
     void updateAllProcesses( Processes::UpdateFlags updateFlags ) override;

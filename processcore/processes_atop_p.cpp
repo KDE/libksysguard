@@ -324,40 +324,36 @@ QSet<long> ProcessesATop::getAllPids( )
     return d->pids.toSet();
 }
 
-bool ProcessesATop::sendSignal(long pid, int sig) {
+Processes::Error ProcessesATop::sendSignal(long pid, int sig) {
     Q_UNUSED(pid);
     Q_UNUSED(sig);
 
-    errorCode = Processes::NotSupported;
-    return false;
+    return Processes::NotSupported;
 }
 
-bool ProcessesATop::setNiceness(long pid, int priority) {
+Processes::Error ProcessesATop::setNiceness(long pid, int priority) {
     Q_UNUSED(pid);
     Q_UNUSED(priority);
 
-    errorCode = Processes::NotSupported;
-    return false;
+    return Processes::NotSupported;
 }
 
-bool ProcessesATop::setScheduler(long pid, int priorityClass, int priority) {
+Processes::Error ProcessesATop::setScheduler(long pid, int priorityClass, int priority) {
     Q_UNUSED(pid);
     Q_UNUSED(priorityClass);
     Q_UNUSED(priority);
 
-    errorCode = Processes::NotSupported;
-    return false;
+    return Processes::NotSupported;
 }
 
 
-bool ProcessesATop::setIoNiceness(long pid, int priorityClass, int priority)
+Processes::Error ProcessesATop::setIoNiceness(long pid, int priorityClass, int priority)
 {
     Q_UNUSED(pid);
     Q_UNUSED(priorityClass);
     Q_UNUSED(priority);
 
-    errorCode = Processes::NotSupported;
-    return false;
+    return Processes::NotSupported;
 }
 
 bool ProcessesATop::supportsIoNiceness()

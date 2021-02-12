@@ -74,7 +74,8 @@ namespace KSysGuard
             InvalidParameter,
             InsufficientPermissions,
             ProcessDoesNotExistOrZombie,
-            NotSupported
+            NotSupported,
+            NoError
         };
 
         /**

@@ -44,7 +44,7 @@ namespace KSysGuard
 
         public:
 
-            AbstractProcesses() { errorCode = Processes::Unknown; }
+            AbstractProcesses() {}
             ~AbstractProcesses() override {}
 
             /** \brief Get a set of the currently running process PIDs.
@@ -81,9 +81,10 @@ namespace KSysGuard
              *
              *    KSysGuard::Processes::sendSignal(324, SIGSTOP);
              *  \endcode
+             *  @return Error::NoError if successful
              *
              */
-            virtual bool sendSignal(long pid, int sig) = 0;
+            virtual Processes::Error sendSignal(long pid, int sig) = 0;
 
             /** \brief Set the priority for a process.
              *
@@ -92,9 +93,9 @@ namespace KSysGuard
              *
              *  This has no effect if the scheduler is not the normal one (SCHED_OTHER in Linux).
              *
-             *  @return false if you do not have permission to set the priority.
+             *  @return Error::NoError if successful
              */
-            virtual bool setNiceness(long pid, int priority) = 0;
+            virtual Processes::Error setNiceness(long pid, int priority) = 0;
 
             /** \brief Set the scheduler for a process.
              *
@@ -103,9 +104,9 @@ namespace KSysGuard
              *
              *  @p priorityClass One of SCHED_FIFO, SCHED_RR, SCHED_OTHER, and SCHED_BATCH
              *  @p priority Set to 0 for SCHED_OTHER and SCHED_BATCH.  Between 1 and 99 for SCHED_FIFO and SCHED_RR
-             *  @return false if you do not have permission to set the priority
+             *  @return Error::NoError if successful
              */
-            virtual bool setScheduler(long pid, int priorityClass, int priority) = 0;
+            virtual Processes::Error setScheduler(long pid, int priorityClass, int priority) = 0;
 
             /** \brief Return the total amount of physical memory in KiB.
              *
@@ -119,9 +120,9 @@ namespace KSysGuard
              *  This is from 7 (very nice, lowest i/o priority) to
              *  0 (highest priority).  The default value is determined as: io_nice = (cpu_nice + 20) / 5.
              *
-             *  @return false if you do not have permission to set the priority
+             *  @return Error::NoError if successful
              */
-            virtual bool setIoNiceness(long pid, int priorityClass, int priority) = 0;
+            virtual Processes::Error setIoNiceness(long pid, int priorityClass, int priority) = 0;
 
             /** \brief Returns true if ionice is supported on this system
              */
@@ -138,8 +139,6 @@ namespace KSysGuard
              *  Get all the current process information from the machine.  When done, emit updateAllProcesses().
              */
             virtual void updateAllProcesses( Processes::UpdateFlags updateFlags ) = 0;
-
-            Processes::Error errorCode;
 Q_SIGNALS:
             /** \brief This is emitted when the processes have been updated, and the view should be refreshed.
              */

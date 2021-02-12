@@ -201,28 +201,28 @@ QSet<long> ProcessesLocal::getAllPids( )
     return pids;
 }
 
-bool ProcessesLocal::sendSignal(long pid, int sig) {
+Processes::Error ProcessesLocal::sendSignal(long pid, int sig) {
     if ( kill( (pid_t)pid, sig ) ) {
         //Kill failed
-        return false;
+        return Processes::Unknown;
     }
-    return false;
+    return Processes::NoError;
 }
 
 /*
  *
  */
-bool ProcessesLocal::setNiceness(long pid, int priority) {
-    return false;
+Processes::Error ProcessesLocal::setNiceness(long pid, int priority) {
+    return Processes::NotSupported;
 }
 
-bool ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
+Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
-    return false;
+    return Processes::NotSupported;
 }
 
-bool ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority) {
-    return false; //Not yet supported
+Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority) {
+    return Processes::NotSupported; //Not yet supported
 }
 
 bool ProcessesLocal::supportsIoNiceness() {

@@ -53,6 +53,7 @@ namespace KSysGuard
         mHavePreviousIoValues = false;
         mUpdateFlags = {};
         mUsingHistoricalData = false;
+        mLastError = Error::NoError;
         q = q_ptr;
     }
       ~Private();
@@ -77,6 +78,8 @@ namespace KSysGuard
       bool mHavePreviousIoValues; ///< This is whether we updated the IO value on the last update
       bool mUsingHistoricalData; ///< Whether to return historical data for updateProcess() etc
       Processes *q;
+
+      Error mLastError;
   };
 
 Processes::Private::~Private() {
@@ -112,7 +115,7 @@ Processes::~Processes()
 
 Processes::Error Processes::lastError() const
 {
-    return d->mAbstractProcesses->errorCode;
+    return d->mLastError;
 }
 Process *Processes::getProcess(long pid) const
 {
@@ -434,44 +437,48 @@ bool Processes::killProcess(long pid) {
 }
 
 bool Processes::sendSignal(long pid, int sig) {
-    d->mAbstractProcesses->errorCode = Unknown;
-    if(d->mUsingHistoricalData) {
-        d->mAbstractProcesses->errorCode = NotSupported;
+    auto processes = d->mUsingHistoricalData ? d->mHistoricProcesses : d->mAbstractProcesses;
+    auto error = processes->sendSignal(pid, sig);
+    if (error != NoError) {
+        d->mLastError = error;
         return false;
     }
-    return d->mAbstractProcesses->sendSignal(pid, sig);
+    return true;
 }
 
 bool Processes::setNiceness(long pid, int priority) {
-    d->mAbstractProcesses->errorCode = Unknown;
-    if(d->mUsingHistoricalData) {
-        d->mAbstractProcesses->errorCode = NotSupported;
+    auto processes = d->mUsingHistoricalData ? d->mHistoricProcesses : d->mAbstractProcesses;
+    auto error = processes->setNiceness(pid, priority);
+    if (error != NoError) {
+        d->mLastError = error;
         return false;
     }
-    return d->mAbstractProcesses->setNiceness(pid, priority);
+    return true;
 }
 
 bool Processes::setScheduler(long pid, KSysGuard::Process::Scheduler priorityClass, int priority) {
-    d->mAbstractProcesses->errorCode = Unknown;
-    if(d->mUsingHistoricalData) {
-        d->mAbstractProcesses->errorCode = NotSupported;
+    auto processes = d->mUsingHistoricalData ? d->mHistoricProcesses : d->mAbstractProcesses;
+    auto error = processes->setScheduler(pid, priorityClass, priority);
+    if (error != NoError) {
+        d->mLastError = error;
         return false;
     }
-    return d->mAbstractProcesses->setScheduler(pid, priorityClass, priority);
+    return true;
 }
 
 bool Processes::setIoNiceness(long pid, KSysGuard::Process::IoPriorityClass priorityClass, int priority) {
-    d->mAbstractProcesses->errorCode = Unknown;
-    if(d->mUsingHistoricalData) {
-        d->mAbstractProcesses->errorCode = NotSupported;
+    auto processes = d->mUsingHistoricalData ? d->mHistoricProcesses : d->mAbstractProcesses;
+    auto error = processes->setIoNiceness(pid, priorityClass, priority);
+    if (error != NoError) {
+        d->mLastError = error;
         return false;
     }
-    return d->mAbstractProcesses->setIoNiceness(pid, priorityClass, priority);
+    return true;
 }
 
 bool Processes::supportsIoNiceness() {
     if(d->mUsingHistoricalData)
-        return false;
+        return d->mHistoricProcesses->supportsIoNiceness();
     return d->mAbstractProcesses->supportsIoNiceness();
 }
 
@@ -511,9 +518,8 @@ void Processes::useCurrentData()
 
 bool Processes::setViewingTime(const QDateTime &when)
 {
-    d->mAbstractProcesses->errorCode = Unknown;
     if(!d->mIsLocalHost) {
-        d->mAbstractProcesses->errorCode = NotSupported;
+        d->mLastError = NotSupported;
         return false;
     }
     if(!d->mUsingHistoricalData) {
@@ -528,9 +534,8 @@ bool Processes::setViewingTime(const QDateTime &when)
 
 bool Processes::loadHistoryFile(const QString &filename)
 {
-    d->mAbstractProcesses->errorCode = Unknown;
     if(!d->mIsLocalHost) {
-        d->mAbstractProcesses->errorCode = NotSupported;
+        d->mLastError = NotSupported;
         return false;
     }
     if(!d->mHistoricProcesses)
