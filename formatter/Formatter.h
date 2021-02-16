@@ -89,6 +89,14 @@ public:
      * The returned unit symbol is localized.
      */
     static QString symbol(Unit unit);
+
+    /**
+     * Return the maximum length of a formatted string for the specified unit and font.
+     *
+     * @param unit The unit to use.
+     * @param font The font to use.
+     */
+    static qreal maximumLength(Unit unit, const QFont &font);
 };
 
 } // namespace KSysGuard

@@ -49,6 +49,8 @@ public:
     Q_INVOKABLE QString formatValueShowNull(const QVariant &value, KSysGuard::Unit unit,
         KSysGuard::MetricPrefix targetPrefix = MetricPrefixAutoAdjust
     );
+
+    Q_INVOKABLE qreal maximumLength(KSysGuard::Unit unit, const QFont &font);
 };
 
 }

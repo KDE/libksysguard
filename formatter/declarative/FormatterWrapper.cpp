@@ -33,4 +33,9 @@ QString FormatterWrapper::formatValueShowNull(const QVariant &value, KSysGuard::
     return Formatter::formatValue(value, unit, targetPrefix, FormatOptionShowNull);
 }
 
+qreal KSysGuard::FormatterWrapper::maximumLength(KSysGuard::Unit unit, const QFont &font)
+{
+    return Formatter::maximumLength(unit, font);
+}
+
 }

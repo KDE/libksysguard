@@ -26,6 +26,7 @@
 
 #include <QLocale>
 #include <QTime>
+#include <QFontMetrics>
 
 #include <cmath>
 
@@ -392,6 +393,32 @@ QString Formatter::symbol(Unit unit)
     default:
         return QString();
     }
+}
+
+qreal Formatter::maximumLength(Unit unit, const QFont &font)
+{
+    auto order = unitOrder(unit);
+
+    QString maximum;
+    switch (unitBase(unit)) {
+    case UnitByte:
+        maximum = formatValue(order - 0.5, UnitMegaByte, MetricPrefixMega);
+        break;
+    case UnitByteRate:
+        maximum = formatValue(order - 0.5, UnitMegaByteRate, MetricPrefixMega);
+        break;
+    case UnitHertz:
+        maximum = formatValue(order - 0.5, UnitMegaHertz, MetricPrefixMega);
+        break;
+    case UnitPercent:
+        maximum = formatValue(9999.9, UnitPercent);
+        break;
+    default:
+        return -1.0;
+    }
+
+    auto metrics = QFontMetrics{font};
+    return metrics.horizontalAdvance(maximum);
 }
 
 } // namespace KSysGuard
