@@ -21,8 +21,10 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 
 import org.kde.kirigami 2.8 as Kirigami
+import org.kde.quickcharts 1.0 as Charts
 import org.kde.quickcharts.controls 1.0 as ChartsControls
 import org.kde.ksysguard.sensors 1.0 as Sensors
+import org.kde.ksysguard.formatter 1.0 as Formatter
 
 ColumnLayout {
     id: root
@@ -44,7 +46,6 @@ ColumnLayout {
             property var colorSource
 
             Kirigami.Heading {
-                Layout.fillWidth: true
                 text: groupSensor.formattedValue
                 level: 3
                 horizontalAlignment: Text.AlignLeft
@@ -53,7 +54,15 @@ ColumnLayout {
                 elide: Text.ElideRight
             }
 
-            Repeater {
+            ChartsControls.Legend {
+                id: legend
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                horizontalSpacing: Kirigami.Units.gridUnit
+                verticalSpacing: Kirigami.Units.smallSpacing
+
                 model: {
                     if (!root.showGroups) {
                         return root.highPrioritySensors.concat(root.lowPrioritySensors)
@@ -73,19 +82,20 @@ ColumnLayout {
                     return result
                 }
 
-                ChartsControls.LegendDelegate {
-                    Layout.fillWidth: true
-                    Layout.minimumHeight: implicitHeight
-
+                delegate: ChartsControls.LegendDelegate {
                     name: root.showGroups ? modelData.shortName : modelData.name
+                    shortName: modelData.shortName
                     value: modelData.formattedValue
-                    colorVisible: true
                     color: root.colorSource.map[modelData.sensorId]
 
-                    layoutWidth: root.width
-                    valueWidth: Kirigami.Units.gridUnit * 2
+                    maximumValueWidth: {
+                        var unit = modelData.unit
+                        return Formatter.Formatter.maximumLength(unit, legend.font)
+                    }
 
-                    opacity: (root.y + parent.y + y + height) < root.totalHeight ? 1 : 0
+                    Charts.LegendLayout.minimumWidth: minimumWidth
+                    Charts.LegendLayout.preferredWidth: preferredWidth
+                    Charts.LegendLayout.maximumWidth: Math.max(preferredWidth, Kirigami.Units.gridUnit * 15)
                 }
             }
 
