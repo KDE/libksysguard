@@ -116,8 +116,7 @@ Faces.SensorFace {
         }
 
         Faces.ExtendedLegend {
-            Layout.fillWidth: root.width < implicitWidth * 1.5
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+            Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: root.formFactor === Faces.SensorFace.Horizontal
                 || root.formFactor === Faces.SensorFace.Vertical
@@ -127,11 +126,6 @@ Faces.SensorFace {
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
             sensorIds: root.showLegend ? root.controller.lowPrioritySensorIds : []
-            flow: root.width > root.height * 1.5 ? GridLayout.LeftToRight : GridLayout.TopToBottom
-        }
-
-        Item {
-            Layout.fillHeight: true
         }
     }
 }

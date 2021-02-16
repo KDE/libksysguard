@@ -58,15 +58,14 @@ ChartsControls.Legend {
      */
     property var colorSource
 
-    flow: GridLayout.TopToBottom
-
     Layout.maximumHeight: implicitHeight
     Layout.maximumWidth: parent.width
 
-    spacing: flow == GridLayout.TopToBottom ? Kirigami.Units.smallSpacing : Kirigami.Units.gridUnit
+    horizontalSpacing: Kirigami.Units.gridUnit
+    verticalSpacing: Kirigami.Units.smallSpacing
 
-    valueVisible: true
-    valueWidth: Kirigami.Units.gridUnit * 2
+    maximumDelegateWidth: Kirigami.Units.gridUnit * 15
+
     formatValue: function(input, index) {
         if (!sourceModel) {
             return input
@@ -98,16 +97,29 @@ ChartsControls.Legend {
         value: "Color"
     }
 
+    maximumValueWidth: function(input, index) {
+        if (!sourceModel) {
+            return -1
+        }
+
+        var unit = sourceModel.data(sourceModel.index(0, index), SensorDataModel.Unit)
+        return Formatter.maximumLength(unit, legend.font)
+    }
+
     Repeater {
         id: sensorsRepeater
         delegate: ChartsControls.LegendDelegate {
             name: sensor.name
             shortName: sensor.shortName
             value: sensor.formattedValue || ""
-            colorVisible: false
 
-            layoutWidth: legend.width
-            valueWidth: Kirigami.Units.gridUnit * 2
+            indicator: Item { }
+
+            maximumValueWidth: legend.maximumValueWidth(sensor.value, index)
+
+            Charts.LegendLayout.minimumWidth: minimumWidth
+            Charts.LegendLayout.preferredWidth: preferredWidth
+            Charts.LegendLayout.maximumWidth: Math.max(legend.maximumDelegateWidth, preferredWidth)
 
             Sensor {
                 id: sensor
