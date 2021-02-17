@@ -24,12 +24,42 @@
 #include <KPluginMetaData>
 #include <KUser>
 
+#include "forwarding_attribute.h"
 #include "process.h"
 #include "process_attribute.h"
 #include "process_data_provider.h"
 #include "processcore_debug.h"
 
 using namespace KSysGuard;
+
+static const QVector<ProcessDataProvider*> &providers() {
+    //instantiate all plugins
+    static auto providers = [] {
+        QVector<ProcessDataProvider*> providers;
+        QSet<QString> loadedPlugins;
+        const QVector<KPluginMetaData> listMetaData = KPluginLoader::findPlugins(QStringLiteral("ksysguard/process"));
+        for (const auto &pluginMetaData : listMetaData) {
+            if (loadedPlugins.contains(pluginMetaData.pluginId())) {
+                continue;
+            }
+            qCDebug(LIBKSYSGUARD_PROCESSCORE) << "loading plugin" << pluginMetaData.name() << pluginMetaData.fileName() <<pluginMetaData.pluginId();
+            auto factory = qobject_cast<KPluginFactory *>(pluginMetaData.instantiate());
+            if (!factory) {
+                qCCritical(LIBKSYSGUARD_PROCESSCORE) << "failed to load plugin factory" << pluginMetaData.name();
+                continue;
+            }
+            ProcessDataProvider *provider = factory->create<ProcessDataProvider>();
+            if (!provider) {
+                qCCritical(LIBKSYSGUARD_PROCESSCORE) << "failed to instantiate ProcessDataProvider" << pluginMetaData.name();
+                continue;
+            }
+            loadedPlugins.insert(pluginMetaData.pluginId());
+            providers.push_back(provider);
+        }
+        return providers;
+    }();
+    return providers;
+}
 
 class Q_DECL_HIDDEN ExtendedProcesses::Private
 {
@@ -39,8 +69,9 @@ public:
 
     ExtendedProcesses *q;
     QVector<ProcessAttribute *> m_coreAttributes;
-    QVector<ProcessDataProvider *> m_providers;
+    QVector<ProcessAttribute *> m_extendedAttributes;
     QHash<K_UID, KUser> m_userCache;
+    inline static QMultiHash<ProcessAttribute*, ForwardingAttribute*> s_attributeMap;
 };
 
 enum GroupPolicy {
@@ -89,8 +120,6 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     : Processes(QString(), parent)
     , d(new Private(this))
 {
-    d->loadPlugins();
-
     auto pidSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("pid"), i18n("PID"), &KSysGuard::Process::pid, KSysGuard::Process::Status, ForwardFirstEntry);
     pidSensor->setDescription(i18n("The unique Process ID that identifies this process."));
     d->m_coreAttributes << pidSensor;
@@ -370,6 +399,22 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     auto numThreadsSensor = new ProcessSensor<int>(this, QStringLiteral("numThreads"), i18n("Threads"), &KSysGuard::Process::numThreads, KSysGuard::Process::NumThreads, ForwardFirstEntry);
     d->m_coreAttributes << numThreadsSensor;
 
+    for (const auto& provider : providers()) {
+        const auto attributes = provider->attributes();
+        for (const auto attribute : attributes) {
+            auto forwardingAttribute = new ForwardingAttribute(attribute, this);
+            d->m_extendedAttributes.push_back(forwardingAttribute);
+            d->s_attributeMap.insert(attribute, forwardingAttribute);
+            auto updateEnabled = [attribute, this]  {
+                const auto forwarders = d->s_attributeMap.equal_range(attribute);
+                const bool anyEnabled = std::any_of(forwarders.first, forwarders.second, std::mem_fn(&ProcessAttribute::enabled));
+                attribute->setEnabled(anyEnabled);
+            };
+            connect(forwardingAttribute, &ProcessAttribute::enabledChanged, this, updateEnabled);
+            connect(forwardingAttribute, &QObject::destroyed, this, updateEnabled);
+        }
+    }
+
     connect(this, &KSysGuard::Processes::beginRemoveProcess, this, [this](KSysGuard::Process *process) {
         const auto attrs = attributes();
         for (auto a : attrs) {
@@ -377,8 +422,8 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
         }
     });
 
-    connect(this, &KSysGuard::Processes::updated, this, [this]() {
-        for (auto p : qAsConst(d->m_providers)) {
+    connect(this, &KSysGuard::Processes::updated, this, []() {
+        for (auto p : providers()) {
             if (p->enabled()) {
                 p->update();
             }
@@ -388,38 +433,19 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
 
 ExtendedProcesses::~ExtendedProcesses()
 {
+    for (auto extendedAttribute : d->m_extendedAttributes) {
+        auto forwardingAttribute = static_cast<ForwardingAttribute*>(extendedAttribute);
+        forwardingAttribute->setEnabled(false);
+        d->s_attributeMap.remove(forwardingAttribute->actualAttribute, forwardingAttribute);
+    }
 }
 
 QVector<ProcessAttribute *> ExtendedProcesses::attributes() const
 {
-    return d->m_coreAttributes + extendedAttributes();
+    return d->m_coreAttributes + d->m_extendedAttributes;
 }
 
 QVector<ProcessAttribute *> ExtendedProcesses::extendedAttributes() const
 {
-    QVector<ProcessAttribute *> rc;
-    for (auto p : qAsConst(d->m_providers)) {
-        rc << p->attributes();
-    }
-    return rc;
-}
-
-void ExtendedProcesses::Private::loadPlugins()
-{
-    //instantiate all plugins
-    const QVector<KPluginMetaData> listMetaData = KPluginLoader::findPlugins(QStringLiteral("ksysguard/process"));
-    for (const auto &pluginMetaData : listMetaData) {
-        qCDebug(LIBKSYSGUARD_PROCESSCORE) << "loading plugin" << pluginMetaData.name();
-        auto factory = qobject_cast<KPluginFactory *>(pluginMetaData.instantiate());
-        if (!factory) {
-            qCCritical(LIBKSYSGUARD_PROCESSCORE) << "failed to load plugin factory" << pluginMetaData.name();
-            continue;
-        }
-        ProcessDataProvider *provider = factory->create<ProcessDataProvider>(q);
-        if (!provider) {
-            qCCritical(LIBKSYSGUARD_PROCESSCORE) << "failed to instantiate ProcessDataProvider" << pluginMetaData.name();
-            continue;
-        }
-        m_providers << provider;
-    }
+    return d->m_extendedAttributes;
 }
