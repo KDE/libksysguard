@@ -97,22 +97,22 @@ public:
     /**
      * The last stored value for a given process
      */
-    virtual QVariant data(KSysGuard::Process *process) const;
+    virtual QVariant data(quint64 pid) const;
 
     /**
      * Updates the stored value for a given process
      * Note stray processes will be automatically expunged
      */
-    void setData(KSysGuard::Process *process, const QVariant &value);
+    void setData(quint64 pid, const QVariant &value);
     /**
      * Remove an attribute from our local cache
      */
-    void clearData(KSysGuard::Process *process);
+    void clearData(quint64 pid);
 
-    virtual QVariant cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process*> &groupProcesses = {}) const;
+    virtual QVariant cgroupData(KSysGuard::CGroup *cgroup) const;
 
 Q_SIGNALS:
-    void dataChanged(KSysGuard::Process *process);
+    void dataChanged(quint64 pid);
     void enabledChanged(bool enabled);
 
 private:

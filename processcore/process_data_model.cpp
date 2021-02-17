@@ -110,12 +110,12 @@ QVariant ProcessDataModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
     case FormattedValue: {
         KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(index.internalPointer());
-        const QVariant value = attribute->data(process);
+        const QVariant value = attribute->data(process->pid());
         return KSysGuard::Formatter::formatValue(value, attribute->unit());
     }
     case Value: {
         KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(index.internalPointer());
-        const QVariant value = attribute->data(process);
+        const QVariant value = attribute->data(process->pid());
         return value;
     }
     case Attribute: {
@@ -212,12 +212,10 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
 
         // reconnect as using the columnIndex in the lambda makes everything super fast
         disconnect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
-        connect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](KSysGuard::Process *process) {
-            if (process->pid() != -1) {
-                const QModelIndex index = d->getQModelIndex(process, columnIndex);
-                if (index.isValid()) {
-                    emit dataChanged(index, index);
-                }
+        connect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](quint64 pid) {
+            const QModelIndex index = d->getQModelIndex(d->m_processes->getProcess(pid), columnIndex);
+            if (index.isValid()) {
+                Q_EMIT dataChanged(index, index);
             }
         });
 

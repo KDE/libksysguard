@@ -41,18 +41,6 @@ public:
     ~ProcessDataProvider() override;
 
     /**
-     * Accessors for process information matching
-     */
-    KSysGuard::Processes *processes() const;
-
-    /**
-     * Returns a new process object for a given PID
-     * This will update the process list if this PID does not exist yet
-     * This may return a null pointer
-     */
-    KSysGuard::Process *getProcess(long pid);
-
-    /**
      * A list of all process attributes provided by this plugin
      * It is expected to remain constant through the lifespan of this class
      */

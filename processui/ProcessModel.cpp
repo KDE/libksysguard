@@ -521,8 +521,8 @@ void ProcessModelPrivate::setupProcesses() {
 
     mExtraAttributes = mProcesses->extendedAttributes();
     for (int i = 0 ; i < mExtraAttributes.count(); i ++) {
-        connect(mExtraAttributes[i], &KSysGuard::ProcessAttribute::dataChanged, this, [this, i](KSysGuard::Process *process) {
-            const QModelIndex index = q->getQModelIndex(process, mHeadings.count() + i);
+        connect(mExtraAttributes[i], &KSysGuard::ProcessAttribute::dataChanged, this, [this, i](quint64 pid) {
+            const QModelIndex index = q->getQModelIndex(q->getProcess(pid), mHeadings.count() + i);
             emit q->dataChanged(index, index);
         });
     }
@@ -1320,17 +1320,17 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         switch (role) {
         case ProcessModel::PlainValueRole: {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            const QVariant value = d->mExtraAttributes[attr]->data(process);
+            const QVariant value = d->mExtraAttributes[attr]->data(process->pid());
             return value;
         }
         case Qt::DisplayRole: {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            const QVariant value = d->mExtraAttributes[attr]->data(process);
+            const QVariant value = d->mExtraAttributes[attr]->data(process->pid());
             return KSysGuard::Formatter::formatValue(value, d->mExtraAttributes[attr]->unit());
         }
         case Qt::TextAlignmentRole: {
             KSysGuard::Process *process = reinterpret_cast< KSysGuard::Process * > (index.internalPointer());
-            const QVariant value = d->mExtraAttributes[attr]->data(process);
+            const QVariant value = d->mExtraAttributes[attr]->data(process->pid());
             if (value.canConvert(QMetaType::LongLong)
                 && static_cast<QMetaType::Type>(value.type()) != QMetaType::QString) {
                 return Qt::AlignRight + Qt::AlignVCenter;

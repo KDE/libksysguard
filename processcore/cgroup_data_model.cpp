@@ -64,8 +64,7 @@ public:
     GroupNameAttribute(QObject *parent) :
         KSysGuard::ProcessAttribute(QStringLiteral("menuId"), i18nc("@title", "Desktop ID"), parent) {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
-        Q_UNUSED(processes)
+    QVariant cgroupData(CGroup *app) const override {
         return app->service()->menuId();
     }
 };
@@ -76,8 +75,7 @@ public:
     AppIconAttribute(QObject *parent) :
         KSysGuard::ProcessAttribute(QStringLiteral("iconName"), i18nc("@title", "Icon"), parent) {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
-        Q_UNUSED(processes)
+    QVariant cgroupData(CGroup *app) const override {
         return app->service()->icon();
     }
 };
@@ -88,8 +86,7 @@ public:
     AppNameAttribute(QObject *parent) :
         KSysGuard::ProcessAttribute(QStringLiteral("appName"), i18nc("@title", "Name"), parent) {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
-        Q_UNUSED(processes)
+    QVariant cgroupData(CGroup *app) const override {
         return app->service()->name();
     }
 };
@@ -200,8 +197,8 @@ void CGroupDataModel::setEnabledAttributes(const QStringList &enabledAttributes)
 
          // reconnect as using the attribute in the lambda makes everything super fast
          disconnect(attr, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
-         connect(attr, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](KSysGuard::Process *process) {
-             auto cgroup = d->m_cgroupMap.value(process->cGroup());
+         connect(attr, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](quint64 pid) {
+             auto cgroup = d->m_cgroupMap.value(d->m_processes->getProcess(pid)->cGroup());
              if (!cgroup) {
                  return;
              }
@@ -252,12 +249,12 @@ QVariant CGroupDataModel::data(const QModelIndex &index, int role) const
         case Qt::DisplayRole:
         case ProcessDataModel::FormattedValue: {
             KSysGuard::CGroup *app = reinterpret_cast< KSysGuard::CGroup* > (index.internalPointer());
-            const QVariant value = attribute->cgroupData(app, d->processesFor(app));
+            const QVariant value = attribute->cgroupData(app);
             return KSysGuard::Formatter::formatValue(value, attribute->unit());
         }
         case ProcessDataModel::Value: {
             KSysGuard::CGroup *app = reinterpret_cast< KSysGuard::CGroup* > (index.internalPointer());
-            const QVariant value = attribute->cgroupData(app, d->processesFor(app));
+            const QVariant value = attribute->cgroupData(app);
             return value;
         }
         case ProcessDataModel::Attribute: {

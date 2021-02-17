@@ -35,7 +35,7 @@ public:
     qreal m_max = 0;
     KSysGuard::Unit m_unit = KSysGuard::UnitInvalid; //Both a format hint and implies data type (i.e double/string)
 
-    QHash<KSysGuard::Process *, QVariant> m_data;
+    QHash<quint64, QVariant> m_data;
     bool m_enabled = false;
 
     bool m_defaultVisible = false;
@@ -147,33 +147,31 @@ void KSysGuard::ProcessAttribute::setVisibleByDefault(bool visible)
     d->m_defaultVisible = visible;
 }
 
-QVariant ProcessAttribute::data(KSysGuard::Process *process) const
+QVariant ProcessAttribute::data(quint64 pid) const
 {
-    return d->m_data.value(process);
+    return d->m_data.value(pid);
 }
 
-void ProcessAttribute::setData(KSysGuard::Process *process, const QVariant &value)
+void ProcessAttribute::setData(quint64 pid, const QVariant &value)
 {
-    d->m_data[process] = value;
-    emit dataChanged(process);
+    d->m_data[pid] = value;
+    emit dataChanged(pid);
 }
 
-void ProcessAttribute::clearData(KSysGuard::Process *process)
+void ProcessAttribute::clearData(quint64 pid)
 {
-    d->m_data.remove(process);
-    emit dataChanged(process);
+    d->m_data.remove(pid);
+    emit dataChanged(pid);
 }
 
-QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process*> &groupProcesses) const
+QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup) const
 {
-    Q_UNUSED(cgroup)
-
-    if (groupProcesses.isEmpty()) {
+    if (cgroup->pids().isEmpty()) {
         return QVariant{};
     }
-
-    qreal total = std::accumulate(groupProcesses.constBegin(), groupProcesses.constEnd(), 0.0, [this](qreal total, KSysGuard::Process *process) {
-        return total + data(process).toDouble();
+    const auto pids = cgroup->pids();
+    qreal total = std::accumulate(pids.constBegin(), pids.constEnd(), 0.0, [this](qreal total, quint64 pid) {
+        return total + data(pid).toDouble();
     });
     return QVariant(total);
 }

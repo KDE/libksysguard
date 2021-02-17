@@ -26,7 +26,6 @@ using namespace KSysGuard;
 class Q_DECL_HIDDEN KSysGuard::ProcessDataProvider::Private
 {
 public:
-    KSysGuard::Processes *m_processes;
     QVector<ProcessAttribute *> m_attributes;
     bool m_enabled = false;
 };
@@ -35,31 +34,11 @@ ProcessDataProvider::ProcessDataProvider(QObject *parent, const QVariantList &ar
     : QObject(parent)
     , d(new Private)
 {
-    //cast is needed to allow us to use KPluginFactory, but not have null pointers during subclass construction
-    auto procList = qobject_cast<KSysGuard::Processes *>(parent);
-    Q_ASSERT(procList);
-    d->m_processes = procList;
-
     Q_UNUSED(args)
 }
 
 ProcessDataProvider::~ProcessDataProvider()
 {
-}
-
-KSysGuard::Processes *ProcessDataProvider::processes() const
-{
-    return d->m_processes;
-}
-
-KSysGuard::Process *ProcessDataProvider::getProcess(long pid)
-{
-    auto process = d->m_processes->getProcess(pid);
-    if (!process) {
-        processes()->updateOrAddProcess(pid);
-    }
-    process = processes()->getProcess(pid);
-    return process;
 }
 
 QVector<ProcessAttribute *> ProcessDataProvider::attributes() const

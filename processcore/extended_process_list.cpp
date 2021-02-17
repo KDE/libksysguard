@@ -64,14 +64,14 @@ public:
                 if (!process->changes().testFlag(m_changeFlag)) {
                     return;
                 }
-                emit dataChanged(process);
+                emit dataChanged(process->pid());
             });
         }
     }
 
-    QVariant data(KSysGuard::Process *process) const override
+    QVariant data(quint64 pid) const override
     {
-        return QVariant::fromValue(m_extractFunc(process));
+        return QVariant::fromValue(m_extractFunc(static_cast<ExtendedProcesses*>(parent())->getProcess(pid)));
     }
 
 private:
@@ -373,7 +373,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     connect(this, &KSysGuard::Processes::beginRemoveProcess, this, [this](KSysGuard::Process *process) {
         const auto attrs = attributes();
         for (auto a : attrs) {
-            a->clearData(process);
+            a->clearData(process->pid());
         }
     });
 
