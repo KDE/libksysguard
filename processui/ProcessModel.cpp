@@ -411,14 +411,17 @@ void ProcessModelPrivate::setupWindows() {
     if (!mIsX11) {
         return;
     }
-    connect( KWindowSystem::self(), SIGNAL(windowChanged(WId,uint)), this, SLOT(windowChanged(WId,uint)));
+    connect(KWindowSystem::self(),
+            QOverload<WId, NET::Properties, NET::Properties2>::of(&KWindowSystem::windowChanged),
+            this,
+            &ProcessModelPrivate::windowChanged);
     connect( KWindowSystem::self(), &KWindowSystem::windowAdded, this, &ProcessModelPrivate::windowAdded);
     connect( KWindowSystem::self(), &KWindowSystem::windowRemoved, this, &ProcessModelPrivate::windowRemoved);
 
     //Add all the windows that KWin is managing - i.e. windows that the user can see
     const QList<WId> windows = KWindowSystem::windows();
     for (auto it = windows.begin(); it != windows.end(); ++it ) {
-        updateWindowInfo(*it, ~0u, true);
+        updateWindowInfo(*it, NET::Properties{}, NET::Properties2{}, true);
     }
 }
 #endif
@@ -529,25 +532,26 @@ void ProcessModelPrivate::setupProcesses() {
 }
 
 #if HAVE_X11
-void ProcessModelPrivate::windowChanged(WId wid, unsigned int properties)
+void ProcessModelPrivate::windowChanged(WId wid, NET::Properties properties, NET::Properties2 properties2)
 {
-    updateWindowInfo(wid, properties, false);
+    updateWindowInfo(wid, properties, properties2, false);
 }
 
 void ProcessModelPrivate::windowAdded(WId wid)
 {
-    updateWindowInfo(wid, ~0u, true);
+    updateWindowInfo(wid, NET::Properties{}, NET::Properties2{}, true);
 }
 
-void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, bool newWindow)
+void ProcessModelPrivate::updateWindowInfo(WId wid, NET::Properties properties, NET::Properties2 /*properties2*/, bool newWindow)
 {
     if (!mIsX11) {
         return;
     }
     properties &= (NET::WMPid | NET::WMVisibleName | NET::WMName | NET::WMIcon);
 
-    if(!properties)
+    if (!properties) {
         return; //Nothing interesting changed
+    }
 
     WindowInfo *w = mWIdToWindowInfo.value(wid);
     const qreal dpr = qApp->devicePixelRatio();
@@ -563,7 +567,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, unsigned int properties, boo
         return;
     }
     /* Get PID for window */
-    NETWinInfo info(QX11Info::connection(), wid, QX11Info::appRootWindow(), NET::Properties(properties) & ~NET::WMIcon, NET::Properties2());
+    NETWinInfo info(QX11Info::connection(), wid, QX11Info::appRootWindow(), properties & ~NET::WMIcon, NET::Properties2{});
 
     if(!w) {
         //We know that this must be a newWindow

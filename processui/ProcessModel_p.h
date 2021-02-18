@@ -70,7 +70,7 @@ class ProcessModelPrivate : public QObject
 
 #if HAVE_X11
         /** When an X window is changed, this is called */
-        void windowChanged(WId wid, unsigned int properties);
+        void windowChanged(WId wid, NET::Properties properties, NET::Properties2 properties2);
         /** When an X window is created, this is called
         */
         void windowAdded(WId wid);
@@ -138,7 +138,7 @@ class ProcessModelPrivate : public QObject
 #if HAVE_X11
         /** On X11 system, connects to the signals emitted when windows are created/destroyed */
         void setupWindows();
-        void updateWindowInfo(WId wid, unsigned int properties, bool newWindow);
+        void updateWindowInfo(WId wid, NET::Properties properties, NET::Properties2 properties2, bool newWindow);
         QMultiHash< long long, WindowInfo *> mPidToWindowInfo;  ///< Map a process pid to X window info if available
         QHash< WId, WindowInfo *> mWIdToWindowInfo; ///< Map an X window id to window info
 #ifdef HAVE_XRES
