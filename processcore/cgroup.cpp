@@ -43,7 +43,6 @@ public:
     const QString processGroupId;
     const KService::Ptr service;
     QVector<pid_t> pids;
-    std::mutex pidsLock;
 
     static KService::Ptr serviceFromAppId(const QString &appId);
 
@@ -51,15 +50,13 @@ public:
     static QString unescapeName(const QString &cgroupId);
 
     class ReadPidsRunnable;
-    ReadPidsRunnable *readPids = nullptr;
 };
 
 class CGroupPrivate::ReadPidsRunnable : public QRunnable
 {
 public:
-    ReadPidsRunnable(CGroupPrivate *cgroup, QPointer<QObject> context, const QString &path, std::function<void()> callback)
-        : m_cgroupPrivate(cgroup)
-        , m_context(context)
+    ReadPidsRunnable(QObject *context, const QString &path, std::function<void(QVector<pid_t>)> callback)
+        : m_context(context)
         , m_path(path)
         , m_callback(callback)
     {
@@ -77,34 +74,16 @@ public:
             pids.append(line.toLong());
             line = stream.readLine();
         }
-        m_cgroupPrivate->pids = pids;
-
         // Ensure we call the callback on the thread the context object lives on.
         if (m_context) {
-            QMetaObject::invokeMethod(m_context, m_callback);
+            QMetaObject::invokeMethod(m_context, std::bind(m_callback, pids));
         }
-
-        std::lock_guard<std::mutex> lock{m_lock};
-        m_finished = true;
-        m_cgroupPrivate->readPids = nullptr;
-        m_condition.notify_all();
-    }
-
-    void wait()
-    {
-        std::unique_lock<std::mutex> lock{m_lock};
-        m_condition.wait(lock, [this]() { return m_finished; });
     }
 
 private:
-    CGroupPrivate *m_cgroupPrivate;
     QPointer<QObject> m_context;
     QString m_path;
-    std::function<void()> m_callback;
-
-    std::mutex m_lock;
-    std::condition_variable m_condition;
-    bool m_finished = false;
+    std::function<void(QVector<pid_t>)> m_callback;
 };
 
 class CGroupSystemInformation
@@ -131,9 +110,6 @@ CGroup::CGroup(const QString &id)
 
 CGroup::~CGroup()
 {
-    if (d->readPids) {
-        d->readPids->wait();
-    }
 }
 
 QString KSysGuard::CGroup::id() const
@@ -148,21 +124,19 @@ KService::Ptr KSysGuard::CGroup::service() const
 
 QVector<pid_t> CGroup::pids() const
 {
-    if (d->readPids) {
-        d->readPids->wait();
-    }
     return d->pids;
 }
 
-void CGroup::requestPids(QPointer<QObject> context, std::function<void()> callback)
+void CGroup::setPids(const QVector<pid_t> &pids)
 {
-    if (d->readPids) {
-        d->readPids->wait();
-    }
+    d->pids = pids;
+}
 
+void CGroup::requestPids(QObject *context, std::function<void(QVector<pid_t>)> callback)
+{
     QString path = cgroupSysBasePath() + d->processGroupId + QLatin1String("/cgroup.procs");
-    d->readPids = new CGroupPrivate::ReadPidsRunnable(d.get(), context, path, callback);
-    QThreadPool::globalInstance()->start(d->readPids);
+    auto readPidsRunnable = new CGroupPrivate::ReadPidsRunnable(context, path, callback);
+    QThreadPool::globalInstance()->start(readPidsRunnable);
 }
 
 QString CGroupPrivate::unescapeName(const QString &name) {
@@ -186,8 +160,6 @@ QString CGroupPrivate::unescapeName(const QString &name) {
     }
     return rc;
 }
-
-
 
 KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
 {

@@ -60,16 +60,23 @@ public:
     QVector<pid_t> pids() const;
 
     /**
+     * @internal
+     */
+    void setPids(const QVector<pid_t> &pids);
+
+    /**
      * Request fetching the list of processes associated with this cgroup.
      *
      * This is done in a separate thread. Once it has completed, \p callback is
      * called with the list of pids of this cgroup.
      *
+     * It is the callers responsibility to call setPids in response.
+     *
      * \param context An object that is used to track if the caller still exists.
      * \param callback A callback that gets called once the list of pids has
      *                 been retrieved.
      */
-    void requestPids(QPointer<QObject> context, std::function<void()> callback);
+    void requestPids(QObject *context, std::function<void(QVector<pid_t>)> callback);
 
     /**
      * Returns the base path to exposed cgroup information. Either /sys/fs/cgroup or /sys/fs/cgroup/unified as applicable
