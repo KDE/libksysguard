@@ -429,9 +429,12 @@ void CGroupDataModel::update(CGroup *node)
 
     // Update our own stat info
     // This may trigger some dataChanged
-    node->requestPids(this, [this, node]() {
+    node->requestPids(this, [this, node](QVector<pid_t> pids) {
         auto row = d->m_cGroups.indexOf(node);
-        Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, columnCount()-1, QModelIndex()));
+        if (row >= 0) {
+            d->m_cGroups[row]->setPids(pids);
+            Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, columnCount()-1, QModelIndex()));
+        }
     });
 
 
