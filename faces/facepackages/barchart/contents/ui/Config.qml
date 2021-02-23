@@ -61,16 +61,16 @@ Kirigami.FormLayout {
     QQC2.SpinBox {
         id: rangeFromSpin
         editable: true
-        from: -99999
-        to: 99999
+        from: Math.pow(-2, 31) + 1
+        to: Math.pow(2, 31) - 1
         Kirigami.FormData.label: i18n("From:")
         enabled: !rangeAutoCheckbox.checked
     }
     QQC2.SpinBox {
         id: rangeToSpin
         editable: true
-        from: -99999
-        to: 99999
+        from: Math.pow(-2, 31) + 1
+        to: Math.pow(2, 31) - 1
         Kirigami.FormData.label: i18n("To:")
         enabled: !rangeAutoCheckbox.checked
     }
