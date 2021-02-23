@@ -392,7 +392,7 @@ SensorFaceController::~SensorFaceController()
         // destruction.
         d->appearanceGroup.markAsClean();
         d->colorsGroup.markAsClean();
-        if (d->faceConfigLoader->isSaveNeeded()) {
+        if (d->faceConfigLoader && d->faceConfigLoader->isSaveNeeded()) {
             d->faceConfigLoader->load();
         }
     }
