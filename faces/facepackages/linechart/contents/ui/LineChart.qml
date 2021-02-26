@@ -69,7 +69,7 @@ Charts.LineChart {
 
     Connections {
         target: sensorsModel
-        enabled: yRange.stackedAuto
+        enabled: yRange.stackedAuto !== undefined ? yRange.stackedAuto : false
         function onColumnsInserted() {
             sensorsModel.stackedMaximum = sensorsModel.calcStackedMaximum()
         }
