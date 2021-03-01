@@ -93,7 +93,7 @@ Charts.LineChart {
             }
 
             interval: sensorsModel.ready ? sensorsModel.headerData(index, Qt.Horizontal, Sensors.SensorDataModel.UpdateInterval) : 0
-            maximumHistory: interval > 0 ? (chart.historyAmount * 1000) / interval : 100
+            maximumHistory: interval > 0 ? (chart.historyAmount * 1000) / interval : 0
             fillMode: Charts.HistoryProxySource.FillFromEnd
         }
         onObjectAdded: {
