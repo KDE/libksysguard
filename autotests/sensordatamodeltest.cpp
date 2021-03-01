@@ -20,6 +20,7 @@
 
 #include <QTest>
 #include <QAbstractItemModelTester>
+#include <QTransposeProxyModel>
 
 #include <QDBusInterface>
 
@@ -93,6 +94,28 @@ private Q_SLOTS:
         QCOMPARE(model.headerData(0, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByte);
         QCOMPARE(model.headerData(1, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByteRate);
         QCOMPARE(model.headerData(2, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitPercent);
+    }
+
+    void testTransposeProxy()
+    {
+        KSysGuard::SensorDataModel model;
+        QAbstractItemModelTester tester{&model};
+        Q_UNUSED(tester)
+
+        QTransposeProxyModel transpose;
+        transpose.setSourceModel(&model);
+
+        model.setSensors({
+            qs("cpu/all/usage"),
+            qs("memory/physical/used"),
+            qs("network/all/download"),
+            qs("disk/all/used")
+        });
+
+        QTRY_VERIFY(model.isReady());
+
+        QCOMPARE(model.columnCount(), transpose.rowCount());
+        QCOMPARE(model.rowCount(), transpose.columnCount());
     }
 };
 
