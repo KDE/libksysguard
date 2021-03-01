@@ -34,62 +34,65 @@ class SensorDataModelTest : public QObject
 private Q_SLOTS:
     void initTestCase()
     {
-        QDBusInterface interface{QStringLiteral("org.kde.kstats"), QStringLiteral("/")};
+        QDBusInterface interface{QStringLiteral("org.kde.ksystemstats"), QStringLiteral("/")};
         if (!interface.isValid()) {
-            QSKIP("KStats Deamon is not running");
+            QSKIP("KSystemStats Deamon is not running");
         }
     }
 
     void testModel()
     {
-        auto model = new KSysGuard::SensorDataModel();
-        auto tester = new QAbstractItemModelTester(model);
+        KSysGuard::SensorDataModel model;
+        QAbstractItemModelTester tester{&model};
+        Q_UNUSED(tester)
 
-        QVERIFY(model->columnCount() == 0);
+        QVERIFY(model.columnCount() == 0);
 
-        model->setSensors({
-            qs("cpu/system/TotalLoad"),
-            qs("mem/physical/allocated"),
-            qs("network/all/sentDataRate"),
-            qs("partitions/all/usedspace")
+        model.setSensors({
+            qs("cpu/all/usage"),
+            qs("memory/physical/used"),
+            qs("network/all/download"),
+            qs("disk/all/used")
         });
 
-        QTest::qWait(500); // Allow the model to communicate with the daemon.
+        QTRY_VERIFY(model.isReady());
 
-        QCOMPARE(model->columnCount(), 4);
+        QCOMPARE(model.columnCount(), 4);
 
         auto id = KSysGuard::SensorDataModel::SensorId;
         auto unit = KSysGuard::SensorDataModel::Unit;
 
-        QCOMPARE(model->headerData(0, Qt::Horizontal, id).toString(), qs("cpu/system/TotalLoad"));
-        QCOMPARE(model->headerData(1, Qt::Horizontal, id).toString(), qs("mem/physical/allocated"));
-        QCOMPARE(model->headerData(2, Qt::Horizontal, id).toString(), qs("network/all/sentDataRate"));
-        QCOMPARE(model->headerData(3, Qt::Horizontal, id).toString(), qs("partitions/all/usedspace"));
+        QCOMPARE(model.headerData(0, Qt::Horizontal, id).toString(), qs("cpu/all/usage"));
+        QCOMPARE(model.headerData(1, Qt::Horizontal, id).toString(), qs("memory/physical/used"));
+        QCOMPARE(model.headerData(2, Qt::Horizontal, id).toString(), qs("network/all/download"));
+        QCOMPARE(model.headerData(3, Qt::Horizontal, id).toString(), qs("disk/all/used"));
 
         // Verify that metadata is also loaded correctly. Not using names to sidestep translation issues.
-        QCOMPARE(model->headerData(0, Qt::Horizontal, unit).toInt(), KSysGuard::UnitPercent);
-        QCOMPARE(model->headerData(1, Qt::Horizontal, unit).toInt(), KSysGuard::UnitKiloByte);
-        QCOMPARE(model->headerData(2, Qt::Horizontal, unit).toInt(), KSysGuard::UnitKiloByteRate);
-        QCOMPARE(model->headerData(3, Qt::Horizontal, unit).toInt(), KSysGuard::UnitKiloByte);
+        QCOMPARE(model.headerData(0, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitPercent);
+        QCOMPARE(model.headerData(1, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByte);
+        QCOMPARE(model.headerData(2, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByteRate);
+        QCOMPARE(model.headerData(3, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByte);
 
-        model->setSensors({
-            qs("partitions/all/usedspace"),
-            qs("network/all/sentDataRate"),
-            qs("cpu/system/TotalLoad")
+        model.setSensors({
+            qs("disk/all/used"),
+            qs("network/all/download"),
+            qs("cpu/all/usage")
         });
 
-        QTest::qWait(500); // As above, give some time for communication.
+        QVERIFY(!model.isReady());
 
-        QCOMPARE(model->columnCount(), 3);
+        QTRY_VERIFY(model.isReady());
 
-        QCOMPARE(model->headerData(0, Qt::Horizontal, id).toString(), qs("partitions/all/usedspace"));
-        QCOMPARE(model->headerData(1, Qt::Horizontal, id).toString(), qs("network/all/sentDataRate"));
-        QCOMPARE(model->headerData(2, Qt::Horizontal, id).toString(), qs("cpu/system/TotalLoad"));
+        QCOMPARE(model.columnCount(), 3);
+
+        QCOMPARE(model.headerData(0, Qt::Horizontal, id).toString(), qs("disk/all/used"));
+        QCOMPARE(model.headerData(1, Qt::Horizontal, id).toString(), qs("network/all/download"));
+        QCOMPARE(model.headerData(2, Qt::Horizontal, id).toString(), qs("cpu/all/usage"));
 
         // Verify that metadata is also loaded correctly. Not using names to sidestep translation issues.
-        QCOMPARE(model->headerData(0, Qt::Horizontal, unit).toInt(), KSysGuard::UnitKiloByte);
-        QCOMPARE(model->headerData(1, Qt::Horizontal, unit).toInt(), KSysGuard::UnitKiloByteRate);
-        QCOMPARE(model->headerData(2, Qt::Horizontal, unit).toInt(), KSysGuard::UnitPercent);
+        QCOMPARE(model.headerData(0, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByte);
+        QCOMPARE(model.headerData(1, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByteRate);
+        QCOMPARE(model.headerData(2, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitPercent);
     }
 };
 

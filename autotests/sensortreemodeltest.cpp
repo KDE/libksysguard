@@ -31,22 +31,21 @@ class SensorTreeModelTest : public QObject
 private Q_SLOTS:
     void initTestCase()
     {
-        QDBusInterface interface{QStringLiteral("org.kde.kstats"), QStringLiteral("/")};
+        QDBusInterface interface{QStringLiteral("org.kde.ksystemstats"), QStringLiteral("/")};
         if (!interface.isValid()) {
-            QSKIP("KStats Deamon is not running");
+            QSKIP("KSystemStats Deamon is not running");
         }
     }
 
     void testModel()
     {
-        auto model = new KSysGuard::SensorTreeModel();
-        auto tester = new QAbstractItemModelTester(model);
+        KSysGuard::SensorTreeModel model;
+        QAbstractItemModelTester tester(&model);
+        Q_UNUSED(tester)
 
-        QVERIFY(model->rowCount() == 0);
+        QVERIFY(model.rowCount() == 0);
 
-        QTest::qWait(500);
-
-        QVERIFY(model->rowCount() > 0);
+        QTRY_VERIFY(model.rowCount() > 0);
     }
 };
 
