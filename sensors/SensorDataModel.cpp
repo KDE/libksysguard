@@ -136,6 +136,7 @@ QVariant SensorDataModel::data(const QModelIndex &index, int role) const
         if (!d->sensorColors.empty()) {
             return d->sensorColors.value(sensor);
         }
+        break;
     case UpdateInterval:
         //TODO: Make this dynamic once the backend supports it.
         return BackendUpdateInterval;
