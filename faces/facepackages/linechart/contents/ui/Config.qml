@@ -105,7 +105,7 @@ Kirigami.FormLayout {
         id: historySpin
         editable: true
         from: 0
-        to: 999999999
+        to: Math.pow(2, 31) - 1
         Kirigami.FormData.label: i18n("Amount of History to Keep:")
 
         textFromValue: function(value, locale) {
