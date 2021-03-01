@@ -38,6 +38,7 @@ Faces.SensorFace {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
+            controller: root.controller
         }
         QQC2.Label {
             id: label

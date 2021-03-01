@@ -33,29 +33,31 @@ Charts.LineChart {
     
     //property var sensors: root.controller.highPrioritySensorIds
 
+    property var controller
+
     readonly property alias sensorsModel: sensorsModel
-    readonly property int historyAmount: root.controller.faceConfiguration.historyAmount
+    readonly property int historyAmount: controller.faceConfiguration.historyAmount
 
     direction: Charts.XYChart.ZeroAtEnd
 
-    fillOpacity: root.controller.faceConfiguration.lineChartFillOpacity / 100
-    stacked: root.controller.faceConfiguration.lineChartStacked
-    smooth: root.controller.faceConfiguration.lineChartSmooth
+    fillOpacity: controller.faceConfiguration.lineChartFillOpacity / 100
+    stacked: controller.faceConfiguration.lineChartStacked
+    smooth: controller.faceConfiguration.lineChartSmooth
 
     //TODO: Have a central heading here too?
     //TODO: Have a plasmoid config value for line thickness?
 
     yRange {
-        readonly property bool stackedAuto: root.controller.faceConfiguration.rangeAutoY && root.controller.faceConfiguration.lineChartStacked
-        from: stackedAuto ? Math.min(sensorsModel.minimum, 0) :  root.controller.faceConfiguration.rangeFromY
-        to: stackedAuto ? sensorsModel.stackedMaximum :  root.controller.faceConfiguration.rangeToY
-        automatic: (root.controller.faceConfiguration.rangeAutoY && !root.controller.faceConfiguration.lineChartStacked)
+        readonly property bool stackedAuto: chart.controller.faceConfiguration.rangeAutoY && chart.controller.faceConfiguration.lineChartStacked
+        from: stackedAuto ? Math.min(sensorsModel.minimum, 0) : chart.controller.faceConfiguration.rangeFromY
+        to: stackedAuto ? sensorsModel.stackedMaximum : chart.controller.faceConfiguration.rangeToY
+        automatic: (chart.controller.faceConfiguration.rangeAutoY && !chart.controller.faceConfiguration.lineChartStacked)
             || stackedAuto && yRange.from == yRange.to
     }
 
     Sensors.SensorDataModel {
         id: sensorsModel
-        sensors: root.controller.highPrioritySensorIds
+        sensors: chart.controller.highPrioritySensorIds
         property double stackedMaximum: yRange.stackedAuto ? calcStackedMaximum() : 0
 
         function calcStackedMaximum() {

@@ -96,6 +96,8 @@ Faces.SensorFace {
                     : 3 * Kirigami.Units.gridUnit
                 Layout.preferredHeight: 5 * Kirigami.Units.gridUnit
 
+                controller: root.controller
+
                 Charts.GridLines {
                     id: horizontalLines
                     visible: showGridLines
