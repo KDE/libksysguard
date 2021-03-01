@@ -206,7 +206,7 @@ int SensorDataModel::columnCount(const QModelIndex &parent) const
         return 0;
     }
 
-    return d->sensors.count();
+    return d->sensorInfos.count();
 }
 
 qreal SensorDataModel::minimum() const
@@ -297,7 +297,7 @@ void SensorDataModel::setSensorColors(const QVariantMap &sensorColors)
 
 bool KSysGuard::SensorDataModel::isReady() const
 {
-    return d->sensors.size() == d->requestedSensors.size();
+    return d->sensors.size() == d->sensorInfos.size();
 }
 
 void SensorDataModel::addSensor(const QString &sensorId)
@@ -433,10 +433,6 @@ void SensorDataModel::Private::sensorsChanged()
     sensorInfos.clear();
 
     sensors = requestedSensors;
-
-    for (const auto& sensor : sensors) {
-        sensorInfos[sensor] = KSysGuard::SensorInfo();
-    }
 
     SensorDaemonInterface::instance()->subscribe(requestedSensors);
     SensorDaemonInterface::instance()->requestMetaData(requestedSensors);
