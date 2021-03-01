@@ -407,7 +407,10 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
 
     SensorDaemonInterface::instance()->requestValue(sensorId);
     emit sensorMetaDataChanged();
-    Q_EMIT readyChanged();
+
+    if (isReady()) {
+        Q_EMIT readyChanged();
+    }
 }
 
 void SensorDataModel::onValueChanged(const QString &sensorId, const QVariant &value)
