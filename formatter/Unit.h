@@ -87,7 +87,8 @@ enum Unit {
     UnitRpm,
     UnitVolt,
     UnitWatt,
-    UnitWattHour
+    UnitWattHour,
+    UnitAmpere
 };
 Q_ENUM_NS(Unit)
 

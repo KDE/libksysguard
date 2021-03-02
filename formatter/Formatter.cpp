@@ -77,6 +77,7 @@ static KLocalizedString unitFormat(Unit unit)
     const static KLocalizedString W = ki18nc("Watts unit symbol", "%1 W");
     const static KLocalizedString Wh = ki18nc("Watt-hours unit symbol", "%1 Wh");
     const static KLocalizedString rate = ki18nc("Rate unit symbol", "%1 s⁻¹");
+    const static KLocalizedString A = ki18nc("Ampere unit symbol", "%1 A");
     const static KLocalizedString unitless = ki18nc("Unitless", "%1");
 
     switch (unit) {
@@ -137,6 +138,8 @@ static KLocalizedString unitFormat(Unit unit)
         return W;
     case UnitWattHour:
         return Wh;
+    case UnitAmpere:
+        return A;
 
     default:
         return unitless;
@@ -168,6 +171,7 @@ static int unitOrder(Unit unit)
     case UnitPetaHertz:
     case UnitWatt:
     case UnitWattHour:
+    case UnitAmpere:
         return 1000;
 
     default:
@@ -307,6 +311,7 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
     case UnitVolt:
     case UnitWatt:
     case UnitSecond:
+    case UnitAmpere:
         return formatNumber(value, unit, targetPrefix, options);
 
     case UnitBootTimestamp:
@@ -381,6 +386,8 @@ QString Formatter::symbol(Unit unit)
         return i18nc("Watt-hours unit symbol", "Wh");
     case UnitRate:
         return i18nc("Rate unit symbol", "s⁻¹");
+    case UnitAmpere:
+        return i18nc("Ampere unit symbol", "A");
 
     default:
         return QString();
