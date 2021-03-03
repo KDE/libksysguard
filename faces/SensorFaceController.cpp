@@ -178,6 +178,7 @@ SensorFaceControllerPrivate::SensorFaceControllerPrivate()
             { QRegularExpression(QStringLiteral("nvidia/(.*)/processorClock$")), QStringLiteral("gpu/\\1/coreFrequency")},
             { QRegularExpression(QStringLiteral("nvidia/(.*)/(memory|sharedMemory)$")), QStringLiteral("gpu/\\1/usedVram")},
             { QRegularExpression(QStringLiteral("nvidia/(.*)/(encoderUsage|decoderUsage)$")), QStringLiteral("gpu/\\1/usage")},
+            { QRegularExpression(QStringLiteral("(uptime|system/uptime/uptime)$")), QStringLiteral("os/system/uptime")},
         };
     }
 }

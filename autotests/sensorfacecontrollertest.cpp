@@ -188,6 +188,16 @@ private Q_SLOTS:
             QStringLiteral("gpu/gpu6/usage"),
             QStringLiteral("gpu/gpu7/usage"),
         };
+
+        QTest::addRow("uptime")
+        << QJsonArray {
+            QStringLiteral("uptime"),
+            QStringLiteral("system/uptime/uptime"),
+        }
+        << QJsonArray {
+            QStringLiteral("os/system/uptime"),
+            QStringLiteral("os/system/uptime"),
+        };
     }
 
     void testSensorIdConversion()
