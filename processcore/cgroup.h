@@ -92,11 +92,6 @@ private:
      */
     CGroup(const QString &id);
 
-    /**
-     * Set the list of PIDs of this cgroup object.
-     */
-    void setPids(const QVector<pid_t> &pids);
-
     QScopedPointer<CGroupPrivate> d;
     friend class CGroupDataModel;
     friend class CGroupDataModelPrivate;
