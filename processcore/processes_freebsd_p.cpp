@@ -223,7 +223,7 @@ Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int p
 {
     if(priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
 	    priority = 0;
-    if(pid <= 0) return false; // check the parameters
+    if(pid <= 0) return Processes::InvalidPid; // check the parameters
     struct sched_param params;
     params.sched_priority = priority;
     bool success = false;
