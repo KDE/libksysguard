@@ -776,8 +776,9 @@ void SensorFaceController::reloadConfig()
 
     //Force to re-read all the values
     setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.textonly")));
-    titleChanged();
-    sensorColorsChanged();
+    Q_EMIT titleChanged();
+    Q_EMIT sensorColorsChanged();
+    Q_EMIT showTitleChanged();
 }
 
 void SensorFaceController::loadPreset(const QString &preset)
