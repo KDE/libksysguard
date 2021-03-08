@@ -46,7 +46,7 @@ public:
     QVector<int> listToVector(const QList<long long> &list);
     QVector<int> listToVector(const QVariantList &list);
 
-    QWidget *widget;
+    QWidget *widget = nullptr;
 };
 
 // Note: This instance is only to have access to the platform-specific code
