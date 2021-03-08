@@ -18,6 +18,11 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "Sensor.h"
+
+#include <optional>
+#include <chrono>
+
 #include <QEvent>
 
 #include "formatter/Formatter.h"
@@ -29,6 +34,7 @@
 
 
 using namespace KSysGuard;
+namespace chrono = std::chrono;
 
 class Q_DECL_HIDDEN Sensor::Private
 {
@@ -45,6 +51,9 @@ public:
     QString id;
 
     bool enabled = true;
+
+    std::optional<int> updateRateLimit;
+    chrono::steady_clock::time_point lastUpdate;
 };
 
 Sensor::Sensor(QObject *parent)
@@ -211,6 +220,37 @@ uint Sensor::updateInterval() const
     return BackendUpdateInterval;
 }
 
+int Sensor::updateRateLimit() const
+{
+    return d->updateRateLimit.value_or(-1);
+}
+
+void Sensor::setUpdateRateLimit(int newUpdateRateLimit)
+{
+    // An update rate limit of 0 or less makes no sense, so treat it as clearing
+    // the limit.
+    if (newUpdateRateLimit <= 0) {
+        if (!d->updateRateLimit) {
+            return;
+        }
+
+        d->updateRateLimit.reset();
+    } else {
+        if (d->updateRateLimit && d->updateRateLimit.value() == newUpdateRateLimit) {
+            return;
+        }
+
+        d->updateRateLimit = newUpdateRateLimit;
+    }
+    d->lastUpdate = chrono::steady_clock::now();
+    Q_EMIT updateRateLimitChanged();
+}
+
+void KSysGuard::Sensor::resetUpdateRateLimit()
+{
+    setUpdateRateLimit(-1);
+}
+
 void Sensor::classBegin()
 {
     d->usedByQml = true;
@@ -247,6 +287,16 @@ void Sensor::onValueChanged(const QString &sensorId, const QVariant &value)
 {
     if (sensorId != d->id || !enabled()) {
         return;
+    }
+
+    if (d->updateRateLimit) {
+        auto updateRateLimit = chrono::steady_clock::duration(chrono::milliseconds(d->updateRateLimit.value()));
+        auto now = chrono::steady_clock::now();
+        if (now - d->lastUpdate < updateRateLimit) {
+            return;
+        } else {
+            d->lastUpdate = now;
+        }
     }
 
     d->value = value;

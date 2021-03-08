@@ -70,6 +70,15 @@ class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlPa
      * Used by the model to provide data for the Color role if set.
      */
     Q_PROPERTY(QVariantMap sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
+    /**
+     * The minimum time between updates, in milliseconds.
+     *
+     * If this is set to a positive non-zero value, at least this many
+     * milliseconds need to elapse before another value update happens, otherwise
+     * it is ignored. This effectively rate-limits the updates and will prevent
+     * value updates.
+     */
+    Q_PROPERTY(int updateRateLimit READ updateRateLimit WRITE setUpdateRateLimit NOTIFY updateRateLimitChanged RESET resetUpdateRateLimit)
 
 public:
     /**
@@ -118,6 +127,11 @@ public:
     QVariantMap sensorColors() const;
     void setSensorColors(const QVariantMap &sensorColors);
     Q_SIGNAL void sensorColorsChanged();
+
+    int updateRateLimit() const;
+    void setUpdateRateLimit(int newUpdateRateLimit);
+    void resetUpdateRateLimit();
+    Q_SIGNAL void updateRateLimitChanged();
 
     bool isReady() const;
     Q_SIGNAL void readyChanged();

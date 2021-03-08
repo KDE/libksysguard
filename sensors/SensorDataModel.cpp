@@ -21,6 +21,7 @@
 #include "SensorDataModel.h"
 
 #include <optional>
+#include <chrono>
 
 #include <QMetaEnum>
 
@@ -31,6 +32,8 @@
 #include "sensors_logging.h"
 
 using namespace KSysGuard;
+
+namespace chrono = std::chrono;
 
 class Q_DECL_HIDDEN SensorDataModel::Private
 {
@@ -60,6 +63,9 @@ public:
 
     std::optional<qreal> minimum;
     std::optional<qreal> maximum;
+
+    std::optional<int> updateRateLimit;
+    QHash<int, std::chrono::steady_clock::time_point> lastUpdateTimes;
 
 private:
     SensorDataModel *q;
@@ -297,6 +303,37 @@ void SensorDataModel::setSensorColors(const QVariantMap &sensorColors)
     Q_EMIT dataChanged(index(0,0), index(rowCount() - 1, columnCount() - 1), {Color});
 }
 
+int SensorDataModel::updateRateLimit() const
+{
+    return d->updateRateLimit.value_or(-1);
+}
+
+void SensorDataModel::setUpdateRateLimit(int newUpdateRateLimit)
+{
+    // An update rate limit of 0 or less makes no sense, so treat it as clearing
+    // the limit.
+    if (newUpdateRateLimit <= 0) {
+        if (!d->updateRateLimit) {
+            return;
+        }
+
+        d->updateRateLimit.reset();
+    } else {
+        if (d->updateRateLimit && d->updateRateLimit.value() == newUpdateRateLimit) {
+            return;
+        }
+
+        d->updateRateLimit = newUpdateRateLimit;
+    }
+    d->lastUpdateTimes.clear();
+    Q_EMIT updateRateLimitChanged();
+}
+
+void KSysGuard::SensorDataModel::resetUpdateRateLimit()
+{
+    setUpdateRateLimit(-1);
+}
+
 bool KSysGuard::SensorDataModel::isReady() const
 {
     return d->sensors.size() == d->sensorInfos.size();
@@ -429,6 +466,16 @@ void SensorDataModel::onValueChanged(const QString &sensorId, const QVariant &va
         return;
     }
 
+    if (d->updateRateLimit) {
+        auto updateRateLimit = chrono::steady_clock::duration(chrono::milliseconds(d->updateRateLimit.value()));
+        auto now = chrono::steady_clock::now();
+        if (d->lastUpdateTimes.contains(column) && now - d->lastUpdateTimes.value(column) < updateRateLimit) {
+            return;
+        } else {
+            d->lastUpdateTimes[column] = now;
+        }
+    }
+
     d->sensorData[sensorId] = value;
     Q_EMIT dataChanged(index(0, column), index(0, column), {Qt::DisplayRole, Value, FormattedValue});
 }
@@ -442,6 +489,7 @@ void SensorDataModel::Private::sensorsChanged()
     sensors.clear();
     sensorData.clear();
     sensorInfos.clear();
+    lastUpdateTimes.clear();
 
     sensors = requestedSensors;
 

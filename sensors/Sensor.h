@@ -119,6 +119,15 @@ class SENSORS_EXPORT Sensor : public QObject, public QQmlParserStatus
      *       that we can support per-sensor update rates.
      */
     Q_PROPERTY(uint updateInterval READ updateInterval NOTIFY updateIntervalChanged)
+    /**
+     * The minimum time between updates, in milliseconds.
+     *
+     * If this is set to a positive non-zero value, at least this many
+     * milliseconds need to elapse before another value update happens, otherwise
+     * it is ignored. This effectively rate-limits the updates and will prevent
+     * value updates.
+     */
+    Q_PROPERTY(int updateRateLimit READ updateRateLimit WRITE setUpdateRateLimit NOTIFY updateRateLimitChanged RESET resetUpdateRateLimit)
 
 public:
     /**
@@ -186,6 +195,11 @@ public:
 
     uint updateInterval() const;
     Q_SIGNAL void updateIntervalChanged();
+
+    int updateRateLimit() const;
+    void setUpdateRateLimit(int newUpdateRateLimit);
+    void resetUpdateRateLimit();
+    Q_SIGNAL void updateRateLimitChanged();
 
     void classBegin() override;
     void componentComplete() override;
