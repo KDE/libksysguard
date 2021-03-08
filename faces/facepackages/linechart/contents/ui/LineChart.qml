@@ -31,8 +31,6 @@ import org.kde.quickcharts 1.0 as Charts
 Charts.LineChart {
     id: chart
     
-    //property var sensors: root.controller.highPrioritySensorIds
-
     property var controller
 
     readonly property alias sensorsModel: sensorsModel
@@ -58,6 +56,8 @@ Charts.LineChart {
     Sensors.SensorDataModel {
         id: sensorsModel
         sensors: chart.controller.highPrioritySensorIds
+        updateRateLimit: chart.controller.updateRateLimit
+
         property double stackedMaximum: yRange.stackedAuto ? calcStackedMaximum() : 0
 
         function calcStackedMaximum() {
@@ -86,15 +86,34 @@ Charts.LineChart {
     Instantiator {
         model: sensorsModel.sensors
         delegate: Charts.HistoryProxySource {
+            id: history
+
             source: Charts.ModelSource {
                 model: sensorsModel
                 column: index
                 roleName: "Value"
             }
 
-            interval: sensorsModel.ready ? sensorsModel.headerData(index, Qt.Horizontal, Sensors.SensorDataModel.UpdateInterval) : 0
+            interval: {
+                if (chart.controller.updateRateLimit > 0) {
+                    return chart.controller.updateRateLimit
+                }
+
+                if (sensorsModel.ready) {
+                    return sensorsModel.headerData(index, Qt.Horizontal, Sensors.SensorDataModel.UpdateInterval)
+                }
+
+                return 0
+            }
             maximumHistory: interval > 0 ? (chart.historyAmount * 1000) / interval : 0
             fillMode: Charts.HistoryProxySource.FillFromEnd
+
+            property var connection: Connections {
+                target: chart.controller
+                function onUpdateRateLimitChanged() {
+                    history.clear()
+                }
+            }
         }
         onObjectAdded: {
             chart.insertValueSource(index, object)

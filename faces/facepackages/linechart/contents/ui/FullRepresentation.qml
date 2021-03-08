@@ -127,6 +127,7 @@ Faces.SensorFace {
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
             sensorIds: root.showLegend ? root.controller.lowPrioritySensorIds : []
+            updateRateLimit: root.controller.updateRateLimit
         }
     }
 }
