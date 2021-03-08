@@ -58,6 +58,8 @@ ChartsControls.Legend {
      */
     property var colorSource
 
+    property int updateRateLimit
+
     Layout.maximumHeight: implicitHeight
     Layout.maximumWidth: parent.width
 
@@ -124,6 +126,7 @@ ChartsControls.Legend {
             Sensor {
                 id: sensor
                 sensorId: modelData
+                updateRateLimit: legend.updateRateLimit
             }
         }
     }
