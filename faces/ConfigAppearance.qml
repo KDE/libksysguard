@@ -41,6 +41,7 @@ Kirigami.FormLayout {
         controller.title = cfg_title;
         controller.faceId = cfg_chartFace;
         controller.showTitle = cfg_showTitle
+        controller.updateRateLimit = cfg_updateRateLimit
 
         var preset = pendingPreset;
         pendingPreset = "";
@@ -54,10 +55,12 @@ Kirigami.FormLayout {
     property alias cfg_title: titleField.text
     property alias cfg_showTitle: showTitleCheckbox.checked
     property string cfg_chartFace
+    property alias cfg_updateRateLimit: updateRateLimitSpinBox.value
 
     onCfg_titleChanged: configurationChanged();
     onCfg_showTitleChanged: configurationChanged()
     onCfg_chartFaceChanged: configurationChanged();
+    onCfg_updateRateLimitChanged: configurationChanged();
 
     // config keys of the selected preset to be applied on save
     property string pendingPreset
@@ -66,6 +69,7 @@ Kirigami.FormLayout {
         cfg_title = controller.title;
         cfg_chartFace = controller.faceId;
         cfg_showTitle = controller.showTitle
+        cfg_updateRateLimit = controller.updateRateLimit
     }
 
     Charts.ColorGradientSource {
@@ -179,6 +183,41 @@ Kirigami.FormLayout {
             text: i18nd("KSysGuardSensorFaces", "Get New Display Styles...")
             configFile: "systemmonitor-faces.knsrc"
             onChangedEntriesChanged: controller.availableFacesModel.reload();
+        }
+    }
+
+    QQC2.SpinBox {
+        id: updateRateLimitSpinBox
+
+        Kirigami.FormData.label: i18nd("KSysGuardSensorFaces", "Minimum Time Between Updates:")
+
+        from: 0
+        to: 600000
+        stepSize: 500
+        editable: true
+
+        textFromValue: function(value, locale) {
+            if (value <= 0) {
+                return i18nd("KSysGuardSensorFaces", "No Limit");
+            } else {
+                var seconds = value / 1000;
+                if (seconds == 1) { // Manual plural handling because i18ndp doesn't handle floats :(
+                    return i18nd("KSysGuardSensorFaces", "1 second");
+                } else {
+                    return i18nd("KSysGuardSensorFaces", "%1 seconds", seconds);
+                }
+            }
+        }
+        valueFromText: function(value, locale) {
+            // Don't use fromLocaleString here since it will error out on extra
+            // characters like the (potentially translated) seconds that gets
+            // added above. Instead parseInt ignores non-numeric characters.
+            var v = parseInt(value)
+            if (isNaN(v)) {
+                return 0;
+            } else {
+                return v * 1000;
+            }
         }
     }
 }
