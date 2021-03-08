@@ -40,6 +40,7 @@ Faces.SensorFace {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
+            updateRateLimit: root.controller.updateRateLimit
         }
         QQC2.Label {
             id: label

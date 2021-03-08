@@ -38,6 +38,8 @@ ChartControls.PieChartControl {
     property alias sensors: sensorsModel.sensors
     property alias sensorsModel: sensorsModel
 
+    property int updateRateLimit
+
     Layout.minimumHeight: root.formFactor == Faces.SensorFace.Vertical ? width : Kirigami.Units.gridUnit
 
     leftPadding: 0
@@ -61,6 +63,7 @@ ChartControls.PieChartControl {
         model: Sensors.SensorDataModel {
             id: sensorsModel
             sensors: root.controller.highPrioritySensorIds
+            updateRateLimit: chart.updateRateLimit
         }
         roleName: "Value"
         indexColumns: true
@@ -80,6 +83,7 @@ ChartControls.PieChartControl {
     Sensors.Sensor {
         id: sensor
         sensorId: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
+        updateRateLimit: chart.updateRateLimit
     }
 
     UsedTotalDisplay {
@@ -89,6 +93,7 @@ ChartControls.PieChartControl {
         totalSensor: root.controller.totalSensors.length > 1 ? root.controller.totalSensors[1] : ""
 
         contentMargin: chart.chart.thickness
+        updateRateLimit: chart.updateRateLimit
     }
 }
 

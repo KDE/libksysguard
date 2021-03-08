@@ -65,6 +65,7 @@ Faces.SensorFace {
                 : 5 * Kirigami.Units.gridUnit
             Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
             Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
+            updateRateLimit: root.controller.updateRateLimit
         }
 
         Faces.ExtendedLegend {
@@ -78,6 +79,7 @@ Faces.SensorFace {
             chart: compactRepresentation.chart
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
             sensorIds: root.showLegend ? root.controller.lowPrioritySensorIds : []
+            updateRateLimit: root.controller.updateRateLimit
         }
     }
 }

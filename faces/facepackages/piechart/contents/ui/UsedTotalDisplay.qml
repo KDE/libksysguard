@@ -32,6 +32,8 @@ Item {
     property alias usedSensor: usedSensorObject.sensorId
     property alias totalSensor: totalSensorObject.sensorId
 
+    property int updateRateLimit
+
     property real contentMargin: 10
 
     ColumnLayout {
@@ -100,10 +102,12 @@ Item {
 
         Sensors.Sensor {
             id: usedSensorObject
+            updateRateLimit: root.updateRateLimit
         }
 
         Sensors.Sensor {
             id: totalSensorObject
+            updateRateLimit: root.updateRateLimit
         }
     }
 }
