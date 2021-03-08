@@ -37,6 +37,8 @@ Charts.BarChart {
 
     readonly property alias sensorsModel: sensorsModel
 
+    property int updateRateLimit
+
     stacked: root.controller.faceConfiguration.barChartStacked
 
     spacing: Math.round(width / 20)
@@ -50,6 +52,7 @@ Charts.BarChart {
     Sensors.SensorDataModel {
         id: sensorsModel
         sensors: root.controller.highPrioritySensorIds
+        updateRateLimit: chart.updateRateLimit
     }
 
     Instantiator {

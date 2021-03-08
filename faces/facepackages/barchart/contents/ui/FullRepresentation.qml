@@ -98,6 +98,8 @@ Faces.SensorFace {
                     : 5 * Kirigami.Units.gridUnit
                 Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
 
+                updateRateLimit: root.controller.updateRateLimit
+
                 Charts.GridLines {
                     id: horizontalLines
                     visible: showGridLines
@@ -126,6 +128,7 @@ Faces.SensorFace {
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
             sensorIds: root.showLegend ? root.controller.lowPrioritySensorIds : []
+            updateRateLimit: root.controller.updateRateLimit
         }
     }
 }
