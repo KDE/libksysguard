@@ -50,6 +50,7 @@ Faces.SensorFace {
                 Sensors.Sensor {
                     id: sensor
                     sensorId: modelData
+                    updateRateLimit: root.controller.updateRateLimit
                 }
             }
         }
