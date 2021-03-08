@@ -162,6 +162,10 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
      * The properties of the preset can be accessed via the `config` role.
      */
     Q_PROPERTY(QAbstractItemModel *availablePresetsModel READ availablePresetsModel CONSTANT)
+    /**
+     * The minimum time that needs to elapse, in milliseconds, between updates of the face.
+     */
+    Q_PROPERTY(int updateRateLimit READ updateRateLimit WRITE setUpdateRateLimit NOTIFY updateRateLimitChanged)
 
 public:
     /**
@@ -206,6 +210,9 @@ public:
 
     QVariantMap sensorColors() const;
     void setSensorColors(const QVariantMap &colors);
+
+    int updateRateLimit() const;
+    void setUpdateRateLimit(int limit);
 
     // from face config, immutable by the user
     QString name() const;
@@ -261,6 +268,7 @@ Q_SIGNALS:
     void lowPrioritySensorIdsChanged();
     void sensorsChanged();
     void sensorColorsChanged();
+    void updateRateLimitChanged();
 
 private:
     const std::unique_ptr<SensorFaceControllerPrivate> d;

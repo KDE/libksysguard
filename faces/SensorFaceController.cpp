@@ -558,6 +558,23 @@ void SensorFaceController::setLowPrioritySensorIds(const QJsonArray &lowPriority
     });
 }
 
+int SensorFaceController::updateRateLimit() const
+{
+    return d->appearanceGroup.readEntry<int>(QStringLiteral("updateRateLimit"), 0);
+}
+
+void SensorFaceController::setUpdateRateLimit(int limit)
+{
+    if (limit == updateRateLimit()) {
+        return;
+    }
+
+    d->appearanceGroup.writeEntry("updateRateLimit", limit);
+    d->syncTimer->start();
+
+    Q_EMIT updateRateLimitChanged();
+}
+
 // from face config, immutable by the user
 QString SensorFaceController::name() const
 {
@@ -782,6 +799,7 @@ void SensorFaceController::reloadConfig()
     Q_EMIT titleChanged();
     Q_EMIT sensorColorsChanged();
     Q_EMIT showTitleChanged();
+    Q_EMIT updateRateLimitChanged();
 }
 
 void SensorFaceController::loadPreset(const QString &preset)
