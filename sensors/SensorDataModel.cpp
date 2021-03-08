@@ -401,6 +401,12 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
     }
 
     // Otherwise, it's a new sensor that was added
+
+    // Ensure we do not insert columns that are out of range.
+    while (d->sensorInfos.count() + 1 <= column && column > 0) {
+        column--;
+    }
+
     beginInsertColumns(QModelIndex{}, column, column);
     d->sensorInfos[sensorId] = info;
     d->sensorData[sensorId] = QVariant{};
