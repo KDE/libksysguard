@@ -63,6 +63,7 @@ Faces.SensorFace {
             showGroups: root.controller.faceConfiguration.groupByTotal
             colorSource: root.colorSource
             totalHeight: root.height
+            updateRateLimit: root.controller.updateRateLimit
         }
 
         Item { Layout.fillWidth: true; Layout.fillHeight: true }

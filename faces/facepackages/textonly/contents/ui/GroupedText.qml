@@ -35,6 +35,7 @@ ColumnLayout {
     property bool showGroups: false
     property var colorSource
     property real totalHeight
+    property int updateRateLimit
 
     Repeater {
         model: root.showGroups ? root.totalSensorIds : 1
@@ -102,6 +103,7 @@ ColumnLayout {
             Sensors.Sensor {
                 id: groupSensor
                 sensorId: root.showGroups ? modelData : ""
+                updateRateLimit: root.updateRateLimit
             }
         }
     }
@@ -112,7 +114,7 @@ ColumnLayout {
     Instantiator {
         model: root.highPrioritySensorIds
 
-        Sensors.Sensor { sensorId: modelData }
+        Sensors.Sensor { sensorId: modelData; updateRateLimit: root.updateRateLimit }
 
         onObjectAdded: {
             root.highPrioritySensors.push(object)
@@ -127,7 +129,7 @@ ColumnLayout {
     Instantiator {
         model: root.lowPrioritySensorIds
 
-        Sensors.Sensor { sensorId: modelData }
+        Sensors.Sensor { sensorId: modelData; updateRateLimit: root.updateRateLimit }
 
         onObjectAdded: {
             root.lowPrioritySensors.push(object)
