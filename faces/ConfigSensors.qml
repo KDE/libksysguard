@@ -44,8 +44,7 @@ ColumnLayout {
 
     property var cfg_totalSensors: []
     property var cfg_highPrioritySensorIds: []
-    property var cfg_sensorColors: {}
-
+    property var cfg_sensorColors: new Object()
     property var cfg_lowPrioritySensorIds: []
 
     onCfg_totalSensorsChanged: configurationChanged();
@@ -55,7 +54,17 @@ ColumnLayout {
 
     property Faces.SensorFaceController controller
 
-    function saveConfig() {
+    // In QML someArray = someOtherArray will always trigger a changed signal
+    // even if the two arrays are the same
+    // to avoid that we implement an explicit check
+    function arrayCompare(array1, array2) {
+      if (array1.length !== array2.length) {
+          return false;
+      }
+      return array1.every(function(value, index) { return value === array2[index]});
+  }
+
+  function saveConfig() {
         controller.totalSensors = cfg_totalSensors;
         controller.highPrioritySensorIds = cfg_highPrioritySensorIds;
         controller.sensorColors = cfg_sensorColors;
@@ -63,16 +72,24 @@ ColumnLayout {
     }
 
     function loadConfig() {
-        cfg_totalSensors = controller.totalSensors;
-        totalChoice.selected = controller.totalSensors;
+        if (!arrayCompare(cfg_totalSensors, controller.totalSensors)) {
+            cfg_totalSensors = controller.totalSensors;
+            totalChoice.selected = controller.totalSensors;
+        }
 
-        cfg_highPrioritySensorIds = controller.highPrioritySensorIds;
-        highPriorityChoice.selected = controller.highPrioritySensorIds;
+        if (!arrayCompare(cfg_highPrioritySensorIds, controller.highPrioritySensorIds)) {
+            cfg_highPrioritySensorIds = controller.highPrioritySensorIds;
+            highPriorityChoice.selected = controller.highPrioritySensorIds;
+        }
 
-        cfg_sensorColors = controller.sensorColors;
+        if(JSON.stringify(cfg_sensorColors) != JSON.stringify(controller.sensorColors)) {
+            cfg_sensorColors = controller.sensorColors;
+        }
 
-        cfg_lowPrioritySensorIds = controller.lowPrioritySensorIds;
-        lowPriorityChoice.selected = controller.lowPrioritySensorIds;
+        if (!arrayCompare(cfg_lowPrioritySensorIds, controller.lowPrioritySensorIds)) {
+            cfg_lowPrioritySensorIds = controller.lowPrioritySensorIds;
+            lowPriorityChoice.selected = controller.lowPrioritySensorIds;
+        }
     }
 
     // When the ui is open in systemsettings and the page is switched around,
@@ -108,7 +125,7 @@ ColumnLayout {
 
         currentColor: destinationSensor != "" ? controller.sensorColors[destinationSensor] : ""
         onAccepted: {
-            cfg_sensorColors[destinationSensor] = color
+            cfg_sensorColors[destinationSensor] = color;
             root.cfg_sensorColorsChanged();
         }
     }
