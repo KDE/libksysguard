@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 Vlad Zahorodnii <vladzzag@gmail.com>
+    Copyright (C) 2019 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
     Copyright (C) 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
 
     This library is free software; you can redistribute it and/or
