@@ -292,6 +292,7 @@ void SensorDataModel::setSensorColors(const QVariantMap &sensorColors)
     }
     d->sensorColors = sensorColors;
     Q_EMIT sensorColorsChanged();
+    Q_EMIT dataChanged(index(0,0), index(rowCount() - 1, columnCount() - 1), {Color});
 }
 
 bool KSysGuard::SensorDataModel::isReady() const
