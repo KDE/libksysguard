@@ -125,7 +125,7 @@ ColumnLayout {
 
         currentColor: destinationSensor != "" ? controller.sensorColors[destinationSensor] : ""
         onAccepted: {
-            cfg_sensorColors[destinationSensor] = color;
+            cfg_sensorColors[destinationSensor] = Qt.rgba(color.r, color.g, color.b, color.a);
             root.cfg_sensorColorsChanged();
         }
     }
