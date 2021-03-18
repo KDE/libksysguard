@@ -297,37 +297,41 @@ Control {
 
         contentItem: ColumnLayout {
             spacing: 0
-            RowLayout {
+            ToolBar {
                 Layout.fillWidth: true
                 Layout.minimumHeight: implicitHeight
                 Layout.maximumHeight: implicitHeight
-                Layout.leftMargin: Kirigami.Units.smallSpacing
-                Layout.topMargin: Kirigami.Units.smallSpacing
-                Layout.rightMargin: Kirigami.Units.smallSpacing
-                Layout.bottomMargin: Kirigami.Units.smallSpacing
+                contentItem: ColumnLayout {
 
-                ToolButton {
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: height
-                    icon.name: "go-previous"
-                    text: i18nc("@action:button", "Back")
-                    display: Button.IconOnly
-                    visible: delegateModel.rootIndex.valid
-                    onClicked: delegateModel.rootIndex = delegateModel.parentModelIndex()
-                }
+                    Kirigami.SearchField {
+                        id: searchField
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        placeholderText: i18n("Search...")
+                        onTextEdited: listView.searchString = text
+                        onAccepted: listView.searchString = text
+                        KeyNavigation.down: listView
+                    }
 
-                TextField {
-                    id: searchField
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    placeholderText: i18n("Search...")
-                    onTextEdited: listView.searchString = text
-                    KeyNavigation.down: listView
+                    RowLayout {
+                        visible: delegateModel.rootIndex.valid
+                        Layout.maximumHeight: visible ? implicitHeight : 0
+                        ToolButton {
+                            Layout.fillHeight: true
+                            Layout.preferredWidth: height
+                            icon.name: "go-previous"
+                            text: i18nc("@action:button", "Back")
+                            display: Button.IconOnly
+                            onClicked: delegateModel.rootIndex = delegateModel.parentModelIndex()
+                        }
+                        Kirigami.Heading {
+                            level: 2
+                            text: delegateModel.rootIndex.model ? delegateModel.rootIndex.model.data(delegateModel.rootIndex) : ""
+                        }
+                    }
                 }
             }
-            Kirigami.Separator {
-                Layout.fillWidth: true
-            }
+
             ScrollView {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -343,6 +347,7 @@ Control {
                     property string searchString
 
                     implicitHeight: contentHeight
+
                     model: DelegateModel {
                         id: delegateModel
 
@@ -352,6 +357,13 @@ Control {
                             text: model.display
                             reserveSpaceForIcon: false
 
+                            Kirigami.Icon {
+                                source: "go-next-symbolic"
+                                Layout.fillHeight: true
+                                Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                                // Still visible for correct size hints calculation
+                                opacity: model.SensorId.length == 0
+                            }
                             onClicked: {
                                 if (model.SensorId.length == 0) {
                                     delegateModel.rootIndex = delegateModel.modelIndex(index);
