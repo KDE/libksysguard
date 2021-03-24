@@ -122,7 +122,7 @@ Faces.SensorFace {
             Layout.minimumHeight: root.formFactor === Faces.SensorFace.Horizontal
                 || root.formFactor === Faces.SensorFace.Vertical
                 ? implicitHeight
-                : -1
+                : Kirigami.Units.gridUnit
             visible: root.showLegend
             chart: compactRepresentation
             sourceModel: root.showLegend ? compactRepresentation.sensorsModel : null
