@@ -79,6 +79,7 @@ Kirigami.FormLayout {
         parent: root
         ListView {
             implicitWidth: Kirigami.Units.gridUnit * 15
+            focus: true
             model: controller.availablePresetsModel
             delegate: Kirigami.SwipeListItem {
                 contentItem: QQC2.Label {
@@ -99,6 +100,14 @@ Kirigami.FormLayout {
 
                     root.configurationChanged();
                     presetSheet.close();
+                }
+
+                // shortcut overrides can only be on the item with focus
+                Keys.onShortcutOverride: {
+                    if (event.key === Qt.Key_Escape) {
+                        event.accepted = true;
+                        root.close();
+                    }
                 }
             }
         }
