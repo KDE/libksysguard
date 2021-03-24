@@ -88,7 +88,7 @@ ChartControls.PieChartControl {
         usedSensor: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
         totalSensor: root.controller.totalSensors.length > 1 ? root.controller.totalSensors[1] : ""
 
-        contentMargin: chart.thickness
+        contentMargin: chart.chart.thickness
     }
 }
 
