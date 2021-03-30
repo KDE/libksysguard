@@ -26,8 +26,9 @@
 
 #include "Formatter.h"
 #include "SensorDaemonInterface_p.h"
-#include "SensorInfo_p.h"
 #include "sensors_logging.h"
+
+#include "../systemstats/SensorInfo.h"
 
 using namespace KSysGuard;
 

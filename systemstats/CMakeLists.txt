@@ -10,6 +10,14 @@ set(systemstats_SRCS
 )
 
 set(systemstats_HDRS
+    AggregateSensor.h
+    SensorObject.h
+    SensorContainer.h
+    SensorPlugin.h
+    SensorProperty.h
+    SysFsSensor.h
+    SysctlSensor.h
+    SensorInfo.h
 )
 
 add_library(SystemStats ${systemstats_SRCS})

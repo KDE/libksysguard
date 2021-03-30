@@ -22,9 +22,10 @@
 
 #include "Sensor.h"
 #include "SensorDaemonInterface_p.h"
-#include "SensorInfo_p.h"
 #include "formatter/Formatter.h"
 #include "SensorQuery.h"
+
+#include "../systemstats/SensorInfo.h"
 
 using namespace KSysGuard;
 

@@ -102,7 +102,7 @@ void SensorDaemonInterface::requestValue(const QString &sensorId)
 
         const auto allData = reply.value();
         for (auto data : allData) {
-            Q_EMIT valueChanged(data.attribute, data.payload);
+            Q_EMIT valueChanged(data.sensorProperty, data.payload);
         }
     });
 }
@@ -149,6 +149,6 @@ void SensorDaemonInterface::onMetaDataChanged(const QHash<QString, SensorInfo> &
 void SensorDaemonInterface::onValueChanged(const SensorDataList &values)
 {
     for (auto entry : values) {
-        Q_EMIT valueChanged(entry.attribute, entry.payload);
+        Q_EMIT valueChanged(entry.sensorProperty, entry.payload);
     }
 }

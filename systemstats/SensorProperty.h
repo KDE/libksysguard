@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include "types.h"
 #include <QObject>
 
+#include "SensorInfo.h"
 #include "systemstats_export.h"
 
 namespace KSysGuard

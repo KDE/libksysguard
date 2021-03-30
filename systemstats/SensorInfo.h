@@ -16,32 +16,36 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
+
 #pragma once
 
+#include <QDBusArgument>
 #include <QDateTime>
 #include <QDebug>
 #include <QObject>
 #include <QVariant>
 
-#include <QDBusArgument>
+#include "formatter/Unit.h"
 
-#include <ksysguard/formatter/Unit.h>
+namespace KSysGuard
+{
 
-//Data that is static for the lifespan of the sensor
-class SensorInfo
+constexpr uint BackendUpdateInterval = 500;
+
+// Data that is static for the lifespan of the sensor
+class Q_DECL_EXPORT SensorInfo
 {
 public:
     SensorInfo() = default;
-    QString name; //translated?
-    QString shortName;
-    QString description; // translated
+
+    QString name;        // Translated name of the sensor.
+    QString shortName;   // Shorter translated name of the sensor, to use when space is constrained.
+    QString description; // Translated description of the sensor.
     QVariant::Type variantType = QVariant::Invalid;
-    KSysGuard::Unit unit = KSysGuard::UnitInvalid; //Both a format hint and implies data type (i.e double/string)
+    KSysGuard::Unit unit = KSysGuard::UnitInvalid; // Both a format hint and implies data type (i.e double/string)
     qreal min = 0;
     qreal max = 0;
 };
-Q_DECLARE_METATYPE(SensorInfo);
-// this stuff could come from .desktop files (for the DBus case) or hardcoded (eg. for example nvidia-smi case) or come from current "ksysgrd monitors"
 
 class Q_DECL_EXPORT SensorData
 {
@@ -55,12 +59,9 @@ public:
     QString sensorProperty;
     QVariant payload;
 };
-Q_DECLARE_METATYPE(SensorData);
 
 typedef QHash<QString, SensorInfo> SensorInfoMap;
 typedef QVector<SensorData> SensorDataList;
-
-Q_DECLARE_METATYPE(SensorDataList);
 
 inline QDBusArgument &operator<<(QDBusArgument &argument, const SensorInfo &s)
 {
@@ -110,3 +111,9 @@ inline const QDBusArgument &operator>>(const QDBusArgument &argument, SensorData
     argument.endStructure();
     return argument;
 }
+
+} // namespace KSysGuard
+
+Q_DECLARE_METATYPE(KSysGuard::SensorInfo);
+Q_DECLARE_METATYPE(KSysGuard::SensorData);
+Q_DECLARE_METATYPE(KSysGuard::SensorDataList);

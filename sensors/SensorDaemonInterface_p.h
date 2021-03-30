@@ -19,9 +19,10 @@
 
 #pragma once
 
-#include "SensorInfo_p.h"
-#include <QObject>
 #include <memory>
+#include <QObject>
+
+#include "../systemstats/SensorInfo.h"
 
 class QDBusPendingCallWatcher;
 
