@@ -20,6 +20,8 @@
 #include "SensorProperty.h"
 #include "SensorObject.h"
 
+using namespace KSysGuard;
+
 SensorProperty::SensorProperty(const QString &id, SensorObject *parent)
     : SensorProperty(id, QString(), parent)
 {

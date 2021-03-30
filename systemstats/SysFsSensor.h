@@ -22,11 +22,15 @@
 #include <QObject>
 
 #include "SensorProperty.h"
+#include "systemstats_export.h"
+
+namespace KSysGuard
+{
 
 /**
  * Convenience subclass of SensorProperty that reads a sysfs file and uses the result as value.
  */
-class Q_DECL_EXPORT SysFsSensor : public SensorProperty
+class SYSTEMSTATS_EXPORT SysFsSensor : public SensorProperty
 {
     Q_OBJECT
 
@@ -54,3 +58,5 @@ private:
     QString m_path;
     std::function<QVariant(const QByteArray&)> m_convertFunction;
 };
+
+} // namespace KSysGuard

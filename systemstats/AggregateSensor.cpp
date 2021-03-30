@@ -23,6 +23,8 @@
 #include "SensorContainer.h"
 #include <QTimer>
 
+using namespace KSysGuard;
+
 // Add two QVariants together.
 //
 // This will try to add two QVariants together based on the type of first. This

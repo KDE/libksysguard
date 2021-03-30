@@ -17,10 +17,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef SYSCTLSENSOR_H
-#define SYSCTLSENSOR_H
+#pragma once
 
 #include <SensorProperty.h>
+
+namespace KSysGuard
+{
 
 /**
  * Convenience subclass of SensorProperty that reads a value of type T from FreeBSD's sysctl interface
@@ -87,4 +89,4 @@ void SysctlSensor<T>::update()
 }
 #endif
 
-#endif
+} // namespace KSysGuard

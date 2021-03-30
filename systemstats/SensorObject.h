@@ -24,6 +24,11 @@
 #include "SensorPlugin.h"
 #include "SensorProperty.h"
 
+#include "systemstats_export.h"
+
+namespace KSysGuard
+{
+
 class SensorContainer;
 class SensorObject;
 
@@ -31,7 +36,7 @@ class SensorObject;
  * Represents a physical or virtual object for example
  * A CPU core, or a disk
  */
-class Q_DECL_EXPORT SensorObject : public QObject
+class SYSTEMSTATS_EXPORT SensorObject : public QObject
 {
     Q_OBJECT
 public:
@@ -76,3 +81,5 @@ private:
     QString m_name;
     QHash<QString, SensorProperty *> m_sensors;
 };
+
+} // namespace KSysGuard

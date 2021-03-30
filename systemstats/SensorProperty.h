@@ -22,13 +22,18 @@
 #include "types.h"
 #include <QObject>
 
+#include "systemstats_export.h"
+
+namespace KSysGuard
+{
+
 class SensorObject;
 
 /**
  * Represents a given value source with attached metadata
  * For example, current load for a given CPU core, or a disk capacity
  */
-class Q_DECL_EXPORT SensorProperty : public QObject
+class SYSTEMSTATS_EXPORT SensorProperty : public QObject
 {
     Q_OBJECT
 public:
@@ -126,3 +131,5 @@ private:
     QVariant m_value;
     int m_subscribers = 0;
 };
+
+} // namespace KSysGuard

@@ -16,16 +16,16 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
+
 #pragma once
 
-#include <QDateTime>
-#include <QDebug>
 #include <QObject>
 #include <QVariant>
 
-#include <QDBusArgument>
+#include "systemstats_export.h"
 
-#include "types.h"
+namespace KSysGuard
+{
 
 class SensorPlugin;
 class SensorContainer;
@@ -33,7 +33,7 @@ class SensorContainer;
 /**
  * Base class for plugins 
  */
-class Q_DECL_EXPORT SensorPlugin : public QObject
+class SYSTEMSTATS_EXPORT SensorPlugin : public QObject
 {
     Q_OBJECT
 public:
@@ -67,3 +67,5 @@ public:
 private:
     QList<SensorContainer *> m_containers;
 };
+
+} // namespace KSysGuard

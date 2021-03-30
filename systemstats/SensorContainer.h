@@ -23,13 +23,18 @@
 
 #include "SensorPlugin.h"
 
+#include "systemstats_export.h"
+
+namespace KSysGuard
+{
+
 class SensorObject;
 
 /**
  * Represents a collection of similar sensors.
  * For example: a SensorContainer could represent all CPUs or represent all disks
  */
-class Q_DECL_EXPORT SensorContainer : public QObject
+class SYSTEMSTATS_EXPORT SensorContainer : public QObject
 {
     Q_OBJECT
 public:
@@ -83,3 +88,5 @@ private:
     QHash<QString, SensorObject *> m_sensorObjects;
     friend class SensorObject;
 };
+
+} // namespace KSysGuard

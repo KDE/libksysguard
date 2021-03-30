@@ -21,6 +21,8 @@
 
 #include <QFile>
 
+using namespace KSysGuard;
+
 SysFsSensor::SysFsSensor(const QString& id, const QString& path, SensorObject* parent)
     : SensorProperty(id, parent)
 {

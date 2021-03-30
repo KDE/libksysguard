@@ -21,6 +21,8 @@
 
 #include "SensorObject.h"
 
+using namespace KSysGuard;
+
 SensorContainer::SensorContainer(const QString &id, const QString &name, SensorPlugin *parent)
     : QObject(parent)
     , m_id(id)

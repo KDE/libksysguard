@@ -18,8 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef AGGREGATESENSOR_H
-#define AGGREGATESENSOR_H
+#pragma once
 
 #include <functional>
 
@@ -32,10 +31,15 @@
 #include "SensorPlugin.h"
 #include "SensorProperty.h"
 
+#include "systemstats_export.h"
+
+namespace KSysGuard
+{
+
 /**
  * @todo write docs
  */
-class Q_DECL_EXPORT AggregateSensor : public SensorProperty
+class SYSTEMSTATS_EXPORT AggregateSensor : public SensorProperty
 {
     Q_OBJECT
 
@@ -89,4 +93,4 @@ private:
     SensorProperty *m_sensor;
 };
 
-#endif // AGGREGATESENSOR_H
+} // namespace KSysGuard

@@ -19,6 +19,8 @@
 
 #include "SensorPlugin.h"
 
+using namespace KSysGuard;
+
 SensorPlugin::SensorPlugin(QObject *parent, const QVariantList &args)
     : QObject(parent)
 {
