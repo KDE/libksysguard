@@ -1,22 +1,34 @@
-set(ksgrdbackend_LIB_SRCS
+set(SystemStats_SOVERSION 1)
+
+set(systemstats_SRCS
     AggregateSensor.cpp
     SensorObject.cpp
     SensorContainer.cpp
     SensorPlugin.cpp
     SensorProperty.cpp
     SysFsSensor.cpp
-
 )
 
-add_library(ksgrdbackend ${ksgrdbackend_LIB_SRCS})
-add_library(KSysGuard::StatsBackend ALIAS ksgrdbackend)
-
-target_link_libraries(ksgrdbackend PUBLIC Qt::Core Qt::DBus KSysGuard::Formatter)
-
-set_target_properties(ksgrdbackend PROPERTIES
-    EXPORT_NAME SysGuardBackend
+set(systemstats_HDRS
 )
 
-install(TARGETS ksgrdbackend EXPORT libKSysGuardbackendTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+add_library(SystemStats ${systemstats_SRCS})
+add_library(KSysGuard::SystemStats ALIAS SystemStats)
 
-# Headers are currently not installed as we don't offer compatability yet
+target_link_libraries(SystemStats PUBLIC Qt::Core Qt::DBus KSysGuard::Formatter)
+
+generate_export_header(SystemStats)
+
+set_target_properties(SystemStats PROPERTIES
+    LIBRARY_OUTPUT_NAME KSysGuardSystemStats
+    VERSION ${KSYSGUARD_VERSION_STRING}
+    SOVERSION ${SystemStats_SOVERSION}
+)
+
+install(TARGETS SystemStats EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(FILES
+    ${systemstats_HDRS}
+    ${CMAKE_CURRENT_BINARY_DIR}/systemstats_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/systemstats
+)

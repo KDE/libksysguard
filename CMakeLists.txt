@@ -113,6 +113,7 @@ add_subdirectory( sensors )
 add_subdirectory( faces )
 add_subdirectory( signalplotter )
 add_subdirectory( ksgrd )
+add_subdirectory( systemstats )
 
 if(BUILD_TESTING)
     add_subdirectory( autotests )
