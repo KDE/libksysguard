@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <memory>
+
 #include <QObject>
 
 #include "SensorProperty.h"
@@ -36,6 +38,7 @@ class SYSTEMSTATS_EXPORT SysFsSensor : public SensorProperty
 
 public:
     SysFsSensor(const QString &id, const QString &path, SensorObject *parent);
+    ~SysFsSensor();
 
     /**
      * Set the function used to convert the data from sysfs to the value of this sensor.
@@ -55,8 +58,8 @@ public:
     void update() override;
 
 private:
-    QString m_path;
-    std::function<QVariant(const QByteArray&)> m_convertFunction;
+    class Private;
+    const std::unique_ptr<Private> d;
 };
 
 } // namespace KSysGuard

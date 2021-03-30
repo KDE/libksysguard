@@ -123,13 +123,8 @@ Q_SIGNALS:
     void subscribedChanged(bool);
 
 private:
-    SensorObject *m_parent = nullptr;
-    SensorInfo m_info;
-    QString m_id;
-    QString m_name;
-    QString m_prefix;
-    QVariant m_value;
-    int m_subscribers = 0;
+    class Private;
+    const std::unique_ptr<Private> d;
 };
 
 } // namespace KSysGuard

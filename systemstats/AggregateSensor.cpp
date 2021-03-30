@@ -75,44 +75,56 @@ QVariant addVariants(const QVariant &first, const QVariant &second)
     return result;
 }
 
+class Q_DECL_HIDDEN AggregateSensor::Private
+{
+public:
+    QRegularExpression matchObjects;
+    QString matchProperty;
+    QHash<QString, QPointer<SensorProperty>> sensors;
+    bool dataChangeQueued = false;
+    int dataCompressionDuration = 100;
+    SensorContainer *subsystem = nullptr;
+
+    std::function<QVariant(QVariant, QVariant)> aggregateFunction;
+};
+
 AggregateSensor::AggregateSensor(SensorObject *provider, const QString &id, const QString &name)
     : SensorProperty(id, name, provider)
-    , m_subsystem(qobject_cast<SensorContainer *>(provider->parent()))
+    , d(std::make_unique<Private>())
 {
-    m_aggregateFunction = addVariants;
-    connect(m_subsystem, &SensorContainer::objectAdded, this, &AggregateSensor::updateSensors);
-    connect(m_subsystem, &SensorContainer::objectRemoved, this, &AggregateSensor::updateSensors);
+    d->subsystem = qobject_cast<SensorContainer *>(provider->parent());
+    d->aggregateFunction = addVariants;
+    connect(d->subsystem, &SensorContainer::objectAdded, this, &AggregateSensor::updateSensors);
+    connect(d->subsystem, &SensorContainer::objectRemoved, this, &AggregateSensor::updateSensors);
 }
 
-AggregateSensor::~AggregateSensor()
-{
-}
+AggregateSensor::~AggregateSensor() = default;
 
 QRegularExpression AggregateSensor::matchSensors() const
 {
-    return m_matchObjects;
+    return d->matchObjects;
 }
 
 QVariant AggregateSensor::value() const
 {
-    if (m_sensors.isEmpty()) {
+    if (d->sensors.isEmpty()) {
         return QVariant();
     }
 
-    auto it = m_sensors.constBegin();
-    while (!it.value() && it != m_sensors.constEnd()) {
+    auto it = d->sensors.constBegin();
+    while (!it.value() && it != d->sensors.constEnd()) {
         it++;
     }
 
-    if (it == m_sensors.constEnd()) {
+    if (it == d->sensors.constEnd()) {
         return QVariant{};
     }
 
     QVariant result = it.value()->value();
     it++;
-    for (; it != m_sensors.constEnd(); it++) {
+    for (; it != d->sensors.constEnd(); it++) {
         if (it.value()) {
-            result = m_aggregateFunction(result, it.value()->value());
+            result = d->aggregateFunction(result, it.value()->value());
         }
     }
     return result;
@@ -123,7 +135,7 @@ void AggregateSensor::subscribe()
     bool wasSubscribed = SensorProperty::isSubscribed();
     SensorProperty::subscribe();
     if (!wasSubscribed && isSubscribed()) {
-        for (auto sensor : qAsConst(m_sensors)) {
+        for (auto sensor : qAsConst(d->sensors)) {
             if (sensor) {
                 sensor->subscribe();
             }
@@ -136,7 +148,7 @@ void AggregateSensor::unsubscribe()
     bool wasSubscribed = SensorProperty::isSubscribed();
     SensorProperty::unsubscribe();
     if (wasSubscribed && !isSubscribed()) {
-        for (auto sensor : qAsConst(m_sensors)) {
+        for (auto sensor : qAsConst(d->sensors)) {
             if (sensor) {
                 sensor->unsubscribe();
             }
@@ -146,28 +158,28 @@ void AggregateSensor::unsubscribe()
 
 void AggregateSensor::setMatchSensors(const QRegularExpression &objectIds, const QString &propertyName)
 {
-    if (objectIds == m_matchObjects && propertyName == m_matchProperty) {
+    if (objectIds == d->matchObjects && propertyName == d->matchProperty) {
         return;
     }
 
-    m_matchProperty = propertyName;
-    m_matchObjects = objectIds;
+    d->matchProperty = propertyName;
+    d->matchObjects = objectIds;
     updateSensors();
 }
 
 std::function<QVariant(QVariant, QVariant)> AggregateSensor::aggregateFunction() const
 {
-    return m_aggregateFunction;
+    return d->aggregateFunction;
 }
 
 void AggregateSensor::setAggregateFunction(const std::function<QVariant(QVariant, QVariant)> &newAggregateFunction)
 {
-    m_aggregateFunction = newAggregateFunction;
+    d->aggregateFunction = newAggregateFunction;
 }
 
 void AggregateSensor::addSensor(SensorProperty *sensor)
 {
-    if (!sensor || sensor->path() == path() || m_sensors.contains(sensor->path())) {
+    if (!sensor || sensor->path() == path() || d->sensors.contains(sensor->path())) {
         return;
     }
 
@@ -178,12 +190,12 @@ void AggregateSensor::addSensor(SensorProperty *sensor)
     connect(sensor, &SensorProperty::valueChanged, this, [this, sensor]() {
         sensorDataChanged(sensor);
     });
-    m_sensors.insert(sensor->path(), sensor);
+    d->sensors.insert(sensor->path(), sensor);
 }
 
 void AggregateSensor::removeSensor(const QString &sensorPath)
 {
-    auto sensor = m_sensors.take(sensorPath);
+    auto sensor = d->sensors.take(sensorPath);
     sensor->disconnect(this);
     if (isSubscribed()) {
         sensor->unsubscribe();
@@ -192,27 +204,27 @@ void AggregateSensor::removeSensor(const QString &sensorPath)
 
 int AggregateSensor::matchCount() const
 {
-    return m_sensors.size();
+    return d->sensors.size();
 }
 
 void AggregateSensor::updateSensors()
 {
-    if (!m_matchObjects.isValid()) {
+    if (!d->matchObjects.isValid()) {
         return;
     }
-    for (auto obj : m_subsystem->objects()) {
-        if (m_matchObjects.match(obj->id()).hasMatch()) {
-            auto sensor = obj->sensor(m_matchProperty);
+    for (auto obj : d->subsystem->objects()) {
+        if (d->matchObjects.match(obj->id()).hasMatch()) {
+            auto sensor = obj->sensor(d->matchProperty);
             if (sensor) {
                 addSensor(sensor);
             }
         }
     }
 
-    auto itr = m_sensors.begin();
-    while (itr != m_sensors.end()) {
+    auto itr = d->sensors.begin();
+    while (itr != d->sensors.end()) {
         if (!itr.value()) {
-            itr = m_sensors.erase(itr);
+            itr = d->sensors.erase(itr);
         } else {
             ++itr;
         }
@@ -229,51 +241,56 @@ void AggregateSensor::sensorDataChanged(SensorProperty *sensor)
 
 void AggregateSensor::delayedEmitDataChanged()
 {
-    if (!m_dataChangeQueued) {
-        m_dataChangeQueued = true;
-        QTimer::singleShot(m_dataCompressionDuration, [this]() {
+    if (!d->dataChangeQueued) {
+        d->dataChangeQueued = true;
+        QTimer::singleShot(d->dataCompressionDuration, [this]() {
             Q_EMIT valueChanged();
-            m_dataChangeQueued = false;
+            d->dataChangeQueued = false;
         });
     }
 }
 
+class Q_DECL_HIDDEN PercentageSensor::Private
+{
+public:
+    SensorProperty *sensor = nullptr;
+};
+
 PercentageSensor::PercentageSensor(SensorObject *provider, const QString &id, const QString &name)
     : SensorProperty(id, name, provider)
+    , d(std::make_unique<Private>())
 {
     setUnit(KSysGuard::UnitPercent);
     setMax(100);
 }
 
-PercentageSensor::~PercentageSensor()
-{
-}
+PercentageSensor::~PercentageSensor() = default;
 
 void PercentageSensor::setBaseSensor(SensorProperty *property)
 {
-    m_sensor = property;
+    d->sensor = property;
     connect(property, &SensorProperty::valueChanged, this, &PercentageSensor::valueChanged);
     connect(property, &SensorProperty::sensorInfoChanged, this, &PercentageSensor::valueChanged);
 }
 
 QVariant PercentageSensor::value() const
 {
-    if (!m_sensor) {
+    if (!d->sensor) {
         return QVariant();
     }
-    QVariant value = m_sensor->value();
+    QVariant value = d->sensor->value();
     if (!value.isValid()) {
         return QVariant();
     }
-    return (value.toReal() / m_sensor->info().max) * 100.0;
+    return (value.toReal() / d->sensor->info().max) * 100.0;
 }
 
 void PercentageSensor::subscribe()
 {
-    m_sensor->subscribe();
+    d->sensor->subscribe();
 }
 
 void PercentageSensor::unsubscribe()
 {
-    m_sensor->unsubscribe();
+    d->sensor->unsubscribe();
 }

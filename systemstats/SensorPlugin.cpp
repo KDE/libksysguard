@@ -21,15 +21,24 @@
 
 using namespace KSysGuard;
 
+class Q_DECL_HIDDEN SensorPlugin::Private
+{
+public:
+    QList<SensorContainer *> containers;
+};
+
 SensorPlugin::SensorPlugin(QObject *parent, const QVariantList &args)
     : QObject(parent)
+    , d(std::make_unique<Private>())
 {
     Q_UNUSED(args)
 }
 
+SensorPlugin::~SensorPlugin() = default;
+
 QList<SensorContainer *> SensorPlugin::containers() const
 {
-    return m_containers;
+    return d->containers;
 }
 
 QString SensorPlugin::providerName() const
@@ -43,5 +52,5 @@ void SensorPlugin::update()
 
 void SensorPlugin::addContainer(SensorContainer *container)
 {
-    m_containers << container;
+    d->containers << container;
 }

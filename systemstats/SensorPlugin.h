@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <memory>
+
 #include <QObject>
 #include <QVariant>
 
@@ -38,7 +40,7 @@ class SYSTEMSTATS_EXPORT SensorPlugin : public QObject
     Q_OBJECT
 public:
     SensorPlugin(QObject *parent, const QVariantList &args);
-    ~SensorPlugin() = default;
+    ~SensorPlugin();
 
     /**
       A list of all containers provided by this plugin
@@ -65,7 +67,8 @@ public:
     void addContainer(SensorContainer *container);
 
 private:
-    QList<SensorContainer *> m_containers;
+    class Private;
+    const std::unique_ptr<Private> d;
 };
 
 } // namespace KSysGuard

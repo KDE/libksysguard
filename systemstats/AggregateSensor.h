@@ -21,6 +21,7 @@
 #pragma once
 
 #include <functional>
+#include <memory>
 
 #include <QRegularExpression>
 #include <QVariant>
@@ -66,14 +67,8 @@ private:
     void sensorDataChanged(SensorProperty *sensor);
     void delayedEmitDataChanged();
 
-    QRegularExpression m_matchObjects;
-    QString m_matchProperty;
-    QHash<QString, QPointer<SensorProperty>> m_sensors;
-    bool m_dataChangeQueued = false;
-    int m_dataCompressionDuration = 100;
-    SensorContainer *m_subsystem;
-
-    std::function<QVariant(QVariant, QVariant)> m_aggregateFunction;
+    class Private;
+    const std::unique_ptr<Private> d;
 };
 
 class Q_DECL_EXPORT PercentageSensor : public SensorProperty
@@ -90,7 +85,8 @@ public:
     void setBaseSensor(SensorProperty *sensor);
 
 private:
-    SensorProperty *m_sensor;
+    class Private;
+    const std::unique_ptr<Private> d;
 };
 
 } // namespace KSysGuard

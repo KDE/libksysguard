@@ -23,19 +23,29 @@
 
 using namespace KSysGuard;
 
+class Q_DECL_HIDDEN SysFsSensor::Private
+{
+public:
+    QString path;
+    std::function<QVariant(const QByteArray&)> convertFunction;
+};
+
 SysFsSensor::SysFsSensor(const QString& id, const QString& path, SensorObject* parent)
     : SensorProperty(id, parent)
+    , d(std::make_unique<Private>())
 {
-    m_path = path;
+    d->path = path;
 
-    m_convertFunction = [](const QByteArray &input) {
+    d->convertFunction = [](const QByteArray &input) {
         return std::atoll(input);
     };
 }
 
+SysFsSensor::~SysFsSensor() = default;
+
 void SysFsSensor::setConvertFunction(const std::function<QVariant (const QByteArray &)>& function)
 {
-    m_convertFunction = function;
+    d->convertFunction = function;
 }
 
 void SysFsSensor::update()
@@ -44,7 +54,7 @@ void SysFsSensor::update()
         return;
     }
 
-    QFile file(m_path);
+    QFile file(d->path);
     if (!file.exists()) {
         return;
     }
@@ -54,5 +64,5 @@ void SysFsSensor::update()
     }
 
     auto value = file.readAll();
-    setValue(m_convertFunction(value));
+    setValue(d->convertFunction(value));
 }

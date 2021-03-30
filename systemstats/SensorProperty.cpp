@@ -22,6 +22,19 @@
 
 using namespace KSysGuard;
 
+class Q_DECL_HIDDEN SensorProperty::Private
+{
+public:
+    SensorObject *parent = nullptr;
+    SensorInfo info;
+    QString id;
+    QString name;
+    QString prefix;
+    QVariant value;
+    int subscribers = 0;
+};
+
+
 SensorProperty::SensorProperty(const QString &id, SensorObject *parent)
     : SensorProperty(id, QString(), parent)
 {
@@ -34,9 +47,10 @@ SensorProperty::SensorProperty(const QString &id, const QString &name, SensorObj
 
 SensorProperty::SensorProperty(const QString &id, const QString &name, const QVariant &initalValue, SensorObject *parent)
     : QObject(parent)
-    , m_parent(parent)
-    , m_id(id)
+    , d(std::make_unique<Private>())
 {
+    d->id = id;
+    d->parent = parent;
     setName(name);
     if (initalValue.isValid()) {
         setValue(initalValue);
@@ -50,78 +64,78 @@ SensorProperty::~SensorProperty()
 
 SensorInfo SensorProperty::info() const
 {
-    return m_info;
+    return d->info;
 }
 
 QString SensorProperty::id() const
 {
-    return m_id;
+    return d->id;
 }
 
 QString SensorProperty::path() const
 {
-    return m_parent->path() % QLatin1Char('/') % m_id;
+    return d->parent->path() % QLatin1Char('/') % d->id;
 }
 
 void SensorProperty::setName(const QString &name)
 {
-    if (m_name == name) {
+    if (d->name == name) {
         return;
     }
 
-    m_name = name;
-    m_info.name = m_prefix.isEmpty() ? m_name : m_prefix % QLatin1Char(' ') % m_name;
+    d->name = name;
+    d->info.name = d->prefix.isEmpty() ? d->name : d->prefix % QLatin1Char(' ') % d->name;
     emit sensorInfoChanged();
 }
 
 void SensorProperty::setShortName(const QString &name)
 {
-    if (m_info.shortName == name) {
+    if (d->info.shortName == name) {
         return;
     }
 
-    m_info.shortName = name;
+    d->info.shortName = name;
     emit sensorInfoChanged();
 }
 
 void SensorProperty::setPrefix(const QString &prefix)
 {
-    if (m_prefix == prefix) {
+    if (d->prefix == prefix) {
         return;
     }
 
-    m_prefix = prefix;
-    m_info.name = prefix.isEmpty() ? m_name : prefix % QLatin1Char(' ') % m_name;
+    d->prefix = prefix;
+    d->info.name = prefix.isEmpty() ? d->name : prefix % QLatin1Char(' ') % d->name;
     emit sensorInfoChanged();
 }
 
 void SensorProperty::setDescription(const QString &description)
 {
-    if (m_info.description == description) {
+    if (d->info.description == description) {
         return;
     }
 
-    m_info.description = description;
+    d->info.description = description;
     emit sensorInfoChanged();
 }
 
 void SensorProperty::setMin(qreal min)
 {
-    if (qFuzzyCompare(m_info.min, min)) {
+    if (qFuzzyCompare(d->info.min, min)) {
         return;
     }
 
-    m_info.min = min;
+    d->info.min = min;
     emit sensorInfoChanged();
 }
 
 void SensorProperty::setMax(qreal max)
 {
-    if (qFuzzyCompare(m_info.max, max)) {
+    if (qFuzzyCompare(d->info.max, max)) {
         return;
     }
 
-    m_info.max = max;
+    d->info.max = max;
     emit sensorInfoChanged();
 }
 
@@ -146,52 +160,52 @@ void SensorProperty::setMax(SensorProperty *other)
 
 void SensorProperty::setUnit(KSysGuard::Unit unit)
 {
-    if (m_info.unit == unit) {
+    if (d->info.unit == unit) {
         return;
     }
 
-    m_info.unit = unit;
+    d->info.unit = unit;
     emit sensorInfoChanged();
 }
 
 void SensorProperty::setVariantType(QVariant::Type type)
 {
-    if (m_info.variantType == type) {
+    if (d->info.variantType == type) {
         return;
     }
 
-    m_info.variantType = type;
+    d->info.variantType = type;
     emit sensorInfoChanged();
 }
 
 bool SensorProperty::isSubscribed() const
 {
-    return m_subscribers > 0;
+    return d->subscribers > 0;
 }
 
 void SensorProperty::subscribe()
 {
-    m_subscribers++;
-    if (m_subscribers == 1) {
+    d->subscribers++;
+    if (d->subscribers == 1) {
         emit subscribedChanged(true);
     }
 }
 
 void SensorProperty::unsubscribe()
 {
-    m_subscribers--;
-    if (m_subscribers == 0) {
+    d->subscribers--;
+    if (d->subscribers == 0) {
         emit subscribedChanged(false);
     }
 }
 
 QVariant SensorProperty::value() const
 {
-    return m_value;
+    return d->value;
 }
 
 void SensorProperty::setValue(const QVariant &value)
 {
-    m_value = value;
+    d->value = value;
     emit valueChanged();
 }

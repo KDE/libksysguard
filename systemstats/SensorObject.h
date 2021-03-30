@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <memory>
+
 #include <QObject>
 
 #include "SensorPlugin.h"
@@ -76,10 +78,8 @@ Q_SIGNALS:
     void nameChanged();
 
 private:
-    SensorContainer *m_parent = nullptr;
-    QString m_id;
-    QString m_name;
-    QHash<QString, SensorProperty *> m_sensors;
+    class Private;
+    const std::unique_ptr<Private> d;
 };
 
 } // namespace KSysGuard

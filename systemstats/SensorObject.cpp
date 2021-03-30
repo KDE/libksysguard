@@ -23,6 +23,16 @@
 
 using namespace KSysGuard;
 
+class Q_DECL_HIDDEN SensorObject::Private
+{
+public:
+    SensorContainer *parent = nullptr;
+    QString id;
+    QString name;
+    QHash<QString, SensorProperty *> sensors;
+};
+
+
 SensorObject::SensorObject(const QString &id, SensorContainer *parent)
     : SensorObject(id, QString(), parent)
 {
@@ -30,69 +40,69 @@ SensorObject::SensorObject(const QString &id, SensorContainer *parent)
 
 SensorObject::SensorObject(const QString &id, const QString &name, SensorContainer *parent)
     : QObject(parent)
-    , m_parent(parent)
-    , m_id(id)
-    , m_name(name)
+    , d(std::make_unique<Private>())
 {
+    d->parent = parent;
+    d->id = id;
+    d->name = name;
+
     if (parent) {
-    parent->addObject(this);
+        parent->addObject(this);
     }
 }
 
-SensorObject::~SensorObject()
-{
-}
+SensorObject::~SensorObject() = default;
 
 QString SensorObject::id() const
 {
-    return m_id;
+    return d->id;
 }
 
 QString SensorObject::name() const
 {
-    return m_name;
+    return d->name;
 }
 
 QString SensorObject::path() const
 {
-    if (!m_parent) {
+    if (!d->parent) {
         return QString{};
     }
 
-    return m_parent->id() % QLatin1Char('/') % m_id;
+    return d->parent->id() % QLatin1Char('/') % d->id;
 }
 
 void SensorObject::setName(const QString& newName)
 {
-    if (newName == m_name) {
+    if (newName == d->name) {
         return;
     }
 
-    m_name = newName;
+    d->name = newName;
     Q_EMIT nameChanged();
 }
 
 void SensorObject::setParentContainer(SensorContainer* parent)
 {
-    m_parent = parent;
+    d->parent = parent;
 }
 
 QList<SensorProperty *> SensorObject::sensors() const
 {
-    return m_sensors.values();
+    return d->sensors.values();
 }
 
 SensorProperty *SensorObject::sensor(const QString &sensorId) const
 {
-    return m_sensors.value(sensorId);
+    return d->sensors.value(sensorId);
 }
 
 void SensorObject::addProperty(SensorProperty *property)
 {
-    m_sensors[property->id()] = property;
+    d->sensors[property->id()] = property;
 
     connect(property, &SensorProperty::subscribedChanged, this, [=]() {
-        uint count = std::count_if(m_sensors.constBegin(), m_sensors.constEnd(), [](const SensorProperty *prop) {
+        uint count = std::count_if(d->sensors.constBegin(), d->sensors.constEnd(), [](const SensorProperty *prop) {
             return prop->isSubscribed();
         });
         if (count == 1) {
@@ -105,7 +115,7 @@ void SensorObject::addProperty(SensorProperty *property)
 
 bool SensorObject::isSubscribed() const
 {
-    return std::any_of(m_sensors.constBegin(), m_sensors.constEnd(), [](const SensorProperty *prop) {
+    return std::any_of(d->sensors.constBegin(), d->sensors.constEnd(), [](const SensorProperty *prop) {
         return prop->isSubscribed();
     });
 }

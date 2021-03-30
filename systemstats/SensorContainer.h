@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <memory>
+
 #include <QObject>
 
 #include "SensorPlugin.h"
@@ -83,10 +85,8 @@ Q_SIGNALS:
     void objectRemoved(SensorObject *object);
 
 private:
-    QString m_id;
-    QString m_name;
-    QHash<QString, SensorObject *> m_sensorObjects;
-    friend class SensorObject;
+    class Private;
+    const std::unique_ptr<Private> d;
 };
 
 } // namespace KSysGuard
