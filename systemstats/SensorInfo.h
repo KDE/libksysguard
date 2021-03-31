@@ -27,13 +27,15 @@
 
 #include "formatter/Unit.h"
 
+#include "systemstats_export.h"
+
 namespace KSysGuard
 {
 
 constexpr uint BackendUpdateInterval = 500;
 
 // Data that is static for the lifespan of the sensor
-class Q_DECL_EXPORT SensorInfo
+class SYSTEMSTATS_EXPORT SensorInfo
 {
 public:
     SensorInfo() = default;
@@ -47,7 +49,7 @@ public:
     qreal max = 0;
 };
 
-class Q_DECL_EXPORT SensorData
+class SYSTEMSTATS_EXPORT SensorData
 {
 public:
     SensorData() = default;
