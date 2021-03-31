@@ -50,6 +50,7 @@ target_link_libraries(Sensors
         Qt::Core
         Qt::DBus
         KF5::I18n
+        KSysGuard::SystemStats
 )
 
 set_target_properties(Sensors PROPERTIES

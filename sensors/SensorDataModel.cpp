@@ -24,11 +24,11 @@
 
 #include <QMetaEnum>
 
-#include "Formatter.h"
+#include "formatter/Formatter.h"
+#include "systemstats/SensorInfo.h"
+
 #include "SensorDaemonInterface_p.h"
 #include "sensors_logging.h"
-
-#include "../systemstats/SensorInfo.h"
 
 using namespace KSysGuard;
 

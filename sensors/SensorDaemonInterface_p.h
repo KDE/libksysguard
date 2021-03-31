@@ -22,7 +22,7 @@
 #include <memory>
 #include <QObject>
 
-#include "../systemstats/SensorInfo.h"
+#include "systemstats/SensorInfo.h"
 
 class QDBusPendingCallWatcher;
 

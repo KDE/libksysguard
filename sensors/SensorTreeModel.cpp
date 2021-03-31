@@ -27,13 +27,12 @@
 #include <QRegularExpression>
 
 #include "formatter/Formatter.h"
+#include "systemstats/SensorInfo.h"
 
 #include "Sensor.h"
 #include "SensorDaemonInterface_p.h"
 #include "SensorQuery.h"
 #include "SensorGroup_p.h"
-
-#include "../systemstats/SensorInfo.h"
 
 using namespace KSysGuard;
 

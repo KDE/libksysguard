@@ -21,22 +21,17 @@
 
 #include <QDBusPendingCallWatcher>
 
-#include "ksysguarddaemon.h"
+#include "systemstats/DBusInterface.h"
 
 using namespace KSysGuard;
 
 class SensorDaemonInterface::Private
 {
 public:
-    std::unique_ptr<org::kde::KSysGuardDaemon> dbusInterface;
+    std::unique_ptr<SystemStats::DBusInterface> dbusInterface;
     std::unique_ptr<QDBusServiceWatcher> serviceWatcher;
     QStringList subscribedSensors;
-    static const QString SensorServiceName;
-    static const QString SensorPath;
 };
-
-const QString SensorDaemonInterface::Private::SensorServiceName = QStringLiteral("org.kde.ksystemstats");
-const QString SensorDaemonInterface::Private::SensorPath = QStringLiteral("/");
 
 SensorDaemonInterface::SensorDaemonInterface(QObject *parent)
     : QObject(parent)
@@ -47,18 +42,18 @@ SensorDaemonInterface::SensorDaemonInterface(QObject *parent)
     qDBusRegisterMetaType<SensorDataList>();
     qDBusRegisterMetaType<SensorInfoMap>();
 
-    d->serviceWatcher = std::make_unique<QDBusServiceWatcher>(d->SensorServiceName, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForUnregistration);
+    d->serviceWatcher = std::make_unique<QDBusServiceWatcher>(SystemStats::ServiceName, QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForUnregistration);
     connect(d->serviceWatcher.get(), &QDBusServiceWatcher::serviceUnregistered, this, &SensorDaemonInterface::reconnect);
     reconnect();
 }
 
 void KSysGuard::SensorDaemonInterface::reconnect()
 {
-    d->dbusInterface = std::make_unique<org::kde::KSysGuardDaemon>(Private::SensorServiceName, Private::SensorPath, QDBusConnection::sessionBus());
-    connect(d->dbusInterface.get(), &org::kde::KSysGuardDaemon::sensorMetaDataChanged, this, &SensorDaemonInterface::onMetaDataChanged);
-    connect(d->dbusInterface.get(), &org::kde::KSysGuardDaemon::newSensorData, this, &SensorDaemonInterface::onValueChanged);
-    connect(d->dbusInterface.get(), &org::kde::KSysGuardDaemon::sensorAdded, this, &SensorDaemonInterface::sensorAdded);
-    connect(d->dbusInterface.get(), &org::kde::KSysGuardDaemon::sensorRemoved, this, &SensorDaemonInterface::sensorRemoved);
+    d->dbusInterface = std::make_unique<SystemStats::DBusInterface>();
+    connect(d->dbusInterface.get(), &SystemStats::DBusInterface::sensorMetaDataChanged, this, &SensorDaemonInterface::onMetaDataChanged);
+    connect(d->dbusInterface.get(), &SystemStats::DBusInterface::newSensorData, this, &SensorDaemonInterface::onValueChanged);
+    connect(d->dbusInterface.get(), &SystemStats::DBusInterface::sensorAdded, this, &SensorDaemonInterface::sensorAdded);
+    connect(d->dbusInterface.get(), &SystemStats::DBusInterface::sensorRemoved, this, &SensorDaemonInterface::sensorRemoved);
     subscribe(d->subscribedSensors);
 }
 
