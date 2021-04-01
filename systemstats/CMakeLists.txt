@@ -59,3 +59,5 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.ksystemstats.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/systemstats
 )
+
+install(FILES org.kde.ksystemstats.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
