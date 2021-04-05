@@ -161,7 +161,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
             qlonglong euid;
             qlonglong suid;
             qlonglong fsuid;
-            sscanf(mBuffer + sizeof("Uid:") -1, "%Ld %Ld %Ld %Ld", &uid, &euid, &suid, &fsuid);
+            sscanf(mBuffer + sizeof("Uid:") -1, "%lld %lld %lld %lld", &uid, &euid, &suid, &fsuid);
             process->setUid(uid);
             process->setEuid(euid);
             process->setSuid(suid);
@@ -172,7 +172,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 	  case 'G':
 	    if((unsigned int)size > sizeof("Gid:") && qstrncmp(mBuffer, "Gid:", sizeof("Gid:")-1) == 0) {
             qlonglong gid, egid, sgid, fsgid;
-            sscanf(mBuffer + sizeof("Gid:")-1, "%Ld %Ld %Ld %Ld", &gid, &egid, &sgid, &fsgid);
+            sscanf(mBuffer + sizeof("Gid:")-1, "%lld %lld %lld %lld", &gid, &egid, &sgid, &fsgid);
             process->setGid(gid);
             process->setEgid(egid);
             process->setSgid(sgid);
