@@ -125,6 +125,13 @@ CGroupDataModel::CGroupDataModel(const QString &root, QObject *parent)
     d->m_updateTimer->setInterval(2000);
     d->m_updateTimer->start();
 
+    // updateAllProcesses will delete processes that no longer exist, a method that
+    // can be called by any user of the shared Processes
+    // so clear out our cache of cgroup -> process whenever anything gets removed
+    connect(d->m_processes.data(), &Processes::beginRemoveProcess, this, [this]() {
+        d->m_processMap.clear();
+    });
+
     setRoot(root);
 }
 
@@ -391,11 +398,6 @@ void CGroupDataModel::update()
     }
 
     d->m_oldGroups = d->m_cgroupMap;
-
-    // updateAllProcesses will delete processes that no longer exist, so clear
-    // out our cache of the processes before that happens so we have no dangling
-    // processes.
-    d->m_processMap.clear();
 
     // In an ideal world we would only the relevant process
     // but Ksysguard::Processes doesn't handle that very well
