@@ -401,7 +401,7 @@ void CGroupDataModel::update()
 
     // In an ideal world we would only the relevant process
     // but Ksysguard::Processes doesn't handle that very well
-    d->m_processes->updateAllProcesses();
+    d->m_processes->updateAllProcesses(d->m_updateTimer->interval());
 
     update(d->m_rootGroup.data());
 
