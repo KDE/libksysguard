@@ -433,6 +433,7 @@ void CGroupDataModel::update(CGroup *node)
         auto row = d->m_cGroups.indexOf(node);
         if (row >= 0) {
             d->m_cGroups[row]->setPids(pids);
+            d->m_processMap.remove(d->m_cGroups[row]);
             Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, columnCount()-1, QModelIndex()));
         }
     });
