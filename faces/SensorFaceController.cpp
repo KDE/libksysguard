@@ -311,6 +311,7 @@ SensorFace *SensorFaceControllerPrivate::createGui(const QString &qmlPath)
     context->setParent(gui);
 
     gui->setController(q);
+    gui->setParent(q);
 
     component->completeCreate();
 
@@ -338,6 +339,7 @@ QQuickItem *SensorFaceControllerPrivate::createConfigUi(const QString &file, con
     QQuickItem *gui = qobject_cast<QQuickItem *>(guiObject);
     Q_ASSERT(gui);
     context->setParent(gui);
+    gui->setParent(q);
 
     component->deleteLater();
 
