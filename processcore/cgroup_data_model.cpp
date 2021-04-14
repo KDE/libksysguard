@@ -357,6 +357,7 @@ void CGroupDataModel::setEnabled(bool enabled)
 {
     if (enabled) {
         d->m_updateTimer->start();
+        QMetaObject::invokeMethod(this, [this] {update();}, Qt::QueuedConnection);
     } else {
         d->m_updateTimer->stop();
     }
