@@ -33,6 +33,7 @@ Kirigami.FormLayout {
 
     Controls.CheckBox {
         id: groupCheckbox
+        Layout.fillWidth: true
         text: i18n("Group sensors based on the value of the total sensors.")
     }
 }
