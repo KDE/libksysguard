@@ -45,8 +45,9 @@ Charts.LineChart {
     //TODO: Have a central heading here too?
     //TODO: Have a plasmoid config value for line thickness?
 
+    readonly property bool stackedAuto: chart.controller.faceConfiguration.rangeAutoY && chart.controller.faceConfiguration.lineChartStacked
+
     yRange {
-        readonly property bool stackedAuto: chart.controller.faceConfiguration.rangeAutoY && chart.controller.faceConfiguration.lineChartStacked
         from: stackedAuto ? Math.min(sensorsModel.minimum, 0) : chart.controller.faceConfiguration.rangeFromY
         to: stackedAuto ? sensorsModel.stackedMaximum : chart.controller.faceConfiguration.rangeToY
         automatic: (chart.controller.faceConfiguration.rangeAutoY && !chart.controller.faceConfiguration.lineChartStacked)
@@ -71,7 +72,7 @@ Charts.LineChart {
 
     Connections {
         target: sensorsModel
-        enabled: yRange.stackedAuto !== undefined ? yRange.stackedAuto : false
+        enabled: chart.stackedAuto
         function onColumnsInserted() {
             sensorsModel.stackedMaximum = sensorsModel.calcStackedMaximum()
         }
