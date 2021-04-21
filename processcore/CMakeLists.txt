@@ -56,6 +56,7 @@ set_target_properties(processcore PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING}
 install(TARGETS processcore EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 add_subdirectory(declarative)
+add_subdirectory(plugins)
 
 ########### install files ###############
 

@@ -10,7 +10,7 @@ set(QT_MIN_VERSION "5.15.0")
 set(KF5_MIN_VERSION "5.78")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -83,6 +83,31 @@ if(Qt5WebEngineWidgets_FOUND AND Qt5WebChannel_FOUND)
     set(WEBENGINE_SCRIPTING_ENABLED TRUE)
 endif()
 add_feature_info("Scripting plugin support" WEBENGINE_SCRIPTING_ENABLED "Support scripting plugins using WebEngine and WebChannel")
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    find_package(NL)
+    set_package_properties(NL PROPERTIES
+        TYPE REQUIRED
+        PURPOSE "Used for gathering socket info via the sock_diag netlink subsystem."
+        URL "https://github.com/thom311/libnl/"
+    )
+    find_package(libpcap)
+    set_package_properties(
+        libpcap PROPERTIES
+        TYPE RECOMMENDED
+        PURPOSE "libpcap is used for per-application network usage."
+    )
+
+    if(libpcap_FOUND )
+        set(BUILD_NETWORK_PLUGIN TRUE)
+
+        find_package(Libcap)
+        set_package_properties(Libcap PROPERTIES
+            TYPE OPTIONAL
+            PURPOSE "Needed for setting capabilities of the per-application network plugin."
+        )
+    endif()
+endif()
 
 set(HAVE_X11 ${X11_FOUND})
 set(HAVE_XRES ${X11_XRes_FOUND})
