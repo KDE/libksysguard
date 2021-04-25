@@ -119,6 +119,7 @@ void testProcess::testTimeToUpdateAllProcesses() {
     QBENCHMARK {
         processController->updateAllProcesses();
     }
+    delete processController;
 }
 void testProcess::testTimeToUpdateModel() {
     KSysGuardProcessList *processList = new KSysGuardProcessList;
