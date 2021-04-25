@@ -91,6 +91,8 @@ Processes::Private::~Private() {
   mListProcesses.clear();
   delete mAbstractProcesses;
   mAbstractProcesses = nullptr;
+  delete mHistoricProcesses;
+  mHistoricProcesses = nullptr;
 }
 
 Processes::Processes(const QString &host, QObject *parent) : QObject(parent), d(new Private(this))
