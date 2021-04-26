@@ -408,7 +408,7 @@ QString SensorFaceController::title() const
         return d->appearanceGroup.readEntry("title");
     } else {
         // if neither exist fall back to name
-        return d->appearanceGroup.readEntry("Title", name());
+        return d->appearanceGroup.readEntry("Title", i18n("System Monitor Sensor"));
     }
 }
 
