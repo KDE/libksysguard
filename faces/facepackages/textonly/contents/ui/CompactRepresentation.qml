@@ -34,19 +34,16 @@ import org.kde.quickcharts.controls 1.0 as ChartsControls
 Faces.SensorFace {
     id: root
 
-    Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : Kirigami.Units.gridUnit * 2
+    Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : contentItem.contentWidth
+    Layout.minimumHeight: Kirigami.Units.gridUnit
 
-    contentItem: ColumnLayout {
-        GroupedText {
-            totalSensorIds: root.controller.totalSensors
-            highPrioritySensorIds: root.controller.highPrioritySensorIds
-            lowPrioritySensorIds: []
-            showGroups: root.controller.faceConfiguration.groupByTotal
-            colorSource: root.colorSource
-            totalHeight: root.height
-            updateRateLimit: root.controller.updateRateLimit
-        }
-
-        Item { Layout.fillWidth: true; Layout.fillHeight: true }
+    contentItem: GroupedText {
+        totalSensorIds: root.controller.totalSensors
+        highPrioritySensorIds: root.controller.highPrioritySensorIds
+        lowPrioritySensorIds: []
+        showGroups: root.controller.faceConfiguration.groupByTotal
+        colorSource: root.colorSource
+        totalHeight: root.height
+        updateRateLimit: root.controller.updateRateLimit
     }
 }

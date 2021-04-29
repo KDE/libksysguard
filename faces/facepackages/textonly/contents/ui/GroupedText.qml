@@ -37,6 +37,17 @@ ColumnLayout {
     property real totalHeight
     property int updateRateLimit
 
+    readonly property real contentWidth: {
+        let w = 0
+        for (let i in children) {
+            let child = children[i]
+            if (child.hasOwnProperty("preferredWidth")) {
+                w = Math.max(w, child.preferredWidth)
+            }
+        }
+        return w
+    }
+
     Repeater {
         model: root.showGroups ? root.totalSensorIds : 1
 
@@ -45,6 +56,8 @@ ColumnLayout {
             property var sensors: []
             property bool useFullName: true
             property var colorSource
+
+            readonly property alias preferredWidth: legend.preferredWidth
 
             Kirigami.Heading {
                 text: groupSensor.formattedValue
