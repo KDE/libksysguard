@@ -72,6 +72,8 @@ ColumnLayout {
                 id: legend
 
                 Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.maximumHeight: implicitHeight
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                 horizontalSpacing: Kirigami.Units.gridUnit
