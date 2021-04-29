@@ -303,6 +303,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     vmPSSSensor->setUnit(KSysGuard::UnitKiloByte);
     vmPSSSensor->setMin(0);
     vmPSSSensor->setMax(totalPhysicalMemory());
+    vmPSSSensor->setRequiredUpdateFlags(Processes::Smaps);
     vmPSSSensor->setDescription(i18n("This is an approximation of the real amount of physical memory that this process is using. It is calculated by dividing the process' shared memory usage by the amount of processes sharing that memory, then adding the process' private memory."));
     d->m_coreAttributes << vmPSSSensor;
 
@@ -319,52 +320,63 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
 
     auto ioCharactersReadSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersRead"), i18n("IO Characters Read"), &KSysGuard::Process::ioCharactersRead, KSysGuard::Process::IO);
     ioCharactersReadSensor->setUnit(KSysGuard::UnitByte);
+    ioCharactersReadSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioCharactersReadSensor;
 
     auto ioCharactersWrittenSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersWritten"), i18n("IO Characters Written"), &KSysGuard::Process::ioCharactersWritten, KSysGuard::Process::IO);
     ioCharactersWrittenSensor->setUnit(KSysGuard::UnitByte);
+    ioCharactersWrittenSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioCharactersWrittenSensor;
 
     auto ioReadSyscallsSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioReadSyscalls"), i18n("IO Read Syscalls"), &KSysGuard::Process::ioReadSyscalls, KSysGuard::Process::IO);
     ioReadSyscallsSensor->setUnit(KSysGuard::UnitRate);
+    ioReadSyscallsSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioReadSyscallsSensor;
 
     auto ioReadSyscallsRateSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioReadSyscallsRate"), i18n("IO Read Syscalls Rate"), &KSysGuard::Process::ioReadSyscallsRate, KSysGuard::Process::IO);
     ioReadSyscallsRateSensor->setUnit(KSysGuard::UnitRate);
+    ioReadSyscallsRateSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioReadSyscallsSensor;
 
     auto ioWriteSyscallsSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioWriteSyscalls"), i18n("IO Write Syscalls"), &KSysGuard::Process::ioWriteSyscalls, KSysGuard::Process::IO);
     ioWriteSyscallsSensor->setUnit(KSysGuard::UnitRate);
+    ioWriteSyscallsSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioWriteSyscallsSensor;
 
     auto ioWriteSyscallsRateSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioReadSyscallsRate"), i18n("IO Write Syscalls Rate"), &KSysGuard::Process::ioWriteSyscallsRate, KSysGuard::Process::IO);
     ioWriteSyscallsRateSensor->setUnit(KSysGuard::UnitRate);
+    ioWriteSyscallsRateSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioWriteSyscallsRateSensor;
 
     auto ioCharactersActuallyReadSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersActuallyRead"), i18n("IO Characters Actually Read"), &KSysGuard::Process::ioCharactersActuallyRead, KSysGuard::Process::IO);
     ioCharactersActuallyReadSensor->setUnit(KSysGuard::UnitByte);
+    ioCharactersActuallyReadSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioCharactersActuallyReadSensor;
 
     auto ioCharactersReadRateSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersReadRate"), i18n("IO Characters Read Rate"), &KSysGuard::Process::ioCharactersReadRate, KSysGuard::Process::IO);
     ioCharactersReadRateSensor->setDescription(i18n("The read rate for all of a process' IO, including disk cache and other nonphysical IO."));
     ioCharactersReadRateSensor->setUnit(KSysGuard::UnitByteRate);
+    ioCharactersReadRateSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioCharactersReadRateSensor;
 
     auto ioCharactersWrittenRateSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersWrittenRate"), i18n("IO Characters Written Rate"), &KSysGuard::Process::ioCharactersWrittenRate, KSysGuard::Process::IO);
     ioCharactersWrittenRateSensor->setDescription(i18n("The write rate for all of a process' IO, including disk cache and other nonphysical IO."));
     ioCharactersWrittenRateSensor->setUnit(KSysGuard::UnitByteRate);
+    ioCharactersWrittenRateSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioCharactersWrittenRateSensor;
 
     auto ioCharactersActuallyReadRateSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersActuallyReadRate"), i18n("Disk Read Rate"), &KSysGuard::Process::ioCharactersActuallyReadRate, KSysGuard::Process::IO);
     ioCharactersActuallyReadRateSensor->setUnit(KSysGuard::UnitByteRate);
     ioCharactersActuallyReadRateSensor->setShortName(i18n("Read"));
     ioCharactersActuallyReadRateSensor->setDescription(i18n("The rate of data being read from disk."));
+    ioCharactersActuallyReadRateSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioCharactersActuallyReadRateSensor;
 
     auto ioCharactersActuallyWrittenRateSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersActuallyWrittenRate"), i18n("Disk Write Rate"), &KSysGuard::Process::ioCharactersActuallyWrittenRate, KSysGuard::Process::IO);
     ioCharactersActuallyWrittenRateSensor->setUnit(KSysGuard::UnitByteRate);
     ioCharactersActuallyWrittenRateSensor->setShortName(i18n("Write"));
     ioCharactersActuallyWrittenRateSensor->setDescription(i18n("The rate of data being written to the disk."));
+    ioCharactersActuallyWrittenRateSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioCharactersActuallyWrittenRateSensor;
 
     auto numThreadsSensor = new ProcessSensor<int>(this, QStringLiteral("numThreads"), i18n("Threads"), &KSysGuard::Process::numThreads, KSysGuard::Process::NumThreads, ForwardFirstEntry);
