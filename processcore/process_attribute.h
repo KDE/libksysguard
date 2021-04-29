@@ -22,6 +22,7 @@
 #include <QVariant>
 
 #include "unit.h"
+#include "processes.h"
 
 namespace KSysGuard {
 
@@ -92,6 +93,16 @@ public:
      */
     bool isVisibleByDefault() const;
     void setVisibleByDefault(bool visible);
+
+    /**
+     * Which update steps are required for this attribute to correctly report its data.
+     *
+     * This can be used to determine which flags should be used when calling
+     * Processes::updateAllProcesses() . By default this will be
+     * Processess::StandardInformation.
+     */
+    Processes::UpdateFlags requiredUpdateFlags() const;
+    void setRequiredUpdateFlags(Processes::UpdateFlags flags);
 
     /**
      * The last stored value for a given process

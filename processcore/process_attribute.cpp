@@ -41,6 +41,8 @@ public:
     int m_watchCount = 0;
 
     bool m_defaultVisible = false;
+
+    Processes::UpdateFlags m_updateFlags = Processes::StandardInformation;
 };
 
 ProcessAttribute::ProcessAttribute(const QString &id, QObject *parent)
@@ -138,6 +140,16 @@ bool KSysGuard::ProcessAttribute::isVisibleByDefault() const
 void KSysGuard::ProcessAttribute::setVisibleByDefault(bool visible)
 {
     d->m_defaultVisible = visible;
+}
+
+Processes::UpdateFlags ProcessAttribute::requiredUpdateFlags() const
+{
+    return d->m_updateFlags;
+}
+
+void ProcessAttribute::setRequiredUpdateFlags(Processes::UpdateFlags flags)
+{
+    d->m_updateFlags = flags;
 }
 
 QVariant ProcessAttribute::data(KSysGuard::Process *process) const
