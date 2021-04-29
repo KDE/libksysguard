@@ -111,7 +111,7 @@ ColumnLayout {
 
                     Charts.LegendLayout.minimumWidth: minimumWidth
                     Charts.LegendLayout.preferredWidth: preferredWidth
-                    Charts.LegendLayout.maximumWidth: Math.max(preferredWidth, Kirigami.Units.gridUnit * 15)
+                    Charts.LegendLayout.maximumWidth: Math.max(preferredWidth, Kirigami.Units.gridUnit * 17)
                 }
             }
 
