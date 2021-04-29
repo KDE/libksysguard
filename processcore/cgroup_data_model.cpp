@@ -400,9 +400,14 @@ void CGroupDataModel::update()
 
     d->m_oldGroups = d->m_cgroupMap;
 
+    Processes::UpdateFlags flags;
+    for (auto attribute : qAsConst(d->m_enabledAttributes)) {
+        flags |= attribute->requiredUpdateFlags();
+    }
+
     // In an ideal world we would only the relevant process
     // but Ksysguard::Processes doesn't handle that very well
-    d->m_processes->updateAllProcesses(d->m_updateTimer->interval());
+    d->m_processes->updateAllProcesses(d->m_updateTimer->interval(), flags);
 
     update(d->m_rootGroup.data());
 

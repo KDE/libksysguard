@@ -345,7 +345,12 @@ void ProcessDataModel::Private::endRemoveRow()
 
 void ProcessDataModel::Private::update()
 {
-    m_processes->updateAllProcesses(m_updateInterval, KSysGuard::Processes::StandardInformation | KSysGuard::Processes::IOStatistics);
+    Processes::UpdateFlags flags;
+    for (auto attribute : qAsConst(m_enabledAttributes)) {
+        flags |= attribute->requiredUpdateFlags();
+    }
+
+    m_processes->updateAllProcesses(m_updateInterval, flags);
 }
 
 QModelIndex ProcessDataModel::Private::getQModelIndex(KSysGuard::Process *process, int column) const
