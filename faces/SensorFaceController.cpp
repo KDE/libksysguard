@@ -389,15 +389,19 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
 SensorFaceController::~SensorFaceController()
 {
     auto forceSave = d->faceProperties.readEntry(QStringLiteral("ForceSaveOnDestroy"), false);
-    if (!d->shouldSync && !forceSave) {
-        // If we should not sync automatically, clear all changes before we
-        // destroy the config objects, otherwise they will be written during
-        // destruction.
-        d->appearanceGroup.markAsClean();
-        d->colorsGroup.markAsClean();
-        if (d->faceConfigLoader && d->faceConfigLoader->isSaveNeeded()) {
-            d->faceConfigLoader->load();
+    if (!forceSave) {
+        if (!d->shouldSync) {
+            // If we should not sync automatically, clear all changes before we
+            // destroy the config objects, otherwise they will be written during
+            // destruction.
+            d->appearanceGroup.markAsClean();
+            d->colorsGroup.markAsClean();
+            if (d->faceConfigLoader && d->faceConfigLoader->isSaveNeeded()) {
+                d->faceConfigLoader->load();
+            }
         }
+    } else {
+        d->faceConfigLoader->save();
     }
 }
 
