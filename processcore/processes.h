@@ -64,7 +64,8 @@ namespace KSysGuard
         enum UpdateFlag {
             StandardInformation = 1,
             IOStatistics = 2,
-            XMemory = 4
+            XMemory = 4,
+            Smaps = 8,
         };
         Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
 

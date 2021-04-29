@@ -552,13 +552,15 @@ bool ProcessesLocal::updateProcessInfo( long pid, Process *process)
     bool success = true;
     const QString dir = QLatin1String("/proc/") + QString::number(pid) + QLatin1Char('/');
 
-    auto runnable = new ReadProcSmapsRunnable{dir};
+    if (mUpdateFlags.testFlag(Processes::Smaps)) {
+        auto runnable = new ReadProcSmapsRunnable{dir};
 
-    connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid, runnable](qulonglong pss) {
-        Q_EMIT processUpdated(pid, { { Process::VmPSS, pss } });
-    });
+        connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid, runnable](qulonglong pss) {
+            Q_EMIT processUpdated(pid, { { Process::VmPSS, pss } });
+        });
 
-    QThreadPool::globalInstance()->start(runnable);
+        QThreadPool::globalInstance()->start(runnable);
+    }
 
     if(!d->readProcStat(dir, process)) success = false;
     if(!d->readProcStatus(dir, process)) success = false;
