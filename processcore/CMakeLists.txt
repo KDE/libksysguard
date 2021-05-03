@@ -35,7 +35,7 @@ target_link_libraries(processcore
     KF5::AuthCore
     KF5::CoreAddons
     KF5::Service
-    ${ZLIB_LIBRARIES}
+    ZLIB::ZLIB
 )
 
 if( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
