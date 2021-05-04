@@ -68,8 +68,8 @@ if(NOT HAVE_CLOCK_GETTIME_C)
     target_link_libraries(processui PRIVATE rt)
 endif()
 
-set_target_properties(processui
-   PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING}
+set_target_properties(processui PROPERTIES
+   VERSION ${KSYSGUARD_VERSION}
    SOVERSION ${KSYSGUARD_SOVERSION}
    EXPORT_NAME ProcessUi
 )

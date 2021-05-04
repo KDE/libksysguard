@@ -55,7 +55,7 @@ target_link_libraries(Sensors
 
 set_target_properties(Sensors PROPERTIES
     LIBRARY_OUTPUT_NAME KSysGuardSensors
-    VERSION ${KSYSGUARD_VERSION_STRING}
+    VERSION ${KSYSGUARD_VERSION}
     SOVERSION ${KSYSGUARD_SENSORS_SOVERSION}
 )
 

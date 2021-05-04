@@ -52,7 +52,11 @@ target_include_directories(processcore
         "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
         "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard>"
 )
-set_target_properties(processcore PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING} SOVERSION ${KSYSGUARD_SOVERSION} EXPORT_NAME ProcessCore)
+set_target_properties(processcore PROPERTIES
+    VERSION ${KSYSGUARD_VERSION}
+    SOVERSION ${KSYSGUARD_SOVERSION}
+    EXPORT_NAME ProcessCore
+)
 install(TARGETS processcore EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 add_subdirectory(declarative)

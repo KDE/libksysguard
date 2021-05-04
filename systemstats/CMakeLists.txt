@@ -47,7 +47,7 @@ generate_export_header(SystemStats)
 
 set_target_properties(SystemStats PROPERTIES
     LIBRARY_OUTPUT_NAME KSysGuardSystemStats
-    VERSION ${KSYSGUARD_VERSION_STRING}
+    VERSION ${KSYSGUARD_VERSION}
     SOVERSION ${SystemStats_SOVERSION}
 )
 

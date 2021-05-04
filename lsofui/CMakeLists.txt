@@ -18,7 +18,11 @@ target_link_libraries(lsofui
     PRIVATE
         KF5::I18n
 )
-set_target_properties(lsofui PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING} SOVERSION ${KSYSGUARD_SOVERSION} EXPORT_NAME LsofUi)
+set_target_properties(lsofui PROPERTIES
+    VERSION ${KSYSGUARD_VERSION}
+    SOVERSION ${KSYSGUARD_SOVERSION}
+    EXPORT_NAME LsofUi
+)
 install(TARGETS lsofui EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############

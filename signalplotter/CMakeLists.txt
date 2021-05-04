@@ -19,8 +19,8 @@ target_link_libraries(ksignalplotter
         KSysGuard::ProcessCore
 )
 
-set_target_properties(ksignalplotter
-   PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING}
+set_target_properties(ksignalplotter PROPERTIES
+   VERSION ${KSYSGUARD_VERSION}
    SOVERSION ${KSYSGUARD_SOVERSION}
    EXPORT_NAME SignalPlotter
 )

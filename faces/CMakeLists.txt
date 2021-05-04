@@ -55,7 +55,7 @@ target_link_libraries(SensorFaces
 
 set_target_properties(SensorFaces PROPERTIES
     LIBRARY_OUTPUT_NAME KSysGuardSensorFaces
-    VERSION ${KSYSGUARD_VERSION_STRING}
+    VERSION ${KSYSGUARD_VERSION}
     SOVERSION ${KSYSGUARD_SENSORS_SOVERSION}
 )
 

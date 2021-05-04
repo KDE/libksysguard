@@ -35,7 +35,11 @@ target_link_libraries(ksgrd
         KSysGuard::ProcessCore
 )
 
-set_target_properties(ksgrd PROPERTIES VERSION ${KSYSGUARD_VERSION_STRING} SOVERSION ${KSYSGUARD_SOVERSION} EXPORT_NAME SysGuard)
+set_target_properties(ksgrd PROPERTIES
+    VERSION ${KSYSGUARD_VERSION}
+    SOVERSION ${KSYSGUARD_SOVERSION}
+    EXPORT_NAME SysGuard
+)
 install(TARGETS ksgrd EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES

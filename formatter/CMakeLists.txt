@@ -39,7 +39,7 @@ target_include_directories(Formatter
 
 set_target_properties(Formatter PROPERTIES
     LIBRARY_OUTPUT_NAME KSysGuardFormatter
-    VERSION ${KSYSGUARD_VERSION_STRING}
+    VERSION ${KSYSGUARD_VERSION}
     SOVERSION ${Formatter_SOVERSION}
 )
 
