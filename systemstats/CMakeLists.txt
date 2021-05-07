@@ -23,7 +23,7 @@ set(systemstats_HDRS
 )
 
 set_source_files_properties(org.kde.ksystemstats.xml PROPERTIES INCLUDE SensorInfo.h)
-qt5_add_dbus_interface(dbusinterface_SRCS org.kde.ksystemstats.xml org.kde.ksystemstats)
+qt_add_dbus_interface(dbusinterface_SRCS org.kde.ksystemstats.xml org.kde.ksystemstats)
 
 # Symbol visibility trickery: We cannot generate the DBus interface class with
 # the right export macro, so instead create it as a static library with the right

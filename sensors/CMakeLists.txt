@@ -29,7 +29,7 @@ ecm_qt_declare_logging_category(sensors_LIB_SRCS
 )
 
 set_source_files_properties(org.kde.KSysGuardDaemon.xml PROPERTIES INCLUDE ../systemstats/SensorInfo.h)
-qt5_add_dbus_interface(sensors_LIB_SRCS org.kde.KSysGuardDaemon.xml ksysguarddaemon)
+qt_add_dbus_interface(sensors_LIB_SRCS org.kde.KSysGuardDaemon.xml ksysguarddaemon)
 
 add_library(Sensors ${sensors_LIB_SRCS})
 add_library(KSysGuard::Sensors ALIAS Sensors)
