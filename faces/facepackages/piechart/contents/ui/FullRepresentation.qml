@@ -39,7 +39,7 @@ Faces.SensorFace {
     Layout.preferredWidth: titleMetrics.width
 
     contentItem: ColumnLayout {
-        spacing: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+        spacing: Kirigami.Units.largeSpacing
         Kirigami.Heading {
             id: heading
             Layout.fillWidth: true
