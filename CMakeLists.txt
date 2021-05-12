@@ -53,6 +53,8 @@ set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed 
                        TYPE REQUIRED
                       )
 
+find_package(Sensors REQUIRED)
+
 check_library_exists(c clock_gettime "time.h" HAVE_CLOCK_GETTIME_C)
 
 ecm_setup_version(${PROJECT_VERSION}

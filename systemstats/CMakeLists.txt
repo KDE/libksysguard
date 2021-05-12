@@ -39,9 +39,11 @@ target_include_directories(SystemStats
     PUBLIC
     "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
     "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard/>"
+    PRIVATE
+    ${SENSORS_INCLUDE_DIR}
 )
 
-target_link_libraries(SystemStats PUBLIC Qt::Core Qt::DBus KSysGuard::Formatter PRIVATE dbusinterface)
+target_link_libraries(SystemStats PUBLIC Qt::Core Qt::DBus KSysGuard::Formatter PRIVATE dbusinterface ${SENSORS_LIBRARIES})
 
 generate_export_header(SystemStats)
 

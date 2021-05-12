@@ -66,6 +66,13 @@ public:
      */
     void addContainer(SensorContainer *container);
 
+    /**
+     * Init libsensors. Call this function if you want to use libsensors in your plugin.
+     * @warning Plugins must never call sensors_init or sensors_cleanup themselves because other
+     * plugins might also be using libsensors.
+     */
+    static bool initLibSensors();
+
 private:
     class Private;
     const std::unique_ptr<Private> d;

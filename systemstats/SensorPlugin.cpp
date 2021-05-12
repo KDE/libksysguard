@@ -19,6 +19,8 @@
 
 #include "SensorPlugin.h"
 
+#include <sensors/sensors.h>
+
 using namespace KSysGuard;
 
 class Q_DECL_HIDDEN SensorPlugin::Private
@@ -54,3 +56,13 @@ void SensorPlugin::addContainer(SensorContainer *container)
 {
     d->containers << container;
 }
+
+bool KSysGuard::SensorPlugin::initLibSensors()
+{
+    static bool inited = false;
+    if (!inited) {
+        inited = sensors_init(nullptr) == 0;
+    }
+    return inited;
+}
+
