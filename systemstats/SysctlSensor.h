@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <SensorProperty.h>
+#include "SensorProperty.h"
 
 namespace KSysGuard
 {
