@@ -21,6 +21,11 @@
 
 #include "SensorProperty.h"
 
+#ifdef Q_OS_FREEBSD
+#include <sys/types.h>
+#include <sys/sysctl.h>
+#endif
+
 namespace KSysGuard
 {
 
@@ -58,8 +63,6 @@ private:
 };
 
 #ifdef Q_OS_FREEBSD
-#include <sys/types.h>
-#include <sys/sysctl.h>
 
 template <typename T>
 SysctlSensor<T>::SysctlSensor(const QString& id, const QByteArray &sysctlName, SensorObject* parent)
