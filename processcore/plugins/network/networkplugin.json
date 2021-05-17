@@ -6,6 +6,8 @@
         "Description[de]": "Netzwerknutzung je Programm",
         "Description[es]": "Uso de red por aplicación",
         "Description[fr]": "Usage du réseau par application",
+        "Description[it]": "Uso della rete per applicazione",
+        "Description[ko]": "프로그램별 네트워크 사용량",
         "Description[nl]": "Netwerkgebruik per toepassing",
         "Description[pl]": "Wykorzystanie sieci wg aplikacji",
         "Description[pt]": "Utilização da rede por aplicação",
