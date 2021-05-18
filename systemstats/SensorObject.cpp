@@ -21,6 +21,8 @@
 
 #include "SensorContainer.h"
 
+#include <QTimer>
+
 using namespace KSysGuard;
 
 class Q_DECL_HIDDEN SensorObject::Private
@@ -47,7 +49,7 @@ SensorObject::SensorObject(const QString &id, const QString &name, SensorContain
     d->name = name;
 
     if (parent) {
-        parent->addObject(this);
+        QMetaObject::invokeMethod(parent, [this, parent] {parent->addObject(this);}, Qt::QueuedConnection);
     }
 }
 
