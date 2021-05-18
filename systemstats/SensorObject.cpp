@@ -21,8 +21,6 @@
 
 #include "SensorContainer.h"
 
-#include <QTimer>
-
 using namespace KSysGuard;
 
 class Q_DECL_HIDDEN SensorObject::Private

@@ -225,7 +225,14 @@ void AggregateSensor::updateSensors()
     while (itr != d->sensors.end()) {
         if (!itr.value()) {
             itr = d->sensors.erase(itr);
-        } else {
+        } else if (itr.value()->parent() && itr.value()->parent()->parent() != d->subsystem){
+            itr.value()->disconnect(this);
+            if (isSubscribed()) {
+                itr.value()->unsubscribe();
+            }
+            itr = d->sensors.erase(itr);
+        }
+        else {
             ++itr;
         }
     }
