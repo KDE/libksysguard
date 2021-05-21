@@ -314,7 +314,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     commandSensor->setDescription(i18n("The command with which this process was launched."));
     d->m_coreAttributes << commandSensor;
 
-    auto statusSensor = new ProcessSensor<uint>(this, QStringLiteral("status"), i18n("Status"), &KSysGuard::Process::status, KSysGuard::Process::Status);
+    auto statusSensor = new ProcessSensor<QString>(this, QStringLiteral("status"), i18n("Status"), &KSysGuard::Process::translatedStatus, KSysGuard::Process::Status);
     d->m_coreAttributes << statusSensor;
 
     auto ioCharactersReadSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("ioCharactersRead"), i18n("IO Characters Read"), &KSysGuard::Process::ioCharactersRead, KSysGuard::Process::IO);
