@@ -4,6 +4,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
+                "Name[az]": "Marco Martin",
                 "Name[ca@valencia]": "Marco Martin",
                 "Name[ca]": "Marco Martin",
                 "Name[cs]": "Marco Martin",
@@ -33,6 +34,7 @@
             {
                 "Email": "aseigo@kde.org",
                 "Name": "Aaron Seigo",
+                "Name[az]": "Aaron Seigo",
                 "Name[ca@valencia]": "Aaron Seigo",
                 "Name[ca]": "Aaron Seigo",
                 "Name[cs]": "Aaron Seigo",
@@ -63,6 +65,7 @@
         ],
         "Id": "KSysguard/SensorFace",
         "Name": "Face for the KSysguard Sensor Face",
+        "Name[az]": "KSysguard sensoru üçün üzlük",
         "Name[ca@valencia]": "Cara per al sensor de cares del KSysguard",
         "Name[ca]": "Cara per al sensor de cares del KSysguard",
         "Name[en_GB]": "Face for the KSysguard Sensor Face",
