@@ -439,8 +439,12 @@ void CGroupDataModel::update(CGroup *node)
         }
     });
 
-
-    for (const auto& entry : fs::directory_iterator(path.toUtf8().data())) {
+    std::error_code error;
+    const fs::directory_iterator iterator(path.toUtf8().data(), error);
+    if (error) {
+        return;
+    }
+    for (const auto& entry : iterator) {
         if (!entry.is_directory()) {
             continue;
         }
