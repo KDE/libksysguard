@@ -23,7 +23,7 @@ Faces.SensorFace {
     readonly property bool showLegend: controller.faceConfiguration.showLegend
 
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8
-    Layout.preferredWidth: titleMetrics.width
+    Layout.preferredWidth: titleMetrics.width + Kirigami.Units.largeSpacing
 
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.largeSpacing
