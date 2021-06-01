@@ -89,6 +89,8 @@ ChartControls.PieChartControl {
     UsedTotalDisplay {
         anchors.fill: parent
 
+        visible: root.controller.totalSensors.length > 0
+
         usedSensor: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
         totalSensor: root.controller.totalSensors.length > 1 ? root.controller.totalSensors[1] : ""
 
