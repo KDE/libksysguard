@@ -81,7 +81,10 @@ ChartControls.PieChartControl {
     }
 
     UsedTotalDisplay {
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: height
 
         visible: root.controller.totalSensors.length > 0
 
