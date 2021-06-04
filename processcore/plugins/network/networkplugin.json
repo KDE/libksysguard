@@ -15,6 +15,7 @@
         "Description[sl]": "Uporaba mreže po aplikacijah",
         "Description[sv]": "Nätverksanvändning per program",
         "Description[uk]": "Використання мережі окремими програмами",
-        "Description[x-test]": "xxPer-application network usagexx"
+        "Description[x-test]": "xxPer-application network usagexx",
+        "Description[zh_CN]": "单个应用程序的网络使用率"
     }
 }
