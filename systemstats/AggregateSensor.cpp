@@ -212,14 +212,6 @@ void AggregateSensor::updateSensors()
     if (!d->matchObjects.isValid()) {
         return;
     }
-    for (auto obj : d->subsystem->objects()) {
-        if (d->matchObjects.match(obj->id()).hasMatch()) {
-            auto sensor = obj->sensor(d->matchProperty);
-            if (sensor) {
-                addSensor(sensor);
-            }
-        }
-    }
 
     auto itr = d->sensors.begin();
     while (itr != d->sensors.end()) {
@@ -236,6 +228,16 @@ void AggregateSensor::updateSensors()
             ++itr;
         }
     }
+
+    for (auto obj : d->subsystem->objects()) {
+        if (d->matchObjects.match(obj->id()).hasMatch()) {
+            auto sensor = obj->sensor(d->matchProperty);
+            if (sensor) {
+                addSensor(sensor);
+            }
+        }
+    }
+
 
     delayedEmitDataChanged();
 }
