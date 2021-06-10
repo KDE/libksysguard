@@ -45,7 +45,6 @@ namespace KSysGuard
       void markProcessesAsEnded(long pid);
 
       QSet<long> mToBeProcessed;
-      QSet<long> mProcessedLastTime;
       QSet<long> mEndedProcesses; ///< Processes that have finished
 
       QHash<long, Process *> mProcesses; ///< This must include mFakeProcess at pid -1
@@ -283,7 +282,6 @@ bool Processes::updateOrAddProcess( long pid)
     if(d->mToBeProcessed.contains(ppid)) {
         //Make sure that we update the parent before we update this one.  Just makes things a bit easier.
         d->mToBeProcessed.remove(ppid);
-        d->mProcessedLastTime.remove(ppid); //It may or may not be here - remove it if it is there
         updateOrAddProcess(ppid);
     }
 
@@ -324,29 +322,32 @@ void Processes::processesUpdated() {
         d->mToBeProcessed = d->mAbstractProcesses->getAllPids();
 
 
-    QSet<long> beingProcessed(d->mToBeProcessed); //keep a copy so that we can replace mProcessedLastTime with this at the end of this function
+    QSet<long> endedProcesses;
+    for (Process* p : d->mListProcesses) {
+        if (!d->mToBeProcessed.contains(p->pid())) {
+            endedProcesses += p->pid();
+        }
+    }
 
     {
         QMutableSetIterator<long> i(d->mToBeProcessed);
         while( i.hasNext()) {
             pid = i.next();
             i.remove();
-            d->mProcessedLastTime.remove(pid); //It may or may not be here - remove it if it is there
             updateOrAddProcess(pid);  //This adds the process or changes an existing one
             i.toFront(); //we can remove entries from this set elsewhere, so our iterator might be invalid.  Reset it back to the start of the set
         }
     }
     {
-        QSetIterator<long> i(d->mProcessedLastTime);
+        QSetIterator<long> i(endedProcesses);
         while( i.hasNext()) {
             //We saw these pids last time, but not this time.  That means we have to mark them for deletion now
             pid = i.next();
             d->markProcessesAsEnded(pid);
         }
-        d->mEndedProcesses = d->mProcessedLastTime;
+        d->mEndedProcesses = endedProcesses;
     }
 
-    d->mProcessedLastTime = beingProcessed;  //update the set for next time this function is called
     emit updated();
 }
 
