@@ -16,6 +16,7 @@
 #include <QByteArray>
 #include <QTextStream>
 #include <QThreadPool>
+#include <QDir>
 
 //for sysconf
 #include <unistd.h>
@@ -596,18 +597,34 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority) {
     if (pid <= 0) {
         return Processes::InvalidPid;
     }
-    if (setpriority( PRIO_PROCESS, pid, priority )) {
-        switch (errno) {
+    auto error =
+        [this] {
+            switch (errno) {
             case ESRCH:
+            case ENOENT:
                 return Processes::ProcessDoesNotExistOrZombie;
             case EINVAL:
                 return Processes::InvalidParameter;
             case EACCES:
             case EPERM:
                 return Processes::InsufficientPermissions;
+            default:
+                return Processes::Unknown;
+            }
+        };
+    auto threadList { QDir(QString::fromLatin1("/proc/%1/task").arg(pid)).
+                     entryList( QDir::NoDotAndDotDot | QDir::Dirs ) };
+    if (threadList.isEmpty()) {
+        return error();
+    }
+    for (auto entry : threadList) {
+        int threadId = entry.toInt();
+        if (!threadId) {
+            return Processes::InvalidParameter;
         }
-        //set niceness failed
-        return Processes::Unknown;
+        if (setpriority( PRIO_PROCESS, threadId, priority )) {
+            return error();
+        }
     }
     return Processes::NoError;
 }
@@ -646,16 +663,33 @@ Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int p
           return Processes::NotSupported;
     }
 
-    if (sched_setscheduler( pid, policy, &params) != 0) {
-        switch (errno) {
+    auto error =
+        [this] {
+            switch (errno) {
             case ESRCH:
+            case ENOENT:
                 return Processes::ProcessDoesNotExistOrZombie;
             case EINVAL:
                 return Processes::InvalidParameter;
             case EPERM:
                 return Processes::InsufficientPermissions;
+            default:
+                return Processes::Unknown;
+            }
+        };
+    auto threadList { QDir(QString::fromLatin1("/proc/%1/task").arg(pid)).
+                     entryList( QDir::NoDotAndDotDot | QDir::Dirs ) };
+    if (threadList.isEmpty()) {
+        return error();
+    }
+    for (auto entry : threadList) {
+        int threadId = entry.toInt();
+        if (!threadId) {
+            return Processes::InvalidParameter;
         }
-        return Processes::Unknown;
+        if (sched_setscheduler( threadId, policy, &params) != 0) {
+            return error();
+        }
     }
     return Processes::NoError;
 }
