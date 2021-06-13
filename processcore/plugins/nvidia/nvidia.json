@@ -4,6 +4,7 @@
         "Description[az]": "Nvidia kartları üçün hər bir prosesə GPU mənbələrinin statistikası",
         "Description[ca]": "Estadístiques dels recursos de GPU per procés per a les targetes Nvidia",
         "Description[de]": "Statistik der GPU-Ressourcen je Prozess für Nvidia-Grafikkarten",
+        "Description[en_GB]": "Stats of per-process GPU resources for Nvidia cards",
         "Description[es]": "Estadísticas de recursos de GPU por proceso para tarjetas Nvidia",
         "Description[fr]": "Statistiques des ressources « GPU » par processus pour des cartes nVidia.",
         "Description[it]": "Statistiche per processo delle risorse GPU per le schede Nvidia",
