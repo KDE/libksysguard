@@ -8,6 +8,9 @@
 #include <QTreeView>
 #include <QtCore>
 #include <QtTestGui>
+#include <QProcess>
+
+#include <limits>
 
 #include "processcore/process.h"
 #include "processcore/processes.h"
@@ -17,6 +20,97 @@
 #include "processui/ksysguardprocesslist.h"
 
 #include "processtest.h"
+
+Q_DECLARE_METATYPE(KSysGuard::Process::Scheduler);
+Q_DECLARE_METATYPE(KSysGuard::Process::IoPriorityClass);
+
+void testProcess::testSetScheduler_data()
+{
+    QTest::addColumn<int>("priority");
+    QTest::addColumn<KSysGuard::Process::Scheduler>("scheduler");
+    QTest::addColumn<bool>("niceness");
+
+    QTest::addRow("normal, 0") << 0 << KSysGuard::Process::Scheduler::Other << true;
+    QTest::addRow("normal, 5") << 5 << KSysGuard::Process::Scheduler::Other << true;
+
+    QTest::addRow("batch, 0") << 0 << KSysGuard::Process::Scheduler::Batch << true;
+    QTest::addRow("batch, 5") << 5 << KSysGuard::Process::Scheduler::Batch << true;
+
+    QTest::addRow("idle, 0") << 0 << KSysGuard::Process::Scheduler::SchedulerIdle << false;
+
+    QTest::addRow("rr, 5") << 5 << KSysGuard::Process::Scheduler::RoundRobin << false;
+
+    QTest::addRow("fifo, 5") << 5 << KSysGuard::Process::Scheduler::Fifo << false;
+}
+
+void testProcess::testSetScheduler()
+{
+    QFETCH(int, priority);
+    QFETCH(KSysGuard::Process::Scheduler, scheduler);
+    QFETCH(bool, niceness);
+
+    KSysGuard::Processes *processController = new KSysGuard::Processes();
+
+    QProcess proc;
+    proc.start(QStringLiteral("sleep"), {QStringLiteral("100")});
+    QVERIFY(proc.waitForStarted());
+
+    int pid=proc.processId();
+    QVERIFY(pid);
+
+    if (!processController->setScheduler(pid, scheduler, priority))
+        QSKIP("skipping verfifcation because setScheduler failed");
+
+    if (niceness && !processController->setNiceness(pid, priority))
+        QSKIP("skipping verfifcation because setNiceness failed");
+
+    processController->updateAllProcesses();
+    KSysGuard::Process* process = processController->getProcess(pid);
+
+    QVERIFY(process);
+    QCOMPARE(process->scheduler(), scheduler);
+    QCOMPARE(process->niceLevel(), priority);
+}
+
+void testProcess::testSetIoScheduler_data()
+{
+    QTest::addColumn<int>("priority");
+    QTest::addColumn<KSysGuard::Process::IoPriorityClass>("prioClass");
+
+    QTest::addRow("idle, 0") << 0 << KSysGuard::Process::Idle;
+    QTest::addRow("idle, 5") << 5 << KSysGuard::Process::Idle;
+
+    QTest::addRow("best-effort, 0") << 0 << KSysGuard::Process::BestEffort;
+    QTest::addRow("best-effort, 5") << 5 << KSysGuard::Process::BestEffort;
+
+    QTest::addRow("rt, 0") << 0 << KSysGuard::Process::RealTime;
+    QTest::addRow("rt, 5") << 5 << KSysGuard::Process::RealTime;
+}
+
+void testProcess::testSetIoScheduler()
+{
+    QFETCH(int, priority);
+    QFETCH(KSysGuard::Process::IoPriorityClass, prioClass);
+
+    KSysGuard::Processes *processController = new KSysGuard::Processes();
+
+    QProcess proc;
+    proc.start(QStringLiteral("sleep"), {QStringLiteral("100")});
+    QVERIFY(proc.waitForStarted());
+
+    int pid=proc.processId();
+    QVERIFY(pid);
+
+    if (!processController->setIoNiceness(pid, prioClass, priority))
+        QSKIP("skipping verfifcation because setNiceness failed");
+
+    processController->updateAllProcesses();
+    KSysGuard::Process* process = processController->getProcess(pid);
+
+    QVERIFY(process);
+    QCOMPARE(process->ioPriorityClass(), prioClass);
+    QCOMPARE(process->ioniceLevel(), priority);
+}
 
 void testProcess::testProcesses()
 {
@@ -68,16 +162,35 @@ void testProcess::testProcessesTreeStructure()
 {
     KSysGuard::Processes *processController = new KSysGuard::Processes();
     processController->updateAllProcesses();
-    QList<KSysGuard::Process *> processes = processController->getAllProcesses();
 
-    Q_FOREACH (KSysGuard::Process *process, processes) {
-        QCOMPARE(countNumChildren(process), process->numChildren());
+    auto verify_counts = [this](const auto processes) {
+        Q_FOREACH( KSysGuard::Process *process, processes) {
+            QCOMPARE(countNumChildren(process), process->numChildren());
 
-        for (int i = 0; i < process->children().size(); i++) {
-            QVERIFY(process->children()[i]->parent());
-            QCOMPARE(process->children()[i]->parent(), process);
+            for(int i = 0; i < process->children().size(); i++) {
+                QVERIFY(process->children()[i]->parent());
+                QCOMPARE(process->children()[i]->parent(), process);
+            }
         }
-    }
+    };
+
+    verify_counts(processController->getAllProcesses());
+
+    // this should test if the children accounting isn't off on updates
+    QProcess proc;
+    proc.start(QStringLiteral("/bin/sh"), {QStringLiteral("-c"), QStringLiteral("sleep 100& (sleep 50; sleep 50) & while true; do :; done")});
+    QVERIFY(proc.waitForStarted());
+    QTest::qSleep(2000);
+
+    processController->updateAllProcesses();
+    verify_counts(processController->getAllProcesses());
+
+    proc.terminate();
+
+    QVERIFY(proc.waitForFinished());
+    processController->updateAllProcesses();
+    verify_counts(processController->getAllProcesses());
+
     delete processController;
 }
 
@@ -193,6 +306,14 @@ void testProcess::testUpdateOrAddProcess()
     processController->updateOrAddProcess(1);
     processController->updateOrAddProcess(0);
     processController->updateOrAddProcess(-1);
+
+    processController->updateOrAddProcess(std::numeric_limits<long>::max()-1);
+    QVERIFY(processController->getProcess(std::numeric_limits<long>::max()-1));
+    processController->updateAllProcesses();
+    QVERIFY(processController->getProcess(std::numeric_limits<long>::max()-1));
+    QCOMPARE(processController->getProcess(std::numeric_limits<long>::max()-1)->status(), KSysGuard::Process::Ended);
+    processController->updateAllProcesses();
+    QVERIFY(!processController->getProcess(std::numeric_limits<long>::max()-1));
 }
 
 void testProcess::testHistoriesWithWidget()

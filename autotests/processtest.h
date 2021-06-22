@@ -27,5 +27,10 @@ private slots:
     void testHistoriesWithWidget();
     void testUpdateOrAddProcess();
     void testCPUGraphHistory();
+
+    void testSetScheduler();
+    void testSetScheduler_data();
+    void testSetIoScheduler_data();
+    void testSetIoScheduler();
 };
 #endif
