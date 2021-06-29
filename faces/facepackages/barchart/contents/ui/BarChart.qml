@@ -2,7 +2,7 @@
     SPDX-FileCopyrightText: 2019 Marco Martin <mart@kde.org>
     SPDX-FileCopyrightText: 2019 David Edmundson <davidedmundson@kde.org>
     SPDX-FileCopyrightText: 2019 Arjen Hiemstra <ahiemstra@heimr.nl>
-    Copyrigth 2019 Kai Uwe Broulik <kde@broulik.de>
+    SPDX-FileCopyrightText: 2019 Kai Uwe Broulik <kde@broulik.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */

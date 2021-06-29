@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2019 Marco Martin <mart@kde.org>
-    Copyrigth 2019 Kai Uwe Broulik <kde@broulik.de>
+    SPDX-FileCopyrightText: 2019 Kai Uwe Broulik <kde@broulik.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
