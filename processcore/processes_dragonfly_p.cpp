@@ -1,4 +1,4 @@
-/*  This file is part of the KDE project
+/*
     SPDX-FileCopyrightText: 2007 Manolo Valdes <nolis71cu@gmail.com>
     SPDX-FileCopyrightText: 2010 Alex Hornung <ahornung@gmail.com>
 

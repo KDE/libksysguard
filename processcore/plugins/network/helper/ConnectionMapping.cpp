@@ -1,5 +1,4 @@
 /*
-    This file is part of KSysGuard.
     SPDX-FileCopyrightText: 2019 Arjen Hiemstra <ahiemstra@heimr.nl>
     SPDX-FileCopyrightText: 2020 David Redondo <kde@david-redondo.de>
 

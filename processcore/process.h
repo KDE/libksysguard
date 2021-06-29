@@ -1,5 +1,4 @@
-/*  This file is part of the KDE project
-
+/*
     SPDX-FileCopyrightText: 2007 John Tapsell <tapsell@kde.org>
     SPDX-FileCopyrightText: 2015 Gregor Mi <codestruct@posteo.org>
 
