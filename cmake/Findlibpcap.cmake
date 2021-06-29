@@ -1,4 +1,4 @@
-# Copyright (c) 1995-2017, The Regents of the University of California
+# SPDX-FileCopyrightText: 1995-2017 The Regents of the University of California
 # through the Lawrence Berkeley National Laboratory and the
 # International Computer Science Institute. All rights reserved.
 #
