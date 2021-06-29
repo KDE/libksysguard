@@ -99,6 +99,7 @@ int main(int argc, char **argv)
 
     accumulator->stop();
     capture->stop();
+    mapping->stop();
 
     return 0;
 }
