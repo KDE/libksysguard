@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <array>
 #include <functional>
+#include <iostream>
 
 #include "TimeStamps.h"
 
@@ -76,6 +77,13 @@ private:
     Address m_sourceAddress;
     Address m_destinationAddress;
 };
+
+inline std::ostream& operator<<(std::ostream& stream, const Packet::Address &address)
+{
+    stream << std::hex << address.address[0] << ":" << address.address[1] << ":" << address.address[2] << ":" << address.address[3];
+    stream << std::dec << "::" << address.port;
+    return stream;
+}
 
 namespace std {
     template <> struct hash<Packet::Address>
