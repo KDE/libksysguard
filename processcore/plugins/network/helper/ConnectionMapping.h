@@ -10,6 +10,9 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <regex>
+#include <thread>
+#include <mutex>
+#include <atomic>
 
 #include <netlink/socket.h>
 
@@ -23,8 +26,11 @@ struct nl_msg;
 class ConnectionMapping
 {
 public:
+    using inode_t = uint32_t;
+    using pid_t = int;
+
     struct PacketResult {
-        int pid = 0;
+        pid_t pid = 0;
         Packet::Direction direction;
     };
 
@@ -32,20 +38,38 @@ public:
 
     PacketResult pidForPacket(const Packet &packet);
 
-private:
-    void getSocketInfo();
-    bool dumpSockets();
-    bool dumpSockets(int inet_family, int protocol);
-    void parseSockets();
-    void parsePid();
-    void parseSocketFile(const char* fileName);
+    void stop();
 
-    std::unordered_map<Packet::Address, int> m_localToINode;
-    std::unordered_map<int, int> m_inodeToPid;
-    std::unordered_set<int> m_inodes;
-    std::unordered_set<int> m_pids;
-    std::unique_ptr<nl_sock, decltype(&nl_socket_free)> m_socket;
-    std::regex m_socketFileMatch;
+private:
+    struct State
+    {
+        State &operator= (const State &other)
+        {
+            addressToInode = other.addressToInode;
+            inodeToPid = other.inodeToPid;
+
+            return *this;
+        }
+
+        std::unordered_map<Packet::Address, inode_t> addressToInode;
+        std::unordered_map<inode_t, pid_t> inodeToPid;
+    };
+
+    void loop();
+    bool dumpSockets(nl_sock *socket);
+    bool dumpSockets(nl_sock *socket, int inet_family, int protocol);
+    void parsePid();
+
+    State m_oldState;
+    State m_newState;
+
+    bool m_newInode = false;
+    std::unordered_set<Packet::Address> m_seenAddresses;
+    std::unordered_set<inode_t> m_seenInodes;
+
+    std::thread m_thread;
+    std::atomic_bool m_running;
+    std::mutex m_mutex;
 
     friend int parseInetDiagMesg(struct nl_msg *msg, void *arg);
 };
