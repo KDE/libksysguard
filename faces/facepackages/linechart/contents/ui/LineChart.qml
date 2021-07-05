@@ -26,6 +26,7 @@ import org.kde.kirigami 2.8 as Kirigami
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
 import org.kde.ksysguard.faces 1.0 as Faces
+import org.kde.ksysguard.formatter 1.0 as Formatter
 import org.kde.quickcharts 1.0 as Charts
 
 Charts.LineChart {
@@ -59,12 +60,13 @@ Charts.LineChart {
         sensors: chart.controller.highPrioritySensorIds
         updateRateLimit: chart.controller.updateRateLimit
 
+        property int unit: sensorsModel.ready ? sensorsModel.headerData(0, Qt.Horizontal, Sensors.SensorDataModel.Unit) : Formatter.Formatter.UnitInvalid
         property double stackedMaximum: yRange.stackedAuto ? calcStackedMaximum() : 0
 
         function calcStackedMaximum() {
             let max = 0
             for (let i = 0; i < sensorsModel.sensors.length; ++i) {
-                max += sensorsModel.data(sensorsModel.index(0, i), Sensors.SensorDataModel.Maximum)
+                max += sensorsModel.headerData(i, Qt.Horizontal, Sensors.SensorDataModel.Maximum)
             }
             return max
         }

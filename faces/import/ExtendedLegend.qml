@@ -73,7 +73,7 @@ ChartsControls.Legend {
             return input
         }
 
-        return Formatter.formatValueShowNull(input, sourceModel.data(sourceModel.index(0, index), SensorDataModel.Unit))
+        return Formatter.formatValueShowNull(input, sourceModel.headerData(index, Qt.Horiztonal, SensorDataModel.Unit))
     }
 
     Binding on model {
@@ -104,7 +104,7 @@ ChartsControls.Legend {
             return -1
         }
 
-        var unit = sourceModel.data(sourceModel.index(0, index), SensorDataModel.Unit)
+        var unit = sourceModel.headerData(index, Qt.Horiztonal, SensorDataModel.Unit)
         return Formatter.maximumLength(unit, legend.font)
     }
 
