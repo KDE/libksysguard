@@ -61,7 +61,7 @@ Faces.SensorFace {
                     anchors.right: parent.right
                     font: Kirigami.Theme.smallFont
                     text: Formatter.Formatter.formatValueShowNull(Charts.AxisLabels.label,
-                        compactRepresentation.sensorsModel.data(compactRepresentation.sensorsModel.index(0, 0), Sensors.SensorDataModel.Unit))
+                        compactRepresentation.sensorsModel.unit)
                     color: Kirigami.Theme.disabledTextColor
                 }
                 source: Charts.ChartAxisSource {
@@ -73,7 +73,7 @@ Faces.SensorFace {
                     id: axisMetrics
                     font: Kirigami.Theme.smallFont
                     text: Formatter.Formatter.formatValueShowNull("0",
-                        compactRepresentation.sensorsModel.data(compactRepresentation.sensorsModel.index(0, 0), Sensors.SensorDataModel.Unit))
+                        compactRepresentation.sensorsModel.unit)
                 }
             }
             LineChart {
