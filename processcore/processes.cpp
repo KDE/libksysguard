@@ -389,7 +389,6 @@ void Processes::deleteProcess(long pid)
     if(!process)
         return;
     Q_FOREACH( Process *it, process->children()) {
-        d->mProcessedLastTime.remove(it->pid());
         deleteProcess(it->pid());
     }
 
