@@ -51,6 +51,7 @@ ChartControls.PieChartControl {
             id: sensorsModel
             sensors: root.controller.highPrioritySensorIds
             updateRateLimit: chart.updateRateLimit
+            sensorLabels: root.controller.sensorLabels
         }
         roleName: "Value"
         indexColumns: true

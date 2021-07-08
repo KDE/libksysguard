@@ -72,6 +72,12 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
      * specific sensor is needed.
      */
     Q_PROPERTY(QVariantMap sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
+
+    /**
+     * Maps sensorIds to user configurable labels than should be displayed instead of the name of the sensor.
+     */
+    Q_PROPERTY(QVariantMap sensorLabels READ sensorLabels WRITE setSensorLabels NOTIFY sensorLabelsChanged)
+
     /**
      * Secondary list of sensors. These sensors do not necessarily appear in main part of the face.
      * For example in most faces they are just added to the legend.
@@ -198,6 +204,9 @@ public:
     QVariantMap sensorColors() const;
     void setSensorColors(const QVariantMap &colors);
 
+    QVariantMap sensorLabels() const;
+    void setSensorLabels(const QVariantMap &labels);
+
     int updateRateLimit() const;
     void setUpdateRateLimit(int limit);
 
@@ -255,6 +264,7 @@ Q_SIGNALS:
     void lowPrioritySensorIdsChanged();
     void sensorsChanged();
     void sensorColorsChanged();
+    void sensorLabelsChanged();
     void updateRateLimitChanged();
 
 private:

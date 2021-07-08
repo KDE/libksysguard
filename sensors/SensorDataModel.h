@@ -57,6 +57,12 @@ class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlPa
      * Used by the model to provide data for the Color role if set.
      */
     Q_PROPERTY(QVariantMap sensorColors READ sensorColors WRITE setSensorColors NOTIFY sensorColorsChanged)
+
+    /**
+     * Provides custom labels for Sensors that are used instead of the name and short name of the sensors.
+     */
+    Q_PROPERTY(QVariantMap sensorLabels READ sensorLabels WRITE setSensorLabels NOTIFY sensorLabelsChanged)
+
     /**
      * The minimum time between updates, in milliseconds.
      *
@@ -114,6 +120,10 @@ public:
     QVariantMap sensorColors() const;
     void setSensorColors(const QVariantMap &sensorColors);
     Q_SIGNAL void sensorColorsChanged();
+
+    QVariantMap sensorLabels() const;
+    void setSensorLabels(const QVariantMap &sensorLabels);
+    Q_SIGNAL void sensorLabelsChanged();
 
     int updateRateLimit() const;
     void setUpdateRateLimit(int newUpdateRateLimit);

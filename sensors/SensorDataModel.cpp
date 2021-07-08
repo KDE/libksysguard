@@ -42,6 +42,7 @@ public:
     QHash<QString, SensorInfo> sensorInfos;
     QHash<QString, QVariant> sensorData;
     QVariantMap sensorColors;
+    QVariantMap sensorLabels;
 
     bool usedByQml = false;
     bool componentComplete = false;
@@ -110,12 +111,17 @@ QVariant SensorDataModel::data(const QModelIndex &index, int role) const
     case Unit:
         return info.unit;
     case Name:
-        return info.name;
-    case ShortName:
+        return d->sensorLabels.value(sensor, info.name);
+    case ShortName: {
+        auto it = d->sensorLabels.constFind(sensor);
+        if (it != d->sensorLabels.constEnd()) {
+            return *it;
+        }
         if (info.shortName.isEmpty()) {
             return info.name;
         }
         return info.shortName;
+    }
     case Description:
         return info.description;
     case Minimum:
@@ -289,6 +295,22 @@ void SensorDataModel::setSensorColors(const QVariantMap &sensorColors)
     Q_EMIT sensorColorsChanged();
     Q_EMIT dataChanged(index(0,0), index(rowCount() - 1, columnCount() - 1), {Color});
 }
+
+QVariantMap SensorDataModel::sensorLabels() const
+{
+    return d->sensorLabels;
+}
+
+void SensorDataModel::setSensorLabels(const QVariantMap &sensorLabels)
+{
+    if (sensorLabels == d->sensorLabels) {
+        return;
+    }
+    d->sensorLabels = sensorLabels;
+    Q_EMIT sensorLabelsChanged();
+    Q_EMIT dataChanged(index(0,0), index(rowCount() - 1, columnCount() - 1), {Name, ShortName});
+}
+
 
 int SensorDataModel::updateRateLimit() const
 {

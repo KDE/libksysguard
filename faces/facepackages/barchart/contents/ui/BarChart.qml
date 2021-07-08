@@ -40,6 +40,7 @@ Charts.BarChart {
         id: sensorsModel
         sensors: root.controller.highPrioritySensorIds
         updateRateLimit: chart.updateRateLimit
+        sensorLabels: root.controller.sensorLabels
     }
 
     Instantiator {

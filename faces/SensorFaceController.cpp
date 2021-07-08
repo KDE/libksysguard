@@ -344,6 +344,7 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
     d->appearanceGroup = KConfigGroup(&config, "Appearance");
     d->sensorsGroup = KConfigGroup(&config, "Sensors");
     d->colorsGroup = KConfigGroup(&config, "SensorColors");
+    d->labelsGroup = KConfigGroup(&config, "SensorLabels");
     d->engine = engine;
     d->syncTimer = new QTimer(this);
     d->syncTimer->setSingleShot(true);
@@ -384,6 +385,7 @@ SensorFaceController::~SensorFaceController()
             // destruction.
             d->appearanceGroup.markAsClean();
             d->colorsGroup.markAsClean();
+            d->labelsGroup.markAsClean();
             if (d->faceConfigLoader && d->faceConfigLoader->isSaveNeeded()) {
                 d->faceConfigLoader->load();
             }
@@ -520,6 +522,35 @@ void SensorFaceController::setSensorColors(const QVariantMap &colors)
 
     d->syncTimer->start();
     emit sensorColorsChanged();
+}
+
+QVariantMap SensorFaceController::sensorLabels() const
+{
+    QVariantMap labels;
+    for (const auto &key : d->labelsGroup.keyList()) {
+        labels[key] = d->labelsGroup.readEntry(key);
+    }
+    return labels;
+}
+
+void SensorFaceController::setSensorLabels(const QVariantMap &labels)
+{
+    if (labels == this->sensorLabels()) {
+        return;
+    }
+
+    d->labelsGroup.deleteGroup();
+    d->labelsGroup = KConfigGroup(&d->configGroup, "SensorLabels");
+
+    for (auto it = labels.cbegin(); it != labels.cend(); ++it) {
+        const auto label = it.value().toString();
+        if (!label.isEmpty()) {
+            d->labelsGroup.writeEntry(it.key(), label);
+        }
+    }
+
+    d->syncTimer->start();
+    emit sensorLabelsChanged();
 }
 
 QJsonArray SensorFaceController::lowPrioritySensorIds() const
@@ -790,6 +821,7 @@ void SensorFaceController::reloadConfig()
     setFaceId(d->appearanceGroup.readEntry("chartFace", QStringLiteral("org.kde.ksysguard.textonly")));
     Q_EMIT titleChanged();
     Q_EMIT sensorColorsChanged();
+    Q_EMIT sensorLabelsChanged();
     Q_EMIT showTitleChanged();
     Q_EMIT updateRateLimitChanged();
 }

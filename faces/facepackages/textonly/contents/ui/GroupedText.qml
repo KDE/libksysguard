@@ -23,6 +23,7 @@ ColumnLayout {
     property var colorSource
     property real totalHeight
     property int updateRateLimit
+    property var sensorLabels
 
     readonly property real contentWidth: {
         let w = 0
@@ -86,8 +87,8 @@ ColumnLayout {
                 }
 
                 delegate: ChartsControls.LegendDelegate {
-                    name: root.showGroups ? modelData.shortName : modelData.name
-                    shortName: modelData.shortName
+                    name: root.sensorLabels[modelData.sensorId] || (root.showGroups ? modelData.shortName : modelData.name)
+                    shortName: root.sensorLabels[modelData.sensorId] || modelData.shortName
                     value: modelData.formattedValue
                     color: root.colorSource.map[modelData.sensorId]
 

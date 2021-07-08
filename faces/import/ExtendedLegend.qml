@@ -98,8 +98,8 @@ ChartsControls.Legend {
     Repeater {
         id: sensorsRepeater
         delegate: ChartsControls.LegendDelegate {
-            name: sensor.name
-            shortName: sensor.shortName
+            name: legend.sourceModel.sensorLabels[sensor.sensorId] || sensor.name
+            shortName: legend.sourceModel.sensorLabels[sensor.sensorId] || sensor.shortName
             value: sensor.formattedValue || ""
 
             indicator: Item { }

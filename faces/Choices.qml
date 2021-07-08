@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2020 Marco Martin <mart@kde.org>
     SPDX-FileCopyrightText: 2020 Arjen Hiemstra <ahiemstra@heimr.nl>
+    SPDX-FileCopyrightText: 2021 David Redondo <kde@david-redondo.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -22,9 +23,11 @@ Control {
     property int maxAllowedSensors: -1
     property var selected: []
     property var colors: {}
+    property var labels: {}
 
     signal selectColor(string sensorId)
     signal colorForSensorGenerated(string sensorId, color color)
+    signal sensorLabelChanged(string sensorId, string label)
 
     onSelectedChanged: {
         if (!control.selected) {
@@ -202,42 +205,100 @@ Control {
                             onClicked: control.selectColor(sensor.sensorId)
                         }
 
-                        Label {
-                            id: label
+                        RowLayout {
+                            id: normalLayout
+                            Label {
+                                id: label
+                                Layout.fillWidth: true
+                                text: control.labels[sensor.sensorId] || sensor.name
+                                elide: Text.ElideRight
 
-                            Layout.fillWidth: true
-                            // Have to use a separate metrics object as contentWidth will be the width of the elided text unfortunately
-                            // FIXME: why +2 is necessary?
-                            Layout.maximumWidth: labelMetrics.boundingRect.width + Kirigami.Units.gridUnit
-                            TextMetrics {
-                                id: labelMetrics
-                                text: sensor.name
-                                font: label.font
+                                HoverHandler { id: handler }
+
+                                ToolTip.text: sensor.name
+                                ToolTip.visible: handler.hovered && label.truncated
+                                ToolTip.delay: Kirigami.Units.toolTipDelay
                             }
+                            ToolButton {
+                                id: editButton
+                                icon.name: "document-edit"
+                                icon.width: Kirigami.Units.iconSizes.small
+                                icon.height: Kirigami.Units.iconSizes.small
+                                Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                                Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                                onClicked: layout.state = "editing"
+                            }
+                            ToolButton {
+                                id: removeButton
+                                icon.name: "edit-delete-remove"
+                                icon.width: Kirigami.Units.iconSizes.small
+                                icon.height: Kirigami.Units.iconSizes.small
+                                Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                                Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
 
-                            text: sensor.name
-                            elide: Text.ElideRight
-
-                            HoverHandler { id: handler }
-
-                            ToolTip.text: sensor.name
-                            ToolTip.visible: handler.hovered && label.truncated
-                            ToolTip.delay: Kirigami.Units.toolTipDelay
+                                onClicked: {
+                                    if (control.selected === undefined || control.selected === null) {
+                                        control.selected = []
+                                    }
+                                    control.selected.splice(control.selected.indexOf(sensor.sensorId), 1)
+                                    control.selectedChanged()
+                                }
+                            }
                         }
 
-                        ToolButton {
-                            icon.name: "edit-delete-remove"
-                            icon.width: Kirigami.Units.iconSizes.small
-                            icon.height: Kirigami.Units.iconSizes.small
-                            Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
-                            Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
-
-                            onClicked: {
-                                if (control.selected === undefined || control.selected === null) {
-                                    control.selected = []
+                        Loader {
+                            id: editLoader
+                            active: false
+                            visible: active
+                            focus: active
+                            Layout.fillWidth: true
+                            sourceComponent: RowLayout {
+                                id: editLayout
+                                TextField {
+                                    id: textField
+                                    Layout.fillWidth: true
+                                    text: label.text
+                                    cursorPosition: 0
+                                    focus: true
+                                    onAccepted: {
+                                        if (text == sensor.name) {
+                                            text = ""
+                                        }
+                                        sensorLabelChanged(sensor.sensorId, text)
+                                        layout.state = ""
+                                    }
                                 }
-                                control.selected.splice(control.selected.indexOf(sensor.sensorId), 1)
-                                control.selectedChanged()
+                                ToolButton {
+                                    icon.name: "checkmark"
+                                    width: Kirigami.Units.iconSizes.smallMedium
+                                    Layout.preferredHeight: textField.implicitHeight
+                                    Layout.preferredWidth: Layout.preferredHeight
+                                    onClicked: textField.accepted()
+                                }
+                            }
+                        }
+
+                        states: State {
+                            name: "editing"
+                            PropertyChanges {
+                                target: normalLayout
+                                visible: false
+                            }
+                            PropertyChanges {
+                                target: editLoader
+                                active: true
+                            }
+                            PropertyChanges {
+                                target: delegate
+                                implicitWidth: control.availableWidth
+                            }
+                        }
+                        transitions: Transition {
+                            PropertyAnimation {
+                                target: delegate
+                                properties: "implicitWidth"
+                                duration: Kirigami.Units.shortDuration
+                                easing.type: Easing.InOutQuad
                             }
                         }
                     }

@@ -36,7 +36,7 @@ Item {
 
             Layout.fillWidth: true
 
-            text: usedSensorObject.name + (usedSensorObject.shortName.length > 0 ? "\x9C" + usedSensorObject.shortName : "")
+            text: chart.sensorsModel.sensorLabels[usedSensor] ||  (usedSensorObject.name + (usedSensorObject.shortName.length > 0 ? "\x9C" + usedSensorObject.shortName : ""))
             horizontalAlignment: Text.AlignHCenter
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
@@ -77,7 +77,7 @@ Item {
 
             Layout.fillWidth: true
 
-            text: totalSensorObject.name + (totalSensorObject.shortName.length > 0 ? "\x9C" + totalSensorObject.shortName : "")
+            text: chart.sensorsModel.sensorLabels[totalSensor] || (totalSensorObject.name + (totalSensorObject.shortName.length > 0 ? "\x9C" + totalSensorObject.shortName : ""))
             horizontalAlignment: Text.AlignHCenter
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor

@@ -33,11 +33,13 @@ ColumnLayout {
     property var cfg_highPrioritySensorIds: []
     property var cfg_sensorColors: new Object()
     property var cfg_lowPrioritySensorIds: []
+    property var cfg_sensorLabels: new Object()
 
     onCfg_totalSensorsChanged: configurationChanged();
     onCfg_highPrioritySensorIdsChanged: configurationChanged();
     onCfg_sensorColorsChanged: configurationChanged();
     onCfg_lowPrioritySensorIdsChanged: configurationChanged();
+    onCfg_sensorLabelsChanged: configurationChanged();
 
     property Faces.SensorFaceController controller
 
@@ -56,6 +58,7 @@ ColumnLayout {
         controller.highPrioritySensorIds = cfg_highPrioritySensorIds;
         controller.sensorColors = cfg_sensorColors;
         controller.lowPrioritySensorIds = cfg_lowPrioritySensorIds;
+        controller.sensorLabels = cfg_sensorLabels;
     }
 
     function loadConfig() {
@@ -76,6 +79,9 @@ ColumnLayout {
         if (!arrayCompare(cfg_lowPrioritySensorIds, controller.lowPrioritySensorIds)) {
             cfg_lowPrioritySensorIds = controller.lowPrioritySensorIds;
             lowPriorityChoice.selected = controller.lowPrioritySensorIds;
+        }
+        if(JSON.stringify(cfg_sensorLabels) != JSON.stringify(controller.sensorLabels)) {
+            cfg_sensorLabels = controller.sensorLabels;
         }
     }
 
@@ -104,6 +110,9 @@ ColumnLayout {
         function onLowPrioritySensorIdsChanged() {
             Qt.callLater(root.loadConfig);
         }
+        function onSensorLabelsChanged() {
+            Qt.callLater(root.loadConfig);
+        }
     }
 
     Platform.ColorDialog {
@@ -128,8 +137,13 @@ ColumnLayout {
         visible: controller.supportsTotalSensors
         supportsColors: false
         maxAllowedSensors: controller.maxTotalSensors
+        labels: root.cfg_sensorLabels
 
         onSelectedChanged: root.cfg_totalSensors = selected
+        onSensorLabelChanged: {
+            cfg_sensorLabels[sensorId] = label
+            root.cfg_sensorLabelsChanged()
+        }
     }
 
     QQC2.Label {
@@ -139,6 +153,7 @@ ColumnLayout {
         id: highPriorityChoice
         Layout.fillWidth: true
         supportsColors: controller.supportsSensorsColors
+        labels: root.cfg_sensorLabels
 
         onSelectedChanged: root.cfg_highPrioritySensorIds = selected
 
@@ -151,6 +166,10 @@ ColumnLayout {
             cfg_sensorColors[sensorId] = color
             root.cfg_sensorColorsChanged();
         }
+        onSensorLabelChanged: {
+            cfg_sensorLabels[sensorId] = label
+            root.cfg_sensorLabelsChanged()
+        }
     }
 
     QQC2.Label {
@@ -162,8 +181,13 @@ ColumnLayout {
         Layout.fillWidth: true
         visible: controller.supportsLowPrioritySensors
         supportsColors: false
+        labels: root.cfg_sensorLabels
 
         onSelectedChanged: root.cfg_lowPrioritySensorIds = selected
+        onSensorLabelChanged: {
+            cfg_sensorLabels[sensorId] = label
+            root.cfg_sensorLabelsChanged()
+        }
     }
 
     Item {

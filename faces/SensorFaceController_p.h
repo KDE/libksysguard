@@ -93,6 +93,7 @@ public:
     KConfigGroup appearanceGroup;
     KConfigGroup sensorsGroup;
     KConfigGroup colorsGroup;
+    KConfigGroup labelsGroup;
     QPointer <SensorFace> fullRepresentation;
     QPointer <SensorFace> compactRepresentation;
     QPointer <QQuickItem> faceConfigUi;

@@ -60,8 +60,8 @@ Faces.SensorFace {
                     Layout.fillWidth: true
                     Layout.minimumHeight: isTextOnly ? 0 : implicitHeight
 
-                    name: sensor.name
-                    shortName: sensor.shortName
+                    name: root.controller.sensorLabels[sensor.sensorId] || sensor.name
+                    shortName: root.controller.sensorLabels[sensor.sensorId] || sensor.shortName
                     value: sensor.formattedValue
                     colorVisible: false
 
@@ -87,7 +87,7 @@ Faces.SensorFace {
                 Layout.fillWidth: true
                 Layout.minimumHeight: implicitHeight
 
-                name: sensor.shortName
+                name: root.controller.sensorLabels[sensor.sensorId] || sensor.shortName
                 value: sensor.formattedValue
                 colorVisible: false
 

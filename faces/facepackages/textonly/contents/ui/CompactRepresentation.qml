@@ -32,5 +32,6 @@ Faces.SensorFace {
         colorSource: root.colorSource
         totalHeight: root.height
         updateRateLimit: root.controller.updateRateLimit
+        sensorLabels: root.controller.sensorLabels
     }
 }
