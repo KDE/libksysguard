@@ -197,6 +197,7 @@ Control {
                             Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
 
                             padding: Kirigami.Units.smallSpacing
+                            flat: false
 
                             contentItem: Rectangle {
                                 color: typeof control.colors === "undefined"  ? "black" : control.colors[sensor.sensorId]
