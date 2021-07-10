@@ -132,7 +132,7 @@ bool Processes::updateProcess(Process *ps, long ppid)
         Process *p = ps;
         do {
             p = p->parent();
-            p->numChildren()--;
+            p->numChildren() -= (ps->numChildren() + 1);
         } while (p->pid() != -1);
         Q_ASSERT(ps != parent);
         ps->parent()->children().removeAll(ps);
@@ -141,7 +141,7 @@ bool Processes::updateProcess(Process *ps, long ppid)
         p = ps;
         do {
             p = p->parent();
-            p->numChildren()++;
+            p->numChildren() += (ps->numChildren() + 1);
         } while (p->pid() != -1);
         emit endMoveProcess();
         Q_ASSERT(ps != parent);
