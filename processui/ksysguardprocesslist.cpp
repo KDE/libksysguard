@@ -552,20 +552,16 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
 
 
 
-    //If the selected process is a zombie, do not bother offering renice and kill options
-    bool showSignalingEntries = numProcesses != 1 || process->status() != KSysGuard::Process::Zombie;
-    if(showSignalingEntries) {
-        d->mProcessContextMenu->addAction(d->renice);
-        QMenu *signalMenu = d->mProcessContextMenu->addMenu(i18n("Send Signal"));
-        signalMenu->addAction(d->sigStop);
-        signalMenu->addAction(d->sigCont);
-        signalMenu->addAction(d->sigHup);
-        signalMenu->addAction(d->sigInt);
-        signalMenu->addAction(d->sigTerm);
-        signalMenu->addAction(d->sigKill);
-        signalMenu->addAction(d->sigUsr1);
-        signalMenu->addAction(d->sigUsr2);
-    }
+    d->mProcessContextMenu->addAction(d->renice);
+    QMenu *signalMenu = d->mProcessContextMenu->addMenu(i18n("Send Signal"));
+    signalMenu->addAction(d->sigStop);
+    signalMenu->addAction(d->sigCont);
+    signalMenu->addAction(d->sigHup);
+    signalMenu->addAction(d->sigInt);
+    signalMenu->addAction(d->sigTerm);
+    signalMenu->addAction(d->sigKill);
+    signalMenu->addAction(d->sigUsr1);
+    signalMenu->addAction(d->sigUsr2);
 
     if(numProcesses == 1 && process->parentPid() > 1) {
         //As a design decision, I do not show the 'Jump to parent process' option when the
@@ -598,12 +594,10 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point) {
             d->mProcessContextMenu->addAction(action);
         }
     }
-    if (showSignalingEntries) {
-        d->mProcessContextMenu->addSeparator();
-        d->mProcessContextMenu->addAction(d->terminate);
-        if (numProcesses == 1 && process->timeKillWasSent().isValid())
-            d->mProcessContextMenu->addAction(d->kill);
-    }
+    d->mProcessContextMenu->addSeparator();
+    d->mProcessContextMenu->addAction(d->terminate);
+    if (numProcesses == 1 && process->timeKillWasSent().isValid())
+        d->mProcessContextMenu->addAction(d->kill);
 
     d->mProcessContextMenu->popup(d->mUi->treeView->viewport()->mapToGlobal(point));
 }
