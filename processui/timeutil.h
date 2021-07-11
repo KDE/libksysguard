@@ -40,7 +40,13 @@ public:
         mach_port_deallocate(mach_task_self(), cclock);
 #else
         timespec tp;
+#ifdef Q_OS_LINUX
+        int isSuccess = clock_gettime(CLOCK_BOOTTIME, &tp);
+        // _MONOTONIC doesn't increase while the system is suspended,
+        // resulting in process start times in the future
+#else
         int isSuccess = clock_gettime(CLOCK_MONOTONIC, &tp); // see https://stackoverflow.com/questions/8357073/get-uptime-in-seconds-or-miliseconds-on-unix-like-systems
+#endif
         Q_ASSERT(isSuccess == 0);
 #endif
         return tp.tv_sec;
