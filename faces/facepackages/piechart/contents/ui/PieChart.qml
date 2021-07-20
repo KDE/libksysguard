@@ -34,13 +34,19 @@ ChartControls.PieChartControl {
     topPadding: 0
     bottomPadding: 0
 
+    readonly property real rangeFrom: root.controller.faceConfiguration.rangeFrom *
+                                      root.controller.faceConfiguration.rangeFromMultiplier
+
+    readonly property real rangeTo: root.controller.faceConfiguration.rangeTo *
+                                    root.controller.faceConfiguration.rangeToMultiplier
+
     chart.smoothEnds: root.controller.faceConfiguration.smoothEnds
     chart.fromAngle: root.controller.faceConfiguration.fromAngle
     chart.toAngle: root.controller.faceConfiguration.toAngle
 
     range {
-        from: root.controller.faceConfiguration.rangeFrom
-        to: root.controller.faceConfiguration.rangeTo
+        from: chart.rangeFrom
+        to: chart.rangeTo
         automatic: root.controller.faceConfiguration.rangeAuto
     }
 

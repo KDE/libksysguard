@@ -21,8 +21,20 @@
         <entry name="rangeFrom" type="Int">
             <default>0</default>
         </entry>
+        <entry name="rangeFromUnit" type="Int">
+            <default>-1</default>
+        </entry>
+        <entry name="rangeFromMultiplier" type="Double">
+            <default>1.0</default>
+        </entry>
         <entry name="rangeTo" type="Int">
             <default>100</default>
+        </entry>
+        <entry name="rangeToUnit" type="Int">
+            <default>-1</default>
+        </entry>
+        <entry name="rangeToMultiplier" type="Double">
+            <default>1.0</default>
         </entry>
         <entry name="rangeAuto" type="Bool">
             <default>true</default>
