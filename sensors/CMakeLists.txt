@@ -11,6 +11,7 @@ set(sensors_LIB_SRCS
     SensorGroup.cpp
     SensorQuery.cpp
     SensorDaemonInterface.cpp
+    SensorUnitModel.cpp
 )
 
 set(sensors_LIB_HEADERS
@@ -18,6 +19,7 @@ set(sensors_LIB_HEADERS
     SensorDataModel.h
     SensorTreeModel.h
     SensorQuery.h
+    SensorUnitModel.h
     SensorInfo_p.h
 )
 

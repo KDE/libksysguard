@@ -9,6 +9,7 @@
 #include "Sensor.h"
 #include "SensorDataModel.h"
 #include "SensorTreeModel.h"
+#include "SensorUnitModel.h"
 
 #include <QQmlEngine>
 
@@ -21,4 +22,5 @@ void SensorsPlugin::registerTypes(const char *uri)
     qmlRegisterType<SensorDataModel>(uri, 1, 0, "SensorDataModel");
     qmlRegisterType<SensorTreeModel>(uri, 1, 0, "SensorTreeModel");
     qmlRegisterType<Sensor>(uri, 1, 0, "Sensor");
+    qmlRegisterType<SensorUnitModel>(uri, 1, 0, "SensorUnitModel");
 }
