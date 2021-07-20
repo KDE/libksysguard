@@ -35,9 +35,15 @@ Charts.LineChart {
 
     readonly property bool stackedAuto: chart.controller.faceConfiguration.rangeAutoY && chart.controller.faceConfiguration.lineChartStacked
 
+    readonly property real rangeFromY: chart.controller.faceConfiguration.rangeFromY *
+                                       chart.controller.faceConfiguration.rangeFromYMultiplier
+
+    readonly property real rangeToY: chart.controller.faceConfiguration.rangeToY *
+                                     chart.controller.faceConfiguration.rangeToYMultiplier
+
     yRange {
-        from: stackedAuto ? Math.min(sensorsModel.minimum, 0) : chart.controller.faceConfiguration.rangeFromY
-        to: stackedAuto ? sensorsModel.stackedMaximum : chart.controller.faceConfiguration.rangeToY
+        from: stackedAuto ? Math.min(sensorsModel.minimum, 0) : chart.rangeFromY
+        to: stackedAuto ? sensorsModel.stackedMaximum : chart.rangeToY
         automatic: (chart.controller.faceConfiguration.rangeAutoY && !chart.controller.faceConfiguration.lineChartStacked)
             || stackedAuto && yRange.from == yRange.to
     }

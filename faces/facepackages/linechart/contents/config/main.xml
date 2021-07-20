@@ -36,8 +36,20 @@
         <entry name="rangeFromY" type="Int">
             <default>0</default>
         </entry>
+        <entry name="rangeFromYUnit" type="Int">
+            <default>-1</default>
+        </entry>
+        <entry name="rangeFromYMultiplier" type="Double">
+            <default>1.0</default>
+        </entry>
         <entry name="rangeToY" type="Int">
             <default>100</default>
+        </entry>
+        <entry name="rangeToYUnit" type="Int">
+            <default>-1</default>
+        </entry>
+        <entry name="rangeToYMultiplier" type="Double">
+            <default>1.0</default>
         </entry>
         <entry name="rangeAutoY" type="Bool">
             <default>true</default>

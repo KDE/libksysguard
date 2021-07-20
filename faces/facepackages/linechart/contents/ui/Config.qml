@@ -26,6 +26,11 @@ Kirigami.FormLayout {
     property alias cfg_rangeAutoY: rangeAutoYCheckbox.checked
     property alias cfg_rangeFromY: rangeFromYSpin.value
     property alias cfg_rangeToY: rangeToYSpin.value
+    property alias cfg_rangeFromYUnit: rangeFromYSpin.unit
+    property alias cfg_rangeToYUnit: rangeToYSpin.unit
+    property alias cfg_rangeFromYMultiplier: rangeFromYSpin.multiplier
+    property alias cfg_rangeToYMultiplier: rangeToYSpin.multiplier
+
     property alias cfg_historyAmount: historySpin.value
 
     // For backward compatibility
@@ -72,21 +77,19 @@ Kirigami.FormLayout {
         id: rangeAutoYCheckbox
         text: i18n("Automatic Y Data Range")
     }
-    QQC2.SpinBox {
+    Faces.SensorRangeSpinBox {
         id: rangeFromYSpin
         Kirigami.FormData.label: i18n("From (Y):")
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoYCheckbox.checked
-        editable: true
-        from: Math.pow(-2, 31) + 1
-        to: Math.pow(2, 31) - 1
+        sensors: controller.highPrioritySensorIds
     }
-    QQC2.SpinBox {
+    Faces.SensorRangeSpinBox {
         id: rangeToYSpin
-        editable: true
-        from: Math.pow(-2, 31) + 1
-        to: Math.pow(2, 31) - 1
         Kirigami.FormData.label: i18n("To (Y):")
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoYCheckbox.checked
+        sensors: controller.highPrioritySensorIds
     }
     QQC2.SpinBox {
         id: historySpin
