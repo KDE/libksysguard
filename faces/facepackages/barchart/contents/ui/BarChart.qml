@@ -49,6 +49,8 @@ Charts.BarChart {
         sensors: controller.highPrioritySensorIds
         updateRateLimit: chart.updateRateLimit
         sensorLabels: root.controller.sensorLabels
+
+        property int unit: sensorsModel.ready ? sensorsModel.headerData(0, Qt.Horizontal, Sensors.SensorDataModel.Unit) : Formatter.Formatter.UnitInvalid
     }
 
     Instantiator {
