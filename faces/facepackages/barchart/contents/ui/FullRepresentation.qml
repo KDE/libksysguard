@@ -89,6 +89,8 @@ Faces.SensorFace {
 
                 updateRateLimit: root.controller.updateRateLimit
 
+                controller: root.controller
+
                 Charts.GridLines {
                     id: horizontalLines
                     visible: showGridLines

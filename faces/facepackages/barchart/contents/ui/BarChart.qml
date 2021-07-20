@@ -26,19 +26,21 @@ Charts.BarChart {
 
     property int updateRateLimit
 
-    stacked: root.controller.faceConfiguration.barChartStacked
+    property var controller
+
+    stacked: controller.faceConfiguration.barChartStacked
 
     spacing: Math.round(width / 20)
 
     yRange {
-        from: root.controller.faceConfiguration.rangeFrom
-        to: root.controller.faceConfiguration.rangeTo
-        automatic: root.controller.faceConfiguration.rangeAuto
+        from: controller.faceConfiguration.rangeFrom
+        to: controller.faceConfiguration.rangeTo
+        automatic: controller.faceConfiguration.rangeAuto
     }
 
     Sensors.SensorDataModel {
         id: sensorsModel
-        sensors: root.controller.highPrioritySensorIds
+        sensors: controller.highPrioritySensorIds
         updateRateLimit: chart.updateRateLimit
         sensorLabels: root.controller.sensorLabels
     }
