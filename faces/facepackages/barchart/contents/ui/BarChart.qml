@@ -32,9 +32,15 @@ Charts.BarChart {
 
     spacing: Math.round(width / 20)
 
+    readonly property real rangeFromY: controller.faceConfiguration.rangeFrom *
+                                       controller.faceConfiguration.rangeFromMultiplier
+
+    readonly property real rangeToY: controller.faceConfiguration.rangeTo *
+                                     controller.faceConfiguration.rangeToMultiplier
+
     yRange {
-        from: controller.faceConfiguration.rangeFrom
-        to: controller.faceConfiguration.rangeTo
+        from: chart.rangeFromY
+        to: chart.rangeToY
         automatic: controller.faceConfiguration.rangeAuto
     }
 

@@ -21,9 +21,14 @@ Kirigami.FormLayout {
     property alias cfg_barChartStacked: stackedCheckbox.checked
     property alias cfg_showGridLines: showGridLinesCheckBox.checked
     property alias cfg_showYAxisLabels: showYAxisLabelsCheckbox.checked
+
     property alias cfg_rangeAuto: rangeAutoCheckbox.checked
     property alias cfg_rangeFrom: rangeFromSpin.value
+    property alias cfg_rangeFromUnit: rangeFromSpin.unit
+    property alias cfg_rangeFromMultiplier: rangeFromSpin.multiplier
     property alias cfg_rangeTo: rangeToSpin.value
+    property alias cfg_rangeToUnit: rangeToSpin.unit
+    property alias cfg_rangeToMultiplier: rangeToSpin.multiplier
 
     QQC2.CheckBox {
         id: showSensorsLegendCheckbox
@@ -45,21 +50,19 @@ Kirigami.FormLayout {
         id: rangeAutoCheckbox
         text: i18n("Automatic Data Range")
     }
-    QQC2.SpinBox {
+    Faces.SensorRangeSpinBox {
         id: rangeFromSpin
-        editable: true
-        from: Math.pow(-2, 31) + 1
-        to: Math.pow(2, 31) - 1
         Kirigami.FormData.label: i18n("From:")
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
+        sensors: controller.highPrioritySensorIds
     }
-    QQC2.SpinBox {
+    Faces.SensorRangeSpinBox {
         id: rangeToSpin
-        editable: true
-        from: Math.pow(-2, 31) + 1
-        to: Math.pow(2, 31) - 1
         Kirigami.FormData.label: i18n("To:")
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
+        sensors: controller.highPrioritySensorIds
     }
 }
 
