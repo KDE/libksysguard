@@ -32,7 +32,7 @@ Control {
     /**
      * The value.
      */
-    property alias value: spinBox.value
+    property real value
     /**
      * The unit for the value.
      */
@@ -70,6 +70,46 @@ Control {
             editable: true
             from: Math.pow(-2, 31) + 1
             to: Math.pow(2, 31) - 1
+            stepSize: 100
+
+            value: control.value * 100
+
+            Binding {
+                target: control
+                property: "value"
+                value: spinBox.value / 100
+            }
+
+            validator: DoubleValidator {
+                locale: spinBox.locale.name
+                bottom: Math.min(spinBox.from, spinBox.to)
+                top:  Math.max(spinBox.from, spinBox.to)
+            }
+
+            textFromValue: function(value, locale) {
+                // "toLocaleString" has no concept of "the minimum amount of
+                // digits to represent this number", so we need to calculate this
+                // manually. This ensures that things like "0" and "10" will be
+                // displayed without any decimals, while things like "2.2" and
+                // "3.87" will be displayed with the right number of decimals.
+
+                let realValue = value / 100
+                let fract = realValue - Math.trunc(realValue)
+
+                let digits = 0
+                if (fract != 0) {
+                    digits++;
+                }
+                if ((fract * 10) - Math.trunc(fract * 10) != 0) {
+                    digist++;
+                }
+
+                return Number(value / 100).toLocaleString(locale, 'f', digits)
+            }
+
+            valueFromText: function(text, locale) {
+                return Number.fromLocaleString(locale, text) * 100
+            }
 
             onValueModified: control.valueModified()
         }

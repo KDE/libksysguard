@@ -18,7 +18,7 @@
         <entry name="showYAxisLabels" type="Bool">
             <default>true</default>
         </entry>
-        <entry name="rangeFrom" type="Int">
+        <entry name="rangeFrom" type="Double">
             <default>0</default>
         </entry>
         <entry name="rangeFromUnit" type="Int">
@@ -27,7 +27,7 @@
         <entry name="rangeFromMultiplier" type="Double">
             <default>1.0</default>
         </entry>
-        <entry name="rangeTo" type="Int">
+        <entry name="rangeTo" type="Double">
             <default>100</default>
         </entry>
         <entry name="rangeToUnit" type="Int">
