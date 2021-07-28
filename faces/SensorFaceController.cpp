@@ -335,7 +335,7 @@ QQuickItem *SensorFaceControllerPrivate::createConfigUi(const QString &file, con
 }
 
 
-SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *engine)
+SensorFaceController::SensorFaceController(const KConfigGroup &config, QQmlEngine *engine)
     : QObject(engine),
       d(std::make_unique<SensorFaceControllerPrivate>())
 {

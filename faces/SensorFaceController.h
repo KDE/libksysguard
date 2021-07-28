@@ -170,7 +170,7 @@ public:
      * @param config The controller uses this config group to read and save the face configuration
      * @param engine This engine will be used for creating the Qml components
      */
-    SensorFaceController(KConfigGroup &config, QQmlEngine *engine);
+    SensorFaceController(const KConfigGroup &config, QQmlEngine *engine);
     ~SensorFaceController();
 
     void setFaceId(const QString &face);
