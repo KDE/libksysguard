@@ -113,7 +113,7 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
      * `main.xml` of the face.
      * @see faceConfigUi
      */
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceIdChanged)
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceConfigurationChanged)
 
     /**
      * The full represenation of the current face. Typically includes additional elements like
@@ -263,6 +263,14 @@ public:
      */
     void setShouldSync(bool sync);
 
+    /**
+     * Reload only the face configuration.
+     *
+     * This does not touch sensors, colors or anything else, only the config
+     * loaded from the face package is reloaded.
+     */
+    Q_INVOKABLE void reloadFaceConfiguration();
+
 Q_SIGNALS:
     void faceIdChanged();
     void titleChanged();
@@ -274,6 +282,7 @@ Q_SIGNALS:
     void sensorColorsChanged();
     void sensorLabelsChanged();
     void updateRateLimitChanged();
+    void faceConfigurationChanged();
 
 private:
     const std::unique_ptr<SensorFaceControllerPrivate> d;

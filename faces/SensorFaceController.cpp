@@ -675,22 +675,7 @@ void SensorFaceController::setFaceId(const QString &face)
 
     d->faceProperties = KConfigGroup(KSharedConfig::openConfig(d->facePackage.filePath("FaceProperties"), KConfig::SimpleConfig), QStringLiteral("Config"));
 
-    const QString xmlPath = d->facePackage.filePath("mainconfigxml");
-
-    if (!xmlPath.isEmpty()) {
-        QFile file(xmlPath);
-        KConfigGroup cg(&d->configGroup, d->faceId);
-
-        d->faceConfigLoader = new KConfigLoader(cg, &file, this);
-        d->faceConfiguration = new KDeclarative::ConfigPropertyMap(d->faceConfigLoader, this);
-        d->faceConfiguration->setAutosave(d->shouldSync);
-        connect(d->faceConfiguration, &KDeclarative::ConfigPropertyMap::valueChanged, this, [this] (const QString &key) {
-            auto item = d->faceConfigLoader->findItemByName(key);
-            if (item) {
-                item->writeConfig(d->faceConfigLoader->config());
-            }
-        });
-    }
+    reloadFaceConfiguration();
 
     d->appearanceGroup.writeEntry("chartFace", face);
     d->syncTimer->start();
@@ -992,5 +977,34 @@ void SensorFaceController::setShouldSync(bool sync)
     }
 }
 
+void SensorFaceController::reloadFaceConfiguration()
+{
+    const QString xmlPath = d->facePackage.filePath("mainconfigxml");
+
+    if (!xmlPath.isEmpty()) {
+        QFile file(xmlPath);
+        KConfigGroup cg(&d->configGroup, d->faceId);
+
+        if (d->faceConfigLoader) {
+            delete d->faceConfigLoader;
+        }
+
+        if (d->faceConfiguration) {
+            delete d->faceConfiguration;
+        }
+
+        d->faceConfigLoader = new KConfigLoader(cg, &file, this);
+        d->faceConfiguration = new KDeclarative::ConfigPropertyMap(d->faceConfigLoader, this);
+        d->faceConfiguration->setAutosave(d->shouldSync);
+        connect(d->faceConfiguration, &KDeclarative::ConfigPropertyMap::valueChanged, this, [this] (const QString &key) {
+            auto item = d->faceConfigLoader->findItemByName(key);
+            if (item) {
+                item->writeConfig(d->faceConfigLoader->config());
+            }
+        });
+
+        Q_EMIT faceConfigurationChanged();
+    }
+}
 
 #include "moc_SensorFaceController.cpp"
