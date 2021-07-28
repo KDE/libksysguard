@@ -173,6 +173,14 @@ public:
     SensorFaceController(const KConfigGroup &config, QQmlEngine *engine);
     ~SensorFaceController();
 
+    /**
+     * Retrieve the KConfigGroup this controller is using to store configuration.
+     *
+     * This is primarily intended to allow adding child groups to the face
+     * configuration.
+     */
+    KConfigGroup configGroup() const;
+
     void setFaceId(const QString &face);
     QString faceId() const;
 

@@ -9,12 +9,14 @@ add_definitions(-DTRANSLATION_DOMAIN=\"KSysGuardSensorFaces\")
 set(faces_LIB_SRCS
     SensorFaceController.cpp
     SensorFace.cpp
+    FaceLoader.cpp
     resources.qrc
 )
 
 set(faces_LIB_HEADERS
     SensorFace_p.h
     SensorFaceController.h
+    FaceLoader.h
 )
 
 ecm_qt_declare_logging_category(faces_LIB_SRCS

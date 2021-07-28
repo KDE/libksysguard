@@ -395,6 +395,11 @@ SensorFaceController::~SensorFaceController()
     }
 }
 
+KConfigGroup KSysGuard::SensorFaceController::configGroup() const
+{
+    return d->configGroup;
+}
+
 QString SensorFaceController::title() const
 {
     // both Title and title can exist to allow i18n of Title

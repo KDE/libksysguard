@@ -12,6 +12,7 @@
 #include "Sensor.h"
 #include "SensorFace_p.h"
 #include "SensorFaceController.h"
+#include "FaceLoader.h"
 
 #include <KDeclarative/ConfigPropertyMap>
 
@@ -28,4 +29,6 @@ void FacesPlugin::registerTypes(const char *uri)
     qmlRegisterUncreatableType<KSysGuard::SensorFaceController>(uri, 1, 0, "SensorFaceController", QStringLiteral("It's not possible to create objects of type SensorFaceController"));
     qmlRegisterAnonymousType<KDeclarative::ConfigPropertyMap>(uri, 1);
     qmlRegisterType<QTransposeProxyModel>("org.kde.ksysguard.faces.private", 1, 0, "QTransposeProxyModel");
+
+    qmlRegisterType<KSysGuard::FaceLoader>(uri, 1, 0, "FaceLoader");
 }
