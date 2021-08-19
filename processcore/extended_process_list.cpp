@@ -4,6 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 #include "extended_process_list.h"
+#include "kcoreaddons_version.h"
 
 #include <KLocalizedString>
 #include <KPluginFactory>
@@ -405,8 +406,12 @@ QVector<ProcessAttribute *> ExtendedProcesses::extendedAttributes() const
 
 void ExtendedProcesses::Private::loadPlugins()
 {
-    //instantiate all plugins
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)
     const QVector<KPluginMetaData> listMetaData = KPluginLoader::findPlugins(QStringLiteral("ksysguard/process"));
+#else
+    const QVector<KPluginMetaData> listMetaData = KPluginMetaData::findPlugins(QStringLiteral("ksysguard/process"));
+#endif
+    //instantiate all plugins
     for (const auto &pluginMetaData : listMetaData) {
         qCDebug(LIBKSYSGUARD_PROCESSCORE) << "loading plugin" << pluginMetaData.name();
         auto factory = qobject_cast<KPluginFactory *>(pluginMetaData.instantiate());
