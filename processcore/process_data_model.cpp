@@ -37,10 +37,10 @@ public:
     ProcessAttributeModel *m_attributeModel = nullptr;
     const int m_updateInterval = 2000;
     bool m_flatList = true;
+    KSysGuard::Process *m_removingRowFor = nullptr;
 
     QHash<QString, KSysGuard::ProcessAttribute *> m_availableAttributes;
     QVector<KSysGuard::ProcessAttribute *> m_enabledAttributes;
-
 };
 
 ProcessDataModel::ProcessDataModel(QObject *parent)
@@ -202,7 +202,7 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
         connect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](KSysGuard::Process *process) {
             if (process->pid() != -1) {
                 const QModelIndex index = d->getQModelIndex(process, columnIndex);
-                if (index.isValid()) {
+                if (index.isValid() && process != d->m_removingRowFor) {
                     emit dataChanged(index, index);
                 }
             }
@@ -316,6 +316,10 @@ void ProcessDataModel::Private::endInsertRow()
 
 void ProcessDataModel::Private::beginRemoveRow(KSysGuard::Process *process)
 {
+    Q_ASSERT(process);
+    Q_ASSERT(!m_removingRowFor);
+
+    m_removingRowFor = process;
     int row = process->parent()->children().indexOf(process);
     Q_ASSERT(row >= 0);
     if (m_flatList) {
@@ -327,6 +331,7 @@ void ProcessDataModel::Private::beginRemoveRow(KSysGuard::Process *process)
 
 void ProcessDataModel::Private::endRemoveRow()
 {
+    m_removingRowFor = nullptr;
     q->endRemoveRows();
 }
 
