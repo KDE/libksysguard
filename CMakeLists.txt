@@ -108,6 +108,11 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
             PURPOSE "Needed for setting capabilities of the per-application network plugin."
         )
     endif()
+
+    find_package(Sensors)
+    set_package_properties(Sensors PROPERTIES
+        TYPE REQUIRED
+        PURPOSE "Used for reading hardware sensors")
 endif()
 
 set(HAVE_X11 ${X11_FOUND})

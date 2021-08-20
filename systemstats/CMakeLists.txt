@@ -16,6 +16,7 @@ set(systemstats_HDRS
     SensorContainer.h
     SensorPlugin.h
     SensorProperty.h
+    SensorsFeatureSensor.h
     SysFsSensor.h
     SysctlSensor.h
     SensorInfo.h
@@ -42,6 +43,12 @@ target_include_directories(SystemStats
 )
 
 target_link_libraries(SystemStats PUBLIC Qt::Core Qt::DBus KSysGuard::Formatter PRIVATE dbusinterface)
+
+if (SENSORS_FOUND)
+    target_sources(SystemStats PRIVATE SensorsFeatureSensor.cpp)
+    target_link_libraries(SystemStats PUBLIC ${SENSORS_LIBRARIES} KF5::I18n)
+    target_include_directories(SystemStats PUBLIC ${SENSORS_INCLUDE_DIR})
+endif()
 
 generate_export_header(SystemStats)
 
