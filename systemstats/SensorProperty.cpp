@@ -18,6 +18,7 @@ public:
     QString name;
     QString prefix;
     QVariant value;
+    QVariant initialValue;
     int subscribers = 0;
 };
 
@@ -32,15 +33,16 @@ SensorProperty::SensorProperty(const QString &id, const QString &name, SensorObj
 {
 }
 
-SensorProperty::SensorProperty(const QString &id, const QString &name, const QVariant &initalValue, SensorObject *parent)
+SensorProperty::SensorProperty(const QString &id, const QString &name, const QVariant &initialValue, SensorObject *parent)
     : QObject(parent)
     , d(std::make_unique<Private>())
 {
     d->id = id;
     d->parent = parent;
     setName(name);
-    if (initalValue.isValid()) {
-        setValue(initalValue);
+    d->initialValue = initialValue;
+    if (initialValue.isValid()) {
+        setValue(initialValue);
     }
     parent->addProperty(this);
 }
@@ -182,6 +184,7 @@ void SensorProperty::unsubscribe()
 {
     d->subscribers--;
     if (d->subscribers == 0) {
+        setValue(d->initialValue);
         emit subscribedChanged(false);
     }
 }
