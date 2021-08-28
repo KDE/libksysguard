@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Grid
+Name[ca]=Quadrícula
+Name[es]=Cuadrícula
+Name[nl]=Raster
+Name[pt]=Grelha
+Name[sv]=Rutnät
+Name[uk]=Таблиця
+Name[x-test]=xxGridxx
 
 Type=Service
 X-KDE-ServiceTypes=KSysguard/SensorFace
