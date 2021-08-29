@@ -112,13 +112,13 @@ void Packet::parseIPv6(const uint8_t *data, int32_t dataLength)
         u8Tou32(header->ip6_src.s6_addr[0], header->ip6_src.s6_addr[1], header->ip6_src.s6_addr[2], header->ip6_src.s6_addr[3]),
         u8Tou32(header->ip6_src.s6_addr[4], header->ip6_src.s6_addr[5], header->ip6_src.s6_addr[6], header->ip6_src.s6_addr[7]),
         u8Tou32(header->ip6_src.s6_addr[8], header->ip6_src.s6_addr[9], header->ip6_src.s6_addr[10], header->ip6_src.s6_addr[11]),
-        u8Tou32(header->ip6_src.s6_addr[12], header->ip6_src.s6_addr[13], header->ip6_src.s6_addr[14], header->ip6_src.s6_addr[15])
+        u8Tou32(header->ip6_src.s6_addr[12], header->ip6_src.s6_addr[13], header->ip6_src.s6_addr[14], header->ip6_src.s6_addr[15]),
     };
     m_destinationAddress.address = {
         u8Tou32(header->ip6_dst.s6_addr[0], header->ip6_dst.s6_addr[1], header->ip6_dst.s6_addr[2], header->ip6_dst.s6_addr[3]),
         u8Tou32(header->ip6_dst.s6_addr[4], header->ip6_dst.s6_addr[5], header->ip6_dst.s6_addr[6], header->ip6_dst.s6_addr[7]),
         u8Tou32(header->ip6_dst.s6_addr[8], header->ip6_dst.s6_addr[9], header->ip6_dst.s6_addr[10], header->ip6_dst.s6_addr[11]),
-        u8Tou32(header->ip6_dst.s6_addr[12], header->ip6_dst.s6_addr[13], header->ip6_dst.s6_addr[14], header->ip6_dst.s6_addr[15])
+        u8Tou32(header->ip6_dst.s6_addr[12], header->ip6_dst.s6_addr[13], header->ip6_dst.s6_addr[14], header->ip6_dst.s6_addr[15]),
     };
 
     parseTransport(header->ip6_nxt, data + sizeof(ip6_hdr), dataLength - sizeof(ip6_hdr));

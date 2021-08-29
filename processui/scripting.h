@@ -70,6 +70,7 @@ class Scripting : public QWidget {
 class ProcessObject : public QObject {
     Q_OBJECT
     public:
+        // clang-format off
        P_PROPERTY(qlonglong pid READ pid WRITE setPid)                 /* Add functionality to 'set' the pid to change which process to read from */
        P_PROPERTY(qlonglong ppid READ parentPid)                       /* Map 'ppid' to 'parentPid' to give it a nicer scripting name */
        P_PROPERTY(QString name READ name)                              /* Defined below to return the first word of the name */
@@ -119,6 +120,7 @@ class ProcessObject : public QObject {
        P_PROPERTY(qlonglong ioWriteSyscallsRate READ ioWriteSyscallsRate)                  PROPERTY(qlonglong, ioWriteSyscallsRate)
        P_PROPERTY(qlonglong ioCharactersActuallyReadRate READ ioCharactersActuallyReadRate)        PROPERTY(qlonglong, ioCharactersActuallyReadRate)
        P_PROPERTY(qlonglong ioCharactersActuallyWrittenRate READ ioCharactersActuallyWrittenRate)  PROPERTY(qlonglong, ioCharactersActuallyWrittenRate)
+        // clang-format off
 
         ProcessObject(ProcessModel * processModel, int pid);
         void update(KSysGuard::Process *process);

@@ -81,7 +81,7 @@ QHash<int, QByteArray> SensorUnitModel::roleNames() const
     static const QHash<int, QByteArray> roleNames = {
         {UnitRole, "unit"},
         {SymbolRole, "symbol"},
-        {MultiplierRole, "multiplier"}
+        {MultiplierRole, "multiplier"},
     };
     return roleNames;
 }
@@ -143,7 +143,7 @@ void SensorUnitModel::metaDataChanged(const QString &id, const SensorInfo &info)
         UnitMegaByte,
         UnitGigaByte,
         UnitTeraByte,
-        UnitPetaByte
+        UnitPetaByte,
     };
     if (d->insertUnits(bytes, unit)) {
         return;
@@ -155,7 +155,7 @@ void SensorUnitModel::metaDataChanged(const QString &id, const SensorInfo &info)
         UnitMegaByteRate,
         UnitGigaByteRate,
         UnitTeraByteRate,
-        UnitPetaByteRate
+        UnitPetaByteRate,
     };
     if (d->insertUnits(rates, unit)) {
         return;
@@ -167,7 +167,7 @@ void SensorUnitModel::metaDataChanged(const QString &id, const SensorInfo &info)
         UnitMegaHertz,
         UnitGigaHertz,
         UnitTeraHertz,
-        UnitPetaHertz
+        UnitPetaHertz,
     };
     if (d->insertUnits(frequencies, unit)) {
         return;

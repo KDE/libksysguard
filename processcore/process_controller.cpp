@@ -124,7 +124,7 @@ ProcessController::Result ProcessController::setCPUScheduler(const QVector<int>&
 
     return d->runKAuthAction(
         QStringLiteral("org.kde.ksysguard.processlisthelper.changecpuscheduler"),
-        result.unchanged,
+        result.unchanged, //
         {{QStringLiteral("cpuScheduler"), scheduler}, {QStringLiteral("cpuSchedulerPriority"), priority}}
     );
 }
@@ -162,7 +162,7 @@ ProcessController::Result ProcessController::setIOScheduler(const QVector<int>& 
 
     return d->runKAuthAction(
         QStringLiteral("org.kde.ksysguard.processlisthelper.changeioscheduler"),
-        result.unchanged,
+        result.unchanged, //
         {{QStringLiteral("ioScheduler"), priorityClass}, {QStringLiteral("ioSchedulerPriority"), priority}}
     );
 }

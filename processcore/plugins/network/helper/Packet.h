@@ -91,10 +91,10 @@ namespace std {
         using argument_type = Packet::Address;
         using result_type = std::size_t;
         inline result_type operator()(argument_type const& address) const noexcept {
-            return std::hash<uint32_t>{}(address.address[0])
-                   ^ (std::hash<uint32_t>{}(address.address[1]) << 1)
-                   ^ (std::hash<uint32_t>{}(address.address[2]) << 2)
-                   ^ (std::hash<uint32_t>{}(address.address[3]) << 3)
+            return std::hash<uint32_t>{}(address.address[0]) //
+                   ^ (std::hash<uint32_t>{}(address.address[1]) << 1) //
+                   ^ (std::hash<uint32_t>{}(address.address[2]) << 2) //
+                   ^ (std::hash<uint32_t>{}(address.address[3]) << 3) //
                    ^ (std::hash<uint32_t>{}(address.port) << 4);
         }
     };
