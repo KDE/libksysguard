@@ -274,7 +274,7 @@ QModelIndex ProcessDataModel::index(int row, int column, const QModelIndex &pare
             return QModelIndex();
         }
 
-        return createIndex( row, column, d->m_processes->getAllProcesses().at(row));
+        return createIndex(row, column, d->m_processes->getAllProcesses().at(row));
     }
 
     // Tree mode
@@ -349,7 +349,8 @@ QModelIndex ProcessDataModel::Private::getQModelIndex(KSysGuard::Process *proces
 {
     Q_ASSERT(process);
     if (process->pid() == -1)
-        return QModelIndex(); // pid -1 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means the top element
+        return QModelIndex(); // pid -1 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means
+                              // the top element
 
     int row;
 

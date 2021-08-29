@@ -16,9 +16,8 @@
 
 class QString;
 
-namespace KSGRD {
-
-
+namespace KSGRD
+{
 /**
   The SensorSocketAgent connects to a ksysguardd via a TCP
   connection. It keeps a list of pending requests that have not been
@@ -28,30 +27,29 @@ namespace KSGRD {
  */
 class SensorSocketAgent : public SensorAgent
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit SensorSocketAgent( SensorManager *sm );
+public:
+    explicit SensorSocketAgent(SensorManager *sm);
     ~SensorSocketAgent() override;
 
-    bool start( const QString &host, const QString &shell,
-                const QString &command = QLatin1String(""), int port = -1 ) override;
+    bool start(const QString &host, const QString &shell, const QString &command = QLatin1String(""), int port = -1) override;
 
-    void hostInfo( QString &shell, QString &command, int &port ) const override;
+    void hostInfo(QString &shell, QString &command, int &port) const override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void connectionClosed();
     void msgSent();
     void msgRcvd();
-    void error( QAbstractSocket::SocketError );
+    void error(QAbstractSocket::SocketError);
 
-  private:
-    bool writeMsg( const char *msg, int len ) override;
+private:
+    bool writeMsg(const char *msg, int len) override;
 
     QTcpSocket mSocket;
     int mPort;
 };
 
 }
-	
+
 #endif

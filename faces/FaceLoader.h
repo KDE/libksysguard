@@ -6,14 +6,14 @@
 
 #pragma once
 
-#include <QObject>
 #include <QJsonArray>
+#include <QObject>
 #include <QQmlParserStatus>
 
 #include "sensorfaces_export.h"
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class SensorFaceController;
 
 /**

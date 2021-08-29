@@ -8,12 +8,11 @@
 #define GUITESTPROCESS_H
 
 #include <QObject>
-class testGuiProcess: public QObject
+class testGuiProcess : public QObject
 {
     Q_OBJECT
-      private slots:
-	void testGUI();
+private slots:
+    void testGUI();
 };
 
 #endif
-

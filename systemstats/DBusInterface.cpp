@@ -10,11 +10,9 @@ namespace KSysGuard
 {
 namespace SystemStats
 {
-
 DBusInterface::DBusInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent)
     : org::kde::ksystemstats(service, path, connection, parent)
 {
-
 }
 
 }

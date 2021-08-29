@@ -12,82 +12,89 @@
 
 #include <QAction>
 #include <QApplication>
+#include <QDialog>
 #include <QDir>
 #include <QDirIterator>
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
-#include <QDialog>
 #include <QUrl>
 
-#include "processes.h"
 #include "ksysguardprocesslist.h"
+#include "processes.h"
 
 #include <KDesktopFile>
-#include <KStandardAction>
 #include <KLocalizedString>
-#include <QVBoxLayout>
-#include <QMessageBox>
+#include <KStandardAction>
 #include <QDialogButtonBox>
+#include <QMessageBox>
+#include <QVBoxLayout>
 
 #if WEBENGINE_SCRIPTING_ENABLED
 #include <QWebChannel>
-#include <QWebEngineSettings>
-#include <QWebEngineView>
 #include <QWebEngineProfile>
 #include <QWebEngineScriptCollection>
+#include <QWebEngineSettings>
 #include <QWebEngineUrlRequestInterceptor>
+#include <QWebEngineView>
 #include <qtwebenginewidgetsversion.h>
 #endif
 
 #if WEBENGINE_SCRIPTING_ENABLED
-class RemoteUrlInterceptor : public QWebEngineUrlRequestInterceptor {
+class RemoteUrlInterceptor : public QWebEngineUrlRequestInterceptor
+{
 public:
-    RemoteUrlInterceptor(QObject *parent) : QWebEngineUrlRequestInterceptor(parent) {}
+    RemoteUrlInterceptor(QObject *parent)
+        : QWebEngineUrlRequestInterceptor(parent)
+    {
+    }
     void interceptRequest(QWebEngineUrlRequestInfo &info) override
     {
         // Block non-GET/HEAD requests
-        if(!QStringList({QStringLiteral("GET"), QStringLiteral("HEAD")})
-           .contains(QString::fromLatin1(info.requestMethod())))
+        if (!QStringList({QStringLiteral("GET"), QStringLiteral("HEAD")}).contains(QString::fromLatin1(info.requestMethod())))
             info.block(true);
 
         // Block remote URLs
-        if(!QStringList({QStringLiteral("blob"), QStringLiteral("data"),
-                         QStringLiteral("file")}).contains(info.requestUrl().scheme()))
+        if (!QStringList({QStringLiteral("blob"), QStringLiteral("data"), QStringLiteral("file")}).contains(info.requestUrl().scheme()))
             info.block(true);
     }
 };
 #endif
 
-class ScriptingHtmlDialog : public QDialog {
-    public:
-        ScriptingHtmlDialog(QWidget *parent) : QDialog(parent) {
-
-            QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
-            buttonBox->setStandardButtons(QDialogButtonBox::Close);
-            connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
-            connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+class ScriptingHtmlDialog : public QDialog
+{
+public:
+    ScriptingHtmlDialog(QWidget *parent)
+        : QDialog(parent)
+    {
+        QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+        buttonBox->setStandardButtons(QDialogButtonBox::Close);
+        connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+        connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
 #if WEBENGINE_SCRIPTING_ENABLED
-            QVBoxLayout *layout = new QVBoxLayout;
-            layout->addWidget(&m_webView);
-            layout->addWidget(buttonBox);
-            setLayout(layout);
-            layout->setContentsMargins(0,0,0,0);
-            m_webView.settings()->setAttribute(QWebEngineSettings::PluginsEnabled, false);
-            m_webView.page()->profile()->setUrlRequestInterceptor(new RemoteUrlInterceptor(this));
+        QVBoxLayout *layout = new QVBoxLayout;
+        layout->addWidget(&m_webView);
+        layout->addWidget(buttonBox);
+        setLayout(layout);
+        layout->setContentsMargins(0, 0, 0, 0);
+        m_webView.settings()->setAttribute(QWebEngineSettings::PluginsEnabled, false);
+        m_webView.page()->profile()->setUrlRequestInterceptor(new RemoteUrlInterceptor(this));
 #endif
-        }
+    }
 #if WEBENGINE_SCRIPTING_ENABLED
-        QWebEngineView *webView() {
-            return &m_webView;
-        }
-    protected:
-        QWebEngineView m_webView;
+    QWebEngineView *webView()
+    {
+        return &m_webView;
+    }
+
+protected:
+    QWebEngineView m_webView;
 #endif
 };
 
-ProcessObject::ProcessObject(ProcessModel *model, int pid) {
+ProcessObject::ProcessObject(ProcessModel *model, int pid)
+{
     mModel = model;
     mPid = pid;
 }
@@ -100,7 +107,7 @@ bool ProcessObject::fileExists(const QString &filename)
 QString ProcessObject::readFile(const QString &filename)
 {
     QFile file(filename);
-    if(!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly))
         return QString();
     QTextStream stream(&file);
     QString contents = stream.readAll();
@@ -108,24 +115,27 @@ QString ProcessObject::readFile(const QString &filename)
     return contents;
 }
 
-Scripting::Scripting(KSysGuardProcessList * parent) : QWidget(parent), mProcessList(parent) {
+Scripting::Scripting(KSysGuardProcessList *parent)
+    : QWidget(parent)
+    , mProcessList(parent)
+{
     mScriptingHtmlDialog = nullptr;
     loadContextMenu();
 }
-void Scripting::runScript(const QString &path, const QString &name) {
-    //Record the script name and path for use in the script helper functions
+void Scripting::runScript(const QString &path, const QString &name)
+{
+    // Record the script name and path for use in the script helper functions
     mScriptPath = path;
     mScriptName = name;
 
 #if WEBENGINE_SCRIPTING_ENABLED
     QUrl fileName = QUrl::fromLocalFile(path + QStringLiteral("index.html"));
-    if(!mScriptingHtmlDialog) {
+    if (!mScriptingHtmlDialog) {
         mScriptingHtmlDialog = new ScriptingHtmlDialog(this);
         mWebChannel = new QWebChannel(mScriptingHtmlDialog);
         connect(mScriptingHtmlDialog, &QDialog::rejected, this, &Scripting::stopAllScripts);
         // Only show after page loaded to allow for layouting
-        mScriptingHtmlDialog->connect(mScriptingHtmlDialog->webView(), &QWebEngineView::loadFinished,
-                                      mScriptingHtmlDialog, &ScriptingHtmlDialog::show);
+        mScriptingHtmlDialog->connect(mScriptingHtmlDialog->webView(), &QWebEngineView::loadFinished, mScriptingHtmlDialog, &ScriptingHtmlDialog::show);
 
         QAction *refreshAction = new QAction(QStringLiteral("refresh"), mScriptingHtmlDialog);
         refreshAction->setShortcut(QKeySequence::Refresh);
@@ -203,18 +213,18 @@ new QWebChannel(window.qt.webChannelTransport, function(channel) {
     profile->scripts()->insert(webChannelScript);
 
     // Inject a style sheet that follows system colors, otherwise we might end up with black text on dark gray background
-    const QString styleSheet = QStringLiteral(
-        "body { background: %1; color: %2; }" \
-        "a { color: %3; }" \
-        "a:visited { color: %4; } "
-    ).arg(palette().window().color().name(),
-          palette().text().color().name(),
-          palette().link().color().name(),
-          palette().linkVisited().color().name());
+    const QString styleSheet =
+        QStringLiteral(
+            "body { background: %1; color: %2; }"
+            "a { color: %3; }"
+            "a:visited { color: %4; } ")
+            .arg(palette().window().color().name(), palette().text().color().name(), palette().link().color().name(), palette().linkVisited().color().name());
 
-    QString styleSheetJs = QStringLiteral("\nvar node = document.createElement('style');"
-                        "node.innerHTML = '%1';"
-                        "document.body.appendChild(node);").arg(styleSheet);
+    QString styleSheetJs = QStringLiteral(
+                               "\nvar node = document.createElement('style');"
+                               "node.innerHTML = '%1';"
+                               "document.body.appendChild(node);")
+                               .arg(styleSheet);
 
     QWebEngineScript styleSheetScript;
     styleSheetScript.setSourceCode(styleSheetJs);
@@ -229,30 +239,35 @@ new QWebChannel(window.qt.webChannelTransport, function(channel) {
 
     mScriptingHtmlDialog->webView()->load(fileName);
 #else
-    QMessageBox::critical(this, i18n("QtWebEngineWidgets not available"),
-            i18n("KSysGuard library was compiled without QtWebEngineWidgets, please contact your distribution."));
+    QMessageBox::critical(this,
+                          i18n("QtWebEngineWidgets not available"),
+                          i18n("KSysGuard library was compiled without QtWebEngineWidgets, please contact your distribution."));
 #endif
 }
 #if WEBENGINE_SCRIPTING_ENABLED
-void Scripting::zoomIn() {
+void Scripting::zoomIn()
+{
     QWebEngineView *webView = mScriptingHtmlDialog->webView();
-    webView->setZoomFactor( webView->zoomFactor() * 1.1 );
+    webView->setZoomFactor(webView->zoomFactor() * 1.1);
 }
-void Scripting::zoomOut() {
+void Scripting::zoomOut()
+{
     QWebEngineView *webView = mScriptingHtmlDialog->webView();
-    if(webView->zoomFactor() > 0.1) //Prevent it getting too small
-        webView->setZoomFactor( webView->zoomFactor() / 1.1 );
+    if (webView->zoomFactor() > 0.1) // Prevent it getting too small
+        webView->setZoomFactor(webView->zoomFactor() / 1.1);
 }
 
-void Scripting::refreshScript() {
-    //Call any refresh function, if it exists
+void Scripting::refreshScript()
+{
+    // Call any refresh function, if it exists
     mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
     mProcessObject->anythingChanged();
-    if(mScriptingHtmlDialog && mScriptingHtmlDialog->webView() && mScriptingHtmlDialog->webView()->page()) {
+    if (mScriptingHtmlDialog && mScriptingHtmlDialog->webView() && mScriptingHtmlDialog->webView()->page()) {
         mScriptingHtmlDialog->webView()->page()->runJavaScript(QStringLiteral("refresh && refresh();"));
     }
 }
-void Scripting::setupJavascriptObjects() {
+void Scripting::setupJavascriptObjects()
+{
     mProcessList->processModel()->update(0, KSysGuard::Processes::XMemory);
     mProcessObject = new ProcessObject(mProcessList->processModel(), mPid);
     mWebChannel->registerObject(QStringLiteral("process"), mProcessObject);
@@ -268,23 +283,25 @@ void Scripting::stopAllScripts()
     mScriptPath.clear();
     mScriptName.clear();
 }
-void Scripting::loadContextMenu() {
-    //Clear any existing actions
+void Scripting::loadContextMenu()
+{
+    // Clear any existing actions
     qDeleteAll(mActions);
     mActions.clear();
 
     QStringList scripts;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("ksysguard/scripts/"), QStandardPaths::LocateDirectory);
-    Q_FOREACH (const QString& dir, dirs) {
+    const QStringList dirs =
+        QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("ksysguard/scripts/"), QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString &dir, dirs) {
         QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);
         while (it.hasNext()) {
             scripts.append(it.next());
         }
     }
 
-    foreach(const QString &script, scripts) {
+    foreach (const QString &script, scripts) {
         KDesktopFile desktopFile(script);
-        if(!desktopFile.name().isEmpty() && !desktopFile.noDisplay()) {
+        if (!desktopFile.name().isEmpty() && !desktopFile.noDisplay()) {
             QAction *action = new QAction(desktopFile.readName(), this);
             action->setToolTip(desktopFile.readComment());
             action->setIcon(QIcon(desktopFile.readIcon()));
@@ -298,13 +315,14 @@ void Scripting::loadContextMenu() {
     }
 }
 
-void Scripting::runScriptSlot() {
-    QAction *action = static_cast<QAction*>(sender());
-    //All the files for the script should be in the scriptPath
+void Scripting::runScriptSlot()
+{
+    QAction *action = static_cast<QAction *>(sender());
+    // All the files for the script should be in the scriptPath
     QString path = action->property("scriptPath").toString();
 
     QList<KSysGuard::Process *> selectedProcesses = mProcessList->selectedProcesses();
-    if(selectedProcesses.isEmpty())
+    if (selectedProcesses.isEmpty())
         return;
     mPid = selectedProcesses[0]->pid();
 

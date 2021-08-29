@@ -51,7 +51,8 @@ static QString prettyName(const sensors_chip_name *const chipName, const sensors
 
 namespace KSysGuard
 {
-SensorsFeatureSensor *makeSensorsFeatureSensor(const QString &id, const sensors_chip_name *const chipName, const sensors_feature *const feature, SensorObject *parent)
+SensorsFeatureSensor *
+makeSensorsFeatureSensor(const QString &id, const sensors_chip_name *const chipName, const sensors_feature *const feature, SensorObject *parent)
 {
     if (parent->sensor(id)) {
         return nullptr;

@@ -7,8 +7,8 @@
 
 #include <QTest>
 
-#include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonDocument>
 
 #include <KConfig>
 #include <Solid/Block>

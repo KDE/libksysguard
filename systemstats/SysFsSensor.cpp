@@ -14,10 +14,10 @@ class Q_DECL_HIDDEN SysFsSensor::Private
 {
 public:
     QString path;
-    std::function<QVariant(const QByteArray&)> convertFunction;
+    std::function<QVariant(const QByteArray &)> convertFunction;
 };
 
-SysFsSensor::SysFsSensor(const QString& id, const QString& path, SensorObject* parent)
+SysFsSensor::SysFsSensor(const QString &id, const QString &path, SensorObject *parent)
     : SensorProperty(id, parent)
     , d(std::make_unique<Private>())
 {
@@ -30,7 +30,7 @@ SysFsSensor::SysFsSensor(const QString& id, const QString& path, SensorObject* p
 
 SysFsSensor::~SysFsSensor() = default;
 
-void SysFsSensor::setConvertFunction(const std::function<QVariant (const QByteArray &)>& function)
+void SysFsSensor::setConvertFunction(const std::function<QVariant(const QByteArray &)> &function)
 {
     d->convertFunction = function;
 }

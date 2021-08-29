@@ -6,9 +6,9 @@
 
 #include "nvidia.h"
 
-#include <QStandardPaths>
-#include <QProcess>
 #include <QDebug>
+#include <QProcess>
+#include <QStandardPaths>
 
 #include <KLocalizedString>
 #include <KPluginFactory>
@@ -57,15 +57,15 @@ void NvidiaPlugin::setup()
     connect(m_process, &QProcess::readyReadStandardOutput, this, [=]() {
         while (m_process->canReadLine()) {
             const QString line = QString::fromLatin1(m_process->readLine());
-            if (line.startsWith(QLatin1Char('#'))) { //comment line
-                if (line != QLatin1String("# gpu        pid  type    sm   mem   enc   dec   command\n") &&
-                    line != QLatin1String("# Idx          #   C/G     %     %     %     %   name\n")) {
-                    //header format doesn't match what we expected, bail before we send any garbage
+            if (line.startsWith(QLatin1Char('#'))) { // comment line
+                if (line != QLatin1String("# gpu        pid  type    sm   mem   enc   dec   command\n")
+                    && line != QLatin1String("# Idx          #   C/G     %     %     %     %   name\n")) {
+                    // header format doesn't match what we expected, bail before we send any garbage
                     m_process->terminate();
                 }
                 continue;
             }
-            const auto parts = line.splitRef(QLatin1Char(' '),  Qt::SkipEmptyParts);
+            const auto parts = line.splitRef(QLatin1Char(' '), Qt::SkipEmptyParts);
 
             // format at time of writing is
             // # gpu        pid  type    sm   mem   enc   dec   command
@@ -78,8 +78,8 @@ void NvidiaPlugin::setup()
             int mem = parts[4].toUInt();
 
             KSysGuard::Process *process = getProcess(pid);
-            if(!process) {
-                continue; //can in race condition etc
+            if (!process) {
+                continue; // can in race condition etc
             }
             m_usage->setData(process, sm);
             m_memory->setData(process, mem);

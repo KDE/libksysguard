@@ -15,19 +15,19 @@ namespace KSysGuard
 {
 FORMATTER_EXPORT Q_NAMESPACE
 
-/**
- * This enum type is used to specify metric prefixes.
- */
-enum MetricPrefix {
-    MetricPrefixAutoAdjust = -1,
-    MetricPrefixUnity = 0,
-    MetricPrefixKilo,
-    MetricPrefixMega,
-    MetricPrefixGiga,
-    MetricPrefixTera,
-    MetricPrefixPeta,
-    MetricPrefixLast = MetricPrefixPeta
-};
+    /**
+     * This enum type is used to specify metric prefixes.
+     */
+    enum MetricPrefix {
+        MetricPrefixAutoAdjust = -1,
+        MetricPrefixUnity = 0,
+        MetricPrefixKilo,
+        MetricPrefixMega,
+        MetricPrefixGiga,
+        MetricPrefixTera,
+        MetricPrefixPeta,
+        MetricPrefixLast = MetricPrefixPeta
+    };
 Q_ENUM_NS(MetricPrefix)
 
 /**

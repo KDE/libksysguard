@@ -7,11 +7,11 @@
 #ifndef CAPTURE_H
 #define CAPTURE_H
 
-#include <thread>
-#include <mutex>
+#include <atomic>
 #include <condition_variable>
 #include <deque>
-#include <atomic>
+#include <mutex>
+#include <thread>
 
 #include "Packet.h"
 

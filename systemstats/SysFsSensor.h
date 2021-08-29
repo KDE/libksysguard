@@ -15,7 +15,6 @@
 
 namespace KSysGuard
 {
-
 /**
  * Convenience subclass of SensorProperty that reads a sysfs file and uses the result as value.
  */
@@ -34,7 +33,7 @@ public:
      * By default this is set to `std::atoll` or in other words, any numeric value
      * should automatically be converted to a proper QVariant.
      */
-    void setConvertFunction(const std::function<QVariant(const QByteArray&)> &function);
+    void setConvertFunction(const std::function<QVariant(const QByteArray &)> &function);
 
     /**
      * Update this sensor.

@@ -6,8 +6,8 @@
 
 #include "Capture.h"
 
-#include <string>
 #include <iostream>
+#include <string>
 
 #include <pcap/pcap.h>
 
@@ -68,7 +68,7 @@ bool Capture::start()
 
     pcap_freecode(&filter);
 
-    m_thread = std::thread { &Capture::loop, this };
+    m_thread = std::thread{&Capture::loop, this};
 
     return true;
 }
@@ -104,7 +104,9 @@ void Capture::reportStatistics()
 Packet Capture::nextPacket()
 {
     std::unique_lock<std::mutex> lock(m_mutex);
-    m_condition.wait(lock, [this]() { return m_queue.size() > 0; });
+    m_condition.wait(lock, [this]() {
+        return m_queue.size() > 0;
+    });
 
     auto packet = std::move(m_queue.front());
     m_queue.pop_front();
@@ -147,10 +149,11 @@ bool Capture::checkError(int result)
 
 void Capture::handlePacket(const struct pcap_pkthdr *header, const uint8_t *data)
 {
-    auto timeStamp = std::chrono::time_point_cast<TimeStamp::MicroSeconds::duration>(std::chrono::system_clock::from_time_t(header->ts.tv_sec) + std::chrono::microseconds { header->ts.tv_usec });
+    auto timeStamp = std::chrono::time_point_cast<TimeStamp::MicroSeconds::duration>(std::chrono::system_clock::from_time_t(header->ts.tv_sec)
+                                                                                     + std::chrono::microseconds{header->ts.tv_usec});
 
     {
-        std::lock_guard<std::mutex> lock { m_mutex };
+        std::lock_guard<std::mutex> lock{m_mutex};
 
         m_packetCount++;
         if (m_queue.size() < MaximumQueueSize) {

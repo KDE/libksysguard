@@ -7,12 +7,12 @@
 #ifndef CONNECTIONMAPPING_H
 #define CONNECTIONMAPPING_H
 
-#include <unordered_map>
-#include <unordered_set>
+#include <atomic>
+#include <mutex>
 #include <regex>
 #include <thread>
-#include <mutex>
-#include <atomic>
+#include <unordered_map>
+#include <unordered_set>
 
 #include <netlink/socket.h>
 
@@ -41,9 +41,8 @@ public:
     void stop();
 
 private:
-    struct State
-    {
-        State &operator= (const State &other)
+    struct State {
+        State &operator=(const State &other)
         {
             addressToInode = other.addressToInode;
             inodeToPid = other.inodeToPid;

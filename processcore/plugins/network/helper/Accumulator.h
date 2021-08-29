@@ -7,14 +7,14 @@
 #ifndef ACCUMULATOR_H
 #define ACCUMULATOR_H
 
-#include <memory>
-#include <thread>
-#include <mutex>
 #include <atomic>
+#include <memory>
+#include <mutex>
+#include <thread>
 #include <unordered_map>
 
-#include "TimeStamps.h"
 #include "Packet.h"
+#include "TimeStamps.h"
 
 class Capture;
 class ConnectionMapping;
@@ -22,7 +22,6 @@ class Packet;
 
 class Accumulator
 {
-
 public:
     using InboundOutboundData = std::pair<int, int>;
     using PidDataCounterHash = std::unordered_map<int, InboundOutboundData>;

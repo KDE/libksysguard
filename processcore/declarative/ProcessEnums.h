@@ -10,7 +10,8 @@
 
 #include "process.h"
 
-namespace KSysGuardProcess {
+namespace KSysGuardProcess
+{
 Q_NAMESPACE
 
 using ProcessStatus = KSysGuard::Process::ProcessStatus;

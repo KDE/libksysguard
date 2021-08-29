@@ -11,7 +11,6 @@
 
 namespace KSysGuard
 {
-
 class Process;
 class ProcessAttributeModel;
 

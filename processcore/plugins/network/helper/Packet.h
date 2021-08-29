@@ -7,9 +7,9 @@
 #ifndef PACKET_H
 #define PACKET_H
 
+#include <array>
 #include <chrono>
 #include <cstdint>
-#include <array>
 #include <functional>
 #include <iostream>
 
@@ -35,15 +35,13 @@ public:
         Outbound,
     };
 
-    struct Address
-    {
-        std::array<uint32_t, 4> address = { 0 };
+    struct Address {
+        std::array<uint32_t, 4> address = {0};
         uint32_t port = 0;
 
         inline bool operator==(const Address &other) const
         {
-            return address == other.address
-                   && port == other.port;
+            return address == other.address && port == other.port;
         }
     };
 
@@ -64,8 +62,8 @@ public:
     Address destinationAddress() const;
 
 private:
-    void parseIPv4(const uint8_t* data, int32_t dataLength);
-    void parseIPv6(const uint8_t* data, int32_t dataLength);
+    void parseIPv4(const uint8_t *data, int32_t dataLength);
+    void parseIPv6(const uint8_t *data, int32_t dataLength);
     void parseTransport(uint8_t type, const uint8_t *data, int32_t dataLength);
 
     TimeStamp::MicroSeconds m_timeStamp;
@@ -78,26 +76,28 @@ private:
     Address m_destinationAddress;
 };
 
-inline std::ostream& operator<<(std::ostream& stream, const Packet::Address &address)
+inline std::ostream &operator<<(std::ostream &stream, const Packet::Address &address)
 {
     stream << std::hex << address.address[0] << ":" << address.address[1] << ":" << address.address[2] << ":" << address.address[3];
     stream << std::dec << "::" << address.port;
     return stream;
 }
 
-namespace std {
-    template <> struct hash<Packet::Address>
+namespace std
+{
+template<>
+struct hash<Packet::Address> {
+    using argument_type = Packet::Address;
+    using result_type = std::size_t;
+    inline result_type operator()(argument_type const &address) const noexcept
     {
-        using argument_type = Packet::Address;
-        using result_type = std::size_t;
-        inline result_type operator()(argument_type const& address) const noexcept {
-            return std::hash<uint32_t>{}(address.address[0]) //
-                   ^ (std::hash<uint32_t>{}(address.address[1]) << 1) //
-                   ^ (std::hash<uint32_t>{}(address.address[2]) << 2) //
-                   ^ (std::hash<uint32_t>{}(address.address[3]) << 3) //
-                   ^ (std::hash<uint32_t>{}(address.port) << 4);
-        }
-    };
+        return std::hash<uint32_t>{}(address.address[0]) //
+            ^ (std::hash<uint32_t>{}(address.address[1]) << 1) //
+            ^ (std::hash<uint32_t>{}(address.address[2]) << 2) //
+            ^ (std::hash<uint32_t>{}(address.address[3]) << 3) //
+            ^ (std::hash<uint32_t>{}(address.port) << 4);
+    }
+};
 }
 
 #endif // PACKET_H

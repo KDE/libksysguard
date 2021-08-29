@@ -13,7 +13,6 @@
 
 namespace KSysGuard
 {
-
 class SensorObject;
 
 /**
@@ -91,7 +90,9 @@ public:
     /**
      * Updates the value of this property if possible. The default implementation does nothing.
      */
-    virtual void update() {}
+    virtual void update()
+    {
+    }
 
 Q_SIGNALS:
     /**

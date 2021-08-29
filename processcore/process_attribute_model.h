@@ -11,7 +11,6 @@
 
 namespace KSysGuard
 {
-
 class ExtendedProcesses;
 class ProcessAttribute;
 

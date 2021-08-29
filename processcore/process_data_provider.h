@@ -9,8 +9,8 @@
 #include <QVariant>
 #include <QVector>
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class Processes;
 class Process;
 class ProcessAttribute;

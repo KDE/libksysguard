@@ -17,7 +17,6 @@
 
 namespace KSysGuard
 {
-
 class SensorContainer;
 class SensorObject;
 

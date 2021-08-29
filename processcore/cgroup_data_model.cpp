@@ -6,34 +6,34 @@
 
 #include "cgroup_data_model.h"
 
+#include "Formatter.h"
 #include "cgroup.h"
 #include "extended_process_list.h"
 #include "process_attribute.h"
 #include "process_data_model.h"
-#include "Formatter.h"
 
 #include <KLocalizedString>
 
-#include <QMetaEnum>
-#include <QTimer>
 #include <QDebug>
 #include <QDir>
+#include <QMetaEnum>
+#include <QTimer>
 
 #include <algorithm>
 #include <filesystem>
 
-using namespace  KSysGuard;
+using namespace KSysGuard;
 
 class KSysGuard::CGroupDataModelPrivate
 {
 public:
-    QVector<KSysGuard::Process*> processesFor(CGroup *app);
+    QVector<KSysGuard::Process *> processesFor(CGroup *app);
 
     QSharedPointer<ExtendedProcesses> m_processes;
     QTimer *m_updateTimer;
     ProcessAttributeModel *m_attributeModel = nullptr;
-    QHash<QString, KSysGuard::ProcessAttribute* > m_availableAttributes;
-    QVector<KSysGuard::ProcessAttribute* > m_enabledAttributes;
+    QHash<QString, KSysGuard::ProcessAttribute *> m_availableAttributes;
+    QVector<KSysGuard::ProcessAttribute *> m_enabledAttributes;
 
     bool m_available = false;
     QString m_root;
@@ -42,16 +42,18 @@ public:
     QVector<CGroup *> m_cGroups; // an ordered list of unfiltered cgroups from our root
     QHash<QString, CGroup *> m_cgroupMap; // all known cgroups from our root
     QHash<QString, CGroup *> m_oldGroups;
-    QHash<CGroup*, QVector<Process*>> m_processMap; // cached mapping of cgroup to list of processes of that group
+    QHash<CGroup *, QVector<Process *>> m_processMap; // cached mapping of cgroup to list of processes of that group
 };
 
 class GroupNameAttribute : public ProcessAttribute
 {
 public:
-    GroupNameAttribute(QObject *parent) :
-        KSysGuard::ProcessAttribute(QStringLiteral("menuId"), i18nc("@title", "Desktop ID"), parent) {
+    GroupNameAttribute(QObject *parent)
+        : KSysGuard::ProcessAttribute(QStringLiteral("menuId"), i18nc("@title", "Desktop ID"), parent)
+    {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
+    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process *> &processes) const override
+    {
         Q_UNUSED(processes)
         return app->service()->menuId();
     }
@@ -60,10 +62,12 @@ public:
 class AppIconAttribute : public KSysGuard::ProcessAttribute
 {
 public:
-    AppIconAttribute(QObject *parent) :
-        KSysGuard::ProcessAttribute(QStringLiteral("iconName"), i18nc("@title", "Icon"), parent) {
+    AppIconAttribute(QObject *parent)
+        : KSysGuard::ProcessAttribute(QStringLiteral("iconName"), i18nc("@title", "Icon"), parent)
+    {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
+    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process *> &processes) const override
+    {
         Q_UNUSED(processes)
         return app->service()->icon();
     }
@@ -72,10 +76,12 @@ public:
 class AppNameAttribute : public KSysGuard::ProcessAttribute
 {
 public:
-    AppNameAttribute(QObject *parent) :
-        KSysGuard::ProcessAttribute(QStringLiteral("appName"), i18nc("@title", "Name"), parent) {
+    AppNameAttribute(QObject *parent)
+        : KSysGuard::ProcessAttribute(QStringLiteral("appName"), i18nc("@title", "Name"), parent)
+    {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process*> &processes) const override {
+    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process *> &processes) const override
+    {
         Q_UNUSED(processes)
         return app->service()->name();
     }
@@ -177,41 +183,40 @@ QStringList CGroupDataModel::enabledAttributes() const
 
 void CGroupDataModel::setEnabledAttributes(const QStringList &enabledAttributes)
 {
-     beginResetModel();
+    beginResetModel();
 
-     QVector<ProcessAttribute*> unusedAttributes = d->m_enabledAttributes;
-     d->m_enabledAttributes.clear();
+    QVector<ProcessAttribute *> unusedAttributes = d->m_enabledAttributes;
+    d->m_enabledAttributes.clear();
 
-     for (auto attribute: enabledAttributes) {
-         auto attr = d->m_availableAttributes.value(attribute, nullptr);
-         if (!attr) {
-             qWarning() << "Could not find attribute" << attribute;
-             continue;
-         }
-         unusedAttributes.removeOne(attr);
-         d->m_enabledAttributes << attr;
-         int columnIndex = d->m_enabledAttributes.count() - 1;
+    for (auto attribute : enabledAttributes) {
+        auto attr = d->m_availableAttributes.value(attribute, nullptr);
+        if (!attr) {
+            qWarning() << "Could not find attribute" << attribute;
+            continue;
+        }
+        unusedAttributes.removeOne(attr);
+        d->m_enabledAttributes << attr;
+        int columnIndex = d->m_enabledAttributes.count() - 1;
 
-         // reconnect as using the attribute in the lambda makes everything super fast
-         disconnect(attr, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
-         connect(attr, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](KSysGuard::Process *process) {
-             auto cgroup = d->m_cgroupMap.value(process->cGroup());
-             if (!cgroup) {
-                 return;
-             }
-             const QModelIndex index = getQModelIndex(cgroup, columnIndex);
-             emit dataChanged(index, index);
-         });
+        // reconnect as using the attribute in the lambda makes everything super fast
+        disconnect(attr, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
+        connect(attr, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](KSysGuard::Process *process) {
+            auto cgroup = d->m_cgroupMap.value(process->cGroup());
+            if (!cgroup) {
+                return;
+            }
+            const QModelIndex index = getQModelIndex(cgroup, columnIndex);
+            emit dataChanged(index, index);
+        });
+    }
 
-     }
+    for (auto unusedAttr : qAsConst(unusedAttributes)) {
+        disconnect(unusedAttr, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
+    }
 
-     for (auto unusedAttr : qAsConst(unusedAttributes)) {
-         disconnect(unusedAttr, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
-     }
+    endResetModel();
 
-     endResetModel();
-
-     emit enabledAttributesChanged();
+    emit enabledAttributesChanged();
 }
 
 QModelIndex CGroupDataModel::getQModelIndex(CGroup *cgroup, int column) const
@@ -240,45 +245,47 @@ QVariant CGroupDataModel::data(const QModelIndex &index, int role) const
     }
     int attr = index.column();
     auto attribute = d->m_enabledAttributes[attr];
-    switch(role) {
-        case Qt::DisplayRole:
-        case ProcessDataModel::FormattedValue: {
-            KSysGuard::CGroup *app = reinterpret_cast< KSysGuard::CGroup* > (index.internalPointer());
-            const QVariant value = attribute->cgroupData(app, d->processesFor(app));
-            return KSysGuard::Formatter::formatValue(value, attribute->unit());
+    switch (role) {
+    case Qt::DisplayRole:
+    case ProcessDataModel::FormattedValue: {
+        KSysGuard::CGroup *app = reinterpret_cast<KSysGuard::CGroup *>(index.internalPointer());
+        const QVariant value = attribute->cgroupData(app, d->processesFor(app));
+        return KSysGuard::Formatter::formatValue(value, attribute->unit());
+    }
+    case ProcessDataModel::Value: {
+        KSysGuard::CGroup *app = reinterpret_cast<KSysGuard::CGroup *>(index.internalPointer());
+        const QVariant value = attribute->cgroupData(app, d->processesFor(app));
+        return value;
+    }
+    case ProcessDataModel::Attribute: {
+        return attribute->id();
+    }
+    case ProcessDataModel::Minimum: {
+        return attribute->min();
+    }
+    case ProcessDataModel::Maximum: {
+        return attribute->max();
+    }
+    case ProcessDataModel::ShortName: {
+        if (!attribute->shortName().isEmpty()) {
+            return attribute->shortName();
         }
-        case ProcessDataModel::Value: {
-            KSysGuard::CGroup *app = reinterpret_cast< KSysGuard::CGroup* > (index.internalPointer());
-            const QVariant value = attribute->cgroupData(app, d->processesFor(app));
-            return value;
-        }
-        case ProcessDataModel::Attribute: {
-            return attribute->id();
-        }
-        case ProcessDataModel::Minimum: {
-            return attribute->min();
-        }
-        case ProcessDataModel::Maximum: {
-            return attribute->max();
-        }
-        case ProcessDataModel::ShortName: {
-            if (!attribute->shortName().isEmpty()) {
-                return attribute->shortName();
-            }
-            return attribute->name();
-        }
-        case ProcessDataModel::Name: {
-            return attribute->name();
-        }
-        case ProcessDataModel::Unit: {
-            return attribute->unit();
-        }
-        case ProcessDataModel::PIDs: {
-            const auto pids = static_cast<KSysGuard::CGroup*>(index.internalPointer())->pids();
-            QVariantList result;
-            std::transform(pids.begin(), pids.end(), std::back_inserter(result), [](pid_t pid) { return int(pid); } );
-            return result;
-        }
+        return attribute->name();
+    }
+    case ProcessDataModel::Name: {
+        return attribute->name();
+    }
+    case ProcessDataModel::Unit: {
+        return attribute->unit();
+    }
+    case ProcessDataModel::PIDs: {
+        const auto pids = static_cast<KSysGuard::CGroup *>(index.internalPointer())->pids();
+        QVariantList result;
+        std::transform(pids.begin(), pids.end(), std::back_inserter(result), [](pid_t pid) {
+            return int(pid);
+        });
+        return result;
+    }
     }
     return QVariant();
 }
@@ -328,7 +335,7 @@ QVariant CGroupDataModel::headerData(int section, Qt::Orientation orientation, i
 
 ProcessAttributeModel *CGroupDataModel::attributesModel()
 {
-    //lazy load
+    // lazy load
     if (!d->m_attributeModel) {
         d->m_attributeModel = new KSysGuard::ProcessAttributeModel(d->m_availableAttributes.values().toVector(), this);
     }
@@ -344,7 +351,12 @@ void CGroupDataModel::setEnabled(bool enabled)
 {
     if (enabled) {
         d->m_updateTimer->start();
-        QMetaObject::invokeMethod(this, [this] {update();}, Qt::QueuedConnection);
+        QMetaObject::invokeMethod(
+            this,
+            [this] {
+                update();
+            },
+            Qt::QueuedConnection);
     } else {
         d->m_updateTimer->stop();
     }
@@ -362,7 +374,12 @@ void CGroupDataModel::setRoot(const QString &root)
     }
     d->m_root = root;
     emit rootChanged();
-    QMetaObject::invokeMethod(this, [this] {update();}, Qt::QueuedConnection);
+    QMetaObject::invokeMethod(
+        this,
+        [this] {
+            update();
+        },
+        Qt::QueuedConnection);
 
     const QString path = CGroup::cgroupSysBasePath() + root;
     bool available = QFile::exists(path);
@@ -427,7 +444,7 @@ void CGroupDataModel::update(CGroup *node)
         if (row >= 0) {
             d->m_cGroups[row]->setPids(pids);
             d->m_processMap.remove(d->m_cGroups[row]);
-            Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, columnCount()-1, QModelIndex()));
+            Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, columnCount() - 1, QModelIndex()));
         }
     });
 
@@ -436,7 +453,7 @@ void CGroupDataModel::update(CGroup *node)
     if (error) {
         return;
     }
-    for (const auto& entry : iterator) {
+    for (const auto &entry : iterator) {
         if (!entry.is_directory()) {
             continue;
         }
@@ -463,13 +480,13 @@ bool CGroupDataModel::isAvailable() const
     return d->m_available;
 }
 
-QVector<Process*> CGroupDataModelPrivate::processesFor(CGroup *app)
+QVector<Process *> CGroupDataModelPrivate::processesFor(CGroup *app)
 {
     if (m_processMap.contains(app)) {
         return m_processMap.value(app);
     }
 
-    QVector<Process*> result;
+    QVector<Process *> result;
     const auto pids = app->pids();
     std::for_each(pids.begin(), pids.end(), [this, &result](pid_t pid) {
         auto process = m_processes->getProcess(pid);

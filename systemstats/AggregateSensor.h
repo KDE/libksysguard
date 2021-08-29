@@ -9,10 +9,10 @@
 #include <functional>
 #include <memory>
 
+#include <QPointer>
 #include <QRegularExpression>
 #include <QVariant>
 #include <QVector>
-#include <QPointer>
 
 #include "SensorObject.h"
 #include "SensorPlugin.h"
@@ -22,7 +22,6 @@
 
 namespace KSysGuard
 {
-
 /**
  * @todo write docs
  */

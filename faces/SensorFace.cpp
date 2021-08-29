@@ -4,14 +4,15 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "SensorFace_p.h"
 #include "SensorFaceController.h"
+#include "SensorFace_p.h"
 
 #include <QDebug>
 
 using namespace KSysGuard;
 
-class SensorFace::Private {
+class SensorFace::Private
+{
 public:
     QPointer<QQuickItem> contentItem;
     SensorFaceController *controller = nullptr;
@@ -19,10 +20,9 @@ public:
 };
 
 SensorFace::SensorFace(QQuickItem *parent)
-    : QQuickItem(parent),
-      d(std::make_unique<Private>())
+    : QQuickItem(parent)
+    , d(std::make_unique<Private>())
 {
-    
 }
 
 SensorFace::~SensorFace()
@@ -55,7 +55,7 @@ void SensorFace::setFormFactor(SensorFace::FormFactor formFactor)
     emit formFactorChanged();
 }
 
-QQuickItem * SensorFace::contentItem() const
+QQuickItem *SensorFace::contentItem() const
 {
     return d->contentItem;
 }

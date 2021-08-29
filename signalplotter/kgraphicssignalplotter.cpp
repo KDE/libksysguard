@@ -6,4 +6,4 @@
 
 #define GRAPHICS_SIGNAL_PLOTTER
 #include "ksignalplotter.cpp"
-#undef  GRAPHICS_SIGNAL_PLOTTER
+#undef GRAPHICS_SIGNAL_PLOTTER

@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#include <QTest>
 #include <QLocale>
+#include <QTest>
 
 #include "Formatter.h"
 #include "Unit.h"
@@ -65,10 +65,9 @@ private Q_SLOTS:
     {
         QFETCH(int, input);
         QFETCH(QString, output);
-        auto formatted =  KSysGuard::Formatter::formatValue(input, KSysGuard::UnitTime);
+        auto formatted = KSysGuard::Formatter::formatValue(input, KSysGuard::UnitTime);
         QCOMPARE(formatted, output);
     }
-
 };
 
 QTEST_MAIN(FormatterTest);

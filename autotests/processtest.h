@@ -10,23 +10,22 @@
 #include <QObject>
 namespace KSysGuard
 {
-    class Process;
+class Process;
 }
 class testProcess : public QObject
 {
     Q_OBJECT
-    private:
-        unsigned long countNumChildren(KSysGuard::Process *p);
-    private slots:
-        void testTimeToUpdateAllProcesses();
-        void testTimeToUpdateModel();
-        void testProcesses();
-        void testProcessesTreeStructure();
-        void testProcessesModification();
-        void testHistories();
-        void testHistoriesWithWidget();
-        void testUpdateOrAddProcess();
-        void testCPUGraphHistory();
+private:
+    unsigned long countNumChildren(KSysGuard::Process *p);
+private slots:
+    void testTimeToUpdateAllProcesses();
+    void testTimeToUpdateModel();
+    void testProcesses();
+    void testProcessesTreeStructure();
+    void testProcessesModification();
+    void testHistories();
+    void testHistoriesWithWidget();
+    void testUpdateOrAddProcess();
+    void testCPUGraphHistory();
 };
 #endif
-

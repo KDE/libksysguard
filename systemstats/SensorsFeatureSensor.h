@@ -50,7 +50,8 @@ private:
  * equal @c SENSORS_FEATURE_MAX_MAIN.
  * @since 5.23
  */
-SYSTEMSTATS_EXPORT SensorsFeatureSensor *makeSensorsFeatureSensor(const QString &id, const sensors_chip_name *const chipName, const sensors_feature *const feature, SensorObject *parent);
+SYSTEMSTATS_EXPORT SensorsFeatureSensor *
+makeSensorsFeatureSensor(const QString &id, const sensors_chip_name *const chipName, const sensors_feature *const feature, SensorObject *parent);
 }
 #endif
 #endif

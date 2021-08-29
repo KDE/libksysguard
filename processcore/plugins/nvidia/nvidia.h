@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <processcore/process_data_provider.h>
 #include <processcore/process_attribute.h>
+#include <processcore/process_data_provider.h>
 
 class QProcess;
 
@@ -17,6 +17,7 @@ class NvidiaPlugin : public KSysGuard::ProcessDataProvider
 public:
     NvidiaPlugin(QObject *parent, const QVariantList &args);
     void handleEnabledChanged(bool enabled) override;
+
 private:
     void setup();
 

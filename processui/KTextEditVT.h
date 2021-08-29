@@ -40,51 +40,49 @@
  */
 class Q_DECL_EXPORT KTextEditVT : public QTextEdit
 {
-	Q_OBJECT
-	Q_PROPERTY( bool parseAnsiEscapeCodes READ parseAnsiEscapeCodes WRITE setParseAnsiEscapeCodes )
+    Q_OBJECT
+    Q_PROPERTY(bool parseAnsiEscapeCodes READ parseAnsiEscapeCodes WRITE setParseAnsiEscapeCodes)
 
 public:
-    explicit KTextEditVT(QWidget* parent);
+    explicit KTextEditVT(QWidget *parent);
 
-	/** Whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
-	bool parseAnsiEscapeCodes() const;
+    /** Whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
+    bool parseAnsiEscapeCodes() const;
 
 public Q_SLOTS:
-	/** Set whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
-	void setParseAnsiEscapeCodes(bool displayall);
-	/** Insert the given string at the current position based on the current state.
-	 *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
-	 *  escape sequences can move the cursor and set the current color etc.
-	 *
-	 *  This just calls insertVTChar for each character in the string
-	 */
-	void insertVTText(const QByteArray & string);
-	/** Insert the given string at the current position based on the current state.
-	 *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
-	 *  escape sequences can move the cursor and set the current color etc.
-	 *
-	 *  This just calls insertVTChar for each character in the string
-	 */
-	void insertVTText(const QString & string);
+    /** Set whether to parse ANSI display code.  If turned off the escape sequence will be shown literally. */
+    void setParseAnsiEscapeCodes(bool displayall);
+    /** Insert the given string at the current position based on the current state.
+     *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
+     *  escape sequences can move the cursor and set the current color etc.
+     *
+     *  This just calls insertVTChar for each character in the string
+     */
+    void insertVTText(const QByteArray &string);
+    /** Insert the given string at the current position based on the current state.
+     *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
+     *  escape sequences can move the cursor and set the current color etc.
+     *
+     *  This just calls insertVTChar for each character in the string
+     */
+    void insertVTText(const QString &string);
 
-	/** Insert the given character at the current position based on the current state.
-	 *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
-	 *  escape sequences can move the cursor and set the current color etc.
-	 */
-	void insertVTChar(const QChar & c);
-
+    /** Insert the given character at the current position based on the current state.
+     *  This is interpreted in a VT100 encoding.  Backspace and delete will delete the previous character,
+     *  escape sequences can move the cursor and set the current color etc.
+     */
+    void insertVTChar(const QChar &c);
 
 private:
-	bool mParseAnsi;
+    bool mParseAnsi;
 
-	bool escape_sequence;
-	bool escape_CSI;
-	bool escape_OSC;
-	int escape_number1;
-	int escape_number2;
-	bool escape_number_separator;
-	QChar escape_code;
-
+    bool escape_sequence;
+    bool escape_CSI;
+    bool escape_OSC;
+    int escape_number1;
+    int escape_number2;
+    bool escape_number_separator;
+    QChar escape_code;
 };
 
 #endif

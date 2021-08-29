@@ -1,8 +1,8 @@
 /*
     KSysGuard, the KDE System Guard
 
-	SPDX-FileCopyrightText: 1999, 2000 Chris Schlaeger <cs@kde.org>
-	SPDX-FileCopyrightText: 2006 John Tapsell <john.tapsell@kdemail.net>
+    SPDX-FileCopyrightText: 1999, 2000 Chris Schlaeger <cs@kde.org>
+    SPDX-FileCopyrightText: 2006 John Tapsell <john.tapsell@kdemail.net>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 
@@ -11,8 +11,8 @@
 #ifndef PROCESSFILTER_H_
 #define PROCESSFILTER_H_
 
-#include <QSortFilterProxyModel>
 #include <QObject>
+#include <QSortFilterProxyModel>
 
 class QModelIndex;
 
@@ -26,25 +26,32 @@ class QModelIndex;
 
 class KSYSGUARD_EXPORT ProcessFilter : public QSortFilterProxyModel
 {
-	Q_OBJECT
-	Q_ENUMS(State)
+    Q_OBJECT
+    Q_ENUMS(State)
 
-  public:
-	enum State {AllProcesses=0,AllProcessesInTreeForm, SystemProcesses, UserProcesses, OwnProcesses, ProgramsOnly};
-    explicit ProcessFilter(QObject *parent=nullptr) : QSortFilterProxyModel(parent) {mFilter = AllProcesses;}
-	~ProcessFilter() override {}
-	bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
-	State filter() const {return mFilter; }
+public:
+    enum State { AllProcesses = 0, AllProcessesInTreeForm, SystemProcesses, UserProcesses, OwnProcesses, ProgramsOnly };
+    explicit ProcessFilter(QObject *parent = nullptr)
+        : QSortFilterProxyModel(parent)
+    {
+        mFilter = AllProcesses;
+    }
+    ~ProcessFilter() override
+    {
+    }
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
+    State filter() const
+    {
+        return mFilter;
+    }
 
+public Q_SLOTS:
+    void setFilter(State index);
 
-  public Q_SLOTS:
-	void setFilter(State index);
+protected:
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
-  protected:
-	bool filterAcceptsRow( int source_row, const QModelIndex & source_parent ) const override;
-
-	State mFilter;
+    State mFilter;
 };
 
 #endif
-

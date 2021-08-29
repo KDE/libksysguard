@@ -19,7 +19,6 @@ public:
     QHash<QString, SensorProperty *> sensors;
 };
 
-
 SensorObject::SensorObject(const QString &id, SensorContainer *parent)
     : SensorObject(id, QString(), parent)
 {
@@ -34,7 +33,12 @@ SensorObject::SensorObject(const QString &id, const QString &name, SensorContain
     d->name = name;
 
     if (parent) {
-        QMetaObject::invokeMethod(parent, [this, parent] {parent->addObject(this);}, Qt::QueuedConnection);
+        QMetaObject::invokeMethod(
+            parent,
+            [this, parent] {
+                parent->addObject(this);
+            },
+            Qt::QueuedConnection);
     }
 }
 
@@ -59,7 +63,7 @@ QString SensorObject::path() const
     return d->parent->id() % QLatin1Char('/') % d->id;
 }
 
-void SensorObject::setName(const QString& newName)
+void SensorObject::setName(const QString &newName)
 {
     if (newName == d->name) {
         return;
@@ -69,7 +73,7 @@ void SensorObject::setName(const QString& newName)
     Q_EMIT nameChanged();
 }
 
-void SensorObject::setParentContainer(SensorContainer* parent)
+void SensorObject::setParentContainer(SensorContainer *parent)
 {
     d->parent = parent;
 }

@@ -15,12 +15,11 @@
 
 namespace KSysGuard
 {
-
 class SensorPlugin;
 class SensorContainer;
 
 /**
- * Base class for plugins 
+ * Base class for plugins
  */
 class SYSTEMSTATS_EXPORT SensorPlugin : public QObject
 {

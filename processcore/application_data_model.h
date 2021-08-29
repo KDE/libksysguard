@@ -8,8 +8,8 @@
 
 #include "cgroup_data_model.h"
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class Q_DECL_EXPORT ApplicationDataModel : public CGroupDataModel
 {
     Q_OBJECT

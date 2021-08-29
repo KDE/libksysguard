@@ -20,14 +20,14 @@ class Ui_LsofSearchWidget;
  */
 class LsofSearchWidget : public QDialog
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
     explicit LsofSearchWidget(QWidget *parent);
     ~LsofSearchWidget();
 
 private:
-	Ui_LsofSearchWidget *ui;
+    Ui_LsofSearchWidget *ui;
 };
 
 #endif

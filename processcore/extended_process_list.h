@@ -10,7 +10,8 @@
 #include <QObject>
 #include <QSharedPointer>
 
-namespace KSysGuard {
+namespace KSysGuard
+{
 class ProcessAttribute;
 
 class Q_DECL_EXPORT ExtendedProcesses : public KSysGuard::Processes

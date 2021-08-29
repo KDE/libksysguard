@@ -8,8 +8,8 @@
 
 #include "Formatter.h"
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 QString FormatterWrapper::formatValue(const QVariant &value, KSysGuard::Unit unit, KSysGuard::MetricPrefix targetPrefix)
 {
     return Formatter::formatValue(value, unit, targetPrefix);

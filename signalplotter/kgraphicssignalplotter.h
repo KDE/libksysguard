@@ -7,17 +7,17 @@
 #ifndef KGRAPHICSSIGNALPLOTTER_H
 #define KGRAPHICSSIGNALPLOTTER_H
 
-#include <QList>
-#include <QString>
 #include <QColor>
 #include <QFont>
 #include <QGraphicsWidget>
+#include <QList>
+#include <QString>
 #include <klocalizedstring.h>
 
 class QGraphicsSceneResizeEvent;
 class KGraphicsSignalPlotterPrivate;
 
-//Make sure only declare KLocalizedString once
+// Make sure only declare KLocalizedString once
 #ifndef KSIGNALPLOTTER_H
 Q_DECLARE_METATYPE(KLocalizedString)
 #endif
@@ -52,27 +52,27 @@ Q_DECLARE_METATYPE(KLocalizedString)
  */
 class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
 {
-  Q_OBJECT
-  Q_PROPERTY(qreal minimumValue READ minimumValue WRITE setMinimumValue)
-  Q_PROPERTY(qreal maximumValue READ maximumValue WRITE setMaximumValue)
-  Q_PROPERTY(bool useAutoRange READ useAutoRange WRITE setUseAutoRange)
-  Q_PROPERTY(KLocalizedString unit READ unit WRITE setUnit)
-  Q_PROPERTY(qreal scaleDownBy READ scaleDownBy WRITE setScaleDownBy)
-  Q_PROPERTY(uint horizontalScale READ horizontalScale WRITE setHorizontalScale)
-  Q_PROPERTY(bool showHorizontalLines READ showHorizontalLines WRITE setShowHorizontalLines)
-  Q_PROPERTY(bool showVerticalLines READ showVerticalLines WRITE setShowVerticalLines)
-  Q_PROPERTY(bool verticalLinesScroll READ verticalLinesScroll WRITE setVerticalLinesScroll)
-  Q_PROPERTY(uint verticalLinesDistance READ verticalLinesDistance WRITE setVerticalLinesDistance)
-  Q_PROPERTY(bool showAxis READ showAxis WRITE setShowAxis)
-  Q_PROPERTY(QString svgBackground READ svgBackground WRITE setSvgBackground)
-  Q_PROPERTY(bool thinFrame READ thinFrame WRITE setThinFrame)
-  Q_PROPERTY(int maxAxisTextWidth READ maxAxisTextWidth WRITE setMaxAxisTextWidth)
-  Q_PROPERTY(bool smoothGraph READ smoothGraph WRITE setSmoothGraph)
-  Q_PROPERTY(bool stackGraph READ stackGraph WRITE setStackGraph)
-  Q_PROPERTY(int fillOpacity READ fillOpacity WRITE setFillOpacity)
+    Q_OBJECT
+    Q_PROPERTY(qreal minimumValue READ minimumValue WRITE setMinimumValue)
+    Q_PROPERTY(qreal maximumValue READ maximumValue WRITE setMaximumValue)
+    Q_PROPERTY(bool useAutoRange READ useAutoRange WRITE setUseAutoRange)
+    Q_PROPERTY(KLocalizedString unit READ unit WRITE setUnit)
+    Q_PROPERTY(qreal scaleDownBy READ scaleDownBy WRITE setScaleDownBy)
+    Q_PROPERTY(uint horizontalScale READ horizontalScale WRITE setHorizontalScale)
+    Q_PROPERTY(bool showHorizontalLines READ showHorizontalLines WRITE setShowHorizontalLines)
+    Q_PROPERTY(bool showVerticalLines READ showVerticalLines WRITE setShowVerticalLines)
+    Q_PROPERTY(bool verticalLinesScroll READ verticalLinesScroll WRITE setVerticalLinesScroll)
+    Q_PROPERTY(uint verticalLinesDistance READ verticalLinesDistance WRITE setVerticalLinesDistance)
+    Q_PROPERTY(bool showAxis READ showAxis WRITE setShowAxis)
+    Q_PROPERTY(QString svgBackground READ svgBackground WRITE setSvgBackground)
+    Q_PROPERTY(bool thinFrame READ thinFrame WRITE setThinFrame)
+    Q_PROPERTY(int maxAxisTextWidth READ maxAxisTextWidth WRITE setMaxAxisTextWidth)
+    Q_PROPERTY(bool smoothGraph READ smoothGraph WRITE setSmoothGraph)
+    Q_PROPERTY(bool stackGraph READ stackGraph WRITE setStackGraph)
+    Q_PROPERTY(int fillOpacity READ fillOpacity WRITE setFillOpacity)
 
-  public:
-    KGraphicsSignalPlotter( QGraphicsItem *parent = nullptr);
+public:
+    KGraphicsSignalPlotter(QGraphicsItem *parent = nullptr);
     ~KGraphicsSignalPlotter() override;
 
     /** \brief Add a new line to the graph plotter, with the specified color.
@@ -82,7 +82,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *
      *  \param color Color of beam - does not have to be unique.
      */
-    void addBeam( const QColor &color );
+    void addBeam(const QColor &color);
 
     /** \brief Add data to the graph, and advance the graph by one time period.
      *
@@ -109,7 +109,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *  Infinity is handled by drawing a straight line up to the top or bottom of the display, and does not affect the range.
      *  For the above example, the displayed range would now be 0 to 10.
      */
-    void addSample( const QList<qreal> &samples );
+    void addSample(const QList<qreal> &samples);
 
     /** \brief Reorder the beams into the order given.
      *
@@ -128,14 +128,14 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      * The size of the \p newOrder list must be equal to the result of numBeams().
      * \param newOrder New order of beams.
      */
-    void reorderBeams( const QList<int>& newOrder );
+    void reorderBeams(const QList<int> &newOrder);
 
     /** \brief Removes the beam at the specified index.
      *
      * This causes the graph to be redrawn with the specified beam completely
      * removed.
      */
-    void removeBeam( int index );
+    void removeBeam(int index);
 
     /** \brief Get the color of the beam at the specified index.
      *
@@ -151,13 +151,13 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *
      * \sa setBeamColor()
      */
-    QColor beamColor( int index ) const;
+    QColor beamColor(int index) const;
 
     /** \brief Set the color of the beam at the specified index.
      *
      * \sa beamColor()
      */
-    void setBeamColor( int index, const QColor &color );
+    void setBeamColor(int index, const QColor &color);
 
     /** \brief Returns the number of beams. */
     int numBeams() const;
@@ -181,7 +181,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *
      * \see unit(), setScaleDownBy()
      */
-    void setUnit( const KLocalizedString &unit );
+    void setUnit(const KLocalizedString &unit);
 
     /** \brief The localizable units used on the vertical axis of the graph.
      *
@@ -202,7 +202,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      * Typically this is followed by calling setUnit() to set the display axis
      * units.  Default value is 1.
      */
-    void setScaleDownBy( qreal value );
+    void setScaleDownBy(qreal value);
 
     /** \brief Amount scaled down by.
      *
@@ -222,7 +222,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *
      * \sa useAutoRange
      */
-    void setUseAutoRange( bool value );
+    void setUseAutoRange(bool value);
 
     /** \brief Whether the vertical axis range is set automatically.
      */
@@ -248,12 +248,12 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *
      *  \sa setMinimumValue(), setMaximumValue(), minimumValue(), maximumValue()
      */
-    void changeRange( qreal min, qreal max );
+    void changeRange(qreal min, qreal max);
 
     /** \brief Set the min value hint for the vertical axis.
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    void setMinimumValue( qreal min );
+    void setMinimumValue(qreal min);
 
     /** \brief Get the min value hint for the vertical axis.
      *
@@ -263,7 +263,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
     /** \brief Set the max value hint for the vertical axis. *
      *
      * \sa changeRange(), minimumValue(), setMaximumValue(), maximumValue() */
-    void setMaximumValue( qreal max );
+    void setMaximumValue(qreal max);
 
     /** \brief Get the maximum value hint for the vertical axis.
      *
@@ -287,14 +287,14 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
 
     /** \brief Set the number of pixels horizontally between data points.
      *  Default is 6. */
-    void setHorizontalScale( uint scale );
+    void setHorizontalScale(uint scale);
     /** \brief The number of pixels horizontally between data points.
      *  Default is 6. */
     int horizontalScale() const;
 
     /** \brief Set whether to draw the vertical grid lines.
      *  Default is false. */
-    void setShowVerticalLines( bool value );
+    void setShowVerticalLines(bool value);
     /** \brief Whether to draw the vertical grid lines.
      *  Default is false. */
     bool showVerticalLines() const;
@@ -302,21 +302,21 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
     /** \brief Set the horizontal distance, in pixels, between the vertical grid lines.
      *  Must be a distance of 1 or more.
      *  Default is 30 pixels. */
-    void setVerticalLinesDistance( uint distance );
+    void setVerticalLinesDistance(uint distance);
     /** \brief The horizontal distance, in pixels, between the vertical grid lines.
-      *  Default is 30 pixels. */
+     *  Default is 30 pixels. */
     uint verticalLinesDistance() const;
 
     /** \brief Set whether the vertical lines move with the data.
      *  Default is true. This has no effect is showVerticalLines is false. */
-    void setVerticalLinesScroll( bool value );
+    void setVerticalLinesScroll(bool value);
     /** \brief Whether the vertical lines move with the data.
      *  Default is true. This has no effect is showVerticalLines is false. */
     bool verticalLinesScroll() const;
 
     /** \brief Set whether to draw the horizontal grid lines.
      *  Default is true. */
-    void setShowHorizontalLines( bool value );
+    void setShowHorizontalLines(bool value);
     /** \brief Whether to draw the horizontal grid lines.
      *  Default is true. */
     bool showHorizontalLines() const;
@@ -330,7 +330,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      *
      * Default is true.
      * \sa showAxis(), setAxisFont(), setAxisFontColor(), setMaxAxisTextWidth() */
-    void setShowAxis( bool show );
+    void setShowAxis(bool show);
     /** \brief Whether to show the vertical axis labels.
      *
      * Default is true.
@@ -340,7 +340,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
     /** \brief Set the filename of the SVG background.
      *
      * Set to empty (default) to disable again. */
-    void setSvgBackground( const QString &filename );
+    void setSvgBackground(const QString &filename);
 
     /** \brief The filename of the SVG background. */
     QString svgBackground() const;
@@ -348,7 +348,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
     /** \brief Return the last value that we have for the given beam index.
      *
      * \return last value, or 0 if not known. */
-    qreal lastValue( int index) const;
+    qreal lastValue(int index) const;
 
     /** \brief Return a translated string for the last value at the given index.
      *
@@ -358,7 +358,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      * If precision is -1 (the default) then if @p value is greater than 99.5, no decimal figures are shown,
      * otherwise if @p value is greater than 0.995, 1 decimal figure is used, otherwise 2.
      */
-    QString lastValueAsString( int index, int precision = -1) const;
+    QString lastValueAsString(int index, int precision = -1) const;
 
     /** \brief Return a translated string for the given value.
      *
@@ -376,7 +376,7 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
      * \endcode
      *
      */
-    QString valueAsString( qreal value, int precision = -1) const;
+    QString valueAsString(qreal value, int precision = -1) const;
 
     /** \brief Set the distance between the left of the widget and the left of the plotting region.
      *
@@ -424,21 +424,20 @@ class Q_DECL_EXPORT KGraphicsSignalPlotter : public QGraphicsWidget
     /* Set whether to show a thin line on the left and bottom of the widget, for a slight 3D effect */
     void setThinFrame(bool thinFrame);
 
-  Q_SIGNALS:
+Q_SIGNALS:
     /** When the axis has changed this signal is emitted. */
     void axisScaleChanged();
 
-  protected:
+protected:
     /* Reimplemented */
-    void resizeEvent( QGraphicsSceneResizeEvent* event ) override;
-    void paint( QPainter * p, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr ) override;
-    QSizeF sizeHint( Qt::SizeHint which, const QSizeF & constraint = QSizeF() ) const override;
-    void changeEvent ( QEvent * event ) override;
+    void resizeEvent(QGraphicsSceneResizeEvent *event) override;
+    void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const override;
+    void changeEvent(QEvent *event) override;
     QPainterPath opaqueArea() const override;
 
-
-  private:
-    KGraphicsSignalPlotterPrivate * const d;
+private:
+    KGraphicsSignalPlotterPrivate *const d;
     friend class KGraphicsSignalPlotterPrivate;
 };
 

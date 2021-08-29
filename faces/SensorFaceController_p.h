@@ -6,14 +6,14 @@
 
 #pragma once
 
-#include <QQuickItem>
-#include <QStandardItemModel>
-#include <QJsonArray>
-#include <KLocalizedContext>
-#include <KPackage/PackageLoader>
 #include <KConfigGroup>
 #include <KConfigLoader>
 #include <KDeclarative/ConfigPropertyMap>
+#include <KLocalizedContext>
+#include <KPackage/PackageLoader>
+#include <QJsonArray>
+#include <QQuickItem>
+#include <QStandardItemModel>
 
 #include <functional>
 
@@ -21,8 +21,8 @@
 
 class QQmlEngine;
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class SensorFaceController;
 class SensorFace;
 
@@ -48,11 +48,7 @@ class PresetsModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
-    enum AdditionalRoles {
-        PluginIdRole = Qt::UserRole + 1,
-        ConfigRole,
-        WritableRole
-    };
+    enum AdditionalRoles { PluginIdRole = Qt::UserRole + 1, ConfigRole, WritableRole };
     Q_ENUM(AdditionalRoles)
 
     PresetsModel(QObject *parent = nullptr);
@@ -73,7 +69,7 @@ public:
     QJsonArray readAndUpdateSensors(KConfigGroup &config, const QString &entryName);
     QString replaceDiskId(const QString &entryname) const;
     QString replacePartitionId(const QString &entryname) const;
-    void resolveSensors(const QJsonArray &partialEntries, std::function<void(const QJsonArray&)> callback);
+    void resolveSensors(const QJsonArray &partialEntries, std::function<void(const QJsonArray &)> callback);
     SensorFace *createGui(const QString &qmlPath);
     QQuickItem *createConfigUi(const QString &file, const QVariantMap &initialProperties);
 
@@ -94,11 +90,11 @@ public:
     KConfigGroup sensorsGroup;
     KConfigGroup colorsGroup;
     KConfigGroup labelsGroup;
-    QPointer <SensorFace> fullRepresentation;
-    QPointer <SensorFace> compactRepresentation;
-    QPointer <QQuickItem> faceConfigUi;
-    QPointer <QQuickItem> appearanceConfigUi;
-    QPointer <QQuickItem> sensorsConfigUi;
+    QPointer<SensorFace> fullRepresentation;
+    QPointer<SensorFace> compactRepresentation;
+    QPointer<QQuickItem> faceConfigUi;
+    QPointer<QQuickItem> appearanceConfigUi;
+    QPointer<QQuickItem> sensorsConfigUi;
 
     QJsonArray totalSensors;
     QJsonArray highPrioritySensorIds;

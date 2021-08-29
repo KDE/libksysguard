@@ -24,5 +24,5 @@ bool ApplicationDataModel::filterAcceptsCGroup(const QString &id)
     // this class is all temporary. In the future as per https://systemd.io/DESKTOP_ENVIRONMENTS/
     // all apps will have a managed by a drop-in that puts apps in the app.slice
     // when this happens adjust the root above and drop this filterAcceptsCGroup line
-   return id.contains(QLatin1String("/app-")) || (id.contains(QLatin1String("/flatpak")) && id.endsWith(QLatin1String("scope")));
+    return id.contains(QLatin1String("/app-")) || (id.contains(QLatin1String("/flatpak")) && id.endsWith(QLatin1String("scope")));
 }

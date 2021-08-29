@@ -18,7 +18,6 @@
 
 namespace KSysGuard
 {
-
 constexpr uint BackendUpdateInterval = 500;
 
 // Data that is static for the lifespan of the sensor
@@ -27,8 +26,8 @@ class SYSTEMSTATS_EXPORT SensorInfo
 public:
     SensorInfo() = default;
 
-    QString name;        // Translated name of the sensor.
-    QString shortName;   // Shorter translated name of the sensor, to use when space is constrained.
+    QString name; // Translated name of the sensor.
+    QString shortName; // Shorter translated name of the sensor, to use when space is constrained.
     QString description; // Translated description of the sensor.
     QVariant::Type variantType = QVariant::Invalid;
     KSysGuard::Unit unit = KSysGuard::UnitInvalid; // Both a format hint and implies data type (i.e double/string)

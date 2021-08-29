@@ -5,8 +5,8 @@
 */
 
 #include "process_attribute.h"
-#include "processes.h"
 #include "cgroup.h"
+#include "processes.h"
 
 #include <QMetaMethod>
 
@@ -22,7 +22,7 @@ public:
     QString m_description;
     qreal m_min = 0;
     qreal m_max = 0;
-    KSysGuard::Unit m_unit = KSysGuard::UnitInvalid; //Both a format hint and implies data type (i.e double/string)
+    KSysGuard::Unit m_unit = KSysGuard::UnitInvalid; // Both a format hint and implies data type (i.e double/string)
 
     QHash<KSysGuard::Process *, QVariant> m_data;
     int m_watchCount = 0;
@@ -156,7 +156,7 @@ void ProcessAttribute::clearData(KSysGuard::Process *process)
     emit dataChanged(process);
 }
 
-QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process*> &groupProcesses) const
+QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process *> &groupProcesses) const
 {
     Q_UNUSED(cgroup)
 

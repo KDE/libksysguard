@@ -9,8 +9,8 @@
 
 namespace KSysGuard
 {
-
-class ProcessPrivate {
+class ProcessPrivate
+{
 public:
     long pid;
     long parent_pid;
@@ -94,61 +94,96 @@ Process::~Process()
     delete d;
 }
 
-QString Process::niceLevelAsString() const {
+QString Process::niceLevelAsString() const
+{
     // Just some rough heuristic to map a number to how nice it is
-    if (d->niceLevel == 0) return i18nc("Process Niceness", "Normal");
-    if (d->niceLevel >= 10) return i18nc("Process Niceness", "Very low priority");
-    if (d->niceLevel > 0) return i18nc("Process Niceness", "Low priority");
-    if (d->niceLevel <= -10) return i18nc("Process Niceness", "Very high priority");
-    if (d->niceLevel < 0) return i18nc("Process Niceness", "High priority");
-    return QString(); //impossible;
+    if (d->niceLevel == 0)
+        return i18nc("Process Niceness", "Normal");
+    if (d->niceLevel >= 10)
+        return i18nc("Process Niceness", "Very low priority");
+    if (d->niceLevel > 0)
+        return i18nc("Process Niceness", "Low priority");
+    if (d->niceLevel <= -10)
+        return i18nc("Process Niceness", "Very high priority");
+    if (d->niceLevel < 0)
+        return i18nc("Process Niceness", "High priority");
+    return QString(); // impossible;
 }
 
-QString Process::ioniceLevelAsString() const {
+QString Process::ioniceLevelAsString() const
+{
     // Just some rough heuristic to map a number to how nice it is
-    if (d->ioniceLevel == 4) return i18nc("Process Niceness", "Normal");
-    if (d->ioniceLevel >= 6) return i18nc("Process Niceness", "Very low priority");
-    if (d->ioniceLevel > 4) return i18nc("Process Niceness", "Low priority");
-    if (d->ioniceLevel <= 2) return i18nc("Process Niceness", "Very high priority");
-    if (d->ioniceLevel < 4) return i18nc("Process Niceness", "High priority");
-    return QString(); //impossible;
+    if (d->ioniceLevel == 4)
+        return i18nc("Process Niceness", "Normal");
+    if (d->ioniceLevel >= 6)
+        return i18nc("Process Niceness", "Very low priority");
+    if (d->ioniceLevel > 4)
+        return i18nc("Process Niceness", "Low priority");
+    if (d->ioniceLevel <= 2)
+        return i18nc("Process Niceness", "Very high priority");
+    if (d->ioniceLevel < 4)
+        return i18nc("Process Niceness", "High priority");
+    return QString(); // impossible;
 }
 
-QString Process::ioPriorityClassAsString() const {
+QString Process::ioPriorityClassAsString() const
+{
     switch (d->ioPriorityClass) {
-        case None: return i18nc("Priority Class", "None");
-        case RealTime: return i18nc("Priority Class", "Real Time");
-        case BestEffort: return i18nc("Priority Class", "Best Effort");
-        case Idle: return i18nc("Priority Class", "Idle");
-        default: return i18nc("Priority Class", "Unknown");
+    case None:
+        return i18nc("Priority Class", "None");
+    case RealTime:
+        return i18nc("Priority Class", "Real Time");
+    case BestEffort:
+        return i18nc("Priority Class", "Best Effort");
+    case Idle:
+        return i18nc("Priority Class", "Idle");
+    default:
+        return i18nc("Priority Class", "Unknown");
     }
 }
 
-QString Process::translatedStatus() const {
+QString Process::translatedStatus() const
+{
     switch (d->status) {
-        case Running: return i18nc("process status", "running");
-        case Sleeping: return i18nc("process status", "sleeping");
-        case DiskSleep: return i18nc("process status", "disk sleep");
-        case Zombie: return i18nc("process status", "zombie");
-        case Stopped: return i18nc("process status", "stopped");
-        case Paging: return i18nc("process status", "paging");
-        case Ended: return i18nc("process status", "finished");
-        default: return i18nc("process status", "unknown");
+    case Running:
+        return i18nc("process status", "running");
+    case Sleeping:
+        return i18nc("process status", "sleeping");
+    case DiskSleep:
+        return i18nc("process status", "disk sleep");
+    case Zombie:
+        return i18nc("process status", "zombie");
+    case Stopped:
+        return i18nc("process status", "stopped");
+    case Paging:
+        return i18nc("process status", "paging");
+    case Ended:
+        return i18nc("process status", "finished");
+    default:
+        return i18nc("process status", "unknown");
     }
 }
 
-QString Process::schedulerAsString() const {
+QString Process::schedulerAsString() const
+{
     switch (d->scheduler) {
-        case Fifo: return i18nc("Scheduler", "FIFO");
-        case RoundRobin: return i18nc("Scheduler", "Round Robin");
-        case Interactive: return i18nc("Scheduler", "Interactive");
-        case Batch: return i18nc("Scheduler", "Batch");
-        case SchedulerIdle: return i18nc("Scheduler", "Idle");
-        default: return QString();
+    case Fifo:
+        return i18nc("Scheduler", "FIFO");
+    case RoundRobin:
+        return i18nc("Scheduler", "Round Robin");
+    case Interactive:
+        return i18nc("Scheduler", "Interactive");
+    case Batch:
+        return i18nc("Scheduler", "Batch");
+    case SchedulerIdle:
+        return i18nc("Scheduler", "Idle");
+    default:
+        return QString();
     }
 }
 
-void Process::clear() {
+void Process::clear()
+{
     d->pid = -1;
     d->parent_pid = -1;
     d->parent = nullptr;
@@ -160,13 +195,13 @@ void Process::clear() {
     d->userTime = 0;
     d->sysTime = 0;
     d->startTime = 0;
-    d->userUsage=0;
-    d->sysUsage=0;
-    d->totalUserUsage=0;
-    d->totalSysUsage=0;
-    d->numChildren=0;
-    d->niceLevel=0;
-    d->vmSize=0;
+    d->userUsage = 0;
+    d->sysUsage = 0;
+    d->totalUserUsage = 0;
+    d->totalSysUsage = 0;
+    d->numChildren = 0;
+    d->niceLevel = 0;
+    d->vmSize = 0;
     d->vmRSS = 0;
     d->vmURSS = 0;
     d->vmPSS = 0;
@@ -176,7 +211,7 @@ void Process::clear() {
     d->vmPSSChange = 0;
     d->pixmapBytes = 0;
     d->hasManagedGuiWindow = false;
-    d->status=OtherStatus;
+    d->status = OtherStatus;
     d->ioPriorityClass = None;
     d->ioniceLevel = -1;
     d->scheduler = Other;
@@ -208,7 +243,7 @@ long int Process::parentPid() const
     return d->parent_pid;
 }
 
-Process* Process::parent() const
+Process *Process::parent() const
 {
     return d->parent;
 }
@@ -298,17 +333,17 @@ int Process::sysUsage() const
     return d->sysUsage;
 }
 
-int & Process::totalUserUsage() const
+int &Process::totalUserUsage() const
 {
     return d->totalUserUsage;
 }
 
-int & Process::totalSysUsage() const
+int &Process::totalSysUsage() const
 {
     return d->totalSysUsage;
 }
 
-long unsigned & Process::numChildren() const
+long unsigned &Process::numChildren() const
 {
     return d->numChildren;
 }
@@ -353,17 +388,17 @@ qlonglong Process::vmPSS() const
     return d->vmPSS;
 }
 
-qlonglong& Process::vmSizeChange() const
+qlonglong &Process::vmSizeChange() const
 {
     return d->vmSizeChange;
 }
 
-qlonglong& Process::vmRSSChange() const
+qlonglong &Process::vmRSSChange() const
 {
     return d->vmRSSChange;
 }
 
-qlonglong& Process::vmURSSChange() const
+qlonglong &Process::vmURSSChange() const
 {
     return d->vmURSSChange;
 }
@@ -373,12 +408,12 @@ qlonglong Process::vmPSSChange() const
     return d->vmPSSChange;
 }
 
-unsigned long& Process::pixmapBytes() const
+unsigned long &Process::pixmapBytes() const
 {
     return d->pixmapBytes;
 }
 
-bool& Process::hasManagedGuiWindow() const
+bool &Process::hasManagedGuiWindow() const
 {
     return d->hasManagedGuiWindow;
 }
@@ -388,7 +423,7 @@ QString Process::name() const
     return d->name;
 }
 
-QString& Process::command() const
+QString &Process::command() const
 {
     return d->command;
 }
@@ -463,7 +498,7 @@ int Process::numThreads() const
     return d->numThreads;
 }
 
-QList< Process* > & Process::children() const
+QList<Process *> &Process::children() const
 {
     return d->children;
 }
@@ -503,83 +538,95 @@ void Process::setParentPid(long int parent_pid)
     d->parent_pid = parent_pid;
 }
 
-void Process::setParent(Process* parent)
+void Process::setParent(Process *parent)
 {
     d->parent = parent;
 }
 
 void Process::setLogin(const QString &login)
 {
-    if(d->login == login) return;
+    if (d->login == login)
+        return;
     d->login = login;
     d->changes |= Process::Login;
 }
 
 void Process::setUid(qlonglong uid)
 {
-    if(d->uid == uid) return;
+    if (d->uid == uid)
+        return;
     d->uid = uid;
     d->changes |= Process::Uids;
 }
 
 void Process::setEuid(qlonglong euid)
 {
-    if(d->euid == euid) return;
+    if (d->euid == euid)
+        return;
     d->euid = euid;
     d->changes |= Process::Uids;
 }
 
-void Process::setSuid(qlonglong suid) {
-    if(d->suid == suid) return;
+void Process::setSuid(qlonglong suid)
+{
+    if (d->suid == suid)
+        return;
     d->suid = suid;
     d->changes |= Process::Uids;
 }
 
 void Process::setFsuid(qlonglong fsuid)
 {
-    if(d->fsuid == fsuid) return;
+    if (d->fsuid == fsuid)
+        return;
     d->fsuid = fsuid;
     d->changes |= Process::Uids;
 }
 
 void Process::setGid(qlonglong gid)
 {
-    if(d->gid == gid) return;
+    if (d->gid == gid)
+        return;
     d->gid = gid;
     d->changes |= Process::Gids;
 }
 
 void Process::setEgid(qlonglong egid)
 {
-    if(d->egid == egid) return;
+    if (d->egid == egid)
+        return;
     d->egid = egid;
     d->changes |= Process::Gids;
 }
 
 void Process::setSgid(qlonglong sgid)
 {
-    if(d->sgid == sgid) return;
+    if (d->sgid == sgid)
+        return;
     d->sgid = sgid;
     d->changes |= Process::Gids;
 }
 
 void Process::setFsgid(qlonglong fsgid)
 {
-    if(d->fsgid == fsgid) return;
+    if (d->fsgid == fsgid)
+        return;
     d->fsgid = fsgid;
     d->changes |= Process::Gids;
 }
 
 void Process::setTracerpid(qlonglong tracerpid)
 {
-    if(d->tracerpid == tracerpid) return;
+    if (d->tracerpid == tracerpid)
+        return;
     d->tracerpid = tracerpid;
     d->changes |= Process::Tracerpid;
 }
 
 void Process::setTty(const QByteArray &tty)
 {
-    if(d->tty == tty) return;
+    if (d->tty == tty)
+        return;
     d->tty = tty;
     d->changes |= Process::Tty;
 }
@@ -599,80 +646,104 @@ void Process::setStartTime(qlonglong startTime)
     d->startTime = startTime;
 }
 
-void Process::setNoNewPrivileges(int number) {
-    if(d->noNewPrivileges == number) return;
+void Process::setNoNewPrivileges(int number)
+{
+    if (d->noNewPrivileges == number)
+        return;
     d->noNewPrivileges = number;
     d->changes |= Process::Status;
 }
 
-void Process::setUserUsage(int _userUsage) {
-    if(d->userUsage == _userUsage) return;
+void Process::setUserUsage(int _userUsage)
+{
+    if (d->userUsage == _userUsage)
+        return;
     d->userUsage = _userUsage;
     d->changes |= Process::Usage;
 }
 
-void Process::setSysUsage(int _sysUsage) {
-    if(d->sysUsage == _sysUsage) return;
+void Process::setSysUsage(int _sysUsage)
+{
+    if (d->sysUsage == _sysUsage)
+        return;
     d->sysUsage = _sysUsage;
     d->changes |= Process::Usage;
 }
 
-void Process::setTotalUserUsage(int _totalUserUsage) {
-    if(d->totalUserUsage == _totalUserUsage) return;
+void Process::setTotalUserUsage(int _totalUserUsage)
+{
+    if (d->totalUserUsage == _totalUserUsage)
+        return;
     d->totalUserUsage = _totalUserUsage;
     d->changes |= Process::TotalUsage;
 }
 
-void Process::setTotalSysUsage(int _totalSysUsage) {
-    if(d->totalSysUsage == _totalSysUsage) return;
+void Process::setTotalSysUsage(int _totalSysUsage)
+{
+    if (d->totalSysUsage == _totalSysUsage)
+        return;
     d->totalSysUsage = _totalSysUsage;
     d->changes |= Process::TotalUsage;
 }
 
-void Process::setNiceLevel(int _niceLevel) {
-    if(d->niceLevel == _niceLevel) return;
+void Process::setNiceLevel(int _niceLevel)
+{
+    if (d->niceLevel == _niceLevel)
+        return;
     d->niceLevel = _niceLevel;
     d->changes |= Process::NiceLevels;
 }
 
-void Process::setScheduler(Scheduler _scheduler) {
-    if(d->scheduler == _scheduler) return;
+void Process::setScheduler(Scheduler _scheduler)
+{
+    if (d->scheduler == _scheduler)
+        return;
     d->scheduler = _scheduler;
     d->changes |= Process::NiceLevels;
 }
 
-void Process::setIoPriorityClass(IoPriorityClass _ioPriorityClass) {
-    if(d->ioPriorityClass == _ioPriorityClass) return;
+void Process::setIoPriorityClass(IoPriorityClass _ioPriorityClass)
+{
+    if (d->ioPriorityClass == _ioPriorityClass)
+        return;
     d->ioPriorityClass = _ioPriorityClass;
     d->changes |= Process::NiceLevels;
 }
 
-void Process::setIoniceLevel(int _ioniceLevel) {
-    if(d->ioniceLevel == _ioniceLevel) return;
+void Process::setIoniceLevel(int _ioniceLevel)
+{
+    if (d->ioniceLevel == _ioniceLevel)
+        return;
     d->ioniceLevel = _ioniceLevel;
     d->changes |= Process::NiceLevels;
 }
 
-void Process::setVmSize(qlonglong _vmSize) {
-    if(d->vmSizeChange != 0 || d->vmSize != 0)
+void Process::setVmSize(qlonglong _vmSize)
+{
+    if (d->vmSizeChange != 0 || d->vmSize != 0)
         d->vmSizeChange = _vmSize - d->vmSize;
-    if(d->vmSize == _vmSize) return;
+    if (d->vmSize == _vmSize)
+        return;
     d->vmSize = _vmSize;
     d->changes |= Process::VmSize;
 }
 
-void Process::setVmRSS(qlonglong _vmRSS) {
-    if(d->vmRSSChange != 0 || d->vmRSS != 0)
+void Process::setVmRSS(qlonglong _vmRSS)
+{
+    if (d->vmRSSChange != 0 || d->vmRSS != 0)
         d->vmRSSChange = _vmRSS - d->vmRSS;
-    if(d->vmRSS == _vmRSS) return;
+    if (d->vmRSS == _vmRSS)
+        return;
     d->vmRSS = _vmRSS;
     d->changes |= Process::VmRSS;
 }
 
-void Process::setVmURSS(qlonglong _vmURSS) {
-    if(d->vmURSSChange != 0 || d->vmURSS != 0)
+void Process::setVmURSS(qlonglong _vmURSS)
+{
+    if (d->vmURSSChange != 0 || d->vmURSS != 0)
         d->vmURSSChange = _vmURSS - d->vmURSS;
-    if(d->vmURSS == _vmURSS) return;
+    if (d->vmURSS == _vmURSS)
+        return;
     d->vmURSS = _vmURSS;
     d->changes |= Process::VmURSS;
 }
@@ -691,98 +762,130 @@ void Process::setVmPSS(qlonglong pss)
     d->changes |= Process::VmPSS;
 }
 
-void Process::setName(const QString &_name) {
-    if(d->name == _name) return;
+void Process::setName(const QString &_name)
+{
+    if (d->name == _name)
+        return;
     d->name = _name;
     d->changes |= Process::Name;
 }
 
-void Process::setCommand(const QString &_command) {
-    if(d->command == _command) return;
+void Process::setCommand(const QString &_command)
+{
+    if (d->command == _command)
+        return;
     d->command = _command;
     d->changes |= Process::Command;
 }
 
-void Process::setStatus(ProcessStatus _status) {
-    if(d->status == _status) return;
+void Process::setStatus(ProcessStatus _status)
+{
+    if (d->status == _status)
+        return;
     d->status = _status;
     d->changes |= Process::Status;
 }
 
-void Process::setIoCharactersRead(qlonglong number) {
-    if(d->ioCharactersRead == number) return;
+void Process::setIoCharactersRead(qlonglong number)
+{
+    if (d->ioCharactersRead == number)
+        return;
     d->ioCharactersRead = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoCharactersWritten(qlonglong number) {
-    if(d->ioCharactersWritten == number) return;
+void Process::setIoCharactersWritten(qlonglong number)
+{
+    if (d->ioCharactersWritten == number)
+        return;
     d->ioCharactersWritten = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoReadSyscalls(qlonglong number) {
-    if(d->ioReadSyscalls == number) return;
+void Process::setIoReadSyscalls(qlonglong number)
+{
+    if (d->ioReadSyscalls == number)
+        return;
     d->ioReadSyscalls = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoWriteSyscalls(qlonglong number) {
-    if(d->ioWriteSyscalls == number) return;
+void Process::setIoWriteSyscalls(qlonglong number)
+{
+    if (d->ioWriteSyscalls == number)
+        return;
     d->ioWriteSyscalls = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoCharactersActuallyRead(qlonglong number) {
-    if(d->ioCharactersActuallyRead == number) return;
+void Process::setIoCharactersActuallyRead(qlonglong number)
+{
+    if (d->ioCharactersActuallyRead == number)
+        return;
     d->ioCharactersActuallyRead = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoCharactersActuallyWritten(qlonglong number) {
-    if(d->ioCharactersActuallyWritten == number) return;
+void Process::setIoCharactersActuallyWritten(qlonglong number)
+{
+    if (d->ioCharactersActuallyWritten == number)
+        return;
     d->ioCharactersActuallyWritten = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoCharactersReadRate(long number) {
-    if(d->ioCharactersReadRate == number) return;
+void Process::setIoCharactersReadRate(long number)
+{
+    if (d->ioCharactersReadRate == number)
+        return;
     d->ioCharactersReadRate = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoCharactersWrittenRate(long number) {
-    if(d->ioCharactersWrittenRate == number) return;
+void Process::setIoCharactersWrittenRate(long number)
+{
+    if (d->ioCharactersWrittenRate == number)
+        return;
     d->ioCharactersWrittenRate = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoReadSyscallsRate(long number) {
-    if(d->ioReadSyscallsRate == number) return;
+void Process::setIoReadSyscallsRate(long number)
+{
+    if (d->ioReadSyscallsRate == number)
+        return;
     d->ioReadSyscallsRate = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoWriteSyscallsRate(long number) {
-    if(d->ioWriteSyscallsRate == number) return;
+void Process::setIoWriteSyscallsRate(long number)
+{
+    if (d->ioWriteSyscallsRate == number)
+        return;
     d->ioWriteSyscallsRate = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoCharactersActuallyReadRate(long number) {
-    if(d->ioCharactersActuallyReadRate == number) return;
+void Process::setIoCharactersActuallyReadRate(long number)
+{
+    if (d->ioCharactersActuallyReadRate == number)
+        return;
     d->ioCharactersActuallyReadRate = number;
     d->changes |= Process::IO;
 }
 
-void Process::setIoCharactersActuallyWrittenRate(long number) {
-    if(d->ioCharactersActuallyWrittenRate == number) return;
+void Process::setIoCharactersActuallyWrittenRate(long number)
+{
+    if (d->ioCharactersActuallyWrittenRate == number)
+        return;
     d->ioCharactersActuallyWrittenRate = number;
     d->changes |= Process::IO;
 }
 
-void Process::setNumThreads(int number) {
-    if(d->numThreads == number) return;
+void Process::setNumThreads(int number)
+{
+    if (d->numThreads == number)
+        return;
     d->numThreads = number;
     d->changes |= Process::NumThreads;
 }
@@ -802,14 +905,18 @@ void Process::setChanges(KSysGuard::Process::Change changes)
     d->changes = changes;
 }
 
-void Process::setCGroup(const QString &_cGroup) {
-    if(d->cGroup == _cGroup) return;
+void Process::setCGroup(const QString &_cGroup)
+{
+    if (d->cGroup == _cGroup)
+        return;
     d->cGroup = _cGroup;
     d->changes |= Process::Status;
 }
 
-void Process::setMACContext(const QString &_macContext) {
-    if(d->macContext == _macContext) return;
+void Process::setMACContext(const QString &_macContext)
+{
+    if (d->macContext == _macContext)
+        return;
     d->macContext = _macContext;
     d->changes |= Process::Status;
 }

@@ -4,11 +4,11 @@
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
+#include <atomic>
+#include <csignal>
 #include <iomanip>
 #include <iostream>
 #include <thread>
-#include <atomic>
-#include <csignal>
 
 #include <getopt.h>
 
@@ -23,9 +23,9 @@ static std::atomic_bool g_running{false};
 int main(int argc, char **argv)
 {
     static struct option long_options[] = {
-        {"help",    0, nullptr, 'h'},
-        {"stats",   0, nullptr, 's'},
-        {nullptr,   0, nullptr, 0},
+        {"help", 0, nullptr, 'h'},
+        {"stats", 0, nullptr, 's'},
+        {nullptr, 0, nullptr, 0},
     };
 
     auto statsRequested = false;
@@ -57,11 +57,15 @@ int main(int argc, char **argv)
 
     auto accumulator = std::make_shared<Accumulator>(capture, mapping);
 
-    signal(SIGINT, [](int) { g_running = false; });
-    signal(SIGTERM, [](int) { g_running = false; });
+    signal(SIGINT, [](int) {
+        g_running = false;
+    });
+    signal(SIGTERM, [](int) {
+        g_running = false;
+    });
 
     g_running = true;
-    while(g_running) {
+    while (g_running) {
         auto data = accumulator->data();
         auto timeStamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 

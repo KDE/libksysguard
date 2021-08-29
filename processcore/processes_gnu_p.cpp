@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "processes_local_p.h"
 #include "process.h"
+#include "processes_local_p.h"
 
 #ifdef __GNUC__
 #warning Totally bogus ProcessesLocal implementation
@@ -13,16 +13,16 @@
 
 namespace KSysGuard
 {
-
 class ProcessesLocal::Private
 {
 public:
     Private()
-    {}
+    {
+    }
     ~Private()
-    {}
+    {
+    }
 };
-
 
 ProcessesLocal::ProcessesLocal()
     : d(0)
@@ -31,7 +31,7 @@ ProcessesLocal::ProcessesLocal()
 
 ProcessesLocal::~ProcessesLocal()
 {
-   delete d;
+    delete d;
 }
 
 long ProcessesLocal::getParentPid(long pid)
@@ -65,7 +65,6 @@ Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int p
 {
     return Processes::NotSupported;
 }
-
 
 Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority)
 {

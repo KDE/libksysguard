@@ -6,8 +6,8 @@
 
 #include "FormatterPlugin.h"
 
-#include "Unit.h"
 #include "FormatterWrapper.h"
+#include "Unit.h"
 
 #include <QQmlEngine>
 
@@ -19,6 +19,8 @@ void FormatterPlugin::registerTypes(const char *uri)
 
     qRegisterMetaType<KSysGuard::Unit>();
     qRegisterMetaType<KSysGuard::MetricPrefix>();
-    qmlRegisterSingletonType<KSysGuard::FormatterWrapper>(uri, 1, 0, "Formatter", [](QQmlEngine*, QJSEngine*) -> QObject* { return new FormatterWrapper(); });
+    qmlRegisterSingletonType<KSysGuard::FormatterWrapper>(uri, 1, 0, "Formatter", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return new FormatterWrapper();
+    });
     qmlRegisterUncreatableMetaObject(KSysGuard::staticMetaObject, uri, 1, 0, "Units", QStringLiteral("Contains unit enums"));
 }

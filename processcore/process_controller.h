@@ -26,14 +26,14 @@ class QWidget;
  * processes directly, if that fails, it will use KAuth to try and perform the
  * action as root.
  */
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class Q_DECL_EXPORT ProcessController : public QObject
 {
     Q_OBJECT
 
 public:
-    ProcessController(QObject* parent = nullptr);
+    ProcessController(QObject *parent = nullptr);
     ~ProcessController();
 
     /**

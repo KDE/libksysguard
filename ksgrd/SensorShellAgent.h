@@ -20,8 +20,8 @@ class QString;
 
 class KProcess;
 
-namespace KSGRD {
-
+namespace KSGRD
+{
 class SensorManager;
 
 /**
@@ -33,25 +33,24 @@ class SensorManager;
  */
 class SensorShellAgent : public SensorAgent
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit SensorShellAgent( SensorManager *sm );
+public:
+    explicit SensorShellAgent(SensorManager *sm);
     ~SensorShellAgent() override;
 
-    bool start( const QString &host, const QString &shell,
-                const QString &command = QLatin1String(""), int port = -1 ) override;
+    bool start(const QString &host, const QString &shell, const QString &command = QLatin1String(""), int port = -1) override;
 
-    void hostInfo( QString &shell, QString &command, int &port) const override;
+    void hostInfo(QString &shell, QString &command, int &port) const override;
 
-  private Q_SLOTS:
-    void msgRcvd( );
-    void errMsgRcvd( );
-    void daemonExited(  int exitCode, QProcess::ExitStatus exitStatus );
-    void daemonError( QProcess::ProcessError errorStatus );
+private Q_SLOTS:
+    void msgRcvd();
+    void errMsgRcvd();
+    void daemonExited(int exitCode, QProcess::ExitStatus exitStatus);
+    void daemonError(QProcess::ProcessError errorStatus);
 
-  private:
-    bool writeMsg( const char *msg, int len ) override;
+private:
+    bool writeMsg(const char *msg, int len) override;
     int mRetryCount;
     QPointer<KProcess> mDaemon;
     QString mShell;
@@ -59,5 +58,5 @@ class SensorShellAgent : public SensorAgent
 };
 
 }
-	
+
 #endif

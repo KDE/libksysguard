@@ -14,7 +14,6 @@
 
 namespace KSysGuard
 {
-
 class Process;
 class CGroupPrivate;
 

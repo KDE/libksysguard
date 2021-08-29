@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#include <QTest>
 #include <QAbstractItemModelTester>
+#include <QTest>
 #include <QTransposeProxyModel>
 
 #include <QDBusInterface>
@@ -35,12 +35,7 @@ private Q_SLOTS:
 
         QVERIFY(model.columnCount() == 0);
 
-        model.setSensors({
-            qs("cpu/all/usage"),
-            qs("memory/physical/used"),
-            qs("network/all/download"),
-            qs("disk/all/used")
-        });
+        model.setSensors({qs("cpu/all/usage"), qs("memory/physical/used"), qs("network/all/download"), qs("disk/all/used")});
 
         QTRY_VERIFY(model.isReady());
 
@@ -60,11 +55,7 @@ private Q_SLOTS:
         QCOMPARE(model.headerData(2, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByteRate);
         QCOMPARE(model.headerData(3, Qt::Horizontal, unit).value<KSysGuard::Unit>(), KSysGuard::UnitByte);
 
-        model.setSensors({
-            qs("disk/all/used"),
-            qs("network/all/download"),
-            qs("cpu/all/usage")
-        });
+        model.setSensors({qs("disk/all/used"), qs("network/all/download"), qs("cpu/all/usage")});
 
         QVERIFY(!model.isReady());
 
@@ -91,12 +82,7 @@ private Q_SLOTS:
         QTransposeProxyModel transpose;
         transpose.setSourceModel(&model);
 
-        model.setSensors({
-            qs("cpu/all/usage"),
-            qs("memory/physical/used"),
-            qs("network/all/download"),
-            qs("disk/all/used")
-        });
+        model.setSensors({qs("cpu/all/usage"), qs("memory/physical/used"), qs("network/all/download"), qs("disk/all/used")});
 
         QTRY_VERIFY(model.isReady());
 

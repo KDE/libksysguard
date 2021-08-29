@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <memory>
 #include <QObject>
+#include <memory>
 
 #include "systemstats/SensorInfo.h"
 

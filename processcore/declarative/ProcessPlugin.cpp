@@ -9,12 +9,11 @@
 #include <QQmlEngine>
 
 #include "application_data_model.h"
+#include "process_attribute_model.h"
 #include "process_controller.h"
 #include "process_data_model.h"
-#include "process_attribute_model.h"
 
 #include "ProcessEnums.h"
-
 
 using namespace KSysGuard;
 
@@ -33,5 +32,4 @@ void ProcessPlugin::registerTypes(const char *uri)
     qmlRegisterType<ProcessDataModel>(uri, 1, 0, "ProcessDataModel");
     qmlRegisterUncreatableType<ProcessAttributeModel>(uri, 1, 0, "ProcessAttributeModel", QStringLiteral("Available through ProcessDataModel"));
     qmlRegisterType<ApplicationDataModel>(uri, 1, 0, "ApplicationDataModel");
-
 }

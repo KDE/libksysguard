@@ -6,7 +6,6 @@
 
 #include "Packet.h"
 
-#include <sys/types.h>
 #include <arpa/inet.h>
 #include <net/ethernet.h>
 #include <netinet/in.h>
@@ -14,6 +13,7 @@
 #include <netinet/ip6.h>
 #include <netinet/tcp.h>
 #include <netinet/udp.h>
+#include <sys/types.h>
 
 #include <pcap/pcap.h>
 #include <pcap/sll.h>

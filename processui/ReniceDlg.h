@@ -21,35 +21,35 @@ class QButtonGroup;
  */
 class ReniceDlg : public QDialog
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	/** Let the user specify the new priorities of the @p processes given, using the given current values.
-	 *  @p currentCpuSched The current Cpu Scheduler of the processes.  Set to -1 to they have different schedulers
-	 *  @p currentIoSched The current I/O Scheduler of the processes.  Set to -1 to they have different schedulers.  Leave as the default -2 if not supported
-	 */
-    explicit ReniceDlg(QWidget* parent, const QStringList& processes, int currentCpuPrio, int currentCpuSched, int currentIoPrio=-2, int currentIoSched=-2);
+    /** Let the user specify the new priorities of the @p processes given, using the given current values.
+     *  @p currentCpuSched The current Cpu Scheduler of the processes.  Set to -1 to they have different schedulers
+     *  @p currentIoSched The current I/O Scheduler of the processes.  Set to -1 to they have different schedulers.  Leave as the default -2 if not supported
+     */
+    explicit ReniceDlg(QWidget *parent, const QStringList &processes, int currentCpuPrio, int currentCpuSched, int currentIoPrio = -2, int currentIoSched = -2);
     ~ReniceDlg();
-	int newCPUPriority;
-	int newIOPriority;
-	int newCPUSched;
-	int newIOSched;
+    int newCPUPriority;
+    int newIOPriority;
+    int newCPUSched;
+    int newIOSched;
 
-	bool ioniceSupported;
-
+    bool ioniceSupported;
 
 public Q_SLOTS:
-	void slotOk();
-	void updateUi();
-	void cpuSliderChanged(int value);
-	void ioSliderChanged(int value);
-	void cpuSchedulerChanged(int value);
+    void slotOk();
+    void updateUi();
+    void cpuSliderChanged(int value);
+    void ioSliderChanged(int value);
+    void cpuSchedulerChanged(int value);
+
 private:
-	void setSliderRange();
-	Ui_ReniceDlgUi *ui;
-	QButtonGroup *cpuScheduler;
-	QButtonGroup *ioScheduler;
-	int previous_cpuscheduler;
+    void setSliderRange();
+    Ui_ReniceDlgUi *ui;
+    QButtonGroup *cpuScheduler;
+    QButtonGroup *ioScheduler;
+    int previous_cpuscheduler;
 };
 
 #endif

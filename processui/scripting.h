@@ -10,22 +10,23 @@
 #ifndef KSYSGUARDSCRIPTING_H
 #define KSYSGUARDSCRIPTING_H
 
+#include "../config-ksysguard.h"
+#include "ProcessModel.h"
 #include <QList>
 #include <QString>
 #include <QWidget>
 #include <processcore/processes.h>
-#include "ProcessModel.h"
-#include "../config-ksysguard.h"
 
 class QAction;
-class ScriptingHtmlDialog; //Defined in scripting.cpp file
+class ScriptingHtmlDialog; // Defined in scripting.cpp file
 class KSysGuardProcessList;
 class ProcessObject;
 class QWebChannel;
 
-class Scripting : public QWidget {
-  Q_OBJECT
-  public:
+class Scripting : public QWidget
+{
+    Q_OBJECT
+public:
     /** Create a scripting object */
     Scripting(KSysGuardProcessList *parent);
     /** Run the script in the given path */
@@ -33,12 +34,15 @@ class Scripting : public QWidget {
     /** Read all the script .desktop files and create an action for each one */
     void loadContextMenu();
     /** List of context menu actions that are created by loadContextMenu() */
-    QList<QAction *> actions() { return mActions; }
+    QList<QAction *> actions()
+    {
+        return mActions;
+    }
 
-  public Q_SLOTS:
+public Q_SLOTS:
     /** Stop all scripts and delete the script engine */
     void stopAllScripts();
-  private Q_SLOTS:
+private Q_SLOTS:
     /** Run the script associated with the QAction that called this slot */
     void runScriptSlot();
 #if WEBENGINE_SCRIPTING_ENABLED
@@ -47,13 +51,13 @@ class Scripting : public QWidget {
     void zoomIn();
     void zoomOut();
 #endif
-  private:
+private:
     /** This is created on the fly as needed, and deleted when no longer used */
     ScriptingHtmlDialog *mScriptingHtmlDialog;
     /** Used to expose mProcessObject to the WebEnginePage */
     QWebChannel *mWebChannel;
     /** The parent process list to script for */
-    KSysGuardProcessList * const mProcessList;
+    KSysGuardProcessList *const mProcessList;
     /** List of context menu actions that are created by loadContextMenu() */
     QList<QAction *> mActions;
     QString mScriptPath;
@@ -65,12 +69,21 @@ class Scripting : public QWidget {
 
 // QWebChannel only reloads properties on demand, so we need a signal.
 #define P_PROPERTY(x) Q_PROPERTY(x NOTIFY anythingChanged)
-#define PROPERTY(Type,Name) Type Name() const { KSysGuard::Process *process = mModel->getProcess(mPid); if(process) return process->Name(); else return Type();}
+#define PROPERTY(Type, Name)                                                                                                                                   \
+    Type Name() const                                                                                                                                          \
+    {                                                                                                                                                          \
+        KSysGuard::Process *process = mModel->getProcess(mPid);                                                                                                \
+        if (process)                                                                                                                                           \
+            return process->Name();                                                                                                                            \
+        else                                                                                                                                                   \
+            return Type();                                                                                                                                     \
+    }
 
-class ProcessObject : public QObject {
+class ProcessObject : public QObject
+{
     Q_OBJECT
-    public:
-        // clang-format off
+public:
+    // clang-format off
        P_PROPERTY(qlonglong pid READ pid WRITE setPid)                 /* Add functionality to 'set' the pid to change which process to read from */
        P_PROPERTY(qlonglong ppid READ parentPid)                       /* Map 'ppid' to 'parentPid' to give it a nicer scripting name */
        P_PROPERTY(QString name READ name)                              /* Defined below to return the first word of the name */

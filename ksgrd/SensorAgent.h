@@ -11,14 +11,14 @@
 #define KSG_SENSORAGENT_H
 
 #include <QObject>
-#include <QQueue>
 #include <QPointer>
+#include <QQueue>
 #include <QSet>
 
 class QString;
 
-namespace KSGRD {
-
+namespace KSGRD
+{
 class SensorClient;
 class SensorManager;
 class SensorRequest;
@@ -33,14 +33,13 @@ class SensorRequest;
 */
 class Q_DECL_EXPORT SensorAgent : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit SensorAgent( SensorManager *sm );
+public:
+    explicit SensorAgent(SensorManager *sm);
     ~SensorAgent() override;
 
-    virtual bool start( const QString &host, const QString &shell,
-                        const QString &command = QLatin1String(""), int port = -1 ) = 0;
+    virtual bool start(const QString &host, const QString &shell, const QString &command = QLatin1String(""), int port = -1) = 0;
 
     /**
       This function should only be used by the SensorManager and
@@ -54,40 +53,40 @@ class Q_DECL_EXPORT SensorAgent : public QObject
       used by the SensorAgent. So it can be any value the client suits to
       use.
      */
-    void sendRequest( const QString &req, SensorClient *client, int id = 0 );
+    void sendRequest(const QString &req, SensorClient *client, int id = 0);
 
-    virtual void hostInfo( QString &sh, QString &cmd, int &port ) const = 0;
+    virtual void hostInfo(QString &sh, QString &cmd, int &port) const = 0;
 
-    void disconnectClient( SensorClient *client );
+    void disconnectClient(SensorClient *client);
 
     QString hostName() const;
 
     bool daemonOnLine() const;
     QString reasonForOffline() const;
-	
-  Q_SIGNALS:
-    void reconfigure( const SensorAgent* );
 
-  protected:
-    void processAnswer( const char *buf, int buflen );
+Q_SIGNALS:
+    void reconfigure(const SensorAgent *);
+
+protected:
+    void processAnswer(const char *buf, int buflen);
     void executeCommand();
 
     SensorManager *sensorManager();
 
-    void setDaemonOnLine( bool value );
+    void setDaemonOnLine(bool value);
 
-    void setHostName( const QString &hostName );
+    void setHostName(const QString &hostName);
     void setReasonForOffline(const QString &reasonForOffline);
 
-  private:
-    virtual bool writeMsg( const char *msg, int len ) = 0;
+private:
+    virtual bool writeMsg(const char *msg, int len) = 0;
     QString mReasonForOffline;
 
-    QQueue< SensorRequest* > mInputFIFO;
-    QQueue< SensorRequest* > mProcessingFIFO;
-    QList<QByteArray> mAnswerBuffer;  ///A single reply can be on multiple lines.  
+    QQueue<SensorRequest *> mInputFIFO;
+    QQueue<SensorRequest *> mProcessingFIFO;
+    QList<QByteArray> mAnswerBuffer; /// A single reply can be on multiple lines.
     QString mErrorBuffer;
-    QByteArray mLeftOverBuffer; ///Any data read in but not terminated is copied into here, awaiting the next load of data
+    QByteArray mLeftOverBuffer; /// Any data read in but not terminated is copied into here, awaiting the next load of data
 
     QPointer<SensorManager> mSensorManager;
 
@@ -101,33 +100,34 @@ class Q_DECL_EXPORT SensorAgent : public QObject
 */
 class SensorRequest
 {
-  public:
-    SensorRequest( const QString &request, SensorClient *client, int id );
+public:
+    SensorRequest(const QString &request, SensorClient *client, int id);
     ~SensorRequest();
 
-    void setRequest( const QString& );
+    void setRequest(const QString &);
     QString request() const;
 
-    void setClient( SensorClient* );
+    void setClient(SensorClient *);
     SensorClient *client();
 
-    void setId( int );
+    void setId(int);
     int id();
 
-  friend uint qHash(const SensorRequest& sr, uint seed=0) {
-    return qHash(qMakePair(sr.mRequest, qMakePair(sr.mClient, sr.mId)), seed);
-  }
-  friend bool operator==(const SensorRequest& a, const SensorRequest& b) {
-    return a.mRequest == b.mRequest &&
-      a.mClient == b.mClient &&
-      a.mId == b.mId;
-  }
-  private:
+    friend uint qHash(const SensorRequest &sr, uint seed = 0)
+    {
+        return qHash(qMakePair(sr.mRequest, qMakePair(sr.mClient, sr.mId)), seed);
+    }
+    friend bool operator==(const SensorRequest &a, const SensorRequest &b)
+    {
+        return a.mRequest == b.mRequest && a.mClient == b.mClient && a.mId == b.mId;
+    }
+
+private:
     QString mRequest;
     SensorClient *mClient = nullptr;
     int mId;
 };
 
 }
-	
+
 #endif

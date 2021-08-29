@@ -18,7 +18,7 @@ public:
     QVector<ProcessAttribute *> m_attributes;
 };
 
-ProcessAttributeModel::ProcessAttributeModel(const QVector<ProcessAttribute *> & attributes, QObject *parent)
+ProcessAttributeModel::ProcessAttributeModel(const QVector<ProcessAttribute *> &attributes, QObject *parent)
     : QAbstractListModel(parent)
     , d(new Private)
 {
@@ -69,12 +69,12 @@ QVariant ProcessAttributeModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> ProcessAttributeModel::roleNames() const
 {
     return QAbstractListModel::roleNames().unite({
-        { static_cast<int>(Role::Id), "id" },
-        { static_cast<int>(Role::Name), "name" },
-        { static_cast<int>(Role::ShortName), "shortName" },
-        { static_cast<int>(Role::Description), "description" },
-        { static_cast<int>(Role::Unit), "unit" },
-        { static_cast<int>(Role::Minimum), "minimum" },
-        { static_cast<int>(Role::Maximum), "maximum" },
+        {static_cast<int>(Role::Id), "id"},
+        {static_cast<int>(Role::Name), "name"},
+        {static_cast<int>(Role::ShortName), "shortName"},
+        {static_cast<int>(Role::Description), "description"},
+        {static_cast<int>(Role::Unit), "unit"},
+        {static_cast<int>(Role::Minimum), "minimum"},
+        {static_cast<int>(Role::Maximum), "maximum"},
     });
 }

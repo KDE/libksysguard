@@ -9,18 +9,18 @@
 #include "SensorProperty.h"
 
 #ifdef Q_OS_FREEBSD
-#include <sys/types.h>
 #include <sys/sysctl.h>
+#include <sys/types.h>
 #endif
 
 namespace KSysGuard
 {
-
 /**
  * Convenience subclass of SensorProperty that reads a value of type T from FreeBSD's sysctl interface
  */
-template <typename T>
-class SysctlSensor : public SensorProperty {
+template<typename T>
+class SysctlSensor : public SensorProperty
+{
 public:
     /**
      * Contstrucor.
@@ -43,29 +43,35 @@ public:
      * QVariant. Use this if you need to convert the value into another unit or do a calculation to
      * arrive at the sensor value. By default the value is stored as is in a QVariant.
      */
-    void setConversionFunction(const std::function<QVariant(const T&)> &function) {m_conversionFunction = function;}
+    void setConversionFunction(const std::function<QVariant(const T &)> &function)
+    {
+        m_conversionFunction = function;
+    }
+
 private:
     const QByteArray m_sysctlName;
-    std::function<QVariant(const T&)> m_conversionFunction = [](const T& t){return QVariant::fromValue(t);};
+    std::function<QVariant(const T &)> m_conversionFunction = [](const T &t) {
+        return QVariant::fromValue(t);
+    };
 };
 
 #ifdef Q_OS_FREEBSD
 
-template <typename T>
-SysctlSensor<T>::SysctlSensor(const QString& id, const QByteArray &sysctlName, SensorObject* parent)
+template<typename T>
+SysctlSensor<T>::SysctlSensor(const QString &id, const QByteArray &sysctlName, SensorObject *parent)
     : SensorProperty(id, parent)
     , m_sysctlName(sysctlName)
 {
 }
 
 template<typename T>
-SysctlSensor<T>::SysctlSensor(const QString& id, const QString& name, const QByteArray& sysctlName, SensorObject* parent)
+SysctlSensor<T>::SysctlSensor(const QString &id, const QString &name, const QByteArray &sysctlName, SensorObject *parent)
     : SensorProperty(id, name, parent)
     , m_sysctlName(sysctlName)
 {
 }
 
-template <typename T>
+template<typename T>
 void SysctlSensor<T>::update()
 {
     if (!isSubscribed()) {

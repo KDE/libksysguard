@@ -13,7 +13,6 @@ namespace KSysGuard
 {
 namespace SystemStats
 {
-
 const QString ServiceName = QStringLiteral("org.kde.ksystemstats");
 const QString ObjectPath = QStringLiteral("/");
 
@@ -24,7 +23,10 @@ class SYSTEMSTATS_EXPORT DBusInterface : public org::kde::ksystemstats
 {
     Q_OBJECT
 public:
-    DBusInterface(const QString &service = ServiceName, const QString &path = ObjectPath, const QDBusConnection &connection = QDBusConnection::sessionBus(), QObject *parent = nullptr);
+    DBusInterface(const QString &service = ServiceName,
+                  const QString &path = ObjectPath,
+                  const QDBusConnection &connection = QDBusConnection::sessionBus(),
+                  QObject *parent = nullptr);
 };
 
 } // namespace SystemStats

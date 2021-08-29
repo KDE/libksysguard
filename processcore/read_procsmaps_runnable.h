@@ -9,8 +9,8 @@
 #include <QObject>
 #include <QRunnable>
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class ReadProcSmapsRunnable : public QObject, public QRunnable
 {
     Q_OBJECT

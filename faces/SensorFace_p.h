@@ -10,10 +10,9 @@
 
 #include "sensorfaces_export.h"
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class SensorFaceController;
-
 
 /**
  * Base for sensor faces. Use this as root item when creating custom faces.
@@ -80,7 +79,7 @@ public:
     SensorFace::FormFactor formFactor() const;
     void setFormFactor(SensorFace::FormFactor formFactor);
 
-    QQuickItem * contentItem() const;
+    QQuickItem *contentItem() const;
     void setContentItem(QQuickItem *item);
 
 Q_SIGNALS:

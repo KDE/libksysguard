@@ -17,7 +17,7 @@ Accumulator::Accumulator(std::shared_ptr<Capture> capture, std::shared_ptr<Conne
     m_mapping = mapping;
 
     m_running = true;
-    m_thread = std::thread { &Accumulator::loop, this };
+    m_thread = std::thread{&Accumulator::loop, this};
 }
 
 Accumulator::PidDataCounterHash Accumulator::data()
@@ -36,7 +36,9 @@ Accumulator::PidDataCounterHash Accumulator::data()
         }
     }
 
-    std::for_each(toErase.cbegin(), toErase.cend(), [this](int pid) { m_data.erase(pid); });
+    std::for_each(toErase.cbegin(), toErase.cend(), [this](int pid) {
+        m_data.erase(pid);
+    });
 
     return tmp;
 }

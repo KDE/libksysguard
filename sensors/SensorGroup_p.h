@@ -6,12 +6,11 @@
 
 #pragma once
 
-#include <QString>
 #include <QHash>
+#include <QString>
 
 namespace KSysGuard
 {
-
 class SensorGroup
 {
 public:
@@ -25,7 +24,7 @@ public:
     QString segmentNameForRegEx(const QString &expr);
 
 private:
-    QHash <QString, QString> m_sensorNames;
-    QHash <QString, QString> m_segmentNames;
+    QHash<QString, QString> m_sensorNames;
+    QHash<QString, QString> m_segmentNames;
 };
 } // namespace KSysGuard

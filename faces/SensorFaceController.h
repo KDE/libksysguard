@@ -6,25 +6,26 @@
 
 #pragma once
 
+#include <QAbstractItemModel>
 #include <QObject>
 #include <QPointer>
 #include <QQuickItem>
-#include <QAbstractItemModel>
 
 #include <KConfigGroup>
 
 #include "sensorfaces_export.h"
 
-namespace KDeclarative {
-    class ConfigPropertyMap;
+namespace KDeclarative
+{
+class ConfigPropertyMap;
 }
 
 class QQmlEngine;
 class KDesktopFile;
 class KConfigLoader;
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class SensorFace;
 class SensorFaceControllerPrivate;
 
@@ -107,9 +108,9 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
     /**
      * The amount of total sensors the current face supports
      */
-    Q_PROPERTY(int maxTotalSensors READ maxTotalSensors  NOTIFY faceIdChanged)
+    Q_PROPERTY(int maxTotalSensors READ maxTotalSensors NOTIFY faceIdChanged)
     /**
-     * A map of config options and values that are specific to the current face as defined by the 
+     * A map of config options and values that are specific to the current face as defined by the
      * `main.xml` of the face.
      * @see faceConfigUi
      */
@@ -140,10 +141,10 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
      */
     Q_PROPERTY(QQuickItem *appearanceConfigUi READ appearanceConfigUi NOTIFY faceIdChanged)
     /**
-    * A user interface for configuring which sensors are displayed in a face
-    * Emits `configurationChanged` if a config value changed. To apply the changes call `saveConfig`
-    * on it.
-    */
+     * A user interface for configuring which sensors are displayed in a face
+     * Emits `configurationChanged` if a config value changed. To apply the changes call `saveConfig`
+     * on it.
+     */
     Q_PROPERTY(QQuickItem *sensorsConfigUi READ sensorsConfigUi NOTIFY faceIdChanged)
 
     /**

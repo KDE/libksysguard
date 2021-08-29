@@ -8,17 +8,18 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-#include <QList>
-#include <QTime>
 #include <QElapsedTimer>
 #include <QFlags>
+#include <QList>
+#include <QTime>
 #include <QVariant>
 
 namespace KSysGuard
 {
 class ProcessPrivate; // forward decl d-ptr
 
-class Q_DECL_EXPORT Process {
+class Q_DECL_EXPORT Process
+{
 public:
     enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, Ended, OtherStatus = 99 };
     enum IoPriorityClass { None, RealTime, BestEffort, Idle };
@@ -28,9 +29,9 @@ public:
     Process(qlonglong _pid, qlonglong _ppid, Process *_parent);
     virtual ~Process();
 
-    long pid() const;    ///< The system's ID for this process.  1 for init.  -1 for our virtual 'parent of init' process used just for convenience.
+    long pid() const; ///< The system's ID for this process.  1 for init.  -1 for our virtual 'parent of init' process used just for convenience.
 
-    long parentPid() const;  ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
+    long parentPid() const; ///< The system's ID for the parent of this process.  Set to -1 if it has no parent (e.g. 'init' on Linux).
     void setParentPid(long parent_pid);
 
     /** A guaranteed NON-NULL pointer for all real processes to the parent process except for the fake process with pid -1.
@@ -42,9 +43,10 @@ public:
     Process *parent() const;
     void setParent(Process *parent);
 
-    QList<Process *> & children() const; // REF, make non-ref later! ///< A list of all the direct children that the process has.  Children of children are not listed here, so note that children_pids <= numChildren
+    QList<Process *> &children() const; // REF, make non-ref later! ///< A list of all the direct children that the process has.  Children of children are not
+                                        // listed here, so note that children_pids <= numChildren
 
-    unsigned long& numChildren() const; // REF, make non-ref later!
+    unsigned long &numChildren() const; // REF, make non-ref later!
 
     QString login() const;
     void setLogin(const QString &login); ///< The user login name.  Only used for processes on remote machines.  Otherwise use uid to get the name
@@ -83,28 +85,32 @@ public:
     void setUserTime(qlonglong userTime); ///< The time, in 100ths of a second, spent in total on user calls. -1 if not known
 
     qlonglong sysTime() const;
-    void setSysTime(qlonglong sysTime);  ///< The time, in 100ths of a second, spent in total on system calls.  -1 if not known
+    void setSysTime(qlonglong sysTime); ///< The time, in 100ths of a second, spent in total on system calls.  -1 if not known
 
     /**
      * the value is expressed in clock ticks (since Linux 2.6; we only handle this case) since system boot
      */
     qlonglong startTime() const;
-    void setStartTime(qlonglong startTime); /// The time the process started after system boot. Since Linux 2.6, the value is expressed in clock ticks. See man proc.
+    void
+    setStartTime(qlonglong startTime); /// The time the process started after system boot. Since Linux 2.6, the value is expressed in clock ticks. See man proc.
 
     int userUsage() const;
     void setUserUsage(int userUsage); ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
 
     int sysUsage() const;
-    void setSysUsage(int sysUsage);  ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
+    void setSysUsage(int sysUsage); ///< Percentage (0 to 100).  It might be more than 100% on multiple cpu core systems
 
-    int& totalUserUsage() const; // REF, make non-ref later!
-    void setTotalUserUsage(int totalUserUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children, it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
+    int &totalUserUsage() const; // REF, make non-ref later!
+    void setTotalUserUsage(int totalUserUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively.  If there's no children,
+                                                ///< it's equal to userUsage.  It might be more than 100% on multiple cpu core systems
 
-    int& totalSysUsage() const; // REF, make non-ref later!
-    void setTotalSysUsage(int totalSysUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's equal to sysUsage. It might be more than 100% on multiple cpu core systems
+    int &totalSysUsage() const; // REF, make non-ref later!
+    void setTotalSysUsage(int totalSysUsage); ///< Percentage (0 to 100) from the sum of itself and all its children recursively. If there's no children, it's
+                                              ///< equal to sysUsage. It might be more than 100% on multiple cpu core systems
 
     int niceLevel() const;
-    void setNiceLevel(int niceLevel);      ///< If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.  Otherwise sched priority (1 to 99)
+    void setNiceLevel(int niceLevel); ///< If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.
+                                      ///< Otherwise sched priority (1 to 99)
 
     Scheduler scheduler() const;
     void setScheduler(Scheduler scheduler); ///< The scheduler this process is running in.  See man sched_getscheduler for more info
@@ -113,28 +119,31 @@ public:
     void setIoPriorityClass(IoPriorityClass ioPriorityClass); ///< The IO priority class.  See man ionice for detailed information.
 
     int ioniceLevel() const;
-    void setIoniceLevel(int ioniceLevel);    ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not applicable because ioPriorityClass is Idle or None
+    void setIoniceLevel(int ioniceLevel); ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not
+                                          ///< applicable because ioPriorityClass is Idle or None
 
     qlonglong vmSize() const;
-    void setVmSize(qlonglong vmSize);   ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
+    void setVmSize(qlonglong vmSize); ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
 
     qlonglong vmRSS() const;
-    void setVmRSS(qlonglong vmRSS);    ///< Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this could be as low as 0
+    void setVmRSS(qlonglong vmRSS); ///< Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this
+                                    ///< could be as low as 0
 
     qlonglong vmURSS() const;
-    void setVmURSS(qlonglong vmURSS);   ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
+    void setVmURSS(qlonglong vmURSS); ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
 
     qlonglong vmPSS() const;
-    void setVmPSS(qlonglong vmPSS); ///< Proportional set size, the amount of private physical memory used by the process + the amount of shared memory used divided over the number of processes using it.
+    void setVmPSS(qlonglong vmPSS); ///< Proportional set size, the amount of private physical memory used by the process + the amount of shared memory used
+                                    ///< divided over the number of processes using it.
 
     QString name() const;
-    void setName(const QString &name);  ///< The name (e.g. "ksysguard", "konversation", "init")
+    void setName(const QString &name); ///< The name (e.g. "ksysguard", "konversation", "init")
 
-    QString& command() const; // REF, make non-ref later!
+    QString &command() const; // REF, make non-ref later!
     void setCommand(const QString &command); ///< The command the process was launched with
 
     ProcessStatus status() const;
-    void setStatus( ProcessStatus status); ///< Whether the process is running/sleeping/etc
+    void setStatus(ProcessStatus status); ///< Whether the process is running/sleeping/etc
 
     qlonglong ioCharactersRead() const;
     void setIoCharactersRead(qlonglong number); ///< The number of bytes which this task has caused to be read from storage
@@ -170,7 +179,8 @@ public:
     void setIoCharactersActuallyReadRate(long number); ///< Number of bytes per second which this process really did cause to be fetched from the storage layer.
 
     long ioCharactersActuallyWrittenRate() const;
-    void setIoCharactersActuallyWrittenRate(long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
+    void setIoCharactersActuallyWrittenRate(
+        long number); ///< Attempt to count the number of bytes per second which this process caused to be sent to the storage layer.
 
     int numThreads() const; ///< Number of threads that this process has, including the main one.  0 if not known
     void setNumThreads(int number); ///< The number of threads that this process has, including this process.
@@ -178,24 +188,25 @@ public:
     int noNewPrivileges() const;
     void setNoNewPrivileges(int number); ///< Linux process flag NoNewPrivileges
 
-    int index() const;  ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
+    int index() const; ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
     void setIndex(int index);
 
-    qlonglong& vmSizeChange() const; // REF, make non-ref later!  ///< The change in vmSize since last update, in KiB
+    qlonglong &vmSizeChange() const; // REF, make non-ref later!  ///< The change in vmSize since last update, in KiB
 
-    qlonglong& vmRSSChange() const; // REF, make non-ref later!   ///< The change in vmRSS since last update, in KiB
+    qlonglong &vmRSSChange() const; // REF, make non-ref later!   ///< The change in vmRSS since last update, in KiB
 
-    qlonglong& vmURSSChange() const; // REF, make non-ref later!  ///< The change in vmURSS since last update, in KiB
+    qlonglong &vmURSSChange() const; // REF, make non-ref later!  ///< The change in vmURSS since last update, in KiB
 
     qlonglong vmPSSChange() const; ///< The change in vmPSS since last update, in KiB.
 
-    unsigned long& pixmapBytes() const; // REF, make non-ref later! ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
+    unsigned long &pixmapBytes() const; // REF, make non-ref later! ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
 
-    bool& hasManagedGuiWindow() const; // REF, make non-ref later!
+    bool &hasManagedGuiWindow() const; // REF, make non-ref later!
 
-    QElapsedTimer timeKillWasSent() const; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.
+    QElapsedTimer
+    timeKillWasSent() const; ///< This is usually a NULL time.  When trying to kill a process, this is the time that the kill signal was sent to the process.
 
-    QString translatedStatus() const;  ///< Returns a translated string of the status. e.g. "Running" etc
+    QString translatedStatus() const; ///< Returns a translated string of the status. e.g. "Running" etc
 
     QString niceLevelAsString() const; ///< Returns a simple translated string of the nice priority.  e.g. "Normal", "High", etc
 
@@ -247,7 +258,7 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    Changes changes() const;  /**< A QFlags representing what has changed */
+    Changes changes() const; /**< A QFlags representing what has changed */
     void setChanges(Change changes);
 
     using Updates = QVector<QPair<Change, QVariant>>;
@@ -256,7 +267,7 @@ private:
     void clear();
 
 private:
-    ProcessPrivate* const d;
+    ProcessPrivate *const d;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Process::Changes)

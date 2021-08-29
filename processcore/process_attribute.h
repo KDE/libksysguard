@@ -8,11 +8,11 @@
 #include <QObject>
 #include <QVariant>
 
-#include "unit.h"
 #include "processes.h"
+#include "unit.h"
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class Process;
 class CGroup;
 
@@ -106,7 +106,7 @@ public:
      */
     void clearData(KSysGuard::Process *process);
 
-    virtual QVariant cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process*> &groupProcesses = {}) const;
+    virtual QVariant cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process *> &groupProcesses = {}) const;
 
 Q_SIGNALS:
     void dataChanged(KSysGuard::Process *process);
@@ -119,7 +119,6 @@ protected:
 private:
     class Private;
     QScopedPointer<Private> d;
-
 };
 
 }

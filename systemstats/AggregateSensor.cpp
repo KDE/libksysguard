@@ -21,7 +21,7 @@ using namespace KSysGuard;
 // returned.
 QVariant addVariants(const QVariant &first, const QVariant &second)
 {
-    auto result = QVariant {};
+    auto result = QVariant{};
 
     bool convertFirst = false;
     bool convertSecond = false;
@@ -203,14 +203,13 @@ void AggregateSensor::updateSensors()
     while (itr != d->sensors.end()) {
         if (!itr.value()) {
             itr = d->sensors.erase(itr);
-        } else if (itr.value()->parent() && itr.value()->parent()->parent() != d->subsystem){
+        } else if (itr.value()->parent() && itr.value()->parent()->parent() != d->subsystem) {
             itr.value()->disconnect(this);
             if (isSubscribed()) {
                 itr.value()->unsubscribe();
             }
             itr = d->sensors.erase(itr);
-        }
-        else {
+        } else {
             ++itr;
         }
     }
@@ -223,7 +222,6 @@ void AggregateSensor::updateSensors()
             }
         }
     }
-
 
     delayedEmitDataChanged();
 }

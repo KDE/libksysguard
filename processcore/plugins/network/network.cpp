@@ -8,16 +8,16 @@
 
 #include <QDateTime>
 #include <QDebug>
+#include <QFile>
 #include <QHash>
 #include <QProcess>
 #include <QStandardPaths>
-#include <QFile>
 
 #include <KLocalizedString>
 #include <KPluginFactory>
 
-#include "networklogging.h"
 #include "networkconstants.h"
+#include "networklogging.h"
 
 using namespace KSysGuard;
 

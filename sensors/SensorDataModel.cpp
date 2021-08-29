@@ -7,8 +7,8 @@
 
 #include "SensorDataModel.h"
 
-#include <optional>
 #include <chrono>
+#include <optional>
 
 #include <QMetaEnum>
 
@@ -138,7 +138,7 @@ QVariant SensorDataModel::data(const QModelIndex &index, int role) const
         }
         break;
     case UpdateInterval:
-        //TODO: Make this dynamic once the backend supports it.
+        // TODO: Make this dynamic once the backend supports it.
         return BackendUpdateInterval;
     default:
         break;
@@ -182,7 +182,7 @@ QVariant SensorDataModel::headerData(int section, Qt::Orientation orientation, i
     case Type:
         return info.variantType;
     case UpdateInterval:
-        //TODO: Make this dynamic once the backend supports it.
+        // TODO: Make this dynamic once the backend supports it.
         return BackendUpdateInterval;
     default:
         break;
@@ -219,7 +219,9 @@ qreal SensorDataModel::minimum() const
         return d->minimum.value();
     }
 
-    auto result = std::min_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) { return first.min < second.min; });
+    auto result = std::min_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) {
+        return first.min < second.min;
+    });
     d->minimum = (*result).min;
     return d->minimum.value();
 }
@@ -234,7 +236,9 @@ qreal SensorDataModel::maximum() const
         return d->maximum.value();
     }
 
-    auto result = std::max_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) { return first.max < second.max; });
+    auto result = std::max_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) {
+        return first.max < second.max;
+    });
     d->maximum = (*result).max;
     return d->maximum.value();
 }
@@ -293,7 +297,7 @@ void SensorDataModel::setSensorColors(const QVariantMap &sensorColors)
     }
     d->sensorColors = sensorColors;
     Q_EMIT sensorColorsChanged();
-    Q_EMIT dataChanged(index(0,0), index(rowCount() - 1, columnCount() - 1), {Color});
+    Q_EMIT dataChanged(index(0, 0), index(rowCount() - 1, columnCount() - 1), {Color});
 }
 
 QVariantMap SensorDataModel::sensorLabels() const
@@ -308,9 +312,8 @@ void SensorDataModel::setSensorLabels(const QVariantMap &sensorLabels)
     }
     d->sensorLabels = sensorLabels;
     Q_EMIT sensorLabelsChanged();
-    Q_EMIT dataChanged(index(0,0), index(rowCount() - 1, columnCount() - 1), {Name, ShortName});
+    Q_EMIT dataChanged(index(0, 0), index(rowCount() - 1, columnCount() - 1), {Name, ShortName});
 }
-
 
 int SensorDataModel::updateRateLimit() const
 {

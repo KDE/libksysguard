@@ -18,8 +18,7 @@
 
 using namespace KSysGuard;
 
-struct UnitInfo
-{
+struct UnitInfo {
     Unit unit = UnitNone;
     QString symbol;
     qreal multiplier;
@@ -35,7 +34,7 @@ public:
     QMap<Unit, UnitInfo> units;
 };
 
-SensorUnitModel::SensorUnitModel(QObject* parent)
+SensorUnitModel::SensorUnitModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new Private)
 {
@@ -49,7 +48,7 @@ QStringList SensorUnitModel::sensors() const
     return d->requestedSensors;
 }
 
-void SensorUnitModel::setSensors(const QStringList & newSensors)
+void SensorUnitModel::setSensors(const QStringList &newSensors)
 {
     if (newSensors == d->requestedSensors) {
         return;
@@ -86,7 +85,7 @@ QHash<int, QByteArray> SensorUnitModel::roleNames() const
     return roleNames;
 }
 
-int SensorUnitModel::rowCount(const QModelIndex& parent) const
+int SensorUnitModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
         return 0;
@@ -95,7 +94,7 @@ int SensorUnitModel::rowCount(const QModelIndex& parent) const
     return d->units.size();
 }
 
-QVariant SensorUnitModel::data(const QModelIndex& index, int role) const
+QVariant SensorUnitModel::data(const QModelIndex &index, int role) const
 {
     if (!checkIndex(index, CheckIndexOption::IndexIsValid | CheckIndexOption::DoNotUseParent)) {
         return QVariant{};

@@ -5,8 +5,8 @@
 */
 
 #include "process_data_provider.h"
-#include "processes.h"
 #include "process_attribute.h"
+#include "processes.h"
 
 using namespace KSysGuard;
 
@@ -22,7 +22,7 @@ ProcessDataProvider::ProcessDataProvider(QObject *parent, const QVariantList &ar
     : QObject(parent)
     , d(new Private)
 {
-    //cast is needed to allow us to use KPluginFactory, but not have null pointers during subclass construction
+    // cast is needed to allow us to use KPluginFactory, but not have null pointers during subclass construction
     auto procList = qobject_cast<KSysGuard::Processes *>(parent);
     Q_ASSERT(procList);
     d->m_processes = procList;

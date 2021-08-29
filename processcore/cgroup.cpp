@@ -88,7 +88,8 @@ Q_GLOBAL_STATIC(CGroupSystemInformation, s_cGroupSystemInformation)
 // Flatpak's are currently in a cgroup, but they don't follow the specification
 // this has been fixed, but this provides some compatability till that lands
 // app vs apps exists because the spec changed.
-QRegularExpression CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("(apps|app|flatpak)-(?:[^-]*-)?([^-]+(?=-.*\\.scope)|[^@]+(?=(?:@.*)?\\.service))"));
+QRegularExpression
+    CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("(apps|app|flatpak)-(?:[^-]*-)?([^-]+(?=-.*\\.scope)|[^@]+(?=(?:@.*)?\\.service))"));
 
 CGroup::CGroup(const QString &id)
     : d(new CGroupPrivate(id))
@@ -126,7 +127,8 @@ void CGroup::requestPids(QObject *context, std::function<void(QVector<pid_t>)> c
     QThreadPool::globalInstance()->start(readPidsRunnable);
 }
 
-QString CGroupPrivate::unescapeName(const QString &name) {
+QString CGroupPrivate::unescapeName(const QString &name)
+{
     // strings are escaped in the form of \xZZ where ZZ is a two digits in hex representing an ascii code
     QString rc = name;
     while (true) {
@@ -190,5 +192,3 @@ CGroupSystemInformation::CGroupSystemInformation()
         sysGgroupRoot = base.absolutePath();
     }
 }
-
-

@@ -123,8 +123,8 @@ public:
     enum class Status {
         Unknown, ///< The sensor has no ID assigned.
         Loading, ///< The sensor is currently being loaded.
-        Ready,   ///< The sensor has been loaded.
-        Error,   ///< An error occurred or the sensor has been removed.
+        Ready, ///< The sensor has been loaded.
+        Error, ///< An error occurred or the sensor has been removed.
         Removed, ///< Removed from backend
     };
     Q_ENUM(Status)

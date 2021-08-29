@@ -1,10 +1,10 @@
 #include "graphicssignalplotterbenchmark.h"
 #include "signalplotter/kgraphicssignalplotter.h"
 
+#include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QRandomGenerator>
 #include <QtTestGui>
-#include <QGraphicsView>
-#include <QGraphicsScene>
 #include <limits>
 
 void BenchmarkGraphicsSignalPlotter::init()
@@ -26,8 +26,8 @@ void BenchmarkGraphicsSignalPlotter::addData()
     s->addBeam(Qt::green);
     s->addBeam(Qt::red);
     s->addBeam(Qt::yellow);
-    s->resize(1000,500);
-    view->resize(1010,510);
+    s->resize(1000, 500);
+    view->resize(1010, 510);
     view->show();
     s->setMaxAxisTextWidth(5);
     QVERIFY(QTest::qWaitForWindowExposed(view));
@@ -38,7 +38,6 @@ void BenchmarkGraphicsSignalPlotter::addData()
         s->addSample(QList<qreal>() << generator->bounded(10) << generator->bounded(10) << generator->bounded(10) << generator->bounded(10));
         qApp->processEvents();
     }
-
 }
 
 void BenchmarkGraphicsSignalPlotter::addDataWhenHidden()
@@ -53,8 +52,6 @@ void BenchmarkGraphicsSignalPlotter::addDataWhenHidden()
         s->addSample(QList<qreal>() << generator->bounded(10) << generator->bounded(10) << generator->bounded(10) << generator->bounded(10));
         qApp->processEvents();
     }
-
 }
 
 QTEST_MAIN(BenchmarkGraphicsSignalPlotter)
-

@@ -45,7 +45,8 @@ public:
         // _MONOTONIC doesn't increase while the system is suspended,
         // resulting in process start times in the future
 #else
-        int isSuccess = clock_gettime(CLOCK_MONOTONIC, &tp); // see https://stackoverflow.com/questions/8357073/get-uptime-in-seconds-or-miliseconds-on-unix-like-systems
+        int isSuccess =
+            clock_gettime(CLOCK_MONOTONIC, &tp); // see https://stackoverflow.com/questions/8357073/get-uptime-in-seconds-or-miliseconds-on-unix-like-systems
 #endif
         Q_ASSERT(isSuccess == 0);
 #endif
@@ -84,8 +85,7 @@ public:
         } else { // d_abs > 0
             const int m = m_abs - h_abs * 60;
             const int h = h_abs - d_abs * 24;
-            return i18ncp("contains also abbreviated time units: (h)ours and (m)inutes",
-                          "%1 day %2h %3m ago", "%1 days %2h %3m ago", d_abs, h, m);
+            return i18ncp("contains also abbreviated time units: (h)ours and (m)inutes", "%1 day %2h %3m ago", "%1 days %2h %3m ago", d_abs, h, m);
         }
     }
 };

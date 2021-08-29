@@ -7,12 +7,12 @@
 
 #include "FacesPlugin.h"
 
-#include "SensorDataModel.h"
-#include "SensorTreeModel.h"
-#include "Sensor.h"
-#include "SensorFace_p.h"
-#include "SensorFaceController.h"
 #include "FaceLoader.h"
+#include "Sensor.h"
+#include "SensorDataModel.h"
+#include "SensorFaceController.h"
+#include "SensorFace_p.h"
+#include "SensorTreeModel.h"
 
 #include <KDeclarative/ConfigPropertyMap>
 
@@ -26,7 +26,11 @@ void FacesPlugin::registerTypes(const char *uri)
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.ksysguard.faces"));
 
     qmlRegisterType<KSysGuard::SensorFace>(uri, 1, 0, "AbstractSensorFace");
-    qmlRegisterUncreatableType<KSysGuard::SensorFaceController>(uri, 1, 0, "SensorFaceController", QStringLiteral("It's not possible to create objects of type SensorFaceController"));
+    qmlRegisterUncreatableType<KSysGuard::SensorFaceController>(uri,
+                                                                1,
+                                                                0,
+                                                                "SensorFaceController",
+                                                                QStringLiteral("It's not possible to create objects of type SensorFaceController"));
     qmlRegisterAnonymousType<KDeclarative::ConfigPropertyMap>(uri, 1);
     qmlRegisterType<QTransposeProxyModel>("org.kde.ksysguard.faces.private", 1, 0, "QTransposeProxyModel");
 

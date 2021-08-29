@@ -16,7 +16,6 @@
 
 namespace KSysGuard
 {
-
 class SensorObject;
 
 /**

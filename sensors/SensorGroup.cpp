@@ -6,20 +6,20 @@
 
 #include "SensorGroup_p.h"
 
-#include <QRegularExpression>
-#include <QDebug>
 #include <KLocalizedString>
+#include <QDebug>
+#include <QRegularExpression>
 
 namespace KSysGuard
 {
-
 SensorGroup::SensorGroup()
 {
     retranslate();
 }
 
 SensorGroup::~SensorGroup()
-{}
+{
+}
 
 void SensorGroup::retranslate()
 {
@@ -64,7 +64,6 @@ void SensorGroup::retranslate()
 
 QString SensorGroup::groupRegexForId(const QString &key)
 {
-
     QRegularExpression cpuExpr(QStringLiteral("cpu/cpu\\d+/(.*)"));
     QRegularExpression netExpr(QStringLiteral("network/(?!all).*/(.*)$"));
     QRegularExpression partitionsExpr(QStringLiteral("partitions/(?!all).*/(.*)$"));

@@ -7,8 +7,8 @@
 
 #include "Sensor.h"
 
-#include <optional>
 #include <chrono>
+#include <optional>
 
 #include <QEvent>
 
@@ -18,7 +18,6 @@
 #include "Sensor.h"
 #include "SensorDaemonInterface_p.h"
 #include "SensorQuery.h"
-
 
 using namespace KSysGuard;
 namespace chrono = std::chrono;
@@ -203,7 +202,7 @@ void Sensor::setEnabled(bool newEnabled)
 
 uint Sensor::updateInterval() const
 {
-    //TODO: Make this dynamic once the backend supports that.
+    // TODO: Make this dynamic once the backend supports that.
     return BackendUpdateInterval;
 }
 

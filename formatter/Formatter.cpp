@@ -11,9 +11,9 @@
 
 #include <KLocalizedString>
 
+#include <QFontMetrics>
 #include <QLocale>
 #include <QTime>
-#include <QFontMetrics>
 
 #include <cmath>
 
@@ -30,7 +30,6 @@
 
 namespace KSysGuard
 {
-
 // TODO: Is there a bit nicer way to handle formatting?
 
 static KLocalizedString unitFormat(Unit unit)

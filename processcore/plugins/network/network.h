@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <processcore/process_data_provider.h>
 #include <processcore/process_attribute.h>
+#include <processcore/process_data_provider.h>
 
 class QProcess;
 

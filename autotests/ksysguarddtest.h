@@ -1,40 +1,42 @@
 #ifndef KSYSGUARD_KSYSGUARDDTEST_H
 #define KSYSGUARD_KSYSGUARDDTEST_H
 
-#include <QtTest>
 #include <Qt>
+#include <QtTest>
 
-#include <QObject>
-#include <QProcess>
-#include "ksgrd/SensorManager.h"
 #include "ksgrd/SensorAgent.h"
 #include "ksgrd/SensorClient.h"
+#include "ksgrd/SensorManager.h"
 #include <QDebug>
+#include <QObject>
+#include <QProcess>
 class SensorClientTest;
 
 class TestKsysguardd : public QObject
 {
     Q_OBJECT
-    private slots:
-        void init();
-        void cleanup();
-        void initTestCase();
-        void cleanupTestCase();
+private slots:
+    void init();
+    void cleanup();
+    void initTestCase();
+    void cleanupTestCase();
 
-        void testSetup();
-        void testFormatting_data();
-        void testFormatting();
-        void testQueueing();
-    private:
-        KSGRD::SensorManager manager;
-        SensorClientTest *client;
-        QSignalSpy *hostConnectionLostSpy;
-        QSignalSpy *updateSpy;
-        QSignalSpy *hostAddedSpy;
-        int nextId;
+    void testSetup();
+    void testFormatting_data();
+    void testFormatting();
+    void testQueueing();
+
+private:
+    KSGRD::SensorManager manager;
+    SensorClientTest *client;
+    QSignalSpy *hostConnectionLostSpy;
+    QSignalSpy *updateSpy;
+    QSignalSpy *hostAddedSpy;
+    int nextId;
 };
 struct Answer {
-    Answer() {
+    Answer()
+    {
         id = -1;
         isSensorLost = false;
     }
@@ -42,13 +44,14 @@ struct Answer {
     QList<QByteArray> answer;
     bool isSensorLost;
 };
-struct SensorClientTest : public KSGRD::SensorClient
-{
-    SensorClientTest() {
+struct SensorClientTest : public KSGRD::SensorClient {
+    SensorClientTest()
+    {
         isSensorLost = false;
         haveAnswer = false;
     }
-    virtual void answerReceived( int id, const QList<QByteArray>& answer_ ) {
+    virtual void answerReceived(int id, const QList<QByteArray> &answer_)
+    {
         Answer answer;
         answer.id = id;
         answer.answer = answer_;

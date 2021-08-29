@@ -7,9 +7,9 @@
 
 #include "ConnectionMapping.h"
 
+#include <charconv>
 #include <fstream>
 #include <iostream>
-#include <charconv>
 
 #include <dirent.h>
 #include <errno.h>
@@ -24,7 +24,7 @@
 
 using namespace std::string_literals;
 
-template <typename Key, typename Value>
+template<typename Key, typename Value>
 inline void cleanupOldEntries(const std::unordered_set<Key> &keys, std::unordered_map<Key, Value> &map)
 {
     for (auto itr = map.begin(); itr != map.end();) {
@@ -45,18 +45,18 @@ ConnectionMapping::inode_t toInode(const std::string_view &view)
     return std::numeric_limits<ConnectionMapping::inode_t>::max();
 }
 
-int parseInetDiagMesg(struct nl_msg *msg, void *arg) 
+int parseInetDiagMesg(struct nl_msg *msg, void *arg)
 {
-    auto self = static_cast<ConnectionMapping*>(arg);
+    auto self = static_cast<ConnectionMapping *>(arg);
     struct nlmsghdr *nlh = nlmsg_hdr(msg);
-    auto inetDiagMsg = static_cast<inet_diag_msg*>(nlmsg_data(nlh));
+    auto inetDiagMsg = static_cast<inet_diag_msg *>(nlmsg_data(nlh));
     Packet::Address localAddress;
     if (inetDiagMsg->idiag_family == AF_INET) {
         // I expected to need ntohl calls here and bewlow for src but comparing to values gathered
         // by parsing proc they are not needed and even produce wrong results
         localAddress.address[3] = inetDiagMsg->id.idiag_src[0];
-    } else if (inetDiagMsg->id.idiag_src[0] == 0 && inetDiagMsg->id.idiag_src[1] == 0 &&  inetDiagMsg->id.idiag_src[2] == 0xffff0000) {
-         // Some applications (like Steam) use ipv6 sockets with ipv4.
+    } else if (inetDiagMsg->id.idiag_src[0] == 0 && inetDiagMsg->id.idiag_src[1] == 0 && inetDiagMsg->id.idiag_src[2] == 0xffff0000) {
+        // Some applications (like Steam) use ipv6 sockets with ipv4.
         // This results in ipv4 addresses that end up in the tcp6 file.
         // They seem to start with 0000000000000000FFFF0000, so if we
         // detect that, assume it is ipv4-over-ipv6.

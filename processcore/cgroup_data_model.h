@@ -10,8 +10,8 @@
 
 #include "process_attribute_model.h"
 
-namespace KSysGuard {
-
+namespace KSysGuard
+{
 class CGroup;
 
 class CGroupDataModelPrivate;
@@ -36,7 +36,7 @@ class Q_DECL_EXPORT CGroupDataModel : public QAbstractItemModel
     /**
      * @copydoc ProcessDataModel::attributesModel
      */
-    Q_PROPERTY(QObject* attributesModel READ attributesModel CONSTANT)
+    Q_PROPERTY(QObject *attributesModel READ attributesModel CONSTANT)
     /**
      * @copydoc ProcessDataModel::enabled
      */

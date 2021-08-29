@@ -13,7 +13,10 @@ using namespace KSysGuard;
 class Q_DECL_HIDDEN FaceLoader::Private
 {
 public:
-    Private(FaceLoader *qq) : q(qq) { }
+    Private(FaceLoader *qq)
+        : q(qq)
+    {
+    }
     void setupController();
 
     FaceLoader *q;
@@ -32,7 +35,7 @@ public:
     bool showTitle = false;
 };
 
-FaceLoader::FaceLoader(QObject* parent)
+FaceLoader::FaceLoader(QObject *parent)
     : QObject(parent)
     , d(new Private{this})
 {
@@ -40,12 +43,12 @@ FaceLoader::FaceLoader(QObject* parent)
 
 FaceLoader::~FaceLoader() = default;
 
-SensorFaceController * FaceLoader::parentController() const
+SensorFaceController *FaceLoader::parentController() const
 {
     return d->parentController;
 }
 
-void FaceLoader::setParentController(SensorFaceController * newParentController)
+void FaceLoader::setParentController(SensorFaceController *newParentController)
 {
     if (newParentController == d->parentController) {
         return;
@@ -71,7 +74,7 @@ QString FaceLoader::faceId() const
     return d->faceId;
 }
 
-void FaceLoader::setFaceId(const QString & newFaceId)
+void FaceLoader::setFaceId(const QString &newFaceId)
 {
     if (newFaceId == d->faceId) {
         return;
@@ -90,7 +93,7 @@ QString FaceLoader::groupName() const
     return d->groupName;
 }
 
-void FaceLoader::setGroupName(const QString & newGroupName)
+void FaceLoader::setGroupName(const QString &newGroupName)
 {
     if (newGroupName == d->groupName) {
         return;
@@ -103,13 +106,12 @@ void FaceLoader::setGroupName(const QString & newGroupName)
     Q_EMIT groupNameChanged();
 }
 
-
 QJsonArray FaceLoader::sensors() const
 {
     return d->sensors;
 }
 
-void FaceLoader::setSensors(const QJsonArray & newSensors)
+void FaceLoader::setSensors(const QJsonArray &newSensors)
 {
     if (newSensors == d->sensors) {
         return;

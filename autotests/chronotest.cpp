@@ -4,14 +4,15 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include <QtTest>
-#include <QtCore>
 #include <QDebug>
+#include <QtCore>
+#include <QtTest>
 
 #include "chronotest.h"
 #include <processui/timeutil.h>
 
-void testChrono::testTimeMethods() {
+void testChrono::testTimeMethods()
+{
     qDebug() << "TimeUtil::systemUptimeSeconds()" << TimeUtil::systemUptimeSeconds();
     qDebug() << "TimeUtil::systemUptimeAbsolute()" << TimeUtil::systemUptimeAbsolute();
 }

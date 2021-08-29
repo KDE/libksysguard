@@ -7,8 +7,8 @@
 #pragma once
 
 // Own
-#include "formatter_export.h"
 #include "Unit.h"
+#include "formatter_export.h"
 
 // Qt
 #include <QString>
@@ -18,7 +18,6 @@ class KLocalizedString;
 
 namespace KSysGuard
 {
-
 /**
  * This enum type is used to specify format options.
  */
@@ -43,8 +42,7 @@ public:
      * @param unit The unit of the value.
      * @param targetPrefix Preferred metric prefix.
      */
-    static qreal scaleDownFactor(const QVariant &value, Unit unit,
-        MetricPrefix targetPrefix = MetricPrefixAutoAdjust);
+    static qreal scaleDownFactor(const QVariant &value, Unit unit, MetricPrefix targetPrefix = MetricPrefixAutoAdjust);
 
     /**
      * Returns localized string that is suitable for display.
@@ -53,8 +51,7 @@ public:
      * @param unit The unit of the value.
      * @param targetPrefix Preferred metric prefix.
      */
-    static KLocalizedString localizedString(const QVariant &value, Unit unit,
-        MetricPrefix targetPrefix = MetricPrefixAutoAdjust);
+    static KLocalizedString localizedString(const QVariant &value, Unit unit, MetricPrefix targetPrefix = MetricPrefixAutoAdjust);
 
     /**
      * Converts @p value to the appropriate displayable string.
@@ -66,9 +63,7 @@ public:
      * @param targetPrefix Preferred metric prefix.
      * @param options
      */
-    static QString formatValue(const QVariant &value, Unit unit,
-        MetricPrefix targetPrefix = MetricPrefixAutoAdjust,
-        FormatOptions options = FormatOptionNone);
+    static QString formatValue(const QVariant &value, Unit unit, MetricPrefix targetPrefix = MetricPrefixAutoAdjust, FormatOptions options = FormatOptionNone);
 
     /**
      * Returns a symbol that corresponds to the given @p unit.

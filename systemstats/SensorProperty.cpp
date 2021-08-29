@@ -22,7 +22,6 @@ public:
     int subscribers = 0;
 };
 
-
 SensorProperty::SensorProperty(const QString &id, SensorObject *parent)
     : SensorProperty(id, QString(), parent)
 {

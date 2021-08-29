@@ -18,13 +18,12 @@
 
 #include "Sensor.h"
 #include "SensorDaemonInterface_p.h"
-#include "SensorQuery.h"
 #include "SensorGroup_p.h"
+#include "SensorQuery.h"
 
 using namespace KSysGuard;
 
-struct Q_DECL_HIDDEN SensorTreeItem
-{
+struct Q_DECL_HIDDEN SensorTreeItem {
     SensorTreeItem *parent = nullptr;
     QString segment;
     QMap<QString, SensorTreeItem *> children;
@@ -42,7 +41,8 @@ struct Q_DECL_HIDDEN SensorTreeItem
         return -1;
     }
 
-    inline SensorTreeItem *itemAt(int index) {
+    inline SensorTreeItem *itemAt(int index)
+    {
         int currentIndex = 0;
         for (auto child : qAsConst(children)) {
             if (currentIndex++ == index) {
@@ -108,7 +108,7 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
         } else {
             m_groupMatches[sensorIdExpr] = 1;
         }
-        
+
         if (m_groupMatches[sensorIdExpr] == 2) {
             SensorInfo newInfo;
             newInfo.name = m_sensorGroup->sensorNameForRegEx(sensorIdExpr);
@@ -117,7 +117,7 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
             newInfo.unit = info.unit;
             newInfo.min = info.min;
             newInfo.max = info.max;
-            
+
             addSensor(sensorIdExpr, newInfo);
         }
     }
@@ -291,7 +291,7 @@ QVariant SensorTreeModel::data(const QModelIndex &index, int role) const
         }
 
         return d->m_sensorGroup->segmentNameForRegEx(item->segment);
-    // Only leaf nodes are valid sensors
+        // Only leaf nodes are valid sensors
     } else if (role == SensorId) {
         if (rowCount(index)) {
             return QString();

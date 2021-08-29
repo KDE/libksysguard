@@ -56,7 +56,7 @@ public:
     };
     Q_ENUM(Roles)
 
-    SensorUnitModel(QObject* parent = nullptr);
+    SensorUnitModel(QObject *parent = nullptr);
     ~SensorUnitModel() override;
 
     QStringList sensors() const;
@@ -68,8 +68,8 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
-    virtual int rowCount(const QModelIndex& parent) const override;
-    virtual QVariant data(const QModelIndex& index, int role) const override;
+    virtual int rowCount(const QModelIndex &parent) const override;
+    virtual QVariant data(const QModelIndex &index, int role) const override;
 
 private:
     void metaDataChanged(const QString &id, const SensorInfo &info);
