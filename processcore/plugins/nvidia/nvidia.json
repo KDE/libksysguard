@@ -9,6 +9,7 @@
         "Description[eu]": "Nvidia txarteletarako GPU baliabideen prozesukako estatistikak",
         "Description[fi]": "Nvidia-korttien prosessikohtaisten GPU-resurssien tilastot",
         "Description[fr]": "Statistiques des ressources « GPU » par processus pour des cartes nVidia.",
+        "Description[ia]": "Statisticas de ressources de GPU  per-processo  per cartas Nvidia",
         "Description[it]": "Statistiche per processo delle risorse GPU per le schede Nvidia",
         "Description[ko]": "Nvidia 카드의 프로세스별 GPU 자원 통계",
         "Description[lt]": "Atskirų programų grafikos procesoriaus išteklių naudojimo statistika, skirta „Nvidia“ plokštėms",
