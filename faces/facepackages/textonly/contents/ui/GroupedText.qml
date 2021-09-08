@@ -38,6 +38,8 @@ ColumnLayout {
 
     readonly property bool hasGroups: showGroups && root.totalSensorIds.length > 0
 
+    Layout.minimumHeight: hasGroups ? Kirigami.Units.gridUnit * 3 : Kirigami.Units.gridUnit
+
     Repeater {
         model: root.hasGroups ? root.totalSensorIds : 1
 
