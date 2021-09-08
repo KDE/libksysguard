@@ -36,8 +36,10 @@ ColumnLayout {
         return w
     }
 
+    readonly property bool hasGroups: showGroups && root.totalSensorIds.length > 0
+
     Repeater {
-        model: root.showGroups ? root.totalSensorIds : 1
+        model: root.hasGroups ? root.totalSensorIds : 1
 
         ColumnLayout {
             property string title
@@ -68,7 +70,7 @@ ColumnLayout {
                 verticalSpacing: Kirigami.Units.smallSpacing
 
                 model: {
-                    if (!root.showGroups) {
+                    if (!root.hasGroups) {
                         return root.highPrioritySensors.concat(root.lowPrioritySensors)
                     }
 
@@ -105,7 +107,7 @@ ColumnLayout {
 
             Sensors.Sensor {
                 id: groupSensor
-                sensorId: root.showGroups ? modelData : ""
+                sensorId: root.hasGroups ? modelData : ""
                 updateRateLimit: root.updateRateLimit
             }
         }
