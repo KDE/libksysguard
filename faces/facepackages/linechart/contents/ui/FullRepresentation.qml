@@ -51,6 +51,7 @@ Faces.SensorFace {
             Layout.fillHeight: true
             Layout.topMargin: showYAxisLabels ? axisMetrics.height / 2 : 0
             Layout.bottomMargin: Layout.topMargin
+            Layout.minimumHeight: compactRepresentation.Layout.minimumHeight
             Charts.AxisLabels {
                 id: axisLabels
                 visible: showYAxisLabels
