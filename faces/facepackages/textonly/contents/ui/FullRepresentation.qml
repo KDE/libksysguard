@@ -42,7 +42,11 @@ Faces.SensorFace {
             }
         }
 
-        Item { Layout.fillWidth: true; Layout.fillHeight: true; Layout.minimumHeight: Kirigami.Units.largeSpacing }
+        Item {
+            Layout.fillWidth: true;
+            Layout.fillHeight: true;
+            Layout.minimumHeight: heading.visible ? Kirigami.Units.largeSpacing : 0
+        }
 
         GroupedText {
             totalSensorIds: root.controller.totalSensors
@@ -61,7 +65,7 @@ Faces.SensorFace {
             // Trick ColumnLayout into layouting this spacer and the one above
             // the same height. Apparently if only minimumHeight is set
             // ColumnLayout will still use that as "weight" for sizing.
-            Layout.preferredHeight: Kirigami.Units.largeSpacing
+            Layout.preferredHeight: heading.visible ? Kirigami.Units.largeSpacing : 0
         }
     }
 }
