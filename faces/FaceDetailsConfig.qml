@@ -22,6 +22,11 @@ Loader {
 
     signal configurationChanged
 
+    property color defaultBackgroundColor: Qt.rgba(Kirigami.Theme.textColor.r,
+                                                   Kirigami.Theme.textColor.g,
+                                                   Kirigami.Theme.textColor.b,
+                                                   0.2)
+
     function saveConfig() {
         if (item.saveConfig) {
             item.saveConfig()

@@ -32,6 +32,14 @@ Faces.AbstractSensorFace {
 
     property alias colorSource: colorSource
 
+    property color backgroundColor: controller.faceConfiguration.backgroundColorSet ?
+                                    controller.faceConfiguration.backgroundColor : defaultBackgroundColor
+
+    property color defaultBackgroundColor: Qt.rgba(Kirigami.Theme.textColor.r,
+                                                   Kirigami.Theme.textColor.g,
+                                                   Kirigami.Theme.textColor.b,
+                                                   0.2)
+
     Charts.MapProxySource {
         id: colorSource
         source: Charts.ArraySource {
