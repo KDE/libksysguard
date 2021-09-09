@@ -21,6 +21,7 @@ import org.kde.quickcharts.controls 1.0 as ChartControls
 
 Faces.SensorFace {
     id: root
+
     contentItem: ColumnLayout {
         PieChart {
             Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
@@ -28,6 +29,8 @@ Faces.SensorFace {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
             updateRateLimit: root.controller.updateRateLimit
+
+            backgroundColor: root.backgroundColor
         }
         QQC2.Label {
             id: label

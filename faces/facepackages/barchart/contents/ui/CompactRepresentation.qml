@@ -21,7 +21,9 @@ import org.kde.quickcharts.controls 1.0 as ChartControls
 
 Faces.SensorFace {
     id: root
+
     Layout.minimumWidth: formFactor == Faces.SensorFace.Horizontal ? Kirigami.Units.gridUnit / 2 * barChart.barCount : 1
+
     contentItem: ColumnLayout {
         BarChart {
             id: barChart
@@ -30,6 +32,7 @@ Faces.SensorFace {
             Layout.alignment: Qt.AlignCenter
             updateRateLimit: root.controller.updateRateLimit
             controller: root.controller
+            backgroundColor: root.backgroundColor
         }
         QQC2.Label {
             id: label

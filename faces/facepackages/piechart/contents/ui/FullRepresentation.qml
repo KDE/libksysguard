@@ -53,6 +53,7 @@ Faces.SensorFace {
             Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
             Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
             updateRateLimit: root.controller.updateRateLimit
+            backgroundColor: root.backgroundColor
         }
 
         Faces.ExtendedLegend {

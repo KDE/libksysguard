@@ -30,6 +30,9 @@ Kirigami.FormLayout {
     property alias cfg_rangeToUnit: rangeToSpin.unit
     property alias cfg_rangeToMultiplier: rangeToSpin.multiplier
 
+    property alias cfg_backgroundColorSet: backgroundSelector.colorSet
+    property alias cfg_backgroundColor: backgroundSelector.color
+
     QQC2.CheckBox {
         id: showSensorsLegendCheckbox
         text: i18n("Show Sensors Legend")
@@ -63,6 +66,14 @@ Kirigami.FormLayout {
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
         sensors: controller.highPrioritySensorIds
+    }
+
+    Faces.BackgroundColorSelector {
+        id: backgroundSelector
+
+        Kirigami.FormData.label: i18n("Background Color:")
+
+        defaultColor: Qt.rgba(0, 0, 0, 0)
     }
 }
 

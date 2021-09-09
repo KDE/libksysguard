@@ -21,7 +21,7 @@ Rectangle {
     id: bar
     Layout.fillWidth: true
     implicitHeight: Math.round(Kirigami.Units.gridUnit / 3)
-    color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 40})
+
     radius: height/2
     property Sensors.Sensor sensor
 

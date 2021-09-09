@@ -34,6 +34,7 @@ Faces.SensorFace {
                 Layout.preferredHeight: Math.min(implicitHeight, Math.max(root.height / root.controller.highPrioritySensorIds.length - Kirigami.Units.smallSpacing * (root.controller.highPrioritySensorIds.length - 1), Kirigami.Units.smallSpacing))
                 opacity: y + height <= root.height
                 sensor: sensor
+                color: root.backgroundColor
                 Sensors.Sensor {
                     id: sensor
                     sensorId: modelData

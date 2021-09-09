@@ -24,6 +24,7 @@ ChartControls.PieChartControl {
     property alias headingSensor: sensor.sensorId
     property alias sensors: sensorsModel.sensors
     property alias sensorsModel: sensorsModel
+    property color backgroundColor
 
     property int updateRateLimit
 
@@ -43,6 +44,7 @@ ChartControls.PieChartControl {
     chart.smoothEnds: root.controller.faceConfiguration.smoothEnds
     chart.fromAngle: root.controller.faceConfiguration.fromAngle
     chart.toAngle: root.controller.faceConfiguration.toAngle
+    chart.backgroundColor: chartControl.backgroundColor
 
     range {
         from: chartControl.rangeFrom

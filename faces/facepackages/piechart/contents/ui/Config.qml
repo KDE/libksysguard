@@ -4,11 +4,12 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.2 as QQC2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15 as QQC2
 
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kquickcontrols 2.0 as KQuickControls
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
 import org.kde.ksysguard.faces 1.0 as Faces
@@ -28,6 +29,9 @@ Kirigami.FormLayout {
     property alias cfg_rangeTo: rangeToSpin.value
     property alias cfg_rangeToUnit: rangeToSpin.unit
     property alias cfg_rangeToMultiplier: rangeToSpin.multiplier
+
+    property alias cfg_backgroundColorSet: backgroundSelector.colorSet
+    property alias cfg_backgroundColor: backgroundSelector.color
 
     QQC2.CheckBox {
         id: showSensorsLegendCheckbox
@@ -81,5 +85,13 @@ Kirigami.FormLayout {
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
         sensors: controller.highPrioritySensorIds
+    }
+
+    Faces.BackgroundColorSelector {
+        id: backgroundSelector
+
+        Kirigami.FormData.label: i18n("Background Color:")
+
+        defaultColor: defaultBackgroundColor // From parent Loader
     }
 }

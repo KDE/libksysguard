@@ -39,6 +39,20 @@
         <entry name="rangeAuto" type="Bool">
             <default>true</default>
         </entry>
+        <!--
+        We want to use a fully transparent colour as default for bar charts,
+        since having a background would make it look rather ugly in a lot of
+        cases. However, overriding the default background in the face would
+        mean there's no easy way of using a themed color for the background. So
+        instead, set a default color here so a user can reset the background to
+        get a themed color.
+        -->
+        <entry name="backgroundColorSet" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="backgroundColor" type="Color">
+            <default>0,0,0,0</default>
+        </entry>
     </group>
 
 </kcfg>

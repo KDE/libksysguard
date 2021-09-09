@@ -91,6 +91,8 @@ Faces.SensorFace {
 
                 controller: root.controller
 
+                backgroundColor: root.backgroundColor
+
                 Charts.GridLines {
                     id: horizontalLines
                     visible: showGridLines

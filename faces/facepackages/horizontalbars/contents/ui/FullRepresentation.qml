@@ -53,6 +53,7 @@ Faces.SensorFace {
                 spacing: 0
                 Bar {
                     sensor: sensor
+                    color: root.backgroundColor
                 }
                 ChartsControls.LegendDelegate {
                     readonly property bool isTextOnly: index >= root.controller.highPrioritySensorIds.length
