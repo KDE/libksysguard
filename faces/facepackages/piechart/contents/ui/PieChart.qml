@@ -19,7 +19,7 @@ import org.kde.quickcharts.controls 1.0 as ChartControls
 
 
 ChartControls.PieChartControl {
-    id: chart
+    id: chartControl
 
     property alias headingSensor: sensor.sensorId
     property alias sensors: sensorsModel.sensors
@@ -45,18 +45,16 @@ ChartControls.PieChartControl {
     chart.toAngle: root.controller.faceConfiguration.toAngle
 
     range {
-        from: chart.rangeFrom
-        to: chart.rangeTo
+        from: chartControl.rangeFrom
+        to: chartControl.rangeTo
         automatic: root.controller.faceConfiguration.rangeAuto
     }
-
-    chart.backgroundColor: Qt.rgba(0.0, 0.0, 0.0, 0.2)
 
     valueSources: Charts.ModelSource {
         model: Sensors.SensorDataModel {
             id: sensorsModel
             sensors: root.controller.highPrioritySensorIds
-            updateRateLimit: chart.updateRateLimit
+            updateRateLimit: chartControl.updateRateLimit
             sensorLabels: root.controller.sensorLabels
         }
         roleName: "Value"
@@ -77,7 +75,7 @@ ChartControls.PieChartControl {
     Sensors.Sensor {
         id: sensor
         sensorId: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
-        updateRateLimit: chart.updateRateLimit
+        updateRateLimit: chartControl.updateRateLimit
     }
 
     UsedTotalDisplay {
@@ -86,8 +84,9 @@ ChartControls.PieChartControl {
         usedSensor: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
         totalSensor: root.controller.totalSensors.length > 1 ? root.controller.totalSensors[1] : ""
 
-        contentMargin: chart.chart.thickness
-        updateRateLimit: chart.updateRateLimit
+        contentMargin: chartControl.chart.thickness
+        updateRateLimit: chartControl.updateRateLimit
+
         sensorLabels: root.controller.sensorLabels
     }
 }
