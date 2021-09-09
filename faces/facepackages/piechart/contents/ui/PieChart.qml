@@ -88,6 +88,7 @@ ChartControls.PieChartControl {
 
         contentMargin: chart.chart.thickness
         updateRateLimit: chart.updateRateLimit
+        sensorLabels: root.controller.sensorLabels
     }
 }
 

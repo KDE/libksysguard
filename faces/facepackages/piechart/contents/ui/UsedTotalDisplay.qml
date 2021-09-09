@@ -19,6 +19,8 @@ Item {
     property alias usedSensor: usedSensorObject.sensorId
     property alias totalSensor: totalSensorObject.sensorId
 
+    property var sensorLabels: []
+
     property int updateRateLimit
 
     property real contentMargin: 10
@@ -36,7 +38,7 @@ Item {
 
             Layout.fillWidth: true
 
-            text: chart.sensorsModel.sensorLabels[usedSensor] ||  (usedSensorObject.name + (usedSensorObject.shortName.length > 0 ? "\x9C" + usedSensorObject.shortName : ""))
+            text: root.sensorLabels[usedSensor] ||  (usedSensorObject.name + (usedSensorObject.shortName.length > 0 ? "\x9C" + usedSensorObject.shortName : ""))
             horizontalAlignment: Text.AlignHCenter
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
@@ -77,7 +79,7 @@ Item {
 
             Layout.fillWidth: true
 
-            text: chart.sensorsModel.sensorLabels[totalSensor] || (totalSensorObject.name + (totalSensorObject.shortName.length > 0 ? "\x9C" + totalSensorObject.shortName : ""))
+            text: root.sensorLabels[totalSensor] || (totalSensorObject.name + (totalSensorObject.shortName.length > 0 ? "\x9C" + totalSensorObject.shortName : ""))
             horizontalAlignment: Text.AlignHCenter
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
