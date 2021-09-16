@@ -424,6 +424,7 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget *parent, const QString &hostN
         addByDesktopName(ksysguardDesktopName);
     }
 
+    addByDesktopName(QStringLiteral("org.kde.plasma-systemmonitor"));
     addByDesktopName(QStringLiteral("org.kde.ksystemlog"));
     addByDesktopName(QStringLiteral("org.kde.kinfocenter"));
     addByDesktopName(QStringLiteral("org.kde.filelight"));
