@@ -26,7 +26,7 @@ class SYSTEMSTATS_EXPORT SensorPlugin : public QObject
     Q_OBJECT
 public:
     SensorPlugin(QObject *parent, const QVariantList &args);
-    ~SensorPlugin();
+    ~SensorPlugin() override;
 
     /**
       A list of all containers provided by this plugin

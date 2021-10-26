@@ -27,7 +27,7 @@ class SYSTEMSTATS_EXPORT SensorContainer : public QObject
     Q_OBJECT
 public:
     explicit SensorContainer(const QString &id, const QString &name, SensorPlugin *parent);
-    ~SensorContainer();
+    ~SensorContainer() override;
 
     /**
      * A computer readable ID of this group of sensors

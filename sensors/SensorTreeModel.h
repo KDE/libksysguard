@@ -34,7 +34,7 @@ public:
     Q_ENUM(AdditionalRoles)
 
     explicit SensorTreeModel(QObject *parent = nullptr);
-    virtual ~SensorTreeModel();
+    ~SensorTreeModel() override;
 
     QHash<int, QByteArray> roleNames() const override;
     QVariant headerData(int section, Qt::Orientation, int role) const override;

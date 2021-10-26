@@ -51,7 +51,7 @@ class Q_DECL_EXPORT CGroupDataModel : public QAbstractItemModel
 public:
     CGroupDataModel(QObject *parent = nullptr);
     CGroupDataModel(const QString &root, QObject *parent = nullptr);
-    ~CGroupDataModel();
+    ~CGroupDataModel() override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;

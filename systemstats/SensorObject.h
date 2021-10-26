@@ -30,7 +30,7 @@ class SYSTEMSTATS_EXPORT SensorObject : public QObject
 public:
     explicit SensorObject(const QString &id, const QString &name, SensorContainer *parent = nullptr);
     explicit SensorObject(const QString &id, SensorContainer *parent = nullptr);
-    ~SensorObject();
+    ~SensorObject() override;
 
     QString id() const;
     QString path() const;

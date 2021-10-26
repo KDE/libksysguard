@@ -36,7 +36,7 @@ public:
     Q_ENUM(AdditionalRoles)
 
     FacesModel(QObject *parent = nullptr);
-    ~FacesModel() = default;
+    ~FacesModel() override = default;
 
     Q_INVOKABLE void reload();
     Q_INVOKABLE QString pluginId(int row);
@@ -52,7 +52,7 @@ public:
     Q_ENUM(AdditionalRoles)
 
     PresetsModel(QObject *parent = nullptr);
-    ~PresetsModel() = default;
+    ~PresetsModel() override = default;
 
     Q_INVOKABLE void reload();
 

@@ -172,7 +172,7 @@ public:
      * @param engine This engine will be used for creating the Qml components
      */
     SensorFaceController(KConfigGroup &config, QQmlEngine *engine);
-    ~SensorFaceController();
+    ~SensorFaceController() override;
 
     /**
      * Retrieve the KConfigGroup this controller is using to store configuration.

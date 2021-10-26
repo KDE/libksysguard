@@ -70,7 +70,7 @@ public:
     Q_ENUM(FormFactor)
 
     SensorFace(QQuickItem *parent = nullptr);
-    ~SensorFace();
+    ~SensorFace() override;
 
     SensorFaceController *controller() const;
     // Not writable from QML

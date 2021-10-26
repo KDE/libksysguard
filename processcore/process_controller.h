@@ -34,7 +34,7 @@ class Q_DECL_EXPORT ProcessController : public QObject
 
 public:
     ProcessController(QObject *parent = nullptr);
-    ~ProcessController();
+    ~ProcessController() override;
 
     /**
      * A signal that can be sent to a process.

@@ -24,7 +24,7 @@ class SYSTEMSTATS_EXPORT SysFsSensor : public SensorProperty
 
 public:
     SysFsSensor(const QString &id, const QString &path, SensorObject *parent);
-    ~SysFsSensor();
+    ~SysFsSensor() override;
 
     /**
      * Set the function used to convert the data from sysfs to the value of this sensor.

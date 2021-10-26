@@ -95,7 +95,7 @@ public:
     Q_ENUM(AdditionalRoles)
 
     explicit SensorDataModel(const QStringList &sensorIds = {}, QObject *parent = nullptr);
-    virtual ~SensorDataModel();
+    ~SensorDataModel() override;
 
     QHash<int, QByteArray> roleNames() const override;
 
