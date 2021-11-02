@@ -35,10 +35,9 @@ public:
     };
 
     ConnectionMapping();
+    ~ConnectionMapping();
 
     PacketResult pidForPacket(const Packet &packet);
-
-    void stop();
 
 private:
     struct State {
