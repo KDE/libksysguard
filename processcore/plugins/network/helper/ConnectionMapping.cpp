@@ -82,8 +82,18 @@ int parseInetDiagMesg(struct nl_msg *msg, void *arg)
 
 ConnectionMapping::ConnectionMapping()
 {
+    m_running = true;
     m_thread = std::thread(&ConnectionMapping::loop, this);
 }
+
+ConnectionMapping::~ConnectionMapping()
+{
+    m_running = false;
+    if (m_thread.joinable()) {
+        m_thread.join();
+    }
+}
+
 
 ConnectionMapping::PacketResult ConnectionMapping::pidForPacket(const Packet &packet)
 {
@@ -116,22 +126,12 @@ ConnectionMapping::PacketResult ConnectionMapping::pidForPacket(const Packet &pa
     return result;
 }
 
-void ConnectionMapping::stop()
-{
-    m_running = false;
-    if (m_thread.joinable()) {
-        m_thread.join();
-    }
-}
-
 void ConnectionMapping::loop()
 {
     std::unique_ptr<nl_sock, decltype(&nl_socket_free)> socket{nl_socket_alloc(), nl_socket_free};
 
     nl_connect(socket.get(), NETLINK_SOCK_DIAG);
     nl_socket_modify_cb(socket.get(), NL_CB_VALID, NL_CB_CUSTOM, &parseInetDiagMesg, this);
-
-    m_running = true;
 
     while (m_running) {
         m_seenAddresses.clear();
