@@ -225,6 +225,9 @@ void ConnectionMapping::parsePid()
             // /proc/PID/fd contains symlinks for each open fd in the process.
             // The symlink target contains information about what the fd is about.
             auto size = readlinkat(dirfd(fdDir), fd->d_name, buffer.data(), 99);
+            if (size < 0) {
+                continue;
+            }
             buffer[size] = '\0';
 
             auto view = std::string_view(buffer.data(), 100);
