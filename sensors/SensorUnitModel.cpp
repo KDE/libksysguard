@@ -7,13 +7,14 @@
 #include "SensorUnitModel.h"
 
 #include <optional>
+#include <array>
 
 #include <QScopeGuard>
 
 #include "formatter/Formatter.h"
 #include "formatter/Unit.h"
 #include "systemstats/SensorInfo.h"
-
+    
 #include "SensorDaemonInterface_p.h"
 
 using namespace KSysGuard;
