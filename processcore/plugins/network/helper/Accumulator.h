@@ -27,10 +27,9 @@ public:
     using PidDataCounterHash = std::unordered_map<int, InboundOutboundData>;
 
     Accumulator(std::shared_ptr<Capture> capture, std::shared_ptr<ConnectionMapping> mapping);
+    ~Accumulator();
 
     PidDataCounterHash data();
-
-    void stop();
 
 private:
     void addData(Packet::Direction direction, const Packet &packet, int pid);

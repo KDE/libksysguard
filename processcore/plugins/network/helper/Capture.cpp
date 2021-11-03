@@ -32,7 +32,11 @@ Capture::Capture(const std::string &interface)
 Capture::~Capture()
 {
     if (m_pcap) {
-        stop();
+        pcap_breakloop(m_pcap);
+        if (m_thread.joinable()) {
+            m_thread.join();
+        }
+        pcap_close(m_pcap);
     }
 }
 
@@ -71,16 +75,6 @@ bool Capture::start()
     m_thread = std::thread{&Capture::loop, this};
 
     return true;
-}
-
-void Capture::stop()
-{
-    pcap_breakloop(m_pcap);
-    if (m_thread.joinable()) {
-        m_thread.join();
-    }
-    pcap_close(m_pcap);
-    m_pcap = nullptr;
 }
 
 std::string Capture::lastError() const

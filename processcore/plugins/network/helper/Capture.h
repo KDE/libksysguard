@@ -24,7 +24,6 @@ public:
     ~Capture();
 
     bool start();
-    void stop();
     std::string lastError() const;
     void reportStatistics();
     Packet nextPacket();

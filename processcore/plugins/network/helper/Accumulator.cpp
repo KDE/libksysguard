@@ -20,6 +20,14 @@ Accumulator::Accumulator(std::shared_ptr<Capture> capture, std::shared_ptr<Conne
     m_thread = std::thread{&Accumulator::loop, this};
 }
 
+Accumulator::~Accumulator()
+{
+    m_running = false;
+    if (m_thread.joinable()) {
+        m_thread.join();
+    }
+}
+
 Accumulator::PidDataCounterHash Accumulator::data()
 {
     std::lock_guard<std::mutex> lock{m_mutex};
@@ -41,14 +49,6 @@ Accumulator::PidDataCounterHash Accumulator::data()
     });
 
     return tmp;
-}
-
-void Accumulator::stop()
-{
-    m_running = false;
-    if (m_thread.joinable()) {
-        m_thread.join();
-    }
 }
 
 void Accumulator::loop()
