@@ -61,6 +61,19 @@ public:
         return QVariant::fromValue(m_extractFunc(process));
     }
 
+    QVariant cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process *> &groupProcesses) const override
+    {
+        switch (m_groupPolicy) {
+        case Accumulate:
+            return ProcessAttribute::cgroupData(cgroup, groupProcesses);
+        case Average:
+            return ProcessAttribute::cgroupData(cgroup, groupProcesses).toDouble() / groupProcesses.size();
+        case ForwardFirstEntry:
+            return groupProcesses.isEmpty() ? QVariant() : data(groupProcesses.first());
+        }
+        Q_UNREACHABLE();
+    }
+
 private:
     std::function<T(KSysGuard::Process *)> m_extractFunc;
     KSysGuard::Process::Change m_changeFlag;
