@@ -196,7 +196,7 @@ bool Processes::updateProcessInfo(Process *ps)
         int elapsedTime = ps->elapsedTimeMilliSeconds();
         ps->setElapsedTimeMilliSeconds(d->mLastUpdated.elapsed());
         elapsedTime = ps->elapsedTimeMilliSeconds() - elapsedTime + d->mElapsedTimeMilliSeconds;
-        if (elapsedTime) {
+        if (elapsedTime > 0) {
             ps->setUserUsage((int)(((ps->userTime() - oldUserTime) * 1000.0) / elapsedTime));
             ps->setSysUsage((int)(((ps->sysTime() - oldSysTime) * 1000.0) / elapsedTime));
         }
