@@ -141,6 +141,10 @@ SensorsFeatureSensor::SensorsFeatureSensor(const QString &id,
 
 void SensorsFeatureSensor::update()
 {
+    if (!isSubscribed()) {
+        return;
+    }
+
     double value;
     if (sensors_get_value(m_chipName, m_valueFeature->number, &value) < 0) {
         setValue(QVariant());
