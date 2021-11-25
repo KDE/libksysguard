@@ -35,7 +35,6 @@ public:
         mIsLocalHost = true;
         mProcesses.insert(-1, &mFakeProcess);
         mElapsedTimeMilliSeconds = 0;
-        mHavePreviousIoValues = false;
         mUpdateFlags = {};
         mUsingHistoricalData = false;
         mLastError = Error::NoError;
@@ -59,7 +58,6 @@ public:
     long mElapsedTimeMilliSeconds; ///< The number of milliseconds  (1000ths of a second) that passed since the last update
 
     Processes::UpdateFlags mUpdateFlags;
-    bool mHavePreviousIoValues; ///< This is whether we updated the IO value on the last update
     bool mUsingHistoricalData; ///< Whether to return historical data for updateProcess() etc
     Processes *q;
 
@@ -201,18 +199,22 @@ bool Processes::updateProcessInfo(Process *ps)
             ps->setSysUsage((int)(((ps->sysTime() - oldSysTime) * 1000.0) / elapsedTime));
         }
 #endif
+
+        static auto calculateRate = [](qlonglong current, qlonglong previous, int elapsedTime) {
+            if (elapsedTime <= 0 || previous <= 0) {
+                return 0.0;
+            }
+            return (current - previous) * 1000.0 / elapsedTime;
+        };
+
         if (d->mUpdateFlags.testFlag(Processes::IOStatistics)) {
-            if (d->mHavePreviousIoValues) {
-                ps->setIoCharactersReadRate((ps->ioCharactersRead() - oldIoCharactersRead) * 1000.0 / elapsedTime);
-                ps->setIoCharactersWrittenRate((ps->ioCharactersWritten() - oldIoCharactersWritten) * 1000.0 / elapsedTime);
-                ps->setIoReadSyscallsRate((ps->ioReadSyscalls() - oldIoReadSyscalls) * 1000.0 / elapsedTime);
-                ps->setIoWriteSyscallsRate((ps->ioWriteSyscalls() - oldIoWriteSyscalls) * 1000.0 / elapsedTime);
-                ps->setIoCharactersActuallyReadRate((ps->ioCharactersActuallyRead() - oldIoCharactersActuallyRead) * 1000.0 / elapsedTime);
-                ps->setIoCharactersActuallyWrittenRate((ps->ioCharactersActuallyWritten() - oldIoCharactersActuallyWritten) * 1000.0 / elapsedTime);
-            } else
-                d->mHavePreviousIoValues = true;
-        } else if (d->mHavePreviousIoValues) {
-            d->mHavePreviousIoValues = false;
+            ps->setIoCharactersReadRate(calculateRate(ps->ioCharactersRead(), oldIoCharactersRead, elapsedTime));
+            ps->setIoCharactersWrittenRate(calculateRate(ps->ioCharactersWritten(), oldIoCharactersWritten, elapsedTime));
+            ps->setIoReadSyscallsRate(calculateRate(ps->ioReadSyscalls(), oldIoReadSyscalls, elapsedTime));
+            ps->setIoWriteSyscallsRate(calculateRate(ps->ioWriteSyscalls(), oldIoWriteSyscalls, elapsedTime));
+            ps->setIoCharactersActuallyReadRate(calculateRate(ps->ioCharactersActuallyRead(), oldIoCharactersActuallyRead, elapsedTime));
+            ps->setIoCharactersActuallyWrittenRate(calculateRate(ps->ioCharactersActuallyWritten(), oldIoCharactersActuallyWritten, elapsedTime));
+        } else {
             ps->setIoCharactersReadRate(0);
             ps->setIoCharactersWrittenRate(0);
             ps->setIoReadSyscallsRate(0);
