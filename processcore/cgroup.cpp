@@ -86,7 +86,7 @@ Q_GLOBAL_STATIC(CGroupSystemInformation, s_cGroupSystemInformation)
 // - app[-<launcher>]-<ApplicationID>-<RANDOM>.scope
 // - app[-<launcher>]-<ApplicationID>[@<RANDOM>].service
 // Flatpak's are currently in a cgroup, but they don't follow the specification
-// this has been fixed, but this provides some compatability till that lands
+// this has been fixed, but this provides some compatibility till that lands
 // app vs apps exists because the spec changed.
 QRegularExpression
     CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("(apps|app|flatpak)-(?:[^-]*-)?([^-]+(?=-.*\\.scope)|[^@]+(?=(?:@.*)?\\.service))"));

@@ -70,7 +70,7 @@ public Q_SLOTS:
 #endif
 
     /** Change the data for a process.  This is called from KSysGuard::Processes
-     *  if @p onlyCpuOrMem is set, only the total cpu usuage is updated.
+     *  if @p onlyCpuOrMem is set, only the total cpu usage is updated.
      *  process->changes  contains a bitfield of what has been changed
      */
     void processChanged(KSysGuard::Process *process, bool onlyCpuOrMem);

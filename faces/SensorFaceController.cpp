@@ -840,7 +840,7 @@ void SensorFaceController::loadPreset(const QString &preset)
     // Load the title
     setTitle(df.readName());
 
-    // Remove the "custon" value from presets models
+    // Remove the "custom" value from presets models
     if (d->availablePresetsModel && d->availablePresetsModel->data(d->availablePresetsModel->index(0, 0), PresetsModel::PluginIdRole).toString().isEmpty()) {
         d->availablePresetsModel->removeRow(0);
     }

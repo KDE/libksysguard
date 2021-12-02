@@ -2,7 +2,7 @@ Per-process Network Usage Plugin
 ================================
 
 This plugin tries to track per-process network usage and feeds that back to
-ksysguard. Unfortunately, at the moment there is no unpriviledged API available
+ksysguard. Unfortunately, at the moment there is no unprivileged API available
 for this information, so this plugin uses a small helper application to work
 around that. The helper uses libpcap to do packet capture. To do the packet
 capture it needs `cap_net_raw`, but nothing else. To ensure the helper has

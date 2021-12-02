@@ -117,17 +117,17 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceConfigurationChanged)
 
     /**
-     * The full represenation of the current face. Typically includes additional elements like
+     * The full representation of the current face. Typically includes additional elements like
      * a legend or title
      */
     Q_PROPERTY(QQuickItem *fullRepresentation READ fullRepresentation NOTIFY faceIdChanged)
     /**
-     * The compact represenation of the current face. Typically only includes the main visualization
+     * The compact representation of the current face. Typically only includes the main visualization
      * of the data without legend, title, etc.
      */
     Q_PROPERTY(QQuickItem *compactRepresentation READ compactRepresentation NOTIFY faceIdChanged)
     /**
-     * A user interace that is suited for configuring the face specific options.
+     * A user interface that is suited for configuring the face specific options.
      * Emits `configurationChanged` if a config value changed. To apply the changes call `saveConfig`
      * on it.
      * @see faceConfiguration
@@ -166,7 +166,7 @@ public:
      * Creates a new SensorFaceController.
      * This is only useful for applications that want display SensorFaces.
      *
-     * SensorFaces  can acces the controller that created them using their `SensorFace::controller`
+     * SensorFaces  can access the controller that created them using their `SensorFace::controller`
      * property.
      * @param config The controller uses this config group to read and save the face configuration
      * @param engine This engine will be used for creating the Qml components

@@ -50,7 +50,7 @@ ColumnLayout {
             model: controller.availableFacesModel
             textRole: "display"
             currentIndex: {
-                // TODO just make an indexOf invokable on the model?
+                // TODO just make an indexOf invocable on the model?
                 for (var i = 0; i < count; ++i) {
                     if (model.pluginId(i) === root.cfg_faceId) {
                         return i;

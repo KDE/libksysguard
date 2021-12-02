@@ -191,7 +191,7 @@ void ConnectionMapping::parsePid()
     std::array<char, 100> buffer;
 
     auto fdPath = "/proc/%/fd"s;
-    // Ensure the string has enough space to accomodate large PIDs
+    // Ensure the string has enough space to accommodate large PIDs
     fdPath.reserve(30);
 
     // The only way to get a list of PIDs is to list the contents of /proc.

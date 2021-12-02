@@ -23,7 +23,7 @@ private Q_SLOTS:
     {
         QDBusInterface interface{QStringLiteral("org.kde.ksystemstats"), QStringLiteral("/")};
         if (!interface.isValid()) {
-            QSKIP("KSystemStats Deamon is not running");
+            QSKIP("KSystemStats Daemon is not running");
         }
     }
 
