@@ -24,6 +24,8 @@ public:
     Private(ProcessDataModel *q);
     void beginInsertRow(KSysGuard::Process *parent);
     void endInsertRow();
+    void beginMoveProcess(KSysGuard::Process *process, KSysGuard::Process *new_parent);
+    void endMoveProcess();
     void beginRemoveRow(KSysGuard::Process *process);
     void endRemoveRow();
 
@@ -64,6 +66,12 @@ ProcessDataModel::Private::Private(ProcessDataModel *_q)
     });
     connect(m_processes.get(), &KSysGuard::Processes::endAddProcess, q, [this]() {
         endInsertRow();
+    });
+    connect(m_processes.get(), &KSysGuard::Processes::beginMoveProcess, q, [this](KSysGuard::Process *process, KSysGuard::Process *new_parent) {
+        beginMoveProcess(process, new_parent);
+    });
+    connect(m_processes.get(), &KSysGuard::Processes::endMoveProcess, q, [this]() {
+        endMoveProcess();
     });
     connect(m_processes.get(), &KSysGuard::Processes::beginRemoveProcess, q, [this](KSysGuard::Process *process) {
         beginRemoveRow(process);
@@ -333,6 +341,27 @@ void ProcessDataModel::Private::endRemoveRow()
 {
     m_removingRowFor = nullptr;
     q->endRemoveRows();
+}
+
+void ProcessDataModel::Private::beginMoveProcess(KSysGuard::Process *process, KSysGuard::Process *new_parent)
+{
+    if (m_flatList)
+        return; // We don't need to move processes when in simple mode
+
+    int current_row = process->parent()->children().indexOf(process);
+    Q_ASSERT(current_row != -1);
+    int new_row = new_parent->children().count();
+    QModelIndex sourceParent = getQModelIndex(process->parent(), 0);
+    QModelIndex destinationParent = getQModelIndex(new_parent, 0);
+    q->beginMoveRows(sourceParent, current_row, current_row, destinationParent, new_row);
+}
+
+void ProcessDataModel::Private::endMoveProcess()
+{
+    if (m_flatList)
+        return; // We don't need to move processes when in simple mode
+
+    q->endMoveRows();
 }
 
 void ProcessDataModel::Private::update()
