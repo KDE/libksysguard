@@ -83,4 +83,3 @@ Kirigami.FormLayout {
         sensors: controller.highPrioritySensorIds
     }
 }
-
