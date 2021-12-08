@@ -35,7 +35,7 @@ Kirigami.FormLayout {
     }
     QQC2.SpinBox {
         id: fromAngleSpin
-        Kirigami.FormData.label: i18n("Start from Angle")
+        Kirigami.FormData.label: i18n("Start from Angle:")
         from: -180
         to: 360
         editable: true
@@ -48,7 +48,7 @@ Kirigami.FormLayout {
     }
     QQC2.SpinBox {
         id: toAngleSpin
-        Kirigami.FormData.label: i18n("Total Pie Angle")
+        Kirigami.FormData.label: i18n("Total Pie Angle:")
         from: 0
         to: 360
         editable: true
