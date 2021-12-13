@@ -45,8 +45,8 @@ static KLocalizedString unitFormat(Unit unit)
     const static KLocalizedString Kbps = ki18nc("Kilobytes per second unit symbol", "%1 KiB/s");
     const static KLocalizedString Mbps = ki18nc("Megabytes per second unit symbol", "%1 MiB/s");
     const static KLocalizedString Gbps = ki18nc("Gigabytes per second unit symbol", "%1 GiB/s");
-    const static KLocalizedString Tbps = ki18nc("Gigabytes per second unit symbol", "%1 TiB/s");
-    const static KLocalizedString Pbps = ki18nc("Gigabytes per second unit symbol", "%1 PiB/s");
+    const static KLocalizedString Tbps = ki18nc("Terabytes per second unit symbol", "%1 TiB/s");
+    const static KLocalizedString Pbps = ki18nc("Petabytes per second unit symbol", "%1 PiB/s");
 
     const static KLocalizedString Hz = ki18nc("Hertz unit symbol", "%1 Hz");
     const static KLocalizedString kHz = ki18nc("Kilohertz unit symbol", "%1 kHz");
@@ -338,9 +338,9 @@ QString Formatter::symbol(Unit unit)
     case UnitGigaByteRate:
         return i18nc("Gigabytes per second unit symbol", "GiB/s");
     case UnitTeraByteRate:
-        return i18nc("Gigabytes per second unit symbol", "TiB/s");
+        return i18nc("Terabytes per second unit symbol", "TiB/s");
     case UnitPetaByteRate:
-        return i18nc("Gigabytes per second unit symbol", "PiB/s");
+        return i18nc("Petabytes per second unit symbol", "PiB/s");
 
     case UnitHertz:
         return i18nc("Hertz unit symbol", "Hz");
