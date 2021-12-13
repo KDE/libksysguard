@@ -292,7 +292,7 @@ void Scripting::loadContextMenu()
     QStringList scripts;
     const QStringList dirs =
         QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("ksysguard/scripts/"), QStandardPaths::LocateDirectory);
-    Q_FOREACH (const QString &dir, dirs) {
+    for (const QString &dir : dirs) {
         QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);
         while (it.hasNext()) {
             scripts.append(it.next());

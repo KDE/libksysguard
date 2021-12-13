@@ -116,9 +116,9 @@ void testProcess::testProcesses()
 {
     KSysGuard::Processes *processController = new KSysGuard::Processes();
     processController->updateAllProcesses();
-    QList<KSysGuard::Process *> processes = processController->getAllProcesses();
+    const QList<KSysGuard::Process *> processes = processController->getAllProcesses();
     QSet<long> pids;
-    Q_FOREACH (KSysGuard::Process *process, processes) {
+    for (KSysGuard::Process *process : processes) {
         if (process->pid() == 0)
             continue;
         QVERIFY(process->pid() > 0);
@@ -129,8 +129,8 @@ void testProcess::testProcesses()
         pids.insert(process->pid());
     }
     processController->updateAllProcesses();
-    QList<KSysGuard::Process *> processes2 = processController->getAllProcesses();
-    Q_FOREACH (KSysGuard::Process *process, processes2) {
+    const QList<KSysGuard::Process *> processes2 = processController->getAllProcesses();
+    for (KSysGuard::Process *process : processes2) {
         if (process->pid() == 0)
             continue;
         QVERIFY(process->pid() > 0);
@@ -164,7 +164,7 @@ void testProcess::testProcessesTreeStructure()
     processController->updateAllProcesses();
 
     auto verify_counts = [this](const auto processes) {
-        Q_FOREACH( KSysGuard::Process *process, processes) {
+        for (KSysGuard::Process *process : processes) {
             QCOMPARE(countNumChildren(process), process->numChildren());
 
             for(int i = 0; i < process->children().size(); i++) {
@@ -266,9 +266,9 @@ void testProcess::testHistories()
 
     // Test the tree structure
     processController->updateAllProcesses();
-    QList<KSysGuard::Process *> processes = processController->getAllProcesses();
+    const QList<KSysGuard::Process *> processes = processController->getAllProcesses();
 
-    Q_FOREACH (KSysGuard::Process *process, processes) {
+    for (KSysGuard::Process *process : processes) {
         QCOMPARE(countNumChildren(process), process->numChildren());
 
         for (int i = 0; i < process->children().size(); i++) {
@@ -279,7 +279,7 @@ void testProcess::testHistories()
 
     // test all the pids are unique
     QSet<long> pids;
-    Q_FOREACH (KSysGuard::Process *process, processes) {
+    for (KSysGuard::Process *process : processes) {
         if (process->pid() == 0)
             continue;
         QVERIFY(process->pid() > 0);
