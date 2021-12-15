@@ -283,7 +283,7 @@ bool SensorManager::engage(const QString &hostName, const QString &shell, const 
         mAgents.insert(hostName, agent);
         connect(agent, &SensorAgent::reconfigure, this, &SensorManager::reconfigure);
 
-        emit hostAdded(agent, hostName);
+        Q_EMIT hostAdded(agent, hostName);
         return true;
     }
 
@@ -307,7 +307,7 @@ bool SensorManager::disengage(const QString &hostName)
     if (mAgents.contains(hostName)) {
         mAgents.take(hostName)->deleteLater();
 
-        emit hostConnectionLost(hostName);
+        Q_EMIT hostConnectionLost(hostName);
         return true;
     }
 
@@ -350,7 +350,7 @@ void SensorManager::setBroadcaster(QObject *wdg)
 
 void SensorManager::reconfigure(const SensorAgent *)
 {
-    emit update();
+    Q_EMIT update();
 }
 
 bool SensorManager::sendRequest(const QString &hostName, const QString &req, SensorClient *client, int id)

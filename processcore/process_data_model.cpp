@@ -211,7 +211,7 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
             if (process->pid() != -1) {
                 const QModelIndex index = d->getQModelIndex(process, columnIndex);
                 if (index.isValid() && process != d->m_removingRowFor) {
-                    emit dataChanged(index, index);
+                    Q_EMIT dataChanged(index, index);
                 }
             }
         });
@@ -224,7 +224,7 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
     d->update();
     endResetModel();
 
-    emit enabledAttributesChanged();
+    Q_EMIT enabledAttributesChanged();
 }
 
 bool ProcessDataModel::enabled() const
@@ -259,11 +259,11 @@ void ProcessDataModel::setFlatList(bool flat)
     }
     beginResetModel();
     // NOTE: layoutAboutToBeChanged doesn't play well with TableView delegate recycling
-    // emit layoutAboutToBeChanged();
+    // Q_EMIT layoutAboutToBeChanged();
 
     d->m_flatList = flat;
     endResetModel();
-    emit flatListChanged();
+    Q_EMIT flatListChanged();
 }
 
 QModelIndex ProcessDataModel::index(int row, int column, const QModelIndex &parent) const

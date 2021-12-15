@@ -51,7 +51,7 @@ public:
                 if (!process->changes().testFlag(m_changeFlag)) {
                     return;
                 }
-                emit dataChanged(process);
+                Q_EMIT dataChanged(process);
             });
         }
     }

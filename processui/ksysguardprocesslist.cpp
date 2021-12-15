@@ -992,7 +992,7 @@ void KSysGuardProcessList::expandAllChildren(const QModelIndex &parent)
 void KSysGuardProcessList::rowsInserted(const QModelIndex &parent, int start, int end)
 {
     if (d->mModel.isSimpleMode() || parent.isValid()) {
-        emit processListChanged();
+        Q_EMIT processListChanged();
         return; // No tree or not a root node - no need to expand init
     }
     disconnect(&d->mFilterModel, &QAbstractItemModel::rowsInserted, this, &KSysGuardProcessList::rowsInserted);
@@ -1012,7 +1012,7 @@ void KSysGuardProcessList::rowsInserted(const QModelIndex &parent, int start, in
     if (expanded)
         connect(d->mUi->treeView, &QTreeView::expanded, this, &KSysGuardProcessList::expandAllChildren);
     connect(&d->mFilterModel, &QAbstractItemModel::rowsInserted, this, &KSysGuardProcessList::rowsInserted);
-    emit processListChanged();
+    Q_EMIT processListChanged();
 }
 
 void KSysGuardProcessList::expandInit()
@@ -1088,7 +1088,7 @@ void KSysGuardProcessList::updateList()
         d->mModel.update(d->mUpdateIntervalMSecs, updateFlags);
         if (d->mUpdateTimer)
             d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
-        emit updated();
+        Q_EMIT updated();
         if (QToolTip::isVisible() && qApp->topLevelAt(QCursor::pos()) == window()) {
             QWidget *w = d->mUi->treeView->viewport();
             if (w->geometry().contains(d->mUi->treeView->mapFromGlobal(QCursor::pos()))) {

@@ -97,9 +97,9 @@ void SensorObject::addProperty(SensorProperty *property)
             return prop->isSubscribed();
         });
         if (count == 1) {
-            emit subscribedChanged(true);
+            Q_EMIT subscribedChanged(true);
         } else if (count == 0) {
-            emit subscribedChanged(false);
+            Q_EMIT subscribedChanged(false);
         }
     });
 }

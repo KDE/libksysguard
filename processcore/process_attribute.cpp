@@ -147,13 +147,13 @@ QVariant ProcessAttribute::data(KSysGuard::Process *process) const
 void ProcessAttribute::setData(KSysGuard::Process *process, const QVariant &value)
 {
     d->m_data[process] = value;
-    emit dataChanged(process);
+    Q_EMIT dataChanged(process);
 }
 
 void ProcessAttribute::clearData(KSysGuard::Process *process)
 {
     d->m_data.remove(process);
-    emit dataChanged(process);
+    Q_EMIT dataChanged(process);
 }
 
 QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process *> &groupProcesses) const
@@ -177,7 +177,7 @@ void ProcessAttribute::connectNotify(const QMetaMethod &signal)
     }
     d->m_watchCount++;
     if (d->m_watchCount == 1) {
-        emit enabledChanged(true);
+        Q_EMIT enabledChanged(true);
     }
 }
 
@@ -188,6 +188,6 @@ void ProcessAttribute::disconnectNotify(const QMetaMethod &signal)
     }
     d->m_watchCount--;
     if (d->m_watchCount == 0) {
-        emit enabledChanged(false);
+        Q_EMIT enabledChanged(false);
     }
 }

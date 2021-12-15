@@ -206,7 +206,7 @@ void CGroupDataModel::setEnabledAttributes(const QStringList &enabledAttributes)
                 return;
             }
             const QModelIndex index = getQModelIndex(cgroup, columnIndex);
-            emit dataChanged(index, index);
+            Q_EMIT dataChanged(index, index);
         });
     }
 
@@ -216,7 +216,7 @@ void CGroupDataModel::setEnabledAttributes(const QStringList &enabledAttributes)
 
     endResetModel();
 
-    emit enabledAttributesChanged();
+    Q_EMIT enabledAttributesChanged();
 }
 
 QModelIndex CGroupDataModel::getQModelIndex(CGroup *cgroup, int column) const
@@ -373,7 +373,7 @@ void CGroupDataModel::setRoot(const QString &root)
         return;
     }
     d->m_root = root;
-    emit rootChanged();
+    Q_EMIT rootChanged();
     QMetaObject::invokeMethod(
         this,
         [this] {
@@ -392,7 +392,7 @@ void CGroupDataModel::setRoot(const QString &root)
 
     if (available != d->m_available) {
         d->m_available = available;
-        emit availableChanged();
+        Q_EMIT availableChanged();
     }
 }
 

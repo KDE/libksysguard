@@ -73,10 +73,10 @@ ProcessesRemote::ProcessesRemote(const QString &hostname)
 
 void ProcessesRemote::setup()
 {
-    emit runCommand(QStringLiteral("mem/physical/used"), (int)UsedMemory);
-    emit runCommand(QStringLiteral("mem/physical/free"), (int)FreeMemory);
-    emit runCommand(QStringLiteral("ps?"), (int)PsInfo);
-    emit runCommand(QStringLiteral("ps"), (int)Ps);
+    Q_EMIT runCommand(QStringLiteral("mem/physical/used"), (int)UsedMemory);
+    Q_EMIT runCommand(QStringLiteral("mem/physical/free"), (int)FreeMemory);
+    Q_EMIT runCommand(QStringLiteral("ps?"), (int)PsInfo);
+    Q_EMIT runCommand(QStringLiteral("ps"), (int)Ps);
 }
 
 long ProcessesRemote::getParentPid(long pid)
@@ -156,8 +156,8 @@ void ProcessesRemote::updateAllProcesses(Processes::UpdateFlags updateFlags)
 {
     d->updateFlags = updateFlags;
     if (!d->havePsInfo)
-        emit runCommand(QStringLiteral("ps?"), (int)PsInfo);
-    emit runCommand(QStringLiteral("ps"), (int)Ps);
+        Q_EMIT runCommand(QStringLiteral("ps?"), (int)PsInfo);
+    Q_EMIT runCommand(QStringLiteral("ps"), (int)Ps);
 }
 QSet<long> ProcessesRemote::getAllPids()
 {
@@ -178,20 +178,20 @@ QSet<long> ProcessesRemote::getAllPids()
 Processes::Error ProcessesRemote::sendSignal(long pid, int sig)
 {
     // TODO run the proper command for all these functions below
-    emit runCommand(QStringLiteral("kill ") + QString::number(pid) + QStringLiteral(" ") + QString::number(sig), (int)Kill);
+    Q_EMIT runCommand(QStringLiteral("kill ") + QString::number(pid) + QStringLiteral(" ") + QString::number(sig), (int)Kill);
     return Processes::NoError;
 }
 Processes::Error ProcessesRemote::setNiceness(long pid, int priority)
 {
-    emit runCommand(QStringLiteral("setpriority ") + QString::number(pid) + QStringLiteral(" ") + QString::number(priority), (int)Renice);
+    Q_EMIT runCommand(QStringLiteral("setpriority ") + QString::number(pid) + QStringLiteral(" ") + QString::number(priority), (int)Renice);
     return Processes::NoError;
 }
 
 Processes::Error ProcessesRemote::setIoNiceness(long pid, int priorityClass, int priority)
 {
-    emit runCommand(QStringLiteral("ionice ") + QString::number(pid) + QStringLiteral(" ") + QString::number(priorityClass) + QStringLiteral(" ")
-                        + QString::number(priority),
-                    (int)Ionice);
+    Q_EMIT runCommand(QStringLiteral("ionice ") + QString::number(pid) + QStringLiteral(" ") + QString::number(priorityClass) + QStringLiteral(" ")
+                          + QString::number(priority),
+                      (int)Ionice);
     return Processes::NoError;
 }
 
@@ -277,7 +277,7 @@ void ProcessesRemote::answerReceived(int id, const QList<QByteArray> &answer)
         d->lastAnswer = answer;
         if (!d->havePsInfo)
             return; // Not setup yet.  Should never happen
-        emit processesUpdated();
+        Q_EMIT processesUpdated();
     case FreeMemory:
         if (answer.isEmpty())
             return; // Invalid data

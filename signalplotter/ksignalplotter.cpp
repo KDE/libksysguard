@@ -873,7 +873,7 @@ void KSignalPlotterPrivate::calculateNiceRange()
 #else
     mScrollableImage = QPixmap();
 #endif
-    emit q->axisScaleChanged();
+    Q_EMIT q->axisScaleChanged();
     q->update();
 }
 

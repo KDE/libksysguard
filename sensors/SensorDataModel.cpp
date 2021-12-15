@@ -377,7 +377,7 @@ void KSysGuard::SensorDataModel::componentComplete()
 
     d->sensorsChanged();
 
-    emit sensorsChanged();
+    Q_EMIT sensorsChanged();
 }
 
 void SensorDataModel::Private::addSensor(const QString &id)
@@ -464,7 +464,7 @@ void SensorDataModel::onMetaDataChanged(const QString &sensorId, const SensorInf
     endInsertColumns();
 
     SensorDaemonInterface::instance()->requestValue(sensorId);
-    emit sensorMetaDataChanged();
+    Q_EMIT sensorMetaDataChanged();
 
     if (isReady()) {
         Q_EMIT readyChanged();

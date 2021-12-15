@@ -420,7 +420,7 @@ void SensorFaceController::setTitle(const QString &title)
     d->appearanceGroup.writeEntry("title", title);
     d->syncTimer->start();
 
-    emit titleChanged();
+    Q_EMIT titleChanged();
 }
 
 bool SensorFaceController::showTitle() const
@@ -437,7 +437,7 @@ void SensorFaceController::setShowTitle(bool show)
     d->appearanceGroup.writeEntry("showTitle", show);
     d->syncTimer->start();
 
-    emit showTitleChanged();
+    Q_EMIT showTitleChanged();
 }
 
 QJsonArray SensorFaceController::totalSensors() const
@@ -524,7 +524,7 @@ void SensorFaceController::setSensorColors(const QVariantMap &colors)
     }
 
     d->syncTimer->start();
-    emit sensorColorsChanged();
+    Q_EMIT sensorColorsChanged();
 }
 
 QVariantMap SensorFaceController::sensorLabels() const
@@ -553,7 +553,7 @@ void SensorFaceController::setSensorLabels(const QVariantMap &labels)
     }
 
     d->syncTimer->start();
-    emit sensorLabelsChanged();
+    Q_EMIT sensorLabelsChanged();
 }
 
 QJsonArray SensorFaceController::lowPrioritySensorIds() const
@@ -665,7 +665,7 @@ void SensorFaceController::setFaceId(const QString &face)
     }
 
     if (!d->facePackage.isValid()) {
-        emit faceIdChanged();
+        Q_EMIT faceIdChanged();
         return;
     }
 
@@ -677,7 +677,7 @@ void SensorFaceController::setFaceId(const QString &face)
 
     d->appearanceGroup.writeEntry("chartFace", face);
     d->syncTimer->start();
-    emit faceIdChanged();
+    Q_EMIT faceIdChanged();
     return;
 }
 
@@ -852,7 +852,7 @@ void SensorFaceController::loadPreset(const QString &preset)
     setFaceId(presetGroup.readEntry(QStringLiteral("chartFace"), QStringLiteral("org.kde.ksysguard.piechart")));
 
     colorsGroup.copyTo(&d->colorsGroup);
-    emit sensorColorsChanged();
+    Q_EMIT sensorColorsChanged();
 
     if (d->faceConfigLoader) {
         KConfigGroup presetGroup(KSharedConfig::openConfig(presetPackage.filePath("FaceProperties"), KConfig::SimpleConfig), QStringLiteral("FaceConfig"));

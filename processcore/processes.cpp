@@ -125,7 +125,7 @@ bool Processes::updateProcess(Process *ps, long ppid)
     Q_ASSERT(parent); // even init has a non-null parent - the mFakeProcess
 
     if (ps->parent() != parent) {
-        emit beginMoveProcess(ps, parent /*new parent*/);
+        Q_EMIT beginMoveProcess(ps, parent /*new parent*/);
         // Processes has been reparented
         Process *p = ps;
         do {
@@ -141,7 +141,7 @@ bool Processes::updateProcess(Process *ps, long ppid)
             p = p->parent();
             p->numChildren() += (ps->numChildren() + 1);
         } while (p->pid() != -1);
-        emit endMoveProcess();
+        Q_EMIT endMoveProcess();
         Q_ASSERT(ps != parent);
         ps->setParent(parent);
     }
@@ -149,7 +149,7 @@ bool Processes::updateProcess(Process *ps, long ppid)
     ps->setParentPid(ppid);
 
     bool success = updateProcessInfo(ps);
-    emit processChanged(ps, false);
+    Q_EMIT processChanged(ps, false);
 
     return success;
 }
@@ -231,7 +231,7 @@ bool Processes::updateProcessInfo(Process *ps)
             while (p->pid() != -1) {
                 p->totalUserUsage() += ps->userUsage();
                 p->totalSysUsage() += ps->sysUsage();
-                emit processChanged(p, true);
+                Q_EMIT processChanged(p, true);
                 p = p->parent();
             }
         }
@@ -252,7 +252,7 @@ bool Processes::addProcess(long pid, long ppid)
     // it's a new process - we need to set it up
     Process *ps = new Process(pid, ppid, parent);
 
-    emit beginAddProcess(ps);
+    Q_EMIT beginAddProcess(ps);
 
     d->mProcesses.insert(pid, ps);
 
@@ -270,7 +270,7 @@ bool Processes::addProcess(long pid, long ppid)
 
     // Now we can actually get the process info
     bool success = updateProcessInfo(ps);
-    emit endAddProcess();
+    Q_EMIT endAddProcess();
     return success;
 }
 bool Processes::updateOrAddProcess(long pid)
@@ -353,7 +353,7 @@ void Processes::processesUpdated()
         d->mEndedProcesses = endedProcesses;
     }
 
-    emit updated();
+    Q_EMIT updated();
 }
 
 void Processes::processUpdated(long pid, const Process::Updates &changes)
@@ -384,7 +384,7 @@ void Processes::Private::markProcessesAsEnded(long pid)
     if (!process)
         return;
     process->setStatus(Process::Ended);
-    emit q->processChanged(process, false);
+    Q_EMIT q->processChanged(process, false);
 }
 void Processes::deleteProcess(long pid)
 {
@@ -397,7 +397,7 @@ void Processes::deleteProcess(long pid)
         deleteProcess(it->pid());
     }
 
-    emit beginRemoveProcess(process);
+    Q_EMIT beginRemoveProcess(process);
 
     d->mProcesses.remove(pid);
     d->mListProcesses.removeAll(process);
@@ -420,7 +420,7 @@ void Processes::deleteProcess(long pid)
     }
 
     delete process;
-    emit endRemoveProcess();
+    Q_EMIT endRemoveProcess();
 }
 
 bool Processes::killProcess(long pid)

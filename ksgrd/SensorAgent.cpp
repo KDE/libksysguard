@@ -81,7 +81,7 @@ void SensorAgent::processAnswer(const char *buf, int buflen)
                 if (buffer.at(i) == '\033') {
                     QString error = QString::fromUtf8(buffer.constData() + startOfError + 1, i - startOfError - 1);
                     if (error.startsWith(QLatin1String("RECONFIGURE"))) {
-                        emit reconfigure(this);
+                        Q_EMIT reconfigure(this);
                     } else {
                         /* We just received the end of an error message, so we
                          * can display it. */

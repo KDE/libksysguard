@@ -52,7 +52,7 @@ void SensorFace::setFormFactor(SensorFace::FormFactor formFactor)
     }
 
     d->formFactor = formFactor;
-    emit formFactorChanged();
+    Q_EMIT formFactorChanged();
 }
 
 QQuickItem *SensorFace::contentItem() const
@@ -74,7 +74,7 @@ void SensorFace::setContentItem(QQuickItem *item)
         d->contentItem->setSize(size());
     }
 
-    emit contentItemChanged();
+    Q_EMIT contentItemChanged();
 }
 
 void SensorFace::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)

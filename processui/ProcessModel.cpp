@@ -392,7 +392,7 @@ void ProcessModelPrivate::windowRemoved(WId wid)
     else
         row = process->parent()->children().indexOf(process);
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
-    emit q->dataChanged(index2, index2);
+    Q_EMIT q->dataChanged(index2, index2);
 }
 #endif
 
@@ -483,7 +483,7 @@ void ProcessModelPrivate::queryForAndUpdateAllXWindows()
             else
                 row = process->parent()->children().indexOf(process);
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingXMemory, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
     }
     if (children)
@@ -520,7 +520,7 @@ void ProcessModelPrivate::setupProcesses()
     for (int i = 0; i < mExtraAttributes.count(); i++) {
         connect(mExtraAttributes[i], &KSysGuard::ProcessAttribute::dataChanged, this, [this, i](KSysGuard::Process *process) {
             const QModelIndex index = q->getQModelIndex(process, mHeadings.count() + i);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         });
     }
 }
@@ -605,10 +605,10 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, NET::Properties properties, 
         // Since this is the first window for a process, invalidate HeadingName so that
         // if we are sorting by name this gets taken into account
         QModelIndex index1 = q->createIndex(row, ProcessModel::HeadingName, process);
-        emit q->dataChanged(index1, index1);
+        Q_EMIT q->dataChanged(index1, index1);
     }
     QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingXTitle, process);
-    emit q->dataChanged(index2, index2);
+    Q_EMIT q->dataChanged(index2, index2);
 }
 #endif
 
@@ -753,7 +753,7 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
                 mPidsToUpdate.append(process->pid());
             QModelIndex index1 = q->createIndex(row, 0, process);
             QModelIndex index2 = q->createIndex(row, mHeadings.count() - 1, process);
-            emit q->dataChanged(index1, index2);
+            Q_EMIT q->dataChanged(index1, index2);
             if (!mHaveTimer) {
                 mHaveTimer = true;
                 mTimerId = startTimer(100);
@@ -766,86 +766,86 @@ void ProcessModelPrivate::processChanged(KSysGuard::Process *process, bool onlyT
         if (mShowChildTotals) {
             // Only the total cpu usage changed, so only update that
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingCPUUsage, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         return;
     } else {
         if (process->changes() & KSysGuard::Process::Uids) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingUser, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::Tty) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingTty, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & (KSysGuard::Process::Usage | KSysGuard::Process::Status)
             || (process->changes() & KSysGuard::Process::TotalUsage && mShowChildTotals)) {
             totalUpdated += 2;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingCPUUsage, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
             index = q->createIndex(row, ProcessModel::HeadingCPUTime, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
             // Because of our sorting, changing usage needs to also invalidate the User column
             index = q->createIndex(row, ProcessModel::HeadingUser, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::Status) {
             totalUpdated += 2;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingNoNewPrivileges, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
             index = q->createIndex(row, ProcessModel::HeadingCGroup, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
             index = q->createIndex(row, ProcessModel::HeadingMACContext, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::NiceLevels) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingNiceness, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::VmSize) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingVmSize, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & (KSysGuard::Process::VmSize | KSysGuard::Process::VmRSS | KSysGuard::Process::VmURSS)) {
             totalUpdated += 2;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingMemory, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
             QModelIndex index2 = q->createIndex(row, ProcessModel::HeadingSharedMemory, process);
-            emit q->dataChanged(index2, index2);
+            Q_EMIT q->dataChanged(index2, index2);
             // Because of our sorting, changing usage needs to also invalidate the User column
             index = q->createIndex(row, ProcessModel::HeadingUser, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::VmPSS) {
             totalUpdated++;
             auto index = q->createIndex(row, ProcessModel::HeadingVmPSS, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::Name) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingName, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::Command) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingCommand, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::Login) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingUser, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
         if (process->changes() & KSysGuard::Process::IO) {
             totalUpdated++;
             QModelIndex index = q->createIndex(row, ProcessModel::HeadingIoRead, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
             index = q->createIndex(row, ProcessModel::HeadingIoWrite, process);
-            emit q->dataChanged(index, index);
+            Q_EMIT q->dataChanged(index, index);
         }
 
         /* Normally this would only be called if changes() tells
@@ -1225,7 +1225,7 @@ void ProcessModel::setSimpleMode(bool simple)
     if (d->mSimple == simple)
         return;
 
-    emit layoutAboutToBeChanged();
+    Q_EMIT layoutAboutToBeChanged();
 
     d->mSimple = simple;
 
@@ -1249,7 +1249,7 @@ void ProcessModel::setSimpleMode(bool simple)
             changePersistentIndexList(flatIndexes, treeIndexes);
     }
 
-    emit layoutChanged();
+    Q_EMIT layoutChanged();
 }
 
 bool ProcessModel::canUserLogin(long uid) const
@@ -2241,7 +2241,7 @@ void ProcessModel::setShowTotals(bool showTotals) // slot
             else
                 row = process->parent()->children().indexOf(process);
             index = createIndex(row, HeadingCPUUsage, process);
-            emit dataChanged(index, index);
+            Q_EMIT dataChanged(index, index);
         }
     }
 }
@@ -2265,13 +2265,13 @@ void ProcessModel::setUnits(Units units)
         else
             row = process->parent()->children().indexOf(process);
         index = createIndex(row, HeadingMemory, process);
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
         index = createIndex(row, HeadingXMemory, process);
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
         index = createIndex(row, HeadingSharedMemory, process);
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
         index = createIndex(row, HeadingVmSize, process);
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
     }
 }
 
@@ -2294,9 +2294,9 @@ void ProcessModel::setIoUnits(Units units)
         else
             row = process->parent()->children().indexOf(process);
         index = createIndex(row, HeadingIoRead, process);
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
         index = createIndex(row, HeadingIoWrite, process);
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
     }
 }
 
@@ -2462,7 +2462,7 @@ void ProcessModelPrivate::timerEvent(QTimerEvent *event)
 
             QModelIndex index1 = q->createIndex(row, 0, process);
             QModelIndex index2 = q->createIndex(row, mHeadings.count() - 1, process);
-            emit q->dataChanged(index1, index2);
+            Q_EMIT q->dataChanged(index1, index2);
         } else {
             mPidsToUpdate.removeAll(pid);
         }
