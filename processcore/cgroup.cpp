@@ -136,7 +136,11 @@ QString CGroupPrivate::unescapeName(const QString &name)
         if (escapeCharIndex < 0) {
             break;
         }
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         const QStringRef sequence = rc.midRef(escapeCharIndex, 4);
+#else
+        const QStringView sequence = rc.mid(escapeCharIndex, 4);
+#endif
         if (sequence.length() != 4 || sequence.at(1) != QLatin1Char('x')) {
             qWarning() << "Badly formed cgroup name" << name;
             return name;
