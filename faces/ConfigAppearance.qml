@@ -105,7 +105,7 @@ Kirigami.FormLayout {
     }
     RowLayout {
         Kirigami.FormData.label: i18nd("KSysGuardSensorFaces", "Presets:")
-        
+
         QQC2.Button {
             icon.name: "document-open"
             text: i18nd("KSysGuardSensorFaces", "Load Preset...")
@@ -175,6 +175,7 @@ Kirigami.FormLayout {
 
     QQC2.SpinBox {
         id: updateRateLimitSpinBox
+        Layout.preferredWidth: titleField.implicitWidth
 
         Kirigami.FormData.label: i18nd("KSysGuardSensorFaces", "Minimum Time Between Updates:")
 
