@@ -44,8 +44,10 @@ void SensorGroup::retranslate()
     m_sensorNames[QStringLiteral("network/(?!all).*/ipv6address")] = i18n("[Group] IPv6 Address");
     m_sensorNames[QStringLiteral("network/(?!all).*/signal")] = i18n("[Group] Signal Strength");
     m_sensorNames[QStringLiteral("network/(?!all).*/download")] = i18n("[Group] Download Rate");
+    m_sensorNames[QStringLiteral("network/(?!all).*/downloadBits")] = i18n("[Group] Download Rate");
     m_sensorNames[QStringLiteral("network/(?!all).*/totalDownload")] = i18n("[Group] Total Downloaded");
     m_sensorNames[QStringLiteral("network/(?!all).*/upload")] = i18n("[Group] Upload Rate");
+    m_sensorNames[QStringLiteral("network/(?!all).*/uploadBits")] = i18n("[Group] Upload Rate");
     m_sensorNames[QStringLiteral("network/(?!all).*/totalUpload")] = i18n("[Group] Total Uploaded");
 
     m_sensorNames[QStringLiteral("disk/(?!all).*/name")] = i18n("[Group] Name");

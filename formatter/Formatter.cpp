@@ -48,6 +48,13 @@ static KLocalizedString unitFormat(Unit unit)
     const static KLocalizedString Tbps = ki18nc("Terabytes per second unit symbol", "%1 TiB/s");
     const static KLocalizedString Pbps = ki18nc("Petabytes per second unit symbol", "%1 PiB/s");
 
+    const static KLocalizedString bitsps = ki18nc("Bits per second unit symbol", "%1 bps");
+    const static KLocalizedString Kbitsps = ki18nc("Kilobits per second unit symbol", "%1 Kbps");
+    const static KLocalizedString Mbitsps = ki18nc("Megabits per second unit symbol", "%1 Mbps");
+    const static KLocalizedString Gbitsps = ki18nc("Gigabits per second unit symbol", "%1 Gbps");
+    const static KLocalizedString Tbitsps = ki18nc("Terabits per second unit symbol", "%1 Tbps");
+    const static KLocalizedString Pbitsps = ki18nc("Petabits per second unit symbol", "%1 Pbps");
+
     const static KLocalizedString Hz = ki18nc("Hertz unit symbol", "%1 Hz");
     const static KLocalizedString kHz = ki18nc("Kilohertz unit symbol", "%1 kHz");
     const static KLocalizedString MHz = ki18nc("Megahertz unit symbol", "%1 MHz");
@@ -93,6 +100,19 @@ static KLocalizedString unitFormat(Unit unit)
         return Tbps;
     case UnitPetaByteRate:
         return Pbps;
+
+    case UnitBitRate:
+        return bitsps;
+    case UnitKiloBitRate:
+        return Kbitsps;
+    case UnitMegaBitRate:
+        return Mbitsps;
+    case UnitGigaBitRate:
+        return Gbitsps;
+    case UnitTeraBitRate:
+        return Tbitsps;
+    case UnitPetaBitRate:
+        return Pbitsps;
 
     case UnitHertz:
         return Hz;
@@ -148,6 +168,12 @@ static int unitOrder(Unit unit)
     case UnitGigaByteRate:
     case UnitTeraByteRate:
     case UnitPetaByteRate:
+    case UnitBitRate:
+    case UnitKiloBitRate:
+    case UnitMegaBitRate:
+    case UnitGigaBitRate:
+    case UnitTeraBitRate:
+    case UnitPetaBitRate:
         return 1024;
 
     case UnitHertz:
@@ -184,6 +210,14 @@ static Unit unitBase(Unit unit)
     case UnitTeraByteRate:
     case UnitPetaByteRate:
         return UnitByteRate;
+
+    case UnitBitRate:
+    case UnitKiloBitRate:
+    case UnitMegaBitRate:
+    case UnitGigaBitRate:
+    case UnitTeraBitRate:
+    case UnitPetaBitRate:
+        return UnitBitRate;
 
     case UnitHertz:
     case UnitKiloHertz:
@@ -284,6 +318,12 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
     case UnitGigaByteRate:
     case UnitTeraByteRate:
     case UnitPetaByteRate:
+    case UnitBitRate:
+    case UnitKiloBitRate:
+    case UnitMegaBitRate:
+    case UnitGigaBitRate:
+    case UnitTeraBitRate:
+    case UnitPetaBitRate:
     case UnitHertz:
     case UnitKiloHertz:
     case UnitMegaHertz:
@@ -342,6 +382,19 @@ QString Formatter::symbol(Unit unit)
     case UnitPetaByteRate:
         return i18nc("Petabytes per second unit symbol", "PiB/s");
 
+    case UnitBitRate:
+        return i18nc("Bits per second unit symbol", "bps");
+    case UnitKiloBitRate:
+        return i18nc("Kilobits per second unit symbol", "Kbps");
+    case UnitMegaBitRate:
+        return i18nc("Megabits per second unit symbol", "Mbps");
+    case UnitGigaBitRate:
+        return i18nc("Gigabits per second unit symbol", "Gbps");
+    case UnitTeraBitRate:
+        return i18nc("Terabits per second unit symbol", "Tbps");
+    case UnitPetaBitRate:
+        return i18nc("Petabits per second unit symbol", "Pbps");
+
     case UnitHertz:
         return i18nc("Hertz unit symbol", "Hz");
     case UnitKiloHertz:
@@ -392,6 +445,9 @@ qreal Formatter::maximumLength(Unit unit, const QFont &font)
         break;
     case UnitByteRate:
         maximum = formatValue(order - 0.5, UnitMegaByteRate, MetricPrefixMega);
+        break;
+    case UnitBitRate:
+        maximum = formatValue(order - 0.5, UnitMegaBitRate, MetricPrefixMega);
         break;
     case UnitHertz:
         maximum = formatValue(order - 0.5, UnitMegaHertz, MetricPrefixMega);

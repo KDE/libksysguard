@@ -68,6 +68,15 @@ enum Unit {
 
     // Misc units.
     UnitCelsius = 500,
+
+    // Data rate units in bits.
+    UnitBitRate = 600,
+    UnitKiloBitRate = MetricPrefixKilo + UnitBitRate,
+    UnitMegaBitRate = MetricPrefixMega + UnitBitRate,
+    UnitGigaBitRate = MetricPrefixGiga + UnitBitRate,
+    UnitTeraBitRate = MetricPrefixTera + UnitBitRate,
+    UnitPetaBitRate = MetricPrefixPeta + UnitBitRate,
+
     UnitDecibelMilliWatts,
     UnitPercent,
     UnitRate,
