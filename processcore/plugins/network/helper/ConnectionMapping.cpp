@@ -7,6 +7,7 @@
 
 #include "ConnectionMapping.h"
 
+#include <cstring>
 #include <charconv>
 #include <fstream>
 #include <iostream>
