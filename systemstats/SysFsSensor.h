@@ -24,6 +24,7 @@ class SYSTEMSTATS_EXPORT SysFsSensor : public SensorProperty
 
 public:
     SysFsSensor(const QString &id, const QString &path, SensorObject *parent);
+    SysFsSensor(const QString &id, const QString &path, const QVariant &initialValue, SensorObject *parent);
     ~SysFsSensor() override;
 
     /**
