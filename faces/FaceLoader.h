@@ -59,6 +59,12 @@ class SENSORFACES_EXPORT FaceLoader : public QObject, public QQmlParserStatus
      */
     Q_PROPERTY(QVariantMap colors READ colors WRITE setColors NOTIFY colorsChanged)
     /**
+     * A map of sensor labels to be used by the face.
+     *
+     * This forwards to the internal SensorFaceController.
+     */
+    Q_PROPERTY(QVariantMap labels READ labels WRITE setLabels NOTIFY labelsChanged)
+    /**
      * Whether to allow modifying the face configuration.
      *
      * If false (the default), any changes to configuration will be ignored. If
@@ -97,6 +103,10 @@ public:
     QVariantMap colors() const;
     void setColors(const QVariantMap &newColors);
     Q_SIGNAL void colorsChanged();
+
+    QVariantMap labels() const;
+    void setLabels(const QVariantMap &newLabels);
+    Q_SIGNAL void labelsChanged();
 
     bool readOnly() const;
     void setReadOnly(bool newReadOnly);
