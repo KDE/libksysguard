@@ -82,9 +82,9 @@ void PresetsModel::reload()
     for (; it != plugins.rend(); ++it) {
         const auto &plugin = *it;
         KPackage::Package p = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Applet"), plugin.pluginId());
-        KDesktopFile df(p.path() + QStringLiteral("metadata.desktop"));
+        auto metadata = p.metadata();
 
-        QString baseName = df.readName();
+        QString baseName = metadata.name();
         QString name = baseName;
         int id = 0;
 
@@ -110,7 +110,7 @@ void PresetsModel::reload()
         item->setData(plugin.pluginId(), PresetsModel::PluginIdRole);
         item->setData(config, PresetsModel::ConfigRole);
 
-        item->setData(QFileInfo(p.path() + QStringLiteral("metadata.desktop")).isWritable(), PresetsModel::WritableRole);
+        item->setData(QFileInfo(p.metadata().metaDataFileName()).isWritable(), PresetsModel::WritableRole);
 
         appendRow(item);
     }
@@ -831,14 +831,12 @@ void SensorFaceController::loadPreset(const QString &preset)
         return;
     }
 
-    KDesktopFile df(presetPackage.path() + QStringLiteral("metadata.desktop"));
-
     auto c = KSharedConfig::openConfig(presetPackage.filePath("config", QStringLiteral("faceproperties")), KConfig::SimpleConfig);
     const KConfigGroup presetGroup(c, QStringLiteral("Config"));
     const KConfigGroup colorsGroup(c, QStringLiteral("SensorColors"));
 
     // Load the title
-    setTitle(df.readName());
+    setTitle(presetPackage.metadata().name());
 
     // Remove the "custom" value from presets models
     if (d->availablePresetsModel && d->availablePresetsModel->data(d->availablePresetsModel->index(0, 0), PresetsModel::PluginIdRole).toString().isEmpty()) {
@@ -894,6 +892,34 @@ void SensorFaceController::savePreset()
         return;
     }
 
+    // First write "new style" plugin JSON file.
+    QJsonDocument json;
+    json.setObject({
+        {"KPlugin",
+         QJsonObject{
+             {"Id", pluginName},
+             {"Name", title()},
+             {"Icon", "ksysguardd"},
+             {"Category", "System Information"},
+             {"License", "LGPL 2.1+"},
+             {"EnabledByDefault", true},
+             {"Version", "0.1"},
+             {"ServiceTypes", QJsonArray{{"Plasma/Applet"}}} //
+         }},
+        {"X-Plasma-API", "declarativeappletscript"},
+        {"X-Plasma-MainScript", "ui/main.qml"},
+        {"X-Plasma-Provides", "org.kde.plasma.systemmonitor"},
+        {"X-Plasma-RootPath", "org.kde.plasma.systemmonitor"},
+    });
+
+    if (QFile file{dir.path() % QStringLiteral("/metadata.json")}; file.open(QIODevice::WriteOnly)) {
+        file.write(json.toJson());
+    } else {
+        qWarning() << "Could not write metadata.json file for preset" << title();
+    }
+
+    // Backward compatibility: Also write out an "old style" desktop file so the
+    // preset works with older Plasma.
     KConfig c(dir.path() % QStringLiteral("/metadata.desktop"));
 
     KConfigGroup cg(&c, "Desktop Entry");
