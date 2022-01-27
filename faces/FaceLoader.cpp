@@ -31,6 +31,7 @@ public:
     QJsonArray sensors;
     QString faceId;
     QVariantMap colors;
+    QVariantMap labels;
     bool readOnly = true;
     bool showTitle = false;
 };
@@ -144,6 +145,24 @@ void FaceLoader::setColors(const QVariantMap &newColors)
     Q_EMIT colorsChanged();
 }
 
+QVariantMap FaceLoader::labels() const
+{
+    return d->labels;
+}
+
+void FaceLoader::setLabels(const QVariantMap &newLabels)
+{
+    if (newLabels == d->labels) {
+        return;
+    }
+
+    d->labels = newLabels;
+    if (d->controller) {
+        d->controller->setSensorLabels(d->labels);
+    }
+    Q_EMIT labelsChanged();
+}
+
 bool FaceLoader::readOnly() const
 {
     return d->readOnly;
@@ -193,6 +212,7 @@ void FaceLoader::Private::setupController()
     controller->setShouldSync(readOnly);
     controller->setHighPrioritySensorIds(sensors);
     controller->setSensorColors(colors);
+    controller->setSensorLabels(labels);
     controller->setShowTitle(showTitle);
     controller->setFaceId(faceId);
 

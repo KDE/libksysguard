@@ -19,6 +19,7 @@ Control {
 
     property var controller
     property var sensors: []
+    property var sensorNames: []
     property string faceId
 
     topPadding: 0
@@ -33,6 +34,7 @@ Control {
         sensors: control.sensors
         faceId: control.faceId
         colors: control.controller.sensorColors
+        labels: control.controller.sensorLabels
     }
 
     Component.onCompleted: updateContentItem()
