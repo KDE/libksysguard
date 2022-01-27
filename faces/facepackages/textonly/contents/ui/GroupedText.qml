@@ -52,6 +52,7 @@ ColumnLayout {
             readonly property alias preferredWidth: legend.preferredWidth
 
             Kirigami.Heading {
+                Layout.fillWidth: true
                 text: groupSensor.formattedValue
                 level: 3
                 horizontalAlignment: Text.AlignLeft
