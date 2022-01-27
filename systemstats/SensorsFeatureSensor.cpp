@@ -133,7 +133,7 @@ SensorsFeatureSensor::SensorsFeatureSensor(const QString &id,
                                            const sensors_chip_name *const chipName,
                                            const sensors_subfeature *const valueFeature,
                                            SensorObject *parent)
-    : SensorProperty(id, parent)
+    : SensorProperty(id, id, 0, parent)
     , m_chipName(chipName)
     , m_valueFeature(valueFeature)
 {
