@@ -31,6 +31,7 @@ class SYSTEMSTATS_EXPORT AggregateSensor : public SensorProperty
 
 public:
     AggregateSensor(SensorObject *provider, const QString &id, const QString &name);
+    AggregateSensor(SensorObject *provider, const QString &id, const QString &name, const QVariant &initialValue);
     ~AggregateSensor() override;
 
     QVariant value() const override;

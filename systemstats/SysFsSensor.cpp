@@ -18,7 +18,12 @@ public:
 };
 
 SysFsSensor::SysFsSensor(const QString &id, const QString &path, SensorObject *parent)
-    : SensorProperty(id, parent)
+    : SysFsSensor(id, path, QVariant{}, parent)
+{
+}
+
+SysFsSensor::SysFsSensor(const QString &id, const QString &path, const QVariant &initialValue, SensorObject *parent)
+    : SensorProperty(id, id, initialValue, parent)
     , d(std::make_unique<Private>())
 {
     d->path = path;

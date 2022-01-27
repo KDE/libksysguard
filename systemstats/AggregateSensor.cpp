@@ -75,7 +75,12 @@ public:
 };
 
 AggregateSensor::AggregateSensor(SensorObject *provider, const QString &id, const QString &name)
-    : SensorProperty(id, name, provider)
+    : AggregateSensor(provider, id, name, QVariant{})
+{
+}
+
+AggregateSensor::AggregateSensor(SensorObject *provider, const QString &id, const QString &name, const QVariant &initialValue)
+    : SensorProperty(id, name, initialValue, provider)
     , d(std::make_unique<Private>())
 {
     d->subsystem = qobject_cast<SensorContainer *>(provider->parent());
