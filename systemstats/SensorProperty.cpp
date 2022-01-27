@@ -183,7 +183,9 @@ void SensorProperty::unsubscribe()
 {
     d->subscribers--;
     if (d->subscribers == 0) {
-        setValue(d->initialValue);
+        if (d->initialValue.isValid()) {
+            setValue(d->initialValue);
+        }
         Q_EMIT subscribedChanged(false);
     }
 }
