@@ -25,6 +25,19 @@ class SYSTEMSTATS_EXPORT SensorProperty : public QObject
 public:
     explicit SensorProperty(const QString &id, SensorObject *parent);
     explicit SensorProperty(const QString &id, const QString &name, SensorObject *parent);
+
+    /**
+     * Construct a SensorProperty.
+     *
+     * \param id The unique ID of this SensorProperty.
+     * \param name The user-visible name of this SensorProperty.
+     * \param initialValue The value that is used when no other value has been set.
+     * \param parent The SensorObject that contains this SensorProperty.
+     *
+     * \note If initialValue is valid, the value of this SensorProperty will be
+     * reset to initialValue when the last client unsubscribes from this
+     * SensorProperty.
+     */
     explicit SensorProperty(const QString &id, const QString &name, const QVariant &initalValue, SensorObject *parent);
 
     ~SensorProperty() override;
