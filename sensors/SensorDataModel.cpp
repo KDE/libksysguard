@@ -478,7 +478,7 @@ void SensorDataModel::onValueChanged(const QString &sensorId, const QVariant &va
         return;
     }
 
-    if (d->updateRateLimit) {
+    if (d->updateRateLimit && d->sensorData[sensorId].isValid()) {
         auto updateRateLimit = chrono::steady_clock::duration(chrono::milliseconds(d->updateRateLimit.value()));
         auto now = chrono::steady_clock::now();
         if (d->lastUpdateTimes.contains(column) && now - d->lastUpdateTimes.value(column) < updateRateLimit) {

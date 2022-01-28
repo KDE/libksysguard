@@ -228,6 +228,7 @@ void Sensor::setUpdateRateLimit(int newUpdateRateLimit)
 
         d->updateRateLimit = newUpdateRateLimit;
     }
+
     d->lastUpdate = chrono::steady_clock::now();
     Q_EMIT updateRateLimitChanged();
 }
@@ -275,7 +276,7 @@ void Sensor::onValueChanged(const QString &sensorId, const QVariant &value)
         return;
     }
 
-    if (d->updateRateLimit) {
+    if (d->updateRateLimit && d->value.isValid()) {
         auto updateRateLimit = chrono::steady_clock::duration(chrono::milliseconds(d->updateRateLimit.value()));
         auto now = chrono::steady_clock::now();
         if (now - d->lastUpdate < updateRateLimit) {
