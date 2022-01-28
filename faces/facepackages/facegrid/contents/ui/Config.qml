@@ -9,6 +9,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kitemmodels 1.0 as KItemModels
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
 import org.kde.ksysguard.faces 1.0 as Faces
@@ -20,6 +21,11 @@ ColumnLayout {
     property string cfg_faceId
 
     property var faceController: controller
+
+    // The pluginId role from the FacesModel. FacesModel is a private class that
+    // is only created by FaceController, so we can't access its roles from QML.
+    // So declare this here since we need to use it in multiple places.
+    readonly property int pluginIdRole: Qt.UserRole + 1
 
     Kirigami.FormLayout {
         id: form
@@ -47,19 +53,36 @@ ColumnLayout {
             id: faceCombo
             Kirigami.FormData.label: i18n("Display Style:")
 
-            model: controller.availableFacesModel
+            model: KItemModels.KSortFilterProxyModel {
+                sourceModel: controller.availableFacesModel
+
+                filterRowCallback: function(row, parent) {
+                    const pluginId = sourceModel.data(sourceModel.index(row, 0, parent), root.pluginIdRole)
+                    const excludedPlugins = [
+                        "org.kde.ksysguard.facegrid",
+                        "org.kde.ksysguard.applicationstable",
+                        "org.kde.ksysguard.processtable"
+                    ]
+
+                    return !excludedPlugins.includes(pluginId)
+                }
+
+                sortRole: "display"
+            }
+
             textRole: "display"
             currentIndex: {
                 // TODO just make an indexOf invocable on the model?
                 for (var i = 0; i < count; ++i) {
-                    if (model.pluginId(i) === root.cfg_faceId) {
+                    const pluginId = model.data(model.index(i, 0), root.pluginIdRole)
+                    if (pluginId === root.cfg_faceId) {
                         return i;
                     }
                 }
                 return -1;
             }
             onActivated: {
-                root.cfg_faceId = model.pluginId(index);
+                root.cfg_faceId = model.data(model.index(index, 0), root.pluginIdRole)
             }
         }
     }
@@ -72,15 +95,17 @@ ColumnLayout {
         readOnly: false
     }
 
-    Control {
+    Item {
         Layout.fillWidth: true
+        implicitHeight: children.length > 0 ? children[0].implicitHeight : 0
 
-        leftPadding: 0
-        rightPadding: 0
-        topPadding: 0
-        bottomPadding: 0
+        children: loader.controller ? loader.controller.faceConfigUi : null
 
-        contentItem: loader.controller ? loader.controller.faceConfigUi : null
+        onWidthChanged: {
+            if (children.length > 0) {
+                children[0].width = width
+            }
+        }
 
         Connections {
             target: loader.controller ? loader.controller.faceConfigUi : null
