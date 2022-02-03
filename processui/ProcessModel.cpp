@@ -412,7 +412,7 @@ void ProcessModelPrivate::setupWindows()
     // Add all the windows that KWin is managing - i.e. windows that the user can see
     const QList<WId> windows = KWindowSystem::windows();
     for (auto it = windows.begin(); it != windows.end(); ++it) {
-        updateWindowInfo(*it, NET::Properties{}, NET::Properties2{}, true);
+        updateWindowInfo(*it, static_cast<NET::Properties>(~0u), NET::Properties2{}, true);
     }
 }
 #endif
