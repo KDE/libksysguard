@@ -14,6 +14,7 @@ import org.kde.kirigami 2.8 as Kirigami
 
 import org.kde.ksysguard.sensors 1.0 as Sensors
 import org.kde.ksysguard.faces 1.0 as Faces
+import org.kde.ksysguard.formatter 1.0 as Formatter
 
 import org.kde.quickcharts 1.0 as Charts
 
@@ -30,7 +31,7 @@ Charts.BarChart {
 
     stacked: controller.faceConfiguration.barChartStacked
 
-    spacing: Math.round(width / 20)
+    spacing: Math.floor((width / barCount) * 0.05)
 
     readonly property real rangeFromY: controller.faceConfiguration.rangeFrom *
                                        controller.faceConfiguration.rangeFromMultiplier
