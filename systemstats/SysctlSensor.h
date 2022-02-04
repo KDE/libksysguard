@@ -27,7 +27,9 @@ public:
      * @param sysctlName The name of the sysctl entry
      */
     SysctlSensor(const QString &id, const QByteArray &sysctlName, SensorObject *parent);
+    SysctlSensor(const QString &id, const QByteArray &sysctlName, const QVariant &initialValue, SensorObject *parent);
     SysctlSensor(const QString &id, const QString &name, const QByteArray &sysctlName, SensorObject *parent);
+    SysctlSensor(const QString &id, const QString &name, const QByteArray &sysctlName, const QVariant &initialValue, SensorObject *parent);
 
     /**
      * Update this sensor.
@@ -59,14 +61,25 @@ private:
 
 template<typename T>
 SysctlSensor<T>::SysctlSensor(const QString &id, const QByteArray &sysctlName, SensorObject *parent)
-    : SensorProperty(id, parent)
-    , m_sysctlName(sysctlName)
+    : SysctlSensor(id, id, sysctlName, QVariant{}, parent)
+{
+}
+
+template<typename T>
+SysctlSensor<T>::SysctlSensor(const QString &id, const QByteArray &sysctlName, const QVariant &initialValue, SensorObject *parent)
+    : SysctlSensor(id, id, sysctlName, initialValue, parent)
 {
 }
 
 template<typename T>
 SysctlSensor<T>::SysctlSensor(const QString &id, const QString &name, const QByteArray &sysctlName, SensorObject *parent)
-    : SensorProperty(id, name, parent)
+    : SysctlSensor(id, name, sysctlName, QVariant{}, parent)
+{
+}
+
+template<typename T>
+SysctlSensor<T>::SysctlSensor(const QString &id, const QString &name, const QByteArray &sysctlName, const QVariant &initialValue, SensorObject *parent)
+    : SensorProperty(id, name, initialValue, parent)
     , m_sysctlName(sysctlName)
 {
 }
