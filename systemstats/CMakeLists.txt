@@ -32,6 +32,7 @@ qt_add_dbus_interface(dbusinterface_SRCS org.kde.ksystemstats.xml org.kde.ksyste
 add_library(dbusinterface STATIC ${dbusinterface_SRCS})
 set_target_properties(dbusinterface PROPERTIES CXX_VISIBILITY_PRESET default)
 target_link_libraries(dbusinterface Qt::Core Qt::DBus KSysGuard::Formatter)
+set_property(TARGET dbusinterface PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 add_library(SystemStats ${systemstats_SRCS})
 add_library(KSysGuard::SystemStats ALIAS SystemStats)

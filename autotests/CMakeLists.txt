@@ -1,4 +1,4 @@
-find_package(Qt5 REQUIRED CONFIG COMPONENTS Test)
+find_package(Qt${QT_MAJOR_VERSION} REQUIRED CONFIG COMPONENTS Test)
 
 include_directories(${libksysguard_SOURCE_DIR})
 

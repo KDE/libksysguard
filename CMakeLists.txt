@@ -30,16 +30,16 @@ include(CheckLibraryExists)
 include(FeatureSummary)
 include(GenerateExportHeader)
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets Qml Quick)
-find_package(Qt5WebEngineWidgets ${QT_MIN_VERSION} CONFIG)
-set_package_properties(Qt5WebEngineWidgets PROPERTIES
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets Qml Quick)
+find_package(Qt${QT_MAJOR_VERSION}WebEngineWidgets ${QT_MIN_VERSION} CONFIG)
+set_package_properties(Qt${QT_MAJOR_VERSION}WebEngineWidgets PROPERTIES
                        URL "git://code.qt.org/qt/qtwebenginewidgets.git"
                        DESCRIPTION "Qt WebEngine module (web browsing engine)"
                        TYPE OPTIONAL
                        PURPOSE "Used by the HTML-based GUI ksysguard library"
                       )
-find_package(Qt5WebChannel ${QT_MIN_VERSION} CONFIG)
-set_package_properties(Qt5WebChannel PROPERTIES
+find_package(Qt${QT_MAJOR_VERSION}WebChannel ${QT_MIN_VERSION} CONFIG)
+set_package_properties(Qt${QT_MAJOR_VERSION}WebChannel PROPERTIES
                        URL "git://code.qt.org/qt/qtwebchannel.git"
                        DESCRIPTION "Qt WebChannel module"
                        TYPE OPTIONAL
@@ -81,7 +81,7 @@ if(X11_FOUND)
 endif()
 
 set(WEBENGINE_SCRIPTING_ENABLED FALSE)
-if(Qt5WebEngineWidgets_FOUND AND Qt5WebChannel_FOUND)
+if(Qt${QT_MAJOR_VERSION}WebEngineWidgets_FOUND AND Qt${QT_MAJOR_VERSION}WebChannel_FOUND)
     set(WEBENGINE_SCRIPTING_ENABLED TRUE)
 endif()
 add_feature_info("Scripting plugin support" WEBENGINE_SCRIPTING_ENABLED "Support scripting plugins using WebEngine and WebChannel")
