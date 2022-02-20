@@ -1875,8 +1875,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             }
 
             return tooltip;
-#endif
+#else
             return QVariant(QVariant::String);
+#endif
         }
         case HeadingVmPSS: {
             if (process->vmPSS() == -1) {
