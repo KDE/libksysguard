@@ -1871,7 +1871,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
                 if (!tooltip.isEmpty()) {
                     tooltip += QLatin1Char('\n');
                 }
-                tooltip += QLatin1String("• ") + value->name;
+                tooltip += QStringLiteral("• ") + value->name;
             }
 
             return tooltip;
