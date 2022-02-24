@@ -11,7 +11,13 @@
 #define KSYSGUARD_HELPER_H
 
 #include <QObject>
+
+#include <kauth_version.h>
+#if KAUTH_VERSION >= QT_VERSION_CHECK(5, 92, 0)
+#include <KAuth/KAuth>
+#else
 #include <kauth.h>
+#endif
 
 using namespace KAuth;
 
