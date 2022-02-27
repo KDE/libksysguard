@@ -523,7 +523,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     });
 
     connect(this, &KSysGuard::Processes::updated, this, [this]() {
-        for (auto p : qAsConst(d->m_providers)) {
+        for (auto p : std::as_const(d->m_providers)) {
             if (p->enabled()) {
                 p->update();
             }
@@ -543,7 +543,7 @@ QVector<ProcessAttribute *> ExtendedProcesses::attributes() const
 QVector<ProcessAttribute *> ExtendedProcesses::extendedAttributes() const
 {
     QVector<ProcessAttribute *> rc;
-    for (auto p : qAsConst(d->m_providers)) {
+    for (auto p : std::as_const(d->m_providers)) {
         rc << p->attributes();
     }
     return rc;

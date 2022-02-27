@@ -31,7 +31,7 @@ struct Q_DECL_HIDDEN SensorTreeItem {
     inline int indexOf(const QString &segment)
     {
         int index = 0;
-        for (auto child : qAsConst(children)) {
+        for (auto child : std::as_const(children)) {
             if (child->segment == segment) {
                 return index;
             }
@@ -44,7 +44,7 @@ struct Q_DECL_HIDDEN SensorTreeItem {
     inline SensorTreeItem *itemAt(int index)
     {
         int currentIndex = 0;
-        for (auto child : qAsConst(children)) {
+        for (auto child : std::as_const(children)) {
             if (currentIndex++ == index) {
                 return child;
             }

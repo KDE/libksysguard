@@ -220,7 +220,7 @@ QJsonArray SensorFaceControllerPrivate::readSensors(const KConfigGroup &read, co
     QJsonArray newSensors;
     for (auto entry : original) {
         QString sensorId = entry.toString();
-        for (auto replacement : qAsConst(sensorIdReplacements)) {
+        for (auto replacement : std::as_const(sensorIdReplacements)) {
             auto match = replacement.first.match(sensorId);
             if (match.hasMatch()) {
                 sensorId.replace(replacement.first, replacement.second);

@@ -104,7 +104,7 @@ CGroupDataModel::CGroupDataModel(const QString &root, QObject *parent)
     attributes.append(new GroupNameAttribute(this));
     attributes.append(new AppNameAttribute(this));
     attributes.append(new AppIconAttribute(this));
-    for (auto attr : qAsConst(attributes)) {
+    for (auto attr : std::as_const(attributes)) {
         d->m_availableAttributes[attr->id()] = attr;
     }
 
@@ -175,7 +175,7 @@ QStringList CGroupDataModel::enabledAttributes() const
 {
     QStringList rc;
     rc.reserve(d->m_enabledAttributes.size());
-    for (auto attr : qAsConst(d->m_enabledAttributes)) {
+    for (auto attr : std::as_const(d->m_enabledAttributes)) {
         rc << attr->id();
     }
     return rc;
@@ -210,7 +210,7 @@ void CGroupDataModel::setEnabledAttributes(const QStringList &enabledAttributes)
         });
     }
 
-    for (auto unusedAttr : qAsConst(unusedAttributes)) {
+    for (auto unusedAttr : std::as_const(unusedAttributes)) {
         disconnect(unusedAttr, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
     }
 
@@ -405,7 +405,7 @@ void CGroupDataModel::update()
     d->m_oldGroups = d->m_cgroupMap;
 
     Processes::UpdateFlags flags;
-    for (auto attribute : qAsConst(d->m_enabledAttributes)) {
+    for (auto attribute : std::as_const(d->m_enabledAttributes)) {
         flags |= attribute->requiredUpdateFlags();
     }
 
@@ -415,7 +415,7 @@ void CGroupDataModel::update()
 
     update(d->m_rootGroup.data());
 
-    for (auto c : qAsConst(d->m_oldGroups)) {
+    for (auto c : std::as_const(d->m_oldGroups)) {
         int row = d->m_cGroups.indexOf(c);
         if (row >= 0) {
             beginRemoveRows(QModelIndex(), row, row);

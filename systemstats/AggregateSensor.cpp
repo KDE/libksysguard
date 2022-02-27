@@ -126,7 +126,7 @@ void AggregateSensor::subscribe()
     bool wasSubscribed = SensorProperty::isSubscribed();
     SensorProperty::subscribe();
     if (!wasSubscribed && isSubscribed()) {
-        for (auto sensor : qAsConst(d->sensors)) {
+        for (auto sensor : std::as_const(d->sensors)) {
             if (sensor) {
                 sensor->subscribe();
             }
@@ -139,7 +139,7 @@ void AggregateSensor::unsubscribe()
     bool wasSubscribed = SensorProperty::isSubscribed();
     SensorProperty::unsubscribe();
     if (wasSubscribed && !isSubscribed()) {
-        for (auto sensor : qAsConst(d->sensors)) {
+        for (auto sensor : std::as_const(d->sensors)) {
             if (sensor) {
                 sensor->unsubscribe();
             }

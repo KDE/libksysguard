@@ -217,7 +217,7 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
         });
     }
 
-    for (auto *unusedAttribute : qAsConst(unusedAttributes)) {
+    for (auto *unusedAttribute : std::as_const(unusedAttributes)) {
         disconnect(unusedAttribute, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
     }
 
@@ -367,7 +367,7 @@ void ProcessDataModel::Private::endMoveProcess()
 void ProcessDataModel::Private::update()
 {
     Processes::UpdateFlags flags;
-    for (auto attribute : qAsConst(m_enabledAttributes)) {
+    for (auto attribute : std::as_const(m_enabledAttributes)) {
         flags |= attribute->requiredUpdateFlags();
     }
 
