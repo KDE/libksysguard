@@ -23,7 +23,7 @@ KTextEditVT::KTextEditVT(QWidget *parent)
     escape_number1 = -1;
     escape_number_separator = false;
     escape_number2 = -1;
-    escape_code = 0;
+    escape_code = QChar(0);
     setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
@@ -45,7 +45,7 @@ void KTextEditVT::insertVTChar(const QChar &c)
                 }
             } else if (c == QLatin1Char(';')) {
                 escape_number_separator = true;
-            } else if (escape_OSC && c == 7) { // Throw away any letters that are not OSC
+            } else if (escape_OSC && c == QChar(7)) { // Throw away any letters that are not OSC
                 escape_code = c;
             } else if (escape_CSI)
                 escape_code = c;
@@ -93,7 +93,7 @@ void KTextEditVT::insertVTChar(const QChar &c)
                     break;
                 }
             }
-            escape_code = 0;
+            escape_code = QChar(0);
             escape_number1 = -1;
             escape_number2 = -1;
             escape_CSI = false;
@@ -101,19 +101,19 @@ void KTextEditVT::insertVTChar(const QChar &c)
             escape_sequence = false;
             escape_number_separator = false;
         }
-    } else if (c == 0x0d) {
+    } else if (c == QChar(0x0d)) {
         insertPlainText(QStringLiteral("\n"));
     } else if (c.isPrint() || c == QLatin1Char('\n')) {
         insertPlainText(c);
     } else if (mParseAnsi) {
-        if (c == 127 || c == 8) { // delete or backspace, respectively
+        if (c == QChar(127) || c == QChar(8)) { // delete or backspace, respectively
             textCursor().deletePreviousChar();
-        } else if (c == 27) { // escape key
+        } else if (c == QChar(27)) { // escape key
             escape_sequence = true;
-        } else if (c == 0x9b) { // CSI - equivalent to esc [
+        } else if (c == QChar(0x9b)) { // CSI - equivalent to esc [
             escape_sequence = true;
             escape_CSI = true;
-        } else if (c == 0x9d) { // OSC - equivalent to esc ]
+        } else if (c == QChar(0x9d)) { // OSC - equivalent to esc ]
             escape_sequence = true;
             escape_OSC = true;
         }
