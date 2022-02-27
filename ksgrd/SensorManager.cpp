@@ -194,7 +194,7 @@ void SensorManager::retranslate()
 
     for (int i = 0; i < 3; i++) {
         mDict.insert(QLatin1String("PECI Agent ") + QString::number(i), i18n("PECI Temperature Sensor %1", i + 1));
-        mDict.insert(QLatin1String("PECI Agent %1 Calibration").arg(i), i18n("PECI Temperature Calibration %1", i + 1));
+        mDict.insert(QLatin1String("PECI Agent %1 Calibration").arg(QString::number(i)), i18n("PECI Temperature Calibration %1", i + 1));
     }
 
     for (int i = 0; i < 32; i++) {
