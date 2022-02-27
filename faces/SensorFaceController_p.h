@@ -8,7 +8,7 @@
 
 #include <KConfigGroup>
 #include <KConfigLoader>
-#include <KDeclarative/ConfigPropertyMap>
+#include <KConfigPropertyMap>
 #include <KLocalizedContext>
 #include <KPackage/PackageLoader>
 #include <QJsonArray>
@@ -78,7 +78,7 @@ public:
     QQmlEngine *engine;
 
     KConfigGroup faceProperties;
-    KDeclarative::ConfigPropertyMap *faceConfiguration = nullptr;
+    KConfigPropertyMap *faceConfiguration = nullptr;
     KConfigLoader *faceConfigLoader = nullptr;
 
     bool configNeedsSave = false;

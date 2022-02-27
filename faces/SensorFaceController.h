@@ -15,11 +15,7 @@
 
 #include "sensorfaces_export.h"
 
-namespace KDeclarative
-{
-class ConfigPropertyMap;
-}
-
+class KConfigPropertyMap;
 class QQmlEngine;
 class KDesktopFile;
 class KConfigLoader;
@@ -114,7 +110,7 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
      * `main.xml` of the face.
      * @see faceConfigUi
      */
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceConfigurationChanged)
+    Q_PROPERTY(KConfigPropertyMap *faceConfiguration READ faceConfiguration NOTIFY faceConfigurationChanged)
 
     /**
      * The full representation of the current face. Typically includes additional elements like
@@ -191,7 +187,7 @@ public:
     QQuickItem *appearanceConfigUi();
     QQuickItem *sensorsConfigUi();
 
-    KDeclarative::ConfigPropertyMap *faceConfiguration() const;
+    KConfigPropertyMap *faceConfiguration() const;
 
     QString title() const;
     void setTitle(const QString &title);

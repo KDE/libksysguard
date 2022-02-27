@@ -13,7 +13,7 @@
 #include <QtQml>
 
 #include <KConfigLoader>
-#include <KDeclarative/ConfigPropertyMap>
+#include <KConfigPropertyMap>
 #include <KDesktopFile>
 #include <KLocalizedString>
 #include <KPackage/PackageLoader>
@@ -686,7 +686,7 @@ QString SensorFaceController::faceId() const
     return d->faceId;
 }
 
-KDeclarative::ConfigPropertyMap *SensorFaceController::faceConfiguration() const
+KConfigPropertyMap *SensorFaceController::faceConfiguration() const
 {
     return d->faceConfiguration;
 }
@@ -991,9 +991,6 @@ bool SensorFaceController::shouldSync() const
 void SensorFaceController::setShouldSync(bool sync)
 {
     d->shouldSync = sync;
-    if (d->faceConfiguration) {
-        d->faceConfiguration->setAutosave(sync);
-    }
     if (!d->shouldSync && d->syncTimer->isActive()) {
         d->syncTimer->stop();
     }
@@ -1016,9 +1013,8 @@ void SensorFaceController::reloadFaceConfiguration()
         }
 
         d->faceConfigLoader = new KConfigLoader(cg, &file, this);
-        d->faceConfiguration = new KDeclarative::ConfigPropertyMap(d->faceConfigLoader, this);
-        d->faceConfiguration->setAutosave(d->shouldSync);
-        connect(d->faceConfiguration, &KDeclarative::ConfigPropertyMap::valueChanged, this, [this](const QString &key) {
+        d->faceConfiguration = new KConfigPropertyMap(d->faceConfigLoader, this);
+        connect(d->faceConfiguration, &KConfigPropertyMap::valueChanged, this, [this](const QString &key) {
             auto item = d->faceConfigLoader->findItemByName(key);
             if (item) {
                 item->writeConfig(d->faceConfigLoader->config());

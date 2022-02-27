@@ -51,7 +51,7 @@ target_link_libraries(SensorFaces
         Qt::DBus
         KF5::I18n
         KF5::Package
-        KF5::Declarative
+        KF5::ConfigQml
         KF5::Solid
 )
 

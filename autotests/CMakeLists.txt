@@ -44,7 +44,7 @@ ecm_add_test(sensorfacecontrollertest.cpp LINK_LIBRARIES
     KF5::ConfigGui
     KF5::I18n
     KF5::Package
-    KF5::Declarative
+    KF5::ConfigQml
     KF5::Solid
     KSysGuard::SensorFaces
 )
