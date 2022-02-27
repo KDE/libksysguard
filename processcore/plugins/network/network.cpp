@@ -59,7 +59,11 @@ NetworkPlugin::NetworkPlugin(QObject *parent, const QVariantList &args)
             const QString line = QString::fromUtf8(m_process->readLine());
 
             // Each line consists of: timestamp|PID|pid|IN|in_bytes|OUT|out_bytes
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             const auto parts = line.splitRef(QLatin1Char('|'), Qt::SkipEmptyParts);
+#else
+            const auto parts = QStringView(line).split(QLatin1Char('|'), Qt::SkipEmptyParts);
+#endif
             if (parts.size() < 7) {
                 continue;
             }

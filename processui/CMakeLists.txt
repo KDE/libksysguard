@@ -57,7 +57,9 @@ target_include_directories(processui
 )
 
 if(X11_FOUND)
-    target_link_libraries(processui PRIVATE Qt::X11Extras KF5::WindowSystem)
+    if (QT_MAJOR_VERSION STREQUAL "5")
+       target_link_libraries(processui PRIVATE Qt::X11Extras KF5::WindowSystem)
+    endif()
 endif()
 
 if(WEBENGINE_SCRIPTING_ENABLED)

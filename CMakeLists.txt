@@ -71,7 +71,9 @@ set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
                         PURPOSE "Required for building the X11 based workspace"
                     )
 if(X11_FOUND)
-    find_package(Qt5X11Extras REQUIRED)
+    if (QT_MAJOR_VERSION STREQUAL "5")
+	    find_package(Qt5X11Extras REQUIRED)
+    endif()
     find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
     find_path(X11_XRes_INCLUDE_PATH X11/extensions/XRes.h ${X11_INC_SEARCH_PATH})
 

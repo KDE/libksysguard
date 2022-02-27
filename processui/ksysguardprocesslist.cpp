@@ -14,6 +14,7 @@
 
 #include <QAbstractItemModel>
 #include <QAction>
+#include <QActionGroup>
 #include <QApplication>
 #include <QComboBox>
 #include <QDBusMetaType>
