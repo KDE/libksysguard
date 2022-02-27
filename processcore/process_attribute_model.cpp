@@ -68,13 +68,13 @@ QVariant ProcessAttributeModel::data(const QModelIndex &index, int role) const
 
 QHash<int, QByteArray> ProcessAttributeModel::roleNames() const
 {
-    return QAbstractListModel::roleNames().unite({
-        {static_cast<int>(Role::Id), "id"},
-        {static_cast<int>(Role::Name), "name"},
-        {static_cast<int>(Role::ShortName), "shortName"},
-        {static_cast<int>(Role::Description), "description"},
-        {static_cast<int>(Role::Unit), "unit"},
-        {static_cast<int>(Role::Minimum), "minimum"},
-        {static_cast<int>(Role::Maximum), "maximum"},
-    });
+    QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
+    roles.insert(static_cast<int>(Role::Id), "id");
+    roles.insert(static_cast<int>(Role::Name), "name");
+    roles.insert(static_cast<int>(Role::ShortName), "shortName");
+    roles.insert(static_cast<int>(Role::Description), "description");
+    roles.insert(static_cast<int>(Role::Unit), "unit");
+    roles.insert(static_cast<int>(Role::Minimum), "minimum");
+    roles.insert(static_cast<int>(Role::Maximum), "maximum");
+    return roles;
 }

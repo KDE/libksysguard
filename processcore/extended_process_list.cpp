@@ -555,17 +555,12 @@ void ExtendedProcesses::Private::loadPlugins()
     // instantiate all plugins
     for (const auto &pluginMetaData : listMetaData) {
         qCDebug(LIBKSYSGUARD_PROCESSCORE) << "loading plugin" << pluginMetaData.name();
-        auto factory = qobject_cast<KPluginFactory *>(pluginMetaData.instantiate());
-        if (!factory) {
-            qCCritical(LIBKSYSGUARD_PROCESSCORE) << "failed to load plugin factory" << pluginMetaData.name();
-            continue;
-        }
-        ProcessDataProvider *provider = factory->create<ProcessDataProvider>(q);
-        if (!provider) {
+        auto provider = KPluginFactory::instantiatePlugin<ProcessDataProvider>(pluginMetaData);
+        if (!provider.plugin) {
             qCCritical(LIBKSYSGUARD_PROCESSCORE) << "failed to instantiate ProcessDataProvider" << pluginMetaData.name();
             continue;
         }
-        m_providers << provider;
+        m_providers << provider.plugin;
     }
 }
 
