@@ -6,8 +6,6 @@
 
 #include "FaceLoader.h"
 
-#include "SensorFaceController.h"
-
 using namespace KSysGuard;
 
 class Q_DECL_HIDDEN FaceLoader::Private

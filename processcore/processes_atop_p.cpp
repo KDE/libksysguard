@@ -303,7 +303,8 @@ QList<QPair<QDateTime, uint>> ProcessesATop::historiesAvailable() const
 
 QSet<long> ProcessesATop::getAllPids()
 {
-    return d->pids.toSet();
+    const QSet<long> pids(d->pids.cbegin(), d->pids.cend());
+    return pids;
 }
 
 Processes::Error ProcessesATop::sendSignal(long pid, int sig)

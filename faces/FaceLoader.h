@@ -10,11 +10,11 @@
 #include <QObject>
 #include <QQmlParserStatus>
 
+#include "SensorFaceController.h"
 #include "sensorfaces_export.h"
 
 namespace KSysGuard
 {
-class SensorFaceController;
 
 /**
  * A helper class to make it easier to load faces when used inside a face.
