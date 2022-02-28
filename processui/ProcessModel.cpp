@@ -31,6 +31,7 @@
 #include <QLocale>
 #include <QMimeData>
 #include <QPixmap>
+#include <QRegExp>
 #include <QTextDocument>
 #include <kcolorscheme.h>
 #include <kiconloader.h>
