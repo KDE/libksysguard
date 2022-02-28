@@ -128,7 +128,7 @@ add_feature_info(DESIGNERPLUGIN ${BUILD_DESIGNERPLUGIN} "Build plugin for Qt Des
 option(ENABLE_KAUTH_HELPER "Build and install ksysguardprocesslist_helper KAuth helper" ON)
 add_feature_info(KAUTH_HELPER ${ENABLE_KAUTH_HELPER} "Build and install ksysguardprocesslist_helper KAuth helper")
 
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055500)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055B00)
 add_definitions(-DKF_DEPRECATED_WARNINGS_SINCE=0x060000)
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 
