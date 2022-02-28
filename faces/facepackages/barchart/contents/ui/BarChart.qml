@@ -31,7 +31,7 @@ Charts.BarChart {
 
     stacked: controller.faceConfiguration.barChartStacked
 
-    spacing: Math.floor((width / barCount) * 0.05)
+    spacing: Math.floor(Kirigami.Units.smallSpacing / 2)
 
     readonly property real rangeFromY: controller.faceConfiguration.rangeFrom *
                                        controller.faceConfiguration.rangeFromMultiplier
