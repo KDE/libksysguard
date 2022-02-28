@@ -10,13 +10,21 @@ set(ksgrd_LIB_SRCS
    SensorSocketAgent.cpp
 )
 
+set(ksgrd_LIB_HEADERS
+    SensorAgent.h
+    SensorClient.h
+    SensorManager.h
+    SensorShellAgent.h
+    SensorSocketAgent.h
+)
+
 ecm_qt_declare_logging_category(ksgrd_LIB_SRCS HEADER ksgrd_debug.h IDENTIFIER LIBKSYSGUARD_KSGRD CATEGORY_NAME org.kde.libksysguard.ksgrd
     DESCRIPTION "libksysguard (ksgrd)" EXPORT LIBKSYSGUARD)
 add_definitions(-DTRANSLATION_DOMAIN=\"ksgrd\")
 
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
-add_library(ksgrd ${ksgrd_LIB_SRCS})
+add_library(ksgrd ${ksgrd_LIB_SRCS} ${ksgrd_LIB_HEADERS})
 add_library(KSysGuard::SysGuard ALIAS ksgrd)
 target_include_directories(ksgrd
     PUBLIC
@@ -43,11 +51,7 @@ set_target_properties(ksgrd PROPERTIES
 install(TARGETS ksgrd EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES
-    SensorAgent.h
-    SensorClient.h
-    SensorManager.h
-    SensorShellAgent.h
-    SensorSocketAgent.h
+    ${ksgrd_LIB_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/ksgrd
     COMPONENT Devel
 )

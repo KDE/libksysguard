@@ -3,6 +3,7 @@
 
 set(lsofui_LIB_SRCS
    lsof.cpp
+   lsof.h
 )
 
 ki18n_wrap_ui( lsofui_LIB_SRCS

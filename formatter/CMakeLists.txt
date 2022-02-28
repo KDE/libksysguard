@@ -18,7 +18,7 @@ ecm_qt_declare_logging_category(formatter_SRCS
     DESCRIPTION "libksysguard (formatter)" EXPORT LIBKSYSGUARD
 )
 
-add_library(Formatter ${formatter_SRCS})
+add_library(Formatter ${formatter_SRCS} ${formatter_HDRS})
 add_library(KSysGuard::Formatter ALIAS Formatter)
 
 target_link_libraries(Formatter

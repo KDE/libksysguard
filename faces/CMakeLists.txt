@@ -27,7 +27,7 @@ ecm_qt_declare_logging_category(faces_LIB_SRCS
 
 set_source_files_properties(org.kde.KSysGuardDaemon.xml PROPERTIES INCLUDE SensorInfo_p.h)
 
-add_library(SensorFaces ${faces_LIB_SRCS})
+add_library(SensorFaces ${faces_LIB_SRCS} ${faces_LIB_HEADERS})
 add_library(KSysGuard::SensorFaces ALIAS SensorFaces)
 
 target_include_directories(SensorFaces

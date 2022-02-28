@@ -1,6 +1,6 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-add_library(FacesPlugin SHARED FacesPlugin.cpp)
+add_library(FacesPlugin SHARED FacesPlugin.cpp FacesPlugin.h)
 
 target_link_libraries(FacesPlugin Qt::Qml KSysGuard::Sensors KSysGuard::SensorFaces  KF5::Package KF5::ConfigCore KF5::ConfigGui  KF5::ConfigQml)
 
