@@ -55,10 +55,11 @@ target_include_directories(processui
         "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
         "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard>"
 )
-
 if(X11_FOUND)
     if (QT_MAJOR_VERSION STREQUAL "5")
        target_link_libraries(processui PRIVATE Qt::X11Extras KF5::WindowSystem)
+    else()
+       target_link_libraries(processui PRIVATE Qt6::GuiPrivate KF5::WindowSystem)
     endif()
 endif()
 

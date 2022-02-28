@@ -72,8 +72,11 @@ set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
                     )
 if(X11_FOUND)
     if (QT_MAJOR_VERSION STREQUAL "5")
-	    find_package(Qt5X11Extras REQUIRED)
+        find_package(Qt5X11Extras REQUIRED)
+    elseif (QT_MAJOR_VERSION STREQUAL "6")
+        find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
     endif()
+    set(HAVE_X11 1)
     find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
     find_path(X11_XRes_INCLUDE_PATH X11/extensions/XRes.h ${X11_INC_SEARCH_PATH})
 
