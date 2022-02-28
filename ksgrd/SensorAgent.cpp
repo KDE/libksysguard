@@ -42,7 +42,6 @@ SensorAgent::~SensorAgent()
 
 void SensorAgent::sendRequest(const QString &req, SensorClient *client, int id)
 {
-    SensorRequest *sensorreq = nullptr;
     SensorRequest nRequest{req, client, id};
     if (mUnderwayRequests.contains(nRequest))
         return;
