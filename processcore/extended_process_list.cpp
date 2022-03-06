@@ -555,7 +555,7 @@ void ExtendedProcesses::Private::loadPlugins()
     // instantiate all plugins
     for (const auto &pluginMetaData : listMetaData) {
         qCDebug(LIBKSYSGUARD_PROCESSCORE) << "loading plugin" << pluginMetaData.name();
-        auto provider = KPluginFactory::instantiatePlugin<ProcessDataProvider>(pluginMetaData);
+        auto provider = KPluginFactory::instantiatePlugin<ProcessDataProvider>(pluginMetaData, q);
         if (!provider.plugin) {
             qCCritical(LIBKSYSGUARD_PROCESSCORE) << "failed to instantiate ProcessDataProvider" << pluginMetaData.name();
             continue;
