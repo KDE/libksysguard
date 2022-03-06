@@ -1405,9 +1405,9 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(index.internalPointer());
             const QVariant value = d->mExtraAttributes[attr]->data(process);
             if (value.canConvert(QMetaType::LongLong) && static_cast<QMetaType::Type>(value.type()) != QMetaType::QString) {
-                return Qt::AlignRight + Qt::AlignVCenter;
+                return (int)(Qt::AlignRight | Qt::AlignVCenter);
             }
-            return Qt::AlignLeft + Qt::AlignVCenter;
+            return (int)(Qt::AlignLeft | Qt::AlignVCenter);
         }
         }
         return QVariant();

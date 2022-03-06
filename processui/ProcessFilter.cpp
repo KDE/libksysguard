@@ -21,7 +21,7 @@
 
 bool ProcessFilter::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-    if ((mFilter == AllProcesses || mFilter == AllProcessesInTreeForm) && filterRegExp().isEmpty())
+    if ((mFilter == AllProcesses || mFilter == AllProcessesInTreeForm) && filterRegularExpression().pattern().isEmpty())
         return true; // Shortcut for common case
 
     ProcessModel *model = static_cast<ProcessModel *>(sourceModel());
@@ -91,17 +91,17 @@ bool ProcessFilter::filterAcceptsRow(int source_row, const QModelIndex &source_p
     }
 
     if (accepted) {
-        if (filterRegExp().isEmpty())
+        if (filterRegularExpression().pattern().isEmpty())
             return true;
 
         // Allow the user to search by PID
-        if (QString::number(process->pid()).contains(filterRegExp()))
+        if (QString::number(process->pid()).contains(filterRegularExpression()))
             return true;
         // None of our tests have rejected it.  Pass it on to qsortfilterproxymodel's filter
         if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
             return true;
 
-        auto strings = filterRegExp().pattern().split(QLatin1Char(','), Qt::SkipEmptyParts);
+        auto strings = filterRegularExpression().pattern().split(QLatin1Char(','), Qt::SkipEmptyParts);
         for (auto string : strings) {
             string = string.trimmed();
             if (process->name().indexOf(string) != -1 || QString::number(process->pid()).indexOf(string) != -1) {
