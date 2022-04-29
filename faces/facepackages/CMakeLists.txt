@@ -4,6 +4,7 @@ function(install_sensorchart_face name)
 endfunction()
 
 install_sensorchart_face(barchart)
+install_sensorchart_face(colorgrid)
 install_sensorchart_face(linechart)
 install_sensorchart_face(piechart)
 install_sensorchart_face(textonly)
