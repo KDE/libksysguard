@@ -95,6 +95,9 @@ makeSensorsFeatureSensor(const QString &id, const sensors_chip_name *const chipN
         break;
     case SENSORS_FEATURE_POWER:
         valueFeature = sensors_get_subfeature(chipName, feature, SENSORS_SUBFEATURE_POWER_INPUT);
+        if (!valueFeature) {
+            valueFeature = sensors_get_subfeature(chipName, feature, SENSORS_SUBFEATURE_POWER_AVERAGE);
+        }
         unit = UnitWatt;
         maximum = getValueOfFirstExisting({SENSORS_SUBFEATURE_POWER_CRIT, SENSORS_SUBFEATURE_POWER_MAX});
         break;
