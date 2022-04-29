@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QStandardPaths>
 #include <QStringView>
 #include <QThreadPool>
 
@@ -173,6 +174,12 @@ KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
     const QString appId = unescapeName(appIdMatch.captured(2));
 
     KService::Ptr service = KService::serviceByMenuId(appId + QStringLiteral(".desktop"));
+    if (!service && processGroup.endsWith(QLatin1String("@autostart.service"))) {
+        auto file = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, QLatin1String("autostart/%1.desktop").arg(appId));
+        if (!file.isEmpty()) {
+            service = new KService(file);
+        }
+    }
     if (!service) {
         service = new KService(appId, QString(), QString());
     }

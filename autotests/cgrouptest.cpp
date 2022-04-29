@@ -4,6 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 #include <QObject>
+#include <QStandardPaths>
 #include <QTest>
 #define private public
 #include "cgroup.h"
@@ -45,6 +46,14 @@ private Q_SLOTS:
         } else {
             QCOMPARE(c.service()->desktopEntryName(), desktopName.toLower());
         }
+    }
+
+    void findAutostartApplication()
+    {
+        qputenv("XDG_CONFIG_DIRS", QFINDTESTDATA("data").toLocal8Bit());
+        KSysGuard::CGroup cgroup("app-org.kde.korgac@autostart.service");
+        QCOMPARE(cgroup.service()->desktopEntryName(), "org.kde.korgac");
+        QCOMPARE(cgroup.service()->name(), "KOrganizer Reminder Client");
     }
 };
 QTEST_MAIN(CGroupTest);
