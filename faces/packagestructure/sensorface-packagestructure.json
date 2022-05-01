@@ -31,6 +31,7 @@
                 "Name[sk]": "Marco Martin",
                 "Name[sl]": "Marco Martin",
                 "Name[sv]": "Marco Martin",
+                "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin"
@@ -66,6 +67,7 @@
                 "Name[sk]": "Aaron Seigo",
                 "Name[sl]": "Aaron Seigo",
                 "Name[sv]": "Aaron Seigo",
+                "Name[tr]": "Aaron Seigo",
                 "Name[uk]": "Aaron Seigo",
                 "Name[x-test]": "xxAaron Seigoxx",
                 "Name[zh_CN]": "Aaron Seigo"
@@ -98,6 +100,7 @@
         "Name[sk]": "Tvár pre senzor KSysguard",
         "Name[sl]": "Obraz za obraz senzorja KSysguard",
         "Name[sv]": "Front för systemövervakaren",
+        "Name[tr]": "KSysGuard Sensör Yüzü için Yüz",
         "Name[uk]": "Оболонка для датчиків KSysguard",
         "Name[x-test]": "xxFace for the KSysguard Sensor Facexx",
         "Name[zh_CN]": "KSysguard 传感器面板的面板",
