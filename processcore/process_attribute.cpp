@@ -6,7 +6,6 @@
 
 #include "process_attribute.h"
 #include "cgroup.h"
-#include "processes.h"
 
 #include <QMetaMethod>
 
