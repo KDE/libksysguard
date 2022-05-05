@@ -54,7 +54,7 @@ public:
      */
     bool waitForFinished();
 
-    Q_SIGNAL void finished(const SensorQuery *query);
+    Q_SIGNAL void finished(SensorQuery *query);
 
 private:
     friend class Sensor;

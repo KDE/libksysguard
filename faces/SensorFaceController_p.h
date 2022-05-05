@@ -25,6 +25,7 @@ namespace KSysGuard
 {
 class SensorFaceController;
 class SensorFace;
+class SensorQuery;
 
 class FacesModel : public QStandardItemModel
 {
@@ -59,6 +60,21 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 };
 
+struct SensorResolver {
+    SensorResolver(SensorFaceController *_controller, const QJsonArray &_expected);
+    void execute();
+
+    SensorFaceController *controller = nullptr;
+
+    QJsonArray expected;
+    QJsonArray found;
+    QJsonArray missing;
+
+    QVector<SensorQuery *> queries;
+
+    std::function<void(SensorResolver *)> callback;
+};
+
 // This is exported so we can use it in autotests
 class SENSORFACES_EXPORT SensorFaceControllerPrivate
 {
@@ -69,7 +85,7 @@ public:
     QJsonArray readAndUpdateSensors(KConfigGroup &config, const QString &entryName);
     QString replaceDiskId(const QString &entryname) const;
     QString replacePartitionId(const QString &entryname) const;
-    void resolveSensors(const QJsonArray &partialEntries, std::function<void(const QJsonArray &)> callback);
+    void resolveSensors(const QJsonArray &partialEntries, std::function<void(SensorResolver *)>);
     SensorFace *createGui(const QString &qmlPath);
     QQuickItem *createConfigUi(const QString &file, const QVariantMap &initialProperties);
 
@@ -99,6 +115,7 @@ public:
     QJsonArray totalSensors;
     QJsonArray highPrioritySensorIds;
     QJsonArray lowPrioritySensorIds;
+    QJsonArray missingSensors;
 
     QTimer *syncTimer;
     bool shouldSync = true;

@@ -126,6 +126,39 @@ QHash<int, QByteArray> PresetsModel::roleNames() const
     return roles;
 }
 
+SensorResolver::SensorResolver(SensorFaceController *_controller, const QJsonArray &_expected)
+    : controller(_controller)
+    , expected(_expected)
+{
+}
+
+void SensorResolver::execute()
+{
+    std::transform(expected.begin(), expected.end(), std::back_inserter(queries), [this](const QJsonValue &entry) {
+        auto query = new SensorQuery{entry.toString()};
+        query->connect(query, &KSysGuard::SensorQuery::finished, controller, [this](SensorQuery *query) {
+            query->sortByName();
+            query->deleteLater();
+
+            const auto ids = query->sensorIds();
+            if (ids.isEmpty()) {
+                missing.append(query->path());
+            } else {
+                std::transform(ids.begin(), ids.end(), std::back_inserter(found), [](const QString &id) {
+                    return id;
+                });
+            }
+
+            queries.removeOne(query);
+            if (queries.isEmpty()) {
+                callback(this);
+            }
+        });
+        query->execute();
+        return query;
+    });
+}
+
 QVector<QPair<QRegularExpression, QString>> KSysGuard::SensorFaceControllerPrivate::sensorIdReplacements;
 QRegularExpression SensorFaceControllerPrivate::oldDiskSensor = QRegularExpression(QStringLiteral("^disk\\/(.+)_\\(\\d+:\\d+\\)"));
 QRegularExpression SensorFaceControllerPrivate::oldPartitionSensor = QRegularExpression(QStringLiteral("^partitions(\\/.+)\\/"));
@@ -248,31 +281,22 @@ QJsonArray SensorFaceControllerPrivate::readAndUpdateSensors(KConfigGroup &confi
     return newSensors;
 }
 
-void SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partialEntries, std::function<void(const QJsonArray &)> callback)
+void SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partialEntries, std::function<void(SensorResolver *)> callback)
 {
-    if (partialEntries.isEmpty()) {
-        callback(partialEntries);
-        return;
-    }
+    auto resolver = new SensorResolver{q, partialEntries};
+    resolver->callback = [this, callback](SensorResolver *resolver) {
+        callback(resolver);
 
-    auto sensors = std::make_shared<QJsonArray>();
-
-    for (const auto &id : partialEntries) {
-        auto query = new KSysGuard::SensorQuery{id.toString()};
-        query->connect(query, &KSysGuard::SensorQuery::finished, q, [this, query, sensors, callback] {
-            query->sortByName();
-            const auto ids = query->sensorIds();
-            delete query;
-            std::transform(ids.begin(), ids.end(), std::back_inserter(*sensors), [](const QString &id) {
-                return QJsonValue(id);
-            });
-            if (sensors.use_count() == 1) {
-                // We are the last query
-                callback(*sensors);
+        if (!resolver->missing.isEmpty()) {
+            for (const auto &entry : std::as_const(resolver->missing)) {
+                missingSensors.append(entry);
             }
-        });
-        query->execute();
-    }
+            Q_EMIT q->missingSensorsChanged();
+        }
+
+        delete resolver;
+    };
+    resolver->execute();
 }
 
 SensorFace *SensorFaceControllerPrivate::createGui(const QString &qmlPath)
@@ -359,16 +383,16 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
 
     d->contextObj = new KLocalizedContext(this);
 
-    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")), [this](const QJsonArray &resolvedSensors) {
-        d->totalSensors = resolvedSensors;
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")), [this](SensorResolver *resolver) {
+        d->totalSensors = resolver->found;
         Q_EMIT totalSensorsChanged();
     });
-    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")), [this](const QJsonArray &resolvedSensors) {
-        d->lowPrioritySensorIds = resolvedSensors;
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")), [this](SensorResolver *resolver) {
+        d->lowPrioritySensorIds = resolver->found;
         Q_EMIT lowPrioritySensorIdsChanged();
     });
-    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")), [this](const QJsonArray &resolvedSensors) {
-        d->highPrioritySensorIds = resolvedSensors;
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")), [this](SensorResolver *resolver) {
+        d->highPrioritySensorIds = resolver->found;
         Q_EMIT highPrioritySensorIdsChanged();
     });
 
@@ -459,11 +483,11 @@ void SensorFaceController::setTotalSensors(const QJsonArray &totalSensors)
     d->totalSensors = totalSensors;
     d->syncTimer->start();
     Q_EMIT totalSensorsChanged();
-    d->resolveSensors(totalSensors, [this](const QJsonArray &resolvedSensors) {
-        if (resolvedSensors == d->totalSensors) {
+    d->resolveSensors(totalSensors, [this](SensorResolver *resolver) {
+        if (resolver->found == d->totalSensors) {
             return;
         }
-        d->totalSensors = resolvedSensors;
+        d->totalSensors = resolver->found;
         Q_EMIT totalSensorsChanged();
     });
 }
@@ -487,13 +511,18 @@ void SensorFaceController::setHighPrioritySensorIds(const QJsonArray &highPriori
     d->syncTimer->start();
     d->highPrioritySensorIds = highPrioritySensorIds;
     Q_EMIT highPrioritySensorIdsChanged();
-    d->resolveSensors(highPrioritySensorIds, [this](const QJsonArray &resolvedSensors) {
-        if (resolvedSensors == d->highPrioritySensorIds) {
+    d->resolveSensors(highPrioritySensorIds, [this](SensorResolver *resolver) {
+        if (resolver->found == d->highPrioritySensorIds) {
             return;
         }
-        d->highPrioritySensorIds = resolvedSensors;
+        d->highPrioritySensorIds = resolver->found;
         Q_EMIT highPrioritySensorIdsChanged();
     });
+}
+
+QJsonArray KSysGuard::SensorFaceController::missingSensors() const
+{
+    return d->missingSensors;
 }
 
 QVariantMap SensorFaceController::sensorColors() const
@@ -575,11 +604,11 @@ void SensorFaceController::setLowPrioritySensorIds(const QJsonArray &lowPriority
     d->lowPrioritySensorIds = lowPrioritySensorIds;
     d->syncTimer->start();
     Q_EMIT lowPrioritySensorIdsChanged();
-    d->resolveSensors(lowPrioritySensorIds, [this](const QJsonArray &resolvedSensors) {
-        if (resolvedSensors == d->lowPrioritySensorIds) {
+    d->resolveSensors(lowPrioritySensorIds, [this](SensorResolver *resolver) {
+        if (resolver->found == d->lowPrioritySensorIds) {
             return;
         }
-        d->lowPrioritySensorIds = resolvedSensors;
+        d->lowPrioritySensorIds = resolver->found;
         Q_EMIT lowPrioritySensorIdsChanged();
     });
 }
@@ -791,16 +820,19 @@ void SensorFaceController::reloadConfig()
         d->faceConfigLoader->load();
     }
 
-    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")), [this](const QJsonArray &resolvedSensors) {
-        d->totalSensors = resolvedSensors;
+    d->missingSensors = QJsonArray{};
+    Q_EMIT missingSensorsChanged();
+
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")), [this](SensorResolver *resolver) {
+        d->totalSensors = resolver->found;
         Q_EMIT totalSensorsChanged();
     });
-    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")), [this](const QJsonArray &resolvedSensors) {
-        d->lowPrioritySensorIds = resolvedSensors;
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds")), [this](SensorResolver *resolver) {
+        d->lowPrioritySensorIds = resolver->found;
         Q_EMIT lowPrioritySensorIdsChanged();
     });
-    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")), [this](const QJsonArray &resolvedSensors) {
-        d->highPrioritySensorIds = resolvedSensors;
+    d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds")), [this](SensorResolver *resolver) {
+        d->highPrioritySensorIds = resolver->found;
         Q_EMIT highPrioritySensorIdsChanged();
     });
 

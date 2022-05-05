@@ -156,6 +156,10 @@ class SENSORFACES_EXPORT SensorFaceController : public QObject
      * The minimum time that needs to elapse, in milliseconds, between updates of the face.
      */
     Q_PROPERTY(int updateRateLimit READ updateRateLimit WRITE setUpdateRateLimit NOTIFY updateRateLimitChanged)
+    /**
+     * Contains the paths of missing sensors, if there are any.
+     */
+    Q_PROPERTY(QJsonArray missingSensors READ missingSensors NOTIFY missingSensorsChanged)
 
 public:
     /**
@@ -205,6 +209,8 @@ public:
 
     QJsonArray lowPrioritySensorIds() const;
     void setLowPrioritySensorIds(const QJsonArray &ids);
+
+    QJsonArray missingSensors() const;
 
     QVariantMap sensorColors() const;
     void setSensorColors(const QVariantMap &colors);
@@ -280,6 +286,7 @@ Q_SIGNALS:
     void sensorLabelsChanged();
     void updateRateLimitChanged();
     void faceConfigurationChanged();
+    void missingSensorsChanged();
 
 private:
     const std::unique_ptr<SensorFaceControllerPrivate> d;
