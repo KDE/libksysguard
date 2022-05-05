@@ -131,7 +131,7 @@ ColumnLayout {
         text: i18ndp("KSysGuardSensorFaces", "Total Sensor", "Total Sensors", controller.maxTotalSensors)
         visible: controller.supportsTotalSensors
     }
-    Local.Choices {
+    Faces.Choices {
         id: totalChoice
         Layout.fillWidth: true
         visible: controller.supportsTotalSensors
@@ -149,7 +149,7 @@ ColumnLayout {
     QQC2.Label {
         text: i18nd("KSysGuardSensorFaces", "Sensors")
     }
-    Local.Choices {
+    Faces.Choices {
         id: highPriorityChoice
         Layout.fillWidth: true
         supportsColors: controller.supportsSensorsColors
@@ -176,7 +176,7 @@ ColumnLayout {
         text: i18nd("KSysGuardSensorFaces", "Text-Only Sensors")
         visible: controller.supportsLowPrioritySensors
     }
-    Local.Choices {
+    Faces.Choices {
         id: lowPriorityChoice
         Layout.fillWidth: true
         visible: controller.supportsLowPrioritySensors

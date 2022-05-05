@@ -10,5 +10,6 @@ install(FILES
     ExtendedLegend.qml
     SensorFace.qml
     SensorRangeSpinBox.qml
+    Choices.qml
     DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/faces
 )

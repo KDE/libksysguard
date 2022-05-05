@@ -6,11 +6,11 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.14
-import QtQuick.Window 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.14
-import QtQml.Models 2.12
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQml.Models 2.15
 
 import org.kde.kirigami 2.12 as Kirigami
 import org.kde.kitemmodels 1.0 as KItemModels
@@ -48,6 +48,8 @@ Control {
     background: TextField {
         readOnly: true
         hoverEnabled: false
+
+        placeholderText: control.selected.length == 0 ? i18nc("@label", "Click to select a sensor…") : ""
 
         onFocusChanged: {
             if (focus && (maxAllowedSensors <= 0 || repeater.count < maxAllowedSensors)) {
@@ -112,7 +114,7 @@ Control {
                     DragHandler {
                         id: drag
                         //TODO: uncomment as soon as we can depend from 5.15
-                        //cursorShape: active ? Qt.ClosedHandCursor : Qt.OpenHandCursor
+                        cursorShape: active ? Qt.ClosedHandCursor : Qt.OpenHandCursor
                         enabled: selectedModel.count > 1
                         onActiveChanged: {
                             if (active) {
@@ -211,7 +213,12 @@ Control {
                             Label {
                                 id: label
                                 Layout.fillWidth: true
-                                text: control.labels[sensor.sensorId] || sensor.name
+                                text: {
+                                    if (!control.labels || !control.labels[sensor.sensorId]) {
+                                        return sensor.name
+                                    }
+                                    return control.labels[sensor.sensorId]
+                                }
                                 elide: Text.ElideRight
 
                                 HoverHandler { id: handler }
