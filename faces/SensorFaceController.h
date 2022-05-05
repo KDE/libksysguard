@@ -274,6 +274,17 @@ public:
      */
     Q_INVOKABLE void reloadFaceConfiguration();
 
+    /**
+     * Replace one sensor with another.
+     *
+     * This replaces a configured sensor with a new one. This replacement happens
+     * inside the configuration, bypassing thing like the sensor properties which
+     * are populated with resolved sensor ids rather than the configured entries.
+     *
+     * You should call @ref reloadConfig once you have made all replacements.
+     */
+    Q_INVOKABLE void replaceSensors(const QString &from, const QString &to);
+
 Q_SIGNALS:
     void faceIdChanged();
     void titleChanged();

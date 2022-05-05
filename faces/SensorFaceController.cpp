@@ -1062,4 +1062,25 @@ void SensorFaceController::reloadFaceConfiguration()
     }
 }
 
+void KSysGuard::SensorFaceController::replaceSensors(const QString &from, const QString &to)
+{
+    auto replaceSensors = [this, from, to](const QString &configEntry) {
+        auto array = QJsonDocument::fromJson(d->sensorsGroup.readEntry(configEntry, QString()).toUtf8()).array();
+        for (auto itr = array.begin(); itr != array.end(); ++itr) {
+            if (itr->toString() == from) {
+                *itr = QJsonValue(to);
+            }
+        }
+        return QJsonDocument(array).toJson(QJsonDocument::Compact);
+    };
+
+    d->sensorsGroup.writeEntry("totalSensors", replaceSensors(QStringLiteral("totalSensors")));
+    d->sensorsGroup.writeEntry("highPrioritySensorIds", replaceSensors(QStringLiteral("highPrioritySensorIds")));
+    d->sensorsGroup.writeEntry("lowPrioritySensorIds", replaceSensors(QStringLiteral("lowPrioritySensorIds")));
+
+    if (d->shouldSync) {
+        d->sensorsGroup.sync();
+    }
+}
+
 #include "moc_SensorFaceController.cpp"
