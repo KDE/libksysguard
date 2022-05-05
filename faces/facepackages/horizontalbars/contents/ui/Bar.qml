@@ -24,16 +24,24 @@ Rectangle {
     color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 40})
     radius: height/2
     property Sensors.Sensor sensor
+    property int value: Math.min(Math.max(Math.round(width * (sensor.value / sensor.maximum)), 0), width)
 
     Rectangle {
         anchors {
             left: parent.left
-            top: parent.top
-            bottom: parent.bottom
+            verticalCenter: parent.verticalCenter
         }
         color: root.colorSource.map[modelData]
-        radius: height/2
-        width: Math.min(Math.max(height, parent.width * (bar.sensor.value / bar.sensor.maximum)), parent.width)
+        radius: parent.radius
+        /* Ensures that the bar has even spacing on top and bottom. */
+        function bumpHeight (value) {
+            return value + (parent.height - value) % 2;
+        }
+        height: {
+            let value = Math.min(parent.height, parent.value)
+            return value + (parent.height - value) % 2;
+        }
+        width: Math.max(height, parent.value)
     }
 }
 
