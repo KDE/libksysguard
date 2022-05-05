@@ -20,6 +20,7 @@ Control {
     id: control
 
     property bool supportsColors: true
+    property bool labelsEditable: true
     property int maxAllowedSensors: -1
     property var selected: []
     property var colors: {}
@@ -229,6 +230,7 @@ Control {
                             }
                             ToolButton {
                                 id: editButton
+                                visible: control.labelsEditable
                                 icon.name: "document-edit"
                                 icon.width: Kirigami.Units.iconSizes.small
                                 icon.height: Kirigami.Units.iconSizes.small
