@@ -34,9 +34,6 @@ Rectangle {
         color: root.colorSource.map[modelData]
         radius: parent.radius
         /* Ensures that the bar has even spacing on top and bottom. */
-        function bumpHeight (value) {
-            return value + (parent.height - value) % 2;
-        }
         height: {
             let value = Math.min(parent.height, parent.value)
             return value + (parent.height - value) % 2;
