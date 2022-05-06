@@ -7,7 +7,10 @@
 
 #include "SensorTreeModel.h"
 
+#include <optional>
+
 #include <KLocalizedString>
+#include <QCollator>
 #include <QDebug>
 #include <QMetaEnum>
 #include <QMimeData>
@@ -23,16 +26,44 @@
 
 using namespace KSysGuard;
 
+struct Compare {
+    bool operator()(const QString &first, const QString &second) const
+    {
+        // Place "All" object at the top.
+        if (first == QLatin1String("all") && first != second) {
+            return true;
+        }
+
+        if (second == QLatin1String("all")) {
+            return false;
+        }
+
+        if (!collator) {
+            collator = QCollator();
+            collator->setNumericMode(true);
+            collator->setCaseSensitivity(Qt::CaseInsensitive);
+        }
+
+        return collator->compare(first, second) == -1;
+    }
+
+    // This uses thread-local storage because QCollator may not be thread safe.
+    // We store it in an optional to make sure we can initialize it above.
+    thread_local static std::optional<QCollator> collator;
+};
+
+thread_local std::optional<QCollator> Compare::collator = std::nullopt;
+
 struct Q_DECL_HIDDEN SensorTreeItem {
     SensorTreeItem *parent = nullptr;
     QString segment;
-    QMap<QString, SensorTreeItem *> children;
+    std::map<QString, SensorTreeItem *, Compare> children;
 
     inline int indexOf(const QString &segment)
     {
         int index = 0;
-        for (auto child : std::as_const(children)) {
-            if (child->segment == segment) {
+        for (const auto &[key, value] : std::as_const(children)) {
+            if (value->segment == segment) {
                 return index;
             }
             index++;
@@ -44,9 +75,9 @@ struct Q_DECL_HIDDEN SensorTreeItem {
     inline SensorTreeItem *itemAt(int index)
     {
         int currentIndex = 0;
-        for (auto child : std::as_const(children)) {
+        for (const auto &[key, value] : std::as_const(children)) {
             if (currentIndex++ == index) {
-                return child;
+                return value;
             }
         }
         return nullptr;
@@ -54,7 +85,9 @@ struct Q_DECL_HIDDEN SensorTreeItem {
 
     ~SensorTreeItem()
     {
-        qDeleteAll(children);
+        std::for_each(children.begin(), children.end(), [](const auto &item) {
+            delete item.second;
+        });
     }
 };
 
@@ -121,14 +154,11 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
             addSensor(sensorIdExpr, newInfo);
         }
     }
+
     SensorTreeItem *item = rootItem;
-
     for (auto segment : segments) {
-        auto child = item->children.value(segment, nullptr);
-
-        if (child) {
-            item = child;
-
+        if (auto itr = item->children.find(segment); itr != item->children.end() && itr->second) {
+            item = itr->second;
         } else {
             SensorTreeItem *newItem = new SensorTreeItem();
             newItem->parent = item;
@@ -136,10 +166,10 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
 
             const QModelIndex &parentIndex = (item == rootItem) ? QModelIndex() : q->createIndex(item->parent->indexOf(item->segment), 0, item);
 
-            auto index = std::distance(item->children.begin(), item->children.upperBound(segment));
+            auto index = std::distance(item->children.begin(), item->children.upper_bound(segment));
 
             q->beginInsertRows(parentIndex, index, index);
-            item->children.insert(segment, newItem);
+            item->children[segment] = newItem;
             q->endInsertRows();
 
             item = newItem;
@@ -176,7 +206,11 @@ void SensorTreeModel::Private::removeSensor(const QString &sensorId)
 
         const QModelIndex &parentIndex = (parent == rootItem) ? QModelIndex() : q->createIndex(parent->parent->indexOf(parent->segment), 0, parent);
         q->beginRemoveRows(parentIndex, index, index);
-        delete item->parent->children.take(item->segment);
+
+        auto itr = item->parent->children.find(item->segment);
+        delete itr->second;
+        item->parent->children.erase(itr);
+
         q->endRemoveRows();
 
         sensorInfos.remove(item);
@@ -184,7 +218,7 @@ void SensorTreeModel::Private::removeSensor(const QString &sensorId)
 
     remove(item, parent);
 
-    while (!parent->children.count()) {
+    while (!parent->children.size()) {
         item = parent;
         parent = parent->parent;
 
@@ -217,8 +251,9 @@ SensorTreeItem *KSysGuard::SensorTreeModel::Private::find(const QString &sensorI
     auto item = rootItem;
     const auto segments = sensorId.split(QLatin1Char('/'));
     for (const QString &segment : segments) {
-        item = item->children.value(segment, nullptr);
-        if (!item) {
+        if (auto itr = item->children.find(segment); itr != item->children.end() && itr->second) {
+            item = itr->second;
+        } else {
             return nullptr;
         }
     }
@@ -347,10 +382,10 @@ int SensorTreeModel::rowCount(const QModelIndex &parent) const
         }
 
         const SensorTreeItem *item = static_cast<SensorTreeItem *>(parent.internalPointer());
-        return item->children.count();
+        return item->children.size();
     }
 
-    return d->rootItem->children.count();
+    return d->rootItem->children.size();
 }
 
 int SensorTreeModel::columnCount(const QModelIndex &parent) const
@@ -372,7 +407,7 @@ QModelIndex SensorTreeModel::index(int row, int column, const QModelIndex &paren
         parentItem = static_cast<SensorTreeItem *>(parent.internalPointer());
     }
 
-    if (row < 0 || row >= parentItem->children.count()) {
+    if (row < 0 || row >= int(parentItem->children.size())) {
         return QModelIndex();
     }
 
