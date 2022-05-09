@@ -938,8 +938,8 @@ void SensorFaceController::savePreset()
     cg.sync();
 
     QDir subDir(dir.path());
-    subDir.mkdir(QStringLiteral("contents"));
-    KConfig faceConfig(subDir.path() % QStringLiteral("/contents/faceproperties"));
+    subDir.mkpath(QStringLiteral("contents/config"));
+    KConfig faceConfig(subDir.path() % QStringLiteral("/contents/config/faceproperties"));
 
     KConfigGroup configGroup(&faceConfig, "Config");
     configGroup.writeEntry(QStringLiteral("totalSensors"), QJsonDocument(totalSensors()).toJson(QJsonDocument::Compact));
