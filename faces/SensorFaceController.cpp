@@ -942,9 +942,14 @@ void SensorFaceController::savePreset()
     KConfig faceConfig(subDir.path() % QStringLiteral("/contents/config/faceproperties"));
 
     KConfigGroup configGroup(&faceConfig, "Config");
-    configGroup.writeEntry(QStringLiteral("totalSensors"), QJsonDocument(totalSensors()).toJson(QJsonDocument::Compact));
-    configGroup.writeEntry(QStringLiteral("highPrioritySensorIds"), QJsonDocument(highPrioritySensorIds()).toJson(QJsonDocument::Compact));
-    configGroup.writeEntry(QStringLiteral("lowPrioritySensorIds"), QJsonDocument(lowPrioritySensorIds()).toJson(QJsonDocument::Compact));
+
+    auto sensors = d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors"));
+    configGroup.writeEntry(QStringLiteral("totalSensors"), QJsonDocument(sensors).toJson(QJsonDocument::Compact));
+    sensors = d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("highPrioritySensorIds"));
+    configGroup.writeEntry(QStringLiteral("highPrioritySensorIds"), QJsonDocument(sensors).toJson(QJsonDocument::Compact));
+    sensors = d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("lowPrioritySensorIds"));
+    configGroup.writeEntry(QStringLiteral("lowPrioritySensorIds"), QJsonDocument(sensors).toJson(QJsonDocument::Compact));
+    configGroup.writeEntry(QStringLiteral("chartFace"), faceId());
 
     KConfigGroup colorsGroup(&faceConfig, "SensorColors");
     d->colorsGroup.copyTo(&colorsGroup);
