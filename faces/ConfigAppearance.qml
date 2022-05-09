@@ -126,7 +126,6 @@ Kirigami.FormLayout {
             id: saveButton
             icon.name: "document-save"
             text: i18nd("KSysGuardSensorFaces", "Save Settings As Preset")
-            enabled: controller.currentPreset.length == 0
             onClicked: controller.savePreset();
         }
     }
