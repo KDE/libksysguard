@@ -54,6 +54,7 @@
 #include <klocalizedstring.h>
 #include <kmessagebox.h>
 
+#include "processdetails/ProcessDetailsDialog.h"
 #include "ReniceDlg.h"
 #include "process_attribute.h"
 #include "process_controller.h"
@@ -207,6 +208,7 @@ struct KSysGuardProcessListPrivate {
 
         selectTracer = new QAction(i18n("Jump to Process Debugging This One"), q);
         window = new QAction(i18n("Show Application Window"), q);
+        processDetails = new QAction(i18nc("@action:inmenu", "Detailed Information..."), q);
         resume = new QAction(QIcon::fromTheme(QStringLiteral("media-playback-start")), i18n("Resume Stopped Process"), q);
         terminate = new QAction(i18np("End Process", "End Processes", 1), q);
         terminate->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
@@ -285,6 +287,7 @@ struct KSysGuardProcessListPrivate {
     QAction *selectTracer;
     QAction *jumpToSearchFilter;
     QAction *window;
+    QAction *processDetails;
     QAction *resume;
     QAction *sigStop;
     QAction *sigCont;
@@ -296,6 +299,8 @@ struct KSysGuardProcessListPrivate {
     QAction *sigUsr2;
 
     QMenu *mToolsMenu;
+
+    QPointer<ProcessDetailsDialog> processDetailsDialog;
 };
 
 KSysGuardProcessList::KSysGuardProcessList(QWidget *parent, const QString &hostName)
@@ -390,8 +395,9 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget *parent, const QString &hostN
 
     // Add all the actions to the main widget, and get all the actions to call actionTriggered when clicked
     QList<QAction *> actions;
-    actions << d->renice << d->kill << d->terminate << d->selectParent << d->selectTracer << d->window << d->jumpToSearchFilter;
-    actions << d->resume << d->sigStop << d->sigCont << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
+    actions << d->renice << d->kill << d->terminate << d->selectParent << d->selectTracer << d->window;
+    actions << d->processDetails << d->jumpToSearchFilter << d->resume << d->sigStop << d->sigCont;
+    actions << d->sigHup << d->sigInt << d->sigTerm << d->sigKill << d->sigUsr1 << d->sigUsr2;
 
     foreach (QAction *action, actions) {
         addAction(action);
@@ -607,6 +613,13 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point)
         d->mProcessContextMenu->addAction(d->window);
     }
 
+    if (numProcesses == 1) {
+        const QFileInfo procDirFileInfo(QStringLiteral("/proc/%1").arg(process->pid()));
+        if (procDirFileInfo.exists() && procDirFileInfo.isReadable() && procDirFileInfo.isDir()) {
+            d->mProcessContextMenu->addAction(d->processDetails);
+        }
+    }
+
     if (numProcesses == 1 && process->status() == KSysGuard::Process::Stopped) {
         // If the process is stopped, offer to resume it
         d->mProcessContextMenu->addAction(d->resume);
@@ -670,6 +683,19 @@ void KSysGuardProcessList::actionTriggered(QObject *object)
                 KWindowSystem::activateWindow(wid);
             }
         }
+    } else if (result == d->processDetails) {
+        const QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
+        if (selectedIndexes.size() != 1) {
+            return;
+        }
+        const QModelIndex mappedIndex = d->mFilterModel.mapToSource(selectedIndexes.first());
+        Q_ASSERT(mappedIndex.isValid());
+        if (!d->processDetailsDialog) {
+            d->processDetailsDialog = new ProcessDetailsDialog(this);
+        }
+        d->processDetailsDialog->setModelIndex(mappedIndex);
+        d->processDetailsDialog->show();
+        d->processDetailsDialog->raise();
     } else if (result == d->jumpToSearchFilter) {
         d->mUi->txtFilter->setFocus();
     } else {

@@ -12,6 +12,10 @@ set(processui_LIB_SRCS
    ReniceDlg.cpp
    KTextEditVT.cpp
    scripting.cpp
+   processdetails/GeneralTab.cpp
+   processdetails/MemoryMapsTab.cpp
+   processdetails/OpenFilesTab.cpp
+   processdetails/ProcessDetailsDialog.cpp
 )
 
 ecm_qt_declare_logging_category(processui_LIB_SRCS HEADER processui_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSUI CATEGORY_NAME org.kde.libksysguard.processui
