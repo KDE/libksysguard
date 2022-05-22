@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QPointer>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QStandardPaths>
