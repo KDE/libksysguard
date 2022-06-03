@@ -59,28 +59,28 @@ struct Q_DECL_HIDDEN SensorTreeItem {
     QString segment;
     std::map<QString, std::unique_ptr<SensorTreeItem>, Compare> children;
 
-    inline int indexOf(const QString &segment)
+    inline int indexOf(const QString &segment) const
     {
-        int index = 0;
-        for (const auto &[key, value] : std::as_const(children)) {
-            if (value->segment == segment) {
-                return index;
-            }
-            index++;
+        auto itr = std::find_if(children.cbegin(), children.cend(), [segment](const auto &item) {
+            return item.second->segment == segment;
+        });
+
+        if (itr != children.cend()) {
+            return std::distance(children.cbegin(), itr);
         }
 
         return -1;
     }
 
-    inline SensorTreeItem *itemAt(int index)
+    inline SensorTreeItem *itemAt(std::size_t index) const
     {
-        int currentIndex = 0;
-        for (const auto &[key, value] : std::as_const(children)) {
-            if (currentIndex++ == index) {
-                return value;
-            }
+        if (index >= children.size()) {
+            return nullptr;
         }
-        return nullptr;
+
+        auto itr = children.cbegin();
+        std::advance(itr, index);
+        return itr->second.get();
     }
 };
 
