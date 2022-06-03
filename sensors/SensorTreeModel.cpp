@@ -57,7 +57,7 @@ thread_local std::optional<QCollator> Compare::collator = std::nullopt;
 struct Q_DECL_HIDDEN SensorTreeItem {
     SensorTreeItem *parent = nullptr;
     QString segment;
-    std::map<QString, SensorTreeItem *, Compare> children;
+    std::map<QString, std::unique_ptr<SensorTreeItem>, Compare> children;
 
     inline int indexOf(const QString &segment)
     {
@@ -81,13 +81,6 @@ struct Q_DECL_HIDDEN SensorTreeItem {
             }
         }
         return nullptr;
-    }
-
-    ~SensorTreeItem()
-    {
-        std::for_each(children.begin(), children.end(), [](const auto &item) {
-            delete item.second;
-        });
     }
 };
 
@@ -158,9 +151,9 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
     SensorTreeItem *item = rootItem;
     for (auto segment : segments) {
         if (auto itr = item->children.find(segment); itr != item->children.end() && itr->second) {
-            item = itr->second;
+            item = itr->second.get();
         } else {
-            SensorTreeItem *newItem = new SensorTreeItem();
+            auto newItem = std::make_unique<SensorTreeItem>();
             newItem->parent = item;
             newItem->segment = segment;
 
@@ -169,10 +162,10 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
             auto index = std::distance(item->children.begin(), item->children.upper_bound(segment));
 
             q->beginInsertRows(parentIndex, index, index);
-            item->children[segment] = newItem;
+            item->children[segment] = std::move(newItem);
             q->endInsertRows();
 
-            item = newItem;
+            item = item->children[segment].get();
         }
     }
 
@@ -208,7 +201,6 @@ void SensorTreeModel::Private::removeSensor(const QString &sensorId)
         q->beginRemoveRows(parentIndex, index, index);
 
         auto itr = item->parent->children.find(item->segment);
-        delete itr->second;
         item->parent->children.erase(itr);
 
         q->endRemoveRows();
@@ -252,7 +244,7 @@ SensorTreeItem *KSysGuard::SensorTreeModel::Private::find(const QString &sensorI
     const auto segments = sensorId.split(QLatin1Char('/'));
     for (const QString &segment : segments) {
         if (auto itr = item->children.find(segment); itr != item->children.end() && itr->second) {
-            item = itr->second;
+            item = itr->second.get();
         } else {
             return nullptr;
         }
