@@ -135,7 +135,7 @@ public:
     void updateWindowInfo(WId wid, NET::Properties properties, NET::Properties2 properties2, bool newWindow);
     QMultiHash<long long, WindowInfo *> mPidToWindowInfo; ///< Map a process pid to X window info if available
     QHash<WId, WindowInfo *> mWIdToWindowInfo; ///< Map an X window id to window info
-#ifdef HAVE_XRES
+#if HAVE_XRES
     bool updateXResClientData();
     void queryForAndUpdateAllXWindows();
 #endif
@@ -203,7 +203,7 @@ public:
 
     QVector<KSysGuard::ProcessAttribute *> mExtraAttributes;
 
-#ifdef HAVE_XRES
+#if HAVE_XRES
     bool mHaveXRes; ///< True if the XRes extension is available at run time
     QMap<qlonglong, XID> mXResClientResources;
 #endif

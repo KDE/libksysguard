@@ -772,7 +772,7 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point)
     if (d->mUi->treeView->header()->sectionsHidden()) {
         for (int i = 0; i < num_headings; ++i) {
             if (d->mUi->treeView->header()->isSectionHidden(i)) {
-#ifndef HAVE_XRES
+#if !HAVE_XRES
                 if (i == ProcessModel::HeadingXMemory)
                     continue;
 #endif

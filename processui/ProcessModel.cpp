@@ -46,7 +46,7 @@
 #include <unistd.h>
 #endif
 
-#ifdef HAVE_XRES
+#if HAVE_XRES
 #include <X11/extensions/XRes.h>
 #endif
 
@@ -115,7 +115,7 @@ ProcessModelPrivate::ProcessModelPrivate()
     mShowingTooltips = true;
     mNormalizeCPUUsage = true;
     mIoInformation = ProcessModel::ActualBytes;
-#ifdef HAVE_XRES
+#if HAVE_XRES
     mHaveXRes = false;
 #endif
     mHaveTimer = false, mTimerId = -1, mMovingRow = false;
@@ -141,7 +141,7 @@ ProcessModel::ProcessModel(QObject *parent, const QString &host)
     , d(new ProcessModelPrivate)
 {
     d->q = this;
-#ifdef HAVE_XRES
+#if HAVE_XRES
     if (d->mIsX11) {
         int event, error, major, minor;
         d->mHaveXRes = XResQueryExtension(QX11Info::display(), &event, &error) && XResQueryVersion(QX11Info::display(), &major, &minor);
@@ -418,7 +418,7 @@ void ProcessModelPrivate::setupWindows()
 }
 #endif
 
-#ifdef HAVE_XRES
+#if HAVE_XRES
 bool ProcessModelPrivate::updateXResClientData()
 {
     if (!mIsX11) {
@@ -621,7 +621,7 @@ void ProcessModel::update(long updateDurationMSecs, KSysGuard::Processes::Update
             d->mMemTotal = d->mProcesses->totalPhysicalMemory();
     }
 
-#ifdef HAVE_XRES
+#if HAVE_XRES
     // Add all the rest of the windows
     if (d->mHaveXRes && updateFlags.testFlag(KSysGuard::Processes::XMemory))
         d->queryForAndUpdateAllXWindows();
