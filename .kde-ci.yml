@@ -22,3 +22,5 @@ Dependencies:
     'frameworks/kwindowsystem': '@latest'
     'frameworks/solid': '@latest'
     'frameworks/knewstuff': '@latest'
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD']
