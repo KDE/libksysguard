@@ -1111,6 +1111,9 @@ void KSysGuardProcessList::updateList()
             updateFlags |= KSysGuard::Processes::IOStatistics;
         if (!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingXMemory))
             updateFlags |= KSysGuard::Processes::XMemory;
+        // Updating VmPSS every call results in ~4x CPU load on my machine, so do it less often
+        if (!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingVmPSS) && d->mResortCountDown <= 1)
+            updateFlags |= KSysGuard::Processes::Smaps;
         d->mModel.update(d->mUpdateIntervalMSecs, updateFlags);
         if (d->mUpdateTimer)
             d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
