@@ -15,13 +15,13 @@ namespace KSysGuardProcess
 Q_NAMESPACE
 
 using ProcessStatus = KSysGuard::Process::ProcessStatus;
-Q_ENUM_NS(ProcessStatus);
+Q_ENUM_NS(ProcessStatus)
 
 using IoPriorityClass = KSysGuard::Process::IoPriorityClass;
-Q_ENUM_NS(IoPriorityClass);
+Q_ENUM_NS(IoPriorityClass)
 
 using Scheduler = KSysGuard::Process::Scheduler;
-Q_ENUM_NS(Scheduler);
+Q_ENUM_NS(Scheduler)
 }
 
 Q_DECLARE_METATYPE(KSysGuard::Process::ProcessStatus)

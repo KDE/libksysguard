@@ -31,7 +31,7 @@ public:
         Minimum, /// Smallest value this attribute can be in normal situations. A hint for graphing utilities
         Maximum, /// Largest value this attribute can be in normal situations. A hint for graphing utilities
     };
-    Q_ENUM(Role);
+    Q_ENUM(Role)
 
     ProcessAttributeModel(const QVector<ProcessAttribute *> &attributes, QObject *parent = nullptr);
     ~ProcessAttributeModel() override;
