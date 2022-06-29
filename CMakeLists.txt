@@ -48,7 +48,7 @@ set_package_properties(Qt${QT_MAJOR_VERSION}WebChannel PROPERTIES
                       )
 
 
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package NewStuff)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package NewStuff)
 
 find_package(ZLIB REQUIRED)
 set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"
