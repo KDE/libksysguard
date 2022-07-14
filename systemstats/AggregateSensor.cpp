@@ -66,13 +66,36 @@ class Q_DECL_HIDDEN AggregateSensor::Private
 public:
     QRegularExpression matchObjects;
     QString matchProperty;
-    QHash<QString, QPointer<SensorProperty>> sensors;
+    SensorHash sensors;
     bool dataChangeQueued = false;
     int dataCompressionDuration = 100;
     SensorContainer *subsystem = nullptr;
 
-    std::function<QVariant(QVariant, QVariant)> aggregateFunction;
+    std::function<QVariant(AggregateSensor::SensorIterator, const AggregateSensor::SensorIterator)> aggregateFunction;
 };
+
+QVariant AggregateSensor::SensorIterator::operator*() const
+{
+    return m_it.value()->value();
+}
+
+AggregateSensor::SensorIterator &AggregateSensor::SensorIterator::operator++()
+{
+    do {
+        ++m_it;
+    } while (!(m_it == m_end || m_it.value()));
+    return *this;
+}
+
+bool AggregateSensor::SensorIterator::operator==(const SensorIterator &other) const
+{
+    return m_it == other.m_it;
+}
+
+bool AggregateSensor::SensorIterator::operator!=(const SensorIterator &other) const
+{
+    return m_it != other.m_it;
+}
 
 AggregateSensor::AggregateSensor(SensorObject *provider, const QString &id, const QString &name)
     : AggregateSensor(provider, id, name, QVariant{})
@@ -84,7 +107,7 @@ AggregateSensor::AggregateSensor(SensorObject *provider, const QString &id, cons
     , d(std::make_unique<Private>())
 {
     d->subsystem = qobject_cast<SensorContainer *>(provider->parent());
-    d->aggregateFunction = addVariants;
+    setAggregateFunction(addVariants);
     connect(d->subsystem, &SensorContainer::objectAdded, this, &AggregateSensor::updateSensors);
     connect(d->subsystem, &SensorContainer::objectRemoved, this, &AggregateSensor::updateSensors);
 }
@@ -111,13 +134,10 @@ QVariant AggregateSensor::value() const
         return QVariant{};
     }
 
-    QVariant result = it.value()->value();
-    it++;
-    for (; it != d->sensors.constEnd(); it++) {
-        if (it.value()) {
-            result = d->aggregateFunction(result, it.value()->value());
-        }
-    }
+    auto begin = SensorIterator(it, d->sensors.constEnd());
+    const auto end = SensorIterator(d->sensors.constEnd(), d->sensors.constEnd());
+    auto result = d->aggregateFunction(begin, end);
+
     return result;
 }
 
@@ -158,12 +178,27 @@ void AggregateSensor::setMatchSensors(const QRegularExpression &objectIds, const
     updateSensors();
 }
 
-std::function<QVariant(QVariant, QVariant)> AggregateSensor::aggregateFunction() const
+std::function<QVariant(AggregateSensor::SensorIterator, AggregateSensor::SensorIterator)> AggregateSensor::aggregateFunction() const
 {
     return d->aggregateFunction;
 }
 
 void AggregateSensor::setAggregateFunction(const std::function<QVariant(QVariant, QVariant)> &newAggregateFunction)
+{
+    auto aggregateFunction = [newAggregateFunction](AggregateSensor::SensorIterator begin, const AggregateSensor::SensorIterator end) -> QVariant {
+        auto &it = begin;
+        QVariant result = *begin;
+        ++it;
+        for (; it != end; ++it) {
+            result = newAggregateFunction(result, *it);
+        }
+        return result;
+    };
+
+    d->aggregateFunction = aggregateFunction;
+}
+
+void AggregateSensor::setAggregateFunction(const std::function<QVariant(SensorIterator, const SensorIterator)> &newAggregateFunction)
 {
     d->aggregateFunction = newAggregateFunction;
 }

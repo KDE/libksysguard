@@ -22,6 +22,9 @@
 
 namespace KSysGuard
 {
+
+using SensorHash = QHash<QString, QPointer<SensorProperty>>;
+
 /**
  * @todo write docs
  */
@@ -38,10 +41,28 @@ public:
     void subscribe() override;
     void unsubscribe() override;
 
+    class SensorIterator
+    {
+    public:
+        SensorIterator(SensorHash::const_iterator begin, const SensorHash::const_iterator end)
+            : m_it(begin)
+            , m_end(end){};
+
+        QVariant operator*() const;
+        SensorIterator &operator++();
+        bool operator==(const SensorIterator &other) const;
+        bool operator!=(const SensorIterator &other) const;
+
+    private:
+        SensorHash::const_iterator m_it;
+        const SensorHash::const_iterator m_end;
+    };
+
     QRegularExpression matchSensors() const;
     void setMatchSensors(const QRegularExpression &objectMatch, const QString &propertyId);
-    std::function<QVariant(QVariant, QVariant)> aggregateFunction() const;
+    std::function<QVariant(SensorIterator, const SensorIterator)> aggregateFunction() const;
     void setAggregateFunction(const std::function<QVariant(QVariant, QVariant)> &function);
+    void setAggregateFunction(const std::function<QVariant(SensorIterator, const SensorIterator)> &function);
 
     void addSensor(SensorProperty *sensor);
     void removeSensor(const QString &sensorPath);
