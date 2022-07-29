@@ -1176,7 +1176,7 @@ bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int nic
         updateList();
         return true;
     } else if (result == KSysGuard::ProcessController::Result::Error) {
-        KMessageBox::sorry(this,
+        KMessageBox::error(this,
                            i18n("You do not have the permission to renice the process and there "
                                 "was a problem trying to run as root."));
     }
@@ -1203,7 +1203,7 @@ void KSysGuardProcessList::reniceSelectedProcesses()
         QStringList selectedAsStrings;
 
         if (processes.isEmpty()) {
-            KMessageBox::sorry(this, i18n("You must select a process first."));
+            KMessageBox::error(this, i18n("You must select a process first."));
             return;
         }
 
@@ -1327,7 +1327,7 @@ bool KSysGuardProcessList::changeIoScheduler(const QList<long long> &pids, KSysG
         updateList();
         return true;
     } else if (result == KSysGuard::ProcessController::Result::Error) {
-        KMessageBox::sorry(this,
+        KMessageBox::error(this,
                            i18n("You do not have the permission to change the I/O priority of the process and there "
                                 "was a problem trying to run as root."));
     }
@@ -1343,7 +1343,7 @@ bool KSysGuardProcessList::changeCpuScheduler(const QList<long long> &pids, KSys
         updateList();
         return true;
     } else if (result == KSysGuard::ProcessController::Result::Error) {
-        KMessageBox::sorry(this,
+        KMessageBox::error(this,
                            i18n("You do not have the permission to change the CPU Scheduler for the process and there "
                                 "was a problem trying to run as root."));
     }
@@ -1358,7 +1358,7 @@ bool KSysGuardProcessList::killProcesses(const QList<long long> &pids, int sig)
         updateList();
         return true;
     } else if (result == KSysGuard::ProcessController::Result::Error) {
-        KMessageBox::sorry(this,
+        KMessageBox::error(this,
                            i18n("You do not have the permission to kill the process and there "
                                 "was a problem trying to run as root."));
     }
@@ -1387,7 +1387,7 @@ void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
 
     if (selectedPids.isEmpty()) {
         if (confirm)
-            KMessageBox::sorry(this, i18n("You must select a process first."));
+            KMessageBox::error(this, i18n("You must select a process first."));
         return;
     } else if (confirm && (sig == SIGTERM || sig == SIGKILL)) {
         int count = selectedAsStrings.count();
