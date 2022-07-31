@@ -615,7 +615,7 @@ Description[uk]=Змінити спосіб планування викорис�
 Description[vi]=Thay đổi trình lập lịch CPU dùng để lập lịch việc chạy một tiến trình đã cho
 Description[wa]=Candjî ké programeu d' CPU doet programer l' enondaedje d' on processus diné
 Description[x-test]=xxChange which CPU scheduler is to schedule the running of a given processxx
-Description[zh_CN]=更改指定的运行中进程采用的 CPU 调度器
+Description[zh_CN]=更改指定进程的 CPU 调度器
 Description[zh_TW]=變更要使用哪個 CPU 排程器來排程指定的行程
 Policy=auth_admin
 
