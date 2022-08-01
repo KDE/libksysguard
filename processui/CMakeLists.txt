@@ -30,7 +30,7 @@ ki18n_wrap_ui( processui_LIB_SRCS
 add_library(processui ${processui_LIB_SRCS})
 add_library(KSysGuard::ProcessUi ALIAS processui)
 
-if(X11_XRes_FOUND)
+if(HAVE_XRES)
     target_link_libraries(processui PRIVATE ${X11_XRes_LIB} ${X11_LIBRARIES})
     include_directories(${X11_XRes_INCLUDE_PATH})
 endif()
@@ -59,7 +59,7 @@ target_include_directories(processui
         "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
         "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard>"
 )
-if(X11_FOUND)
+if(HAVE_X11)
     if (QT_MAJOR_VERSION STREQUAL "5")
        target_link_libraries(processui PRIVATE Qt::X11Extras KF5::WindowSystem)
     else()

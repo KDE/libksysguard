@@ -65,25 +65,31 @@ ecm_setup_version(${PROJECT_VERSION}
                   SOVERSION 9
 )
 
-find_package(X11)
-set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
-                        URL "https://www.x.org"
-                        TYPE OPTIONAL
-                        PURPOSE "Required for building the X11 based workspace"
-                    )
-if(X11_FOUND)
-    if (QT_MAJOR_VERSION STREQUAL "5")
-        find_package(Qt5X11Extras REQUIRED)
-    elseif (QT_MAJOR_VERSION STREQUAL "6")
-        find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
-    endif()
-    set(HAVE_X11 1)
-    find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
-    find_path(X11_XRes_INCLUDE_PATH X11/extensions/XRes.h ${X11_INC_SEARCH_PATH})
+option(WITH_X11 "Build with X11 support." ON)
+if(WITH_X11)
+    find_package(X11)
+    set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
+                            URL "https://www.x.org"
+                            TYPE OPTIONAL
+                            PURPOSE "Required for building Process UI with X11 support"
+                        )
+    if(X11_FOUND)
+        if (QT_MAJOR_VERSION STREQUAL "5")
+            find_package(Qt5X11Extras REQUIRED)
+        elseif (QT_MAJOR_VERSION STREQUAL "6")
+            find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
+        endif()
+        set(HAVE_X11 1)
+        find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
+        find_path(X11_XRes_INCLUDE_PATH X11/extensions/XRes.h ${X11_INC_SEARCH_PATH})
 
-    if(X11_XRes_LIB AND X11_XRes_INCLUDE_PATH)
-        set(X11_XRes_FOUND TRUE)
+        if(X11_XRes_LIB AND X11_XRes_INCLUDE_PATH)
+            set(HAVE_XRES 1)
+        endif()
     endif()
+else()
+    set(HAVE_X11 0)
+    set(HAVE_XRES 0)
 endif()
 
 set(WEBENGINE_SCRIPTING_ENABLED FALSE)
@@ -122,8 +128,6 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         PURPOSE "Used for reading hardware sensors")
 endif()
 
-set(HAVE_X11 ${X11_FOUND})
-set(HAVE_XRES ${X11_XRes_FOUND})
 configure_file(config-ksysguard.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksysguard.h )
 
 option(BUILD_DESIGNERPLUGIN "Build plugin for Qt Designer" ON)
