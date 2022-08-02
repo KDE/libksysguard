@@ -7,6 +7,7 @@
 #pragma once
 
 #include <functional>
+#include <iterator>
 #include <memory>
 
 #include <QPointer>
@@ -44,12 +45,23 @@ public:
     class SensorIterator
     {
     public:
+        using iterator_category = std::input_iterator_tag;
+        using value_type = QVariant;
+        using difference_type = SensorHash::size_type;
+        using pointer = void;
+        using reference = QVariant &;
+
+        SensorIterator(const SensorIterator &) = default;
+        SensorIterator &operator=(const SensorIterator &) = default;
+        ~SensorIterator() = default;
+
         SensorIterator(SensorHash::const_iterator begin, const SensorHash::const_iterator end)
             : m_it(begin)
             , m_end(end){};
 
-        QVariant operator*() const;
+        value_type operator*() const;
         SensorIterator &operator++();
+        SensorIterator operator++(int);
         bool operator==(const SensorIterator &other) const;
         bool operator!=(const SensorIterator &other) const;
 

@@ -87,6 +87,13 @@ AggregateSensor::SensorIterator &AggregateSensor::SensorIterator::operator++()
     return *this;
 }
 
+AggregateSensor::SensorIterator AggregateSensor::SensorIterator::operator++(int)
+{
+    AggregateSensor::SensorIterator tmp = *this;
+    operator++();
+    return tmp;
+}
+
 bool AggregateSensor::SensorIterator::operator==(const SensorIterator &other) const
 {
     return m_it == other.m_it;
