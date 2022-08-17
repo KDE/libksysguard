@@ -38,14 +38,7 @@
 
 #include <signal.h> //For SIGTERM
 
-#include <kauth_version.h>
-#if KAUTH_VERSION >= QT_VERSION_CHECK(5, 92, 0)
 #include <KAuth/Action>
-#else
-#include <KAuth>
-#include <KAuthAction>
-#include <KAuthActionReply>
-#endif
 #include <KDialogJobUiDelegate>
 #include <KGlobalAccel>
 #include <KIO/ApplicationLauncherJob>
