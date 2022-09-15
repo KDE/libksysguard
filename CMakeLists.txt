@@ -7,7 +7,7 @@ set(PROJECT_VERSION_MAJOR 5)
 
 # check with non-Plasma consumers (e.g. KDevelop) before bumping these versions to make sure the KDE CI does not break
 set(QT_MIN_VERSION "5.15.2")
-set(KF5_MIN_VERSION "5.94")
+set(KF5_MIN_VERSION "5.98.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
