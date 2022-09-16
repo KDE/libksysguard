@@ -82,8 +82,8 @@ int parseInetDiagMesg(struct nl_msg *msg, void *arg)
 }
 
 ConnectionMapping::ConnectionMapping()
+    : m_running(true)
 {
-    m_running = true;
     m_thread = std::thread(&ConnectionMapping::loop, this);
 }
 

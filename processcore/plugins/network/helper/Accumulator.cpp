@@ -12,11 +12,10 @@
 using namespace std::chrono_literals;
 
 Accumulator::Accumulator(std::shared_ptr<Capture> capture, std::shared_ptr<ConnectionMapping> mapping)
+    : m_capture(capture)
+    , m_mapping(mapping)
+    , m_running(true)
 {
-    m_capture = capture;
-    m_mapping = mapping;
-
-    m_running = true;
     m_thread = std::thread{&Accumulator::loop, this};
 }
 

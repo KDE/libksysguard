@@ -19,8 +19,8 @@ using namespace KSysGuard;
 
 NvidiaPlugin::NvidiaPlugin(QObject *parent, const QVariantList &args)
     : ProcessDataProvider(parent, args)
+    , m_sniExecutablePath(QStandardPaths::findExecutable(QStringLiteral("nvidia-smi")))
 {
-    m_sniExecutablePath = QStandardPaths::findExecutable(QStringLiteral("nvidia-smi"));
     if (m_sniExecutablePath.isEmpty()) {
         return;
     }

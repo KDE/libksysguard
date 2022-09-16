@@ -15,6 +15,7 @@
 
 KTextEditVT::KTextEditVT(QWidget *parent)
     : QTextEdit(parent)
+    , escape_code(QChar(0))
 {
     mParseAnsi = true;
     escape_sequence = false;
@@ -23,7 +24,6 @@ KTextEditVT::KTextEditVT(QWidget *parent)
     escape_number1 = -1;
     escape_number_separator = false;
     escape_number2 = -1;
-    escape_code = QChar(0);
     setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 

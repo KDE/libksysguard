@@ -25,8 +25,8 @@ void pcapDispatchCallback(uint8_t *user, const struct pcap_pkthdr *h, const uint
 }
 
 Capture::Capture(const std::string &interface)
+    : m_interface(interface)
 {
-    m_interface = interface;
 }
 
 Capture::~Capture()

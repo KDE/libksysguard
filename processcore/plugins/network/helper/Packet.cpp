@@ -28,8 +28,8 @@ Packet::Packet()
 }
 
 Packet::Packet(const TimeStamp::MicroSeconds &timeStamp, const uint8_t *data, uint32_t dataLength, uint32_t packetSize)
+    : m_timeStamp(timeStamp)
 {
-    m_timeStamp = timeStamp;
     m_size = packetSize;
 
     const sll_header *header = reinterpret_cast<const sll_header *>(data);

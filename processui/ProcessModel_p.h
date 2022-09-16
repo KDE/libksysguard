@@ -37,8 +37,8 @@
 
 struct WindowInfo {
     WindowInfo(WId _wid, qlonglong _pid)
+         : wid(_wid)
     {
-        wid = _wid;
         pid = 0;
         pid = _pid;
     }

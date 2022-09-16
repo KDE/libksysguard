@@ -27,8 +27,8 @@ using namespace KSGRD;
 
 SensorAgent::SensorAgent(SensorManager *sm)
     : QObject(sm)
+    , mSensorManager(sm)
 {
-    mSensorManager = sm;
     mDaemonOnLine = false;
 }
 
