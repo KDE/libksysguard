@@ -272,7 +272,7 @@ void OpenFilesTab::onProxyModelChanged()
     if (m_proxyModel->rowCount() > 0) {
         m_placeholderLabel->hide();
     } else {
-        if (m_proxyModel->filterRegularExpression().pattern().isEmpty()) {
+        if (m_proxyModel->sourceModel()->rowCount() == 0) {
             m_placeholderLabel->setText(i18nc("@info:status", "No data to display"));
         } else {
             m_placeholderLabel->setText(i18nc("@info:status", "No data matching the filter"));
