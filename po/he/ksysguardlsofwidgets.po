@@ -1,0 +1,55 @@
+# translation of ksysguardlsofwidgets.po to hebrew
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# tahmar1900 <tahmar1900@gmail.com>, 2008.
+# Diego Iastrubni <elcuco@kde.org>, 2008.
+# Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: ksysguardlsofwidgets\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"PO-Revision-Date: 2017-05-16 06:54-0400\n"
+"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
+"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Zanata 3.9.6\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: lsof.cpp:22
+#, kde-format
+msgctxt "Short for File Descriptor"
+msgid "FD"
+msgstr "תיאור קובץ"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
+#, kde-format
+msgid "Type"
+msgstr "סוג"
+
+#: lsof.cpp:22
+#, kde-format
+msgid "Object"
+msgstr "אובייקט"
+
+#: LsofSearchWidget.cpp:25
+#, kde-format
+msgid "Renice Process"
+msgstr "שנה עדיפות לתהליך"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "זרם"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "שם קובץ"

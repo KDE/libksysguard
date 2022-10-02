@@ -1,0 +1,55 @@
+# translation of ksysguardlsofwidgets.po to Icelandic
+# Copyright (C) 2009 This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sveinn í Felli <sveinki@nett.is>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: ksysguardlsofwidgets\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"PO-Revision-Date: 2009-05-22 10:39+0000\n"
+"Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
+"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+"\n"
+
+#: lsof.cpp:22
+#, kde-format
+msgctxt "Short for File Descriptor"
+msgid "FD"
+msgstr "FD"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
+#, kde-format
+msgid "Type"
+msgstr "Tegund"
+
+#: lsof.cpp:22
+#, kde-format
+msgid "Object"
+msgstr "Hlutur"
+
+#: LsofSearchWidget.cpp:25
+#, kde-format
+msgid "Renice Process"
+msgstr "Forgangsbreyting ferlis"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "Straumur"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "Skráarnafn"

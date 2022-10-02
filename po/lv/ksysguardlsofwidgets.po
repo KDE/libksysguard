@@ -1,0 +1,53 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: ksysguardlsofwidgets\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"PO-Revision-Date: 2008-11-18 11:47+0200\n"
+"Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#: lsof.cpp:22
+#, kde-format
+msgctxt "Short for File Descriptor"
+msgid "FD"
+msgstr "FD"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
+#, kde-format
+msgid "Type"
+msgstr "Tips"
+
+#: lsof.cpp:22
+#, kde-format
+msgid "Object"
+msgstr "Objekts"
+
+#: LsofSearchWidget.cpp:25
+#, kde-format
+msgid "Renice Process"
+msgstr "Mainīt procesa prioritāti"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "Straume"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "Faila nosaukums"

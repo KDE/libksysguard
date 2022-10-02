@@ -1,0 +1,300 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the libksysguard package.
+#
+# giovanni <g.sora@tiscali.it>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: libksysguard\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-15 00:48+0000\n"
+"PO-Revision-Date: 2021-08-31 22:41+0200\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.04.3\n"
+
+#: ConfigAppearance.qml:107
+#, kde-format
+msgid "Presets:"
+msgstr "Preregulationes:"
+
+#: ConfigAppearance.qml:111
+#, kde-format
+msgid "Load Preset..."
+msgstr "Carga preregulation..."
+
+#: ConfigAppearance.qml:116
+#, kde-format
+msgid "Get new presets..."
+msgstr "Obtene nove prergulationes..."
+
+#: ConfigAppearance.qml:128
+#, kde-format
+msgid "Save Settings As Preset"
+msgstr "Salveguarda preferentias como preregulation"
+
+#: ConfigAppearance.qml:138
+#, kde-format
+msgid "Title:"
+msgstr "Titulo:"
+
+#: ConfigAppearance.qml:144
+#, kde-format
+msgid "Show Title"
+msgstr "Monstra titulo:"
+
+#: ConfigAppearance.qml:149 facepackages/facegrid/contents/ui/Config.qml:54
+#, kde-format
+msgid "Display Style:"
+msgstr "Stilo de monstrator:"
+
+#: ConfigAppearance.qml:169
+#, kde-format
+msgid "Get New Display Styles..."
+msgstr "Obtene nove stilos de monstrator…"
+
+#: ConfigAppearance.qml:179
+#, kde-format
+msgid "Minimum Time Between Updates:"
+msgstr "Minime tempore inter actualistiones:"
+
+#: ConfigAppearance.qml:188
+#, kde-format
+msgid "No Limit"
+msgstr "Nulle  limite"
+
+#. i18ndp doesn't handle floats :(
+#: ConfigAppearance.qml:192
+#, kde-format
+msgid "1 second"
+msgstr "1 secunda"
+
+#: ConfigAppearance.qml:194
+#, kde-format
+msgid "%1 seconds"
+msgstr "%1 secundas"
+
+#: ConfigSensors.qml:131
+#, kde-format
+msgid "Total Sensor"
+msgid_plural "Total Sensors"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ConfigSensors.qml:150
+#, kde-format
+msgid "Sensors"
+msgstr "Sensores"
+
+#: ConfigSensors.qml:176
+#, kde-format
+msgid "Text-Only Sensors"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:35
+#: facepackages/linechart/contents/ui/Config.qml:47
+#: facepackages/piechart/contents/ui/Config.qml:34
+#, kde-format
+msgid "Show Sensors Legend"
+msgstr "Monstra legenda de sensores"
+
+#: facepackages/barchart/contents/ui/Config.qml:39
+#, kde-format
+msgid "Stacked Bars"
+msgstr "Barras Pilate"
+
+#: facepackages/barchart/contents/ui/Config.qml:43
+#: facepackages/linechart/contents/ui/Config.qml:59
+#, kde-format
+msgid "Show Grid Lines"
+msgstr "Monstra lineas de grillia"
+
+#: facepackages/barchart/contents/ui/Config.qml:47
+#: facepackages/linechart/contents/ui/Config.qml:63
+#, kde-format
+msgid "Show Y Axis Labels"
+msgstr "Monstra etiquettas de axe Y"
+
+#: facepackages/barchart/contents/ui/Config.qml:51
+#: facepackages/piechart/contents/ui/Config.qml:69
+#, kde-format
+msgid "Automatic Data Range"
+msgstr "Extension de datos automatic"
+
+#: facepackages/barchart/contents/ui/Config.qml:55
+#: facepackages/piechart/contents/ui/Config.qml:73
+#, kde-format
+msgid "From:"
+msgstr "Ex:"
+
+#: facepackages/barchart/contents/ui/Config.qml:62
+#: facepackages/piechart/contents/ui/Config.qml:80
+#, kde-format
+msgid "To:"
+msgstr "A:"
+
+#: facepackages/facegrid/contents/ui/Config.qml:35
+#, kde-format
+msgid "Number of Columns:"
+msgstr "Numero de columnas:"
+
+#: facepackages/facegrid/contents/ui/Config.qml:42
+#, kde-format
+msgctxt "@label"
+msgid "Automatic"
+msgstr "Automatic"
+
+#: facepackages/linechart/contents/ui/Config.qml:42
+#, kde-format
+msgid "Appearance"
+msgstr "Apparentia"
+
+#: facepackages/linechart/contents/ui/Config.qml:51
+#, kde-format
+msgid "Stacked Charts"
+msgstr ""
+
+#: facepackages/linechart/contents/ui/Config.qml:55
+#, kde-format
+msgid "Smooth Lines"
+msgstr ""
+
+#: facepackages/linechart/contents/ui/Config.qml:67
+#, kde-format
+msgid "Fill Opacity:"
+msgstr "Plenar opacitate:"
+
+#: facepackages/linechart/contents/ui/Config.qml:73
+#, kde-format
+msgid "Data Ranges"
+msgstr ""
+
+#: facepackages/linechart/contents/ui/Config.qml:78
+#, kde-format
+msgid "Automatic Y Data Range"
+msgstr ""
+
+#: facepackages/linechart/contents/ui/Config.qml:82
+#, kde-format
+msgid "From (Y):"
+msgstr "Ex (Y):"
+
+#: facepackages/linechart/contents/ui/Config.qml:89
+#, kde-format
+msgid "To (Y):"
+msgstr "A (Y):"
+
+#: facepackages/linechart/contents/ui/Config.qml:99
+#, kde-format
+msgid "Amount of History to Keep:"
+msgstr ""
+
+#: facepackages/linechart/contents/ui/Config.qml:102
+#, kde-format
+msgctxt "%1 is seconds of history"
+msgid "%1 second"
+msgid_plural "%1 seconds"
+msgstr[0] "%1 secunda"
+msgstr[1] "%1 secundas"
+
+#: facepackages/piechart/contents/ui/Config.qml:38
+#, kde-format
+msgid "Start from Angle:"
+msgstr ""
+
+#: facepackages/piechart/contents/ui/Config.qml:43
+#, kde-format
+msgctxt "angle degrees"
+msgid "%1°"
+msgstr "%1°"
+
+#: facepackages/piechart/contents/ui/Config.qml:46
+#: facepackages/piechart/contents/ui/Config.qml:59
+#, kde-format
+msgctxt "angle degrees"
+msgid "°"
+msgstr "°"
+
+#: facepackages/piechart/contents/ui/Config.qml:51
+#, kde-format
+msgid "Total Pie Angle:"
+msgstr ""
+
+#: facepackages/piechart/contents/ui/Config.qml:56
+#, kde-format
+msgctxt "angle"
+msgid "%1°"
+msgstr "%1°"
+
+#: facepackages/piechart/contents/ui/Config.qml:64
+#, kde-format
+msgid "Rounded Lines"
+msgstr "Lineas Arrotundate"
+
+#: facepackages/textonly/contents/ui/Config.qml:24
+#, kde-format
+msgid "Group sensors based on the value of the total sensors."
+msgstr "Gruppa sensores basate sur le valor del sensores total."
+
+#: import/Choices.qml:53
+#, kde-format
+msgctxt "@label"
+msgid "Click to select a sensor…"
+msgstr ""
+
+#: import/Choices.qml:368
+#, kde-format
+msgid "Search..."
+msgstr "Cerca..."
+
+#: import/Choices.qml:381
+#, kde-format
+msgctxt "@action:button"
+msgid "Back"
+msgstr "Retro"
+
+#: packagestructure/sensorfacepackage.cpp:25
+#, kde-format
+msgid "User Interface"
+msgstr "Interfacie de usator"
+
+#: packagestructure/sensorfacepackage.cpp:29
+#, kde-format
+msgid ""
+"The compact representation of the sensors plasmoid when collapsed, for "
+"instance in a panel."
+msgstr ""
+
+#: packagestructure/sensorfacepackage.cpp:34
+#, kde-format
+msgid "The representation of the plasmoid when it's fully expanded."
+msgstr ""
+
+#: packagestructure/sensorfacepackage.cpp:37
+#, kde-format
+msgid "The optional configuration page for this face."
+msgstr ""
+
+#: packagestructure/sensorfacepackage.cpp:39
+#, kde-format
+msgid "Configuration support"
+msgstr ""
+
+#: packagestructure/sensorfacepackage.cpp:40
+#, kde-format
+msgid "KConfigXT xml file for face-specific configuration options."
+msgstr ""
+
+#: packagestructure/sensorfacepackage.cpp:44
+#, kde-format
+msgid "The configuration file that describes face properties and capabilities."
+msgstr ""
+
+#: SensorFaceController.cpp:434
+#, kde-format
+msgid "System Monitor Sensor"
+msgstr "Sensor de Monitor (supervisor)  de systema"

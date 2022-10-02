@@ -1,0 +1,57 @@
+# translation of ksysguardlsofwidgets.po to Francais
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Mickael Sibelle <kimael@gmail.com>, 2008.
+# xavier <ktranslator31@yahoo.fr>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ksysguardlsofwidgets\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"PO-Revision-Date: 2013-04-25 16:24+0200\n"
+"Last-Translator: xavier <ktranslator31@yahoo.fr>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.5\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: lsof.cpp:22
+#, kde-format
+msgctxt "Short for File Descriptor"
+msgid "FD"
+msgstr "DF"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
+#, kde-format
+msgid "Type"
+msgstr "Type"
+
+#: lsof.cpp:22
+#, kde-format
+msgid "Object"
+msgstr "Objet"
+
+#: LsofSearchWidget.cpp:25
+#, kde-format
+msgid "Renice Process"
+msgstr "Processus « Renice »"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "Flux"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "Nom de fichier"

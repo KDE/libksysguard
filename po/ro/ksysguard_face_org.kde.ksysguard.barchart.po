@@ -1,0 +1,54 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the libksysguard package.
+# Sergiu Bivol <sergiu@cip.md>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libksysguard\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-08-07 00:17+0000\n"
+"PO-Revision-Date: 2020-11-12 23:36+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: contents/ui/Config.qml:35
+#, kde-format
+msgid "Show Sensors Legend"
+msgstr "Arată legenda senzorilor"
+
+#: contents/ui/Config.qml:39
+#, kde-format
+msgid "Stacked Bars"
+msgstr "Bare suprapuse"
+
+#: contents/ui/Config.qml:43
+#, kde-format
+msgid "Show Grid Lines"
+msgstr "Arată liniile grilei"
+
+#: contents/ui/Config.qml:47
+#, kde-format
+msgid "Show Y Axis Labels"
+msgstr "Arată etichetele axei Y"
+
+#: contents/ui/Config.qml:51
+#, kde-format
+msgid "Automatic Data Range"
+msgstr "Diapazon de date automat"
+
+#: contents/ui/Config.qml:55
+#, kde-format
+msgid "From:"
+msgstr "De la:"
+
+#: contents/ui/Config.qml:62
+#, kde-format
+msgid "To:"
+msgstr "Până la:"

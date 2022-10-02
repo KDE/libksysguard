@@ -1,0 +1,51 @@
+# Copyright (C) 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the kdebase package.
+# HARI VISHNU <harivishnu@gmail.com>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdebase\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"PO-Revision-Date: 2008-11-16 03:07+0730\n"
+"Last-Translator: Hari Vishnu <harivishnu@gmail.com>\n"
+"Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
+"discuss@googlegroups.com>\n"
+"Language: ml\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: lsof.cpp:22
+#, kde-format
+msgctxt "Short for File Descriptor"
+msgid "FD"
+msgstr "FD"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
+#, kde-format
+msgid "Type"
+msgstr "തരം"
+
+#: lsof.cpp:22
+#, kde-format
+msgid "Object"
+msgstr "വസ്തു"
+
+#: LsofSearchWidget.cpp:25
+#, kde-format
+msgid "Renice Process"
+msgstr "പ്രക്രിയ റീനൈസ് ചെയ്യുക"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "സ്റ്റ്രീം"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "ഫയലിന്റെ പേരു്‌"

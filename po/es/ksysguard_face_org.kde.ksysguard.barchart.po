@@ -1,0 +1,55 @@
+# Spanish translations for ksysguard_face_org.kde.ksysguard.barchart.po package.
+# Copyright (C) 2020 This file is copyright:
+# This file is distributed under the same license as the libksysguard package.
+#
+# Automatically generated, 2020.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: ksysguard_face_org\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-08-07 00:17+0000\n"
+"PO-Revision-Date: 2020-07-25 20:08+0200\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.07.80\n"
+
+#: contents/ui/Config.qml:35
+#, kde-format
+msgid "Show Sensors Legend"
+msgstr "Mostrar la leyenda de los sensores"
+
+#: contents/ui/Config.qml:39
+#, kde-format
+msgid "Stacked Bars"
+msgstr "Barras apiladas"
+
+#: contents/ui/Config.qml:43
+#, kde-format
+msgid "Show Grid Lines"
+msgstr "Mostrar líneas de cuadrícula"
+
+#: contents/ui/Config.qml:47
+#, kde-format
+msgid "Show Y Axis Labels"
+msgstr "Mostrar etiquetas del eje Y"
+
+#: contents/ui/Config.qml:51
+#, kde-format
+msgid "Automatic Data Range"
+msgstr "Intervalo de datos automático"
+
+#: contents/ui/Config.qml:55
+#, kde-format
+msgid "From:"
+msgstr "Desde:"
+
+#: contents/ui/Config.qml:62
+#, kde-format
+msgid "To:"
+msgstr "Hasta:"

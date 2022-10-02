@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ksysguardlsofwidgets\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"PO-Revision-Date: 2010-02-07 18:09+0000\n"
+"Last-Translator: José Nuno Pires <zepires@gmail.com>\n"
+"Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-POFile-SpellExtra: rtd Arial libqico ede libqcncodecs dbe urandom ffe\n"
+"X-POFile-SpellExtra: ffc ttf kimgpcx kimgxview copy fontconfig cc\n"
+"X-POFile-SpellExtra: supportwidgets addb bin ceb kdebase libc db dc vera\n"
+"X-POFile-SpellExtra: ddc CHR libs faa oxygen dbus fonts opendir kpc\n"
+"X-POFile-SpellExtra: unstable aeaf eec eba bfbd libqsvg locale ed ef ea ec\n"
+"X-POFile-SpellExtra: eb ksysguardwidgets designer kimgdds home tmp pts\n"
+"X-POFile-SpellExtra: gconv ffa kimgxcf ddb NOFD proc cwd bd be bf ecc ba\n"
+"X-POFile-SpellExtra: bb bc mem eddbdc msttcorefonts codecs bash src\n"
+"X-POFile-SpellExtra: inotify libqt kimgpsd fd libqgif lsof eadf cb ca cf\n"
+"X-POFile-SpellExtra: ce kdedev libqkrcodecs cfb fbe langpack txt REG\n"
+"X-POFile-SpellExtra: kimgtga gsfonts ksysguardlsofwidgets bitstream usr\n"
+"X-POFile-SpellExtra: var type kimgrgb libqmng ksycoca pfb kimgexr kdecache\n"
+"X-POFile-SpellExtra: ee kimgjp kimgeps dead ksysguard kdewidgets fdb aac\n"
+"X-POFile-SpellExtra: fdf truetype dev bcd lsofui dea caf aa styles ac ab\n"
+"X-POFile-SpellExtra: ae ad af DF share FIFO null LCMESSAGES DIR libqjpeg\n"
+"X-POFile-SpellExtra: VeraSeBd lib afe libqwebview df build efc libqtiff\n"
+"X-POFile-SpellExtra: passwd enGB dbde VeraSe dffc fa fb readlink fe icon\n"
+"X-POFile-SpellExtra: libqtwcodecs exe imageformats kimgico so workspace\n"
+"X-POFile-SpellExtra: ccd libqjpcodecs\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-POFile-IgnoreConsistency: Type\n"
+
+#: lsof.cpp:22
+#, kde-format
+msgctxt "Short for File Descriptor"
+msgid "FD"
+msgstr "DF"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
+#, kde-format
+msgid "Type"
+msgstr "Tipo"
+
+#: lsof.cpp:22
+#, kde-format
+msgid "Object"
+msgstr "Objecto"
+
+#: LsofSearchWidget.cpp:25
+#, kde-format
+msgid "Renice Process"
+msgstr "Mudar a Prioridade de Processo"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "Transmissão"
+
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "Nome do Ficheiro"

@@ -1,0 +1,926 @@
+# Translation for ksgrd.po to Euskara/Basque (eu).
+# Copyright (C) 2017, Free Software Foundation, Inc.
+# Copyright (C) 2018-2020, This file is copyright:
+# This file is distributed under the same license as the libksysguard package.
+# KDE euskaratzeko proiektuko arduraduna <xalba@euskalnet.net>.
+#
+# Translators:
+# Osoitz <oelkoro@gmail.com>, 2017.
+# Ander Elortondo <ander.elor@gmail.com>, 2017.
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2017, 2019, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: libksysguard\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-03-01 00:45+0000\n"
+"PO-Revision-Date: 2020-10-10 11:52+0200\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: SensorAgent.cpp:87
+#, kde-format
+msgctxt "%1 is a host name"
+msgid ""
+"Message from %1:\n"
+"%2"
+msgstr ""
+"%1(r)en mezua:\n"
+"%2"
+
+#: SensorManager.cpp:49
+#, kde-format
+msgid "Change"
+msgstr "Aldatu"
+
+#: SensorManager.cpp:50
+#, kde-format
+msgid "Rate"
+msgstr "Tasa"
+
+#: SensorManager.cpp:52
+#, kde-format
+msgid "CPU Load"
+msgstr "PUZ Karga"
+
+#: SensorManager.cpp:53
+#, kde-format
+msgid "Idling"
+msgstr "Inaktibatzen"
+
+#: SensorManager.cpp:54
+#, kde-format
+msgid "Nice Load"
+msgstr "Karga zuzena"
+
+#: SensorManager.cpp:55
+#, kde-format
+msgid "User Load"
+msgstr "Erabiltzailearen karga"
+
+#: SensorManager.cpp:56
+#, kde-format
+msgctxt "@item sensor description"
+msgid "System Load"
+msgstr "Sistemaren karga"
+
+#: SensorManager.cpp:57
+#, kde-format
+msgid "Waiting"
+msgstr "Itxaroten"
+
+#: SensorManager.cpp:58
+#, kde-format
+msgid "Interrupt Load"
+msgstr "Eten karga"
+
+#: SensorManager.cpp:59
+#, kde-format
+msgid "Total Load"
+msgstr "Karga guztira"
+
+#: SensorManager.cpp:61
+#, kde-format
+msgid "Memory"
+msgstr "Memoria"
+
+#: SensorManager.cpp:62
+#, kde-format
+msgid "Physical Memory"
+msgstr "Memoria fisikoa"
+
+#: SensorManager.cpp:63
+#, kde-format
+msgid "Total Memory"
+msgstr "Memoriaren guztikoa"
+
+#: SensorManager.cpp:64
+#, kde-format
+msgid "Swap Memory"
+msgstr "Trukaketa-memoria:"
+
+#: SensorManager.cpp:65
+#, kde-format
+msgid "Cached Memory"
+msgstr "Cacheratutako memoria"
+
+#: SensorManager.cpp:66
+#, kde-format
+msgid "Buffered Memory"
+msgstr "Bufferreratutako memoria"
+
+#: SensorManager.cpp:67
+#, kde-format
+msgid "Used Memory"
+msgstr "Erabilitako memoria"
+
+#: SensorManager.cpp:68
+#, kde-format
+msgid "Application Memory"
+msgstr "Aplikazioen memoria"
+
+#: SensorManager.cpp:69
+#, kde-format
+msgid "Allocated Memory"
+msgstr "Alokatutako memoria"
+
+#: SensorManager.cpp:70
+#, kde-format
+msgid "Free Memory"
+msgstr "Memoria librea"
+
+#: SensorManager.cpp:71
+#, kde-format
+msgid "Available Memory"
+msgstr "Memoria erabilgarria"
+
+#: SensorManager.cpp:72
+#, kde-format
+msgid "Active Memory"
+msgstr "Memoria aktiboa"
+
+#: SensorManager.cpp:73
+#, kde-format
+msgid "Inactive Memory"
+msgstr "Memoria inaktiboa"
+
+#: SensorManager.cpp:74
+#, kde-format
+msgid "Wired Memory"
+msgstr "Nukleoaren memoria"
+
+#: SensorManager.cpp:75
+#, kde-format
+msgid "Exec Pages"
+msgstr "Exekuzio orriak"
+
+#: SensorManager.cpp:76
+#, kde-format
+msgid "File Pages"
+msgstr "Fitxategi orriak"
+
+#: SensorManager.cpp:79
+#, kde-format
+msgid "Processes"
+msgstr "Prozesuak"
+
+#: SensorManager.cpp:80 SensorManager.cpp:257
+#, kde-format
+msgid "Process Controller"
+msgstr "Prozesu kontroladorea"
+
+#: SensorManager.cpp:81
+#, kde-format
+msgid "Last Process ID"
+msgstr "Azken prozesuaren ID"
+
+#: SensorManager.cpp:82
+#, kde-format
+msgid "Process Spawn Count"
+msgstr "Prozesu-sortze zenbaketa"
+
+#: SensorManager.cpp:83
+#, kde-format
+msgid "Process Count"
+msgstr "Prozesu zenbaketa"
+
+#: SensorManager.cpp:84
+#, kde-format
+msgid "Idle Processes Count"
+msgstr "Prozesu inaktiboen zenbaketa"
+
+#: SensorManager.cpp:85
+#, kde-format
+msgid "Running Processes Count"
+msgstr "Martxan dauden prozesuen zenbaketa"
+
+#: SensorManager.cpp:86
+#, kde-format
+msgid "Sleeping Processes Count"
+msgstr "Lotan dauden prozesuen zenbaketa"
+
+#: SensorManager.cpp:87
+#, kde-format
+msgid "Stopped Processes Count"
+msgstr "Geldituta dauden prozesuen zenbaketa"
+
+#: SensorManager.cpp:88
+#, kde-format
+msgid "Zombie Processes Count"
+msgstr "Zonbi dauden prozesuen zenbaketa"
+
+#: SensorManager.cpp:89
+#, kde-format
+msgid "Waiting Processes Count"
+msgstr "Itxaroten dauden prozesuen zenbaketa"
+
+#: SensorManager.cpp:90
+#, kde-format
+msgid "Locked Processes Count"
+msgstr "Blokeatuta dauden prozesuen zenbaketa"
+
+#: SensorManager.cpp:92
+#, kde-format
+msgid "Disk Throughput"
+msgstr "Diskoaren errendimendua"
+
+#: SensorManager.cpp:93
+#, kde-format
+msgctxt "CPU Load"
+msgid "Load"
+msgstr "Karga"
+
+#: SensorManager.cpp:94
+#, kde-format
+msgid "Total Accesses"
+msgstr "Atzitzeak guztira"
+
+#: SensorManager.cpp:95
+#, kde-format
+msgid "Read Accesses"
+msgstr "Irakurketa atzitzeak"
+
+#: SensorManager.cpp:96
+#, kde-format
+msgid "Write Accesses"
+msgstr "Idazketa atzitzeak"
+
+#: SensorManager.cpp:97
+#, kde-format
+msgid "Read Data"
+msgstr "Irakurri datuak"
+
+#: SensorManager.cpp:98
+#, kde-format
+msgid "Written Data"
+msgstr "Idatzitako datuak"
+
+#: SensorManager.cpp:99
+#, kde-format
+msgid "Milliseconds spent reading"
+msgstr "Irakurtzen emandako milisegundoak"
+
+#: SensorManager.cpp:100
+#, kde-format
+msgid "Milliseconds spent writing"
+msgstr "Idazten emandako milisegundoak"
+
+#: SensorManager.cpp:101
+#, kde-format
+msgid "I/Os currently in progress"
+msgstr "S/I une honetan garapenean"
+
+#: SensorManager.cpp:102
+#, kde-format
+msgid "Pages In"
+msgstr "Orrialdeak barrura"
+
+#: SensorManager.cpp:103
+#, kde-format
+msgid "Pages Out"
+msgstr "Orrialdeak kanpora"
+
+#: SensorManager.cpp:104
+#, kde-format
+msgid "Context Switches"
+msgstr "Testuinguru aldaketa"
+
+#: SensorManager.cpp:105
+#, kde-format
+msgid "Traps"
+msgstr "Tranpak"
+
+#: SensorManager.cpp:106
+#, kde-format
+msgid "System Calls"
+msgstr "Sistemaren deiak"
+
+#: SensorManager.cpp:107
+#, kde-format
+msgid "Network"
+msgstr "Sarea"
+
+#: SensorManager.cpp:108
+#, kde-format
+msgid "Interfaces"
+msgstr "Interfazeak"
+
+#: SensorManager.cpp:109
+#, kde-format
+msgid "Receiver"
+msgstr "Hartzailea"
+
+#: SensorManager.cpp:110
+#, kde-format
+msgid "Transmitter"
+msgstr "Igorlea"
+
+#: SensorManager.cpp:112
+#, kde-format
+msgid "Data Rate"
+msgstr "Datu-tasa"
+
+#: SensorManager.cpp:113
+#, kde-format
+msgid "Compressed Packets Rate"
+msgstr "Konprimitutako paketeen tasa"
+
+#: SensorManager.cpp:114
+#, kde-format
+msgid "Dropped Packets Rate"
+msgstr "Galdutako paketeen tasa"
+
+#: SensorManager.cpp:115
+#, kde-format
+msgid "Error Rate"
+msgstr "Errore tasa"
+
+#: SensorManager.cpp:116
+#, kde-format
+msgid "FIFO Overruns Rate"
+msgstr "FIFO gainezka egite tasa"
+
+#: SensorManager.cpp:117
+#, kde-format
+msgid "Frame Error Rate"
+msgstr "Bilbe errore tasa"
+
+#: SensorManager.cpp:118
+#, kde-format
+msgid "Multicast Packet Rate"
+msgstr "Multidifusio pakete tasa"
+
+#: SensorManager.cpp:119
+#, kde-format
+msgid "Packet Rate"
+msgstr "Paketeen tasa"
+
+#: SensorManager.cpp:120
+#, kde-format
+msgctxt "@item sensor description ('carrier' is a type of network signal)"
+msgid "Carrier Loss Rate"
+msgstr "Garraiatzaile galera tasa"
+
+#: SensorManager.cpp:121 SensorManager.cpp:132
+#, kde-format
+msgid "Collisions"
+msgstr "Talkak"
+
+#: SensorManager.cpp:123
+#, kde-format
+msgid "Data"
+msgstr "Datuak"
+
+#: SensorManager.cpp:124
+#, kde-format
+msgid "Compressed Packets"
+msgstr "Pakete konprimituak"
+
+#: SensorManager.cpp:125
+#, kde-format
+msgid "Dropped Packets"
+msgstr "Eroritako paketeak"
+
+#: SensorManager.cpp:126
+#, kde-format
+msgid "Errors"
+msgstr "Erroreak"
+
+#: SensorManager.cpp:127
+#, kde-format
+msgid "FIFO Overruns"
+msgstr "FIFO gainezka egiteak"
+
+#: SensorManager.cpp:128
+#, kde-format
+msgid "Frame Errors"
+msgstr "Bilbe erroreak"
+
+#: SensorManager.cpp:129
+#, kde-format
+msgid "Multicast Packets"
+msgstr "Multidifusio paketeak"
+
+#: SensorManager.cpp:130
+#, kde-format
+msgid "Packets"
+msgstr "Paketeak"
+
+#: SensorManager.cpp:131
+#, kde-format
+msgctxt "@item sensor description ('carrier' is a type of network signal)"
+msgid "Carrier Losses"
+msgstr "Garraiatzailearen galerak"
+
+#: SensorManager.cpp:135
+#, kde-format
+msgid "Sockets"
+msgstr "Socketak"
+
+#: SensorManager.cpp:136
+#, kde-format
+msgid "Total Number"
+msgstr "Kopurua guztira"
+
+#: SensorManager.cpp:137 SensorManager.cpp:258
+#, kde-format
+msgid "Table"
+msgstr "Taula"
+
+#: SensorManager.cpp:138
+#, kde-format
+msgid "Advanced Power Management"
+msgstr "Energia-kudeaketa aurreratua"
+
+#: SensorManager.cpp:139
+#, kde-format
+msgid "ACPI"
+msgstr "ACPI"
+
+#: SensorManager.cpp:140
+#, kde-format
+msgid "Cooling Device"
+msgstr "Hozteko gailua"
+
+#: SensorManager.cpp:141
+#, kde-format
+msgid "Current State"
+msgstr "Uneko egoera"
+
+#: SensorManager.cpp:142 SensorManager.cpp:143
+#, kde-format
+msgid "Thermal Zone"
+msgstr "Gune termikoa"
+
+#: SensorManager.cpp:144 SensorManager.cpp:145
+#, kde-format
+msgid "Temperature"
+msgstr "Tenperatura"
+
+#: SensorManager.cpp:146
+#, kde-format
+msgid "Average CPU Temperature"
+msgstr "PUZ bataz-besteko tenperatura"
+
+#: SensorManager.cpp:147
+#, kde-format
+msgid "Fan"
+msgstr "Haizagailua"
+
+#: SensorManager.cpp:148
+#, kde-format
+msgid "State"
+msgstr "Egoera"
+
+#: SensorManager.cpp:149
+#, kde-format
+msgid "Battery"
+msgstr "Bateria"
+
+#: SensorManager.cpp:150
+#, kde-format
+msgid "Battery Capacity"
+msgstr "Bateriaren edukiera"
+
+#: SensorManager.cpp:151
+#, kde-format
+msgid "Battery Charge"
+msgstr "Bateriaren karga"
+
+#: SensorManager.cpp:152
+#, kde-format
+msgid "Battery Usage"
+msgstr "Bateria-erabilera"
+
+#: SensorManager.cpp:153
+#, kde-format
+msgid "Battery Voltage"
+msgstr "Bateriaren boltajea"
+
+#: SensorManager.cpp:154
+#, kde-format
+msgid "Battery Discharge Rate"
+msgstr "Bateria deskargatze tasa"
+
+#: SensorManager.cpp:155
+#, kde-format
+msgid "Remaining Time"
+msgstr "Geratzen den denbora"
+
+#: SensorManager.cpp:156
+#, kde-format
+msgid "Interrupts"
+msgstr "Etenak"
+
+#: SensorManager.cpp:157
+#, kde-format
+msgid "Load Average (1 min)"
+msgstr "Kargatu bataz-bestekoa (1 min)"
+
+#: SensorManager.cpp:158
+#, kde-format
+msgid "Load Average (5 min)"
+msgstr "Kargatu bataz-bestekoa (5 min)"
+
+#: SensorManager.cpp:159
+#, kde-format
+msgid "Load Average (15 min)"
+msgstr "Kargatu bataz-bestekoa (15 min)"
+
+#: SensorManager.cpp:160
+#, kde-format
+msgid "Clock Frequency"
+msgstr "Erlojuaren maiztasuna"
+
+#: SensorManager.cpp:161
+#, kde-format
+msgid "Average Clock Frequency"
+msgstr "Bataz-besteko erlojuaren maiztasuna"
+
+#: SensorManager.cpp:162
+#, kde-format
+msgid "Hardware Sensors"
+msgstr "Hardware Sentsoreak"
+
+#: SensorManager.cpp:163
+#, kde-format
+msgid "Partition Usage"
+msgstr "Partizio erabilera"
+
+#: SensorManager.cpp:164
+#, kde-format
+msgid "Used Space"
+msgstr "Erabilitako lekua"
+
+#: SensorManager.cpp:165
+#, kde-format
+msgid "Free Space"
+msgstr "Leku librea"
+
+#: SensorManager.cpp:166
+#, kde-format
+msgid "Fill Level"
+msgstr "Betetze maila"
+
+#: SensorManager.cpp:167
+#, kde-format
+msgid "Used Inodes"
+msgstr "Erabilitako inodoak"
+
+#: SensorManager.cpp:168
+#, kde-format
+msgid "Free Inodes"
+msgstr "Inodo libreak"
+
+#: SensorManager.cpp:169
+#, kde-format
+msgid "Inode Level"
+msgstr "Inodo maila"
+
+#: SensorManager.cpp:170
+#, kde-format
+msgid "System"
+msgstr "Sistema"
+
+#: SensorManager.cpp:171
+#, kde-format
+msgid "Uptime"
+msgstr "Jardun-denbora"
+
+#: SensorManager.cpp:172
+#, kde-format
+msgid "Linux Soft Raid (md)"
+msgstr "Linux Software Raid (md)"
+
+#: SensorManager.cpp:173
+#, kde-format
+msgid "Processors"
+msgstr "Prozesatzaileak"
+
+#: SensorManager.cpp:174
+#, kde-format
+msgid "Cores"
+msgstr "Nukleoak"
+
+#: SensorManager.cpp:175
+#, kde-format
+msgid "Number of Blocks"
+msgstr "Bloke kopurua"
+
+#: SensorManager.cpp:176
+#, kde-format
+msgid "Total Number of Devices"
+msgstr "Gailu kopurua guztira:"
+
+#: SensorManager.cpp:177
+#, kde-format
+msgid "Failed Devices"
+msgstr "Huts egin duten gailuak"
+
+#: SensorManager.cpp:178
+#, kde-format
+msgid "Spare Devices"
+msgstr "Ordezko gailuak"
+
+#: SensorManager.cpp:179
+#, kde-format
+msgid "Number of Raid Devices"
+msgstr "RAID gailuen kopurua"
+
+#: SensorManager.cpp:180
+#, kde-format
+msgid "Working Devices"
+msgstr "Lanean dauden gailuak"
+
+#: SensorManager.cpp:181
+#, kde-format
+msgid "Active Devices"
+msgstr "Gailu aktiboak"
+
+#: SensorManager.cpp:182
+#, kde-format
+msgid "Number of Devices"
+msgstr "Gailu kopurua"
+
+#: SensorManager.cpp:183
+#, kde-format
+msgid "Resyncing Percent"
+msgstr "Birsinkronizatze ehunekoa"
+
+#: SensorManager.cpp:184
+#, kde-format
+msgid "Disk Information"
+msgstr "Disko informazioa"
+
+#: SensorManager.cpp:185
+#, kde-format
+msgid "CPU Temperature"
+msgstr "PUZaren tenperatura"
+
+#: SensorManager.cpp:186
+#, kde-format
+msgid "Motherboard Temperature"
+msgstr "Plaka nagusiaren tenperatura"
+
+#: SensorManager.cpp:187
+#, kde-format
+msgid "Power Supply Temperature"
+msgstr "Elikatze iturriaren tenperatura"
+
+#: SensorManager.cpp:189
+#, kde-format
+msgid "Filesystem Root"
+msgstr "Fitxategi-sistemaren erroa"
+
+#: SensorManager.cpp:192
+#, kde-format
+msgid "Extra Temperature Sensor %1"
+msgstr "Tenperatura sentsore gehigarria %1"
+
+#: SensorManager.cpp:196
+#, kde-format
+msgid "PECI Temperature Sensor %1"
+msgstr "PECI tenperatura sentsorea %1"
+
+#: SensorManager.cpp:197
+#, kde-format
+msgid "PECI Temperature Calibration %1"
+msgstr "PECI tenperatura kalibratzea %1"
+
+#: SensorManager.cpp:201
+#, kde-format
+msgid "CPU %1"
+msgstr "%1 PUZ"
+
+#: SensorManager.cpp:202
+#, kde-format
+msgid "Disk %1"
+msgstr "%1 diskoa"
+
+#: SensorManager.cpp:206
+#, kde-format
+msgid "Battery %1"
+msgstr "%1 bateria"
+
+#: SensorManager.cpp:207
+#, kde-format
+msgid "Fan %1"
+msgstr "%1 haizagailua"
+
+#: SensorManager.cpp:208
+#, kde-format
+msgid "Temperature %1"
+msgstr "%1 tenperatura"
+
+#: SensorManager.cpp:211
+#, kde-format
+msgid "Total"
+msgstr "Guztira"
+
+#: SensorManager.cpp:212
+#, kde-format
+msgid "Software Interrupts"
+msgstr "Software etenak"
+
+#: SensorManager.cpp:213
+#, kde-format
+msgid "Hardware Interrupts"
+msgstr "Hardware etenak"
+
+#: SensorManager.cpp:218 SensorManager.cpp:220
+#, kde-format
+msgid "Int %1"
+msgstr "%1 etena"
+
+#: SensorManager.cpp:223
+#, kde-format
+msgid "Link Quality"
+msgstr "Lotura kalitatea"
+
+#: SensorManager.cpp:224
+#, kde-format
+msgid "Signal Level"
+msgstr "Seinale maila"
+
+#: SensorManager.cpp:225
+#, kde-format
+msgid "Noise Level"
+msgstr "Zarata maila"
+
+#: SensorManager.cpp:226
+#, kde-format
+msgid "Rx Invalid Nwid Packets"
+msgstr "Rx paketeak Nwid ezegokiarekin"
+
+#: SensorManager.cpp:227
+#, kde-format
+msgid "Total Rx Invalid Nwid Packets"
+msgstr "Guztizko Rx paketeak Nwid ezegokiarekin"
+
+#: SensorManager.cpp:228
+#, kde-format
+msgid "Rx Invalid Crypt Packets"
+msgstr "Rx paketeak zifratze ezegokiarekin"
+
+#: SensorManager.cpp:229
+#, kde-format
+msgid "Total Rx Invalid Crypt Packets"
+msgstr "Guztizko Rx paketeak zifratze ezegokiarekin"
+
+#: SensorManager.cpp:230
+#, kde-format
+msgid "Rx Invalid Frag Packets"
+msgstr "Rx paketeak zatikatze ezegokiarekin"
+
+#: SensorManager.cpp:231
+#, kde-format
+msgid "Total Rx Invalid Frag Packets"
+msgstr "Guztizko Rx paketeak zatikatze ezegokiarekin"
+
+#: SensorManager.cpp:232
+#, kde-format
+msgid "Tx Excessive Retries Packets"
+msgstr "Tx paketeak gehiegizko birsaiakerekin"
+
+#: SensorManager.cpp:233
+#, kde-format
+msgid "Total Tx Excessive Retries Packets"
+msgstr "Guztizko Tx gehiegizko birsaiakerekin"
+
+#: SensorManager.cpp:234
+#, kde-format
+msgid "Invalid Misc Packets"
+msgstr "Bestelako pakete baliogabeak"
+
+#: SensorManager.cpp:235
+#, kde-format
+msgid "Total Invalid Misc Packets"
+msgstr "Bestelako pakete baliogabeak guztira"
+
+#: SensorManager.cpp:236
+#, kde-format
+msgid "Missed Beacons"
+msgstr "Galdutako balizak"
+
+#: SensorManager.cpp:237
+#, kde-format
+msgid "Total Missed Beacons"
+msgstr "Galdutako balizak guztira"
+
+#: SensorManager.cpp:239
+#, kde-format
+msgid "Log Files"
+msgstr "Egunkari-fitxategiak"
+
+#: SensorManager.cpp:243
+#, kde-format
+msgctxt "the unit 1 per second"
+msgid "1/s"
+msgstr "1/s"
+
+#: SensorManager.cpp:244
+#, kde-format
+msgid "kBytes"
+msgstr "kByte"
+
+#: SensorManager.cpp:245
+#, kde-format
+msgctxt "the unit minutes"
+msgid "min"
+msgstr "min"
+
+#: SensorManager.cpp:246
+#, kde-format
+msgctxt "the frequency unit"
+msgid "MHz"
+msgstr "MHz"
+
+#: SensorManager.cpp:247
+#, kde-format
+msgctxt "a percentage"
+msgid "%"
+msgstr "%"
+
+#: SensorManager.cpp:248
+#, kde-format
+msgctxt "the unit milliamperes"
+msgid "mA"
+msgstr "mA"
+
+#: SensorManager.cpp:249
+#, kde-format
+msgctxt "the unit milliampere hours"
+msgid "mAh"
+msgstr "mAh"
+
+#: SensorManager.cpp:250
+#, kde-format
+msgctxt "the unit milliwatts"
+msgid "mW"
+msgstr "mW"
+
+#: SensorManager.cpp:251
+#, kde-format
+msgctxt "the unit milliwatt hours"
+msgid "mWh"
+msgstr "mWh"
+
+#: SensorManager.cpp:252
+#, kde-format
+msgctxt "the unit millivolts"
+msgid "mV"
+msgstr "mV"
+
+#: SensorManager.cpp:255
+#, kde-format
+msgid "Integer Value"
+msgstr "Osoko balioa"
+
+#: SensorManager.cpp:256
+#, kde-format
+msgid "Floating Point Value"
+msgstr "Koma higikorreko balioa"
+
+#: SensorManager.cpp:259
+#, kde-format
+msgid "Log File"
+msgstr "Egunkari-fitxategia"
+
+#: SensorShellAgent.cpp:108
+#, kde-format
+msgid "Could not run daemon program '%1'."
+msgstr "Ezin exekutatu '%1' daemon programa."
+
+#: SensorShellAgent.cpp:115
+#, kde-format
+msgid "The daemon program '%1' failed."
+msgstr "'%1' daemon programak huts egin du."
+
+#: SensorSocketAgent.cpp:89
+#, kde-format
+msgid "Connection to %1 refused"
+msgstr "%1ra konexioa ukatua"
+
+#: SensorSocketAgent.cpp:92
+#, kde-format
+msgid "Host %1 not found"
+msgstr "%1 ostalaria ez da aurkitu"
+
+#: SensorSocketAgent.cpp:95
+#, kde-format
+msgid ""
+"An error occurred with the network (e.g. the network cable was accidentally "
+"unplugged) for host %1."
+msgstr ""
+"Sarean errore bat eman da (adibidez istripuz kablea atera da) %1 "
+"ostalariarentzat"
+
+#: SensorSocketAgent.cpp:98
+#, kde-format
+msgid "Error for host %1: %2"
+msgstr "%1 ostalarian errorea: %2"

@@ -1,0 +1,923 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Andrej Mernik <andrejm@ubuntu.si>, 2013, 2015.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-03-01 00:45+0000\n"
+"PO-Revision-Date: 2020-07-08 09:32+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+"X-Generator: Lokalize 19.12.2\n"
+
+#: SensorAgent.cpp:87
+#, kde-format
+msgctxt "%1 is a host name"
+msgid ""
+"Message from %1:\n"
+"%2"
+msgstr ""
+"Sporočilo od %1:\n"
+"%2"
+
+#: SensorManager.cpp:49
+#, kde-format
+msgid "Change"
+msgstr "Sprememba"
+
+#: SensorManager.cpp:50
+#, kde-format
+msgid "Rate"
+msgstr "Hitrost"
+
+#: SensorManager.cpp:52
+#, kde-format
+msgid "CPU Load"
+msgstr "Obremenitev CPE"
+
+#: SensorManager.cpp:53
+#, kde-format
+msgid "Idling"
+msgstr "Nedejavnost"
+
+#: SensorManager.cpp:54
+#, kde-format
+msgid "Nice Load"
+msgstr "Prijaznost"
+
+#: SensorManager.cpp:55
+#, kde-format
+msgid "User Load"
+msgstr "Uporabniška obremenitev"
+
+#: SensorManager.cpp:56
+#, kde-format
+msgctxt "@item sensor description"
+msgid "System Load"
+msgstr "Obremenitev sistema"
+
+#: SensorManager.cpp:57
+#, kde-format
+msgid "Waiting"
+msgstr "Čakanje"
+
+#: SensorManager.cpp:58
+#, kde-format
+msgid "Interrupt Load"
+msgstr "Obremenitev prekinitev"
+
+#: SensorManager.cpp:59
+#, kde-format
+msgid "Total Load"
+msgstr "Skupna obremenitev"
+
+#: SensorManager.cpp:61
+#, kde-format
+msgid "Memory"
+msgstr "Pomnilnik"
+
+#: SensorManager.cpp:62
+#, kde-format
+msgid "Physical Memory"
+msgstr "Fizični pomnilnik"
+
+#: SensorManager.cpp:63
+#, kde-format
+msgid "Total Memory"
+msgstr "Skupni pomnilnik"
+
+#: SensorManager.cpp:64
+#, kde-format
+msgid "Swap Memory"
+msgstr "Izmenjevalni pomnilnik"
+
+#: SensorManager.cpp:65
+#, kde-format
+msgid "Cached Memory"
+msgstr "Predpomnilnik"
+
+#: SensorManager.cpp:66
+#, kde-format
+msgid "Buffered Memory"
+msgstr "Medpomnilnik"
+
+#: SensorManager.cpp:67
+#, kde-format
+msgid "Used Memory"
+msgstr "Uporabljen pomnilnik"
+
+#: SensorManager.cpp:68
+#, kde-format
+msgid "Application Memory"
+msgstr "Pomnilnik programov"
+
+#: SensorManager.cpp:69
+#, kde-format
+msgid "Allocated Memory"
+msgstr "Pomnilnik v rabi"
+
+#: SensorManager.cpp:70
+#, kde-format
+msgid "Free Memory"
+msgstr "Neporabljen pomnilnik"
+
+#: SensorManager.cpp:71
+#, kde-format
+msgid "Available Memory"
+msgstr "Pomnilnik na voljo"
+
+#: SensorManager.cpp:72
+#, kde-format
+msgid "Active Memory"
+msgstr "Dejaven pomnilnik"
+
+#: SensorManager.cpp:73
+#, kde-format
+msgid "Inactive Memory"
+msgstr "Nedejaven pomnilnik"
+
+#: SensorManager.cpp:74
+#, kde-format
+msgid "Wired Memory"
+msgstr "Zvezan pomnilnik"
+
+#: SensorManager.cpp:75
+#, kde-format
+msgid "Exec Pages"
+msgstr "Izvedljive strani"
+
+#: SensorManager.cpp:76
+#, kde-format
+msgid "File Pages"
+msgstr "Datotečne strani"
+
+#: SensorManager.cpp:79
+#, kde-format
+msgid "Processes"
+msgstr "Opravila"
+
+#: SensorManager.cpp:80 SensorManager.cpp:257
+#, kde-format
+msgid "Process Controller"
+msgstr "Krmilnik opravil"
+
+#: SensorManager.cpp:81
+#, kde-format
+msgid "Last Process ID"
+msgstr "ID zadnjega opravila"
+
+#: SensorManager.cpp:82
+#, kde-format
+msgid "Process Spawn Count"
+msgstr "Število ustvarjenih opravil"
+
+#: SensorManager.cpp:83
+#, kde-format
+msgid "Process Count"
+msgstr "Število opravil"
+
+#: SensorManager.cpp:84
+#, kde-format
+msgid "Idle Processes Count"
+msgstr "Število nedejavnih opravil"
+
+#: SensorManager.cpp:85
+#, kde-format
+msgid "Running Processes Count"
+msgstr "Število tekočih opravil"
+
+#: SensorManager.cpp:86
+#, kde-format
+msgid "Sleeping Processes Count"
+msgstr "Število opravil v pripravljenosti"
+
+#: SensorManager.cpp:87
+#, kde-format
+msgid "Stopped Processes Count"
+msgstr "Število zaustavljenih opravil"
+
+#: SensorManager.cpp:88
+#, kde-format
+msgid "Zombie Processes Count"
+msgstr "Število zombi opravil"
+
+#: SensorManager.cpp:89
+#, kde-format
+msgid "Waiting Processes Count"
+msgstr "Število čakajočih opravil"
+
+#: SensorManager.cpp:90
+#, kde-format
+msgid "Locked Processes Count"
+msgstr "Število zaklenjenih opravil"
+
+#: SensorManager.cpp:92
+#, kde-format
+msgid "Disk Throughput"
+msgstr "Prepustnost diska"
+
+#: SensorManager.cpp:93
+#, kde-format
+msgctxt "CPU Load"
+msgid "Load"
+msgstr "Obremenitev"
+
+#: SensorManager.cpp:94
+#, kde-format
+msgid "Total Accesses"
+msgstr "Skupni dostopi"
+
+#: SensorManager.cpp:95
+#, kde-format
+msgid "Read Accesses"
+msgstr "Bralni dostopi"
+
+#: SensorManager.cpp:96
+#, kde-format
+msgid "Write Accesses"
+msgstr "Pisalni dostopi"
+
+#: SensorManager.cpp:97
+#, kde-format
+msgid "Read Data"
+msgstr "Prebrani podatki"
+
+#: SensorManager.cpp:98
+#, kde-format
+msgid "Written Data"
+msgstr "Zapisani podatki"
+
+#: SensorManager.cpp:99
+#, kde-format
+msgid "Milliseconds spent reading"
+msgstr "Milisekund pretečenih za branje"
+
+#: SensorManager.cpp:100
+#, kde-format
+msgid "Milliseconds spent writing"
+msgstr "Milisekund pretečenih za pisanje"
+
+#: SensorManager.cpp:101
+#, kde-format
+msgid "I/Os currently in progress"
+msgstr "V/I Opravil, ki trenutno potekajo"
+
+#: SensorManager.cpp:102
+#, kde-format
+msgid "Pages In"
+msgstr "Strani noter"
+
+#: SensorManager.cpp:103
+#, kde-format
+msgid "Pages Out"
+msgstr "Strani ven"
+
+#: SensorManager.cpp:104
+#, kde-format
+msgid "Context Switches"
+msgstr "Kontekstni preklopi"
+
+#: SensorManager.cpp:105
+#, kde-format
+msgid "Traps"
+msgstr "Pasti"
+
+#: SensorManager.cpp:106
+#, kde-format
+msgid "System Calls"
+msgstr "Sistemski klici"
+
+#: SensorManager.cpp:107
+#, kde-format
+msgid "Network"
+msgstr "Omrežje"
+
+#: SensorManager.cpp:108
+#, kde-format
+msgid "Interfaces"
+msgstr "Vmesniki"
+
+#: SensorManager.cpp:109
+#, kde-format
+msgid "Receiver"
+msgstr "Prejemnik"
+
+#: SensorManager.cpp:110
+#, kde-format
+msgid "Transmitter"
+msgstr "Oddajnik"
+
+#: SensorManager.cpp:112
+#, kde-format
+msgid "Data Rate"
+msgstr "Podatkovna hitrost"
+
+#: SensorManager.cpp:113
+#, kde-format
+msgid "Compressed Packets Rate"
+msgstr "Hitrost stisnjenih paketov"
+
+#: SensorManager.cpp:114
+#, kde-format
+msgid "Dropped Packets Rate"
+msgstr "Hitrost opuščenih paketov"
+
+#: SensorManager.cpp:115
+#, kde-format
+msgid "Error Rate"
+msgstr "Raven napak"
+
+#: SensorManager.cpp:116
+#, kde-format
+msgid "FIFO Overruns Rate"
+msgstr "Hitrost prekoračitev FIFO"
+
+#: SensorManager.cpp:117
+#, kde-format
+msgid "Frame Error Rate"
+msgstr "Hitrost napak okvirjev"
+
+#: SensorManager.cpp:118
+#, kde-format
+msgid "Multicast Packet Rate"
+msgstr "Hitrost večsmernega oddajanja paketov"
+
+#: SensorManager.cpp:119
+#, kde-format
+msgid "Packet Rate"
+msgstr "Hitrost paketov"
+
+#: SensorManager.cpp:120
+#, kde-format
+msgctxt "@item sensor description ('carrier' is a type of network signal)"
+msgid "Carrier Loss Rate"
+msgstr "Hitrost izgube nosilnega signala"
+
+#: SensorManager.cpp:121 SensorManager.cpp:132
+#, kde-format
+msgid "Collisions"
+msgstr "Trki"
+
+#: SensorManager.cpp:123
+#, kde-format
+msgid "Data"
+msgstr "Podatki"
+
+#: SensorManager.cpp:124
+#, kde-format
+msgid "Compressed Packets"
+msgstr "Stisnjeni paketi"
+
+#: SensorManager.cpp:125
+#, kde-format
+msgid "Dropped Packets"
+msgstr "Opuščeni paketi"
+
+#: SensorManager.cpp:126
+#, kde-format
+msgid "Errors"
+msgstr "Napake"
+
+#: SensorManager.cpp:127
+#, kde-format
+msgid "FIFO Overruns"
+msgstr "Prekoračitve FIFO"
+
+#: SensorManager.cpp:128
+#, kde-format
+msgid "Frame Errors"
+msgstr "Napake okvirjev"
+
+#: SensorManager.cpp:129
+#, kde-format
+msgid "Multicast Packets"
+msgstr "Paketi večsmernega oddajanja"
+
+#: SensorManager.cpp:130
+#, kde-format
+msgid "Packets"
+msgstr "Paketi"
+
+#: SensorManager.cpp:131
+#, kde-format
+msgctxt "@item sensor description ('carrier' is a type of network signal)"
+msgid "Carrier Losses"
+msgstr "Izgube nosilnega signala"
+
+#: SensorManager.cpp:135
+#, kde-format
+msgid "Sockets"
+msgstr "Vtiči"
+
+#: SensorManager.cpp:136
+#, kde-format
+msgid "Total Number"
+msgstr "Skupno število"
+
+#: SensorManager.cpp:137 SensorManager.cpp:258
+#, kde-format
+msgid "Table"
+msgstr "Razpredelnica"
+
+#: SensorManager.cpp:138
+#, kde-format
+msgid "Advanced Power Management"
+msgstr "Napredno upravljanje z energijo"
+
+#: SensorManager.cpp:139
+#, kde-format
+msgid "ACPI"
+msgstr "ACPI"
+
+#: SensorManager.cpp:140
+#, kde-format
+msgid "Cooling Device"
+msgstr "Naprava hlajenja"
+
+#: SensorManager.cpp:141
+#, kde-format
+msgid "Current State"
+msgstr "Trenutno stanje"
+
+#: SensorManager.cpp:142 SensorManager.cpp:143
+#, kde-format
+msgid "Thermal Zone"
+msgstr "Toplotno območje"
+
+#: SensorManager.cpp:144 SensorManager.cpp:145
+#, kde-format
+msgid "Temperature"
+msgstr "Temperatura"
+
+#: SensorManager.cpp:146
+#, kde-format
+msgid "Average CPU Temperature"
+msgstr "Povprečna temperatura CPE"
+
+#: SensorManager.cpp:147
+#, kde-format
+msgid "Fan"
+msgstr "Ventilator"
+
+#: SensorManager.cpp:148
+#, kde-format
+msgid "State"
+msgstr "Stanje"
+
+#: SensorManager.cpp:149
+#, kde-format
+msgid "Battery"
+msgstr "Baterija"
+
+#: SensorManager.cpp:150
+#, kde-format
+msgid "Battery Capacity"
+msgstr "Zmogljivost baterije"
+
+#: SensorManager.cpp:151
+#, kde-format
+msgid "Battery Charge"
+msgstr "Napolnjenost baterije"
+
+#: SensorManager.cpp:152
+#, kde-format
+msgid "Battery Usage"
+msgstr "Uporaba baterije"
+
+#: SensorManager.cpp:153
+#, kde-format
+msgid "Battery Voltage"
+msgstr "Napetost baterije"
+
+#: SensorManager.cpp:154
+#, kde-format
+msgid "Battery Discharge Rate"
+msgstr "Hitrost praznjenja baterije"
+
+#: SensorManager.cpp:155
+#, kde-format
+msgid "Remaining Time"
+msgstr "Preostali čas"
+
+#: SensorManager.cpp:156
+#, kde-format
+msgid "Interrupts"
+msgstr "Prekinitve"
+
+#: SensorManager.cpp:157
+#, kde-format
+msgid "Load Average (1 min)"
+msgstr "Povprečna obremenitev (1 min)"
+
+#: SensorManager.cpp:158
+#, kde-format
+msgid "Load Average (5 min)"
+msgstr "Povprečna obremenitev (5 min)"
+
+#: SensorManager.cpp:159
+#, kde-format
+msgid "Load Average (15 min)"
+msgstr "Povprečna obremenitev (15 min)"
+
+#: SensorManager.cpp:160
+#, kde-format
+msgid "Clock Frequency"
+msgstr "Frekvenca ure"
+
+#: SensorManager.cpp:161
+#, kde-format
+msgid "Average Clock Frequency"
+msgstr "Povprečna frekvenca ure"
+
+#: SensorManager.cpp:162
+#, kde-format
+msgid "Hardware Sensors"
+msgstr "Strojna tipala"
+
+#: SensorManager.cpp:163
+#, kde-format
+msgid "Partition Usage"
+msgstr "Poraba razdelkov"
+
+#: SensorManager.cpp:164
+#, kde-format
+msgid "Used Space"
+msgstr "Uporabljen prostor"
+
+#: SensorManager.cpp:165
+#, kde-format
+msgid "Free Space"
+msgstr "Neporabljen prostor"
+
+#: SensorManager.cpp:166
+#, kde-format
+msgid "Fill Level"
+msgstr "Stopnja zapolnitve"
+
+#: SensorManager.cpp:167
+#, kde-format
+msgid "Used Inodes"
+msgstr "Porabljena kazalna vozlišča (inodes)"
+
+#: SensorManager.cpp:168
+#, kde-format
+msgid "Free Inodes"
+msgstr "Neporabljena kazalna vozlišča (inodes)"
+
+#: SensorManager.cpp:169
+#, kde-format
+msgid "Inode Level"
+msgstr "Stopnja kazalnega vozlišča (inode)"
+
+#: SensorManager.cpp:170
+#, kde-format
+msgid "System"
+msgstr "Sistem"
+
+#: SensorManager.cpp:171
+#, kde-format
+msgid "Uptime"
+msgstr "Čas delovanja"
+
+#: SensorManager.cpp:172
+#, kde-format
+msgid "Linux Soft Raid (md)"
+msgstr "Programski RAID (md)"
+
+#: SensorManager.cpp:173
+#, kde-format
+msgid "Processors"
+msgstr "Procesorji"
+
+#: SensorManager.cpp:174
+#, kde-format
+msgid "Cores"
+msgstr "Jedra"
+
+#: SensorManager.cpp:175
+#, kde-format
+msgid "Number of Blocks"
+msgstr "Število blokov"
+
+#: SensorManager.cpp:176
+#, kde-format
+msgid "Total Number of Devices"
+msgstr "Skupno število naprav"
+
+#: SensorManager.cpp:177
+#, kde-format
+msgid "Failed Devices"
+msgstr "Spodletele naprave"
+
+#: SensorManager.cpp:178
+#, kde-format
+msgid "Spare Devices"
+msgstr "Rezervne naprave"
+
+#: SensorManager.cpp:179
+#, kde-format
+msgid "Number of Raid Devices"
+msgstr "Število naprav RAID"
+
+#: SensorManager.cpp:180
+#, kde-format
+msgid "Working Devices"
+msgstr "Delujoče naprave"
+
+#: SensorManager.cpp:181
+#, kde-format
+msgid "Active Devices"
+msgstr "Dejavne naprave"
+
+#: SensorManager.cpp:182
+#, kde-format
+msgid "Number of Devices"
+msgstr "Število naprav"
+
+#: SensorManager.cpp:183
+#, kde-format
+msgid "Resyncing Percent"
+msgstr "Odstotek ponovne uskladitve"
+
+#: SensorManager.cpp:184
+#, kde-format
+msgid "Disk Information"
+msgstr "Podatki o disku"
+
+#: SensorManager.cpp:185
+#, kde-format
+msgid "CPU Temperature"
+msgstr "Temperatura CPE"
+
+#: SensorManager.cpp:186
+#, kde-format
+msgid "Motherboard Temperature"
+msgstr "Temperatura matične plošče"
+
+#: SensorManager.cpp:187
+#, kde-format
+msgid "Power Supply Temperature"
+msgstr "Temperatura napajalnika"
+
+#: SensorManager.cpp:189
+#, kde-format
+msgid "Filesystem Root"
+msgstr "Koren datotečnega sistema"
+
+#: SensorManager.cpp:192
+#, kde-format
+msgid "Extra Temperature Sensor %1"
+msgstr "Posebna temperatura senzorja %1"
+
+#: SensorManager.cpp:196
+#, kde-format
+msgid "PECI Temperature Sensor %1"
+msgstr "Temperatura PECI senzorja %1"
+
+#: SensorManager.cpp:197
+#, kde-format
+msgid "PECI Temperature Calibration %1"
+msgstr "Kalibracijska temperatura PECI %1"
+
+#: SensorManager.cpp:201
+#, kde-format
+msgid "CPU %1"
+msgstr "CPE %1"
+
+#: SensorManager.cpp:202
+#, kde-format
+msgid "Disk %1"
+msgstr "Disk %1"
+
+#: SensorManager.cpp:206
+#, kde-format
+msgid "Battery %1"
+msgstr "Baterija %1"
+
+#: SensorManager.cpp:207
+#, kde-format
+msgid "Fan %1"
+msgstr "Ventilator %1"
+
+#: SensorManager.cpp:208
+#, kde-format
+msgid "Temperature %1"
+msgstr "Temperatura %1"
+
+#: SensorManager.cpp:211
+#, kde-format
+msgid "Total"
+msgstr "Skupno"
+
+#: SensorManager.cpp:212
+#, kde-format
+msgid "Software Interrupts"
+msgstr "Programske prekinitve"
+
+#: SensorManager.cpp:213
+#, kde-format
+msgid "Hardware Interrupts"
+msgstr "Strojne prekinitve"
+
+#: SensorManager.cpp:218 SensorManager.cpp:220
+#, kde-format
+msgid "Int %1"
+msgstr "Prek. %1"
+
+#: SensorManager.cpp:223
+#, kde-format
+msgid "Link Quality"
+msgstr "Kakovost povezave"
+
+#: SensorManager.cpp:224
+#, kde-format
+msgid "Signal Level"
+msgstr "Stopnja signala"
+
+#: SensorManager.cpp:225
+#, kde-format
+msgid "Noise Level"
+msgstr "Stopnja šuma"
+
+#: SensorManager.cpp:226
+#, kde-format
+msgid "Rx Invalid Nwid Packets"
+msgstr "Paketi Rx Invalid Nwid"
+
+#: SensorManager.cpp:227
+#, kde-format
+msgid "Total Rx Invalid Nwid Packets"
+msgstr "Skupno paketov Rx Invalid Nwid"
+
+#: SensorManager.cpp:228
+#, kde-format
+msgid "Rx Invalid Crypt Packets"
+msgstr "Paketi Rx Invalid Crypt"
+
+#: SensorManager.cpp:229
+#, kde-format
+msgid "Total Rx Invalid Crypt Packets"
+msgstr "Skupno paketov Rx Invalid Crypt"
+
+#: SensorManager.cpp:230
+#, kde-format
+msgid "Rx Invalid Frag Packets"
+msgstr "Paketi Rx Invalid Frag"
+
+#: SensorManager.cpp:231
+#, kde-format
+msgid "Total Rx Invalid Frag Packets"
+msgstr "Skupno paketov Rx Invalid Frag"
+
+#: SensorManager.cpp:232
+#, kde-format
+msgid "Tx Excessive Retries Packets"
+msgstr "Paketi Tx Excessive Retries"
+
+#: SensorManager.cpp:233
+#, kde-format
+msgid "Total Tx Excessive Retries Packets"
+msgstr "Skupno paketov Tx Excessive Retries"
+
+#: SensorManager.cpp:234
+#, kde-format
+msgid "Invalid Misc Packets"
+msgstr "Neveljavni splošni paketi"
+
+#: SensorManager.cpp:235
+#, kde-format
+msgid "Total Invalid Misc Packets"
+msgstr "Skupno neveljavnih splošnih paketov"
+
+#: SensorManager.cpp:236
+#, kde-format
+msgid "Missed Beacons"
+msgstr "Zgrešeni oddajniki"
+
+#: SensorManager.cpp:237
+#, kde-format
+msgid "Total Missed Beacons"
+msgstr "Skupno zgrešenih oddajnikov"
+
+#: SensorManager.cpp:239
+#, kde-format
+msgid "Log Files"
+msgstr "Dnevniške datoteke"
+
+#: SensorManager.cpp:243
+#, kde-format
+msgctxt "the unit 1 per second"
+msgid "1/s"
+msgstr "1/s"
+
+#: SensorManager.cpp:244
+#, kde-format
+msgid "kBytes"
+msgstr "kBajtov"
+
+#: SensorManager.cpp:245
+#, kde-format
+msgctxt "the unit minutes"
+msgid "min"
+msgstr "min"
+
+#: SensorManager.cpp:246
+#, kde-format
+msgctxt "the frequency unit"
+msgid "MHz"
+msgstr "MHz"
+
+#: SensorManager.cpp:247
+#, kde-format
+msgctxt "a percentage"
+msgid "%"
+msgstr "%"
+
+#: SensorManager.cpp:248
+#, kde-format
+msgctxt "the unit milliamperes"
+msgid "mA"
+msgstr "mA"
+
+#: SensorManager.cpp:249
+#, kde-format
+msgctxt "the unit milliampere hours"
+msgid "mAh"
+msgstr "mAh"
+
+#: SensorManager.cpp:250
+#, kde-format
+msgctxt "the unit milliwatts"
+msgid "mW"
+msgstr "mW"
+
+#: SensorManager.cpp:251
+#, kde-format
+msgctxt "the unit milliwatt hours"
+msgid "mWh"
+msgstr "mWh"
+
+#: SensorManager.cpp:252
+#, kde-format
+msgctxt "the unit millivolts"
+msgid "mV"
+msgstr "mV"
+
+#: SensorManager.cpp:255
+#, kde-format
+msgid "Integer Value"
+msgstr "Celoštevilska vrednost"
+
+#: SensorManager.cpp:256
+#, kde-format
+msgid "Floating Point Value"
+msgstr "Vrednost s plavajočo vejico"
+
+#: SensorManager.cpp:259
+#, kde-format
+msgid "Log File"
+msgstr "Dnevniška datoteka"
+
+#: SensorShellAgent.cpp:108
+#, kde-format
+msgid "Could not run daemon program '%1'."
+msgstr "Ozadnjega programa '%1' ni bilo mogoče zagnati."
+
+#: SensorShellAgent.cpp:115
+#, kde-format
+msgid "The daemon program '%1' failed."
+msgstr "Ozadnji program '%1' je spodletel."
+
+#: SensorSocketAgent.cpp:89
+#, kde-format
+msgid "Connection to %1 refused"
+msgstr "Povezava s %1 je bila zavrnjena"
+
+#: SensorSocketAgent.cpp:92
+#, kde-format
+msgid "Host %1 not found"
+msgstr "Gostitelja %1 ni mogoče najti"
+
+#: SensorSocketAgent.cpp:95
+#, kde-format
+msgid ""
+"An error occurred with the network (e.g. the network cable was accidentally "
+"unplugged) for host %1."
+msgstr ""
+"V omrežju za gostitelja %1 je prišlo do napake (npr. omrežni kabel je bil po "
+"nesreči odklopljen)."
+
+#: SensorSocketAgent.cpp:98
+#, kde-format
+msgid "Error for host %1: %2"
+msgstr "Napaka za gostitelja %1: %2"

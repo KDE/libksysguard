@@ -1,0 +1,621 @@
+# Translation of processcore.po into Serbian.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2007, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: processcore\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-05-31 18:13+0200\n"
+"PO-Revision-Date: 2010-06-30 14:15+0200\n"
+"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@ijekavianlatin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: extended_process_list.cpp:94
+#, kde-format
+msgid "PID"
+msgstr ""
+
+#: extended_process_list.cpp:95
+#, kde-format
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#: extended_process_list.cpp:98
+#, kde-format
+msgid "Parent PID"
+msgstr ""
+
+#: extended_process_list.cpp:101
+#, kde-format
+msgid "Login"
+msgstr ""
+
+#: extended_process_list.cpp:102
+#, kde-format
+msgid "The user who owns this process."
+msgstr ""
+
+#: extended_process_list.cpp:105
+#, kde-format
+msgid "UID"
+msgstr ""
+
+#: extended_process_list.cpp:109
+#, kde-format
+msgid "Username"
+msgstr ""
+
+#: extended_process_list.cpp:121
+#, kde-format
+msgid "Can Login"
+msgstr ""
+
+#: extended_process_list.cpp:145
+#, kde-format
+msgid "EUID"
+msgstr ""
+
+#: extended_process_list.cpp:149
+#, kde-format
+msgid "suid"
+msgstr ""
+
+#: extended_process_list.cpp:152
+#, kde-format
+msgid "fsuid"
+msgstr ""
+
+#: extended_process_list.cpp:155
+#, kde-format
+msgid "gid"
+msgstr ""
+
+#: extended_process_list.cpp:158
+#, kde-format
+msgid "egid"
+msgstr ""
+
+#: extended_process_list.cpp:161
+#, kde-format
+msgid "sgid"
+msgstr ""
+
+#: extended_process_list.cpp:164
+#, kde-format
+msgid "fsgid"
+msgstr ""
+
+#: extended_process_list.cpp:167
+#, kde-format
+msgid "Tracer Pid"
+msgstr ""
+
+#: extended_process_list.cpp:170
+#, kde-format
+msgid "tty"
+msgstr ""
+
+#: extended_process_list.cpp:171
+#, kde-format
+msgid "The controlling terminal on which this process is running."
+msgstr ""
+
+#: extended_process_list.cpp:174
+#, fuzzy, kde-format
+#| msgctxt "Priority Class"
+#| msgid "Real Time"
+msgid "User Time"
+msgstr "stvarnovremenski"
+
+#: extended_process_list.cpp:177
+#, kde-format
+msgid "System Time"
+msgstr ""
+
+#: extended_process_list.cpp:182
+#, fuzzy, kde-format
+#| msgctxt "Priority Class"
+#| msgid "Real Time"
+msgid "Total Time"
+msgstr "stvarnovremenski"
+
+#: extended_process_list.cpp:186
+#, fuzzy, kde-format
+#| msgctxt "Priority Class"
+#| msgid "Real Time"
+msgid "Time"
+msgstr "stvarnovremenski"
+
+#: extended_process_list.cpp:188
+#, kde-format
+msgid "The total user and system time that this process has been running for"
+msgstr ""
+
+#: extended_process_list.cpp:191
+#, fuzzy, kde-format
+#| msgctxt "Priority Class"
+#| msgid "Real Time"
+msgid "Start Time"
+msgstr "stvarnovremenski"
+
+#: extended_process_list.cpp:192
+#, kde-format
+msgid "The elapsed time since the process was started."
+msgstr ""
+
+#: extended_process_list.cpp:196
+#, kde-format
+msgid "User CPU Usage"
+msgstr ""
+
+#: extended_process_list.cpp:197
+#, kde-format
+msgid "User CPU"
+msgstr ""
+
+#: extended_process_list.cpp:203
+#, kde-format
+msgid "System CPU Usage"
+msgstr ""
+
+#: extended_process_list.cpp:204
+#, kde-format
+msgid "System CPU"
+msgstr ""
+
+#: extended_process_list.cpp:211
+#, kde-format
+msgid "Total CPU Usage"
+msgstr ""
+
+#: extended_process_list.cpp:215
+#, kde-format
+msgid "CPU"
+msgstr ""
+
+#: extended_process_list.cpp:219
+#, kde-format
+msgid "The current total CPU usage of the process."
+msgstr ""
+
+#: extended_process_list.cpp:222
+#, kde-format
+msgid "Group User CPU Usage"
+msgstr ""
+
+#: extended_process_list.cpp:223
+#, kde-format
+msgid "The amount of userspace CPU used by this process and all its children."
+msgstr ""
+
+#: extended_process_list.cpp:229
+#, kde-format
+msgid "Group System CPU Usage"
+msgstr ""
+
+#: extended_process_list.cpp:230
+#, kde-format
+msgid "The amount of system CPU used by this process and all its children."
+msgstr ""
+
+#: extended_process_list.cpp:237
+#, kde-format
+msgid "Group Total CPU Usage"
+msgstr ""
+
+#: extended_process_list.cpp:241
+#, kde-format
+msgid "Group CPU"
+msgstr ""
+
+#: extended_process_list.cpp:242
+#, kde-format
+msgid "The total amount of CPU used by this process and all its children."
+msgstr ""
+
+#: extended_process_list.cpp:248
+#, kde-format
+msgid "Nice Level"
+msgstr ""
+
+#: extended_process_list.cpp:249
+#, kde-format
+msgid ""
+"The priority with which this process is being run. For the normal scheduler, "
+"this ranges from 19 (very nice, least priority) to -19 (top priority)."
+msgstr ""
+
+#: extended_process_list.cpp:252
+#, kde-format
+msgid "Scheduler"
+msgstr ""
+
+#: extended_process_list.cpp:255
+#, kde-format
+msgid "IO Priority Class"
+msgstr ""
+
+#: extended_process_list.cpp:259
+#, kde-format
+msgid "IO Nice Level"
+msgstr ""
+
+#: extended_process_list.cpp:263
+#, kde-format
+msgid "VM Size"
+msgstr ""
+
+#: extended_process_list.cpp:267
+#, kde-format
+msgid ""
+"This is the amount of virtual memory space that the process is using, "
+"included shared libraries, graphics memory, files on disk, and so on. This "
+"number is almost meaningless."
+msgstr ""
+
+#: extended_process_list.cpp:270
+#, kde-format
+msgid "RSS Memory Usage"
+msgstr ""
+
+#: extended_process_list.cpp:274
+#, kde-format
+msgid ""
+"This is the amount of physical memory that this process is using and "
+"includes the amount of memory used by shared libraries."
+msgstr ""
+
+#: extended_process_list.cpp:276
+#, kde-format
+msgid "Private Memory Usage"
+msgstr ""
+
+#: extended_process_list.cpp:278
+#, kde-format
+msgid "Private"
+msgstr ""
+
+#: extended_process_list.cpp:281
+#, kde-format
+msgid ""
+"This is the amount of physical memory that this process is using by itself, "
+"and approximates the Private memory usage of the process.<br>It does not "
+"include any swapped out memory, nor the code size of its shared libraries."
+msgstr ""
+
+#: extended_process_list.cpp:285
+#, kde-format
+msgid "Shared Memory Usage"
+msgstr ""
+
+#: extended_process_list.cpp:293
+#, kde-format
+msgid "Shared"
+msgstr ""
+
+#: extended_process_list.cpp:294
+#, kde-format
+msgid ""
+"This is approximately the amount of real physical memory that this process's "
+"shared libraries are using.<br>This memory is shared among all processes "
+"that use this library."
+msgstr ""
+
+#: extended_process_list.cpp:299
+#, kde-format
+msgid "Memory Usage"
+msgstr ""
+
+#: extended_process_list.cpp:300
+#, kde-format
+msgid "Memory"
+msgstr ""
+
+#: extended_process_list.cpp:304
+#, kde-format
+msgid ""
+"This is an approximation of the real amount of physical memory that this "
+"process is using. It is calculated by dividing the process' shared memory "
+"usage by the amount of processes sharing that memory, then adding the "
+"process' private memory."
+msgstr ""
+
+#: extended_process_list.cpp:307
+#, kde-format
+msgid "Name"
+msgstr ""
+
+#: extended_process_list.cpp:308
+#, kde-format
+msgid "The process name."
+msgstr ""
+
+#: extended_process_list.cpp:311
+#, kde-format
+msgid "Command"
+msgstr ""
+
+#: extended_process_list.cpp:312
+#, kde-format
+msgid "The command with which this process was launched."
+msgstr ""
+
+#: extended_process_list.cpp:315
+#, kde-format
+msgid "Status"
+msgstr ""
+
+#: extended_process_list.cpp:318
+#, kde-format
+msgid "IO Characters Read"
+msgstr ""
+
+#: extended_process_list.cpp:322
+#, kde-format
+msgid "IO Characters Written"
+msgstr ""
+
+#: extended_process_list.cpp:326
+#, kde-format
+msgid "IO Read Syscalls"
+msgstr ""
+
+#: extended_process_list.cpp:330
+#, kde-format
+msgid "IO Read Syscalls Rate"
+msgstr ""
+
+#: extended_process_list.cpp:334
+#, kde-format
+msgid "IO Write Syscalls"
+msgstr ""
+
+#: extended_process_list.cpp:338
+#, kde-format
+msgid "IO Write Syscalls Rate"
+msgstr ""
+
+#: extended_process_list.cpp:342
+#, kde-format
+msgid "IO Characters Actually Read"
+msgstr ""
+
+#: extended_process_list.cpp:346
+#, kde-format
+msgid "IO Characters Read Rate"
+msgstr ""
+
+#: extended_process_list.cpp:347
+#, kde-format
+msgid ""
+"The read rate for all of a process' IO, including disk cache and other "
+"nonphysical IO."
+msgstr ""
+
+#: extended_process_list.cpp:351
+#, kde-format
+msgid "IO Characters Written Rate"
+msgstr ""
+
+#: extended_process_list.cpp:352
+#, kde-format
+msgid ""
+"The write rate for all of a process' IO, including disk cache and other "
+"nonphysical IO."
+msgstr ""
+
+#: extended_process_list.cpp:356
+#, kde-format
+msgid "Disk Read Rate"
+msgstr ""
+
+#: extended_process_list.cpp:358
+#, kde-format
+msgid "Read"
+msgstr ""
+
+#: extended_process_list.cpp:359
+#, kde-format
+msgid "The rate of data being read from disk."
+msgstr ""
+
+#: extended_process_list.cpp:362
+#, kde-format
+msgid "Disk Write Rate"
+msgstr ""
+
+#: extended_process_list.cpp:364
+#, kde-format
+msgid "Write"
+msgstr ""
+
+#: extended_process_list.cpp:365
+#, kde-format
+msgid "The rate of data being written to the disk."
+msgstr ""
+
+#: extended_process_list.cpp:368
+#, kde-format
+msgid "Threads"
+msgstr ""
+
+#: process.cpp:114 process.cpp:124
+#, kde-format
+msgctxt "Process Niceness"
+msgid "Normal"
+msgstr "normalan"
+
+#: process.cpp:115 process.cpp:125
+#, kde-format
+msgctxt "Process Niceness"
+msgid "Very low priority"
+msgstr "vrlo nizak prioritet"
+
+#: process.cpp:116 process.cpp:126
+#, kde-format
+msgctxt "Process Niceness"
+msgid "Low priority"
+msgstr "nizak prioritet"
+
+#: process.cpp:117 process.cpp:127
+#, kde-format
+msgctxt "Process Niceness"
+msgid "Very high priority"
+msgstr "vrlo visok prioritet"
+
+#: process.cpp:118 process.cpp:128
+#, kde-format
+msgctxt "Process Niceness"
+msgid "High priority"
+msgstr "visok prioritet"
+
+#: process.cpp:134
+#, kde-format
+msgctxt "Priority Class"
+msgid "None"
+msgstr "nikakav"
+
+#: process.cpp:135
+#, kde-format
+msgctxt "Priority Class"
+msgid "Real Time"
+msgstr "stvarnovremenski"
+
+#: process.cpp:136
+#, kde-format
+msgctxt "Priority Class"
+msgid "Best Effort"
+msgstr "najnaporniji"
+
+#: process.cpp:137
+#, kde-format
+msgctxt "Priority Class"
+msgid "Idle"
+msgstr "mirujući"
+
+#: process.cpp:138
+#, kde-format
+msgctxt "Priority Class"
+msgid "Unknown"
+msgstr "nepoznat"
+
+#: process.cpp:144
+#, kde-format
+msgctxt "process status"
+msgid "running"
+msgstr "radi"
+
+#: process.cpp:145
+#, kde-format
+msgctxt "process status"
+msgid "sleeping"
+msgstr "spava"
+
+#: process.cpp:146
+#, kde-format
+msgctxt "process status"
+msgid "disk sleep"
+msgstr "disk‑spava"
+
+#: process.cpp:147
+#, kde-format
+msgctxt "process status"
+msgid "zombie"
+msgstr "zombi"
+
+#: process.cpp:148
+#, kde-format
+msgctxt "process status"
+msgid "stopped"
+msgstr "stoji"
+
+#: process.cpp:149
+#, kde-format
+msgctxt "process status"
+msgid "paging"
+msgstr "straniči"
+
+#: process.cpp:150
+#, kde-format
+msgctxt "process status"
+msgid "finished"
+msgstr "završen"
+
+#: process.cpp:151
+#, kde-format
+msgctxt "process status"
+msgid "unknown"
+msgstr "nepoznat"
+
+#: process.cpp:157
+#, kde-format
+msgctxt "Scheduler"
+msgid "FIFO"
+msgstr "FIFO"
+
+#: process.cpp:158
+#, kde-format
+msgctxt "Scheduler"
+msgid "Round Robin"
+msgstr "kružni"
+
+#: process.cpp:159
+#, kde-format
+msgctxt "Scheduler"
+msgid "Interactive"
+msgstr "interaktivni"
+
+#: process.cpp:160
+#, kde-format
+msgctxt "Scheduler"
+msgid "Batch"
+msgstr "paketni"
+
+#: process.cpp:161
+#, kde-format
+msgctxt "Scheduler"
+msgid "Idle"
+msgstr "mirujući"
+
+#: process_controller.cpp:199
+#, kde-format
+msgid "Success"
+msgstr ""
+
+#: process_controller.cpp:201
+#, kde-format
+msgid "Insufficient permissions."
+msgstr ""
+
+#: process_controller.cpp:203
+#, kde-format
+msgid "No matching process was found."
+msgstr ""
+
+#: process_controller.cpp:205
+#, kde-format
+msgid "Not supported on the current system."
+msgstr ""
+
+#: process_controller.cpp:207
+#, kde-format
+msgid "The user cancelled."
+msgstr ""
+
+#: process_controller.cpp:209
+#, kde-format
+msgid "An unspecified error occurred."
+msgstr ""
+
+#: process_controller.cpp:211
+#, kde-format
+msgid "An unknown error occurred."
+msgstr ""

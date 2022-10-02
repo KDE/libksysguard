@@ -1,0 +1,921 @@
+# Burkhard Lück <lueck@hube-lueck.de>, 2013, 2014, 2015, 2016, 2018, 2019, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-03-01 00:45+0000\n"
+"PO-Revision-Date: 2020-09-28 06:26+0200\n"
+"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: SensorAgent.cpp:87
+#, kde-format
+msgctxt "%1 is a host name"
+msgid ""
+"Message from %1:\n"
+"%2"
+msgstr ""
+"Meldung von %1:\n"
+"%2"
+
+#: SensorManager.cpp:49
+#, kde-format
+msgid "Change"
+msgstr "Ändern"
+
+#: SensorManager.cpp:50
+#, kde-format
+msgid "Rate"
+msgstr "Rate"
+
+#: SensorManager.cpp:52
+#, kde-format
+msgid "CPU Load"
+msgstr "Prozessorlast"
+
+#: SensorManager.cpp:53
+#, kde-format
+msgid "Idling"
+msgstr "Leerlauf"
+
+#: SensorManager.cpp:54
+#, kde-format
+msgid "Nice Load"
+msgstr "Nice-Last"
+
+#: SensorManager.cpp:55
+#, kde-format
+msgid "User Load"
+msgstr "Benutzerlast"
+
+#: SensorManager.cpp:56
+#, kde-format
+msgctxt "@item sensor description"
+msgid "System Load"
+msgstr "Systemlast"
+
+#: SensorManager.cpp:57
+#, kde-format
+msgid "Waiting"
+msgstr "Warten"
+
+#: SensorManager.cpp:58
+#, kde-format
+msgid "Interrupt Load"
+msgstr "Ladevorgang abbrechen"
+
+#: SensorManager.cpp:59
+#, kde-format
+msgid "Total Load"
+msgstr "Gesamtlast"
+
+#: SensorManager.cpp:61
+#, kde-format
+msgid "Memory"
+msgstr "Speicher"
+
+#: SensorManager.cpp:62
+#, kde-format
+msgid "Physical Memory"
+msgstr "Arbeitsspeicher"
+
+#: SensorManager.cpp:63
+#, kde-format
+msgid "Total Memory"
+msgstr "Gesamter Speicher"
+
+#: SensorManager.cpp:64
+#, kde-format
+msgid "Swap Memory"
+msgstr "Auslagerungsspeicher"
+
+#: SensorManager.cpp:65
+#, kde-format
+msgid "Cached Memory"
+msgstr "Zwischenspeicher"
+
+#: SensorManager.cpp:66
+#, kde-format
+msgid "Buffered Memory"
+msgstr "Pufferspeicher"
+
+#: SensorManager.cpp:67
+#, kde-format
+msgid "Used Memory"
+msgstr "Benutzter Speicher"
+
+#: SensorManager.cpp:68
+#, kde-format
+msgid "Application Memory"
+msgstr "Anwendungsspeicher"
+
+#: SensorManager.cpp:69
+#, kde-format
+msgid "Allocated Memory"
+msgstr "Zugeordneter Speicher"
+
+#: SensorManager.cpp:70
+#, kde-format
+msgid "Free Memory"
+msgstr "Freier Speicher"
+
+#: SensorManager.cpp:71
+#, kde-format
+msgid "Available Memory"
+msgstr "Verfügbarer Speicher"
+
+#: SensorManager.cpp:72
+#, kde-format
+msgid "Active Memory"
+msgstr "Aktiver Speicher"
+
+#: SensorManager.cpp:73
+#, kde-format
+msgid "Inactive Memory"
+msgstr "Inaktiver Speicher"
+
+#: SensorManager.cpp:74
+#, kde-format
+msgid "Wired Memory"
+msgstr "Kernel-Speicher"
+
+#: SensorManager.cpp:75
+#, kde-format
+msgid "Exec Pages"
+msgstr "Exec-Seiten"
+
+#: SensorManager.cpp:76
+#, kde-format
+msgid "File Pages"
+msgstr "Datei-Seiten"
+
+#: SensorManager.cpp:79
+#, kde-format
+msgid "Processes"
+msgstr "Prozesse"
+
+#: SensorManager.cpp:80 SensorManager.cpp:257
+#, kde-format
+msgid "Process Controller"
+msgstr "Prozesskontrolle"
+
+#: SensorManager.cpp:81
+#, kde-format
+msgid "Last Process ID"
+msgstr "Letzte Prozess-ID"
+
+#: SensorManager.cpp:82
+#, kde-format
+msgid "Process Spawn Count"
+msgstr "Anzahl erzeugte Prozesse"
+
+#: SensorManager.cpp:83
+#, kde-format
+msgid "Process Count"
+msgstr "Anzahl Prozesse"
+
+#: SensorManager.cpp:84
+#, kde-format
+msgid "Idle Processes Count"
+msgstr "Anzahl Prozesse im Leerlauf"
+
+#: SensorManager.cpp:85
+#, kde-format
+msgid "Running Processes Count"
+msgstr "Anzahl laufender Prozesse"
+
+#: SensorManager.cpp:86
+#, kde-format
+msgid "Sleeping Processes Count"
+msgstr "Anzahl schlafender Prozesse"
+
+#: SensorManager.cpp:87
+#, kde-format
+msgid "Stopped Processes Count"
+msgstr "Anzahl angehaltener Prozesse"
+
+#: SensorManager.cpp:88
+#, kde-format
+msgid "Zombie Processes Count"
+msgstr "Anzahl Zombie-Prozesse"
+
+#: SensorManager.cpp:89
+#, kde-format
+msgid "Waiting Processes Count"
+msgstr "Anzahl wartender Prozesse"
+
+#: SensorManager.cpp:90
+#, kde-format
+msgid "Locked Processes Count"
+msgstr "Anzahl gesperrter Prozesse"
+
+#: SensorManager.cpp:92
+#, kde-format
+msgid "Disk Throughput"
+msgstr "Festplattendurchsatz"
+
+#: SensorManager.cpp:93
+#, kde-format
+msgctxt "CPU Load"
+msgid "Load"
+msgstr "Auslastung"
+
+#: SensorManager.cpp:94
+#, kde-format
+msgid "Total Accesses"
+msgstr "Zugriffe insgesamt"
+
+#: SensorManager.cpp:95
+#, kde-format
+msgid "Read Accesses"
+msgstr "Lesezugriffe"
+
+#: SensorManager.cpp:96
+#, kde-format
+msgid "Write Accesses"
+msgstr "Schreibzugriffe"
+
+#: SensorManager.cpp:97
+#, kde-format
+msgid "Read Data"
+msgstr "Daten lesen"
+
+#: SensorManager.cpp:98
+#, kde-format
+msgid "Written Data"
+msgstr "Daten schreiben"
+
+#: SensorManager.cpp:99
+#, kde-format
+msgid "Milliseconds spent reading"
+msgstr "Millisekunden mit Lesen verbracht"
+
+#: SensorManager.cpp:100
+#, kde-format
+msgid "Milliseconds spent writing"
+msgstr "Millisekunden mit Schreiben verbracht"
+
+#: SensorManager.cpp:101
+#, kde-format
+msgid "I/Os currently in progress"
+msgstr "Laufende Ein-/Ausgaben"
+
+#: SensorManager.cpp:102
+#, kde-format
+msgid "Pages In"
+msgstr "Seiten: Eingang"
+
+#: SensorManager.cpp:103
+#, kde-format
+msgid "Pages Out"
+msgstr "Seiten: Ausgang"
+
+#: SensorManager.cpp:104
+#, kde-format
+msgid "Context Switches"
+msgstr "Kontext-Umschaltungen"
+
+#: SensorManager.cpp:105
+#, kde-format
+msgid "Traps"
+msgstr "CPU-Interrupts (Traps)"
+
+#: SensorManager.cpp:106
+#, kde-format
+msgid "System Calls"
+msgstr "Systemaufrufe"
+
+#: SensorManager.cpp:107
+#, kde-format
+msgid "Network"
+msgstr "Netzwerk"
+
+#: SensorManager.cpp:108
+#, kde-format
+msgid "Interfaces"
+msgstr "Schnittstellen"
+
+#: SensorManager.cpp:109
+#, kde-format
+msgid "Receiver"
+msgstr "Empfänger"
+
+#: SensorManager.cpp:110
+#, kde-format
+msgid "Transmitter"
+msgstr "Transmitter"
+
+#: SensorManager.cpp:112
+#, kde-format
+msgid "Data Rate"
+msgstr "Datenrate"
+
+#: SensorManager.cpp:113
+#, kde-format
+msgid "Compressed Packets Rate"
+msgstr "Menge komprimierter Pakete"
+
+#: SensorManager.cpp:114
+#, kde-format
+msgid "Dropped Packets Rate"
+msgstr "Menge ausgelassener Pakete"
+
+#: SensorManager.cpp:115
+#, kde-format
+msgid "Error Rate"
+msgstr "Fehlerrate"
+
+#: SensorManager.cpp:116
+#, kde-format
+msgid "FIFO Overruns Rate"
+msgstr "FIFO-Überlauf-Rate"
+
+#: SensorManager.cpp:117
+#, kde-format
+msgid "Frame Error Rate"
+msgstr "Framefehler-Rate"
+
+#: SensorManager.cpp:118
+#, kde-format
+msgid "Multicast Packet Rate"
+msgstr "Multicast-Paket-Rate"
+
+#: SensorManager.cpp:119
+#, kde-format
+msgid "Packet Rate"
+msgstr "Paketrate"
+
+#: SensorManager.cpp:120
+#, kde-format
+msgctxt "@item sensor description ('carrier' is a type of network signal)"
+msgid "Carrier Loss Rate"
+msgstr "Trägerverlust-Rate"
+
+#: SensorManager.cpp:121 SensorManager.cpp:132
+#, kde-format
+msgid "Collisions"
+msgstr "Kollisionen"
+
+#: SensorManager.cpp:123
+#, kde-format
+msgid "Data"
+msgstr "Daten"
+
+#: SensorManager.cpp:124
+#, kde-format
+msgid "Compressed Packets"
+msgstr "Komprimierte Pakete"
+
+#: SensorManager.cpp:125
+#, kde-format
+msgid "Dropped Packets"
+msgstr "Ausgelassene Pakete"
+
+#: SensorManager.cpp:126
+#, kde-format
+msgid "Errors"
+msgstr "Fehler"
+
+#: SensorManager.cpp:127
+#, kde-format
+msgid "FIFO Overruns"
+msgstr "FIFO-Überläufe"
+
+#: SensorManager.cpp:128
+#, kde-format
+msgid "Frame Errors"
+msgstr "Frame-Fehler"
+
+#: SensorManager.cpp:129
+#, kde-format
+msgid "Multicast Packets"
+msgstr "Multicast-Pakete"
+
+#: SensorManager.cpp:130
+#, kde-format
+msgid "Packets"
+msgstr "Pakete"
+
+#: SensorManager.cpp:131
+#, kde-format
+msgctxt "@item sensor description ('carrier' is a type of network signal)"
+msgid "Carrier Losses"
+msgstr "Trägerverluste"
+
+#: SensorManager.cpp:135
+#, kde-format
+msgid "Sockets"
+msgstr "Sockets"
+
+#: SensorManager.cpp:136
+#, kde-format
+msgid "Total Number"
+msgstr "Gesamtzahl"
+
+#: SensorManager.cpp:137 SensorManager.cpp:258
+#, kde-format
+msgid "Table"
+msgstr "Tabelle"
+
+#: SensorManager.cpp:138
+#, kde-format
+msgid "Advanced Power Management"
+msgstr "Erweiterte Energieverwaltung"
+
+#: SensorManager.cpp:139
+#, kde-format
+msgid "ACPI"
+msgstr "ACPI"
+
+#: SensorManager.cpp:140
+#, kde-format
+msgid "Cooling Device"
+msgstr "Kühlgeräte"
+
+#: SensorManager.cpp:141
+#, kde-format
+msgid "Current State"
+msgstr "Aktueller Status"
+
+#: SensorManager.cpp:142 SensorManager.cpp:143
+#, kde-format
+msgid "Thermal Zone"
+msgstr "Thermale Zone"
+
+#: SensorManager.cpp:144 SensorManager.cpp:145
+#, kde-format
+msgid "Temperature"
+msgstr "Temperatur"
+
+#: SensorManager.cpp:146
+#, kde-format
+msgid "Average CPU Temperature"
+msgstr "Durchschnittliche Prozessor-Temperatur"
+
+#: SensorManager.cpp:147
+#, kde-format
+msgid "Fan"
+msgstr "Lüfter"
+
+#: SensorManager.cpp:148
+#, kde-format
+msgid "State"
+msgstr "Status"
+
+#: SensorManager.cpp:149
+#, kde-format
+msgid "Battery"
+msgstr "Akku"
+
+#: SensorManager.cpp:150
+#, kde-format
+msgid "Battery Capacity"
+msgstr "Leistung des Akkus"
+
+#: SensorManager.cpp:151
+#, kde-format
+msgid "Battery Charge"
+msgstr "Ladestand des Akkus"
+
+#: SensorManager.cpp:152
+#, kde-format
+msgid "Battery Usage"
+msgstr "Akkubetrieb"
+
+#: SensorManager.cpp:153
+#, kde-format
+msgid "Battery Voltage"
+msgstr "Spannung des Akkus"
+
+#: SensorManager.cpp:154
+#, kde-format
+msgid "Battery Discharge Rate"
+msgstr "Entladegeschwindigkeit des Akkus"
+
+#: SensorManager.cpp:155
+#, kde-format
+msgid "Remaining Time"
+msgstr "Restzeit"
+
+#: SensorManager.cpp:156
+#, kde-format
+msgid "Interrupts"
+msgstr "Interrupts"
+
+#: SensorManager.cpp:157
+#, kde-format
+msgid "Load Average (1 min)"
+msgstr "Durchschnittslast (1 min)"
+
+#: SensorManager.cpp:158
+#, kde-format
+msgid "Load Average (5 min)"
+msgstr "Durchschnittslast (5 min)"
+
+#: SensorManager.cpp:159
+#, kde-format
+msgid "Load Average (15 min)"
+msgstr "Durchschnittslast (15 min)"
+
+#: SensorManager.cpp:160
+#, kde-format
+msgid "Clock Frequency"
+msgstr "Taktrate"
+
+#: SensorManager.cpp:161
+#, kde-format
+msgid "Average Clock Frequency"
+msgstr "Durchschnittliche Taktrate"
+
+#: SensorManager.cpp:162
+#, kde-format
+msgid "Hardware Sensors"
+msgstr "Hardware-Sensoren"
+
+#: SensorManager.cpp:163
+#, kde-format
+msgid "Partition Usage"
+msgstr "Partitionsbelegung"
+
+#: SensorManager.cpp:164
+#, kde-format
+msgid "Used Space"
+msgstr "Belegter Platz"
+
+#: SensorManager.cpp:165
+#, kde-format
+msgid "Free Space"
+msgstr "Freier Platz"
+
+#: SensorManager.cpp:166
+#, kde-format
+msgid "Fill Level"
+msgstr "Ausnutzung"
+
+#: SensorManager.cpp:167
+#, kde-format
+msgid "Used Inodes"
+msgstr "Belegte Inodes"
+
+#: SensorManager.cpp:168
+#, kde-format
+msgid "Free Inodes"
+msgstr "Freie Inodes"
+
+#: SensorManager.cpp:169
+#, kde-format
+msgid "Inode Level"
+msgstr "Inode-Ebene"
+
+#: SensorManager.cpp:170
+#, kde-format
+msgid "System"
+msgstr "System"
+
+#: SensorManager.cpp:171
+#, kde-format
+msgid "Uptime"
+msgstr "Betriebszeit"
+
+#: SensorManager.cpp:172
+#, kde-format
+msgid "Linux Soft Raid (md)"
+msgstr "Linux Soft Raid (md)"
+
+#: SensorManager.cpp:173
+#, kde-format
+msgid "Processors"
+msgstr "Prozessoren"
+
+#: SensorManager.cpp:174
+#, kde-format
+msgid "Cores"
+msgstr "Kerne"
+
+#: SensorManager.cpp:175
+#, kde-format
+msgid "Number of Blocks"
+msgstr "Anzahl der Blöcke"
+
+#: SensorManager.cpp:176
+#, kde-format
+msgid "Total Number of Devices"
+msgstr "Gesamtzahl der Geräte"
+
+#: SensorManager.cpp:177
+#, kde-format
+msgid "Failed Devices"
+msgstr "Fehlgeschlagene Geräte"
+
+#: SensorManager.cpp:178
+#, kde-format
+msgid "Spare Devices"
+msgstr "Ersatzgeräte"
+
+#: SensorManager.cpp:179
+#, kde-format
+msgid "Number of Raid Devices"
+msgstr "Anzahl der Raid-Geräte"
+
+#: SensorManager.cpp:180
+#, kde-format
+msgid "Working Devices"
+msgstr "Funktionierende Geräte"
+
+#: SensorManager.cpp:181
+#, kde-format
+msgid "Active Devices"
+msgstr "Aktive Geräte"
+
+#: SensorManager.cpp:182
+#, kde-format
+msgid "Number of Devices"
+msgstr "Anzahl der Geräte"
+
+#: SensorManager.cpp:183
+#, kde-format
+msgid "Resyncing Percent"
+msgstr "Neuabgleich (Prozent)"
+
+#: SensorManager.cpp:184
+#, kde-format
+msgid "Disk Information"
+msgstr "Disk-Informationen"
+
+#: SensorManager.cpp:185
+#, kde-format
+msgid "CPU Temperature"
+msgstr "CPU-Temperatur"
+
+#: SensorManager.cpp:186
+#, fuzzy, kde-format
+#| msgid "Average CPU Temperature"
+msgid "Motherboard Temperature"
+msgstr "Durchschnittliche Prozessor-Temperatur"
+
+#: SensorManager.cpp:187
+#, fuzzy, kde-format
+#| msgid "Average CPU Temperature"
+msgid "Power Supply Temperature"
+msgstr "Durchschnittliche Prozessor-Temperatur"
+
+#: SensorManager.cpp:189
+#, kde-format
+msgid "Filesystem Root"
+msgstr ""
+
+#: SensorManager.cpp:192
+#, fuzzy, kde-format
+#| msgid "Temperature %1"
+msgid "Extra Temperature Sensor %1"
+msgstr "Temperatur %1"
+
+#: SensorManager.cpp:196
+#, fuzzy, kde-format
+#| msgid "Temperature %1"
+msgid "PECI Temperature Sensor %1"
+msgstr "Temperatur %1"
+
+#: SensorManager.cpp:197
+#, fuzzy, kde-format
+#| msgid "Temperature %1"
+msgid "PECI Temperature Calibration %1"
+msgstr "Temperatur %1"
+
+#: SensorManager.cpp:201
+#, kde-format
+msgid "CPU %1"
+msgstr "CPU %1"
+
+#: SensorManager.cpp:202
+#, kde-format
+msgid "Disk %1"
+msgstr "Festplatte %1"
+
+#: SensorManager.cpp:206
+#, kde-format
+msgid "Battery %1"
+msgstr "Akku %1"
+
+#: SensorManager.cpp:207
+#, kde-format
+msgid "Fan %1"
+msgstr "Lüfter %1"
+
+#: SensorManager.cpp:208
+#, kde-format
+msgid "Temperature %1"
+msgstr "Temperatur %1"
+
+#: SensorManager.cpp:211
+#, kde-format
+msgid "Total"
+msgstr "Gesamt"
+
+#: SensorManager.cpp:212
+#, kde-format
+msgid "Software Interrupts"
+msgstr "Software-Interrupts"
+
+#: SensorManager.cpp:213
+#, kde-format
+msgid "Hardware Interrupts"
+msgstr "Hardware-Interrupts"
+
+#: SensorManager.cpp:218 SensorManager.cpp:220
+#, kde-format
+msgid "Int %1"
+msgstr "Int %1"
+
+#: SensorManager.cpp:223
+#, kde-format
+msgid "Link Quality"
+msgstr "Verbindungsqualität"
+
+#: SensorManager.cpp:224
+#, kde-format
+msgid "Signal Level"
+msgstr "Signalstärke"
+
+#: SensorManager.cpp:225
+#, kde-format
+msgid "Noise Level"
+msgstr "Rausch-Pegel"
+
+#: SensorManager.cpp:226
+#, kde-format
+msgid "Rx Invalid Nwid Packets"
+msgstr "Empfangene ungültige Nwid-Pakete"
+
+#: SensorManager.cpp:227
+#, kde-format
+msgid "Total Rx Invalid Nwid Packets"
+msgstr "Summe empfangene ungültige Nwid-Pakete"
+
+#: SensorManager.cpp:228
+#, kde-format
+msgid "Rx Invalid Crypt Packets"
+msgstr "Empfangene ungültige verschlüsselte Pakete"
+
+#: SensorManager.cpp:229
+#, kde-format
+msgid "Total Rx Invalid Crypt Packets"
+msgstr "Summe empfangene ungültige verschlüsselte Pakete"
+
+#: SensorManager.cpp:230
+#, kde-format
+msgid "Rx Invalid Frag Packets"
+msgstr "Empfangene ungültige fragmentierte Pakete"
+
+#: SensorManager.cpp:231
+#, kde-format
+msgid "Total Rx Invalid Frag Packets"
+msgstr "Summe empfangene ungültige fragmentierte Pakete"
+
+#: SensorManager.cpp:232
+#, kde-format
+msgid "Tx Excessive Retries Packets"
+msgstr "Exzessive Wiederholungen von gesendeten Paketen"
+
+#: SensorManager.cpp:233
+#, kde-format
+msgid "Total Tx Excessive Retries Packets"
+msgstr "Summe exzessive Wiederholungen von gesendeten Paketen"
+
+#: SensorManager.cpp:234
+#, kde-format
+msgid "Invalid Misc Packets"
+msgstr "Ungültige sonstige Pakete"
+
+#: SensorManager.cpp:235
+#, kde-format
+msgid "Total Invalid Misc Packets"
+msgstr "Summe ungültige sonstige Pakete"
+
+#: SensorManager.cpp:236
+#, kde-format
+msgid "Missed Beacons"
+msgstr "Verloren gegangene Beacons"
+
+#: SensorManager.cpp:237
+#, kde-format
+msgid "Total Missed Beacons"
+msgstr "Summe verloren gegangene Beacons"
+
+#: SensorManager.cpp:239
+#, kde-format
+msgid "Log Files"
+msgstr "Protokolldateien"
+
+#: SensorManager.cpp:243
+#, kde-format
+msgctxt "the unit 1 per second"
+msgid "1/s"
+msgstr "1/s"
+
+#: SensorManager.cpp:244
+#, kde-format
+msgid "kBytes"
+msgstr "KByte"
+
+#: SensorManager.cpp:245
+#, kde-format
+msgctxt "the unit minutes"
+msgid "min"
+msgstr "Min."
+
+#: SensorManager.cpp:246
+#, kde-format
+msgctxt "the frequency unit"
+msgid "MHz"
+msgstr "MHz"
+
+#: SensorManager.cpp:247
+#, kde-format
+msgctxt "a percentage"
+msgid "%"
+msgstr " %"
+
+#: SensorManager.cpp:248
+#, kde-format
+msgctxt "the unit milliamperes"
+msgid "mA"
+msgstr "mA"
+
+#: SensorManager.cpp:249
+#, kde-format
+msgctxt "the unit milliampere hours"
+msgid "mAh"
+msgstr "mAh"
+
+#: SensorManager.cpp:250
+#, kde-format
+msgctxt "the unit milliwatts"
+msgid "mW"
+msgstr "mW"
+
+#: SensorManager.cpp:251
+#, kde-format
+msgctxt "the unit milliwatt hours"
+msgid "mWh"
+msgstr "mWh"
+
+#: SensorManager.cpp:252
+#, kde-format
+msgctxt "the unit millivolts"
+msgid "mV"
+msgstr "mV"
+
+#: SensorManager.cpp:255
+#, kde-format
+msgid "Integer Value"
+msgstr "Ganzzahliger Wert"
+
+#: SensorManager.cpp:256
+#, kde-format
+msgid "Floating Point Value"
+msgstr "Fließkommawert"
+
+#: SensorManager.cpp:259
+#, kde-format
+msgid "Log File"
+msgstr "Protokolldatei"
+
+#: SensorShellAgent.cpp:108
+#, kde-format
+msgid "Could not run daemon program '%1'."
+msgstr "Dienstprogramm „%1“ lässt sich nicht ausführen."
+
+#: SensorShellAgent.cpp:115
+#, kde-format
+msgid "The daemon program '%1' failed."
+msgstr "Das Dienstprogramm „%1“ hat einen Fehler gemeldet."
+
+#: SensorSocketAgent.cpp:89
+#, kde-format
+msgid "Connection to %1 refused"
+msgstr "Verbindung mit %1 wurde abgelehnt"
+
+#: SensorSocketAgent.cpp:92
+#, kde-format
+msgid "Host %1 not found"
+msgstr "Rechner %1 nicht gefunden"
+
+#: SensorSocketAgent.cpp:95
+#, kde-format
+msgid ""
+"An error occurred with the network (e.g. the network cable was accidentally "
+"unplugged) for host %1."
+msgstr ""
+"Für den Rechner „%1“ ist ein Netzwerkfehler aufgetreten (möglicherweise "
+"wurde versehentlich das Netzwerkkabel entfernt)."
+
+#: SensorSocketAgent.cpp:98
+#, kde-format
+msgid "Error for host %1: %2"
+msgstr "Fehler für Rechner %1: %2"
