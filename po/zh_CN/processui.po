@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-24 00:47+0000\n"
-"PO-Revision-Date: 2022-09-20 01:56\n"
+"PO-Revision-Date: 2022-10-02 15:49\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -339,12 +339,10 @@ msgid "Quick search"
 msgstr "快速搜索"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "用户名"
+msgstr ""
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
@@ -353,8 +351,7 @@ msgid "Start"
 msgstr ""
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
 msgstr "结束"
@@ -390,11 +387,10 @@ msgid "File"
 msgstr ""
 
 #: processdetails/OpenFilesTab.cpp:36
-#, fuzzy, kde-format
-#| msgid "Characters read/written"
+#, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr "读取/写入字符数"
+msgstr ""
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
@@ -415,11 +411,10 @@ msgid "Socket"
 msgstr ""
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "空闲"
+msgstr ""
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
@@ -434,11 +429,10 @@ msgid "%1: Failed to list directory contents"
 msgstr ""
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "全部进程"
+msgstr ""
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
@@ -447,12 +441,10 @@ msgid "General"
 msgstr ""
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "内存"
+msgstr ""
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
@@ -467,11 +459,10 @@ msgid "The \"%1\" (PID: %2) process has stopped executing"
 msgstr ""
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "设定优先级"
+msgstr ""
 
 #: ProcessModel.cpp:58
 #, kde-format
