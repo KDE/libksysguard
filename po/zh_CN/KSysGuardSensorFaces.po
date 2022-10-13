@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-15 00:48+0000\n"
+"POT-Creation-Date: 2022-10-13 00:48+0000\n"
 "PO-Revision-Date: 2022-10-02 15:49\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -136,11 +136,18 @@ msgstr "来源："
 msgid "To:"
 msgstr "目标："
 
+#: facepackages/colorgrid/contents/ui/Config.qml:25
+#, kde-format
+msgid "Use sensor color:"
+msgstr ""
+
+#: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, kde-format
 msgid "Number of Columns:"
 msgstr "列数："
 
+#: facepackages/colorgrid/contents/ui/Config.qml:37
 #: facepackages/facegrid/contents/ui/Config.qml:42
 #, kde-format
 msgctxt "@label"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-15 00:48+0000\n"
+"POT-Creation-Date: 2022-10-13 00:48+0000\n"
 "PO-Revision-Date: 2022-06-15 17:38+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -139,11 +139,18 @@ msgstr "Desde:"
 msgid "To:"
 msgstr "Hasta:"
 
+#: facepackages/colorgrid/contents/ui/Config.qml:25
+#, kde-format
+msgid "Use sensor color:"
+msgstr ""
+
+#: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, kde-format
 msgid "Number of Columns:"
 msgstr "Número de columnas:"
 
+#: facepackages/colorgrid/contents/ui/Config.qml:37
 #: facepackages/facegrid/contents/ui/Config.qml:42
 #, kde-format
 msgctxt "@label"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-15 00:48+0000\n"
+"POT-Creation-Date: 2022-10-13 00:48+0000\n"
 "PO-Revision-Date: 2022-06-15 19:26+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -133,11 +133,18 @@ msgstr "De:"
 msgid "To:"
 msgstr "Até:"
 
+#: facepackages/colorgrid/contents/ui/Config.qml:25
+#, kde-format
+msgid "Use sensor color:"
+msgstr ""
+
+#: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, kde-format
 msgid "Number of Columns:"
 msgstr "Número de Colunas:"
 
+#: facepackages/colorgrid/contents/ui/Config.qml:37
 #: facepackages/facegrid/contents/ui/Config.qml:42
 #, kde-format
 msgctxt "@label"
