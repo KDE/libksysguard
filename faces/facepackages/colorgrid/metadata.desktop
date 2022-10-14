@@ -1,5 +1,13 @@
 [Desktop Entry]
 Name=Color Grid
+Name[ca]=Quadrícula de color
+Name[es]=Cuadrícula de colores
+Name[eu]=Kolore-sareta
+Name[nl]=Kleurraster
+Name[pt]=Grelha de Cores
+Name[tr]=Renk Izgarası
+Name[uk]=Кольорова таблиця
+Name[x-test]=xxColor Gridxx
 Icon=view-grid
 
 Type=Service
