@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-13 00:48+0000\n"
-"PO-Revision-Date: 2022-06-15 17:38+0200\n"
+"PO-Revision-Date: 2022-10-13 12:31+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.08.1\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -142,7 +142,7 @@ msgstr "Hasta:"
 #: facepackages/colorgrid/contents/ui/Config.qml:25
 #, kde-format
 msgid "Use sensor color:"
-msgstr ""
+msgstr "Usar color de sensor:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
