@@ -78,7 +78,7 @@ msgstr "Fins a (Y):"
 #: contents/ui/Config.qml:99
 #, kde-format
 msgid "Amount of History to Keep:"
-msgstr "Quantitat d'historial a mantindre:"
+msgstr "Quantitat d'historial que s'ha de mantindre:"
 
 #: contents/ui/Config.qml:102
 #, kde-format
