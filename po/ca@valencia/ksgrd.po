@@ -176,7 +176,7 @@ msgstr "Controlador de processos"
 #: SensorManager.cpp:81
 #, kde-format
 msgid "Last Process ID"
-msgstr "ID del últim procés"
+msgstr "ID de l'últim procés"
 
 #: SensorManager.cpp:82
 #, kde-format
