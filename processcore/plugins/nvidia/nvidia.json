@@ -29,6 +29,7 @@
         "Description[sv]": "Statistik över grafikprocessorresurser per process för Nvidia-kort",
         "Description[tr]": "Nvidia kartları için süreç başı GPU özkaynakları istatistikleri",
         "Description[uk]": "Статистика ресурсів окремих процесів графічного процесора для карток NVidia",
+        "Description[vi]": "Các thống kê về tài nguyên GPU theo từng tiến trình cho các bo mạch NVIDIA",
         "Description[x-test]": "xxStats of per-process GPU resources for Nvidia cardsxx",
         "Description[zh_CN]": "单个进程的 GPU 资源状态，仅限 Nvidia 显卡"
     }

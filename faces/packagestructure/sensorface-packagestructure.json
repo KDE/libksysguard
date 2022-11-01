@@ -35,6 +35,7 @@
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
+                "Name[vi]": "Marco Martin",
                 "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin"
             },
@@ -73,6 +74,7 @@
                 "Name[sv]": "Aaron Seigo",
                 "Name[tr]": "Aaron Seigo",
                 "Name[uk]": "Aaron Seigo",
+                "Name[vi]": "Aaron Seigo",
                 "Name[x-test]": "xxAaron Seigoxx",
                 "Name[zh_CN]": "Aaron Seigo"
             }
@@ -108,6 +110,7 @@
         "Name[sv]": "Front för systemövervakaren",
         "Name[tr]": "KSysGuard Sensör Yüzü için Yüz",
         "Name[uk]": "Оболонка для датчиків KSysguard",
+        "Name[vi]": "Mặt cho mặt cảm biến KSysguard",
         "Name[x-test]": "xxFace for the KSysguard Sensor Facexx",
         "Name[zh_CN]": "KSysguard 传感器面板的面板",
         "ServiceTypes": [
