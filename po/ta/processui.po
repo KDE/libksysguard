@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: கேபசூ 4.1 தமிழாக்கம்\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-24 00:47+0000\n"
-"PO-Revision-Date: 2022-09-27 19:21+0530\n"
+"PO-Revision-Date: 2022-11-08 21:45+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: ksysguardprocesslist.cpp:198 ksysguardprocesslist.cpp:542
 #, fuzzy, kde-format
@@ -222,27 +222,27 @@ msgstr "காட்டப்படும் விவரங்கள்"
 #: ksysguardprocesslist.cpp:879
 #, kde-format
 msgid "Characters read/written"
-msgstr ""
+msgstr "எழுதிய/படித்த எழுத்துகள்"
 
 #: ksysguardprocesslist.cpp:884
 #, kde-format
 msgid "Number of Read/Write operations"
-msgstr ""
+msgstr "எழுதல்/படித்தல் செயல்பாடுகளின் எண்ணிக்கை"
 
 #: ksysguardprocesslist.cpp:889
 #, kde-format
 msgid "Bytes actually read/written"
-msgstr ""
+msgstr "எழுதிய/படித்த பைட்டுகள்"
 
 #: ksysguardprocesslist.cpp:895
 #, kde-format
 msgid "Show I/O rate"
-msgstr ""
+msgstr "I/O விகித‍த்தைக் காட்டு"
 
 #: ksysguardprocesslist.cpp:922
 #, kde-format
 msgid "Show Tooltips"
-msgstr ""
+msgstr "கருவித் துப்புகளை காட்டு"
 
 #: ksysguardprocesslist.cpp:1173
 #, fuzzy, kde-format
@@ -256,10 +256,9 @@ msgstr ""
 "பணியை ரெனைஸ் செய்ய தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
 #: ksysguardprocesslist.cpp:1199 ksysguardprocesslist.cpp:1383
-#, fuzzy, kde-format
-#| msgid "You need to select a process first."
+#, kde-format
 msgid "You must select a process first."
-msgstr "பணியொன்றை முதலில் தேர்வு செய்ய வேண்டும்."
+msgstr "முதலில் ஓர் பணியைத் தேர்ந்தெடுக்க வேண்டும்."
 
 #: ksysguardprocesslist.cpp:1324
 #, fuzzy, kde-format
@@ -292,30 +291,28 @@ msgid ""
 msgstr "பணியை முடிக்க தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
 #: ksysguardprocesslist.cpp:1392
-#, fuzzy, kde-format
-#| msgid "Do you want to kill the selected process?"
-#| msgid_plural "Do you want to kill the %1 selected processes?"
+#, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
 msgid_plural ""
 "Are you sure you want to end these %1 processes?  Any unsaved work may be "
 "lost"
-msgstr[0] "தேர்வு செய்யப்பட்ட பணியை முடிக்க விருப்பமா?"
-msgstr[1] "%1 தேர்வு செய்யப்பட்ட பணிகளை முடிக்க விருப்பமா?"
+msgstr[0] "இப்பணியை உறுதியாக நிறுத்த வேண்டுமா? சேமிக்கப்படா தரவுகளை நீங்கள் இழக்கலாம்."
+msgstr[1] ""
+"இந்த %1 பணிகளை உறுதியாக நிறுத்த வேண்டுமா? சேமிக்கப்படா தரவுகளை நீங்கள் இழக்கலாம்."
 
 #: ksysguardprocesslist.cpp:1395
-#, fuzzy, kde-format
-#| msgid "Own Processes"
+#, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
 msgid_plural "End %1 Processes"
-msgstr[0] "தனிப்பட்ட பணிகள்"
-msgstr[1] "தனிப்பட்ட பணிகள்"
+msgstr[0] "பணியை நிறுத்து"
+msgstr[1] "%1 பணிகளை நிறுத்து"
 
 #: ksysguardprocesslist.cpp:1397
 #, kde-format
 msgid "End"
-msgstr ""
+msgstr "நிறுத்து"
 
 #: ksysguardprocesslist.cpp:1399
 #, fuzzy, kde-format
