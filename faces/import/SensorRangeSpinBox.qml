@@ -101,7 +101,7 @@ Control {
                     digits++;
                 }
                 if ((fract * 10) - Math.trunc(fract * 10) != 0) {
-                    digist++;
+                    digits++;
                 }
 
                 return Number(value / 100).toLocaleString(locale, 'f', digits)
