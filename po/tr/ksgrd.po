@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2022-04-30 11:56+0300\n"
+"PO-Revision-Date: 2022-11-15 05:13+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.04.0\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: SensorAgent.cpp:87
 #, kde-format
@@ -912,8 +912,8 @@ msgid ""
 "An error occurred with the network (e.g. the network cable was accidentally "
 "unplugged) for host %1."
 msgstr ""
-"%1 makinesinde ağ ile bir hata oluştu (örn. ağ kablosu yanlışlıkla "
-"çıkartıldı)."
+"%1 makinesinde ağ ile ilgili bir hata oluştu (örn. ağ kablosu yanlışlıkla "
+"çıkarıldı)."
 
 #: SensorSocketAgent.cpp:98
 #, kde-format
