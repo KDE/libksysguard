@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-24 00:47+0000\n"
-"PO-Revision-Date: 2022-11-06 01:06\n"
+"PO-Revision-Date: 2022-11-19 14:48\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -317,19 +317,19 @@ msgstr "终止"
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "没有可显示的数据"
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "刷新"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -342,13 +342,13 @@ msgstr "快速搜索"
 #, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr ""
+msgstr "文件名"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "开头"
 
 #: processdetails/MemoryMapsTab.cpp:253
 #, kde-format
@@ -360,109 +360,109 @@ msgstr "结束"
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "权限"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "偏移"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
 msgctxt "@title:column"
 msgid "Inode"
-msgstr ""
+msgstr "节点"
 
 #: processdetails/MemoryMapsTab.cpp:283 processdetails/OpenFilesTab.cpp:278
 #, kde-format
 msgctxt "@info:status"
 msgid "No data matching the filter"
-msgstr ""
+msgstr "没有匹配该筛选条件的数据"
 
 #: processdetails/OpenFilesTab.cpp:33
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 #: processdetails/OpenFilesTab.cpp:36
 #, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr ""
+msgstr "字符设备"
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "块设备"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "管道"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "套接字"
 
 #: processdetails/OpenFilesTab.cpp:124
 #, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "文件类型"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
 msgctxt "@info:status"
 msgid "%1: Failed to list directory contents"
-msgstr ""
+msgstr "%1：列出目录内容失败"
 
 #: processdetails/ProcessDetailsDialog.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr ""
+msgstr "进程详情"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "常规"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
 #, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr ""
+msgstr "内存布局"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "打开文件"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
 msgctxt "@info:status"
 msgid "The \"%1\" (PID: %2) process has stopped executing"
-msgstr ""
+msgstr "\"%1\" (PID: %2) 进程已停止执行"
 
 #: processdetails/ProcessDetailsDialog.cpp:126
 #, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr ""
+msgstr "IO 优先级"
 
 #: ProcessModel.cpp:58
 #, kde-format
