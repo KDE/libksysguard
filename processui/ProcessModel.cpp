@@ -50,6 +50,10 @@
 #include <X11/extensions/XRes.h>
 #endif
 
+#if HAVE_X11
+#include <KX11Extras>
+#endif
+
 extern QApplication *Qapp;
 
 static QString formatByteSize(qlonglong amountInKB, int units)
@@ -403,15 +407,12 @@ void ProcessModelPrivate::setupWindows()
     if (!mIsX11) {
         return;
     }
-    connect(KWindowSystem::self(),
-            QOverload<WId, NET::Properties, NET::Properties2>::of(&KWindowSystem::windowChanged),
-            this,
-            &ProcessModelPrivate::windowChanged);
-    connect(KWindowSystem::self(), &KWindowSystem::windowAdded, this, &ProcessModelPrivate::windowAdded);
-    connect(KWindowSystem::self(), &KWindowSystem::windowRemoved, this, &ProcessModelPrivate::windowRemoved);
+    connect(KX11Extras::self(), &KX11Extras::windowChanged, this, &ProcessModelPrivate::windowChanged);
+    connect(KX11Extras::self(), &KX11Extras::windowAdded, this, &ProcessModelPrivate::windowAdded);
+    connect(KX11Extras::self(), &KX11Extras::windowRemoved, this, &ProcessModelPrivate::windowRemoved);
 
     // Add all the windows that KWin is managing - i.e. windows that the user can see
-    const QList<WId> windows = KWindowSystem::windows();
+    const QList<WId> windows = KX11Extras::windows();
     for (auto it = windows.begin(); it != windows.end(); ++it) {
         updateWindowInfo(*it, static_cast<NET::Properties>(~0u), NET::Properties2{}, true);
     }
@@ -556,7 +557,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, NET::Properties properties, 
 
     if (properties == NET::WMIcon) {
         if (w) {
-            w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE * dpr, HEADING_X_ICON_SIZE * dpr, true);
+            w->icon = KX11Extras::icon(wid, HEADING_X_ICON_SIZE * dpr, HEADING_X_ICON_SIZE * dpr, true);
             w->icon.setDevicePixelRatio(dpr);
         }
         return;
@@ -581,7 +582,7 @@ void ProcessModelPrivate::updateWindowInfo(WId wid, NET::Properties properties, 
     }
 
     if (w && (properties & NET::WMIcon)) {
-        w->icon = KWindowSystem::icon(wid, HEADING_X_ICON_SIZE * dpr, HEADING_X_ICON_SIZE * dpr, true);
+        w->icon = KX11Extras::icon(wid, HEADING_X_ICON_SIZE * dpr, HEADING_X_ICON_SIZE * dpr, true);
         w->icon.setDevicePixelRatio(dpr);
     }
     if (properties & NET::WMVisibleName && info.visibleName())

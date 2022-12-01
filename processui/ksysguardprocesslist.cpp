@@ -44,6 +44,7 @@
 #include <KIO/ApplicationLauncherJob>
 #include <KService>
 #include <KWindowSystem>
+#include <KX11Extras>
 #include <klocalizedstring.h>
 #include <kmessagebox.h>
 
@@ -673,7 +674,7 @@ void KSysGuardProcessList::actionTriggered(QObject *object)
             QVariant widVar = d->mModel.data(realIndex, ProcessModel::WindowIdRole);
             if (!widVar.isNull()) {
                 int wid = widVar.toInt();
-                KWindowSystem::activateWindow(wid);
+                KX11Extras::activateWindow(wid);
             }
         }
     } else if (result == d->processDetails) {
