@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-24 00:47+0000\n"
+"POT-Creation-Date: 2022-12-02 00:48+0000\n"
 "PO-Revision-Date: 2008-10-22 19:48+0530\n"
 "Last-Translator: Ria Das <mailtoria@gmail.com>\n"
 "Language-Team: Bengali (India) <discuss@ankur.co.in>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ksysguardprocesslist.cpp:198 ksysguardprocesslist.cpp:542
+#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, fuzzy, kde-format
 #| msgid "Low Priority"
 msgid "Set Priority..."
@@ -27,33 +27,33 @@ msgid_plural "Set Priority..."
 msgstr[0] "নিম্ন পরিমাণ গুরুত্ব"
 msgstr[1] "নিম্ন পরিমাণ গুরুত্ব"
 
-#: ksysguardprocesslist.cpp:200 ksysguardprocesslist.cpp:638
+#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
 #, kde-format
 msgid "Jump to Parent Process"
 msgstr "ঊর্ধ্বতন প্রসেসে এগিয়ে চলুন"
 
-#: ksysguardprocesslist.cpp:202
+#: ksysguardprocesslist.cpp:203
 #, kde-format
 msgid "Jump to Process Debugging This One"
 msgstr "এটি ডিবাগ করে প্রসেসে এগিয়ে চলুন"
 
-#: ksysguardprocesslist.cpp:203
+#: ksysguardprocesslist.cpp:204
 #, kde-format
 msgid "Show Application Window"
 msgstr "অ্যাপ্লিকেশন উইন্ডো প্রদর্শিত হবে"
 
-#: ksysguardprocesslist.cpp:204
+#: ksysguardprocesslist.cpp:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detailed Information..."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:205
+#: ksysguardprocesslist.cpp:206
 #, kde-format
 msgid "Resume Stopped Process"
 msgstr "স্থগিত প্রসেস পুনরায় আরম্ভ করা হবে"
 
-#: ksysguardprocesslist.cpp:206
+#: ksysguardprocesslist.cpp:207
 #, fuzzy, kde-format
 #| msgid "Own Processes"
 msgid "End Process"
@@ -61,7 +61,7 @@ msgid_plural "End Processes"
 msgstr[0] "নিজস্ব প্রসেস"
 msgstr[1] "নিজস্ব প্রসেস"
 
-#: ksysguardprocesslist.cpp:209 ksysguardprocesslist.cpp:543
+#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
 #, fuzzy, kde-format
 #| msgid "Kill Process"
 #| msgid_plural "Kill Processes"
@@ -70,53 +70,53 @@ msgid_plural "Forcibly Kill Processes"
 msgstr[0] "প্রসেস kill করা হবে"
 msgstr[1] "প্রসেস kill করা হবে"
 
-#: ksysguardprocesslist.cpp:213
+#: ksysguardprocesslist.cpp:214
 #, kde-format
 msgid "Suspend (STOP)"
 msgstr "Suspend (STOP)"
 
-#: ksysguardprocesslist.cpp:214
+#: ksysguardprocesslist.cpp:215
 #, kde-format
 msgid "Continue (CONT)"
 msgstr "Continue (CONT)"
 
-#: ksysguardprocesslist.cpp:215
+#: ksysguardprocesslist.cpp:216
 #, kde-format
 msgid "Hangup (HUP)"
 msgstr "Hangup (HUP)"
 
-#: ksysguardprocesslist.cpp:216
+#: ksysguardprocesslist.cpp:217
 #, kde-format
 msgid "Interrupt (INT)"
 msgstr "Interrupt (INT)"
 
-#: ksysguardprocesslist.cpp:217
+#: ksysguardprocesslist.cpp:218
 #, kde-format
 msgid "Terminate (TERM)"
 msgstr "Terminate (TERM)"
 
-#: ksysguardprocesslist.cpp:218
+#: ksysguardprocesslist.cpp:219
 #, kde-format
 msgid "Kill (KILL)"
 msgstr "Kill (KILL)"
 
-#: ksysguardprocesslist.cpp:219
+#: ksysguardprocesslist.cpp:220
 #, kde-format
 msgid "User 1 (USR1)"
 msgstr "ইউসার ১ (USR1)"
 
-#: ksysguardprocesslist.cpp:220
+#: ksysguardprocesslist.cpp:221
 #, kde-format
 msgid "User 2 (USR2)"
 msgstr "ইউসার ২ (USR2)"
 
-#: ksysguardprocesslist.cpp:223
+#: ksysguardprocesslist.cpp:224
 #, fuzzy, kde-format
 #| msgid "Quick search"
 msgid "Focus on Quick Search"
 msgstr "দ্রুত অনুসন্ধান"
 
-#: ksysguardprocesslist.cpp:406
+#: ksysguardprocesslist.cpp:407
 #, kde-format
 msgid ""
 "<qt>End the selected process. Warning - you may lose unsaved work.<br>Right "
@@ -124,13 +124,13 @@ msgid ""
 "information."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:441
+#: ksysguardprocesslist.cpp:442
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:544
+#: ksysguardprocesslist.cpp:545
 #, fuzzy, kde-format
 #| msgid "Own Processes"
 msgctxt "Context menu"
@@ -139,115 +139,115 @@ msgid_plural "End Processes"
 msgstr[0] "নিজস্ব প্রসেস"
 msgstr[1] "নিজস্ব প্রসেস"
 
-#: ksysguardprocesslist.cpp:578
+#: ksysguardprocesslist.cpp:579
 #, kde-format
 msgid "Send Signal"
 msgstr "সিগনাল পাঠানো হবে"
 
-#: ksysguardprocesslist.cpp:595
+#: ksysguardprocesslist.cpp:596
 #, kde-format
 msgid "Jump to Parent Process (%1)"
 msgstr "ঊর্ধ্বতন প্রসেসে চলুন (%1)"
 
-#: ksysguardprocesslist.cpp:757
+#: ksysguardprocesslist.cpp:758
 #, kde-format
 msgid "Hide Column '%1'"
 msgstr "কলাম '%1' আড়াল করা হবে"
 
-#: ksysguardprocesslist.cpp:773
+#: ksysguardprocesslist.cpp:774
 #, kde-format
 msgid "Show Column '%1'"
 msgstr "কলাম প্রদর্শিত হবে '%1'"
 
-#: ksysguardprocesslist.cpp:802
+#: ksysguardprocesslist.cpp:803
 #, kde-format
 msgid "Display Units"
 msgstr "ইউনিটগুলি প্রদর্শিত হবে"
 
-#: ksysguardprocesslist.cpp:806
+#: ksysguardprocesslist.cpp:807
 #, kde-format
 msgid "Mixed"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:812
+#: ksysguardprocesslist.cpp:813
 #, fuzzy, kde-format
 #| msgid "Kilobytes"
 msgid "Kilobytes per second"
 msgstr "কিলোবাইট"
 
-#: ksysguardprocesslist.cpp:812
+#: ksysguardprocesslist.cpp:813
 #, kde-format
 msgid "Kilobytes"
 msgstr "কিলোবাইট"
 
-#: ksysguardprocesslist.cpp:818
+#: ksysguardprocesslist.cpp:819
 #, fuzzy, kde-format
 #| msgid "Megabytes"
 msgid "Megabytes per second"
 msgstr "মেগাবাইট"
 
-#: ksysguardprocesslist.cpp:818
+#: ksysguardprocesslist.cpp:819
 #, kde-format
 msgid "Megabytes"
 msgstr "মেগাবাইট"
 
-#: ksysguardprocesslist.cpp:824
+#: ksysguardprocesslist.cpp:825
 #, fuzzy, kde-format
 #| msgid "Gigabytes"
 msgid "Gigabytes per second"
 msgstr "গিগাবাইট"
 
-#: ksysguardprocesslist.cpp:824
+#: ksysguardprocesslist.cpp:825
 #, kde-format
 msgid "Gigabytes"
 msgstr "গিগাবাইট"
 
-#: ksysguardprocesslist.cpp:833
+#: ksysguardprocesslist.cpp:834
 #, kde-format
 msgid "Percentage"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:862
+#: ksysguardprocesslist.cpp:863
 #, kde-format
 msgid "Display command line options"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:869
+#: ksysguardprocesslist.cpp:870
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:876
+#: ksysguardprocesslist.cpp:877
 #, kde-format
 msgid "Displayed Information"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:879
+#: ksysguardprocesslist.cpp:880
 #, kde-format
 msgid "Characters read/written"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:884
+#: ksysguardprocesslist.cpp:885
 #, kde-format
 msgid "Number of Read/Write operations"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:889
+#: ksysguardprocesslist.cpp:890
 #, kde-format
 msgid "Bytes actually read/written"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:895
+#: ksysguardprocesslist.cpp:896
 #, kde-format
 msgid "Show I/O rate"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:922
+#: ksysguardprocesslist.cpp:923
 #, kde-format
 msgid "Show Tooltips"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1173
+#: ksysguardprocesslist.cpp:1174
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to renice the process and there was a "
@@ -259,12 +259,12 @@ msgstr ""
 "প্রসেসটি renice করার জন্য পর্যাপ্ত অনুমতি আপনার নেই এবং root পরিচয়ে এই কাজের "
 "প্রচেষ্টা করতে সমস্যা দেখা দিয়েছে।"
 
-#: ksysguardprocesslist.cpp:1199 ksysguardprocesslist.cpp:1383
+#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
 #, kde-format
 msgid "You must select a process first."
 msgstr "প্রথমে একটি প্রসেস নির্বাচন করুন।"
 
-#: ksysguardprocesslist.cpp:1324
+#: ksysguardprocesslist.cpp:1325
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -276,7 +276,7 @@ msgstr ""
 "প্রসেসটি kill করার জন্য পর্যাপ্ত অনুমতি আপনার নেই এবং root পরিচয়ে এই কাজের "
 "প্রচেষ্টা করতে সমস্যা দেখা দিয়েছে।"
 
-#: ksysguardprocesslist.cpp:1340
+#: ksysguardprocesslist.cpp:1341
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -288,7 +288,7 @@ msgstr ""
 "প্রসেসটি kill করার জন্য পর্যাপ্ত অনুমতি আপনার নেই এবং root পরিচয়ে এই কাজের "
 "প্রচেষ্টা করতে সমস্যা দেখা দিয়েছে।"
 
-#: ksysguardprocesslist.cpp:1355
+#: ksysguardprocesslist.cpp:1356
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -300,7 +300,7 @@ msgstr ""
 "প্রসেসটি kill করার জন্য পর্যাপ্ত অনুমতি আপনার নেই এবং root পরিচয়ে এই কাজের "
 "প্রচেষ্টা করতে সমস্যা দেখা দিয়েছে।"
 
-#: ksysguardprocesslist.cpp:1392
+#: ksysguardprocesslist.cpp:1393
 #, fuzzy, kde-format
 #| msgid "Do you want to kill the selected process?"
 #| msgid_plural "Do you want to kill the %1 selected processes?"
@@ -312,7 +312,7 @@ msgid_plural ""
 msgstr[0] "আপনি কি নির্বাচিত প্রসেসটি kill করতে ইচ্ছুক?"
 msgstr[1] "আপনি কি %1-টি নির্বাচিত প্রসেসগুলি kill করতে ইচ্ছুক?"
 
-#: ksysguardprocesslist.cpp:1395
+#: ksysguardprocesslist.cpp:1396
 #, fuzzy, kde-format
 #| msgid "Own Processes"
 msgctxt "Dialog title"
@@ -321,12 +321,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "নিজস্ব প্রসেস"
 msgstr[1] "নিজস্ব প্রসেস"
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1398
 #, kde-format
 msgid "End"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1399
+#: ksysguardprocesslist.cpp:1400
 #, fuzzy, kde-format
 #| msgid "Do you want to kill the selected process?"
 #| msgid_plural "Do you want to kill the %1 selected processes?"
@@ -339,7 +339,7 @@ msgid_plural ""
 msgstr[0] "আপনি কি নির্বাচিত প্রসেসটি kill করতে ইচ্ছুক?"
 msgstr[1] "আপনি কি %1-টি নির্বাচিত প্রসেসগুলি kill করতে ইচ্ছুক?"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1403
 #, fuzzy, kde-format
 #| msgid "Kill Process"
 #| msgid_plural "Kill Processes"
@@ -349,7 +349,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "প্রসেস kill করা হবে"
 msgstr[1] "প্রসেস kill করা হবে"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1405
 #, kde-format
 msgid "Kill"
 msgstr "Kill করুন"
@@ -513,46 +513,46 @@ msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
 msgstr "নিম্ন পরিমাণ গুরুত্ব"
 
-#: ProcessModel.cpp:58
+#: ProcessModel.cpp:62
 #, kde-format
 msgid "%1 K"
 msgstr "%1 K"
 
-#: ProcessModel.cpp:59
+#: ProcessModel.cpp:63
 #, kde-format
 msgid "%1 M"
 msgstr "%1 M"
 
-#: ProcessModel.cpp:60
+#: ProcessModel.cpp:64
 #, kde-format
 msgid "%1 G"
 msgstr "%1 G"
 
-#: ProcessModel.cpp:61
+#: ProcessModel.cpp:65
 #, fuzzy, kde-format
 #| msgid "%1 K"
 msgid "%1 T"
 msgstr "%1 K"
 
-#: ProcessModel.cpp:62
+#: ProcessModel.cpp:66
 #, fuzzy, kde-format
 #| msgid "%1 K"
 msgid "%1 P"
 msgstr "%1 K"
 
-#: ProcessModel.cpp:635
+#: ProcessModel.cpp:636
 #, fuzzy, kde-format
 #| msgid "- Process is doing some work"
 msgid "- Process is doing some work."
 msgstr "- প্রসেস দ্বারা কিছু কাজ করা হচ্ছে"
 
-#: ProcessModel.cpp:637
+#: ProcessModel.cpp:638
 #, fuzzy, kde-format
 #| msgid "- Process is waiting for something to happen"
 msgid "- Process is waiting for something to happen."
 msgstr "- প্রসেস দ্বারা কিছু ঘটার অপেক্ষা করা হচ্ছে"
 
-#: ProcessModel.cpp:639
+#: ProcessModel.cpp:640
 #, fuzzy, kde-format
 #| msgid ""
 #| "- Process has been stopped. It will not respond to user input at the "
@@ -563,7 +563,7 @@ msgstr ""
 "- প্রসেসটিকে বন্ধ করে দেওয়া হয়েছে। এই মুহূর্তে ব্যবহারকারীদের থেকে প্রাপ্ত ইনপুটের "
 "জন্য কোনো প্রতিক্রিয়া প্রাপ্ত হবে না"
 
-#: ProcessModel.cpp:641
+#: ProcessModel.cpp:642
 #, fuzzy, kde-format
 #| msgid ""
 #| "- Process has finished and is now dead, but the parent process has not "
@@ -575,25 +575,25 @@ msgstr ""
 "- প্রসেসের কাজ সমাপ্ত হয়ে এটি বন্ধ করা হয়েছে, কিন্তু ঊর্ধ্বতন প্রসেসে এখনো এই তথ্য "
 "সম্পূর্ণরূপে উপস্থিত নেই"
 
-#: ProcessModel.cpp:1053
+#: ProcessModel.cpp:1054
 #, fuzzy, kde-format
 #| msgid "The process name"
 msgid "The process name."
 msgstr "প্রসেসের নাম"
 
-#: ProcessModel.cpp:1055
+#: ProcessModel.cpp:1056
 #, fuzzy, kde-format
 #| msgid "The user that owns this process"
 msgid "The user who owns this process."
 msgstr "প্রসেসটি চিহ্নিত ব্যবহারকারীর মালিকানাধীন"
 
-#: ProcessModel.cpp:1057
+#: ProcessModel.cpp:1058
 #, fuzzy, kde-format
 #| msgid "The controlling terminal that this process is running on."
 msgid "The controlling terminal on which this process is running."
 msgstr "প্রসেসটি যে নিয়ন্ত্রণকারী টার্মিন্যালের মধ্যে সঞ্চালিত হচ্ছে।"
 
-#: ProcessModel.cpp:1060
+#: ProcessModel.cpp:1061
 #, fuzzy, kde-format
 #| msgid ""
 #| "The priority that this process is being run with. Ranges from 19 (very "
@@ -605,12 +605,12 @@ msgstr ""
 "প্রসেসটি সঞ্চালনের জন্য ব্যবহৃত গুরুত্বের পরিমাণ। 19 (অত্যন্ত ভাল, নিম্ন গুরুত্বপ্রাপ্ত) "
 "থেকে -19-র (উচ্চ গুরুত্বপ্রাপ্ত) মধ্যে একটি মান প্রযোজ্য"
 
-#: ProcessModel.cpp:1064
+#: ProcessModel.cpp:1065
 #, kde-format
 msgid "The current CPU usage of the process."
 msgstr "প্রসেসটি দ্বারা বর্তমানে CPU-র ব্যবহার।"
 
-#: ProcessModel.cpp:1069
+#: ProcessModel.cpp:1070
 #, kde-format
 msgid ""
 "The current total CPU usage of the process, divided by the %1 processor core "
@@ -625,20 +625,20 @@ msgstr[1] ""
 "প্রসেস দ্বারা বর্তমানে CPU-র ব্যবহারের সর্বমোট পরিমাণ, মেশিনে উপস্থিত %1 প্রসেসর "
 "কোর দ্বারা বিভাজিত।"
 
-#: ProcessModel.cpp:1073
+#: ProcessModel.cpp:1074
 #, fuzzy, kde-format
 #| msgid "The current CPU usage of the process."
 msgid "The current total CPU usage of the process."
 msgstr "প্রসেসটি দ্বারা বর্তমানে CPU-র ব্যবহার।"
 
-#: ProcessModel.cpp:1075
+#: ProcessModel.cpp:1076
 #, kde-format
 msgid ""
 "<qt>The total user and system time that this process has been running for, "
 "displayed as minutes:seconds."
 msgstr ""
 
-#: ProcessModel.cpp:1078
+#: ProcessModel.cpp:1079
 #, kde-format
 msgid ""
 "<qt>This is the amount of virtual memory space that the process is using, "
@@ -648,7 +648,7 @@ msgstr ""
 "<qt>প্রসেস দ্বারা বর্তমানে ব্যবহৃত ভার্চুয়াল মেমরির পরিমাণ যেমন শেয়ার্ড লাইব্রেরি, "
 "গ্রাফিক্স মেমরি, ডিস্কের ফাইল প্রভৃতি। এই সংখ্যা মূলত অপ্রয়োজনীয়।</qt>"
 
-#: ProcessModel.cpp:1082
+#: ProcessModel.cpp:1083
 #, kde-format
 msgid ""
 "<qt>This is the amount of real physical memory that this process is using by "
@@ -658,7 +658,7 @@ msgid ""
 "of a program.  See What's This for more information.</qt>"
 msgstr ""
 
-#: ProcessModel.cpp:1087
+#: ProcessModel.cpp:1088
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>This is the amount of real physical memory that this process's shared "
@@ -672,67 +672,67 @@ msgstr ""
 "<qt>প্রসেসের শেয়ার্ড লাইব্রেরিগুলি দ্বারা বর্তমানে ব্যবহৃত প্রকৃত মেমরির পরিমাণ। এই "
 "লাইব্রেরি প্রয়োগকারী সকল প্রসেস দ্বারা এই মেমরি যৌথরূপে ব্যবহার করা হয়</qt>"
 
-#: ProcessModel.cpp:1090
+#: ProcessModel.cpp:1091
 #, fuzzy, kde-format
 #| msgid "<qt>The command with which this process was launched</qt>"
 msgid "<qt>The elapsed time since the process was started.</qt>"
 msgstr "<qt>প্রসেসটি আরম্ভ করার জন্য ব্যবহৃত কমান্ড</qt>"
 
-#: ProcessModel.cpp:1092
+#: ProcessModel.cpp:1093
 #, kde-format
 msgid ""
 "<qt>Linux flag NoNewPrivileges, if set the process can't gain further "
 "privileges via setuid etc.</qt>"
 msgstr ""
 
-#: ProcessModel.cpp:1094
+#: ProcessModel.cpp:1095
 #, fuzzy, kde-format
 #| msgid "<qt>The command with which this process was launched</qt>"
 msgid "<qt>The command with which this process was launched.</qt>"
 msgstr "<qt>প্রসেসটি আরম্ভ করার জন্য ব্যবহৃত কমান্ড</qt>"
 
-#: ProcessModel.cpp:1096
+#: ProcessModel.cpp:1097
 #, fuzzy, kde-format
 #| msgid "<qt>The title of any windows that this process is showing</qt>"
 msgid "<qt>The amount of pixmap memory that this process is using.</qt>"
 msgstr "<qt>এই প্রসেস দ্বারা প্রদর্শিত কোনো উইন্ডোর শিরোনাম</qt>"
 
-#: ProcessModel.cpp:1098
+#: ProcessModel.cpp:1099
 #, fuzzy, kde-format
 #| msgid "<qt>The title of any windows that this process is showing</qt>"
 msgid "<qt>The title of any windows that this process is showing.</qt>"
 msgstr "<qt>এই প্রসেস দ্বারা প্রদর্শিত কোনো উইন্ডোর শিরোনাম</qt>"
 
-#: ProcessModel.cpp:1100
+#: ProcessModel.cpp:1101
 #, fuzzy, kde-format
 #| msgid "The unique Process ID that identifies this process"
 msgid "The unique Process ID that identifies this process."
 msgstr "প্রসেসটি সনাক্ত করার জন্য একটি স্বতন্ত্র প্রসেস ID"
 
-#: ProcessModel.cpp:1102
+#: ProcessModel.cpp:1103
 #, kde-format
 msgid "The number of bytes read.  See What's This for more information."
 msgstr ""
 
-#: ProcessModel.cpp:1104
+#: ProcessModel.cpp:1105
 #, kde-format
 msgid "The number of bytes written.  See What's This for more information."
 msgstr ""
 
-#: ProcessModel.cpp:1106
+#: ProcessModel.cpp:1107
 #, fuzzy, kde-format
 #| msgid "<qt>The title of any windows that this process is showing</qt>"
 msgid "<qt>The control group (cgroup) where this process belongs.</qt>"
 msgstr "<qt>এই প্রসেস দ্বারা প্রদর্শিত কোনো উইন্ডোর শিরোনাম</qt>"
 
-#: ProcessModel.cpp:1108
+#: ProcessModel.cpp:1109
 #, kde-format
 msgid ""
 "<qt>Mandatory Access Control (SELinux or AppArmor) context for this process."
 "</qt>"
 msgstr ""
 
-#: ProcessModel.cpp:1111
+#: ProcessModel.cpp:1112
 #, kde-format
 msgid ""
 "The amount of private physical memory used by a process, with the amount of "
@@ -740,7 +740,7 @@ msgid ""
 "added."
 msgstr ""
 
-#: ProcessModel.cpp:1121
+#: ProcessModel.cpp:1122
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The kernel process name is a maximum of 8 "
@@ -749,7 +749,7 @@ msgid ""
 "command line is shown, otherwise the process name is used."
 msgstr ""
 
-#: ProcessModel.cpp:1125
+#: ProcessModel.cpp:1126
 #, kde-format
 msgid ""
 "<qt>The user who owns this process.  If the effective, setuid etc user is "
@@ -766,7 +766,7 @@ msgid ""
 "more information.</td></tr></table>"
 msgstr ""
 
-#: ProcessModel.cpp:1140
+#: ProcessModel.cpp:1141
 #, kde-format
 msgid ""
 "<qt>This is the size of allocated address space - not memory, but address "
@@ -776,7 +776,7 @@ msgid ""
 "i>This is VmSize in proc/*/status and VIRT in top."
 msgstr ""
 
-#: ProcessModel.cpp:1145
+#: ProcessModel.cpp:1146
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is an approximation of the Private "
@@ -788,12 +788,12 @@ msgid ""
 "accurate, but slower, calculation of the true Private memory usage."
 msgstr ""
 
-#: ProcessModel.cpp:1150
+#: ProcessModel.cpp:1151
 #, kde-format
 msgid "The CPU usage of a process and all of its threads."
 msgstr ""
 
-#: ProcessModel.cpp:1153
+#: ProcessModel.cpp:1154
 #, kde-format
 msgid ""
 "<qt>The total system and user time that a process and all of its threads "
@@ -801,7 +801,7 @@ msgid ""
 "time if the process has been across multiple CPU cores."
 msgstr ""
 
-#: ProcessModel.cpp:1157
+#: ProcessModel.cpp:1158
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is an approximation of the Shared "
@@ -811,26 +811,26 @@ msgid ""
 "slower, calculation of the true Shared memory usage."
 msgstr ""
 
-#: ProcessModel.cpp:1161
+#: ProcessModel.cpp:1162
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The underlying value (clock ticks since "
 "system boot) is retrieved from /proc/[pid]/stat"
 msgstr ""
 
-#: ProcessModel.cpp:1163
+#: ProcessModel.cpp:1164
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The flag is retrieved from /proc/[pid]/"
 "status"
 msgstr ""
 
-#: ProcessModel.cpp:1165
+#: ProcessModel.cpp:1166
 #, kde-format
 msgid "<qt><i>Technical information: </i>This is from /proc/*/cmdline"
 msgstr ""
 
-#: ProcessModel.cpp:1168
+#: ProcessModel.cpp:1169
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is the amount of memory used by the "
@@ -841,7 +841,7 @@ msgid ""
 "more detailed breakdown."
 msgstr ""
 
-#: ProcessModel.cpp:1173
+#: ProcessModel.cpp:1174
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>For each X11 window, the X11 property "
@@ -849,7 +849,7 @@ msgid ""
 "not shown, then that application incorrectly is not setting _NET_WM_PID."
 msgstr ""
 
-#: ProcessModel.cpp:1177
+#: ProcessModel.cpp:1178
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is the Process ID.  A multi-threaded "
@@ -858,7 +858,7 @@ msgid ""
 "threads."
 msgstr ""
 
-#: ProcessModel.cpp:1182
+#: ProcessModel.cpp:1183
 #, kde-format
 msgid ""
 "<qt>This column shows the IO statistics for each process. The tooltip "
@@ -887,7 +887,7 @@ msgid ""
 "filesystems/proc.txt in the kernel source."
 msgstr ""
 
-#: ProcessModel.cpp:1202
+#: ProcessModel.cpp:1203
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This shows Linux Control Group (cgroup) "
@@ -896,14 +896,14 @@ msgid ""
 "to monitor them."
 msgstr ""
 
-#: ProcessModel.cpp:1206
+#: ProcessModel.cpp:1207
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This shows Mandatory Access Control "
 "(SELinux or AppArmor) context, retrieved from /proc/[pid]/attr/current."
 msgstr ""
 
-#: ProcessModel.cpp:1210
+#: ProcessModel.cpp:1211
 #, kde-format
 msgid ""
 "<i>Technical information:</i> This is often referred to as \"Proportional "
@@ -913,87 +913,87 @@ msgid ""
 "memory section."
 msgstr ""
 
-#: ProcessModel.cpp:1293
+#: ProcessModel.cpp:1294
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Login Name:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1297
+#: ProcessModel.cpp:1298
 #, fuzzy, kde-kuit-format
 #| msgid "This user is not recognized for some reason."
 msgctxt "@info:tooltip"
 msgid "<para>This user is not recognized for some reason.</para>"
 msgstr "কোনো কারণবসত ব্যবহারকারীর পরিচয় নির্ধারণ করা যায়নি।"
 
-#: ProcessModel.cpp:1300
+#: ProcessModel.cpp:1301
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>%1</emphasis></para>"
 msgstr ""
 
-#: ProcessModel.cpp:1302
+#: ProcessModel.cpp:1303
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "<para><emphasis strong='true'>Login Name:</emphasis> %1 (uid: %2)</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1307
+#: ProcessModel.cpp:1308
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>  Room Number:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1310
+#: ProcessModel.cpp:1311
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>  Work Phone:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1315
+#: ProcessModel.cpp:1316
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Effective User:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1317
+#: ProcessModel.cpp:1318
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Setuid User:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1320
+#: ProcessModel.cpp:1321
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>File System User:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1324
+#: ProcessModel.cpp:1325
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Group:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1327
+#: ProcessModel.cpp:1328
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Effective Group:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1329
+#: ProcessModel.cpp:1330
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Setuid Group:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1332
+#: ProcessModel.cpp:1333
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>File System Group:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1341
+#: ProcessModel.cpp:1342
 #, fuzzy, kde-format
 #| msgctxt "Short description of a process. PID, name, user"
 #| msgid "<numid>%1</numid>: %2, owned by user %3"
@@ -1001,66 +1001,66 @@ msgctxt "Short description of a process. PID, name, user"
 msgid "%1: %2, owned by user %3"
 msgstr "<numid>%1</numid>: %2, %3-র মালিকানাধীন"
 
-#: ProcessModel.cpp:1352
+#: ProcessModel.cpp:1353
 #, fuzzy, kde-format
 #| msgid "%1 (uid: %2)"
 msgctxt "Group name and group id"
 msgid "%1 (gid: %2)"
 msgstr "%1 (uid: %2)"
 
-#: ProcessModel.cpp:1374
+#: ProcessModel.cpp:1375
 #, fuzzy, kde-format
 #| msgid "%1 (uid: %2)"
 msgctxt "User name and user id"
 msgid "%1 (uid: %2)"
 msgstr "%1 (uid: %2)"
 
-#: ProcessModel.cpp:1440
+#: ProcessModel.cpp:1441
 #, fuzzy, kde-format
 #| msgid "Idle"
 msgctxt "scheduler"
 msgid "Idle"
 msgstr "কর্মবিহীন"
 
-#: ProcessModel.cpp:1442
+#: ProcessModel.cpp:1443
 #, fuzzy, kde-format
 #| msgid "Batch"
 msgctxt "scheduler"
 msgid "(Batch) %1"
 msgstr "Batch (ব্যাচ)"
 
-#: ProcessModel.cpp:1444
+#: ProcessModel.cpp:1445
 #, kde-format
 msgctxt "Round robin scheduler"
 msgid "RR %1"
 msgstr ""
 
-#: ProcessModel.cpp:1447
+#: ProcessModel.cpp:1448
 #, kde-format
 msgctxt "Real Time scheduler"
 msgid "RT"
 msgstr ""
 
-#: ProcessModel.cpp:1449
+#: ProcessModel.cpp:1450
 #, fuzzy, kde-format
 #| msgid "FIFO"
 msgctxt "First in first out scheduler"
 msgid "FIFO %1"
 msgstr "FIFO"
 
-#: ProcessModel.cpp:1451
+#: ProcessModel.cpp:1452
 #, kde-format
 msgctxt "scheduler"
 msgid "(IA) %1"
 msgstr ""
 
-#: ProcessModel.cpp:1522 ProcessModel.cpp:1530 ProcessModel.cpp:1547
-#: ProcessModel.cpp:1555
+#: ProcessModel.cpp:1523 ProcessModel.cpp:1531 ProcessModel.cpp:1548
+#: ProcessModel.cpp:1556
 #, kde-format
 msgid "%1/s"
 msgstr ""
 
-#: ProcessModel.cpp:1594
+#: ProcessModel.cpp:1595
 #, fuzzy, kde-kuit-format
 #| msgctxt "tooltip. name,pid "
 #| msgid "This process is being debugged by %1 (<numid>%2</numid>)"
@@ -1068,7 +1068,7 @@ msgctxt "tooltip. name,pid "
 msgid "This process is being debugged by %1 (%2)"
 msgstr "%1 (<numid>%2</numid>) দ্বারা এই প্রসেসটি ডিবাগ করা হচ্ছে"
 
-#: ProcessModel.cpp:1616
+#: ProcessModel.cpp:1617
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1076,7 +1076,7 @@ msgid ""
 "killed.</para><para><emphasis strong='true'>Process ID:</emphasis> %2</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1622
+#: ProcessModel.cpp:1623
 #, fuzzy, kde-kuit-format
 #| msgid ""
 #| "<b>KThreadd</b> manages kernel threads. The children processes run in the "
@@ -1090,7 +1090,7 @@ msgstr ""
 "প্রসেসগুলি কার্নেলের মধ্যে সঞ্চালিত হয় এবং এই প্রসেসগুলি দ্বারা হার্ড-ডিস্ক প্রভৃতি "
 "নিয়ন্ত্রিত হয়।<br/>"
 
-#: ProcessModel.cpp:1626
+#: ProcessModel.cpp:1627
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1098,7 +1098,7 @@ msgid ""
 "para>"
 msgstr ""
 
-#: ProcessModel.cpp:1634
+#: ProcessModel.cpp:1635
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1107,7 +1107,7 @@ msgid ""
 "para><para><emphasis strong='true'>Parent's ID:</emphasis> %4</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1644
+#: ProcessModel.cpp:1645
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1115,25 +1115,25 @@ msgid ""
 "para><para><emphasis strong='true'>Parent's ID:</emphasis> %3</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1653 ProcessModel.cpp:1754
+#: ProcessModel.cpp:1654 ProcessModel.cpp:1755
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Number of threads:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1655
+#: ProcessModel.cpp:1656
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Command:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1658 ProcessModel.cpp:1689
+#: ProcessModel.cpp:1659 ProcessModel.cpp:1690
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Running on:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1673
+#: ProcessModel.cpp:1674
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1144,7 +1144,7 @@ msgid ""
 "</emphasis> %5</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1685
+#: ProcessModel.cpp:1686
 #, fuzzy, kde-kuit-format
 #| msgid "<qt>This process was run with the following command:<br />%1"
 msgctxt "@info:tooltip"
@@ -1153,13 +1153,13 @@ msgid ""
 "command:</emphasis></para><para>%1</para>"
 msgstr "<qt>এই প্রসেসটি চিহ্নিত কমান্ড দ্বারা চালানো হয়েছে:<br />%1"
 
-#: ProcessModel.cpp:1710 ProcessModel.cpp:1776
+#: ProcessModel.cpp:1711 ProcessModel.cpp:1777
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Nice level:</emphasis> %1 (%2)</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1717
+#: ProcessModel.cpp:1718
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1167,25 +1167,25 @@ msgid ""
 "para><para><emphasis strong='true'>Scheduler priority:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1725
+#: ProcessModel.cpp:1726
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Scheduler:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1731 ProcessModel.cpp:1783
+#: ProcessModel.cpp:1732 ProcessModel.cpp:1784
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>I/O Nice level:</emphasis> %1 (%2)</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1734 ProcessModel.cpp:1786
+#: ProcessModel.cpp:1735 ProcessModel.cpp:1787
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>I/O Class:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1745
+#: ProcessModel.cpp:1746
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1194,7 +1194,7 @@ msgid ""
 "para><para><emphasis strong='true'>System CPU usage:</emphasis> %4%</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1757
+#: ProcessModel.cpp:1758
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1204,7 +1204,7 @@ msgid ""
 "para><para><emphasis strong='true'>Total CPU usage:</emphasis> %4%</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1768
+#: ProcessModel.cpp:1769
 #, fuzzy, kde-kuit-format
 #| msgid "<br /><br />CPU time spent running as user: %1 seconds"
 msgctxt "@info:tooltip"
@@ -1213,7 +1213,7 @@ msgid ""
 "seconds</para>"
 msgstr "<br /><br />ব্যবহারকারী দ্বারা সঞ্চালনকালে ব্যবহৃত CPU-র সময়: %1 সেকেন্ড"
 
-#: ProcessModel.cpp:1772
+#: ProcessModel.cpp:1773
 #, fuzzy, kde-kuit-format
 #| msgid "<br />CPU time spent running in kernel: %1 seconds"
 msgctxt "@info:tooltip"
@@ -1222,7 +1222,7 @@ msgid ""
 "%1 seconds</para>"
 msgstr "<br /><br />কার্নেলের মধ্যে সঞ্চালনকালে ব্যবহৃত CPU-র সময়: %1 সেকেন্ড"
 
-#: ProcessModel.cpp:1802
+#: ProcessModel.cpp:1803
 #, fuzzy, kde-kuit-format
 #| msgid "Memory usage: %1 out of %2  (%3 %)<br />"
 msgctxt "@info:tooltip"
@@ -1231,14 +1231,14 @@ msgid ""
 "para>"
 msgstr "মেমরির ব্যবহার: %1, সর্বমোট %2  (%3 %)<br />"
 
-#: ProcessModel.cpp:1808
+#: ProcessModel.cpp:1809
 #, fuzzy, kde-kuit-format
 #| msgid "Memory usage: %1 out of %2  (%3 %)<br />"
 msgctxt "@info:tooltip"
 msgid "<emphasis strong='true'>Memory usage:</emphasis> %1<br />"
 msgstr "মেমরির ব্যবহার: %1, সর্বমোট %2  (%3 %)<br />"
 
-#: ProcessModel.cpp:1812
+#: ProcessModel.cpp:1813
 #, fuzzy, kde-kuit-format
 #| msgid "RSS Memory usage: %1 out of %2  (%3 %)"
 msgctxt "@info:tooltip"
@@ -1247,13 +1247,13 @@ msgid ""
 "%)</para>"
 msgstr "RSS মেমরির ব্যবহার: %1, সর্বমোট %2  (%3 %)"
 
-#: ProcessModel.cpp:1818
+#: ProcessModel.cpp:1819
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1825 ProcessModel.cpp:1886
+#: ProcessModel.cpp:1826 ProcessModel.cpp:1887
 #, fuzzy, kde-kuit-format
 #| msgid ""
 #| "<qt>Your system does not seem to have this information available to be "
@@ -1264,7 +1264,7 @@ msgid ""
 "information available to be read.</emphasis></para>"
 msgstr "<qt>আপনার সিস্টেমে সম্ভবত এই তথ্য, পড়ার জন্য উপলব্ধ নেই।</qt>"
 
-#: ProcessModel.cpp:1829
+#: ProcessModel.cpp:1830
 #, fuzzy, kde-kuit-format
 #| msgid "Shared library memory usage: %1 out of %2  (%3 %)"
 msgctxt "@info:tooltip"
@@ -1273,7 +1273,7 @@ msgid ""
 "of %2  (%3 %)</para>"
 msgstr "শেয়ার্ড লাইব্রেরি মেমরির ব্যবহার: %1, সর্বমোট %2  (%3 %)"
 
-#: ProcessModel.cpp:1835 ProcessModel.cpp:1896
+#: ProcessModel.cpp:1836 ProcessModel.cpp:1897
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1281,7 +1281,7 @@ msgid ""
 "para>"
 msgstr ""
 
-#: ProcessModel.cpp:1842
+#: ProcessModel.cpp:1843
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1294,7 +1294,7 @@ msgid ""
 "emphasis> %11 (%12 KiB/s)</para>"
 msgstr ""
 
-#: ProcessModel.cpp:1890
+#: ProcessModel.cpp:1891
 #, fuzzy, kde-kuit-format
 #| msgid "Memory usage: %1 out of %2  (%3 %)<br />"
 msgctxt "@info:tooltip"
@@ -1303,13 +1303,13 @@ msgid ""
 "(%3 %)</para>"
 msgstr "মেমরির ব্যবহার: %1, সর্বমোট %2  (%3 %)<br />"
 
-#: ProcessModel.cpp:2180
+#: ProcessModel.cpp:2181
 #, kde-format
 msgctxt "process heading"
 msgid "Name"
 msgstr "নাম"
 
-#: ProcessModel.cpp:2181
+#: ProcessModel.cpp:2182
 #, fuzzy, kde-format
 #| msgctxt "process heading"
 #| msgid "User Name"
@@ -1317,31 +1317,31 @@ msgctxt "process heading"
 msgid "Username"
 msgstr "ব্যবহারকারীর নাম"
 
-#: ProcessModel.cpp:2182
+#: ProcessModel.cpp:2183
 #, kde-format
 msgctxt "process heading"
 msgid "PID"
 msgstr "PID"
 
-#: ProcessModel.cpp:2183
+#: ProcessModel.cpp:2184
 #, kde-format
 msgctxt "process heading"
 msgid "TTY"
 msgstr "TTY"
 
-#: ProcessModel.cpp:2184
+#: ProcessModel.cpp:2185
 #, kde-format
 msgctxt "process heading"
 msgid "Niceness"
 msgstr "Niceness"
 
-#: ProcessModel.cpp:2186
+#: ProcessModel.cpp:2187
 #, no-c-format, kde-format
 msgctxt "process heading"
 msgid "CPU %"
 msgstr "CPU %"
 
-#: ProcessModel.cpp:2187
+#: ProcessModel.cpp:2188
 #, fuzzy, kde-format
 #| msgctxt "process heading"
 #| msgid "CPU %"
@@ -1349,55 +1349,55 @@ msgctxt "process heading"
 msgid "CPU Time"
 msgstr "CPU %"
 
-#: ProcessModel.cpp:2188
+#: ProcessModel.cpp:2189
 #, kde-format
 msgctxt "process heading"
 msgid "IO Read"
 msgstr ""
 
-#: ProcessModel.cpp:2189
+#: ProcessModel.cpp:2190
 #, kde-format
 msgctxt "process heading"
 msgid "IO Write"
 msgstr ""
 
-#: ProcessModel.cpp:2190
+#: ProcessModel.cpp:2191
 #, kde-format
 msgctxt "process heading"
 msgid "Virtual Size"
 msgstr "ভার্চুয়াল মাপ"
 
-#: ProcessModel.cpp:2191
+#: ProcessModel.cpp:2192
 #, kde-format
 msgctxt "process heading"
 msgid "Memory"
 msgstr "মেমরি"
 
-#: ProcessModel.cpp:2192
+#: ProcessModel.cpp:2193
 #, kde-format
 msgctxt "process heading"
 msgid "Shared Mem"
 msgstr "শেয়ার্ড মেমরি"
 
-#: ProcessModel.cpp:2193
+#: ProcessModel.cpp:2194
 #, kde-format
 msgctxt "process heading"
 msgid "Relative Start Time"
 msgstr ""
 
-#: ProcessModel.cpp:2194
+#: ProcessModel.cpp:2195
 #, kde-format
 msgctxt "process heading"
 msgid "NNP"
 msgstr ""
 
-#: ProcessModel.cpp:2195
+#: ProcessModel.cpp:2196
 #, kde-format
 msgctxt "process heading"
 msgid "Command"
 msgstr "কমান্ড"
 
-#: ProcessModel.cpp:2198
+#: ProcessModel.cpp:2199
 #, fuzzy, kde-format
 #| msgctxt "process heading"
 #| msgid "Memory"
@@ -1405,26 +1405,26 @@ msgctxt "process heading"
 msgid "X11 Memory"
 msgstr "মেমরি"
 
-#: ProcessModel.cpp:2199
+#: ProcessModel.cpp:2200
 #, kde-format
 msgctxt "process heading"
 msgid "Window Title"
 msgstr "উইন্ডোর শিরোনাম"
 
-#: ProcessModel.cpp:2202
+#: ProcessModel.cpp:2203
 #, fuzzy, kde-format
 #| msgid "Group: %1"
 msgctxt "process heading"
 msgid "CGroup"
 msgstr "দল: %1"
 
-#: ProcessModel.cpp:2203
+#: ProcessModel.cpp:2204
 #, kde-format
 msgctxt "process heading"
 msgid "MAC Context"
 msgstr ""
 
-#: ProcessModel.cpp:2204
+#: ProcessModel.cpp:2205
 #, fuzzy, kde-format
 #| msgctxt "process heading"
 #| msgid "Memory"
@@ -1432,7 +1432,7 @@ msgctxt "process heading"
 msgid "Total Memory"
 msgstr "মেমরি"
 
-#: ProcessModel.cpp:2326
+#: ProcessModel.cpp:2327
 #, kde-format
 msgid "%1%"
 msgstr ""
