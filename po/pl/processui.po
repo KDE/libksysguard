@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-02 00:48+0000\n"
-"PO-Revision-Date: 2022-06-04 09:37+0200\n"
+"PO-Revision-Date: 2022-11-28 18:20+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.03.70\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -354,19 +354,19 @@ msgstr "Zniszcz"
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "Nie ma żadnych danych do wyświetlenia"
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "Odśwież"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -376,139 +376,130 @@ msgid "Quick search"
 msgstr "Szybkie wyszukiwanie"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "Użytkownik"
+msgstr "Nazwa pliku"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "Początek"
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
-msgstr "Zakończ"
+msgstr "Koniec"
 
 #: processdetails/MemoryMapsTab.cpp:254
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "Uprawnienia"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "Przesunięcie"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
 msgctxt "@title:column"
 msgid "Inode"
-msgstr ""
+msgstr "I-węzeł"
 
 #: processdetails/MemoryMapsTab.cpp:283 processdetails/OpenFilesTab.cpp:278
 #, kde-format
 msgctxt "@info:status"
 msgid "No data matching the filter"
-msgstr ""
+msgstr "Nie znaleziono niczego odpowiadającego filtrowi"
 
 #: processdetails/OpenFilesTab.cpp:33
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "Plik"
 
 #: processdetails/OpenFilesTab.cpp:36
-#, fuzzy, kde-format
-#| msgid "Characters read/written"
+#, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr "Odczytane/zapisane znaki"
+msgstr "Urządzenie znakowe"
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "Urządzenie blokowe"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "Potok"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "Gniazdo"
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "Bezczynny"
+msgstr "Id"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "Rodzaj"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
 msgctxt "@info:status"
 msgid "%1: Failed to list directory contents"
-msgstr ""
+msgstr "%1: Nie udało się wypisać zawartości katalogu"
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "Wszystkie procesy"
+msgstr "Szczegóły procesów"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "Pamięć"
+msgstr "Mapy pamięci"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "Otwórz pliki"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
 msgctxt "@info:status"
 msgid "The \"%1\" (PID: %2) process has stopped executing"
-msgstr ""
+msgstr "Proces \"%1\" (PID: %2) przestał się wykonywać"
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "Ustaw priorytet"
+msgstr "Priorytet WE/WY"
 
 #: ProcessModel.cpp:62
 #, kde-format
