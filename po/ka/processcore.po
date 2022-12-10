@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-18 00:47+0000\n"
-"PO-Revision-Date: 2022-09-25 06:21+0200\n"
+"PO-Revision-Date: 2022-12-09 11:05+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -124,7 +124,7 @@ msgstr "tty"
 #: extended_process_list.cpp:199
 #, kde-format
 msgid "The controlling terminal on which this process is running."
-msgstr ""
+msgstr "ამ პროცესის მაკონტროლებელი ტერმინალი."
 
 #: extended_process_list.cpp:202
 #, kde-format
@@ -149,7 +149,7 @@ msgstr "დრო"
 #: extended_process_list.cpp:219
 #, kde-format
 msgid "The total user and system time that this process has been running for"
-msgstr ""
+msgstr "ჯამური სისტემური და მომხმარებლის დრო, რაც ეს პროცესი გაშვებულია"
 
 #: extended_process_list.cpp:224
 #, kde-format
@@ -159,7 +159,7 @@ msgstr "დაწყების დრო"
 #: extended_process_list.cpp:228
 #, kde-format
 msgid "The elapsed time since the process was started."
-msgstr ""
+msgstr "გასული დრო, რაც პროცესი გაეშვა."
 
 #: extended_process_list.cpp:235
 #, kde-format
@@ -199,37 +199,38 @@ msgstr "პროცესის მიერ გამოყენებულ�
 #: extended_process_list.cpp:268
 #, kde-format
 msgid "Group User CPU Usage"
-msgstr ""
+msgstr "მომხმარებლის CPU-ის მოხმარების დაჯგუფება"
 
 #: extended_process_list.cpp:272
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
+"ამ პროცესისა და მისი შვილების მიერ გამოყენებული მომხმარებლის სივრცის CPU."
 
 #: extended_process_list.cpp:280
 #, kde-format
 msgid "Group System CPU Usage"
-msgstr ""
+msgstr "სისტემის CPU-ის მოხმარების დაჯგუფება"
 
 #: extended_process_list.cpp:284
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
-msgstr ""
+msgstr "ამ პროცესისა და მისი შვილების მიერ გამოყენებული სისტემური CPU."
 
 #: extended_process_list.cpp:293
 #, kde-format
 msgid "Group Total CPU Usage"
-msgstr ""
+msgstr "სრული CPU-ის მოხმარების დაჯგუფება"
 
 #: extended_process_list.cpp:299
 #, kde-format
 msgid "Group CPU"
-msgstr ""
+msgstr "ჯგუფის CPU"
 
 #: extended_process_list.cpp:300
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
-msgstr ""
+msgstr "ამ პროცესისა და მისი შვილების მიერ გამოყენებული ჯამური CPU."
 
 #: extended_process_list.cpp:307
 #, kde-format
@@ -356,7 +357,7 @@ msgstr "ბრძანება"
 #: extended_process_list.cpp:398
 #, kde-format
 msgid "The command with which this process was launched."
-msgstr ""
+msgstr "ბრძანება, რითიც ეს პროცესი გაეშვა."
 
 #: extended_process_list.cpp:402
 #, kde-format
@@ -366,42 +367,42 @@ msgstr "მდგომარეობა"
 #: extended_process_list.cpp:407
 #, kde-format
 msgid "IO Characters Read"
-msgstr ""
+msgstr "წაკითხული სიმბოლოები"
 
 #: extended_process_list.cpp:416
 #, kde-format
 msgid "IO Characters Written"
-msgstr ""
+msgstr "ჩაწერილი სიმბოლოები"
 
 #: extended_process_list.cpp:425
 #, kde-format
 msgid "IO Read Syscalls"
-msgstr ""
+msgstr "წაკითხვის სისტემური ოპერაციები"
 
 #: extended_process_list.cpp:434
 #, kde-format
 msgid "IO Read Syscalls Rate"
-msgstr ""
+msgstr "წაკითხვის სისტემური ოპერაციების სიხშირე"
 
 #: extended_process_list.cpp:443
 #, kde-format
 msgid "IO Write Syscalls"
-msgstr ""
+msgstr "ჩაწერის სისტემური ოპერაციები"
 
 #: extended_process_list.cpp:452
 #, kde-format
 msgid "IO Write Syscalls Rate"
-msgstr ""
+msgstr "ჩაწერის სისტემური ოპერაციების სიხშირე"
 
 #: extended_process_list.cpp:461
 #, kde-format
 msgid "IO Characters Actually Read"
-msgstr ""
+msgstr "ამჟამად წაკითხული სიმბოლოები"
 
 #: extended_process_list.cpp:470
 #, kde-format
 msgid "IO Characters Read Rate"
-msgstr ""
+msgstr "სიმბოლოების წაკითხვის სიჩქარე"
 
 #: extended_process_list.cpp:473
 #, kde-format
@@ -413,7 +414,7 @@ msgstr ""
 #: extended_process_list.cpp:480
 #, kde-format
 msgid "IO Characters Written Rate"
-msgstr ""
+msgstr "სიმბოლოების ჩაწერის სიჩქარე"
 
 #: extended_process_list.cpp:483
 #, kde-format
@@ -435,7 +436,7 @@ msgstr "წაკითხვა"
 #: extended_process_list.cpp:495
 #, kde-format
 msgid "The rate of data being read from disk."
-msgstr ""
+msgstr "დისკიდან მონაცემების წაკითხვის სიჩქარე."
 
 #: extended_process_list.cpp:501
 #, kde-format
@@ -450,7 +451,7 @@ msgstr "ჩასწორება"
 #: extended_process_list.cpp:506
 #, kde-format
 msgid "The rate of data being written to the disk."
-msgstr ""
+msgstr "დისკზე მონაცემების ჩაწერის სიჩქარე."
 
 #: extended_process_list.cpp:512
 #, kde-format
@@ -537,7 +538,7 @@ msgstr "რეალურ დროში"
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
-msgstr ""
+msgstr "საუკეთესო მცდელობა"
 
 #: process.cpp:139
 #, kde-format
@@ -642,17 +643,17 @@ msgstr "არასაკმარისი წვდომები."
 #: process_controller.cpp:183
 #, kde-format
 msgid "No matching process was found."
-msgstr ""
+msgstr "შესაბამისი პროცესი ვერ ვიპოვე."
 
 #: process_controller.cpp:185
 #, kde-format
 msgid "Not supported on the current system."
-msgstr ""
+msgstr "ამ სისტემაზე მხარდაუჭერელია."
 
 #: process_controller.cpp:187
 #, kde-format
 msgid "The user cancelled."
-msgstr ""
+msgstr "გაუქმდა მომხმარებლის მიერ."
 
 #: process_controller.cpp:189
 #, kde-format
