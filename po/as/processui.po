@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2009-01-14 12:30+0530\n"
 "Last-Translator: Amitakhya Phukan <অমিতাক্ষ ফুকন>\n"
 "Language-Team: Assamese <fedora-trans-as@redhat.com>\n"
@@ -243,40 +243,40 @@ msgstr ""
 msgid "Show Tooltips"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
 "trying to run as root."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "আপুনি প্ৰথমে এটা প্ৰক্ৰিয়া বাচিব লাগিব ।"
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
 "there was a problem trying to run as root."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
 "and there was a problem trying to run as root."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
 "trying to run as root."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -286,7 +286,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, fuzzy, kde-format
 #| msgid "Renice Process"
 msgctxt "Dialog title"
@@ -295,12 +295,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "প্ৰক্ৰিয়া Renice কৰক"
 msgstr[1] "প্ৰক্ৰিয়া Renice কৰক"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -311,7 +311,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, fuzzy, kde-format
 #| msgid "Kill Process"
 #| msgid_plural "Kill Processes"
@@ -321,7 +321,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "প্ৰক্ৰিয়া Kill কৰক"
 msgstr[1] "প্ৰক্ৰিয়াসমূহ Kill কৰক"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Kill"

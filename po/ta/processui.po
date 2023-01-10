@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: கேபசூ 4.1 தமிழாக்கம்\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2022-11-10 21:30+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -244,7 +244,7 @@ msgstr "I/O விகித‍த்தைக் காட்டு"
 msgid "Show Tooltips"
 msgstr "கருவித் துப்புகளை காட்டு"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to renice the process and there was a "
@@ -255,12 +255,12 @@ msgid ""
 msgstr ""
 "பணியை ரெனைஸ் செய்ய தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "முதலில் ஓர் பணியைத் தேர்ந்தெடுக்க வேண்டும்."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -270,7 +270,7 @@ msgid ""
 "there was a problem trying to run as root."
 msgstr "பணியை முடிக்க தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -280,7 +280,7 @@ msgid ""
 "and there was a problem trying to run as root."
 msgstr "பணியை முடிக்க தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -290,7 +290,7 @@ msgid ""
 "trying to run as root."
 msgstr "பணியை முடிக்க தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -301,7 +301,7 @@ msgstr[0] "இப்பணியை உறுதியாக நிறுத்�
 msgstr[1] ""
 "இந்த %1 பணிகளை உறுதியாக நிறுத்த வேண்டுமா? சேமிக்கப்படா தரவுகளை நீங்கள் இழக்கலாம்."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -309,12 +309,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "பணியை நிறுத்து"
 msgstr[1] "%1 பணிகளை நிறுத்து"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "நிறுத்து"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -329,7 +329,7 @@ msgstr[1] ""
 "<qt>உறுதியாக இந்த %1 பணிகளை <b>உடனடியாகவும் கட்டாயமாகவும் நிறுத்த</b> வேண்டுமா? "
 "சேமிக்கப்படா தரவுகளை நீங்கள் இழக்கலாம்."
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -337,7 +337,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "பணியை கட்டாயமாக நிறுத்துவது"
 msgstr[1] "%1 பணிகளை கட்டாயமாக நிறுத்துவது"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "கட்டாயமாக நிறுத்து"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2022-11-28 18:20+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -248,7 +248,7 @@ msgstr "Pokaż prędkość WE/WY"
 msgid "Show Tooltips"
 msgstr "Pokaż podpowiedzi"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -257,12 +257,12 @@ msgstr ""
 "Nie masz wystarczających uprawnień, żeby zmienić priorytet procesu. Wystąpił "
 "też problem podczas próby działania jako administrator."
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Trzeba najpierw wybrać proces."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -271,7 +271,7 @@ msgstr ""
 "Nie masz wystarczających uprawnień, żeby ustawić priorytet WE/WY. Wystąpił "
 "też problem podczas próby działania jako administrator."
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -280,7 +280,7 @@ msgstr ""
 "Nie masz wystarczających uprawnień, żeby zmienić planistę procesora dla "
 "procesu. Wystąpił też problem podczas próby działania jako administrator."
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -289,7 +289,7 @@ msgstr ""
 "Nie masz wystarczających uprawnień, żeby zatrzymać proces. Wystąpił też "
 "problem podczas próby działania jako administrator."
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -303,7 +303,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Czy na pewno zakończyć te %1 procesów? Niezapisana praca zostanie utracona."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -312,12 +312,12 @@ msgstr[0] "Kończenie procesu"
 msgstr[1] "Kończenie %1 procesów"
 msgstr[2] "Kończenie %1 procesów"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Zakończ"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -335,7 +335,7 @@ msgstr[2] ""
 "<qt>Czy na pewno <b>natychmiast wymusić zniszczenie</b> tych %1 procesów? "
 "Niezapisana praca zostanie utracona."
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -344,7 +344,7 @@ msgstr[0] "Wymuszone zniszczenie procesu"
 msgstr[1] "Wymuszone zniszczenie %1 procesów"
 msgstr[2] "Wymuszone zniszczenie %1 procesów"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Zniszcz"

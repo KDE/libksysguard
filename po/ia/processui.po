@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2022-05-18 21:40+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -239,7 +239,7 @@ msgstr "Monstra frequentia de I/E (I/O)"
 msgid "Show Tooltips"
 msgstr "Monstra consilios"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -248,12 +248,12 @@ msgstr ""
 "Tu non ha le permission de renice le processo e on habeva un problema "
 "durante que on tentava executar lo como super-usator."
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Prime tu debe eliger un processo"
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -263,7 +263,7 @@ msgstr ""
 "del processo e on habeva un problema durante que on tentava lo como super-"
 "usator."
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -272,7 +272,7 @@ msgstr ""
 "Tu non ha le permission de cambiar le planificator de CPU pro le processo e "
 "il habeva un problema durante que il tentava lo como super-usator."
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -281,7 +281,7 @@ msgstr ""
 "Tu non ha le permission de occider le processo e on habeva un problema "
 "durante que on tentava executar lo como super-usator."
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -295,7 +295,7 @@ msgstr[1] ""
 "Tu es secur que tu vole terminar iste %1 processos? Omne labor non salvate "
 "potera esser perdite."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -303,12 +303,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Termina processo"
 msgstr[1] "Termina %1 processos"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Termina"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -325,7 +325,7 @@ msgstr[1] ""
 "(terminar) </b> iste %1 processos? Omne labor non salveguardate potera esser "
 "perdite."
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -333,7 +333,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Occide (termina) processo per fortia"
 msgstr[1] "Occide (termina) per fortia %1 processos"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Occide (termina)"

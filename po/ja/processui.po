@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2021-09-23 16:31+0900\n"
 "Last-Translator: Tomohiro Hyakutake <tomhioo@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -255,7 +255,7 @@ msgstr "I/O の速度を表示"
 msgid "Show Tooltips"
 msgstr "ツールチップを表示"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -264,12 +264,12 @@ msgstr ""
 "プロセス優先度を変更する権限がありません。また、root として実行できませんでし"
 "た。"
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "先にプロセスを選んでください。"
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -281,7 +281,7 @@ msgstr ""
 "プロセスの I/O 優先度を変更する権限がありません。また、root として実行できま"
 "せんでした。エラー %1 %2"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -293,7 +293,7 @@ msgstr ""
 "プロセスの CPU スケジューラを変更する権限がありません。また、root として実行"
 "できませんでした。エラー %1 %2"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -305,7 +305,7 @@ msgstr ""
 "プロセスを強制終了する権限がありません。また、root として実行できませんでし"
 "た。エラー %1 %2"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -318,7 +318,7 @@ msgstr[1] ""
 "本当にこれら %1 個のプロセスを終了しますか？保存されていない作業は失われま"
 "す。"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -326,12 +326,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "プロセスを終了"
 msgstr[1] "%1 個のプロセスを終了"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "終了"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -350,7 +350,7 @@ msgstr[1] ""
 "本当にこれら %1 個のプロセスを終了しますか？保存されていない作業は失われま"
 "す。"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -358,7 +358,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "強制終了"

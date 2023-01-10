@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2022-09-24 08:45+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -252,7 +252,7 @@ msgstr "Показати швидкість В/В"
 msgid "Show Tooltips"
 msgstr "Показувати підказки"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -261,12 +261,12 @@ msgstr ""
 "У вас немає достатніх привілеїв для того, щоб змінити пріоритет процесу, а з "
 "виконанням у режимі адміністратора виникли проблеми."
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Спочатку вам слід вибрати процес."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -275,7 +275,7 @@ msgstr ""
 "У вас немає достатніх привілеїв для того, щоб змінити пріоритет вводу-виводу "
 "процесу, а з виконанням у режимі адміністратора виникли проблеми."
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -285,7 +285,7 @@ msgstr ""
 "процесорного часу процесу, а з виконанням у режимі адміністратора виникли "
 "проблеми."
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -294,7 +294,7 @@ msgstr ""
 "У вас немає достатніх привілеїв для того, щоб вбити процес, а з виконанням у "
 "режимі адміністратора виникли проблеми."
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -310,7 +310,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Ви справді хочете завершити %1 процес? Це може призвести до втрати даних."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -320,12 +320,12 @@ msgstr[1] "Завершення %1 процесів"
 msgstr[2] "Завершення %1 процесів"
 msgstr[3] "Завершення процесу"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Завершити"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -346,7 +346,7 @@ msgstr[3] ""
 "<qt>Ви справді хочете <b>негайно і примусово завершити</b> цей процес? Це "
 "може призвести до втрати незбережених даних."
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -356,7 +356,7 @@ msgstr[1] "Примусове завершення %1 процесів"
 msgstr[2] "Примусове завершення %1 процесів"
 msgstr[3] "Примусове завершення процесу"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Вбити"

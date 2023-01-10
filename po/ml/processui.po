@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui trunk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2010-01-02 12:11+0530\n"
 "Last-Translator: Praveen Arimbrathodiyil <pravi.a@gmail.com>\n"
 "Language-Team: Swathanthra Malayalam Computing <smc-discuss@googlegroups."
@@ -238,7 +238,7 @@ msgstr "ഐ/ഒ നിരക്ക് കാണിയ്ക്കുക"
 msgid "Show Tooltips"
 msgstr "സൂചനകള്‍ കാണിയ്ക്കുക"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, fuzzy, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -247,12 +247,12 @@ msgstr ""
 "നിങ്ങള്‍ക്കു് പ്രൊസസ്സിനെ ഇല്ലാതാക്കാനുള്ള അനുവാദമില്ല, കൂടാതെ റൂട്ടായി പ്രവര്‍ത്തിപ്പിയ്ക്കുന്നതില്‍ ഒരു "
 "പ്രശ്നം ഉണ്ടായി. തെറ്റു് %1 %2"
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "നിങ്ങളാദ്യം ഒരു പോളിസി തെരഞ്ഞെടുക്കണം."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -264,7 +264,7 @@ msgstr ""
 "നിങ്ങള്‍ക്കു് പ്രൊസസ്സിന്റെ ഐ/ഒ മുന്‍ഗണന മാറ്റാനുള്ള അനുവാദമില്ല, കൂടാതെ റൂട്ടായി പ്രവര്‍"
 "ത്തിപ്പിയ്ക്കുന്നതില്‍ ഒരു പ്രശ്നം ഉണ്ടായി. തെറ്റു് %1 %2"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -276,7 +276,7 @@ msgstr ""
 "നിങ്ങള്‍ക്കു് പ്രൊസസ്സിന്റെ സിപിയു ഷെഡ്യൂളര്‍ മാറ്റാനുള്ള അനുവാദമില്ല, കൂടാതെ റൂട്ടായി പ്രവര്‍"
 "ത്തിപ്പിയ്ക്കുന്നതില്‍ ഒരു പ്രശ്നം ഉണ്ടായി. തെറ്റു് %1 %2"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -285,7 +285,7 @@ msgstr ""
 "നിങ്ങള്‍ക്കു് പ്രൊസസ്സിനെ ഇല്ലാതാക്കാനുള്ള അനുവാദമില്ല, കൂടാതെ റൂട്ടായി പ്രവര്‍ത്തിപ്പിയ്ക്കുന്നതില്‍ ഒരു "
 "പ്രശ്നം ഉണ്ടായി. തെറ്റു് %1 %2"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, fuzzy, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -295,7 +295,7 @@ msgid_plural ""
 msgstr[0] "ഈ പ്രക്രിയയെ ഇല്ലാതാക്കണമെന്നു് നിങ്ങള്‍ക്ക് ഉറപ്പുണ്ടോ?"
 msgstr[1] "ഈ %1 പ്രക്രിയകളെ ഇല്ലാതാക്കണമെന്നു് നിങ്ങള്‍ക്ക് ഉറപ്പുണ്ടോ?"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, fuzzy, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -303,12 +303,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "സ്വന്തം പ്രക്രിയകള്‍"
 msgstr[1] "സ്വന്തം പ്രക്രിയകള്‍"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, fuzzy, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -319,7 +319,7 @@ msgid_plural ""
 msgstr[0] "ഈ പ്രക്രിയയെ ഇല്ലാതാക്കണമെന്നു് നിങ്ങള്‍ക്ക് ഉറപ്പുണ്ടോ?"
 msgstr[1] "ഈ %1 പ്രക്രിയകളെ ഇല്ലാതാക്കണമെന്നു് നിങ്ങള്‍ക്ക് ഉറപ്പുണ്ടോ?"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, fuzzy, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -327,7 +327,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "പ്രക്രിയെ ഇല്ലാതാക്കുക"
 msgstr[1] "പ്രക്രിയകളെ ഇല്ലാതാക്കുക"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "ഇല്ലാതാക്കുക"

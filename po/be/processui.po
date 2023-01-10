@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2008-02-29 13:32+0200\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -253,41 +253,41 @@ msgstr ""
 msgid "Show Tooltips"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
 "trying to run as root."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, fuzzy, kde-format
 #| msgid "You need to select a process first."
 msgid "You must select a process first."
 msgstr "Спачатку вы павінны выбраць працэс."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
 "there was a problem trying to run as root."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
 "and there was a problem trying to run as root."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
 "trying to run as root."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -298,7 +298,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, fuzzy, kde-format
 #| msgid "Own Processes"
 msgctxt "Dialog title"
@@ -308,12 +308,12 @@ msgstr[0] "Уласныя працэсы"
 msgstr[1] "Уласныя працэсы"
 msgstr[2] "Уласныя працэсы"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -325,7 +325,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, fuzzy, kde-format
 #| msgid "Kill Process"
 #| msgid_plural "Kill Processes"
@@ -336,7 +336,7 @@ msgstr[0] "Забіць працэс"
 msgstr[1] "Забіць працэсы"
 msgstr[2] "Забіць працэсы"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Забіць"

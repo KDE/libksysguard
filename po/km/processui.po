@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2010-06-08 14:10+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -243,7 +243,7 @@ msgstr "បង្ហាញ​អត្រា I/O"
 msgid "Show Tooltips"
 msgstr "បង្ហាញព័ត៌មាន​ជំនួយ"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -253,12 +253,12 @@ msgid ""
 "trying to run as root."
 msgstr "អ្នក​មិន​មាន​សិទ្ធិ​ ដើម្បី​បញ្ចប់​ដំណើរការ​ ហើយ​មាន​បញ្ហា​ក្នុង​ការ​ព្យាយាម​ដំណើរការ​ជា​ root ។ %1"
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "អ្នក​ត្រូវតែ​ជ្រើស​ដំណើរការ​ជាមុន ។"
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -270,7 +270,7 @@ msgstr ""
 "អ្នកមិនមាន​សិទ្ធិ​ ដើម្បី​ផ្លាស់ប្ដូរ​អាទិភាព​របស់ I/O របស់​ដំណើរការ​បាន​ទេ ហើយ​មាន​បញ្ហា​ក្នុងការ​ព្យាយាម​"
 "ដំណើរការ​ជា root ។  កំហុស %1 %2"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -282,7 +282,7 @@ msgstr ""
 "អ្នក​មិនមាន​សិទ្ធិ​ ដើម្បី​ផ្លាស់ប្ដូរ​កម្មវិធី​គ្រោង​របស់​ស៊ីភីយូ​ទេ​សម្រាប់​ដំណើរការ​ទេ ហើយមាន​បញ្ហា​ក្នុងកា​រព្យាយាម​"
 "ដំណើរការ​ជា root ។  កំហុស %1 %2"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -292,7 +292,7 @@ msgid ""
 "trying to run as root."
 msgstr "អ្នក​មិន​មាន​សិទ្ធិ​ ដើម្បី​បញ្ចប់​ដំណើរការ​ ហើយ​មាន​បញ្ហា​ក្នុង​ការ​ព្យាយាម​ដំណើរការ​ជា​ root ។ %1"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -301,19 +301,19 @@ msgid_plural ""
 "lost"
 msgstr[0] "តើ​អ្នក​ប្រាកដ​ហើយ​ឬថា​ចង់​បញ្ចប់​ដំណើរការ​ %1 នេះ ? ការងារ​ដែល​មិន​បាន​រក្សាទុក​អាច​បាត់បង់"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
 msgid_plural "End %1 Processes"
 msgstr[0] "បាន​បញ្ឈប់​ដំណើរ​ការ %1"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "បញ្ចប់"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -325,14 +325,14 @@ msgstr[0] ""
 "<qt>តើ​អ្នក​ប្រាដក​ជា​ចង់​ <b>បញ្ចប់​​ឲ្យ​​មាន​ប្រសិទ្ធភាព​​ភ្លាម​ៗ​</b> ដំឡើង​​ការ​ %1 ​ទាំង​នេះ​ឬ​ ?  ការ​ងារ​"
 "ដែល​មិន​បាន​រក្សា​ទុក​មួយ​ចំនួន​អាច​ត្រូវ​​បាន​បាត់បង់"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "ដំណើរការ​បញ្ចប់​ %1 ​ដោយ​មាន​ប្រសិទ្ធភាព​"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "បញ្ចប់​"

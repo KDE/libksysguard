@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2022-09-24 07:15+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -245,7 +245,7 @@ msgstr "Erakutsi S/I abiadura"
 msgid "Show Tooltips"
 msgstr "Erakutsi argibideak"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -254,12 +254,12 @@ msgstr ""
 "Ez duzu prozesuaren adeitasuna aldatzeko baimenik eta arazo bat sortu da "
 "«root» gisa exekutatzen saiatzean."
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Prozesu bat hautatu behar duzu lehenbizi."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -268,7 +268,7 @@ msgstr ""
 "Ez duzu S/I lehentasuna aldatzeko baimenik eta arazo bat sortu da «root» "
 "gisa exekutatzen saiatzean."
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -277,7 +277,7 @@ msgstr ""
 "Ez duzu prozesuaren PUZ antolatzailearen lehentasuna aldatzeko baimenik eta "
 "arazoa sortu da «root» gisa exekutatzen saiatzean."
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -286,7 +286,7 @@ msgstr ""
 "Ez duzu prozesua akabatzeko baimenik eta arazoa sortu da «root» gisa "
 "exekutatzen saiatzean."
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -299,7 +299,7 @@ msgstr[1] ""
 "Ziur zaude %1 prozesu hauek amaitu nahi dituzula? Gorde gabe dagoen lana gal "
 "liteke"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -307,12 +307,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Amaitu prozesua"
 msgstr[1] "Amaitu %1 prozesu"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Amaitu"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -327,7 +327,7 @@ msgstr[1] ""
 "<qt>Ziur zaude %1 prozesu hauek <b>berehala eta indarrez akabatu</b> nahi "
 "dituzula? Gorde gabe dagoen lana gal liteke."
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -335,7 +335,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Indarrez akabatu prozesua"
 msgstr[1] "Indarrez akabatu %1 prozesu"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Akabatu"

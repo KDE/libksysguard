@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2015-02-04 14:19+0000\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -270,7 +270,7 @@ msgstr "U/I protok"
 msgid "Show Tooltips"
 msgstr "Oblačići"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to renice the process and there was a "
@@ -282,12 +282,12 @@ msgstr ""
 "Nemate dozvolu za profinjavanje procesa, a nije prošlo pokretanje kao "
 "korijen. Greška %1 %2"
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Morate prvo izabrati proces."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -299,7 +299,7 @@ msgstr ""
 "Nemate dozvolu za mijenjanje prioriteta U/I‑ja procesa, a nije prošlo "
 "pokretanje kao korijen. Greška %1 %2"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -311,7 +311,7 @@ msgstr ""
 "Nemate dozvolu za mijenjanje raspoređivača CPU‑a procesa, a nije prošlo "
 "pokretanje kao korijen. Greška %1 %2"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -323,7 +323,7 @@ msgstr ""
 "Nemate dozvolu za ukidanje procesa, a nije prošlo pokretanje kao korijen. "
 "Greška %1 %2"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -337,7 +337,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Želite li da ukinete ovih %1 procesa? Nesačuvani podaci mogu biti izgubljeni."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -346,12 +346,12 @@ msgstr[0] "Ukidanje %1 procesa"
 msgstr[1] "Ukidanje %1 procesa"
 msgstr[2] "Ukidanje %1 procesa"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Ukini"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -369,7 +369,7 @@ msgstr[2] ""
 "<qt>Da li ste sigurni da želite <b>odmah i nasilno ubiti</b> ovih %1 "
 "procesa?  Sav nesnimljeni rad će biti izgubljen."
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -378,7 +378,7 @@ msgstr[0] "Namjerno ubij %1 proces"
 msgstr[1] "Namjerno ubij %1 procesa"
 msgstr[2] "Namjerno ubij %1 procesa"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Ubij"

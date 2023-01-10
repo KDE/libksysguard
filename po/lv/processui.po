@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2011-07-13 00:47+0300\n"
 "Last-Translator: Einars Sprugis <einars8@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -256,7 +256,7 @@ msgstr "Rādīt I/O ātrumu"
 msgid "Show Tooltips"
 msgstr "Rādīt paskaidres"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -268,12 +268,12 @@ msgstr ""
 "Jums nav tiesību nokaut procesu, un neizdevās arī mēģināt to izpildīt kā "
 "root. %1"
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Vispirms jāizvēlas process."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -285,7 +285,7 @@ msgstr ""
 "Jums nav tiesību mainīt ievadizvades prioritāti un arī neizvdevās mēģināt "
 "izpildīt kā root.  Kļūda %1 %2"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -297,7 +297,7 @@ msgstr ""
 "Jums nav tiesību mainīt procesa prioritāti un arī neizvdevās mēģināt "
 "izpildīt kā root. Kļūda %1 %2"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -309,7 +309,7 @@ msgstr ""
 "Jums nav tiesību nokaut procesu, un neizdevās arī mēģināt to izpildīt kā "
 "root. %1"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -326,7 +326,7 @@ msgstr[2] ""
 "Vai tiešām vēlaties nokaut šos %1 procesus? Visi nesaglabātie darbi var tikt "
 "zaudēti."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -335,12 +335,12 @@ msgstr[0] "Nobeigt %1 procesu"
 msgstr[1] "Nobeigt %1 procesus"
 msgstr[2] "Nobeigt %1 procesus"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Beigt"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -358,7 +358,7 @@ msgstr[2] ""
 "<qt>Vai tiešām vēlaties <b>nekavējoties un piespiedu kārtā nokaut</b> šos %1 "
 "procesus? Visi nesaglabātie darbi var tikt zaudēti."
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -367,7 +367,7 @@ msgstr[0] "Piespiedu kārtā nokaut %1 procesu"
 msgstr[1] "Piespiedu kārtā nokaut %1 procesus"
 msgstr[2] "Piespiedu kārtā nokaut %1 procesus"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Nokaut"

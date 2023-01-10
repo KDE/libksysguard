@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2012-02-28 05:50+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -249,7 +249,7 @@ msgstr "Е/Ш жылдамдығын көрсету"
 msgid "Show Tooltips"
 msgstr "Ишараларын көрсету"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -258,12 +258,12 @@ msgstr ""
 "Бұл процестің артықшылығын өзгертуге рұқсатыңыз жоқ және root әкімшісі бола "
 "алмадыңыз."
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Алдымен процесті таңдап алу керек."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -275,7 +275,7 @@ msgstr ""
 "Бұл процестің Е/Ш артықшылығын өзгертуге рұқсатыңыз жоқ және root әкімшісі "
 "бола алмадыңыз. %1 %2 қатесі"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -287,7 +287,7 @@ msgstr ""
 "Бұл процестің поцессорды қолдану жоспарын өзгертуге рұқсатыңыз жоқ және root "
 "әкімшісі бола алмадыңыз. %1 %2 қатесі"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -299,7 +299,7 @@ msgstr ""
 "Бұл процесті құртуға рұқсатыңыз жоқ және root әкімшісі болу жолында бір "
 "мәселе туды. %1"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -308,19 +308,19 @@ msgid_plural ""
 "lost"
 msgstr[0] "Осы %1 процесті аяқтамақсыз ба? Сақталмаған жұмыстар жоғалады"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
 msgid_plural "End %1 Processes"
 msgstr[0] "%1 процесін аяқтау"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Аяқтау"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -332,14 +332,14 @@ msgstr[0] ""
 "<qt>Осы %1 процесті <b>бірден, мәжбүрлеп құртпақсыз</b> ба? Сақталмаған "
 "жұмыстар жоғалады"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "%1 процесті мәжбүрлеп құрту"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Құрту"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2011-05-01 06:50+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -248,7 +248,7 @@ msgstr "In-/Utgaavgauigkeit wiesen"
 msgid "Show Tooltips"
 msgstr "Kortinfos wiesen"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -257,12 +257,12 @@ msgstr ""
 "Du muttst den Perzess keen nieg Prioriteet towiesen, un bi't Utföhren as "
 "Systeempleger geev dat Problemen."
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Du muttst toeerst en Perzess utsöken."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -274,7 +274,7 @@ msgstr ""
 "Du muttst de In-Utgaav-Prioriteet nich ännern, un bi't Utföhren as "
 "Systeempleger geev dat Problemen. Fehler %1 %2"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -286,7 +286,7 @@ msgstr ""
 "Du muttst den Perzess sien CPU-Planer nich ännern, un bi't Utföhren as "
 "Systeempleger geev dat Problemen. Fehler %1 %2"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -298,7 +298,7 @@ msgstr ""
 "Du muttst den Perzess nich afscheten, un bi't Utföhren as Systeempleger geev "
 "dat Problemen. %1"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -312,7 +312,7 @@ msgstr[1] ""
 "Wullt Du disse %1 Perzessen redig beennen? Nich sekerte Arbeit kaamt Di "
 "villicht weg."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -320,12 +320,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Perzess beennen"
 msgstr[1] "%1 Perzessen beennen"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Beennen"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -340,7 +340,7 @@ msgstr[1] ""
 "Wullt Du disse %1 Perzessen redig <b>fuurts un mit Gewalt afscheten</b>? "
 "Nich sekerte Arbeit kaamt Di villicht weg."
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -348,7 +348,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Perzess mit Gewalt afscheten"
 msgstr[1] "%1 Perzessen mit Gewalt afscheten"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Afscheten"

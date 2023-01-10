@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-02 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:57+0000\n"
 "PO-Revision-Date: 2009-12-19 10:16+0100\n"
 "Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -244,7 +244,7 @@ msgstr "Montri en-eligan elcentaĵon"
 msgid "Show Tooltips"
 msgstr "Montri la ŝpruchelpilon"
 
-#: ksysguardprocesslist.cpp:1174
+#: ksysguardprocesslist.cpp:1177
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to renice the process and there was a "
@@ -256,12 +256,12 @@ msgstr ""
 "Vi ne havas rajton reasigni prioritaton al la procezo, kaj ne sukcese "
 "ruliĝis kiel ĉefuzanto"
 
-#: ksysguardprocesslist.cpp:1200 ksysguardprocesslist.cpp:1384
+#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
 msgid "You must select a process first."
 msgstr "Unue vi bezonas elekti procezon."
 
-#: ksysguardprocesslist.cpp:1325
+#: ksysguardprocesslist.cpp:1328
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -273,7 +273,7 @@ msgstr ""
 "Vi ne havas rajton mortigi la procezon, kaj ne sukcese ruliĝis kiel "
 "ĉefuzanto. Eraro %1 %2"
 
-#: ksysguardprocesslist.cpp:1341
+#: ksysguardprocesslist.cpp:1344
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -285,7 +285,7 @@ msgstr ""
 "Vi ne havas rajton mortigi la procezon, kaj ne sukcese ruliĝis kiel "
 "ĉefuzanto. Eraro %1 %2"
 
-#: ksysguardprocesslist.cpp:1356
+#: ksysguardprocesslist.cpp:1359
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -297,7 +297,7 @@ msgstr ""
 "Vi ne havas rajton mortigi la procezon, kaj ne sukcese ruliĝis kiel "
 "ĉefuzanto. Eraro %1 %2"
 
-#: ksysguardprocesslist.cpp:1393
+#: ksysguardprocesslist.cpp:1396
 #, fuzzy, kde-format
 #| msgid "Are you sure you want to kill this process?"
 #| msgid_plural "Are you sure you want to kill these %1 processes?"
@@ -309,7 +309,7 @@ msgid_plural ""
 msgstr[0] "Ĉu vi volas mortigi la elektitan procezon?"
 msgstr[1] "Ĉu vi volas mortigi la %1 elektitajn procezojn?"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1399
 #, fuzzy, kde-format
 #| msgid "Own Processes"
 msgctxt "Dialog title"
@@ -318,12 +318,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Viaj procezoj"
 msgstr[1] "Viaj procezoj"
 
-#: ksysguardprocesslist.cpp:1398
+#: ksysguardprocesslist.cpp:1401
 #, kde-format
 msgid "End"
 msgstr "Fino"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1403
 #, fuzzy, kde-format
 #| msgid "Are you sure you want to kill this process?"
 #| msgid_plural "Are you sure you want to kill these %1 processes?"
@@ -336,7 +336,7 @@ msgid_plural ""
 msgstr[0] "Ĉu vi volas mortigi la elektitan procezon?"
 msgstr[1] "Ĉu vi volas mortigi la %1 elektitajn procezojn?"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1406
 #, fuzzy, kde-format
 #| msgid "Kill Process"
 #| msgid_plural "Kill Processes"
@@ -346,7 +346,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Mortigi procezon"
 msgstr[1] "Mortigi procezojn"
 
-#: ksysguardprocesslist.cpp:1405
+#: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
 msgstr "Mortigi"
