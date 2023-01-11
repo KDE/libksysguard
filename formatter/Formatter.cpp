@@ -346,6 +346,8 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
         return value.toString();
     case UnitTime:
         return formatTime(value);
+    case UnitNone:
+        return formatNumber(value, unit, MetricPrefix::MetricPrefixUnity, options);
 
     default:
         return value.toString();
