@@ -188,11 +188,13 @@ bool SensorUnitModel::Private::insertUnits(const std::array<Unit, 6> &from, Unit
         return false;
     }
 
+    auto baseUnit = from.at(0);
+
     for (; itr != from.end(); ++itr) {
         UnitInfo info;
         info.unit = *itr;
         info.symbol = Formatter::symbol(*itr);
-        info.multiplier = Formatter::scaleDownFactor(1.0, start, static_cast<MetricPrefix>((*itr) - start));
+        info.multiplier = Formatter::scaleDownFactor(1.0, start, static_cast<MetricPrefix>((*itr) - baseUnit));
         units.insert(*itr, info);
     }
 
