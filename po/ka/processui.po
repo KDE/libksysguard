@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2022-12-09 11:08+0100\n"
+"PO-Revision-Date: 2023-01-12 16:28+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -538,6 +538,8 @@ msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
+"პრიორიტეტი, როლითაც ეს პროცესია გაშვებული. ნორმალურად, ეს 19-დან (ძალიან "
+"დაბალი) -19-მდე (უმაღლესი პრიორიტეტი) მერყეობს."
 
 #: ProcessModel.cpp:1065
 #, kde-format
@@ -596,7 +598,7 @@ msgstr ""
 #: ProcessModel.cpp:1091
 #, kde-format
 msgid "<qt>The elapsed time since the process was started.</qt>"
-msgstr ""
+msgstr "<qt>გასული დრო, რაც პროცესი გაეშვა.</qt>"
 
 #: ProcessModel.cpp:1093
 #, kde-format
@@ -608,7 +610,7 @@ msgstr ""
 #: ProcessModel.cpp:1095
 #, kde-format
 msgid "<qt>The command with which this process was launched.</qt>"
-msgstr ""
+msgstr "<qt>ბრძანება, რითიც ეს პროცესი გაეშვა.</qt>"
 
 #: ProcessModel.cpp:1097
 #, kde-format
@@ -629,11 +631,13 @@ msgstr "პროცესის უნიკალური იდენტი�
 #, kde-format
 msgid "The number of bytes read.  See What's This for more information."
 msgstr ""
+"წაკითხული ბაიტების რაოდენობა.  მეტი ინფორმაციისთვის იხილეთ 'რა არის ეს?'."
 
 #: ProcessModel.cpp:1105
 #, kde-format
 msgid "The number of bytes written.  See What's This for more information."
 msgstr ""
+"ჩაწერილი ბაიტების რაოდენობა.  მეტი ინფორმაციისთვის იხილეთ 'რა არის ეს?'."
 
 #: ProcessModel.cpp:1107
 #, kde-format
@@ -706,7 +710,7 @@ msgstr ""
 #: ProcessModel.cpp:1151
 #, kde-format
 msgid "The CPU usage of a process and all of its threads."
-msgstr ""
+msgstr "პროცესისა და მისი ყველა ნაკადის CPU-ის გამოყენება."
 
 #: ProcessModel.cpp:1154
 #, kde-format
@@ -1500,7 +1504,7 @@ msgstr "ინტერაქტიური"
 #: ReniceDlgUi.ui:23
 #, kde-format
 msgid "Change scheduling priority for:"
-msgstr ""
+msgstr "დამგეგმავის პრიორიტეტის შეცვლა პროცესისთვის:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ReniceDlgUi.ui:100
@@ -1894,3 +1898,5 @@ msgid ""
 "KSysGuard library was compiled without QtWebEngineWidgets, please contact "
 "your distribution."
 msgstr ""
+"KSysGuard აგებულიაQtWebEngineWidgets-ის გარეშე. დაუკავშირდით დისტრიბუტივის "
+"მომწოდებელს."

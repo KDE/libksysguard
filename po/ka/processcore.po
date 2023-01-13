@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-18 00:47+0000\n"
-"PO-Revision-Date: 2022-12-09 11:05+0100\n"
+"PO-Revision-Date: 2023-01-12 16:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -243,6 +243,8 @@ msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
+"პრიორიტეტი, როლითაც ეს პროცესია გაშვებული. ნორმალურად, ეს 19-დან (ძალიან "
+"დაბალი) -19-მდე (უმაღლესი პრიორიტეტი) მერყეობს."
 
 #: extended_process_list.cpp:313
 #, kde-format
@@ -271,6 +273,9 @@ msgid ""
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless."
 msgstr ""
+"ეს ვირტუალური მეხსიერების რაოდენობაა, რომელსაც პროცესი იყენებს, გაზიარებული "
+"ბიბლიოთეკების, გრაფიკული მეხსიერების, დისკზე ფაილების და ა.შ. ჩათვლით. ეს "
+"რიცხვი თითქმის უაზროა."
 
 #: extended_process_list.cpp:338
 #, kde-format
@@ -283,6 +288,8 @@ msgid ""
 "This is the amount of physical memory that this process is using and "
 "includes the amount of memory used by shared libraries."
 msgstr ""
+"ეს პროცესის მიერ გამოყენებული ფიზიკური მეხსიერების რაოდენობაა, გაზიარებული "
+"ბიბლიოთეკების ჩათვლით."
 
 #: extended_process_list.cpp:346
 #, kde-format
@@ -301,6 +308,10 @@ msgid ""
 "and approximates the Private memory usage of the process.<br>It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
+"ეს პროცესის მიერ გამოყენებული ფიზიკური მეხსიერების რაოდენობაა და დაახლოებით "
+"თვითონ პროგრამის მიერ გამოყენებული მეხსიერების რაოდენობას უდროს. <br> ის არ "
+"შეიცავს სვოპზე ჩაწერილ მეხსიერებას, არც კოდის ზომას და არც გაზიარებულ "
+"ბიბლიოთეკებს."
 
 #: extended_process_list.cpp:359
 #, kde-format
@@ -319,6 +330,9 @@ msgid ""
 "shared libraries are using.<br>This memory is shared among all processes "
 "that use this library."
 msgstr ""
+"ეს იმ ფიზიკური მეხსიერების დაახლოებითი რაოდენობაა, რომელსაც პროცესის "
+"გაზიარებული ბიბლიოთეკები იყენებენ. <br>ეს მეხსიერება გაზიარებულია ყველა "
+"პროცესს შორის, რომელიც ამ ბიბლიოთეკას იყენებს."
 
 #: extended_process_list.cpp:376
 #, kde-format
@@ -338,6 +352,9 @@ msgid ""
 "usage by the amount of processes sharing that memory, then adding the "
 "process' private memory."
 msgstr ""
+"ეს ფიზიკური მეხსიერების, რომელსაც პროცესი იყენებს, რეალური ნაწილია. ის "
+"პროცესის გაზიარებული მეხსიერების პროცესის გაყოფით გაშვებული პროცესების "
+"რაოდენობაზე, შემდეგ კი პროცესის პირადი მეხსიერების დამატებით გამოითვლება."
 
 #: extended_process_list.cpp:388
 #, kde-format
@@ -410,6 +427,8 @@ msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"პროცესის შეყვანა/გამოყვანის კითხვის სრული სიჩქარე, დისკის კეშისა და სხვა "
+"არაფიზიკური შეტანა/გამოტანის ჩათვლით."
 
 #: extended_process_list.cpp:480
 #, kde-format
@@ -422,6 +441,8 @@ msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"პროცესის შეყვანა/გამოყვანის ჩაწერის სრული სიჩქარე, დისკის კეშისა და სხვა "
+"არაფიზიკური შეტანა/გამოტანის ჩათვლით."
 
 #: extended_process_list.cpp:490
 #, kde-format
