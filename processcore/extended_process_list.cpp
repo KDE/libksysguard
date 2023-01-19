@@ -200,22 +200,18 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     d->m_coreAttributes << ttySensor;
 
     auto userTimeSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("userTime"), i18n("User Time"), &KSysGuard::Process::userTime);
+    userTimeSensor->setUnit(KSysGuard::UnitTicks);
     d->m_coreAttributes << userTimeSensor;
 
     auto sysTimeSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("sysTime"), i18n("System Time"), &KSysGuard::Process::sysTime);
-    sysTimeSensor->setUnit(KSysGuard::UnitSecond);
+    sysTimeSensor->setUnit(KSysGuard::UnitTicks);
     d->m_coreAttributes << sysTimeSensor;
 
-    auto timeSensor = new ProcessSensor<qlonglong>(
-        this,
-        QStringLiteral("totalUsage"),
-        i18n("Total Time"),
-        [](KSysGuard::Process *p) {
-            return p->userTime() + p->sysTime();
-        },
-        KSysGuard::Process::Usage);
+    auto timeSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("totalTime"), i18n("Total Time"), [](KSysGuard::Process *p) {
+        return p->userTime() + p->sysTime();
+    });
     timeSensor->setShortName(i18n("Time"));
-    timeSensor->setUnit(KSysGuard::UnitSecond);
+    timeSensor->setUnit(KSysGuard::UnitTicks);
     timeSensor->setDescription(i18n("The total user and system time that this process has been running for"));
     d->m_coreAttributes << timeSensor;
 

@@ -65,6 +65,7 @@ enum Unit {
     UnitBootTimestamp = 400,
     UnitSecond,
     UnitTime,
+    UnitTicks,
 
     // Misc units.
     UnitCelsius = 500,
