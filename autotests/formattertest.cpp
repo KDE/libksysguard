@@ -53,12 +53,13 @@ private Q_SLOTS:
     {
         QTest::addColumn<int>("input");
         QTest::addColumn<QString>("output");
-        QTest::newRow("1 s") << 1 << QSL("0:01");
-        QTest::newRow("10 s") << 10 << QSL("0:10");
-        QTest::newRow("1 m") << 60 << QSL("1:00");
-        QTest::newRow("10m") << 60 * 10 << QSL("10:00");
-        QTest::newRow("1h") << 60 * 60 << QSL("60:00");
-        QTest::newRow("1h 1 m 1s") << (60 * 60) + 60 + 1 << QSL("61:01");
+        QTest::newRow("1 s") << 1 << QSL("0:00:01");
+        QTest::newRow("10 s") << 10 << QSL("0:00:10");
+        QTest::newRow("1 m") << 60 << QSL("0:01:00");
+        QTest::newRow("10m") << 60 * 10 << QSL("0:10:00");
+        QTest::newRow("1h") << 60 * 60 << QSL("1:00:00");
+        QTest::newRow("1h 1 m 1s") << (60 * 60) + 60 + 1 << QSL("1:01:01");
+        QTest::newRow("25h 0m 0s") << (25 * 3600) << QSL("25:00:00");
     }
 
     void testFormatTime()
