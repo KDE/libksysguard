@@ -225,8 +225,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
                                                         &KSysGuard::Process::startTime,
                                                         Process::Nothing,
                                                         ForwardFirstEntry); // Is this correct for apps?
-    startTimeSensor->setDescription(i18n("The elapsed time since the process was started."));
-    startTimeSensor->setUnit(KSysGuard::UnitTime);
+    startTimeSensor->setUnit(KSysGuard::UnitBootTimestamp);
     d->m_coreAttributes << startTimeSensor;
 
     const int maximumCpuPercent = 100 * numberProcessorCores();
