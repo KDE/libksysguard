@@ -62,7 +62,7 @@ enum Unit {
     UnitPetaHertz = MetricPrefixPeta + UnitHertz,
 
     // Time units.
-    UnitBootTimestamp = 400, // deprecated
+    UnitBootTimestamp = 400,
     UnitSecond,
     UnitTime,
 

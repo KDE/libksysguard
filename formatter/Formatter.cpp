@@ -17,14 +17,9 @@
 #include <QTime>
 
 #include <cmath>
-
-#ifdef Q_OS_OSX
-#include <mach/clock.h>
-#include <mach/mach.h>
-#else
 #include <ctime>
-#endif
 
+#include <time.h>
 #include <unistd.h>
 
 #include "formatter_debug.h"
@@ -283,6 +278,23 @@ static QString formatTime(const QVariant &value)
     return KFormat().formatDuration(value.toLongLong() * 1000);
 }
 
+static QString formatBootTimestamp(const QVariant &value)
+{
+    timespec tp;
+#ifdef Q_OS_LINUX
+    clock_gettime(CLOCK_BOOTTIME, &tp);
+#else
+    clock_gettime(CLOCK_MONOTONIC, &tp);
+#endif
+
+    const QDateTime systemBootTime = QDateTime::currentDateTime().addSecs(-tp.tv_sec);
+
+    const qreal secondsSinceSystemBoot = value.toReal() / sysconf(_SC_CLK_TCK);
+    const QDateTime absoluteTimeSinceBoot = systemBootTime.addSecs(secondsSinceSystemBoot);
+
+    return KFormat().formatRelativeDateTime(absoluteTimeSinceBoot, QLocale::ShortFormat);
+}
+
 qreal Formatter::scaleDownFactor(const QVariant &value, Unit unit, MetricPrefix targetPrefix)
 {
     const Unit adjusted = adjustedUnit(value.toDouble(), unit, targetPrefix);
@@ -338,8 +350,7 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
         return formatNumber(value, unit, targetPrefix, options);
 
     case UnitBootTimestamp:
-        qCWarning(FORMATTER) << "UnitBootTimestamp is deprecated and is not formatted anymore";
-        return value.toString();
+        return formatBootTimestamp(value);
     case UnitTime:
         return formatTime(value);
     case UnitNone:
