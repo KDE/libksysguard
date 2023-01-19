@@ -8,13 +8,13 @@
 # Ozan Çağlayan <ozan@pardus.org.tr>, 2010.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2017.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2022-12-31 18:46+0300\n"
+"PO-Revision-Date: 2023-01-18 22:34+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -760,10 +760,10 @@ msgid ""
 msgstr ""
 "<qt>Ayrılmış adres uzayı - bellek değil, adres uzayı. Pratikte bu değer "
 "neredeyse hiçbir anlam ifade etmemektedir. Bir süreç sistemden büyük bir "
-"bellek bloğu isteğinde bulunur ve bunun sadece küçük bir kısmını kullanırsa, "
-"gerçek kullanım düşük, VIRT yüksek değer olacaktır. <p><i>Teknik bilgi: </"
-"i>Bu bilgi /proc/*/status  adresindeki VmSize ve top programındaki VIRT "
-"bilgileridir."
+"bellek bloğu isteğinde bulunur ve bunun yalnızca küçük bir kısmını "
+"kullanırsa, gerçek kullanım düşük, VIRT yüksek değer olacaktır. <p><i>Teknik "
+"bilgi: </i>Bu bilgi /proc/*/status  adresindeki VmSize ve top programındaki "
+"VIRT bilgileridir."
 
 #: ProcessModel.cpp:1146
 #, kde-format
@@ -849,7 +849,7 @@ msgid ""
 msgstr ""
 "<qt><i>Teknik bilgi: </i>Xorg sürecinin bu sürecin resimlerini işlemek için "
 "kullandığı, bellek ve paylaşımlı bellek haricinde kullanılan ayrı bir bellek "
-"miktarıdır.<br> <i>Teknik bilgi: </i>Sadece pixmap belleği hesaba "
+"miktarıdır.<br> <i>Teknik bilgi: </i>Yalnızca pixmap belleği hesaba "
 "katılmakta, yazı tipleri ve imleçler gibi diğer özkaynak kullanımları bu "
 "miktara eklenmemektedir. <code>xrestop</code> aracını kullanarak daha "
 "detaylı bilgi alabilirsiniz."
@@ -916,8 +916,8 @@ msgstr ""
 "sayısı, ör. read() ve pread() sistem çağrıları.</td></tr><tr><td>Sistem "
 "Yazma Çağrıları</td><td>G/Ç yazma işlemleri, ör. write() ve pwrite() sistem "
 "çağrıları.</td></tr><tr><td>Gerçekte Okunan Bayt</td><td>Bu sürecin gerçekte "
-"depolama katmanından okuduğu bayt sayısı. submit_bio() seviyesinde yapılır "
-"bu yüzden block-tabanlı dosya sistemlerinde doğru bilgi verir. NFS ve CIFS "
+"depolama katmanından okuduğu bayt sayısı. submit_bio() düzeyinde yapılır bu "
+"yüzden block-tabanlı dosya sistemlerinde doğru bilgi verir. NFS ve CIFS "
 "dosya sistemleri için doğru değer vermeyebilir.</td></tr><tr><td>Gerçekte "
 "Yazılan Bayt</td><td>Bu sürecin depolama katmanına yazmaya çalıştığı bayt "
 "sayısı. </td></table><p>Parantezler arasında gösterilen sayı, yeni değer ve "
@@ -1213,7 +1213,7 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Nice level:</emphasis> %1 (%2)</para>"
-msgstr "<para><emphasis strong='true'>Nice seviyesi:</emphasis> %1 (%2)</para>"
+msgstr "<para><emphasis strong='true'>Nice düzeyi:</emphasis> %1 (%2)</para>"
 
 #: ProcessModel.cpp:1718
 #, kde-kuit-format
@@ -1236,7 +1236,7 @@ msgstr "<para><emphasis strong='true'>Zamanlayıcı:</emphasis> %1</para>"
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>I/O Nice level:</emphasis> %1 (%2)</para>"
 msgstr ""
-"<para><emphasis strong='true'>G/Ç Nice seviyesi:</emphasis> %1 (%2)</para>"
+"<para><emphasis strong='true'>G/Ç Nice düzeyi:</emphasis> %1 (%2)</para>"
 
 #: ProcessModel.cpp:1735 ProcessModel.cpp:1787
 #, kde-kuit-format
@@ -1643,7 +1643,7 @@ msgstr ""
 "kullanıcıların süreçlerini göster.</td></tr>\n"
 "<tr><td>Kendi Süreçlerim</td><td>Bu sürecin çalıştırıldığı kullacını "
 "bilgisiyle aynı bilgiye sahip süreçleri çalıştır.</td></tr>\n"
-"<tr><td>Sadece Programlar</td><td>Oturum açabilen ve TTY konsola ya da en "
+"<tr><td>Yalnızca Programlar</td><td>Oturum açabilen ve TTY konsola ya da en "
 "azından bir X11 Penceresine sahip kulllanıcıların çalıştırdığı süreçleri "
 "göster.</td></tr>\n"
 "</table>\n"
@@ -1689,7 +1689,7 @@ msgstr "Kendi Süreçlerim"
 #: ProcessWidgetUI.ui:136
 #, kde-format
 msgid "Programs Only"
-msgstr "Sadece Uygulamalar"
+msgstr "Yalnızca Uygulamalar"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnTools)
 #: ProcessWidgetUI.ui:144
@@ -1782,13 +1782,12 @@ msgstr ""
 "\">Normal<span style=\" font-weight:400;\">, özel durağan gerçek zaman "
 "mekanizma önceliği gerektirmeyen tüm süreçler için amaçlanan standart Linux "
 "zaman paylaşım zamanlayıcısıdır. Çalıştırılacak süreç diğer </span> "
-"Normal<span style=\" font-weight:400;\"> veya sadece bu listede karar "
+"Normal<span style=\" font-weight:400;\"> veya yalnızca bu listede karar "
 "verilmiş dinamik öncelik tabanlı </span>Toplu<span style=\" font-weight:400;"
-"\"> süreçlerden seçilir. Dinamik öncelik, verilmiş öncelik seviyesi "
-"tabanlıdır ve çalışmak üzere hazır, ancak zamanlayıcı tarafından "
-"çalıştırılması reddedilen her zaman aralığında arttırılır. Bu tüm Normal "
-"süreçler arasında adaletli bir ilerlemeyi emin kılar.</span></p></body></"
-"html>"
+"\"> süreçlerden seçilir. Dinamik öncelik, verilmiş öncelik düzeyi tabanlıdır "
+"ve çalışmak üzere hazır, ancak zamanlayıcı tarafından çalıştırılması "
+"reddedilen her zaman aralığında arttırılır. Bu tüm Normal süreçler arasında "
+"adaletli bir ilerlemeyi emin kılar.</span></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioNormal)
 #. i18n: ectx: property (text), widget (QRadioButton, radioIONormal)
@@ -1956,8 +1955,8 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Süreç çalışabilir olduğu "
-"her zaman çalışacak. Normal ve Toplu seviyelerinden daha yüksek öncelik "
-"seviyesi. Zaman dilimleme yok.</p></body></html>"
+"her zaman çalışacak. Normal ve Toplu düzeylerinden daha yüksek öncelik "
+"düzeyi. Zaman dilimleme yok.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioFIFO)
 #: ReniceDlgUi.ui:196
@@ -2084,7 +2083,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Bu süreç sabit diski "
-"sadece başka bir süreç kullanmadığı zaman kullanabilir.</p></body></html>"
+"yalnızca başka bir süreç kullanmadığı zaman kullanabilir.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioIdle)
 #: ReniceDlgUi.ui:320
@@ -2251,7 +2250,7 @@ msgstr ""
 "kaynak kullanımını kısacağından dikkatli kullanılmalıdır. <span style=\" "
 "font-weight:600;\">En İyi Başarım</span> sınıfında olduğu gibi, her "
 "zamanlama penceresinde bir sürecin ne kadar büyük bir zaman payı alacağını "
-"belirten 8 öncelik seviyesi tanımlanmıştır.</p></body></html>"
+"belirten 8 öncelik düzeyi tanımlanmıştır.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioRealTime)
 #: ReniceDlgUi.ui:363
