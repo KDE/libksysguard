@@ -9,6 +9,7 @@
 
 #include "Formatter.h"
 
+#include <KFormat>
 #include <KLocalizedString>
 
 #include <QFontMetrics>
@@ -279,12 +280,7 @@ static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefi
 
 static QString formatTime(const QVariant &value)
 {
-    const qlonglong seconds = value.toLongLong();
-
-    const QString minutesString = QString::number(seconds / 60);
-    const QString secondsScring = QStringLiteral("%1").arg(seconds % 60, 2, 10, QLatin1Char('0'));
-
-    return minutesString + QLatin1Char(':') + secondsScring;
+    return KFormat().formatDuration(value.toLongLong() * 1000);
 }
 
 qreal Formatter::scaleDownFactor(const QVariant &value, Unit unit, MetricPrefix targetPrefix)
