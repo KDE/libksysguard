@@ -278,6 +278,12 @@ static QString formatTime(const QVariant &value)
     return KFormat().formatDuration(value.toLongLong() * 1000);
 }
 
+static QString formatTicks(const QVariant &value)
+{
+    auto seconds = value.toLongLong() / sysconf(_SC_CLK_TCK);
+    return KFormat().formatDuration(seconds * 1000);
+}
+
 static QString formatBootTimestamp(const QVariant &value)
 {
     timespec tp;
@@ -355,6 +361,8 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
         return formatTime(value);
     case UnitNone:
         return formatNumber(value, unit, MetricPrefix::MetricPrefixUnity, options);
+    case UnitTicks:
+        return formatTicks(value);
 
     default:
         return value.toString();
