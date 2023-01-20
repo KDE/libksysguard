@@ -7,6 +7,8 @@
 #include <QLocale>
 #include <QTest>
 
+#include <unistd.h>
+
 #include "Formatter.h"
 #include "Unit.h"
 
@@ -68,6 +70,39 @@ private Q_SLOTS:
         QFETCH(QString, output);
         auto formatted = KSysGuard::Formatter::formatValue(input, KSysGuard::UnitTime);
         QCOMPARE(formatted, output);
+    }
+
+    void testFormatBootTimestamp_data()
+    {
+        QTest::addColumn<int>("input");
+        // This uses a list because we are comparing translated strings and those may
+        // end up slightly different in some cases.
+        QTest::addColumn<QStringList>("output");
+        QTest::newRow("1s ago") << 1 << QStringList{QSL("Just now")};
+        QTest::newRow("10s ago") << 10 << QStringList{QSL("Just now")};
+        QTest::newRow("1m ago") << 60 << QStringList{QSL("Just now")};
+        QTest::newRow("10m ago") << 600 << QStringList{QSL("10 minute(s) ago"), QSL("10 minutes ago")};
+        QTest::newRow("59m59s ago") << 3559 << QStringList{QSL("59 minute(s) ago"), QSL("59 minutes ago")};
+    }
+
+    void testFormatBootTimestamp()
+    {
+        QFETCH(int, input);
+        QFETCH(QStringList, output);
+
+        timespec tp;
+#ifdef Q_OS_LINUX
+        clock_gettime(CLOCK_BOOTTIME, &tp);
+#else
+        clock_gettime(CLOCK_MONOTONIC, &tp);
+#endif
+
+        const auto ticks = sysconf(_SC_CLK_TCK);
+
+        const QDateTime systemBootTime = QDateTime::currentDateTime().addSecs(-tp.tv_sec);
+        auto elapsed = QDateTime::currentDateTime().addSecs(-input);
+        auto formatted = KSysGuard::Formatter::formatValue(systemBootTime.secsTo(elapsed) * ticks, KSysGuard::UnitBootTimestamp);
+        QVERIFY(output.contains(formatted));
     }
 };
 
