@@ -1,6 +1,6 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-add_library(FormatterPlugin SHARED FormatterPlugin.cpp FormatterWrapper.cpp)
+add_library(FormatterPlugin SHARED FormatterPlugin.cpp FormatterPlugin.h FormatterWrapper.cpp FormatterWrapper.h)
 
 target_link_libraries(FormatterPlugin Qt::Qml KSysGuard::Formatter)
 

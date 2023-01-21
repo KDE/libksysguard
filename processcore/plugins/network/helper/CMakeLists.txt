@@ -1,10 +1,10 @@
 
 set(ksgrd_network_helper_SRCS
     main.cpp
-    Capture.cpp
-    Packet.cpp
-    ConnectionMapping.cpp
-    Accumulator.cpp
+    Capture.cpp Capture.h
+    Packet.cpp Packet.h
+    ConnectionMapping.cpp ConnectionMapping.h
+    Accumulator.cpp Accumulator.h
 )
 
 add_executable(ksgrd_network_helper ${ksgrd_network_helper_SRCS})

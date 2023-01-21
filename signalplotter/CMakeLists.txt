@@ -3,7 +3,7 @@ set(ksignalplotter_WIDGETS "ksignalplotter.widgets")
 
 set(ksignalplotter_LIB_SRCS
     ksignalplotter.cpp
-    kgraphicssignalplotter.cpp
+    kgraphicssignalplotter.cpp kgraphicssignalplotter.h
 )
 ecm_qt_declare_logging_category(ksignalplotter_LIB_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter
     DESCRIPTION "libksysguard (ksignalplotter)" EXPORT LIBKSYSGUARD)

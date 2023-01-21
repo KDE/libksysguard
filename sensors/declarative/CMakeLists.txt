@@ -1,6 +1,6 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-add_library(SensorsPlugin SHARED SensorsPlugin.cpp)
+add_library(SensorsPlugin SHARED SensorsPlugin.cpp SensorsPlugin.h)
 
 target_link_libraries(SensorsPlugin Qt::Qml KSysGuard::Sensors)
 

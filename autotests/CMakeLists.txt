@@ -4,29 +4,29 @@ include_directories(${libksysguard_SOURCE_DIR})
 
 # Process unit test
 ecm_qt_declare_logging_category(processtest_debug_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
-ecm_add_test(processtest.cpp ${processtest_debug_SRCS} TEST_NAME processtest
+ecm_add_test(processtest.cpp processtest.h ${processtest_debug_SRCS} TEST_NAME processtest
 	LINK_LIBRARIES KSysGuard::ProcessUi Qt::Test)
 
 if (KF5Plasma_FOUND)
     set(SIGNALPLOTTER_DEBUG_SRCS)
     ecm_qt_declare_logging_category(SIGNALPLOTTER_DEBUG_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter)
-    ecm_add_test(signalplotterbenchmark.cpp  ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
+    ecm_add_test(signalplotterbenchmark.cpp signalplotterbenchmark.h  ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME signalplotterbenchmark
         LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF5::IconThemes
     )
 
-    ecm_add_test(graphicssignalplotterbenchmark.cpp ../signalplotter/kgraphicssignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
+    ecm_add_test(graphicssignalplotterbenchmark.cpp graphicssignalplotterbenchmark.h signalplotterbenchmark.h ../signalplotter/kgraphicssignalplotter.cpp kgraphicssignalplotter.h ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME graphicssignalplotterbenchmark
         LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF5::IconThemes KF5::Plasma
     )
 
-    ecm_add_test(signalplottertest.cpp ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
+    ecm_add_test(signalplottertest.cpp signalplottertest.h ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME signalplottertest
         LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF5::IconThemes
     )
 endif()
 
-ecm_add_test(chronotest.cpp
+ecm_add_test(chronotest.cpp chronotest.h
     TEST_NAME chronotest
     LINK_LIBRARIES Qt::Test KF5::I18n
 )
@@ -49,7 +49,7 @@ ecm_add_test(sensorfacecontrollertest.cpp LINK_LIBRARIES
     KSysGuard::SensorFaces
 )
 
-# set( ksysguarddtest_SRCS ksysguarddtest.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorManager.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorSocketAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorShellAgent.cpp)
+# set( ksysguarddtest_SRCS ksysguarddtest.cpp ksysguarddtest.h ${libksysguard_SOURCE_DIR}/ksgrd/SensorAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorManager.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorSocketAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorShellAgent.cpp)
 #
 # ecm_add_test(${ksysguarddtest_SRCS}
 #     TEST_NAME "ksysguard-ksysguarddtest"
