@@ -46,6 +46,6 @@ public:
     }
 };
 
-K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(SensorFacePackage, "sensorface-packagestructure.json")
+K_PLUGIN_CLASS_WITH_JSON(SensorFacePackage, "sensorface-packagestructure.json")
 
 #include "sensorfacepackage.moc"
