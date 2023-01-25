@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-18 00:47+0000\n"
+"POT-Creation-Date: 2023-01-25 02:55+0000\n"
 "PO-Revision-Date: 2020-09-28 13:21+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -133,113 +133,108 @@ msgstr "Kontrolliv terminal, milles protsess töötab."
 msgid "User Time"
 msgstr "Kasutaja aeg"
 
-#: extended_process_list.cpp:205
+#: extended_process_list.cpp:206
 #, kde-format
 msgid "System Time"
 msgstr "Süsteemi aeg"
 
-#: extended_process_list.cpp:212
+#: extended_process_list.cpp:210
 #, kde-format
 msgid "Total Time"
 msgstr "Aeg kokku"
 
-#: extended_process_list.cpp:217
+#: extended_process_list.cpp:213
 #, kde-format
 msgid "Time"
 msgstr "Aeg"
 
-#: extended_process_list.cpp:219
+#: extended_process_list.cpp:215
 #, kde-format
 msgid "The total user and system time that this process has been running for"
 msgstr "Kasutaja ja süsteemi aeg kokku, mille vältel protsess on töötanud"
 
-#: extended_process_list.cpp:224
+#: extended_process_list.cpp:220
 #, kde-format
 msgid "Start Time"
 msgstr "Algusaeg"
 
-#: extended_process_list.cpp:228
-#, kde-format
-msgid "The elapsed time since the process was started."
-msgstr "Protsessi algusest möödunud aeg"
-
-#: extended_process_list.cpp:235
+#: extended_process_list.cpp:230
 #, kde-format
 msgid "User CPU Usage"
 msgstr "Kasutaja CPU kasutus"
 
-#: extended_process_list.cpp:236
+#: extended_process_list.cpp:231
 #, kde-format
 msgid "User CPU"
 msgstr "Kasutaja CPU"
 
-#: extended_process_list.cpp:243
+#: extended_process_list.cpp:238
 #, kde-format
 msgid "System CPU Usage"
 msgstr "Süsteemi CPU kasutus"
 
-#: extended_process_list.cpp:244
+#: extended_process_list.cpp:239
 #, kde-format
 msgid "System CPU"
 msgstr "Süsteemi CPU"
 
-#: extended_process_list.cpp:253
+#: extended_process_list.cpp:248
 #, kde-format
 msgid "Total CPU Usage"
 msgstr "CPU kasutus kokku"
 
-#: extended_process_list.cpp:259
+#: extended_process_list.cpp:254
 #, kde-format
 msgid "CPU"
 msgstr "CPU"
 
-#: extended_process_list.cpp:263
+#: extended_process_list.cpp:258
 #, kde-format
 msgid "The current total CPU usage of the process."
 msgstr "Protsessi praegune CPU kogukasutus."
 
-#: extended_process_list.cpp:268
+#: extended_process_list.cpp:263
 #, kde-format
 msgid "Group User CPU Usage"
 msgstr "Grupikasutaja CPU kasutus"
 
-#: extended_process_list.cpp:272
+#: extended_process_list.cpp:267
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
 "Kasutajaruumi CPU kogus, mida see protsess ja selle järglased tarvitavad."
 
-#: extended_process_list.cpp:280
+#: extended_process_list.cpp:275
 #, kde-format
 msgid "Group System CPU Usage"
 msgstr "Grupi süsteemi CPU kasutus"
 
-#: extended_process_list.cpp:284
+#: extended_process_list.cpp:279
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
 msgstr "Süsteemi CPU kogus, mida see protsess ja selle järglased tarvitavad."
 
-#: extended_process_list.cpp:293
+#: extended_process_list.cpp:288
 #, kde-format
 msgid "Group Total CPU Usage"
 msgstr "Grupi CPU kogukasutus"
 
-#: extended_process_list.cpp:299
+#: extended_process_list.cpp:294
 #, kde-format
 msgid "Group CPU"
 msgstr "Grupi CPU"
 
-#: extended_process_list.cpp:300
+#: extended_process_list.cpp:295
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
 msgstr "CPU tervikkogus, mida see protsess ja selle järglased tarvitavad."
 
-#: extended_process_list.cpp:307
+#: extended_process_list.cpp:302
 #, kde-format
 msgid "Nice Level"
 msgstr "Viisakuse tase"
 
-#: extended_process_list.cpp:309
+#: extended_process_list.cpp:304
 #, kde-format
 msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
@@ -249,27 +244,27 @@ msgstr ""
 "vahemikku 19 (väga viisakas, madalaim prioriteet) kuni -19 (kõrgeim "
 "prioriteet)."
 
-#: extended_process_list.cpp:313
+#: extended_process_list.cpp:308
 #, kde-format
 msgid "Scheduler"
 msgstr "Planeerija"
 
-#: extended_process_list.cpp:318
+#: extended_process_list.cpp:313
 #, kde-format
 msgid "IO Priority Class"
 msgstr "IO prioriteedi klass"
 
-#: extended_process_list.cpp:324
+#: extended_process_list.cpp:319
 #, kde-format
 msgid "IO Nice Level"
 msgstr "IO viisakuse tase"
 
-#: extended_process_list.cpp:328
+#: extended_process_list.cpp:323
 #, kde-format
 msgid "VM Size"
 msgstr "VM suurus"
 
-#: extended_process_list.cpp:333
+#: extended_process_list.cpp:328
 #, kde-format
 msgid ""
 "This is the amount of virtual memory space that the process is using, "
@@ -280,12 +275,12 @@ msgstr ""
 "jagatud teegid, graafikamälu, failid kettal ja ni edasi. Üldiselt on see "
 "üpris mõttetu arv."
 
-#: extended_process_list.cpp:338
+#: extended_process_list.cpp:333
 #, kde-format
 msgid "RSS Memory Usage"
 msgstr "RSS mälukasutus"
 
-#: extended_process_list.cpp:343
+#: extended_process_list.cpp:338
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using and "
@@ -294,17 +289,17 @@ msgstr ""
 "See on füüsilise mälu kogus, mida protsess tarvitab, sealhulgas jagatud "
 "teekide kasutatava mälu kogus."
 
-#: extended_process_list.cpp:346
+#: extended_process_list.cpp:341
 #, kde-format
 msgid "Private Memory Usage"
 msgstr "Privaatne mälukasutus"
 
-#: extended_process_list.cpp:348
+#: extended_process_list.cpp:343
 #, kde-format
 msgid "Private"
 msgstr "Privaatne"
 
-#: extended_process_list.cpp:352
+#: extended_process_list.cpp:347
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
@@ -315,17 +310,17 @@ msgstr ""
 "ligilähedaselt protsessi privaatse mälukasutusega.<br>See ei sisalda ei "
 "saalemälu ega jagatud teekide koodi mahtu."
 
-#: extended_process_list.cpp:359
+#: extended_process_list.cpp:354
 #, kde-format
 msgid "Shared Memory Usage"
 msgstr "Jagatud mälukasutus"
 
-#: extended_process_list.cpp:368
+#: extended_process_list.cpp:363
 #, kde-format
 msgid "Shared"
 msgstr "Jagatud"
 
-#: extended_process_list.cpp:370
+#: extended_process_list.cpp:365
 #, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
@@ -335,17 +330,17 @@ msgstr ""
 "See on reaalse füüsilise mälu ligikaudne kogus, mida tarvitavad protsessi "
 "jagatud teegid.<br>Seda mälu jagavad kõik seda teeki kasutavad protsessid."
 
-#: extended_process_list.cpp:376
+#: extended_process_list.cpp:371
 #, kde-format
 msgid "Memory Usage"
 msgstr "Mälukasutus"
 
-#: extended_process_list.cpp:377
+#: extended_process_list.cpp:372
 #, kde-format
 msgid "Memory"
 msgstr "Mälu"
 
-#: extended_process_list.cpp:383
+#: extended_process_list.cpp:378
 #, kde-format
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -357,72 +352,72 @@ msgstr ""
 "Selle leidmiseks jagatakse protsessi jagatud mälukasutus seda mälu "
 "kasutavate protsesside arvuga ja lisatakse protsessi privaatne mälukasutus."
 
-#: extended_process_list.cpp:388
+#: extended_process_list.cpp:383
 #, kde-format
 msgid "Name"
 msgstr "Nimi"
 
-#: extended_process_list.cpp:389
+#: extended_process_list.cpp:384
 #, kde-format
 msgid "The process name."
 msgstr "Protsessi nimi."
 
-#: extended_process_list.cpp:394
+#: extended_process_list.cpp:389
 #, kde-format
 msgid "Command"
 msgstr "Käsk"
 
-#: extended_process_list.cpp:398
+#: extended_process_list.cpp:393
 #, kde-format
 msgid "The command with which this process was launched."
 msgstr "Käsk, millega protsess käivitati."
 
-#: extended_process_list.cpp:402
+#: extended_process_list.cpp:397
 #, kde-format
 msgid "Status"
 msgstr "Olek"
 
-#: extended_process_list.cpp:407
+#: extended_process_list.cpp:402
 #, kde-format
 msgid "IO Characters Read"
 msgstr "IO märkide loetud"
 
-#: extended_process_list.cpp:416
+#: extended_process_list.cpp:411
 #, kde-format
 msgid "IO Characters Written"
 msgstr "IO märke kirjutatud"
 
-#: extended_process_list.cpp:425
+#: extended_process_list.cpp:420
 #, kde-format
 msgid "IO Read Syscalls"
 msgstr "IO süsteemi väljakutseid loetud"
 
-#: extended_process_list.cpp:434
+#: extended_process_list.cpp:429
 #, kde-format
 msgid "IO Read Syscalls Rate"
 msgstr "IO süsteemi väljakutsete lugemise kiirus"
 
-#: extended_process_list.cpp:443
+#: extended_process_list.cpp:438
 #, kde-format
 msgid "IO Write Syscalls"
 msgstr "IO süsteemi väljakutseid kirjutatud"
 
-#: extended_process_list.cpp:452
+#: extended_process_list.cpp:447
 #, kde-format
 msgid "IO Write Syscalls Rate"
 msgstr "IO süsteemi väljakutsete kirjutamise kiirus"
 
-#: extended_process_list.cpp:461
+#: extended_process_list.cpp:456
 #, kde-format
 msgid "IO Characters Actually Read"
 msgstr "IO tegelikult loetud märke"
 
-#: extended_process_list.cpp:470
+#: extended_process_list.cpp:465
 #, kde-format
 msgid "IO Characters Read Rate"
 msgstr "IO märkide lugemise kiirus"
 
-#: extended_process_list.cpp:473
+#: extended_process_list.cpp:468
 #, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
@@ -431,12 +426,12 @@ msgstr ""
 "Kogu protsessi IO, kaasa arvatud kettapuhvri ja muu mittefüüsilise IO "
 "lugemise kiirus."
 
-#: extended_process_list.cpp:480
+#: extended_process_list.cpp:475
 #, kde-format
 msgid "IO Characters Written Rate"
 msgstr "IO märkide kirjutamise kiirus"
 
-#: extended_process_list.cpp:483
+#: extended_process_list.cpp:478
 #, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
@@ -445,37 +440,37 @@ msgstr ""
 "Kogu protsessi IO, kaasa arvatud kettapuhvri ja muu mittefüüsilise IO "
 "kirjutamise kiirus."
 
-#: extended_process_list.cpp:490
+#: extended_process_list.cpp:485
 #, kde-format
 msgid "Disk Read Rate"
 msgstr "Ketta lugemise kiirus"
 
-#: extended_process_list.cpp:494
+#: extended_process_list.cpp:489
 #, kde-format
 msgid "Read"
 msgstr "Lugemine"
 
-#: extended_process_list.cpp:495
+#: extended_process_list.cpp:490
 #, kde-format
 msgid "The rate of data being read from disk."
 msgstr "Andmete kettalt lugemise kiirus."
 
-#: extended_process_list.cpp:501
+#: extended_process_list.cpp:496
 #, kde-format
 msgid "Disk Write Rate"
 msgstr "Ketta kirjutamise kiirus"
 
-#: extended_process_list.cpp:505
+#: extended_process_list.cpp:500
 #, kde-format
 msgid "Write"
 msgstr "Kirjutamine"
 
-#: extended_process_list.cpp:506
+#: extended_process_list.cpp:501
 #, kde-format
 msgid "The rate of data being written to the disk."
 msgstr "Andmete kettale kirjutamise kiirus."
 
-#: extended_process_list.cpp:512
+#: extended_process_list.cpp:507
 #, kde-format
 msgid "Threads"
 msgstr "Lõimed"
@@ -688,6 +683,9 @@ msgstr "Tekkis määratlemata tõrge."
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "Tekkis tundmatu tõrge."
+
+#~ msgid "The elapsed time since the process was started."
+#~ msgstr "Protsessi algusest möödunud aeg"
 
 #~ msgctxt "Bytes unit symbol"
 #~ msgid "%1 B"
