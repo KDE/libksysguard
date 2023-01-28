@@ -50,7 +50,7 @@ Control {
         readOnly: true
         hoverEnabled: false
 
-        placeholderText: control.selected.length == 0 ? i18nc("@label", "Click to select a sensor…") : ""
+        placeholderText: control.selected.length == 0 ? i18ndc("KSysGuardSensorFaces", "@label", "Click to select a sensor…") : ""
 
         onFocusChanged: {
             if (focus && (maxAllowedSensors <= 0 || repeater.count < maxAllowedSensors)) {
@@ -365,7 +365,7 @@ Control {
                         id: searchField
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        placeholderText: i18n("Search...")
+                        placeholderText: i18nd("KSysGuardSensorFaces", "Search...")
                         onTextEdited: listView.searchString = text
                         onAccepted: listView.searchString = text
                         KeyNavigation.down: listView
@@ -378,7 +378,7 @@ Control {
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
                             icon.name: "go-previous"
-                            text: i18nc("@action:button", "Back")
+                            text: i18ndc("KSysGuardSensorFaces", "@action:button", "Back")
                             display: Button.IconOnly
                             onClicked: delegateModel.rootIndex = delegateModel.parentModelIndex()
                         }
