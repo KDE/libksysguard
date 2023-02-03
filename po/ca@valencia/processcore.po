@@ -691,6 +691,3 @@ msgstr "S'ha produït un error no especificat."
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "S'ha produït un error desconegut."
-
-#~ msgid "The elapsed time since the process was started."
-#~ msgstr "El temps transcorregut des que es va iniciar el procés."
