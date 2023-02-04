@@ -660,6 +660,3 @@ msgstr "Nastala blíže neurčená chyba."
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "Došlo k neznámé chybě."
-
-#~ msgid "The elapsed time since the process was started."
-#~ msgstr "Čas od spuštění procesu."
