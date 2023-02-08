@@ -26,6 +26,7 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <sys/resource.h>
+#include <sys/sysinfo.h>
 #include <sys/types.h>
 // for ionice
 #include <asm/unistd.h>
@@ -131,17 +132,18 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 
     int size;
     int found = 0; // count how many fields we found
+    constexpr int total = 7; // How many fields we want to read
     while ((size = mFile.readLine(mBuffer, sizeof(mBuffer))) > 0) { //-1 indicates an error
         switch (mBuffer[0]) {
         case 'N':
             if ((unsigned int)size > sizeof("Name:") && qstrncmp(mBuffer, "Name:", sizeof("Name:") - 1) == 0) {
                 if (process->command().isEmpty())
                     process->setName(QString::fromLocal8Bit(mBuffer + sizeof("Name:") - 1, size - sizeof("Name:") + 1).trimmed());
-                if (++found == 6)
+                if (++found == total)
                     goto finish;
             } else if ((unsigned int)size > sizeof("NoNewPrivs:") && qstrncmp(mBuffer, "NoNewPrivs:", sizeof("NoNewPrivs:") - 1) == 0) {
                 process->setNoNewPrivileges(atol(mBuffer + sizeof("NoNewPrivs:") - 1));
-                if (++found == 6)
+                if (++found == total)
                     goto finish;
             }
             break;
@@ -156,7 +158,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setEuid(euid);
                 process->setSuid(suid);
                 process->setFsuid(fsuid);
-                if (++found == 6)
+                if (++found == total)
                     goto finish;
             }
             break;
@@ -168,7 +170,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setEgid(egid);
                 process->setSgid(sgid);
                 process->setFsgid(fsgid);
-                if (++found == 6)
+                if (++found == total)
                     goto finish;
             }
             break;
@@ -177,14 +179,21 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setTracerpid(atol(mBuffer + sizeof("TracerPid:") - 1));
                 if (process->tracerpid() == 0)
                     process->setTracerpid(-1);
-                if (++found == 6)
+                if (++found == total)
                     goto finish;
             } else if ((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:") - 1) == 0) {
                 process->setNumThreads(atol(mBuffer + sizeof("Threads:") - 1));
-                if (++found == 6)
+                if (++found == total)
                     goto finish;
             }
             break;
+        case 'V':
+            if ((unsigned int)size > sizeof("VmSwap:") && qstrncmp(mBuffer, "VmSwap:", sizeof("VmSwap:") - 1) == 0) {
+                process->setVmSwap(atol(mBuffer + sizeof("VmSwap:") - 1));
+                if (++found == total) {
+                    goto finish;
+                }
+            }
         default:
             break;
         }
@@ -772,6 +781,19 @@ long long ProcessesLocal::totalPhysicalMemory()
     return 0; // Not found.  Probably will never happen
 #endif
 }
+
+long long ProcessesLocal::totalSwapMemory()
+{
+    struct sysinfo info;
+    if (sysinfo(&info) != 0) {
+        return 0;
+    }
+
+    // mem_unit is an amount of bytes, convert to KiB so it matches memory
+    // fields
+    return (info.totalswap * info.mem_unit) / 1024;
+}
+
 ProcessesLocal::~ProcessesLocal()
 {
     delete d;

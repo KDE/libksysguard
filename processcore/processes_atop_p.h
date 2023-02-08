@@ -32,6 +32,7 @@ public:
     Processes::Error setNiceness(long pid, int priority) override;
     Processes::Error setScheduler(long pid, int priorityClass, int priority) override;
     long long totalPhysicalMemory() override;
+    long long totalSwapMemory() override;
     Processes::Error setIoNiceness(long pid, int priorityClass, int priority) override;
     bool supportsIoNiceness() override;
     long numberProcessorCores() override

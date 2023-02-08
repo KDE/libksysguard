@@ -82,4 +82,8 @@ long long ProcessesLocal::totalPhysicalMemory()
     return memory;
 }
 
+long long ProcessesLocal::totalSwapMemory()
+{
+    return 0;
+}
 }

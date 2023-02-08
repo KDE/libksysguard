@@ -136,6 +136,9 @@ public:
     void setVmPSS(qlonglong vmPSS); ///< Proportional set size, the amount of private physical memory used by the process + the amount of shared memory used
                                     ///< divided over the number of processes using it.
 
+    qlonglong vmSwap() const; ///< Swap memory used by the process, in KiB.
+    void setVmSwap(qlonglong vmSwap);
+
     QString name() const;
     void setName(const QString &name); ///< The name (e.g. "ksysguard", "konversation", "init")
 
@@ -199,6 +202,8 @@ public:
 
     qlonglong vmPSSChange() const; ///< The change in vmPSS since last update, in KiB.
 
+    qlonglong vmSwapChange() const; ///< The change in vmSwap since last update, in KiB.
+
     unsigned long &pixmapBytes() const; // REF, make non-ref later! ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
 
     bool &hasManagedGuiWindow() const; // REF, make non-ref later!
@@ -255,6 +260,7 @@ public:
         IO = 0x4000,
         NumThreads = 0x8000,
         VmPSS = 0x10000,
+        VmSwap = 0x20000,
     };
     Q_DECLARE_FLAGS(Changes, Change)
 

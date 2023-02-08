@@ -351,6 +351,11 @@ long long ProcessesATop::totalPhysicalMemory()
     return 0;
 }
 
+long long ProcessesATop::totalSwapMemory()
+{
+    return 0;
+}
+
 ProcessesATop::~ProcessesATop()
 {
     delete d;

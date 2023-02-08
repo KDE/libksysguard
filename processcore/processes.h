@@ -153,6 +153,8 @@ public:
      */
     long long totalPhysicalMemory();
 
+    long long totalSwapMemory();
+
     /**
      *  Return the number of processor cores enabled.
      *  (A system can disable processors.  Disabled processors are not counted here).

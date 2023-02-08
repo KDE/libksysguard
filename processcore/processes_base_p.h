@@ -103,6 +103,8 @@ public:
      */
     virtual long long totalPhysicalMemory() = 0;
 
+    virtual long long totalSwapMemory() = 0;
+
     /** \brief Set the i/o priority for a process.
      *
      *  This is from 7 (very nice, lowest i/o priority) to

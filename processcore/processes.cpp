@@ -484,6 +484,11 @@ long long Processes::totalPhysicalMemory()
     return d->mAbstractProcesses->totalPhysicalMemory();
 }
 
+long long Processes::totalSwapMemory()
+{
+    return d->mAbstractProcesses->totalSwapMemory();
+}
+
 long Processes::numberProcessorCores()
 {
     return d->mAbstractProcesses->numberProcessorCores();

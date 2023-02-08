@@ -213,6 +213,12 @@ long long ProcessesRemote::totalPhysicalMemory()
 {
     return d->usedMemory + d->freeMemory;
 }
+
+long long ProcessesRemote::totalSwapMemory()
+{
+    return 0;
+}
+
 long ProcessesRemote::numberProcessorCores()
 {
     return 0;

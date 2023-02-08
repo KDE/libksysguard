@@ -379,6 +379,15 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
              "memory usage by the amount of processes sharing that memory, then adding the process' private memory."));
     d->m_coreAttributes << vmPSSSensor;
 
+    auto vmSwapSensor =
+        new ProcessSensor<qlonglong>(this, QStringLiteral("vmSwap"), i18n("Swap Memory Usage"), &KSysGuard::Process::vmSwap, KSysGuard::Process::VmSwap);
+    vmSwapSensor->setShortName(i18n("Swap Memory"));
+    vmSwapSensor->setUnit(KSysGuard::UnitKiloByte);
+    vmSwapSensor->setMin(0);
+    vmSwapSensor->setMax(totalSwapMemory());
+    vmSwapSensor->setDescription(i18n("This is an approximation of the amount of memory that has been swapped out of physical memory for this process."));
+    d->m_coreAttributes << vmSwapSensor;
+
     auto nameSensor =
         new ProcessSensor<QString>(this, QStringLiteral("name"), i18n("Name"), &KSysGuard::Process::name, KSysGuard::Process::Name, ForwardFirstEntry);
     nameSensor->setDescription(i18n("The process name."));
