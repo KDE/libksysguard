@@ -1,23 +1,21 @@
-# Translation for KSysGuardFormatter.po to Euskara/Basque (eu).
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# KDE euskaratzeko proiektuko arduraduan <xalba@ni.eus>.
 #
-# Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-11 02:38+0000\n"
-"PO-Revision-Date: 2023-02-11 09:58+0100\n"
-"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
-"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
-"Language: eu\n"
+"PO-Revision-Date: 2023-02-12 08:42+0100\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Lokalize 22.12.2\n"
 
 #: Formatter.cpp:33
@@ -93,37 +91,37 @@ msgid "%1 PiB/s"
 msgstr "%1 PiB/s"
 
 #: Formatter.cpp:47
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Bits per second unit symbol"
 msgid "%1 bps"
 msgstr "%1 bps"
 
 #: Formatter.cpp:48
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Kilobits per second unit symbol"
 msgid "%1 Kbps"
 msgstr "%1 Kbps"
 
 #: Formatter.cpp:49
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "%1 Mbps"
 msgstr "%1 Mbps"
 
 #: Formatter.cpp:50
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "%1 Gbps"
 msgstr "%1 Gbps"
 
 #: Formatter.cpp:51
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "%1 Tbps"
 msgstr "%1 Tbps"
 
 #: Formatter.cpp:52
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "%1 Pbps"
 msgstr "%1 Pbps"
@@ -168,13 +166,13 @@ msgstr "%1 PHz"
 #, kde-format
 msgctxt "Percent unit"
 msgid "%1%"
-msgstr "%%1"
+msgstr "%1%"
 
 #: Formatter.cpp:62
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Revolutions per minute unit symbol"
 msgid "%1 RPM"
-msgstr "%1 b/min"
+msgstr "%1 RPM"
 
 #: Formatter.cpp:63
 #, kde-format
@@ -303,37 +301,37 @@ msgid "PiB/s"
 msgstr "PiB/s"
 
 #: Formatter.cpp:403
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Bits per second unit symbol"
 msgid "bps"
 msgstr "bps"
 
 #: Formatter.cpp:405
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Kilobits per second unit symbol"
 msgid "Kbps"
 msgstr "Kbps"
 
 #: Formatter.cpp:407
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "Mbps"
 msgstr "Mbps"
 
 #: Formatter.cpp:409
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "Gbps"
 msgstr "Gbps"
 
 #: Formatter.cpp:411
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "Tbps"
 msgstr "Tbps"
 
 #: Formatter.cpp:413
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "Pbps"
 msgstr "Pbps"
@@ -381,10 +379,10 @@ msgid "%"
 msgstr "%"
 
 #: Formatter.cpp:431
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Revolutions per minute unit symbol"
 msgid "RPM"
-msgstr "b/min"
+msgstr "RPM"
 
 #: Formatter.cpp:433
 #, kde-format
