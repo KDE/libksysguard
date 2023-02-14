@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-06-14 00:50+0000\n"
-"PO-Revision-Date: 2023-02-01 12:52+0100\n"
+"PO-Revision-Date: 2023-02-13 12:47+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -21,37 +21,37 @@ msgstr ""
 #, kde-format
 msgctxt "Total load sensor of all cores"
 msgid "[Group] Total Usage"
-msgstr ""
+msgstr "[Group] Uso Total"
 
 #: SensorGroup.cpp:30
 #, kde-format
 msgctxt "All cores user load sensors"
 msgid "[Group] User Usage"
-msgstr ""
+msgstr "[Group] Uso de usator"
 
 #: SensorGroup.cpp:31
 #, kde-format
 msgctxt "All cores user system sensors"
 msgid "[Group] System Usage"
-msgstr ""
+msgstr "[Group] Uso de systema"
 
 #: SensorGroup.cpp:32
 #, kde-format
 msgctxt "All cores wait load sensors"
 msgid "[Group] Wait Usage"
-msgstr ""
+msgstr "[Group] Uso de attender"
 
 #: SensorGroup.cpp:33
 #, kde-format
 msgctxt "All cores clock frequency sensors"
 msgid "[Group] Clock Frequency"
-msgstr ""
+msgstr "[Group] Frequentia de clock (horologio)"
 
 #: SensorGroup.cpp:34
 #, kde-format
 msgctxt "All cores temperature sensors"
 msgid "[Group] Temperature"
-msgstr ""
+msgstr "[Group] Temperatura"
 
 #: SensorGroup.cpp:35
 #, kde-format
@@ -62,62 +62,62 @@ msgstr "[Group] Nomine:"
 #: SensorGroup.cpp:37
 #, kde-format
 msgid "[Group] Used"
-msgstr ""
+msgstr "[Group] Usate"
 
 #: SensorGroup.cpp:38
 #, kde-format
 msgid "[Group] Available"
-msgstr ""
+msgstr "[Group] Disponibile"
 
 #: SensorGroup.cpp:39 SensorGroup.cpp:59
 #, kde-format
 msgid "[Group] Percentage Used"
-msgstr ""
+msgstr "[Group] Percentage usate"
 
 #: SensorGroup.cpp:40
 #, kde-format
 msgid "[Group] Total Size"
-msgstr ""
+msgstr "[Group] Grandor Total"
 
 #: SensorGroup.cpp:42
 #, kde-format
 msgid "[Group] Network Name"
-msgstr ""
+msgstr "[Group] Nomine de rete"
 
 #: SensorGroup.cpp:43
 #, kde-format
 msgid "[Group] IPv4 Address"
-msgstr ""
+msgstr "[Group] Adresse IPv4"
 
 #: SensorGroup.cpp:44
 #, kde-format
 msgid "[Group] IPv6 Address"
-msgstr ""
+msgstr "[Group] Adresse IPv6"
 
 #: SensorGroup.cpp:45
 #, kde-format
 msgid "[Group] Signal Strength"
-msgstr ""
+msgstr "[Group] Fortia de signal"
 
 #: SensorGroup.cpp:46 SensorGroup.cpp:47
 #, kde-format
 msgid "[Group] Download Rate"
-msgstr ""
+msgstr "[Group] Frequentia de discargamento"
 
 #: SensorGroup.cpp:48
 #, kde-format
 msgid "[Group] Total Downloaded"
-msgstr ""
+msgstr "[Group] Total discargate"
 
 #: SensorGroup.cpp:49 SensorGroup.cpp:50
 #, kde-format
 msgid "[Group] Upload Rate"
-msgstr ""
+msgstr "[Group] Frequentia de incargar"
 
 #: SensorGroup.cpp:51
 #, kde-format
 msgid "[Group] Total Uploaded"
-msgstr ""
+msgstr "[Group] Total incargate"
 
 #: SensorGroup.cpp:53
 #, kde-format
@@ -127,32 +127,32 @@ msgstr "[Group] Nomine:"
 #: SensorGroup.cpp:54
 #, kde-format
 msgid "[Group] Total Space"
-msgstr ""
+msgstr "[Group] Spatio total"
 
 #: SensorGroup.cpp:55
 #, kde-format
 msgid "[Group] Used Space"
-msgstr ""
+msgstr "[Group] Spatio Usate"
 
 #: SensorGroup.cpp:56
 #, kde-format
 msgid "[Group] Free Space"
-msgstr ""
+msgstr "[Group] Spatio Libere"
 
 #: SensorGroup.cpp:57
 #, kde-format
 msgid "[Group] Read Rate"
-msgstr ""
+msgstr "[Group] Frequentia de lectura"
 
 #: SensorGroup.cpp:58
 #, kde-format
 msgid "[Group] Write Rate"
-msgstr ""
+msgstr "[Group] Frequentia de scriptura"
 
 #: SensorGroup.cpp:60
 #, kde-format
 msgid "[Group] Percentage Free"
-msgstr ""
+msgstr "[Group] Percentage libere"
 
 #: SensorGroup.cpp:62
 #, kde-format
@@ -162,7 +162,7 @@ msgstr "Group] CPU"
 #: SensorGroup.cpp:63
 #, kde-format
 msgid "[Group] Disk"
-msgstr ""
+msgstr "[Group] Disco"
 
 #: SensorGroup.cpp:64
 #, kde-format
@@ -178,4 +178,4 @@ msgstr "Navigator de Sensor"
 #, kde-format
 msgctxt "Name (unit)"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
