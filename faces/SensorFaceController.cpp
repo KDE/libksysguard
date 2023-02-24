@@ -110,7 +110,7 @@ void PresetsModel::reload()
         item->setData(plugin.pluginId(), PresetsModel::PluginIdRole);
         item->setData(config, PresetsModel::ConfigRole);
 
-        item->setData(QFileInfo(p.metadata().metaDataFileName()).isWritable(), PresetsModel::WritableRole);
+        item->setData(QFileInfo(p.metadata().fileName()).isWritable(), PresetsModel::WritableRole);
 
         appendRow(item);
     }
