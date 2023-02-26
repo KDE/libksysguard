@@ -1,0 +1,55 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "kde@broulik.de",
+                "Name": "Kai Uwe Broulik"
+            }
+        ],
+        "Icon": "office-chart-bar",
+        "Id": "org.kde.ksysguard.barchart",
+        "License": "LGPLv2+",
+        "Name": "Bar Chart",
+        "Name[ar]": "شريط بياني",
+        "Name[az]": "Sütunlar",
+        "Name[bg]": "Графика с колони",
+        "Name[ca@valencia]": "Diagrama de barres",
+        "Name[ca]": "Diagrama de barres",
+        "Name[cs]": "Sloupcový graf",
+        "Name[de]": "Balkendiagramm",
+        "Name[en_GB]": "Bar Chart",
+        "Name[es]": "Gráfico de barras",
+        "Name[et]": "Tulpdiagramm",
+        "Name[eu]": "Barra-diagrama",
+        "Name[fi]": "Pylväskaavio",
+        "Name[fr]": "Histogramme",
+        "Name[hu]": "Sávdiagram",
+        "Name[ia]": "Diagramma a barra",
+        "Name[it]": "Grafico a barre",
+        "Name[ka]": "პანელის გრაფიკები",
+        "Name[ko]": "막대형 차트",
+        "Name[lt]": "Juostinė diagrama",
+        "Name[nl]": "Balkgrafiek",
+        "Name[nn]": "Søylediagram",
+        "Name[pl]": "Wykres słupkowy",
+        "Name[pt]": "Gráfico de Barras",
+        "Name[pt_BR]": "Gráfico de barras",
+        "Name[ro]": "Diagramă de bare",
+        "Name[ru]": "Столбцы",
+        "Name[sk]": "Stĺpcový graf",
+        "Name[sl]": "Stolpični grafikon",
+        "Name[sv]": "Stapeldiagram",
+        "Name[tr]": "Çubuk Grafik",
+        "Name[uk]": "Стовпчикова діаграма",
+        "Name[vi]": "Biểu đồ thanh",
+        "Name[x-test]": "xxBar Chartxx",
+        "Name[zh_CN]": "柱状图",
+        "Name[zh_TW]": "橫條圖",
+        "ServiceTypes": [
+            "KSysguard/SensorFace"
+        ],
+        "Version": "1.0",
+        "Website": "https://kde.org"
+    },
+    "X-KDE-ParentApp": "org.kde.plasmashell"
+}
