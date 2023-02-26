@@ -45,11 +45,9 @@
         "Name[x-test]": "xxPie Chartxx",
         "Name[zh_CN]": "饼状图",
         "Name[zh_TW]": "圓餅圖",
-        "ServiceTypes": [
-            "KSysguard/SensorFace"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell"
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "KPackageStructure": "KSysguard/SensorFace"
 }

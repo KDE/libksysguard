@@ -41,11 +41,9 @@
         "Name[vi]": "Lưới",
         "Name[x-test]": "xxGridxx",
         "Name[zh_CN]": "网格",
-        "ServiceTypes": [
-            "KSysguard/SensorFace"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell"
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "KPackageStructure": "KSysguard/SensorFace"
 }

@@ -31,11 +31,9 @@
         "Name[vi]": "Lưới màu",
         "Name[x-test]": "xxColor Gridxx",
         "Name[zh_CN]": "彩色网格",
-        "ServiceTypes": [
-            "KSysguard/SensorFace"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell"
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "KPackageStructure": "KSysguard/SensorFace"
 }

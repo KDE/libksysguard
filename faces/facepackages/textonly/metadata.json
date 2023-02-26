@@ -46,11 +46,9 @@
         "Name[x-test]": "xxText Onlyxx",
         "Name[zh_CN]": "仅文字",
         "Name[zh_TW]": "僅文字",
-        "ServiceTypes": [
-            "KSysguard/SensorFace"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell"
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "KPackageStructure": "KSysguard/SensorFace"
 }

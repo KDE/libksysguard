@@ -45,11 +45,9 @@
         "Name[x-test]": "xxLine Chartxx",
         "Name[zh_CN]": "折线图",
         "Name[zh_TW]": "折線圖",
-        "ServiceTypes": [
-            "KSysguard/SensorFace"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell"
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "KPackageStructure": "KSysguard/SensorFace"
 }

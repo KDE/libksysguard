@@ -43,11 +43,9 @@
         "Name[vi]": "Thanh ngang",
         "Name[x-test]": "xxHorizontal Barsxx",
         "Name[zh_CN]": "水平柱状图",
-        "ServiceTypes": [
-            "KSysguard/SensorFace"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell"
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "KPackageStructure": "KSysguard/SensorFace"
 }

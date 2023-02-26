@@ -45,11 +45,9 @@
         "Name[x-test]": "xxBar Chartxx",
         "Name[zh_CN]": "柱状图",
         "Name[zh_TW]": "橫條圖",
-        "ServiceTypes": [
-            "KSysguard/SensorFace"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell"
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "KPackageStructure": "KSysguard/SensorFace"
 }
