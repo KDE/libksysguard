@@ -1,5 +1,5 @@
-add_library(sensorface_packagestructure MODULE sensorfacepackage.cpp)
+add_library(ksysguard_sensorface MODULE sensorfacepackage.cpp)
 
-target_link_libraries(sensorface_packagestructure PRIVATE KF5::Package KF5::I18n)
+target_link_libraries(ksysguard_sensorface PRIVATE KF5::Package KF5::I18n)
 
-install(TARGETS sensorface_packagestructure DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)
+install(TARGETS ksysguard_sensorface DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)
