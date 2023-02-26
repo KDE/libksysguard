@@ -2359,7 +2359,6 @@ QMimeData *ProcessModel::mimeData(const QModelIndexList &indexes) const
     QString textPlainHeaders;
     QString textHtml;
     QString textHtmlHeaders;
-    QString display;
     int firstColumn = -1;
     bool firstrow = true;
     foreach (const QModelIndex &index, indexes) {

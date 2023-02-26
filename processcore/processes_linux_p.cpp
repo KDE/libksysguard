@@ -550,7 +550,7 @@ bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
     if (mUpdateFlags.testFlag(Processes::Smaps)) {
         auto runnable = new ReadProcSmapsRunnable{dir};
 
-        connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid, runnable](qulonglong pss) {
+        connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid](qulonglong pss) {
             Q_EMIT processUpdated(pid, {{Process::VmPSS, pss}});
         });
 
@@ -617,7 +617,7 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
     if (pid <= 0) {
         return Processes::InvalidPid;
     }
-    auto error = [this] {
+    auto error = [] {
         switch (errno) {
         case ESRCH:
         case ENOENT:
@@ -682,7 +682,7 @@ Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int p
         return Processes::NotSupported;
     }
 
-    auto error = [this] {
+    auto error = [] {
         switch (errno) {
         case ESRCH:
         case ENOENT:
