@@ -7,45 +7,45 @@ ecm_qt_declare_logging_category(processtest_debug_SRCS HEADER processcore_debug.
 ecm_add_test(processtest.cpp processtest.h ${processtest_debug_SRCS} TEST_NAME processtest
 	LINK_LIBRARIES KSysGuard::ProcessUi Qt::Test)
 
-if (KF5Plasma_FOUND)
+if (KF6Plasma_FOUND)
     set(SIGNALPLOTTER_DEBUG_SRCS)
     ecm_qt_declare_logging_category(SIGNALPLOTTER_DEBUG_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter)
     ecm_add_test(signalplotterbenchmark.cpp signalplotterbenchmark.h  ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME signalplotterbenchmark
-        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF5::IconThemes
+        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF6::IconThemes
     )
 
     ecm_add_test(graphicssignalplotterbenchmark.cpp graphicssignalplotterbenchmark.h signalplotterbenchmark.h ../signalplotter/kgraphicssignalplotter.cpp kgraphicssignalplotter.h ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME graphicssignalplotterbenchmark
-        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF5::IconThemes KF5::Plasma
+        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF6::IconThemes KF6::Plasma
     )
 
     ecm_add_test(signalplottertest.cpp signalplottertest.h ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME signalplottertest
-        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF5::IconThemes
+        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF6::IconThemes
     )
 endif()
 
 ecm_add_test(chronotest.cpp chronotest.h
     TEST_NAME chronotest
-    LINK_LIBRARIES Qt::Test KF5::I18n
+    LINK_LIBRARIES Qt::Test KF6::I18n
 )
 
 ecm_add_test(formattertest.cpp LINK_LIBRARIES Qt::Test KSysGuard::Formatter)
 ecm_add_test(sensortreemodeltest.cpp LINK_LIBRARIES Qt::Test Qt::DBus KSysGuard::Sensors)
 ecm_add_test(sensordatamodeltest.cpp LINK_LIBRARIES Qt::Test Qt::DBus KSysGuard::Sensors KSysGuard::Formatter)
 ecm_add_test(processdatamodeltest.cpp LINK_LIBRARIES Qt::Test KSysGuard::ProcessCore)
-ecm_add_test(cgrouptest.cpp LINK_LIBRARIES Qt::Test KF5::Service KSysGuard::ProcessCore)
+ecm_add_test(cgrouptest.cpp LINK_LIBRARIES Qt::Test KF6::Service KSysGuard::ProcessCore)
 
 include_directories(../faces)
 ecm_add_test(sensorfacecontrollertest.cpp LINK_LIBRARIES
     Qt::Test
-    KF5::ConfigCore
-    KF5::ConfigGui
-    KF5::I18n
-    KF5::Package
-    KF5::ConfigQml
-    KF5::Solid
+    KF6::ConfigCore
+    KF6::ConfigGui
+    KF6::I18n
+    KF6::Package
+    KF6::ConfigQml
+    KF6::Solid
     KSysGuard::SensorFaces
 )
 
@@ -57,7 +57,7 @@ ecm_add_test(sensorfacecontrollertest.cpp LINK_LIBRARIES
 #     Qt::Test
 #     Qt::Network
 #     Qt::Widgets
-#     KF5::ConfigCore
-#     KF5::CoreAddons
-#     KF5::I18n
+#     KF6::ConfigCore
+#     KF6::CoreAddons
+#     KF6::I18n
 # )

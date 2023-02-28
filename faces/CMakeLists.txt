@@ -42,17 +42,17 @@ target_link_libraries(SensorFaces
     PUBLIC
         Qt::Qml
         Qt::Quick
-        KF5::ConfigCore
-        KF5::ConfigGui
+        KF6::ConfigCore
+        KF6::ConfigGui
         KSysGuard::Formatter
         KSysGuard::Sensors
     PRIVATE
         Qt::Core
         Qt::DBus
-        KF5::I18n
-        KF5::Package
-        KF5::ConfigQml
-        KF5::Solid
+        KF6::I18n
+        KF6::Package
+        KF6::ConfigQml
+        KF6::Solid
 )
 
 set_target_properties(SensorFaces PROPERTIES

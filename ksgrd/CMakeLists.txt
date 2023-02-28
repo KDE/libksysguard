@@ -36,10 +36,10 @@ target_link_libraries(ksgrd
     PUBLIC
         Qt::Core
         Qt::Network # QTcpSocket in SensorSocketAgent.h
-        KF5::ConfigCore # KConfigGroup in SensorManager.h
+        KF6::ConfigCore # KConfigGroup in SensorManager.h
     PRIVATE
-        KF5::I18n
-        KF5::CoreAddons
+        KF6::I18n
+        KF6::CoreAddons
         KSysGuard::ProcessCore
 )
 

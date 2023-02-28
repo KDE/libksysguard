@@ -31,10 +31,10 @@ target_link_libraries(processcore
     Qt::Core
     KSysGuard::Formatter
    PRIVATE
-    KF5::I18n
-    KF5::AuthCore
-    KF5::CoreAddons
-    KF5::Service
+    KF6::I18n
+    KF6::AuthCore
+    KF6::CoreAddons
+    KF6::Service
     ZLIB::ZLIB
 )
 
@@ -91,7 +91,7 @@ if(ENABLE_KAUTH_HELPER)
     )
 
     add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})
-    target_link_libraries(ksysguardprocesslist_helper Qt::Core KF5::AuthCore KF5::I18n)
+    target_link_libraries(ksysguardprocesslist_helper Qt::Core KF6::AuthCore KF6::I18n)
     install(TARGETS ksysguardprocesslist_helper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
     kauth_install_helper_files(ksysguardprocesslist_helper org.kde.ksysguard.processlisthelper root)

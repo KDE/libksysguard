@@ -7,10 +7,10 @@ set(PROJECT_VERSION_MAJOR 5)
 
 # check with non-Plasma consumers (e.g. KDevelop) before bumping these versions to make sure the KDE CI does not break
 set(QT_MIN_VERSION "5.15.2")
-set(KF5_MIN_VERSION "5.102.0")
+set(KF6_MIN_VERSION "5.102.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(KDEInstallDirs)
@@ -31,7 +31,7 @@ include(CheckLibraryExists)
 include(FeatureSummary)
 include(GenerateExportHeader)
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets Qml Quick)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets Qml Quick Core5Compat)
 find_package(Qt${QT_MAJOR_VERSION}WebEngineWidgets ${QT_MIN_VERSION} CONFIG)
 set_package_properties(Qt${QT_MAJOR_VERSION}WebEngineWidgets PROPERTIES
                        URL "git://code.qt.org/qt/qtwebenginewidgets.git"
@@ -48,7 +48,7 @@ set_package_properties(Qt${QT_MAJOR_VERSION}WebChannel PROPERTIES
                       )
 
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package NewStuff)
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Config I18n JobWidgets WindowSystem Completion Auth WidgetsAddons IconThemes ConfigWidgets Service GlobalAccel KIO Package NewStuff)
 
 find_package(ZLIB REQUIRED)
 set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed files and data streams"

@@ -39,20 +39,21 @@ target_link_libraries(processui
     PUBLIC
         KSysGuard::ProcessCore
         Qt::Widgets
-        KF5::ConfigCore
+        KF6::ConfigCore
     PRIVATE
         Qt::DBus
-        KF5::I18n
-        KF5::WindowSystem
-        KF5::AuthCore
-        KF5::Completion
-        KF5::ConfigWidgets
-        KF5::WidgetsAddons
-        KF5::IconThemes
-        KF5::JobWidgets
-        KF5::GlobalAccel
-        KF5::Service
-        KF5::KIOGui
+        Qt::Core5Compat
+        KF6::I18n
+        KF6::WindowSystem
+        KF6::AuthCore
+        KF6::Completion
+        KF6::ConfigWidgets
+        KF6::WidgetsAddons
+        KF6::IconThemes
+        KF6::JobWidgets
+        KF6::GlobalAccel
+        KF6::Service
+        KF6::KIOGui
 )
 target_include_directories(processui
     PUBLIC
@@ -61,9 +62,9 @@ target_include_directories(processui
 )
 if(HAVE_X11)
     if (QT_MAJOR_VERSION STREQUAL "5")
-       target_link_libraries(processui PRIVATE Qt::X11Extras KF5::WindowSystem)
+       target_link_libraries(processui PRIVATE Qt::X11Extras KF6::WindowSystem)
     else()
-       target_link_libraries(processui PRIVATE Qt6::GuiPrivate KF5::WindowSystem)
+       target_link_libraries(processui PRIVATE Qt6::GuiPrivate KF6::WindowSystem)
     endif()
 endif()
 

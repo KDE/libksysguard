@@ -51,7 +51,7 @@ target_link_libraries(Sensors
     PRIVATE
         Qt::Core
         Qt::DBus
-        KF5::I18n
+        KF6::I18n
         KSysGuard::SystemStats
 )
 

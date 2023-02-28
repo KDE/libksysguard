@@ -47,7 +47,7 @@ target_link_libraries(SystemStats PUBLIC Qt::Core Qt::DBus KSysGuard::Formatter 
 
 if (SENSORS_FOUND)
     target_sources(SystemStats PRIVATE SensorsFeatureSensor.cpp)
-    target_link_libraries(SystemStats PUBLIC ${SENSORS_LIBRARIES} KF5::I18n)
+    target_link_libraries(SystemStats PUBLIC ${SENSORS_LIBRARIES} KF6::I18n)
     target_include_directories(SystemStats PUBLIC ${SENSORS_INCLUDE_DIR})
 endif()
 

@@ -17,7 +17,7 @@ target_link_libraries(lsofui
     PUBLIC
         Qt::Widgets
     PRIVATE
-        KF5::I18n
+        KF6::I18n
 )
 set_target_properties(lsofui PROPERTIES
     VERSION ${KSYSGUARD_VERSION}
