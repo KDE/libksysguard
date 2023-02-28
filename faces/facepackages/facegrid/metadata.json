@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "KSysguard/SensorFace",
     "KPlugin": {
         "Authors": [
             {
@@ -9,41 +10,8 @@
         "Id": "org.kde.ksysguard.facegrid",
         "License": "LGPLv2+",
         "Name": "Grid",
-        "Name[ar]": "الشّبكة",
-        "Name[az]": "Tor",
-        "Name[bg]": "Координатна мрежа",
-        "Name[ca@valencia]": "Quadrícula",
-        "Name[ca]": "Quadrícula",
-        "Name[cs]": "Mřížka",
-        "Name[de]": "Gitter",
-        "Name[en_GB]": "Grid",
-        "Name[es]": "Cuadrícula",
-        "Name[eu]": "Sareta",
-        "Name[fi]": "Ruudukko",
-        "Name[fr]": "Grille",
-        "Name[hu]": "Rács",
-        "Name[ia]": "Grillia",
-        "Name[it]": "Griglia",
-        "Name[ka]": "ბადე",
-        "Name[ko]": "격자",
-        "Name[lt]": "Tinklelis",
-        "Name[nl]": "Raster",
-        "Name[pl]": "Siatka",
-        "Name[pt]": "Grelha",
-        "Name[pt_BR]": "Grade",
-        "Name[ro]": "Grilă",
-        "Name[ru]": "Сетка",
-        "Name[sk]": "Mriežka",
-        "Name[sl]": "Mreža",
-        "Name[sv]": "Rutnät",
-        "Name[tr]": "Izgara",
-        "Name[uk]": "Таблиця",
-        "Name[vi]": "Lưới",
-        "Name[x-test]": "xxGridxx",
-        "Name[zh_CN]": "网格",
         "Version": "1.0",
         "Website": "https://kde.org"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell",
-    "KPackageStructure": "KSysguard/SensorFace"
+    "X-KDE-ParentApp": "org.kde.plasmashell"
 }
