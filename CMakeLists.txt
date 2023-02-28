@@ -173,20 +173,10 @@ configure_package_config_file(KSysGuardConfig.cmake.in
     "${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfig.cmake"
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR})
 
-configure_package_config_file(KF5SysGuardConfig.cmake.in
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake"
-    INSTALL_DESTINATION ${KDE_INSTALL_LIBDIR}/cmake/KF5SysGuard
-)
-
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfig.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfigVersion.cmake
     DESTINATION ${CMAKECONFIG_INSTALL_DIR})
-
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/KF5SysGuardConfig.cmake
-    DESTINATION ${KDE_INSTALL_LIBDIR}/cmake/KF5SysGuard
-)
 
 install(EXPORT libksysguardLibraryTargets
         NAMESPACE KSysGuard::
