@@ -4,12 +4,28 @@
         "Authors": [
             {
                 "Email": "ahiemstra@heimr.nl",
-                "Name": "Arjen Hiemstra"
+                "Name": "Arjen Hiemstra",
+                "Name[ca]": "Arjen Hiemstra",
+                "Name[es]": "Arjen Hiemstra",
+                "Name[ka]": "Arjen Hiemstra",
+                "Name[nl]": "Arjen Hiemstra",
+                "Name[sl]": "Arjen Hiemstra",
+                "Name[tr]": "Arjen Hiemstra",
+                "Name[uk]": "Arjen Hiemstra",
+                "Name[x-test]": "xxArjen Hiemstraxx"
             }
         ],
         "Id": "org.kde.ksysguard.facegrid",
         "License": "LGPLv2+",
         "Name": "Grid",
+        "Name[ca]": "Quadrícula",
+        "Name[es]": "Cuadrícula",
+        "Name[ka]": "ბადე",
+        "Name[nl]": "Raster",
+        "Name[sl]": "Mreža",
+        "Name[tr]": "Izgara",
+        "Name[uk]": "Ґратка",
+        "Name[x-test]": "xxGridxx",
         "Version": "1.0",
         "Website": "https://kde.org"
     },

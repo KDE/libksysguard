@@ -4,13 +4,29 @@
         "Authors": [
             {
                 "Email": "kde@broulik.de",
-                "Name": "Kai Uwe Broulik"
+                "Name": "Kai Uwe Broulik",
+                "Name[ca]": "Kai Uwe Broulik",
+                "Name[es]": "Kai Uwe Broulik",
+                "Name[ka]": "კაი უვე ბროულიკი",
+                "Name[nl]": "Kai Uwe Broulik",
+                "Name[sl]": "Kai Uwe Broulik",
+                "Name[tr]": "Kai Uwe Broulik",
+                "Name[uk]": "Kai Uwe Broulik",
+                "Name[x-test]": "xxKai Uwe Broulikxx"
             }
         ],
         "Icon": "office-chart-bar",
         "Id": "org.kde.ksysguard.barchart",
         "License": "LGPLv2+",
         "Name": "Bar Chart",
+        "Name[ca]": "Diagrama de barres",
+        "Name[es]": "Gráfico de barras",
+        "Name[ka]": "პანელის გრაფიკები",
+        "Name[nl]": "Balkgrafiek",
+        "Name[sl]": "Stolpični diagram",
+        "Name[tr]": "Çubuk Grafik",
+        "Name[uk]": "Стовпчикова діаграма",
+        "Name[x-test]": "xxBar Chartxx",
         "Version": "1.0",
         "Website": "https://kde.org"
     },

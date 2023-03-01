@@ -4,13 +4,29 @@
         "Authors": [
             {
                 "Email": "kde@broulik.de",
-                "Name": "Kai Uwe Broulik"
+                "Name": "Kai Uwe Broulik",
+                "Name[ca]": "Kai Uwe Broulik",
+                "Name[es]": "Kai Uwe Broulik",
+                "Name[ka]": "კაი უვე ბროულიკი",
+                "Name[nl]": "Kai Uwe Broulik",
+                "Name[sl]": "Kai Uwe Broulik",
+                "Name[tr]": "Kai Uwe Broulik",
+                "Name[uk]": "Kai Uwe Broulik",
+                "Name[x-test]": "xxKai Uwe Broulikxx"
             }
         ],
         "Icon": "view-grid",
         "Id": "org.kde.ksysguard.colorgrid",
         "License": "LGPLv2+",
         "Name": "Color Grid",
+        "Name[ca]": "Quadrícula de color",
+        "Name[es]": "Cuadrícula de color",
+        "Name[ka]": "ფერადი ბადე",
+        "Name[nl]": "Kleurraster",
+        "Name[sl]": "Barvna mreža",
+        "Name[tr]": "Renk Izgarası",
+        "Name[uk]": "Кольорова таблиця",
+        "Name[x-test]": "xxColor Gridxx",
         "Version": "1.0",
         "Website": "https://kde.org"
     },
