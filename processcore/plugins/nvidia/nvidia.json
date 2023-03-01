@@ -27,7 +27,7 @@
         "Description[sk]": "Štatistiky zdrojov GPU pre procesy pre karty Nvidia",
         "Description[sl]": "Statistike virov GPE Nvidia kartic po procesih",
         "Description[sv]": "Statistik över grafikprocessorresurser per process för Nvidia-kort",
-        "Description[tr]": "Nvidia kartları için süreç başı GPU özkaynakları istatistikleri",
+        "Description[tr]": "Nvidia kartları için süreç başına GPU özkaynakları istatistikleri",
         "Description[uk]": "Статистика ресурсів окремих процесів графічного процесора для карток NVidia",
         "Description[vi]": "Các thống kê về tài nguyên GPU theo từng tiến trình cho các bo mạch NVIDIA",
         "Description[x-test]": "xxStats of per-process GPU resources for Nvidia cardsxx",
