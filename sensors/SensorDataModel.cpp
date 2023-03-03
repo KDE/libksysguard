@@ -222,7 +222,11 @@ qreal SensorDataModel::minimum() const
     auto result = std::min_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) {
         return first.min < second.min;
     });
-    d->minimum = (*result).min;
+    if (result == d->sensorInfos.cend()) {
+        d->minimum = 0.0;
+    } else {
+        d->minimum = (*result).min;
+    }
     return d->minimum.value();
 }
 
@@ -239,7 +243,11 @@ qreal SensorDataModel::maximum() const
     auto result = std::max_element(d->sensorInfos.cbegin(), d->sensorInfos.cend(), [](const SensorInfo &first, const SensorInfo &second) {
         return first.max < second.max;
     });
-    d->maximum = (*result).max;
+    if (result == d->sensorInfos.cend()) {
+        d->maximum = 0.0;
+    } else {
+        d->maximum = (*result).max;
+    }
     return d->maximum.value();
 }
 
