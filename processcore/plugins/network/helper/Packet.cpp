@@ -94,8 +94,8 @@ void Packet::parseIPv4(const uint8_t *data, int32_t dataLength)
 
     const ip *header = reinterpret_cast<const ip *>(data);
 
-    m_sourceAddress.address[3] = header->ip_src.s_addr;
-    m_destinationAddress.address[3] = header->ip_dst.s_addr;
+    m_sourceAddress.address[3] = ntohl(header->ip_src.s_addr);
+    m_destinationAddress.address[3] = ntohl(header->ip_dst.s_addr);
 
     parseTransport(header->ip_p, data + sizeof(ip), dataLength - sizeof(ip));
 }

@@ -7,8 +7,9 @@
 
 #include "ConnectionMapping.h"
 
-#include <cstring>
+#include <algorithm>
 #include <charconv>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 
@@ -52,21 +53,19 @@ int parseInetDiagMesg(struct nl_msg *msg, void *arg)
     struct nlmsghdr *nlh = nlmsg_hdr(msg);
     auto inetDiagMsg = static_cast<inet_diag_msg *>(nlmsg_data(nlh));
     Packet::Address localAddress;
+    localAddress.port = ntohs(inetDiagMsg->id.idiag_sport);
     if (inetDiagMsg->idiag_family == AF_INET) {
-        // I expected to need ntohl calls here and bewlow for src but comparing to values gathered
-        // by parsing proc they are not needed and even produce wrong results
-        localAddress.address[3] = inetDiagMsg->id.idiag_src[0];
-    } else if (inetDiagMsg->id.idiag_src[0] == 0 && inetDiagMsg->id.idiag_src[1] == 0 && inetDiagMsg->id.idiag_src[2] == 0xffff0000) {
+        localAddress.address[3] = ntohl(inetDiagMsg->id.idiag_src[0]);
+    } else if (inetDiagMsg->id.idiag_src[0] == 0 && inetDiagMsg->id.idiag_src[1] == 0 && ntohl(inetDiagMsg->id.idiag_src[2]) == 0xffff0000) {
         // Some applications (like Steam) use ipv6 sockets with ipv4.
         // This results in ipv4 addresses that end up in the tcp6 file.
         // They seem to start with 0000000000000000FFFF0000, so if we
         // detect that, assume it is ipv4-over-ipv6.
-        localAddress.address[3] = inetDiagMsg->id.idiag_src[3];
+        localAddress.address[3] = ntohl(inetDiagMsg->id.idiag_src[3]);
 
     } else {
-        std::memcpy(localAddress.address.data(), inetDiagMsg->id.idiag_src, sizeof(localAddress.address));
+        std::transform(std::begin(inetDiagMsg->id.idiag_src), std::end(inetDiagMsg->id.idiag_src), localAddress.address.begin(), ntohl);
     }
-    localAddress.port = ntohs(inetDiagMsg->id.idiag_sport);
 
     if (self->m_newState.addressToInode.find(localAddress) == self->m_newState.addressToInode.end()) {
         // new localAddress is found for which no socket inode is known
