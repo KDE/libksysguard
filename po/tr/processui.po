@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2023-02-08 19:48+0300\n"
+"PO-Revision-Date: 2023-03-07 20:48+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -534,7 +534,7 @@ msgstr "- Süreç bir şeyler olmasını bekliyor."
 msgid ""
 "- Process has been stopped. It will not respond to user input at the moment."
 msgstr ""
-"- Süreç durduruldu. Bu süreç şu anda kullanıcı girdilerine yanıt vermiyor."
+"- Süreç durduruldu. Bu süreç şu anda kullanıcı girişlerine yanıt vermiyor."
 
 #: ProcessModel.cpp:642
 #, kde-format
