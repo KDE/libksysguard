@@ -5,6 +5,7 @@
             {
                 "Email": "kde@broulik.de",
                 "Name": "Kai Uwe Broulik",
+                "Name[bg]": "Kai Uwe Broulik",
                 "Name[ca@valencia]": "Kai Uwe Broulik",
                 "Name[ca]": "Kai Uwe Broulik",
                 "Name[es]": "Kai Uwe Broulik",
@@ -23,6 +24,7 @@
         "Id": "org.kde.ksysguard.colorgrid",
         "License": "LGPLv2+",
         "Name": "Color Grid",
+        "Name[bg]": "Цвят на координатната мрежа",
         "Name[ca@valencia]": "Quadrícula de color",
         "Name[ca]": "Quadrícula de color",
         "Name[es]": "Cuadrícula de color",

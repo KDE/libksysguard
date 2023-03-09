@@ -45,6 +45,7 @@
         "Id": "org.kde.ksysguard.horizontalbars",
         "License": "LGPLv2+",
         "Name": "Horizontal Bars",
+        "Name[bg]": "Хоризонтални линии",
         "Name[ca@valencia]": "Barres horitzontals",
         "Name[ca]": "Barres horitzontals",
         "Name[es]": "Barras horizontales",

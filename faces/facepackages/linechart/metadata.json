@@ -45,6 +45,7 @@
         "Id": "org.kde.ksysguard.linechart",
         "License": "LGPLv2+",
         "Name": "Line Chart",
+        "Name[bg]": "Линейна графика",
         "Name[ca@valencia]": "Diagrama de línies",
         "Name[ca]": "Diagrama de línies",
         "Name[es]": "Gráfico de líneas",

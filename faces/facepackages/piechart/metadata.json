@@ -45,6 +45,7 @@
         "Id": "org.kde.ksysguard.piechart",
         "License": "LGPLv2+",
         "Name": "Pie Chart",
+        "Name[bg]": "Кръгова графика",
         "Name[ca@valencia]": "Diagrama de sectors",
         "Name[ca]": "Diagrama de sectors",
         "Name[es]": "Gráfico de tarta",

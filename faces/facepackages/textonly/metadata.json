@@ -45,6 +45,7 @@
         "Id": "org.kde.ksysguard.textonly",
         "License": "LGPLv2+",
         "Name": "Text Only",
+        "Name[bg]": "Само текст",
         "Name[ca@valencia]": "Només el text",
         "Name[ca]": "Només el text",
         "Name[es]": "Solo texto",
