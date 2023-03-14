@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2023-01-12 16:28+0100\n"
+"PO-Revision-Date: 2023-03-13 08:14+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -117,6 +117,9 @@ msgid ""
 "click on a process to send other signals.<br>See What's This for technical "
 "information."
 msgstr ""
+"<qt>მონიშნული პროცესის დასრულება. გაფრთხილება - შეიძლება შეუნახავი სამუშაო "
+"დაკარგოთ. <br>სხვა სიგნალების გასაგზავნად მასზე მარჯვენა ღილაკით დააწკაპუნეთ."
+"<br>ტექნიკური ინფორმაციისთვის იხილეთ რა არის ეს."
 
 #: ksysguardprocesslist.cpp:442
 #, kde-format
@@ -615,12 +618,12 @@ msgstr "<qt>ბრძანება, რითიც ეს პროცეს�
 #: ProcessModel.cpp:1097
 #, kde-format
 msgid "<qt>The amount of pixmap memory that this process is using.</qt>"
-msgstr ""
+msgstr "<qt>პროცესის მიერ გამოყენებული მეხსიერება პიქსელების რუკისთვის.</qt>"
 
 #: ProcessModel.cpp:1099
 #, kde-format
 msgid "<qt>The title of any windows that this process is showing.</qt>"
-msgstr ""
+msgstr "<qt>ყველა ფანჯრის სათაური, რომელსაც ეს პროცესი აჩვენებს.</qt>"
 
 #: ProcessModel.cpp:1101
 #, kde-format
@@ -642,7 +645,7 @@ msgstr ""
 #: ProcessModel.cpp:1107
 #, kde-format
 msgid "<qt>The control group (cgroup) where this process belongs.</qt>"
-msgstr ""
+msgstr "<qt>კონტროლის ჯგუფი (cgroup), რომელსაც ეს პროცესი ეკუთვნის.</qt>"
 
 #: ProcessModel.cpp:1109
 #, kde-format
@@ -743,11 +746,12 @@ msgid ""
 "<qt><i>Technical information: </i>The flag is retrieved from /proc/[pid]/"
 "status"
 msgstr ""
+"<qt><i>ტექნიკური ინფორმაცია: </i>ალამი მიღებულია ფაილიდან /proc/[pid]/status"
 
 #: ProcessModel.cpp:1166
 #, kde-format
 msgid "<qt><i>Technical information: </i>This is from /proc/*/cmdline"
-msgstr ""
+msgstr "<qt><i>ტექნიკური ინფორმაცია: </i>ეს /proc/*/cmdline-დანაა"
 
 #: ProcessModel.cpp:1169
 #, kde-format
@@ -1004,6 +1008,8 @@ msgid ""
 "<title>KThreadd</title><para>Manages kernel threads. The children processes "
 "run in the kernel, controlling hard disk access, etc.</para>"
 msgstr ""
+"<title>KThreadd</title><para> ბირთვის ნაკადებს მართავს. ეს შვილი პროცესები "
+"ბირთვში ეშვება და დისკებთან წვდომას და ა.შ. მართავს.</para>"
 
 #: ProcessModel.cpp:1627
 #, kde-kuit-format
@@ -1066,6 +1072,11 @@ msgid ""
 "time:</emphasis> %4</para><para><emphasis strong='true'>Relative start time:"
 "</emphasis> %5</para>"
 msgstr ""
+"<para><emphasis strong='true'>დრო სისტემის ჩატვირთვის შემდეგ:</emphasis> %1</"
+"para><para><emphasis strong='true'>დრო სისტემის ჩატვირთვის შემდეგ, წამებში:</"
+"emphasis> %2 (სისტემის ჩატვირთვის დრო: %3)</para><para><emphasis "
+"strong='true'>დაწყების აბსოლუტური დრო:</emphasis> %4</para><para><emphasis "
+"strong='true'>ჩატვირთვის შედარებითი დრო:</emphasis> %5</para>"
 
 #: ProcessModel.cpp:1686
 #, kde-kuit-format
@@ -1074,6 +1085,8 @@ msgid ""
 "<para><emphasis strong='true'>This process was run with the following "
 "command:</emphasis></para><para>%1</para>"
 msgstr ""
+"<para><emphasis strong='true'>ეს პროცესი გაეშვა შემდეგი ბრძანებით:</"
+"emphasis></para><para>%1</para>"
 
 #: ProcessModel.cpp:1711 ProcessModel.cpp:1777
 #, kde-kuit-format
@@ -1182,12 +1195,15 @@ msgid ""
 "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1 out of %2  (%3 "
 "%)</para>"
 msgstr ""
+"<para><emphasis strong='true'>RSS მეხსიერების გამოყენება:</emphasis> %1 %2-"
+"დან  (%3 %)</para>"
 
 #: ProcessModel.cpp:1819
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1</para>"
 msgstr ""
+"<para><emphasis strong='true'>RSS მეხსირების გამოყენება:</emphasis> %1</para>"
 
 #: ProcessModel.cpp:1826 ProcessModel.cpp:1887
 #, kde-kuit-format
@@ -1196,6 +1212,8 @@ msgid ""
 "<para><emphasis strong='true'>Your system does not seem to have this "
 "information available to be read.</emphasis></para>"
 msgstr ""
+"<para><emphasis strong='true'>თქვენს სისტემას ამ ინფორმაციის წაკითხვის "
+"საშუალება არ გაჩნია.</emphasis></para>"
 
 #: ProcessModel.cpp:1830
 #, kde-kuit-format
@@ -1204,6 +1222,8 @@ msgid ""
 "<para><emphasis strong='true'>Shared library memory usage:</emphasis> %1 out "
 "of %2  (%3 %)</para>"
 msgstr ""
+"<para><emphasis strong='true'>გაზიარებული ბიბლიოთეკების მეხსიერების "
+"გამოყენება:</emphasis> %1 %2-დან  (%3 %)</para>"
 
 #: ProcessModel.cpp:1836 ProcessModel.cpp:1897
 #, kde-kuit-format
@@ -1212,6 +1232,8 @@ msgid ""
 "<para><emphasis strong='true'>Shared library memory usage:</emphasis> %1</"
 "para>"
 msgstr ""
+"<para><emphasis strong='true'>გაზიარებული ბიბლიოთეკების მეხსიერების "
+"გამოყენება:</emphasis> %1</para>"
 
 #: ProcessModel.cpp:1843
 #, kde-kuit-format
@@ -1225,6 +1247,13 @@ msgid ""
 "(%10 KiB/s)</para><para><emphasis strong='true'>Actual bytes written:</"
 "emphasis> %11 (%12 KiB/s)</para>"
 msgstr ""
+"<para><emphasis strong='true'>წაკითხული სიმბოლო:</emphasis> %1 (%2 კიბ/წმ)</"
+"para><para><emphasis strong='true'>ჩაწერილი სიმბოლო:</emphasis> %3 (%4 კიბ/"
+"წმ)</para><para><emphasis strong='true'>წაკითხვის სისფუნქციები:</emphasis> "
+"%5 (%6 წმ⁻¹)</para><para><emphasis strong='true'>ჩაწერის სისფუნქციები:</"
+"emphasis> %7 (%8 წმ⁻¹)</para><para><emphasis strong='true'>მიმდინარე "
+"წაკითხული ბაიტი:</emphasis> %9 (%10 კიბ/წმ)</para><para><emphasis "
+"strong='true'>მიმდინარე ჩაწერილი ბაიტი:</emphasis> %11 (%12 კიბ/წმ)</para>"
 
 #: ProcessModel.cpp:1891
 #, kde-kuit-format
@@ -1233,6 +1262,8 @@ msgid ""
 "<para><emphasis strong='true'>Total memory usage:</emphasis> %1 out of %2  "
 "(%3 %)</para>"
 msgstr ""
+"<para><emphasis strong='true'>მეხსიერების სრული გამოყენება:</emphasis> %1 %2-"
+"დან  (%3 %)</para>"
 
 #: ProcessModel.cpp:2181
 #, kde-format
@@ -1310,7 +1341,7 @@ msgstr "გაზიარებული მეხსიერება"
 #, kde-format
 msgctxt "process heading"
 msgid "Relative Start Time"
-msgstr ""
+msgstr "დაწყების შედარებითი დრო"
 
 #: ProcessModel.cpp:2195
 #, kde-format
@@ -1396,6 +1427,8 @@ msgid ""
 "Type comma separated search terms or regular expressions to filter the "
 "process list"
 msgstr ""
+"შეიყვანეთ მძიმით გამოყოფილი წესები და რეგულარული გამოსახულებები, პროცესების "
+"სიის გასაფილტრად"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:69
