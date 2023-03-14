@@ -947,25 +947,6 @@ void SensorFaceController::savePreset()
         qWarning() << "Could not write metadata.json file for preset" << title();
     }
 
-    // Backward compatibility: Also write out an "old style" desktop file so the
-    // preset works with older Plasma.
-    KConfig c(dir.path() % QStringLiteral("/metadata.desktop"));
-
-    KConfigGroup cg(&c, "Desktop Entry");
-    cg.writeEntry("Name", title());
-    cg.writeEntry("Icon", "ksysguardd");
-    cg.writeEntry("X-Plasma-API", "declarativeappletscript");
-    cg.writeEntry("X-Plasma-MainScript", "ui/main.qml");
-    cg.writeEntry("X-Plasma-Provides", "org.kde.plasma.systemmonitor");
-    cg.writeEntry("X-Plasma-RootPath", "org.kde.plasma.systemmonitor");
-    cg.writeEntry("X-KDE-PluginInfo-Name", pluginName);
-    cg.writeEntry("X-KDE-ServiceTypes", "Plasma/Applet");
-    cg.writeEntry("X-KDE-PluginInfo-Category", "System Information");
-    cg.writeEntry("X-KDE-PluginInfo-License", "LGPL 2.1+");
-    cg.writeEntry("X-KDE-PluginInfo-EnabledByDefault", "true");
-    cg.writeEntry("X-KDE-PluginInfo-Version", "0.1");
-    cg.sync();
-
     QDir subDir(dir.path());
     subDir.mkpath(QStringLiteral("contents/config"));
     KConfig faceConfig(subDir.path() % QStringLiteral("/contents/config/faceproperties"));
