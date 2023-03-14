@@ -16,6 +16,7 @@
 #include <KConfigPropertyMap>
 #include <KDesktopFile>
 #include <KLocalizedString>
+#include <KPackage/PackageJob>
 #include <KPackage/PackageLoader>
 #include <KPluginMetaData>
 #include <Solid/Block>
@@ -36,11 +37,7 @@ void FacesModel::reload()
 {
     clear();
 
-    auto list = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KSysguard/SensorFace"));
-    // NOTE: This will disable completely the internal in-memory cache
-    KPackage::Package p;
-    p.install(QString(), QString());
-
+    const auto list = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KSysguard/SensorFace"));
     for (auto plugin : list) {
         QStandardItem *item = new QStandardItem(plugin.name());
         item->setData(plugin.pluginId(), FacesModel::PluginIdRole);
@@ -996,9 +993,8 @@ void SensorFaceController::savePreset()
     }
     configGroup.sync();
 
-    auto *job = presetPackage.install(dir.path());
-
-    connect(job, &KJob::finished, this, [this, pluginName]() {
+    auto *job = KPackage::PackageJob::install(QStringLiteral("Plasma/Applet"), dir.path());
+    connect(job, &KJob::finished, this, [this]() {
         d->availablePresetsModel->reload();
     });
 }
@@ -1013,7 +1009,7 @@ void SensorFaceController::uninstallPreset(const QString &pluginId)
 
     QDir root(presetPackage.path());
     root.cdUp();
-    auto *job = presetPackage.uninstall(pluginId, root.path());
+    auto *job = KPackage::PackageJob::uninstall(QStringLiteral("Plasma/Applet"), pluginId, root.path());
 
     connect(job, &KJob::finished, this, [this]() {
         d->availablePresetsModel->reload();
