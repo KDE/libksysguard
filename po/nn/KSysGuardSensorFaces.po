@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-13 00:48+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2023-03-10 22:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -306,7 +306,7 @@ msgstr "KConfigXT-XML-fil for flate­spesifikke innstillingar."
 msgid "The configuration file that describes face properties and capabilities."
 msgstr "Oppsettfila som skildrar eigenskapar og funksjonalitet for flater."
 
-#: SensorFaceController.cpp:434
+#: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Systemovervakingssensor"

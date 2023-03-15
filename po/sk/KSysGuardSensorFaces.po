@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-13 00:48+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2022-06-14 17:30+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -304,7 +304,7 @@ msgstr "Súbor KConfigXT xml pre možnosti konfigurácie špecifickej pre tvár.
 msgid "The configuration file that describes face properties and capabilities."
 msgstr "Konfiguračný súbor, ktorý popisuje schopnosti a vlastnosti tváre."
 
-#: SensorFaceController.cpp:434
+#: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Senzor monitorovania systému"
