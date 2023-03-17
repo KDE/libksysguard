@@ -1,10 +1,10 @@
 set(KSYSGUARD_SENSORS_SOVERSION 1)
 
+add_definitions(-DTRANSLATION_DOMAIN=\"KSysGuardSensorFaces\")
+
 add_subdirectory(import)
 add_subdirectory(facepackages)
 add_subdirectory(packagestructure)
-
-add_definitions(-DTRANSLATION_DOMAIN=\"KSysGuardSensorFaces\")
 
 set(faces_LIB_SRCS
     SensorFaceController.cpp
