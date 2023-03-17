@@ -555,7 +555,7 @@ msgstr "%1 ت"
 #: ProcessModel.cpp:66
 #, kde-format
 msgid "%1 P"
-msgstr "%1 پ"
+msgstr "%1 ب"
 
 #: ProcessModel.cpp:636
 #, kde-format
