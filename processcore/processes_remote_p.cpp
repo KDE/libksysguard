@@ -18,6 +18,8 @@ class ProcessesRemote::Private
 {
 public:
     Private()
+        : numColumns(0)
+        , freeMemory(0)
     {
         havePsInfo = false;
         pidColumn = 1;
