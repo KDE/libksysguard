@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-03-16 23:19+0100\n"
+"PO-Revision-Date: 2023-03-17 15:10+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -82,8 +82,8 @@ msgstr "%1 secundas"
 #, kde-format
 msgid "Total Sensor"
 msgid_plural "Total Sensors"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Sensor Total"
+msgstr[1] "Sensores total"
 
 #: ConfigSensors.qml:150
 #, kde-format
@@ -93,7 +93,7 @@ msgstr "Sensores"
 #: ConfigSensors.qml:176
 #, kde-format
 msgid "Text-Only Sensors"
-msgstr ""
+msgstr "Sensores de sol texto"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
 #: facepackages/linechart/contents/ui/Config.qml:47
@@ -251,7 +251,7 @@ msgstr "Gruppa sensores basate sur le valor del sensores total."
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr ""
+msgstr "Clicca pro seliger un sensor..."
 
 #: import/Choices.qml:368
 #, kde-format
@@ -284,12 +284,12 @@ msgstr ""
 #: packagestructure/sensorfacepackage.cpp:37
 #, kde-format
 msgid "The optional configuration page for this face."
-msgstr ""
+msgstr "Le configuration optional per iste facie."
 
 #: packagestructure/sensorfacepackage.cpp:39
 #, kde-format
 msgid "Configuration support"
-msgstr ""
+msgstr "Supporto de configuration"
 
 #: packagestructure/sensorfacepackage.cpp:40
 #, kde-format
