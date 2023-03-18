@@ -10,13 +10,13 @@
 # Nick Shaforostoff <shafff@ukr.net>, 2009.
 # Alex K. <bird.translator@gmail.com>, 2014.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2019.
-# Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
+# Olesya Gerasimenko <translation-team@basealt.ru>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2022-08-18 16:10+0300\n"
+"PO-Revision-Date: 2023-03-17 16:15+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.08.3\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -374,19 +374,19 @@ msgstr "Уничтожить"
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "Нет данных для показа"
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 КБ"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "Обновить"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -396,139 +396,130 @@ msgid "Quick search"
 msgstr "Быстрый поиск"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "Пользователь"
+msgstr "Имя файла"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "Начало"
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
-msgstr "Завершить"
+msgstr "Окончание"
 
 #: processdetails/MemoryMapsTab.cpp:254
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "Права доступа"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "Смещение"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
 msgctxt "@title:column"
 msgid "Inode"
-msgstr ""
+msgstr "Inode"
 
 #: processdetails/MemoryMapsTab.cpp:283 processdetails/OpenFilesTab.cpp:278
 #, kde-format
 msgctxt "@info:status"
 msgid "No data matching the filter"
-msgstr ""
+msgstr "Нет данных, соответствующих фильтру"
 
 #: processdetails/OpenFilesTab.cpp:33
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: processdetails/OpenFilesTab.cpp:36
-#, fuzzy, kde-format
-#| msgid "Characters read/written"
+#, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr "Прочитано/записано символов"
+msgstr "Символьное устройство"
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "Блочное устройство"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "Канал"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "Сокет"
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "Бездействие"
+msgstr "Идентификатор"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
 msgctxt "@info:status"
 msgid "%1: Failed to list directory contents"
-msgstr ""
+msgstr "%1: не удалось показать содержимое каталога"
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "Все процессы"
+msgstr "Сведения о процессе"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "Общие"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "Память"
+msgstr "Таблицы распределения памяти"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "Открытые файлы"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
 msgctxt "@info:status"
 msgid "The \"%1\" (PID: %2) process has stopped executing"
-msgstr ""
+msgstr "Процесс «%1» (PID: %2) прекратил выполнение"
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "Изменение приоритета"
+msgstr "Приоритет ввода-вывода"
 
 #: ProcessModel.cpp:62
 #, kde-format
