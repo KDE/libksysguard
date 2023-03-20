@@ -87,12 +87,3 @@ msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 segon"
 msgstr[1] "%1 segons"
-
-#~ msgid "Automatic X Data Range"
-#~ msgstr "Interval automàtic de les dades X"
-
-#~ msgid "From (X):"
-#~ msgstr "Des de (X):"
-
-#~ msgid "To (X):"
-#~ msgstr "Fins a (X):"

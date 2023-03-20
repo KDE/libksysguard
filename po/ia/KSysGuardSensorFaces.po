@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-03-17 15:10+0100\n"
+"PO-Revision-Date: 2023-03-19 21:58+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -279,7 +279,7 @@ msgstr ""
 #: packagestructure/sensorfacepackage.cpp:34
 #, kde-format
 msgid "The representation of the plasmoid when it's fully expanded."
-msgstr ""
+msgstr "Le representation del plasmoid quando illo es plenemente expandite."
 
 #: packagestructure/sensorfacepackage.cpp:37
 #, kde-format
@@ -300,6 +300,7 @@ msgstr ""
 #, kde-format
 msgid "The configuration file that describes face properties and capabilities."
 msgstr ""
+"Le file de configuration que describe proprietates de facie e capacitate."
 
 #: SensorFaceController.cpp:431
 #, kde-format
