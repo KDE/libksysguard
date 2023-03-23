@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-24 01:00+0000\n"
-"PO-Revision-Date: 2023-03-17 15:15+0100\n"
+"PO-Revision-Date: 2023-03-22 17:57+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -149,6 +149,8 @@ msgstr "Tempore"
 #, kde-format
 msgid "The total user and system time that this process has been running for"
 msgstr ""
+"Le tempore total de usator e de systema per le qual iste processo es "
+"executante"
 
 #: extended_process_list.cpp:220
 #, kde-format
@@ -371,12 +373,12 @@ msgstr "Stato"
 #: extended_process_list.cpp:402
 #, kde-format
 msgid "IO Characters Read"
-msgstr ""
+msgstr "Characteres de IO Legite"
 
 #: extended_process_list.cpp:411
 #, kde-format
 msgid "IO Characters Written"
-msgstr ""
+msgstr "Characteres de IO Scribite"
 
 #: extended_process_list.cpp:420
 #, kde-format
@@ -662,7 +664,7 @@ msgstr ""
 #: process_controller.cpp:189
 #, kde-format
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Un error non specificate ha occurrite."
 
 #: process_controller.cpp:191
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-03-19 21:58+0100\n"
+"PO-Revision-Date: 2023-03-22 17:53+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -275,6 +275,8 @@ msgid ""
 "The compact representation of the sensors plasmoid when collapsed, for "
 "instance in a panel."
 msgstr ""
+"Le representation compacte de plasmoid de sensores quando plicate, pro "
+"exemplo in un pannello."
 
 #: packagestructure/sensorfacepackage.cpp:34
 #, kde-format
@@ -294,7 +296,7 @@ msgstr "Supporto de configuration"
 #: packagestructure/sensorfacepackage.cpp:40
 #, kde-format
 msgid "KConfigXT xml file for face-specific configuration options."
-msgstr ""
+msgstr "File xml de KConfigXT per optiones de configuration specific de facie."
 
 #: packagestructure/sensorfacepackage.cpp:44
 #, kde-format
