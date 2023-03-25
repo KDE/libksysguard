@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-24 01:00+0000\n"
-"PO-Revision-Date: 2023-03-22 17:57+0100\n"
+"PO-Revision-Date: 2023-03-24 11:09+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -286,6 +286,8 @@ msgid ""
 "This is the amount of physical memory that this process is using and "
 "includes the amount of memory used by shared libraries."
 msgstr ""
+"Isto es le amonta de memoria phisic que iste processo es usante e include le "
+"amonta de memoria usate per bibliothecas compartite."
 
 #: extended_process_list.cpp:341
 #, kde-format
@@ -304,6 +306,10 @@ msgid ""
 "and approximates the Private memory usage of the process.<br>It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
+"Isto es le quantitate de memoria physic  que le processo es usante per se "
+"mesmo, e approxima  le uso de memoria private del processo. <br> Il non "
+"include alicun swapped out de memoria, ni le dimension de codice de su "
+"bibliothecas compartite."
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -344,6 +350,10 @@ msgid ""
 "usage by the amount of processes sharing that memory, then adding the "
 "process' private memory."
 msgstr ""
+"Isto es un approximation del amonta real de memoria physic que iste processo "
+"es usante. Il es calculate per divider le uso de memoria compartite de "
+"processo per le quantitate de processos que comparti ille memoria, post "
+"adder le momoria private del processo."
 
 #: extended_process_list.cpp:383
 #, kde-format
@@ -383,32 +393,32 @@ msgstr "Characteres de IO Scribite"
 #: extended_process_list.cpp:420
 #, kde-format
 msgid "IO Read Syscalls"
-msgstr ""
+msgstr "IO Read Syscalls (Appellos de systema de lectura de IO)"
 
 #: extended_process_list.cpp:429
 #, kde-format
 msgid "IO Read Syscalls Rate"
-msgstr ""
+msgstr "Rata de IO Read Syscalls"
 
 #: extended_process_list.cpp:438
 #, kde-format
 msgid "IO Write Syscalls"
-msgstr ""
+msgstr "IO Write Syscalls (Appellos de systema de scriptura de IO)"
 
 #: extended_process_list.cpp:447
 #, kde-format
 msgid "IO Write Syscalls Rate"
-msgstr ""
+msgstr "Rata de IO Write Syscalls"
 
 #: extended_process_list.cpp:456
 #, kde-format
 msgid "IO Characters Actually Read"
-msgstr ""
+msgstr "Characteres de IO legite de facto"
 
 #: extended_process_list.cpp:465
 #, kde-format
 msgid "IO Characters Read Rate"
-msgstr ""
+msgstr "Rata de lectura de character de IO"
 
 #: extended_process_list.cpp:468
 #, kde-format
@@ -416,11 +426,13 @@ msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"Le rata de lectura per tote IO de processo, includente cache de disco e "
+"altere IO non physic."
 
 #: extended_process_list.cpp:475
 #, kde-format
 msgid "IO Characters Written Rate"
-msgstr ""
+msgstr "Rata d Scriptura de Characteres de IO"
 
 #: extended_process_list.cpp:478
 #, kde-format
@@ -428,6 +440,8 @@ msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"Le rata de scriptura per tote IO de processo, includente cache de disco e "
+"altere IO non physic."
 
 #: extended_process_list.cpp:485
 #, kde-format
@@ -442,7 +456,7 @@ msgstr "Legite"
 #: extended_process_list.cpp:490
 #, kde-format
 msgid "The rate of data being read from disk."
-msgstr ""
+msgstr "Le rata de datos que es legite ex disco"
 
 #: extended_process_list.cpp:496
 #, kde-format
@@ -649,17 +663,17 @@ msgstr "Permissiones insufficiente"
 #: process_controller.cpp:183
 #, kde-format
 msgid "No matching process was found."
-msgstr ""
+msgstr "Necun processo coincidente esseva trovate"
 
 #: process_controller.cpp:185
 #, kde-format
 msgid "Not supported on the current system."
-msgstr ""
+msgstr "Non supportate sur le systema currente"
 
 #: process_controller.cpp:187
 #, kde-format
 msgid "The user cancelled."
-msgstr ""
+msgstr "Le usator cancellava."
 
 #: process_controller.cpp:189
 #, kde-format

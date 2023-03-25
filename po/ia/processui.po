@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2023-01-14 23:33+0100\n"
+"PO-Revision-Date: 2023-03-24 22:10+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 23.03.80\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -649,6 +649,8 @@ msgid ""
 "<qt>Linux flag NoNewPrivileges, if set the process can't gain further "
 "privileges via setuid etc.</qt>"
 msgstr ""
+"<qt>Linux flag NoNewPrivileges (Bandiera de Linux necunNovePrivilegios),  si "
+"fixate le processo non pote ganiar ulterior privilegios via setuid etc.</qt>"
 
 #: ProcessModel.cpp:1095
 #, kde-format
@@ -704,6 +706,9 @@ msgid ""
 "shared memory divided by the amount of processes using that shared memory "
 "added."
 msgstr ""
+"Le amonta de memoria physic usate per un processo, con le quantitate de "
+"momoria compartite dividite pe le quantitate de processos que usa ille "
+"memoria compartite addite."
 
 #: ProcessModel.cpp:1122
 #, kde-format
@@ -823,6 +828,8 @@ msgid ""
 "<qt><i>Technical information: </i>The underlying value (clock ticks since "
 "system boot) is retrieved from /proc/[pid]/stat"
 msgstr ""
+"<qt><i>Information Technic: </i>Le valor subjacente ( tics de horologio "
+"usqueboot de systema) es  recuperate ex /proc/[pid]/stat"
 
 #: ProcessModel.cpp:1164
 #, kde-format
@@ -943,6 +950,10 @@ msgid ""
 "Systemd and containers for limiting process group's usage of resources and "
 "to monitor them."
 msgstr ""
+"<qt><i>Information Technic: </i>Isto monstra le adhesion al Gruppo de "
+"Controlo de Linux i.e.  Linux Control Group (cgroup), recuperate ex /proc/"
+"[pid]/cgroup. Gruppos de  Controlo es usate per are Systemd e containers  "
+"per limitar le uso de ressource de grupos de processo e per monitorar los."
 
 #: ProcessModel.cpp:1207
 #, kde-format
@@ -963,6 +974,11 @@ msgid ""
 "shared memory is determined per shared memory section and thus can vary per "
 "memory section."
 msgstr ""
+"<i>Information Technic:</i> Isto sovente es le qual es referite como "
+"\"Grandor de Insimul Proportional\" e es le plus proxime approximation del "
+"real amonta de memoria otal usate per un processo. Nota que le numero de "
+"applicationes compartiente memoria compartite es determinate per section de "
+"memoria compartite e assi pote variar per section de memoria."
 
 #: ProcessModel.cpp:1294
 #, kde-kuit-format
@@ -1195,6 +1211,12 @@ msgid ""
 "time:</emphasis> %4</para><para><emphasis strong='true'>Relative start time:"
 "</emphasis> %5</para>"
 msgstr ""
+"<para><emphasis strong='true'>Tics de horologio usque boot de  systema:</"
+"emphasis> %1</para><para><emphasis strong='true'>Secundas usque boot de "
+"systema:</emphasis> %2 (Tempore de boot de systema: %3)</"
+"para><para><emphasis strong='true'>Tempore de initiar ansolute:</emphasis> "
+"%4</para><para><emphasis strong='true'>Tempore de initiar relative :</"
+"emphasis> %5</para>"
 
 #: ProcessModel.cpp:1686
 #, kde-kuit-format
