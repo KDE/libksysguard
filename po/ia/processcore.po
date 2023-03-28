@@ -1,20 +1,20 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# g.sora <g.sora@tiscali.it>, 2010, 2020, 2021.
+# g.sora <g.sora@tiscali.it>, 2010, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 02:55+0000\n"
-"PO-Revision-Date: 2021-07-11 17:41+0200\n"
+"PO-Revision-Date: 2023-03-27 22:05+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.04.3\n"
+"X-Generator: Lokalize 23.03.80\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: cgroup_data_model.cpp:52
@@ -149,6 +149,8 @@ msgstr "Tempore"
 #, kde-format
 msgid "The total user and system time that this process has been running for"
 msgstr ""
+"Le tempore total de usator e de systema per le qual iste processo es "
+"executante"
 
 #: extended_process_list.cpp:220
 #, kde-format
@@ -193,27 +195,29 @@ msgstr "Le currente uso total de CPU del processo"
 #: extended_process_list.cpp:263
 #, kde-format
 msgid "Group User CPU Usage"
-msgstr ""
+msgstr "Uso de CPU de Usator de Gruppo"
 
 #: extended_process_list.cpp:267
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
+"Le amonta de CPU de spatio de usator usate per iste processo e omne su "
+"filios."
 
 #: extended_process_list.cpp:275
 #, kde-format
 msgid "Group System CPU Usage"
-msgstr ""
+msgstr "Uso de CPU de Systema de Gruppo"
 
 #: extended_process_list.cpp:279
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
-msgstr ""
+msgstr "Le amonta de CPU de systema usate per iste processo e omne su filios."
 
 #: extended_process_list.cpp:288
 #, kde-format
 msgid "Group Total CPU Usage"
-msgstr ""
+msgstr "Uso de CPU Total de Gruppo"
 
 #: extended_process_list.cpp:294
 #, kde-format
@@ -223,7 +227,7 @@ msgstr "CPU de Gruppo"
 #: extended_process_list.cpp:295
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
-msgstr ""
+msgstr "Le amonta total de CPU usate per iste processo e omne su filios."
 
 #: extended_process_list.cpp:302
 #, kde-format
@@ -282,6 +286,8 @@ msgid ""
 "This is the amount of physical memory that this process is using and "
 "includes the amount of memory used by shared libraries."
 msgstr ""
+"Isto es le amonta de memoria phisic que iste processo es usante e include le "
+"amonta de memoria usate per bibliothecas compartite."
 
 #: extended_process_list.cpp:341
 #, kde-format
@@ -300,6 +306,10 @@ msgid ""
 "and approximates the Private memory usage of the process.<br>It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
+"Isto es le quantitate de memoria physic  que le processo es usante per se "
+"mesmo, e approxima  le uso de memoria private del processo. <br> Il non "
+"include alicun swapped out de memoria, ni le dimension de codice de su "
+"bibliothecas compartite."
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -340,6 +350,10 @@ msgid ""
 "usage by the amount of processes sharing that memory, then adding the "
 "process' private memory."
 msgstr ""
+"Isto es un approximation del amonta real de memoria physic que iste processo "
+"es usante. Il es calculate per divider le uso de memoria compartite de "
+"processo per le quantitate de processos que comparti ille memoria, post "
+"adder le momoria private del processo."
 
 #: extended_process_list.cpp:383
 #, kde-format
@@ -369,42 +383,42 @@ msgstr "Stato"
 #: extended_process_list.cpp:402
 #, kde-format
 msgid "IO Characters Read"
-msgstr ""
+msgstr "Characteres de IO Legite"
 
 #: extended_process_list.cpp:411
 #, kde-format
 msgid "IO Characters Written"
-msgstr ""
+msgstr "Characteres de IO Scribite"
 
 #: extended_process_list.cpp:420
 #, kde-format
 msgid "IO Read Syscalls"
-msgstr ""
+msgstr "IO Read Syscalls (Appellos de systema de lectura de IO)"
 
 #: extended_process_list.cpp:429
 #, kde-format
 msgid "IO Read Syscalls Rate"
-msgstr ""
+msgstr "Rata de IO Read Syscalls"
 
 #: extended_process_list.cpp:438
 #, kde-format
 msgid "IO Write Syscalls"
-msgstr ""
+msgstr "IO Write Syscalls (Appellos de systema de scriptura de IO)"
 
 #: extended_process_list.cpp:447
 #, kde-format
 msgid "IO Write Syscalls Rate"
-msgstr ""
+msgstr "Rata de IO Write Syscalls"
 
 #: extended_process_list.cpp:456
 #, kde-format
 msgid "IO Characters Actually Read"
-msgstr ""
+msgstr "Characteres de IO legite de facto"
 
 #: extended_process_list.cpp:465
 #, kde-format
 msgid "IO Characters Read Rate"
-msgstr ""
+msgstr "Rata de lectura de character de IO"
 
 #: extended_process_list.cpp:468
 #, kde-format
@@ -412,11 +426,13 @@ msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"Le rata de lectura per tote IO de processo, includente cache de disco e "
+"altere IO non physic."
 
 #: extended_process_list.cpp:475
 #, kde-format
 msgid "IO Characters Written Rate"
-msgstr ""
+msgstr "Rata d Scriptura de Characteres de IO"
 
 #: extended_process_list.cpp:478
 #, kde-format
@@ -424,6 +440,8 @@ msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"Le rata de scriptura per tote IO de processo, includente cache de disco e "
+"altere IO non physic."
 
 #: extended_process_list.cpp:485
 #, kde-format
@@ -438,7 +456,7 @@ msgstr "Legite"
 #: extended_process_list.cpp:490
 #, kde-format
 msgid "The rate of data being read from disk."
-msgstr ""
+msgstr "Le rata de datos que es legite ex disco"
 
 #: extended_process_list.cpp:496
 #, kde-format
@@ -645,22 +663,22 @@ msgstr "Permissiones insufficiente"
 #: process_controller.cpp:183
 #, kde-format
 msgid "No matching process was found."
-msgstr ""
+msgstr "Necun processo coincidente esseva trovate"
 
 #: process_controller.cpp:185
 #, kde-format
 msgid "Not supported on the current system."
-msgstr ""
+msgstr "Non supportate sur le systema currente"
 
 #: process_controller.cpp:187
 #, kde-format
 msgid "The user cancelled."
-msgstr ""
+msgstr "Le usator cancellava."
 
 #: process_controller.cpp:189
 #, kde-format
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Un error non specificate ha occurrite."
 
 #: process_controller.cpp:191
 #, kde-format

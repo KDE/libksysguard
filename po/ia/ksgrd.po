@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2023-02-13 12:39+0100\n"
+"PO-Revision-Date: 2023-03-27 22:06+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.03.80\n"
 
 #: SensorAgent.cpp:87
 #, kde-format
@@ -749,62 +749,62 @@ msgstr "Nivello de rumor"
 #: SensorManager.cpp:226
 #, kde-format
 msgid "Rx Invalid Nwid Packets"
-msgstr ""
+msgstr "Rx Invalide Pacchettos de Nwid"
 
 #: SensorManager.cpp:227
 #, kde-format
 msgid "Total Rx Invalid Nwid Packets"
-msgstr ""
+msgstr "Total Rx Invalide Pacchettos de Nwid"
 
 #: SensorManager.cpp:228
 #, kde-format
 msgid "Rx Invalid Crypt Packets"
-msgstr ""
+msgstr "Rx Invalide Pacchettos de Crypt"
 
 #: SensorManager.cpp:229
 #, kde-format
 msgid "Total Rx Invalid Crypt Packets"
-msgstr ""
+msgstr "Total Rx Invalide Pacchettos de Crypt"
 
 #: SensorManager.cpp:230
 #, kde-format
 msgid "Rx Invalid Frag Packets"
-msgstr ""
+msgstr "Rx Invalide Pacchettos de Frag"
 
 #: SensorManager.cpp:231
 #, kde-format
 msgid "Total Rx Invalid Frag Packets"
-msgstr ""
+msgstr "Total Rx Invalide Pacchettos de Frag"
 
 #: SensorManager.cpp:232
 #, kde-format
 msgid "Tx Excessive Retries Packets"
-msgstr ""
+msgstr "Tx Excessive pacchettos a reprobar"
 
 #: SensorManager.cpp:233
 #, kde-format
 msgid "Total Tx Excessive Retries Packets"
-msgstr ""
+msgstr "Total Tx Excessive pacchettos a reprobar"
 
 #: SensorManager.cpp:234
 #, kde-format
 msgid "Invalid Misc Packets"
-msgstr ""
+msgstr "Invalide Pacchettos Misc"
 
 #: SensorManager.cpp:235
 #, kde-format
 msgid "Total Invalid Misc Packets"
-msgstr ""
+msgstr "Total Invalide Pacchettos Misc"
 
 #: SensorManager.cpp:236
 #, kde-format
 msgid "Missed Beacons"
-msgstr ""
+msgstr "Fanales (beacon) mancate"
 
 #: SensorManager.cpp:237
 #, kde-format
 msgid "Total Missed Beacons"
-msgstr ""
+msgstr "Total Fanales (beacon) mancate"
 
 #: SensorManager.cpp:239
 #, kde-format
