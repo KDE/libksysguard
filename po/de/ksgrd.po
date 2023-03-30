@@ -1,17 +1,19 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2013, 2014, 2015, 2016, 2018, 2019, 2020.
+# Jannick Kuhr <opensource@kuhr.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2020-09-28 06:26+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2023-03-20 20:24+0100\n"
+"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: SensorAgent.cpp:87
 #, kde-format
@@ -653,39 +655,34 @@ msgid "CPU Temperature"
 msgstr "CPU-Temperatur"
 
 #: SensorManager.cpp:186
-#, fuzzy, kde-format
-#| msgid "Average CPU Temperature"
+#, kde-format
 msgid "Motherboard Temperature"
-msgstr "Durchschnittliche Prozessor-Temperatur"
+msgstr "Motherboard-Temperatur"
 
 #: SensorManager.cpp:187
-#, fuzzy, kde-format
-#| msgid "Average CPU Temperature"
+#, kde-format
 msgid "Power Supply Temperature"
-msgstr "Durchschnittliche Prozessor-Temperatur"
+msgstr "Netzteil-Temperatur"
 
 #: SensorManager.cpp:189
 #, kde-format
 msgid "Filesystem Root"
-msgstr ""
+msgstr "Wurzelverzeichnis"
 
 #: SensorManager.cpp:192
-#, fuzzy, kde-format
-#| msgid "Temperature %1"
+#, kde-format
 msgid "Extra Temperature Sensor %1"
-msgstr "Temperatur %1"
+msgstr "Zusätzlicher Temperatursensor %1"
 
 #: SensorManager.cpp:196
-#, fuzzy, kde-format
-#| msgid "Temperature %1"
+#, kde-format
 msgid "PECI Temperature Sensor %1"
-msgstr "Temperatur %1"
+msgstr "PECI-Temperatursensor %1"
 
 #: SensorManager.cpp:197
-#, fuzzy, kde-format
-#| msgid "Temperature %1"
+#, kde-format
 msgid "PECI Temperature Calibration %1"
-msgstr "Temperatur %1"
+msgstr "PECI-Temperaturkalibrierung %1"
 
 #: SensorManager.cpp:201
 #, kde-format

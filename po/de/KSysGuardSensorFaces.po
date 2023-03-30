@@ -1,20 +1,22 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-#
 # Burkhard Lück <lueck@hube-lueck.de>, 2021.
+# Jannick Kuhr <opensource@kuhr.org>, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-13 00:48+0000\n"
-"PO-Revision-Date: 2021-05-10 17:20+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2023-03-20 23:44+0100\n"
+"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -81,8 +83,8 @@ msgstr "%1 Sekunden"
 #, kde-format
 msgid "Total Sensor"
 msgid_plural "Total Sensors"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Gesamtsensor"
+msgstr[1] "Gesamtsensoren"
 
 #: ConfigSensors.qml:150
 #, kde-format
@@ -92,7 +94,7 @@ msgstr "Sensoren"
 #: ConfigSensors.qml:176
 #, kde-format
 msgid "Text-Only Sensors"
-msgstr ""
+msgstr "Nur-Text-Sensoren"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
 #: facepackages/linechart/contents/ui/Config.qml:47
@@ -139,21 +141,20 @@ msgstr "Bis:"
 #: facepackages/colorgrid/contents/ui/Config.qml:25
 #, kde-format
 msgid "Use sensor color:"
-msgstr ""
+msgstr "Sensor-Farbe verwenden:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, kde-format
 msgid "Number of Columns:"
-msgstr ""
+msgstr "Anzahl der Spalten:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:37
 #: facepackages/facegrid/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@label"
 msgid "Automatic"
-msgstr "Automatischer Datenbereich"
+msgstr "Automatisch"
 
 #: facepackages/linechart/contents/ui/Config.qml:42
 #, kde-format
@@ -163,17 +164,17 @@ msgstr "Erscheinungsbild"
 #: facepackages/linechart/contents/ui/Config.qml:51
 #, kde-format
 msgid "Stacked Charts"
-msgstr ""
+msgstr "Gestapelte Diagramme"
 
 #: facepackages/linechart/contents/ui/Config.qml:55
 #, kde-format
 msgid "Smooth Lines"
-msgstr ""
+msgstr "Weiche Linien"
 
 #: facepackages/linechart/contents/ui/Config.qml:67
 #, kde-format
 msgid "Fill Opacity:"
-msgstr ""
+msgstr "Füllungsdeckkraft:"
 
 #: facepackages/linechart/contents/ui/Config.qml:73
 #, kde-format
@@ -198,7 +199,7 @@ msgstr "Bis (Y):"
 #: facepackages/linechart/contents/ui/Config.qml:99
 #, kde-format
 msgid "Amount of History to Keep:"
-msgstr ""
+msgstr "Anzuzeigender Verlauf:"
 
 #: facepackages/linechart/contents/ui/Config.qml:102
 #, kde-format
@@ -211,7 +212,7 @@ msgstr[1] "%1 Sekunden"
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
 msgid "Start from Angle:"
-msgstr ""
+msgstr "Startwinkel:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
 #, kde-format
@@ -229,7 +230,7 @@ msgstr "°"
 #: facepackages/piechart/contents/ui/Config.qml:51
 #, kde-format
 msgid "Total Pie Angle:"
-msgstr ""
+msgstr "Gesamtwinkel:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
 #, kde-format
@@ -240,18 +241,18 @@ msgstr "%1°"
 #: facepackages/piechart/contents/ui/Config.qml:64
 #, kde-format
 msgid "Rounded Lines"
-msgstr ""
+msgstr "Abgerundete Linien"
 
 #: facepackages/textonly/contents/ui/Config.qml:24
 #, kde-format
 msgid "Group sensors based on the value of the total sensors."
-msgstr ""
+msgstr "Sensoren basierend auf dem Wert der Gesamtsensoren gruppieren."
 
 #: import/Choices.qml:53
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr ""
+msgstr "Klicken Sie zur Auswahl eines Sensors ..."
 
 #: import/Choices.qml:368
 #, kde-format
@@ -275,33 +276,38 @@ msgid ""
 "The compact representation of the sensors plasmoid when collapsed, for "
 "instance in a panel."
 msgstr ""
+"Die kompakte Darstellung des Sensoren-Plasmoids, wenn es zum Beispiel in "
+"einer Kontrollleiste eingeklappt ist."
 
 #: packagestructure/sensorfacepackage.cpp:34
 #, kde-format
 msgid "The representation of the plasmoid when it's fully expanded."
-msgstr ""
+msgstr "Die Darstellung des Plasmoids, wenn es vollständig ausgeklappt ist."
 
 #: packagestructure/sensorfacepackage.cpp:37
 #, kde-format
 msgid "The optional configuration page for this face."
-msgstr ""
+msgstr "Die optionale Einrichtungsseite für diese Darstellung."
 
 #: packagestructure/sensorfacepackage.cpp:39
 #, kde-format
 msgid "Configuration support"
-msgstr ""
+msgstr "Einrichtungsunterstützung"
 
 #: packagestructure/sensorfacepackage.cpp:40
 #, kde-format
 msgid "KConfigXT xml file for face-specific configuration options."
 msgstr ""
+"KConfigXT-xml-Datei für darstellungsspezifische Einrichtungsmöglichkeiten."
 
 #: packagestructure/sensorfacepackage.cpp:44
 #, kde-format
 msgid "The configuration file that describes face properties and capabilities."
 msgstr ""
+"Die Einrichtungsdatei, die die Eigenschaften und Fähigkeiten der Darstellung "
+"beschreibt."
 
 #: SensorFaceController.cpp:434
 #, kde-format
 msgid "System Monitor Sensor"
-msgstr ""
+msgstr "Systemmonitor-Sensor"
