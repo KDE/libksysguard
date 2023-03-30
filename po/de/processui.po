@@ -4,19 +4,21 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2010, 2011, 2012, 2015, 2016, 2020.
 # Markus Slopianka <kamikazow@fishmouth.net>, 2010.
 # Panagiotis Papadopoulos <pano_90@gmx.net>, 2010.
+# Jannick Kuhr <opensource@kuhr.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2021-05-06 05:59+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2023-03-23 21:00+0100\n"
+"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -41,11 +43,10 @@ msgid "Show Application Window"
 msgstr "Programmfenster anzeigen"
 
 #: ksysguardprocesslist.cpp:205
-#, fuzzy, kde-format
-#| msgid "Displayed Information"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detailed Information..."
-msgstr "Angezeigte Informationen"
+msgstr "Detaillierte Informationen ..."
 
 #: ksysguardprocesslist.cpp:206
 #, kde-format
@@ -343,19 +344,19 @@ msgstr "Beenden (&kill)"
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "Keine anzuzeigenden Daten"
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "Aktualisieren"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -365,139 +366,130 @@ msgid "Quick search"
 msgstr "Schnellsuche"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "Benutzername"
+msgstr "Dateiname"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
-msgstr "Beenden"
+msgstr "Ende"
 
 #: processdetails/MemoryMapsTab.cpp:254
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "Berechtigungen"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "Versatz"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
 msgctxt "@title:column"
 msgid "Inode"
-msgstr ""
+msgstr "Inode"
 
 #: processdetails/MemoryMapsTab.cpp:283 processdetails/OpenFilesTab.cpp:278
 #, kde-format
 msgctxt "@info:status"
 msgid "No data matching the filter"
-msgstr ""
+msgstr "Keine mit dem Filter übereinstimmenden Daten"
 
 #: processdetails/OpenFilesTab.cpp:33
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #: processdetails/OpenFilesTab.cpp:36
-#, fuzzy, kde-format
-#| msgid "Characters read/written"
+#, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr "Zeichen gelesen/geschrieben"
+msgstr "Zeichenorientiertes Gerät"
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "Blockorientiertes Gerät"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "Pipe"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "Socket"
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "Inaktiv"
+msgstr "ID"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
 msgctxt "@info:status"
 msgid "%1: Failed to list directory contents"
-msgstr ""
+msgstr "%1: Fehler beim Auflisten des Ordnerinhalts"
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "Alle Prozesse"
+msgstr "Prozessdetails"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "Speicher"
+msgstr "Speicherzuweisung"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "Geöffnete Dateien"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
 msgctxt "@info:status"
 msgid "The \"%1\" (PID: %2) process has stopped executing"
-msgstr ""
+msgstr "Der „%1”-Prozess (PID: %2) wird nicht mehr ausgeführt"
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "Priorität setzen "
+msgstr "E/A-Priorität"
 
 #: ProcessModel.cpp:62
 #, kde-format
@@ -658,6 +650,8 @@ msgid ""
 "<qt>Linux flag NoNewPrivileges, if set the process can't gain further "
 "privileges via setuid etc.</qt>"
 msgstr ""
+"<qt>Wenn die Linux-Option „NoNewPrivileges“ gesetzt ist, kann der Prozess "
+"keine weiteren Rechte über setuid usw. erlangen.</qt>"
 
 #: ProcessModel.cpp:1095
 #, kde-format
@@ -695,10 +689,9 @@ msgstr ""
 "mehr Informationen."
 
 #: ProcessModel.cpp:1107
-#, fuzzy, kde-format
-#| msgid "<qt>The amount of pixmap memory that this process is using.</qt>"
+#, kde-format
 msgid "<qt>The control group (cgroup) where this process belongs.</qt>"
-msgstr "<qt>Die Menge an Pixmap-Speicher, die dieser Prozess verwendet.</qt>"
+msgstr "<qt>Die Kontrollgruppe (cgroup), zu der dieser Prozess gehört.</qt>"
 
 #: ProcessModel.cpp:1109
 #, kde-format
@@ -706,6 +699,8 @@ msgid ""
 "<qt>Mandatory Access Control (SELinux or AppArmor) context for this process."
 "</qt>"
 msgstr ""
+"<qt>Mandatory-Access-Control-Kontext (SELinux oder AppArmor) für diesen "
+"Prozess.</qt>"
 
 #: ProcessModel.cpp:1112
 #, kde-format
@@ -714,6 +709,9 @@ msgid ""
 "shared memory divided by the amount of processes using that shared memory "
 "added."
 msgstr ""
+"Die Summer aus dem privaten physischen Speicher eines Prozesses und dem "
+"gemeinsam verwendeten Speicher geteilt durch die Anzahl der beteiligten "
+"Prozesse."
 
 #: ProcessModel.cpp:1122
 #, kde-format
@@ -842,13 +840,13 @@ msgstr ""
 "Systemstart) wird aus /proc/[pid]/stat bezogen"
 
 #: ProcessModel.cpp:1164
-#, fuzzy, kde-format
-#| msgid "<qt><i>Technical information: </i>This is from /proc/*/cmdline"
+#, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The flag is retrieved from /proc/[pid]/"
 "status"
 msgstr ""
-"<qt><i>Technische Informationen:</i> Diese Daten kommen aus /proc/*/cmdline."
+"<qt><i>Technische Informationen:</i> Dieser Wert wird aus /proc/[pid]/status "
+"bezogen"
 
 #: ProcessModel.cpp:1166
 #, kde-format
@@ -963,15 +961,19 @@ msgid ""
 "Systemd and containers for limiting process group's usage of resources and "
 "to monitor them."
 msgstr ""
+"<qt><i>Technische Informationen:</i> Dies zeigt die Mitgliedschaft in einer "
+"Linux-Kontrollgruppe (cgroup) an, bezogen von /proc/[pid]/cgroup. "
+"Kontrollgruppen werden von Systemd und Containern verwendet, um die "
+"Ressourcen von Prozessgruppen zu begrenzen und zu überwachen."
 
 #: ProcessModel.cpp:1207
-#, fuzzy, kde-format
-#| msgid "<qt><i>Technical information: </i>This is from /proc/*/cmdline"
+#, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This shows Mandatory Access Control "
 "(SELinux or AppArmor) context, retrieved from /proc/[pid]/attr/current."
 msgstr ""
-"<qt><i>Technische Informationen:</i> Diese Daten kommen aus /proc/*/cmdline."
+"<qt><i>Technische Informationen:</i> Dies zeigt den Mandatory-Access-Control-"
+"Kontext (SELinux oder AppArmor), bezogen von /proc/[pid]/attr/current."
 
 #: ProcessModel.cpp:1211
 #, kde-format
@@ -982,6 +984,12 @@ msgid ""
 "shared memory is determined per shared memory section and thus can vary per "
 "memory section."
 msgstr ""
+"<i>Technische Informationen:</i> Dies wird oft als „Proportional Set Size“ "
+"bezeichnet und ist die dichteste Annäherung an den tatsächlichen "
+"Speicherverbrauch eines Prozesses. Beachten Sie, dass die Anzahl an "
+"Anwendungen, die sich Speicher teilen, pro gemeinsam genutztem "
+"Speicherbereich festgelegt wird und entsprechend für jeden Speicherbereich "
+"variieren kann."
 
 #: ProcessModel.cpp:1294
 #, kde-kuit-format
@@ -1516,7 +1524,7 @@ msgstr "CGroup"
 #, kde-format
 msgctxt "process heading"
 msgid "MAC Context"
-msgstr ""
+msgstr "MAC-Kontext"
 
 #: ProcessModel.cpp:2205
 #, kde-format
