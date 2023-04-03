@@ -351,6 +351,7 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
     case UnitDecibelMilliWatts:
     case UnitVolt:
     case UnitWatt:
+    case UnitWattHour:
     case UnitSecond:
     case UnitAmpere:
         return formatNumber(value, unit, targetPrefix, options);
