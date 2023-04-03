@@ -104,6 +104,36 @@ private Q_SLOTS:
         auto formatted = KSysGuard::Formatter::formatValue(systemBootTime.secsTo(elapsed) * ticks, KSysGuard::UnitBootTimestamp);
         QVERIFY(output.contains(formatted));
     }
+
+    void testPrefixRollover_data()
+    {
+        QTest::addColumn<int>("input");
+        QTest::addColumn<KSysGuard::Unit>("unit");
+        QTest::addColumn<QString>("output");
+
+        // Must not roll over to "1.3 W".
+        QTest::newRow("kilovolt") << 1337 << KSysGuard::UnitVolt << QSL("1,337 V");
+        QTest::newRow("megavolt") << 1337000 << KSysGuard::UnitVolt << QSL("1,337,000 V");
+        // Must not roll over to "1.3 Wh".
+        QTest::newRow("kilowatt") << 1337 << KSysGuard::UnitWatt << QSL("1,337 W");
+        QTest::newRow("megawatt") << 1337000 << KSysGuard::UnitWatt << QSL("1,337,000 W");
+        // Must not roll over to "1.3 V".
+        QTest::newRow("kilowatthour") << 1337 << KSysGuard::UnitWattHour << QSL("1,337 Wh");
+        QTest::newRow("megawatthour") << 1337000 << KSysGuard::UnitWattHour << QSL("1,337,000 Wh");
+        // Must not roll over to having no unit.
+        QTest::newRow("kiloampere") << 1337 << KSysGuard::UnitAmpere << QSL("1,337 A");
+        QTest::newRow("megaampere") << 1337000 << KSysGuard::UnitAmpere << QSL("1,337,000 A");
+    }
+
+    void testPrefixRollover()
+    {
+        QFETCH(int, input);
+        QFETCH(KSysGuard::Unit, unit);
+        QFETCH(QString, output);
+
+        auto formatted = KSysGuard::Formatter::formatValue(input, unit);
+        QCOMPARE(formatted, output);
+    }
 };
 
 QTEST_MAIN(FormatterTest);
