@@ -251,7 +251,14 @@ static Unit adjustedUnit(qreal value, Unit unit, MetricPrefix prefix)
         }
     }
 
-    return Unit(prefix + baseUnit);
+    const Unit newUnit = Unit(prefix + baseUnit);
+    // If there is no prefixed unit (e.g. no UnitKiloWatt),
+    // don't overflow into the following unrelated units.
+    if (unitBase(newUnit) != baseUnit) {
+        return unit;
+    }
+
+    return newUnit;
 }
 
 static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefix, FormatOptions options)
