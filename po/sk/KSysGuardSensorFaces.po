@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-06-14 17:30+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -265,49 +265,36 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Späť"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Užívateľské rozhranie"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"Kompaktná reprezentácia plasmoidu senzorov pri zbalení ako napríklad v "
-"paneli."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Reprezentácia plasmoidu keď je úplne rozbalený."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Voliteľná konfiguračná stránka pre túto tvár."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Podpora konfigurácie"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "Súbor KConfigXT xml pre možnosti konfigurácie špecifickej pre tvár."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Konfiguračný súbor, ktorý popisuje schopnosti a vlastnosti tváre."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Senzor monitorovania systému"
+
+#~ msgid "User Interface"
+#~ msgstr "Užívateľské rozhranie"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Kompaktná reprezentácia plasmoidu senzorov pri zbalení ako napríklad v "
+#~ "paneli."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Reprezentácia plasmoidu keď je úplne rozbalený."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Voliteľná konfiguračná stránka pre túto tvár."
+
+#~ msgid "Configuration support"
+#~ msgstr "Podpora konfigurácie"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "Súbor KConfigXT xml pre možnosti konfigurácie špecifickej pre tvár."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "Konfiguračný súbor, ktorý popisuje schopnosti a vlastnosti tváre."
 
 #~ msgid "Automatic X Data Range"
 #~ msgstr "Automatický dátový rozsah X"

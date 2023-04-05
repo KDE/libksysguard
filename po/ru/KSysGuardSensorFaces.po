@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-09-05 11:54+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -271,47 +271,35 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Назад"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Пользовательский интерфейс"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"Компактное изображение датчиков виджета Plasma при сворачивании, например, "
-"на панели."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Отображение виджета Plasma в развёрнутом состоянии."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Страница дополнительной настройки для этого оформления."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Поддержка конфигурации"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr ""
-"XML-файл KConfigXT для параметров конфигурации, зависящих от оформления."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Файл конфигурации, описывающий свойства оформления и его возможности."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Датчик системного монитора"
+
+#~ msgid "User Interface"
+#~ msgstr "Пользовательский интерфейс"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Компактное изображение датчиков виджета Plasma при сворачивании, "
+#~ "например, на панели."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Отображение виджета Plasma в развёрнутом состоянии."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Страница дополнительной настройки для этого оформления."
+
+#~ msgid "Configuration support"
+#~ msgstr "Поддержка конфигурации"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr ""
+#~ "XML-файл KConfigXT для параметров конфигурации, зависящих от оформления."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr ""
+#~ "Файл конфигурации, описывающий свойства оформления и его возможности."

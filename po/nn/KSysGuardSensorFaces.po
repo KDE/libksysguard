@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2023-03-10 22:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -267,46 +267,33 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Tilbake"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Brukarflate"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"Den kompakte visinga av sensor­elementet når det er falda saman, for eksempel "
-"i eit panel."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Visinga av sensor­elementet når det er heilt utvida."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Den valfrie oppsettsida for denne flata."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Oppsettstøtte"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "KConfigXT-XML-fil for flate­spesifikke innstillingar."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Oppsettfila som skildrar eigenskapar og funksjonalitet for flater."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Systemovervakingssensor"
+
+#~ msgid "User Interface"
+#~ msgstr "Brukarflate"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Den kompakte visinga av sensor­elementet når det er falda saman, for "
+#~ "eksempel i eit panel."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Visinga av sensor­elementet når det er heilt utvida."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Den valfrie oppsettsida for denne flata."
+
+#~ msgid "Configuration support"
+#~ msgstr "Oppsettstøtte"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "KConfigXT-XML-fil for flate­spesifikke innstillingar."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "Oppsettfila som skildrar eigenskapar og funksjonalitet for flater."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-06-15 21:49+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -264,49 +264,36 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Bakåt"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Användargränssnitt"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"Den kompakta representationen av sensorplasmoiden när den är hopdragen, "
-"exempelvis i en panel."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Representationen av plasmoiden när den är helt expanderad."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Frontens valfria inställningssida."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Inställningsstöd"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "KConfigXT XML-fil för frontspecifika inställningsalternativ."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Inställningsfilen som beskriver frontens egenskaper och funktioner."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Systemövervakningssensor"
+
+#~ msgid "User Interface"
+#~ msgstr "Användargränssnitt"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Den kompakta representationen av sensorplasmoiden när den är hopdragen, "
+#~ "exempelvis i en panel."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Representationen av plasmoiden när den är helt expanderad."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Frontens valfria inställningssida."
+
+#~ msgid "Configuration support"
+#~ msgstr "Inställningsstöd"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "KConfigXT XML-fil för frontspecifika inställningsalternativ."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "Inställningsfilen som beskriver frontens egenskaper och funktioner."
 
 #~ msgid "Automatic X Data Range"
 #~ msgstr "Automatiskt X-dataintervall"

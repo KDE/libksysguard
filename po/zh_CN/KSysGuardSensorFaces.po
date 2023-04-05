@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2023-02-24 12:43\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -262,44 +262,31 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "返回"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "用户界面"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr "传感器 Plasma 小程序在面板折叠等情况下的紧凑式显示效果。"
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "传感器 Plasma 小程序在完全展开时的显示效果。"
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "此面板的可选配置页面。"
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "配置支持"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "KConfigXT XML 文件，用于面板的配置选项。"
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "描述面板属性和功能的配置文件。"
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "系统监视传感器"
+
+#~ msgid "User Interface"
+#~ msgstr "用户界面"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr "传感器 Plasma 小程序在面板折叠等情况下的紧凑式显示效果。"
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "传感器 Plasma 小程序在完全展开时的显示效果。"
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "此面板的可选配置页面。"
+
+#~ msgid "Configuration support"
+#~ msgstr "配置支持"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "KConfigXT XML 文件，用于面板的配置选项。"
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "描述面板属性和功能的配置文件。"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-10-13 06:50+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -267,52 +267,39 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Atzera"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Erabiltzailearen interfazea"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"Sentsoreen plasmoidearen adierazpen trinkoa tolestuta dagoenean, panel "
-"batean adibidez."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Plasmoidearen adierazpena erabat zabalduta dagoenean."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "«Aurpegi» honetarako hautazko konfigurazioa."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Konfigurazioaren euskarria"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr ""
-"«Aurpegien» berariazko konfigurazio aukeretarako KConfigXT xml fitxategia."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr ""
-"«Aurpegien» propietateak eta gaitasunak deskribatzen dituen konfiguratzeko "
-"fitxategia."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sistema gainbegiratzeko sentsorea"
+
+#~ msgid "User Interface"
+#~ msgstr "Erabiltzailearen interfazea"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Sentsoreen plasmoidearen adierazpen trinkoa tolestuta dagoenean, panel "
+#~ "batean adibidez."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Plasmoidearen adierazpena erabat zabalduta dagoenean."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "«Aurpegi» honetarako hautazko konfigurazioa."
+
+#~ msgid "Configuration support"
+#~ msgstr "Konfigurazioaren euskarria"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr ""
+#~ "«Aurpegien» berariazko konfigurazio aukeretarako KConfigXT xml fitxategia."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr ""
+#~ "«Aurpegien» propietateak eta gaitasunak deskribatzen dituen "
+#~ "konfiguratzeko fitxategia."
 
 #~ msgid "Automatic X Data Range"
 #~ msgstr "X datuen barruti automatikoa"

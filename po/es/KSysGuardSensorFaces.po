@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-10-13 12:31+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -266,53 +266,41 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Volver"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Interfaz del usuario"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"La representación compacta del plasmoide de los sensores cuando está "
-"comprimida (por ejemplo, en un panel)."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "La representación del plasmoide cuando está completamente expandido."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "La página de configuración opcional para esta carátula."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Implementación de configuración"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr ""
-"Archivo XML de KConfigXT para las opciones de configuración específicas de "
-"carátulas."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr ""
-"El archivo de configuración que describe las propiedades y capacidades de la "
-"carátula."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sensor del monitor del sistema"
+
+#~ msgid "User Interface"
+#~ msgstr "Interfaz del usuario"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "La representación compacta del plasmoide de los sensores cuando está "
+#~ "comprimida (por ejemplo, en un panel)."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr ""
+#~ "La representación del plasmoide cuando está completamente expandido."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "La página de configuración opcional para esta carátula."
+
+#~ msgid "Configuration support"
+#~ msgstr "Implementación de configuración"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr ""
+#~ "Archivo XML de KConfigXT para las opciones de configuración específicas "
+#~ "de carátulas."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr ""
+#~ "El archivo de configuración que describe las propiedades y capacidades de "
+#~ "la carátula."
 
 #~ msgid "Automatic X Data Range"
 #~ msgstr "Intervalo de datos en X automático"

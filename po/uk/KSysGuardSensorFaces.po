@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-10-13 12:02+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -271,49 +271,37 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Назад"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Інтерфейс користувача"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"Компактне представлення плазмоїда, коли його згорнуто, наприклад на панелі."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Вигляд плазмоїда, коли його повністю розгорнуто."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Додаткова сторінка налаштувань для цього вигляду."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Підтримка налаштувань"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr ""
-"Файл XML KConfigXT для специфічних для вигляду параметрів налаштування."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Файл налаштувань, який описує властивості і можливості вигляду."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Датчик нагляду за системою"
+
+#~ msgid "User Interface"
+#~ msgstr "Інтерфейс користувача"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Компактне представлення плазмоїда, коли його згорнуто, наприклад на "
+#~ "панелі."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Вигляд плазмоїда, коли його повністю розгорнуто."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Додаткова сторінка налаштувань для цього вигляду."
+
+#~ msgid "Configuration support"
+#~ msgstr "Підтримка налаштувань"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr ""
+#~ "Файл XML KConfigXT для специфічних для вигляду параметрів налаштування."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "Файл налаштувань, який описує властивості і можливості вигляду."
 
 #~ msgid "Automatic X Data Range"
 #~ msgstr "Автоматичний діапазон за X"

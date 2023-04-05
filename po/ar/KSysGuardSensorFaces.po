@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-09-06 20:39+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -273,46 +273,33 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "السابق"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "واجهة المستخدم"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"التمثيل المضغوط لأجهزة الاستشعار البلازمويدية عند تصغيرها، على سبيل المثال "
-"في لوحة."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "تمثيل البلازمويد عندما يتم توسيعه بالكامل."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "صفحة الضبط الاختيارية لهذا الوجه."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "دعم الضبط"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "ملف KConfigXT xml لخيارات الضبط الخاصة بالوجه."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "ملف الضبط الذي يصف خصائص وقدرات الوجه."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "مستشعر مراقبة النظام"
+
+#~ msgid "User Interface"
+#~ msgstr "واجهة المستخدم"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "التمثيل المضغوط لأجهزة الاستشعار البلازمويدية عند تصغيرها، على سبيل "
+#~ "المثال في لوحة."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "تمثيل البلازمويد عندما يتم توسيعه بالكامل."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "صفحة الضبط الاختيارية لهذا الوجه."
+
+#~ msgid "Configuration support"
+#~ msgstr "دعم الضبط"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "ملف KConfigXT xml لخيارات الضبط الخاصة بالوجه."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "ملف الضبط الذي يصف خصائص وقدرات الوجه."

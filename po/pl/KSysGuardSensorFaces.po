@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-12-10 11:39+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -267,44 +267,31 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Wstecz"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Interfejs użytkownika"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr "Zwarty wygląd plazmoidu mierników, gdy zwinięty, np. na panelu."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Wygląd plazmoidu, gdy jest w pełni rozwinięty."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Nieobowiązkowa strona ustawień dla tej twarzy."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Obsługa ustawiania"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "Plik xml KConfigXT do ustawiania twarzy."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Plik ustawień, który opisuje własności i możliwości twarzy."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Miernik monitora systemowego"
+
+#~ msgid "User Interface"
+#~ msgstr "Interfejs użytkownika"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr "Zwarty wygląd plazmoidu mierników, gdy zwinięty, np. na panelu."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Wygląd plazmoidu, gdy jest w pełni rozwinięty."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Nieobowiązkowa strona ustawień dla tej twarzy."
+
+#~ msgid "Configuration support"
+#~ msgstr "Obsługa ustawiania"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "Plik xml KConfigXT do ustawiania twarzy."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "Plik ustawień, który opisuje własności i możliwości twarzy."

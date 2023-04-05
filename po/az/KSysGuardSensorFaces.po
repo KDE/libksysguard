@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-11-11 18:00+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -264,46 +264,33 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Geriyə"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "İstifaddəçi İnterfeysi"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"Sensor plazmoidinin bükülmüş vəziyyətdə yığcam görünüşü, misal üçün, panel "
-"görünüşündə olduğu kimi."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Plazmoid tam açıldığı zaman onun görünüşü."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Bu üz üçün səhifənin tənzimlənmə seçimi."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Tənzimləmə dəstəyi"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "Verilmiş üz üçün tənzimləmə seçimləri üçün KConfigXT xml faylı."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Üz xüsusiyyətlərini və imkanlarını təsvir edən tənzimləmə faylı."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sistemi İzləmə Sensoru"
+
+#~ msgid "User Interface"
+#~ msgstr "İstifaddəçi İnterfeysi"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Sensor plazmoidinin bükülmüş vəziyyətdə yığcam görünüşü, misal üçün, "
+#~ "panel görünüşündə olduğu kimi."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Plazmoid tam açıldığı zaman onun görünüşü."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Bu üz üçün səhifənin tənzimlənmə seçimi."
+
+#~ msgid "Configuration support"
+#~ msgstr "Tənzimləmə dəstəyi"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "Verilmiş üz üçün tənzimləmə seçimləri üçün KConfigXT xml faylı."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "Üz xüsusiyyətlərini və imkanlarını təsvir edən tənzimləmə faylı."

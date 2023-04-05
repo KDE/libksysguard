@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2023-02-20 22:06+0200\n"
 "Last-Translator: Tommi Nieminen <tommi.nieminen@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -265,47 +265,35 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Takaisin"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Käyttöliittymä"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr "Anturisovelman tiivis esitysasu supistettuna, esimerkiksi paneelissa."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Sovelman esitysasu täydeksi laajennettuna."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Tämän ulkoasun valinnainen asetussivu."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Asetustuki"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "KConfigXT-XML-tiedosto ulkoasukohtaisille asetusvalinnoille."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Ulkoasun ominaisuudet ja kyvyt kuvaava asetustiedosto."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Järjestelmävalvonnan anturi"
+
+#~ msgid "User Interface"
+#~ msgstr "Käyttöliittymä"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Anturisovelman tiivis esitysasu supistettuna, esimerkiksi paneelissa."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Sovelman esitysasu täydeksi laajennettuna."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Tämän ulkoasun valinnainen asetussivu."
+
+#~ msgid "Configuration support"
+#~ msgstr "Asetustuki"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "KConfigXT-XML-tiedosto ulkoasukohtaisille asetusvalinnoille."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "Ulkoasun ominaisuudet ja kyvyt kuvaava asetustiedosto."
 
 #~ msgid "Automatic X Data Range"
 #~ msgstr "Automaattinen X-tietoalue"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2023-02-13 09:03+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -269,48 +269,36 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Nazaj"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "Uporabniški vmesnik"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr ""
-"Kompakten prikaz plazmoida senzorjev če so strnjeni na primer v plošči."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "Predstavitev plazmoida, ko je popolnoma razširjen."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "Neobvezna stran z nastavitvijo za ta prikaz."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "Podpora nastavitvam"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "KConfigXT datoteka xml za posebne možnosti nastavitve."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "Nastavitvena datoteka, ki opisuje lastnosti in zmogljivosti prikaza."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Senzor sistemskega monitorja"
+
+#~ msgid "User Interface"
+#~ msgstr "Uporabniški vmesnik"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr ""
+#~ "Kompakten prikaz plazmoida senzorjev če so strnjeni na primer v plošči."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "Predstavitev plazmoida, ko je popolnoma razširjen."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "Neobvezna stran z nastavitvijo za ta prikaz."
+
+#~ msgid "Configuration support"
+#~ msgstr "Podpora nastavitvam"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "KConfigXT datoteka xml za posebne možnosti nastavitve."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr ""
+#~ "Nastavitvena datoteka, ki opisuje lastnosti in zmogljivosti prikaza."
 
 #~ msgid "Automatic X Data Range"
 #~ msgstr "Samodejni obseg podatkov X"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
 "PO-Revision-Date: 2022-07-13 12:18+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -262,47 +262,34 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "뒤로"
 
-#: packagestructure/sensorfacepackage.cpp:25
-#, kde-format
-msgid "User Interface"
-msgstr "사용자 인터페이스"
-
-#: packagestructure/sensorfacepackage.cpp:29
-#, kde-format
-msgid ""
-"The compact representation of the sensors plasmoid when collapsed, for "
-"instance in a panel."
-msgstr "패널 등에서 센서 Plasmoid를 접었을 때 작은 표시입니다."
-
-#: packagestructure/sensorfacepackage.cpp:34
-#, kde-format
-msgid "The representation of the plasmoid when it's fully expanded."
-msgstr "센서 Plasmoid를 펼쳤을 때 표시입니다."
-
-#: packagestructure/sensorfacepackage.cpp:37
-#, kde-format
-msgid "The optional configuration page for this face."
-msgstr "이 표시기의 추가 설정 페이지입니다."
-
-#: packagestructure/sensorfacepackage.cpp:39
-#, kde-format
-msgid "Configuration support"
-msgstr "설정 지원"
-
-#: packagestructure/sensorfacepackage.cpp:40
-#, kde-format
-msgid "KConfigXT xml file for face-specific configuration options."
-msgstr "표시기별 설정을 저장하는 KConfigXT XML 파일입니다."
-
-#: packagestructure/sensorfacepackage.cpp:44
-#, kde-format
-msgid "The configuration file that describes face properties and capabilities."
-msgstr "표시기 속성과 사용 가능한 기능을 설명하는 설정 파일입니다."
-
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "시스템 모니터 센서"
+
+#~ msgid "User Interface"
+#~ msgstr "사용자 인터페이스"
+
+#~ msgid ""
+#~ "The compact representation of the sensors plasmoid when collapsed, for "
+#~ "instance in a panel."
+#~ msgstr "패널 등에서 센서 Plasmoid를 접었을 때 작은 표시입니다."
+
+#~ msgid "The representation of the plasmoid when it's fully expanded."
+#~ msgstr "센서 Plasmoid를 펼쳤을 때 표시입니다."
+
+#~ msgid "The optional configuration page for this face."
+#~ msgstr "이 표시기의 추가 설정 페이지입니다."
+
+#~ msgid "Configuration support"
+#~ msgstr "설정 지원"
+
+#~ msgid "KConfigXT xml file for face-specific configuration options."
+#~ msgstr "표시기별 설정을 저장하는 KConfigXT XML 파일입니다."
+
+#~ msgid ""
+#~ "The configuration file that describes face properties and capabilities."
+#~ msgstr "표시기 속성과 사용 가능한 기능을 설명하는 설정 파일입니다."
 
 #~ msgid "Automatic X Data Range"
 #~ msgstr "자동 X 데이터 범위"
