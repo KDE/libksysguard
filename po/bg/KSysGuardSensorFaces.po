@@ -270,28 +270,3 @@ msgstr "Назад"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Сензор на системния монитор"
-
-#~ msgid "User Interface"
-#~ msgstr "Потребителски интерфейс"
-
-#~ msgid ""
-#~ "The compact representation of the sensors plasmoid when collapsed, for "
-#~ "instance in a panel."
-#~ msgstr "Компактно представяне на сензорните приставки в панела при свиване."
-
-#~ msgid "The representation of the plasmoid when it's fully expanded."
-#~ msgstr "Представянето на плазмоид, когато е напълно разширен."
-
-#~ msgid "The optional configuration page for this face."
-#~ msgstr "Опционална страница за конфигурация за това лице."
-
-#~ msgid "Configuration support"
-#~ msgstr "Поддръжка за конфигурация"
-
-#~ msgid "KConfigXT xml file for face-specific configuration options."
-#~ msgstr "KConfigXT xml файл за специфични за лицето опции за конфигуриране."
-
-#~ msgid ""
-#~ "The configuration file that describes face properties and capabilities."
-#~ msgstr ""
-#~ "Конфигурационният файл, който описва свойствата и възможностите на лицето."
