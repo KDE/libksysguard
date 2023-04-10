@@ -116,7 +116,7 @@ Kirigami.FormLayout {
             Accessible.name: i18nd("KSysGuardSensorFaces", "Get new presets...")
             configFile: "systemmonitor-presets.knsrc"
             text: ""
-            onChangedEntriesChanged: controller.availablePresetsModel.reload();
+            onEntryEvent: controller.availablePresetsModel.reload();
             QQC2.ToolTip {
                 text: parent.Accessible.name
             }
@@ -168,7 +168,7 @@ Kirigami.FormLayout {
         NewStuff.Button {
             text: i18nd("KSysGuardSensorFaces", "Get New Display Styles...")
             configFile: "systemmonitor-faces.knsrc"
-            onChangedEntriesChanged: controller.availableFacesModel.reload();
+            onEntryEvent: controller.availableFacesModel.reload();
         }
     }
 
