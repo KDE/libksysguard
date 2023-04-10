@@ -933,12 +933,12 @@ void SensorFaceController::savePreset()
              {"License", "LGPL 2.1+"},
              {"EnabledByDefault", true},
              {"Version", "0.1"},
-             {"ServiceTypes", QJsonArray{{"Plasma/Applet"}}} //
          }},
         {"X-Plasma-API", "declarativeappletscript"},
         {"X-Plasma-MainScript", "ui/main.qml"},
         {"X-Plasma-Provides", "org.kde.plasma.systemmonitor"},
         {"X-Plasma-RootPath", "org.kde.plasma.systemmonitor"},
+        {"KPackageStructure", "Plasma/Applet"},
     });
 
     if (QFile file{dir.path() % QStringLiteral("/metadata.json")}; file.open(QIODevice::WriteOnly)) {
