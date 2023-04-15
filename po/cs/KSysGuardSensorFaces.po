@@ -270,6 +270,3 @@ msgstr "Zpět"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Senzor monitoru systému"
-
-#~ msgid "User Interface"
-#~ msgstr "Uživatelské rozhraní"
