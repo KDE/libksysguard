@@ -271,29 +271,3 @@ msgstr "Tilbake"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Systemovervakingssensor"
-
-#~ msgid "User Interface"
-#~ msgstr "Brukarflate"
-
-#~ msgid ""
-#~ "The compact representation of the sensors plasmoid when collapsed, for "
-#~ "instance in a panel."
-#~ msgstr ""
-#~ "Den kompakte visinga av sensor­elementet når det er falda saman, for "
-#~ "eksempel i eit panel."
-
-#~ msgid "The representation of the plasmoid when it's fully expanded."
-#~ msgstr "Visinga av sensor­elementet når det er heilt utvida."
-
-#~ msgid "The optional configuration page for this face."
-#~ msgstr "Den valfrie oppsettsida for denne flata."
-
-#~ msgid "Configuration support"
-#~ msgstr "Oppsettstøtte"
-
-#~ msgid "KConfigXT xml file for face-specific configuration options."
-#~ msgstr "KConfigXT-XML-fil for flate­spesifikke innstillingar."
-
-#~ msgid ""
-#~ "The configuration file that describes face properties and capabilities."
-#~ msgstr "Oppsettfila som skildrar eigenskapar og funksjonalitet for flater."
