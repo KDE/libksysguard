@@ -9,6 +9,8 @@
 #include <QAbstractItemModel>
 #include <processcore/processes.h>
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 class Process;
@@ -24,7 +26,7 @@ class ProcessAttributeModel;
  * needing to understand the semantics of each column
  * It is designed to be consumable by a QML API
  */
-class Q_DECL_EXPORT ProcessDataModel : public QAbstractItemModel
+class PROCESSCORE_EXPORT ProcessDataModel : public QAbstractItemModel
 {
     Q_OBJECT
 

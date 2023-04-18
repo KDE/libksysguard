@@ -10,11 +10,13 @@
 #include <QObject>
 #include <QSharedPointer>
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 class ProcessAttribute;
 
-class Q_DECL_EXPORT ExtendedProcesses : public KSysGuard::Processes
+class PROCESSCORE_EXPORT ExtendedProcesses : public KSysGuard::Processes
 {
     Q_OBJECT
 public:

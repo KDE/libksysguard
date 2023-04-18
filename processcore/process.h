@@ -14,11 +14,13 @@
 #include <QTime>
 #include <QVariant>
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 class ProcessPrivate; // forward decl d-ptr
 
-class Q_DECL_EXPORT Process
+class PROCESSCORE_EXPORT Process
 {
 public:
     enum ProcessStatus { Running, Sleeping, DiskSleep, Zombie, Stopped, Paging, Ended, OtherStatus = 99 };

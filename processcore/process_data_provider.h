@@ -9,6 +9,8 @@
 #include <QVariant>
 #include <QVector>
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 class Processes;
@@ -19,7 +21,7 @@ class ProcessAttribute;
  * Base class for a process plugin data
  * Plugins provide a list of additional attributes, which in turn have data about a given process
  */
-class Q_DECL_EXPORT ProcessDataProvider : public QObject
+class PROCESSCORE_EXPORT ProcessDataProvider : public QObject
 {
     Q_OBJECT
 

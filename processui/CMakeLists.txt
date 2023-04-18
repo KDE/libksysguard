@@ -35,6 +35,8 @@ if(HAVE_XRES)
     include_directories(${X11_XRes_INCLUDE_PATH})
 endif()
 
+generate_export_header(processui)
+
 target_link_libraries(processui
     PUBLIC
         KSysGuard::ProcessCore
@@ -89,6 +91,7 @@ install( FILES
     ProcessFilter.h
     KTextEditVT.h
     ksysguardprocesslist.h
+    ${CMAKE_CURRENT_BINARY_DIR}/processui_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/processui
     COMPONENT Devel
 )

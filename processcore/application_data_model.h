@@ -8,9 +8,11 @@
 
 #include "cgroup_data_model.h"
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
-class Q_DECL_EXPORT ApplicationDataModel : public CGroupDataModel
+class PROCESSCORE_EXPORT ApplicationDataModel : public CGroupDataModel
 {
     Q_OBJECT
 public:

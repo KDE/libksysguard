@@ -10,6 +10,8 @@ ecm_qt_declare_logging_category(ksignalplotter_LIB_SRCS HEADER ksignalplotter_de
 add_library(ksignalplotter ${ksignalplotter_LIB_SRCS})
 add_library(KSysGuard::SignalPlotter ALIAS ksignalplotter)
 
+generate_export_header(ksignalplotter)
+
 target_link_libraries(ksignalplotter
     PUBLIC
         Qt::Widgets
@@ -27,7 +29,9 @@ set_target_properties(ksignalplotter PROPERTIES
 
 install(TARGETS ksignalplotter EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(FILES ksignalplotter.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard COMPONENT Devel)
+install(FILES ksignalplotter.h
+    ${CMAKE_CURRENT_BINARY_DIR}/ksignalplotter_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard COMPONENT Devel)
 
 if(BUILD_DESIGNERPLUGIN)
     add_subdirectory(designer)

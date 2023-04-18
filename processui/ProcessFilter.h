@@ -14,6 +14,8 @@
 #include <QObject>
 #include <QSortFilterProxyModel>
 
+#include "processui_export.h"
+
 class QModelIndex;
 
 #ifdef Q_OS_WIN
@@ -21,7 +23,7 @@ class QModelIndex;
 // please keep it this way even if you port this library to have a _export.h header file
 #define KSYSGUARD_EXPORT
 #else
-#define KSYSGUARD_EXPORT Q_DECL_EXPORT
+#define KSYSGUARD_EXPORT PROCESSUI_EXPORT
 #endif
 
 class KSYSGUARD_EXPORT ProcessFilter : public QSortFilterProxyModel

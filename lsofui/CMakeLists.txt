@@ -13,6 +13,8 @@ ki18n_wrap_ui( lsofui_LIB_SRCS
 add_library(lsofui ${lsofui_LIB_SRCS})
 add_library(KSysGuard::LsofUi ALIAS lsofui)
 
+generate_export_header(lsofui)
+
 target_link_libraries(lsofui
     PUBLIC
         Qt::Widgets
@@ -28,7 +30,11 @@ install(TARGETS lsofui EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_D
 
 ########### install files ###############
 
-install( FILES lsof.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard COMPONENT Devel)
+install( FILES lsof.h 
+    ${CMAKE_CURRENT_BINARY_DIR}/lsofui_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard
+    COMPONENT Devel
+)
 
 if(BUILD_DESIGNERPLUGIN)
     add_subdirectory(designer)

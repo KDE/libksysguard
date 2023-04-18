@@ -20,6 +20,8 @@
 #include "ProcessModel.h"
 #include <processcore/processes.h>
 
+#include "processui_export.h"
+
 class QShowEvent;
 class QHideEvent;
 class QLineEdit;
@@ -33,7 +35,7 @@ struct KSysGuardProcessListPrivate;
  * update rate and the process filter.  The buttons are used to force
  * an immediate update and to kill a process.
  */
-class Q_DECL_EXPORT KSysGuardProcessList : public QWidget
+class PROCESSUI_EXPORT KSysGuardProcessList : public QWidget
 {
     Q_OBJECT
     Q_PROPERTY(bool showTotalsInTree READ showTotals WRITE setShowTotals)

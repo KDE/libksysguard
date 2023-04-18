@@ -14,6 +14,8 @@
 #include <QWidget>
 #include <klocalizedstring.h>
 
+#include "ksignalplotter_export.h"
+
 class QPaintEvent;
 class QResizeEvent;
 
@@ -52,7 +54,7 @@ Q_DECLARE_METATYPE(KLocalizedString)
  *
  *  \image KSignalPlotter.png  Example KSignalPlotter with two beams
  */
-class Q_DECL_EXPORT KSignalPlotter : public QWidget
+class KSIGNALPLOTTER_EXPORT KSignalPlotter : public QWidget
 {
     Q_OBJECT
     Q_PROPERTY(qreal minimumValue READ minimumValue WRITE setMinimumValue)

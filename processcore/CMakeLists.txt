@@ -26,6 +26,8 @@ ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h ID
 add_library(processcore ${ksysguard_LIB_SRCS})
 add_library(KSysGuard::ProcessCore ALIAS processcore)
 
+generate_export_header(processcore)
+
 target_link_libraries(processcore
    PUBLIC
     Qt::Core
@@ -74,6 +76,7 @@ install( FILES
     process_attribute_model.h
     formatter.h
     unit.h
+    ${CMAKE_CURRENT_BINARY_DIR}/processcore_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/processcore
     COMPONENT Devel
 )

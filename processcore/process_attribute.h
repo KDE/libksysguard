@@ -11,12 +11,14 @@
 #include "processes.h"
 #include "unit.h"
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 class Process;
 class CGroup;
 
-class Q_DECL_EXPORT ProcessAttribute : public QObject
+class PROCESSCORE_EXPORT ProcessAttribute : public QObject
 {
     Q_OBJECT
 public:

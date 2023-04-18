@@ -12,6 +12,8 @@
 #include <QObject>
 #include <QVariant>
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 /**
@@ -37,7 +39,7 @@ namespace KSysGuard
 #ifdef Q_WS_WIN
 class Processes : public QObject
 #else
-class Q_DECL_EXPORT Processes : public QObject
+class PROCESSCORE_EXPORT Processes : public QObject
 #endif
 {
     Q_OBJECT

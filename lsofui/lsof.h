@@ -11,9 +11,11 @@
 #include <QProcess>
 #include <QTreeWidget>
 
+#include "lsofui_export.h"
+
 struct KLsofWidgetPrivate;
 
-class Q_DECL_EXPORT KLsofWidget : public QTreeWidget
+class LSOFUI_EXPORT KLsofWidget : public QTreeWidget
 {
     Q_OBJECT
     Q_PROPERTY(qlonglong pid READ pid WRITE setPid)

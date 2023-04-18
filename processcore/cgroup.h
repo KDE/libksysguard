@@ -12,6 +12,8 @@
 
 #include <KService>
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 class Process;
@@ -21,7 +23,7 @@ class CGroupPrivate;
  * @brief The CGroup class represents a cgroup. This could be a
  * service, slice or scope
  */
-class Q_DECL_EXPORT CGroup
+class PROCESSCORE_EXPORT CGroup
 {
 public:
     virtual ~CGroup();

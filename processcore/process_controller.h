@@ -16,6 +16,8 @@
 
 #include "process.h"
 
+#include "processcore_export.h"
+
 class QWidget;
 
 /**
@@ -28,7 +30,7 @@ class QWidget;
  */
 namespace KSysGuard
 {
-class Q_DECL_EXPORT ProcessController : public QObject
+class PROCESSCORE_EXPORT ProcessController : public QObject
 {
     Q_OBJECT
 

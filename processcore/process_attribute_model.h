@@ -9,6 +9,8 @@
 
 #include <QAbstractListModel>
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 class ExtendedProcesses;
@@ -18,7 +20,7 @@ class ProcessAttribute;
  * Presents a list of available attributes that can be
  * enabled on a ProceessDataModel
  */
-class Q_DECL_EXPORT ProcessAttributeModel : public QAbstractListModel
+class PROCESSCORE_EXPORT ProcessAttributeModel : public QAbstractListModel
 {
     Q_OBJECT
 public:

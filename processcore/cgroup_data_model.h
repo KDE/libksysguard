@@ -10,6 +10,8 @@
 
 #include "process_attribute_model.h"
 
+#include "processcore_export.h"
+
 namespace KSysGuard
 {
 class CGroup;
@@ -22,7 +24,7 @@ class CGroupDataModelPrivate;
  *
  * Data is refreshed on a timer
  */
-class Q_DECL_EXPORT CGroupDataModel : public QAbstractItemModel
+class PROCESSCORE_EXPORT CGroupDataModel : public QAbstractItemModel
 {
     Q_OBJECT
     /**
