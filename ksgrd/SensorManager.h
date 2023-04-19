@@ -20,6 +20,8 @@
 
 #include "SensorAgent.h"
 
+#include "ksgrd_export.h"
+
 namespace KSGRD
 {
 class SensorManagerIterator;
@@ -30,14 +32,14 @@ class SensorManagerIterator;
   SensorAgents. Use engage() to establish a connection and
   disengage() to terminate the connection.
  */
-class Q_DECL_EXPORT SensorManager : public QObject
+class KSGRD_EXPORT SensorManager : public QObject
 {
     Q_OBJECT
 
     friend class SensorManagerIterator;
 
 public:
-    class Q_DECL_EXPORT MessageEvent : public QEvent
+    class KSGRD_EXPORT MessageEvent : public QEvent
     {
     public:
         MessageEvent(const QString &message);
@@ -110,9 +112,9 @@ private:
     QPointer<QObject> mBroadcaster;
 };
 
-Q_DECL_EXPORT extern SensorManager *SensorMgr;
+KSGRD_EXPORT extern SensorManager *SensorMgr;
 
-class Q_DECL_EXPORT SensorManagerIterator : public QHashIterator<QString, SensorAgent *>
+class KSGRD_EXPORT SensorManagerIterator : public QHashIterator<QString, SensorAgent *>
 {
 public:
     explicit SensorManagerIterator(const SensorManager *sm)

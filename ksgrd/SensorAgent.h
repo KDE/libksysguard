@@ -15,6 +15,8 @@
 #include <QQueue>
 #include <QSet>
 
+#include "ksgrd_export.h"
+
 class QString;
 
 namespace KSGRD
@@ -31,7 +33,7 @@ class SensorRequest;
   ksysguardd. The current implementation only allows one pending
   requests. Incoming requests are queued in an input FIFO.
 */
-class Q_DECL_EXPORT SensorAgent : public QObject
+class KSGRD_EXPORT SensorAgent : public QObject
 {
     Q_OBJECT
 

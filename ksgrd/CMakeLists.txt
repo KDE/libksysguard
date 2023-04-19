@@ -48,10 +48,14 @@ set_target_properties(ksgrd PROPERTIES
     SOVERSION ${KSYSGUARD_SOVERSION}
     EXPORT_NAME SysGuard
 )
+
+generate_export_header(ksgrd)
+
 install(TARGETS ksgrd EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES
     ${ksgrd_LIB_HEADERS}
+    ${CMAKE_CURRENT_BINARY_DIR}/ksgrd_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/ksgrd
     COMPONENT Devel
 )
