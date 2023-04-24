@@ -6,7 +6,7 @@
 # Pino Toscano <toscano.pino@tiscali.it>, 2006, 2007, 2009, 2013.
 # Dario Panico <Dareus_Persarumrex@fastwebnet.it>, 2008.
 # Luciano Montanaro <mikelima@cirulla.net>, 2008.
-# Paolo Zamponi <zapaolo@email.it>, 2017, 2019, 2020.
+# Paolo Zamponi <feus73@gmail.com>, 2017, 2019, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard\n"
