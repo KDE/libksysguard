@@ -1,17 +1,17 @@
 # Translation of processui.po to Catalan (Valencian)
-# Copyright (C) 2007-2022 This_file_is_part_of_KDE
+# Copyright (C) 2007-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2007, 2008, 2009, 2010, 2011, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2007, 2008, 2009, 2010, 2011, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2014, 2018, 2019, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2022-11-02 19:02+0100\n"
-"Last-Translator: Antoni Bella <antonibella5@yahoo.com>\n"
+"PO-Revision-Date: 2023-05-02 21:42+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
@@ -2282,12 +2282,12 @@ msgstr ""
 "weight:600;\">Planificació de temps real</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">La classe de planificació "
-"<span style=\" font-weight:600;\">temps real</span> és per a donar accés al "
-"disc primer, independentment del passe en el sistema. D'esta manera, la "
-"classe de <span style=\" font-weight:600;\">temps real</span> necessita que "
-"siga utilitzada amb molta cura, atés que pot fer morir altres processos. "
-"Igual que a la classe <span style=\" font-weight:600;\">tant-com-puc</span>, "
-"hi ha definits 8 nivells de prioritat que indiquen com ha de ser de gran "
+"<span style=\" font-weight:600;\">temps real</span> té primer accés al disc, "
+"independentment d'allò que passe en el sistema. D'esta manera, la classe de "
+"<span style=\" font-weight:600;\">temps real</span> necessita que siga "
+"utilitzada amb molta cura, atés que pot fer morir altres processos. Igual "
+"que a la classe <span style=\" font-weight:600;\">tant-com-puc</span>, hi ha "
+"definits 8 nivells de prioritat que indiquen com ha de ser de gran "
 "l'interval de temps que rebrà un procés donat en cada finestra de "
 "planificació.</p></body></html>"
 
