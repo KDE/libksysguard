@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2023-05-01 23:44+0200\n"
+"PO-Revision-Date: 2023-05-09 00:29+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -813,7 +813,7 @@ msgstr ""
 #, kde-format
 msgctxt "the unit 1 per second"
 msgid "1/s"
-msgstr ""
+msgstr "1/s"
 
 #: SensorManager.cpp:244
 #, kde-format
@@ -830,7 +830,7 @@ msgstr ""
 #, kde-format
 msgctxt "the frequency unit"
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #: SensorManager.cpp:247
 #, kde-format
@@ -842,31 +842,31 @@ msgstr "%"
 #, kde-format
 msgctxt "the unit milliamperes"
 msgid "mA"
-msgstr ""
+msgstr "mA"
 
 #: SensorManager.cpp:249
 #, kde-format
 msgctxt "the unit milliampere hours"
 msgid "mAh"
-msgstr ""
+msgstr "mAh"
 
 #: SensorManager.cpp:250
 #, kde-format
 msgctxt "the unit milliwatts"
 msgid "mW"
-msgstr ""
+msgstr "mW"
 
 #: SensorManager.cpp:251
 #, kde-format
 msgctxt "the unit milliwatt hours"
 msgid "mWh"
-msgstr ""
+msgstr "mWh"
 
 #: SensorManager.cpp:252
 #, kde-format
 msgctxt "the unit millivolts"
 msgid "mV"
-msgstr ""
+msgstr "mV"
 
 #: SensorManager.cpp:255
 #, kde-format
