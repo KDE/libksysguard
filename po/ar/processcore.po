@@ -246,8 +246,8 @@ msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
-"الأولوية التي تعمل بها العملية. تتراوح (في المجدول العادي) بين ١٩ (لطيفة "
-"جدًا، منخفضة الأولوية) إلى -١٩ (عالية الأولوية)."
+"الأولوية التي تعمل بها العملية. تتراوح (في المجدول العادي) بين 19 (لطيفة "
+"جدًا، منخفضة الأولوية) إلى -19 (عالية الأولوية)."
 
 #: extended_process_list.cpp:308
 #, kde-format

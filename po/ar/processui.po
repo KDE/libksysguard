@@ -117,12 +117,12 @@ msgstr "اقتل (KILL)"
 #: ksysguardprocesslist.cpp:220
 #, kde-format
 msgid "User 1 (USR1)"
-msgstr "مستخدم ١ (USR1)"
+msgstr "مستخدم 1 (USR1)"
 
 #: ksysguardprocesslist.cpp:221
 #, kde-format
 msgid "User 2 (USR2)"
-msgstr "مستخدم ٢ (USR2)"
+msgstr "مستخدم 2 (USR2)"
 
 #: ksysguardprocesslist.cpp:224
 #, kde-format
@@ -601,8 +601,8 @@ msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
-"الأولوية التي تعمل بها العملية. تتراوح (في المجدول العادي) بين ١٩ (لطيفة "
-"جدًا، منخفضة الأولوية) إلى -١٩ (عالية الأولوية)."
+"الأولوية التي تعمل بها العملية. تتراوح (في المجدول العادي) بين 19 (لطيفة "
+"جدًا، منخفضة الأولوية) إلى -19 (عالية الأولوية)."
 
 #: ProcessModel.cpp:1065
 #, kde-format
@@ -757,7 +757,7 @@ msgid ""
 "full command line starts with the process name, the first word of the "
 "command line is shown, otherwise the process name is used."
 msgstr ""
-"<html dir=\"rtl\">معلومات تقنية: إن أقصى طول لاسم العملية في النواة هو ٨ "
+"<html dir=\"rtl\">معلومات تقنية: إن أقصى طول لاسم العملية في النواة هو 8 "
 "محارف، لذلك فالأمر كاملًا يُفحص. إن بدأت أول كلمة في سطر الأوامر كاملًا باسم "
 "العملية، فستُعرض أول كلمة من سطر الأوامر، وإلا فسيُستخدم اسم العملية."
 
@@ -2127,7 +2127,7 @@ msgstr ""
 "font-weight:600;\">الوقت الفعلي</span> أول وصول إلى القرص، أيًا كان ما يجري "
 "في النظام. ولذلك يجب استخدام صنف <span style=\" font-weight:600;\">الوقت "
 "الفعلي</span> مع أخذ الحيطة، فيمكنه أن يمنع المعالجة عن العمليّات الأخرى. "
-"بالنسبة إلى صنف <span style=\" font-weight:600;\">أفضل جهد</span>، فتُحدّد ٨ "
+"بالنسبة إلى صنف <span style=\" font-weight:600;\">أفضل جهد</span>، فتُحدّد 8 "
 "مستويات أولوية تُشير إلى مقدار الوقت الذي ستأخذه كل عمليّة في كل نافذة جدولة.</"
 "p></body></html>"
 
