@@ -9,20 +9,21 @@
 # pan93412 <pan93412@gmail.com>, 2018, 2019, 2020.
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2020-03-29 00:04+0800\n"
-"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-05-17 04:50+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -46,11 +47,10 @@ msgid "Show Application Window"
 msgstr "顯示應用程式視窗"
 
 #: ksysguardprocesslist.cpp:205
-#, fuzzy, kde-format
-#| msgid "Displayed Information"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detailed Information..."
-msgstr "顯示資訊"
+msgstr "詳細資訊…"
 
 #: ksysguardprocesslist.cpp:206
 #, kde-format
@@ -72,42 +72,42 @@ msgstr[0] "強制結束行程"
 #: ksysguardprocesslist.cpp:214
 #, kde-format
 msgid "Suspend (STOP)"
-msgstr "暫停（STOP）"
+msgstr "暫停 (STOP)"
 
 #: ksysguardprocesslist.cpp:215
 #, kde-format
 msgid "Continue (CONT)"
-msgstr "繼續（CONT）"
+msgstr "繼續 (CONT)"
 
 #: ksysguardprocesslist.cpp:216
 #, kde-format
 msgid "Hangup (HUP)"
-msgstr "掛斷（HUP）"
+msgstr "掛起 (HUP)"
 
 #: ksysguardprocesslist.cpp:217
 #, kde-format
 msgid "Interrupt (INT)"
-msgstr "中斷（INT）"
+msgstr "中斷 (INT)"
 
 #: ksysguardprocesslist.cpp:218
 #, kde-format
 msgid "Terminate (TERM)"
-msgstr "終結（TERM）"
+msgstr "終止 (TERM)"
 
 #: ksysguardprocesslist.cpp:219
 #, kde-format
 msgid "Kill (KILL)"
-msgstr "Kill（KILL）"
+msgstr "強制停止 (KILL)"
 
 #: ksysguardprocesslist.cpp:220
 #, kde-format
 msgid "User 1 (USR1)"
-msgstr "使用者定義1（USR1）"
+msgstr "使用者訊號1 (USR1)"
 
 #: ksysguardprocesslist.cpp:221
 #, kde-format
 msgid "User 2 (USR2)"
-msgstr "使用者定義2（USR2）"
+msgstr "使用者訊號2 (USR2)"
 
 #: ksysguardprocesslist.cpp:224
 #, kde-format
@@ -128,7 +128,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
-msgstr "強制中止視窗"
+msgstr "強制停止視窗"
 
 #: ksysguardprocesslist.cpp:545
 #, kde-format
@@ -312,31 +312,31 @@ msgstr[0] ""
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
-msgstr[0] "強制結束 %1 個行程"
+msgstr[0] "強制停止 %1 個行程"
 
 #: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
-msgstr "結束"
+msgstr "強制停止"
 
 #: processdetails/GeneralTab.cpp:39 processdetails/MemoryMapsTab.cpp:281
 #: processdetails/OpenFilesTab.cpp:276
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "沒有可以顯示的資料"
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "重新整理"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -346,139 +346,130 @@ msgid "Quick search"
 msgstr " 快速搜尋"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "使用者名稱"
+msgstr "檔名"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "開頭"
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
-msgstr "結束"
+msgstr "結尾"
 
 #: processdetails/MemoryMapsTab.cpp:254
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "權限"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "位移"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
 msgctxt "@title:column"
 msgid "Inode"
-msgstr ""
+msgstr "Inode"
 
 #: processdetails/MemoryMapsTab.cpp:283 processdetails/OpenFilesTab.cpp:278
 #, kde-format
 msgctxt "@info:status"
 msgid "No data matching the filter"
-msgstr ""
+msgstr "沒有符合過濾器的資料"
 
 #: processdetails/OpenFilesTab.cpp:33
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "檔案"
 
 #: processdetails/OpenFilesTab.cpp:36
-#, fuzzy, kde-format
-#| msgid "Characters read/written"
+#, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr "已讀取/寫入字元"
+msgstr "字元裝置"
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "區塊裝置"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "管線"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "Socket"
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "閒置"
+msgstr "ID"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "類型"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
 msgctxt "@info:status"
 msgid "%1: Failed to list directory contents"
-msgstr ""
+msgstr "%1：無法列出目錄內容"
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "所有行程"
+msgstr "行程詳細資料"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "記憶體"
+msgstr "記憶體對映"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "開啟檔案"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
 msgctxt "@info:status"
 msgid "The \"%1\" (PID: %2) process has stopped executing"
-msgstr ""
+msgstr "「%1」 (PID: %2) 行程已停止執行"
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "設定優先權"
+msgstr "IO 優先權"
 
 #: ProcessModel.cpp:62
 #, kde-format
@@ -2176,8 +2167,7 @@ msgstr "QtWebEngineWidgets 無法使用"
 msgid ""
 "KSysGuard library was compiled without QtWebEngineWidgets, please contact "
 "your distribution."
-msgstr ""
-"KSysGuard 函式庫編譯時未使用 QtWebEngineWidgets。請向您的散布版發行商反映。"
+msgstr "KSysGuard 函式庫編譯時未使用 QtWebEngineWidgets。請向您的發行版反映。"
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Run Command"
