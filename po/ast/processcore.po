@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-24 01:00+0000\n"
-"PO-Revision-Date: 2023-05-03 23:27+0200\n"
+"PO-Revision-Date: 2023-05-13 23:59+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -27,18 +27,18 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Icon"
-msgstr ""
+msgstr "Iconu"
 
 #: cgroup_data_model.cpp:80
 #, kde-format
 msgctxt "@title"
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: extended_process_list.cpp:95
 #, kde-format
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: extended_process_list.cpp:96
 #, kde-format
@@ -63,7 +63,7 @@ msgstr ""
 #: extended_process_list.cpp:113
 #, kde-format
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: extended_process_list.cpp:119
 #, kde-format
@@ -78,37 +78,37 @@ msgstr ""
 #: extended_process_list.cpp:162
 #, kde-format
 msgid "EUID"
-msgstr ""
+msgstr "EUID"
 
 #: extended_process_list.cpp:166
 #, kde-format
 msgid "suid"
-msgstr ""
+msgstr "suid"
 
 #: extended_process_list.cpp:170
 #, kde-format
 msgid "fsuid"
-msgstr ""
+msgstr "fsuid"
 
 #: extended_process_list.cpp:174
 #, kde-format
 msgid "gid"
-msgstr ""
+msgstr "gid"
 
 #: extended_process_list.cpp:178
 #, kde-format
 msgid "egid"
-msgstr ""
+msgstr "egid"
 
 #: extended_process_list.cpp:182
 #, kde-format
 msgid "sgid"
-msgstr ""
+msgstr "sgid"
 
 #: extended_process_list.cpp:186
 #, kde-format
 msgid "fsgid"
-msgstr ""
+msgstr "fsgid"
 
 #: extended_process_list.cpp:191
 #, kde-format
@@ -118,7 +118,7 @@ msgstr ""
 #: extended_process_list.cpp:198
 #, kde-format
 msgid "tty"
-msgstr ""
+msgstr "tty"
 
 #: extended_process_list.cpp:199
 #, kde-format
@@ -335,7 +335,7 @@ msgstr ""
 #: extended_process_list.cpp:383
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: extended_process_list.cpp:384
 #, kde-format
@@ -651,9 +651,9 @@ msgstr ""
 #: process_controller.cpp:189
 #, kde-format
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Prodúxose un error ensin especificar."
 
 #: process_controller.cpp:191
 #, kde-format
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Prodúxose un error desconocíu."
