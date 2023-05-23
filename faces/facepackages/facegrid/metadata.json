@@ -25,7 +25,8 @@
                 "Name[sl]": "Arjen Hiemstra",
                 "Name[tr]": "Arjen Hiemstra",
                 "Name[uk]": "Arjen Hiemstra",
-                "Name[x-test]": "xxArjen Hiemstraxx"
+                "Name[x-test]": "xxArjen Hiemstraxx",
+                "Name[zh_CN]": "Arjen Hiemstra"
             }
         ],
         "Id": "org.kde.ksysguard.facegrid",
@@ -52,6 +53,7 @@
         "Name[tr]": "Izgara",
         "Name[uk]": "Ґратка",
         "Name[x-test]": "xxGridxx",
+        "Name[zh_CN]": "网格",
         "Version": "1.0",
         "Website": "https://kde.org"
     },

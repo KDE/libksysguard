@@ -25,7 +25,8 @@
                 "Name[sl]": "Kai Uwe Broulik",
                 "Name[tr]": "Kai Uwe Broulik",
                 "Name[uk]": "Kai Uwe Broulik",
-                "Name[x-test]": "xxKai Uwe Broulikxx"
+                "Name[x-test]": "xxKai Uwe Broulikxx",
+                "Name[zh_CN]": "Kai Uwe Broulik"
             }
         ],
         "Icon": "office-chart-bar",
@@ -53,6 +54,7 @@
         "Name[tr]": "Çubuk Grafik",
         "Name[uk]": "Стовпчикова діаграма",
         "Name[x-test]": "xxBar Chartxx",
+        "Name[zh_CN]": "柱状图",
         "Version": "1.0",
         "Website": "https://kde.org"
     },

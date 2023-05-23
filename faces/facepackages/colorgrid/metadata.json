@@ -25,7 +25,8 @@
                 "Name[sl]": "Kai Uwe Broulik",
                 "Name[tr]": "Kai Uwe Broulik",
                 "Name[uk]": "Kai Uwe Broulik",
-                "Name[x-test]": "xxKai Uwe Broulikxx"
+                "Name[x-test]": "xxKai Uwe Broulikxx",
+                "Name[zh_CN]": "Kai Uwe Broulik"
             }
         ],
         "Icon": "view-grid",
@@ -53,6 +54,7 @@
         "Name[tr]": "Renk Izgarası",
         "Name[uk]": "Кольорова таблиця",
         "Name[x-test]": "xxColor Gridxx",
+        "Name[zh_CN]": "彩色网格",
         "Version": "1.0",
         "Website": "https://kde.org"
     },
