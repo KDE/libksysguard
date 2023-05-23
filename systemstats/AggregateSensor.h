@@ -90,7 +90,7 @@ private:
     const std::unique_ptr<Private> d;
 };
 
-class Q_DECL_EXPORT PercentageSensor : public SensorProperty
+class SYSTEMSTATS_EXPORT PercentageSensor : public SensorProperty
 {
     Q_OBJECT
 public:
