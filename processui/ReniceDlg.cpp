@@ -96,8 +96,8 @@ ReniceDlg::ReniceDlg(QWidget *parent, const QStringList &processes, int currentC
 
     newCPUPriority = 40;
 
-    connect(cpuScheduler, SIGNAL(buttonClicked(int)), this, SLOT(cpuSchedulerChanged(int)));
-    connect(ioScheduler, SIGNAL(buttonClicked(int)), this, SLOT(updateUi()));
+    connect(cpuScheduler, &QButtonGroup::idClicked, this, &ReniceDlg::cpuSchedulerChanged);
+    connect(ioScheduler, &QButtonGroup::idClicked, this, &ReniceDlg::updateUi);
     connect(ui->sliderCPU, &QAbstractSlider::valueChanged, this, &ReniceDlg::cpuSliderChanged);
     connect(ui->sliderIO, &QAbstractSlider::valueChanged, this, &ReniceDlg::ioSliderChanged);
 
