@@ -21,7 +21,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 "X-Generator: Lokalize 21.08.1\n"
@@ -31,7 +31,6 @@ msgstr ""
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
 msgstr[0] "優先度を設定..."
-msgstr[1] "優先度を設定..."
 
 #: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
 #, kde-format
@@ -65,14 +64,12 @@ msgstr "停止したプロセスを再開"
 msgid "End Process"
 msgid_plural "End Processes"
 msgstr[0] "プロセスを終了"
-msgstr[1] "プロセスを終了"
 
 #: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
 #, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
 msgstr[0] ""
-msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:214
 #, kde-format
@@ -148,7 +145,6 @@ msgctxt "Context menu"
 msgid "End Process"
 msgid_plural "End Processes"
 msgstr[0] "プロセスを終了"
-msgstr[1] "プロセスを終了"
 
 #: ksysguardprocesslist.cpp:579
 #, kde-format
@@ -313,8 +309,6 @@ msgid_plural ""
 "Are you sure you want to end these %1 processes?  Any unsaved work may be "
 "lost"
 msgstr[0] ""
-"本当にこのプロセスを終了しますか？保存されていない作業は失われます。"
-msgstr[1] ""
 "本当にこれら %1 個のプロセスを終了しますか？保存されていない作業は失われま"
 "す。"
 
@@ -323,8 +317,7 @@ msgstr[1] ""
 msgctxt "Dialog title"
 msgid "End Process"
 msgid_plural "End %1 Processes"
-msgstr[0] "プロセスを終了"
-msgstr[1] "%1 個のプロセスを終了"
+msgstr[0] "%1 個のプロセスを終了"
 
 #: ksysguardprocesslist.cpp:1401
 #, kde-format
@@ -345,8 +338,6 @@ msgid_plural ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> these %1 "
 "processes?  Any unsaved work may be lost"
 msgstr[0] ""
-"本当にこのプロセスを終了しますか？保存されていない作業は失われます。"
-msgstr[1] ""
 "本当にこれら %1 個のプロセスを終了しますか？保存されていない作業は失われま"
 "す。"
 
@@ -356,7 +347,6 @@ msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] ""
-msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:1408
 #, kde-format
@@ -612,9 +602,6 @@ msgid_plural ""
 "The current total CPU usage of the process, divided by the %1 processor "
 "cores in the machine."
 msgstr[0] ""
-"このプロセスの現在の CPU 使用率です。マシンに搭載されているプロセッサコアの"
-"数 (%1) で割った値です。"
-msgstr[1] ""
 "このプロセスの現在の CPU 使用率です。マシンに搭載されているプロセッサコアの"
 "数 (%1) で割った値です。"
 
