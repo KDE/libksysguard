@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2023-05-12 05:40+0200\n"
+"PO-Revision-Date: 2023-05-30 06:03+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -317,7 +317,11 @@ msgid_plural ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> these %1 "
 "processes?  Any unsaved work may be lost"
 msgstr[0] ""
+"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, <b>დაუყოვნებლივ და ძალით მოკლათ</"
+"b> ეს პროცესი?  დიდი ალბათობით, ის, რაც არ შეგინახავთ, დაიკარგება."
 msgstr[1] ""
+"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, <b>დაუყოვნებლივ და ძალით მოკლათ</"
+"b> ეს %1 პროცესი?  დიდი ალბათობით, ის, რაც არ შეგინახავთ, დაიკარგება."
 
 #: ksysguardprocesslist.cpp:1406
 #, kde-format
@@ -635,6 +639,8 @@ msgid ""
 "<qt>Linux flag NoNewPrivileges, if set the process can't gain further "
 "privileges via setuid etc.</qt>"
 msgstr ""
+"<qt>თუ დაყენებულია Linux-ის ალამი NoNewPrivileges, პროცესს setuid და ა.შ. "
+"ფუნქციებით მეტი პრივილეგიის მიღება არ შეუძლია.</qt>"
 
 #: ProcessModel.cpp:1095
 #, kde-format
@@ -689,6 +695,9 @@ msgid ""
 "shared memory divided by the amount of processes using that shared memory "
 "added."
 msgstr ""
+"პროცესის მიერ გამოყენებული საკუთარი ფიზიკური მეხსიერების რაოდენობა, "
+"მიმატებული გაზიარებული მეხსიერება და გაყოფილი პროცესების რაოდენობაზე, "
+"რომლებიც ამ დამატებულ გაზიარებულ მეხსიერებას იყენებენ."
 
 #: ProcessModel.cpp:1122
 #, kde-format
