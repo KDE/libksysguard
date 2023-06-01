@@ -31,16 +31,16 @@ include(CheckLibraryExists)
 include(FeatureSummary)
 include(GenerateExportHeader)
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets Qml Quick Core5Compat)
-find_package(Qt${QT_MAJOR_VERSION}WebEngineWidgets ${QT_MIN_VERSION} CONFIG)
-set_package_properties(Qt${QT_MAJOR_VERSION}WebEngineWidgets PROPERTIES
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets Qml Quick Core5Compat)
+find_package(Qt6WebEngineWidgets ${QT_MIN_VERSION} CONFIG)
+set_package_properties(Qt6WebEngineWidgets PROPERTIES
                        URL "git://code.qt.org/qt/qtwebenginewidgets.git"
                        DESCRIPTION "Qt WebEngine module (web browsing engine)"
                        TYPE OPTIONAL
                        PURPOSE "Used by the HTML-based GUI ksysguard library"
                       )
-find_package(Qt${QT_MAJOR_VERSION}WebChannel ${QT_MIN_VERSION} CONFIG)
-set_package_properties(Qt${QT_MAJOR_VERSION}WebChannel PROPERTIES
+find_package(Qt6WebChannel ${QT_MIN_VERSION} CONFIG)
+set_package_properties(Qt6WebChannel PROPERTIES
                        URL "git://code.qt.org/qt/qtwebchannel.git"
                        DESCRIPTION "Qt WebChannel module"
                        TYPE OPTIONAL
@@ -74,11 +74,7 @@ if(WITH_X11)
                             PURPOSE "Required for building Process UI with X11 support"
                         )
     if(X11_FOUND)
-        if (QT_MAJOR_VERSION STREQUAL "5")
-            find_package(Qt5X11Extras REQUIRED)
-        elseif (QT_MAJOR_VERSION STREQUAL "6")
-            find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
-        endif()
+        find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
         set(HAVE_X11 1)
         find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
         find_path(X11_XRes_INCLUDE_PATH X11/extensions/XRes.h ${X11_INC_SEARCH_PATH})
@@ -93,7 +89,7 @@ else()
 endif()
 
 set(WEBENGINE_SCRIPTING_ENABLED FALSE)
-if(Qt${QT_MAJOR_VERSION}WebEngineWidgets_FOUND AND Qt${QT_MAJOR_VERSION}WebChannel_FOUND)
+if(Qt6WebEngineWidgets_FOUND AND Qt6WebChannel_FOUND)
     set(WEBENGINE_SCRIPTING_ENABLED TRUE)
 endif()
 add_feature_info("Scripting plugin support" WEBENGINE_SCRIPTING_ENABLED "Support scripting plugins using WebEngine and WebChannel")
