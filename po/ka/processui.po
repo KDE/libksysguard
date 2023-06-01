@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2023-05-30 06:03+0200\n"
+"PO-Revision-Date: 2023-05-31 05:38+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -616,6 +616,12 @@ msgid ""
 "libraries.<br>This is often the most useful figure to judge the memory use "
 "of a program.  See What's This for more information.</qt>"
 msgstr ""
+"<qt>ეს წარმოადგენს რეალურ ფიზიკურ მეხსიერებას, რომელსაც პროცესი თვითონ "
+"იყენებს და დაახლოებით პროცესის მიერ გამოყენებული მეხსიერების რაოდენობას. "
+"<br> ის დასვოპილ მეხსიერებას და გაზიარებული ბიბლიოთეკების კოდის ზომას არ "
+"შეიცავს.<br>ეს ხშირად სასარგებლოა, რომ დაახლოებით გაარკვიოთ პროცესის მიერ "
+"გამოყენებული მეხსიერების რაოდენობა.  მეტი ინფორმაციისთვის იხილეთ 'რა არის "
+"ეს'.</qt>"
 
 #: ProcessModel.cpp:1088
 #, kde-format
@@ -707,6 +713,11 @@ msgid ""
 "full command line starts with the process name, the first word of the "
 "command line is shown, otherwise the process name is used."
 msgstr ""
+"<qt><i>ტექნიკური ინფორმაცია: </i>კერნელის პროცესის სახელი მაქსიმუმ 8 "
+"სიმბოლოს სიგრძისაა, ასე რომ ანალიზი მთლიანი ბრძანების ხდება.  თუ სრული "
+"ბრძანების პირველი სიტყვა პროცესის სახელით იწყება, გამოყენებული იქნება "
+"ბრძანების სტრიქონის პირველი სიტყვა, წინააღმდეგ შემთხვევაში პროცესის სახელი "
+"იქნება გამოყენებული."
 
 #: ProcessModel.cpp:1126
 #, kde-format
