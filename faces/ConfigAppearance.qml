@@ -12,7 +12,7 @@ import QtQuick.Controls 2.2 as QQC2
 
 import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kquickcontrols 2.0
-import org.kde.kconfig 1.0 // for KAuthorized
+import org.kde.config 1.0 // for KAuthorized
 import org.kde.newstuff 1.62 as NewStuff
 
 import org.kde.quickcharts 1.0 as Charts
