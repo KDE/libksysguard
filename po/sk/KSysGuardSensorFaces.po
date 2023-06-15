@@ -1,19 +1,20 @@
 # translation of KSysGuardSensorFaces.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2020.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2020, 2021, 2022.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 02:19+0000\n"
-"PO-Revision-Date: 2022-06-14 17:30+0200\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-06-09 16:50+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ConfigAppearance.qml:107
@@ -140,7 +141,7 @@ msgstr "Do:"
 #: facepackages/colorgrid/contents/ui/Config.qml:25
 #, kde-format
 msgid "Use sensor color:"
-msgstr ""
+msgstr "Použiť farbu senzora:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
@@ -252,7 +253,7 @@ msgstr "Zoskupiť senzory na základe hodnoty celkových senzorov."
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr ""
+msgstr "Kliknutím vybrať senzor…"
 
 #: import/Choices.qml:368
 #, kde-format
