@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2013, 2015.
 # Marce Villarino <mvillarino@kde-espana.es>, 2013.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2019, 2020.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2019, 2020, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2020-01-05 18:36+0100\n"
+"PO-Revision-Date: 2023-06-19 08:32+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.08.3\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: SensorAgent.cpp:87
 #, kde-format
@@ -63,7 +63,7 @@ msgstr "Carga do usuario"
 #, kde-format
 msgctxt "@item sensor description"
 msgid "System Load"
-msgstr "Carga do sistema"
+msgstr "Carga do sistema."
 
 #: SensorManager.cpp:57
 #, kde-format
@@ -91,10 +91,9 @@ msgid "Physical Memory"
 msgstr "Memoria física"
 
 #: SensorManager.cpp:63
-#, fuzzy, kde-format
-#| msgid "Swap Memory"
+#, kde-format
 msgid "Total Memory"
-msgstr "Memoria de intercambio"
+msgstr "Memoria total"
 
 #: SensorManager.cpp:64
 #, kde-format
@@ -114,7 +113,7 @@ msgstr "Memoria en búfer"
 #: SensorManager.cpp:67
 #, kde-format
 msgid "Used Memory"
-msgstr "Memoria empregada"
+msgstr "Memoria usada"
 
 #: SensorManager.cpp:68
 #, kde-format
@@ -122,10 +121,9 @@ msgid "Application Memory"
 msgstr "Memoria das aplicacións"
 
 #: SensorManager.cpp:69
-#, fuzzy, kde-format
-#| msgid "Active Memory"
+#, kde-format
 msgid "Allocated Memory"
-msgstr "Memoria activa"
+msgstr "Memoria asignada"
 
 #: SensorManager.cpp:70
 #, kde-format
@@ -133,10 +131,9 @@ msgid "Free Memory"
 msgstr "Memoria libre"
 
 #: SensorManager.cpp:71
-#, fuzzy, kde-format
-#| msgid "Active Memory"
+#, kde-format
 msgid "Available Memory"
-msgstr "Memoria activa"
+msgstr "Memoria dispoñíbel"
 
 #: SensorManager.cpp:72
 #, kde-format
@@ -363,7 +360,7 @@ msgstr "Taxa de paquetes"
 #, kde-format
 msgctxt "@item sensor description ('carrier' is a type of network signal)"
 msgid "Carrier Loss Rate"
-msgstr "Taxa de perda do portador"
+msgstr "Taxa de perda do portador."
 
 #: SensorManager.cpp:121 SensorManager.cpp:132
 #, kde-format
@@ -414,7 +411,7 @@ msgstr "Paquetes"
 #, kde-format
 msgctxt "@item sensor description ('carrier' is a type of network signal)"
 msgid "Carrier Losses"
-msgstr "Perdas do portador"
+msgstr "Perdas do portador."
 
 #: SensorManager.cpp:135
 #, kde-format
@@ -569,7 +566,7 @@ msgstr "Nivel de recheo"
 #: SensorManager.cpp:167
 #, kde-format
 msgid "Used Inodes"
-msgstr "Inodos empregados"
+msgstr "Inodos usados"
 
 #: SensorManager.cpp:168
 #, kde-format
@@ -657,45 +654,39 @@ msgid "Disk Information"
 msgstr "Información do disco"
 
 #: SensorManager.cpp:185
-#, fuzzy, kde-format
-#| msgid "Temperature"
+#, kde-format
 msgid "CPU Temperature"
-msgstr "Temperatura"
+msgstr "Temperatura do procesador"
 
 #: SensorManager.cpp:186
-#, fuzzy, kde-format
-#| msgid "Average CPU Temperature"
+#, kde-format
 msgid "Motherboard Temperature"
-msgstr "Temperatura media do procesador"
+msgstr "Temperatura da placa base"
 
 #: SensorManager.cpp:187
-#, fuzzy, kde-format
-#| msgid "Average CPU Temperature"
+#, kde-format
 msgid "Power Supply Temperature"
-msgstr "Temperatura media do procesador"
+msgstr "Temperatura da toma de corrente"
 
 #: SensorManager.cpp:189
 #, kde-format
 msgid "Filesystem Root"
-msgstr ""
+msgstr "Raíz do sistema de ficheiros"
 
 #: SensorManager.cpp:192
-#, fuzzy, kde-format
-#| msgid "Temperature %1"
+#, kde-format
 msgid "Extra Temperature Sensor %1"
-msgstr "Temperatura %1"
+msgstr "Sensor de temperatura adicional %1"
 
 #: SensorManager.cpp:196
-#, fuzzy, kde-format
-#| msgid "Temperature %1"
+#, kde-format
 msgid "PECI Temperature Sensor %1"
-msgstr "Temperatura %1"
+msgstr "Sensor de temperatura de PECI %1"
 
 #: SensorManager.cpp:197
-#, fuzzy, kde-format
-#| msgid "Temperature %1"
+#, kde-format
 msgid "PECI Temperature Calibration %1"
-msgstr "Temperatura %1"
+msgstr "Calibración de temperatura de PECI %1"
 
 #: SensorManager.cpp:201
 #, kde-format

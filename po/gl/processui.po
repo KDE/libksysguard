@@ -26,7 +26,7 @@ msgstr ""
 #, kde-format
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
-msgstr[0] "Estabelecer a prioridade…"
+msgstr[0] "Definir a prioridade…"
 msgstr[1] "Baixa prioridade"
 
 #: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
@@ -42,7 +42,7 @@ msgstr "Saltar ao proceso que está a depurar este"
 #: ksysguardprocesslist.cpp:204
 #, kde-format
 msgid "Show Application Window"
-msgstr "Mostrar a xanela da aplicación"
+msgstr "Amosar a xanela da aplicación"
 
 #: ksysguardprocesslist.cpp:205
 #, fuzzy, kde-format
@@ -158,12 +158,12 @@ msgstr "Agochar a columna «%1»"
 #: ksysguardprocesslist.cpp:774
 #, kde-format
 msgid "Show Column '%1'"
-msgstr "Mostrar a columna «%1»"
+msgstr "Amosar a columna «%1»"
 
 #: ksysguardprocesslist.cpp:803
 #, kde-format
 msgid "Display Units"
-msgstr "Unidades para mostrar"
+msgstr "Unidades para amosar"
 
 #: ksysguardprocesslist.cpp:807
 #, kde-format
@@ -208,7 +208,7 @@ msgstr "Porcentaxe"
 #: ksysguardprocesslist.cpp:863
 #, kde-format
 msgid "Display command line options"
-msgstr "Mostrar as opcións da liña de ordes"
+msgstr "Amosar as opcións da liña de ordes"
 
 #: ksysguardprocesslist.cpp:870
 #, kde-format
@@ -218,7 +218,7 @@ msgstr "Dividir a utilización da CPU polo número delas"
 #: ksysguardprocesslist.cpp:877
 #, kde-format
 msgid "Displayed Information"
-msgstr "Información mostrada"
+msgstr "Información amosada"
 
 #: ksysguardprocesslist.cpp:880
 #, kde-format
@@ -238,12 +238,12 @@ msgstr "Bytes lidos ou escritos realmente"
 #: ksysguardprocesslist.cpp:896
 #, kde-format
 msgid "Show I/O rate"
-msgstr "Mostrar a taxa de E/S"
+msgstr "Amosar a taxa de E/S"
 
 #: ksysguardprocesslist.cpp:923
 #, kde-format
 msgid "Show Tooltips"
-msgstr "Mostrar as axudas"
+msgstr "Amosar as axudas"
 
 #: ksysguardprocesslist.cpp:1177
 #, kde-format
@@ -607,7 +607,7 @@ msgid ""
 "displayed as minutes:seconds."
 msgstr ""
 "<qt>O tempo total do usuario e do sistema nos que correu este proceso, "
-"mostrado como minutos:segundos."
+"amosado como minutos:segundos."
 
 #: ProcessModel.cpp:1079
 #, kde-format
@@ -629,11 +629,11 @@ msgid ""
 "libraries.<br>This is often the most useful figure to judge the memory use "
 "of a program.  See What's This for more information.</qt>"
 msgstr ""
-"<qt>Esta é a cantidade de memoria física real que está a empregar este "
-"proceso en si, e aproxímase ao uso se memoria privada do proceso.<br>Non "
-"inclúe a memoria na swap, nin o tamaño do código das bibliotecas compartidas."
-"<br>Polo xeral esta é a cantidade máis útil para avaliar a memoria empregada "
-"por un programa. Consulte o Que é isto? para máis información.</qt>"
+"<qt>Esta é a cantidade de memoria física real que está a usar este proceso "
+"en si, e aproxímase ao uso se memoria privada do proceso.<br>Non inclúe a "
+"memoria na swap, nin o tamaño do código das bibliotecas compartidas.<br>Polo "
+"xeral esta é a cantidade máis útil para avaliar a memoria empregada por un "
+"programa. Consulte o Que é isto? para máis información.</qt>"
 
 #: ProcessModel.cpp:1088
 #, kde-format
@@ -675,7 +675,7 @@ msgstr ""
 #: ProcessModel.cpp:1099
 #, kde-format
 msgid "<qt>The title of any windows that this process is showing.</qt>"
-msgstr "<qt>O título de calquera xanela que estea a mostrar este proceso.</qt>"
+msgstr "<qt>O título de calquera xanela que estea a amosar este proceso.</qt>"
 
 #: ProcessModel.cpp:1101
 #, kde-format
@@ -728,8 +728,8 @@ msgid ""
 msgstr ""
 "<qt><i>Información técnica:</i> O nome do proceso do núcleo ten como moito "
 "oito caracteres de longo, polo que se examina toda a orde. Se a primeira "
-"palabra de toda a orde comeza co nome do proceso mostrarase a primeira "
-"palabra da liña de orde, noutro caso emprégase o nome do proceso."
+"palabra de toda a orde comeza co nome do proceso amosarase a primeira "
+"palabra da liña de orde, noutro caso úsase o nome do proceso."
 
 #: ProcessModel.cpp:1126
 #, kde-format
@@ -748,11 +748,11 @@ msgid ""
 "more information.</td></tr></table>"
 msgstr ""
 "<qt>O usuario que posúe este proceso. Se o setuid efectivo do usuario é "
-"distinto mostrarase o usuario que posúe o proceso seguido polo usuario "
+"distinto amosarase o usuario que posúe o proceso seguido polo usuario "
 "efectivo. A axudiña contén a información completa. <p><table><tr><td>Nome de "
 "usuario/grupo</td><td>O nome de usuario do usuario e grupo reais que crearon "
 "este proceso</td></tr><tr> <td>Usuario/grupo efectivo</td><td>O proceso está "
-"a executarse cos privilexios do usuario e grupo efectivos. Móstrase se é "
+"a executarse cos privilexios do usuario e grupo efectivos. Amósase se é "
 "distinto do usuario real.</td></tr> <tr><td>Usuario e grupo setuid</td><td>O "
 "nome de usuario gardado do binario. O proceso pode trocar do usuario ou "
 "grupo efectivos ao setuid.</td></tr> <tr><td>Usuario e grupo no sistema de "
@@ -771,8 +771,8 @@ msgid ""
 msgstr ""
 "<qt>Este é o tamaño do espazo de enderezos reservados, non da memoria, senón "
 "do espazo dos enderezos. Este valor na práctica non significa nada. Cando un "
-"proceso pide un bloque de memoria grande no sistema pero só emprega unha "
-"parte pequena del a utilización real será pequena, pero VIRT será grande."
+"proceso pide un bloque de memoria grande no sistema pero só usa unha parte "
+"pequena del a utilización real será pequena, pero VIRT será grande."
 "<p><i>Información técnica:</i> Isto é VmSize en proc/*/status e VIRT en top."
 
 #: ProcessModel.cpp:1146
@@ -789,7 +789,7 @@ msgstr ""
 "<qt><i>Información técnica:</i> Esta é unha aproximación ao uso privado de "
 "memoria, calculado como VmRSS - Compartida, obtido de /proc/*/statm. Isto "
 "tende a subestimar a utilización real da memoria privada por parte dun "
-"proceso, porque non inclúe as páxinas de memoria con copia de seguranza, "
+"proceso, porque non inclúe as páxinas de memoria con copia de seguridade, "
 "pero é a mellor estimación das rápidas de calcular. Isto coñécese tamén como "
 "URSS (Unique Resident Set Size). Para un proceso individual obterá un "
 "cálculo máis exacto pero lento na «Información detallada da memoria»."
@@ -871,8 +871,8 @@ msgid ""
 "not shown, then that application incorrectly is not setting _NET_WM_PID."
 msgstr ""
 "<qt><i>Información técnica:</i> En cada xanela do X11, a propiedade "
-"_NET_WM_PID emprégase para relacionar a xanela dun PID. Se non se mostran as "
-"dun proceso entón esa aplicación non indica _NET_WM_PID, o que é incorrecto."
+"_NET_WM_PID úsase para relacionar a xanela dun PID. Se non se amosan as dun "
+"proceso entón esa aplicación non indica _NET_WM_PID, o que é incorrecto."
 
 #: ProcessModel.cpp:1178
 #, kde-format
@@ -929,7 +929,7 @@ msgstr ""
 "operacións de E/S, i.e. chamadas como write() e pwrite().</td></tr> "
 "<tr><td>Bytes realmente lidos</td><td>A cantidade de bytes realmente obtidos "
 "da capa de almacén a causa do proceso. Faise ao nivel de submit_bio(), polo "
-"que é exacto para sistemas de ficheiros con copia de seguranza a nivel de "
+"que é exacto para sistemas de ficheiros con copia de seguridade a nivel de "
 "bloque. Isto pode non dar valores sensíbeis en sistemas de ficheiro NFS e "
 "CIFS.</td></tr> <tr><td>Bytes realmente escritos</td><td>Intento de contar a "
 "cantidade de bytes enviados á capa de almacén a causa do proceso. Isto faise "
@@ -1607,9 +1607,9 @@ msgid ""
 "<b>1234</b>.</td></th></tr>\n"
 "</table>\n"
 msgstr ""
-"O texto que se indica aquí filtra os procesos que se mostran. Este texto "
-"pode se unha parte da cadea do nome, orde ou título da xanela do proceso. "
-"Tamén pode ser un nome de usuario ou un número ID de proceso.<p>\n"
+"O texto que se indica aquí filtra os procesos que se amosan. Este texto pode "
+"se unha parte da cadea do nome, orde ou título da xanela do proceso. Tamén "
+"pode ser un nome de usuario ou un número ID de proceso.<p>\n"
 "Por exemplo:\n"
 "\n"
 "<table>\n"
@@ -1650,14 +1650,14 @@ msgid ""
 "inside the kernel and are not real processes.  As such, many of the fields "
 "(such as Username) do not apply.\n"
 msgstr ""
-"<qt>Cambia cales procesos se ven e como se mostran. Os procesos poden "
-"filtrarse ademais empregando o filtro de texto de Busca rápida.<p>\n"
+"<qt>Cambia cales procesos se ven e como se amosan. Os procesos poden "
+"filtrarse ademais usando o filtro de texto de Busca rápida.<p>\n"
 "<table>\n"
 "<tr><td>Todos os procesos</td><td>Mostra todos os procesos do sistema.</td></"
 "tr>\n"
 "<tr><td>Todos os procesos, en árbore</td><td>Mostra todos os procesos do "
-"sistema, nunha vista xerárquica empregando a información de PID do pai.</"
-"td></tr>\n"
+"sistema, nunha vista xerárquica usando a información de PID do pai.</td></"
+"tr>\n"
 "<tr><td>Procesos do sistema</td><td>Mostra os procesos que se executan como "
 "root ou como un usuario que non poida acceder ao sistema.</td></tr>\n"
 "<tr><td>Procesos de usuario</td><td>Mostra os procesos que se executan por "
@@ -1670,9 +1670,9 @@ msgstr ""
 "</table>\n"
 "<p>\n"
 "<i>Información técnica:</i><br>\n"
-"Os procesos con varios fíos de execución móstranse como un único proceso e "
+"Os procesos con varios fíos de execución amósanse como un único proceso e "
 "non se tratan dun xeito distinto.<br>\n"
-"Os fíos do núcleo móstranse como procesos normais pero en realidade "
+"Os fíos do núcleo amósanse como procesos normais pero en realidade "
 "execútanse dentro do núcleo e non son un proceso real. Polo tanto moitos dos "
 "campos (como Nome de usuario) non se aplican.\n"
 
@@ -1721,7 +1721,7 @@ msgstr "Ferramentas"
 #: ReniceDlg.cpp:28
 #, kde-format
 msgid "Set Priority"
-msgstr "Estabelecer a prioridade"
+msgstr "Definir a prioridade"
 
 #: ReniceDlg.cpp:63
 #, kde-format
