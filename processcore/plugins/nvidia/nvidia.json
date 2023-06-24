@@ -14,6 +14,7 @@
         "Description[eu]": "Nvidia txarteletarako GPU baliabideen prozesukako estatistikak",
         "Description[fi]": "Nvidia-korttien prosessikohtaisten GPU-resurssien tilastot",
         "Description[fr]": "Statistiques des ressources « GPU » par processus pour des cartes nVidia.",
+        "Description[gl]": "Estatísticas de recursos de procesador gráfico por proceso para tarxetas de Nvidia.",
         "Description[hu]": "Nvidia kártyák folyamatonkénti GPU erőforrásainak statisztikái",
         "Description[ia]": "Statisticas de ressources de GPU  per-processo  per cartas Nvidia",
         "Description[it]": "Statistiche per processo delle risorse GPU per le schede Nvidia",
