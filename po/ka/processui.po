@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2023-01-12 16:28+0100\n"
+"PO-Revision-Date: 2023-06-24 07:35+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -117,6 +117,9 @@ msgid ""
 "click on a process to send other signals.<br>See What's This for technical "
 "information."
 msgstr ""
+"<qt>მონიშნული პროცესის დასრულება. გაფრთხილება - შეიძლება შეუნახავი სამუშაო "
+"დაკარგოთ. <br>სხვა სიგნალების გასაგზავნად მასზე მარჯვენა ღილაკით დააწკაპუნეთ."
+"<br>ტექნიკური ინფორმაციისთვის იხილეთ რა არის ეს."
 
 #: ksysguardprocesslist.cpp:442
 #, kde-format
@@ -243,6 +246,8 @@ msgid ""
 "You do not have the permission to renice the process and there was a problem "
 "trying to run as root."
 msgstr ""
+"პროცესის პრიორიტეტის შესაცვლელად წვდომა არ გაგაჩნიათ და აღმოჩენილია root-ით "
+"გაშვების პრობლემა."
 
 #: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
@@ -255,6 +260,8 @@ msgid ""
 "You do not have the permission to change the I/O priority of the process and "
 "there was a problem trying to run as root."
 msgstr ""
+"პროცესის შეტანა/გამოტანის პრიორიტეტის შესაცვლელად წვდომა არ გაგაჩნიათ და "
+"აღმოჩენილია root-ით გაშვების პრობლემა."
 
 #: ksysguardprocesslist.cpp:1344
 #, kde-format
@@ -262,6 +269,8 @@ msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
 "and there was a problem trying to run as root."
 msgstr ""
+"პროცესის CPU-ის მგეგმავის შესაცვლელად წვდომა არ გაგაჩნიათ და აღმოჩენილია "
+"root-ით გაშვების პრობლემა."
 
 #: ksysguardprocesslist.cpp:1359
 #, kde-format
@@ -269,6 +278,8 @@ msgid ""
 "You do not have the permission to kill the process and there was a problem "
 "trying to run as root."
 msgstr ""
+"პროცესის მოკვლის წვდომა არ გაგაჩნიათ და აღმოჩენილია root-ით გაშვების "
+"პრობლემა."
 
 #: ksysguardprocesslist.cpp:1396
 #, kde-format
@@ -278,7 +289,11 @@ msgid_plural ""
 "Are you sure you want to end these %1 processes?  Any unsaved work may be "
 "lost"
 msgstr[0] ""
+"დარწმუნებული ბრძანდებით, რომ გნებავთ, დაასრულოთ ეს პროცესი? შეუნახავი "
+"ნამუშევრები დაგეკარგებათ."
 msgstr[1] ""
+"დარწმუნებული ბრძანდებით, რომ გნებავთ, დაასრულოთ %1 პროცესი? შეუნახავი "
+"ნამუშევრები დაგეკარგებათ."
 
 #: ksysguardprocesslist.cpp:1399
 #, kde-format
@@ -302,7 +317,11 @@ msgid_plural ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> these %1 "
 "processes?  Any unsaved work may be lost"
 msgstr[0] ""
+"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, <b>დაუყოვნებლივ და ძალით მოკლათ</"
+"b> ეს პროცესი?  დიდი ალბათობით, ის, რაც არ შეგინახავთ, დაიკარგება."
 msgstr[1] ""
+"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, <b>დაუყოვნებლივ და ძალით მოკლათ</"
+"b> ეს %1 პროცესი?  დიდი ალბათობით, ის, რაც არ შეგინახავთ, დაიკარგება."
 
 #: ksysguardprocesslist.cpp:1406
 #, kde-format
@@ -508,7 +527,7 @@ msgstr "- პროცესი ელოდება, რომ რაღაც
 #, kde-format
 msgid ""
 "- Process has been stopped. It will not respond to user input at the moment."
-msgstr ""
+msgstr "- პროცესი შეჩერდა. ამ მომენტში ის მომხმარებელს არ უპასუხებს."
 
 #: ProcessModel.cpp:642
 #, kde-format
@@ -516,6 +535,8 @@ msgid ""
 "- Process has finished and is now dead, but the parent process has not "
 "cleaned up."
 msgstr ""
+"- პროცესი დასრულდა და ახლა მკვდარია, მაგრამ მშობელი პროცესი ჯერ არ "
+"გასუფთავებულა."
 
 #: ProcessModel.cpp:1054
 #, kde-format
@@ -555,7 +576,11 @@ msgid_plural ""
 "The current total CPU usage of the process, divided by the %1 processor "
 "cores in the machine."
 msgstr[0] ""
+"პროცესის მიმდინარე ჯამური CPU-ის გამოყენება, გაყოფილი %1 პროცესორის ბირთვზე, "
+"რომელიც მანქანაშია."
 msgstr[1] ""
+"პროცესის მიმდინარე ჯამური CPU-ის გამოყენება, გაყოფილი %1 პროცესორის ბირთვზე, "
+"რომელიც მანქანაშია."
 
 #: ProcessModel.cpp:1074
 #, kde-format
@@ -568,6 +593,8 @@ msgid ""
 "<qt>The total user and system time that this process has been running for, "
 "displayed as minutes:seconds."
 msgstr ""
+"<qt>ჯამური მომხმარებლისა და სისტემის დრო, რომლის განმავლობაშიც ეს პროცესი "
+"გაშვებულია. ნაჩვენებია ფორმატში წუთი:წამი."
 
 #: ProcessModel.cpp:1079
 #, kde-format
@@ -576,6 +603,9 @@ msgid ""
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless.</qt>"
 msgstr ""
+"<qt>ეს ვირტუალური მეხსიერების რაოდენობაა, რომელსაც პროცესი იყენებს, "
+"გაზიარებული ბიბლიოთეკების, გრაფიკული მეხსიერების, დისკზე ფაილების და ა.შ. "
+"ჩათვლით. ეს რიცხვი თითქმის უაზროა.</qt>"
 
 #: ProcessModel.cpp:1083
 #, kde-format
@@ -586,6 +616,12 @@ msgid ""
 "libraries.<br>This is often the most useful figure to judge the memory use "
 "of a program.  See What's This for more information.</qt>"
 msgstr ""
+"<qt>ეს წარმოადგენს რეალურ ფიზიკურ მეხსიერებას, რომელსაც პროცესი თვითონ "
+"იყენებს და დაახლოებით პროცესის მიერ გამოყენებული მეხსიერების რაოდენობას. "
+"<br> ის დასვოპილ მეხსიერებას და გაზიარებული ბიბლიოთეკების კოდის ზომას არ "
+"შეიცავს.<br>ეს ხშირად სასარგებლოა, რომ დაახლოებით გაარკვიოთ პროცესის მიერ "
+"გამოყენებული მეხსიერების რაოდენობა.  მეტი ინფორმაციისთვის იხილეთ 'რა არის "
+"ეს'.</qt>"
 
 #: ProcessModel.cpp:1088
 #, kde-format
@@ -594,6 +630,9 @@ msgid ""
 "process's shared libraries are using.<br>This memory is shared among all "
 "processes that use this library.</qt>"
 msgstr ""
+"<qt>ეს იმ ფიზიკური მეხსიერების დაახლოებითი რაოდენობაა, რომელსაც პროცესის "
+"გაზიარებული ბიბლიოთეკები იყენებენ. <br>ეს მეხსიერება გაზიარებულია ყველა "
+"პროცესს შორის, რომელიც ამ ბიბლიოთეკას იყენებს.</qt>"
 
 #: ProcessModel.cpp:1091
 #, kde-format
@@ -606,6 +645,8 @@ msgid ""
 "<qt>Linux flag NoNewPrivileges, if set the process can't gain further "
 "privileges via setuid etc.</qt>"
 msgstr ""
+"<qt>თუ დაყენებულია Linux-ის ალამი NoNewPrivileges, პროცესს setuid და ა.შ. "
+"ფუნქციებით მეტი პრივილეგიის მიღება არ შეუძლია.</qt>"
 
 #: ProcessModel.cpp:1095
 #, kde-format
@@ -615,12 +656,12 @@ msgstr "<qt>ბრძანება, რითიც ეს პროცეს�
 #: ProcessModel.cpp:1097
 #, kde-format
 msgid "<qt>The amount of pixmap memory that this process is using.</qt>"
-msgstr ""
+msgstr "<qt>პროცესის მიერ გამოყენებული მეხსიერება პიქსელების რუკისთვის.</qt>"
 
 #: ProcessModel.cpp:1099
 #, kde-format
 msgid "<qt>The title of any windows that this process is showing.</qt>"
-msgstr ""
+msgstr "<qt>ყველა ფანჯრის სათაური, რომელსაც ეს პროცესი აჩვენებს.</qt>"
 
 #: ProcessModel.cpp:1101
 #, kde-format
@@ -642,7 +683,7 @@ msgstr ""
 #: ProcessModel.cpp:1107
 #, kde-format
 msgid "<qt>The control group (cgroup) where this process belongs.</qt>"
-msgstr ""
+msgstr "<qt>კონტროლის ჯგუფი (cgroup), რომელსაც ეს პროცესი ეკუთვნის.</qt>"
 
 #: ProcessModel.cpp:1109
 #, kde-format
@@ -650,6 +691,8 @@ msgid ""
 "<qt>Mandatory Access Control (SELinux or AppArmor) context for this process."
 "</qt>"
 msgstr ""
+"<qt>სავალდებულო წვდომის კონტროლის (SELinux ან AppArmor) კონტექსტი ამ "
+"პროცესისთვის.</qt>"
 
 #: ProcessModel.cpp:1112
 #, kde-format
@@ -658,6 +701,9 @@ msgid ""
 "shared memory divided by the amount of processes using that shared memory "
 "added."
 msgstr ""
+"პროცესის მიერ გამოყენებული საკუთარი ფიზიკური მეხსიერების რაოდენობა, "
+"მიმატებული გაზიარებული მეხსიერება და გაყოფილი პროცესების რაოდენობაზე, "
+"რომლებიც ამ დამატებულ გაზიარებულ მეხსიერებას იყენებენ."
 
 #: ProcessModel.cpp:1122
 #, kde-format
@@ -667,6 +713,11 @@ msgid ""
 "full command line starts with the process name, the first word of the "
 "command line is shown, otherwise the process name is used."
 msgstr ""
+"<qt><i>ტექნიკური ინფორმაცია: </i>კერნელის პროცესის სახელი მაქსიმუმ 8 "
+"სიმბოლოს სიგრძისაა, ასე რომ ანალიზი მთლიანი ბრძანების ხდება.  თუ სრული "
+"ბრძანების პირველი სიტყვა პროცესის სახელით იწყება, გამოყენებული იქნება "
+"ბრძანების სტრიქონის პირველი სიტყვა, წინააღმდეგ შემთხვევაში პროცესის სახელი "
+"იქნება გამოყენებული."
 
 #: ProcessModel.cpp:1126
 #, kde-format
@@ -743,11 +794,12 @@ msgid ""
 "<qt><i>Technical information: </i>The flag is retrieved from /proc/[pid]/"
 "status"
 msgstr ""
+"<qt><i>ტექნიკური ინფორმაცია: </i>ალამი მიღებულია ფაილიდან /proc/[pid]/status"
 
 #: ProcessModel.cpp:1166
 #, kde-format
 msgid "<qt><i>Technical information: </i>This is from /proc/*/cmdline"
-msgstr ""
+msgstr "<qt><i>ტექნიკური ინფორმაცია: </i>ეს /proc/*/cmdline-დანაა"
 
 #: ProcessModel.cpp:1169
 #, kde-format
@@ -1004,6 +1056,8 @@ msgid ""
 "<title>KThreadd</title><para>Manages kernel threads. The children processes "
 "run in the kernel, controlling hard disk access, etc.</para>"
 msgstr ""
+"<title>KThreadd</title><para> ბირთვის ნაკადებს მართავს. ეს შვილი პროცესები "
+"ბირთვში ეშვება და დისკებთან წვდომას და ა.შ. მართავს.</para>"
 
 #: ProcessModel.cpp:1627
 #, kde-kuit-format
@@ -1066,6 +1120,11 @@ msgid ""
 "time:</emphasis> %4</para><para><emphasis strong='true'>Relative start time:"
 "</emphasis> %5</para>"
 msgstr ""
+"<para><emphasis strong='true'>დრო სისტემის ჩატვირთვის შემდეგ:</emphasis> %1</"
+"para><para><emphasis strong='true'>დრო სისტემის ჩატვირთვის შემდეგ, წამებში:</"
+"emphasis> %2 (სისტემის ჩატვირთვის დრო: %3)</para><para><emphasis "
+"strong='true'>დაწყების აბსოლუტური დრო:</emphasis> %4</para><para><emphasis "
+"strong='true'>ჩატვირთვის შედარებითი დრო:</emphasis> %5</para>"
 
 #: ProcessModel.cpp:1686
 #, kde-kuit-format
@@ -1074,6 +1133,8 @@ msgid ""
 "<para><emphasis strong='true'>This process was run with the following "
 "command:</emphasis></para><para>%1</para>"
 msgstr ""
+"<para><emphasis strong='true'>ეს პროცესი გაეშვა შემდეგი ბრძანებით:</"
+"emphasis></para><para>%1</para>"
 
 #: ProcessModel.cpp:1711 ProcessModel.cpp:1777
 #, kde-kuit-format
@@ -1182,12 +1243,15 @@ msgid ""
 "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1 out of %2  (%3 "
 "%)</para>"
 msgstr ""
+"<para><emphasis strong='true'>RSS მეხსიერების გამოყენება:</emphasis> %1 %2-"
+"დან  (%3 %)</para>"
 
 #: ProcessModel.cpp:1819
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1</para>"
 msgstr ""
+"<para><emphasis strong='true'>RSS მეხსირების გამოყენება:</emphasis> %1</para>"
 
 #: ProcessModel.cpp:1826 ProcessModel.cpp:1887
 #, kde-kuit-format
@@ -1196,6 +1260,8 @@ msgid ""
 "<para><emphasis strong='true'>Your system does not seem to have this "
 "information available to be read.</emphasis></para>"
 msgstr ""
+"<para><emphasis strong='true'>თქვენს სისტემას ამ ინფორმაციის წაკითხვის "
+"საშუალება არ გაჩნია.</emphasis></para>"
 
 #: ProcessModel.cpp:1830
 #, kde-kuit-format
@@ -1204,6 +1270,8 @@ msgid ""
 "<para><emphasis strong='true'>Shared library memory usage:</emphasis> %1 out "
 "of %2  (%3 %)</para>"
 msgstr ""
+"<para><emphasis strong='true'>გაზიარებული ბიბლიოთეკების მეხსიერების "
+"გამოყენება:</emphasis> %1 %2-დან  (%3 %)</para>"
 
 #: ProcessModel.cpp:1836 ProcessModel.cpp:1897
 #, kde-kuit-format
@@ -1212,6 +1280,8 @@ msgid ""
 "<para><emphasis strong='true'>Shared library memory usage:</emphasis> %1</"
 "para>"
 msgstr ""
+"<para><emphasis strong='true'>გაზიარებული ბიბლიოთეკების მეხსიერების "
+"გამოყენება:</emphasis> %1</para>"
 
 #: ProcessModel.cpp:1843
 #, kde-kuit-format
@@ -1225,6 +1295,13 @@ msgid ""
 "(%10 KiB/s)</para><para><emphasis strong='true'>Actual bytes written:</"
 "emphasis> %11 (%12 KiB/s)</para>"
 msgstr ""
+"<para><emphasis strong='true'>წაკითხული სიმბოლო:</emphasis> %1 (%2 კიბ/წმ)</"
+"para><para><emphasis strong='true'>ჩაწერილი სიმბოლო:</emphasis> %3 (%4 კიბ/"
+"წმ)</para><para><emphasis strong='true'>წაკითხვის სისფუნქციები:</emphasis> "
+"%5 (%6 წმ⁻¹)</para><para><emphasis strong='true'>ჩაწერის სისფუნქციები:</"
+"emphasis> %7 (%8 წმ⁻¹)</para><para><emphasis strong='true'>მიმდინარე "
+"წაკითხული ბაიტი:</emphasis> %9 (%10 კიბ/წმ)</para><para><emphasis "
+"strong='true'>მიმდინარე ჩაწერილი ბაიტი:</emphasis> %11 (%12 კიბ/წმ)</para>"
 
 #: ProcessModel.cpp:1891
 #, kde-kuit-format
@@ -1233,6 +1310,8 @@ msgid ""
 "<para><emphasis strong='true'>Total memory usage:</emphasis> %1 out of %2  "
 "(%3 %)</para>"
 msgstr ""
+"<para><emphasis strong='true'>მეხსიერების სრული გამოყენება:</emphasis> %1 %2-"
+"დან  (%3 %)</para>"
 
 #: ProcessModel.cpp:2181
 #, kde-format
@@ -1310,7 +1389,7 @@ msgstr "გაზიარებული მეხსიერება"
 #, kde-format
 msgctxt "process heading"
 msgid "Relative Start Time"
-msgstr ""
+msgstr "დაწყების შედარებითი დრო"
 
 #: ProcessModel.cpp:2195
 #, kde-format
@@ -1396,6 +1475,8 @@ msgid ""
 "Type comma separated search terms or regular expressions to filter the "
 "process list"
 msgstr ""
+"შეიყვანეთ მძიმით გამოყოფილი წესები და რეგულარული გამოსახულებები, პროცესების "
+"სიის გასაფილტრად"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:69
@@ -1416,6 +1497,21 @@ msgid ""
 "<b>1234</b>.</td></th></tr>\n"
 "</table>\n"
 msgstr ""
+"ფილტრი, რომლითაც პროცესებია ნაჩვენებ აქ მითითებული ტექსტი. ტექსტი შეიძლება "
+"პროცესის სახელის, ბრძანების ან ფანჯრის სათაურის სტრიქონს ნაწილობრივ "
+"ემთხვეოდეს. ასევე შეიძლება წარმოადგენდეს მომხმარებლის სახელს ან პროცესის ID-"
+"ის ნომერს <p>\n"
+"მაგალითად:\n"
+"\n"
+"<table>\n"
+"<tr><th>ksys</th><td>აჩვენებს პროცესებს, რომელსაც \"<b>ksys</b>\" სახელში "
+"ურევიათ. მაგ: პროცესი \"<i>ksysguard</i>\" და \"<i>ksysguardd</i>\".<td></"
+"tr>\n"
+"<tr><th>root</th><td>აჩვენებს პროცესებს, რომლების მფლობელიც <b>root</b>-ია. "
+"მაგ <i>init</i></td></tr>\n"
+"<tr><th>1234</th><td>აჩვენებს პროცესებს, რომლის PID ან მშობლის PID-ი "
+"<b>1234</b>-ის ტოლია.</td></th></tr>\n"
+"</table>\n"
 
 #. i18n: ectx: property (whatsThis), widget (QComboBox, cmbFilter)
 #: ProcessWidgetUI.ui:101
@@ -1582,6 +1678,15 @@ msgid ""
 "interactive processes.  Process is mildly disfavored in scheduling decisions."
 "</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">CPU-ის ინტენსიურად "
+"გამომყენებელი არაინტერაქტიური პროცესებისთვის.  დამგეგმავის გადაწყვეტილებებში "
+"პროცესს ოდნავ ნაკლები პრიორიტეტი გააჩნია.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioBatch)
 #: ReniceDlgUi.ui:156
@@ -1629,6 +1734,15 @@ msgid ""
 "runnable.  Higher priority than Normal or Batch.  Has Timeslicing.</p></"
 "body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">პროცესი მაშინ გაეშვება, "
+"როცა ის გაშვებადი იქნება.  უფრო მაღალი პრიორიტეტით, ვიდრე ნაკრებში ან "
+"ნორმალურად.  Has Timeslicing.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioRR)
 #: ReniceDlgUi.ui:176
@@ -1761,6 +1875,15 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Process can only use the "
 "hard disk when no other process has used it very recently.</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">პროცესს დისკთან წვდომა "
+"მხოლოდ მაშინ შეეძლება, თუ დისკთან წვდომა ძალიან ცოტა ხნის წინ სხვა პროცესს "
+"არ დასჭირვებია.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioIdle)
 #: ReniceDlgUi.ui:320
@@ -1802,6 +1925,14 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Process is given higher "
 "priority to access the hard disk than Normal.</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">პროცესს დისკთან წვდომის "
+"ჩვეულებრივზე მაღალი პრიორიტეტი აქვს მინიჭებული.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioBestEffort)
 #: ReniceDlgUi.ui:340
@@ -1843,6 +1974,14 @@ msgid ""
 "access to the hard disk whenever needed, regardless of what else is going on."
 "</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">პროცესი, იმის მიუხედავად, "
+"კიდევ რა ხდება, მყარ დისკთან წვდომას დაუყოვნებლივ მიიღებს.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioRealTime)
 #: ReniceDlgUi.ui:360

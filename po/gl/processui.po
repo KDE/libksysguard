@@ -1,18 +1,18 @@
 # translation of processui.po to galician
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # mvillarino <mvillarino@users.sourceforge.net>, 2007, 2008, 2009.
 # marce villarino <mvillarino@users.sourceforge.net>, 2009.
 # Marce Villarino <mvillarino@kde-espana.es>, 2009, 2011, 2012, 2013.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2019-11-26 22:32+0100\n"
+"PO-Revision-Date: 2023-06-24 09:55+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.08.3\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -45,11 +45,10 @@ msgid "Show Application Window"
 msgstr "Amosar a xanela da aplicación"
 
 #: ksysguardprocesslist.cpp:205
-#, fuzzy, kde-format
-#| msgid "Displayed Information"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detailed Information..."
-msgstr "Información mostrada"
+msgstr "Información detallada…"
 
 #: ksysguardprocesslist.cpp:206
 #, kde-format
@@ -213,7 +212,7 @@ msgstr "Amosar as opcións da liña de ordes"
 #: ksysguardprocesslist.cpp:870
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
-msgstr "Dividir a utilización da CPU polo número delas"
+msgstr "Dividir o uso de procesador polo número deles"
 
 #: ksysguardprocesslist.cpp:877
 #, kde-format
@@ -274,8 +273,8 @@ msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
 "and there was a problem trying to run as root."
 msgstr ""
-"Non ten permisos para cambiar o planificador de CPU do proceso. Ademais "
-"produciuse un problema ao intentar executar como root."
+"Non ten permisos para cambiar o planificador de procesador do proceso. "
+"Ademais produciuse un problema ao intentar executar como root."
 
 #: ksysguardprocesslist.cpp:1359
 #, kde-format
@@ -346,19 +345,19 @@ msgstr "Matar"
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "Non hai datos para amosar."
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "Actualizar"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -368,139 +367,130 @@ msgid "Quick search"
 msgstr "Busca rápida"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "Nome de usuario"
+msgstr "Nome do ficheiro"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "Comezo"
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
-msgstr "Finalizar"
+msgstr "Fin"
 
 #: processdetails/MemoryMapsTab.cpp:254
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "Permisos"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "Desprazamento"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
 msgctxt "@title:column"
 msgid "Inode"
-msgstr ""
+msgstr "Inodo"
 
 #: processdetails/MemoryMapsTab.cpp:283 processdetails/OpenFilesTab.cpp:278
 #, kde-format
 msgctxt "@info:status"
 msgid "No data matching the filter"
-msgstr ""
+msgstr "Ningún dato coincide co filtro."
 
 #: processdetails/OpenFilesTab.cpp:33
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "Ficheiro"
 
 #: processdetails/OpenFilesTab.cpp:36
-#, fuzzy, kde-format
-#| msgid "Characters read/written"
+#, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr "Caracteres lidos/escritos"
+msgstr "Dispositivo de caracteres"
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "Dispositivo de bloques"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "Cano"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "Toma"
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "Ocioso"
+msgstr "Identificador"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
 msgctxt "@info:status"
 msgid "%1: Failed to list directory contents"
-msgstr ""
+msgstr "%1: non se puido listar o contido do cartafol."
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "Todos os procesos"
+msgstr "Detalles do proceso"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "Xeral"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "Memoria"
+msgstr "Mapas de memoria"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "Ficheiros abertos"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
 msgctxt "@info:status"
 msgid "The \"%1\" (PID: %2) process has stopped executing"
-msgstr ""
+msgstr "Detívose a execución do proceso «%1» (identificador: %2)."
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "Estabelecer a prioridade"
+msgstr "Prioridade de entrada e saída"
 
 #: ProcessModel.cpp:62
 #, kde-format
@@ -578,7 +568,7 @@ msgstr ""
 #: ProcessModel.cpp:1065
 #, kde-format
 msgid "The current CPU usage of the process."
-msgstr "A utilización actual de CPU por parte do proceso."
+msgstr "O uso que o proceso está facendo do procesador."
 
 #: ProcessModel.cpp:1070
 #, kde-format
@@ -588,17 +578,15 @@ msgid ""
 msgid_plural ""
 "The current total CPU usage of the process, divided by the %1 processor "
 "cores in the machine."
-msgstr[0] ""
-"A utilización total da CPU polo proceso, dividida polo %1 núcleo de "
-"procesamento que hai na máquina."
+msgstr[0] "O uso total que o proceso fai do procesador."
 msgstr[1] ""
-"A utilización total da CPU polo proceso, dividida polos %1 núcleos de "
-"procesamento que hai na máquina."
+"O uso total que o proceso fai do procesador, dividido polos %1 núcleos do "
+"procesador."
 
 #: ProcessModel.cpp:1074
 #, kde-format
 msgid "The current total CPU usage of the process."
-msgstr "A utilización total actual de CPU por parte do proceso."
+msgstr "O uso total que o proceso fixo do procesador."
 
 #: ProcessModel.cpp:1076
 #, kde-format
@@ -632,8 +620,8 @@ msgstr ""
 "<qt>Esta é a cantidade de memoria física real que está a usar este proceso "
 "en si, e aproxímase ao uso se memoria privada do proceso.<br>Non inclúe a "
 "memoria na swap, nin o tamaño do código das bibliotecas compartidas.<br>Polo "
-"xeral esta é a cantidade máis útil para avaliar a memoria empregada por un "
-"programa. Consulte o Que é isto? para máis información.</qt>"
+"xeral esta é a cantidade máis útil para avaliar a memoria usada por un "
+"programa. Consulte o «Que é isto?» para máis información.</qt>"
 
 #: ProcessModel.cpp:1088
 #, kde-format
@@ -771,8 +759,8 @@ msgid ""
 msgstr ""
 "<qt>Este é o tamaño do espazo de enderezos reservados, non da memoria, senón "
 "do espazo dos enderezos. Este valor na práctica non significa nada. Cando un "
-"proceso pide un bloque de memoria grande no sistema pero só usa unha parte "
-"pequena del a utilización real será pequena, pero VIRT será grande."
+"proceso solicita un bloque de memoria grande no sistema pero só usa unha "
+"parte pequena del o uso real será pequeno, pero VIRT será grande."
 "<p><i>Información técnica:</i> Isto é VmSize en proc/*/status e VIRT en top."
 
 #: ProcessModel.cpp:1146
@@ -788,16 +776,16 @@ msgid ""
 msgstr ""
 "<qt><i>Información técnica:</i> Esta é unha aproximación ao uso privado de "
 "memoria, calculado como VmRSS - Compartida, obtido de /proc/*/statm. Isto "
-"tende a subestimar a utilización real da memoria privada por parte dun "
-"proceso, porque non inclúe as páxinas de memoria con copia de seguridade, "
-"pero é a mellor estimación das rápidas de calcular. Isto coñécese tamén como "
-"URSS (Unique Resident Set Size). Para un proceso individual obterá un "
-"cálculo máis exacto pero lento na «Información detallada da memoria»."
+"tende a subestimar o uso real da memoria privada por parte dun proceso, "
+"porque non inclúe as páxinas de memoria con copia de seguridade, pero é a "
+"mellor estimación das rápidas de calcular. Isto coñécese tamén como URSS "
+"(Unique Resident Set Size). Para un proceso individual obterá un cálculo "
+"máis exacto pero lento na «Información detallada da memoria»."
 
 #: ProcessModel.cpp:1151
 #, kde-format
 msgid "The CPU usage of a process and all of its threads."
-msgstr "A utilización da CPU dun proceso e de todos os seus fíos."
+msgstr "O uso que un proceso e os seus fíos fan do procesador."
 
 #: ProcessModel.cpp:1154
 #, kde-format
@@ -807,8 +795,9 @@ msgid ""
 "time if the process has been across multiple CPU cores."
 msgstr ""
 "<qt>O tempo total de usuario e do sistema durante o que estiveron a "
-"executarse na CPU un proceso e máis todos os seus fíos. Isto pode ser maior "
-"do que o tempo do reloxo se o proceso se executou en varios núcleos de CPU."
+"executarse no procesador un proceso e máis todos os seus fíos. Isto pode ser "
+"maior do que o tempo do reloxo se o proceso se executou en varios núcleos de "
+"procesador."
 
 #: ProcessModel.cpp:1158
 #, kde-format
@@ -884,7 +873,7 @@ msgid ""
 msgstr ""
 "<qt><i>Información técnica:</i> Este é o ID do proceso. Unha aplicación de "
 "varios fíos trátase como un proceso único, con todos os fíos compartindo o "
-"mesmo PID. A utilización da CPU e o demais será a total, acumulada de todos "
+"mesmo PID. O uso do procesador e o demais será a total, acumulada de todos "
 "os fíos."
 
 #: ProcessModel.cpp:1183
@@ -915,7 +904,7 @@ msgid ""
 "*/io and is documented further in Documentation/accounting and Documentation/"
 "filesystems/proc.txt in the kernel source."
 msgstr ""
-"<qt>Esta columna mostra as estatísticas de E/S de cada proceso. A axudiña "
+"<qt>Esta columna amosa as estatísticas de E/S de cada proceso. A axudiña "
 "fornece a seguinte información:<br><table> <tr><td>Caracteres lidos</"
 "td><td>A cantidade de bytes que lese esta tarefa desde o almacén. Non é máis "
 "que a suma dos bytes que pasase a read() ou pread(). Inclúe cousas como a E/"
@@ -934,7 +923,7 @@ msgstr ""
 "CIFS.</td></tr> <tr><td>Bytes realmente escritos</td><td>Intento de contar a "
 "cantidade de bytes enviados á capa de almacén a causa do proceso. Isto faise "
 "no momento de tocar as páxinas.</td></table><p>A cantidade entre corchetes "
-"mostra a taxa á que está a cambiarse cada valor, que se determina tomando a "
+"amosa a taxa á que está a cambiarse cada valor, que se determina tomando a "
 "diferenza entre o valor anterior e o novo, e dividindo entre o intervalo de "
 "actualización. <p><i>Información técnica:</i> Estes datos recóllense en /"
 "proc/*/io e está máis documentado en Documentation/accounting e "
@@ -948,7 +937,7 @@ msgid ""
 "Systemd and containers for limiting process group's usage of resources and "
 "to monitor them."
 msgstr ""
-"<qt><i>Información técnica:</i> Isto mostra a pertenza a un grupo de control "
+"<qt><i>Información técnica:</i> Isto amosa a pertenza a un grupo de control "
 "de Linux (cgroup), obtida de /proc/[pid]/cgroup. Systemd e os contedores "
 "usan os grupos de control para liminar o uso de recursos por parte dun grupo "
 "de procesos e para vixialos."
@@ -959,7 +948,7 @@ msgid ""
 "<qt><i>Technical information: </i>This shows Mandatory Access Control "
 "(SELinux or AppArmor) context, retrieved from /proc/[pid]/attr/current."
 msgstr ""
-"<qt><i>Información técnica:</i> Isto mostra o contexto de control de acceso "
+"<qt><i>Información técnica:</i> Isto amosa o contexto de control de acceso "
 "obrigatorio (MAC; SELinux ou AppArmor), obtido de /proc/[pid]/attr/current."
 
 #: ProcessModel.cpp:1211
@@ -971,8 +960,8 @@ msgid ""
 "shared memory is determined per shared memory section and thus can vary per "
 "memory section."
 msgstr ""
-"<i>Información técnica:</i> A isto adóitano chamar «tamaño proporcional da "
-"colección» e é a mellor aproximación á cantidade real de memoria total que "
+"<i>Información técnica:</i> A isto adóitano chamar «tamaño proporcional do "
+"conxunto» e é a mellor aproximación á cantidade real de memoria total que "
 "usa un proceso. Teña en conta que o número de aplicacións que se reparten a "
 "memoria compartida determínase por cada sección de memoria compartida, e "
 "polo tanto pode ser distinto por cada sección de memoria."
@@ -1231,7 +1220,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Nice level:</emphasis> %1 (%2)</para>"
 msgstr ""
-"<para><emphasis strong='true'>Nivel de prioridade:</emphasis> %1 (%2)</para>"
+"<para><emphasis strong='true'>Nivel de prioridade:</emphasis> %1 (%2).</para>"
 
 #: ProcessModel.cpp:1718
 #, kde-kuit-format
@@ -1256,7 +1245,7 @@ msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>I/O Nice level:</emphasis> %1 (%2)</para>"
 msgstr ""
 "<para><emphasis strong='true'>Nivel de prioridade de entrada e saída:</"
-"emphasis> %1 (%2)</para>"
+"emphasis> %1 (%2).</para>"
 
 #: ProcessModel.cpp:1735 ProcessModel.cpp:1787
 #, kde-kuit-format
@@ -1273,10 +1262,10 @@ msgid ""
 "para><para><emphasis strong='true'>User CPU usage:</emphasis> %3%</"
 "para><para><emphasis strong='true'>System CPU usage:</emphasis> %4%</para>"
 msgstr ""
-"<para><emphasis strong='true'>Estado do proceso:</emphasis> %1 %2</"
-"para><para><emphasis strong='true'>Uso da CPU polo usuario:</emphasis> %3%</"
-"para><para><emphasis strong='true'>Uso da CPU polo sistema:</emphasis> %4%</"
-"para>"
+"<para><emphasis strong='true'>Estado do proceso:</emphasis> %1 %2.</"
+"para><para><emphasis strong='true'>Uso do procesador pola persoa usuaria:</"
+"emphasis> %3%</para><para><emphasis strong='true'>Uso do procesador polo "
+"sistema:</emphasis> %4%</para>"
 
 #: ProcessModel.cpp:1758
 #, kde-kuit-format
@@ -1288,10 +1277,10 @@ msgid ""
 "para><para><emphasis strong='true'>Total CPU usage:</emphasis> %4%</para>"
 msgstr ""
 "<para><emphasis strong='true'>Número de fillos:</emphasis> %1</"
-"para><para><emphasis strong='true'>Uso todal da CPU polo usuario:</emphasis> "
-"%2%</para><para><emphasis strong='true'>Uso todal da CPU polo sistema:</"
-"emphasis> %3%</para><para><emphasis strong='true'>Uso todal da CPU:</"
-"emphasis> %4%</para>"
+"para><para><emphasis strong='true'>Uso total do procesador pola persoa "
+"usuaria:</emphasis> %2%</para><para><emphasis strong='true'>Uso total do "
+"procesador polo sistema:</emphasis> %3%</para><para><emphasis "
+"strong='true'>Uso total do procesador:</emphasis> %4%</para>"
 
 #: ProcessModel.cpp:1769
 #, kde-kuit-format
@@ -1300,8 +1289,8 @@ msgid ""
 "<para><emphasis strong='true'>CPU time spent running as user:</emphasis> %1 "
 "seconds</para>"
 msgstr ""
-"<para><emphasis strong='true'>Tempo da COU executando para o usuario:</"
-"emphasis> %1 segundos</para>"
+"<para><emphasis strong='true'>Tempo do procesador usado executando como "
+"persoa usuaria:</emphasis> %1 segundos.</para>"
 
 #: ProcessModel.cpp:1773
 #, kde-kuit-format
@@ -1310,8 +1299,8 @@ msgid ""
 "<para><emphasis strong='true'>CPU time spent running in kernel:</emphasis> "
 "%1 seconds</para>"
 msgstr ""
-"<para><emphasis strong='true'>Tempo da CPU executando o kernel:</emphasis> "
-"%1 segundos</para>"
+"<para><emphasis strong='true'>Tempo do procesador usado executando no kernel:"
+"</emphasis> %1 segundos.</para>"
 
 #: ProcessModel.cpp:1803
 #, kde-kuit-format
@@ -1320,14 +1309,14 @@ msgid ""
 "<para><emphasis strong='true'>Memory usage:</emphasis> %1 out of %2  (%3 %)</"
 "para>"
 msgstr ""
-"<para><emphasis strong='true'>Uso de memoria:</emphasis> %1 de %2  (%3 %)</"
+"<para><emphasis strong='true'>Uso de memoria:</emphasis> %1 de %2  (%3 %).</"
 "para>"
 
 #: ProcessModel.cpp:1809
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<emphasis strong='true'>Memory usage:</emphasis> %1<br />"
-msgstr "<emphasis strong='true'>Uso de memoria:</emphasis> %1<br />"
+msgstr "<emphasis strong='true'>Uso de memoria:</emphasis> %1.<br />"
 
 #: ProcessModel.cpp:1813
 #, kde-kuit-format
@@ -1337,7 +1326,7 @@ msgid ""
 "%)</para>"
 msgstr ""
 "<para><emphasis strong='true'>Uso de memoria RSS:</emphasis> %1 de %2  (%3 "
-"%)</para>"
+"%).</para>"
 
 #: ProcessModel.cpp:1819
 #, kde-kuit-format
@@ -1363,7 +1352,7 @@ msgid ""
 "of %2  (%3 %)</para>"
 msgstr ""
 "<para><emphasis strong='true'>Uso de memoria por bibliotecas compartidas:</"
-"emphasis> %1 de %2  (%3 %)</para>"
+"emphasis> %1 de %2  (%3 %).</para>"
 
 #: ProcessModel.cpp:1836 ProcessModel.cpp:1897
 #, kde-kuit-format
@@ -1403,7 +1392,7 @@ msgid ""
 "(%3 %)</para>"
 msgstr ""
 "<para><emphasis strong='true'>Uso de memoria total:</emphasis> %1 de %2  (%3 "
-"%)</para>"
+"%).</para>"
 
 #: ProcessModel.cpp:2181
 #, kde-format
@@ -1439,13 +1428,13 @@ msgstr "Prioridade"
 #, no-c-format, kde-format
 msgctxt "process heading"
 msgid "CPU %"
-msgstr "% CPU"
+msgstr "% do procesador"
 
 #: ProcessModel.cpp:2188
 #, kde-format
 msgctxt "process heading"
 msgid "CPU Time"
-msgstr "Tempo da CPU"
+msgstr "Tempo do procesador"
 
 #: ProcessModel.cpp:2189
 #, kde-format
@@ -1586,7 +1575,7 @@ msgid ""
 "process list"
 msgstr ""
 "Escriba termos de busca ou expresións regulares separadas por comas para "
-"filtrar a lista de procesos"
+"filtrar a lista de procesos."
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:69
@@ -1613,11 +1602,11 @@ msgstr ""
 "Por exemplo:\n"
 "\n"
 "<table>\n"
-"<tr><th>ksys</th><td>Mostra os procesos que conteñen «<b>ksys</b>» no nome, "
+"<tr><th>ksys</th><td>Amosa os procesos que conteñen «<b>ksys</b>» no nome, "
 "por exemplo os procesos «<i>ksysguard</i>» e «<i>ksysguardd</i>». <td></tr>\n"
-"<tr><th>root</th><td>Mostra os procesos posuídos por <b>root</b>. Por "
-"exemplo <i>init</i></td></tr>\n"
-"<tr><th>1234</th><td>Mostra os procesos con PID ou PID do pai con valor "
+"<tr><th>root</th><td>Amosa os procesos posuídos por <b>root</b>. Por exemplo "
+"<i>init</i></td></tr>\n"
+"<tr><th>1234</th><td>Amosa os procesos con PID ou PID do pai con valor "
 "<b>1234</b>.</td></th></tr>\n"
 "</table>\n"
 
@@ -1653,18 +1642,18 @@ msgstr ""
 "<qt>Cambia cales procesos se ven e como se amosan. Os procesos poden "
 "filtrarse ademais usando o filtro de texto de Busca rápida.<p>\n"
 "<table>\n"
-"<tr><td>Todos os procesos</td><td>Mostra todos os procesos do sistema.</td></"
+"<tr><td>Todos os procesos</td><td>Amosa todos os procesos do sistema.</td></"
 "tr>\n"
-"<tr><td>Todos os procesos, en árbore</td><td>Mostra todos os procesos do "
+"<tr><td>Todos os procesos, en árbore</td><td>Amosa todos os procesos do "
 "sistema, nunha vista xerárquica usando a información de PID do pai.</td></"
 "tr>\n"
-"<tr><td>Procesos do sistema</td><td>Mostra os procesos que se executan como "
+"<tr><td>Procesos do sistema</td><td>Amosa os procesos que se executan como "
 "root ou como un usuario que non poida acceder ao sistema.</td></tr>\n"
-"<tr><td>Procesos de usuario</td><td>Mostra os procesos que se executan por "
-"un usuario que non sexa root e que poida acceder ao sistema.</td></tr>\n"
-"<tr><td>Procesos propios</td><td>Mostra os procesos posuídos polo mesmo "
+"<tr><td>Procesos de usuario</td><td>Amosa os procesos que se executan por un "
+"usuario que non sexa root e que poida acceder ao sistema.</td></tr>\n"
+"<tr><td>Procesos propios</td><td>Amosa os procesos posuídos polo mesmo "
 "usuario que posúe este.</td></tr>\n"
-"<tr><td>Só programas</td><td>Mostra os procesos que se executan por un "
+"<tr><td>Só programas</td><td>Amosa os procesos que se executan por un "
 "usuario que poida acceder ao sistema e que esteas conectado ou a un TTY ou "
 "que polo menos teñan unha xanela do X11.</td></tr>\n"
 "</table>\n"
@@ -1739,7 +1728,7 @@ msgstr "Cambiar a prioridade de planificación de:"
 #: ReniceDlgUi.ui:100
 #, kde-format
 msgid "CPU Scheduler"
-msgstr "Planificador da CPU"
+msgstr "Planificador do procesador"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioNormal)
 #: ReniceDlgUi.ui:129
@@ -1838,8 +1827,8 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Para procesos interactivos "
-"cun gran consumo de CPU. O proceso vese un pouco desfavorecido nas decisións "
-"de planificación.</p></body></html>"
+"cun gran consumo de procesador. O proceso vese un pouco desfavorecido nas "
+"decisións de planificación.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioBatch)
 #: ReniceDlgUi.ui:156
@@ -1879,13 +1868,14 @@ msgstr ""
 "style=\" font-weight:400; font-style:italic;\">(Desde Linux 2.6.16.)</"
 "span><span style=\" font-weight:400;\"> Esta política é similar á </"
 "span>Normal<span style=\" font-weight:400;\">, excepto que esta fará que o "
-"planificador sempre asuma que o proceso consume moita CPU. En consecuencia, "
-"o planificador aplicará unha pequena penalización na planificación para que "
-"se vexa un pouco prexudicado nas decisións de planificación. Esta política é "
-"útil para cargar de traballo que non sexan interactivas, pero que non queira "
-"diminuír a súa prioridade, e para traballos que queiran unha política de "
-"planificación determinista sen interaccións que causen apropriacións "
-"adicionais (entre as tarefas da carga de traballo).</span></p></body></html>"
+"planificador sempre asuma que o proceso consume moito procesador. En "
+"consecuencia, o planificador aplicará unha pequena penalización na "
+"planificación para que se vexa un pouco prexudicado nas decisións de "
+"planificación. Esta política é útil para cargar de traballo que non sexan "
+"interactivas, pero que non queira diminuír a súa prioridade, e para "
+"traballos que queiran unha política de planificación determinista sen "
+"interaccións que causen apropiacións adicionais (entre as tarefas da carga "
+"de traballo).</span></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioBatch)
 #: ReniceDlgUi.ui:159
@@ -2049,7 +2039,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">A prioridade dos procesos "
-"está baseada na prioridade da CPU.</p></body></html>"
+"está baseada na prioridade do procesador.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioIONormal)
 #: ReniceDlgUi.ui:300
@@ -2084,11 +2074,11 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">É a mesma que a "
 "planificación do <span style=\" font-weight:600;\">Mellor esforzo</span>, "
 "excepto en que a prioridade é calculada automaticamente con base na "
-"prioridade da CPU. Os procesos con maior prioridade terán prioridade para os "
-"accesos ao disco duro. Os programas que se executen coa mesma prioridade "
-"<span style=\" font-weight:600;\">Mellor esforzo/Normal</span> son servidos "
-"como nun <span style=\" font-weight:600;\">Round Robin</span>.</p></body></"
-"html>"
+"prioridade do procesador. Os procesos con maior prioridade terán prioridade "
+"para os accesos ao disco duro. Os programas que se executen coa mesma "
+"prioridade <span style=\" font-weight:600;\">Mellor esforzo/Normal</span> "
+"son servidos como nun <span style=\" font-weight:600;\">Round Robin</span>.</"
+"p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioIdle)
 #: ReniceDlgUi.ui:313
@@ -2276,11 +2266,11 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">O tipo de planificación "
 "<span style=\" font-weight:600;\">Tempo real</span> ten acceso prioritario "
 "ao disco, sen importar o demais que estea a pasar no sistema. Por iso a "
-"clase de <span style=\" font-weight:600;\">Tempo real</span> debe ser "
-"empregada con precaución, xa que pode trancar a outros procesos. Igual que a "
-"clase <span style=\"font-weight:600;\">Mellor esforzo</span>, hai definidos "
-"8 niveis de prioridade que indican a cantidade de tempo que recibe cada "
-"proceso en cada xanela de planificación.</p></body></html>"
+"clase de <span style=\" font-weight:600;\">Tempo real</span> debe usarse con "
+"precaución, xa que pode trancar a outros procesos. Igual que a clase <span "
+"style=\"font-weight:600;\">Mellor esforzo</span>, hai definidos 8 niveis de "
+"prioridade que indican a cantidade de tempo que recibe cada proceso en cada "
+"xanela de planificación.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioRealTime)
 #: ReniceDlgUi.ui:363
