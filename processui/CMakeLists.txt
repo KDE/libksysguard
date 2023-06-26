@@ -63,11 +63,7 @@ target_include_directories(processui
         "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/ksysguard>"
 )
 if(HAVE_X11)
-    if (QT_MAJOR_VERSION STREQUAL "5")
-       target_link_libraries(processui PRIVATE Qt::X11Extras KF6::WindowSystem)
-    else()
-       target_link_libraries(processui PRIVATE Qt6::GuiPrivate KF6::WindowSystem)
-    endif()
+    target_link_libraries(processui PRIVATE Qt6::GuiPrivate KF6::WindowSystem)
 endif()
 
 if(WEBENGINE_SCRIPTING_ENABLED)
