@@ -170,7 +170,6 @@ ProcessModel::ProcessModel(QObject *parent, const QString &host)
 
 bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    // Because we need to sort Descendingly by default for most of the headings, we often return left > right
     KSysGuard::Process *processLeft = reinterpret_cast<KSysGuard::Process *>(left.internalPointer());
     KSysGuard::Process *processRight = reinterpret_cast<KSysGuard::Process *>(right.internalPointer());
     Q_ASSERT(processLeft);
@@ -220,7 +219,7 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
         if (!processLeft->hasManagedGuiWindow() && processRight->hasManagedGuiWindow())
             return false;
 
-        /* 3rd sort order - CPU Usage */
+        /* 3rd sort order - decreasing CPU Usage */
         int leftCpu, rightCpu;
         if (d->mSimple || !d->mShowChildTotals) {
             leftCpu = processLeft->userUsage() + processLeft->sysUsage();
@@ -232,7 +231,7 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
         if (leftCpu != rightCpu)
             return leftCpu > rightCpu;
 
-        /* 4th sort order - Memory Usage */
+        /* 4th sort order - decreasing Memory Usage */
         qlonglong memoryLeft = (processLeft->vmURSS() != -1) ? processLeft->vmURSS() : processLeft->vmRSS();
         qlonglong memoryRight = (processRight->vmURSS() != -1) ? processRight->vmURSS() : processRight->vmRSS();
         return memoryLeft > memoryRight;
@@ -246,35 +245,37 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
             leftCpu = processLeft->totalUserUsage() + processLeft->totalSysUsage();
             rightCpu = processRight->totalUserUsage() + processRight->totalSysUsage();
         }
-        return leftCpu > rightCpu;
+        return leftCpu < rightCpu;
     }
     case HeadingCPUTime: {
-        return (processLeft->userTime() + processLeft->sysTime()) > (processRight->userTime() + processRight->sysTime());
+        return (processLeft->userTime() + processLeft->sysTime()) < (processRight->userTime() + processRight->sysTime());
     }
     case HeadingMemory: {
         qlonglong memoryLeft = (processLeft->vmURSS() != -1) ? processLeft->vmURSS() : processLeft->vmRSS();
         qlonglong memoryRight = (processRight->vmURSS() != -1) ? processRight->vmURSS() : processRight->vmRSS();
-        return memoryLeft > memoryRight;
+        return memoryLeft < memoryRight;
     }
     case HeadingVmPSS: {
-        return processLeft->vmPSS() > processRight->vmPSS();
+        return processLeft->vmPSS() < processRight->vmPSS();
     }
     case HeadingStartTime: {
+        // The comparison order is reversed here to put processes started later at the top.
+        // This is done because the user interface displays the relative start times, which are lower for processes started last.
         return processLeft->startTime() > processRight->startTime();
     }
     case HeadingNoNewPrivileges:
-        return processLeft->noNewPrivileges() > processRight->noNewPrivileges();
+        return processLeft->noNewPrivileges() < processRight->noNewPrivileges();
     case HeadingXMemory:
-        return processLeft->pixmapBytes() > processRight->pixmapBytes();
+        return processLeft->pixmapBytes() < processRight->pixmapBytes();
     case HeadingVmSize:
-        return processLeft->vmSize() > processRight->vmSize();
+        return processLeft->vmSize() < processRight->vmSize();
     case HeadingSharedMemory: {
         qlonglong memoryLeft = (processLeft->vmURSS() != -1) ? processLeft->vmRSS() - processLeft->vmURSS() : 0;
         qlonglong memoryRight = (processRight->vmURSS() != -1) ? processRight->vmRSS() - processRight->vmURSS() : 0;
-        return memoryLeft > memoryRight;
+        return memoryLeft < memoryRight;
     }
     case HeadingPid:
-        return processLeft->pid() > processRight->pid();
+        return processLeft->pid() < processRight->pid();
     case HeadingNiceness:
         // Sort by scheduler first
         if (processLeft->scheduler() != processRight->scheduler()) {
@@ -316,33 +317,33 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
     case HeadingIoRead:
         switch (d->mIoInformation) {
         case ProcessModel::Bytes:
-            return processLeft->ioCharactersRead() > processRight->ioCharactersRead();
+            return processLeft->ioCharactersRead() < processRight->ioCharactersRead();
         case ProcessModel::Syscalls:
-            return processLeft->ioReadSyscalls() > processRight->ioReadSyscalls();
+            return processLeft->ioReadSyscalls() < processRight->ioReadSyscalls();
         case ProcessModel::ActualBytes:
-            return processLeft->ioCharactersActuallyRead() > processRight->ioCharactersActuallyRead();
+            return processLeft->ioCharactersActuallyRead() < processRight->ioCharactersActuallyRead();
         case ProcessModel::BytesRate:
-            return processLeft->ioCharactersReadRate() > processRight->ioCharactersReadRate();
+            return processLeft->ioCharactersReadRate() < processRight->ioCharactersReadRate();
         case ProcessModel::SyscallsRate:
-            return processLeft->ioReadSyscallsRate() > processRight->ioReadSyscallsRate();
+            return processLeft->ioReadSyscallsRate() < processRight->ioReadSyscallsRate();
         case ProcessModel::ActualBytesRate:
-            return processLeft->ioCharactersActuallyReadRate() > processRight->ioCharactersActuallyReadRate();
+            return processLeft->ioCharactersActuallyReadRate() < processRight->ioCharactersActuallyReadRate();
         }
         return {}; // It actually never gets here since all cases are handled in the switch, but makes gcc not complain about a possible fall through
     case HeadingIoWrite:
         switch (d->mIoInformation) {
         case ProcessModel::Bytes:
-            return processLeft->ioCharactersWritten() > processRight->ioCharactersWritten();
+            return processLeft->ioCharactersWritten() < processRight->ioCharactersWritten();
         case ProcessModel::Syscalls:
-            return processLeft->ioWriteSyscalls() > processRight->ioWriteSyscalls();
+            return processLeft->ioWriteSyscalls() < processRight->ioWriteSyscalls();
         case ProcessModel::ActualBytes:
-            return processLeft->ioCharactersActuallyWritten() > processRight->ioCharactersActuallyWritten();
+            return processLeft->ioCharactersActuallyWritten() < processRight->ioCharactersActuallyWritten();
         case ProcessModel::BytesRate:
-            return processLeft->ioCharactersWrittenRate() > processRight->ioCharactersWrittenRate();
+            return processLeft->ioCharactersWrittenRate() < processRight->ioCharactersWrittenRate();
         case ProcessModel::SyscallsRate:
-            return processLeft->ioWriteSyscallsRate() > processRight->ioWriteSyscallsRate();
+            return processLeft->ioWriteSyscallsRate() < processRight->ioWriteSyscallsRate();
         case ProcessModel::ActualBytesRate:
-            return processLeft->ioCharactersActuallyWrittenRate() > processRight->ioCharactersActuallyWrittenRate();
+            return processLeft->ioCharactersActuallyWrittenRate() < processRight->ioCharactersActuallyWrittenRate();
         }
     }
     // Sort by the display string if we do not have an explicit sorting here
@@ -1213,6 +1214,27 @@ QVariant ProcessModel::headerData(int section, Qt::Orientation orientation, int 
                 "can vary per memory section.");
         default:
             return QVariant();
+        }
+    }
+    case Qt::InitialSortOrderRole: {
+        switch (section) {
+        case HeadingName:
+        case HeadingUser:
+        case HeadingTty:
+        case HeadingCommand:
+        case HeadingXTitle:
+        case HeadingCGroup:
+        case HeadingMACContext:
+            // Textual column to be sorted alphabetically first
+            return Qt::AscendingOrder;
+
+        case HeadingStartTime:
+            // Put recently started processes at the top
+            return Qt::AscendingOrder;
+
+        default:
+            // All other columns are numeric and should be sorted highest-to-lowest first
+            return Qt::DescendingOrder;
         }
     }
     case Qt::DisplayRole:
