@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 00:57+0000\n"
+"POT-Creation-Date: 2023-06-28 02:09+0000\n"
 "PO-Revision-Date: 2019-12-09 00:20+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -527,17 +527,17 @@ msgstr "%1 T"
 msgid "%1 P"
 msgstr "%1 P"
 
-#: ProcessModel.cpp:636
+#: ProcessModel.cpp:637
 #, kde-format
 msgid "- Process is doing some work."
 msgstr "- A folyamat műveleteket végez."
 
-#: ProcessModel.cpp:638
+#: ProcessModel.cpp:639
 #, kde-format
 msgid "- Process is waiting for something to happen."
 msgstr "- A folyamat egy esemény bekövetkezésére vár."
 
-#: ProcessModel.cpp:640
+#: ProcessModel.cpp:641
 #, kde-format
 msgid ""
 "- Process has been stopped. It will not respond to user input at the moment."
@@ -545,7 +545,7 @@ msgstr ""
 "- A folyamat le lett álltíva, nem fog válaszolni a felhasználói kérésekre "
 "jelen pillanatban."
 
-#: ProcessModel.cpp:642
+#: ProcessModel.cpp:643
 #, kde-format
 msgid ""
 "- Process has finished and is now dead, but the parent process has not "
@@ -554,22 +554,22 @@ msgstr ""
 "- A folyamat befejeződött és most halott, de a szülőfolyamat még nem zárta "
 "le teljesen."
 
-#: ProcessModel.cpp:1054
+#: ProcessModel.cpp:1055
 #, kde-format
 msgid "The process name."
 msgstr "A folyamat neve."
 
-#: ProcessModel.cpp:1056
+#: ProcessModel.cpp:1057
 #, kde-format
 msgid "The user who owns this process."
 msgstr "A folyamat tulajdonosának neve."
 
-#: ProcessModel.cpp:1058
+#: ProcessModel.cpp:1059
 #, kde-format
 msgid "The controlling terminal on which this process is running."
 msgstr "A folyamatot ezen a vezérlőterminálon fut."
 
-#: ProcessModel.cpp:1061
+#: ProcessModel.cpp:1062
 #, kde-format
 msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
@@ -578,12 +578,12 @@ msgstr ""
 "A prioritás, amellyel ez a folyamat futni fog. A normál ütemezőben ez 19-től "
 "(rendes, kisebb prioritás) -19-ig (magas prioritás) terjed."
 
-#: ProcessModel.cpp:1065
+#: ProcessModel.cpp:1066
 #, kde-format
 msgid "The current CPU usage of the process."
 msgstr "A folyamat aktuális CPU-használata."
 
-#: ProcessModel.cpp:1070
+#: ProcessModel.cpp:1071
 #, kde-format
 msgid ""
 "The current total CPU usage of the process, divided by the %1 processor core "
@@ -596,12 +596,12 @@ msgstr[0] ""
 msgstr[1] ""
 "A folyamat teljes CPU-terhelése, elosztva a CPU-magok számával (%1)."
 
-#: ProcessModel.cpp:1074
+#: ProcessModel.cpp:1075
 #, kde-format
 msgid "The current total CPU usage of the process."
 msgstr "A folyamat jelenlegi teljes CPU-használata."
 
-#: ProcessModel.cpp:1076
+#: ProcessModel.cpp:1077
 #, kde-format
 msgid ""
 "<qt>The total user and system time that this process has been running for, "
@@ -610,7 +610,7 @@ msgstr ""
 "<qt>A teljes felhasználói és rendszer idő, amióta ez a folyamat fut. Perc:"
 "másodperc alakban kerül megjelenítésre."
 
-#: ProcessModel.cpp:1079
+#: ProcessModel.cpp:1080
 #, kde-format
 msgid ""
 "<qt>This is the amount of virtual memory space that the process is using, "
@@ -621,7 +621,7 @@ msgstr ""
 "osztott memóriarészeket, a grafikus memóriát, a kilapozódott részeket stb. "
 "Ez az érték önmagában kevés információt mutat.</qt>"
 
-#: ProcessModel.cpp:1083
+#: ProcessModel.cpp:1084
 #, kde-format
 msgid ""
 "<qt>This is the amount of real physical memory that this process is using by "
@@ -637,7 +637,7 @@ msgstr ""
 "ábrázolás a program memóriahasználatának megítéléséhez. Nézze meg a „Mi ez”-"
 "t további információért.</qt>"
 
-#: ProcessModel.cpp:1088
+#: ProcessModel.cpp:1089
 #, kde-format
 msgid ""
 "<qt>This is approximately the amount of real physical memory that this "
@@ -648,12 +648,12 @@ msgstr ""
 "folyamatnak az osztott könyvtárai használnak.<br>Ez a memória közös az "
 "összes olyan folyamattal, amely használja a programkönyvtárt.</qt>"
 
-#: ProcessModel.cpp:1091
+#: ProcessModel.cpp:1092
 #, kde-format
 msgid "<qt>The elapsed time since the process was started.</qt>"
 msgstr "<qt>A folyamat indítása óta eltelt idő.</qt>"
 
-#: ProcessModel.cpp:1093
+#: ProcessModel.cpp:1094
 #, kde-format
 msgid ""
 "<qt>Linux flag NoNewPrivileges, if set the process can't gain further "
@@ -662,43 +662,43 @@ msgstr ""
 "<qt>Ha a NoNewPrivileges Linux flag be van állítva, a folyamat nem kérhet "
 "további privilégiumokat setuid-on keresztül.</qt>"
 
-#: ProcessModel.cpp:1095
+#: ProcessModel.cpp:1096
 #, kde-format
 msgid "<qt>The command with which this process was launched.</qt>"
 msgstr "<qt>A folyamatot indító parancs</qt>"
 
-#: ProcessModel.cpp:1097
+#: ProcessModel.cpp:1098
 #, kde-format
 msgid "<qt>The amount of pixmap memory that this process is using.</qt>"
 msgstr "<qt>A folyamat által használt képmemória mennyisége.</qt>"
 
-#: ProcessModel.cpp:1099
+#: ProcessModel.cpp:1100
 #, kde-format
 msgid "<qt>The title of any windows that this process is showing.</qt>"
 msgstr "<qt>A folyamathoz tartozó ablakok címsora</qt>"
 
-#: ProcessModel.cpp:1101
+#: ProcessModel.cpp:1102
 #, kde-format
 msgid "The unique Process ID that identifies this process."
 msgstr "Az egyedi folyamatazonosító, amely meghatározza ezt a folyamatot"
 
-#: ProcessModel.cpp:1103
+#: ProcessModel.cpp:1104
 #, kde-format
 msgid "The number of bytes read.  See What's This for more information."
 msgstr "Az olvasott bájtok száma. Nézze meg a Mi ez-t további információkért."
 
-#: ProcessModel.cpp:1105
+#: ProcessModel.cpp:1106
 #, kde-format
 msgid "The number of bytes written.  See What's This for more information."
 msgstr "Az írott bájtok száma. Nézze meg a Mi ez-t további információkért."
 
-#: ProcessModel.cpp:1107
+#: ProcessModel.cpp:1108
 #, kde-format
 msgid "<qt>The control group (cgroup) where this process belongs.</qt>"
 msgstr ""
 "<qt>A vezérlési csoport (cgroup), amelyhez ez a folyamat tartozik.</qt>"
 
-#: ProcessModel.cpp:1109
+#: ProcessModel.cpp:1110
 #, kde-format
 msgid ""
 "<qt>Mandatory Access Control (SELinux or AppArmor) context for this process."
@@ -707,7 +707,7 @@ msgstr ""
 "<qt>A folyamat Mandatory Access Control (SELinux vagy AppArmor) kontextusa.</"
 "qt>"
 
-#: ProcessModel.cpp:1112
+#: ProcessModel.cpp:1113
 #, kde-format
 msgid ""
 "The amount of private physical memory used by a process, with the amount of "
@@ -717,7 +717,7 @@ msgstr ""
 "A folyamat saját fizikai memóriájának mennyisége, plusz a megosztott memória "
 "mennyisége osztva az azt használó folyamatok számával."
 
-#: ProcessModel.cpp:1122
+#: ProcessModel.cpp:1123
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The kernel process name is a maximum of 8 "
@@ -730,7 +730,7 @@ msgstr ""
 "parancssorban a folyamat nevével kezdődik, a parancssor első szava lesz "
 "megjelenítve, egyébként a használt folyamat neve."
 
-#: ProcessModel.cpp:1126
+#: ProcessModel.cpp:1127
 #, kde-format
 msgid ""
 "<qt>The user who owns this process.  If the effective, setuid etc user is "
@@ -759,7 +759,7 @@ msgstr ""
 "hozzáférést a fájlrendszer-felhasználóval/csoporttal ellenőrzi, ez egy Linux-"
 "specifikus hívás. További információkért lásd setfsuid(2).</td></tr></table>"
 
-#: ProcessModel.cpp:1141
+#: ProcessModel.cpp:1142
 #, kde-format
 msgid ""
 "<qt>This is the size of allocated address space - not memory, but address "
@@ -774,7 +774,7 @@ msgstr ""
 "lesz, a VIRT magas.<p><i>Technikai információ: </i>Ez a VmSize a /proc/*/"
 "status fájlban és a VIRT a topban."
 
-#: ProcessModel.cpp:1146
+#: ProcessModel.cpp:1147
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is an approximation of the Private "
@@ -793,12 +793,12 @@ msgstr ""
 "hívják. Egyedi folyamatokhoz lásd „Részletes memóriainformáció” egy "
 "pontosabb, de lassabb számításához a saját memória használatnak."
 
-#: ProcessModel.cpp:1151
+#: ProcessModel.cpp:1152
 #, kde-format
 msgid "The CPU usage of a process and all of its threads."
 msgstr "Egy folyamat CPU használata és az összes szála."
 
-#: ProcessModel.cpp:1154
+#: ProcessModel.cpp:1155
 #, kde-format
 msgid ""
 "<qt>The total system and user time that a process and all of its threads "
@@ -809,7 +809,7 @@ msgstr ""
 "szála a CPU-n fut. Ez nagyobb lehet a fali óra idejénél, ha a folyamat több "
 "CPU magon futott."
 
-#: ProcessModel.cpp:1158
+#: ProcessModel.cpp:1159
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is an approximation of the Shared "
@@ -824,7 +824,7 @@ msgstr ""
 "folyamathoz nézze meg a „Részletes memóriainformáció” részt a valódi osztott "
 "memória használatának pontosabb, de lassabb számításához."
 
-#: ProcessModel.cpp:1162
+#: ProcessModel.cpp:1163
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The underlying value (clock ticks since "
@@ -833,7 +833,7 @@ msgstr ""
 "<qt><i>Technikai információ: </i>Az alábbi érték (a rendszerindítás óta "
 "eltelt idő) a /proc/[pid]/stat-ból származik"
 
-#: ProcessModel.cpp:1164
+#: ProcessModel.cpp:1165
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The flag is retrieved from /proc/[pid]/"
@@ -842,12 +842,12 @@ msgstr ""
 "<qt><i>Technikai információ: </i>Ennek a flagnek a forrása a /proc/[pid]/"
 "status"
 
-#: ProcessModel.cpp:1166
+#: ProcessModel.cpp:1167
 #, kde-format
 msgid "<qt><i>Technical information: </i>This is from /proc/*/cmdline"
 msgstr "<qt><i>Technikai információ: </i>Ez a /proc/*/cmdline-ból való"
 
-#: ProcessModel.cpp:1169
+#: ProcessModel.cpp:1170
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is the amount of memory used by the "
@@ -864,7 +864,7 @@ msgstr ""
 "szimbólumok, stb. által használt erőforrás memóriát. Nézze meg az "
 "<code>xrestop</code> programot a részletesebb felbontásért."
 
-#: ProcessModel.cpp:1174
+#: ProcessModel.cpp:1175
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>For each X11 window, the X11 property "
@@ -876,7 +876,7 @@ msgstr ""
 "folyamatablakok nem látszódnak, akkor az az alkalmazás tévesen nem állítja "
 "be a _NET_WM_PID tulajdonságot."
 
-#: ProcessModel.cpp:1178
+#: ProcessModel.cpp:1179
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is the Process ID.  A multi-threaded "
@@ -889,7 +889,7 @@ msgstr ""
 "PID-en osztozik. A CPU-használat, stb. az összes szál teljes, összegzett CPU-"
 "használata lesz."
 
-#: ProcessModel.cpp:1183
+#: ProcessModel.cpp:1184
 #, kde-format
 msgid ""
 "<qt>This column shows the IO statistics for each process. The tooltip "
@@ -944,7 +944,7 @@ msgstr ""
 "van összegyűjtve később dokumentálva van a Documentation/accounting és a "
 "Documentation/filesystems/proc.txt fájlokban a kernel forrásában."
 
-#: ProcessModel.cpp:1203
+#: ProcessModel.cpp:1204
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This shows Linux Control Group (cgroup) "
@@ -957,7 +957,7 @@ msgstr ""
 "Systemd és a konténerek használják a folyamatok erőforráshasználatának "
 "korlátozására és azok monitorozására."
 
-#: ProcessModel.cpp:1207
+#: ProcessModel.cpp:1208
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This shows Mandatory Access Control "
@@ -966,7 +966,7 @@ msgstr ""
 "<qt><i>Technikai információ: </i>Ez a Mandatory Access Contol (SELinux vagy "
 "AppArmor) kontextust mutatja meg, melynek forrása a /proc/[pid]/attr/current."
 
-#: ProcessModel.cpp:1211
+#: ProcessModel.cpp:1212
 #, kde-format
 msgid ""
 "<i>Technical information:</i> This is often referred to as \"Proportional "
@@ -981,25 +981,25 @@ msgstr ""
 "megosztott memóriát használó alkalmazások száma memóriaszakaszonként kerül "
 "meghatározásra, így memóriaszakaszonként változhat."
 
-#: ProcessModel.cpp:1294
+#: ProcessModel.cpp:1316
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Login Name:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Bejelentkezési név:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1298
+#: ProcessModel.cpp:1320
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para>This user is not recognized for some reason.</para>"
 msgstr "<para>Ez a felhasználó nem ismert.</para>"
 
-#: ProcessModel.cpp:1301
+#: ProcessModel.cpp:1323
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>%1</emphasis></para>"
 msgstr "<para><emphasis strong='true'>%1</emphasis></para>"
 
-#: ProcessModel.cpp:1303
+#: ProcessModel.cpp:1325
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1008,131 +1008,131 @@ msgstr ""
 "<para><emphasis strong='true'>Bejelentkezési név:</emphasis> %1 (UID: %2)</"
 "para>"
 
-#: ProcessModel.cpp:1308
+#: ProcessModel.cpp:1330
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>  Room Number:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>  Szobaszám:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1311
+#: ProcessModel.cpp:1333
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>  Work Phone:</emphasis> %1</para>"
 msgstr ""
 "<para><emphasis strong='true'>  Munkahelyi telefonszám:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1316
+#: ProcessModel.cpp:1338
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Effective User:</emphasis> %1</para>"
 msgstr ""
 "<para><emphasis strong='true'>Tényleges felhasználó:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1318
+#: ProcessModel.cpp:1340
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Setuid User:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Setuid felhasználó:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1321
+#: ProcessModel.cpp:1343
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>File System User:</emphasis> %1</para>"
 msgstr ""
 "<para><emphasis strong='true'>Fájlrendszeri felhasználó:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1325
+#: ProcessModel.cpp:1347
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Group:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Csoport:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1328
+#: ProcessModel.cpp:1350
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Effective Group:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Tényleges csoport:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1330
+#: ProcessModel.cpp:1352
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Setuid Group:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Setuid csoport:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1333
+#: ProcessModel.cpp:1355
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>File System Group:</emphasis> %1</para>"
 msgstr ""
 "<para><emphasis strong='true'>Fájlrendszeri csoport:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1342
+#: ProcessModel.cpp:1364
 #, kde-format
 msgctxt "Short description of a process. PID, name, user"
 msgid "%1: %2, owned by user %3"
 msgstr "%1: %2, tulajdonos: %3"
 
-#: ProcessModel.cpp:1353
+#: ProcessModel.cpp:1375
 #, kde-format
 msgctxt "Group name and group id"
 msgid "%1 (gid: %2)"
 msgstr "%1 (csoportazonosító: %2)"
 
-#: ProcessModel.cpp:1375
+#: ProcessModel.cpp:1397
 #, kde-format
 msgctxt "User name and user id"
 msgid "%1 (uid: %2)"
 msgstr "%1 (felhasználóazonosító: %2)"
 
-#: ProcessModel.cpp:1441
+#: ProcessModel.cpp:1463
 #, kde-format
 msgctxt "scheduler"
 msgid "Idle"
 msgstr "Üresjárat"
 
-#: ProcessModel.cpp:1443
+#: ProcessModel.cpp:1465
 #, kde-format
 msgctxt "scheduler"
 msgid "(Batch) %1"
 msgstr "(Kötegelt) %1"
 
-#: ProcessModel.cpp:1445
+#: ProcessModel.cpp:1467
 #, kde-format
 msgctxt "Round robin scheduler"
 msgid "RR %1"
 msgstr "RR %1"
 
-#: ProcessModel.cpp:1448
+#: ProcessModel.cpp:1470
 #, kde-format
 msgctxt "Real Time scheduler"
 msgid "RT"
 msgstr "RT"
 
-#: ProcessModel.cpp:1450
+#: ProcessModel.cpp:1472
 #, kde-format
 msgctxt "First in first out scheduler"
 msgid "FIFO %1"
 msgstr "FIFO %1"
 
-#: ProcessModel.cpp:1452
+#: ProcessModel.cpp:1474
 #, kde-format
 msgctxt "scheduler"
 msgid "(IA) %1"
 msgstr "(IA) %1"
 
-#: ProcessModel.cpp:1523 ProcessModel.cpp:1531 ProcessModel.cpp:1548
-#: ProcessModel.cpp:1556
+#: ProcessModel.cpp:1545 ProcessModel.cpp:1553 ProcessModel.cpp:1570
+#: ProcessModel.cpp:1578
 #, kde-format
 msgid "%1/s"
 msgstr "%1/s"
 
-#: ProcessModel.cpp:1595
+#: ProcessModel.cpp:1617
 #, kde-kuit-format
 msgctxt "tooltip. name,pid "
 msgid "This process is being debugged by %1 (%2)"
 msgstr "A folyamat nyomkövetés alatt áll. A nyomkövető folyamat: %1 (%2)"
 
-#: ProcessModel.cpp:1617
+#: ProcessModel.cpp:1639
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1142,7 +1142,7 @@ msgstr ""
 "<title>%1</title><para>Az összes többi folyamat szülője, és nem lehetkilőni."
 "</para><para><emphasis strong='true'>Folyamatazonosító:</emphasis> %2</para>"
 
-#: ProcessModel.cpp:1623
+#: ProcessModel.cpp:1645
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1153,7 +1153,7 @@ msgstr ""
 "gyermekfolyamatok a rendszermagban futnak, például a merevlemez-elérést "
 "kezelve.</para>"
 
-#: ProcessModel.cpp:1627
+#: ProcessModel.cpp:1649
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1163,7 +1163,7 @@ msgstr ""
 "<title>%1</title><para><emphasis strong='true'>Folyamatazonosító:</emphasis> "
 "%2</para>"
 
-#: ProcessModel.cpp:1635
+#: ProcessModel.cpp:1657
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1175,7 +1175,7 @@ msgstr ""
 "%2</para><para><emphasis strong='true'>Szülő:</emphasis> %3</"
 "para><para><emphasis strong='true'>Szülő azonosítója:</emphasis> %4</para>"
 
-#: ProcessModel.cpp:1645
+#: ProcessModel.cpp:1667
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1186,25 +1186,25 @@ msgstr ""
 "%2</para><para><emphasis strong='true'>Szülő azonosítója:</emphasis> %3</"
 "para>"
 
-#: ProcessModel.cpp:1654 ProcessModel.cpp:1755
+#: ProcessModel.cpp:1676 ProcessModel.cpp:1777
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Number of threads:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Szálak száma:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1656
+#: ProcessModel.cpp:1678
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Command:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Parancs:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1659 ProcessModel.cpp:1690
+#: ProcessModel.cpp:1681 ProcessModel.cpp:1712
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Running on:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Ezen fut:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1674
+#: ProcessModel.cpp:1696
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1220,7 +1220,7 @@ msgstr ""
 "para><para><emphasis strong='true'>Abszolút indítási idő:</emphasis>  %4</"
 "para><para><emphasis strong='true'>Relatív indítási idő:</emphasis> %5</para>"
 
-#: ProcessModel.cpp:1686
+#: ProcessModel.cpp:1708
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1230,13 +1230,13 @@ msgstr ""
 "<para><emphasis strong='true'>A folyamat parancssora:</emphasis></para><para>"
 "%1</para>"
 
-#: ProcessModel.cpp:1711 ProcessModel.cpp:1777
+#: ProcessModel.cpp:1733 ProcessModel.cpp:1799
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Nice level:</emphasis> %1 (%2)</para>"
 msgstr "<para><emphasis strong='true'>Nice szint:</emphasis> %1 (%2)</para>"
 
-#: ProcessModel.cpp:1718
+#: ProcessModel.cpp:1740
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1246,26 +1246,26 @@ msgstr ""
 "<para><emphasis strong='true'>Ez egy valós idejű folyamat.</emphasis></"
 "para><para><emphasis strong='true'>Ütemező prioritása:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1726
+#: ProcessModel.cpp:1748
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Scheduler:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Ütemező:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1732 ProcessModel.cpp:1784
+#: ProcessModel.cpp:1754 ProcessModel.cpp:1806
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>I/O Nice level:</emphasis> %1 (%2)</para>"
 msgstr ""
 "<para><emphasis strong='true'>I/O Nice szint:</emphasis> %1 (%2)</para>"
 
-#: ProcessModel.cpp:1735 ProcessModel.cpp:1787
+#: ProcessModel.cpp:1757 ProcessModel.cpp:1809
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>I/O Class:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>I/O osztály:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1746
+#: ProcessModel.cpp:1768
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1278,7 +1278,7 @@ msgstr ""
 "%3%</para><para><emphasis strong='true'>Rendszer CPU használata:</emphasis> "
 "%4%</para>"
 
-#: ProcessModel.cpp:1758
+#: ProcessModel.cpp:1780
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1293,7 +1293,7 @@ msgstr ""
 "használata:</emphasis> %3%</para><para><emphasis strong='true'>Teljes CPU "
 "használat:</emphasis> %4%</para>"
 
-#: ProcessModel.cpp:1769
+#: ProcessModel.cpp:1791
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1303,7 +1303,7 @@ msgstr ""
 "<para><emphasis strong='true'>CPU-idő felhasználóként:</emphasis> %1 "
 "másodperc</para>"
 
-#: ProcessModel.cpp:1773
+#: ProcessModel.cpp:1795
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1313,7 +1313,7 @@ msgstr ""
 "<para><emphasis strong='true'>CPU-idő a rendszermagban:</emphasis> %1 "
 "másodperc</para>"
 
-#: ProcessModel.cpp:1803
+#: ProcessModel.cpp:1825
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1323,13 +1323,13 @@ msgstr ""
 "<para><emphasis strong='true'>Memóriahasználat:</emphasis> %1 / %2 (%3%)</"
 "para>"
 
-#: ProcessModel.cpp:1809
+#: ProcessModel.cpp:1831
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<emphasis strong='true'>Memory usage:</emphasis> %1<br />"
 msgstr "<emphasis strong='true'>Memóriahasználat:</emphasis> %1<br />"
 
-#: ProcessModel.cpp:1813
+#: ProcessModel.cpp:1835
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1339,14 +1339,14 @@ msgstr ""
 "<para><emphasis strong='true'>RSS memóriahasználat:</emphasis> %1 / %2 "
 "(%3%)</para>"
 
-#: ProcessModel.cpp:1819
+#: ProcessModel.cpp:1841
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1</para>"
 msgstr ""
 "<para><emphasis strong='true'>RSS memóriahasználata:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1826 ProcessModel.cpp:1887
+#: ProcessModel.cpp:1848 ProcessModel.cpp:1909
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1356,7 +1356,7 @@ msgstr ""
 "<para><emphasis strong='true'>A rendszerben nem érhető el olvasásra ez az "
 "információ.</emphasis></para>"
 
-#: ProcessModel.cpp:1830
+#: ProcessModel.cpp:1852
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1366,7 +1366,7 @@ msgstr ""
 "<para><emphasis strong='true'>Megosztott programkönyvtár memóriahasználata:</"
 "emphasis> %1 / %2 (%3%)</para>"
 
-#: ProcessModel.cpp:1836 ProcessModel.cpp:1897
+#: ProcessModel.cpp:1858 ProcessModel.cpp:1919
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1376,7 +1376,7 @@ msgstr ""
 "<para><emphasis strong='true'>Megosztott könyvtárak memóriahasználata:</"
 "emphasis> %1</para>"
 
-#: ProcessModel.cpp:1843
+#: ProcessModel.cpp:1865
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1396,7 +1396,7 @@ msgstr ""
 "bájtok:</emphasis> %9 (%10 KiB/s)</para><para><emphasis "
 "strong='true'>Jelenleg írt bájtok:</emphasis> %11 (%12 KiB/s)</para>"
 
-#: ProcessModel.cpp:1891
+#: ProcessModel.cpp:1913
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1406,127 +1406,127 @@ msgstr ""
 "<para><emphasis strong='true'>Teljes memóriahasználat:</emphasis> %1 / %2 "
 "(%3%)</para>"
 
-#: ProcessModel.cpp:2181
+#: ProcessModel.cpp:2203
 #, kde-format
 msgctxt "process heading"
 msgid "Name"
 msgstr "Név"
 
-#: ProcessModel.cpp:2182
+#: ProcessModel.cpp:2204
 #, kde-format
 msgctxt "process heading"
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: ProcessModel.cpp:2183
+#: ProcessModel.cpp:2205
 #, kde-format
 msgctxt "process heading"
 msgid "PID"
 msgstr "PID"
 
-#: ProcessModel.cpp:2184
+#: ProcessModel.cpp:2206
 #, kde-format
 msgctxt "process heading"
 msgid "TTY"
 msgstr "TTY"
 
-#: ProcessModel.cpp:2185
+#: ProcessModel.cpp:2207
 #, kde-format
 msgctxt "process heading"
 msgid "Niceness"
 msgstr "Prioritás"
 
-#: ProcessModel.cpp:2187
+#: ProcessModel.cpp:2209
 #, no-c-format, kde-format
 msgctxt "process heading"
 msgid "CPU %"
 msgstr "CPU %"
 
-#: ProcessModel.cpp:2188
+#: ProcessModel.cpp:2210
 #, kde-format
 msgctxt "process heading"
 msgid "CPU Time"
 msgstr "CPU-idő"
 
-#: ProcessModel.cpp:2189
+#: ProcessModel.cpp:2211
 #, kde-format
 msgctxt "process heading"
 msgid "IO Read"
 msgstr "IO-olvasás"
 
-#: ProcessModel.cpp:2190
+#: ProcessModel.cpp:2212
 #, kde-format
 msgctxt "process heading"
 msgid "IO Write"
 msgstr "IO-írás"
 
-#: ProcessModel.cpp:2191
+#: ProcessModel.cpp:2213
 #, kde-format
 msgctxt "process heading"
 msgid "Virtual Size"
 msgstr "Virtuális méret"
 
-#: ProcessModel.cpp:2192
+#: ProcessModel.cpp:2214
 #, kde-format
 msgctxt "process heading"
 msgid "Memory"
 msgstr "Memória"
 
-#: ProcessModel.cpp:2193
+#: ProcessModel.cpp:2215
 #, kde-format
 msgctxt "process heading"
 msgid "Shared Mem"
 msgstr "Osztott memória"
 
-#: ProcessModel.cpp:2194
+#: ProcessModel.cpp:2216
 #, kde-format
 msgctxt "process heading"
 msgid "Relative Start Time"
 msgstr "Relatív indítási idő"
 
-#: ProcessModel.cpp:2195
+#: ProcessModel.cpp:2217
 #, kde-format
 msgctxt "process heading"
 msgid "NNP"
 msgstr "NNP"
 
-#: ProcessModel.cpp:2196
+#: ProcessModel.cpp:2218
 #, kde-format
 msgctxt "process heading"
 msgid "Command"
 msgstr "Parancs"
 
-#: ProcessModel.cpp:2199
+#: ProcessModel.cpp:2221
 #, kde-format
 msgctxt "process heading"
 msgid "X11 Memory"
 msgstr "X11-memória"
 
-#: ProcessModel.cpp:2200
+#: ProcessModel.cpp:2222
 #, kde-format
 msgctxt "process heading"
 msgid "Window Title"
 msgstr "Ablakcím"
 
-#: ProcessModel.cpp:2203
+#: ProcessModel.cpp:2225
 #, kde-format
 msgctxt "process heading"
 msgid "CGroup"
 msgstr "CGroup"
 
-#: ProcessModel.cpp:2204
+#: ProcessModel.cpp:2226
 #, kde-format
 msgctxt "process heading"
 msgid "MAC Context"
 msgstr "MAC kontextus"
 
-#: ProcessModel.cpp:2205
+#: ProcessModel.cpp:2227
 #, kde-format
 msgctxt "process heading"
 msgid "Total Memory"
 msgstr "Összes memória"
 
-#: ProcessModel.cpp:2327
+#: ProcessModel.cpp:2349
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
