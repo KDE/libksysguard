@@ -5,8 +5,8 @@
 */
 
 #include <QDebug>
+#include <QTest>
 #include <QtCore>
-#include <QtTest>
 
 #include "chronotest.h"
 #include <processui/timeutil.h>

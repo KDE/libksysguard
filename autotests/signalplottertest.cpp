@@ -1,8 +1,8 @@
 #include "signalplottertest.h"
 #include "signalplotter/ksignalplotter.h"
 
+#include <QTestGui>
 #include <QtGui>
-#include <QtTestGui>
 #include <limits>
 
 void TestSignalPlotter::init()

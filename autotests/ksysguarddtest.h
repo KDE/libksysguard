@@ -1,8 +1,8 @@
 #ifndef KSYSGUARD_KSYSGUARDDTEST_H
 #define KSYSGUARD_KSYSGUARDDTEST_H
 
+#include <QTest>
 #include <Qt>
-#include <QtTest>
 
 #include "ksgrd/SensorAgent.h"
 #include "ksgrd/SensorClient.h"

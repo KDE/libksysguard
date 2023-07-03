@@ -1,8 +1,8 @@
 #ifndef GRAPHICSSIGNALPLOTTERBENCHMARK_H
 #define GRAPHICSSIGNALPLOTTERBENCHMARK_H
 
+#include <QTest>
 #include <Qt>
-#include <QtTest>
 
 class KGraphicsSignalPlotter;
 class QGraphicsView;

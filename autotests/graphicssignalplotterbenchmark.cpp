@@ -4,7 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QRandomGenerator>
-#include <QtTestGui>
+#include <QTestGui>
 #include <limits>
 
 void BenchmarkGraphicsSignalPlotter::init()

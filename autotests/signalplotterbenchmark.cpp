@@ -2,8 +2,8 @@
 #include "signalplotter/ksignalplotter.h"
 
 #include <QRandomGenerator>
+#include <QTestGui>
 #include <QtGui>
-#include <QtTestGui>
 #include <limits>
 
 void BenchmarkSignalPlotter::init()
