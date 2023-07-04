@@ -54,7 +54,7 @@ void NvidiaPlugin::setup()
     m_process->setProgram(m_sniExecutablePath);
     m_process->setArguments({QStringLiteral("pmon")});
 
-    connect(m_process, &QProcess::readyReadStandardOutput, this, [=]() {
+    connect(m_process, &QProcess::readyReadStandardOutput, this, [this]() {
         while (m_process->canReadLine()) {
             const QString line = QString::fromLatin1(m_process->readLine());
             if (line.startsWith(QLatin1Char('#'))) { // comment line

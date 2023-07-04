@@ -92,7 +92,7 @@ void SensorObject::addProperty(SensorProperty *property)
 {
     d->sensors[property->id()] = property;
 
-    connect(property, &SensorProperty::subscribedChanged, this, [=]() {
+    connect(property, &SensorProperty::subscribedChanged, this, [this]() {
         uint count = std::count_if(d->sensors.constBegin(), d->sensors.constEnd(), [](const SensorProperty *prop) {
             return prop->isSubscribed();
         });

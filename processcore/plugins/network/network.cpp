@@ -48,13 +48,13 @@ NetworkPlugin::NetworkPlugin(QObject *parent, const QVariantList &args)
     m_process = new QProcess(this);
     m_process->setProgram(executable);
 
-    connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), [=](int exitCode, QProcess::ExitStatus status) {
+    connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), [this](int exitCode, QProcess::ExitStatus status) {
         if (exitCode != 0 || status != QProcess::NormalExit) {
             qCWarning(KSYSGUARD_PLUGIN_NETWORK) << "Helper process terminated abnormally:" << m_process->readAllStandardError().trimmed();
         }
     });
 
-    connect(m_process, &QProcess::readyReadStandardOutput, this, [=]() {
+    connect(m_process, &QProcess::readyReadStandardOutput, this, [this]() {
         while (m_process->canReadLine()) {
             const QString line = QString::fromUtf8(m_process->readLine());
 
