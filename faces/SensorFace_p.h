@@ -87,11 +87,8 @@ Q_SIGNALS:
     void contentItemChanged();
 
 protected:
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
-#else
     void geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry) override;
-#endif
+
 private:
     class Private;
     const std::unique_ptr<Private> d;
