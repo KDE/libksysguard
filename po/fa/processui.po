@@ -12,13 +12,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
 msgstr[0] ""
+msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
 #, kde-format
@@ -51,12 +52,14 @@ msgstr ""
 msgid "End Process"
 msgid_plural "End Processes"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
 #, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:214
 #, kde-format
@@ -123,6 +126,7 @@ msgctxt "Context menu"
 msgid "End Process"
 msgid_plural "End Processes"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:579
 #, kde-format
@@ -270,6 +274,7 @@ msgid_plural ""
 "Are you sure you want to end these %1 processes?  Any unsaved work may be "
 "lost"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:1399
 #, kde-format
@@ -277,6 +282,7 @@ msgctxt "Dialog title"
 msgid "End Process"
 msgid_plural "End %1 Processes"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:1401
 #, kde-format
@@ -292,6 +298,7 @@ msgid_plural ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> these %1 "
 "processes?  Any unsaved work may be lost"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:1406
 #, kde-format
@@ -299,6 +306,7 @@ msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ksysguardprocesslist.cpp:1408
 #, kde-format
