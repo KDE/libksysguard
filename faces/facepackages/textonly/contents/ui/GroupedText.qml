@@ -124,11 +124,11 @@ ColumnLayout {
 
         Sensors.Sensor { sensorId: modelData; updateRateLimit: root.updateRateLimit }
 
-        onObjectAdded: {
+        onObjectAdded: (index, object) => {
             root.highPrioritySensors.push(object)
             root.highPrioritySensors = root.highPrioritySensors
         }
-        onObjectRemoved: {
+        onObjectRemoved: (index, object) => {
             root.highPrioritySensors.splice(root.highPrioritySensors.indexOf(object), 1)
             root.highPrioritySensors = root.highPrioritySensors
         }
@@ -139,11 +139,11 @@ ColumnLayout {
 
         Sensors.Sensor { sensorId: modelData; updateRateLimit: root.updateRateLimit }
 
-        onObjectAdded: {
+        onObjectAdded: (index, object) => {
             root.lowPrioritySensors.push(object)
             root.lowPrioritySensors = root.lowPrioritySensors
         }
-        onObjectRemoved: {
+        onObjectRemoved: (index, object) => {
             root.lowPrioritySensors.splice(root.lowPrioritySensors.indexOf(object), 1)
             root.lowPrioritySensors = root.lowPrioritySensors
         }
