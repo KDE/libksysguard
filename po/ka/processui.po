@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-28 02:09+0000\n"
-"PO-Revision-Date: 2023-06-30 05:55+0200\n"
+"PO-Revision-Date: 2023-07-06 05:58+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -836,6 +836,9 @@ msgid ""
 "PID.  The CPU usage etc will be the total, accumulated, CPU usage of all the "
 "threads."
 msgstr ""
+"<qt><I>ტექნიკური ინფორმაცია: <I>ეს პროცესის ID-ია.  მრავალნაკადიანი "
+"აპლიკაცია აღიქმება, როგორც ერთი პროცესი, სადაც ყველა ნაკადი ერთ PID-ს "
+"იზიარებს.  CPU-ის გამოყენება და ა.შ. ყველა ნაკადისთვის შეჯამდება."
 
 #: ProcessModel.cpp:1184
 #, kde-format
@@ -898,6 +901,11 @@ msgid ""
 "shared memory is determined per shared memory section and thus can vary per "
 "memory section."
 msgstr ""
+"<I>ტექნიკური ინფორმაცია:</I> ამას ხშირად პროპორციული სეტის ზომას\" ეძახიან "
+"და ის პროცესის მიერ გამოყენებული მეხსიერების რაოდენობის ყველაზე ზუსტი "
+"რაოდენობაა. დაიმახსოვრეთ, რომ აპლიკაციების რიცხვი, რომლებიც გაზიარებული "
+"მეხსიერების სექციებს იყენებენ, სათითაოდ დგინდება და ამიტომ, შეიძლება, ყველა "
+"მეხსიერების რეგიონისთვის განსხვავდებოდეს."
 
 #: ProcessModel.cpp:1316
 #, kde-kuit-format
