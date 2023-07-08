@@ -62,10 +62,10 @@ Charts.BarChart {
             roleName: "Value"
             column: index
         }
-        onObjectAdded: {
+        onObjectAdded: (index, object) => {
             chart.insertValueSource(index, object)
         }
-        onObjectRemoved: {
+        onObjectRemoved: (index, object) => {
             chart.removeValueSource(object)
         }
     }
