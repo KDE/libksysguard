@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-28 02:09+0000\n"
-"PO-Revision-Date: 2023-07-06 05:58+0200\n"
+"PO-Revision-Date: 2023-07-07 06:06+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -788,6 +788,12 @@ msgid ""
 "process, see \"Detailed Memory Information\" for a more accurate, but "
 "slower, calculation of the true Shared memory usage."
 msgstr ""
+"<qt><i>ტექნიკური ინფორმაცია: </i> ეს გაზიარებული მეხსიერების რაოდენობაა, "
+"რომელსაც top-ში SHR ჰქვია.  წარმოადგენს გვერდების რაოდენობას, რომელიც "
+"სინამდვილეში ფაილში წერია (იხ. ბირთვის კოდის საქაღალდეში Documentation/"
+"filesystems/proc.txt).  ინდივიდუალური პროცესებისთვის იხილეთ \"დეტალური "
+"ინფორმაცია მეხსიერების შესახებ\", სადაც უფრო ზუსტი, მაგრამ უფრო ნელი დათვლა "
+"ხდება იმ გაზიარებული მეხსიერების რაოდენობის, რომელსაც პროცესი იყენებ."
 
 #: ProcessModel.cpp:1163
 #, kde-format
@@ -795,6 +801,8 @@ msgid ""
 "<qt><i>Technical information: </i>The underlying value (clock ticks since "
 "system boot) is retrieved from /proc/[pid]/stat"
 msgstr ""
+"<qt><i>ტექნიკური ინფორმაცია: </i> ქვედა მნიშვნელობა (გასული საათის წიკწიკი "
+"სისტემის ჩატვირთვის შემდეგ) /proc/[pid]/stat-დან მიიღება"
 
 #: ProcessModel.cpp:1165
 #, kde-format
@@ -827,6 +835,9 @@ msgid ""
 "_NET_WM_PID is used to map the window to a PID.  If a process' windows are "
 "not shown, then that application incorrectly is not setting _NET_WM_PID."
 msgstr ""
+"<qt><i>ტექნიკური ინფორმაცია: </i>თითოეული X11 ფანჯრისთვის არსებობს X11-ის "
+"თვისება, _NET_WM_PID, რომელიც ფანჯრის PID-ზე მისაბმელად გამოიყენება.  თუ "
+"პროცესის ფანჯრები ნაჩვენები არაა, პროგრამა _NET_WM_PID-ს არასწორად აყენებს."
 
 #: ProcessModel.cpp:1179
 #, kde-format
