@@ -756,7 +756,7 @@ QQuickItem *SensorFaceController::faceConfigUi()
     }
 
     d->faceConfigUi = d->createConfigUi(QStringLiteral(":/FaceDetailsConfig.qml"),
-                                        {{QStringLiteral("controller"), QVariant::fromValue(this)}, {QStringLiteral("source"), filePath}});
+                                        {{QStringLiteral("controller"), QVariant::fromValue(this)}, {QStringLiteral("source"), QUrl::fromLocalFile(filePath)}});
 
     if (d->faceConfigUi && !d->faceConfigUi->property("item").value<QQuickItem *>()) {
         d->faceConfigUi->deleteLater();
