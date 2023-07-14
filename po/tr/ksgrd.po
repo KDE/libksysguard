@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2023-05-24 01:34+0300\n"
+"PO-Revision-Date: 2023-07-13 13:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -540,7 +540,7 @@ msgstr "Ortalama Saat Frekansı"
 #: SensorManager.cpp:162
 #, kde-format
 msgid "Hardware Sensors"
-msgstr "Donanım Sensörleri"
+msgstr "Donanım Algılayıcıları"
 
 #: SensorManager.cpp:163
 #, kde-format
@@ -675,12 +675,12 @@ msgstr "Dosya Sistemi Kökü"
 #: SensorManager.cpp:192
 #, kde-format
 msgid "Extra Temperature Sensor %1"
-msgstr "Ek Sıcaklık Sensörü %1"
+msgstr "Ek Sıcaklık Algılayıcısı %1"
 
 #: SensorManager.cpp:196
 #, kde-format
 msgid "PECI Temperature Sensor %1"
-msgstr "PECI Sıcaklık Sensörü %1"
+msgstr "PECI Sıcaklık Algılayıcısı %1"
 
 #: SensorManager.cpp:197
 #, kde-format

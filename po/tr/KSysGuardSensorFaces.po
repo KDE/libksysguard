@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 02:19+0000\n"
-"PO-Revision-Date: 2022-10-13 05:01+0300\n"
+"PO-Revision-Date: 2023-07-13 13:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -82,25 +82,25 @@ msgstr "%1 saniye"
 #, kde-format
 msgid "Total Sensor"
 msgid_plural "Total Sensors"
-msgstr[0] "Toplam Sensör"
-msgstr[1] "Toplam Sensörler"
+msgstr[0] "Toplam Algılayıcı"
+msgstr[1] "Toplam Algılayıcılar"
 
 #: ConfigSensors.qml:150
 #, kde-format
 msgid "Sensors"
-msgstr "Sensörler"
+msgstr "Algılayıcılar"
 
 #: ConfigSensors.qml:176
 #, kde-format
 msgid "Text-Only Sensors"
-msgstr "Yalnızca Metin Sensörleri"
+msgstr "Yalnızca Metin Algılayıcılar"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
 #, kde-format
 msgid "Show Sensors Legend"
-msgstr "Sensör Göstergelerini Göster"
+msgstr "Algılayıcı Göstergelerini Göster"
 
 #: facepackages/barchart/contents/ui/Config.qml:39
 #, kde-format
@@ -140,7 +140,7 @@ msgstr "Nereye:"
 #: facepackages/colorgrid/contents/ui/Config.qml:25
 #, kde-format
 msgid "Use sensor color:"
-msgstr "Sensör rengi kullan:"
+msgstr "Algılayıcı rengi kullan:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
@@ -245,13 +245,13 @@ msgstr "Yuvarlatılmış Çizgiler"
 #: facepackages/textonly/contents/ui/Config.qml:24
 #, kde-format
 msgid "Group sensors based on the value of the total sensors."
-msgstr "Sensörleri, toplam sensörlerin değerlerine göre grupla."
+msgstr "Algılayıcıları, toplam algılayıcıların değerlerine göre grupla."
 
 #: import/Choices.qml:53
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr "Bir sensör seçmek için tıklayın…"
+msgstr "Bir algılayıcı seçmek için tıkla…"
 
 #: import/Choices.qml:368
 #, kde-format
@@ -267,7 +267,7 @@ msgstr "Geri"
 #: SensorFaceController.cpp:431
 #, kde-format
 msgid "System Monitor Sensor"
-msgstr "Sistem Monitörü Sensörü"
+msgstr "Sistem Monitörü Algılayıcısı"
 
 #~ msgid "User Interface"
 #~ msgstr "Kullanıcı Arayüzü"
