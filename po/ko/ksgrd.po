@@ -116,7 +116,7 @@ msgstr "사용 중인 메모리"
 #: SensorManager.cpp:68
 #, kde-format
 msgid "Application Memory"
-msgstr "프로그램 메모리"
+msgstr "앱 메모리"
 
 #: SensorManager.cpp:69
 #, kde-format

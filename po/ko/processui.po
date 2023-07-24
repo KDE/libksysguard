@@ -1,14 +1,14 @@
 # Translation of processui to Korean.
 # Copyright (C) 2007-2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdebase package.
-# Shinjo Park <kde@peremen.name>, 2007, 2008, 2009, 2010, 2011, 2012, 2015, 2017, 2018, 2019, 2020, 2022.
+# Shinjo Park <kde@peremen.name>, 2007, 2008, 2009, 2010, 2011, 2012, 2015, 2017, 2018, 2019, 2020, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2022-05-16 00:01+0200\n"
+"PO-Revision-Date: 2023-07-24 00:10+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -37,7 +37,7 @@ msgstr "이 프로세스를 디버깅하는 프로세스로 가기"
 #: ksysguardprocesslist.cpp:204
 #, kde-format
 msgid "Show Application Window"
-msgstr "프로그램 창 표시"
+msgstr "앱 창 표시"
 
 #: ksysguardprocesslist.cpp:205
 #, kde-format
@@ -105,7 +105,7 @@ msgstr "사용자 2(USR2)"
 #: ksysguardprocesslist.cpp:224
 #, kde-format
 msgid "Focus on Quick Search"
-msgstr "빠른 찾기에 초점 맞추기"
+msgstr "빠른 찾기에 포커스 맞추기"
 
 #: ksysguardprocesslist.cpp:407
 #, kde-format
@@ -328,19 +328,19 @@ msgstr "죽이기"
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "표시할 데이터 없음"
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "새로 고침"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -350,139 +350,130 @@ msgid "Quick search"
 msgstr "빠른 찾기"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "사용자 이름"
+msgstr "파일 이름"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "시작"
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
-msgstr "끝내기"
+msgstr "끝"
 
 #: processdetails/MemoryMapsTab.cpp:254
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "권한"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "위치"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
 msgctxt "@title:column"
 msgid "Inode"
-msgstr ""
+msgstr "Inode"
 
 #: processdetails/MemoryMapsTab.cpp:283 processdetails/OpenFilesTab.cpp:278
 #, kde-format
 msgctxt "@info:status"
 msgid "No data matching the filter"
-msgstr ""
+msgstr "필터와 일치하는 데이터 없음"
 
 #: processdetails/OpenFilesTab.cpp:33
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "파일"
 
 #: processdetails/OpenFilesTab.cpp:36
-#, fuzzy, kde-format
-#| msgid "Characters read/written"
+#, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr "읽고 쓴 글자 수"
+msgstr "문자열 장치"
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "블록 장치"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "파이프"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "소켓"
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "휴식"
+msgstr "ID"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "형식"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
 msgctxt "@info:status"
 msgid "%1: Failed to list directory contents"
-msgstr ""
+msgstr "%1: 디렉터리 내용을 표시할 수 없음"
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "모든 프로세스"
+msgstr "프로세스 자세한 정보"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "일반"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "메모리"
+msgstr "메모리 맵"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "파일 열기"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
 msgctxt "@info:status"
 msgid "The \"%1\" (PID: %2) process has stopped executing"
-msgstr ""
+msgstr "\"%1\"(PID: %2) 프로세스의 실행이 중단됨"
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "우선 순위 설정"
+msgstr "IO 우선 순위"
 
 #: ProcessModel.cpp:62
 #, kde-format
@@ -840,8 +831,8 @@ msgid ""
 "not shown, then that application incorrectly is not setting _NET_WM_PID."
 msgstr ""
 "<qt><i>기술 정보:</i> 각각 X11 창에 대해서 _NET_WM_PID X11 속성은 창의 프로세"
-"스 ID입니다. 프로세스의 창이 없다면 프로그램에서 _NET_WM_PID를 올바르게 설정"
-"하지 않았습니다."
+"스 ID입니다. 프로세스의 창이 없다면 앱에서 _NET_WM_PID를 올바르게 설정하지 않"
+"았습니다."
 
 #: ProcessModel.cpp:1178
 #, kde-format
@@ -851,9 +842,9 @@ msgid ""
 "PID.  The CPU usage etc will be the total, accumulated, CPU usage of all the "
 "threads."
 msgstr ""
-"<qt><i>기술 정보:</i> 프로세스 ID입니다. 다중 스레드 프로그램은 같은 PID를 가"
-"지는 하나의 프로세스로 취급됩니다. CPU 사용량 등은 모든 스레드의 값을 합쳐셔 "
-"표시됩니다."
+"<qt><i>기술 정보:</i> 프로세스 ID입니다. 다중 스레드 앱은 같은 PID를 가지는 "
+"하나의 프로세스로 취급됩니다. CPU 사용량 등은 모든 스레드의 값을 합쳐셔 표시"
+"됩니다."
 
 #: ProcessModel.cpp:1183
 #, kde-format
@@ -934,8 +925,8 @@ msgid ""
 "memory section."
 msgstr ""
 "<i>기술 정보:</i> 이 값은 PSS(\"Proportional Set Size\")라고도 불리며 프로세"
-"스에서 사용하는 실제 메모리와 가장 근접합니다. 메모리를 공유하는 프로그램 개"
-"수는 공유 메모리 부분별로 계산되므로 메모리 부분마다 다를 수도 있습니다."
+"스에서 사용하는 실제 메모리와 가장 근접합니다. 메모리를 공유하는 앱 개수는 공"
+"유 메모리 부분별로 계산되므로 메모리 부분마다 다를 수도 있습니다."
 
 #: ProcessModel.cpp:1294
 #, kde-kuit-format
@@ -1607,7 +1598,7 @@ msgstr ""
 "세스만 표시합니다.</td></tr>\n"
 "<tr><td>사용자 프로세스</td><td>로그인할 수 있는 사용자로 실행된 프로세스만 "
 "표시합니다.</td></tr>\n"
-"<tr><td>소유하고 있는 프로세스</td><td>현재 프로그램이 실행된 사용자와 같은 "
+"<tr><td>소유하고 있는 프로세스</td><td>현재 프로세스가 실행된 사용자와 같은 "
 "사용자가 소유한 프로세스만 표시합니다.</td></tr>\n"
 "<tr><td>프로그램만</td><td>로그인할 수 있는 사용자로 실행되었고, TTY에 연결되"
 "어 있거나 X11 창이 있는 프로세스만 표시합니다.</td></tr>\n"
