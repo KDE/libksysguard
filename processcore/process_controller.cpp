@@ -8,6 +8,8 @@
 
 #include <functional>
 
+#include <QWindow>
+
 #include <KAuth/Action>
 #include <KAuth/ExecuteJob>
 
@@ -31,7 +33,7 @@ public:
     QVector<int> listToVector(const QList<long long> &list);
     QVector<int> listToVector(const QVariantList &list);
 
-    QWidget *widget = nullptr;
+    QWindow *window = nullptr;
 };
 
 // Note: This instance is only to have access to the platform-specific code
@@ -50,14 +52,14 @@ KSysGuard::ProcessController::~ProcessController()
     // Empty destructor needed for std::unique_ptr to incomplete class.
 }
 
-QWidget *KSysGuard::ProcessController::widget() const
+QWindow *KSysGuard::ProcessController::window() const
 {
-    return d->widget;
+    return d->window;
 }
 
-void KSysGuard::ProcessController::setWidget(QWidget *widget)
+void KSysGuard::ProcessController::setWindow(QWindow *window)
 {
-    d->widget = widget;
+    d->window = window;
 }
 
 ProcessController::Result ProcessController::sendSignal(const QVector<int> &pids, int signal)
@@ -226,7 +228,7 @@ ProcessController::Result ProcessController::Private::runKAuthAction(const QStri
         qCWarning(LIBKSYSGUARD_PROCESSCORE) << "Executing KAuth action" << actionId << "failed because it is an invalid action";
         return Result::InsufficientPermissions;
     }
-    action.setParentWidget(widget);
+    action.setParentWindow(window);
     action.setHelperId(QStringLiteral("org.kde.ksysguard.processlisthelper"));
 
     const int processCount = pids.count();

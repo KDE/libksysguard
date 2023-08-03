@@ -18,7 +18,7 @@
 
 #include "processcore_export.h"
 
-class QWidget;
+class QWindow;
 
 /**
  * Control processes' priority, scheduling and sending signals.
@@ -68,15 +68,15 @@ public:
     Q_ENUM(Result)
 
     /**
-     * The widget used as parent for any dialogs that get shown.
+     * The window used as parent for any dialogs that get shown.
      */
-    QWidget *widget() const;
+    QWindow *window() const;
     /**
-     * Set the widget to use as parent for dialogs.
+     * Set the window to use as parent for dialogs.
      *
-     * \param widget The widget to use.
+     * \param window The window to use.
      */
-    void setWidget(QWidget *widget);
+    void setWindow(QWindow *window);
 
     /**
      * Send a signal to a number of processes.
