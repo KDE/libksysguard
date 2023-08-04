@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-24 01:00+0000\n"
+"POT-Creation-Date: 2023-08-04 01:59+0000\n"
 "PO-Revision-Date: 2023-04-04 22:48+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -649,37 +649,37 @@ msgctxt "Scheduler"
 msgid "Idle"
 msgstr "Senokupe"
 
-#: process_controller.cpp:179
+#: process_controller.cpp:181
 #, kde-format
 msgid "Success"
 msgstr "Sukceso"
 
-#: process_controller.cpp:181
+#: process_controller.cpp:183
 #, kde-format
 msgid "Insufficient permissions."
 msgstr "Nesufiĉaj permesoj."
 
-#: process_controller.cpp:183
+#: process_controller.cpp:185
 #, kde-format
 msgid "No matching process was found."
 msgstr "Neniu kongrua procezo estis trovita."
 
-#: process_controller.cpp:185
+#: process_controller.cpp:187
 #, kde-format
 msgid "Not supported on the current system."
 msgstr "Ne subtenata en la nuna sistemo."
 
-#: process_controller.cpp:187
+#: process_controller.cpp:189
 #, kde-format
 msgid "The user cancelled."
 msgstr "La uzanto nuligis."
 
-#: process_controller.cpp:189
+#: process_controller.cpp:191
 #, kde-format
 msgid "An unspecified error occurred."
 msgstr "Nespecifita eraro okazis."
 
-#: process_controller.cpp:191
+#: process_controller.cpp:193
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "Nekonata eraro okazis."

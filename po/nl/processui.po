@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-28 02:09+0000\n"
+"POT-Creation-Date: 2023-08-04 01:59+0000\n"
 "PO-Revision-Date: 2022-12-25 13:37+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -19,14 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.0\n"
 
-#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
+#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:544
 #, kde-format
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
 msgstr[0] "Prioriteit instellen..."
 msgstr[1] "Prioriteiten instellen..."
 
-#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
+#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:640
 #, kde-format
 msgid "Jump to Parent Process"
 msgstr "Ga naar ouderproces"
@@ -59,7 +59,7 @@ msgid_plural "End Processes"
 msgstr[0] "Proces beëindigen"
 msgstr[1] "Processen beëindigen"
 
-#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
+#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:545
 #, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
@@ -111,7 +111,7 @@ msgstr "Gebruiker 2 (USR2)"
 msgid "Focus on Quick Search"
 msgstr "Focus op snelzoeken"
 
-#: ksysguardprocesslist.cpp:407
+#: ksysguardprocesslist.cpp:408
 #, kde-format
 msgid ""
 "<qt>End the selected process. Warning - you may lose unsaved work.<br>Right "
@@ -122,13 +122,13 @@ msgstr ""
 "werk verliezen.<br>Klik rechts op een proces om andere signalen te zenden."
 "<br>Zie Wat-is-dit voor technische informatie."
 
-#: ksysguardprocesslist.cpp:442
+#: ksysguardprocesslist.cpp:443
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
 msgstr "Een venster geforceerd sluiten"
 
-#: ksysguardprocesslist.cpp:545
+#: ksysguardprocesslist.cpp:546
 #, kde-format
 msgctxt "Context menu"
 msgid "End Process"
@@ -136,112 +136,112 @@ msgid_plural "End Processes"
 msgstr[0] "Proces beëindigen"
 msgstr[1] "Processen beëindigen"
 
-#: ksysguardprocesslist.cpp:579
+#: ksysguardprocesslist.cpp:580
 #, kde-format
 msgid "Send Signal"
 msgstr "Signaal sturen"
 
-#: ksysguardprocesslist.cpp:596
+#: ksysguardprocesslist.cpp:597
 #, kde-format
 msgid "Jump to Parent Process (%1)"
 msgstr "Ga naar ouderproces (%1)"
 
-#: ksysguardprocesslist.cpp:758
+#: ksysguardprocesslist.cpp:759
 #, kde-format
 msgid "Hide Column '%1'"
 msgstr "Kolom '%1' verbergen"
 
-#: ksysguardprocesslist.cpp:774
+#: ksysguardprocesslist.cpp:775
 #, kde-format
 msgid "Show Column '%1'"
 msgstr "Kolom '%1' tonen"
 
-#: ksysguardprocesslist.cpp:803
+#: ksysguardprocesslist.cpp:804
 #, kde-format
 msgid "Display Units"
 msgstr "Eenheden tonen"
 
-#: ksysguardprocesslist.cpp:807
+#: ksysguardprocesslist.cpp:808
 #, kde-format
 msgid "Mixed"
 msgstr "Gemengd"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes per second"
 msgstr "Kilobytes per seconde"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes"
 msgstr "Kilobytes"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes per second"
 msgstr "Megabytes per seconde"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes"
 msgstr "Megabytes"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes per second"
 msgstr "Gigabytes per seconde"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes"
 msgstr "Gigabytes"
 
-#: ksysguardprocesslist.cpp:834
+#: ksysguardprocesslist.cpp:835
 #, kde-format
 msgid "Percentage"
 msgstr "Percentage"
 
-#: ksysguardprocesslist.cpp:863
+#: ksysguardprocesslist.cpp:864
 #, kde-format
 msgid "Display command line options"
 msgstr "Opdrachtregel-opties tonen"
 
-#: ksysguardprocesslist.cpp:870
+#: ksysguardprocesslist.cpp:871
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
 msgstr "Verdeel het CPU-gebruik tussen het aantal CPU's"
 
-#: ksysguardprocesslist.cpp:877
+#: ksysguardprocesslist.cpp:878
 #, kde-format
 msgid "Displayed Information"
 msgstr "Getoonde informatie"
 
-#: ksysguardprocesslist.cpp:880
+#: ksysguardprocesslist.cpp:881
 #, kde-format
 msgid "Characters read/written"
 msgstr "Gelezen/geschreven tekens"
 
-#: ksysguardprocesslist.cpp:885
+#: ksysguardprocesslist.cpp:886
 #, kde-format
 msgid "Number of Read/Write operations"
 msgstr "Aantal lees/schrijf-bewerkingen"
 
-#: ksysguardprocesslist.cpp:890
+#: ksysguardprocesslist.cpp:891
 #, kde-format
 msgid "Bytes actually read/written"
 msgstr "Actueel gelezen/geschreven bytes"
 
-#: ksysguardprocesslist.cpp:896
+#: ksysguardprocesslist.cpp:897
 #, kde-format
 msgid "Show I/O rate"
 msgstr "I/O-snelheid tonen"
 
-#: ksysguardprocesslist.cpp:923
+#: ksysguardprocesslist.cpp:924
 #, kde-format
 msgid "Show Tooltips"
 msgstr "Tekstballonnen tonen"
 
-#: ksysguardprocesslist.cpp:1177
+#: ksysguardprocesslist.cpp:1178
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -250,12 +250,12 @@ msgstr ""
 "U hebt geen toegangsrechten om de prioriteit van het proces te wijzigen en "
 "er was een probleem om het als root te proberen."
 
-#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
 #, kde-format
 msgid "You must select a process first."
 msgstr "Selecteer eerst een proces."
 
-#: ksysguardprocesslist.cpp:1328
+#: ksysguardprocesslist.cpp:1329
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -264,7 +264,7 @@ msgstr ""
 "U hebt onvoldoende toegangsrechten om de I/O-prioriteit van het proces te "
 "wijzigen en er was een probleem om het als root te proberen."
 
-#: ksysguardprocesslist.cpp:1344
+#: ksysguardprocesslist.cpp:1345
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -273,7 +273,7 @@ msgstr ""
 "U hebt geen toegangsrechten om de CPU-planner voor het proces te wijzigen en "
 "er was een probleem om het als root te proberen."
 
-#: ksysguardprocesslist.cpp:1359
+#: ksysguardprocesslist.cpp:1360
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -282,7 +282,7 @@ msgstr ""
 "U hebt geen toegangsrechten om het proces te beëindigen en er was een "
 "probleem om het als root te proberen."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1397
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -296,7 +296,7 @@ msgstr[1] ""
 "Wilt u deze %1 processen geforceerd beëindigen? Alle niet opgeslagen werk "
 "gaat verloren."
 
-#: ksysguardprocesslist.cpp:1399
+#: ksysguardprocesslist.cpp:1400
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -304,12 +304,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Proces beëindigen"
 msgstr[1] "%1 processen beëindigen"
 
-#: ksysguardprocesslist.cpp:1401
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgid "End"
 msgstr "Beëindigen"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -324,7 +324,7 @@ msgstr[1] ""
 "<qt>Wilt u deze %1 processen <b>onmiddellijk en geforceerd</b> beëindigen? "
 "Alle niet opgeslagen werk gaat verloren."
 
-#: ksysguardprocesslist.cpp:1406
+#: ksysguardprocesslist.cpp:1407
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -332,7 +332,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Proces geforceerd beëindigen"
 msgstr[1] "%1 processen geforceerd beëindigen"
 
-#: ksysguardprocesslist.cpp:1408
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgid "Kill"
 msgstr "Beëindigen"

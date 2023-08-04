@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-28 02:09+0000\n"
+"POT-Creation-Date: 2023-08-04 01:59+0000\n"
 "PO-Revision-Date: 2017-05-16 06:58-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -20,14 +20,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Zanata 3.9.6\n"
 
-#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
+#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:544
 #, kde-format
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
 msgstr[0] "קבע עדיפות..."
 msgstr[1] "קבע עדיפויות..."
 
-#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
+#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:640
 #, kde-format
 msgid "Jump to Parent Process"
 msgstr "קפוץ לתהליך האב"
@@ -61,7 +61,7 @@ msgid_plural "End Processes"
 msgstr[0] "סיים תהליך"
 msgstr[1] "סיים תהליכים"
 
-#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
+#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:545
 #, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
@@ -113,7 +113,7 @@ msgstr "משתמש 2 (USR2)"
 msgid "Focus on Quick Search"
 msgstr "התמקד על חיפוש מהיר"
 
-#: ksysguardprocesslist.cpp:407
+#: ksysguardprocesslist.cpp:408
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>End the selected process. Warning - you may lose unsaved work."
@@ -129,13 +129,13 @@ msgstr ""
 "ימנית מאפשרות לשלוח אותות אחרים. <br> הסתכל בעזרה לקבלת מידע טכני יותר. <br> "
 "כדי להרוג חלון מסויים, בכל רגע נתון ניתן ללחוץ על Alt+Control+ESC. </qt>"
 
-#: ksysguardprocesslist.cpp:442
+#: ksysguardprocesslist.cpp:443
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:545
+#: ksysguardprocesslist.cpp:546
 #, kde-format
 msgctxt "Context menu"
 msgid "End Process"
@@ -143,112 +143,112 @@ msgid_plural "End Processes"
 msgstr[0] "סיים תהליך"
 msgstr[1] "סיים תהליכים"
 
-#: ksysguardprocesslist.cpp:579
+#: ksysguardprocesslist.cpp:580
 #, kde-format
 msgid "Send Signal"
 msgstr "שלח אות"
 
-#: ksysguardprocesslist.cpp:596
+#: ksysguardprocesslist.cpp:597
 #, kde-format
 msgid "Jump to Parent Process (%1)"
 msgstr "קפוץ לתהליך האב (%1)"
 
-#: ksysguardprocesslist.cpp:758
+#: ksysguardprocesslist.cpp:759
 #, kde-format
 msgid "Hide Column '%1'"
 msgstr "הסתר עמודה \"%1\""
 
-#: ksysguardprocesslist.cpp:774
+#: ksysguardprocesslist.cpp:775
 #, kde-format
 msgid "Show Column '%1'"
 msgstr "הצג עמודה \"%1\""
 
-#: ksysguardprocesslist.cpp:803
+#: ksysguardprocesslist.cpp:804
 #, kde-format
 msgid "Display Units"
 msgstr "הצג יחידות"
 
-#: ksysguardprocesslist.cpp:807
+#: ksysguardprocesslist.cpp:808
 #, kde-format
 msgid "Mixed"
 msgstr "מעורב"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes per second"
 msgstr "קילובייטים לשנייה"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes"
 msgstr "קילובייט"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes per second"
 msgstr "מגהבייטים לשנייה"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes"
 msgstr "מגהבייט"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes per second"
 msgstr "ג'יגהבייטים לשנייה"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes"
 msgstr "ג'יגהבייט"
 
-#: ksysguardprocesslist.cpp:834
+#: ksysguardprocesslist.cpp:835
 #, kde-format
 msgid "Percentage"
 msgstr "אחוז"
 
-#: ksysguardprocesslist.cpp:863
+#: ksysguardprocesslist.cpp:864
 #, kde-format
 msgid "Display command line options"
 msgstr "הצג אפשרויות שורת פקודה"
 
-#: ksysguardprocesslist.cpp:870
+#: ksysguardprocesslist.cpp:871
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
 msgstr "חלק את השימוש במעבד במספר המעבדים"
 
-#: ksysguardprocesslist.cpp:877
+#: ksysguardprocesslist.cpp:878
 #, kde-format
 msgid "Displayed Information"
 msgstr "מידע מוצג"
 
-#: ksysguardprocesslist.cpp:880
+#: ksysguardprocesslist.cpp:881
 #, kde-format
 msgid "Characters read/written"
 msgstr "תווים שנקראו/נכתבו"
 
-#: ksysguardprocesslist.cpp:885
+#: ksysguardprocesslist.cpp:886
 #, kde-format
 msgid "Number of Read/Write operations"
 msgstr "מספר פעולות קריאה/כתיבה"
 
-#: ksysguardprocesslist.cpp:890
+#: ksysguardprocesslist.cpp:891
 #, kde-format
 msgid "Bytes actually read/written"
 msgstr "בתים שבסופו של דבר נקראו/נכתבו"
 
-#: ksysguardprocesslist.cpp:896
+#: ksysguardprocesslist.cpp:897
 #, kde-format
 msgid "Show I/O rate"
 msgstr "הצג קצב I/O"
 
-#: ksysguardprocesslist.cpp:923
+#: ksysguardprocesslist.cpp:924
 #, kde-format
 msgid "Show Tooltips"
 msgstr "הצג חלוניות מידע"
 
-#: ksysguardprocesslist.cpp:1177
+#: ksysguardprocesslist.cpp:1178
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to renice the process and there was a "
@@ -260,12 +260,12 @@ msgstr ""
 "אין ברשותך הרשאות מתאימות כדי לשנות עדיפויות (renice) עבור תהליך זה והתרחשה "
 "בעיה בניסיון לרוץ כמנהל (root). שגיאה %1 %2"
 
-#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
 #, kde-format
 msgid "You must select a process first."
 msgstr "עליך לבחור תהליך קודם."
 
-#: ksysguardprocesslist.cpp:1328
+#: ksysguardprocesslist.cpp:1329
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -277,7 +277,7 @@ msgstr ""
 "אין ברשותך הרשאות מתאימות כדי לשנות את עדיפות הקלט/פלט עבור תהליך זה והתרחשה "
 "בעיה בניסיון לרוץ כמנהל (root). שגיאה %1 %2"
 
-#: ksysguardprocesslist.cpp:1344
+#: ksysguardprocesslist.cpp:1345
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -289,7 +289,7 @@ msgstr ""
 "אין ברשותך הרשאות מתאימות כדי לשנות את מתזמן המעבד עבור תהליך זה והתרחשה "
 "בעיה בניסיון לרוץ כמנהל (root). שגיאה %1 %2"
 
-#: ksysguardprocesslist.cpp:1359
+#: ksysguardprocesslist.cpp:1360
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -301,7 +301,7 @@ msgstr ""
 "אין ברשותך הרשאות מתאימות כדי להרוג את התהליך והתרחשה בעיה בניסיון לרוץ "
 "כמנהל (root). שגיאה %1 %2"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1397
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -315,7 +315,7 @@ msgstr[1] ""
 "האם הינך בטוח שברצונך לסיים את %1 התהליכים הנבחרים? סביר להניח שכל עבודה שלא "
 "נשמרה, תאבד"
 
-#: ksysguardprocesslist.cpp:1399
+#: ksysguardprocesslist.cpp:1400
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -323,12 +323,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "סיים תהליך"
 msgstr[1] "סיים %1 תהליכים"
 
-#: ksysguardprocesslist.cpp:1401
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgid "End"
 msgstr "סוף"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -343,7 +343,7 @@ msgstr[1] ""
 "<qt>האם הינך בטוח שברצונך <b>להרוג בכוח את %1</b> התהליכים הנבחרים? סביר "
 "להניח שכל עבודה שלא נשמרה, תאבד </qt>"
 
-#: ksysguardprocesslist.cpp:1406
+#: ksysguardprocesslist.cpp:1407
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -351,7 +351,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "הרוג תהליך בכוח"
 msgstr[1] "הרוג %1 תהליכים בכוח"
 
-#: ksysguardprocesslist.cpp:1408
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgid "Kill"
 msgstr "הרוג (KILL)"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: கேபசூ 4.1 தமிழாக்கம்\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-28 02:09+0000\n"
+"POT-Creation-Date: 2023-08-04 01:59+0000\n"
 "PO-Revision-Date: 2022-11-10 21:30+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.08.3\n"
 
-#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
+#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:544
 #, fuzzy, kde-format
 #| msgid "Low Priority"
 msgid "Set Priority..."
@@ -26,7 +26,7 @@ msgid_plural "Set Priority..."
 msgstr[0] "முன்னிலையை அமை..."
 msgstr[1] "முன்னிலையை அமை..."
 
-#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
+#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:640
 #, kde-format
 msgid "Jump to Parent Process"
 msgstr "தாய் பணிக்குத் தாவு"
@@ -59,7 +59,7 @@ msgid_plural "End Processes"
 msgstr[0] "பணியை நிறுத்து"
 msgstr[1] "பணிகளை நிறுத்து"
 
-#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
+#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:545
 #, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
@@ -111,7 +111,7 @@ msgstr "தனிப்பயன் 2 (USR2)"
 msgid "Focus on Quick Search"
 msgstr "விரைத் தேடலைக் குவியப்படுத்து"
 
-#: ksysguardprocesslist.cpp:407
+#: ksysguardprocesslist.cpp:408
 #, kde-format
 msgid ""
 "<qt>End the selected process. Warning - you may lose unsaved work.<br>Right "
@@ -119,13 +119,13 @@ msgid ""
 "information."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:442
+#: ksysguardprocesslist.cpp:443
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
 msgstr "ஓர் சாளரத்தை கட்டாயமாக நிறுத்து"
 
-#: ksysguardprocesslist.cpp:545
+#: ksysguardprocesslist.cpp:546
 #, kde-format
 msgctxt "Context menu"
 msgid "End Process"
@@ -133,118 +133,118 @@ msgid_plural "End Processes"
 msgstr[0] "பணியை நிறுத்து"
 msgstr[1] "பணிகளை நிறுத்து"
 
-#: ksysguardprocesslist.cpp:579
+#: ksysguardprocesslist.cpp:580
 #, kde-format
 msgid "Send Signal"
 msgstr "சமிக்ஞை அனுப்பு"
 
-#: ksysguardprocesslist.cpp:596
+#: ksysguardprocesslist.cpp:597
 #, kde-format
 msgid "Jump to Parent Process (%1)"
 msgstr "தாய் பணிக்குத் தாவு (%1)"
 
-#: ksysguardprocesslist.cpp:758
+#: ksysguardprocesslist.cpp:759
 #, kde-format
 msgid "Hide Column '%1'"
 msgstr "'%1' நெடுவரிசையை மறை"
 
-#: ksysguardprocesslist.cpp:774
+#: ksysguardprocesslist.cpp:775
 #, kde-format
 msgid "Show Column '%1'"
 msgstr "'%1' நெடுவரிசையை காட்டு"
 
-#: ksysguardprocesslist.cpp:803
+#: ksysguardprocesslist.cpp:804
 #, kde-format
 msgid "Display Units"
 msgstr "காட்சிக்கான அலகுகள்"
 
-#: ksysguardprocesslist.cpp:807
+#: ksysguardprocesslist.cpp:808
 #, kde-format
 msgid "Mixed"
 msgstr "கலந்தவை"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, fuzzy, kde-format
 #| msgid "KiloBytes"
 msgid "Kilobytes per second"
 msgstr "கிலோபைட்"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, fuzzy, kde-format
 #| msgid "KiloBytes"
 msgid "Kilobytes"
 msgstr "கிலோபைட்"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, fuzzy, kde-format
 #| msgid "MegaBytes"
 msgid "Megabytes per second"
 msgstr "மெகாபைட்"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, fuzzy, kde-format
 #| msgid "MegaBytes"
 msgid "Megabytes"
 msgstr "மெகாபைட்"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, fuzzy, kde-format
 #| msgid "GigaBytes"
 msgid "Gigabytes per second"
 msgstr "கிகாபைட்"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, fuzzy, kde-format
 #| msgid "GigaBytes"
 msgid "Gigabytes"
 msgstr "கிகாபைட்"
 
-#: ksysguardprocesslist.cpp:834
+#: ksysguardprocesslist.cpp:835
 #, kde-format
 msgid "Percentage"
 msgstr "சதவீதம்"
 
-#: ksysguardprocesslist.cpp:863
+#: ksysguardprocesslist.cpp:864
 #, kde-format
 msgid "Display command line options"
 msgstr "கட்டளைவரியிலுள்ள தருமதிப்புகளை காட்டு"
 
-#: ksysguardprocesslist.cpp:870
+#: ksysguardprocesslist.cpp:871
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
 msgstr "சீபியூ பயன்பாட்டை அவற்றின் எண்ணிக்கையால் வகு"
 
-#: ksysguardprocesslist.cpp:877
+#: ksysguardprocesslist.cpp:878
 #, kde-format
 msgid "Displayed Information"
 msgstr "காட்டப்படும் விவரங்கள்"
 
-#: ksysguardprocesslist.cpp:880
+#: ksysguardprocesslist.cpp:881
 #, kde-format
 msgid "Characters read/written"
 msgstr "எழுதிய/படித்த எழுத்துகள்"
 
-#: ksysguardprocesslist.cpp:885
+#: ksysguardprocesslist.cpp:886
 #, kde-format
 msgid "Number of Read/Write operations"
 msgstr "எழுதல்/படித்தல் செயல்பாடுகளின் எண்ணிக்கை"
 
-#: ksysguardprocesslist.cpp:890
+#: ksysguardprocesslist.cpp:891
 #, kde-format
 msgid "Bytes actually read/written"
 msgstr "எழுதிய/படித்த பைட்டுகள்"
 
-#: ksysguardprocesslist.cpp:896
+#: ksysguardprocesslist.cpp:897
 #, kde-format
 msgid "Show I/O rate"
 msgstr "I/O விகித‍த்தைக் காட்டு"
 
-#: ksysguardprocesslist.cpp:923
+#: ksysguardprocesslist.cpp:924
 #, kde-format
 msgid "Show Tooltips"
 msgstr "கருவித் துப்புகளை காட்டு"
 
-#: ksysguardprocesslist.cpp:1177
+#: ksysguardprocesslist.cpp:1178
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to renice the process and there was a "
@@ -255,12 +255,12 @@ msgid ""
 msgstr ""
 "பணியை ரெனைஸ் செய்ய தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
-#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
 #, kde-format
 msgid "You must select a process first."
 msgstr "முதலில் ஓர் பணியைத் தேர்ந்தெடுக்க வேண்டும்."
 
-#: ksysguardprocesslist.cpp:1328
+#: ksysguardprocesslist.cpp:1329
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -270,7 +270,7 @@ msgid ""
 "there was a problem trying to run as root."
 msgstr "பணியை முடிக்க தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
-#: ksysguardprocesslist.cpp:1344
+#: ksysguardprocesslist.cpp:1345
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -280,7 +280,7 @@ msgid ""
 "and there was a problem trying to run as root."
 msgstr "பணியை முடிக்க தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
-#: ksysguardprocesslist.cpp:1359
+#: ksysguardprocesslist.cpp:1360
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -290,7 +290,7 @@ msgid ""
 "trying to run as root."
 msgstr "பணியை முடிக்க தங்களுக்கு உரிமையில்லை அதோடு மூலப் பயனராக இயக்குவதிலும் சிக்கல்"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1397
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -301,7 +301,7 @@ msgstr[0] "இப்பணியை உறுதியாக நிறுத்�
 msgstr[1] ""
 "இந்த %1 பணிகளை உறுதியாக நிறுத்த வேண்டுமா? சேமிக்கப்படா தரவுகளை நீங்கள் இழக்கலாம்."
 
-#: ksysguardprocesslist.cpp:1399
+#: ksysguardprocesslist.cpp:1400
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -309,12 +309,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "பணியை நிறுத்து"
 msgstr[1] "%1 பணிகளை நிறுத்து"
 
-#: ksysguardprocesslist.cpp:1401
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgid "End"
 msgstr "நிறுத்து"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -329,7 +329,7 @@ msgstr[1] ""
 "<qt>உறுதியாக இந்த %1 பணிகளை <b>உடனடியாகவும் கட்டாயமாகவும் நிறுத்த</b> வேண்டுமா? "
 "சேமிக்கப்படா தரவுகளை நீங்கள் இழக்கலாம்."
 
-#: ksysguardprocesslist.cpp:1406
+#: ksysguardprocesslist.cpp:1407
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -337,7 +337,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "பணியை கட்டாயமாக நிறுத்துவது"
 msgstr[1] "%1 பணிகளை கட்டாயமாக நிறுத்துவது"
 
-#: ksysguardprocesslist.cpp:1408
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgid "Kill"
 msgstr "கட்டாயமாக நிறுத்து"

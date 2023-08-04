@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-28 02:09+0000\n"
+"POT-Creation-Date: 2023-08-04 01:59+0000\n"
 "PO-Revision-Date: 2023-02-20 22:08+0200\n"
 "Last-Translator: Tommi Nieminen <tommi.nieminen@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -26,14 +26,14 @@ msgstr ""
 "X-POT-Import-Date: 2012-12-01 22:22:38+0000\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
+#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:544
 #, kde-format
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
 msgstr[0] "Aseta prioriteetti…"
 msgstr[1] "Aseta prioriteetti…"
 
-#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
+#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:640
 #, kde-format
 msgid "Jump to Parent Process"
 msgstr "Hyppää emoprosessiin"
@@ -66,7 +66,7 @@ msgid_plural "End Processes"
 msgstr[0] "Lopeta prosessi"
 msgstr[1] "Lopeta prosessit"
 
-#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
+#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:545
 #, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
@@ -118,7 +118,7 @@ msgstr "Käyttäjä 2 (USR2)"
 msgid "Focus on Quick Search"
 msgstr "Kohdista pikahakuun"
 
-#: ksysguardprocesslist.cpp:407
+#: ksysguardprocesslist.cpp:408
 #, kde-format
 msgid ""
 "<qt>End the selected process. Warning - you may lose unsaved work.<br>Right "
@@ -129,13 +129,13 @@ msgstr ""
 "<br>Lähetä muu signaali napsauttamalla prosessia hiiren oikealla "
 "painikkeella.<br>Katso tekniset tiedot kohdasta ”Mikä tämä on?”."
 
-#: ksysguardprocesslist.cpp:442
+#: ksysguardprocesslist.cpp:443
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
 msgstr "Tapa ikkuna"
 
-#: ksysguardprocesslist.cpp:545
+#: ksysguardprocesslist.cpp:546
 #, kde-format
 msgctxt "Context menu"
 msgid "End Process"
@@ -143,114 +143,114 @@ msgid_plural "End Processes"
 msgstr[0] "Lopeta prosessi"
 msgstr[1] "Lopeta prosessit"
 
-#: ksysguardprocesslist.cpp:579
+#: ksysguardprocesslist.cpp:580
 #, kde-format
 msgid "Send Signal"
 msgstr "Lähetä signaali"
 
-#: ksysguardprocesslist.cpp:596
+#: ksysguardprocesslist.cpp:597
 #, kde-format
 msgid "Jump to Parent Process (%1)"
 msgstr "Hyppää emoprosessiin (%1)"
 
-#: ksysguardprocesslist.cpp:758
+#: ksysguardprocesslist.cpp:759
 #, kde-format
 msgid "Hide Column '%1'"
 msgstr "Piilota sarake ”%1”"
 
-#: ksysguardprocesslist.cpp:774
+#: ksysguardprocesslist.cpp:775
 #, kde-format
 msgid "Show Column '%1'"
 msgstr "Näytä sarake ”%1”"
 
 # ”display” ei anna mitään lisäinformaatiota ja valittavana on yksi yksikkö, jossa sarakkeen tiedot näytetään
-#: ksysguardprocesslist.cpp:803
+#: ksysguardprocesslist.cpp:804
 #, kde-format
 msgid "Display Units"
 msgstr "Näytä yksikössä"
 
 # Määrä näytetään automaattisesti sopivimmassa yksikössä. Esim. pienet määrät kilotavuina, suuremmat megatavuina jne.
-#: ksysguardprocesslist.cpp:807
+#: ksysguardprocesslist.cpp:808
 #, kde-format
 msgid "Mixed"
 msgstr "automaattinen"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes per second"
 msgstr "kilotavua sekunnissa"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes"
 msgstr "kilotavua"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes per second"
 msgstr "megatavua sekunnissa"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes"
 msgstr "megatavua"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes per second"
 msgstr "gigatavua sekunnissa"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes"
 msgstr "gigatavua"
 
-#: ksysguardprocesslist.cpp:834
+#: ksysguardprocesslist.cpp:835
 #, kde-format
 msgid "Percentage"
 msgstr "osuus"
 
-#: ksysguardprocesslist.cpp:863
+#: ksysguardprocesslist.cpp:864
 #, kde-format
 msgid "Display command line options"
 msgstr "Näytä komentoriviparametrit"
 
-#: ksysguardprocesslist.cpp:870
+#: ksysguardprocesslist.cpp:871
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
 msgstr "Jaa keskusyksikkökäyttö keskusyksiköiden määrällä"
 
-#: ksysguardprocesslist.cpp:877
+#: ksysguardprocesslist.cpp:878
 #, kde-format
 msgid "Displayed Information"
 msgstr "Näytetyt tiedot"
 
-#: ksysguardprocesslist.cpp:880
+#: ksysguardprocesslist.cpp:881
 #, kde-format
 msgid "Characters read/written"
 msgstr "Luettuja/kirjoitettuja merkkejä"
 
-#: ksysguardprocesslist.cpp:885
+#: ksysguardprocesslist.cpp:886
 #, kde-format
 msgid "Number of Read/Write operations"
 msgstr "Luku/kirjoitusoperaatioiden määrä"
 
-#: ksysguardprocesslist.cpp:890
+#: ksysguardprocesslist.cpp:891
 #, kde-format
 msgid "Bytes actually read/written"
 msgstr "Todellisia luettuja/kirjoitettuja tavuja"
 
-#: ksysguardprocesslist.cpp:896
+#: ksysguardprocesslist.cpp:897
 #, kde-format
 msgid "Show I/O rate"
 msgstr "Näytä siirräntänopeus"
 
-#: ksysguardprocesslist.cpp:923
+#: ksysguardprocesslist.cpp:924
 #, kde-format
 msgid "Show Tooltips"
 msgstr "Näytä työkaluvihjeet"
 
-#: ksysguardprocesslist.cpp:1177
+#: ksysguardprocesslist.cpp:1178
 #, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
@@ -259,12 +259,12 @@ msgstr ""
 "Sinulla ei ole oikeuksia muuttaa prosessin prioriteettia, ja yrityksessä "
 "käyttää root-oikeuksia oli ongelma."
 
-#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
 #, kde-format
 msgid "You must select a process first."
 msgstr "Prosessi täytyy valita ensin."
 
-#: ksysguardprocesslist.cpp:1328
+#: ksysguardprocesslist.cpp:1329
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -273,7 +273,7 @@ msgstr ""
 "Sinulla ei ole oikeuksia muuttaa prosessin I/O-prioriteettia, ja yrityksessä "
 "käyttää root-oikeuksia oli ongelma."
 
-#: ksysguardprocesslist.cpp:1344
+#: ksysguardprocesslist.cpp:1345
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -282,7 +282,7 @@ msgstr ""
 "Sinulla ei ole oikeuksia muuttaa prosessin keskusyksikköajastusta, ja "
 "yrityksessä käyttää root-oikeuksia oli ongelma."
 
-#: ksysguardprocesslist.cpp:1359
+#: ksysguardprocesslist.cpp:1360
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -291,7 +291,7 @@ msgstr ""
 "Sinulla ei ole oikeuksia tappaa prosessia, ja yrityksessä käyttää root-"
 "oikeuksia oli ongelma."
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1397
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -305,7 +305,7 @@ msgstr[1] ""
 "Haluatko varmasti lopettaa nämä %1 prosessia? Tallentamattomat muutokset "
 "menetetään."
 
-#: ksysguardprocesslist.cpp:1399
+#: ksysguardprocesslist.cpp:1400
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -313,12 +313,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Lopeta prosessi"
 msgstr[1] "Lopeta %1 prosessia"
 
-#: ksysguardprocesslist.cpp:1401
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgid "End"
 msgstr "Lopeta"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -333,7 +333,7 @@ msgstr[1] ""
 "<qt>Haluatko varmasti <b>tappaa nämä %1 prosessia väkisin</b>? "
 "Tallentamattomat muutokset menetetään."
 
-#: ksysguardprocesslist.cpp:1406
+#: ksysguardprocesslist.cpp:1407
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -341,7 +341,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Tapa prosessi väkisin"
 msgstr[1] "Tapa %1 prosessia väkisin"
 
-#: ksysguardprocesslist.cpp:1408
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgid "Kill"
 msgstr "Tapa"

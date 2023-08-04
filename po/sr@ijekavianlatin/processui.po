@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-28 02:09+0000\n"
+"POT-Creation-Date: 2023-08-04 01:59+0000\n"
 "PO-Revision-Date: 2017-09-28 17:58+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
+#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:544
 #, kde-format
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
@@ -28,7 +28,7 @@ msgstr[1] "Postavi prioritet..."
 msgstr[2] "Postavi prioritet..."
 msgstr[3] "Postavi prioritet..."
 
-#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
+#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:640
 #, kde-format
 msgid "Jump to Parent Process"
 msgstr "Skoči na roditeljski proces"
@@ -64,7 +64,7 @@ msgstr[1] "Ukini procese"
 msgstr[2] "Ukini procese"
 msgstr[3] "Ukini proces"
 
-#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
+#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:545
 #, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
@@ -118,7 +118,7 @@ msgstr "Korisnički 2 (USR2)"
 msgid "Focus on Quick Search"
 msgstr "Fokusiraj brzu pretragu"
 
-#: ksysguardprocesslist.cpp:407
+#: ksysguardprocesslist.cpp:408
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>End the selected process. Warning - you may lose unsaved work."
@@ -135,13 +135,13 @@ msgstr ""
 "šta‑je‑ovo za tehničke informacije. Proces možete i preko njegovog prozora, "
 "tako što pritisnete <b>Ctrl+Alt+Esc</b>.</qt>"
 
-#: ksysguardprocesslist.cpp:442
+#: ksysguardprocesslist.cpp:443
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:545
+#: ksysguardprocesslist.cpp:546
 #, kde-format
 msgctxt "Context menu"
 msgid "End Process"
@@ -152,126 +152,126 @@ msgstr[2] "Ukini procese"
 msgstr[3] "Ukini proces"
 
 # >> @title:menu
-#: ksysguardprocesslist.cpp:579
+#: ksysguardprocesslist.cpp:580
 #, kde-format
 msgid "Send Signal"
 msgstr "Pošalji signal"
 
-#: ksysguardprocesslist.cpp:596
+#: ksysguardprocesslist.cpp:597
 #, kde-format
 msgid "Jump to Parent Process (%1)"
 msgstr "Skoči na roditeljski proces (%1)"
 
-#: ksysguardprocesslist.cpp:758
+#: ksysguardprocesslist.cpp:759
 #, kde-format
 msgid "Hide Column '%1'"
 msgstr "Sakrij kolonu „%1“|/|Sakrij $[aku %1]"
 
-#: ksysguardprocesslist.cpp:774
+#: ksysguardprocesslist.cpp:775
 #, kde-format
 msgid "Show Column '%1'"
 msgstr "Prikaži kolonu „%1“|/|Prikaži $[aku %1]"
 
-#: ksysguardprocesslist.cpp:803
+#: ksysguardprocesslist.cpp:804
 #, kde-format
 msgid "Display Units"
 msgstr "Jedinice prikaza"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:807
+#: ksysguardprocesslist.cpp:808
 #, kde-format
 msgid "Mixed"
 msgstr "miješano"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes per second"
 msgstr "kilobajt po sekundi"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes"
 msgstr "kilobajt"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes per second"
 msgstr "megabajt po sekundi"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes"
 msgstr "megabajt"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes per second"
 msgstr "gigabajt po sekundi"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes"
 msgstr "gigabajt"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:834
+#: ksysguardprocesslist.cpp:835
 #, kde-format
 msgid "Percentage"
 msgstr "procenat"
 
 # >> @option:check
-#: ksysguardprocesslist.cpp:863
+#: ksysguardprocesslist.cpp:864
 #, kde-format
 msgid "Display command line options"
 msgstr "Opcije komandne linije"
 
 # >> @option:check
-#: ksysguardprocesslist.cpp:870
+#: ksysguardprocesslist.cpp:871
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
 msgstr "Podijeli opterećenje brojem CPU‑ova"
 
-#: ksysguardprocesslist.cpp:877
+#: ksysguardprocesslist.cpp:878
 #, kde-format
 msgid "Displayed Information"
 msgstr "Prikazani podaci"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:880
+#: ksysguardprocesslist.cpp:881
 #, kde-format
 msgid "Characters read/written"
 msgstr "pročitanih/upisanih znakova"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:885
+#: ksysguardprocesslist.cpp:886
 #, kde-format
 msgid "Number of Read/Write operations"
 msgstr "broj operacija čitanja/pisanja"
 
 # >> @item:inmenu
-#: ksysguardprocesslist.cpp:890
+#: ksysguardprocesslist.cpp:891
 #, kde-format
 msgid "Bytes actually read/written"
 msgstr "stvarno pročitanih/upisanih bajtova"
 
-#: ksysguardprocesslist.cpp:896
+#: ksysguardprocesslist.cpp:897
 #, kde-format
 msgid "Show I/O rate"
 msgstr "U/I protok"
 
 # >> @option:check
-#: ksysguardprocesslist.cpp:923
+#: ksysguardprocesslist.cpp:924
 #, kde-format
 msgid "Show Tooltips"
 msgstr "Oblačići"
 
-#: ksysguardprocesslist.cpp:1177
+#: ksysguardprocesslist.cpp:1178
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to renice the process and there was a "
@@ -283,12 +283,12 @@ msgstr ""
 "Nemate dozvolu za profinjavanje procesa, a nije prošlo pokretanje kao "
 "korijen. Greška %1 %2"
 
-#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
 #, kde-format
 msgid "You must select a process first."
 msgstr "Morate prvo izabrati proces."
 
-#: ksysguardprocesslist.cpp:1328
+#: ksysguardprocesslist.cpp:1329
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -300,7 +300,7 @@ msgstr ""
 "Nemate dozvolu za mijenjanje prioriteta U/I‑ja procesa, a nije prošlo "
 "pokretanje kao korijen. Greška %1 %2"
 
-#: ksysguardprocesslist.cpp:1344
+#: ksysguardprocesslist.cpp:1345
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -312,7 +312,7 @@ msgstr ""
 "Nemate dozvolu za mijenjanje raspoređivača CPU‑a procesa, a nije prošlo "
 "pokretanje kao korijen. Greška %1 %2"
 
-#: ksysguardprocesslist.cpp:1359
+#: ksysguardprocesslist.cpp:1360
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -324,7 +324,7 @@ msgstr ""
 "Nemate dozvolu za ukidanje procesa, a nije prošlo pokretanje kao korijen. "
 "Greška %1 %2"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1397
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -340,7 +340,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Želite li da ukinete ovaj proces? Nesačuvani podaci mogu biti izgubljeni."
 
-#: ksysguardprocesslist.cpp:1399
+#: ksysguardprocesslist.cpp:1400
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -350,12 +350,12 @@ msgstr[1] "Ukidanje %1 procesa"
 msgstr[2] "Ukidanje %1 procesa"
 msgstr[3] "Ukidanje procesa"
 
-#: ksysguardprocesslist.cpp:1401
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgid "End"
 msgstr "Ukini"
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -376,7 +376,7 @@ msgstr[3] ""
 "<qt>Želite li da <b>momentalno i nasilno ukinete</b> ovaj proces? Nesačuvani "
 "podaci mogu biti izgubljeni.</qt>"
 
-#: ksysguardprocesslist.cpp:1406
+#: ksysguardprocesslist.cpp:1407
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -386,7 +386,7 @@ msgstr[1] "Nasilno ukidanje %1 procesa"
 msgstr[2] "Nasilno ukidanje %1 procesa"
 msgstr[3] "Nasilno ukidanje procesa"
 
-#: ksysguardprocesslist.cpp:1408
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgid "Kill"
 msgstr "Ukini"

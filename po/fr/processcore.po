@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-24 01:00+0000\n"
+"POT-Creation-Date: 2023-08-04 01:59+0000\n"
 "PO-Revision-Date: 2021-05-19 09:40+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -661,37 +661,37 @@ msgctxt "Scheduler"
 msgid "Idle"
 msgstr "Inactif"
 
-#: process_controller.cpp:179
+#: process_controller.cpp:181
 #, kde-format
 msgid "Success"
 msgstr "Succès"
 
-#: process_controller.cpp:181
+#: process_controller.cpp:183
 #, kde-format
 msgid "Insufficient permissions."
 msgstr "Permissions insuffisantes."
 
-#: process_controller.cpp:183
+#: process_controller.cpp:185
 #, kde-format
 msgid "No matching process was found."
 msgstr "Aucun processus n'a été trouvé."
 
-#: process_controller.cpp:185
+#: process_controller.cpp:187
 #, kde-format
 msgid "Not supported on the current system."
 msgstr "Non pris en charge sur le système actuel."
 
-#: process_controller.cpp:187
+#: process_controller.cpp:189
 #, kde-format
 msgid "The user cancelled."
 msgstr "Annulation par l'utilisateur."
 
-#: process_controller.cpp:189
+#: process_controller.cpp:191
 #, kde-format
 msgid "An unspecified error occurred."
 msgstr "Une erreur non spécifiée est survenue."
 
-#: process_controller.cpp:191
+#: process_controller.cpp:193
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "Une erreur inconnue est survenue."

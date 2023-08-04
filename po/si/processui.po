@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-28 02:09+0000\n"
+"POT-Creation-Date: 2023-08-04 01:59+0000\n"
 "PO-Revision-Date: 2009-12-28 17:12+0530\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: Sinhala <danishka@gmail.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 0.3\n"
 
-#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
+#: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:544
 #, fuzzy, kde-format
 #| msgid "Low Priority"
 msgid "Set Priority..."
@@ -25,7 +25,7 @@ msgid_plural "Set Priority..."
 msgstr[0] "අඩු ප්‍රමුඛතාව"
 msgstr[1] "අඩු ප්‍රමුඛතාව"
 
-#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
+#: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:640
 #, kde-format
 msgid "Jump to Parent Process"
 msgstr "මව් සකසනයට යන්න"
@@ -60,7 +60,7 @@ msgid_plural "End Processes"
 msgstr[0] "අයත් සැකසුම්"
 msgstr[1] "අයත් සැකසුම්"
 
-#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:544
+#: ksysguardprocesslist.cpp:210 ksysguardprocesslist.cpp:545
 #, fuzzy, kde-format
 #| msgid "Kill Process"
 #| msgid_plural "Kill Processes"
@@ -115,7 +115,7 @@ msgstr "2 වන පරිශීලක (USR2)"
 msgid "Focus on Quick Search"
 msgstr "ක්‍ෂණික සෙවීම"
 
-#: ksysguardprocesslist.cpp:407
+#: ksysguardprocesslist.cpp:408
 #, kde-format
 msgid ""
 "<qt>End the selected process. Warning - you may lose unsaved work.<br>Right "
@@ -123,13 +123,13 @@ msgid ""
 "information."
 msgstr ""
 
-#: ksysguardprocesslist.cpp:442
+#: ksysguardprocesslist.cpp:443
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:545
+#: ksysguardprocesslist.cpp:546
 #, fuzzy, kde-format
 #| msgid "Own Processes"
 msgctxt "Context menu"
@@ -138,112 +138,112 @@ msgid_plural "End Processes"
 msgstr[0] "අයත් සැකසුම්"
 msgstr[1] "අයත් සැකසුම්"
 
-#: ksysguardprocesslist.cpp:579
+#: ksysguardprocesslist.cpp:580
 #, kde-format
 msgid "Send Signal"
 msgstr "සංඥාව යවන්න"
 
-#: ksysguardprocesslist.cpp:596
+#: ksysguardprocesslist.cpp:597
 #, kde-format
 msgid "Jump to Parent Process (%1)"
 msgstr "මුල් සැකසුමට පනින්න (%1)"
 
-#: ksysguardprocesslist.cpp:758
+#: ksysguardprocesslist.cpp:759
 #, kde-format
 msgid "Hide Column '%1'"
 msgstr "'%1' තීරුව සගවන්න"
 
-#: ksysguardprocesslist.cpp:774
+#: ksysguardprocesslist.cpp:775
 #, kde-format
 msgid "Show Column '%1'"
 msgstr "'%1' තීරුව පෙන්වන්න"
 
-#: ksysguardprocesslist.cpp:803
+#: ksysguardprocesslist.cpp:804
 #, kde-format
 msgid "Display Units"
 msgstr "ඒකක පෙන්වන්න"
 
-#: ksysguardprocesslist.cpp:807
+#: ksysguardprocesslist.cpp:808
 #, kde-format
 msgid "Mixed"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes per second"
 msgstr "තත්පරයට කිලෝබයිට්"
 
-#: ksysguardprocesslist.cpp:813
+#: ksysguardprocesslist.cpp:814
 #, kde-format
 msgid "Kilobytes"
 msgstr "කිලෝ බයිට්"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes per second"
 msgstr "තත්පරයට මෙගාබයිට"
 
-#: ksysguardprocesslist.cpp:819
+#: ksysguardprocesslist.cpp:820
 #, kde-format
 msgid "Megabytes"
 msgstr "මෙගා බයිට්"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes per second"
 msgstr "තත්පරයට ගිගාබයිට්"
 
-#: ksysguardprocesslist.cpp:825
+#: ksysguardprocesslist.cpp:826
 #, kde-format
 msgid "Gigabytes"
 msgstr "ගිගා බයිට්"
 
-#: ksysguardprocesslist.cpp:834
+#: ksysguardprocesslist.cpp:835
 #, kde-format
 msgid "Percentage"
 msgstr "ප්‍රථිශතය"
 
-#: ksysguardprocesslist.cpp:863
+#: ksysguardprocesslist.cpp:864
 #, kde-format
 msgid "Display command line options"
 msgstr "විධාන රේඛීය අභිප්‍රේත පෙන්වන්න"
 
-#: ksysguardprocesslist.cpp:870
+#: ksysguardprocesslist.cpp:871
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
 msgstr "CPU ගණනෙන් CPU භාවිතාව බෙදන්න"
 
-#: ksysguardprocesslist.cpp:877
+#: ksysguardprocesslist.cpp:878
 #, kde-format
 msgid "Displayed Information"
 msgstr "පෙන්වූ තොරතුරු"
 
-#: ksysguardprocesslist.cpp:880
+#: ksysguardprocesslist.cpp:881
 #, kde-format
 msgid "Characters read/written"
 msgstr "අක්‍ෂර කියවූ/ලියූ"
 
-#: ksysguardprocesslist.cpp:885
+#: ksysguardprocesslist.cpp:886
 #, kde-format
 msgid "Number of Read/Write operations"
 msgstr "කියවීම්/ලිවීම් මෙහෙයුම් ගණන"
 
-#: ksysguardprocesslist.cpp:890
+#: ksysguardprocesslist.cpp:891
 #, kde-format
 msgid "Bytes actually read/written"
 msgstr "ඇත්තෙන්ම කියවූ/ලියූ බයිට ගණන"
 
-#: ksysguardprocesslist.cpp:896
+#: ksysguardprocesslist.cpp:897
 #, kde-format
 msgid "Show I/O rate"
 msgstr "I/O  අගය පෙන්වන්න"
 
-#: ksysguardprocesslist.cpp:923
+#: ksysguardprocesslist.cpp:924
 #, kde-format
 msgid "Show Tooltips"
 msgstr "මෙවලම් ඉඟි පෙන්වන්න"
 
-#: ksysguardprocesslist.cpp:1177
+#: ksysguardprocesslist.cpp:1178
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -254,12 +254,12 @@ msgid ""
 msgstr ""
 "ඔබට සැකසුම වසාදැමීමේ  බලතල නොමැති අතර , එය රූට් ලෙස ක්‍රියාකිරීමේ දෝශයක්. දෝශය %1 %2"
 
-#: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
 #, kde-format
 msgid "You must select a process first."
 msgstr "ඔබ මුලින්ම සැකසුමක් තෝරාගත යුතුයි."
 
-#: ksysguardprocesslist.cpp:1328
+#: ksysguardprocesslist.cpp:1329
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the I/O priority of the process "
@@ -271,7 +271,7 @@ msgstr ""
 "සැකසුමේ IO ප්‍රමුඛතාව  වෙනස් කිරීමට ඔබට බලතල නොමැති අතර , එය රූට් ලෙස ක්‍රියාකිරීමේ දෝශයක්. "
 "දෝශය %1 %2"
 
-#: ksysguardprocesslist.cpp:1344
+#: ksysguardprocesslist.cpp:1345
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to change the CPU Scheduler for the "
@@ -283,7 +283,7 @@ msgstr ""
 "සැකසුම සඳහා CPU කාර්යය සටහන් වෙනස් කිරීමට ඔබට බලතල නොමැති අතර , එය රූට් ලෙස ක්‍රියාකිරීමේ "
 "දෝශයක්. දෝශය %1 %2"
 
-#: ksysguardprocesslist.cpp:1359
+#: ksysguardprocesslist.cpp:1360
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -294,7 +294,7 @@ msgid ""
 msgstr ""
 "ඔබට සැකසුම වසාදැමීමේ  බලතල නොමැති අතර , එය රූට් ලෙස ක්‍රියාකිරීමේ දෝශයක්. දෝශය %1 %2"
 
-#: ksysguardprocesslist.cpp:1396
+#: ksysguardprocesslist.cpp:1397
 #, fuzzy, kde-format
 #| msgid "Are you sure you want to kill this process?"
 #| msgid_plural "Are you sure you want to kill these %1 processes?"
@@ -306,7 +306,7 @@ msgid_plural ""
 msgstr[0] "ඔබට මෙම සැකසුම වැසීමට ඇවැසි බව චිශ්වාසද?"
 msgstr[1] "ඔබට %1 සැකසුම් වසාදැමීමට ඇවැසි බව විශ්වාසද?"
 
-#: ksysguardprocesslist.cpp:1399
+#: ksysguardprocesslist.cpp:1400
 #, fuzzy, kde-format
 #| msgid "Own Processes"
 msgctxt "Dialog title"
@@ -315,12 +315,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "අයත් සැකසුම්"
 msgstr[1] "අයත් සැකසුම්"
 
-#: ksysguardprocesslist.cpp:1401
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgid "End"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1403
+#: ksysguardprocesslist.cpp:1404
 #, fuzzy, kde-format
 #| msgid "Are you sure you want to kill this process?"
 #| msgid_plural "Are you sure you want to kill these %1 processes?"
@@ -333,7 +333,7 @@ msgid_plural ""
 msgstr[0] "ඔබට මෙම සැකසුම වැසීමට ඇවැසි බව චිශ්වාසද?"
 msgstr[1] "ඔබට %1 සැකසුම් වසාදැමීමට ඇවැසි බව විශ්වාසද?"
 
-#: ksysguardprocesslist.cpp:1406
+#: ksysguardprocesslist.cpp:1407
 #, fuzzy, kde-format
 #| msgid "Kill Process"
 #| msgid_plural "Kill Processes"
@@ -343,7 +343,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "සකසනය අවසන් කරන්න"
 msgstr[1] "සකසන අවසන් කරන්න"
 
-#: ksysguardprocesslist.cpp:1408
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgid "Kill"
 msgstr "වසන්න"
