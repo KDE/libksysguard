@@ -44,7 +44,7 @@ struct Compare {
             collator->setCaseSensitivity(Qt::CaseInsensitive);
         }
 
-        return collator->compare(first, second) == -1;
+        return collator->compare(first, second) < 0;
     }
 
     // This uses thread-local storage because QCollator may not be thread safe.
