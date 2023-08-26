@@ -37,11 +37,11 @@
 
 struct WindowInfo {
     WindowInfo(WId _wid, qlonglong _pid)
-         : wid(_wid)
+        : wid(_wid)
+        , pid(_pid)
     {
-        pid = 0;
-        pid = _pid;
     }
+
     qlonglong pid;
     QPixmap icon;
     WId wid;
