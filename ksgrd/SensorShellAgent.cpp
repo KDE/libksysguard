@@ -52,8 +52,9 @@ bool SensorShellAgent::start(const QString &host, const QString &shell, const QS
 
     if (!command.isEmpty()) {
         *mDaemon << KShell::splitArgs(command);
-    } else
+    } else {
         *mDaemon << mShell << hostName() << QStringLiteral("ksysguardd");
+    }
     mDaemon->start();
 
     return true;
@@ -117,9 +118,11 @@ void SensorShellAgent::daemonError(QProcess::ProcessError errorStatus)
     setReasonForOffline(error);
     qCDebug(LIBKSYSGUARD_KSGRD) << "Error received " << error << "(" << errorStatus << ")";
     setDaemonOnLine(false);
-    if (sensorManager())
+    if (sensorManager()) {
         sensorManager()->disengage(this); // delete ourselves
+    }
 }
+
 bool SensorShellAgent::writeMsg(const char *msg, int len)
 {
     // write returns -1 on error, in which case we should return false.  true otherwise.

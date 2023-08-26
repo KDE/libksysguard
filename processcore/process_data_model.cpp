@@ -345,8 +345,9 @@ void ProcessDataModel::Private::endRemoveRow()
 
 void ProcessDataModel::Private::beginMoveProcess(KSysGuard::Process *process, KSysGuard::Process *new_parent)
 {
-    if (m_flatList)
+    if (m_flatList) {
         return; // We don't need to move processes when in simple mode
+    }
 
     int current_row = process->parent()->children().indexOf(process);
     Q_ASSERT(current_row != -1);
@@ -358,8 +359,9 @@ void ProcessDataModel::Private::beginMoveProcess(KSysGuard::Process *process, KS
 
 void ProcessDataModel::Private::endMoveProcess()
 {
-    if (m_flatList)
+    if (m_flatList) {
         return; // We don't need to move processes when in simple mode
+    }
 
     q->endMoveRows();
 }
@@ -377,9 +379,10 @@ void ProcessDataModel::Private::update()
 QModelIndex ProcessDataModel::Private::getQModelIndex(KSysGuard::Process *process, int column) const
 {
     Q_ASSERT(process);
-    if (process->pid() == -1)
+    if (process->pid() == -1) {
         return QModelIndex(); // pid -1 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means
                               // the top element
+    }
 
     int row;
 

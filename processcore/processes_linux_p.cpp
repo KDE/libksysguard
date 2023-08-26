@@ -135,14 +135,17 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
         switch (mBuffer[0]) {
         case 'N':
             if ((unsigned int)size > sizeof("Name:") && qstrncmp(mBuffer, "Name:", sizeof("Name:") - 1) == 0) {
-                if (process->command().isEmpty())
+                if (process->command().isEmpty()) {
                     process->setName(QString::fromLocal8Bit(mBuffer + sizeof("Name:") - 1, size - sizeof("Name:") + 1).trimmed());
-                if (++found == 6)
+                }
+                if (++found == 6) {
                     goto finish;
+                }
             } else if ((unsigned int)size > sizeof("NoNewPrivs:") && qstrncmp(mBuffer, "NoNewPrivs:", sizeof("NoNewPrivs:") - 1) == 0) {
                 process->setNoNewPrivileges(atol(mBuffer + sizeof("NoNewPrivs:") - 1));
-                if (++found == 6)
+                if (++found == 6) {
                     goto finish;
+                }
             }
             break;
         case 'U':
@@ -156,8 +159,9 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setEuid(euid);
                 process->setSuid(suid);
                 process->setFsuid(fsuid);
-                if (++found == 6)
+                if (++found == 6) {
                     goto finish;
+                }
             }
             break;
         case 'G':
@@ -168,21 +172,25 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setEgid(egid);
                 process->setSgid(sgid);
                 process->setFsgid(fsgid);
-                if (++found == 6)
+                if (++found == 6) {
                     goto finish;
+                }
             }
             break;
         case 'T':
             if ((unsigned int)size > sizeof("TracerPid:") && qstrncmp(mBuffer, "TracerPid:", sizeof("TracerPid:") - 1) == 0) {
                 process->setTracerpid(atol(mBuffer + sizeof("TracerPid:") - 1));
-                if (process->tracerpid() == 0)
+                if (process->tracerpid() == 0) {
                     process->setTracerpid(-1);
-                if (++found == 6)
+                }
+                if (++found == 6) {
                     goto finish;
+                }
             } else if ((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:") - 1) == 0) {
                 process->setNumThreads(atol(mBuffer + sizeof("Threads:") - 1));
-                if (++found == 6)
+                if (++found == 6) {
                     goto finish;
+                }
             }
             break;
         default:
@@ -198,8 +206,9 @@ finish:
 bool ProcessesLocal::Private::readProcCGroup(const QString &dir, Process *process)
 {
     mFile.setFileName(dir + QStringLiteral("cgroup"));
-    if (!mFile.open(QIODevice::ReadOnly))
+    if (!mFile.open(QIODevice::ReadOnly)) {
         return false; /* process has terminated in the meantime */
+    }
 
     while (mFile.readLine(mBuffer, sizeof(mBuffer)) > 0) { //-1 indicates an error
         if (mBuffer[0] == '0' && mBuffer[1] == ':' && mBuffer[2] == ':') {
@@ -214,8 +223,9 @@ bool ProcessesLocal::Private::readProcCGroup(const QString &dir, Process *proces
 bool ProcessesLocal::Private::readProcAttr(const QString &dir, Process *process)
 {
     mFile.setFileName(dir + QStringLiteral("attr/current"));
-    if (!mFile.open(QIODevice::ReadOnly))
+    if (!mFile.open(QIODevice::ReadOnly)) {
         return false; /* process has terminated in the meantime */
+    }
 
     if (mFile.readLine(mBuffer, sizeof(mBuffer)) > 0) { //-1 indicates an error
         process->setMACContext(QString::fromLocal8Bit(mBuffer).trimmed());
@@ -226,11 +236,13 @@ bool ProcessesLocal::Private::readProcAttr(const QString &dir, Process *process)
 
 long ProcessesLocal::getParentPid(long pid)
 {
-    if (pid <= 0)
+    if (pid <= 0) {
         return -1;
+    }
     d->mFile.setFileName(QStringLiteral("/proc/") + QString::number(pid) + QStringLiteral("/stat"));
-    if (!d->mFile.open(QIODevice::ReadOnly))
+    if (!d->mFile.open(QIODevice::ReadOnly)) {
         return -1; /* process has terminated in the meantime */
+    }
 
     int size; // amount of data read in
     if ((size = d->mFile.readLine(d->mBuffer, sizeof(d->mBuffer))) <= 0) { //-1 indicates nothing read
@@ -243,23 +255,26 @@ long ProcessesLocal::getParentPid(long pid)
     // The command name is the second parameter, and this ends with a closing bracket.  So find the last
     // closing bracket and start from there
     word = strrchr(word, ')');
-    if (!word)
+    if (!word) {
         return -1;
+    }
     word++; // Nove to the space after the last ")"
     int current_word = 1;
 
     while (true) {
         if (word[0] == ' ') {
-            if (++current_word == 3)
+            if (++current_word == 3) {
                 break;
+            }
         } else if (word[0] == 0) {
             return -1; // end of data - serious problem
         }
         word++;
     }
     long ppid = atol(++word);
-    if (ppid == 0)
+    if (ppid == 0) {
         return -1;
+    }
     return ppid;
 }
 
@@ -269,8 +284,9 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
     // As an optimization, if the last file read in was stat, then we already have this info in memory
     if (mFile.fileName() != filename) {
         mFile.setFileName(filename);
-        if (!mFile.open(QIODevice::ReadOnly))
+        if (!mFile.open(QIODevice::ReadOnly)) {
             return false; /* process has terminated in the meantime */
+        }
         if (mFile.readLine(mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
             mFile.close();
             return false;
@@ -282,8 +298,9 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
     // The command name is the second parameter, and this ends with a closing bracket.  So find the last
     // closing bracket and start from there
     word = strrchr(word, ')');
-    if (!word)
+    if (!word) {
         return false;
+    }
     word++; // Nove to the space after the last ")"
     int current_word = 1; // We've skipped the process ID and now at the end of the command name
     char status = '\0';
@@ -310,10 +327,11 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
                     ps->setTty(QByteArray("tty"));
                     break;
                 case 4:
-                    if (minor < 64)
+                    if (minor < 64) {
                         ps->setTty(QByteArray("tty") + QByteArray::number(minor));
-                    else
+                    } else {
                         ps->setTty(QByteArray("ttyS") + QByteArray::number(minor - 64));
+                    }
                     break;
                 default:
                     ps->setTty(QByteArray());
@@ -386,8 +404,9 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
 {
 #ifdef _SC_PAGESIZE
     mFile.setFileName(dir + QStringLiteral("statm"));
-    if (!mFile.open(QIODevice::ReadOnly))
+    if (!mFile.open(QIODevice::ReadOnly)) {
         return false; /* process has terminated in the meantime */
+    }
 
     if (mFile.readLine(mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
         mFile.close();
@@ -400,8 +419,10 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
 
     while (true) {
         if (word[0] == ' ') {
-            if (++current_word == 2) // number of pages that are shared
+            if (++current_word == 2) {
+                // number of pages that are shared
                 break;
+            }
         } else if (word[0] == 0) {
             return false; // end of data - serious problem
         }
@@ -419,11 +440,13 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
 
 bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *process)
 {
-    if (!process->command().isNull())
+    if (!process->command().isNull()) {
         return true; // only parse the cmdline once.  This function takes up 25% of the CPU time :-/
+    }
     mFile.setFileName(dir + QStringLiteral("cmdline"));
-    if (!mFile.open(QIODevice::ReadOnly))
+    if (!mFile.open(QIODevice::ReadOnly)) {
         return false; /* process has terminated in the meantime */
+    }
 
     QTextStream in(&mFile);
     process->setCommand(in.readAll());
@@ -433,13 +456,15 @@ bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *proce
         // extract non-truncated name from cmdline
         int zeroIndex = process->command().indexOf(QLatin1Char('\0'));
         int processNameStart = process->command().lastIndexOf(QLatin1Char('/'), zeroIndex);
-        if (processNameStart == -1)
+        if (processNameStart == -1) {
             processNameStart = 0;
-        else
+        } else {
             processNameStart++;
+        }
         QString nameFromCmdLine = process->command().mid(processNameStart, zeroIndex - processNameStart);
-        if (nameFromCmdLine.startsWith(process->name()))
+        if (nameFromCmdLine.startsWith(process->name())) {
             process->setName(nameFromCmdLine);
+        }
 
         process->command().replace(QLatin1Char('\0'), QLatin1Char(' '));
     }
@@ -476,10 +501,11 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process)
     }
     if (sched == SCHED_FIFO || sched == SCHED_RR) {
         struct sched_param param;
-        if (sched_getparam(pid, &param) == 0)
+        if (sched_getparam(pid, &param) == 0) {
             process->setNiceLevel(param.sched_priority);
-        else
+        } else {
             process->setNiceLevel(0); // Error getting scheduler parameters.
+        }
     }
 
 #ifdef HAVE_IONICE
@@ -502,8 +528,9 @@ bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *proce
     QString filename = dir + QStringLiteral("io");
     // As an optimization, if the last file read in was io, then we already have this info in memory
     mFile.setFileName(filename);
-    if (!mFile.open(QIODevice::ReadOnly))
+    if (!mFile.open(QIODevice::ReadOnly)) {
         return false; /* process has terminated in the meantime */
+    }
     if (mFile.read(mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
         mFile.close();
         return false;
@@ -557,22 +584,30 @@ bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
         QThreadPool::globalInstance()->start(runnable);
     }
 
-    if (!d->readProcStat(dir, process))
+    if (!d->readProcStat(dir, process)) {
         success = false;
-    if (!d->readProcStatus(dir, process))
+    }
+    if (!d->readProcStatus(dir, process)) {
         success = false;
-    if (!d->readProcStatm(dir, process))
+    }
+    if (!d->readProcStatm(dir, process)) {
         success = false;
-    if (!d->readProcCmdline(dir, process))
+    }
+    if (!d->readProcCmdline(dir, process)) {
         success = false;
-    if (!d->readProcCGroup(dir, process))
+    }
+    if (!d->readProcCGroup(dir, process)) {
         success = false;
-    if (!d->readProcAttr(dir, process))
+    }
+    if (!d->readProcAttr(dir, process)) {
         success = false;
-    if (!d->getNiceness(pid, process))
+    }
+    if (!d->getNiceness(pid, process)) {
         success = false;
-    if (mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(dir, process))
+    }
+    if (mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(dir, process)) {
         success = false;
+    }
 
     return success;
 }
@@ -580,13 +615,16 @@ bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
 QSet<long> ProcessesLocal::getAllPids()
 {
     QSet<long> pids;
-    if (d->mProcDir == nullptr)
+    if (d->mProcDir == nullptr) {
         return pids; // There's not much we can do without /proc
+    }
     struct dirent *entry;
     rewinddir(d->mProcDir);
-    while ((entry = readdir(d->mProcDir)))
-        if (entry->d_name[0] >= '0' && entry->d_name[0] <= '9')
+    while ((entry = readdir(d->mProcDir))) {
+        if (entry->d_name[0] >= '0' && entry->d_name[0] <= '9') {
             pids.insert(atol(entry->d_name));
+        }
+    }
     return pids;
 }
 
@@ -650,8 +688,9 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
 Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     errno = 0;
-    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch || priorityClass == KSysGuard::Process::SchedulerIdle)
+    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch || priorityClass == KSysGuard::Process::SchedulerIdle) {
         priority = 0;
+    }
     if (pid <= 0) {
         return Processes::InvalidPid;
     }
@@ -756,8 +795,9 @@ long long ProcessesLocal::totalPhysicalMemory()
     // This is backup code in case this is not defined.  It should never fail on a linux system.
 
     d->mFile.setFileName("/proc/meminfo");
-    if (!d->mFile.open(QIODevice::ReadOnly))
+    if (!d->mFile.open(QIODevice::ReadOnly)) {
         return 0;
+    }
 
     int size;
     while ((size = d->mFile.readLine(d->mBuffer, sizeof(d->mBuffer))) > 0) { //-1 indicates an error

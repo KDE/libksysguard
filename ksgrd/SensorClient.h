@@ -137,29 +137,33 @@ public:
 
     QString name()
     {
-        if (count() > 0)
+        if (count() > 0) {
             return QString::fromUtf8((*this)[0]);
+        }
         return QString();
     }
 
     long long min()
     {
-        if (count() > 1)
+        if (count() > 1) {
             return (*this)[1].toLongLong();
+        }
         return -1;
     }
 
     long long max()
     {
-        if (count() > 2)
+        if (count() > 2) {
             return (*this)[2].toLongLong();
+        }
         return -1;
     }
 
     QString unit()
     {
-        if (count() > 3)
+        if (count() > 3) {
             return QString::fromUtf8((*this)[3]);
+        }
         return QString();
     }
 };
@@ -183,29 +187,33 @@ public:
 
     QString name()
     {
-        if (count() > 0)
+        if (count() > 0) {
             return QString::fromUtf8((*this)[0]);
+        }
         return QString();
     }
 
     double min()
     {
-        if (count() > 1)
+        if (count() > 1) {
             return (*this)[1].toDouble();
+        }
         return -1;
     }
 
     double max()
     {
-        if (count() > 2)
+        if (count() > 2) {
             return (*this)[2].toDouble();
+        }
         return -1;
     }
 
     QString unit()
     {
-        if (count() > 3)
+        if (count() > 3) {
             return QString::fromUtf8((*this)[3]);
+        }
         return QString();
     }
 };

@@ -20,8 +20,10 @@ KSysGuardProcessListHelper::KSysGuardProcessListHelper()
 /* The functions here run as ROOT.  So be careful.  DO NOT TRUST THE INPUTS TO BE SANE. */
 #define GET_PID(i)                                                                                                                                             \
     parameters.value(QStringLiteral("pid%1").arg(i), -1).toULongLong();                                                                                        \
-    if (pid < 0)                                                                                                                                               \
-        return ActionReply(ActionReply::HelperErrorType);
+    if (pid < 0) {                                                                                                                                             \
+        return ActionReply(ActionReply::HelperErrorType);                                                                                                      \
+    }
+
 ActionReply KSysGuardProcessListHelper::sendsignal(const QVariantMap &parameters)
 {
     ActionReply reply(ActionReply::HelperErrorType);
@@ -60,8 +62,9 @@ ActionReply KSysGuardProcessListHelper::sendsignal(const QVariantMap &parameters
 
 ActionReply KSysGuardProcessListHelper::renice(const QVariantMap &parameters)
 {
-    if (!parameters.contains(QLatin1String("nicevalue")) || !parameters.contains(QLatin1String("pidcount")))
+    if (!parameters.contains(QLatin1String("nicevalue")) || !parameters.contains(QLatin1String("pidcount"))) {
         return ActionReply(ActionReply::HelperErrorType);
+    }
 
     KSysGuard::ProcessesLocal processes;
     int niceValue = qvariant_cast<int>(parameters.value(QStringLiteral("nicevalue")));
@@ -71,17 +74,19 @@ ActionReply KSysGuardProcessListHelper::renice(const QVariantMap &parameters)
         qlonglong pid = GET_PID(i);
         success &= (processes.setNiceness(pid, niceValue) != KSysGuard::Processes::NoError);
     }
-    if (success)
+    if (success) {
         return ActionReply::SuccessReply();
-    else
+    } else {
         return ActionReply(ActionReply::HelperErrorType);
+    }
 }
 
 ActionReply KSysGuardProcessListHelper::changeioscheduler(const QVariantMap &parameters)
 {
     if (!parameters.contains(QLatin1String("ioScheduler")) || !parameters.contains(QLatin1String("ioSchedulerPriority"))
-        || !parameters.contains(QLatin1String("pidcount")))
+        || !parameters.contains(QLatin1String("pidcount"))) {
         return ActionReply(ActionReply::HelperErrorType);
+    }
 
     KSysGuard::ProcessesLocal processes;
     int ioScheduler = qvariant_cast<int>(parameters.value(QStringLiteral("ioScheduler")));
@@ -92,16 +97,19 @@ ActionReply KSysGuardProcessListHelper::changeioscheduler(const QVariantMap &par
         qlonglong pid = GET_PID(i);
         success &= (processes.setIoNiceness(pid, ioScheduler, ioSchedulerPriority) != KSysGuard::Processes::NoError);
     }
-    if (success)
+    if (success) {
         return ActionReply::SuccessReply();
-    else
+    } else {
         return ActionReply(ActionReply::HelperErrorType);
+    }
 }
+
 ActionReply KSysGuardProcessListHelper::changecpuscheduler(const QVariantMap &parameters)
 {
     if (!parameters.contains(QLatin1String("cpuScheduler")) || !parameters.contains(QLatin1String("cpuSchedulerPriority"))
-        || !parameters.contains(QLatin1String("pidcount")))
+        || !parameters.contains(QLatin1String("pidcount"))) {
         return ActionReply(ActionReply::HelperErrorType);
+    }
 
     KSysGuard::ProcessesLocal processes;
     int cpuScheduler = qvariant_cast<int>(parameters.value(QStringLiteral("cpuScheduler")));
@@ -113,9 +121,11 @@ ActionReply KSysGuardProcessListHelper::changecpuscheduler(const QVariantMap &pa
         qlonglong pid = GET_PID(i);
         success &= (processes.setScheduler(pid, cpuScheduler, cpuSchedulerPriority) != KSysGuard::Processes::NoError);
     }
-    if (success)
+    if (success) {
         return ActionReply::SuccessReply();
-    else
+    } else {
         return ActionReply(ActionReply::HelperErrorType);
+    }
 }
+
 KAUTH_HELPER_MAIN("org.kde.ksysguard.processlisthelper", KSysGuardProcessListHelper)

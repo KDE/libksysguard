@@ -56,8 +56,9 @@ void Accumulator::loop()
         auto packet = m_capture->nextPacket();
 
         auto result = m_mapping->pidForPacket(packet);
-        if (result.pid == 0)
+        if (result.pid == 0) {
             continue;
+        }
 
         addData(result.direction, packet, result.pid);
     }

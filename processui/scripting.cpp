@@ -51,12 +51,14 @@ public:
     void interceptRequest(QWebEngineUrlRequestInfo &info) override
     {
         // Block non-GET/HEAD requests
-        if (!QStringList({QStringLiteral("GET"), QStringLiteral("HEAD")}).contains(QString::fromLatin1(info.requestMethod())))
+        if (!QStringList({QStringLiteral("GET"), QStringLiteral("HEAD")}).contains(QString::fromLatin1(info.requestMethod()))) {
             info.block(true);
+        }
 
         // Block remote URLs
-        if (!QStringList({QStringLiteral("blob"), QStringLiteral("data"), QStringLiteral("file")}).contains(info.requestUrl().scheme()))
+        if (!QStringList({QStringLiteral("blob"), QStringLiteral("data"), QStringLiteral("file")}).contains(info.requestUrl().scheme())) {
             info.block(true);
+        }
     }
 };
 #endif
@@ -104,11 +106,13 @@ bool ProcessObject::fileExists(const QString &filename)
     QFileInfo fileInfo(filename);
     return fileInfo.exists();
 }
+
 QString ProcessObject::readFile(const QString &filename)
 {
     QFile file(filename);
-    if (!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly)) {
         return QString();
+    }
     QTextStream stream(&file);
     QString contents = stream.readAll();
     file.close();
@@ -122,6 +126,7 @@ Scripting::Scripting(KSysGuardProcessList *parent)
     mScriptingHtmlDialog = nullptr;
     loadContextMenu();
 }
+
 void Scripting::runScript(const QString &path, const QString &name)
 {
     // Record the script name and path for use in the script helper functions
@@ -276,8 +281,9 @@ void Scripting::setupJavascriptObjects()
 #endif
 void Scripting::stopAllScripts()
 {
-    if (mScriptingHtmlDialog)
+    if (mScriptingHtmlDialog) {
         mScriptingHtmlDialog->deleteLater();
+    }
     mScriptingHtmlDialog = nullptr;
     mProcessObject = nullptr;
     mScriptPath.clear();
@@ -322,8 +328,9 @@ void Scripting::runScriptSlot()
     QString path = action->property("scriptPath").toString();
 
     QList<KSysGuard::Process *> selectedProcesses = mProcessList->selectedProcesses();
-    if (selectedProcesses.isEmpty())
+    if (selectedProcesses.isEmpty()) {
         return;
+    }
     mPid = selectedProcesses[0]->pid();
 
     runScript(path, action->text());

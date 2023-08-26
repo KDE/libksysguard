@@ -102,12 +102,15 @@ bool ProcessesRemote::updateProcessInfo(long pid, Process *process)
     }
     QList<QByteArray> p = d->processByPid[pid];
 
-    if (d->nameColumn != -1)
+    if (d->nameColumn != -1) {
         process->setName(QString::fromUtf8(p.at(d->nameColumn)));
-    if (d->uidColumn != -1)
+    }
+    if (d->uidColumn != -1) {
         process->setUid(p.at(d->uidColumn).toLong());
-    if (d->gidColumn != -1)
+    }
+    if (d->gidColumn != -1) {
         process->setGid(p.at(d->gidColumn).toLong());
+    }
     if (d->statusColumn != -1) {
         switch (p.at(d->statusColumn)[0]) {
         case 's':
@@ -118,38 +121,54 @@ bool ProcessesRemote::updateProcessInfo(long pid, Process *process)
             break;
         }
     }
-    if (d->userColumn != -1)
+    if (d->userColumn != -1) {
         process->setUserTime(p.at(d->userColumn).toLong());
-    if (d->systemColumn != -1)
+    }
+    if (d->systemColumn != -1) {
         process->setSysTime(p.at(d->systemColumn).toLong());
-    if (d->niceColumn != -1)
+    }
+    if (d->niceColumn != -1) {
         process->setNiceLevel(p.at(d->niceColumn).toLong());
-    if (d->vmSizeColumn != -1)
+    }
+    if (d->vmSizeColumn != -1) {
         process->setVmSize(p.at(d->vmSizeColumn).toLong());
-    if (d->vmRSSColumn != -1)
+    }
+    if (d->vmRSSColumn != -1) {
         process->setVmRSS(p.at(d->vmRSSColumn).toLong());
-    if (d->vmURSSColumn != -1)
+    }
+    if (d->vmURSSColumn != -1) {
         process->setVmURSS(p.at(d->vmURSSColumn).toLong());
-    if (d->loginColumn != -1)
+    }
+    if (d->loginColumn != -1) {
         process->setLogin(QString::fromUtf8(p.at(d->loginColumn).data()));
-    if (d->commandColumn != -1)
+    }
+    if (d->commandColumn != -1) {
         process->setCommand(QString::fromUtf8(p.at(d->commandColumn).data()));
-    if (d->tracerPidColumn != -1)
+    }
+    if (d->tracerPidColumn != -1) {
         process->setTracerpid(p.at(d->tracerPidColumn).toLong());
-    if (d->vmURSSColumn != -1)
+    }
+    if (d->vmURSSColumn != -1) {
         process->setVmURSS(p.at(d->vmURSSColumn).toLong());
-    if (d->ttyColumn != -1)
+    }
+    if (d->ttyColumn != -1) {
         process->setTty(p.at(d->ttyColumn));
-    if (d->ioprioColumn != -1)
+    }
+    if (d->ioprioColumn != -1) {
         process->setIoniceLevel(p.at(d->ioprioColumn).toInt());
-    if (d->ioprioClassColumn != -1)
+    }
+    if (d->ioprioClassColumn != -1) {
         process->setIoPriorityClass((KSysGuard::Process::IoPriorityClass)(p.at(d->ioprioClassColumn).toInt()));
-    if (d->noNewPrivilegesColumn != -1)
+    }
+    if (d->noNewPrivilegesColumn != -1) {
         process->setNoNewPrivileges(p.at(d->noNewPrivilegesColumn).toLong());
-    if (d->cGroupColumn != -1)
+    }
+    if (d->cGroupColumn != -1) {
         process->setCGroup(QString::fromUtf8(p.at(d->cGroupColumn)));
-    if (d->macContextColumn != -1)
+    }
+    if (d->macContextColumn != -1) {
         process->setMACContext(QString::fromUtf8(p.at(d->macContextColumn)));
+    }
 
     return true;
 }
@@ -157,8 +176,9 @@ bool ProcessesRemote::updateProcessInfo(long pid, Process *process)
 void ProcessesRemote::updateAllProcesses(Processes::UpdateFlags updateFlags)
 {
     d->updateFlags = updateFlags;
-    if (!d->havePsInfo)
+    if (!d->havePsInfo) {
         Q_EMIT runCommand(QStringLiteral("ps?"), (int)PsInfo);
+    }
     Q_EMIT runCommand(QStringLiteral("ps"), (int)Ps);
 }
 QSet<long> ProcessesRemote::getAllPids()
@@ -224,71 +244,76 @@ void ProcessesRemote::answerReceived(int id, const QList<QByteArray> &answer)
 {
     switch (id) {
     case PsInfo: {
-        if (answer.isEmpty())
+        if (answer.isEmpty()) {
             return; // Invalid data
+        }
         QList<QByteArray> info = answer.at(0).split('\t');
         d->numColumns = info.size();
         for (int i = 0; i < d->numColumns; i++) {
-            if (info[i] == "Name")
+            if (info[i] == "Name") {
                 d->nameColumn = i;
-            else if (info[i] == "PID")
+            } else if (info[i] == "PID") {
                 d->pidColumn = i;
-            else if (info[i] == "PPID")
+            } else if (info[i] == "PPID") {
                 d->ppidColumn = i;
-            else if (info[i] == "UID")
+            } else if (info[i] == "UID") {
                 d->uidColumn = i;
-            else if (info[i] == "GID")
+            } else if (info[i] == "GID") {
                 d->gidColumn = i;
-            else if (info[i] == "TracerPID")
+            } else if (info[i] == "TracerPID") {
                 d->tracerPidColumn = i;
-            else if (info[i] == "Status")
+            } else if (info[i] == "Status") {
                 d->statusColumn = i;
-            else if (info[i] == "User Time")
+            } else if (info[i] == "User Time") {
                 d->userColumn = i;
-            else if (info[i] == "System Time")
+            } else if (info[i] == "System Time") {
                 d->systemColumn = i;
-            else if (info[i] == "Nice")
+            } else if (info[i] == "Nice") {
                 d->niceColumn = i;
-            else if (info[i] == "VmSize")
+            } else if (info[i] == "VmSize") {
                 d->vmSizeColumn = i;
-            else if (info[i] == "VmRss")
+            } else if (info[i] == "VmRss") {
                 d->vmRSSColumn = i;
-            else if (info[i] == "VmURss")
+            } else if (info[i] == "VmURss") {
                 d->vmURSSColumn = i;
-            else if (info[i] == "Login")
+            } else if (info[i] == "Login") {
                 d->loginColumn = i;
-            else if (info[i] == "TTY")
+            } else if (info[i] == "TTY") {
                 d->ttyColumn = i;
-            else if (info[i] == "Command")
+            } else if (info[i] == "Command") {
                 d->commandColumn = i;
-            else if (info[i] == "IO Priority Class")
+            } else if (info[i] == "IO Priority Class") {
                 d->ioprioClassColumn = i;
-            else if (info[i] == "IO Priority")
+            } else if (info[i] == "IO Priority") {
                 d->ioprioColumn = i;
-            else if (info[i] == "NNP")
+            } else if (info[i] == "NNP") {
                 d->noNewPrivilegesColumn = i;
-            else if (info[i] == "CGroup")
+            } else if (info[i] == "CGroup") {
                 d->cGroupColumn = i;
-            else if (info[i] == "MAC Context")
+            } else if (info[i] == "MAC Context") {
                 d->macContextColumn = i;
+            }
         }
         d->havePsInfo = true;
         break;
     }
     case Ps:
         d->lastAnswer = answer;
-        if (!d->havePsInfo)
+        if (!d->havePsInfo) {
             return; // Not setup yet.  Should never happen
+        }
         Q_EMIT processesUpdated();
         break;
     case FreeMemory:
-        if (answer.isEmpty())
+        if (answer.isEmpty()) {
             return; // Invalid data
+        }
         d->freeMemory = answer[0].toLong();
         break;
     case UsedMemory:
-        if (answer.isEmpty())
+        if (answer.isEmpty()) {
             return; // Invalid data
+        }
         d->usedMemory = answer[0].toLong();
         break;
     }

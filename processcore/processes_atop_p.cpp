@@ -110,8 +110,9 @@ bool ProcessesATop::Private::loadHistoryFile(const QString &filename)
         offset += sizeof(RawRecord) + rr.scomplen + rr.pcomplen;
         atopLog.seek(offset);
     }
-    if (currentlySelectedIndex >= historyOffsets.size())
+    if (currentlySelectedIndex >= historyOffsets.size()) {
         currentlySelectedIndex = historyOffsets.size() - 1;
+    }
 
     ready = true;
     return true;
@@ -183,8 +184,9 @@ bool ProcessesATop::Private::loadDataForHistory(int index)
 ProcessesATop::ProcessesATop(bool loadDefaultFile)
     : d(new Private())
 {
-    if (loadDefaultFile)
+    if (loadDefaultFile) {
         loadHistoryFile(QStringLiteral("/var/log/atop.log"));
+    }
 }
 
 bool ProcessesATop::isHistoryAvailable() const
@@ -195,16 +197,18 @@ bool ProcessesATop::isHistoryAvailable() const
 long ProcessesATop::getParentPid(long pid)
 {
     int index = d->pids.indexOf(pid);
-    if (index < 0)
+    if (index < 0) {
         return 0;
+    }
     return d->pstats[index].gen.ppid;
 }
 
 bool ProcessesATop::updateProcessInfo(long pid, Process *process)
 {
     int index = d->pids.indexOf(pid);
-    if (index < 0)
+    if (index < 0) {
         return false;
+    }
     PStat &p = d->pstats[index];
     process->setParentPid(p.gen.ppid);
     process->setUid(p.gen.ruid);
@@ -275,12 +279,14 @@ bool ProcessesATop::updateProcessInfo(long pid, Process *process)
 
     return true;
 }
+
 QDateTime ProcessesATop::viewingTime() const
 {
     if (!d->ready)
         return QDateTime();
     return d->historyTimes.at(d->currentlySelectedIndex).first;
 }
+
 bool ProcessesATop::setViewingTime(const QDateTime &when)
 {
     QPair<QDateTime, uint> tmpWhen(when, 0);
@@ -290,12 +296,14 @@ bool ProcessesATop::setViewingTime(const QDateTime &when)
         // We found the time :)
         d->currentlySelectedIndex = i - d->historyTimes.begin();
         bool success = d->loadDataForHistory(d->currentlySelectedIndex);
-        if (!success)
+        if (!success) {
             qCWarning(LIBKSYSGUARD_PROCESSCORE) << d->lastError;
+        }
         return success;
     }
     return false;
 }
+
 QList<QPair<QDateTime, uint>> ProcessesATop::historiesAvailable() const
 {
     return d->historyTimes;

@@ -46,8 +46,9 @@ bool KLsofWidget::update()
     QStringList args;
     d->process->waitForFinished();
     args << QStringLiteral("-Fftn");
-    if (d->pid > 0)
+    if (d->pid > 0) {
         args << (QStringLiteral("-p") + QString::number(d->pid));
+    }
     d->process->start(QStringLiteral("lsof"), args);
     return true;
 }
@@ -62,10 +63,12 @@ void KLsofWidget::finished(int exitCode, QProcess::ExitStatus exitStatus)
     while (true) {
         qint64 lineLength = d->process->readLine(buf, sizeof(buf));
 
-        if (lineLength <= 0)
+        if (lineLength <= 0) {
             break;
-        if (buf[lineLength - 1] == '\n')
+        }
+        if (buf[lineLength - 1] == '\n') {
             lineLength--;
+        }
 
         switch (buf[0]) {
         /* Process related stuff */
@@ -74,13 +77,15 @@ void KLsofWidget::finished(int exitCode, QProcess::ExitStatus exitStatus)
             process->setText(0, QString::fromUtf8(buf + 1, lineLength - 1));
             break;
         case 't':
-            if (process)
+            if (process) {
                 process->setText(1, QString::fromUtf8(buf + 1, lineLength - 1));
+            }
             break;
 
         case 'n':
-            if (process)
+            if (process) {
                 process->setText(2, QString::fromUtf8(buf + 1, lineLength - 1));
+            }
             break;
         default:
             break;

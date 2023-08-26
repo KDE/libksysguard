@@ -101,14 +101,14 @@ public:
             if (row >= 0 && row < m_data.count()) {
                 const DataItem &dataItem = m_data.at(row);
                 switch (index.column()) {
-                    case Column_Id:
-                        return dataItem.id;
-                    case Column_Type:
-                        return dataItem.type;
-                    case Column_Filename:
-                        return dataItem.filename;
-                    default:
-                        Q_UNREACHABLE();
+                case Column_Id:
+                    return dataItem.id;
+                case Column_Type:
+                    return dataItem.type;
+                case Column_Filename:
+                    return dataItem.filename;
+                default:
+                    Q_UNREACHABLE();
                 }
             }
         }
@@ -120,14 +120,14 @@ public:
     {
         if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
             switch (section) {
-                case Column_Id:
-                    return i18nc("@title:column File ID", "Id");
-                case Column_Type:
-                    return i18nc("@title:column File type", "Type");
-                case Column_Filename:
-                    return i18nc("@title:column", "Filename");
-                default:
-                    Q_UNREACHABLE();
+            case Column_Id:
+                return i18nc("@title:column File ID", "Id");
+            case Column_Type:
+                return i18nc("@title:column File type", "Type");
+            case Column_Filename:
+                return i18nc("@title:column", "Filename");
+            default:
+                Q_UNREACHABLE();
             }
         }
 

@@ -56,8 +56,9 @@ long int KSysGuard::ProcessesLocal::numberProcessorCores()
     mib[1] = HW_NCPU;
     len = sizeof(ncpu);
 
-    if (sysctl(mib, 2, &ncpu, &len, NULL, 0) == -1 || !len)
+    if (sysctl(mib, 2, &ncpu, &len, NULL, 0) == -1 || !len) {
         return 1;
+    }
     return len;
 }
 #endif
@@ -76,11 +77,13 @@ bool ProcessesLocal::Private::readProc(long pid, struct kinfo_proc2 **p, int *nu
     }
     *p = kvm_getproc2(kd, op, arg, sizeof(struct kinfo_proc2), &len);
 
-    if (len < 1)
+    if (len < 1) {
         return false;
+    }
 
-    if (num != NULL)
+    if (num != NULL) {
         *num = len;
+    }
     return true;
 }
 
@@ -153,8 +156,9 @@ bool ProcessesLocal::Private::readProcCmdline(struct kinfo_proc2 *p, Process *pr
 {
     char **argv;
 
-    if ((argv = kvm_getargv2(kd, p, 256)) == NULL)
+    if ((argv = kvm_getargv2(kd, p, 256)) == NULL) {
         return false;
+    }
 
     QString command = QString("");
 
@@ -186,13 +190,15 @@ long ProcessesLocal::getParentPid(long pid)
 bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
 {
     struct kinfo_proc2 *p;
-    if (!d->readProc(pid, &p, NULL))
+    if (!d->readProc(pid, &p, NULL)) {
         return false;
+    }
     d->readProcStat(p, process);
     d->readProcStatus(p, process);
     d->readProcStatm(p, process);
-    if (!d->readProcCmdline(p, process))
+    if (!d->readProcCmdline(p, process)) {
         return false;
+    }
 
     return true;
 }
@@ -211,8 +217,9 @@ QSet<long> ProcessesLocal::getAllPids()
         long long ppid = p[num].p_ppid;
 
         // skip all process with parent id = 0 but init
-        if (ppid <= 0 && pid != 1)
+        if (ppid <= 0 && pid != 1) {
             continue;
+        }
         pids.insert(pid);
     }
     return pids;
@@ -238,10 +245,12 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
 
 Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
-    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
+    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch) {
         priority = 0;
-    if (pid <= 0)
+    }
+    if (pid <= 0) {
         return Processes::InvalidPid; // check the parameters
+    }
     struct sched_param params;
     params.sched_priority = priority;
     bool success;

@@ -55,8 +55,9 @@ bool ProcessesLocal::Private::readProc(long pid, struct kinfo_proc *p)
     mib[3] = pid;
 
     len = sizeof(struct kinfo_proc);
-    if (sysctl(mib, 4, p, &len, NULL, 0) == -1 || !len)
+    if (sysctl(mib, 4, p, &len, NULL, 0) == -1 || !len) {
         return false;
+    }
     return true;
 }
 
@@ -151,8 +152,9 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
     mib[2] = KERN_PROC_ARGS;
     mib[3] = pid;
 
-    if (sysctl(mib, 4, buf, &buflen, NULL, 0) == -1 || !buflen)
+    if (sysctl(mib, 4, buf, &buflen, NULL, 0) == -1 || !buflen) {
         return false;
+    }
     QString command = QString(buf);
 
     // cmdline separates parameters with the NULL character
@@ -187,13 +189,15 @@ long ProcessesLocal::getParentPid(long pid)
 bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
 {
     struct kinfo_proc p;
-    if (!d->readProc(pid, &p))
+    if (!d->readProc(pid, &p)) {
         return false;
+    }
     d->readProcStat(&p, process);
     d->readProcStatus(&p, process);
     d->readProcStatm(&p, process);
-    if (!d->readProcCmdline(pid, process))
+    if (!d->readProcCmdline(pid, process)) {
         return false;
+    }
 
     return true;
 }
@@ -213,7 +217,7 @@ QSet<long> ProcessesLocal::getAllPids()
     p = (kinfo_proc *)malloc(len);
     sysctl(mib, 3, p, &len, NULL, 0);
 
-    for (num = 0; num < len / sizeof(struct kinfo_proc); num++)
+    for (num = 0; num < len / sizeof(struct kinfo_proc); num++) {
 #if defined(__FreeBSD__) && __FreeBSD_version >= 500015
         pids.insert(p[num].ki_pid);
 #elif defined(__DragonFly__) && __DragonFly_version >= 190000
@@ -221,6 +225,7 @@ QSet<long> ProcessesLocal::getAllPids()
 #else
         pids.insert(p[num].kp_proc.p_pid);
 #endif
+    }
     free(p);
     return pids;
 }
@@ -245,10 +250,12 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
 
 Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
-    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
+    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch) {
         priority = 0;
-    if (pid <= 0)
+    }
+    if (pid <= 0) {
         return Processes::InvalidPid; // check the parameters
+    }
     return Processes::NotSupported;
 }
 
@@ -289,8 +296,9 @@ long int KSysGuard::ProcessesLocal::numberProcessorCores()
     mib[1] = HW_NCPU;
     len = sizeof(ncpu);
 
-    if (sysctl(mib, 2, &ncpu, &len, NULL, 0) == -1 || !len)
+    if (sysctl(mib, 2, &ncpu, &len, NULL, 0) == -1 || !len) {
         return 1;
+    }
     return len;
 }
 ProcessesLocal::~ProcessesLocal()

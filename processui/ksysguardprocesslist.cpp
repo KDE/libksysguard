@@ -78,10 +78,11 @@ public:
 
         float percentage = index.data(ProcessModel::PercentageRole).toFloat();
         auto history = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
-        if (percentage >= 0 || history.size() > 1)
+        if (percentage >= 0 || history.size() > 1) {
             drawPercentageDisplay(painter, option, percentage, history);
-        else
+        } else {
             QStyledItemDelegate::paint(painter, option, index);
+        }
     }
 
 private:
@@ -103,8 +104,9 @@ private:
         style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
 
         QPalette::ColorGroup cg = option.state & QStyle::State_Enabled ? QPalette::Normal : QPalette::Disabled;
-        if (cg == QPalette::Normal && !(option.state & QStyle::State_Active))
+        if (cg == QPalette::Normal && !(option.state & QStyle::State_Active)) {
             cg = QPalette::Inactive;
+        }
 
         // Now draw our percentage thingy
         int size = qMin(int(percentage * rect.height()), rect.height());
@@ -194,8 +196,8 @@ struct KSysGuardProcessListPrivate {
         mScripting = nullptr;
         mNeedToExpandInit = false;
         mNumItemsSelected = -1;
-        mResortCountDown =
-            2; // The items added initially will be already sorted, but without CPU info.  On the second refresh we will have CPU usage, so /then/ we can resort
+        // The items added initially will be already sorted, but without CPU info.  On the second refresh we will have CPU usage, so /then/ we can resort
+        mResortCountDown = 2;
         renice = new QAction(i18np("Set Priority...", "Set Priority...", 1), q);
         renice->setShortcut(Qt::Key_F8);
         selectParent = new QAction(i18n("Jump to Parent Process"), q);
@@ -479,24 +481,29 @@ ProcessFilter::State KSysGuardProcessList::state() const
 {
     return d->mFilterModel.filter();
 }
+
 void KSysGuardProcessList::setStateInt(int state)
 {
     setState((ProcessFilter::State)state);
     d->mUi->treeView->scrollTo(d->mUi->treeView->currentIndex());
 }
+
 void KSysGuardProcessList::setState(ProcessFilter::State state)
 { // index is the item the user selected in the combo box
     d->mFilterModel.setFilter(state);
     d->mModel.setSimpleMode((state != ProcessFilter::AllProcessesInTreeForm));
     d->mUi->cmbFilter->setCurrentIndex((int)state);
-    if (isVisible())
+    if (isVisible()) {
         expandInit();
+    }
 }
+
 void KSysGuardProcessList::filterTextChanged(const QString &newText)
 {
     d->mFilterModel.setFilterRegularExpression(newText.trimmed());
-    if (isVisible())
+    if (isVisible()) {
         expandInit();
+    }
     d->mUi->btnKillProcess->setEnabled(d->mUi->treeView->selectionModel()->hasSelection());
     d->mUi->treeView->scrollTo(d->mUi->treeView->currentIndex());
 }
@@ -505,8 +512,9 @@ int KSysGuardProcessList::visibleProcessesCount() const
 {
     // This assumes that all the visible rows are processes.  This is true currently, but might not be
     // true if we add support for showing threads etc
-    if (d->mModel.isSimpleMode())
+    if (d->mModel.isSimpleMode()) {
         return d->mFilterModel.rowCount();
+    }
     return d->totalRowCount(QModelIndex());
 }
 
@@ -517,8 +525,9 @@ int KSysGuardProcessListPrivate::totalRowCount(const QModelIndex &parent) const
     for (int i = 0; i < numRows; ++i) {
         QModelIndex index = mFilterModel.index(i, 0, parent);
         // if it has children add the total
-        if (mFilterModel.hasChildren(index))
+        if (mFilterModel.hasChildren(index)) {
             total += totalRowCount(index);
+        }
     }
     return total;
 }
@@ -536,8 +545,9 @@ void KSysGuardProcessListPrivate::setupKAuthAction(KAuth::Action &action, const 
 void KSysGuardProcessList::selectionChanged()
 {
     int numSelected = d->mUi->treeView->selectionModel()->selectedRows().size();
-    if (numSelected == d->mNumItemsSelected)
+    if (numSelected == d->mNumItemsSelected) {
         return;
+    }
     d->mNumItemsSelected = numSelected;
     d->mUi->btnKillProcess->setEnabled(numSelected != 0);
 
@@ -547,8 +557,9 @@ void KSysGuardProcessList::selectionChanged()
 }
 void KSysGuardProcessList::showProcessContextMenu(const QModelIndex &index)
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return;
+    }
     QRect rect = d->mUi->treeView->visualRect(index);
     QPoint point(rect.x() + rect.width() / 4, rect.y() + rect.height() / 2);
     showProcessContextMenu(point);
@@ -566,8 +577,9 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point)
         // Check just incase we have no columns visible.  In which case show the column context menu
         // so that users can unhide columns if there are no columns visible
         for (int i = 0; i < d->mFilterModel.columnCount(); ++i) {
-            if (!d->mUi->treeView->header()->isSectionHidden(i))
+            if (!d->mUi->treeView->header()->isSectionHidden(i)) {
                 return;
+            }
         }
         showColumnContextMenu(point);
         return;
@@ -592,7 +604,8 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point)
         // parent is just 'init'.
 
         KSysGuard::Process *parent_process = d->mModel.getProcess(process->parentPid());
-        if (parent_process) { // it should not be possible for this process to not exist, but check just incase
+        // it should not be possible for this process to not exist, but check just in case
+        if (parent_process) {
             QString parent_name = parent_process->name();
             d->selectParent->setText(i18n("Jump to Parent Process (%1)", parent_name));
             d->mProcessContextMenu->addAction(d->selectParent);
@@ -627,15 +640,18 @@ void KSysGuardProcessList::showProcessContextMenu(const QPoint &point)
     }
     d->mProcessContextMenu->addSeparator();
     d->mProcessContextMenu->addAction(d->terminate);
-    if (numProcesses == 1 && process->timeKillWasSent().isValid())
+    if (numProcesses == 1 && process->timeKillWasSent().isValid()) {
         d->mProcessContextMenu->addAction(d->kill);
+    }
 
     d->mProcessContextMenu->popup(d->mUi->treeView->viewport()->mapToGlobal(point));
 }
 void KSysGuardProcessList::actionTriggered(QObject *object)
 {
-    if (!isVisible()) // Ignore triggered actions if we are not visible!
+    if (!isVisible()) {
+        // Ignore triggered actions if we are not visible!
         return;
+    }
     // Reset the text back to normal
     d->selectParent->setText(i18n("Jump to Parent Process"));
     QAction *result = qobject_cast<QAction *>(object);
@@ -650,26 +666,31 @@ void KSysGuardProcessList::actionTriggered(QObject *object)
     } else if (result == d->selectParent) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();
-        if (numProcesses == 0)
+        if (numProcesses == 0) {
             return; // No processes selected
+        }
         QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
         KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(realIndex.internalPointer());
-        if (process)
+        if (process) {
             selectAndJumpToProcess(process->parentPid());
+        }
     } else if (result == d->selectTracer) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();
-        if (numProcesses == 0)
+        if (numProcesses == 0) {
             return; // No processes selected
+        }
         QModelIndex realIndex = d->mFilterModel.mapToSource(selectedIndexes.at(0));
         KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(realIndex.internalPointer());
-        if (process)
+        if (process) {
             selectAndJumpToProcess(process->tracerpid());
+        }
     } else if (result == d->window) {
         QModelIndexList selectedIndexes = d->mUi->treeView->selectionModel()->selectedRows();
         int numProcesses = selectedIndexes.size();
-        if (numProcesses == 0)
+        if (numProcesses == 0) {
             return; // No processes selected
+        }
         foreach (const QModelIndex &index, selectedIndexes) {
             QModelIndex realIndex = d->mFilterModel.mapToSource(index);
             QVariant widVar = d->mModel.data(realIndex, ProcessModel::WindowIdRole);
@@ -695,24 +716,25 @@ void KSysGuardProcessList::actionTriggered(QObject *object)
         d->mUi->txtFilter->setFocus();
     } else {
         int sig;
-        if (result == d->resume || result == d->sigCont)
+        if (result == d->resume || result == d->sigCont) {
             sig = SIGCONT; // Despite the function name, this sends a signal, rather than kill it.  Silly unix :)
-        else if (result == d->sigStop)
+        } else if (result == d->sigStop) {
             sig = SIGSTOP;
-        else if (result == d->sigHup)
+        } else if (result == d->sigHup) {
             sig = SIGHUP;
-        else if (result == d->sigInt)
+        } else if (result == d->sigInt) {
             sig = SIGINT;
-        else if (result == d->sigTerm)
+        } else if (result == d->sigTerm) {
             sig = SIGTERM;
-        else if (result == d->sigKill)
+        } else if (result == d->sigKill) {
             sig = SIGKILL;
-        else if (result == d->sigUsr1)
+        } else if (result == d->sigUsr1) {
             sig = SIGUSR1;
-        else if (result == d->sigUsr2)
+        } else if (result == d->sigUsr2) {
             sig = SIGUSR2;
-        else
+        } else {
             return;
+        }
         sendSignalToSelectedProcesses(sig, false);
     }
 }
@@ -720,8 +742,9 @@ void KSysGuardProcessList::actionTriggered(QObject *object)
 void KSysGuardProcessList::selectAndJumpToProcess(int pid)
 {
     KSysGuard::Process *process = d->mModel.getProcess(pid);
-    if (!process)
+    if (!process) {
         return;
+    }
     QModelIndex sourceIndex = d->mModel.getQModelIndex(process, 0);
     QModelIndex filterIndex = d->mFilterModel.mapFromSource(sourceIndex);
     if (!filterIndex.isValid() && !d->mUi->txtFilter->text().isEmpty()) {
@@ -768,8 +791,9 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point)
         for (int i = 0; i < num_headings; ++i) {
             if (d->mUi->treeView->header()->isSectionHidden(i)) {
 #if !HAVE_XRES
-                if (i == ProcessModel::HeadingXMemory)
+                if (i == ProcessModel::HeadingXMemory) {
                     continue;
+                }
 #endif
                 action = new QAction(&menu);
                 action->setText(i18n("Show Column '%1'", d->mFilterModel.headerData(i, Qt::Horizontal, Qt::DisplayRole).toString()));
@@ -792,9 +816,10 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point)
     QAction *actionIoActualCharacters = nullptr;
     QAction *actionIoShowRate = nullptr;
     bool showIoRate = false;
-    if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+    if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
         showIoRate = d->mModel.ioInformation() == ProcessModel::BytesRate || d->mModel.ioInformation() == ProcessModel::SyscallsRate
             || d->mModel.ioInformation() == ProcessModel::ActualBytesRate;
+    }
 
     if (index == ProcessModel::HeadingVmSize || index == ProcessModel::HeadingMemory || index == ProcessModel::HeadingXMemory
         || index == ProcessModel::HeadingSharedMemory || index == ProcessModel::HeadingVmPSS
@@ -925,31 +950,36 @@ void KSysGuardProcessList::showColumnContextMenu(const QPoint &point)
     menu.addAction(actionShowTooltips);
 
     QAction *result = menu.exec(d->mUi->treeView->header()->mapToGlobal(point));
-    if (!result)
+    if (!result) {
         return; // Menu cancelled
+    }
     if (result == actionAuto) {
-        if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+        if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
             d->mModel.setIoUnits(ProcessModel::UnitsAuto);
-        else
+        } else {
             d->mModel.setUnits(ProcessModel::UnitsAuto);
+        }
         return;
     } else if (result == actionKB) {
-        if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+        if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
             d->mModel.setIoUnits(ProcessModel::UnitsKB);
-        else
+        } else {
             d->mModel.setUnits(ProcessModel::UnitsKB);
+        }
         return;
     } else if (result == actionMB) {
-        if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+        if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
             d->mModel.setIoUnits(ProcessModel::UnitsMB);
-        else
+        } else {
             d->mModel.setUnits(ProcessModel::UnitsMB);
+        }
         return;
     } else if (result == actionGB) {
-        if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite)
+        if (index == ProcessModel::HeadingIoRead || index == ProcessModel::HeadingIoWrite) {
             d->mModel.setIoUnits(ProcessModel::UnitsGB);
-        else
+        } else {
             d->mModel.setUnits(ProcessModel::UnitsGB);
+        }
         return;
     } else if (result == actionPercentage) {
         d->mModel.setUnits(ProcessModel::UnitsPercentage);
@@ -1036,16 +1066,18 @@ void KSysGuardProcessList::rowsInserted(const QModelIndex &parent, int start, in
             d->mNeedToExpandInit = true;
         }
     }
-    if (expanded)
+    if (expanded) {
         connect(d->mUi->treeView, &QTreeView::expanded, this, &KSysGuardProcessList::expandAllChildren);
+    }
     connect(&d->mFilterModel, &QAbstractItemModel::rowsInserted, this, &KSysGuardProcessList::rowsInserted);
     Q_EMIT processListChanged();
 }
 
 void KSysGuardProcessList::expandInit()
 {
-    if (d->mModel.isSimpleMode())
+    if (d->mModel.isSimpleMode()) {
         return; // No tree - no need to expand init
+    }
 
     bool expanded = false;
     for (int i = 0; i < d->mFilterModel.rowCount(QModelIndex()); i++) {
@@ -1059,18 +1091,21 @@ void KSysGuardProcessList::expandInit()
             d->mUi->treeView->expand(index);
         }
     }
-    if (expanded)
+    if (expanded) {
         connect(d->mUi->treeView, &QTreeView::expanded, this, &KSysGuardProcessList::expandAllChildren);
+    }
 }
 
 void KSysGuardProcessList::hideEvent(QHideEvent *event) // virtual protected from QWidget
 {
     // Stop updating the process list if we are hidden
-    if (d->mUpdateTimer)
+    if (d->mUpdateTimer) {
         d->mUpdateTimer->stop();
+    }
     // stop any scripts running, to save on memory
-    if (d->mScripting)
+    if (d->mScripting) {
         d->mScripting->stopAllScripts();
+    }
 
     QWidget::hideEvent(event);
 }
@@ -1108,16 +1143,20 @@ void KSysGuardProcessList::updateList()
 {
     if (isVisible()) {
         KSysGuard::Processes::UpdateFlags updateFlags = KSysGuard::Processes::StandardInformation;
-        if (!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoRead) || !d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoWrite))
+        if (!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoRead) || !d->mUi->treeView->isColumnHidden(ProcessModel::HeadingIoWrite)) {
             updateFlags |= KSysGuard::Processes::IOStatistics;
-        if (!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingXMemory))
+        }
+        if (!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingXMemory)) {
             updateFlags |= KSysGuard::Processes::XMemory;
+        }
         // Updating VmPSS every call results in ~4x CPU load on my machine, so do it less often
-        if (!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingVmPSS) && d->mResortCountDown <= 1)
+        if (!d->mUi->treeView->isColumnHidden(ProcessModel::HeadingVmPSS) && d->mResortCountDown <= 1) {
             updateFlags |= KSysGuard::Processes::Smaps;
+        }
         d->mModel.update(d->mUpdateIntervalMSecs, updateFlags);
-        if (d->mUpdateTimer)
+        if (d->mUpdateTimer) {
             d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
+        }
         Q_EMIT updated();
         if (QToolTip::isVisible() && qApp->topLevelAt(QCursor::pos()) == window()) {
             QWidget *w = d->mUi->treeView->viewport();
@@ -1146,8 +1185,9 @@ int KSysGuardProcessList::updateIntervalMSecs() const
 
 void KSysGuardProcessList::setUpdateIntervalMSecs(int intervalMSecs)
 {
-    if (intervalMSecs == d->mUpdateIntervalMSecs)
+    if (intervalMSecs == d->mUpdateIntervalMSecs) {
         return;
+    }
 
     d->mUpdateIntervalMSecs = intervalMSecs;
     if (intervalMSecs <= 0) { // no point keep the timer around if we aren't updating automatically
@@ -1161,10 +1201,12 @@ void KSysGuardProcessList::setUpdateIntervalMSecs(int intervalMSecs)
         d->mUpdateTimer = new QTimer(this);
         d->mUpdateTimer->setSingleShot(true);
         connect(d->mUpdateTimer, &QTimer::timeout, this, &KSysGuardProcessList::updateList);
-        if (isVisible())
+        if (isVisible()) {
             d->mUpdateTimer->start(d->mUpdateIntervalMSecs);
-    } else
+        }
+    } else {
         d->mUpdateTimer->setInterval(d->mUpdateIntervalMSecs);
+    }
 }
 
 bool KSysGuardProcessList::reniceProcesses(const QList<long long> &pids, int niceValue)
@@ -1210,14 +1252,16 @@ void KSysGuardProcessList::reniceSelectedProcesses()
         foreach (KSysGuard::Process *process, processes) {
             pids << process->pid();
             selectedAsStrings << d->mModel.getStringForProcess(process);
-            if (sched == -2)
+            if (sched == -2) {
                 sched = (int)process->scheduler();
-            else if (sched != -1 && sched != (int)process->scheduler())
+            } else if (sched != -1 && sched != (int)process->scheduler()) {
                 sched = -1; // If two processes have different schedulers, disable the cpu scheduler stuff
-            if (iosched == -2)
+            }
+            if (iosched == -2) {
                 iosched = (int)process->ioPriorityClass();
-            else if (iosched != -1 && iosched != (int)process->ioPriorityClass())
+            } else if (iosched != -1 && iosched != (int)process->ioPriorityClass()) {
                 iosched = -1; // If two processes have different schedulers, disable the cpu scheduler stuff
+            }
         }
         int firstPriority = processes.first()->niceLevel();
         int firstIOPriority = processes.first()->ioniceLevel();
@@ -1242,8 +1286,9 @@ void KSysGuardProcessList::reniceSelectedProcesses()
     QList<long long> changeIOSchedulerPids;
     foreach (long long pid, pids) {
         KSysGuard::Process *process = d->mModel.getProcess(pid);
-        if (!process)
+        if (!process) {
             continue;
+        }
 
         switch (reniceDlg->newCPUSched) {
         case -2:
@@ -1258,8 +1303,9 @@ void KSysGuardProcessList::reniceSelectedProcesses()
             if (reniceDlg->newCPUSched != (int)process->scheduler()) {
                 changeCPUSchedulerPids << pid;
                 renicePids << pid;
-            } else if (reniceDlg->newCPUPriority != process->niceLevel())
+            } else if (reniceDlg->newCPUPriority != process->niceLevel()) {
                 renicePids << pid;
+            }
             break;
 
         case KSysGuard::Process::RoundRobin:
@@ -1275,8 +1321,9 @@ void KSysGuardProcessList::reniceSelectedProcesses()
         case KSysGuard::Process::None:
             if (reniceDlg->newIOSched != (int)process->ioPriorityClass()) {
                 // Unfortunately linux doesn't actually let us set the ioniceness back to none after being set to something else
-                if (process->ioPriorityClass() != KSysGuard::Process::BestEffort || reniceDlg->newIOPriority != process->ioniceLevel())
+                if (process->ioPriorityClass() != KSysGuard::Process::BestEffort || reniceDlg->newIOPriority != process->ioniceLevel()) {
                     changeIOSchedulerPids << pid;
+                }
             }
             break;
         case KSysGuard::Process::Idle:
@@ -1379,15 +1426,17 @@ void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
     QList<KSysGuard::Process *> processes = selectedProcesses();
     foreach (KSysGuard::Process *process, processes) {
         selectedPids << process->pid();
-        if (!confirm)
+        if (!confirm) {
             continue;
+        }
         QString name = d->mModel.getStringForProcess(process);
         selectedAsStrings << name;
     }
 
     if (selectedPids.isEmpty()) {
-        if (confirm)
+        if (confirm) {
             KMessageBox::error(this, i18n("You must select a process first."));
+        }
         return;
     } else if (confirm && (sig == SIGTERM || sig == SIGKILL)) {
         int count = selectedAsStrings.count();
@@ -1418,20 +1467,23 @@ void KSysGuardProcessList::sendSignalToSelectedProcesses(int sig, bool confirm)
                                                          KGuiItem(closeButton, QStringLiteral("process-stop")),
                                                          KStandardGuiItem::cancel(),
                                                          dontAskAgainKey);
-        if (res != KMessageBox::Continue)
+        if (res != KMessageBox::Continue) {
             return;
+        }
     }
 
     // We have shown a GUI dialog box, which processes events etc.
     // So processes is NO LONGER VALID
 
-    if (!killProcesses(selectedPids, sig))
+    if (!killProcesses(selectedPids, sig)) {
         return;
+    }
     if (sig == SIGTERM || sig == SIGKILL) {
         foreach (long long pid, selectedPids) {
             KSysGuard::Process *process = d->mModel.getProcess(pid);
-            if (process)
+            if (process) {
                 process->timeKillWasSent().start();
+            }
             d->mUi->treeView->selectionModel()->clearSelection();
         }
     }
@@ -1564,14 +1616,17 @@ bool KSysGuardProcessList::isKillButtonVisible() const
 {
     return d->mUi->btnKillProcess->isVisible();
 }
+
 bool KSysGuardProcessList::scriptingEnabled() const
 {
     return !!d->mScripting;
 }
+
 void KSysGuardProcessList::setScriptingEnabled(bool enabled)
 {
-    if (!!d->mScripting == enabled)
+    if (!!d->mScripting == enabled) {
         return; // Nothing changed
+    }
     if (!enabled) {
         delete d->mScripting;
         d->mScripting = nullptr;

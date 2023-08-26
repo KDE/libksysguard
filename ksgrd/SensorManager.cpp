@@ -270,10 +270,11 @@ bool SensorManager::engage(const QString &hostName, const QString &shell, const 
     if (!mAgents.contains(hostName)) {
         SensorAgent *agent = nullptr;
 
-        if (port == -1)
+        if (port == -1) {
             agent = new SensorShellAgent(this);
-        else
+        } else {
             agent = new SensorSocketAgent(this);
+        }
 
         if (!agent->start(hostName.toLatin1(), shell, command, port)) {
             delete agent;
@@ -292,8 +293,9 @@ bool SensorManager::engage(const QString &hostName, const QString &shell, const 
 
 bool SensorManager::disengage(SensorAgent *agent)
 {
-    if (!agent)
+    if (!agent) {
         return false;
+    }
     const QString key = mAgents.key(const_cast<SensorAgent *>(agent));
     return disengage(key);
 }
@@ -302,6 +304,7 @@ bool SensorManager::isConnected(const QString &hostName)
 {
     return mAgents.contains(hostName);
 }
+
 bool SensorManager::disengage(const QString &hostName)
 {
     if (mAgents.contains(hostName)) {
@@ -318,8 +321,9 @@ bool SensorManager::resynchronize(const QString &hostName)
 {
     const SensorAgent *agent = mAgents.value(hostName);
 
-    if (!agent)
+    if (!agent) {
         return false;
+    }
 
     QString shell, command;
     int port;
@@ -387,26 +391,29 @@ bool SensorManager::hostInfo(const QString &hostName, QString &shell, QString &c
 
 QString SensorManager::translateUnit(const QString &unit) const
 {
-    if (!unit.isEmpty() && mUnits.contains(unit))
+    if (!unit.isEmpty() && mUnits.contains(unit)) {
         return mUnits[unit];
-    else
+    } else {
         return unit;
+    }
 }
 
 QString SensorManager::translateSensorPath(const QString &path) const
 {
-    if (!path.isEmpty() && mDict.contains(path))
+    if (!path.isEmpty() && mDict.contains(path)) {
         return mDict[path];
-    else
+    } else {
         return path;
+    }
 }
 
 QString SensorManager::translateSensorType(const QString &type) const
 {
-    if (!type.isEmpty() && mTypes.contains(type))
+    if (!type.isEmpty() && mTypes.contains(type)) {
         return mTypes[type];
-    else
+    } else {
         return type;
+    }
 }
 
 QString SensorManager::translateSensor(const QString &sensor) const
@@ -415,9 +422,9 @@ QString SensorManager::translateSensor(const QString &sensor) const
     int start = 0, end = 0;
     for (;;) {
         end = sensor.indexOf(QLatin1Char('/'), start);
-        if (end > 0)
+        if (end > 0) {
             out += translateSensorPath(sensor.mid(start, end - start)) + QLatin1Char('/');
-        else {
+        } else {
             out += translateSensorPath(sensor.right(sensor.length() - start));
             break;
         }
@@ -443,6 +450,7 @@ void SensorManager::disconnectClient(SensorClient *client)
 {
     QHashIterator<QString, SensorAgent *> it(mAgents);
 
-    while (it.hasNext())
+    while (it.hasNext()) {
         it.next().value()->disconnectClient(client);
+    }
 }

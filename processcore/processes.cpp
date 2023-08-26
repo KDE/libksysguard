@@ -67,8 +67,9 @@ public:
 Processes::Private::~Private()
 {
     Q_FOREACH (Process *process, mProcesses) {
-        if (process != &mFakeProcess)
+        if (process != &mFakeProcess) {
             delete process;
+        }
     }
     mProcesses.clear();
     mListProcesses.clear();
@@ -95,6 +96,7 @@ Processes::Processes(const QString &host, QObject *parent)
     connect(d->mAbstractProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
     connect(d->mAbstractProcesses, &AbstractProcesses::processUpdated, this, &Processes::processUpdated);
 }
+
 Processes::~Processes()
 {
     delete d;
@@ -178,10 +180,11 @@ bool Processes::updateProcessInfo(Process *ps)
 
     ps->setChanges(Process::Nothing);
     bool success;
-    if (d->mUsingHistoricalData)
+    if (d->mUsingHistoricalData) {
         success = d->mHistoricProcesses->updateProcessInfo(ps->pid(), ps);
-    else
+    } else {
         success = d->mAbstractProcesses->updateProcessInfo(ps->pid(), ps);
+    }
 
     // Now we have the process info.  Calculate the cpu usage and total cpu usage for itself and all its parents
     if (!d->mUsingHistoricalData && d->mElapsedTimeMilliSeconds != 0) { // Update the user usage and sys usage
@@ -273,16 +276,20 @@ bool Processes::addProcess(long pid, long ppid)
     Q_EMIT endAddProcess();
     return success;
 }
+
 bool Processes::updateOrAddProcess(long pid)
 {
     long ppid;
-    if (d->mUsingHistoricalData)
+    if (d->mUsingHistoricalData) {
         ppid = d->mHistoricProcesses->getParentPid(pid);
-    else
+    } else {
         ppid = d->mAbstractProcesses->getParentPid(pid);
+    }
 
-    if (ppid == pid) // Shouldn't ever happen
+    if (ppid == pid) {
+        // Shouldn't ever happen
         ppid = -1;
+    }
 
     if (d->mToBeProcessed.contains(ppid)) {
         // Make sure that we update the parent before we update this one.  Just makes things a bit easier.
@@ -291,10 +298,11 @@ bool Processes::updateOrAddProcess(long pid)
     }
 
     Process *ps = d->mProcesses.value(pid);
-    if (!ps)
+    if (!ps) {
         return addProcess(pid, ppid);
-    else
+    } else {
         return updateProcess(ps, ppid);
+    }
 }
 
 void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags updateFlags)
@@ -303,10 +311,11 @@ void Processes::updateAllProcesses(long updateDurationMS, Processes::UpdateFlags
 
     if (d->mUsingHistoricalData || d->mLastUpdated.elapsed() >= updateDurationMS || !d->mLastUpdated.isValid()) {
         d->mElapsedTimeMilliSeconds = d->mLastUpdated.restart();
-        if (d->mUsingHistoricalData)
+        if (d->mUsingHistoricalData) {
             d->mHistoricProcesses->updateAllProcesses(d->mUpdateFlags);
-        else
+        } else {
             d->mAbstractProcesses->updateAllProcesses(d->mUpdateFlags); // For a local machine, this will directly call Processes::processesUpdated()
+        }
     }
 }
 
@@ -322,10 +331,11 @@ void Processes::processesUpdated()
         }
     }
 
-    if (d->mUsingHistoricalData)
+    if (d->mUsingHistoricalData) {
         d->mToBeProcessed = d->mHistoricProcesses->getAllPids();
-    else
+    } else {
         d->mToBeProcessed = d->mAbstractProcesses->getAllPids();
+    }
 
     QSet<long> endedProcesses;
     for (Process *p : d->mListProcesses) {
@@ -381,8 +391,9 @@ void Processes::Private::markProcessesAsEnded(long pid)
     Q_ASSERT(pid >= 0);
 
     Process *process = mProcesses.value(pid);
-    if (!process)
+    if (!process) {
         return;
+    }
     process->setStatus(Process::Ended);
     Q_EMIT q->processChanged(process, false);
 }
@@ -391,8 +402,9 @@ void Processes::deleteProcess(long pid)
     Q_ASSERT(pid >= 0);
 
     Process *process = d->mProcesses.value(pid);
-    if (!process)
+    if (!process) {
         return;
+    }
     Q_FOREACH (Process *it, process->children()) {
         deleteProcess(it->pid());
     }
@@ -412,8 +424,9 @@ void Processes::deleteProcess(long pid)
     int i = 0;
 #endif
     Q_FOREACH (Process *it, d->mListProcesses) {
-        if (it->index() > process->index())
+        if (it->index() > process->index()) {
             it->setIndex(it->index() - 1);
+        }
 #ifndef QT_NO_DEBUG
         Q_ASSERT(it->index() == i++);
 #endif
@@ -474,8 +487,9 @@ bool Processes::setIoNiceness(long pid, KSysGuard::Process::IoPriorityClass prio
 
 bool Processes::supportsIoNiceness()
 {
-    if (d->mUsingHistoricalData)
+    if (d->mUsingHistoricalData) {
         return d->mHistoricProcesses->supportsIoNiceness();
+    }
     return d->mAbstractProcesses->supportsIoNiceness();
 }
 
@@ -492,16 +506,19 @@ long Processes::numberProcessorCores()
 void Processes::answerReceived(int id, const QList<QByteArray> &answer)
 {
     KSysGuard::ProcessesRemote *processes = qobject_cast<KSysGuard::ProcessesRemote *>(d->mAbstractProcesses);
-    if (processes)
+    if (processes) {
         processes->answerReceived(id, answer);
+    }
 }
 
 QList<QPair<QDateTime, uint>> Processes::historiesAvailable() const
 {
-    if (!d->mIsLocalHost)
+    if (!d->mIsLocalHost) {
         return QList<QPair<QDateTime, uint>>();
-    if (!d->mHistoricProcesses)
+    }
+    if (!d->mHistoricProcesses) {
         d->mHistoricProcesses = new ProcessesATop();
+    }
 
     return d->mHistoricProcesses->historiesAvailable();
 }
@@ -538,31 +555,36 @@ bool Processes::loadHistoryFile(const QString &filename)
         d->mLastError = NotSupported;
         return false;
     }
-    if (!d->mHistoricProcesses)
+    if (!d->mHistoricProcesses) {
         d->mHistoricProcesses = new ProcessesATop(false);
+    }
 
     return d->mHistoricProcesses->loadHistoryFile(filename);
 }
 
 QString Processes::historyFileName() const
 {
-    if (!d->mIsLocalHost || !d->mHistoricProcesses)
+    if (!d->mIsLocalHost || !d->mHistoricProcesses) {
         return QString();
+    }
     return d->mHistoricProcesses->historyFileName();
 }
 QDateTime Processes::viewingTime() const
 {
-    if (!d->mIsLocalHost || !d->mHistoricProcesses)
+    if (!d->mIsLocalHost || !d->mHistoricProcesses) {
         return QDateTime();
+    }
     return d->mHistoricProcesses->viewingTime();
 }
 
 bool Processes::isHistoryAvailable() const
 {
-    if (!d->mIsLocalHost)
+    if (!d->mIsLocalHost) {
         return false;
-    if (!d->mHistoricProcesses)
+    }
+    if (!d->mHistoricProcesses) {
         d->mHistoricProcesses = new ProcessesATop();
+    }
 
     return d->mHistoricProcesses->isHistoryAvailable();
 }

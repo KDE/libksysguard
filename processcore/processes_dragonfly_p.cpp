@@ -57,8 +57,9 @@ bool ProcessesLocal::Private::readProc(long pid, struct kinfo_proc *p)
     mib[3] = pid;
 
     len = sizeof(struct kinfo_proc);
-    if (sysctl(mib, 4, p, &len, NULL, 0) == -1 || !len)
+    if (sysctl(mib, 4, p, &len, NULL, 0) == -1 || !len) {
         return false;
+    }
     return true;
 }
 
@@ -98,8 +99,9 @@ void ProcessesLocal::Private::readProcStat(struct kinfo_proc *p, Process *ps)
         ps->setStatus(Process::OtherStatus);
         break;
     }
-    if (PP(p, stat) == SZOMB)
+    if (PP(p, stat) == SZOMB) {
         ps->setStatus(Process::Zombie);
+    }
 }
 
 void ProcessesLocal::Private::readProcStatm(struct kinfo_proc *p, Process *process)
@@ -118,8 +120,9 @@ bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
     mib[2] = KERN_PROC_ARGS;
     mib[3] = pid;
 
-    if (sysctl(mib, 4, buf, &buflen, NULL, 0) == -1 || (buflen == 0))
+    if (sysctl(mib, 4, buf, &buflen, NULL, 0) == -1 || (buflen == 0)) {
         return false;
+    }
     QString command = QString(buf);
 
     // cmdline separates parameters with the NULL character
@@ -139,8 +142,9 @@ long ProcessesLocal::getParentPid(long pid)
     long long ppid = -1;
     struct kinfo_proc p;
 
-    if (d->readProc(pid, &p))
+    if (d->readProc(pid, &p)) {
         ppid = PP(&p, ppid);
+    }
 
     return ppid;
 }
@@ -174,10 +178,12 @@ QSet<long> ProcessesLocal::getAllPids()
     mib[0] = CTL_KERN;
     mib[1] = KERN_PROC;
     mib[2] = KERN_PROC_ALL;
-    if (sysctl(mib, 3, NULL, &len, NULL, 0) == -1)
+    if (sysctl(mib, 3, NULL, &len, NULL, 0) == -1) {
         return pids;
-    if ((p = (kinfo_proc *)malloc(len)) == NULL)
+    }
+    if ((p = (kinfo_proc *)malloc(len)) == NULL) {
         return pids;
+    }
     if (sysctl(mib, 3, p, &len, NULL, 0) == -1) {
         free(p);
         return pids;
@@ -188,8 +194,9 @@ QSet<long> ProcessesLocal::getAllPids()
         long long ppid = PP((&p[num]), ppid);
 
         // skip all process with parent id = 0 but init
-        if (ppid <= 0 && pid != 1)
+        if (ppid <= 0 && pid != 1) {
             continue;
+        }
         pids.insert(pid);
     }
     free(p);
@@ -216,10 +223,12 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
 
 Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
-    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch)
+    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch) {
         priority = 0;
-    if (pid <= 0)
+    }
+    if (pid <= 0) {
         return Processes::InvalidPid; // check the parameters
+    }
     struct sched_param params;
     params.sched_priority = priority;
     bool success;
@@ -261,8 +270,9 @@ long long ProcessesLocal::totalPhysicalMemory()
     size_t len;
 
     len = sizeof(Total);
-    if (sysctlbyname("hw.physmem", &Total, &len, NULL, 0) == -1)
+    if (sysctlbyname("hw.physmem", &Total, &len, NULL, 0) == -1) {
         return 0;
+    }
 
     Total *= getpagesize() / 1024;
     return Total;

@@ -33,29 +33,34 @@ void KTextEditVT::insertVTChar(const QChar &c)
         if (escape_CSI || escape_OSC) {
             if (c.isDigit()) {
                 if (!escape_number_separator) {
-                    if (escape_number1 == -1)
+                    if (escape_number1 == -1) {
                         escape_number1 = c.digitValue();
-                    else
+                    } else {
                         escape_number1 = escape_number1 * 10 + c.digitValue();
+                    }
                 } else {
-                    if (escape_number2 == -1)
+                    if (escape_number2 == -1) {
                         escape_number2 = c.digitValue();
-                    else
+                    } else {
                         escape_number2 = escape_number2 * 10 + c.digitValue();
+                    }
                 }
             } else if (c == QLatin1Char(';')) {
                 escape_number_separator = true;
             } else if (escape_OSC && c == QChar(7)) { // Throw away any letters that are not OSC
                 escape_code = c;
-            } else if (escape_CSI)
+            } else if (escape_CSI) {
                 escape_code = c;
+            }
         } else if (c == QLatin1Char('[')) {
             escape_CSI = true;
         } else if (c == QLatin1Char(']')) {
             escape_OSC = true;
         } else if (c == QLatin1Char('(') || c == QLatin1Char(')')) {
-        } else
+            // do nothing
+        } else {
             escape_code = c;
+        }
         if (!escape_code.isNull()) {
             // We've read in the whole escape sequence.  Now parse it
             if (escape_code == QLatin1Char('m')) { // change color
@@ -117,7 +122,6 @@ void KTextEditVT::insertVTChar(const QChar &c)
             escape_sequence = true;
             escape_OSC = true;
         }
-
     } else if (!c.isNull()) {
         insertPlainText(QStringLiteral("["));
         QString num;
@@ -130,15 +134,17 @@ void KTextEditVT::insertVTChar(const QChar &c)
 void KTextEditVT::insertVTText(const QByteArray &string)
 {
     const int size = string.size();
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++) {
         insertVTChar(QLatin1Char(string.at(i)));
+    }
 }
 
 void KTextEditVT::insertVTText(const QString &string)
 {
     int size = string.size();
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++) {
         insertVTChar(string.at(i));
+    }
 }
 
 void KTextEditVT::setParseAnsiEscapeCodes(bool parseAnsi)

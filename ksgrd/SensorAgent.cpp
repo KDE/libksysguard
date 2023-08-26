@@ -34,17 +34,20 @@ SensorAgent::SensorAgent(SensorManager *sm)
 
 SensorAgent::~SensorAgent()
 {
-    for (int i = mInputFIFO.size() - 1; i >= 0; --i)
+    for (int i = mInputFIFO.size() - 1; i >= 0; --i) {
         delete mInputFIFO.takeAt(i);
-    for (int i = mProcessingFIFO.size() - 1; i >= 0; --i)
+    }
+    for (int i = mProcessingFIFO.size() - 1; i >= 0; --i) {
         delete mProcessingFIFO.takeAt(i);
+    }
 }
 
 void SensorAgent::sendRequest(const QString &req, SensorClient *client, int id)
 {
     SensorRequest nRequest{req, client, id};
-    if (mUnderwayRequests.contains(nRequest))
+    if (mUnderwayRequests.contains(nRequest)) {
         return;
+    }
     mUnderwayRequests.insert(nRequest);
 
     /* The request is registered with the FIFO so that the answer can be
@@ -107,17 +110,20 @@ void SensorAgent::processAnswer(const char *buf, int buflen)
             || (buffer.size() - i >= (signed)(sizeof("\nksysguardd>")) - 1
                 && qstrncmp(buffer.constData() + i, "\nksysguardd>", sizeof("\nksysguardd>") - 1) == 0)) {
             QByteArray answer(buffer.constData() + startOfAnswer, i - startOfAnswer);
-            if (!answer.isEmpty())
+            if (!answer.isEmpty()) {
                 mAnswerBuffer << answer;
+            }
 #if SA_TRACE
             qCDebug(LIBKSYSGUARD_KSGRD) << "<= " << mAnswerBuffer << "(" << mInputFIFO.count() << "/" << mProcessingFIFO.count() << ")" << endl;
 #endif
-            if (buffer.at(i) == '\n')
+            if (buffer.at(i) == '\n') {
                 i++;
+            }
             i += sizeof("ksysguardd>")
                 - 2; // Move i on to the next answer (if any). -2 because sizeof adds one for \0  and the for loop will increment by 1 also
-            if (i + 1 < buffer.size() && buffer.at(i + 1) == ' ')
+            if (i + 1 < buffer.size() && buffer.at(i + 1) == ' ') {
                 i++;
+            }
             startOfAnswer = i + 1;
 
             // We have found the end of one reply
@@ -187,8 +193,9 @@ void SensorAgent::executeCommand()
 #endif
         // send request to daemon
         QString cmdWithNL = req->request() + '\n';
-        if (!writeMsg(cmdWithNL.toLatin1().constData(), cmdWithNL.length()))
+        if (!writeMsg(cmdWithNL.toLatin1().constData(), cmdWithNL.length())) {
             qCDebug(LIBKSYSGUARD_KSGRD) << "SensorAgent::writeMsg() failed";
+        }
 
         // add request to processing FIFO.
         // Note that this means that mProcessingFIFO is now responsible for managing the memory for it.
@@ -198,12 +205,16 @@ void SensorAgent::executeCommand()
 
 void SensorAgent::disconnectClient(SensorClient *client)
 {
-    for (int i = 0, total = mInputFIFO.size(); i < total; ++i)
-        if (mInputFIFO[i]->client() == client)
+    for (int i = 0, total = mInputFIFO.size(); i < total; ++i) {
+        if (mInputFIFO[i]->client() == client) {
             mInputFIFO[i]->setClient(nullptr);
-    for (int i = 0, total = mProcessingFIFO.size(); i < total; ++i)
-        if (mProcessingFIFO[i]->client() == client)
+        }
+    }
+    for (int i = 0, total = mProcessingFIFO.size(); i < total; ++i) {
+        if (mProcessingFIFO[i]->client() == client) {
             mProcessingFIFO[i]->setClient(nullptr);
+        }
+    }
 }
 
 SensorManager *SensorAgent::sensorManager()

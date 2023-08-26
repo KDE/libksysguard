@@ -78,17 +78,20 @@ ReniceDlg::ReniceDlg(QWidget *parent, const QStringList &processes, int currentC
     ioScheduler->addButton(ui->radioIdle, (int)KSysGuard::Process::Idle);
     ioScheduler->addButton(ui->radioRealTime, (int)KSysGuard::Process::RealTime);
     ioScheduler->addButton(ui->radioBestEffort, (int)KSysGuard::Process::BestEffort);
-    if (currentIoSched >= 0) { // negative means none of these
+    // negative means none of these
+    if (currentIoSched >= 0) {
         QAbstractButton *iosched = ioScheduler->button(currentIoSched);
-        if (iosched)
+        if (iosched) {
             iosched->setChecked(true); // Check the current io scheduler
+        }
     }
 
     ioScheduler->setExclusive(true);
 
     setSliderRange(); // Update the slider ranges before trying to set their current values
-    if (ioniceSupported)
+    if (ioniceSupported) {
         ui->sliderIO->setValue(currentIoPrio);
+    }
     ui->sliderCPU->setValue(currentCpuPrio);
 
     ui->imgCPU->setPixmap(QIcon::fromTheme(QStringLiteral("cpu")).pixmap(128, 128));
@@ -178,15 +181,17 @@ void ReniceDlg::setSliderRange()
         || cpuScheduler->checkedId() == (int)KSysGuard::Process::Interactive) {
         // The slider is setting the priority, so goes from 19 to -20.  We cannot actually do this with a slider, so instead we go from -19 to 20, and negate
         // later
-        if (ui->sliderCPU->value() > 20)
+        if (ui->sliderCPU->value() > 20) {
             ui->sliderCPU->setValue(20);
+        }
         ui->sliderCPU->setInvertedAppearance(true);
         ui->sliderCPU->setMinimum(-20);
         ui->sliderCPU->setMaximum(19);
         ui->sliderCPU->setTickInterval(5);
     } else {
-        if (ui->sliderCPU->value() < 1)
+        if (ui->sliderCPU->value() < 1) {
             ui->sliderCPU->setValue(1);
+        }
         ui->sliderCPU->setInvertedAppearance(false);
         ui->sliderCPU->setMinimum(1);
         ui->sliderCPU->setMaximum(99);

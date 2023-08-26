@@ -177,8 +177,9 @@ QSet<long> ProcessesLocal::getAllPids()
     QSet<long> pids;
     long pid;
 
-    if (d->mProcDir == NULL)
+    if (d->mProcDir == NULL) {
         return pids; // There's not much we can do without /proc
+    }
     struct dirent *entry;
     rewinddir(d->mProcDir);
     while ((entry = readdir(d->mProcDir)))
@@ -227,8 +228,9 @@ bool ProcessesLocal::supportsIoNiceness()
 long long ProcessesLocal::totalPhysicalMemory()
 {
     long long memory = ((long long)sysconf(_SC_PHYS_PAGES)) * (sysconf(_SC_PAGESIZE) / 1024);
-    if (memory > 0)
+    if (memory > 0) {
         return memory;
+    }
     return 0;
 }
 

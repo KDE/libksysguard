@@ -21,8 +21,9 @@
 
 bool ProcessFilter::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-    if ((mFilter == AllProcesses || mFilter == AllProcessesInTreeForm) && filterRegularExpression().pattern().isEmpty())
+    if ((mFilter == AllProcesses || mFilter == AllProcessesInTreeForm) && filterRegularExpression().pattern().isEmpty()) {
         return true; // Shortcut for common case
+    }
 
     ProcessModel *model = static_cast<ProcessModel *>(sourceModel());
     const KSysGuard::Process *process;
@@ -61,29 +62,34 @@ bool ProcessFilter::filterAcceptsRow(int source_row, const QModelIndex &source_p
     case AllProcessesInTreeForm:
         break;
     case SystemProcesses:
-        if (uid >= 100 && model->canUserLogin(uid))
+        if (uid >= 100 && model->canUserLogin(uid)) {
             accepted = false;
+        }
         break;
     case UserProcesses:
-        if ((uid < 100 || !model->canUserLogin(uid)) && (euid < 100 || !model->canUserLogin(euid)))
+        if ((uid < 100 || !model->canUserLogin(uid)) && (euid < 100 || !model->canUserLogin(euid))) {
             accepted = false;
+        }
         break;
     case OwnProcesses: {
         long ownuid = getuid();
-        if (uid != ownuid && process->suid() != ownuid && process->fsuid() != ownuid && euid != ownuid)
+        if (uid != ownuid && process->suid() != ownuid && process->fsuid() != ownuid && euid != ownuid) {
             accepted = false;
+        }
         break;
     }
     case ProgramsOnly:
         if (process->tty().isEmpty()) {
-            if (!model->hasGUIWindow(process->pid()))
+            if (!model->hasGUIWindow(process->pid())) {
                 accepted = false;
+            }
         } else {
             // login and getty kinda _are_ the tty, so I do not really count them as 'programs'. So make a special case and hide them
             // Their ppid are 1 (init) so by checking we try to avoid false matches, and speed up checking overall
             QString name = process->name().section(QLatin1Char(' '), 0, 0);
-            if (process->parentPid() == 1 && (name == QLatin1String("login") || name.endsWith(QLatin1String("getty"))))
+            if (process->parentPid() == 1 && (name == QLatin1String("login") || name.endsWith(QLatin1String("getty")))) {
                 accepted = false;
+            }
         }
         break;
     default:
@@ -91,15 +97,18 @@ bool ProcessFilter::filterAcceptsRow(int source_row, const QModelIndex &source_p
     }
 
     if (accepted) {
-        if (filterRegularExpression().pattern().isEmpty())
+        if (filterRegularExpression().pattern().isEmpty()) {
             return true;
+        }
 
         // Allow the user to search by PID
-        if (QString::number(process->pid()).contains(filterRegularExpression()))
+        if (QString::number(process->pid()).contains(filterRegularExpression())) {
             return true;
+        }
         // None of our tests have rejected it.  Pass it on to qsortfilterproxymodel's filter
-        if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
+        if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent)) {
             return true;
+        }
 
         auto strings = filterRegularExpression().pattern().split(QLatin1Char(','), Qt::SkipEmptyParts);
         for (auto string : strings) {
@@ -113,14 +122,16 @@ bool ProcessFilter::filterAcceptsRow(int source_row, const QModelIndex &source_p
     // We did not accept this row at all.
 
     // If we are in flat mode, then give up now
-    if (mFilter != AllProcessesInTreeForm)
+    if (mFilter != AllProcessesInTreeForm) {
         return false;
+    }
 
     // one of our children might be accepted, so accept this row if our children are accepted.
     QModelIndex source_index = sourceModel()->index(source_row, 0, source_parent);
     for (int i = 0; i < sourceModel()->rowCount(source_index); i++) {
-        if (filterAcceptsRow(i, source_index))
+        if (filterAcceptsRow(i, source_index)) {
             return true;
+        }
     }
     return false;
 }

@@ -36,8 +36,9 @@ SensorSocketAgent::~SensorSocketAgent()
 
 bool SensorSocketAgent::start(const QString &host, const QString &, const QString &, int port)
 {
-    if (port <= 0)
+    if (port <= 0) {
         qCDebug(LIBKSYSGUARD_KSGRD) << "SensorSocketAgent::start: Invalid port " << port;
+    }
 
     setHostName(host);
     mPort = port;
@@ -56,8 +57,9 @@ void SensorSocketAgent::hostInfo(QString &shell, QString &command, int &port) co
 
 void SensorSocketAgent::msgSent()
 {
-    if (mSocket.bytesToWrite() != 0)
+    if (mSocket.bytesToWrite() != 0) {
         return;
+    }
 
     // Try to send next request if available.
     executeCommand();
@@ -99,8 +101,9 @@ void SensorSocketAgent::error(QAbstractSocket::SocketError id)
     }
 
     setDaemonOnLine(false);
-    if (sensorManager())
+    if (sensorManager()) {
         sensorManager()->disengage(this);
+    }
 }
 
 bool SensorSocketAgent::writeMsg(const char *msg, int len)
