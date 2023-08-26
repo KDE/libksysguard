@@ -2101,8 +2101,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         return QVariant::fromValue(QVector<PercentageHistoryEntry>{});
     }
     case Qt::DecorationRole: {
-        if (index.column() == HeadingName) {
 #if HAVE_X11
+        if (index.column() == HeadingName) {
             KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(index.internalPointer());
             if (!process->hasManagedGuiWindow()) {
                 if (d->mSimple) // When not in tree mode, we need to pad the name column where we do not have an icon
@@ -2114,18 +2114,8 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
             if (w && !w->icon.isNull())
                 return w->icon;
             return QIcon(d->mBlankPixmap);
-#else
-            return QVariant();
-#endif
-
-        } else if (index.column() == HeadingCPUUsage) {
-            KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(index.internalPointer());
-            if (process->status() == KSysGuard::Process::Stopped || process->status() == KSysGuard::Process::Zombie) {
-                //        QPixmap pix = KIconLoader::global()->loadIcon("button_cancel", KIconLoader::Small,
-                //                    KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(),
-                //                0L, true);
-            }
         }
+#endif
         return QVariant();
     }
     case Qt::BackgroundRole: {
