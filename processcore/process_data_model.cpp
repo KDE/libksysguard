@@ -404,6 +404,7 @@ ProcessAttributeModel *ProcessDataModel::attributesModel()
 
 int ProcessDataModel::columnCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return d->m_enabledAttributes.count();
 }
 
