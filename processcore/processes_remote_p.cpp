@@ -280,6 +280,7 @@ void ProcessesRemote::answerReceived(int id, const QList<QByteArray> &answer)
         if (!d->havePsInfo)
             return; // Not setup yet.  Should never happen
         Q_EMIT processesUpdated();
+        break;
     case FreeMemory:
         if (answer.isEmpty())
             return; // Invalid data
