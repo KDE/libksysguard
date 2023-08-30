@@ -6,18 +6,18 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.2 as QQC2
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 
-import org.kde.kirigami 2.5 as Kirigami
-import org.kde.kquickcontrols 2.0
-import org.kde.config 1.0 // for KAuthorized
-import org.kde.newstuff 1.62 as NewStuff
+import org.kde.kirigami as Kirigami
+import org.kde.kquickcontrols
+import org.kde.config
+import org.kde.newstuff as NewStuff
 
-import org.kde.quickcharts 1.0 as Charts
-import org.kde.ksysguard.sensors 1.0 as Sensors
-import org.kde.ksysguard.faces 1.0 as Faces
+import org.kde.quickcharts as Charts
+import org.kde.ksysguard.sensors as Sensors
+import org.kde.ksysguard.faces as Faces
 
 Kirigami.FormLayout {
     id: root

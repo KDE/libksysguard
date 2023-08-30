@@ -6,21 +6,21 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.2 as QQC2
-import QtQml.Models 2.12
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import QtQml.Models
 
-import Qt.labs.platform 1.1 as Platform
+import Qt.labs.platform as Platform
 
-import org.kde.kirigami 2.8 as Kirigami
-import org.kde.kquickcontrols 2.0
+import org.kde.kirigami as Kirigami
+import org.kde.kquickcontrols
 
-import org.kde.kitemmodels 1.0 as KItemModels
+import org.kde.kitemmodels as KItemModels
 
-import org.kde.quickcharts 1.0 as Charts
-import org.kde.ksysguard.sensors 1.0 as Sensors
-import org.kde.ksysguard.faces 1.0 as Faces
+import org.kde.quickcharts as Charts
+import org.kde.ksysguard.sensors as Sensors
+import org.kde.ksysguard.faces as Faces
 
 import "./" as Local
 

@@ -4,14 +4,14 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.12
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.8 as Kirigami
-import org.kde.quickcharts 1.0 as Charts
-import org.kde.quickcharts.controls 1.0 as ChartsControls
-import org.kde.ksysguard.sensors 1.0 as Sensors
-import org.kde.ksysguard.formatter 1.0 as Formatter
+import org.kde.kirigami as Kirigami
+import org.kde.quickcharts as Charts
+import org.kde.quickcharts.controls as ChartsControls
+import org.kde.ksysguard.sensors as Sensors
+import org.kde.ksysguard.formatter as Formatter
 
 ColumnLayout {
     id: root

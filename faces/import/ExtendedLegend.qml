@@ -7,17 +7,17 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami as Kirigami
 
-import org.kde.ksysguard.faces.private 1.0
-import org.kde.ksysguard.formatter 1.0
-import org.kde.ksysguard.sensors 1.0
+import org.kde.ksysguard.faces.private
+import org.kde.ksysguard.formatter
+import org.kde.ksysguard.sensors
 
-import org.kde.quickcharts 1.0 as Charts
-import org.kde.quickcharts.controls 1.0 as ChartsControls
+import org.kde.quickcharts as Charts
+import org.kde.quickcharts.controls as ChartsControls
 
 /**
  * A legend control to be used in faces based on org.kde.quickcharts.Controls.Legend.
