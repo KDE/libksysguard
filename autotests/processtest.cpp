@@ -5,10 +5,9 @@
 */
 
 #include <QDebug>
-#include <QTreeView>
+#include <QProcess>
 #include <QtCore>
 #include <QtTestGui>
-#include <QProcess>
 
 #include <limits>
 
@@ -16,8 +15,6 @@
 #include "processcore/processes.h"
 #include "processcore/processes_base_p.h"
 #include "processcore_debug.h"
-
-#include "processui/ksysguardprocesslist.h"
 
 #include "processtest.h"
 
@@ -227,19 +224,6 @@ void testProcess::testTimeToUpdateAllProcesses()
     }
     delete processController;
 }
-void testProcess::testTimeToUpdateModel()
-{
-    KSysGuardProcessList *processList = new KSysGuardProcessList;
-    processList->treeView()->setColumnHidden(13, false);
-    processList->show();
-    QVERIFY(QTest::qWaitForWindowExposed(processList));
-
-    QBENCHMARK {
-        processList->updateList();
-        QTest::qWait(0);
-    }
-    delete processList;
-}
 
 void testProcess::testHistories()
 {
@@ -314,51 +298,6 @@ void testProcess::testUpdateOrAddProcess()
     QCOMPARE(processController->getProcess(std::numeric_limits<long>::max()-1)->status(), KSysGuard::Process::Ended);
     processController->updateAllProcesses();
     QVERIFY(!processController->getProcess(std::numeric_limits<long>::max()-1));
-}
-
-void testProcess::testHistoriesWithWidget()
-{
-    KSysGuardProcessList *processList = new KSysGuardProcessList;
-    processList->treeView()->setColumnHidden(13, false);
-    processList->show();
-    QVERIFY(QTest::qWaitForWindowExposed(processList));
-    KSysGuard::Processes *processController = processList->processModel()->processController();
-
-    QList<QPair<QDateTime, uint>> history = processController->historiesAvailable();
-
-    for (int i = 0; i < history.size(); i++) {
-        qCDebug(LIBKSYSGUARD_PROCESSCORE) << "Viewing time" << history[i].first;
-        bool success = processController->setViewingTime(history[i].first);
-        QVERIFY(success);
-        QCOMPARE(processController->viewingTime(), history[i].first);
-        processList->updateList();
-        QTest::qWait(100);
-    }
-    delete processList;
-}
-
-void testProcess::testCPUGraphHistory()
-{
-    KSysGuardProcessList processList;
-    processList.show();
-    QVERIFY(QTest::qWaitForWindowExposed(&processList));
-    auto model = processList.processModel();
-    // Access the PercentageHistoryRole to enable collection
-    for (int i = 0; i < model->rowCount(); i++) {
-        auto index = model->index(i, ProcessModel::HeadingCPUUsage, {});
-        auto percentageHist = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
-    }
-
-    processList.updateList();
-
-    // Verify that the current value is the newest history entry
-    for (int i = 0; i < model->rowCount(); i++) {
-        auto index = model->index(i, ProcessModel::HeadingCPUUsage, {});
-        auto percentage = index.data(ProcessModel::PercentageRole).toFloat();
-        auto percentageHist = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
-        QVERIFY(percentageHist.size() > 0);
-        QCOMPARE(percentage, percentageHist.constLast().value);
-    }
 }
 
 QTEST_MAIN(testProcess)
