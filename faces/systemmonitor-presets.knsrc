@@ -44,4 +44,4 @@ UploadCategories=Plasma Charts Preset
 ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml
 StandardResource=tmp
 Uncompress=kpackage
-KPackageType=Plasma/Applet
+KPackageStructure=Plasma/Applet
