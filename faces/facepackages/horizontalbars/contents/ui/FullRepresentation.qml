@@ -63,10 +63,9 @@ Faces.SensorFace {
                     name: root.controller.sensorLabels[sensor.sensorId] || sensor.name
                     shortName: root.controller.sensorLabels[sensor.sensorId] || sensor.shortName
                     value: sensor.formattedValue
-                    colorVisible: false
+                    indicator: Item {}
 
-                    layoutWidth: root.width
-                    valueWidth: Kirigami.Units.gridUnit * 2
+                    maximumValueWidth: Kirigami.Units.gridUnit * 2
 
                     Sensors.Sensor {
                         id: sensor
@@ -89,10 +88,9 @@ Faces.SensorFace {
 
                 name: root.controller.sensorLabels[sensor.sensorId] || sensor.shortName
                 value: sensor.formattedValue
-                colorVisible: false
+                indicator: Item {}
 
-                layoutWidth: root.width
-                valueWidth: Kirigami.Units.gridUnit * 2
+                maximumValueWidth: Kirigami.Units.gridUnit * 2
 
                 Sensors.Sensor {
                     id: sensor
