@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2023-09-02 02:55\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -241,19 +241,19 @@ msgid ""
 "trying to run as root."
 msgstr "您没有权限更改此进程的运行优先级，而尝试以 root 身份进行时遇到问题。"
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "您必须先选择一个进程。"
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
 "there was a problem trying to run as root."
 msgstr "您没有权限更改此进程的 I/O 优先级，而尝试以 root 身份进行时遇到问题。"
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -261,14 +261,14 @@ msgid ""
 msgstr ""
 "您没有权限更改此进程的 CPU 调度方式，而尝试以 root 身份进行时遇到问题。"
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
 "trying to run as root."
 msgstr "您没有权限杀死此进程，而尝试以 root 身份进行时遇到问题。"
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -277,19 +277,19 @@ msgid_plural ""
 "lost"
 msgstr[0] "您是否要结束这 %1 个进程？尚未保存进度的工作成果可能会丢失。"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
 msgid_plural "End %1 Processes"
 msgstr[0] "结束 %1 个进程"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "结束"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -300,14 +300,14 @@ msgid_plural ""
 msgstr[0] ""
 "<qt>您是否要<b>立即强制终止</b>这 %1 个进程？尚未保存的工作进度可能会丢失。"
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "强制终止 %1 进程"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "终止"

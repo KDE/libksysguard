@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdebase/processui.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2007-07-10 12:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -262,12 +262,12 @@ msgstr ""
 "Níl go leor ceadanna agat chun an próiseas a mharú, agus bhí fadhb ann nuair "
 "a baineadh triail as é a dhéanamh mar fhorúsáideoir. %1"
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "Caithfidh tú próiseas a roghnú ar dtús."
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -279,7 +279,7 @@ msgstr ""
 "Níl go leor ceadanna agat chun an próiseas a mharú, agus bhí fadhb ann nuair "
 "a baineadh triail as é a dhéanamh mar fhorúsáideoir. %1"
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -291,7 +291,7 @@ msgstr ""
 "Níl go leor ceadanna agat chun an próiseas a mharú, agus bhí fadhb ann nuair "
 "a baineadh triail as é a dhéanamh mar fhorúsáideoir. %1"
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -303,7 +303,7 @@ msgstr ""
 "Níl go leor ceadanna agat chun an próiseas a mharú, agus bhí fadhb ann nuair "
 "a baineadh triail as é a dhéanamh mar fhorúsáideoir. %1"
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -326,7 +326,7 @@ msgstr[4] ""
 "An bhfuil tú cinnte gur mhaith leat na %1 próiseas seo a mharú? Seans go "
 "gcaillfidh tú obair nach sábháilte."
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -337,12 +337,12 @@ msgstr[2] "Cuir Deireadh Le %1 Phróiseas"
 msgstr[3] "Cuir Deireadh Le %1 bPróiseas"
 msgstr[4] "Cuir Deireadh Le %1 Próiseas"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "Deireadh"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -371,7 +371,7 @@ msgstr[4] ""
 "<b>láithreach agus le lámh láidir</b>? Caillfidh tú aon obair nár shábháil "
 "tú."
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -382,7 +382,7 @@ msgstr[2] "Maraigh %1 Phróiseas le Lámh Láidir"
 msgstr[3] "Maraigh %1 bPróiseas le Lámh Láidir"
 msgstr[4] "Maraigh %1 Próiseas le Lámh Láidir"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "Maraigh"

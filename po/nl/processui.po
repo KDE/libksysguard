@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2023-08-28 11:00+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -250,12 +250,12 @@ msgstr ""
 "U hebt geen toegangsrechten om de prioriteit van het proces te wijzigen en "
 "er was een probleem om het als root te proberen."
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "Selecteer eerst een proces."
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -264,7 +264,7 @@ msgstr ""
 "U hebt onvoldoende toegangsrechten om de I/O-prioriteit van het proces te "
 "wijzigen en er was een probleem om het als root te proberen."
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -273,7 +273,7 @@ msgstr ""
 "U hebt geen toegangsrechten om de CPU-planner voor het proces te wijzigen en "
 "er was een probleem om het als root te proberen."
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -282,7 +282,7 @@ msgstr ""
 "U hebt geen toegangsrechten om het proces te beëindigen en er was een "
 "probleem om het als root te proberen."
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -296,7 +296,7 @@ msgstr[1] ""
 "Wilt u deze %1 processen geforceerd beëindigen? Alle niet opgeslagen werk "
 "gaat verloren."
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -304,12 +304,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Proces beëindigen"
 msgstr[1] "%1 processen beëindigen"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "Beëindigen"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -324,7 +324,7 @@ msgstr[1] ""
 "<qt>Wilt u deze %1 processen <b>onmiddellijk en geforceerd</b> beëindigen? "
 "Alle niet opgeslagen werk gaat verloren."
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -332,7 +332,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Proces geforceerd beëindigen"
 msgstr[1] "%1 processen geforceerd beëindigen"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "Beëindigen"

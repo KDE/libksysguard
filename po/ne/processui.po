@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2007-10-31 19:03+0545\n"
 "Last-Translator: Shyam Krishna Bal <shyamkrishna_bal@yahoo.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -267,13 +267,13 @@ msgstr ""
 "तपाईँलाई प्रक्रिया फेरि राम्रो बनाउने अनुमति छैन र मूलको रूपमा चलाउने प्रयास गर्दा त्यहाँ "
 "त्रुटि थियो"
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, fuzzy, kde-format
 #| msgid "You need to select a process first."
 msgid "You must select a process first."
 msgstr "तपाईँले पहिला प्रक्रिया चयन गर्नुपर्दछ ।"
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -284,7 +284,7 @@ msgid ""
 msgstr ""
 "तपाईँलाई प्रक्रिया अन्त्य गर्ने अनुमति छैन र मूलको रूपमा चलाउने प्रयास गर्दा त्यहाँ त्रुटि थियो"
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -295,7 +295,7 @@ msgid ""
 msgstr ""
 "तपाईँलाई प्रक्रिया अन्त्य गर्ने अनुमति छैन र मूलको रूपमा चलाउने प्रयास गर्दा त्यहाँ त्रुटि थियो"
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, fuzzy, kde-format
 #| msgid ""
 #| "You do not have the permission to kill the process and there was a "
@@ -306,7 +306,7 @@ msgid ""
 msgstr ""
 "तपाईँलाई प्रक्रिया अन्त्य गर्ने अनुमति छैन र मूलको रूपमा चलाउने प्रयास गर्दा त्यहाँ त्रुटि थियो"
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, fuzzy, kde-format
 #| msgid "Do you want to kill the selected process?"
 #| msgid_plural "Do you want to kill the %1 selected processes?"
@@ -318,7 +318,7 @@ msgid_plural ""
 msgstr[0] "तपाईँ चयन गरिएका प्रक्रिया अन्त्य गर्न चाहनुहुन्छ ?"
 msgstr[1] "तपाईँ चयन गरिएका %1 प्रक्रिया अन्त्य गर्न चाहनुहुन्छ ?"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, fuzzy, kde-format
 #| msgid "Own Processes"
 msgctxt "Dialog title"
@@ -327,12 +327,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "आफ्नै प्रक्रिया"
 msgstr[1] "आफ्नै प्रक्रिया"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr ""
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, fuzzy, kde-format
 #| msgid "Do you want to kill the selected process?"
 #| msgid_plural "Do you want to kill the %1 selected processes?"
@@ -345,7 +345,7 @@ msgid_plural ""
 msgstr[0] "तपाईँ चयन गरिएका प्रक्रिया अन्त्य गर्न चाहनुहुन्छ ?"
 msgstr[1] "तपाईँ चयन गरिएका %1 प्रक्रिया अन्त्य गर्न चाहनुहुन्छ ?"
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, fuzzy, kde-format
 #| msgid "Kill Process"
 #| msgid_plural "Kill Processes"
@@ -355,7 +355,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "प्रक्रिया अन्त्य गर्नुहोस्"
 msgstr[1] "प्रक्रिया अन्त्य गर्नुहोस्"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "अन्त्य गर्नुहोस्"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2023-07-24 00:10+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -245,12 +245,12 @@ msgstr ""
 "프로세스의 nice 값을 바꿀 수 있는 권한이 없으며, 루트로 실행하려는 중 문제가 "
 "발생했습니다."
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "프로세스를 먼저 선택하십시오."
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -259,7 +259,7 @@ msgstr ""
 "프로세스의 I/O 우선 순위를 바꿀 수 있는 권한이 없으며, 루트로 실행하려는 중 "
 "문제가 발생했습니다."
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -268,7 +268,7 @@ msgstr ""
 "프로세스의 CPU 스케줄러를 바꿀 수 있는 권한이 없으며, 루트로 실행하려는 중 문"
 "제가 발생했습니다."
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -277,7 +277,7 @@ msgstr ""
 "프로세스를 죽일 수 있는 권한이 없으며, 루트로 실행하려는 중 문제가 발생했습니"
 "다."
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -287,19 +287,19 @@ msgid_plural ""
 msgstr[0] ""
 "선택한 프로세스 %1개를 죽이시겠습니까? 저장하지 않은 작업은 손실됩니다"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
 msgid_plural "End %1 Processes"
 msgstr[0] "프로세스 %1개 끝내기"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "끝내기"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -311,14 +311,14 @@ msgstr[0] ""
 "<qt>선택한 프로세스 %1개를 <b>지금 즉시 강제로</b> 죽이시겠습니까? 저장하지 "
 "않은 작업은 손실됩니다"
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "프로세스 %1개 강제로 죽이기"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "죽이기"

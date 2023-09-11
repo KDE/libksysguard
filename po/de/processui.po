@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2023-04-03 16:20+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -252,12 +252,12 @@ msgstr ""
 "Sie sind nicht berechtigt, die Priorität dieses Prozesses zu ändern, und es "
 "gab ein Problem, diesen Vorgang als Systemverwalter durchzuführen."
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "Sie müssen zuerst einen Prozess auswählen."
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -266,7 +266,7 @@ msgstr ""
 "Sie sind nicht berechtigt, die E/A-Priorität zu ändern, und es gab ein "
 "Problem, diesen Vorgang als Systemverwalter durchzuführen."
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -275,7 +275,7 @@ msgstr ""
 "Sie sind nicht berechtigt, den CPU-Planer zu ändern, und es gab ein Problem, "
 "diesen Vorgang als Systemverwalter durchzuführen."
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -284,7 +284,7 @@ msgstr ""
 "Sie sind nicht berechtigt, den Prozess zu beenden, und es gab ein Problem, "
 "diesen Vorgang als Systemverwalter durchzuführen."
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -298,7 +298,7 @@ msgstr[1] ""
 "Möchten Sie diese %1 Prozesse wirklich beenden? Jegliche ungespeicherte "
 "Arbeit könnte dabei verloren gehen."
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -306,12 +306,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Prozess beenden"
 msgstr[1] "%1 Prozesse beenden"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "Beenden"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -326,7 +326,7 @@ msgstr[1] ""
 "Möchten Sie diese %1 Prozesse wirklich <b>sofort und erzwungen</b> beenden? "
 "Jegliche ungespeicherte Arbeit könnte dabei verloren gehen."
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -334,7 +334,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Prozessbeendigung erzwingen"
 msgstr[1] "%1 Prozessbeendigungen erzwingen"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "Beenden (kill)"

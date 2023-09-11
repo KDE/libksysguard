@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2022-12-28 03:25+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -261,12 +261,12 @@ msgstr ""
 "Jūs neturite leidimo keisti proceso Nice reikšmę, be to atsirado problemų "
 "bandant paleisti pagrindinio naudotojo (root) teisėmis."
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "Iš pradžių, privalote pasirinkti procesą."
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -275,7 +275,7 @@ msgstr ""
 "Jūs neturite leidimo keisti proceso I/O prioritetą, be to atsirado problemų "
 "bandant paleisti pagrindinio naudotojo (root) teisėmis."
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -284,7 +284,7 @@ msgstr ""
 "Jūs neturite leidimo keisti procesui procesoriaus planuoklę, be to atsirado "
 "problemų bandant paleisti pagrindinio naudotojo (root) teisėmis."
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -293,7 +293,7 @@ msgstr ""
 "Jūs neturite leidimo nutraukti procesą, be to atsirado problemų bandant "
 "paleisti pagrindinio naudotojo (root) teisėmis."
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -313,7 +313,7 @@ msgstr[3] ""
 "Ar tikrai norite užbaigti šį %1 procesą?  Bet koks neįrašytas darbas gali "
 "būti prarastas."
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -323,12 +323,12 @@ msgstr[1] "Užbaigti %1 procesus"
 msgstr[2] "Užbaigti %1 procesų"
 msgstr[3] "Užbaigti %1 procesą"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "Užbaigti"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -349,7 +349,7 @@ msgstr[3] ""
 "<qt>Ar tikrai norite <b>nedelsiant ir priverstinai nutraukti</b> šį %1 "
 "procesą?  Bet koks neįrašytas darbas gali būti prarastas."
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -359,7 +359,7 @@ msgstr[1] "Priverstinai nutraukti %1 procesus"
 msgstr[2] "Priverstinai nutraukti %1 procesų"
 msgstr[3] "Priverstinai nutraukti %1 procesą"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "Nutraukti"

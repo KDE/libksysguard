@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2023-06-14 15:37+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -257,12 +257,12 @@ msgstr ""
 "Nemáte oprávnenie na zmenu hodnoty nice procesu a vyskytol sa problém pri "
 "pokuse o spustenie ako root."
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "Najskôr musíte zvoliť proces."
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -271,7 +271,7 @@ msgstr ""
 "Nemáte povolenie na zmenu priority I/O procesu a vyskytol sa problém pri "
 "pokuse o spustenie ako root."
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -280,7 +280,7 @@ msgstr ""
 "Nemáte povolenie na zmenu plánovača CPU pre proces a vyskytol sa problém pri "
 "pokuse o spustenie ako root."
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -289,7 +289,7 @@ msgstr ""
 "Nemáte povolenie na zabitie procesu a vyskytol sa problém pri pokuse o "
 "spustenie ako root."
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -304,7 +304,7 @@ msgstr[2] ""
 "Určite chcete ukončiť týchto %1 procesov? Celá neuložená práca sa môže "
 "stratiť."
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -313,12 +313,12 @@ msgstr[0] "Ukončiť proces"
 msgstr[1] "Ukončiť %1 procesy"
 msgstr[2] "Ukončiť %1 procesov"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "Koniec"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -336,7 +336,7 @@ msgstr[2] ""
 "<qt>Určite chcete <b>okamžite a vynútene zabiť</b> týchto %1 procesov? Celá "
 "neuložená práca sa môže stratiť."
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -345,7 +345,7 @@ msgstr[0] "Zabiť proces"
 msgstr[1] "Zabiť %1 procesy"
 msgstr[2] "Zabiť %1 procesov"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "Zabiť"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2022-01-23 23:07+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -272,12 +272,12 @@ msgid ""
 msgstr ""
 "لا تملك صلاحيات لتلطيف هذه العملية و حدثت مشكلة عند محاولة الدخول كجذر."
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "عليك اختيار عملية أولًا."
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -286,7 +286,7 @@ msgstr ""
 "لا تملك تصريحًا بتغيير أولوية الدخل والخرج للعملية، كما وحدثت مشكلة أثناء "
 "محاولة التشغيل بحساب الجذر."
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -295,14 +295,14 @@ msgstr ""
 "لا تملك تصريحًا بتغيير مجدول المعالجة للعملية، كما وحدثت مشكلة أثناء محاولة "
 "التشغيل بحساب الجذر."
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
 "trying to run as root."
 msgstr "لا تملك صلاحيات لقتل هذه العملية و حدثت مشكلة عند محاولة الدخول كجذر."
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -316,7 +316,7 @@ msgstr[3] "أمتأكد من إنهاء %1 عمليات؟ ستفقد أي عمل
 msgstr[4] "أمتأكد من إنهاء %1 عملية؟ ستفقد أي عمل غير محفوظ."
 msgstr[5] "أمتأكد من إنهاء %1 عملية؟ ستفقد أي عمل غير محفوظ."
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -328,12 +328,12 @@ msgstr[3] "إنهاء %1 عمليات"
 msgstr[4] "إنهاء %1 عملية"
 msgstr[5] "إنهاء %1 عملية"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "أنهِ"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -354,7 +354,7 @@ msgstr[4] ""
 msgstr[5] ""
 " أمتأكد من <b>قتل %1 عملية بالقوة وحالًا</b>؟ ستفقد أي عمل غير محفوظ."
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -366,7 +366,7 @@ msgstr[3] "قتل %1 عمليات بالقوة"
 msgstr[4] "قتل %1 عملية بالقوة"
 msgstr[5] "قتل %1 عملية بالقوة"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "اقتل"

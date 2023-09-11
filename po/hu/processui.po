@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-11 02:01+0000\n"
 "PO-Revision-Date: 2019-12-09 00:20+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -254,12 +254,12 @@ msgstr ""
 "Nincs jogosultsága a folyamat prioritásának módosításhoz, és nem sikerült "
 "rendszergazdai módba váltani."
 
-#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1388
+#: ksysguardprocesslist.cpp:1204 ksysguardprocesslist.cpp:1390
 #, kde-format
 msgid "You must select a process first."
 msgstr "Először ki kell jelölni egy folyamatot."
 
-#: ksysguardprocesslist.cpp:1329
+#: ksysguardprocesslist.cpp:1331
 #, kde-format
 msgid ""
 "You do not have the permission to change the I/O priority of the process and "
@@ -268,7 +268,7 @@ msgstr ""
 "Nincs jogosultsága a folyamat I/O prioritásának módosításához, és nem "
 "sikerült rendszergazdai  módba váltani."
 
-#: ksysguardprocesslist.cpp:1345
+#: ksysguardprocesslist.cpp:1347
 #, kde-format
 msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
@@ -277,7 +277,7 @@ msgstr ""
 "Nincs jogosultsága a folyamat CPU ütemezőjének módosításához, és nem "
 "sikerült rendszergazdai módba váltani."
 
-#: ksysguardprocesslist.cpp:1360
+#: ksysguardprocesslist.cpp:1362
 #, kde-format
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
@@ -286,7 +286,7 @@ msgstr ""
 "Nincs jogosultsága a folyamat kilövéséhez, és nem sikerült rendszergazdai "
 "módba váltani."
 
-#: ksysguardprocesslist.cpp:1397
+#: ksysguardprocesslist.cpp:1399
 #, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
@@ -300,7 +300,7 @@ msgstr[1] ""
 "Biztosan le szeretné állítani ezeket a folyamatokat: %1? Az elmentetlen "
 "munkák elveszhetnek"
 
-#: ksysguardprocesslist.cpp:1400
+#: ksysguardprocesslist.cpp:1402
 #, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
@@ -308,12 +308,12 @@ msgid_plural "End %1 Processes"
 msgstr[0] "Folyamat leállítása"
 msgstr[1] "%1 folyamatok leállítása"
 
-#: ksysguardprocesslist.cpp:1402
+#: ksysguardprocesslist.cpp:1404
 #, kde-format
 msgid "End"
 msgstr "Leállítás"
 
-#: ksysguardprocesslist.cpp:1404
+#: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
@@ -328,7 +328,7 @@ msgstr[1] ""
 "<qt>Biztosan szeretné <b>azonnal és erőltetve kilőni</b> ezt a %1 "
 "folyamatot? Az elmentetlen munkák elveszhetnek."
 
-#: ksysguardprocesslist.cpp:1407
+#: ksysguardprocesslist.cpp:1409
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
@@ -336,7 +336,7 @@ msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "Folyamat erőltetett kilövése"
 msgstr[1] "%1 folyamat erőltetett kilövése"
 
-#: ksysguardprocesslist.cpp:1409
+#: ksysguardprocesslist.cpp:1411
 #, kde-format
 msgid "Kill"
 msgstr "Kilövés"
