@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-03-01 00:45+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2023-06-19 08:32+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.2\n"
 
-#: SensorAgent.cpp:87
+#: SensorAgent.cpp:90
 #, kde-format
 msgctxt "%1 is a host name"
 msgid ""
@@ -888,27 +888,27 @@ msgstr "Número real"
 msgid "Log File"
 msgstr "Ficheiro de rexistro"
 
-#: SensorShellAgent.cpp:108
+#: SensorShellAgent.cpp:109
 #, kde-format
 msgid "Could not run daemon program '%1'."
 msgstr "Non puido executarse o servizo «%1»."
 
-#: SensorShellAgent.cpp:115
+#: SensorShellAgent.cpp:116
 #, kde-format
 msgid "The daemon program '%1' failed."
 msgstr "O servizo «%1» fallou."
 
-#: SensorSocketAgent.cpp:89
+#: SensorSocketAgent.cpp:91
 #, kde-format
 msgid "Connection to %1 refused"
 msgstr "rexeitouse a conexión con %1."
 
-#: SensorSocketAgent.cpp:92
+#: SensorSocketAgent.cpp:94
 #, kde-format
 msgid "Host %1 not found"
 msgstr "non se atopou a máquina %1."
 
-#: SensorSocketAgent.cpp:95
+#: SensorSocketAgent.cpp:97
 #, kde-format
 msgid ""
 "An error occurred with the network (e.g. the network cable was accidentally "
@@ -917,7 +917,7 @@ msgstr ""
 "produciuse un erro coa rede (por exemplo, puido desconectarse "
 "accidentalmente o cable de rede) para a máquina %1."
 
-#: SensorSocketAgent.cpp:98
+#: SensorSocketAgent.cpp:100
 #, kde-format
 msgid "Error for host %1: %2"
 msgstr "Erro para a máquina %1: %2"

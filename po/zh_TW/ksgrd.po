@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-03-01 00:45+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2019-11-30 17:50+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 19.11.80\n"
 
-#: SensorAgent.cpp:87
+#: SensorAgent.cpp:90
 #, kde-format
 msgctxt "%1 is a host name"
 msgid ""
@@ -893,34 +893,34 @@ msgstr "浮點數值"
 msgid "Log File"
 msgstr "紀錄檔"
 
-#: SensorShellAgent.cpp:108
+#: SensorShellAgent.cpp:109
 #, kde-format
 msgid "Could not run daemon program '%1'."
 msgstr "無法執行伺服程式 '%1'。"
 
-#: SensorShellAgent.cpp:115
+#: SensorShellAgent.cpp:116
 #, kde-format
 msgid "The daemon program '%1' failed."
 msgstr "伺服程式 '%1' 執行失敗。"
 
-#: SensorSocketAgent.cpp:89
+#: SensorSocketAgent.cpp:91
 #, kde-format
 msgid "Connection to %1 refused"
 msgstr "連線到 %1 被拒"
 
-#: SensorSocketAgent.cpp:92
+#: SensorSocketAgent.cpp:94
 #, kde-format
 msgid "Host %1 not found"
 msgstr "找不到主機 %1"
 
-#: SensorSocketAgent.cpp:95
+#: SensorSocketAgent.cpp:97
 #, kde-format
 msgid ""
 "An error occurred with the network (e.g. the network cable was accidentally "
 "unplugged) for host %1."
 msgstr "主機 %1 發生網路錯誤（例如可能網路線掉了）。"
 
-#: SensorSocketAgent.cpp:98
+#: SensorSocketAgent.cpp:100
 #, kde-format
 msgid "Error for host %1: %2"
 msgstr "主機 %1 的錯誤：%2"

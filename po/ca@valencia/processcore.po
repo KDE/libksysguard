@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2021-11-03 09:12+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -519,139 +519,139 @@ msgstr "Ús de la GPU"
 msgid "GPU Memory"
 msgstr "Memòria de la GPU"
 
-#: process.cpp:101 process.cpp:117
+#: process.cpp:101 process.cpp:122
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Normal"
 msgstr "Normal"
 
-#: process.cpp:103 process.cpp:119
+#: process.cpp:104 process.cpp:125
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very low priority"
 msgstr "Prioritat molt baixa"
 
-#: process.cpp:105 process.cpp:121
+#: process.cpp:107 process.cpp:128
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Low priority"
 msgstr "Prioritat baixa"
 
-#: process.cpp:107 process.cpp:123
+#: process.cpp:110 process.cpp:131
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very high priority"
 msgstr "Prioritat molt alta"
 
-#: process.cpp:109 process.cpp:125
+#: process.cpp:113 process.cpp:134
 #, kde-format
 msgctxt "Process Niceness"
 msgid "High priority"
 msgstr "Prioritat alta"
 
-#: process.cpp:133
+#: process.cpp:143
 #, kde-format
 msgctxt "Priority Class"
 msgid "None"
 msgstr "Sense"
 
-#: process.cpp:135
+#: process.cpp:145
 #, kde-format
 msgctxt "Priority Class"
 msgid "Real Time"
 msgstr "Temps real"
 
-#: process.cpp:137
+#: process.cpp:147
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
 msgstr "Tant-com-puc"
 
-#: process.cpp:139
+#: process.cpp:149
 #, kde-format
 msgctxt "Priority Class"
 msgid "Idle"
 msgstr "En espera"
 
-#: process.cpp:141
+#: process.cpp:151
 #, kde-format
 msgctxt "Priority Class"
 msgid "Unknown"
 msgstr "Desconeguda"
 
-#: process.cpp:149
+#: process.cpp:159
 #, kde-format
 msgctxt "process status"
 msgid "running"
 msgstr "executant-se"
 
-#: process.cpp:151
+#: process.cpp:161
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
 msgstr "adormit"
 
-#: process.cpp:153
+#: process.cpp:163
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
 msgstr "adormit al disc"
 
-#: process.cpp:155
+#: process.cpp:165
 #, kde-format
 msgctxt "process status"
 msgid "zombie"
 msgstr "zombi"
 
-#: process.cpp:157
+#: process.cpp:167
 #, kde-format
 msgctxt "process status"
 msgid "stopped"
 msgstr "parat"
 
-#: process.cpp:159
+#: process.cpp:169
 #, kde-format
 msgctxt "process status"
 msgid "paging"
 msgstr "paginant"
 
-#: process.cpp:161
+#: process.cpp:171
 #, kde-format
 msgctxt "process status"
 msgid "finished"
 msgstr "finalitzat"
 
-#: process.cpp:163
+#: process.cpp:173
 #, kde-format
 msgctxt "process status"
 msgid "unknown"
 msgstr "desconegut"
 
-#: process.cpp:171
+#: process.cpp:181
 #, kde-format
 msgctxt "Scheduler"
 msgid "FIFO"
 msgstr "FIFO"
 
-#: process.cpp:173
+#: process.cpp:183
 #, kde-format
 msgctxt "Scheduler"
 msgid "Round Robin"
 msgstr "Round Roben"
 
-#: process.cpp:175
+#: process.cpp:185
 #, kde-format
 msgctxt "Scheduler"
 msgid "Interactive"
 msgstr "Interactiu"
 
-#: process.cpp:177
+#: process.cpp:187
 #, kde-format
 msgctxt "Scheduler"
 msgid "Batch"
 msgstr "Batch"
 
-#: process.cpp:179
+#: process.cpp:189
 #, kde-format
 msgctxt "Scheduler"
 msgid "Idle"

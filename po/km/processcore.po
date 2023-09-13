@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2010-04-29 14:11+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -495,139 +495,139 @@ msgstr ""
 msgid "GPU Memory"
 msgstr ""
 
-#: process.cpp:101 process.cpp:117
+#: process.cpp:101 process.cpp:122
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Normal"
 msgstr "ធម្មតា"
 
-#: process.cpp:103 process.cpp:119
+#: process.cpp:104 process.cpp:125
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very low priority"
 msgstr "អទិភាព​ទាប​បំផុត"
 
-#: process.cpp:105 process.cpp:121
+#: process.cpp:107 process.cpp:128
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Low priority"
 msgstr "អទិភាព​ទាប"
 
-#: process.cpp:107 process.cpp:123
+#: process.cpp:110 process.cpp:131
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very high priority"
 msgstr "អទិភាព​ខ្ពស់​បំផុត"
 
-#: process.cpp:109 process.cpp:125
+#: process.cpp:113 process.cpp:134
 #, kde-format
 msgctxt "Process Niceness"
 msgid "High priority"
 msgstr "អទិភាព​ខ្ពស់"
 
-#: process.cpp:133
+#: process.cpp:143
 #, kde-format
 msgctxt "Priority Class"
 msgid "None"
 msgstr "គ្មាន"
 
-#: process.cpp:135
+#: process.cpp:145
 #, kde-format
 msgctxt "Priority Class"
 msgid "Real Time"
 msgstr "ពេលវេលា​ពិត"
 
-#: process.cpp:137
+#: process.cpp:147
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
 msgstr "ល្អបំផុត"
 
-#: process.cpp:139
+#: process.cpp:149
 #, kde-format
 msgctxt "Priority Class"
 msgid "Idle"
 msgstr "ទំនេរ"
 
-#: process.cpp:141
+#: process.cpp:151
 #, kde-format
 msgctxt "Priority Class"
 msgid "Unknown"
 msgstr "មិន​ស្គាល់"
 
-#: process.cpp:149
+#: process.cpp:159
 #, kde-format
 msgctxt "process status"
 msgid "running"
 msgstr "កំពុង​រត់"
 
-#: process.cpp:151
+#: process.cpp:161
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
 msgstr "កំពុង​ដេក"
 
-#: process.cpp:153
+#: process.cpp:163
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
 msgstr "ថាស​ដេក"
 
-#: process.cpp:155
+#: process.cpp:165
 #, kde-format
 msgctxt "process status"
 msgid "zombie"
 msgstr "ដំណើរការ​ឡើងវិញ"
 
-#: process.cpp:157
+#: process.cpp:167
 #, kde-format
 msgctxt "process status"
 msgid "stopped"
 msgstr "បាន​ឈប់"
 
-#: process.cpp:159
+#: process.cpp:169
 #, kde-format
 msgctxt "process status"
 msgid "paging"
 msgstr "កំពុង​ដាក់​ក្នុង​ទំព័រ"
 
-#: process.cpp:161
+#: process.cpp:171
 #, kde-format
 msgctxt "process status"
 msgid "finished"
 msgstr "បាន​បញ្ចប់"
 
-#: process.cpp:163
+#: process.cpp:173
 #, kde-format
 msgctxt "process status"
 msgid "unknown"
 msgstr "មិន​ស្គាល់"
 
-#: process.cpp:171
+#: process.cpp:181
 #, kde-format
 msgctxt "Scheduler"
 msgid "FIFO"
 msgstr "FIFO"
 
-#: process.cpp:173
+#: process.cpp:183
 #, kde-format
 msgctxt "Scheduler"
 msgid "Round Robin"
 msgstr "Round Robin"
 
-#: process.cpp:175
+#: process.cpp:185
 #, kde-format
 msgctxt "Scheduler"
 msgid "Interactive"
 msgstr "អន្តរកម្ម"
 
-#: process.cpp:177
+#: process.cpp:187
 #, kde-format
 msgctxt "Scheduler"
 msgid "Batch"
 msgstr "បាច់"
 
-#: process.cpp:179
+#: process.cpp:189
 #, kde-format
 msgctxt "Scheduler"
 msgid "Idle"

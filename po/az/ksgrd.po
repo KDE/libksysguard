@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-03-01 00:45+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2022-11-11 17:55+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.08.3\n"
 
-#: SensorAgent.cpp:87
+#: SensorAgent.cpp:90
 #, kde-format
 msgctxt "%1 is a host name"
 msgid ""
@@ -884,27 +884,27 @@ msgstr "Kəsirli dəyər"
 msgid "Log File"
 msgstr "Jurnal faylı"
 
-#: SensorShellAgent.cpp:108
+#: SensorShellAgent.cpp:109
 #, kde-format
 msgid "Could not run daemon program '%1'."
 msgstr "'%1' demon proqramı başladıla bilmədi."
 
-#: SensorShellAgent.cpp:115
+#: SensorShellAgent.cpp:116
 #, kde-format
 msgid "The daemon program '%1' failed."
 msgstr "'%1' demon proqramında xəta oldu."
 
-#: SensorSocketAgent.cpp:89
+#: SensorSocketAgent.cpp:91
 #, kde-format
 msgid "Connection to %1 refused"
 msgstr "%1 ilə bağlantı rədd edildi"
 
-#: SensorSocketAgent.cpp:92
+#: SensorSocketAgent.cpp:94
 #, kde-format
 msgid "Host %1 not found"
 msgstr "%1 hostu tapılmadı"
 
-#: SensorSocketAgent.cpp:95
+#: SensorSocketAgent.cpp:97
 #, kde-format
 msgid ""
 "An error occurred with the network (e.g. the network cable was accidentally "
@@ -913,7 +913,7 @@ msgstr ""
 "%1 hostu ilə şəbəkə əlaqəsi zamanı xəta baş verdi (məs., təsadüfən şəbəkə "
 "kabeli ayrıldı)."
 
-#: SensorSocketAgent.cpp:98
+#: SensorSocketAgent.cpp:100
 #, kde-format
 msgid "Error for host %1: %2"
 msgstr "%1 hostu ilə bağlantı xətası: %2"

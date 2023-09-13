@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-03-01 00:45+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2020-09-06 01:17+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 19.12.3\n"
 
-#: SensorAgent.cpp:87
+#: SensorAgent.cpp:90
 #, kde-format
 msgctxt "%1 is a host name"
 msgid ""
@@ -885,27 +885,27 @@ msgstr "부동 소수점 값"
 msgid "Log File"
 msgstr "로그 파일"
 
-#: SensorShellAgent.cpp:108
+#: SensorShellAgent.cpp:109
 #, kde-format
 msgid "Could not run daemon program '%1'."
 msgstr "데몬 프로그램 '%1'을(를) 실행할 수 없습니다."
 
-#: SensorShellAgent.cpp:115
+#: SensorShellAgent.cpp:116
 #, kde-format
 msgid "The daemon program '%1' failed."
 msgstr "데몬 프로그램 '%1'이(가) 실패했습니다."
 
-#: SensorSocketAgent.cpp:89
+#: SensorSocketAgent.cpp:91
 #, kde-format
 msgid "Connection to %1 refused"
 msgstr "%1에 연결이 거부됨"
 
-#: SensorSocketAgent.cpp:92
+#: SensorSocketAgent.cpp:94
 #, kde-format
 msgid "Host %1 not found"
 msgstr "호스트 %1을(를) 찾을 수 없음"
 
-#: SensorSocketAgent.cpp:95
+#: SensorSocketAgent.cpp:97
 #, kde-format
 msgid ""
 "An error occurred with the network (e.g. the network cable was accidentally "
@@ -914,7 +914,7 @@ msgstr ""
 "호스트 %1(으)로 가는 네트워크에서 오류가 발생했습니다(예: 네트워크 케이블 연"
 "결이 해제됨)."
 
-#: SensorSocketAgent.cpp:98
+#: SensorSocketAgent.cpp:100
 #, kde-format
 msgid "Error for host %1: %2"
 msgstr "호스트 %1 오류: %2"

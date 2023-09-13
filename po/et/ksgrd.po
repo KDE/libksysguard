@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-03-01 00:45+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2020-09-25 13:53+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: SensorAgent.cpp:87
+#: SensorAgent.cpp:90
 #, kde-format
 msgctxt "%1 is a host name"
 msgid ""
@@ -886,27 +886,27 @@ msgstr "Ujukomaväärtus"
 msgid "Log File"
 msgstr "Logifail"
 
-#: SensorShellAgent.cpp:108
+#: SensorShellAgent.cpp:109
 #, kde-format
 msgid "Could not run daemon program '%1'."
 msgstr "Deemoniprogrammi '%1' käivitamine nurjus."
 
-#: SensorShellAgent.cpp:115
+#: SensorShellAgent.cpp:116
 #, kde-format
 msgid "The daemon program '%1' failed."
 msgstr "Deemoniprogramm '%1' nurjus."
 
-#: SensorSocketAgent.cpp:89
+#: SensorSocketAgent.cpp:91
 #, kde-format
 msgid "Connection to %1 refused"
 msgstr "Masin %1 keeldus ühendusest"
 
-#: SensorSocketAgent.cpp:92
+#: SensorSocketAgent.cpp:94
 #, kde-format
 msgid "Host %1 not found"
 msgstr "Masinat %1 ei leitud"
 
-#: SensorSocketAgent.cpp:95
+#: SensorSocketAgent.cpp:97
 #, kde-format
 msgid ""
 "An error occurred with the network (e.g. the network cable was accidentally "
@@ -915,7 +915,7 @@ msgstr ""
 "Masina %1 puhul tekkis võrgutõrge (nt. võidi võrgukaabel kogemata välja "
 "tõmmata)."
 
-#: SensorSocketAgent.cpp:98
+#: SensorSocketAgent.cpp:100
 #, kde-format
 msgid "Error for host %1: %2"
 msgstr "Tõrge masinaga %1: %2"

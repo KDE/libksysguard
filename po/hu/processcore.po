@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2021-09-04 18:31+0200\n"
 "Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -513,139 +513,139 @@ msgstr "GPU használat"
 msgid "GPU Memory"
 msgstr "GPU memória"
 
-#: process.cpp:101 process.cpp:117
+#: process.cpp:101 process.cpp:122
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Normal"
 msgstr "Normál"
 
-#: process.cpp:103 process.cpp:119
+#: process.cpp:104 process.cpp:125
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very low priority"
 msgstr "Nagyon alacsony prioritás"
 
-#: process.cpp:105 process.cpp:121
+#: process.cpp:107 process.cpp:128
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Low priority"
 msgstr "Alacsony prioritás"
 
-#: process.cpp:107 process.cpp:123
+#: process.cpp:110 process.cpp:131
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very high priority"
 msgstr "Nagyon magas prioritás"
 
-#: process.cpp:109 process.cpp:125
+#: process.cpp:113 process.cpp:134
 #, kde-format
 msgctxt "Process Niceness"
 msgid "High priority"
 msgstr "Magas prioritás"
 
-#: process.cpp:133
+#: process.cpp:143
 #, kde-format
 msgctxt "Priority Class"
 msgid "None"
 msgstr "Nincs"
 
-#: process.cpp:135
+#: process.cpp:145
 #, kde-format
 msgctxt "Priority Class"
 msgid "Real Time"
 msgstr "Valós idejű"
 
-#: process.cpp:137
+#: process.cpp:147
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
 msgstr "Legjobb teljesítmény"
 
-#: process.cpp:139
+#: process.cpp:149
 #, kde-format
 msgctxt "Priority Class"
 msgid "Idle"
 msgstr "Üresjárat"
 
-#: process.cpp:141
+#: process.cpp:151
 #, kde-format
 msgctxt "Priority Class"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: process.cpp:149
+#: process.cpp:159
 #, kde-format
 msgctxt "process status"
 msgid "running"
 msgstr "fut"
 
-#: process.cpp:151
+#: process.cpp:161
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
 msgstr "inaktív"
 
-#: process.cpp:153
+#: process.cpp:163
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
 msgstr "inaktív lemez"
 
-#: process.cpp:155
+#: process.cpp:165
 #, kde-format
 msgctxt "process status"
 msgid "zombie"
 msgstr "zombi"
 
-#: process.cpp:157
+#: process.cpp:167
 #, kde-format
 msgctxt "process status"
 msgid "stopped"
 msgstr "leállt"
 
-#: process.cpp:159
+#: process.cpp:169
 #, kde-format
 msgctxt "process status"
 msgid "paging"
 msgstr "lapozás"
 
-#: process.cpp:161
+#: process.cpp:171
 #, kde-format
 msgctxt "process status"
 msgid "finished"
 msgstr "befejezett"
 
-#: process.cpp:163
+#: process.cpp:173
 #, kde-format
 msgctxt "process status"
 msgid "unknown"
 msgstr "ismeretlen"
 
-#: process.cpp:171
+#: process.cpp:181
 #, kde-format
 msgctxt "Scheduler"
 msgid "FIFO"
 msgstr "FIFO"
 
-#: process.cpp:173
+#: process.cpp:183
 #, kde-format
 msgctxt "Scheduler"
 msgid "Round Robin"
 msgstr "Egymás után"
 
-#: process.cpp:175
+#: process.cpp:185
 #, kde-format
 msgctxt "Scheduler"
 msgid "Interactive"
 msgstr "Interaktív"
 
-#: process.cpp:177
+#: process.cpp:187
 #, kde-format
 msgctxt "Scheduler"
 msgid "Batch"
 msgstr "Kötegelt"
 
-#: process.cpp:179
+#: process.cpp:189
 #, kde-format
 msgctxt "Scheduler"
 msgid "Idle"

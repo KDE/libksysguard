@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2010-06-30 14:15+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -494,139 +494,139 @@ msgstr ""
 msgid "GPU Memory"
 msgstr ""
 
-#: process.cpp:101 process.cpp:117
+#: process.cpp:101 process.cpp:122
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Normal"
 msgstr "нормалан"
 
-#: process.cpp:103 process.cpp:119
+#: process.cpp:104 process.cpp:125
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very low priority"
 msgstr "врло низак приоритет"
 
-#: process.cpp:105 process.cpp:121
+#: process.cpp:107 process.cpp:128
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Low priority"
 msgstr "низак приоритет"
 
-#: process.cpp:107 process.cpp:123
+#: process.cpp:110 process.cpp:131
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very high priority"
 msgstr "врло висок приоритет"
 
-#: process.cpp:109 process.cpp:125
+#: process.cpp:113 process.cpp:134
 #, kde-format
 msgctxt "Process Niceness"
 msgid "High priority"
 msgstr "висок приоритет"
 
-#: process.cpp:133
+#: process.cpp:143
 #, kde-format
 msgctxt "Priority Class"
 msgid "None"
 msgstr "никакав"
 
-#: process.cpp:135
+#: process.cpp:145
 #, kde-format
 msgctxt "Priority Class"
 msgid "Real Time"
 msgstr "стварновременски"
 
-#: process.cpp:137
+#: process.cpp:147
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
 msgstr "најнапорнији"
 
-#: process.cpp:139
+#: process.cpp:149
 #, kde-format
 msgctxt "Priority Class"
 msgid "Idle"
 msgstr "мирујући"
 
-#: process.cpp:141
+#: process.cpp:151
 #, kde-format
 msgctxt "Priority Class"
 msgid "Unknown"
 msgstr "непознат"
 
-#: process.cpp:149
+#: process.cpp:159
 #, kde-format
 msgctxt "process status"
 msgid "running"
 msgstr "ради"
 
-#: process.cpp:151
+#: process.cpp:161
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
 msgstr "спава"
 
-#: process.cpp:153
+#: process.cpp:163
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
 msgstr "диск‑спава"
 
-#: process.cpp:155
+#: process.cpp:165
 #, kde-format
 msgctxt "process status"
 msgid "zombie"
 msgstr "зомби"
 
-#: process.cpp:157
+#: process.cpp:167
 #, kde-format
 msgctxt "process status"
 msgid "stopped"
 msgstr "стоји"
 
-#: process.cpp:159
+#: process.cpp:169
 #, kde-format
 msgctxt "process status"
 msgid "paging"
 msgstr "страничи"
 
-#: process.cpp:161
+#: process.cpp:171
 #, kde-format
 msgctxt "process status"
 msgid "finished"
 msgstr "завршен"
 
-#: process.cpp:163
+#: process.cpp:173
 #, kde-format
 msgctxt "process status"
 msgid "unknown"
 msgstr "непознат"
 
-#: process.cpp:171
+#: process.cpp:181
 #, kde-format
 msgctxt "Scheduler"
 msgid "FIFO"
 msgstr "ФИФО"
 
-#: process.cpp:173
+#: process.cpp:183
 #, kde-format
 msgctxt "Scheduler"
 msgid "Round Robin"
 msgstr "кружни"
 
-#: process.cpp:175
+#: process.cpp:185
 #, kde-format
 msgctxt "Scheduler"
 msgid "Interactive"
 msgstr "интерактивни"
 
-#: process.cpp:177
+#: process.cpp:187
 #, kde-format
 msgctxt "Scheduler"
 msgid "Batch"
 msgstr "пакетни"
 
-#: process.cpp:179
+#: process.cpp:189
 #, kde-format
 msgctxt "Scheduler"
 msgid "Idle"

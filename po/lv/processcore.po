@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-04 01:59+0000\n"
+"POT-Creation-Date: 2023-09-13 02:06+0000\n"
 "PO-Revision-Date: 2011-07-08 13:00+0300\n"
 "Last-Translator: Rūdofls Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -497,139 +497,139 @@ msgstr ""
 msgid "GPU Memory"
 msgstr ""
 
-#: process.cpp:101 process.cpp:117
+#: process.cpp:101 process.cpp:122
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Normal"
 msgstr "Normāla"
 
-#: process.cpp:103 process.cpp:119
+#: process.cpp:104 process.cpp:125
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very low priority"
 msgstr "Ļoti zema prioritāte"
 
-#: process.cpp:105 process.cpp:121
+#: process.cpp:107 process.cpp:128
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Low priority"
 msgstr "Zema prioritāte"
 
-#: process.cpp:107 process.cpp:123
+#: process.cpp:110 process.cpp:131
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very high priority"
 msgstr "Ļoti augsta prioritāte"
 
-#: process.cpp:109 process.cpp:125
+#: process.cpp:113 process.cpp:134
 #, kde-format
 msgctxt "Process Niceness"
 msgid "High priority"
 msgstr "Augsta prioritāte"
 
-#: process.cpp:133
+#: process.cpp:143
 #, kde-format
 msgctxt "Priority Class"
 msgid "None"
 msgstr "Nav"
 
-#: process.cpp:135
+#: process.cpp:145
 #, kde-format
 msgctxt "Priority Class"
 msgid "Real Time"
 msgstr "Reāla laika prioritāte"
 
-#: process.cpp:137
+#: process.cpp:147
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
 msgstr "Labākā mēģinājuma"
 
-#: process.cpp:139
+#: process.cpp:149
 #, kde-format
 msgctxt "Priority Class"
 msgid "Idle"
 msgstr "Tukšgaita"
 
-#: process.cpp:141
+#: process.cpp:151
 #, kde-format
 msgctxt "Priority Class"
 msgid "Unknown"
 msgstr "Nezināma"
 
-#: process.cpp:149
+#: process.cpp:159
 #, kde-format
 msgctxt "process status"
 msgid "running"
 msgstr "izpildās"
 
-#: process.cpp:151
+#: process.cpp:161
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
 msgstr "guļ"
 
-#: process.cpp:153
+#: process.cpp:163
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
 msgstr "gaida disku"
 
-#: process.cpp:155
+#: process.cpp:165
 #, kde-format
 msgctxt "process status"
 msgid "zombie"
 msgstr "zombijs"
 
-#: process.cpp:157
+#: process.cpp:167
 #, kde-format
 msgctxt "process status"
 msgid "stopped"
 msgstr "apstādināts"
 
-#: process.cpp:159
+#: process.cpp:169
 #, kde-format
 msgctxt "process status"
 msgid "paging"
 msgstr "lapošana"
 
-#: process.cpp:161
+#: process.cpp:171
 #, kde-format
 msgctxt "process status"
 msgid "finished"
 msgstr "pabeigts"
 
-#: process.cpp:163
+#: process.cpp:173
 #, kde-format
 msgctxt "process status"
 msgid "unknown"
 msgstr "nezināms"
 
-#: process.cpp:171
+#: process.cpp:181
 #, kde-format
 msgctxt "Scheduler"
 msgid "FIFO"
 msgstr "FIFO"
 
-#: process.cpp:173
+#: process.cpp:183
 #, kde-format
 msgctxt "Scheduler"
 msgid "Round Robin"
 msgstr "Apļnodošana (Round Robin)"
 
-#: process.cpp:175
+#: process.cpp:185
 #, kde-format
 msgctxt "Scheduler"
 msgid "Interactive"
 msgstr "Interaktīvs"
 
-#: process.cpp:177
+#: process.cpp:187
 #, kde-format
 msgctxt "Scheduler"
 msgid "Batch"
 msgstr "Uzkrājošie (Batch)"
 
-#: process.cpp:179
+#: process.cpp:189
 #, kde-format
 msgctxt "Scheduler"
 msgid "Idle"
