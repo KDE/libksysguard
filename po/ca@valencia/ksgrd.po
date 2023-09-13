@@ -916,7 +916,7 @@ msgid ""
 "An error occurred with the network (e.g. the network cable was accidentally "
 "unplugged) for host %1."
 msgstr ""
-"S'ha produït un error de la xarxa amb la màquina %1 (p. ex. el cable de "
+"S'ha produït un error de la xarxa amb la màquina %1 (p. ex., el cable de "
 "xarxa s'ha desconnectat accidentalment)."
 
 #: SensorSocketAgent.cpp:98
