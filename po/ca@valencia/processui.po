@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-13 02:06+0000\n"
-"PO-Revision-Date: 2023-05-02 21:42+0200\n"
+"PO-Revision-Date: 2023-09-14 18:38+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:554
 #, kde-format
@@ -858,9 +858,9 @@ msgstr ""
 "pel procés Xorg per a les imatges d'este procés. Esta és la memòria "
 "addicional utilitzada a la memòria i a la memòria compartida."
 "<br><i>Informació tècnica: </i>Esta només compta la memòria dels mapes de "
-"píxels, i no inclou els recursos de memòria utilitzats per als tipus de "
-"lletra, cursors, conjunts de tipus, etc. Vegeu el programa <code>xrestop</"
-"code> per a una anàlisi més detallada."
+"píxels, i no inclou els recursos de memòria utilitzats per les lletres, "
+"cursors, conjunts de tipus, etc. Vegeu el programa <code>xrestop</code> per "
+"a una anàlisi més detallada."
 
 #: ProcessModel.cpp:1245
 #, kde-format
