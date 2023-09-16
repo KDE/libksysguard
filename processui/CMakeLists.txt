@@ -48,7 +48,6 @@ target_link_libraries(processui
         KF6::I18n
         KF6::WindowSystem
         KF6::AuthCore
-        KF6::Completion
         KF6::ConfigWidgets
         KF6::WidgetsAddons
         KF6::IconThemes
