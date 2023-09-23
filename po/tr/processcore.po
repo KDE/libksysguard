@@ -683,6 +683,3 @@ msgstr "Belirtilmeyen bir hata oluştu."
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "Bilinmeyen bir hata oluştu."
-
-#~ msgid "The elapsed time since the process was started."
-#~ msgstr "Bu sürecin başlatıldığından bu yana geçen zaman."

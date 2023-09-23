@@ -25,7 +25,7 @@ msgstr "Algılayıcı Göstergelerini Göster"
 #: contents/ui/Config.qml:38
 #, kde-format
 msgid "Start from Angle:"
-msgstr "Şu Açıdan Başlat:"
+msgstr "Şu açıdan başlat:"
 
 #: contents/ui/Config.qml:43
 #, kde-format
@@ -42,7 +42,7 @@ msgstr "°"
 #: contents/ui/Config.qml:51
 #, kde-format
 msgid "Total Pie Angle:"
-msgstr "Toplam Pasta Açısı:"
+msgstr "Toplam pasta açısı:"
 
 #: contents/ui/Config.qml:56
 #, kde-format

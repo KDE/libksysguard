@@ -268,29 +268,3 @@ msgstr "Geri"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sistem Monitörü Algılayıcısı"
-
-#~ msgid "User Interface"
-#~ msgstr "Kullanıcı Arayüzü"
-
-#~ msgid ""
-#~ "The compact representation of the sensors plasmoid when collapsed, for "
-#~ "instance in a panel."
-#~ msgstr ""
-#~ "Sensörler Plasmoid'inin daraltıldığındaki kompakt görünüşü; örneğin bir "
-#~ "paneldeki gibi."
-
-#~ msgid "The representation of the plasmoid when it's fully expanded."
-#~ msgstr "Plasmoid'in tümüyle genişletildiğindeki görünüşü."
-
-#~ msgid "The optional configuration page for this face."
-#~ msgstr "Bu yüz için isteğe bağlı yapılandırma sayfası."
-
-#~ msgid "Configuration support"
-#~ msgstr "Yapılandırma desteği"
-
-#~ msgid "KConfigXT xml file for face-specific configuration options."
-#~ msgstr "Yüze özel yapılandırma seçenekleri için KConfigXT xml dosyası."
-
-#~ msgid ""
-#~ "The configuration file that describes face properties and capabilities."
-#~ msgstr "Yüz özelliklerini ve yeteneklerini açıklayan yapılandırma dosyası."
