@@ -307,7 +307,6 @@ KSysGuardProcessList::KSysGuardProcessList(QWidget *parent, const QString &hostN
     qDBusRegisterMetaType<QList<long long>>();
 
     d->mProcessController = new KSysGuard::ProcessController(this);
-    window()->winId();
     d->mProcessController->setWindow(window()->windowHandle());
 
     d->mUpdateIntervalMSecs = 0; // Set process to not update manually by default
