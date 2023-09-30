@@ -5,15 +5,15 @@
 # Sébastien Renard <renard@kde.org>, 2010.
 # Nathan Murat <nathanmurat28@outlook.com>, 2019.
 # Simon Depiets <sdepiets@gmail.com>, 2020.
-# Xavier Besnard <xavier.besnard@neuf.fr>, 2020, 2021.
+# SPDX-FileCopyrightText: 2020, 2021, 2023 Xavier Besnard <xavier.besnard@neuf.fr>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 02:55+0000\n"
-"PO-Revision-Date: 2021-05-19 09:40+0200\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2023-09-28 17:48+0200\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 21.04.1\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -499,7 +499,7 @@ msgstr "Vitesse de téléchargement"
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr "Télécharger"
+msgstr "Téléchargement"
 
 #: plugins/network/network.cpp:40
 #, kde-format
@@ -511,7 +511,7 @@ msgstr "Vitesse d'envoi"
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr "Envoyer"
+msgstr "Envoi"
 
 #: plugins/nvidia/nvidia.cpp:28
 #, kde-format
