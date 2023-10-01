@@ -551,7 +551,7 @@ msgstr "Uso da partición"
 #: SensorManager.cpp:164
 #, kde-format
 msgid "Used Space"
-msgstr "Espazo utilizado"
+msgstr "Espazo usado"
 
 #: SensorManager.cpp:165
 #, kde-format
