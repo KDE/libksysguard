@@ -680,6 +680,3 @@ msgstr ""
 #, kde-format
 msgid "An unknown error occurred."
 msgstr ""
-
-#~ msgid "The elapsed time since the process was started."
-#~ msgstr "プロセス起動後に経過した時間です。"
