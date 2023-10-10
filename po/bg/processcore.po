@@ -686,6 +686,3 @@ msgstr "Възникна неуточнена грешка."
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "Възникна неизвестна грешка."
-
-#~ msgid "The elapsed time since the process was started."
-#~ msgstr "Изминалото време от началото на процеса."
