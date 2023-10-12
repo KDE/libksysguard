@@ -738,11 +738,11 @@ msgstr ""
 "<qt>O usuario que posúe este proceso. Se o setuid efectivo do usuario é "
 "distinto amosarase o usuario que posúe o proceso seguido polo usuario "
 "efectivo. A axudiña contén a información completa. <p><table><tr><td>Nome de "
-"usuario/grupo</td><td>O nome de usuario do usuario e grupo reais que crearon "
+"usuaria/grupo</td><td>O nome de usuaria do usuario e grupo reais que crearon "
 "este proceso</td></tr><tr> <td>Usuario/grupo efectivo</td><td>O proceso está "
 "a executarse cos privilexios do usuario e grupo efectivos. Amósase se é "
 "distinto do usuario real.</td></tr> <tr><td>Usuario e grupo setuid</td><td>O "
-"nome de usuario gardado do binario. O proceso pode trocar do usuario ou "
+"nome de usuaria gardado do binario. O proceso pode trocar do usuario ou "
 "grupo efectivos ao setuid.</td></tr> <tr><td>Usuario e grupo no sistema de "
 "ficheiros</td><td>Os accesos ao sistema de ficheiros compróbanse con este "
 "usuario e grupo. Esta é unha chamada específica de Linux. Consulte "
@@ -970,7 +970,7 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Login Name:</emphasis> %1</para>"
-msgstr "<para><emphasis strong='true'>Nome de usuario:</emphasis> %1</para>"
+msgstr "<para><emphasis strong='true'>Nome de usuaria:</emphasis> %1</para>"
 
 #: ProcessModel.cpp:1298
 #, kde-kuit-format
@@ -990,7 +990,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "<para><emphasis strong='true'>Login Name:</emphasis> %1 (uid: %2)</para>"
 msgstr ""
-"<para><emphasis strong='true'>Nome de usuario:</emphasis> %1 (uid: %2)</para>"
+"<para><emphasis strong='true'>Nome de usuaria:</emphasis> %1 (uid: %2)</para>"
 
 #: ProcessModel.cpp:1308
 #, kde-kuit-format
@@ -1404,7 +1404,7 @@ msgstr "Nome"
 #, kde-format
 msgctxt "process heading"
 msgid "Username"
-msgstr "Nome de usuario"
+msgstr "Nome de usuaria"
 
 #: ProcessModel.cpp:2183
 #, kde-format
@@ -1598,7 +1598,7 @@ msgid ""
 msgstr ""
 "O texto que se indica aquí filtra os procesos que se amosan. Este texto pode "
 "se unha parte da cadea do nome, orde ou título da xanela do proceso. Tamén "
-"pode ser un nome de usuario ou un número ID de proceso.<p>\n"
+"pode ser un nome de usuaria ou un número ID de proceso.<p>\n"
 "Por exemplo:\n"
 "\n"
 "<table>\n"
@@ -1663,7 +1663,7 @@ msgstr ""
 "non se tratan dun xeito distinto.<br>\n"
 "Os fíos do núcleo amósanse como procesos normais pero en realidade "
 "execútanse dentro do núcleo e non son un proceso real. Polo tanto moitos dos "
-"campos (como Nome de usuario) non se aplican.\n"
+"campos (como Nome de usuaria) non se aplican.\n"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cmbFilter)
 #: ProcessWidgetUI.ui:111
