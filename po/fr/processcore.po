@@ -493,13 +493,13 @@ msgstr "Processus"
 #, kde-format
 msgctxt "@title"
 msgid "Download Speed"
-msgstr "Vitesse de téléchargement"
+msgstr "Vitesse de réception"
 
 #: plugins/network/network.cpp:37
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr "Téléchargement"
+msgstr "Réception"
 
 #: plugins/network/network.cpp:40
 #, kde-format
