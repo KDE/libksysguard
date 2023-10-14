@@ -31,12 +31,12 @@ msgstr[1] "Establix les prioritats..."
 #: ksysguardprocesslist.cpp:203 ksysguardprocesslist.cpp:656
 #, kde-format
 msgid "Jump to Parent Process"
-msgstr "Salta al procés pare"
+msgstr "Salta fins al procés pare"
 
 #: ksysguardprocesslist.cpp:205
 #, kde-format
 msgid "Jump to Process Debugging This One"
-msgstr "Salta als processos que depuren este"
+msgstr "Salta fins als processos que depuren este"
 
 #: ksysguardprocesslist.cpp:206
 #, kde-format
@@ -146,7 +146,7 @@ msgstr "Envia un senyal"
 #: ksysguardprocesslist.cpp:610
 #, kde-format
 msgid "Jump to Parent Process (%1)"
-msgstr "Salta al procés pare (%1)"
+msgstr "Salta fins al procés pare (%1)"
 
 #: ksysguardprocesslist.cpp:782
 #, kde-format
