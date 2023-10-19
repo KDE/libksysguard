@@ -25,7 +25,7 @@ public:
 
     QString path;
     State state = State::Initial;
-    QVector<QPair<QString, SensorInfo>> result;
+    QList<QPair<QString, SensorInfo>> result;
 
     QDBusPendingCallWatcher *watcher = nullptr;
 };
@@ -109,7 +109,7 @@ void KSysGuard::SensorQuery::sortByName()
     });
 }
 
-QVector<QPair<QString, SensorInfo>> KSysGuard::SensorQuery::result() const
+QList<QPair<QString, SensorInfo>> KSysGuard::SensorQuery::result() const
 {
     return d->result;
 }

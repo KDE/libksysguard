@@ -59,7 +59,7 @@ public:
 private:
     friend class Sensor;
     friend class SensorTreeModel;
-    QVector<QPair<QString, SensorInfo>> result() const;
+    QList<QPair<QString, SensorInfo>> result() const;
 
     class Private;
     const std::unique_ptr<Private> d;

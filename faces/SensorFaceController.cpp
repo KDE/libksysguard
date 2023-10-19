@@ -156,7 +156,7 @@ void SensorResolver::execute()
     });
 }
 
-QVector<QPair<QRegularExpression, QString>> KSysGuard::SensorFaceControllerPrivate::sensorIdReplacements;
+QList<QPair<QRegularExpression, QString>> KSysGuard::SensorFaceControllerPrivate::sensorIdReplacements;
 QRegularExpression SensorFaceControllerPrivate::oldDiskSensor = QRegularExpression(QStringLiteral("^disk\\/(.+)_\\(\\d+:\\d+\\)"));
 QRegularExpression SensorFaceControllerPrivate::oldPartitionSensor = QRegularExpression(QStringLiteral("^partitions(\\/.+)\\/"));
 

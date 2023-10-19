@@ -199,9 +199,9 @@ public:
     static const int MAX_HIST_ENTRIES = 100;
     static const int MIN_HIST_AGE = 200; ///< If the latest history entry is at least this ms old, a new one gets added
     /** Storage for the history entries. We need one per percentage column. */
-    QHash<KSysGuard::Process *, QVector<ProcessModel::PercentageHistoryEntry>> mMapProcessCPUHistory;
+    QHash<KSysGuard::Process *, QList<ProcessModel::PercentageHistoryEntry>> mMapProcessCPUHistory;
 
-    QVector<KSysGuard::ProcessAttribute *> mExtraAttributes;
+    QList<KSysGuard::ProcessAttribute *> mExtraAttributes;
 
 #if HAVE_XRES
     bool mHaveXRes; ///< True if the XRes extension is available at run time

@@ -15,10 +15,10 @@ using namespace KSysGuard;
 class Q_DECL_HIDDEN ProcessAttributeModel::Private
 {
 public:
-    QVector<ProcessAttribute *> m_attributes;
+    QList<ProcessAttribute *> m_attributes;
 };
 
-ProcessAttributeModel::ProcessAttributeModel(const QVector<ProcessAttribute *> &attributes, QObject *parent)
+ProcessAttributeModel::ProcessAttributeModel(const QList<ProcessAttribute *> &attributes, QObject *parent)
     : QAbstractListModel(parent)
     , d(new Private)
 {

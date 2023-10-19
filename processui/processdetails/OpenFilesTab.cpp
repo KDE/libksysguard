@@ -85,7 +85,7 @@ public:
         QString type;
         QString filename;
     };
-    using Data = QVector<DataItem>;
+    using Data = QList<DataItem>;
 
     void setData(Data &&data)
     {

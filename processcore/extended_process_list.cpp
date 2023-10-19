@@ -24,8 +24,8 @@ public:
     void loadPlugins();
 
     ExtendedProcesses *q;
-    QVector<ProcessAttribute *> m_coreAttributes;
-    QVector<ProcessDataProvider *> m_providers;
+    QList<ProcessAttribute *> m_coreAttributes;
+    QList<ProcessDataProvider *> m_providers;
     QHash<K_UID, KUser> m_userCache;
 };
 
@@ -61,7 +61,7 @@ public:
         return QVariant::fromValue(m_extractFunc(process));
     }
 
-    QVariant cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process *> &groupProcesses) const override
+    QVariant cgroupData(KSysGuard::CGroup *cgroup, const QList<KSysGuard::Process *> &groupProcesses) const override
     {
         switch (m_groupPolicy) {
         case Accumulate:
@@ -530,14 +530,14 @@ ExtendedProcesses::~ExtendedProcesses()
 {
 }
 
-QVector<ProcessAttribute *> ExtendedProcesses::attributes() const
+QList<ProcessAttribute *> ExtendedProcesses::attributes() const
 {
     return d->m_coreAttributes + extendedAttributes();
 }
 
-QVector<ProcessAttribute *> ExtendedProcesses::extendedAttributes() const
+QList<ProcessAttribute *> ExtendedProcesses::extendedAttributes() const
 {
-    QVector<ProcessAttribute *> rc;
+    QList<ProcessAttribute *> rc;
     for (auto p : std::as_const(d->m_providers)) {
         rc << p->attributes();
     }
@@ -546,7 +546,7 @@ QVector<ProcessAttribute *> ExtendedProcesses::extendedAttributes() const
 
 void ExtendedProcesses::Private::loadPlugins()
 {
-    const QVector<KPluginMetaData> listMetaData = KPluginMetaData::findPlugins(QStringLiteral("ksysguard/process"));
+    const QList<KPluginMetaData> listMetaData = KPluginMetaData::findPlugins(QStringLiteral("ksysguard/process"));
     // instantiate all plugins
     for (const auto &pluginMetaData : listMetaData) {
         qCDebug(LIBKSYSGUARD_PROCESSCORE) << "loading plugin" << pluginMetaData.name();

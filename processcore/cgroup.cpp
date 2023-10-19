@@ -31,7 +31,7 @@ public:
     }
     const QString processGroupId;
     const KService::Ptr service;
-    QVector<pid_t> pids;
+    QList<pid_t> pids;
 
     static KService::Ptr serviceFromAppId(const QString &appId);
 
@@ -44,7 +44,7 @@ public:
 class CGroupPrivate::ReadPidsRunnable : public QRunnable
 {
 public:
-    ReadPidsRunnable(QObject *context, const QString &path, std::function<void(QVector<pid_t>)> callback)
+    ReadPidsRunnable(QObject *context, const QString &path, std::function<void(QList<pid_t>)> callback)
         : m_context(context)
         , m_path(path)
         , m_callback(callback)
@@ -57,7 +57,7 @@ public:
         pidFile.open(QFile::ReadOnly | QIODevice::Text);
         QTextStream stream(&pidFile);
 
-        QVector<pid_t> pids;
+        QList<pid_t> pids;
         QString line = stream.readLine();
         while (!line.isNull()) {
             pids.append(line.toLong());
@@ -72,7 +72,7 @@ public:
 private:
     QPointer<QObject> m_context;
     QString m_path;
-    std::function<void(QVector<pid_t>)> m_callback;
+    std::function<void(QList<pid_t>)> m_callback;
 };
 
 class CGroupSystemInformation
@@ -112,17 +112,17 @@ KService::Ptr KSysGuard::CGroup::service() const
     return d->service;
 }
 
-QVector<pid_t> CGroup::pids() const
+QList<pid_t> CGroup::pids() const
 {
     return d->pids;
 }
 
-void CGroup::setPids(const QVector<pid_t> &pids)
+void CGroup::setPids(const QList<pid_t> &pids)
 {
     d->pids = pids;
 }
 
-void CGroup::requestPids(QObject *context, std::function<void(QVector<pid_t>)> callback)
+void CGroup::requestPids(QObject *context, std::function<void(QList<pid_t>)> callback)
 {
     QString path = cgroupSysBasePath() + d->processGroupId + QLatin1String("/cgroup.procs");
     auto readPidsRunnable = new CGroupPrivate::ReadPidsRunnable(context, path, callback);

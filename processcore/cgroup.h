@@ -6,9 +6,9 @@
 
 #pragma once
 
+#include <QList>
 #include <QScopedPointer>
 #include <QString>
-#include <QVector>
 
 #include <KService>
 
@@ -45,12 +45,12 @@ public:
      * @brief The list of pids contained in this group.
      * @return A Vector of pids
      */
-    QVector<pid_t> pids() const;
+    QList<pid_t> pids() const;
 
     /**
      * @internal
      */
-    void setPids(const QVector<pid_t> &pids);
+    void setPids(const QList<pid_t> &pids);
 
     /**
      * Request fetching the list of processes associated with this cgroup.
@@ -64,7 +64,7 @@ public:
      * \param callback A callback that gets called once the list of pids has
      *                 been retrieved.
      */
-    void requestPids(QObject *context, std::function<void(QVector<pid_t>)> callback);
+    void requestPids(QObject *context, std::function<void(QList<pid_t>)> callback);
 
     /**
      * Returns the base path to exposed cgroup information. Either /sys/fs/cgroup or /sys/fs/cgroup/unified as applicable

@@ -40,7 +40,7 @@ class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
     Q_ENUMS(Units)
 
 public:
-    /** Storage for history values. PercentageHistoryRole returns a QVector of this. */
+    /** Storage for history values. PercentageHistoryRole returns a QList of this. */
     struct PercentageHistoryEntry {
         unsigned long timestamp; // in ms, origin undefined as only the delta matters
         float value;
@@ -120,7 +120,7 @@ public:
     KSysGuard::Processes *processController() const; // The processes instance
 
     /** Returns the list of extra attributes provided by plugins */
-    const QVector<KSysGuard::ProcessAttribute *> extraAttributes() const;
+    const QList<KSysGuard::ProcessAttribute *> extraAttributes() const;
 
     /** Convenience function to get the number of processes.
      *
@@ -211,7 +211,7 @@ private:
     friend class ProcessModelPrivate;
 };
 
-Q_DECLARE_METATYPE(QVector<ProcessModel::PercentageHistoryEntry>);
+Q_DECLARE_METATYPE(QList<ProcessModel::PercentageHistoryEntry>);
 Q_DECLARE_TYPEINFO(ProcessModel::PercentageHistoryEntry, Q_PRIMITIVE_TYPE);
 
 #endif

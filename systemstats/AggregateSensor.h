@@ -10,10 +10,10 @@
 #include <iterator>
 #include <memory>
 
+#include <QList>
 #include <QPointer>
 #include <QRegularExpression>
 #include <QVariant>
-#include <QVector>
 
 #include "SensorObject.h"
 #include "SensorPlugin.h"

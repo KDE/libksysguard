@@ -346,7 +346,7 @@ void testProcess::testCPUGraphHistory()
     // Access the PercentageHistoryRole to enable collection
     for (int i = 0; i < model->rowCount(); i++) {
         auto index = model->index(i, ProcessModel::HeadingCPUUsage, {});
-        auto percentageHist = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
+        auto percentageHist = index.data(ProcessModel::PercentageHistoryRole).value<QList<ProcessModel::PercentageHistoryEntry>>();
     }
 
     processList.updateList();
@@ -355,7 +355,7 @@ void testProcess::testCPUGraphHistory()
     for (int i = 0; i < model->rowCount(); i++) {
         auto index = model->index(i, ProcessModel::HeadingCPUUsage, {});
         auto percentage = index.data(ProcessModel::PercentageRole).toFloat();
-        auto percentageHist = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
+        auto percentageHist = index.data(ProcessModel::PercentageHistoryRole).value<QList<ProcessModel::PercentageHistoryEntry>>();
         QVERIFY(percentageHist.size() > 0);
         QCOMPARE(percentage, percentageHist.constLast().value);
     }

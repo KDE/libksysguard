@@ -42,7 +42,7 @@ public:
     KSysGuard::Process *m_removingRowFor = nullptr;
 
     QHash<QString, KSysGuard::ProcessAttribute *> m_availableAttributes;
-    QVector<KSysGuard::ProcessAttribute *> m_enabledAttributes;
+    QList<KSysGuard::ProcessAttribute *> m_enabledAttributes;
 };
 
 ProcessDataModel::ProcessDataModel(QObject *parent)
@@ -193,7 +193,7 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
 {
     beginResetModel();
 
-    QVector<ProcessAttribute *> unusedAttributes = d->m_enabledAttributes;
+    QList<ProcessAttribute *> unusedAttributes = d->m_enabledAttributes;
     d->m_enabledAttributes.clear();
 
     for (auto attributeId : enabledAttributes) {

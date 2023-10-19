@@ -20,8 +20,8 @@ class PROCESSCORE_EXPORT ExtendedProcesses : public KSysGuard::Processes
 {
     Q_OBJECT
 public:
-    QVector<ProcessAttribute *> attributes() const;
-    QVector<ProcessAttribute *> extendedAttributes() const;
+    QList<ProcessAttribute *> attributes() const;
+    QList<ProcessAttribute *> extendedAttributes() const;
 
     /**
      * Returns a single shared instance of the process list for when used in multiple views

@@ -92,13 +92,13 @@ public:
      *         that a non-Success result may indicate any of the processes in
      *         \p pids encountered that result.
      */
-    Q_INVOKABLE Result sendSignal(const QVector<int> &pids, int signal);
+    Q_INVOKABLE Result sendSignal(const QList<int> &pids, int signal);
     /**
-     * \overload Result sendSignal(const QVector<int> &pids, int signal)
+     * \overload Result sendSignal(const QList<int> &pids, int signal)
      */
     Q_INVOKABLE Result sendSignal(const QList<long long> &pids, int signal);
     /**
-     * \overload Result sendSignal(const QVector<int> &pids, int signal)
+     * \overload Result sendSignal(const QList<int> &pids, int signal)
      */
     Q_INVOKABLE Result sendSignal(const QVariantList &pids, int signal);
 
@@ -116,13 +116,13 @@ public:
      *         that a non-Success result may indicate any of the processes in
      *         \p pids encountered that result.
      */
-    Q_INVOKABLE Result setPriority(const QVector<int> &pids, int priority);
+    Q_INVOKABLE Result setPriority(const QList<int> &pids, int priority);
     /**
-     * \overload Result setPriority(const QVector<int> &pids, int priority)
+     * \overload Result setPriority(const QList<int> &pids, int priority)
      */
     Q_INVOKABLE Result setPriority(const QList<long long> &pids, int priority);
     /**
-     * \overload Result setPriority(const QVector<int> &pids, int priority)
+     * \overload Result setPriority(const QList<int> &pids, int priority)
      */
     Q_INVOKABLE Result setPriority(const QVariantList &pids, int priority);
 
@@ -142,13 +142,13 @@ public:
      *         that a non-Success result may indicate any of the processes in
      *         \p pids encountered that result.
      */
-    Q_INVOKABLE Result setCPUScheduler(const QVector<int> &pids, Process::Scheduler scheduler, int priority);
+    Q_INVOKABLE Result setCPUScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority);
     /**
-     * \overload Result setCPUScheduler(const QVector<int> &pids, Process::Scheduler scheduler, int priority)
+     * \overload Result setCPUScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
      */
     Q_INVOKABLE Result setCPUScheduler(const QList<long long> &pids, Process::Scheduler scheduler, int priority);
     /**
-     * \overload Result setCPUScheduler(const QVector<int> &pids, Process::Scheduler scheduler, int priority)
+     * \overload Result setCPUScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
      */
     Q_INVOKABLE Result setCPUScheduler(const QVariantList &pids, Process::Scheduler scheduler, int priority);
 
@@ -168,13 +168,13 @@ public:
      *         that a non-Success result may indicate any of the processes in
      *         \p pids encountered that result.
      */
-    Q_INVOKABLE Result setIOScheduler(const QVector<int> &pids, Process::IoPriorityClass priorityClass, int priority);
+    Q_INVOKABLE Result setIOScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority);
     /**
-     * \overload Result setIOScheduler(const QVector<int> &pids, Process::IoPriorityClass priorityClass, int priority)
+     * \overload Result setIOScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
      */
     Q_INVOKABLE Result setIOScheduler(const QList<long long> &pids, Process::IoPriorityClass priorityClass, int priority);
     /**
-     * \overload Result setIOScheduler(const QVector<int> &pids, Process::IoPriorityClass priorityClass, int priority)
+     * \overload Result setIOScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
      */
     Q_INVOKABLE Result setIOScheduler(const QVariantList &pids, Process::IoPriorityClass priorityClass, int priority);
 

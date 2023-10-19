@@ -263,7 +263,7 @@ public:
     Changes changes() const; /**< A QFlags representing what has changed */
     void setChanges(Change changes);
 
-    using Updates = QVector<QPair<Change, QVariant>>;
+    using Updates = QList<QPair<Change, QVariant>>;
 
 private:
     void clear();

@@ -77,7 +77,7 @@ public:
         initStyleOption(&option, index);
 
         float percentage = index.data(ProcessModel::PercentageRole).toFloat();
-        auto history = index.data(ProcessModel::PercentageHistoryRole).value<QVector<ProcessModel::PercentageHistoryEntry>>();
+        auto history = index.data(ProcessModel::PercentageHistoryRole).value<QList<ProcessModel::PercentageHistoryEntry>>();
         if (percentage >= 0 || history.size() > 1) {
             drawPercentageDisplay(painter, option, percentage, history);
         } else {
@@ -87,7 +87,7 @@ public:
 
 private:
     inline void
-    drawPercentageDisplay(QPainter *painter, QStyleOptionViewItem &option, float percentage, const QVector<ProcessModel::PercentageHistoryEntry> &history) const
+    drawPercentageDisplay(QPainter *painter, QStyleOptionViewItem &option, float percentage, const QList<ProcessModel::PercentageHistoryEntry> &history) const
     {
         QStyle *style = option.widget ? option.widget->style() : QApplication::style();
         const QRect &rect = option.rect;

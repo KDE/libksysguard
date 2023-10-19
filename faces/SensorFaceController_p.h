@@ -70,7 +70,7 @@ struct SensorResolver {
     QJsonArray found;
     QJsonArray missing;
 
-    QVector<SensorQuery *> queries;
+    QList<SensorQuery *> queries;
 
     std::function<void(SensorResolver *)> callback;
 };
@@ -122,7 +122,7 @@ public:
     FacesModel *availableFacesModel = nullptr;
     PresetsModel *availablePresetsModel = nullptr;
 
-    static QVector<QPair<QRegularExpression, QString>> sensorIdReplacements;
+    static QList<QPair<QRegularExpression, QString>> sensorIdReplacements;
     static QRegularExpression oldDiskSensor;
     static QRegularExpression oldPartitionSensor;
 };

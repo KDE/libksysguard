@@ -35,7 +35,7 @@ public:
     };
     Q_ENUM(Role)
 
-    ProcessAttributeModel(const QVector<ProcessAttribute *> &attributes, QObject *parent = nullptr);
+    ProcessAttributeModel(const QList<ProcessAttribute *> &attributes, QObject *parent = nullptr);
     ~ProcessAttributeModel() override;
 
     int rowCount(const QModelIndex &parent) const override;

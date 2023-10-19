@@ -1010,7 +1010,7 @@ void KSignalPlotterPrivate::drawBeam(QPainter *p, const QRect &boundingBox, int 
     }
 
     const int count = qMin(datapoints.size(), mBeamColors.size());
-    QVector<QPainterPath> paths(count);
+    QList<QPainterPath> paths(count);
     QPointF previous_c0;
     QPointF previous_c1;
     QPointF previous_c2;

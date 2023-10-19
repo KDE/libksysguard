@@ -155,7 +155,7 @@ void ProcessAttribute::clearData(KSysGuard::Process *process)
     Q_EMIT dataChanged(process);
 }
 
-QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup, const QVector<KSysGuard::Process *> &groupProcesses) const
+QVariant ProcessAttribute::cgroupData(KSysGuard::CGroup *cgroup, const QList<KSysGuard::Process *> &groupProcesses) const
 {
     Q_UNUSED(cgroup)
 

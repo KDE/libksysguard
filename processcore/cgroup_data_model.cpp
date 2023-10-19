@@ -27,22 +27,22 @@ using namespace KSysGuard;
 class KSysGuard::CGroupDataModelPrivate
 {
 public:
-    QVector<KSysGuard::Process *> processesFor(CGroup *app);
+    QList<KSysGuard::Process *> processesFor(CGroup *app);
 
     QSharedPointer<ExtendedProcesses> m_processes;
     QTimer *m_updateTimer;
     ProcessAttributeModel *m_attributeModel = nullptr;
     QHash<QString, KSysGuard::ProcessAttribute *> m_availableAttributes;
-    QVector<KSysGuard::ProcessAttribute *> m_enabledAttributes;
+    QList<KSysGuard::ProcessAttribute *> m_enabledAttributes;
 
     bool m_available = false;
     QString m_root;
     QScopedPointer<CGroup> m_rootGroup;
 
-    QVector<CGroup *> m_cGroups; // an ordered list of unfiltered cgroups from our root
+    QList<CGroup *> m_cGroups; // an ordered list of unfiltered cgroups from our root
     QHash<QString, CGroup *> m_cgroupMap; // all known cgroups from our root
     QHash<QString, CGroup *> m_oldGroups;
-    QHash<CGroup *, QVector<Process *>> m_processMap; // cached mapping of cgroup to list of processes of that group
+    QHash<CGroup *, QList<Process *>> m_processMap; // cached mapping of cgroup to list of processes of that group
 };
 
 class GroupNameAttribute : public ProcessAttribute
@@ -52,7 +52,7 @@ public:
         : KSysGuard::ProcessAttribute(QStringLiteral("menuId"), i18nc("@title", "Desktop ID"), parent)
     {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process *> &processes) const override
+    QVariant cgroupData(CGroup *app, const QList<KSysGuard::Process *> &processes) const override
     {
         Q_UNUSED(processes)
         return app->service()->menuId();
@@ -66,7 +66,7 @@ public:
         : KSysGuard::ProcessAttribute(QStringLiteral("iconName"), i18nc("@title", "Icon"), parent)
     {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process *> &processes) const override
+    QVariant cgroupData(CGroup *app, const QList<KSysGuard::Process *> &processes) const override
     {
         Q_UNUSED(processes)
         return app->service()->icon();
@@ -80,7 +80,7 @@ public:
         : KSysGuard::ProcessAttribute(QStringLiteral("appName"), i18nc("@title", "Name"), parent)
     {
     }
-    QVariant cgroupData(CGroup *app, const QVector<KSysGuard::Process *> &processes) const override
+    QVariant cgroupData(CGroup *app, const QList<KSysGuard::Process *> &processes) const override
     {
         Q_UNUSED(processes)
         return app->service()->name();
@@ -99,7 +99,7 @@ CGroupDataModel::CGroupDataModel(const QString &root, QObject *parent)
     d->m_updateTimer = new QTimer(this);
     d->m_processes = ExtendedProcesses::instance();
 
-    QVector<ProcessAttribute *> attributes = d->m_processes->attributes();
+    QList<ProcessAttribute *> attributes = d->m_processes->attributes();
     attributes.reserve(attributes.count() + 3);
     attributes.append(new GroupNameAttribute(this));
     attributes.append(new AppNameAttribute(this));
@@ -185,7 +185,7 @@ void CGroupDataModel::setEnabledAttributes(const QStringList &enabledAttributes)
 {
     beginResetModel();
 
-    QVector<ProcessAttribute *> unusedAttributes = d->m_enabledAttributes;
+    QList<ProcessAttribute *> unusedAttributes = d->m_enabledAttributes;
     d->m_enabledAttributes.clear();
 
     for (auto attribute : enabledAttributes) {
@@ -439,7 +439,7 @@ void CGroupDataModel::update(CGroup *node)
 
     // Update our own stat info
     // This may trigger some dataChanged
-    node->requestPids(this, [this, node](QVector<pid_t> pids) {
+    node->requestPids(this, [this, node](QList<pid_t> pids) {
         auto row = d->m_cGroups.indexOf(node);
         if (row >= 0) {
             d->m_cGroups[row]->setPids(pids);
@@ -480,13 +480,13 @@ bool CGroupDataModel::isAvailable() const
     return d->m_available;
 }
 
-QVector<Process *> CGroupDataModelPrivate::processesFor(CGroup *app)
+QList<Process *> CGroupDataModelPrivate::processesFor(CGroup *app)
 {
     if (m_processMap.contains(app)) {
         return m_processMap.value(app);
     }
 
-    QVector<Process *> result;
+    QList<Process *> result;
     const auto pids = app->pids();
     std::for_each(pids.begin(), pids.end(), [this, &result](pid_t pid) {
         auto process = m_processes->getProcess(pid);

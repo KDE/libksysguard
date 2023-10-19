@@ -41,11 +41,11 @@ public:
         KnownColumnCount
     };
 
-    using DataItem = QVector<QVariant>;
+    using DataItem = QList<QVariant>;
     using Data = struct
     {
-        QVector<QString> columns;
-        QVector<DataItem> rows;
+        QList<QString> columns;
+        QList<DataItem> rows;
     };
 
     void setData(Data &&data)

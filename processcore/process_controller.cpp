@@ -22,16 +22,16 @@ using namespace KSysGuard;
 
 struct ApplyResult {
     ProcessController::Result resultCode = ProcessController::Result::Success;
-    QVector<int> unchanged;
+    QList<int> unchanged;
 };
 
 class ProcessController::Private
 {
 public:
-    ApplyResult applyToPids(const QVector<int> &pids, const std::function<Processes::Error(int)> &function);
-    ProcessController::Result runKAuthAction(const QString &actionId, const QVector<int> &pids, const QVariantMap &options);
-    QVector<int> listToVector(const QList<long long> &list);
-    QVector<int> listToVector(const QVariantList &list);
+    ApplyResult applyToPids(const QList<int> &pids, const std::function<Processes::Error(int)> &function);
+    ProcessController::Result runKAuthAction(const QString &actionId, const QList<int> &pids, const QVariantMap &options);
+    QList<int> listToVector(const QList<long long> &list);
+    QList<int> listToVector(const QVariantList &list);
 
     QWindow *window = nullptr;
 };
@@ -62,7 +62,7 @@ void KSysGuard::ProcessController::setWindow(QWindow *window)
     d->window = window;
 }
 
-ProcessController::Result ProcessController::sendSignal(const QVector<int> &pids, int signal)
+ProcessController::Result ProcessController::sendSignal(const QList<int> &pids, int signal)
 {
     qCDebug(LIBKSYSGUARD_PROCESSCORE) << "Sending signal" << signal << "to" << pids;
 
@@ -86,7 +86,7 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::sendSignal(co
     return sendSignal(d->listToVector(pids), signal);
 }
 
-ProcessController::Result ProcessController::setPriority(const QVector<int> &pids, int priority)
+ProcessController::Result ProcessController::setPriority(const QList<int> &pids, int priority)
 {
     auto result = d->applyToPids(pids, [priority](int pid) {
         return s_localProcesses->setNiceness(pid, priority);
@@ -108,7 +108,7 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::setPriority(c
     return setPriority(d->listToVector(pids), priority);
 }
 
-ProcessController::Result ProcessController::setCPUScheduler(const QVector<int> &pids, Process::Scheduler scheduler, int priority)
+ProcessController::Result ProcessController::setCPUScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
 {
     if (scheduler == KSysGuard::Process::Other || scheduler == KSysGuard::Process::Batch) {
         priority = 0;
@@ -136,7 +136,7 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::setCPUSchedul
     return setCPUScheduler(d->listToVector(pids), scheduler, priority);
 }
 
-ProcessController::Result ProcessController::setIOScheduler(const QVector<int> &pids, Process::IoPriorityClass priorityClass, int priority)
+ProcessController::Result ProcessController::setIOScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
 {
     if (!s_localProcesses->supportsIoNiceness()) {
         return Result::Unsupported;
@@ -194,7 +194,7 @@ QString ProcessController::resultToString(Result result)
     }
 }
 
-ApplyResult KSysGuard::ProcessController::Private::applyToPids(const QVector<int> &pids, const std::function<Processes::Error(int)> &function)
+ApplyResult KSysGuard::ProcessController::Private::applyToPids(const QList<int> &pids, const std::function<Processes::Error(int)> &function)
 {
     ApplyResult result;
 
@@ -221,7 +221,7 @@ ApplyResult KSysGuard::ProcessController::Private::applyToPids(const QVector<int
     return result;
 }
 
-ProcessController::Result ProcessController::Private::runKAuthAction(const QString &actionId, const QVector<int> &pids, const QVariantMap &options)
+ProcessController::Result ProcessController::Private::runKAuthAction(const QString &actionId, const QList<int> &pids, const QVariantMap &options)
 {
     KAuth::Action action(actionId);
     if (!action.isValid()) {
@@ -259,18 +259,18 @@ ProcessController::Result ProcessController::Private::runKAuthAction(const QStri
     }
 }
 
-QVector<int> KSysGuard::ProcessController::Private::listToVector(const QList<long long> &list)
+QList<int> KSysGuard::ProcessController::Private::listToVector(const QList<long long> &list)
 {
-    QVector<int> vector;
+    QList<int> vector;
     std::transform(list.cbegin(), list.cend(), std::back_inserter(vector), [](long long entry) {
         return entry;
     });
     return vector;
 }
 
-QVector<int> KSysGuard::ProcessController::Private::listToVector(const QVariantList &list)
+QList<int> KSysGuard::ProcessController::Private::listToVector(const QVariantList &list)
 {
-    QVector<int> vector;
+    QList<int> vector;
     std::transform(list.cbegin(), list.cend(), std::back_inserter(vector), [](const QVariant &entry) {
         return entry.toInt();
     });

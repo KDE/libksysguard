@@ -14,7 +14,7 @@ class Q_DECL_HIDDEN KSysGuard::ProcessDataProvider::Private
 {
 public:
     KSysGuard::Processes *m_processes;
-    QVector<ProcessAttribute *> m_attributes;
+    QList<ProcessAttribute *> m_attributes;
     bool m_enabled = false;
 };
 
@@ -49,7 +49,7 @@ KSysGuard::Process *ProcessDataProvider::getProcess(long pid)
     return process;
 }
 
-QVector<ProcessAttribute *> ProcessDataProvider::attributes() const
+QList<ProcessAttribute *> ProcessDataProvider::attributes() const
 {
     return d->m_attributes;
 }

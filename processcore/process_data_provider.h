@@ -5,9 +5,9 @@
 */
 #pragma once
 
+#include <QList>
 #include <QObject>
 #include <QVariant>
-#include <QVector>
 
 #include "processcore_export.h"
 
@@ -45,7 +45,7 @@ public:
      * A list of all process attributes provided by this plugin
      * It is expected to remain constant through the lifespan of this class
      */
-    QVector<ProcessAttribute *> attributes() const;
+    QList<ProcessAttribute *> attributes() const;
 
     /**
      * Called when processes should be updated if manually polled

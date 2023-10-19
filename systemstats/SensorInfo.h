@@ -49,7 +49,7 @@ public:
 };
 
 typedef QHash<QString, SensorInfo> SensorInfoMap;
-typedef QVector<SensorData> SensorDataList;
+typedef QList<SensorData> SensorDataList;
 
 inline QDBusArgument &operator<<(QDBusArgument &argument, const SensorInfo &s)
 {

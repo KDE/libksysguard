@@ -388,7 +388,7 @@ KSysGuard::Processes *ProcessModel::processController() const
     return d->mProcesses.get();
 }
 
-const QVector<KSysGuard::ProcessAttribute *> ProcessModel::extraAttributes() const
+const QList<KSysGuard::ProcessAttribute *> ProcessModel::extraAttributes() const
 {
     return d->mExtraAttributes;
 }
@@ -2240,7 +2240,7 @@ QVariant ProcessModel::data(const QModelIndex &index, int role) const
         default: {
         }
         }
-        return QVariant::fromValue(QVector<PercentageHistoryEntry>{});
+        return QVariant::fromValue(QList<PercentageHistoryEntry>{});
     }
     case Qt::DecorationRole: {
 #if HAVE_X11
