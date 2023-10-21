@@ -17,15 +17,18 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Zanata 3.9.6\n"
 
 #: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:554
-#, kde-format
+#, fuzzy, kde-format
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
 msgstr[0] "קבע עדיפות..."
 msgstr[1] "קבע עדיפויות..."
+msgstr[2] ""
+msgstr[3] ""
 
 #: ksysguardprocesslist.cpp:203 ksysguardprocesslist.cpp:656
 #, kde-format
@@ -55,18 +58,22 @@ msgid "Resume Stopped Process"
 msgstr "הפעל תהליך בהשהיה"
 
 #: ksysguardprocesslist.cpp:209
-#, kde-format
+#, fuzzy, kde-format
 msgid "End Process"
 msgid_plural "End Processes"
 msgstr[0] "סיים תהליך"
 msgstr[1] "סיים תהליכים"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ksysguardprocesslist.cpp:212 ksysguardprocesslist.cpp:555
-#, kde-format
+#, fuzzy, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
 msgstr[0] "חסל תהליך בכוח"
 msgstr[1] "חסל תהליכים בכוח"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ksysguardprocesslist.cpp:216
 #, kde-format
@@ -136,12 +143,14 @@ msgid "Kill a Window"
 msgstr ""
 
 #: ksysguardprocesslist.cpp:556
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Context menu"
 msgid "End Process"
 msgid_plural "End Processes"
 msgstr[0] "סיים תהליך"
 msgstr[1] "סיים תהליכים"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ksysguardprocesslist.cpp:592
 #, kde-format
@@ -302,7 +311,7 @@ msgstr ""
 "כמנהל (root). שגיאה %1 %2"
 
 #: ksysguardprocesslist.cpp:1448
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "Are you sure you want to end this process?  Any unsaved work may be lost."
 msgid_plural ""
@@ -314,14 +323,18 @@ msgstr[0] ""
 msgstr[1] ""
 "האם הינך בטוח שברצונך לסיים את %1 התהליכים הנבחרים? סביר להניח שכל עבודה שלא "
 "נשמרה, תאבד"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ksysguardprocesslist.cpp:1451
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Dialog title"
 msgid "End Process"
 msgid_plural "End %1 Processes"
 msgstr[0] "סיים תהליך"
 msgstr[1] "סיים %1 תהליכים"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ksysguardprocesslist.cpp:1453
 #, kde-format
@@ -329,7 +342,7 @@ msgid "End"
 msgstr "סוף"
 
 #: ksysguardprocesslist.cpp:1455
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> this "
 "process?  Any unsaved work may be lost."
@@ -342,14 +355,18 @@ msgstr[0] ""
 msgstr[1] ""
 "<qt>האם הינך בטוח שברצונך <b>להרוג בכוח את %1</b> התהליכים הנבחרים? סביר "
 "להניח שכל עבודה שלא נשמרה, תאבד </qt>"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ksysguardprocesslist.cpp:1458
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
 msgstr[0] "הרוג תהליך בכוח"
 msgstr[1] "הרוג %1 תהליכים בכוח"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ksysguardprocesslist.cpp:1460
 #, kde-format
@@ -595,7 +612,7 @@ msgid "The current CPU usage of the process."
 msgstr "ניצול המעבד בידי התהליך."
 
 #: ProcessModel.cpp:1139
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "The current total CPU usage of the process, divided by the %1 processor core "
 "in the machine."
@@ -604,6 +621,8 @@ msgid_plural ""
 "cores in the machine."
 msgstr[0] "סה\"כ שימוש המעבד של התהליך מחולק במעבד %1 במחשב."
 msgstr[1] "סה\"כ שימוש המעבד של התהליך מחולק ב־%1 המעבדים במחשב."
+msgstr[2] ""
+msgstr[3] ""
 
 #: ProcessModel.cpp:1143
 #, kde-format
