@@ -2357,12 +2357,8 @@ void ProcessModel::setupHeader()
     headings << i18nc("process heading", "Relative Start Time");
     headings << i18nc("process heading", "NNP");
     headings << i18nc("process heading", "Command");
-#if HAVE_X11
-    if (d->mIsX11) {
-        headings << i18nc("process heading", "X11 Memory");
-        headings << i18nc("process heading", "Window Title");
-    }
-#endif
+    headings << i18nc("process heading", "X11 Memory");
+    headings << i18nc("process heading", "Window Title");
     headings << i18nc("process heading", "CGroup");
     headings << i18nc("process heading", "MAC Context");
     headings << i18nc("process heading", "Total Memory");
