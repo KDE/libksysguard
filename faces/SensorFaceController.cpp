@@ -398,6 +398,10 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
 
 SensorFaceController::~SensorFaceController()
 {
+    if (!d->faceProperties.isValid()) {
+        return;
+    }
+
     auto forceSave = d->faceProperties.readEntry(QStringLiteral("ForceSaveOnDestroy"), false);
     if (!forceSave) {
         if (!d->shouldSync) {
@@ -640,21 +644,37 @@ const QString SensorFaceController::icon() const
 
 bool SensorFaceController::supportsSensorsColors() const
 {
+    if (!d->faceProperties.isValid()) {
+        return false;
+    }
+
     return d->faceProperties.readEntry("SupportsSensorsColors", false);
 }
 
 bool SensorFaceController::supportsTotalSensors() const
 {
+    if (!d->faceProperties.isValid()) {
+        return false;
+    }
+
     return d->faceProperties.readEntry("SupportsTotalSensors", false);
 }
 
 bool SensorFaceController::supportsLowPrioritySensors() const
 {
+    if (!d->faceProperties.isValid()) {
+        return false;
+    }
+
     return d->faceProperties.readEntry("SupportsLowPrioritySensors", false);
 }
 
 int SensorFaceController::maxTotalSensors() const
 {
+    if (!d->faceProperties.isValid()) {
+        return 1;
+    }
+
     return d->faceProperties.readEntry("MaxTotalSensors", 1);
 }
 
@@ -698,6 +718,11 @@ void SensorFaceController::setFaceId(const QString &face)
     d->contextObj->setTranslationDomain(QLatin1String("ksysguard_face_") + face);
 
     d->faceProperties = KConfigGroup(KSharedConfig::openConfig(d->facePackage.filePath("FaceProperties"), KConfig::SimpleConfig), QStringLiteral("Config"));
+
+    if (!d->faceProperties.isValid()) {
+        Q_EMIT faceIdChanged();
+        return;
+    }
 
     reloadFaceConfiguration();
 
@@ -782,7 +807,7 @@ QQuickItem *SensorFaceController::sensorsConfigUi()
         return d->sensorsConfigUi;
     }
 
-    if (d->faceProperties.readEntry("SupportsSensors", true)) {
+    if (d->faceProperties.isValid() && d->faceProperties.readEntry("SupportsSensors", true)) {
         d->sensorsConfigUi = d->createConfigUi(QStringLiteral(":/ConfigSensors.qml"), {{QStringLiteral("controller"), QVariant::fromValue(this)}});
     } else {
         d->sensorsConfigUi = new QQuickItem;
