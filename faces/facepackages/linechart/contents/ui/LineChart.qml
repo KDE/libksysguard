@@ -54,7 +54,7 @@ Charts.LineChart {
         updateRateLimit: chart.controller.updateRateLimit
         sensorLabels: chart.controller.sensorLabels
 
-        property int unit: sensorsModel.ready ? sensorsModel.headerData(0, Qt.Horizontal, Sensors.SensorDataModel.Unit) : Formatter.Formatter.UnitInvalid
+        property int unit: (sensorsModel.ready && sensorsModel.headerData(0, Qt.Horizontal, Sensors.SensorDataModel.Unit)) ?? Formatter.Units.UnitInvalid
         property double stackedMaximum: yRange.stackedAuto ? calcStackedMaximum() : 0
 
         function calcStackedMaximum() {
