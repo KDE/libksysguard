@@ -54,6 +54,11 @@ Faces.SensorFace {
             Layout.topMargin: showYAxisLabels ? axisMetrics.height / 2 : 0
             Layout.bottomMargin: Layout.topMargin
 
+            Layout.minimumHeight: root.formFactor === Faces.SensorFace.Constrained
+                ? 3 * Kirigami.Units.gridUnit
+                : 5 * Kirigami.Units.gridUnit
+            Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
+
             ChartsControls.AxisLabels {
                 id: axisLabels
                 visible: showYAxisLabels
@@ -83,10 +88,6 @@ Faces.SensorFace {
                 id: compactRepresentation
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumHeight: root.formFactor === Faces.SensorFace.Constrained
-                    ? Kirigami.Units.gridUnit
-                    : 5 * Kirigami.Units.gridUnit
-                Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
 
                 updateRateLimit: root.controller.updateRateLimit
 

@@ -48,7 +48,7 @@ Faces.SensorFace {
             Layout.fillHeight: true
             Layout.minimumWidth: root.formFactor != Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit * 4 : Kirigami.Units.gridUnit
             Layout.minimumHeight: root.formFactor === Faces.SensorFace.Constrained 
-                ? Kirigami.Units.gridUnit
+                ? 3 * Kirigami.Units.gridUnit
                 : 5 * Kirigami.Units.gridUnit
             Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
             Layout.maximumHeight: Math.max(heading.width, Layout.minimumHeight)
