@@ -106,9 +106,9 @@ ChartsControls.Legend {
 
             maximumValueWidth: legend.maximumValueWidth(sensor.value, index)
 
-            Charts.LegendLayout.minimumWidth: minimumWidth
-            Charts.LegendLayout.preferredWidth: preferredWidth
-            Charts.LegendLayout.maximumWidth: Math.max(legend.maximumDelegateWidth, preferredWidth)
+            ChartsControls.LegendLayout.minimumWidth: minimumWidth
+            ChartsControls.LegendLayout.preferredWidth: preferredWidth
+            ChartsControls.LegendLayout.maximumWidth: Math.max(legend.maximumDelegateWidth, preferredWidth)
 
             Sensor {
                 id: sensor

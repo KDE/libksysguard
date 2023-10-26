@@ -102,9 +102,9 @@ ColumnLayout {
                         return Formatter.Formatter.maximumLength(unit, legend.font)
                     }
 
-                    Charts.LegendLayout.minimumWidth: minimumWidth
-                    Charts.LegendLayout.preferredWidth: preferredWidth
-                    Charts.LegendLayout.maximumWidth: Math.max(preferredWidth, Kirigami.Units.gridUnit * 17)
+                    ChartsControls.LegendLayout.minimumWidth: minimumWidth
+                    ChartsControls.LegendLayout.preferredWidth: preferredWidth
+                    ChartsControls.LegendLayout.maximumWidth: Math.max(preferredWidth, Kirigami.Units.gridUnit * 17)
                 }
             }
 

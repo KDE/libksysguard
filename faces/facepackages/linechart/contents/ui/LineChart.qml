@@ -28,7 +28,7 @@ Charts.LineChart {
 
     fillOpacity: controller.faceConfiguration.lineChartFillOpacity / 100
     stacked: controller.faceConfiguration.lineChartStacked
-    smooth: controller.faceConfiguration.lineChartSmooth
+    interpolate: controller.faceConfiguration.lineChartSmooth
 
     //TODO: Have a central heading here too?
     //TODO: Have a plasmoid config value for line thickness?

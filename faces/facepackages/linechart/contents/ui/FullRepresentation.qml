@@ -18,6 +18,7 @@ import org.kde.ksysguard.faces as Faces
 import org.kde.ksysguard.formatter as Formatter
 
 import org.kde.quickcharts as Charts
+import org.kde.quickcharts.controls as ChartsControls
 
 Faces.SensorFace {
     id: root
@@ -52,16 +53,17 @@ Faces.SensorFace {
             Layout.topMargin: showYAxisLabels ? axisMetrics.height / 2 : 0
             Layout.bottomMargin: Layout.topMargin
             Layout.minimumHeight: compactRepresentation.Layout.minimumHeight
-            Charts.AxisLabels {
+
+            ChartsControls.AxisLabels {
                 id: axisLabels
                 visible: showYAxisLabels
                 Layout.fillHeight: true
                 constrainToBounds: false
-                direction: Charts.AxisLabels.VerticalBottomTop
+                direction: ChartsControls.AxisLabels.VerticalBottomTop
                 delegate: QQC2.Label {
                     anchors.right: parent.right
                     font: Kirigami.Theme.smallFont
-                    text: Formatter.Formatter.formatValueShowNull(Charts.AxisLabels.label,
+                    text: Formatter.Formatter.formatValueShowNull(ChartsControls.AxisLabels.label,
                         compactRepresentation.sensorsModel.unit)
                     color: Kirigami.Theme.disabledTextColor
                 }
@@ -88,10 +90,10 @@ Faces.SensorFace {
 
                 controller: root.controller
 
-                Charts.GridLines {
+                ChartsControls.GridLines {
                     id: horizontalLines
                     visible: showGridLines
-                    direction: Charts.GridLines.Vertical
+                    direction: ChartsControls.GridLines.Vertical
                     anchors.fill: compactRepresentation
                     z: compactRepresentation.z - 1
                     chart: compactRepresentation
