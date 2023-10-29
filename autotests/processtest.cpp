@@ -297,7 +297,7 @@ void testProcess::testUpdateOrAddProcess()
     processController->updateAllProcesses();
     KSysGuard::Process *process;
     // Make sure that this doesn't crash at least
-    process = processController->getProcess(0);
+    processController->getProcess(0);
     process = processController->getProcess(1);
     if (process)
         QCOMPARE(process->pid(), 1l);
