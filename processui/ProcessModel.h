@@ -37,7 +37,6 @@ class ProcessModelPrivate;
 class KSYSGUARD_EXPORT ProcessModel : public QAbstractItemModel
 {
     Q_OBJECT
-    Q_ENUMS(Units)
 
 public:
     /** Storage for history values. PercentageHistoryRole returns a QList of this. */
@@ -168,6 +167,7 @@ public:
 
     /** When displaying memory sizes, this is the units it should be displayed in */
     enum Units { UnitsAuto, UnitsKB, UnitsMB, UnitsGB, UnitsTB, UnitsPB, UnitsPercentage };
+    Q_ENUM(Units)
     /** Set the units memory sizes etc should be displayed in */
     void setUnits(Units units);
     /** The units memory sizes etc should be displayed in */
