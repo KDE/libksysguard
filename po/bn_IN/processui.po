@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-13 02:06+0000\n"
+"POT-Creation-Date: 2023-11-01 01:41+0000\n"
 "PO-Revision-Date: 2008-10-22 19:48+0530\n"
 "Last-Translator: Ria Das <mailtoria@gmail.com>\n"
 "Language-Team: Bengali (India) <discuss@ankur.co.in>\n"
@@ -1397,7 +1397,7 @@ msgctxt "process heading"
 msgid "Command"
 msgstr "কমান্ড"
 
-#: ProcessModel.cpp:2362
+#: ProcessModel.cpp:2360
 #, fuzzy, kde-format
 #| msgctxt "process heading"
 #| msgid "Memory"
@@ -1405,26 +1405,26 @@ msgctxt "process heading"
 msgid "X11 Memory"
 msgstr "মেমরি"
 
-#: ProcessModel.cpp:2363
+#: ProcessModel.cpp:2361
 #, kde-format
 msgctxt "process heading"
 msgid "Window Title"
 msgstr "উইন্ডোর শিরোনাম"
 
-#: ProcessModel.cpp:2366
+#: ProcessModel.cpp:2362
 #, fuzzy, kde-format
 #| msgid "Group: %1"
 msgctxt "process heading"
 msgid "CGroup"
 msgstr "দল: %1"
 
-#: ProcessModel.cpp:2367
+#: ProcessModel.cpp:2363
 #, kde-format
 msgctxt "process heading"
 msgid "MAC Context"
 msgstr ""
 
-#: ProcessModel.cpp:2368
+#: ProcessModel.cpp:2364
 #, fuzzy, kde-format
 #| msgctxt "process heading"
 #| msgid "Memory"
@@ -1432,7 +1432,7 @@ msgctxt "process heading"
 msgid "Total Memory"
 msgstr "মেমরি"
 
-#: ProcessModel.cpp:2498
+#: ProcessModel.cpp:2494
 #, kde-format
 msgid "%1%"
 msgstr ""

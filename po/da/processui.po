@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-13 02:06+0000\n"
+"POT-Creation-Date: 2023-11-01 01:41+0000\n"
 "PO-Revision-Date: 2020-02-08 15:42+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -1471,37 +1471,37 @@ msgctxt "process heading"
 msgid "Command"
 msgstr "Kommando"
 
-#: ProcessModel.cpp:2362
+#: ProcessModel.cpp:2360
 #, kde-format
 msgctxt "process heading"
 msgid "X11 Memory"
 msgstr "X11-hukommelse"
 
-#: ProcessModel.cpp:2363
+#: ProcessModel.cpp:2361
 #, kde-format
 msgctxt "process heading"
 msgid "Window Title"
 msgstr "Vinduestitel"
 
-#: ProcessModel.cpp:2366
+#: ProcessModel.cpp:2362
 #, kde-format
 msgctxt "process heading"
 msgid "CGroup"
 msgstr "CGruppe"
 
-#: ProcessModel.cpp:2367
+#: ProcessModel.cpp:2363
 #, kde-format
 msgctxt "process heading"
 msgid "MAC Context"
 msgstr "MAC-kontekst"
 
-#: ProcessModel.cpp:2368
+#: ProcessModel.cpp:2364
 #, kde-format
 msgctxt "process heading"
 msgid "Total Memory"
 msgstr "Hukommelse i alt"
 
-#: ProcessModel.cpp:2498
+#: ProcessModel.cpp:2494
 #, kde-format
 msgid "%1%"
 msgstr "%1%"

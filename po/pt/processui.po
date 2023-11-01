@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-13 02:06+0000\n"
+"POT-Creation-Date: 2023-11-01 01:41+0000\n"
 "PO-Revision-Date: 2022-09-24 14:27+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -1504,37 +1504,37 @@ msgctxt "process heading"
 msgid "Command"
 msgstr "Comando"
 
-#: ProcessModel.cpp:2362
+#: ProcessModel.cpp:2360
 #, kde-format
 msgctxt "process heading"
 msgid "X11 Memory"
 msgstr "Memória do X11"
 
-#: ProcessModel.cpp:2363
+#: ProcessModel.cpp:2361
 #, kde-format
 msgctxt "process heading"
 msgid "Window Title"
 msgstr "Título da Janela"
 
-#: ProcessModel.cpp:2366
+#: ProcessModel.cpp:2362
 #, kde-format
 msgctxt "process heading"
 msgid "CGroup"
 msgstr "Grupo Ctrl"
 
-#: ProcessModel.cpp:2367
+#: ProcessModel.cpp:2363
 #, kde-format
 msgctxt "process heading"
 msgid "MAC Context"
 msgstr "Contexto MAC"
 
-#: ProcessModel.cpp:2368
+#: ProcessModel.cpp:2364
 #, kde-format
 msgctxt "process heading"
 msgid "Total Memory"
 msgstr "Memória Total"
 
-#: ProcessModel.cpp:2498
+#: ProcessModel.cpp:2494
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
