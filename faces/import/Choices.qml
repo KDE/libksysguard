@@ -410,18 +410,29 @@ Control {
                         id: delegateModel
 
                         model: listView.searchString ? sensorsSearchableModel : treeModel
-                        delegate: Kirigami.BasicListItem {
+                        delegate: ItemDelegate {
+                            id: listItem
+                            readonly property int iconSize: Kirigami.Units.iconSizes.small
                             width: listView.width
+                            height: iconSize + (Kirigami.Units.smallSpacing * 2)
                             text: model.display
-                            reserveSpaceForIcon: false
-
-                            Kirigami.Icon {
-                                source: "go-next-symbolic"
-                                Layout.fillHeight: true
-                                Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                                // Still visible for correct size hints calculation
-                                opacity: model.SensorId.length == 0
+                            contentItem: RowLayout {
+                                spacing: Kirigami.Units.smallSpacing
+                                Label {
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignVCenter
+                                    text: listItem.text
+                                    elide: Text.ElideRight
+                                }
+                                Kirigami.Icon {
+                                    source: "go-next-symbolic"
+                                    Layout.fillHeight: true
+                                    Layout.preferredWidth: listItem.iconSize
+                                    // Still visible for correct size hints calculation
+                                    opacity: model.SensorId.length == 0
+                                }
                             }
+
                             onClicked: {
                                 if (model.SensorId.length == 0) {
                                     delegateModel.rootIndex = delegateModel.modelIndex(index);
