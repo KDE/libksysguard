@@ -66,26 +66,54 @@ enum Unit {
     UnitSecond,
     UnitTime,
     UnitTicks,
-
-    // Misc units.
-    UnitCelsius = 500,
+    UnitDuration,
 
     // Data rate units in bits.
-    UnitBitRate = 600,
+    UnitBitRate = 500,
     UnitKiloBitRate = MetricPrefixKilo + UnitBitRate,
     UnitMegaBitRate = MetricPrefixMega + UnitBitRate,
     UnitGigaBitRate = MetricPrefixGiga + UnitBitRate,
     UnitTeraBitRate = MetricPrefixTera + UnitBitRate,
     UnitPetaBitRate = MetricPrefixPeta + UnitBitRate,
 
+    // Volt.
+    UnitVolt = 600,
+    UnitKiloVolt = MetricPrefixKilo + UnitVolt,
+    UnitMegaVolt = MetricPrefixMega + UnitVolt,
+    UnitGigaVolt = MetricPrefixGiga + UnitVolt,
+    UnitTeraVolt = MetricPrefixTera + UnitVolt,
+    UnitPetaVolt = MetricPrefixPeta + UnitVolt,
+
+    // Watt.
+    UnitWatt = 700,
+    UnitKiloWatt = MetricPrefixKilo + UnitWatt,
+    UnitMegaWatt = MetricPrefixMega + UnitWatt,
+    UnitGigaWatt = MetricPrefixGiga + UnitWatt,
+    UnitTeraWatt = MetricPrefixTera + UnitWatt,
+    UnitPetaWatt = MetricPrefixPeta + UnitWatt,
+
+    // WattHour.
+    UnitWattHour = 800,
+    UnitKiloWattHour = MetricPrefixKilo + UnitWattHour,
+    UnitMegaWattHour = MetricPrefixMega + UnitWattHour,
+    UnitGigaWattHour = MetricPrefixGiga + UnitWattHour,
+    UnitTeraWattHour = MetricPrefixTera + UnitWattHour,
+    UnitPetaWattHour = MetricPrefixPeta + UnitWattHour,
+
+    // Ampere.
+    UnitAmpere = 900,
+    UnitKiloAmpere = MetricPrefixKilo + UnitAmpere,
+    UnitMegaAmpere = MetricPrefixMega + UnitAmpere,
+    UnitGigaAmpere = MetricPrefixGiga + UnitAmpere,
+    UnitTeraAmpere = MetricPrefixTera + UnitAmpere,
+    UnitPetaAmpere = MetricPrefixPeta + UnitAmpere,
+
+    // Misc units.
+    UnitCelsius = 1000,
     UnitDecibelMilliWatts,
     UnitPercent,
     UnitRate,
     UnitRpm,
-    UnitVolt,
-    UnitWatt,
-    UnitWattHour,
-    UnitAmpere
 };
 Q_ENUM_NS(Unit)
 

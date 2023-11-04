@@ -58,16 +58,40 @@ static KLocalizedString unitFormat(Unit unit)
     const static KLocalizedString THz = ki18nc("Terahertz unit symbol", "%1 THz");
     const static KLocalizedString PHz = ki18nc("Petahertz unit symbol", "%1 PHz");
 
+    const static KLocalizedString V = ki18nc("Volts unit symbol", "%1 V");
+    const static KLocalizedString kV = ki18nc("Kilovolts unit symbol", "%1 kV");
+    const static KLocalizedString MV = ki18nc("Megavolts unit symbol", "%1 MV");
+    const static KLocalizedString GV = ki18nc("Gigavolts unit symbol", "%1 GV");
+    const static KLocalizedString TV = ki18nc("Teravolts unit symbol", "%1 TV");
+    const static KLocalizedString PV = ki18nc("Petavolts unit symbol", "%1 PV");
+
+    const static KLocalizedString W = ki18nc("Watts unit symbol", "%1 W");
+    const static KLocalizedString kW = ki18nc("Kilowatts unit symbol", "%1 kW");
+    const static KLocalizedString MW = ki18nc("Megawatts unit symbol", "%1 MW");
+    const static KLocalizedString GW = ki18nc("Gigawatts unit symbol", "%1 GW");
+    const static KLocalizedString TW = ki18nc("Terawatts unit symbol", "%1 TW");
+    const static KLocalizedString PW = ki18nc("Petawatts unit symbol", "%1 PW");
+
+    const static KLocalizedString Wh = ki18nc("Watt-hours unit symbol", "%1 Wh");
+    const static KLocalizedString kWh = ki18nc("Kilowatt-hours unit symbol", "%1 kWh");
+    const static KLocalizedString MWh = ki18nc("Megawatt-hours unit symbol", "%1 MWh");
+    const static KLocalizedString GWh = ki18nc("Gigawatt-hours unit symbol", "%1 GWh");
+    const static KLocalizedString TWh = ki18nc("Terawatt-hours unit symbol", "%1 TWh");
+    const static KLocalizedString PWh = ki18nc("Petawatt-hours unit symbol", "%1 PWh");
+
+    const static KLocalizedString A = ki18nc("Ampere unit symbol", "%1 A");
+    const static KLocalizedString kA = ki18nc("Kiloamperes unit symbol", "%1 kA");
+    const static KLocalizedString MA = ki18nc("Megaamperes unit symbol", "%1 MA");
+    const static KLocalizedString GA = ki18nc("Gigaamperes unit symbol", "%1 GA");
+    const static KLocalizedString TA = ki18nc("Teraamperes unit symbol", "%1 TA");
+    const static KLocalizedString PA = ki18nc("Petaamperes unit symbol", "%1 PA");
+
     const static KLocalizedString percent = ki18nc("Percent unit", "%1%");
     const static KLocalizedString RPM = ki18nc("Revolutions per minute unit symbol", "%1 RPM");
     const static KLocalizedString C = ki18nc("Celsius unit symbol", "%1°C");
     const static KLocalizedString dBm = ki18nc("Decibels unit symbol", "%1 dBm");
     const static KLocalizedString s = ki18nc("Seconds unit symbol", "%1s");
-    const static KLocalizedString V = ki18nc("Volts unit symbol", "%1 V");
-    const static KLocalizedString W = ki18nc("Watts unit symbol", "%1 W");
-    const static KLocalizedString Wh = ki18nc("Watt-hours unit symbol", "%1 Wh");
     const static KLocalizedString rate = ki18nc("Rate unit symbol", "%1 s⁻¹");
-    const static KLocalizedString A = ki18nc("Ampere unit symbol", "%1 A");
     const static KLocalizedString unitless = ki18nc("Unitless", "%1");
 
     switch (unit) {
@@ -123,6 +147,58 @@ static KLocalizedString unitFormat(Unit unit)
     case UnitPetaHertz:
         return PHz;
 
+    case UnitVolt:
+        return V;
+    case UnitKiloVolt:
+        return kV;
+    case UnitMegaVolt:
+        return MV;
+    case UnitGigaVolt:
+        return GV;
+    case UnitTeraVolt:
+        return TV;
+    case UnitPetaVolt:
+        return PV;
+
+    case UnitWatt:
+        return W;
+    case UnitKiloWatt:
+        return kW;
+    case UnitMegaWatt:
+        return MW;
+    case UnitGigaWatt:
+        return GW;
+    case UnitTeraWatt:
+        return TW;
+    case UnitPetaWatt:
+        return PV;
+
+    case UnitWattHour:
+        return Wh;
+    case UnitKiloWattHour:
+        return kWh;
+    case UnitMegaWattHour:
+        return MWh;
+    case UnitGigaWattHour:
+        return GWh;
+    case UnitTeraWattHour:
+        return TWh;
+    case UnitPetaWattHour:
+        return PWh;
+
+    case UnitAmpere:
+        return A;
+    case UnitKiloAmpere:
+        return kA;
+    case UnitMegaAmpere:
+        return MA;
+    case UnitGigaAmpere:
+        return GA;
+    case UnitTeraAmpere:
+        return TA;
+    case UnitPetaAmpere:
+        return PA;
+
     case UnitCelsius:
         return C;
     case UnitDecibelMilliWatts:
@@ -135,14 +211,6 @@ static KLocalizedString unitFormat(Unit unit)
         return RPM;
     case UnitSecond:
         return s;
-    case UnitVolt:
-        return V;
-    case UnitWatt:
-        return W;
-    case UnitWattHour:
-        return Wh;
-    case UnitAmpere:
-        return A;
 
     default:
         return unitless;
@@ -178,9 +246,34 @@ static int unitOrder(Unit unit)
     case UnitGigaHertz:
     case UnitTeraHertz:
     case UnitPetaHertz:
+
     case UnitWatt:
+    case UnitKiloWatt:
+    case UnitMegaWatt:
+    case UnitGigaWatt:
+    case UnitTeraWatt:
+    case UnitPetaWatt:
+
     case UnitWattHour:
+    case UnitKiloWattHour:
+    case UnitMegaWattHour:
+    case UnitGigaWattHour:
+    case UnitTeraWattHour:
+    case UnitPetaWattHour:
+
     case UnitAmpere:
+    case UnitKiloAmpere:
+    case UnitMegaAmpere:
+    case UnitGigaAmpere:
+    case UnitTeraAmpere:
+    case UnitPetaAmpere:
+
+    case UnitVolt:
+    case UnitKiloVolt:
+    case UnitMegaVolt:
+    case UnitGigaVolt:
+    case UnitTeraVolt:
+    case UnitPetaVolt:
         return 1000;
 
     default:
@@ -223,6 +316,38 @@ static Unit unitBase(Unit unit)
     case UnitPetaHertz:
         return UnitHertz;
 
+    case UnitVolt:
+    case UnitKiloVolt:
+    case UnitMegaVolt:
+    case UnitGigaVolt:
+    case UnitTeraVolt:
+    case UnitPetaVolt:
+        return UnitVolt;
+
+    case UnitWatt:
+    case UnitKiloWatt:
+    case UnitMegaWatt:
+    case UnitGigaWatt:
+    case UnitTeraWatt:
+    case UnitPetaWatt:
+        return UnitWatt;
+
+    case UnitWattHour:
+    case UnitKiloWattHour:
+    case UnitMegaWattHour:
+    case UnitGigaWattHour:
+    case UnitTeraWattHour:
+    case UnitPetaWattHour:
+        return UnitWattHour;
+
+    case UnitAmpere:
+    case UnitKiloAmpere:
+    case UnitMegaAmpere:
+    case UnitGigaAmpere:
+    case UnitTeraAmpere:
+    case UnitPetaAmpere:
+        return UnitAmpere;
+
     default:
         return unit;
     }
@@ -252,7 +377,7 @@ static Unit adjustedUnit(qreal value, Unit unit, MetricPrefix prefix)
     }
 
     const Unit newUnit = Unit(prefix + baseUnit);
-    // If there is no prefixed unit (e.g. no UnitKiloWatt),
+    // If there is no prefixed unit,
     // don't overflow into the following unrelated units.
     if (unitBase(newUnit) != baseUnit) {
         return unit;
@@ -351,16 +476,36 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
     case UnitGigaHertz:
     case UnitTeraHertz:
     case UnitPetaHertz:
+    case UnitVolt:
+    case UnitKiloVolt:
+    case UnitMegaVolt:
+    case UnitGigaVolt:
+    case UnitTeraVolt:
+    case UnitPetaVolt:
+    case UnitWatt:
+    case UnitKiloWatt:
+    case UnitMegaWatt:
+    case UnitGigaWatt:
+    case UnitTeraWatt:
+    case UnitPetaWatt:
+    case UnitWattHour:
+    case UnitKiloWattHour:
+    case UnitMegaWattHour:
+    case UnitGigaWattHour:
+    case UnitTeraWattHour:
+    case UnitPetaWattHour:
+    case UnitAmpere:
+    case UnitKiloAmpere:
+    case UnitMegaAmpere:
+    case UnitGigaAmpere:
+    case UnitTeraAmpere:
+    case UnitPetaAmpere:
+    case UnitSecond:
     case UnitPercent:
     case UnitRate:
     case UnitRpm:
     case UnitCelsius:
     case UnitDecibelMilliWatts:
-    case UnitVolt:
-    case UnitWatt:
-    case UnitWattHour:
-    case UnitSecond:
-    case UnitAmpere:
         return formatNumber(value, unit, targetPrefix, options);
 
     case UnitBootTimestamp:
@@ -433,6 +578,58 @@ QString Formatter::symbol(Unit unit)
     case UnitPetaHertz:
         return i18nc("Petahertz unit symbol", "PHz");
 
+    case UnitVolt:
+        return i18nc("Volts unit symbol", "V");
+    case UnitKiloVolt:
+        return i18nc("Kilovolts unit symbol", "kV");
+    case UnitMegaVolt:
+        return i18nc("Megavolts unit symbol", "MV");
+    case UnitGigaVolt:
+        return i18nc("Gigavolts unit symbol", "GV");
+    case UnitTeraVolt:
+        return i18nc("Teravolts unit symbol", "TV");
+    case UnitPetaVolt:
+        return i18nc("Petavolts unit symbol", "PV");
+
+    case UnitWatt:
+        return i18nc("Watts unit symbol", "W");
+    case UnitKiloWatt:
+        return i18nc("Kilowatts unit symbol", "kW");
+    case UnitMegaWatt:
+        return i18nc("Megawatts unit symbol", "MW");
+    case UnitGigaWatt:
+        return i18nc("Gigawatts unit symbol", "GW");
+    case UnitTeraWatt:
+        return i18nc("Terawatts unit symbol", "TW");
+    case UnitPetaWatt:
+        return i18nc("Petawatts unit symbol", "PW");
+
+    case UnitWattHour:
+        return i18nc("Watt-hours unit symbol", "Wh");
+    case UnitKiloWattHour:
+        return i18nc("Kilo-watthours unit symbol", "kWh");
+    case UnitMegaWattHour:
+        return i18nc("Mega-watthours unit symbol", "MWh");
+    case UnitGigaWattHour:
+        return i18nc("Giga-watthours unit symbol", "GWh");
+    case UnitTeraWattHour:
+        return i18nc("Tera-watthours unit symbol", "TWh");
+    case UnitPetaWattHour:
+        return i18nc("Peta-watthours unit symbol", "PWh");
+
+    case UnitAmpere:
+        return i18nc("Ampere unit symbol", "A");
+    case UnitKiloAmpere:
+        return i18nc("Kiloamperes unit symbol", "kA");
+    case UnitMegaAmpere:
+        return i18nc("Megaamperes unit symbol", "MA");
+    case UnitGigaAmpere:
+        return i18nc("Gigaamperes unit symbol", "GA");
+    case UnitTeraAmpere:
+        return i18nc("Teraamperes unit symbol", "TA");
+    case UnitPetaAmpere:
+        return i18nc("Petaamperes unit symbol", "PA");
+
     case UnitPercent:
         return i18nc("Percent unit", "%");
     case UnitRpm:
@@ -443,16 +640,9 @@ QString Formatter::symbol(Unit unit)
         return i18nc("Decibels unit symbol", "dBm");
     case UnitSecond:
         return i18nc("Seconds unit symbol", "s");
-    case UnitVolt:
-        return i18nc("Volts unit symbol", "V");
-    case UnitWatt:
-        return i18nc("Watts unit symbol", "W");
-    case UnitWattHour:
-        return i18nc("Watt-hours unit symbol", "Wh");
+
     case UnitRate:
         return i18nc("Rate unit symbol", "s⁻¹");
-    case UnitAmpere:
-        return i18nc("Ampere unit symbol", "A");
 
     default:
         return QString();
