@@ -74,7 +74,7 @@ if(WITH_X11)
                             PURPOSE "Required for building Process UI with X11 support"
                         )
     if(X11_FOUND)
-        find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
+        find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
         set(HAVE_X11 1)
         find_library(X11_XRes_LIB XRes ${X11_LIB_SEARCH_PATH})
         find_path(X11_XRes_INCLUDE_PATH X11/extensions/XRes.h ${X11_INC_SEARCH_PATH})
