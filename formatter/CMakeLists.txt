@@ -1,5 +1,5 @@
 
-set(Formatter_SOVERSION 1)
+set(Formatter_SOVERSION 2)
 
 set(formatter_SRCS
     Formatter.cpp

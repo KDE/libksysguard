@@ -1,4 +1,4 @@
-set(SystemStats_SOVERSION 1)
+set(SystemStats_SOVERSION 2)
 
 set(systemstats_SRCS
     AggregateSensor.cpp
