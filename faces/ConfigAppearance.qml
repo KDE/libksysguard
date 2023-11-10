@@ -74,7 +74,7 @@ Kirigami.FormLayout {
             model: controller.availablePresetsModel
             delegate: Kirigami.SwipeListItem {
                 contentItem: QQC2.Label {
-                    Layout.fillWidth: true
+                    elide: Text.ElideRight
                     text: model.display
                 }
                 actions: Kirigami.Action {
