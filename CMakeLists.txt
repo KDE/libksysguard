@@ -62,7 +62,7 @@ ecm_setup_version(${PROJECT_VERSION}
                   VARIABLE_PREFIX KSYSGUARD
                   VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/ksysguard_version.h"
                   PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfigVersion.cmake"
-                  SOVERSION 9
+                  SOVERSION 10
 )
 
 option(WITH_X11 "Build with X11 support." ON)
