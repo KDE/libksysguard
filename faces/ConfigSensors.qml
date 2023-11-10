@@ -140,7 +140,7 @@ ColumnLayout {
         labels: root.cfg_sensorLabels
 
         onSelectedChanged: root.cfg_totalSensors = selected
-        onSensorLabelChanged: {
+        onSensorLabelChanged: (sensorId, label) => {
             cfg_sensorLabels[sensorId] = label
             root.cfg_sensorLabelsChanged()
         }
@@ -158,15 +158,15 @@ ColumnLayout {
         onSelectedChanged: root.cfg_highPrioritySensorIds = selected
 
         colors: root.cfg_sensorColors
-        onSelectColor: {
+        onSelectColor: sensorId => {
             colorDialog.destinationSensor = sensorId
             colorDialog.open()
         }
-        onColorForSensorGenerated: {
+        onColorForSensorGenerated: (sensorId, color) => {
             cfg_sensorColors[sensorId] = color
             root.cfg_sensorColorsChanged();
         }
-        onSensorLabelChanged: {
+        onSensorLabelChanged: (sensorId, label) => {
             cfg_sensorLabels[sensorId] = label
             root.cfg_sensorLabelsChanged()
         }
@@ -184,7 +184,7 @@ ColumnLayout {
         labels: root.cfg_sensorLabels
 
         onSelectedChanged: root.cfg_lowPrioritySensorIds = selected
-        onSensorLabelChanged: {
+        onSensorLabelChanged: (sensorId, label) => {
             cfg_sensorLabels[sensorId] = label
             root.cfg_sensorLabelsChanged()
         }
