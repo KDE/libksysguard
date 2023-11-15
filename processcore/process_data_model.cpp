@@ -221,8 +221,8 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
         disconnect(unusedAttribute, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
     }
 
-    d->update();
     endResetModel();
+    d->update();
 
     Q_EMIT enabledAttributesChanged();
 }
