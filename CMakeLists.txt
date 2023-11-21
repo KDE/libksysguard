@@ -31,7 +31,7 @@ include(CheckLibraryExists)
 include(FeatureSummary)
 include(GenerateExportHeader)
 
-find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets Qml Quick Core5Compat)
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS DBus Network Widgets Qml Quick)
 find_package(Qt6WebEngineWidgets ${QT_MIN_VERSION} CONFIG)
 set_package_properties(Qt6WebEngineWidgets PROPERTIES
                        URL "git://code.qt.org/qt/qtwebenginewidgets.git"

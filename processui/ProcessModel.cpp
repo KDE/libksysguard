@@ -31,7 +31,7 @@
 #include <QLocale>
 #include <QMimeData>
 #include <QPixmap>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QTextDocument>
 #include <kcolorscheme.h>
 #include <kiconloader.h>
@@ -324,19 +324,20 @@ bool ProcessModel::lessThan(const QModelIndex &left, const QModelIndex &right) c
 
         // Neither left or right is empty. The tty string is like  "tty10"  so split this into "tty" and "10"
         // and sort by the string first, then sort by the number
-        QRegExp regexpLeft(QStringLiteral("^(\\D*)(\\d*)$"));
-        QRegExp regexpRight(regexpLeft);
-        if (regexpLeft.indexIn(QString::fromUtf8(processLeft->tty())) == -1 || regexpRight.indexIn(QString::fromUtf8(processRight->tty())) == -1) {
+        const QRegularExpression regexp(QStringLiteral("^(\\D*)(\\d*)$"));
+        const auto regexpLeft = regexp.match(QString::fromUtf8(processLeft->tty()));
+        const auto regexpRight = regexp.match(QString::fromUtf8(processRight->tty()));
+        if (!regexpLeft.hasMatch() || !regexpRight.hasMatch()) {
             return processLeft->tty() < processRight->tty();
         }
-        int nameMatch = regexpLeft.cap(1).compare(regexpRight.cap(1));
+        int nameMatch = regexpLeft.capturedView(1).compare(regexpRight.capturedView(1));
         if (nameMatch < 0) {
             return true;
         }
         if (nameMatch > 0) {
             return false;
         }
-        return regexpLeft.cap(2).toInt() < regexpRight.cap(2).toInt();
+        return regexpLeft.capturedView(2).toInt() < regexpRight.capturedView(2).toInt();
     }
     case HeadingIoRead:
         switch (d->mIoInformation) {
