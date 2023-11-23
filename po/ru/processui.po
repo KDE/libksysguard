@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-01 01:41+0000\n"
+"POT-Creation-Date: 2023-11-23 01:39+0000\n"
 "PO-Revision-Date: 2022-08-18 16:10+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -555,24 +555,24 @@ msgstr "%1 ТиБ"
 msgid "%1 P"
 msgstr "%1 ПиБ"
 
-#: ProcessModel.cpp:684
+#: ProcessModel.cpp:685
 #, kde-format
 msgid "- Process is doing some work."
 msgstr "— процесс выполняет работу."
 
-#: ProcessModel.cpp:686
+#: ProcessModel.cpp:687
 #, kde-format
 msgid "- Process is waiting for something to happen."
 msgstr "— процесс ждёт какого-то события."
 
-#: ProcessModel.cpp:688
+#: ProcessModel.cpp:689
 #, kde-format
 msgid ""
 "- Process has been stopped. It will not respond to user input at the moment."
 msgstr ""
 "— процесс остановлен. Он временно не реагирует на пользовательский ввод."
 
-#: ProcessModel.cpp:690
+#: ProcessModel.cpp:691
 #, kde-format
 msgid ""
 "- Process has finished and is now dead, but the parent process has not "
@@ -581,22 +581,22 @@ msgstr ""
 "— процесс завершил свою работу и уничтожен, но родительский процесс ещё не "
 "удалил его данные."
 
-#: ProcessModel.cpp:1123
+#: ProcessModel.cpp:1124
 #, kde-format
 msgid "The process name."
 msgstr "Имя процесса."
 
-#: ProcessModel.cpp:1125
+#: ProcessModel.cpp:1126
 #, kde-format
 msgid "The user who owns this process."
 msgstr "Пользователь-владелец процесса."
 
-#: ProcessModel.cpp:1127
+#: ProcessModel.cpp:1128
 #, kde-format
 msgid "The controlling terminal on which this process is running."
 msgstr "Терминал, с которым связан данный процесс."
 
-#: ProcessModel.cpp:1130
+#: ProcessModel.cpp:1131
 #, kde-format
 msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
@@ -605,12 +605,12 @@ msgstr ""
 "Приоритет, с которым работает данный процесс. Может быть от 19 (низший "
 "приоритет) до -19 (высший приоритет)."
 
-#: ProcessModel.cpp:1134
+#: ProcessModel.cpp:1135
 #, kde-format
 msgid "The current CPU usage of the process."
 msgstr "Текущее потребление процессорного времени процессом."
 
-#: ProcessModel.cpp:1139
+#: ProcessModel.cpp:1140
 #, kde-format
 msgid ""
 "The current total CPU usage of the process, divided by the %1 processor core "
@@ -631,12 +631,12 @@ msgstr[3] ""
 "Текущее суммарное потребление процессорного времени процессом, делённое на "
 "%1 ядро."
 
-#: ProcessModel.cpp:1143
+#: ProcessModel.cpp:1144
 #, kde-format
 msgid "The current total CPU usage of the process."
 msgstr "Текущее общее потребление процессорного времени процессом."
 
-#: ProcessModel.cpp:1147
+#: ProcessModel.cpp:1148
 #, kde-format
 msgid ""
 "<qt>The total user and system time that this process has been running for, "
@@ -645,7 +645,7 @@ msgstr ""
 "<qt>Общее пользовательское и системное время работы процесса, показанное в "
 "виде минуты:секунды."
 
-#: ProcessModel.cpp:1150
+#: ProcessModel.cpp:1151
 #, kde-format
 msgid ""
 "<qt>This is the amount of virtual memory space that the process is using, "
@@ -655,7 +655,7 @@ msgstr ""
 "<qt>Это объем виртуальной памяти, используемой процессом, включая "
 "разделённые библиотеки, видеопамять, файлы на диске и прочее.</qt>"
 
-#: ProcessModel.cpp:1154
+#: ProcessModel.cpp:1155
 #, kde-format
 msgid ""
 "<qt>This is the amount of real physical memory that this process is using by "
@@ -669,7 +669,7 @@ msgstr ""
 "также размер кода разделяемых библиотек.<br>Часто это наиболее полезный "
 "параметр для того, чтобы судить об использовании памяти программой.</qt>"
 
-#: ProcessModel.cpp:1159
+#: ProcessModel.cpp:1160
 #, kde-format
 msgid ""
 "<qt>This is approximately the amount of real physical memory that this "
@@ -680,12 +680,12 @@ msgstr ""
 "разделяемые библиотеки данного процесса.<br>Эта память используется "
 "совместно с другими процессами.</qt>"
 
-#: ProcessModel.cpp:1162
+#: ProcessModel.cpp:1163
 #, kde-format
 msgid "<qt>The elapsed time since the process was started.</qt>"
 msgstr "<qt>Время, прошедшее с момента запуска процесса.</qt>"
 
-#: ProcessModel.cpp:1164
+#: ProcessModel.cpp:1165
 #, kde-format
 msgid ""
 "<qt>Linux flag NoNewPrivileges, if set the process can't gain further "
@@ -695,46 +695,46 @@ msgstr ""
 "процесс не сможет устанавливать права доступа при помощи механизмов setuid и "
 "подобных.</qt>"
 
-#: ProcessModel.cpp:1166
+#: ProcessModel.cpp:1167
 #, kde-format
 msgid "<qt>The command with which this process was launched.</qt>"
 msgstr "<qt>Команда, при помощи которой был запущен данный процесс.</qt>"
 
-#: ProcessModel.cpp:1168
+#: ProcessModel.cpp:1169
 #, kde-format
 msgid "<qt>The amount of pixmap memory that this process is using.</qt>"
 msgstr "<qt>Объём памяти пиксельных карт, используемых процессом.</qt>"
 
-#: ProcessModel.cpp:1170
+#: ProcessModel.cpp:1171
 #, kde-format
 msgid "<qt>The title of any windows that this process is showing.</qt>"
 msgstr "<qt>Заголовок окон.</qt>"
 
-#: ProcessModel.cpp:1172
+#: ProcessModel.cpp:1173
 #, kde-format
 msgid "The unique Process ID that identifies this process."
 msgstr "Уникальный номер, идентифицирующий данный процесс."
 
-#: ProcessModel.cpp:1174
+#: ProcessModel.cpp:1175
 #, kde-format
 msgid "The number of bytes read.  See What's This for more information."
 msgstr ""
 "Количество прочитанных данных в байтах. Используйте функцию «Что это?» для "
 "разъяснения."
 
-#: ProcessModel.cpp:1176
+#: ProcessModel.cpp:1177
 #, kde-format
 msgid "The number of bytes written.  See What's This for more information."
 msgstr ""
 "Количество записанных данных в байтах. Используйте функцию «Что это?» для "
 "разъяснения."
 
-#: ProcessModel.cpp:1178
+#: ProcessModel.cpp:1179
 #, kde-format
 msgid "<qt>The control group (cgroup) where this process belongs.</qt>"
 msgstr "<qt>Контрольная группа (cgroup), которой принадлежит процесс.</qt>"
 
-#: ProcessModel.cpp:1180
+#: ProcessModel.cpp:1181
 #, kde-format
 msgid ""
 "<qt>Mandatory Access Control (SELinux or AppArmor) context for this process."
@@ -743,7 +743,7 @@ msgstr ""
 "<qt>Контекст мандатного управления доступа (SELinux или AppArmor) процесса.</"
 "qt>"
 
-#: ProcessModel.cpp:1183
+#: ProcessModel.cpp:1184
 #, kde-format
 msgid ""
 "The amount of private physical memory used by a process, with the amount of "
@@ -753,7 +753,7 @@ msgstr ""
 "Сумма объёма физической памяти, используемой процессом и объёма разделяемой "
 "памяти, делённого на количество использующих её процессов."
 
-#: ProcessModel.cpp:1193
+#: ProcessModel.cpp:1194
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The kernel process name is a maximum of 8 "
@@ -766,7 +766,7 @@ msgstr ""
 "полной строке запуска начинается с имени процесса, показывается это первое "
 "слово. В противном случае показывается имя процесса."
 
-#: ProcessModel.cpp:1197
+#: ProcessModel.cpp:1198
 #, kde-format
 msgid ""
 "<qt>The user who owns this process.  If the effective, setuid etc user is "
@@ -796,7 +796,7 @@ msgstr ""
 "Обратитесь к man-странице setfsuid(2) для получения дополнительной "
 "информации.</td></tr></table>"
 
-#: ProcessModel.cpp:1212
+#: ProcessModel.cpp:1213
 #, kde-format
 msgid ""
 "<qt>This is the size of allocated address space - not memory, but address "
@@ -811,7 +811,7 @@ msgstr ""
 "большим. <p> <i>Техническая информация: </i>это VmSize в proc/*/status и "
 "VIRT в программе top."
 
-#: ProcessModel.cpp:1217
+#: ProcessModel.cpp:1218
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is an approximation of the Private "
@@ -831,12 +831,12 @@ msgstr ""
 "его памяти можно найти в разделе «Сведения об использовании памяти». "
 "Указанное там значение более точное, но определяется дольше."
 
-#: ProcessModel.cpp:1222
+#: ProcessModel.cpp:1223
 #, kde-format
 msgid "The CPU usage of a process and all of its threads."
 msgstr "Использование процессора процессом и всеми его потоками"
 
-#: ProcessModel.cpp:1225
+#: ProcessModel.cpp:1226
 #, kde-format
 msgid ""
 "<qt>The total system and user time that a process and all of its threads "
@@ -847,7 +847,7 @@ msgstr ""
 "процессом и всеми его программными потоками. Это значение может быть больше, "
 "чем время работы, если процесс запущен на на нескольких процессорных ядрах."
 
-#: ProcessModel.cpp:1229
+#: ProcessModel.cpp:1230
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is an approximation of the Shared "
@@ -863,7 +863,7 @@ msgstr ""
 "можно найти в разделе «Сведения об использовании памяти». Указанное там "
 "значение более точное, но определяется дольше."
 
-#: ProcessModel.cpp:1233
+#: ProcessModel.cpp:1234
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The underlying value (clock ticks since "
@@ -872,7 +872,7 @@ msgstr ""
 "<qt><i>Техническая информация: </i>за основу берётся число тактов системного "
 "таймера начиная с момента загрузки операционной системы из /proc/[pid]/stat"
 
-#: ProcessModel.cpp:1235
+#: ProcessModel.cpp:1236
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>The flag is retrieved from /proc/[pid]/"
@@ -881,13 +881,13 @@ msgstr ""
 "<qt><i>Техническая информация: </i> Состояние флага получено из «/proc/[pid]/"
 "status»."
 
-#: ProcessModel.cpp:1237
+#: ProcessModel.cpp:1238
 #, kde-format
 msgid "<qt><i>Technical information: </i>This is from /proc/*/cmdline"
 msgstr ""
 "<qt><i>Техническая информация: </i>информация берётся из /proc/*/cmdline"
 
-#: ProcessModel.cpp:1240
+#: ProcessModel.cpp:1241
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is the amount of memory used by the "
@@ -904,7 +904,7 @@ msgstr ""
 "(такие как шрифты, курсоры и тому подобное). Подробные сведения о выделении "
 "памяти под ресурсы можно получить в программе <code>xrestop</code>."
 
-#: ProcessModel.cpp:1245
+#: ProcessModel.cpp:1246
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>For each X11 window, the X11 property "
@@ -915,7 +915,7 @@ msgstr ""
 "идентификатору процесса используется свойство окна _NET_WM_PID. Если окна "
 "процесса не показываются, приложение неверно установило _NET_WM_PID."
 
-#: ProcessModel.cpp:1249
+#: ProcessModel.cpp:1250
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This is the Process ID.  A multi-threaded "
@@ -928,7 +928,7 @@ msgstr ""
 "процессора определяется как суммарное использование процессора каждым "
 "программным потоком."
 
-#: ProcessModel.cpp:1254
+#: ProcessModel.cpp:1255
 #, kde-format
 msgid ""
 "<qt>This column shows the IO statistics for each process. The tooltip "
@@ -981,7 +981,7 @@ msgstr ""
 "читаются из файлов /proc/*/io; параметры описаны в документации по ядру "
 "(Documentation/accounting и Documentation/filesystems/proc.txt)."
 
-#: ProcessModel.cpp:1274
+#: ProcessModel.cpp:1275
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This shows Linux Control Group (cgroup) "
@@ -995,7 +995,7 @@ msgstr ""
 "и контейнерами для ограничения и отслеживания использования ресурсов "
 "принадлежащими группе процессами."
 
-#: ProcessModel.cpp:1278
+#: ProcessModel.cpp:1279
 #, kde-format
 msgid ""
 "<qt><i>Technical information: </i>This shows Mandatory Access Control "
@@ -1005,7 +1005,7 @@ msgstr ""
 "(системы мандатного управления доступом, такого как SELinux или AppArmor), "
 "полученный из «/proc/[pid]/attr/current»."
 
-#: ProcessModel.cpp:1282
+#: ProcessModel.cpp:1283
 #, kde-format
 msgid ""
 "<i>Technical information:</i> This is often referred to as \"Proportional "
@@ -1020,25 +1020,25 @@ msgstr ""
 "то, что количество приложений, использующих память совместно, может быть "
 "различным для разных блоков памяти."
 
-#: ProcessModel.cpp:1392
+#: ProcessModel.cpp:1393
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Login Name:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Имя пользователя:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1396
+#: ProcessModel.cpp:1397
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para>This user is not recognized for some reason.</para>"
 msgstr "<para>Невозможно определить пользователя.</para>"
 
-#: ProcessModel.cpp:1399
+#: ProcessModel.cpp:1400
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>%1</emphasis></para>"
 msgstr "<para><emphasis strong='true'>%1</emphasis></para>"
 
-#: ProcessModel.cpp:1402
+#: ProcessModel.cpp:1403
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1047,33 +1047,33 @@ msgstr ""
 "<para><emphasis strong='true'>Имя пользователя:</emphasis> %1 (UID: %2)</"
 "para>"
 
-#: ProcessModel.cpp:1407
+#: ProcessModel.cpp:1408
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>  Room Number:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>  Номер офиса:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1411
+#: ProcessModel.cpp:1412
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>  Work Phone:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>  Рабочий телефон:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1417
+#: ProcessModel.cpp:1418
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Effective User:</emphasis> %1</para>"
 msgstr ""
 "<para><emphasis strong='true'>Эффективный пользователь:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1420
+#: ProcessModel.cpp:1421
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Setuid User:</emphasis> %1</para>"
 msgstr ""
 "<para><emphasis strong='true'>Пользователь setuid:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1424
+#: ProcessModel.cpp:1425
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>File System User:</emphasis> %1</para>"
@@ -1081,98 +1081,98 @@ msgstr ""
 "<para><emphasis strong='true'>Пользователь файловой системы:</emphasis> %1</"
 "para>"
 
-#: ProcessModel.cpp:1429
+#: ProcessModel.cpp:1430
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Group:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Группа:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1432
+#: ProcessModel.cpp:1433
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Effective Group:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Эффективная группа:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1435
+#: ProcessModel.cpp:1436
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Setuid Group:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Группа setuid:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1439
+#: ProcessModel.cpp:1440
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>File System Group:</emphasis> %1</para>"
 msgstr ""
 "<para><emphasis strong='true'>Группа файловой системы:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1449
+#: ProcessModel.cpp:1450
 #, kde-format
 msgctxt "Short description of a process. PID, name, user"
 msgid "%1: %2, owned by user %3"
 msgstr "%1: %2, принадлежит %3"
 
-#: ProcessModel.cpp:1460
+#: ProcessModel.cpp:1461
 #, kde-format
 msgctxt "Group name and group id"
 msgid "%1 (gid: %2)"
 msgstr "%1 (GID: %2)"
 
-#: ProcessModel.cpp:1485
+#: ProcessModel.cpp:1486
 #, kde-format
 msgctxt "User name and user id"
 msgid "%1 (uid: %2)"
 msgstr "%1 (UID: %2)"
 
-#: ProcessModel.cpp:1555
+#: ProcessModel.cpp:1556
 #, kde-format
 msgctxt "scheduler"
 msgid "Idle"
 msgstr "Бездействие"
 
-#: ProcessModel.cpp:1557
+#: ProcessModel.cpp:1558
 #, kde-format
 msgctxt "scheduler"
 msgid "(Batch) %1"
 msgstr "(Batch) %1"
 
-#: ProcessModel.cpp:1559
+#: ProcessModel.cpp:1560
 #, kde-format
 msgctxt "Round robin scheduler"
 msgid "RR %1"
 msgstr "RR %1"
 
-#: ProcessModel.cpp:1562
+#: ProcessModel.cpp:1563
 #, kde-format
 msgctxt "Real Time scheduler"
 msgid "RT"
 msgstr "РВ"
 
-#: ProcessModel.cpp:1564
+#: ProcessModel.cpp:1565
 #, kde-format
 msgctxt "First in first out scheduler"
 msgid "FIFO %1"
 msgstr "FIFO %1"
 
-#: ProcessModel.cpp:1567
+#: ProcessModel.cpp:1568
 #, kde-format
 msgctxt "scheduler"
 msgid "(IA) %1"
 msgstr "(IA) %1"
 
-#: ProcessModel.cpp:1644 ProcessModel.cpp:1654 ProcessModel.cpp:1673
-#: ProcessModel.cpp:1683
+#: ProcessModel.cpp:1645 ProcessModel.cpp:1655 ProcessModel.cpp:1674
+#: ProcessModel.cpp:1684
 #, kde-format
 msgid "%1/s"
 msgstr "%1/с"
 
-#: ProcessModel.cpp:1727
+#: ProcessModel.cpp:1728
 #, kde-kuit-format
 msgctxt "tooltip. name,pid "
 msgid "This process is being debugged by %1 (%2)"
 msgstr "Процесс %1 (%2) отлаживает данный процесс."
 
-#: ProcessModel.cpp:1750
+#: ProcessModel.cpp:1751
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1183,7 +1183,7 @@ msgstr ""
 "процессов, его нельзя завершить.</para><para><emphasis "
 "strong='true'>Идентификатор процесса (PID):</emphasis> %2</para>"
 
-#: ProcessModel.cpp:1756
+#: ProcessModel.cpp:1757
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1194,7 +1194,7 @@ msgstr ""
 "работают в режиме ядра, контролируя доступ у жёсткому диску и прочие "
 "операции.</para>"
 
-#: ProcessModel.cpp:1760
+#: ProcessModel.cpp:1761
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1204,7 +1204,7 @@ msgstr ""
 "<title>%1</title><para><emphasis strong='true'>Идентификатор процесса (PID):"
 "</emphasis> %2</para>"
 
-#: ProcessModel.cpp:1769
+#: ProcessModel.cpp:1770
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1217,7 +1217,7 @@ msgstr ""
 "emphasis> %3</para> <para><emphasis strong='true'>PID родительского процесса:"
 "</emphasis> %4</para>"
 
-#: ProcessModel.cpp:1779
+#: ProcessModel.cpp:1780
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1228,25 +1228,25 @@ msgstr ""
 "</emphasis> %2</para> <para><emphasis strong='true'>PID родительского "
 "процесса:</emphasis> %3</para>"
 
-#: ProcessModel.cpp:1788 ProcessModel.cpp:1896
+#: ProcessModel.cpp:1789 ProcessModel.cpp:1897
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Number of threads:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Количество потоков:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1791
+#: ProcessModel.cpp:1792
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Command:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Команда запуска:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1794 ProcessModel.cpp:1827
+#: ProcessModel.cpp:1795 ProcessModel.cpp:1828
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Running on:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Выполняется на:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1811
+#: ProcessModel.cpp:1812
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1263,7 +1263,7 @@ msgstr ""
 "<para><emphasis strong='true'>Относительное время запуска:</emphasis> %5</"
 "para>"
 
-#: ProcessModel.cpp:1823
+#: ProcessModel.cpp:1824
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1273,14 +1273,14 @@ msgstr ""
 "<para><emphasis strong='true'>Этот процесс был запущен следующей командой:</"
 "emphasis></para><para>%1</para>"
 
-#: ProcessModel.cpp:1849 ProcessModel.cpp:1921
+#: ProcessModel.cpp:1850 ProcessModel.cpp:1922
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Nice level:</emphasis> %1 (%2)</para>"
 msgstr ""
 "<para><emphasis strong='true'>Значение приоритета:</emphasis> %1 (%2)</para>"
 
-#: ProcessModel.cpp:1856
+#: ProcessModel.cpp:1857
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1291,13 +1291,13 @@ msgstr ""
 "времени.</emphasis></para><para><emphasis strong='true'>Приоритет "
 "планировщика:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1864
+#: ProcessModel.cpp:1865
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Scheduler:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Планировщик:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1871 ProcessModel.cpp:1929
+#: ProcessModel.cpp:1872 ProcessModel.cpp:1930
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>I/O Nice level:</emphasis> %1 (%2)</para>"
@@ -1305,13 +1305,13 @@ msgstr ""
 "<para><emphasis strong='true'>Значение приоритета ввода/вывода:</emphasis>%1 "
 "(%2)</para>"
 
-#: ProcessModel.cpp:1875 ProcessModel.cpp:1933
+#: ProcessModel.cpp:1876 ProcessModel.cpp:1934
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>I/O Class:</emphasis> %1</para>"
 msgstr "<para><emphasis strong='true'>Класс ввода/вывода:</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1887
+#: ProcessModel.cpp:1888
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1324,7 +1324,7 @@ msgstr ""
 "emphasis> %3%</para><para><emphasis strong='true'>Использование ЦП ядром:</"
 "emphasis> %4%</para>"
 
-#: ProcessModel.cpp:1900
+#: ProcessModel.cpp:1901
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1339,7 +1339,7 @@ msgstr ""
 "ядра:</emphasis> %3%</para><para><emphasis strong='true'>Общее использование "
 "ЦП:</emphasis> %4%</para>"
 
-#: ProcessModel.cpp:1911
+#: ProcessModel.cpp:1912
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1349,7 +1349,7 @@ msgstr ""
 "<para><emphasis strong='true'>Общее время работы в режиме пользователя:</"
 "emphasis> %1 с</para>"
 
-#: ProcessModel.cpp:1916
+#: ProcessModel.cpp:1917
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1359,7 +1359,7 @@ msgstr ""
 "<para><emphasis strong='true'>Общее время работы в режиме ядра:</emphasis> "
 "%1 с</para>"
 
-#: ProcessModel.cpp:1950
+#: ProcessModel.cpp:1951
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1369,13 +1369,13 @@ msgstr ""
 "<para><emphasis strong='true'>Использование памяти:</emphasis> %1 из %2  (%3 "
 "%)</para>"
 
-#: ProcessModel.cpp:1956
+#: ProcessModel.cpp:1957
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<emphasis strong='true'>Memory usage:</emphasis> %1<br />"
 msgstr "<emphasis strong='true'>Использование памяти:</emphasis> %1<br />"
 
-#: ProcessModel.cpp:1961
+#: ProcessModel.cpp:1962
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1385,7 +1385,7 @@ msgstr ""
 "<para><emphasis strong='true'>Использование резидентной памяти:</emphasis> "
 "%1 из %2  (%3 %)</para>"
 
-#: ProcessModel.cpp:1967
+#: ProcessModel.cpp:1968
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>RSS Memory usage:</emphasis> %1</para>"
@@ -1393,7 +1393,7 @@ msgstr ""
 "<para><emphasis strong='true'>Использование резидентной памяти:</emphasis> "
 "%1</para>"
 
-#: ProcessModel.cpp:1975 ProcessModel.cpp:2037
+#: ProcessModel.cpp:1976 ProcessModel.cpp:2038
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1403,7 +1403,7 @@ msgstr ""
 "<para><emphasis strong='true'>Cистема не может предоставить эту информацию.</"
 "emphasis></para>"
 
-#: ProcessModel.cpp:1979
+#: ProcessModel.cpp:1980
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1413,7 +1413,7 @@ msgstr ""
 "<para><emphasis strong='true'>Использование памяти разделяемыми библиотеками:"
 "</emphasis> %1 из %2  (%3 %)</para>"
 
-#: ProcessModel.cpp:1985 ProcessModel.cpp:2047
+#: ProcessModel.cpp:1986 ProcessModel.cpp:2048
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1423,7 +1423,7 @@ msgstr ""
 "<para><emphasis strong='true'>Использование памяти разделяемыми библиотеками:"
 "</emphasis> %1</para>"
 
-#: ProcessModel.cpp:1993
+#: ProcessModel.cpp:1994
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1443,7 +1443,7 @@ msgstr ""
 "emphasis> %9 (%10 КиБ/с)</para><para><emphasis strong='true'>Записано байтов:"
 "</emphasis> %11 (%12 КиБ/с)</para>"
 
-#: ProcessModel.cpp:2041
+#: ProcessModel.cpp:2042
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1453,127 +1453,127 @@ msgstr ""
 "<para><emphasis strong='true'>Общее использование памяти:</emphasis> %1 из "
 "%2  (%3 %)</para>"
 
-#: ProcessModel.cpp:2344
+#: ProcessModel.cpp:2345
 #, kde-format
 msgctxt "process heading"
 msgid "Name"
 msgstr "Имя процесса"
 
-#: ProcessModel.cpp:2345
+#: ProcessModel.cpp:2346
 #, kde-format
 msgctxt "process heading"
 msgid "Username"
 msgstr "Пользователь"
 
-#: ProcessModel.cpp:2346
+#: ProcessModel.cpp:2347
 #, kde-format
 msgctxt "process heading"
 msgid "PID"
 msgstr "PID"
 
-#: ProcessModel.cpp:2347
+#: ProcessModel.cpp:2348
 #, kde-format
 msgctxt "process heading"
 msgid "TTY"
 msgstr "TTY"
 
-#: ProcessModel.cpp:2348
+#: ProcessModel.cpp:2349
 #, kde-format
 msgctxt "process heading"
 msgid "Niceness"
 msgstr "Приоритет"
 
-#: ProcessModel.cpp:2350
+#: ProcessModel.cpp:2351
 #, no-c-format, kde-format
 msgctxt "process heading"
 msgid "CPU %"
 msgstr "% ЦП"
 
-#: ProcessModel.cpp:2351
+#: ProcessModel.cpp:2352
 #, kde-format
 msgctxt "process heading"
 msgid "CPU Time"
 msgstr "Время ЦП"
 
-#: ProcessModel.cpp:2352
+#: ProcessModel.cpp:2353
 #, kde-format
 msgctxt "process heading"
 msgid "IO Read"
 msgstr "Чтение"
 
-#: ProcessModel.cpp:2353
+#: ProcessModel.cpp:2354
 #, kde-format
 msgctxt "process heading"
 msgid "IO Write"
 msgstr "Запись"
 
-#: ProcessModel.cpp:2354
+#: ProcessModel.cpp:2355
 #, kde-format
 msgctxt "process heading"
 msgid "Virtual Size"
 msgstr "Вирт. память"
 
-#: ProcessModel.cpp:2355
+#: ProcessModel.cpp:2356
 #, kde-format
 msgctxt "process heading"
 msgid "Memory"
 msgstr "Память"
 
-#: ProcessModel.cpp:2356
+#: ProcessModel.cpp:2357
 #, kde-format
 msgctxt "process heading"
 msgid "Shared Mem"
 msgstr "Разд.память"
 
-#: ProcessModel.cpp:2357
+#: ProcessModel.cpp:2358
 #, kde-format
 msgctxt "process heading"
 msgid "Relative Start Time"
 msgstr "Относительное время запуска"
 
-#: ProcessModel.cpp:2358
+#: ProcessModel.cpp:2359
 #, kde-format
 msgctxt "process heading"
 msgid "NNP"
 msgstr "NNP"
 
-#: ProcessModel.cpp:2359
+#: ProcessModel.cpp:2360
 #, kde-format
 msgctxt "process heading"
 msgid "Command"
 msgstr "Команда запуска"
 
-#: ProcessModel.cpp:2360
+#: ProcessModel.cpp:2361
 #, kde-format
 msgctxt "process heading"
 msgid "X11 Memory"
 msgstr "Память X11"
 
-#: ProcessModel.cpp:2361
+#: ProcessModel.cpp:2362
 #, kde-format
 msgctxt "process heading"
 msgid "Window Title"
 msgstr "Заголовок окна"
 
-#: ProcessModel.cpp:2362
+#: ProcessModel.cpp:2363
 #, kde-format
 msgctxt "process heading"
 msgid "CGroup"
 msgstr "Контрольная группа"
 
-#: ProcessModel.cpp:2363
+#: ProcessModel.cpp:2364
 #, kde-format
 msgctxt "process heading"
 msgid "MAC Context"
 msgstr "Контекст MAC"
 
-#: ProcessModel.cpp:2364
+#: ProcessModel.cpp:2365
 #, kde-format
 msgctxt "process heading"
 msgid "Total Memory"
 msgstr "Вся память"
 
-#: ProcessModel.cpp:2494
+#: ProcessModel.cpp:2495
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
