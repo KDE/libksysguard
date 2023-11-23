@@ -17,7 +17,7 @@ if (KF6Plasma_FOUND)
 
     ecm_add_test(graphicssignalplotterbenchmark.cpp graphicssignalplotterbenchmark.h signalplotterbenchmark.h ../signalplotter/kgraphicssignalplotter.cpp kgraphicssignalplotter.h ${SIGNALPLOTTER_DEBUG_SRCS}
         TEST_NAME graphicssignalplotterbenchmark
-        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF6::IconThemes KF6::Plasma
+        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF6::IconThemes Plasma::Plasma
     )
 
     ecm_add_test(signalplottertest.cpp signalplottertest.h ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
