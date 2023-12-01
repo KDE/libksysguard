@@ -6,20 +6,21 @@
 
 #pragma once
 
-#include "org.kde.ksystemstats.h"
+#include "org.kde.ksystemstats1.h"
 #include "systemstats_export.h"
 
 namespace KSysGuard
 {
 namespace SystemStats
 {
-const QString ServiceName = QStringLiteral("org.kde.ksystemstats");
-const QString ObjectPath = QStringLiteral("/");
+const QString ServiceName = QStringLiteral("org.kde.ksystemstats1");
+const QString ObjectPath = QStringLiteral("/org/kde/ksystemstats1");
+const QString InterfaceName = QStringLiteral("org.kde.ksystemstats1");
 
 /**
  * This exposes the generated DBus interface for org.kde.ksystemstats
  */
-class SYSTEMSTATS_EXPORT DBusInterface : public org::kde::ksystemstats
+class SYSTEMSTATS_EXPORT DBusInterface : public org::kde::ksystemstats1
 {
     Q_OBJECT
 public:

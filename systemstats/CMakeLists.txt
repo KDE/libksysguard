@@ -23,8 +23,8 @@ set(systemstats_HDRS
     DBusInterface.h
 )
 
-set_source_files_properties(org.kde.ksystemstats.xml PROPERTIES INCLUDE SensorInfo.h)
-qt_add_dbus_interface(dbusinterface_SRCS org.kde.ksystemstats.xml org.kde.ksystemstats)
+set_source_files_properties(org.kde.ksystemstats1.xml PROPERTIES INCLUDE SensorInfo.h)
+qt_add_dbus_interface(dbusinterface_SRCS org.kde.ksystemstats1.xml org.kde.ksystemstats1)
 
 # Symbol visibility trickery: We cannot generate the DBus interface class with
 # the right export macro, so instead create it as a static library with the right
@@ -64,8 +64,8 @@ install(TARGETS SystemStats EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARG
 install(FILES
     ${systemstats_HDRS}
     ${CMAKE_CURRENT_BINARY_DIR}/systemstats_export.h
-    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.ksystemstats.h
+    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.ksystemstats1.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/ksysguard/systemstats
 )
 
-install(FILES org.kde.ksystemstats.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
+install(FILES org.kde.ksystemstats1.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
