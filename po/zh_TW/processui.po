@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-23 01:39+0000\n"
-"PO-Revision-Date: 2023-11-29 17:38+0900\n"
+"PO-Revision-Date: 2023-12-13 17:41+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:554
 #, kde-format
@@ -664,6 +664,8 @@ msgid ""
 "shared memory divided by the amount of processes using that shared memory "
 "added."
 msgstr ""
+"一個行程所使用的私密物理記憶體量，加上共享記憶體的量除以使用該共享記憶體的行"
+"程數後的結果。"
 
 #: ProcessModel.cpp:1194
 #, kde-format
@@ -892,6 +894,9 @@ msgid ""
 "shared memory is determined per shared memory section and thus can vary per "
 "memory section."
 msgstr ""
+"<qt><i>技術資訊：</i>這被稱作「比例集合大小」 (\"Proportional Set Size\")，是"
+"一個行程實際使用的記憶體總量的最好的估計。請注意，分享某共享記憶體的應用程式"
+"數量在不同記憶體區段間可能不同。"
 
 #: ProcessModel.cpp:1393
 #, kde-kuit-format
@@ -1952,7 +1957,7 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">一般排程</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">這跟「最佳效果」的排程法很"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">這跟「最佳努力」的排程法很"
 "類似，差別只在優先權是以 CPU 的優先權為基準來自動計算。有較高的優先權的行程可"
 "以取得硬碟的存取優先權。相同「最佳效果/一般」優先權的程式會以 Round Robin 的"
 "方式來輪流。</p></body></html>"
@@ -2066,17 +2071,17 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">最佳效果排程</span></p>\n"
+"weight:600;\">最佳努力排程</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">有較高優先權的行程會取得硬"
-"碟的讀寫權。相同「最佳效果/一般」優先權的程式會以 Round Robin 的方式來輪流。"
+"碟的讀寫權。相同「最佳努力/一般」優先權的程式會以 Round Robin 的方式來輪流。"
 "</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioBestEffort)
 #: ReniceDlgUi.ui:343
 #, kde-format
 msgid "Best effort"
-msgstr "最佳效果"
+msgstr "最佳努力"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioRealTime)
 #: ReniceDlgUi.ui:353
@@ -2134,8 +2139,8 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">「即時」（real-time）排程類"
 "別就是不管系統目前在做什麼，都先給予磁碟的讀寫權。因此使用這種排程要很小心，"
-"因為可能會造成其它行程完全無法取得執行的機會。與「最佳效果」類別一起用時，會"
-"定義八種優先權等級。</p></body></html>"
+"因為可能會造成其它行程完全無法取得執行的機會。與「最佳努力」類別相同，會定義"
+"八種優先權等級。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioRealTime)
 #: ReniceDlgUi.ui:363
