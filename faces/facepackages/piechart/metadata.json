@@ -41,7 +41,8 @@
                 "Name[uk]": "Marco Martin",
                 "Name[vi]": "Marco Martin",
                 "Name[x-test]": "xxMarco Martinxx",
-                "Name[zh_CN]": "Marco Martin"
+                "Name[zh_CN]": "Marco Martin",
+                "Name[zh_TW]": "Marco Martin"
             }
         ],
         "Icon": "office-chart-pie",
@@ -73,6 +74,7 @@
         "Name[uk]": "Кругова діаграма",
         "Name[x-test]": "xxPie Chartxx",
         "Name[zh_CN]": "饼状图",
+        "Name[zh_TW]": "圓餅圖",
         "Version": "1.0",
         "Website": "https://kde.org"
     },
