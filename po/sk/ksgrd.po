@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: ksgrd.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2023-12-11 18:55+0100\n"
+"PO-Revision-Date: 2023-12-15 20:42+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
@@ -672,10 +672,9 @@ msgid "Filesystem Root"
 msgstr "Koreň súborového systému"
 
 #: SensorManager.cpp:192
-#, fuzzy, kde-format
-#| msgid "Temperature %1"
+#, kde-format
 msgid "Extra Temperature Sensor %1"
-msgstr "Teplota č. %1"
+msgstr "Extra teplotný senzor %1"
 
 #: SensorManager.cpp:196
 #, kde-format

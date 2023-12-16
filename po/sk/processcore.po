@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 02:55+0000\n"
-"PO-Revision-Date: 2023-12-11 18:56+0100\n"
+"PO-Revision-Date: 2023-12-15 20:42+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
@@ -125,7 +125,7 @@ msgstr "tty"
 #: extended_process_list.cpp:199
 #, kde-format
 msgid "The controlling terminal on which this process is running."
-msgstr ""
+msgstr "Ovládací terminál, na ktorom tento proces beží."
 
 #: extended_process_list.cpp:202
 #, kde-format
