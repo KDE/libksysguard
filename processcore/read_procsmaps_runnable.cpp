@@ -29,6 +29,7 @@ void ReadProcSmapsRunnable::run()
     while (file.readLine(buffer.data(), buffer.size()) > 0) {
         if (buffer.startsWith("Pss:")) {
             pss += std::stoll(buffer.mid(sizeof("Pss:")).toStdString());
+            break;
         }
     }
 
