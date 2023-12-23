@@ -1,309 +1,350 @@
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# SPDX-FileCopyrightText: 2023 Enol P. <enolp@softastur.org>
+# Olesya Gerasimenko <translation-team@basealt.ru>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:44+0000\n"
-"PO-Revision-Date: 2023-12-12 01:03+0100\n"
-"Last-Translator: Enol P. <enolp@softastur.org>\n"
-"Language-Team: Asturian <alministradores@softastur.org>\n"
-"Language: ast\n"
+"PO-Revision-Date: 2023-03-17 16:46+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: Formatter.cpp:33
 #, kde-format
 msgctxt "Bytes unit symbol"
 msgid "%1 B"
-msgstr "%1 B"
+msgstr "%1 б"
 
 #: Formatter.cpp:34
 #, kde-format
 msgctxt "Kilobytes unit symbol"
 msgid "%1 KiB"
-msgstr "%1 KiB"
+msgstr "%1 КиБ"
 
 #: Formatter.cpp:35
 #, kde-format
 msgctxt "Megabytes unit symbol"
 msgid "%1 MiB"
-msgstr "%1 MiB"
+msgstr "%1 МиБ"
 
 #: Formatter.cpp:36
 #, kde-format
 msgctxt "Gigabytes unit symbol"
 msgid "%1 GiB"
-msgstr "%1 GiB"
+msgstr "%1 ГиБ"
 
 #: Formatter.cpp:37
 #, kde-format
 msgctxt "Terabytes unit symbol"
 msgid "%1 TiB"
-msgstr "%1 TiB"
+msgstr "%1 ТиБ"
 
 #: Formatter.cpp:38
 #, kde-format
 msgctxt "Petabytes unit symbol"
 msgid "%1 PiB"
-msgstr "%1 PiB"
+msgstr "%1 ПиБ"
 
 #: Formatter.cpp:40
 #, kde-format
 msgctxt "Bytes per second unit symbol"
 msgid "%1 B/s"
-msgstr "%1 B/s"
+msgstr "%1 б/с"
 
 #: Formatter.cpp:41
 #, kde-format
 msgctxt "Kilobytes per second unit symbol"
 msgid "%1 KiB/s"
-msgstr "%1 KiB/s"
+msgstr "%1 КиБ/с"
 
 #: Formatter.cpp:42
 #, kde-format
 msgctxt "Megabytes per second unit symbol"
 msgid "%1 MiB/s"
-msgstr "%1 MiB/s"
+msgstr "%1 МиБ/с"
 
 #: Formatter.cpp:43
 #, kde-format
 msgctxt "Gigabytes per second unit symbol"
 msgid "%1 GiB/s"
-msgstr "%1 GiB/s"
+msgstr "%1 ГиБ/с"
 
 #: Formatter.cpp:44
 #, kde-format
 msgctxt "Terabytes per second unit symbol"
 msgid "%1 TiB/s"
-msgstr "%1 TiB/s"
+msgstr "%1 ТиБ/с"
 
 #: Formatter.cpp:45
 #, kde-format
 msgctxt "Petabytes per second unit symbol"
 msgid "%1 PiB/s"
-msgstr "%1 PiB/s"
+msgstr "%1 ПиБ/с"
 
 #: Formatter.cpp:47
 #, kde-format
 msgctxt "Bits per second unit symbol"
 msgid "%1 bps"
-msgstr "%1 bps"
+msgstr "%1 бит/с"
 
 #: Formatter.cpp:48
 #, kde-format
 msgctxt "Kilobits per second unit symbol"
 msgid "%1 Kbps"
-msgstr "%1 Kbps"
+msgstr "%1 Кбит/с"
 
 #: Formatter.cpp:49
 #, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "%1 Mbps"
-msgstr "%1 Mbps"
+msgstr "%1 Мбит/с"
 
 #: Formatter.cpp:50
 #, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "%1 Gbps"
-msgstr "%1 Gbps"
+msgstr "%1 Гбит/с"
 
 #: Formatter.cpp:51
 #, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "%1 Tbps"
-msgstr "%1 Tbps"
+msgstr "%1 Тбит/с"
 
 #: Formatter.cpp:52
 #, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "%1 Pbps"
-msgstr "%1 Pbps"
+msgstr "%1 Пбит/с"
 
 #: Formatter.cpp:54
 #, kde-format
 msgctxt "Hertz unit symbol"
 msgid "%1 Hz"
-msgstr "%1 Hz"
+msgstr "%1 Гц"
 
 #: Formatter.cpp:55
 #, kde-format
 msgctxt "Kilohertz unit symbol"
 msgid "%1 kHz"
-msgstr "%1 kHz"
+msgstr "%1 кГц"
 
 #: Formatter.cpp:56
 #, kde-format
 msgctxt "Megahertz unit symbol"
 msgid "%1 MHz"
-msgstr "%1 MHz"
+msgstr "%1 МГц"
 
 #: Formatter.cpp:57
 #, kde-format
 msgctxt "Gigahertz unit symbol"
 msgid "%1 GHz"
-msgstr "%1 GHz"
+msgstr "%1 ГГц"
 
 #: Formatter.cpp:58
 #, kde-format
 msgctxt "Terahertz unit symbol"
 msgid "%1 THz"
-msgstr "%1 THz"
+msgstr "%1 ТГц"
 
 #: Formatter.cpp:59
 #, kde-format
 msgctxt "Petahertz unit symbol"
 msgid "%1 PHz"
-msgstr "%1 PHz"
+msgstr "%1 ПГц"
 
 #: Formatter.cpp:61
 #, kde-format
 msgctxt "Volts unit symbol"
 msgid "%1 V"
-msgstr "%1 V"
+msgstr "%1 В"
 
 #: Formatter.cpp:62
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Kilohertz unit symbol"
+#| msgid "%1 kHz"
 msgctxt "Kilovolts unit symbol"
 msgid "%1 kV"
-msgstr "%1 kV"
+msgstr "%1 кГц"
 
 #: Formatter.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Megabytes unit symbol"
+#| msgid "%1 MiB"
 msgctxt "Megavolts unit symbol"
 msgid "%1 MV"
-msgstr "%1 MV"
+msgstr "%1 МиБ"
 
 #: Formatter.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
 msgctxt "Gigavolts unit symbol"
 msgid "%1 GV"
-msgstr "%1 GV"
+msgstr "%1 ГиБ"
 
 #: Formatter.cpp:65
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Terabytes unit symbol"
+#| msgid "%1 TiB"
 msgctxt "Teravolts unit symbol"
 msgid "%1 TV"
-msgstr "%1 TV"
+msgstr "%1 ТиБ"
 
 #: Formatter.cpp:66
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Petabytes unit symbol"
+#| msgid "%1 PiB"
 msgctxt "Petavolts unit symbol"
 msgid "%1 PV"
-msgstr "%1 PV"
+msgstr "%1 ПиБ"
 
 #: Formatter.cpp:68
 #, kde-format
 msgctxt "Watts unit symbol"
 msgid "%1 W"
-msgstr "%1 W"
+msgstr "%1 Вт"
 
 #: Formatter.cpp:69
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Kilohertz unit symbol"
+#| msgid "%1 kHz"
 msgctxt "Kilowatts unit symbol"
 msgid "%1 kW"
-msgstr "%1 kW"
+msgstr "%1 кГц"
 
 #: Formatter.cpp:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Megabytes unit symbol"
+#| msgid "%1 MiB"
 msgctxt "Megawatts unit symbol"
 msgid "%1 MW"
-msgstr "%1 MW"
+msgstr "%1 МиБ"
 
 #: Formatter.cpp:71
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
 msgctxt "Gigawatts unit symbol"
 msgid "%1 GW"
-msgstr "%1 GW"
+msgstr "%1 ГиБ"
 
 #: Formatter.cpp:72
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Terabytes unit symbol"
+#| msgid "%1 TiB"
 msgctxt "Terawatts unit symbol"
 msgid "%1 TW"
-msgstr "%1 TW"
+msgstr "%1 ТиБ"
 
 #: Formatter.cpp:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Petabytes unit symbol"
+#| msgid "%1 PiB"
 msgctxt "Petawatts unit symbol"
 msgid "%1 PW"
-msgstr "%1 PW"
+msgstr "%1 ПиБ"
 
 #: Formatter.cpp:75
 #, kde-format
 msgctxt "Watt-hours unit symbol"
 msgid "%1 Wh"
-msgstr "%1 Wh"
+msgstr "%1 Вт-ч"
 
 #: Formatter.cpp:76
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Kilohertz unit symbol"
+#| msgid "%1 kHz"
 msgctxt "Kilowatt-hours unit symbol"
 msgid "%1 kWh"
-msgstr "%1 kWh"
+msgstr "%1 кГц"
 
 #: Formatter.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Megabytes unit symbol"
+#| msgid "%1 MiB"
 msgctxt "Megawatt-hours unit symbol"
 msgid "%1 MWh"
-msgstr "%1 MWh"
+msgstr "%1 МиБ"
 
 #: Formatter.cpp:78
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
 msgctxt "Gigawatt-hours unit symbol"
 msgid "%1 GWh"
-msgstr "%1 GWh"
+msgstr "%1 ГиБ"
 
 #: Formatter.cpp:79
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Terabytes unit symbol"
+#| msgid "%1 TiB"
 msgctxt "Terawatt-hours unit symbol"
 msgid "%1 TWh"
-msgstr "%1 TWh"
+msgstr "%1 ТиБ"
 
 #: Formatter.cpp:80
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Petabytes unit symbol"
+#| msgid "%1 PiB"
 msgctxt "Petawatt-hours unit symbol"
 msgid "%1 PWh"
-msgstr "%1 PWh"
+msgstr "%1 ПиБ"
 
 #: Formatter.cpp:82
 #, kde-format
 msgctxt "Ampere unit symbol"
 msgid "%1 A"
-msgstr "%1 A"
+msgstr "%1 А"
 
 #: Formatter.cpp:83
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Kilohertz unit symbol"
+#| msgid "%1 kHz"
 msgctxt "Kiloamperes unit symbol"
 msgid "%1 kA"
-msgstr "%1 kA"
+msgstr "%1 кГц"
 
 #: Formatter.cpp:84
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Megabytes unit symbol"
+#| msgid "%1 MiB"
 msgctxt "Megaamperes unit symbol"
 msgid "%1 MA"
-msgstr "%1 MA"
+msgstr "%1 МиБ"
 
 #: Formatter.cpp:85
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
 msgctxt "Gigaamperes unit symbol"
 msgid "%1 GA"
-msgstr "%1 GA"
+msgstr "%1 ГиБ"
 
 #: Formatter.cpp:86
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Terabytes unit symbol"
+#| msgid "%1 TiB"
 msgctxt "Teraamperes unit symbol"
 msgid "%1 TA"
-msgstr "%1 TA"
+msgstr "%1 ТиБ"
 
 #: Formatter.cpp:87
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Petabytes unit symbol"
+#| msgid "%1 PiB"
 msgctxt "Petaamperes unit symbol"
 msgid "%1 PA"
-msgstr "%1 PA"
+msgstr "%1 ПиБ"
 
 #: Formatter.cpp:89
 #, kde-format
@@ -315,31 +356,31 @@ msgstr "%1%"
 #, kde-format
 msgctxt "Revolutions per minute unit symbol"
 msgid "%1 RPM"
-msgstr "%1 RPM"
+msgstr "%1 об/мин"
 
 #: Formatter.cpp:91
 #, kde-format
 msgctxt "Celsius unit symbol"
 msgid "%1°C"
-msgstr "%1°C"
+msgstr "%1 °C"
 
 #: Formatter.cpp:92
 #, kde-format
 msgctxt "Decibels unit symbol"
 msgid "%1 dBm"
-msgstr "%1 dBm"
+msgstr "%1 дБм"
 
 #: Formatter.cpp:93
 #, kde-format
 msgctxt "Seconds unit symbol"
 msgid "%1s"
-msgstr "%1s"
+msgstr "%1 с"
 
 #: Formatter.cpp:94
 #, kde-format
 msgctxt "Rate unit symbol"
 msgid "%1 s⁻¹"
-msgstr "%1 s⁻¹"
+msgstr "%1 с⁻¹"
 
 #: Formatter.cpp:95
 #, kde-format
@@ -351,289 +392,329 @@ msgstr "%1"
 #, kde-format
 msgctxt "Bytes unit symbol"
 msgid "B"
-msgstr "B"
+msgstr "Б"
 
 #: Formatter.cpp:532
 #, kde-format
 msgctxt "Kilobytes unit symbol"
 msgid "KiB"
-msgstr "KiB"
+msgstr "КиБ"
 
 #: Formatter.cpp:534
 #, kde-format
 msgctxt "Megabytes unit symbol"
 msgid "MiB"
-msgstr "MiB"
+msgstr "МиБ"
 
 #: Formatter.cpp:536
 #, kde-format
 msgctxt "Gigabytes unit symbol"
 msgid "GiB"
-msgstr "GiB"
+msgstr "ГиБ"
 
 #: Formatter.cpp:538
 #, kde-format
 msgctxt "Terabytes unit symbol"
 msgid "TiB"
-msgstr "TiB"
+msgstr "ТиБ"
 
 #: Formatter.cpp:540
 #, kde-format
 msgctxt "Petabytes unit symbol"
 msgid "PiB"
-msgstr "PiB"
+msgstr "ПиБ"
 
 #: Formatter.cpp:543
 #, kde-format
 msgctxt "Bytes per second unit symbol"
 msgid "B/s"
-msgstr "B/s"
+msgstr "Б/с"
 
 #: Formatter.cpp:545
 #, kde-format
 msgctxt "Kilobytes per second unit symbol"
 msgid "KiB/s"
-msgstr "KiB/s"
+msgstr "КиБ/с"
 
 #: Formatter.cpp:547
 #, kde-format
 msgctxt "Megabytes per second unit symbol"
 msgid "MiB/s"
-msgstr "MiB/s"
+msgstr "МиБ/с"
 
 #: Formatter.cpp:549
 #, kde-format
 msgctxt "Gigabytes per second unit symbol"
 msgid "GiB/s"
-msgstr "GiB/s"
+msgstr "ГиБ/с"
 
 #: Formatter.cpp:551
 #, kde-format
 msgctxt "Terabytes per second unit symbol"
 msgid "TiB/s"
-msgstr "TiB/s"
+msgstr "ТиБ/с"
 
 #: Formatter.cpp:553
 #, kde-format
 msgctxt "Petabytes per second unit symbol"
 msgid "PiB/s"
-msgstr "PiB/s"
+msgstr "ПиБ/с"
 
 #: Formatter.cpp:556
 #, kde-format
 msgctxt "Bits per second unit symbol"
 msgid "bps"
-msgstr "bps"
+msgstr "бит/с"
 
 #: Formatter.cpp:558
 #, kde-format
 msgctxt "Kilobits per second unit symbol"
 msgid "Kbps"
-msgstr "Kbps"
+msgstr "Кбит/с"
 
 #: Formatter.cpp:560
 #, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "Mbps"
-msgstr "Mbps"
+msgstr "Мбит/с"
 
 #: Formatter.cpp:562
 #, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "Gbps"
-msgstr "Gbps"
+msgstr "Гбит/с"
 
 #: Formatter.cpp:564
 #, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "Tbps"
-msgstr "Tbps"
+msgstr "Тбит/с"
 
 #: Formatter.cpp:566
 #, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "Pbps"
-msgstr "Pbps"
+msgstr "Пбит/с"
 
 #: Formatter.cpp:569
 #, kde-format
 msgctxt "Hertz unit symbol"
 msgid "Hz"
-msgstr "Hz"
+msgstr "Гц"
 
 #: Formatter.cpp:571
 #, kde-format
 msgctxt "Kilohertz unit symbol"
 msgid "kHz"
-msgstr "kHz"
+msgstr "кГц"
 
 #: Formatter.cpp:573
 #, kde-format
 msgctxt "Megahertz unit symbol"
 msgid "MHz"
-msgstr "MHz"
+msgstr "Мгц"
 
 #: Formatter.cpp:575
 #, kde-format
 msgctxt "Gigahertz unit symbol"
 msgid "GHz"
-msgstr "GHz"
+msgstr "ГГц"
 
 #: Formatter.cpp:577
 #, kde-format
 msgctxt "Terahertz unit symbol"
 msgid "THz"
-msgstr "THz"
+msgstr "ТГц"
 
 #: Formatter.cpp:579
 #, kde-format
 msgctxt "Petahertz unit symbol"
 msgid "PHz"
-msgstr "PHz"
+msgstr "ПГц"
 
 #: Formatter.cpp:582
 #, kde-format
 msgctxt "Volts unit symbol"
 msgid "V"
-msgstr "V"
+msgstr "В"
 
 #: Formatter.cpp:584
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Volts unit symbol"
+#| msgid "V"
 msgctxt "Kilovolts unit symbol"
 msgid "kV"
-msgstr "kV"
+msgstr "В"
 
 #: Formatter.cpp:586
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Volts unit symbol"
+#| msgid "V"
 msgctxt "Megavolts unit symbol"
 msgid "MV"
-msgstr "MV"
+msgstr "В"
 
 #: Formatter.cpp:588
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Volts unit symbol"
+#| msgid "V"
 msgctxt "Gigavolts unit symbol"
 msgid "GV"
-msgstr "GV"
+msgstr "В"
 
 #: Formatter.cpp:590
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Volts unit symbol"
+#| msgid "V"
 msgctxt "Teravolts unit symbol"
 msgid "TV"
-msgstr "TV"
+msgstr "В"
 
 #: Formatter.cpp:592
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Volts unit symbol"
+#| msgid "V"
 msgctxt "Petavolts unit symbol"
 msgid "PV"
-msgstr "PV"
+msgstr "В"
 
 #: Formatter.cpp:595
 #, kde-format
 msgctxt "Watts unit symbol"
 msgid "W"
-msgstr "W"
+msgstr "Вт"
 
 #: Formatter.cpp:597
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watts unit symbol"
+#| msgid "W"
 msgctxt "Kilowatts unit symbol"
 msgid "kW"
-msgstr "kW"
+msgstr "Вт"
 
 #: Formatter.cpp:599
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watts unit symbol"
+#| msgid "W"
 msgctxt "Megawatts unit symbol"
 msgid "MW"
-msgstr "MW"
+msgstr "Вт"
 
 #: Formatter.cpp:601
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watts unit symbol"
+#| msgid "W"
 msgctxt "Gigawatts unit symbol"
 msgid "GW"
-msgstr "GW"
+msgstr "Вт"
 
 #: Formatter.cpp:603
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watts unit symbol"
+#| msgid "W"
 msgctxt "Terawatts unit symbol"
 msgid "TW"
-msgstr "TW"
+msgstr "Вт"
 
 #: Formatter.cpp:605
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watts unit symbol"
+#| msgid "W"
 msgctxt "Petawatts unit symbol"
 msgid "PW"
-msgstr "PW"
+msgstr "Вт"
 
 #: Formatter.cpp:608
 #, kde-format
 msgctxt "Watt-hours unit symbol"
 msgid "Wh"
-msgstr "Wh"
+msgstr "Вт-ч"
 
 #: Formatter.cpp:610
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watt-hours unit symbol"
+#| msgid "Wh"
 msgctxt "Kilo-watthours unit symbol"
 msgid "kWh"
-msgstr "kWh"
+msgstr "Вт-ч"
 
 #: Formatter.cpp:612
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watt-hours unit symbol"
+#| msgid "Wh"
 msgctxt "Mega-watthours unit symbol"
 msgid "MWh"
-msgstr "MWh"
+msgstr "Вт-ч"
 
 #: Formatter.cpp:614
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watt-hours unit symbol"
+#| msgid "Wh"
 msgctxt "Giga-watthours unit symbol"
 msgid "GWh"
-msgstr "GWh"
+msgstr "Вт-ч"
 
 #: Formatter.cpp:616
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watt-hours unit symbol"
+#| msgid "Wh"
 msgctxt "Tera-watthours unit symbol"
 msgid "TWh"
-msgstr "TWh"
+msgstr "Вт-ч"
 
 #: Formatter.cpp:618
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Watt-hours unit symbol"
+#| msgid "Wh"
 msgctxt "Peta-watthours unit symbol"
 msgid "PWh"
-msgstr "PWh"
+msgstr "Вт-ч"
 
 #: Formatter.cpp:621
 #, kde-format
 msgctxt "Ampere unit symbol"
 msgid "A"
-msgstr "A"
+msgstr "А"
 
 #: Formatter.cpp:623
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Ampere unit symbol"
+#| msgid "A"
 msgctxt "Kiloamperes unit symbol"
 msgid "kA"
-msgstr "kA"
+msgstr "А"
 
 #: Formatter.cpp:625
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Ampere unit symbol"
+#| msgid "A"
 msgctxt "Megaamperes unit symbol"
 msgid "MA"
-msgstr "MA"
+msgstr "А"
 
 #: Formatter.cpp:627
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Ampere unit symbol"
+#| msgid "A"
 msgctxt "Gigaamperes unit symbol"
 msgid "GA"
-msgstr "GA"
+msgstr "А"
 
 #: Formatter.cpp:629
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Ampere unit symbol"
+#| msgid "A"
 msgctxt "Teraamperes unit symbol"
 msgid "TA"
-msgstr "TA"
+msgstr "А"
 
 #: Formatter.cpp:631
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Ampere unit symbol"
+#| msgid "A"
 msgctxt "Petaamperes unit symbol"
 msgid "PA"
-msgstr "PA"
+msgstr "А"
 
 #: Formatter.cpp:634
 #, kde-format
@@ -645,7 +726,7 @@ msgstr "%"
 #, kde-format
 msgctxt "Revolutions per minute unit symbol"
 msgid "RPM"
-msgstr "RPM"
+msgstr "об/мин"
 
 #: Formatter.cpp:638
 #, kde-format
@@ -657,16 +738,16 @@ msgstr "°C"
 #, kde-format
 msgctxt "Decibels unit symbol"
 msgid "dBm"
-msgstr "dBm"
+msgstr "дБм"
 
 #: Formatter.cpp:642
 #, kde-format
 msgctxt "Seconds unit symbol"
 msgid "s"
-msgstr "s"
+msgstr "с"
 
 #: Formatter.cpp:645
 #, kde-format
 msgctxt "Rate unit symbol"
 msgid "s⁻¹"
-msgstr "s⁻¹"
+msgstr "с⁻¹"
