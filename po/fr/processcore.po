@@ -5,7 +5,7 @@
 # Sébastien Renard <renard@kde.org>, 2010.
 # Nathan Murat <nathanmurat28@outlook.com>, 2019.
 # Simon Depiets <sdepiets@gmail.com>, 2020.
-# SPDX-FileCopyrightText: 2020, 2021, 2023 Xavier Besnard <xavier.besnard@neuf.fr>
+# SPDX-FileCopyrightText: 2020, 2021, 2023 Xavier Besnard <xavier.besnard@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
