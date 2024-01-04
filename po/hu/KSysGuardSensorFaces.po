@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
 # Kristóf Kiszel <kiszel.kristof@gmail.com>, 2021.
-# Kristof Kiszel <ulysses@fsf.hu>, 2021.
+# SPDX-FileCopyrightText: 2021, 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-26 01:46+0000\n"
-"PO-Revision-Date: 2021-12-28 17:30+0100\n"
+"PO-Revision-Date: 2024-01-03 14:04+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -141,7 +141,7 @@ msgstr "Eddig:"
 #: facepackages/colorgrid/contents/ui/Config.qml:25
 #, kde-format
 msgid "Use sensor color:"
-msgstr ""
+msgstr "Szenzorszín használata:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
@@ -252,7 +252,7 @@ msgstr "Érzékelők csoportosítása az összes szenzor értéke szerint."
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr ""
+msgstr "Kattintson a szenzor kiválasztásához…"
 
 #: import/Choices.qml:368
 #, kde-format
