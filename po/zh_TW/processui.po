@@ -9,13 +9,13 @@
 # pan93412 <pan93412@gmail.com>, 2018, 2019, 2020.
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
-# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-23 01:39+0000\n"
-"PO-Revision-Date: 2023-12-13 17:41+0900\n"
+"PO-Revision-Date: 2024-01-08 03:57+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -894,9 +894,9 @@ msgid ""
 "shared memory is determined per shared memory section and thus can vary per "
 "memory section."
 msgstr ""
-"<qt><i>技術資訊：</i>這被稱作「比例集合大小」 (\"Proportional Set Size\")，是"
-"一個行程實際使用的記憶體總量的最好的估計。請注意，分享某共享記憶體的應用程式"
-"數量在不同記憶體區段間可能不同。"
+"<i>技術資訊：</i>這被稱作「比例集合大小」 (\"Proportional Set Size\")，是一個"
+"行程實際使用的記憶體總量的最好的估計。請注意，分享某共享記憶體的應用程式數量"
+"在不同記憶體區段間可能不同。"
 
 #: ProcessModel.cpp:1393
 #, kde-kuit-format
