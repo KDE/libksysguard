@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-23 01:39+0000\n"
-"PO-Revision-Date: 2022-12-28 03:25+0200\n"
+"PO-Revision-Date: 2024-01-31 19:37+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:554
 #, kde-format
@@ -129,7 +129,7 @@ msgid ""
 msgstr ""
 "<qt>Užbaigti pasirinktą procesą. Įspėjimas - galite prarasti neįrašytą darbą."
 "<br>Spustelėkite dešiniuoju pelės mygtuku ant proceso, norėdami siųsti kitus "
-"signalus.<br>Techninei informacijai, naudokite \"Kas tai\"."
+"signalus.<br>Techninei informacijai, naudokite „Kas tai“."
 
 #: ksysguardprocesslist.cpp:445
 #, kde-format
@@ -160,12 +160,12 @@ msgstr "Peršokti į viršesnį procesą (%1)"
 #: ksysguardprocesslist.cpp:782
 #, kde-format
 msgid "Hide Column '%1'"
-msgstr "Slėpti stulpelį \"%1\""
+msgstr "Slėpti stulpelį „%1“"
 
 #: ksysguardprocesslist.cpp:799
 #, kde-format
 msgid "Show Column '%1'"
-msgstr "Rodyti stulpelį \"%1\""
+msgstr "Rodyti stulpelį „%1“"
 
 #: ksysguardprocesslist.cpp:829
 #, kde-format
@@ -505,10 +505,10 @@ msgid "Open Files"
 msgstr "Atverti failus"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:status"
 msgid "The \"%1\" (PID: %2) process has stopped executing"
-msgstr "Procesas \"%1\" (PID: %2) nustojo būti vykdomas"
+msgstr "Procesas „%1“ (PID: %2) nustojo būti vykdomas"
 
 #: processdetails/ProcessDetailsDialog.cpp:126
 #, kde-format
@@ -656,7 +656,7 @@ msgstr ""
 "sukeičiama atmintis, nei jos bendrinamų bibliotekų kodo dydis.<br>Tai, "
 "dažniausiai, yra pats naudingiausias kriterijus, leidžiantis spręsti apie "
 "tai, kiek programa naudoja atminties.  Išsamesnei informacijai, naudokite "
-"\"Kas tai\".</qt>"
+"„Kas tai“.</qt>"
 
 #: ProcessModel.cpp:1160
 #, kde-format
@@ -815,7 +815,7 @@ msgstr ""
 "atminties naudojimą (neįskaitant i/o remiamos atminties puslapius), tačiau "
 "yra geriausias įvertinimas, kurį yra greita nustatyti.  Tai yra kartais "
 "žinoma kaip URSS (angl. Unique Resident Set Size). Atskiram procesui, "
-"žiūrėkite \"Išsamią atminties informaciją\", norėdami sužinoti tikslesnį, "
+"žiūrėkite „Išsamią atminties informaciją“, norėdami sužinoti tikslesnį, "
 "tačiau lėtesnį privačiosios atminties naudojimo apskaičiavimą."
 
 #: ProcessModel.cpp:1223
@@ -846,7 +846,7 @@ msgstr ""
 "<qt><i>Techninė informacija: </i>Tai yra bendrosios atminties, top "
 "programoje vadinamos kaip SHR, artinys.  Tai yra puslapių, kurie remiami "
 "failu, skaičius (žiūrėkite branduolio Documentation/filesystems/proc.txt).  "
-"Atskiram procesui, žiūrėkite \"Išsamią atminties informaciją\", norėdami "
+"Atskiram procesui, žiūrėkite „Išsamią atminties informaciją“, norėdami "
 "sužinoti tikslesnį, tačiau lėtesnį bendrosios atminties naudojimo "
 "apskaičiavimą."
 
@@ -998,8 +998,8 @@ msgid ""
 "shared memory is determined per shared memory section and thus can vary per "
 "memory section."
 msgstr ""
-"<i>Techninė informacija:</i> Tai dažnai yra vadinama \"Proporciniu nustatymo "
-"dydžiu\" ir yra tiksliausias apytikslis realus proceso naudojamos bendros "
+"<i>Techninė informacija:</i> Tai dažnai yra vadinama „Proporciniu nustatymo "
+"dydžiu“ ir yra tiksliausias apytikslis realus proceso naudojamos bendros "
 "atminties kiekis. Turėkite omenyje, kad bendrąją atmintį naudojančių "
 "programų skaičius yra nustatomas atskirai pagal bendrosios atminties "
 "sekcijas ir todėl, kiekvienai atminties sekcijai gali būti skirtingas."
@@ -1638,7 +1638,7 @@ msgstr ""
 "Pavyzdžiui:\n"
 "\n"
 "<table>\n"
-"<tr><th>ksys</th><td>Rodyti procesus, kurių pavadinime yra \"<b>ksys</b>\", "
+"<tr><th>ksys</th><td>Rodyti procesus, kurių pavadinime yra „<b>ksys</b>“, "
 "pavyzdžiui, procesus \"<i>ksysguard</i>\" ir \"<i>ksysguardd</i>\".<td></"
 "tr>\n"
 "<tr><th>root</th><td>Rodyti <b>pagrindiniam naudotojui (root)</b> "
