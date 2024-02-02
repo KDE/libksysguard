@@ -344,7 +344,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     vmURSSSensor->setMin(0);
     vmURSSSensor->setMax(totalPhysicalMemory());
     vmURSSSensor->setDescription(
-        i18n("This is the amount of physical memory that this process is using by itself, and approximates the Private memory usage of the process.<br>It does "
+        i18n("This is the amount of physical memory that this process is using by itself, and approximates the Private memory usage of the process. It does "
              "not include any swapped out memory, nor the code size of its shared libraries."));
     d->m_coreAttributes << vmURSSSensor;
 
@@ -362,7 +362,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     d->m_coreAttributes << sharedMemorySensor;
     sharedMemorySensor->setShortName(i18n("Shared"));
     sharedMemorySensor->setDescription(
-        i18n("This is approximately the amount of real physical memory that this process's shared libraries are using.<br>This memory is shared among all "
+        i18n("This is approximately the amount of real physical memory that this process's shared libraries are using. This memory is shared among all "
              "processes that use this library."));
     sharedMemorySensor->setUnit(KSysGuard::UnitKiloByte);
     sharedMemorySensor->setMin(0);
