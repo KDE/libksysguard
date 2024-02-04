@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Rinse de Vries <rinsedevries@kde.nl>, 2007.
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2010, 2014, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2010, 2014, 2019, 2020, 2021, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2021-05-18 12:59+0200\n"
+"PO-Revision-Date: 2024-02-03 10:58+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.04.0\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: cgroup_data_model.cpp:52
@@ -301,19 +301,14 @@ msgid "Private"
 msgstr "Privé"
 
 #: extended_process_list.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process.<br>It "
-#| "does not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
+#, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "Dit is de hoeveelheid fysiek geheugen dat het proces momenteel zelf gebruikt "
-"en is bij benadering het privégebruik van het proces.<br/>Dit bevat geen "
+"en is bij benadering het privégebruik van het proces. Dit bevat geen "
 "wisselgeheugen en ook niet de code-grootte van gedeelde bibliotheken."
 
 #: extended_process_list.cpp:354
@@ -327,19 +322,15 @@ msgid "Shared"
 msgstr "Gedeeld"
 
 #: extended_process_list.cpp:365
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is approximately the amount of real physical memory that this "
-#| "process's shared libraries are using.<br>This memory is shared among all "
-#| "processes that use this library."
+#, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
 "Dit is bij benadering de hoeveelheid fysiek geheugen dat de gedeelde "
-"bibliotheken van dit proces gebruiken.<br>Dit geheugen wordt gedeeld door "
-"alle processen die deze bibliotheek gebruiken."
+"bibliotheken van dit proces gebruiken. Dit geheugen wordt gedeeld door alle "
+"processen die deze bibliotheek gebruiken."
 
 #: extended_process_list.cpp:371
 #, kde-format

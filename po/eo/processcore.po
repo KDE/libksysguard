@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2023-04-04 22:48+0100\n"
+"PO-Revision-Date: 2024-02-03 09:19+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -299,21 +299,15 @@ msgid "Private"
 msgstr "Privata"
 
 #: extended_process_list.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process.<br>It "
-#| "does not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
+#, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "Ĉi tiu estas la kvanto de fizika memoro kiun ĉi tiu procezo uzas per si mem, "
-"kaj proksimumas la Privatmemoran uzadon de la procezo.<br>Ĝi ne inkluzivas "
-"iun ajn interŝanĝitan memoron, nek la kodgrandecon de siaj komunaj "
-"bibliotekoj."
+"kaj proksimumas la Privatmemoran uzadon de la procezo. Ĝi ne inkluzivas iun "
+"ajn interŝanĝitan memoron, nek la kodgrandecon de siaj komunaj bibliotekoj."
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -326,18 +320,14 @@ msgid "Shared"
 msgstr "Kunhavita"
 
 #: extended_process_list.cpp:365
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is approximately the amount of real physical memory that this "
-#| "process's shared libraries are using.<br>This memory is shared among all "
-#| "processes that use this library."
+#, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
 "Ĉi tio estas proksimume la kvanto de reala fizika memoro kiun la komunaj "
-"bibliotekoj de ĉi tiu procezo uzas.<br>Tiu memoro estas dividita inter ĉiuj "
+"bibliotekoj de ĉi tiu procezo uzas. Tiu memoro estas dividita inter ĉiuj "
 "procezoj kiuj uzas ĉi tiun bibliotekon."
 
 #: extended_process_list.cpp:371
