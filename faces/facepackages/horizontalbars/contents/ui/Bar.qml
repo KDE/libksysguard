@@ -8,6 +8,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 
 import org.kde.kirigami as Kirigami
 
@@ -17,28 +18,33 @@ import org.kde.ksysguard.faces as Faces
 import org.kde.quickcharts as Charts
 import org.kde.quickcharts.controls as ChartsControls
 
-Rectangle {
+ProgressBar {
     id: bar
-    Layout.fillWidth: true
-    implicitHeight: Math.round(Kirigami.Units.gridUnit / 3)
-    color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 40})
-    radius: height/2
-    property Sensors.Sensor sensor
-    property int value: Math.min(Math.max(Math.round(width * (sensor.value / sensor.maximum)), 0), width)
 
-    Rectangle {
-        anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
+    Layout.fillWidth: true
+
+    property Sensors.Sensor sensor
+    property Faces.SensorFaceController controller
+    property color color
+
+    readonly property real rangeFrom: controller.faceConfiguration.rangeFrom * controller.faceConfiguration.rangeFromMultiplier
+    readonly property real rangeTo: controller.faceConfiguration.rangeTo * controller.faceConfiguration.rangeToMultiplier
+
+    Kirigami.Theme.inherit: false
+
+    value: sensor?.value ?? 0
+    from: controller.faceConfiguration.rangeAuto ? sensor.minimum : rangeFrom
+    to: controller.faceConfiguration.rangeAuto ? sensor.maximum : rangeTo
+
+    topPadding: topInset
+    bottomPadding: bottomInset
+
+    contentItem: Item {
+        Rectangle {
+            width: bar.visualPosition * parent.width
+            height: parent.height
+            color: bar.color
+            radius: height / 2
         }
-        color: root.colorSource.map[modelData]
-        radius: parent.radius
-        /* Ensures that the bar has even spacing on top and bottom. */
-        height: {
-            let value = Math.min(parent.height, parent.value)
-            return value + (parent.height - value) % 2;
-        }
-        width: Math.max(height, parent.value)
     }
 }
-

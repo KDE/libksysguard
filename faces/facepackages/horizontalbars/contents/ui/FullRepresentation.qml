@@ -25,7 +25,7 @@ Faces.SensorFace {
     Layout.preferredWidth: titleMetrics.width
 
     contentItem: ColumnLayout {
-        spacing: Kirigami.Units.smallspacing
+        spacing: Kirigami.Units.smallSpacing
 
         Kirigami.Heading {
             id: heading
@@ -53,6 +53,8 @@ Faces.SensorFace {
                 spacing: 0
                 Bar {
                     sensor: sensor
+                    controller: root.controller
+                    color: root.colorSource.map[modelData]
                 }
                 ChartsControls.LegendDelegate {
                     readonly property bool isTextOnly: index >= root.controller.highPrioritySensorIds.length
