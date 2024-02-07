@@ -97,7 +97,7 @@ Charts.LineChart {
                 }
 
                 if (sensorsModel.ready) {
-                    return sensorsModel.headerData(index, Qt.Horizontal, Sensors.SensorDataModel.UpdateInterval)
+                    return sensorsModel.headerData(index, Qt.Horizontal, Sensors.SensorDataModel.UpdateInterval) ?? 0
                 }
 
                 return 0
