@@ -67,7 +67,7 @@ ColumnLayout {
                     return !excludedPlugins.includes(pluginId)
                 }
 
-                sortRole: "display"
+                sortRoleName: "display"
             }
 
             textRole: "display"
