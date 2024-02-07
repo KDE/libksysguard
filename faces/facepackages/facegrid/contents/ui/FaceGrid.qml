@@ -30,7 +30,7 @@ GridLayout {
     Kirigami.Heading {
         id: heading
         Layout.fillWidth: true
-        Layout.columnSpan: parent.columns
+        Layout.columnSpan: parent.columns > 0 ? parent.columns : 1
 
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
