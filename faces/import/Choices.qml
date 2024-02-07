@@ -394,6 +394,8 @@ Control {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                clip: true
+
                 ListView {
                     id: listView
 
@@ -412,25 +414,23 @@ Control {
                         model: listView.searchString ? sensorsSearchableModel : treeModel
                         delegate: ItemDelegate {
                             id: listItem
-                            readonly property int iconSize: Kirigami.Units.iconSizes.small
+
                             width: listView.width
-                            height: iconSize + (Kirigami.Units.smallSpacing * 2)
+
                             text: model.display
-                            contentItem: RowLayout {
-                                spacing: Kirigami.Units.smallSpacing
-                                Label {
-                                    Layout.fillWidth: true
-                                    Layout.alignment: Qt.AlignVCenter
-                                    text: listItem.text
-                                    elide: Text.ElideRight
-                                }
-                                Kirigami.Icon {
-                                    source: "go-next-symbolic"
-                                    Layout.fillHeight: true
-                                    Layout.preferredWidth: listItem.iconSize
-                                    // Still visible for correct size hints calculation
-                                    opacity: model.SensorId.length == 0
-                                }
+
+                            leftPadding: mirrored ? indicator.implicitWidth + Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+                            rightPadding: !mirrored ? indicator.implicitWidth + Kirigami.Units.largeSpacing * 2 : Kirigami.Units.largeSpacing
+
+                            indicator: Kirigami.Icon {
+                                anchors.right: parent.right
+                                anchors.rightMargin: Kirigami.Units.largeSpacing
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                width: Kirigami.Units.iconSizes.small
+                                height: width
+                                source: "go-next-symbolic"
+                                opacity: model.SensorId.length == 0
                             }
 
                             onClicked: {
