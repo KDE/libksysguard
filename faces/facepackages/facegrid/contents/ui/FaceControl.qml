@@ -27,6 +27,12 @@ Control {
     leftPadding: 0
     rightPadding: 0
 
+    Layout.minimumWidth: contentItem?.Layout.minimumWidth ?? undefined
+    Layout.minimumHeight: contentItem?.Layout.minimumHeight ?? undefined
+
+    implicitWidth: contentItem?.implicitWidth ?? 0
+    implicitHeight: contentItem?.implicitHeight ?? 0
+
     Faces.FaceLoader {
         id: loader
         parentController: control.controller
