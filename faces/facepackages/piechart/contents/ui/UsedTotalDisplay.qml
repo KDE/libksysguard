@@ -54,7 +54,7 @@ Item {
             verticalAlignment: Text.AlignVCenter
 
             fontSizeMode: Text.HorizontalFit
-            minimumPointSize: 7
+            minimumPointSize: Kirigami.Theme.smallFont.pointSize * 0.8
         }
 
         Kirigami.Separator {
