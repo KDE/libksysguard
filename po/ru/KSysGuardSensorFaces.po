@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-26 01:46+0000\n"
+"POT-Creation-Date: 2024-02-08 02:29+0000\n"
 "PO-Revision-Date: 2022-09-05 11:54+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -125,18 +125,21 @@ msgid "Show Y Axis Labels"
 msgstr "Показать метки оси Y"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
+#: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
 #, kde-format
 msgid "Automatic Data Range"
 msgstr "Автоматический диапазон значений"
 
 #: facepackages/barchart/contents/ui/Config.qml:55
+#: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
 #, kde-format
 msgid "From:"
 msgstr "От:"
 
 #: facepackages/barchart/contents/ui/Config.qml:62
+#: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
 #, kde-format
 msgid "To:"
