@@ -51,6 +51,7 @@ Item {
             Layout.fillWidth: true
             text: usedSensorObject.formattedValue
             horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
 
             fontSizeMode: Text.HorizontalFit
             minimumPointSize: 7
