@@ -1,14 +1,14 @@
 # Translation of processcore to Korean.
 # Copyright (C) 2007 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdebase package.
-# Shinjo Park <kde@peremen.name>, 2007, 2010, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2007, 2010, 2019, 2020, 2021, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2021-05-23 15:52+0200\n"
+"PO-Revision-Date: 2024-02-10 00:17+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -297,20 +297,15 @@ msgid "Private"
 msgstr "개별"
 
 #: extended_process_list.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process.<br>It "
-#| "does not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
+#, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "프로세스 자신이 사용하고 있는 실제 물리적 메모리의 크기입니다. 프로세스에서 "
-"독점적으로 사용하는 메모리 크기와 거의 일치합니다.<br>이 크기는 스왑 영역으"
-"로 전환된 메모리나 공유 라이브러리 등을 제외합니다."
+"독점적으로 사용하는 메모리 크기와 거의 일치합니다. 이 크기는 스왑 영역으로 전"
+"환된 메모리나 공유 라이브러리 등을 제외합니다."
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -323,19 +318,14 @@ msgid "Shared"
 msgstr "공유됨"
 
 #: extended_process_list.cpp:365
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is approximately the amount of real physical memory that this "
-#| "process's shared libraries are using.<br>This memory is shared among all "
-#| "processes that use this library."
+#, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
 "프로세스의 공유 라이브러리가 사용하는 실제 물리적 메모리의 크기와 개략적으로 "
-"일치합니다. <br>이 메모리는 이 라이브러리를 사용하는 모든 프로세스가 공유합니"
-"다."
+"일치합니다. 이 메모리는 이 라이브러리를 사용하는 모든 프로세스가 공유합니다."
 
 #: extended_process_list.cpp:371
 #, kde-format
