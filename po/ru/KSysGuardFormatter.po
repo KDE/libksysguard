@@ -1,22 +1,23 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2023.
+# SPDX-FileCopyrightText: 2024 Alexander Yavorsky <kekcuha@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-06 02:34+0000\n"
-"PO-Revision-Date: 2023-03-17 16:46+0300\n"
-"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
-"Language-Team: Basealt Translation Team\n"
+"PO-Revision-Date: 2024-02-09 22:57+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 24.01.95\n"
 
 #: Formatter.cpp:33
 #, kde-format
@@ -208,7 +209,7 @@ msgstr "%1 Вт"
 #, kde-format
 msgctxt "Watt-hours unit symbol"
 msgid "%1 Wh"
-msgstr "%1 Вт-ч"
+msgstr "%1 Вт⋅ч"
 
 #: Formatter.cpp:69
 #, kde-format
@@ -418,7 +419,7 @@ msgstr "Вт"
 #, kde-format
 msgctxt "Watt-hours unit symbol"
 msgid "Wh"
-msgstr "Вт-ч"
+msgstr "Вт⋅ч"
 
 #: Formatter.cpp:453
 #, kde-format
