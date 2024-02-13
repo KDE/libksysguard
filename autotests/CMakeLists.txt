@@ -4,32 +4,7 @@ include_directories(${libksysguard_SOURCE_DIR})
 
 # Process unit test
 ecm_qt_declare_logging_category(processtest_debug_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore)
-ecm_add_test(processtest.cpp processtest.h ${processtest_debug_SRCS} TEST_NAME processtest
-	LINK_LIBRARIES KSysGuard::ProcessUi Qt::Test)
-
-if (KF6Plasma_FOUND)
-    set(SIGNALPLOTTER_DEBUG_SRCS)
-    ecm_qt_declare_logging_category(SIGNALPLOTTER_DEBUG_SRCS HEADER ksignalplotter_debug.h IDENTIFIER LIBKSYSGUARD_KSIGNALPLOTTER CATEGORY_NAME org.kde.libksysguard.ksignalplotter)
-    ecm_add_test(signalplotterbenchmark.cpp signalplotterbenchmark.h  ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
-        TEST_NAME signalplotterbenchmark
-        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF6::IconThemes
-    )
-
-    ecm_add_test(graphicssignalplotterbenchmark.cpp graphicssignalplotterbenchmark.h signalplotterbenchmark.h ../signalplotter/kgraphicssignalplotter.cpp kgraphicssignalplotter.h ${SIGNALPLOTTER_DEBUG_SRCS}
-        TEST_NAME graphicssignalplotterbenchmark
-        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF6::IconThemes Plasma::Plasma
-    )
-
-    ecm_add_test(signalplottertest.cpp signalplottertest.h ../signalplotter/ksignalplotter.cpp ${SIGNALPLOTTER_DEBUG_SRCS}
-        TEST_NAME signalplottertest
-        LINK_LIBRARIES KSysGuard::SignalPlotter Qt::Test Qt::Widgets KF6::IconThemes
-    )
-endif()
-
-ecm_add_test(chronotest.cpp chronotest.h
-    TEST_NAME chronotest
-    LINK_LIBRARIES Qt::Test KF6::I18n
-)
+ecm_add_test(processtest.cpp processtest.h ${processtest_debug_SRCS} TEST_NAME processtest LINK_LIBRARIES KSysGuard::ProcessCore Qt::Test)
 
 ecm_add_test(formattertest.cpp LINK_LIBRARIES Qt::Test KSysGuard::Formatter)
 ecm_add_test(sensortreemodeltest.cpp LINK_LIBRARIES Qt::Test Qt::DBus KSysGuard::Sensors)
@@ -48,16 +23,3 @@ ecm_add_test(sensorfacecontrollertest.cpp LINK_LIBRARIES
     KF6::Solid
     KSysGuard::SensorFaces
 )
-
-# set( ksysguarddtest_SRCS ksysguarddtest.cpp ksysguarddtest.h ${libksysguard_SOURCE_DIR}/ksgrd/SensorAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorManager.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorSocketAgent.cpp ${libksysguard_SOURCE_DIR}/ksgrd/SensorShellAgent.cpp)
-#
-# ecm_add_test(${ksysguarddtest_SRCS}
-#     TEST_NAME "ksysguard-ksysguarddtest"
-#     LINK_LIBRARIES
-#     Qt::Test
-#     Qt::Network
-#     Qt::Widgets
-#     KF6::ConfigCore
-#     KF6::CoreAddons
-#     KF6::I18n
-# )
