@@ -275,33 +275,3 @@ msgstr "Enrere"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sensor del monitor del sistema"
-
-#~ msgid "User Interface"
-#~ msgstr "Interfície d'usuari"
-
-#~ msgid ""
-#~ "The compact representation of the sensors plasmoid when collapsed, for "
-#~ "instance in a panel."
-#~ msgstr ""
-#~ "La representació compacta del plasmoide dels sensors quan està reduït, "
-#~ "per exemple, en un plafó."
-
-#~ msgid "The representation of the plasmoid when it's fully expanded."
-#~ msgstr "La representació del plasmoide quan està completament expandit."
-
-#~ msgid "The optional configuration page for this face."
-#~ msgstr "La pàgina de configuració opcional per a aquesta cara."
-
-#~ msgid "Configuration support"
-#~ msgstr "Suport de la configuració"
-
-#~ msgid "KConfigXT xml file for face-specific configuration options."
-#~ msgstr ""
-#~ "El fitxer en XML del KConfigXT per a les opcions de configuració "
-#~ "específiques de la cara."
-
-#~ msgid ""
-#~ "The configuration file that describes face properties and capabilities."
-#~ msgstr ""
-#~ "El fitxer de configuració que descriu les propietats i les capacitats de "
-#~ "la cara."
