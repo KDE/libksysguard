@@ -6,19 +6,20 @@
 # Diego Iastrubni <elcuco@kde.org>, 2008, 2009.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2017-05-16 06:58-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2024-02-15 23:16+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -26,59 +27,59 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Desktop ID"
-msgstr ""
+msgstr "מזהה שולחן עבודה"
 
 #: cgroup_data_model.cpp:66
 #, kde-format
 msgctxt "@title"
 msgid "Icon"
-msgstr ""
+msgstr "סמל"
 
 #: cgroup_data_model.cpp:80
 #, kde-format
 msgctxt "@title"
 msgid "Name"
-msgstr ""
+msgstr "שם"
 
 #: extended_process_list.cpp:95
 #, kde-format
 msgid "PID"
-msgstr ""
+msgstr "מזהה תהליך"
 
 #: extended_process_list.cpp:96
 #, kde-format
 msgid "The unique Process ID that identifies this process."
-msgstr ""
+msgstr "מזהה התהליך הייחודי שמבדל אותו מהשאר."
 
 #: extended_process_list.cpp:101
 #, kde-format
 msgid "Parent PID"
-msgstr ""
+msgstr "מזהה תהליך הורה"
 
 #: extended_process_list.cpp:108
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "משתמש"
 
 #: extended_process_list.cpp:109
 #, kde-format
 msgid "The user who owns this process."
-msgstr ""
+msgstr "המשתמש שהתהליך הזה בבעלותו."
 
 #: extended_process_list.cpp:113
 #, kde-format
 msgid "UID"
-msgstr ""
+msgstr "מזהה משתמש"
 
 #: extended_process_list.cpp:119
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "שם משתמש"
 
 #: extended_process_list.cpp:135
 #, kde-format
 msgid "Can Login"
-msgstr ""
+msgstr "יכול להיכנס"
 
 #: extended_process_list.cpp:162
 #, kde-format
@@ -131,30 +132,24 @@ msgid "The controlling terminal on which this process is running."
 msgstr ""
 
 #: extended_process_list.cpp:202
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "User Time"
-msgstr "זמן אמת"
+msgstr "זמן משתמש"
 
 #: extended_process_list.cpp:206
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "שעת המערכת"
 
 #: extended_process_list.cpp:210
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Total Time"
-msgstr "זמן אמת"
+msgstr "זמן כולל"
 
 #: extended_process_list.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Time"
-msgstr "זמן אמת"
+msgstr "זמן"
 
 #: extended_process_list.cpp:215
 #, kde-format
@@ -162,11 +157,9 @@ msgid "The total user and system time that this process has been running for"
 msgstr ""
 
 #: extended_process_list.cpp:220
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Start Time"
-msgstr "זמן אמת"
+msgstr "זמן התחלה"
 
 #: extended_process_list.cpp:230
 #, kde-format
@@ -368,7 +361,7 @@ msgstr ""
 #: extended_process_list.cpp:397
 #, kde-format
 msgid "Status"
-msgstr ""
+msgstr "מצב"
 
 #: extended_process_list.cpp:402
 #, kde-format
@@ -432,71 +425,71 @@ msgstr ""
 #: extended_process_list.cpp:485
 #, kde-format
 msgid "Disk Read Rate"
-msgstr ""
+msgstr "קצב קריאה מהכונן"
 
 #: extended_process_list.cpp:489
 #, kde-format
 msgid "Read"
-msgstr ""
+msgstr "קריאה"
 
 #: extended_process_list.cpp:490
 #, kde-format
 msgid "The rate of data being read from disk."
-msgstr ""
+msgstr "קצב הנתונים שנקראים מהכונן."
 
 #: extended_process_list.cpp:496
 #, kde-format
 msgid "Disk Write Rate"
-msgstr ""
+msgstr "קצב כתיבה לכונן"
 
 #: extended_process_list.cpp:500
 #, kde-format
 msgid "Write"
-msgstr ""
+msgstr "כתיבה"
 
 #: extended_process_list.cpp:501
 #, kde-format
 msgid "The rate of data being written to the disk."
-msgstr ""
+msgstr "קצב הנתונים שנכתבים לכונן."
 
 #: extended_process_list.cpp:507
 #, kde-format
 msgid "Threads"
-msgstr ""
+msgstr "תהליכונים"
 
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
 msgid "Download Speed"
-msgstr ""
+msgstr "מהירות הורדה"
 
 #: plugins/network/network.cpp:37
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr ""
+msgstr "הורדה"
 
 #: plugins/network/network.cpp:40
 #, kde-format
 msgctxt "@title"
 msgid "Upload Speed"
-msgstr ""
+msgstr "מהירות העלאה"
 
 #: plugins/network/network.cpp:41
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
+msgstr "העלאה"
 
 #: plugins/nvidia/nvidia.cpp:28
 #, kde-format
 msgid "GPU Usage"
-msgstr ""
+msgstr "ניצולת מעבד גרפי"
 
 #: plugins/nvidia/nvidia.cpp:30
 #, kde-format
 msgid "GPU Memory"
-msgstr ""
+msgstr "זיכרון מעבד גרפי"
 
 #: process.cpp:101 process.cpp:122
 #, kde-format
@@ -574,7 +567,7 @@ msgstr "ישן"
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
-msgstr "שינת דיסק"
+msgstr "שנת כונן"
 
 #: process.cpp:165
 #, kde-format
@@ -639,34 +632,34 @@ msgstr "לא פעיל"
 #: process_controller.cpp:181
 #, kde-format
 msgid "Success"
-msgstr ""
+msgstr "הצלחה"
 
 #: process_controller.cpp:183
 #, kde-format
 msgid "Insufficient permissions."
-msgstr ""
+msgstr "אין מספיק הרשאות."
 
 #: process_controller.cpp:185
 #, kde-format
 msgid "No matching process was found."
-msgstr ""
+msgstr "לא נמצא תהליך מתאים."
 
 #: process_controller.cpp:187
 #, kde-format
 msgid "Not supported on the current system."
-msgstr ""
+msgstr "אין תמיכה במערכת הנוכחית."
 
 #: process_controller.cpp:189
 #, kde-format
 msgid "The user cancelled."
-msgstr ""
+msgstr "המשתמש ביטל."
 
 #: process_controller.cpp:191
 #, kde-format
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "אירעה שגיאה בלתי מוגדרת."
 
 #: process_controller.cpp:193
 #, kde-format
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "אירעה שגיאה לא ידועה."
