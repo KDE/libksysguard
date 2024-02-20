@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-15 23:16+0200\n"
+"PO-Revision-Date: 2024-02-18 08:51+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -129,7 +129,7 @@ msgstr ""
 #: extended_process_list.cpp:199
 #, kde-format
 msgid "The controlling terminal on which this process is running."
-msgstr ""
+msgstr "המסוף השולט בו רץ התהליך."
 
 #: extended_process_list.cpp:202
 #, kde-format
@@ -164,32 +164,32 @@ msgstr "זמן התחלה"
 #: extended_process_list.cpp:230
 #, kde-format
 msgid "User CPU Usage"
-msgstr ""
+msgstr "ניצולת מעבד למשתמש"
 
 #: extended_process_list.cpp:231
 #, kde-format
 msgid "User CPU"
-msgstr ""
+msgstr "מעבד למשתמש"
 
 #: extended_process_list.cpp:238
 #, kde-format
 msgid "System CPU Usage"
-msgstr ""
+msgstr "ניצולת מעבד למערכת"
 
 #: extended_process_list.cpp:239
 #, kde-format
 msgid "System CPU"
-msgstr ""
+msgstr "מעבד למערכת"
 
 #: extended_process_list.cpp:248
 #, kde-format
 msgid "Total CPU Usage"
-msgstr ""
+msgstr "ניצולת מעבד כוללת"
 
 #: extended_process_list.cpp:254
 #, kde-format
 msgid "CPU"
-msgstr ""
+msgstr "מעבד"
 
 #: extended_process_list.cpp:258
 #, kde-format
@@ -286,12 +286,12 @@ msgstr ""
 #: extended_process_list.cpp:341
 #, kde-format
 msgid "Private Memory Usage"
-msgstr ""
+msgstr "ניצולת זיכרון פרטי"
 
 #: extended_process_list.cpp:343
 #, kde-format
 msgid "Private"
-msgstr ""
+msgstr "פרטי"
 
 #: extended_process_list.cpp:347
 #, kde-format
@@ -304,12 +304,12 @@ msgstr ""
 #: extended_process_list.cpp:354
 #, kde-format
 msgid "Shared Memory Usage"
-msgstr ""
+msgstr "ניצולת זיכרון שיתופי"
 
 #: extended_process_list.cpp:363
 #, kde-format
 msgid "Shared"
-msgstr ""
+msgstr "שיתופי"
 
 #: extended_process_list.cpp:365
 #, kde-format
@@ -322,12 +322,12 @@ msgstr ""
 #: extended_process_list.cpp:371
 #, kde-format
 msgid "Memory Usage"
-msgstr ""
+msgstr "ניצולת זיכרון"
 
 #: extended_process_list.cpp:372
 #, kde-format
 msgid "Memory"
-msgstr ""
+msgstr "זיכרון"
 
 #: extended_process_list.cpp:378
 #, kde-format
@@ -341,17 +341,17 @@ msgstr ""
 #: extended_process_list.cpp:383
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "שם"
 
 #: extended_process_list.cpp:384
 #, kde-format
 msgid "The process name."
-msgstr ""
+msgstr "שם התהליך."
 
 #: extended_process_list.cpp:389
 #, kde-format
 msgid "Command"
-msgstr ""
+msgstr "פקודה"
 
 #: extended_process_list.cpp:393
 #, kde-format

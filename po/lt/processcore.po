@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2021-08-26 13:42+0300\n"
+"PO-Revision-Date: 2024-02-19 23:30+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -302,19 +302,14 @@ msgid "Private"
 msgstr "Privačioji"
 
 #: extended_process_list.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process.<br>It "
-#| "does not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
+#, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "Tai yra paties proceso naudojamos, fizinės atminties kiekis ir jis yra "
-"artimas šio proceso privačiosios atminties naudojimui.<br>Į jį neįeina "
+"artimas šio proceso privačiosios atminties naudojimui. Į jį neįeina "
 "sukeičiama atmintis, nei jos bendrinamų bibliotekų kodo dydis."
 
 #: extended_process_list.cpp:354
@@ -328,18 +323,14 @@ msgid "Shared"
 msgstr "Bendroji"
 
 #: extended_process_list.cpp:365
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is approximately the amount of real physical memory that this "
-#| "process's shared libraries are using.<br>This memory is shared among all "
-#| "processes that use this library."
+#, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
 "Tai yra apytikslis šio proceso bendrinamų bibliotekų naudojamos realios "
-"fizinės atminties kiekis.<br>Ši atmintis yra bendrinama tarp visų procesų, "
+"fizinės atminties kiekis. Ši atmintis yra bendrinama tarp visų procesų, "
 "kurie naudoja šią biblioteką."
 
 #: extended_process_list.cpp:371

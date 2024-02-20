@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-23 01:39+0000\n"
-"PO-Revision-Date: 2024-02-15 23:26+0200\n"
+"PO-Revision-Date: 2024-02-18 09:20+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -34,29 +34,28 @@ msgstr[3] ""
 #: ksysguardprocesslist.cpp:203 ksysguardprocesslist.cpp:656
 #, kde-format
 msgid "Jump to Parent Process"
-msgstr "קפוץ לתהליך האב"
+msgstr "קפיצה לתהליך האב"
 
 #: ksysguardprocesslist.cpp:205
 #, kde-format
 msgid "Jump to Process Debugging This One"
-msgstr "קפוץ לתהליך שמנפה את התהליך הזה"
+msgstr "קפיצה לתהליך שמנפה את התהליך הזה"
 
 #: ksysguardprocesslist.cpp:206
 #, kde-format
 msgid "Show Application Window"
-msgstr "הצג את חלון התוכנה"
+msgstr "הצגת חלון היישום"
 
 #: ksysguardprocesslist.cpp:207
-#, fuzzy, kde-format
-#| msgid "Displayed Information"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detailed Information..."
-msgstr "מידע מוצג"
+msgstr "פירוט…"
 
 #: ksysguardprocesslist.cpp:208
 #, kde-format
 msgid "Resume Stopped Process"
-msgstr "הפעל תהליך בהשהיה"
+msgstr "שחזור ריצת תהליך מושהה"
 
 #: ksysguardprocesslist.cpp:209
 #, fuzzy, kde-format
@@ -79,32 +78,32 @@ msgstr[3] ""
 #: ksysguardprocesslist.cpp:216
 #, kde-format
 msgid "Suspend (STOP)"
-msgstr "השהה (STOP)"
+msgstr "השהייה (STOP)"
 
 #: ksysguardprocesslist.cpp:217
 #, kde-format
 msgid "Continue (CONT)"
-msgstr "המשך (CONT)"
+msgstr "להמשיך (CONT)"
 
 #: ksysguardprocesslist.cpp:218
 #, kde-format
 msgid "Hangup (HUP)"
-msgstr "נתק (HUP)"
+msgstr "ניתוק (HUP)"
 
 #: ksysguardprocesslist.cpp:219
 #, kde-format
 msgid "Interrupt (INT)"
-msgstr "הפסק (INT)"
+msgstr "פסיקה (INT)"
 
 #: ksysguardprocesslist.cpp:220
 #, kde-format
 msgid "Terminate (TERM)"
-msgstr "חסל (TERM)"
+msgstr "חיסול (TERM)"
 
 #: ksysguardprocesslist.cpp:221
 #, kde-format
 msgid "Kill (KILL)"
-msgstr "הרוג (KILL)"
+msgstr "הריגה (KILL)"
 
 #: ksysguardprocesslist.cpp:222
 #, kde-format
@@ -119,7 +118,7 @@ msgstr "משתמש 2 (USR2)"
 #: ksysguardprocesslist.cpp:226
 #, kde-format
 msgid "Focus on Quick Search"
-msgstr "התמקד על חיפוש מהיר"
+msgstr "התמקדות על החיפוש המהיר"
 
 #: ksysguardprocesslist.cpp:410
 #, fuzzy, kde-format
@@ -156,27 +155,27 @@ msgstr[3] ""
 #: ksysguardprocesslist.cpp:592
 #, kde-format
 msgid "Send Signal"
-msgstr "שלח אות"
+msgstr "שליחת אות"
 
 #: ksysguardprocesslist.cpp:610
 #, kde-format
 msgid "Jump to Parent Process (%1)"
-msgstr "קפוץ לתהליך האב (%1)"
+msgstr "קפיצה לתהליך ההורה (%1)"
 
 #: ksysguardprocesslist.cpp:782
 #, kde-format
 msgid "Hide Column '%1'"
-msgstr "הסתר עמודה \"%1\""
+msgstr "הסתרת העמודה ‚%1’"
 
 #: ksysguardprocesslist.cpp:799
 #, kde-format
 msgid "Show Column '%1'"
-msgstr "הצג עמודה \"%1\""
+msgstr "הצגת העמודה ‚%1’"
 
 #: ksysguardprocesslist.cpp:829
 #, kde-format
 msgid "Display Units"
-msgstr "הצג יחידות"
+msgstr "הצגת יחידות"
 
 #: ksysguardprocesslist.cpp:833
 #, kde-format
@@ -186,32 +185,32 @@ msgstr "מעורב"
 #: ksysguardprocesslist.cpp:839
 #, kde-format
 msgid "Kilobytes per second"
-msgstr "קילובייטים לשנייה"
+msgstr "קילובתים לשנייה"
 
 #: ksysguardprocesslist.cpp:839
 #, kde-format
 msgid "Kilobytes"
-msgstr "קילובייט"
+msgstr "קילובתים"
 
 #: ksysguardprocesslist.cpp:845
 #, kde-format
 msgid "Megabytes per second"
-msgstr "מגהבייטים לשנייה"
+msgstr "מגהבתים לשנייה"
 
 #: ksysguardprocesslist.cpp:845
 #, kde-format
 msgid "Megabytes"
-msgstr "מגהבייט"
+msgstr "מגהבתים"
 
 #: ksysguardprocesslist.cpp:851
 #, kde-format
 msgid "Gigabytes per second"
-msgstr "ג'יגהבייטים לשנייה"
+msgstr "גיגהבתים לשנייה"
 
 #: ksysguardprocesslist.cpp:851
 #, kde-format
 msgid "Gigabytes"
-msgstr "ג'יגהבייט"
+msgstr "גיגהבתים"
 
 #: ksysguardprocesslist.cpp:860
 #, kde-format
@@ -221,12 +220,12 @@ msgstr "אחוז"
 #: ksysguardprocesslist.cpp:889
 #, kde-format
 msgid "Display command line options"
-msgstr "הצג אפשרויות שורת פקודה"
+msgstr "הצגת אפשרויות שורת פקודה"
 
 #: ksysguardprocesslist.cpp:896
 #, kde-format
 msgid "Divide CPU usage by number of CPUs"
-msgstr "חלק את השימוש במעבד במספר המעבדים"
+msgstr "חלוקת ניצולת המעבד במספר המעבדים"
 
 #: ksysguardprocesslist.cpp:903
 #, kde-format
@@ -246,17 +245,17 @@ msgstr "מספר פעולות קריאה/כתיבה"
 #: ksysguardprocesslist.cpp:916
 #, kde-format
 msgid "Bytes actually read/written"
-msgstr "בתים שבסופו של דבר נקראו/נכתבו"
+msgstr "בתים שנקראו/נכתבו בפועל"
 
 #: ksysguardprocesslist.cpp:922
 #, kde-format
 msgid "Show I/O rate"
-msgstr "הצג קצב I/O"
+msgstr "הצגת קצב קלט/פלט"
 
 #: ksysguardprocesslist.cpp:949
 #, kde-format
 msgid "Show Tooltips"
-msgstr "הצג חלוניות מידע"
+msgstr "הצגת חלוניות מידע"
 
 #: ksysguardprocesslist.cpp:1220
 #, fuzzy, kde-format
@@ -273,7 +272,7 @@ msgstr ""
 #: ksysguardprocesslist.cpp:1246 ksysguardprocesslist.cpp:1438
 #, kde-format
 msgid "You must select a process first."
-msgstr "עליך לבחור תהליך קודם."
+msgstr "קודם יש לבחור תהליך."
 
 #: ksysguardprocesslist.cpp:1378
 #, fuzzy, kde-format
@@ -372,7 +371,7 @@ msgstr[3] ""
 #: ksysguardprocesslist.cpp:1460
 #, kde-format
 msgid "Kill"
-msgstr "הרוג (KILL)"
+msgstr "הריגה (KILL)"
 
 #: processdetails/GeneralTab.cpp:39 processdetails/MemoryMapsTab.cpp:281
 #: processdetails/OpenFilesTab.cpp:276
@@ -401,12 +400,10 @@ msgid "Quick search"
 msgstr "חיפוש מהיר"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "שם משתמש"
+msgstr "שם קובץ"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
@@ -415,8 +412,7 @@ msgid "Start"
 msgstr "התחלה"
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
 msgstr "סוף"
@@ -452,11 +448,10 @@ msgid "File"
 msgstr "קובץ"
 
 #: processdetails/OpenFilesTab.cpp:36
-#, fuzzy, kde-format
-#| msgid "Characters read/written"
+#, kde-format
 msgctxt "Device type"
 msgid "Character device"
-msgstr "תווים שנקראו/נכתבו"
+msgstr "התקן תווים"
 
 #: processdetails/OpenFilesTab.cpp:39
 #, kde-format
@@ -477,11 +472,10 @@ msgid "Socket"
 msgstr "שקע"
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "לא פעיל"
+msgstr "מזהה"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
@@ -496,11 +490,10 @@ msgid "%1: Failed to list directory contents"
 msgstr "%1: הצגת תוכן התיקייה נכשלה"
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "כל התהליכים"
+msgstr "פרטי תהליך"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
@@ -509,12 +502,10 @@ msgid "General"
 msgstr "כללי"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "זיכרון"
+msgstr "מפות זיכרון"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
@@ -529,59 +520,58 @@ msgid "The \"%1\" (PID: %2) process has stopped executing"
 msgstr ""
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "קבע עדיפות"
+msgstr "עדיפות קלט/פלט"
 
 #: ProcessModel.cpp:62
 #, kde-format
 msgid "%1 K"
-msgstr "%1 ק"
+msgstr "%1 ק׳"
 
 #: ProcessModel.cpp:63
 #, kde-format
 msgid "%1 M"
-msgstr "%1 מ"
+msgstr "%1 מ׳"
 
 #: ProcessModel.cpp:64
 #, kde-format
 msgid "%1 G"
-msgstr "%1 ג'"
+msgstr "%1 ג׳"
 
 #: ProcessModel.cpp:65
 #, kde-format
 msgid "%1 T"
-msgstr "%1 ט"
+msgstr "%1 ט׳"
 
 #: ProcessModel.cpp:66
 #, kde-format
 msgid "%1 P"
-msgstr "%1 פ"
+msgstr "%1 פ׳"
 
 #: ProcessModel.cpp:685
 #, kde-format
 msgid "- Process is doing some work."
-msgstr "- התהליך מבצע עבודה כלשהי"
+msgstr "- התהליך מבצע עבודה כלשהי."
 
 #: ProcessModel.cpp:687
 #, kde-format
 msgid "- Process is waiting for something to happen."
-msgstr "- התהליך מחכה שמשהו יתרחש."
+msgstr "- התהליך ממתין שמשהו יתרחש."
 
 #: ProcessModel.cpp:689
 #, kde-format
 msgid ""
 "- Process has been stopped. It will not respond to user input at the moment."
-msgstr "- התהליך נעצר. הוא לא יענה לקלט מהמשתמש כרגע."
+msgstr "- התהליך נעצר. הוא לא יגיב לקלט מהמשתמש כרגע."
 
 #: ProcessModel.cpp:691
 #, kde-format
 msgid ""
 "- Process has finished and is now dead, but the parent process has not "
 "cleaned up."
-msgstr "- התהליך סיים וכרגע הוא מת, אולם תהליך האב לא ניקה."
+msgstr "- התהליך סיים וכרגע הוא מת, אולם תהליך ההורה לא התנקה."
 
 #: ProcessModel.cpp:1124
 #, kde-format
@@ -604,13 +594,13 @@ msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
-"העדיפות שבו התהליך הזה רץ. עבור מערכת התזמון הרגילה, ערכים בין 19 (עדיפות "
-"נמוכה very nice) ובין ‎-19 (עדיפות הכי גבוהה)."
+"העדיפות שבה התהליך הזה רץ. עבור מערכת התזמון הרגילה, ערכים בין 19 (עדיפות "
+"נמוכה, very nice) ובין ‎-19 (עדיפות עליונה)."
 
 #: ProcessModel.cpp:1135
 #, kde-format
 msgid "The current CPU usage of the process."
-msgstr "ניצול המעבד בידי התהליך."
+msgstr "ניצולת המעבד בידי התהליך."
 
 #: ProcessModel.cpp:1140
 #, fuzzy, kde-format
@@ -1346,7 +1336,7 @@ msgstr "זיכרון משותף"
 #, kde-format
 msgctxt "process heading"
 msgid "Relative Start Time"
-msgstr ""
+msgstr "זמן התחלה יחסי"
 
 #: ProcessModel.cpp:2359
 #, kde-format
@@ -1385,12 +1375,10 @@ msgid "MAC Context"
 msgstr ""
 
 #: ProcessModel.cpp:2365
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "process heading"
 msgid "Total Memory"
-msgstr "זיכרון"
+msgstr "זיכרון כולל"
 
 #: ProcessModel.cpp:2495
 #, kde-format
@@ -1442,7 +1430,7 @@ msgstr ""
 #: ProcessWidgetUI.ui:42
 #, kde-format
 msgid "&End Process..."
-msgstr "&סיים תהליך..."
+msgstr "&סיום תהליך…"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:58
@@ -1575,12 +1563,12 @@ msgstr "תוכנות בלבד"
 #: ProcessWidgetUI.ui:144
 #, kde-format
 msgid "Tools"
-msgstr ""
+msgstr "כלים"
 
 #: ReniceDlg.cpp:28
 #, kde-format
 msgid "Set Priority"
-msgstr "קבע עדיפות"
+msgstr "הגדרת עדיפות"
 
 #: ReniceDlg.cpp:63
 #, kde-format
@@ -1592,7 +1580,7 @@ msgstr "אינטראקטיבי"
 #: ReniceDlgUi.ui:23
 #, kde-format
 msgid "Change scheduling priority for:"
-msgstr "שנה חשיבות תזמון עבור:"
+msgstr "שינוי חשיבות תזמון עבור:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ReniceDlgUi.ui:100
@@ -1620,7 +1608,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">חלוקת הזמן הרגילה עבור "
-"תהליכים אשר אין להם דרישות מיוחדות.</p></body></html>"
+"תהליכים שאין להם דרישות מיוחדות.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioNormal)
 #: ReniceDlgUi.ui:136
@@ -1809,7 +1797,7 @@ msgstr ""
 #: ReniceDlgUi.ui:179
 #, kde-format
 msgid "Round robin"
-msgstr "עיגול פינות"
+msgstr "לפי הסדר"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioFIFO)
 #: ReniceDlgUi.ui:189
@@ -2152,14 +2140,14 @@ msgstr "עדיפות גבוהה"
 #: scripting.cpp:248
 #, kde-format
 msgid "QtWebEngineWidgets not available"
-msgstr ""
+msgstr "QtWebEngineWidgets לא זמין"
 
 #: scripting.cpp:249
 #, kde-format
 msgid ""
 "KSysGuard library was compiled without QtWebEngineWidgets, please contact "
 "your distribution."
-msgstr ""
+msgstr "ספריית KSysGuard הודרה ללא QtWebEngineWidgets, נא ליצור עם ההפצה שלך."
 
 #, fuzzy
 #~| msgctxt "process heading"
