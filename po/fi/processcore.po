@@ -6,7 +6,7 @@
 # Jorma Karvonen <karvonen.jorma@gmail.com>, 2010.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011.
-# Tommi Nieminen <translator@legisign.org>, 2019, 2021.
+# Tommi Nieminen <translator@legisign.org>, 2019, 2021, 2024.
 #
 #
 # KDE Finnish translation sprint participants:
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2021-08-23 18:04+0300\n"
+"PO-Revision-Date: 2024-02-14 18:56+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:22:38+0000\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -307,20 +307,15 @@ msgid "Private"
 msgstr "Yksityinen"
 
 #: extended_process_list.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process.<br>It "
-#| "does not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
+#, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "Tämä on prosessin itsensä käyttämä fyysisen muistin määrä ja vastaa "
-"suunnilleen prosessin yksityisen muistin määrää.<br>Luku ei sisällä "
-"sivutettua muistia eikä jaettujen kirjastojen koodin kokoa."
+"suunnilleen prosessin yksityisen muistin määrää. Luku ei sisällä sivutettua "
+"muistia eikä jaettujen kirjastojen koodin kokoa."
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -333,18 +328,14 @@ msgid "Shared"
 msgstr "Jaettu"
 
 #: extended_process_list.cpp:365
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is approximately the amount of real physical memory that this "
-#| "process's shared libraries are using.<br>This memory is shared among all "
-#| "processes that use this library."
+#, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
 "Tämä on suunnilleen prosessin jaettujen kirjastojen käyttämän todellisen "
-"fyysisen muistin määrä.<br>Tämä muisti jaetaan kaikkien tätä kirjastoa "
+"fyysisen muistin määrä. Tämä muisti jaetaan kaikkien tätä kirjastoa "
 "käyttävien prosessien kesken."
 
 #: extended_process_list.cpp:371
