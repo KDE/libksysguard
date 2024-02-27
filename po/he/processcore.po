@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-18 08:51+0200\n"
+"PO-Revision-Date: 2024-02-25 10:15+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -234,7 +234,7 @@ msgstr ""
 #: extended_process_list.cpp:302
 #, kde-format
 msgid "Nice Level"
-msgstr ""
+msgstr "רמת Nice"
 
 #: extended_process_list.cpp:304
 #, kde-format
@@ -242,26 +242,28 @@ msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
+"העדיפות שבה התהליך הזה רץ. עבור מערכת התזמון הרגילה, ערכים בין 19 (עדיפות "
+"נמוכה, very nice) ובין ‎-19 (עדיפות עליונה)."
 
 #: extended_process_list.cpp:308
 #, kde-format
 msgid "Scheduler"
-msgstr ""
+msgstr "מתזמן"
 
 #: extended_process_list.cpp:313
 #, kde-format
 msgid "IO Priority Class"
-msgstr ""
+msgstr "מחלקת עדיפות קלט/פלט"
 
 #: extended_process_list.cpp:319
 #, kde-format
 msgid "IO Nice Level"
-msgstr ""
+msgstr "רמת Nice של קלט/פלט"
 
 #: extended_process_list.cpp:323
 #, kde-format
 msgid "VM Size"
-msgstr ""
+msgstr "גודל זיכרון וירטואלי"
 
 #: extended_process_list.cpp:328
 #, kde-format
@@ -270,6 +272,8 @@ msgid ""
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless."
 msgstr ""
+"זה נפח הזיכרון הווירטואלי בו משתמש התהליך, כולל ספריות משותפות, זיכרון גרפי, "
+"קבצים בכונן ועוד. המספר הזה הוא כמעט חסר משמעות."
 
 #: extended_process_list.cpp:333
 #, kde-format
@@ -356,7 +360,7 @@ msgstr "פקודה"
 #: extended_process_list.cpp:393
 #, kde-format
 msgid "The command with which this process was launched."
-msgstr ""
+msgstr "הפקודה שאיתה התהליך הזה הופעל."
 
 #: extended_process_list.cpp:397
 #, kde-format
@@ -366,42 +370,42 @@ msgstr "מצב"
 #: extended_process_list.cpp:402
 #, kde-format
 msgid "IO Characters Read"
-msgstr ""
+msgstr "תווי קלט/פלט שנקראובפועל"
 
 #: extended_process_list.cpp:411
 #, kde-format
 msgid "IO Characters Written"
-msgstr ""
+msgstr "תווי קלט/פלט שנכתבו"
 
 #: extended_process_list.cpp:420
 #, kde-format
 msgid "IO Read Syscalls"
-msgstr ""
+msgstr "קריאות מערכת לקריאת קלט/פלט"
 
 #: extended_process_list.cpp:429
 #, kde-format
 msgid "IO Read Syscalls Rate"
-msgstr ""
+msgstr "קצב קריאות מערכת לקריאת קלט/פלט"
 
 #: extended_process_list.cpp:438
 #, kde-format
 msgid "IO Write Syscalls"
-msgstr ""
+msgstr "קריאות מערכת לכתיבת קלט/פלט"
 
 #: extended_process_list.cpp:447
 #, kde-format
 msgid "IO Write Syscalls Rate"
-msgstr ""
+msgstr "קצב קריאות מערכת לכתיבת קלט/פלט"
 
 #: extended_process_list.cpp:456
 #, kde-format
 msgid "IO Characters Actually Read"
-msgstr ""
+msgstr "תווי קלט/פלט שנקראו בפועל"
 
 #: extended_process_list.cpp:465
 #, kde-format
 msgid "IO Characters Read Rate"
-msgstr ""
+msgstr "קצב קריאת תווי קלט/פלט"
 
 #: extended_process_list.cpp:468
 #, kde-format
@@ -409,11 +413,13 @@ msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"קצב הקריאה של כל הקלט/פלט של התהליך, כולל מטמון הכונן וקלט/פלט אחר שאינו "
+"פיזי."
 
 #: extended_process_list.cpp:475
 #, kde-format
 msgid "IO Characters Written Rate"
-msgstr ""
+msgstr "קצב כתיבת תווי קלט/פלט"
 
 #: extended_process_list.cpp:478
 #, kde-format
@@ -421,6 +427,8 @@ msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"קצב הכתיבה של כל הקלט/פלט של התהליך, כולל מטמון הכונן וקלט/פלט אחר שאינו "
+"פיזי."
 
 #: extended_process_list.cpp:485
 #, kde-format

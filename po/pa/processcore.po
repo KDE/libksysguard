@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-25 09:37-0600\n"
+"PO-Revision-Date: 2024-02-26 07:55-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
@@ -22,29 +22,29 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Desktop ID"
-msgstr ""
+msgstr "ਡੈਸਕਟਾਪ ID"
 
 #: cgroup_data_model.cpp:66
 #, kde-format
 msgctxt "@title"
 msgid "Icon"
-msgstr ""
+msgstr "ਆਈਕਾਨ"
 
 #: cgroup_data_model.cpp:80
 #, kde-format
 msgctxt "@title"
 msgid "Name"
-msgstr ""
+msgstr "ਨਾਂ"
 
 #: extended_process_list.cpp:95
 #, kde-format
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: extended_process_list.cpp:96
 #, kde-format
 msgid "The unique Process ID that identifies this process."
-msgstr ""
+msgstr "ਵਿਲੱਖਣ ਪਰੋਸੈਸ ID, ਜੋ ਕਿ ਇਹ ਪਰੋਸੈਸ ਨੂੰ ਪਛਾਣਦਾ ਹੈ।"
 
 #: extended_process_list.cpp:101
 #, kde-format
@@ -54,62 +54,62 @@ msgstr ""
 #: extended_process_list.cpp:108
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "ਲਾਗਇਨ"
 
 #: extended_process_list.cpp:109
 #, kde-format
 msgid "The user who owns this process."
-msgstr ""
+msgstr "ਇਹ ਪਰੋਸੈਸ ਰੱਖਣ ਵਾਲਾ ਵਰਤੋਂਕਾਰ ਹੈ।"
 
 #: extended_process_list.cpp:113
 #, kde-format
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: extended_process_list.cpp:119
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "ਵਰਤੋਂਕਾਰ-ਨਾਂ"
 
 #: extended_process_list.cpp:135
 #, kde-format
 msgid "Can Login"
-msgstr ""
+msgstr "ਲਾਗਇਨ ਕਰ ਸਕਦਾ ਹੈ"
 
 #: extended_process_list.cpp:162
 #, kde-format
 msgid "EUID"
-msgstr ""
+msgstr "EUID"
 
 #: extended_process_list.cpp:166
 #, kde-format
 msgid "suid"
-msgstr ""
+msgstr "suid"
 
 #: extended_process_list.cpp:170
 #, kde-format
 msgid "fsuid"
-msgstr ""
+msgstr "fsuid"
 
 #: extended_process_list.cpp:174
 #, kde-format
 msgid "gid"
-msgstr ""
+msgstr "gid"
 
 #: extended_process_list.cpp:178
 #, kde-format
 msgid "egid"
-msgstr ""
+msgstr "egid"
 
 #: extended_process_list.cpp:182
 #, kde-format
 msgid "sgid"
-msgstr ""
+msgstr "sgid"
 
 #: extended_process_list.cpp:186
 #, kde-format
 msgid "fsgid"
-msgstr ""
+msgstr "fsgid"
 
 #: extended_process_list.cpp:191
 #, kde-format
@@ -119,12 +119,12 @@ msgstr ""
 #: extended_process_list.cpp:198
 #, kde-format
 msgid "tty"
-msgstr ""
+msgstr "tty"
 
 #: extended_process_list.cpp:199
 #, kde-format
 msgid "The controlling terminal on which this process is running."
-msgstr ""
+msgstr "ਕੰਟਰੋਲਿੰਗ ਟਰਮੀਨਲ, ਜੋ ਕਿ ਇਹ ਪਰੋਸੈਸ ਚਲਾਉਦਾ ਹੈ।"
 
 #: extended_process_list.cpp:202
 #, kde-format
@@ -142,11 +142,9 @@ msgid "Total Time"
 msgstr "ਕੁੱਲ ਸਮਾਂ"
 
 #: extended_process_list.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Time"
-msgstr "ਰੀਅਲ ਟਾਈਮ"
+msgstr "ਸਮਾਂ"
 
 #: extended_process_list.cpp:215
 #, kde-format
@@ -154,51 +152,49 @@ msgid "The total user and system time that this process has been running for"
 msgstr ""
 
 #: extended_process_list.cpp:220
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Start Time"
-msgstr "ਰੀਅਲ ਟਾਈਮ"
+msgstr "ਸ਼ੁਰੂ ਸਮਾਂ"
 
 #: extended_process_list.cpp:230
 #, kde-format
 msgid "User CPU Usage"
-msgstr ""
+msgstr "ਵਰਤੋਂਕਾਰ CPU ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:231
 #, kde-format
 msgid "User CPU"
-msgstr ""
+msgstr "ਵਰਤੋਂਕਾਰ CPU"
 
 #: extended_process_list.cpp:238
 #, kde-format
 msgid "System CPU Usage"
-msgstr ""
+msgstr "ਸਿਸਟਮ CPU ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:239
 #, kde-format
 msgid "System CPU"
-msgstr ""
+msgstr "ਸਿਸਟਮ CPU"
 
 #: extended_process_list.cpp:248
 #, kde-format
 msgid "Total CPU Usage"
-msgstr ""
+msgstr "ਕੁੱਲ CPU ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:254
 #, kde-format
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: extended_process_list.cpp:258
 #, kde-format
 msgid "The current total CPU usage of the process."
-msgstr ""
+msgstr "ਪਰੋਸੈਸ ਦੀ ਮੌਜੂਦਾ ਕੁੱਲ CPU ਵਰਤੋਂ।"
 
 #: extended_process_list.cpp:263
 #, kde-format
 msgid "Group User CPU Usage"
-msgstr ""
+msgstr "ਗਰੁੱਪ ਵਰਤੋਂਕਾਰ CPU ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:267
 #, kde-format
@@ -208,7 +204,7 @@ msgstr ""
 #: extended_process_list.cpp:275
 #, kde-format
 msgid "Group System CPU Usage"
-msgstr ""
+msgstr "ਗਰੁੱਪ ਸਿਸਟਮ CPU ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:279
 #, kde-format
@@ -218,12 +214,12 @@ msgstr ""
 #: extended_process_list.cpp:288
 #, kde-format
 msgid "Group Total CPU Usage"
-msgstr ""
+msgstr "ਗਰੁੱਪ ਕੁੱਲ CPU ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:294
 #, kde-format
 msgid "Group CPU"
-msgstr ""
+msgstr "ਗਰੁੱਪ CPU"
 
 #: extended_process_list.cpp:295
 #, kde-format
@@ -245,7 +241,7 @@ msgstr ""
 #: extended_process_list.cpp:308
 #, kde-format
 msgid "Scheduler"
-msgstr ""
+msgstr "ਸੈਡਿਊਲਰ"
 
 #: extended_process_list.cpp:313
 #, kde-format
@@ -260,7 +256,7 @@ msgstr ""
 #: extended_process_list.cpp:323
 #, kde-format
 msgid "VM Size"
-msgstr ""
+msgstr "VM ਆਕਾਰ"
 
 #: extended_process_list.cpp:328
 #, kde-format
@@ -269,11 +265,13 @@ msgid ""
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless."
 msgstr ""
+"ਇਹ ਵੁਰਚੁਅਲ ਮੈਮੋਰੀ ਥਾਂ ਦੀ ਮਾਤਰਾ ਹੈ, ਜੋ ਕਿ ਪਰੋਸੈਸ ਵਲੋਂ ਵਰਤੀ ਜਾ ਰਹੀ ਹੈ, ਜਿਸ ਵਿੱਚ ਸ਼ੇਅਰ "
+"ਲਾਇਬਰੇਰੀਆਂ, ਗਰਾਫਿਕਸ ਮੈਮੋਰੀ, ਡਿਸਕ ਉੱਤੇ ਫਾਈਲਾਂ ਅਤੇ ਹੋਰ ਕੁਝ। ਇਸ ਗਿਣਤੀ ਬਹੁਤਾ ਕਰਕੇ ਬੇਮਤਲਬ ਹੈ।"
 
 #: extended_process_list.cpp:333
 #, kde-format
 msgid "RSS Memory Usage"
-msgstr ""
+msgstr "RSS ਮੈਮੋਰੀ ਦੀ ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:338
 #, kde-format
@@ -285,12 +283,12 @@ msgstr ""
 #: extended_process_list.cpp:341
 #, kde-format
 msgid "Private Memory Usage"
-msgstr ""
+msgstr "ਪ੍ਰਾਈਵੇਟ ਮੈਮੋਰੀ ਦੀ ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:343
 #, kde-format
 msgid "Private"
-msgstr ""
+msgstr "ਪ੍ਰਾਈਵੇਟ"
 
 #: extended_process_list.cpp:347
 #, kde-format
@@ -303,12 +301,12 @@ msgstr ""
 #: extended_process_list.cpp:354
 #, kde-format
 msgid "Shared Memory Usage"
-msgstr ""
+msgstr "ਸਾਂਝੀ ਮੈਮੋਰੀ ਦੀ ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:363
 #, kde-format
 msgid "Shared"
-msgstr ""
+msgstr "ਸਾਂਝੀ ਕੀਤੀ"
 
 #: extended_process_list.cpp:365
 #, kde-format
@@ -317,16 +315,18 @@ msgid ""
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
+"ਇਹ ਅਸਲ ਫਿਜ਼ੀਕਲ ਮੈਮੋਰੀ ਥਾਂ ਦੀ ਲਗਭਗ ਮਾਤਰਾ ਹੈ, ਜੋ ਕਿ ਇਸ ਪਰੋਸੈਸ ਦੀਆਂ ਸਾਂਝੀਆਂ ਲਾਇਬਰੇਰੀਆਂ ਵਲੋਂ "
+"ਵਰਤੀ ਜਾ ਰਹੀ ਹੈ।ਇਹ ਮੈਮੋਰੀ ਇਸ ਲਾਇਬਰੇਰੀ ਦੀ ਵਰਤੋਂ ਕਰਨ ਵਾਲੇ ਸਭ ਪਰੋਸੈਸਾਂ ਲਈ ਸਾਂਝੀ ਹੈ।"
 
 #: extended_process_list.cpp:371
 #, kde-format
 msgid "Memory Usage"
-msgstr ""
+msgstr "ਮੈਮੋਰੀ ਦੀ ਵਰਤੋਂ"
 
 #: extended_process_list.cpp:372
 #, kde-format
 msgid "Memory"
-msgstr ""
+msgstr "ਮੈਮੋਰੀ"
 
 #: extended_process_list.cpp:378
 #, kde-format
@@ -340,37 +340,37 @@ msgstr ""
 #: extended_process_list.cpp:383
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "ਨਾਂ"
 
 #: extended_process_list.cpp:384
 #, kde-format
 msgid "The process name."
-msgstr ""
+msgstr "ਪਰੋਸੈਸ ਨਾਂ ਹੈ।"
 
 #: extended_process_list.cpp:389
 #, kde-format
 msgid "Command"
-msgstr ""
+msgstr "ਕਮਾਂਡ"
 
 #: extended_process_list.cpp:393
 #, kde-format
 msgid "The command with which this process was launched."
-msgstr ""
+msgstr "ਕਮਾਂਡ, ਜਿਸ ਨਾਲ ਇਹ ਪਰੋਸੈਸ ਚਲਾਇਆ ਗਿਆ ਸੀ।"
 
 #: extended_process_list.cpp:397
 #, kde-format
 msgid "Status"
-msgstr ""
+msgstr "ਸਥਿਤੀ"
 
 #: extended_process_list.cpp:402
 #, kde-format
 msgid "IO Characters Read"
-msgstr ""
+msgstr "IO ਅੱਖਰ ਪੜ੍ਹਨ"
 
 #: extended_process_list.cpp:411
 #, kde-format
 msgid "IO Characters Written"
-msgstr ""
+msgstr "IO ਅੱਖਰ ਲਿਖਣ"
 
 #: extended_process_list.cpp:420
 #, kde-format
@@ -424,12 +424,12 @@ msgstr ""
 #: extended_process_list.cpp:485
 #, kde-format
 msgid "Disk Read Rate"
-msgstr ""
+msgstr "ਡਿਸਕ ਪੜ੍ਹਨ ਦੀ ਦਰ"
 
 #: extended_process_list.cpp:489
 #, kde-format
 msgid "Read"
-msgstr ""
+msgstr "ਪੜ੍ਹਨ"
 
 #: extended_process_list.cpp:490
 #, kde-format
@@ -439,12 +439,12 @@ msgstr ""
 #: extended_process_list.cpp:496
 #, kde-format
 msgid "Disk Write Rate"
-msgstr ""
+msgstr "ਡਿਸਕ ਲਿਖਣ ਦੀ ਦਰ"
 
 #: extended_process_list.cpp:500
 #, kde-format
 msgid "Write"
-msgstr ""
+msgstr "ਲਿਖਣ"
 
 #: extended_process_list.cpp:501
 #, kde-format
@@ -454,41 +454,41 @@ msgstr ""
 #: extended_process_list.cpp:507
 #, kde-format
 msgid "Threads"
-msgstr ""
+msgstr "ਥਰਿੱਡ"
 
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
 msgid "Download Speed"
-msgstr ""
+msgstr "ਡਾਊਨਲੋਡ ਸਪੀਡ"
 
 #: plugins/network/network.cpp:37
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr ""
+msgstr "ਡਾਊਨਲੋਡ"
 
 #: plugins/network/network.cpp:40
 #, kde-format
 msgctxt "@title"
 msgid "Upload Speed"
-msgstr ""
+msgstr "ਅੱਪਲੋਡ ਸਪੀਡ"
 
 #: plugins/network/network.cpp:41
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
+msgstr "ਅੱਪਲੋਡ"
 
 #: plugins/nvidia/nvidia.cpp:28
 #, kde-format
 msgid "GPU Usage"
-msgstr ""
+msgstr "GPU ਵਰਤੋਂ"
 
 #: plugins/nvidia/nvidia.cpp:30
 #, kde-format
 msgid "GPU Memory"
-msgstr ""
+msgstr "GPU ਮੈਮੋਰੀ"
 
 #: process.cpp:101 process.cpp:122
 #, kde-format
@@ -631,34 +631,34 @@ msgstr "ਵੇਹਲਾ"
 #: process_controller.cpp:181
 #, kde-format
 msgid "Success"
-msgstr ""
+msgstr "ਕਾਮਯਾਬ"
 
 #: process_controller.cpp:183
 #, kde-format
 msgid "Insufficient permissions."
-msgstr ""
+msgstr "ਨਾ-ਲੋੜੀਦੀਆਂ ਇਜਾਜ਼ਤਾਂ।"
 
 #: process_controller.cpp:185
 #, kde-format
 msgid "No matching process was found."
-msgstr ""
+msgstr "ਕੋਈ ਮਿਲਦਾ ਪਰੋਸੈਸ ਨਹੀਂ ਲੱਭਿਆ ਸੀ।"
 
 #: process_controller.cpp:187
 #, kde-format
 msgid "Not supported on the current system."
-msgstr ""
+msgstr "ਮੌਜੂਦਾ ਸਿਸਟਮ ਉੱਤੇ ਸਹਾਇਕ ਨਹੀਂ ਹੈ।"
 
 #: process_controller.cpp:189
 #, kde-format
 msgid "The user cancelled."
-msgstr ""
+msgstr "ਵਰਤੋਂਕਾਰ ਵਲੋਂ ਰੱਦ ਕੀਤਾ।"
 
 #: process_controller.cpp:191
 #, kde-format
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "ਅਣਜਾਣ ਗਲਤੀ ਆਈ ਹੈ।"
 
 #: process_controller.cpp:193
 #, kde-format
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "ਅਣਪਛਾਤੀ ਗਲਤੀ ਆਈ ਹੈ।"
