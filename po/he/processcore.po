@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-25 10:15+0200\n"
+"PO-Revision-Date: 2024-02-27 23:19+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -154,7 +154,7 @@ msgstr "זמן"
 #: extended_process_list.cpp:215
 #, kde-format
 msgid "The total user and system time that this process has been running for"
-msgstr ""
+msgstr "זמן המשתמש והמערכת הכולל של ריצת התהליך הזה"
 
 #: extended_process_list.cpp:220
 #, kde-format
@@ -194,7 +194,7 @@ msgstr "מעבד"
 #: extended_process_list.cpp:258
 #, kde-format
 msgid "The current total CPU usage of the process."
-msgstr ""
+msgstr "ניצולת המעבד הכוללת הנוכחית של התהליך."
 
 #: extended_process_list.cpp:263
 #, kde-format
