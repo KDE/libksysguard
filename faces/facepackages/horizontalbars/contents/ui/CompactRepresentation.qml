@@ -27,13 +27,22 @@ Faces.SensorFace {
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.smallSpacing
 
+        Item { Layout.fillWidth: true; Layout.preferredHeight: Kirigami.Units.smallSpacing }
+
         Repeater {
             model: root.controller.highPrioritySensorIds
 
             Bar {
-                Layout.preferredHeight: Math.min(implicitHeight, Math.max(root.height / root.controller.highPrioritySensorIds.length - Kirigami.Units.smallSpacing * (root.controller.highPrioritySensorIds.length - 1), Kirigami.Units.smallSpacing))
+                Layout.preferredHeight: Kirigami.Units.largeSpacing
+
+                topInset: 0
+                bottomInset: 0
+
                 opacity: y + height <= root.height
                 sensor: sensor
+                controller: root.controller
+                color: root.colorSource.map[modelData]
+
                 Sensors.Sensor {
                     id: sensor
                     sensorId: modelData
@@ -41,5 +50,7 @@ Faces.SensorFace {
                 }
             }
         }
+
+        Item { Layout.fillWidth: true; Layout.preferredHeight: Kirigami.Units.smallSpacing }
     }
 }
