@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-01-29 00:45+0000\n"
+"POT-Creation-Date: 2024-02-08 00:39+0000\n"
 "PO-Revision-Date: 2024-02-29 12:52\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -15,21 +15,20 @@ msgstr ""
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: /kf6-trunk/messages/libksysguard/ksysguard_face_org.kde."
-"ksysguard.facegrid.pot\n"
-"X-Crowdin-File-ID: 42891\n"
+"ksysguard.horizontalbars.pot\n"
+"X-Crowdin-File-ID: 49392\n"
 
-#: contents/ui/Config.qml:35
+#: contents/ui/Config.qml:29
 #, kde-format
-msgid "Number of Columns:"
-msgstr "列数："
+msgid "Automatic Data Range"
+msgstr ""
 
-#: contents/ui/Config.qml:42
+#: contents/ui/Config.qml:33
 #, kde-format
-msgctxt "@label"
-msgid "Automatic"
-msgstr "自动"
+msgid "From:"
+msgstr ""
 
-#: contents/ui/Config.qml:54
+#: contents/ui/Config.qml:40
 #, kde-format
-msgid "Display Style:"
-msgstr "显示风格："
+msgid "To:"
+msgstr ""
