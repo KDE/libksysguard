@@ -43,6 +43,7 @@ ChartControls.PieChartControl {
     chart.smoothEnds: root.controller.faceConfiguration.smoothEnds
     chart.fromAngle: root.controller.faceConfiguration.fromAngle
     chart.toAngle: root.controller.faceConfiguration.toAngle
+    chart.thickness: Kirigami.Units.largeSpacing
 
     range {
         from: chart.rangeFrom
