@@ -50,7 +50,7 @@ ChartControls.PieChartControl {
         automatic: root.controller.faceConfiguration.rangeAuto
     }
 
-    chart.backgroundColor: Qt.rgba(0.0, 0.0, 0.0, 0.2)
+    chart.backgroundColor: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.1)
 
     valueSources: Charts.ModelSource {
         model: Sensors.SensorDataModel {
