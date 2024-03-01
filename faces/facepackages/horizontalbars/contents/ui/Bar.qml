@@ -30,8 +30,6 @@ ProgressBar {
     readonly property real rangeFrom: controller.faceConfiguration.rangeFrom * controller.faceConfiguration.rangeFromMultiplier
     readonly property real rangeTo: controller.faceConfiguration.rangeTo * controller.faceConfiguration.rangeToMultiplier
 
-    Kirigami.Theme.inherit: false
-
     value: sensor?.value ?? 0
     from: controller.faceConfiguration.rangeAuto ? sensor.minimum : rangeFrom
     to: controller.faceConfiguration.rangeAuto ? sensor.maximum : rangeTo
@@ -46,5 +44,12 @@ ProgressBar {
             color: bar.color
             radius: height / 2
         }
+    }
+
+    background: Rectangle {
+        implicitWidth: 100
+        implicitHeight: Kirigami.Units.largeSpacing
+        color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.1)
+        radius: height / 2
     }
 }
