@@ -28,6 +28,8 @@ Faces.SensorFace {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
             updateRateLimit: root.controller.updateRateLimit
+
+            chart.thickness: Kirigami.Units.smallSpacing
         }
         QQC2.Label {
             id: label
