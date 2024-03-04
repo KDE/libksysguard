@@ -1,5 +1,7 @@
 set(SystemStats_SOVERSION 1)
 
+add_compile_definitions(TRANSLATION_DOMAIN="ksysguard_systemstats")
+
 set(systemstats_SRCS
     AggregateSensor.cpp
     SensorObject.cpp
