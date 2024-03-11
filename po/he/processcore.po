@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2024-03-02 22:01+0200\n"
+"PO-Revision-Date: 2024-03-10 15:31+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -84,47 +84,47 @@ msgstr "יכול להיכנס"
 #: extended_process_list.cpp:162
 #, kde-format
 msgid "EUID"
-msgstr ""
+msgstr "EUID"
 
 #: extended_process_list.cpp:166
 #, kde-format
 msgid "suid"
-msgstr ""
+msgstr "suid"
 
 #: extended_process_list.cpp:170
 #, kde-format
 msgid "fsuid"
-msgstr ""
+msgstr "fsuid"
 
 #: extended_process_list.cpp:174
 #, kde-format
 msgid "gid"
-msgstr ""
+msgstr "gid"
 
 #: extended_process_list.cpp:178
 #, kde-format
 msgid "egid"
-msgstr ""
+msgstr "egid"
 
 #: extended_process_list.cpp:182
 #, kde-format
 msgid "sgid"
-msgstr ""
+msgstr "sgid"
 
 #: extended_process_list.cpp:186
 #, kde-format
 msgid "fsgid"
-msgstr ""
+msgstr "fsgid"
 
 #: extended_process_list.cpp:191
 #, kde-format
 msgid "Tracer Pid"
-msgstr ""
+msgstr "מזהה תהליך עוקב"
 
 #: extended_process_list.cpp:198
 #, kde-format
 msgid "tty"
-msgstr ""
+msgstr "tty"
 
 #: extended_process_list.cpp:199
 #, kde-format
@@ -199,37 +199,38 @@ msgstr "ניצולת המעבד הכוללת הנוכחית של התהליך."
 #: extended_process_list.cpp:263
 #, kde-format
 msgid "Group User CPU Usage"
-msgstr ""
+msgstr "קיבוץ ניצולת מעבד לפי משתמש"
 
 #: extended_process_list.cpp:267
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
+"כמות ניצולת המעבד שנוצל במרחב המשתמש על ידי התהליך הזה על כל הצאצאים שלו."
 
 #: extended_process_list.cpp:275
 #, kde-format
 msgid "Group System CPU Usage"
-msgstr ""
+msgstr "קיבוץ ניצולת מעבד לפי מערכת"
 
 #: extended_process_list.cpp:279
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
-msgstr ""
+msgstr "כמות ניצולת המעבד של המערכת על ידי התהליך הזה על כל הצאצאים שלו."
 
 #: extended_process_list.cpp:288
 #, kde-format
 msgid "Group Total CPU Usage"
-msgstr ""
+msgstr "קיבוץ ניצולת מעבד כוללת"
 
 #: extended_process_list.cpp:294
 #, kde-format
 msgid "Group CPU"
-msgstr ""
+msgstr "קיבוץ מעבד"
 
 #: extended_process_list.cpp:295
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
-msgstr ""
+msgstr "כמות ניצולת המעבד הכוללת על ידי התהליך הזה על כל הצאצאים שלו."
 
 #: extended_process_list.cpp:302
 #, kde-format
@@ -278,7 +279,7 @@ msgstr ""
 #: extended_process_list.cpp:333
 #, kde-format
 msgid "RSS Memory Usage"
-msgstr ""
+msgstr "ניצול זיכרון גודל סדרה מיושבת (RSS)"
 
 #: extended_process_list.cpp:338
 #, kde-format
@@ -306,6 +307,9 @@ msgid ""
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
+"זאת כמות הזיכרון הפיזי בה משתמש התהליך הזה בעצמו, ושערוך של הזיכרון הפרטי בו "
+"משתמש התהליך. הוא לא כולל זיכרון שהועבר לשטח ההחלפה או את גודל הקוד של "
+"הספריות המשותפות שלו."
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -324,6 +328,8 @@ msgid ""
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
+"זאת בערך כמות הזיכרון הפיזי הממשי שהספריות המשותפות של המיזם הזה צורכות. "
+"הזיכרון הזה משותף בין תהליכים שמשתמשים בספרייה הזאת."
 
 #: extended_process_list.cpp:371
 #, kde-format
@@ -343,6 +349,9 @@ msgid ""
 "usage by the amount of processes sharing that memory, then adding the "
 "process' private memory."
 msgstr ""
+"זה שערוך של הכמות הפיזית בה משתמש התהליך הזה. היא מחושבת על ידי חלוקת ניצולת "
+"הזיכרון השיתופי בכמות התהליכים שחולקים את הזיכרון הזה ולאחר מכן מתווסף "
+"לחישוב הזיכרון הפרטי של התהליך."
 
 #: extended_process_list.cpp:383
 #, kde-format
