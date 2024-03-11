@@ -10,7 +10,12 @@
 #include <Sensor.h>
 #include <SensorQuery.h>
 
-#include <QtQml>
+#include <QFileInfo>
+#include <QJsonDocument>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QTemporaryDir>
+#include <QTimer>
 
 #include <KConfigLoader>
 #include <KConfigPropertyMap>

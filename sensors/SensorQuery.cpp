@@ -104,7 +104,7 @@ void KSysGuard::SensorQuery::sortByName()
 {
     QCollator collator;
     collator.setNumericMode(true);
-    std::sort(d->result.begin(), d->result.end(), [this, &collator](const QPair<QString, SensorInfo> &left, const QPair<QString, SensorInfo> &right) {
+    std::sort(d->result.begin(), d->result.end(), [&collator](const QPair<QString, SensorInfo> &left, const QPair<QString, SensorInfo> &right) {
         return collator.compare(left.second.name, right.second.name) < 0;
     });
 }
