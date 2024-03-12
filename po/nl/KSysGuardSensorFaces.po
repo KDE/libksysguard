@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-08 00:39+0000\n"
+"POT-Creation-Date: 2024-03-12 00:38+0000\n"
 "PO-Revision-Date: 2022-10-13 13:44+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -268,7 +268,7 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Terug"
 
-#: SensorFaceController.cpp:435
+#: SensorFaceController.cpp:440
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Systeemmonitorsensor"
