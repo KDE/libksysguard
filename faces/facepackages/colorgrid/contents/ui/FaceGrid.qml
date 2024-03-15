@@ -17,11 +17,14 @@ import org.kde.quickcharts.controls as ChartsControls
 GridLayout {
     id: grid
 
+    property QtObject controller
+    property QtObject colorSource
     property int columnCount
     property int autoColumnCount
-    property bool useSensorColor
 
     readonly property real preferredWidth: titleMetrics.width
+
+    readonly property bool useSensorColor: controller.faceConfiguration.useSensorColor
 
     columns: columnCount > 0 ? columnCount : autoColumnCount
 
@@ -35,8 +38,8 @@ GridLayout {
 
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
-        text: root.controller.title
-        visible: root.controller.showTitle && text.length > 0
+        text: grid.controller.title
+        visible: grid.controller.showTitle && text.length > 0
         level: 2
 
         TextMetrics {
@@ -47,7 +50,7 @@ GridLayout {
     }
 
     Repeater {
-        model: root.controller.highPrioritySensorIds
+        model: grid.controller.highPrioritySensorIds
 
         SensorRect {
             Layout.fillWidth: true
@@ -59,7 +62,7 @@ GridLayout {
             Sensors.Sensor {
                 id: sensor
                 sensorId: modelData
-                updateRateLimit: root.controller.updateRateLimit
+                updateRateLimit: grid.controller.updateRateLimit
             }
         }
     }

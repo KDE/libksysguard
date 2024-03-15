@@ -34,8 +34,9 @@ Faces.SensorFace {
     contentItem: FaceGrid {
         id: grid
 
+        controller: root.controller
+        colorSource: root.colorSource
         columnCount: root.columnCount
         autoColumnCount: root.autoColumnCount
-        useSensorColor: root.controller.faceConfiguration.useSensorColor
     }
 }
