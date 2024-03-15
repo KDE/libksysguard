@@ -26,8 +26,8 @@ QVariant addVariants(const QVariant &first, const QVariant &second)
     bool convertFirst = false;
     bool convertSecond = false;
 
-    auto type = first.type();
-    switch (static_cast<QMetaType::Type>(type)) {
+    auto type = first.typeId();
+    switch (type) {
     case QMetaType::Char:
     case QMetaType::Short:
     case QMetaType::Int:
@@ -54,7 +54,7 @@ QVariant addVariants(const QVariant &first, const QVariant &second)
         return first;
     }
 
-    if (!result.convert(type)) {
+    if (!result.convert(QMetaType(type))) {
         return first;
     }
 
