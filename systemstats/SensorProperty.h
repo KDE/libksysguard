@@ -42,6 +42,8 @@ public:
 
     ~SensorProperty() override;
 
+    SensorObject *parentObject() const;
+
     SensorInfo info() const;
 
     /**

@@ -50,6 +50,11 @@ SensorProperty::~SensorProperty()
 {
 }
 
+SensorObject *KSysGuard::SensorProperty::parentObject() const
+{
+    return d->parent;
+}
+
 SensorInfo SensorProperty::info() const
 {
     return d->info;
