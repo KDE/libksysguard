@@ -18,7 +18,7 @@ Rectangle {
     property alias text: label.text
     property color sensorColor
 
-    color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 40})
+    color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.1)
 
     Rectangle {
         anchors.fill: parent
