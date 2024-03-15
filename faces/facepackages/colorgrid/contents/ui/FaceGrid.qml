@@ -57,7 +57,7 @@ GridLayout {
             Layout.fillHeight: true
             sensor: sensor
             text: sensor.formattedValue
-            useSensorColor: grid.useSensorColor
+            sensorColor: grid.useSensorColor ? grid.colorSource.map[modelData] : Kirigami.Theme.highlightColor
 
             Sensors.Sensor {
                 id: sensor

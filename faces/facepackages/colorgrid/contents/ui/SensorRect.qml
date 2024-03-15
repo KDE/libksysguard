@@ -16,13 +16,13 @@ Rectangle {
 
     property Sensors.Sensor sensor
     property alias text: label.text
-    property bool useSensorColor
+    property color sensorColor
 
     color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 40})
 
     Rectangle {
         anchors.fill: parent
-        color: rect.useSensorColor ? root.colorSource.map[modelData] : Kirigami.Theme.highlightColor
+        color: rect.sensorColor
         opacity: (rect.sensor.value / rect.sensor.maximum)
     }
 
@@ -33,6 +33,4 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
         textFormat: Text.PlainText
     }
-
 }
-
