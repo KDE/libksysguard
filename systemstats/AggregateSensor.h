@@ -65,6 +65,7 @@ public:
     };
 
     using AggregateFunction = std::function<QVariant(SensorIterator, const SensorIterator)>;
+    using FilterFunction = std::function<bool(const SensorProperty *)>;
 
     AggregateSensor(SensorObject *provider, const QString &id, const QString &name);
     AggregateSensor(SensorObject *provider, const QString &id, const QString &name, const QVariant &initialValue);
@@ -79,6 +80,8 @@ public:
     AggregateFunction aggregateFunction() const;
     void setAggregateFunction(const std::function<QVariant(QVariant, QVariant)> &function);
     void setAggregateFunction(const AggregateFunction &function);
+    FilterFunction filterFunction() const;
+    void setFilterFunction(const FilterFunction &function);
 
     void addSensor(SensorProperty *sensor);
     void removeSensor(const QString &sensorPath);

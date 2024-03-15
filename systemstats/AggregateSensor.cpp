@@ -72,6 +72,7 @@ public:
     SensorContainer *subsystem = nullptr;
 
     AggregateFunction aggregateFunction;
+    FilterFunction filterFunction;
 };
 
 QVariant AggregateSensor::SensorIterator::operator*() const
@@ -117,6 +118,10 @@ AggregateSensor::AggregateSensor(SensorObject *provider, const QString &id, cons
     setAggregateFunction(addVariants);
     connect(d->subsystem, &SensorContainer::objectAdded, this, &AggregateSensor::updateSensors);
     connect(d->subsystem, &SensorContainer::objectRemoved, this, &AggregateSensor::updateSensors);
+
+    d->filterFunction = [](const SensorProperty *) {
+        return true;
+    };
 }
 
 AggregateSensor::~AggregateSensor() = default;
@@ -227,6 +232,10 @@ void AggregateSensor::addSensor(SensorProperty *sensor)
         return;
     }
 
+    if (!d->filterFunction(sensor)) {
+        return;
+    }
+
     if (isSubscribed()) {
         sensor->subscribe();
     }
@@ -262,6 +271,12 @@ void AggregateSensor::updateSensors()
         if (!itr.value()) {
             itr = d->sensors.erase(itr);
         } else if (itr.value()->parent() && itr.value()->parent()->parent() != d->subsystem) {
+            itr.value()->disconnect(this);
+            if (isSubscribed()) {
+                itr.value()->unsubscribe();
+            }
+            itr = d->sensors.erase(itr);
+        } else if (!d->filterFunction(itr.value())) {
             itr.value()->disconnect(this);
             if (isSubscribed()) {
                 itr.value()->unsubscribe();
