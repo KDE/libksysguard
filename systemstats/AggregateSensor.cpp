@@ -71,7 +71,7 @@ public:
     int dataCompressionDuration = 100;
     SensorContainer *subsystem = nullptr;
 
-    std::function<QVariant(AggregateSensor::SensorIterator, const AggregateSensor::SensorIterator)> aggregateFunction;
+    AggregateFunction aggregateFunction;
 };
 
 QVariant AggregateSensor::SensorIterator::operator*() const
@@ -185,7 +185,7 @@ void AggregateSensor::setMatchSensors(const QRegularExpression &objectIds, const
     updateSensors();
 }
 
-std::function<QVariant(AggregateSensor::SensorIterator, AggregateSensor::SensorIterator)> AggregateSensor::aggregateFunction() const
+AggregateSensor::AggregateFunction AggregateSensor::aggregateFunction() const
 {
     return d->aggregateFunction;
 }
@@ -205,9 +205,20 @@ void AggregateSensor::setAggregateFunction(const std::function<QVariant(QVariant
     d->aggregateFunction = aggregateFunction;
 }
 
-void AggregateSensor::setAggregateFunction(const std::function<QVariant(SensorIterator, const SensorIterator)> &newAggregateFunction)
+void AggregateSensor::setAggregateFunction(const AggregateFunction &newAggregateFunction)
 {
     d->aggregateFunction = newAggregateFunction;
+}
+
+AggregateSensor::FilterFunction AggregateSensor::filterFunction() const
+{
+    return d->filterFunction;
+}
+
+void AggregateSensor::setFilterFunction(const FilterFunction &function)
+{
+    d->filterFunction = function;
+    updateSensors();
 }
 
 void AggregateSensor::addSensor(SensorProperty *sensor)
