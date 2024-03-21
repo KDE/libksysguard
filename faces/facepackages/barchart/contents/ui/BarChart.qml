@@ -29,6 +29,8 @@ Charts.BarChart {
 
     property var controller
 
+    orientation: controller.faceConfiguration.horizontalBars ? Charts.BarChart.HorizontalOrientation : Charts.BarChart.VerticalOrientation
+
     stacked: controller.faceConfiguration.barChartStacked
 
     spacing: Math.floor(Kirigami.Units.smallSpacing / 2)

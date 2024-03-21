@@ -25,6 +25,7 @@ Faces.SensorFace {
 
     readonly property bool showLegend: controller.faceConfiguration.showLegend
     readonly property bool showGridLines: root.controller.faceConfiguration.showGridLines
+    readonly property bool horizontalBars: root.controller.faceConfiguration.horizontalBars
     readonly property bool showYAxisLabels: root.controller.faceConfiguration.showYAxisLabels
 
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
@@ -96,7 +97,7 @@ Faces.SensorFace {
                 ChartsControls.GridLines {
                     id: horizontalLines
                     visible: showGridLines
-                    direction: ChartsControls.GridLines.Vertical
+                    direction: horizontalBars ? ChartsControls.GridLines.Horizontal : ChartsControls.GridLines.Vertical
                     anchors.fill: compactRepresentation
                     z: compactRepresentation.z - 1
                     chart: compactRepresentation

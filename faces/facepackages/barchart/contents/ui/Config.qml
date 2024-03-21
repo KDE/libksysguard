@@ -20,6 +20,7 @@ Kirigami.FormLayout {
     property alias cfg_showLegend: showSensorsLegendCheckbox.checked
     property alias cfg_barChartStacked: stackedCheckbox.checked
     property alias cfg_showGridLines: showGridLinesCheckBox.checked
+    property alias cfg_horizontalBars: horizontalBarsRadio.checked
     property alias cfg_showYAxisLabels: showYAxisLabelsCheckbox.checked
 
     property alias cfg_rangeAuto: rangeAutoCheckbox.checked
@@ -31,6 +32,7 @@ Kirigami.FormLayout {
     property alias cfg_rangeToMultiplier: rangeToSpin.multiplier
 
     QQC2.CheckBox {
+        Kirigami.FormData.label: i18nc("General options", "General:")
         id: showSensorsLegendCheckbox
         text: i18n("Show Sensors Legend")
     }
@@ -38,13 +40,38 @@ Kirigami.FormLayout {
         id: stackedCheckbox
         text: i18n("Stacked Bars")
     }
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    QQC2.RadioButton {
+        Kirigami.FormData.label: i18nc("Orientation of bar chart", "Bar Orientation:")
+        id: verticalBarsRadio
+        text: i18nc("@option:radio Vertical option for the bar chart", "Vertical")
+        checked: !cfg_horizontalBars
+    }
+    QQC2.RadioButton {
+        id: horizontalBarsRadio
+        text: i18nc("@option:radio Horizontal option for the bar chart", "Horizontal")
+        onClicked: {
+            showYAxisLabelsCheckbox.checked = false
+        }
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    QQC2.CheckBox {
+        Kirigami.FormData.label: i18nc("Options about axis and label of bar chart", "Axis:")
+        id: showYAxisLabelsCheckbox
+        text: i18n("Show Y Axis Labels")
+        enabled: !horizontalBarsRadio.checked
+    }
     QQC2.CheckBox {
         id: showGridLinesCheckBox
         text: i18n("Show Grid Lines")
-    }
-    QQC2.CheckBox {
-        id: showYAxisLabelsCheckbox
-        text: i18n("Show Y Axis Labels")
     }
     QQC2.CheckBox {
         id: rangeAutoCheckbox

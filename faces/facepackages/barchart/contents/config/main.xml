@@ -39,6 +39,9 @@
         <entry name="rangeAuto" type="Bool">
             <default>true</default>
         </entry>
+        <entry name="horizontalBars" type="Bool">
+            <default>false</default>
+        </entry>
     </group>
 
 </kcfg>
