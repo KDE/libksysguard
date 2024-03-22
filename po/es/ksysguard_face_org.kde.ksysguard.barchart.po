@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-08-07 00:17+0000\n"
+"POT-Creation-Date: 2024-03-22 00:39+0000\n"
 "PO-Revision-Date: 2020-07-25 20:08+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -21,35 +21,65 @@ msgstr ""
 
 #: contents/ui/Config.qml:35
 #, kde-format
+msgctxt "General options"
+msgid "General:"
+msgstr ""
+
+#: contents/ui/Config.qml:37
+#, kde-format
 msgid "Show Sensors Legend"
 msgstr "Mostrar la leyenda de los sensores"
 
-#: contents/ui/Config.qml:39
+#: contents/ui/Config.qml:41
 #, kde-format
 msgid "Stacked Bars"
 msgstr "Barras apiladas"
 
-#: contents/ui/Config.qml:43
+#: contents/ui/Config.qml:49
 #, kde-format
-msgid "Show Grid Lines"
-msgstr "Mostrar líneas de cuadrícula"
+msgctxt "Orientation of bar chart"
+msgid "Bar Orientation:"
+msgstr ""
 
-#: contents/ui/Config.qml:47
+#: contents/ui/Config.qml:51
+#, kde-format
+msgctxt "@option:radio Vertical option for the bar chart"
+msgid "Vertical"
+msgstr ""
+
+#: contents/ui/Config.qml:56
+#, kde-format
+msgctxt "@option:radio Horizontal option for the bar chart"
+msgid "Horizontal"
+msgstr ""
+
+#: contents/ui/Config.qml:67
+#, kde-format
+msgctxt "Options about axis and label of bar chart"
+msgid "Axis:"
+msgstr ""
+
+#: contents/ui/Config.qml:69
 #, kde-format
 msgid "Show Y Axis Labels"
 msgstr "Mostrar etiquetas del eje Y"
 
-#: contents/ui/Config.qml:51
+#: contents/ui/Config.qml:74
+#, kde-format
+msgid "Show Grid Lines"
+msgstr "Mostrar líneas de cuadrícula"
+
+#: contents/ui/Config.qml:78
 #, kde-format
 msgid "Automatic Data Range"
 msgstr "Intervalo de datos automático"
 
-#: contents/ui/Config.qml:55
+#: contents/ui/Config.qml:82
 #, kde-format
 msgid "From:"
 msgstr "Desde:"
 
-#: contents/ui/Config.qml:62
+#: contents/ui/Config.qml:89
 #, kde-format
 msgid "To:"
 msgstr "Hasta:"

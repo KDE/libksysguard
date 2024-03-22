@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-12 00:38+0000\n"
+"POT-Creation-Date: 2024-03-22 00:39+0000\n"
 "PO-Revision-Date: 2022-12-31 16:13+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -96,44 +96,74 @@ msgid "Text-Only Sensors"
 msgstr "Text-Only Sensors"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
+#, kde-format
+msgctxt "General options"
+msgid "General:"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
 #, kde-format
 msgid "Show Sensors Legend"
 msgstr "Show Sensors Legend"
 
-#: facepackages/barchart/contents/ui/Config.qml:39
+#: facepackages/barchart/contents/ui/Config.qml:41
 #, kde-format
 msgid "Stacked Bars"
 msgstr "Stacked Bars"
 
-#: facepackages/barchart/contents/ui/Config.qml:43
-#: facepackages/linechart/contents/ui/Config.qml:59
+#: facepackages/barchart/contents/ui/Config.qml:49
 #, kde-format
-msgid "Show Grid Lines"
-msgstr "Show Grid Lines"
+msgctxt "Orientation of bar chart"
+msgid "Bar Orientation:"
+msgstr ""
 
-#: facepackages/barchart/contents/ui/Config.qml:47
+#: facepackages/barchart/contents/ui/Config.qml:51
+#, kde-format
+msgctxt "@option:radio Vertical option for the bar chart"
+msgid "Vertical"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:56
+#, kde-format
+msgctxt "@option:radio Horizontal option for the bar chart"
+msgid "Horizontal"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:67
+#, kde-format
+msgctxt "Options about axis and label of bar chart"
+msgid "Axis:"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
 #, kde-format
 msgid "Show Y Axis Labels"
 msgstr "Show Y Axis Labels"
 
-#: facepackages/barchart/contents/ui/Config.qml:51
+#: facepackages/barchart/contents/ui/Config.qml:74
+#: facepackages/linechart/contents/ui/Config.qml:59
+#, kde-format
+msgid "Show Grid Lines"
+msgstr "Show Grid Lines"
+
+#: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
 #, kde-format
 msgid "Automatic Data Range"
 msgstr "Automatic Data Range"
 
-#: facepackages/barchart/contents/ui/Config.qml:55
+#: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
 #, kde-format
 msgid "From:"
 msgstr "From:"
 
-#: facepackages/barchart/contents/ui/Config.qml:62
+#: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
 #, kde-format

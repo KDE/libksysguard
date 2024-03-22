@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-12 00:38+0000\n"
+"POT-Creation-Date: 2024-03-22 00:39+0000\n"
 "PO-Revision-Date: 2022-10-13 06:50+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -99,44 +99,74 @@ msgid "Text-Only Sensors"
 msgstr "Testu-soileko sentsoreak"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
+#, kde-format
+msgctxt "General options"
+msgid "General:"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
 #, kde-format
 msgid "Show Sensors Legend"
 msgstr "Erakutsi sentsoreen legenda"
 
-#: facepackages/barchart/contents/ui/Config.qml:39
+#: facepackages/barchart/contents/ui/Config.qml:41
 #, kde-format
 msgid "Stacked Bars"
 msgstr "Metatutako barrak"
 
-#: facepackages/barchart/contents/ui/Config.qml:43
-#: facepackages/linechart/contents/ui/Config.qml:59
+#: facepackages/barchart/contents/ui/Config.qml:49
 #, kde-format
-msgid "Show Grid Lines"
-msgstr "Erakutsi sareta-lerroak"
+msgctxt "Orientation of bar chart"
+msgid "Bar Orientation:"
+msgstr ""
 
-#: facepackages/barchart/contents/ui/Config.qml:47
+#: facepackages/barchart/contents/ui/Config.qml:51
+#, kde-format
+msgctxt "@option:radio Vertical option for the bar chart"
+msgid "Vertical"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:56
+#, kde-format
+msgctxt "@option:radio Horizontal option for the bar chart"
+msgid "Horizontal"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:67
+#, kde-format
+msgctxt "Options about axis and label of bar chart"
+msgid "Axis:"
+msgstr ""
+
+#: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
 #, kde-format
 msgid "Show Y Axis Labels"
 msgstr "Erakutsi Y ardatzeko etiketak"
 
-#: facepackages/barchart/contents/ui/Config.qml:51
+#: facepackages/barchart/contents/ui/Config.qml:74
+#: facepackages/linechart/contents/ui/Config.qml:59
+#, kde-format
+msgid "Show Grid Lines"
+msgstr "Erakutsi sareta-lerroak"
+
+#: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
 #, kde-format
 msgid "Automatic Data Range"
 msgstr "Datuen barruti automatikoa"
 
-#: facepackages/barchart/contents/ui/Config.qml:55
+#: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
 #, kde-format
 msgid "From:"
 msgstr "Nondik:"
 
-#: facepackages/barchart/contents/ui/Config.qml:62
+#: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
 #, kde-format
