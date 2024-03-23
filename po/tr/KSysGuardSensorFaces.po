@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 00:39+0000\n"
-"PO-Revision-Date: 2023-07-13 13:10+0300\n"
+"PO-Revision-Date: 2024-03-22 15:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -25,12 +25,12 @@ msgstr "Önayarlar:"
 #: ConfigAppearance.qml:111
 #, kde-format
 msgid "Load Preset..."
-msgstr "Önayar Yükle..."
+msgstr "Önayar Yükle…"
 
 #: ConfigAppearance.qml:116
 #, kde-format
 msgid "Get new presets..."
-msgstr "Yeni önayarlar al..."
+msgstr "Yeni Önayarlar Al…"
 
 #: ConfigAppearance.qml:128
 #, kde-format
@@ -50,17 +50,17 @@ msgstr "Başlığı Göster"
 #: ConfigAppearance.qml:149 facepackages/facegrid/contents/ui/Config.qml:54
 #, kde-format
 msgid "Display Style:"
-msgstr "Görüntüleme Biçemi:"
+msgstr "Görüntüleme biçemi:"
 
 #: ConfigAppearance.qml:169
 #, kde-format
 msgid "Get New Display Styles..."
-msgstr "Yeni Görüntüleme Biçemleri Al..."
+msgstr "Yeni Görüntüleme Biçemleri Al…"
 
 #: ConfigAppearance.qml:179
 #, kde-format
 msgid "Minimum Time Between Updates:"
-msgstr "Güncellemeler Arasındaki En Az Süre:"
+msgstr "Güncellemeler arasındaki en az süre:"
 
 #: ConfigAppearance.qml:188
 #, kde-format
@@ -99,7 +99,7 @@ msgstr "Yalnızca Metin Algılayıcılar"
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr ""
+msgstr "Genel:"
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
@@ -117,25 +117,25 @@ msgstr "Yığılmış Çubuklar"
 #, kde-format
 msgctxt "Orientation of bar chart"
 msgid "Bar Orientation:"
-msgstr ""
+msgstr "Çubuk yönelimi:"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "Dikey"
 
 #: facepackages/barchart/contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "Yatay"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "Eksen:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
@@ -179,7 +179,7 @@ msgstr "Algılayıcı rengi kullan:"
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, kde-format
 msgid "Number of Columns:"
-msgstr "Sütun Sayısı:"
+msgstr "Sütun sayısı:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:37
 #: facepackages/facegrid/contents/ui/Config.qml:42
@@ -206,7 +206,7 @@ msgstr "Pürüzsüz Çizgiler"
 #: facepackages/linechart/contents/ui/Config.qml:67
 #, kde-format
 msgid "Fill Opacity:"
-msgstr "Dolgu Matlığı:"
+msgstr "Dolgu matlığı:"
 
 #: facepackages/linechart/contents/ui/Config.qml:73
 #, kde-format
@@ -231,7 +231,7 @@ msgstr "Nereye (Y):"
 #: facepackages/linechart/contents/ui/Config.qml:99
 #, kde-format
 msgid "Amount of History to Keep:"
-msgstr "Tutulacak Geçmiş Miktarı:"
+msgstr "Tutulacak geçmiş miktarı:"
 
 #: facepackages/linechart/contents/ui/Config.qml:102
 #, kde-format
@@ -244,7 +244,7 @@ msgstr[1] "%1 saniye"
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
 msgid "Start from Angle:"
-msgstr "Başlangıç Açısı:"
+msgstr "Başlangıç açısı:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
 #, kde-format
@@ -262,7 +262,7 @@ msgstr "°"
 #: facepackages/piechart/contents/ui/Config.qml:51
 #, kde-format
 msgid "Total Pie Angle:"
-msgstr "Toplam Pasta Açısı:"
+msgstr "Toplam pasta açısı:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
 #, kde-format
@@ -289,7 +289,7 @@ msgstr "Bir algılayıcı seçmek için tıkla…"
 #: import/Choices.qml:368
 #, kde-format
 msgid "Search..."
-msgstr "Ara..."
+msgstr "Ara…"
 
 #: import/Choices.qml:381
 #, kde-format
