@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 00:39+0000\n"
-"PO-Revision-Date: 2022-10-13 13:44+0200\n"
+"PO-Revision-Date: 2024-03-23 22:49+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -99,7 +99,7 @@ msgstr "Alleen-tekst sensoren"
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr ""
+msgstr "Algemeen:"
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
@@ -117,25 +117,25 @@ msgstr "Gestapelde balken"
 #, kde-format
 msgctxt "Orientation of bar chart"
 msgid "Bar Orientation:"
-msgstr ""
+msgstr "Oriëntatie van balk:"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "Verticaal"
 
 #: facepackages/barchart/contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontaal"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "As:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63

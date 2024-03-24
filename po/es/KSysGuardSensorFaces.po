@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the libksysguard package.
 #
 # Automatically generated, 2020.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 00:39+0000\n"
-"PO-Revision-Date: 2022-10-13 12:31+0200\n"
+"PO-Revision-Date: 2024-03-23 12:10+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -101,7 +101,7 @@ msgstr "Sensores de texto"
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr ""
+msgstr "General:"
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
@@ -119,25 +119,25 @@ msgstr "Barras apiladas"
 #, kde-format
 msgctxt "Orientation of bar chart"
 msgid "Bar Orientation:"
-msgstr ""
+msgstr "Orientación de la barra:"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 #: facepackages/barchart/contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "Eje:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
