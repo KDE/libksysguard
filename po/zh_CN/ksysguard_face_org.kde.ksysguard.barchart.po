@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 00:39+0000\n"
-"PO-Revision-Date: 2024-03-17 20:42\n"
+"PO-Revision-Date: 2024-03-24 18:59\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -22,7 +22,7 @@ msgstr ""
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr ""
+msgstr "常规："
 
 #: contents/ui/Config.qml:37
 #, kde-format
@@ -38,25 +38,25 @@ msgstr "堆叠柱状图"
 #, kde-format
 msgctxt "Orientation of bar chart"
 msgid "Bar Orientation:"
-msgstr ""
+msgstr "图表方向："
 
 #: contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "垂直"
 
 #: contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "水平"
 
 #: contents/ui/Config.qml:67
 #, kde-format
 msgctxt "Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "轴："
 
 #: contents/ui/Config.qml:69
 #, kde-format

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2024-03-17 20:42\n"
+"PO-Revision-Date: 2024-03-24 18:59\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -297,7 +297,7 @@ msgid ""
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "这是此进程自身使用的物理内存总量和它的私有内存使用量的估计值。这不包括已经交"
-"换的内存和它的共享程序库代码大小。"
+"换的内存和它的动态链接库代码大小。"
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -316,8 +316,8 @@ msgid ""
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
-"这是此进程的共享程序库在使用的物理内存总量的估计值。所有使用此程序库的进程都"
-"会共享这部分内存。"
+"这是此进程的动态链接库占用的物理内存总量的估计值。所有使用此动态链接库的进程"
+"都会共享这部分内存。"
 
 #: extended_process_list.cpp:371
 #, kde-format
