@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2024-03-17 20:47\n"
+"PO-Revision-Date: 2024-03-24 19:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -59,7 +59,7 @@ msgstr[0] "结束进程"
 #, kde-format
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill Processes"
-msgstr[0] "强制终止进程"
+msgstr[0] "强制杀死进程"
 
 #: ksysguardprocesslist.cpp:214
 #, kde-format
@@ -89,22 +89,22 @@ msgstr "终止(TERM)"
 #: ksysguardprocesslist.cpp:219
 #, kde-format
 msgid "Kill (KILL)"
-msgstr "终止 (KILL)"
+msgstr "杀死(KILL)"
 
 #: ksysguardprocesslist.cpp:220
 #, kde-format
 msgid "User 1 (USR1)"
-msgstr "用户 1(USR1)"
+msgstr "用户 1 (USR1)"
 
 #: ksysguardprocesslist.cpp:221
 #, kde-format
 msgid "User 2 (USR2)"
-msgstr "用户 2(USR2)"
+msgstr "用户 2 (USR2)"
 
 #: ksysguardprocesslist.cpp:224
 #, kde-format
 msgid "Focus on Quick Search"
-msgstr "快速搜索"
+msgstr "聚焦快速搜索"
 
 #: ksysguardprocesslist.cpp:407
 #, kde-format
@@ -162,32 +162,32 @@ msgstr "混合"
 #: ksysguardprocesslist.cpp:813
 #, kde-format
 msgid "Kilobytes per second"
-msgstr "每秒 KB"
+msgstr "KiB/秒"
 
 #: ksysguardprocesslist.cpp:813
 #, kde-format
 msgid "Kilobytes"
-msgstr "KB"
+msgstr "KiB"
 
 #: ksysguardprocesslist.cpp:819
 #, kde-format
 msgid "Megabytes per second"
-msgstr "每秒 MB"
+msgstr "MiB/秒"
 
 #: ksysguardprocesslist.cpp:819
 #, kde-format
 msgid "Megabytes"
-msgstr "MB"
+msgstr "MiB"
 
 #: ksysguardprocesslist.cpp:825
 #, kde-format
 msgid "Gigabytes per second"
-msgstr "每秒 GB"
+msgstr "GiB/秒"
 
 #: ksysguardprocesslist.cpp:825
 #, kde-format
 msgid "Gigabytes"
-msgstr "GB"
+msgstr "GiB"
 
 #: ksysguardprocesslist.cpp:834
 #, kde-format
@@ -298,19 +298,19 @@ msgid_plural ""
 "<qt>Are you sure you want to <b>immediately and forcibly kill</b> these %1 "
 "processes?  Any unsaved work may be lost"
 msgstr[0] ""
-"<qt>您是否要<b>立即强制终止</b>这 %1 个进程？尚未保存的工作进度可能会丢失。"
+"<qt>您确定要<b>立即强制杀死</b>这 %1 个进程吗？所有尚未保存的工作都会丢失。"
 
 #: ksysguardprocesslist.cpp:1406
 #, kde-format
 msgctxt "Dialog title"
 msgid "Forcibly Kill Process"
 msgid_plural "Forcibly Kill %1 Processes"
-msgstr[0] "强制终止 %1 进程"
+msgstr[0] "强制杀死 %1 个进程"
 
 #: ksysguardprocesslist.cpp:1408
 #, kde-format
 msgid "Kill"
-msgstr "终止"
+msgstr "杀死"
 
 #: processdetails/GeneralTab.cpp:39 processdetails/MemoryMapsTab.cpp:281
 #: processdetails/OpenFilesTab.cpp:276
@@ -559,7 +559,7 @@ msgstr "此进程当前的 CPU 总使用率。"
 msgid ""
 "<qt>The total user and system time that this process has been running for, "
 "displayed as minutes:seconds."
-msgstr "<qt>此进程已经运行的系统和用户时间总计，显示为分钟:秒数。"
+msgstr "<qt>此进程已经运行的系统和用户时间总计，显示为 mm:ss。"
 
 #: ProcessModel.cpp:1079
 #, kde-format
@@ -591,8 +591,8 @@ msgid ""
 "process's shared libraries are using.<br>This memory is shared among all "
 "processes that use this library.</qt>"
 msgstr ""
-"<qt>这大约是此进程的共享库在使用的物理内存总量。<br>所有使用此库的进程都会共"
-"享这部分内存。</qt>"
+"<qt>这大约是此进程的动态链接库在使用的物理内存总量。<br>所有使用此动态链接库"
+"的进程都会共享这部分内存。</qt>"
 
 #: ProcessModel.cpp:1091
 #, kde-format
@@ -631,7 +631,7 @@ msgstr "标识此进程的唯一进程号(UID)。"
 #: ProcessModel.cpp:1103
 #, kde-format
 msgid "The number of bytes read.  See What's This for more information."
-msgstr "读取的字节数。详情请见“这是什么”关联帮助信息。"
+msgstr "读取的字节数。参阅“这是什么”可获取更多信息。"
 
 #: ProcessModel.cpp:1105
 #, kde-format
@@ -1310,13 +1310,13 @@ msgstr "用户名"
 #, kde-format
 msgctxt "process heading"
 msgid "PID"
-msgstr "进程号"
+msgstr "进程号(PID)"
 
 #: ProcessModel.cpp:2184
 #, kde-format
 msgctxt "process heading"
 msgid "TTY"
-msgstr "终端"
+msgstr "终端(TTY)"
 
 #: ProcessModel.cpp:2185
 #, kde-format
@@ -1451,19 +1451,19 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">尝试以发送 SIGTERM 信号的方"
-"式终止当前所选进程。</p>\n"
+"式杀死当前所选进程。</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
 "italic;\">Technical information: </span><br />SIGTERM 信号将被发送到给定进"
 "程，如果权限不足，默认将会请求一个密码。<br />通过 <span style=\" font-"
 "family:'Courier New,courier';\">polkit-kde-authorization</span> 这个程序，您"
-"可以授予指定(或所有)用户不需密码就终止任何进程的权限。</p></body></html>"
+"可以授予指定(或所有)用户不需密码就杀死任何进程的权限。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnKillProcess)
 #: ProcessWidgetUI.ui:42
 #, kde-format
 msgid "&End Process..."
-msgstr "结束进程(&E)…"
+msgstr "结束进程(&E)..."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:58
@@ -1689,7 +1689,7 @@ msgstr ""
 #: ReniceDlgUi.ui:139 ReniceDlgUi.ui:303
 #, kde-format
 msgid "Normal"
-msgstr "正常"
+msgstr "普通"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioBatch)
 #: ReniceDlgUi.ui:149
@@ -1880,7 +1880,7 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">当一个<span style=\" font-"
 "weight:600;\">先进先出(FIFO)</span>进程可运行时，它会立即抢占任何当前已在运行"
-"的<span style=\" font-weight:600;\">正常</span>或<span style=\" font-"
+"的<span style=\" font-weight:600;\">普通</span>或<span style=\" font-"
 "weight:600;\">批处理</span>进程。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioFIFO)
@@ -1945,12 +1945,12 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">正常调度</span></p>\n"
+"weight:600;\">普通调度</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">和<span style=\" font-"
-"weight:600;\">全力</span>式调度基本一样，差别在于进程优先级会根据 CPU 优先级"
+"weight:600;\">尽力</span>式调度基本一样，差别在于进程优先级会根据 CPU 优先级"
 "自动计算生成，优先级越高的进程对磁盘的访问优先级也越高。以相同的<span style="
-"\" font-weight:600;\">全力/正常</span>优先级运行的程序会以<span style=\" "
+"\" font-weight:600;\">尽力/普通</span>优先级运行的程序会以<span style=\" "
 "font-weight:600;\">轮询</span>方式交替运行。</p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioIdle)
@@ -2035,7 +2035,7 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">与正常调度相比，进程会被给"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">与普通调度相比，进程会被给"
 "予更高的对磁盘访问的优先级。</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioBestEffort)
@@ -2064,10 +2064,10 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">全力调度</span></p>\n"
+"weight:600;\">尽力调度</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">优先级越高的进程对磁盘访问"
-"的优先级也越高。以相同的<span style=\" font-weight:600;\">全力/正常</span>优"
+"的优先级也越高。以相同的<span style=\" font-weight:600;\">尽力/普通</span>优"
 "先级运行的程序会以<span style=\" font-weight:600;\">轮询</span>方式交替运行。"
 "</p></body></html>"
 
@@ -2075,7 +2075,7 @@ msgstr ""
 #: ReniceDlgUi.ui:343
 #, kde-format
 msgid "Best effort"
-msgstr "全力"
+msgstr "尽力"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioRealTime)
 #: ReniceDlgUi.ui:353
@@ -2135,7 +2135,7 @@ msgstr ""
 "weight:600;\">实时调度</span>进程会获得对磁盘访问的第一优先级，不管系统中是否"
 "有其他进程在操作。因此您应该小心地使用<span style=\" font-weight:600;\">实时"
 "</span>调度，它会阻塞其他进程对磁盘的操作。当与<span style=\" font-"
-"weight:600;\">全力</span>方式一同使用时，可以定义八种优先级别，以指定每个调度"
+"weight:600;\">尽力</span>方式一同使用时，可以定义八种优先级别，以指定每个调度"
 "窗口中要给予进程多大的时间片。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioRealTime)
@@ -2149,14 +2149,14 @@ msgstr "实时"
 #: ReniceDlgUi.ui:402 ReniceDlgUi.ui:470
 #, kde-format
 msgid "Low Priority"
-msgstr "低优先"
+msgstr "低优先级"
 
 #. i18n: ectx: property (text), widget (QLabel, lblCpuHigh)
 #. i18n: ectx: property (text), widget (QLabel, lblIOHigh)
 #: ReniceDlgUi.ui:409 ReniceDlgUi.ui:477
 #, kde-format
 msgid "High Priority"
-msgstr "高优先"
+msgstr "高优先级"
 
 #: scripting.cpp:243
 #, kde-format
