@@ -1,32 +1,32 @@
+# translation of ksysguard_face_org.kde.ksysguard.piechart.pot to Esperanto
+# Copyright (C) 2024 Free Software Foundation, Inc.
+# This file is distributed under the same license as the libksysguard package.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2024.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-12-09 00:44+0000\n"
-"PO-Revision-Date: 2024-03-28 19:24\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2024-03-28 09:21+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/libksysguard/ksysguard_face_org.kde."
-"ksysguard.piechart.pot\n"
-"X-Crowdin-File-ID: 12268\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: contents/ui/Config.qml:34
 #, kde-format
 msgid "Show Sensors Legend"
-msgstr "显示传感器图例"
+msgstr "Montri sentilajn klarigetojn"
 
 #: contents/ui/Config.qml:38
 #, kde-format
 msgid "Start from Angle:"
-msgstr "起始角度："
+msgstr "Komenci de angulo:"
 
 #: contents/ui/Config.qml:43
 #, kde-format
@@ -43,7 +43,7 @@ msgstr "°"
 #: contents/ui/Config.qml:51
 #, kde-format
 msgid "Total Pie Angle:"
-msgstr "饼状图总角度："
+msgstr "Totala tort-angulo:"
 
 #: contents/ui/Config.qml:56
 #, kde-format
@@ -54,19 +54,19 @@ msgstr "%1°"
 #: contents/ui/Config.qml:64
 #, kde-format
 msgid "Rounded Lines"
-msgstr "圆滑线条"
+msgstr "Rondigitaj linioj"
 
 #: contents/ui/Config.qml:69
 #, kde-format
 msgid "Automatic Data Range"
-msgstr "自动数据范围"
+msgstr "Aŭtomataj datumgamoj"
 
 #: contents/ui/Config.qml:73
 #, kde-format
 msgid "From:"
-msgstr "来源："
+msgstr "De:"
 
 #: contents/ui/Config.qml:80
 #, kde-format
 msgid "To:"
-msgstr "目标："
+msgstr "Al:"
