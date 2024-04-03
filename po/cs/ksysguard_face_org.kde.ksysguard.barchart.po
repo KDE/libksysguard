@@ -21,7 +21,7 @@ msgstr ""
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr ""
+msgstr "Obecné:"
 
 #: contents/ui/Config.qml:37
 #, kde-format

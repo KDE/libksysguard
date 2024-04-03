@@ -100,7 +100,7 @@ msgstr "Pouze textové senzory"
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr ""
+msgstr "Obecné:"
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
