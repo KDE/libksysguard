@@ -5,13 +5,13 @@
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2007.
 # Jure Repinc <jlp@holodeck1.com>, 2007, 2010.
 # Andrej Mernik <andrejm@ubuntu.si>, 2013.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2021.
+# SPDX-FileCopyrightText: 2020, 2021, 2024 Matjaž Jeran <matjaz.jeran@amis.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-03 05:15+0100\n"
+"PO-Revision-Date: 2024-04-03 07:50+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -588,13 +588,13 @@ msgstr "teče"
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
-msgstr "v pripravljenosti"
+msgstr "v spanju"
 
 #: process.cpp:163
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
-msgstr "v pripravljenosti na disku"
+msgstr "v spanju na disku"
 
 #: process.cpp:165
 #, kde-format
