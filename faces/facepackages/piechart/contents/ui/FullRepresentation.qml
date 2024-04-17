@@ -52,9 +52,11 @@ Faces.SensorFace {
                 : 5 * Kirigami.Units.gridUnit
             Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
             updateRateLimit: root.controller.updateRateLimit
+            highlight: legend.highlightedIndex
         }
 
         Faces.ExtendedLegend {
+            id: legend
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: implicitHeight

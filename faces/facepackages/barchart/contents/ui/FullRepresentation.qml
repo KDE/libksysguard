@@ -94,6 +94,8 @@ Faces.SensorFace {
 
                 controller: root.controller
 
+                highlight: legend.highlightedIndex
+
                 ChartsControls.GridLines {
                     id: horizontalLines
                     visible: showGridLines
@@ -112,6 +114,8 @@ Faces.SensorFace {
         }
 
         Faces.ExtendedLegend {
+            id: legend
+
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: implicitHeight

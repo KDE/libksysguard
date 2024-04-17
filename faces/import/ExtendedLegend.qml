@@ -55,6 +55,8 @@ ChartsControls.Legend {
 
     maximumDelegateWidth: Kirigami.Units.gridUnit * 15
 
+    highlightEnabled: sourceModel.sensors.length > 1
+
     formatValue: function(input, index) {
         if (!sourceModel) {
             return input
