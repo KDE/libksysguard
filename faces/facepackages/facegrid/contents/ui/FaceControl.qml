@@ -21,6 +21,7 @@ Control {
     property var sensors: []
     property var sensorNames: []
     property string faceId
+    property bool compact
 
     topPadding: 0
     bottomPadding: 0
@@ -53,8 +54,13 @@ Control {
     }
 
     function updateContentItem() {
-        loader.controller.fullRepresentation.formFactor = Faces.SensorFace.Constrained;
-        control.contentItem = loader.controller.fullRepresentation;
+        if (control.compact) {
+            loader.controller.compactRepresentation.formFactor = Faces.SensorFace.Constrained;
+            control.contentItem = loader.controller.compactRepresentation;
+        } else {
+            loader.controller.fullRepresentation.formFactor = Faces.SensorFace.Constrained;
+            control.contentItem = loader.controller.fullRepresentation;
+        }
     }
 
     Connections {

@@ -20,6 +20,8 @@ import org.kde.quickcharts.controls as ChartControls
 
 Faces.SensorFace {
     id: root
+    Layout.minimumWidth: Kirigami.Units.gridUnit
+    Layout.minimumHeight: Kirigami.Units.gridUnit
     contentItem: ColumnLayout {
         LineChart {
             Layout.fillWidth: true
