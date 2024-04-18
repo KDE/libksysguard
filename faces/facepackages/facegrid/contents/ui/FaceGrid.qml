@@ -19,6 +19,7 @@ GridLayout {
 
     property int columnCount
     property int autoColumnCount
+    property bool compact
 
     readonly property real preferredWidth: titleMetrics.width
 
@@ -55,7 +56,7 @@ GridLayout {
             Layout.fillHeight: true
             Layout.preferredWidth: 0
             Layout.preferredHeight: 0
-
+            compact: grid.compact
             controller: root.controller
             sensors: [modelData]
             faceId: root.controller.faceConfiguration.faceId

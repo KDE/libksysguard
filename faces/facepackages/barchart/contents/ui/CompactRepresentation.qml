@@ -21,7 +21,9 @@ import org.kde.quickcharts.controls as ChartControls
 
 Faces.SensorFace {
     id: root
-    Layout.minimumWidth: formFactor == Faces.SensorFace.Horizontal ? Kirigami.Units.gridUnit / 2 * barChart.barCount : 1
+    Layout.minimumWidth: Kirigami.Units.gridUnit
+    Layout.minimumHeight: Kirigami.Units.gridUnit
+
     contentItem: ColumnLayout {
         BarChart {
             id: barChart
