@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 00:39+0000\n"
-"PO-Revision-Date: 2024-04-20 08:00+0300\n"
+"PO-Revision-Date: 2024-04-24 08:44+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,52 +16,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
 msgid "Presets:"
-msgstr ""
+msgstr "ערכות:"
 
 #: ConfigAppearance.qml:111
 #, kde-format
 msgid "Load Preset..."
-msgstr ""
+msgstr "טעינת ערכה…"
 
 #: ConfigAppearance.qml:116
 #, kde-format
 msgid "Get new presets..."
-msgstr ""
+msgstr "משיכת ערכות חדשות…"
 
 #: ConfigAppearance.qml:128
 #, kde-format
 msgid "Save Settings As Preset"
-msgstr ""
+msgstr "שמירת ההגדרות כערכה"
 
 #: ConfigAppearance.qml:138
 #, kde-format
 msgid "Title:"
-msgstr ""
+msgstr "כותרת:"
 
 #: ConfigAppearance.qml:144
 #, kde-format
 msgid "Show Title"
-msgstr ""
+msgstr "הצגת כותרת"
 
 #: ConfigAppearance.qml:149 facepackages/facegrid/contents/ui/Config.qml:54
 #, kde-format
 msgid "Display Style:"
-msgstr ""
+msgstr "סגנון תצוגה:"
 
 #: ConfigAppearance.qml:169
 #, kde-format
 msgid "Get New Display Styles..."
-msgstr ""
+msgstr "הורדת סגנונות תצוגה חדשים..."
 
 #: ConfigAppearance.qml:179
 #, kde-format
 msgid "Minimum Time Between Updates:"
-msgstr ""
+msgstr "הזמן המזערי בין עדכונים:"
 
 #: ConfigAppearance.qml:188
 #, kde-format
@@ -83,10 +83,10 @@ msgstr "%1 שניות"
 #, kde-format
 msgid "Total Sensor"
 msgid_plural "Total Sensors"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "סך הכול לחיישן"
+msgstr[1] "סך הכול לחיישנים"
+msgstr[2] "סך הכול לחיישנים"
+msgstr[3] "סך הכול לחיישנים"
 
 #: ConfigSensors.qml:150
 #, kde-format
@@ -241,10 +241,10 @@ msgstr "כמות ההיסטוריה לשימור:"
 msgctxt "%1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "שנייה"
+msgstr[1] "שתי שניות"
+msgstr[2] "%1 שניות"
+msgstr[3] "%1 שניות"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
