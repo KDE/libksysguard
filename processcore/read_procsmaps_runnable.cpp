@@ -28,7 +28,7 @@ void ReadProcSmapsRunnable::run()
     auto buffer = QByteArray{1024, '\0'};
     while (file.readLine(buffer.data(), buffer.size()) > 0) {
         if (buffer.startsWith("Pss:")) {
-            pss += std::stoll(buffer.mid(sizeof("Pss:") + 1).toStdString());
+            pss += std::stoll(buffer.mid(sizeof("Pss:")).toStdString());
             break;
         }
     }
