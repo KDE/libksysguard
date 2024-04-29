@@ -1,8 +1,9 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-add_library(FormatterPlugin SHARED FormatterPlugin.cpp FormatterPlugin.h FormatterWrapper.cpp FormatterWrapper.h)
+ecm_add_qml_module(FormatterPlugin URI "org.kde.ksysguard.formatter" VERSION 1.0)
 
-target_link_libraries(FormatterPlugin Qt::Qml KSysGuard::Formatter)
+target_sources(FormatterPlugin PRIVATE FormatterPlugin.cpp FormatterPlugin.h FormatterWrapper.cpp FormatterWrapper.h)
 
-install(TARGETS FormatterPlugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/formatter)
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/formatter)
+target_link_libraries(FormatterPlugin PRIVATE Qt::Qml KSysGuard::Formatter)
+
+ecm_finalize_qml_module(FormatterPlugin)

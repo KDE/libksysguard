@@ -1,8 +1,9 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-add_library(SensorsPlugin SHARED SensorsPlugin.cpp SensorsPlugin.h)
+ecm_add_qml_module(SensorsPlugin URI "org.kde.ksysguard.sensors" VERSION 1.0)
 
-target_link_libraries(SensorsPlugin Qt::Qml KSysGuard::Sensors)
+target_sources(SensorsPlugin PRIVATE SensorsPlugin.cpp SensorsPlugin.h)
 
-install(TARGETS SensorsPlugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/sensors)
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/sensors)
+target_link_libraries(SensorsPlugin PRIVATE Qt::Qml KSysGuard::Sensors)
+
+ecm_finalize_qml_module(SensorsPlugin)
