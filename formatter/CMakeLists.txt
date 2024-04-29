@@ -4,11 +4,13 @@ set(Formatter_SOVERSION 2)
 set(formatter_SRCS
     Formatter.cpp
     Unit.cpp
+    FormatterWrapper.cpp
 )
 
 set(formatter_HDRS
     Formatter.h
     Unit.h
+    FormatterWrapper.h
 )
 
 ecm_qt_declare_logging_category(formatter_SRCS
@@ -21,10 +23,15 @@ ecm_qt_declare_logging_category(formatter_SRCS
 add_library(Formatter ${formatter_SRCS} ${formatter_HDRS})
 add_library(KSysGuard::Formatter ALIAS Formatter)
 
+ecm_add_qml_module(Formatter URI "org.kde.ksysguard.formatter" VERSION 1.0 GENERATE_PLUGIN_SOURCE)
+
+ecm_finalize_qml_module(Formatter)
+
 target_link_libraries(Formatter
     PUBLIC
     Qt::Core
     Qt::Gui
+    Qt::Qml
     PRIVATE
     KF6::CoreAddons
     KF6::I18n
@@ -45,8 +52,6 @@ set_target_properties(Formatter PROPERTIES
 )
 
 target_compile_definitions(Formatter PRIVATE -DTRANSLATION_DOMAIN=\"KSysGuardFormatter\")
-
-add_subdirectory(declarative)
 
 install(TARGETS Formatter EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 

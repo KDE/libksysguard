@@ -12,6 +12,7 @@
 #include <QDateTime>
 #include <QQmlParserStatus>
 #include <memory>
+#include <qqmlregistration.h>
 
 namespace KSysGuard
 {
@@ -27,6 +28,7 @@ class SensorInfo;
 class SENSORS_EXPORT SensorDataModel : public QAbstractTableModel, public QQmlParserStatus
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_INTERFACES(QQmlParserStatus)
 
     /**

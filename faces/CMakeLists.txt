@@ -2,7 +2,6 @@ set(KSYSGUARD_SENSORS_SOVERSION 2)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"KSysGuardSensorFaces\")
 
-add_subdirectory(import)
 add_subdirectory(facepackages)
 add_subdirectory(packagestructure)
 
@@ -29,6 +28,34 @@ set_source_files_properties(org.kde.KSysGuardDaemon.xml PROPERTIES INCLUDE Senso
 
 add_library(SensorFaces ${faces_LIB_SRCS} ${faces_LIB_HEADERS})
 add_library(KSysGuard::SensorFaces ALIAS SensorFaces)
+
+ecm_add_qml_module(SensorFaces URI "org.kde.ksysguard.faces"
+    VERSION 1.0
+    GENERATE_PLUGIN_SOURCE
+    DEPENDENCIES
+    "QtCore"
+    "QtQuick"
+    "org.kde.config"
+)
+
+ecm_target_qml_sources(SensorFaces SOURCES
+    import/ExtendedLegend.qml
+    import/SensorFace.qml
+    import/SensorRangeSpinBox.qml
+    import/Choices.qml
+    import/CompactSensorFace.qml
+)
+
+ecm_finalize_qml_module(SensorFaces)
+
+ecm_add_qml_module(SensorFacesPrivate URI "org.kde.ksysguard.faces.private"
+    VERSION 1.0
+    GENERATE_PLUGIN_SOURCE
+)
+
+target_sources(SensorFacesPrivate PRIVATE private_types.h)
+
+ecm_finalize_qml_module(SensorFacesPrivate)
 
 target_include_directories(SensorFaces
     PUBLIC

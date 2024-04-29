@@ -29,6 +29,7 @@ class SensorFaceController;
 class SENSORFACES_EXPORT SensorFace : public QQuickItem
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(AbstractSensorFace)
     /**
      * The controller that instantiated this face and is responsible for it. Contains information
      * about the sensors that should be displayed and the configuration of the face

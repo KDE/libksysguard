@@ -13,6 +13,7 @@
 #include <QQmlParserStatus>
 #include <QString>
 #include <QVariant>
+#include <qqmlregistration.h>
 
 #include "formatter/Unit.h"
 
@@ -33,6 +34,7 @@ class SensorQuery;
 class SENSORS_EXPORT Sensor : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_INTERFACES(QQmlParserStatus)
 
     /**
