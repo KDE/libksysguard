@@ -31,6 +31,7 @@ namespace KSysGuard
 class SENSORFACES_EXPORT FaceLoader : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_INTERFACES(QQmlParserStatus)
     /**
      * The parent SensorFaceController that will be used for configuration storage.

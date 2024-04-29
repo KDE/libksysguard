@@ -6,7 +6,9 @@
 
 #pragma once
 
+#include <QFont>
 #include <QObject>
+#include <QVariant>
 
 #include "Unit.h"
 
@@ -27,6 +29,8 @@ namespace KSysGuard
 class FormatterWrapper : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Formatter)
+    QML_SINGLETON
 
 public:
     Q_INVOKABLE QString formatValue(const QVariant &value, KSysGuard::Unit unit, KSysGuard::MetricPrefix targetPrefix = MetricPrefixAutoAdjust);

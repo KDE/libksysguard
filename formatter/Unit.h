@@ -8,12 +8,13 @@
 
 // Qt
 #include <QMetaType>
+#include <qqmlregistration.h>
 
 #include "formatter_export.h"
 
 namespace KSysGuard
 {
-FORMATTER_EXPORT Q_NAMESPACE
+FORMATTER_EXPORT Q_NAMESPACE QML_NAMED_ELEMENT(Units)
 
     /**
      * This enum type is used to specify metric prefixes.

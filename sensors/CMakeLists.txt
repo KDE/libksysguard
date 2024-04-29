@@ -1,7 +1,5 @@
 set(KSYSGUARD_SENSORS_SOVERSION 2)
 
-add_subdirectory(declarative)
-
 add_definitions(-DTRANSLATION_DOMAIN=\"ksysguard_sensors\")
 
 set(sensors_LIB_SRCS
@@ -35,6 +33,9 @@ qt_add_dbus_interface(sensors_LIB_SRCS org.kde.KSysGuardDaemon.xml ksysguarddaem
 
 add_library(Sensors ${sensors_LIB_SRCS})
 add_library(KSysGuard::Sensors ALIAS Sensors)
+
+ecm_add_qml_module(Sensors URI "org.kde.ksysguard.sensors" VERSION 1.0 GENERATE_PLUGIN_SOURCE DEPENDENCIES QtCore)
+ecm_finalize_qml_module(Sensors)
 
 target_include_directories(Sensors
     PUBLIC

@@ -41,6 +41,8 @@ class SensorFaceControllerPrivate;
 class SENSORFACES_EXPORT SensorFaceController : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("It's not possible to create objects of type SensorFaceController")
     /**
      * A title for the face.
      * @see showTitle

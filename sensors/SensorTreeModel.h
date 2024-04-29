@@ -10,6 +10,7 @@
 #include "sensors_export.h"
 #include <QAbstractItemModel>
 #include <memory>
+#include <qqmlregistration.h>
 
 namespace KSysGuard
 {
@@ -26,6 +27,7 @@ class SensorInfo;
 class SENSORS_EXPORT SensorTreeModel : public QAbstractItemModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     enum AdditionalRoles {

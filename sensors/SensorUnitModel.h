@@ -9,6 +9,7 @@
 #include <memory>
 
 #include <QAbstractListModel>
+#include <qqmlregistration.h>
 
 #include "sensors_export.h"
 
@@ -36,6 +37,7 @@ class SensorInfo;
 class SENSORS_EXPORT SensorUnitModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
     /**
      * The list of sensors to list units for.
      */
