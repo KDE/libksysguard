@@ -1,8 +1,9 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-add_library(ProcessPlugin SHARED ProcessPlugin.cpp ProcessPlugin.h ProcessEnums.cpp ProcessEnums.h)
+ecm_add_qml_module(ProcessPlugin URI "org.kde.ksysguard.process" VERSION 1.0)
 
-target_link_libraries(ProcessPlugin Qt::Qml KSysGuard::ProcessCore)
+target_sources(ProcessPlugin PRIVATE ProcessPlugin.cpp ProcessPlugin.h ProcessEnums.cpp ProcessEnums.h)
 
-install(TARGETS ProcessPlugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/process)
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/process)
+target_link_libraries(ProcessPlugin PRIVATE Qt::Qml KSysGuard::ProcessCore)
+
+ecm_finalize_qml_module(ProcessPlugin)

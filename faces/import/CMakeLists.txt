@@ -1,16 +1,17 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-add_library(FacesPlugin SHARED FacesPlugin.cpp FacesPlugin.h)
+ecm_add_qml_module(FacesPlugin URI "org.kde.ksysguard.faces" VERSION 1.0)
 
-target_link_libraries(FacesPlugin Qt::Qml KSysGuard::Sensors KSysGuard::SensorFaces  KF6::Package KF6::ConfigCore KF6::ConfigGui  KF6::ConfigQml)
+target_sources(FacesPlugin PRIVATE FacesPlugin.cpp FacesPlugin.h)
 
-install(TARGETS FacesPlugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/faces)
-install(FILES
-    qmldir
+ecm_target_qml_sources(FacesPlugin SOURCES
     ExtendedLegend.qml
     SensorFace.qml
     SensorRangeSpinBox.qml
     Choices.qml
     CompactSensorFace.qml
-    DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/faces
 )
+
+target_link_libraries(FacesPlugin PRIVATE Qt::Qml KSysGuard::Sensors KSysGuard::SensorFaces  KF6::Package KF6::ConfigCore KF6::ConfigGui  KF6::ConfigQml)
+
+ecm_finalize_qml_module(FacesPlugin)

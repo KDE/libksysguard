@@ -24,6 +24,7 @@ include(ECMInstallIcons)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
+include(ECMQmlModule)
 
 include(CMakePackageConfigHelpers)
 include(CheckIncludeFiles)

@@ -1,2 +1,0 @@
-module org.kde.ksysguard.process
-plugin ProcessPlugin
