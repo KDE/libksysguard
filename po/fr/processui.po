@@ -8,7 +8,7 @@
 # Mickaël Sibelle <kimael@gmail.com>, 2009.
 # Guillaume Pujol <guill.p@gmail.com>, 2010.
 # Sébastien Renard <renard@kde.org>, 2011.
-# Xavier Besnard <xavier.besnard@kde.org>, 2013, 2020, 2022.
+# SPDX-FileCopyrightText: 2013, 2020, 2022, 2024 Xavier Besnard <xavier.besnard@kde.org>
 # Vincent Pinon <vpinon@kde.org>, 2016, 2017.
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
 #
@@ -17,9 +17,9 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2022-09-24 21:45+0200\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2024-05-02 15:44+0200\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -259,8 +259,8 @@ msgid ""
 "You do not have the permission to renice the process and there was a problem "
 "trying to run as root."
 msgstr ""
-"Vous n'avez pas les droits pour « renice » le processus et la tentative en "
-"tant que superutilisateur a échoué."
+"Vous n'avez pas les privilèges pour  le processus « renice ». La tentative "
+"en mode administrateur a échoué."
 
 #: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
@@ -273,8 +273,8 @@ msgid ""
 "You do not have the permission to change the I/O priority of the process and "
 "there was a problem trying to run as root."
 msgstr ""
-"Vous n'avez pas les droits pour régler la priorité des entrées / sorties du "
-"processus et la tentative en tant que superutilisateur a échoué."
+"Vous n'avez pas les privilèges pour régler la priorité des entrées / sorties "
+"du processus. La tentative en mode administrateur a échoué."
 
 #: ksysguardprocesslist.cpp:1344
 #, kde-format
@@ -282,8 +282,8 @@ msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
 "and there was a problem trying to run as root."
 msgstr ""
-"Vous n'avez pas les droits pour modifier l'ordonnanceur du processeur pour "
-"ce processus et la tentative en tant que superutilisateur a échoué."
+"Vous n'avez pas les privilèges pour modifier l'ordonnanceur du processeur "
+"pour ce processus. La tentative en mode administrateur a échoué."
 
 #: ksysguardprocesslist.cpp:1359
 #, kde-format
@@ -291,8 +291,8 @@ msgid ""
 "You do not have the permission to kill the process and there was a problem "
 "trying to run as root."
 msgstr ""
-"Vous n'avez pas les droits pour tuer le processus et la tentative en tant "
-"que superutilisateur a échoué."
+"Vous n'avez pas les privilèges pour tuer le processus. La tentative en mode "
+"administrateur a échoué."
 
 #: ksysguardprocesslist.cpp:1396
 #, kde-format
