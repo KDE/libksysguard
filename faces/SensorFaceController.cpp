@@ -332,7 +332,9 @@ SensorFace *SensorFaceControllerPrivate::createGui(const QString &qmlPath)
 
 QQuickItem *SensorFaceControllerPrivate::createConfigUi(const QString &file, const QVariantMap &initialProperties)
 {
-    QQmlComponent *component = new QQmlComponent(engine, file, nullptr);
+    // Ensure we don't re-use the Plasma Theme coloring, BUG:483689
+    auto configEngine = new QQmlEngine(engine);
+    QQmlComponent *component = new QQmlComponent(configEngine, file, nullptr);
     // TODO: eventually support async  components? (only useful for qml files from http, we probably don't want that)
     if (component->status() != QQmlComponent::Ready) {
         qCritical() << "Error creating component:";
@@ -343,7 +345,7 @@ QQuickItem *SensorFaceControllerPrivate::createConfigUi(const QString &file, con
         return nullptr;
     }
 
-    QQmlContext *context = new QQmlContext(engine);
+    QQmlContext *context = new QQmlContext(configEngine);
     context->setContextObject(contextObj);
     QObject *guiObject = component->createWithInitialProperties(initialProperties, context);
     QQuickItem *gui = qobject_cast<QQuickItem *>(guiObject);
