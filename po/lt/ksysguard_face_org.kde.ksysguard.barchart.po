@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 00:39+0000\n"
-"PO-Revision-Date: 2021-08-26 13:52+0300\n"
+"PO-Revision-Date: 2024-05-08 23:16+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: contents/ui/Config.qml:35
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr ""
+msgstr "Bendra:"
 
 #: contents/ui/Config.qml:37
 #, kde-format
@@ -39,25 +39,25 @@ msgstr "Sudurtinės juostos"
 #, kde-format
 msgctxt "Orientation of bar chart"
 msgid "Bar Orientation:"
-msgstr ""
+msgstr "Juostos orientacija:"
 
 #: contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikali"
 
 #: contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontali"
 
 #: contents/ui/Config.qml:67
 #, kde-format
 msgctxt "Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "Ašis:"
 
 #: contents/ui/Config.qml:69
 #, kde-format
