@@ -29,12 +29,12 @@ msgstr "Valors predefinits:"
 #: ConfigAppearance.qml:111
 #, kde-format
 msgid "Load Preset..."
-msgstr "Carrega els valors predeterminats..."
+msgstr "Carrega els valors predeterminats…"
 
 #: ConfigAppearance.qml:116
 #, kde-format
 msgid "Get new presets..."
-msgstr "Obtín valors predeterminats nous..."
+msgstr "Obtín valors predeterminats nous…"
 
 #: ConfigAppearance.qml:128
 #, kde-format
@@ -59,7 +59,7 @@ msgstr "Estil de la vista:"
 #: ConfigAppearance.qml:169
 #, kde-format
 msgid "Get New Display Styles..."
-msgstr "Obtín estils de vista nous..."
+msgstr "Obtín estils de vista nous…"
 
 #: ConfigAppearance.qml:179
 #, kde-format
@@ -260,7 +260,7 @@ msgstr "Feu clic per a seleccionar un sensor…"
 #: import/Choices.qml:368
 #, kde-format
 msgid "Search..."
-msgstr "Busca..."
+msgstr "Busca…"
 
 #: import/Choices.qml:381
 #, kde-format

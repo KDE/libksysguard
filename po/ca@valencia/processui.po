@@ -25,8 +25,8 @@ msgstr ""
 #, kde-format
 msgid "Set Priority..."
 msgid_plural "Set Priority..."
-msgstr[0] "Establix la prioritat..."
-msgstr[1] "Establix les prioritats..."
+msgstr[0] "Establix la prioritat…"
+msgstr[1] "Establix les prioritats…"
 
 #: ksysguardprocesslist.cpp:201 ksysguardprocesslist.cpp:639
 #, kde-format
@@ -47,7 +47,7 @@ msgstr "Mostra la finestra de l'aplicació"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detailed Information..."
-msgstr "Informació detallada..."
+msgstr "Informació detallada…"
 
 #: ksysguardprocesslist.cpp:206
 #, kde-format
@@ -869,8 +869,8 @@ msgid ""
 "_NET_WM_PID is used to map the window to a PID.  If a process' windows are "
 "not shown, then that application incorrectly is not setting _NET_WM_PID."
 msgstr ""
-"<qt><i>Informació tècnica: </i>Per a cada finestra de l'X11, s'utilitza la "
-"propietat _NET_WM_PID de l'X11 per a mapar la finestra a un PID. Si no es "
+"<qt><i>Informació tècnica: </i>Per a cada finestra de X11, s'utilitza la "
+"propietat _NET_WM_PID de X11 per a mapar la finestra a un PID. Si no es "
 "visualitza una finestra del procés, llavors l'aplicació no pot informar "
 "correctament _NET_WM_PID."
 
@@ -1503,7 +1503,7 @@ msgstr "Ordre"
 #, kde-format
 msgctxt "process heading"
 msgid "X11 Memory"
-msgstr "Memòria de l'X11"
+msgstr "Memòria de X11"
 
 #: ProcessModel.cpp:2200
 #, kde-format
@@ -1580,7 +1580,7 @@ msgstr ""
 #: ProcessWidgetUI.ui:42
 #, kde-format
 msgid "&End Process..."
-msgstr "&Finalitza el procés..."
+msgstr "&Finalitza el procés…"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:58
