@@ -337,8 +337,6 @@ SensorFace *SensorFaceControllerPrivate::createGui(const QString &qmlPath)
 
 QQuickItem *SensorFaceControllerPrivate::createConfigUi(const QString &file, const QVariantMap &initialProperties)
 {
-    // Ensure we don't re-use the Plasma Theme coloring, BUG:483689
-    auto configEngine = new QQmlEngine(engine);
     QQmlComponent *component = new QQmlComponent(configEngine, file, nullptr);
     // TODO: eventually support async  components? (only useful for qml files from http, we probably don't want that)
     if (component->status() != QQmlComponent::Ready) {
@@ -363,7 +361,7 @@ QQuickItem *SensorFaceControllerPrivate::createConfigUi(const QString &file, con
     return gui;
 }
 
-SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *engine)
+SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *engine, QQmlEngine *configEngine)
     : QObject(engine)
     , d(std::make_unique<SensorFaceControllerPrivate>())
 {
@@ -374,6 +372,8 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
     d->colorsGroup = KConfigGroup(&config, "SensorColors");
     d->labelsGroup = KConfigGroup(&config, "SensorLabels");
     d->engine = engine;
+    // Ensure we don't re-use the Plasma Theme coloring by using separate configEngine, BUG:483689
+    d->configEngine = configEngine;
     d->syncTimer = new QTimer(this);
     d->syncTimer->setSingleShot(true);
     d->syncTimer->setInterval(5000);
