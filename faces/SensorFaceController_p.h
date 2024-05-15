@@ -92,6 +92,7 @@ public:
     SensorFaceController *q;
     QString title;
     QQmlEngine *engine;
+    QQmlEngine *configEngine;
 
     KConfigGroup faceProperties;
     KConfigPropertyMap *faceConfiguration = nullptr;

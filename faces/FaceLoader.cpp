@@ -5,6 +5,7 @@
  */
 
 #include "FaceLoader.h"
+#include <QQmlEngine>
 
 using namespace KSysGuard;
 
@@ -206,7 +207,7 @@ void FaceLoader::Private::setupController()
     }
 
     auto configGroup = parentController->configGroup().group(groupName);
-    controller = new SensorFaceController(configGroup, qmlEngine(q));
+    controller = new SensorFaceController(configGroup, qmlEngine(q), new QQmlEngine(q));
     controller->setShouldSync(readOnly);
     controller->setHighPrioritySensorIds(sensors);
     controller->setSensorColors(colors);
