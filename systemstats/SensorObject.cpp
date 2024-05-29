@@ -8,6 +8,8 @@
 
 #include "SensorContainer.h"
 
+#include "systemstats_logging.h"
+
 using namespace KSysGuard;
 
 class Q_DECL_HIDDEN SensorObject::Private
@@ -90,6 +92,11 @@ SensorProperty *SensorObject::sensor(const QString &sensorId) const
 
 void SensorObject::addProperty(SensorProperty *property)
 {
+    if (d->sensors.contains(property->id())) {
+        qCWarning(SYSTEMSTATS) << "Add property" << property->id() << "to object" << id()
+                               << "that already contains a property with that ID, overwriting the old property";
+    }
+
     d->sensors[property->id()] = property;
 
     connect(property, &SensorProperty::subscribedChanged, this, [this]() {
