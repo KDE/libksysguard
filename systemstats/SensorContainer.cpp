@@ -8,6 +8,8 @@
 
 #include "SensorObject.h"
 
+#include "systemstats_logging.h"
+
 using namespace KSysGuard;
 
 class Q_DECL_HIDDEN SensorContainer::Private
@@ -53,9 +55,14 @@ void SensorContainer::addObject(SensorObject *object)
 {
     object->setParentContainer(this);
 
-    const QString id = object->id();
-    Q_ASSERT(!d->sensorObjects.contains(id));
-    d->sensorObjects[id] = object;
+    const QString objectId = object->id();
+    if (d->sensorObjects.contains(objectId)) {
+        qCWarning(SYSTEMSTATS) << "Tried to add SensorObject with id" << objectId << "to container" << id()
+                               << "that already contains an object with that ID, ignoring.";
+        return;
+    }
+
+    d->sensorObjects[objectId] = object;
     Q_EMIT objectAdded(object);
 
     connect(object, &SensorObject::aboutToBeRemoved, this, [this, object]() {

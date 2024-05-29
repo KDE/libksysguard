@@ -39,6 +39,14 @@ set_property(TARGET dbusinterface PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_library(SystemStats ${systemstats_SRCS})
 add_library(KSysGuard::SystemStats ALIAS SystemStats)
 
+ecm_qt_declare_logging_category(SystemStats
+    HEADER systemstats_logging.h
+    IDENTIFIER SYSTEMSTATS
+    CATEGORY_NAME org.kde.libksysguard.systemstats
+    DESCRIPTION "libksysguard (system stats)"
+    EXPORT LIBKSYSGUARD
+)
+
 target_include_directories(SystemStats
     PUBLIC
     "$<BUILD_INTERFACE:${libksysguard_SOURCE_DIR}>"
