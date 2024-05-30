@@ -27,7 +27,7 @@ Faces.SensorFace {
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.smallSpacing
 
-        Item { Layout.fillWidth: true; Layout.preferredHeight: Kirigami.Units.smallSpacing }
+        Item { Layout.fillWidth: true }
 
         Repeater {
             model: root.controller.highPrioritySensorIds
@@ -51,6 +51,6 @@ Faces.SensorFace {
             }
         }
 
-        Item { Layout.fillWidth: true; Layout.preferredHeight: Kirigami.Units.smallSpacing }
+        Item { Layout.fillWidth: true }
     }
 }
