@@ -22,6 +22,7 @@ Faces.SensorFace {
     id: root
     Layout.minimumWidth: Kirigami.Units.gridUnit
     Layout.minimumHeight: Kirigami.Units.gridUnit
+    Layout.preferredWidth: formFactor == Faces.SensorFace.Horizontal ? height * 2 : height
     contentItem: ColumnLayout {
         LineChart {
             Layout.fillWidth: true
