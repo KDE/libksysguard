@@ -51,7 +51,6 @@ Faces.SensorFace {
                 ? 3 * Kirigami.Units.gridUnit
                 : 5 * Kirigami.Units.gridUnit
             Layout.preferredHeight: 8 * Kirigami.Units.gridUnit
-            Layout.maximumHeight: Math.max(heading.width, Layout.minimumHeight)
             updateRateLimit: root.controller.updateRateLimit
         }
 
