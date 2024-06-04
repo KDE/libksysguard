@@ -11,5 +11,6 @@ install(FILES
     SensorFace.qml
     SensorRangeSpinBox.qml
     Choices.qml
+    CompactSensorFace.qml
     DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/ksysguard/faces
 )
