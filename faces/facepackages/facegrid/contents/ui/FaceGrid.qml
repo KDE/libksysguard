@@ -25,8 +25,8 @@ GridLayout {
 
     columns: columnCount > 0 ? columnCount : autoColumnCount
 
-    columnSpacing: Kirigami.Units.largeSpacing
-    rowSpacing: Kirigami.Units.largeSpacing
+    columnSpacing: compact ? 1 : Kirigami.Units.largeSpacing
+    rowSpacing: compact ? 1 : Kirigami.Units.largeSpacing
 
     Kirigami.Heading {
         id: heading
@@ -36,7 +36,7 @@ GridLayout {
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
         text: root.controller.title
-        visible: root.controller.showTitle && text.length > 0
+        visible: !root.controller.compact && root.controller.showTitle && text.length > 0
         level: 2
 
         TextMetrics {
