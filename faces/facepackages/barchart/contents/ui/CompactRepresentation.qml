@@ -19,10 +19,21 @@ import org.kde.ksysguard.faces as Faces
 import org.kde.quickcharts as Charts
 import org.kde.quickcharts.controls as ChartControls
 
-Faces.SensorFace {
+Faces.CompactSensorFace {
     id: root
-    Layout.minimumWidth: Kirigami.Units.gridUnit
-    Layout.minimumHeight: Kirigami.Units.gridUnit
+
+    readonly property bool horizontalOrientation: controller.faceConfiguration.horizontalBars
+
+    readonly property real minimumBarSize: {
+        if ((horizontalFormFactor && !horizontalOrientation) || (verticalFormFactor && horizontalOrientation)) {
+            return Kirigami.Units.smallSpacing
+        } else {
+            return 1
+        }
+    }
+
+    Layout.minimumWidth: Math.max(horizontalFormFactor ? minimumBarSize * barChart.barCount : 0, defaultMinimumSize)
+    Layout.minimumHeight: Math.max(verticalFormFactor ? minimumBarSize * barChart.barCount : 0, defaultMinimumSize)
 
     contentItem: ColumnLayout {
         BarChart {
@@ -32,6 +43,7 @@ Faces.SensorFace {
             Layout.alignment: Qt.AlignCenter
             updateRateLimit: root.controller.updateRateLimit
             controller: root.controller
+            spacing: root.minimumBarSize * 0.25
         }
         QQC2.Label {
             id: label

@@ -19,8 +19,12 @@ import org.kde.ksysguard.faces as Faces
 import org.kde.quickcharts as Charts
 import org.kde.quickcharts.controls as ChartControls
 
-Faces.SensorFace {
+Faces.CompactSensorFace {
     id: root
+
+    // Prefer keeping things square as the pie itself also maintains a square aspect
+    Layout.preferredWidth: horizontalFormFactor ? height : undefined
+
     contentItem: ColumnLayout {
         PieChart {
             Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
