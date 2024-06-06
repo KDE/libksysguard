@@ -22,7 +22,9 @@ Faces.CompactSensorFace {
     id: root
 
     // For vertical panels, base minimum height on the amount of items in the face
-    Layout.minimumHeight: verticalFormFactor ? Math.max(contentItem.implicitHeight, Kirigami.Units.gridUnit) : defaultMinimumSize
+    readonly property int barCount: controller.highPrioritySensorIds.length
+    readonly property real minimumTotalHeight: Kirigami.Units.smallSpacing * barCount + (barCount - 1)
+    Layout.minimumHeight: verticalFormFactor ? Math.max(minimumTotalHeight, Kirigami.Units.gridUnit) : defaultMinimumSize
 
     contentItem: ColumnLayout {
         spacing: 1
@@ -33,7 +35,9 @@ Faces.CompactSensorFace {
             model: root.controller.highPrioritySensorIds
 
             Bar {
-                Layout.preferredHeight: Kirigami.Units.largeSpacing
+                Layout.fillHeight: true
+                Layout.minimumHeight: Kirigami.Units.smallSpacing
+                Layout.maximumHeight: Kirigami.Units.largeSpacing
 
                 topInset: 0
                 bottomInset: 0
