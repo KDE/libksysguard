@@ -13,6 +13,7 @@ import org.kde.kirigami as Kirigami
 
 import org.kde.ksysguard.sensors as Sensors
 import org.kde.ksysguard.faces as Faces
+import org.kde.ksysguard.formatter as Formatter
 
 import org.kde.quickcharts as Charts
 import org.kde.quickcharts.controls as ChartsControls
@@ -21,22 +22,39 @@ import org.kde.quickcharts.controls as ChartsControls
 Faces.CompactSensorFace {
     id: root
 
-    // Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : contentItem.contentWidth
-    // Layout.minimumHeight: Kirigami.Units.gridUnit
+    Layout.minimumHeight: verticalFormFactor ? contentItem.implicitHeight : defaultMinimumSize
 
-    Layout.minimumWidth: horizontalFormFactor ? contentItem.Layout.minimumWidth : defaultMinimumSize
-    Layout.minimumHeight: verticalFormFactor ? Math.max(contentItem.implicitHeight, Kirigami.Units.gridUnit) : defaultMinimumSize
+    Layout.preferredWidth: horizontalFormFactor ? contentItem.preferredWidth : undefined
 
-    Layout.preferredWidth: horizontalFormFactor ? contentItem.contentWidth : undefined
+    contentItem: ChartsControls.LegendLayout {
+        horizontalSpacing: 1
+        verticalSpacing: 1
 
-    contentItem: GroupedText {
-        totalSensorIds: root.controller.totalSensors
-        highPrioritySensorIds: root.controller.highPrioritySensorIds
-        lowPrioritySensorIds: []
-        showGroups: root.controller.faceConfiguration.groupByTotal
-        colorSource: root.colorSource
-        totalHeight: root.height
-        updateRateLimit: root.controller.updateRateLimit
-        sensorLabels: root.controller.sensorLabels
+        Repeater {
+            model: root.controller.highPrioritySensorIds
+
+            ChartsControls.LegendDelegate {
+                name: root.controller.sensorLabels[modelData] || sensor.name
+                shortName: root.controller.sensorLabels[modelData] || sensor.shortName
+                value: sensor.formattedValue
+                color: root.colorSource.map[modelData]
+
+                font: Kirigami.Theme.smallFont
+
+                maximumValueWidth: Formatter.Formatter.maximumLength(sensor.unit, Kirigami.Theme.smallFont)
+
+                opacity: y + height > root.height ? 0 : 1
+
+                ChartsControls.LegendLayout.minimumWidth: minimumWidth
+                ChartsControls.LegendLayout.preferredWidth: preferredWidth
+                ChartsControls.LegendLayout.maximumWidth: Math.max(preferredWidth, Kirigami.Units.iconSizes.huge)
+
+                Sensors.Sensor {
+                    id: sensor
+                    sensorId: modelData
+                    updateRateLimit: root.controller.updateRateLimit
+                }
+            }
+        }
     }
 }
