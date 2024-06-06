@@ -18,14 +18,14 @@ import org.kde.quickcharts as Charts
 import org.kde.quickcharts.controls as ChartsControls
 
 
-Faces.SensorFace {
+Faces.CompactSensorFace {
     id: root
 
-    Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : Kirigami.Units.gridUnit * 2
-    Layout.minimumHeight: root.formFactor == Faces.SensorFace.Vertical ? contentItem.implicitHeight : Kirigami.Units.gridUnit
+    // For vertical panels, base minimum height on the amount of items in the face
+    Layout.minimumHeight: verticalFormFactor ? Math.max(contentItem.implicitHeight, Kirigami.Units.gridUnit) : defaultMinimumSize
 
     contentItem: ColumnLayout {
-        spacing: Kirigami.Units.smallSpacing
+        spacing: 1
 
         Item { Layout.fillWidth: true }
 

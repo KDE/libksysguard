@@ -13,14 +13,12 @@ import org.kde.ksysguard.faces as Faces
 import org.kde.quickcharts as Charts
 import org.kde.quickcharts.controls as ChartControls
 
+// Don't use CompactSensorFace here to ensure we always use the size hints from FaceGrid
 Faces.SensorFace {
     id: root
 
     readonly property int columnCount: root.controller.faceConfiguration.columnCount
     readonly property int autoColumnCount: Math.ceil(Math.sqrt(controller.highPrioritySensorIds.length))
-
-    //Layout.minimumWidth: Kirigami.Units.gridUnit * 8
-    //Layout.preferredWidth: titleMetrics.width + Kirigami.Units.largeSpacing
 
     contentItem: FaceGrid {
         id: grid

@@ -18,11 +18,16 @@ import org.kde.quickcharts as Charts
 import org.kde.quickcharts.controls as ChartsControls
 
 
-Faces.SensorFace {
+Faces.CompactSensorFace {
     id: root
 
-    Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : contentItem.contentWidth
-    Layout.minimumHeight: Kirigami.Units.gridUnit
+    // Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : contentItem.contentWidth
+    // Layout.minimumHeight: Kirigami.Units.gridUnit
+
+    Layout.minimumWidth: horizontalFormFactor ? contentItem.Layout.minimumWidth : defaultMinimumSize
+    Layout.minimumHeight: verticalFormFactor ? Math.max(contentItem.implicitHeight, Kirigami.Units.gridUnit) : defaultMinimumSize
+
+    Layout.preferredWidth: horizontalFormFactor ? contentItem.contentWidth : undefined
 
     contentItem: GroupedText {
         totalSensorIds: root.controller.totalSensors
