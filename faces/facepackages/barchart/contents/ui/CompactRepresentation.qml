@@ -24,16 +24,29 @@ Faces.CompactSensorFace {
 
     readonly property bool horizontalOrientation: controller.faceConfiguration.horizontalBars
 
-    readonly property real minimumBarSize: {
-        if ((horizontalFormFactor && !horizontalOrientation) || (verticalFormFactor && horizontalOrientation)) {
-            return Kirigami.Units.smallSpacing
-        } else {
-            return 1
+    readonly property real minimumBarSize: (horizontalFormFactor && !horizontalOrientation) || (verticalFormFactor && horizontalOrientation) ? Kirigami.Units.smallSpacing : 1
+    readonly property real minimumBarSpacing: Math.floor(minimumBarSize * 0.25)
+    readonly property real minimumTotalSize: minimumBarSize * barChart.barCount + minimumBarSpacing * (barChart.barCount - 1)
+    readonly property real preferredTotalSize: Kirigami.Units.largeSpacing * barChart.barCount + Kirigami.Units.largeSpacing * 0.25 * (barChart.barCount - 1)
+
+    Layout.minimumWidth: (!horizontalFormFactor || horizontalOrientation) ? defaultMinimumSize : Math.max(minimumTotalSize, Kirigami.Units.largeSpacing)
+    Layout.minimumHeight: (!verticalFormFactor || !horizontalOrientation) ? defaultMinimumSize : Math.max(minimumTotalSize, Kirigami.Units.largeSpacing)
+
+    Layout.preferredWidth: {
+        if (!horizontalFormFactor) {
+            return -1
         }
+
+        return horizontalOrientation ? height * goldenRatio : preferredTotalSize
     }
 
-    Layout.minimumWidth: Math.max(horizontalFormFactor ? minimumBarSize * barChart.barCount : 0, defaultMinimumSize)
-    Layout.minimumHeight: Math.max(verticalFormFactor ? minimumBarSize * barChart.barCount : 0, defaultMinimumSize)
+    Layout.preferredHeight: {
+        if (!verticalFormFactor) {
+            return -1
+        }
+
+        return horizontalOrientation ? preferredTotalSize : width
+    }
 
     contentItem: ColumnLayout {
         BarChart {
@@ -43,7 +56,7 @@ Faces.CompactSensorFace {
             Layout.alignment: Qt.AlignCenter
             updateRateLimit: root.controller.updateRateLimit
             controller: root.controller
-            spacing: root.minimumBarSize * 0.25
+            spacing: Math.max(Math.floor(((root.horizontalOrientation ? height : width) / barCount) * 0.25), root.minimumBarSpacing)
         }
         QQC2.Label {
             id: label
