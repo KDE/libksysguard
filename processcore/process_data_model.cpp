@@ -378,8 +378,7 @@ void ProcessDataModel::Private::update()
 
 QModelIndex ProcessDataModel::Private::getQModelIndex(KSysGuard::Process *process, int column) const
 {
-    Q_ASSERT(process);
-    if (process->pid() == -1) {
+    if (!process || process->pid() == -1) {
         return QModelIndex(); // pid -1 is our fake process meaning the very root (never drawn).  To represent that, we return QModelIndex() which also means
                               // the top element
     }
