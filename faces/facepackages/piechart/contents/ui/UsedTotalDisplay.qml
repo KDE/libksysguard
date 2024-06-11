@@ -23,38 +23,60 @@ Item {
 
     property real contentMargin: 10
 
+    FontMetrics {
+        id: metrics
+        font: Kirigami.Theme.defaultFont
+    }
+
     ColumnLayout {
         id: layout
 
-        anchors.centerIn: parent
-        width: Math.min(parent.width, parent.height) * 0.75
+        anchors.fill: parent
+        anchors.margins: root.contentMargin
 
         spacing: 0
+
+        Item { Layout.fillWidth: true; Layout.fillHeight: true }
 
         Label {
             id: usedLabel
 
             Layout.fillWidth: true
+            Layout.leftMargin: root.contentMargin
+            Layout.rightMargin: root.contentMargin
 
             text: chart.sensorsModel.sensorLabels[usedSensor] ||  (usedSensorObject.name + (usedSensorObject.shortName.length > 0 ? "\x9C" + usedSensorObject.shortName : ""))
             horizontalAlignment: Text.AlignHCenter
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
-            visible: totalValue.visible
+            visible: totalValue.visible && root.height > metrics.lineSpacing * 5
             elide: Text.ElideRight
-
-            opacity: layout.y > root.contentMargin ? 1 : 0
         }
 
         Label {
             id: usedValue
             Layout.fillWidth: true
-            text: usedSensorObject.formattedValue
+            Layout.maximumHeight: root.height - root.contentMargin * 2
+            text: {
+                if (!root.usedSensor) {
+                    return ""
+                }
+
+                // If size gets too small we really can't do much more than just
+                // hide things.
+                if (root.height < metrics.lineSpacing + root.contentMargin * 2) {
+                    return ""
+                }
+                return usedSensorObject.formattedValue
+            }
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
 
             fontSizeMode: Text.HorizontalFit
             minimumPointSize: Kirigami.Theme.smallFont.pointSize * 0.8
+
+            wrapMode: Text.Wrap
+            maximumLineCount: 2
         }
 
         Kirigami.Separator {
@@ -70,23 +92,25 @@ Item {
 
             text: totalSensorObject.formattedValue
             horizontalAlignment: Text.AlignHCenter
-            visible: root.totalSensor.length > 0 && contentWidth < layout.width
+            visible: root.totalSensor.length > 0 && root.height > metrics.lineSpacing * 4
         }
 
         Label {
             id: totalLabel
 
             Layout.fillWidth: true
+            Layout.leftMargin: root.contentMargin
+            Layout.rightMargin: root.contentMargin
 
             text: chart.sensorsModel.sensorLabels[totalSensor] || (totalSensorObject.name + (totalSensorObject.shortName.length > 0 ? "\x9C" + totalSensorObject.shortName : ""))
             horizontalAlignment: Text.AlignHCenter
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
-            visible: totalValue.visible
+            visible: totalValue.visible && root.height > metrics.lineSpacing * 5
             elide: Text.ElideRight
-
-            opacity: layout.y + layout.height < root.height - root.contentMargin ? 1 : 0
         }
+
+        Item { Layout.fillWidth: true; Layout.fillHeight: true }
 
         Sensors.Sensor {
             id: usedSensorObject
