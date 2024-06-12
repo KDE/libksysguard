@@ -3,7 +3,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# zayed <zayed.alsaidi@gmail.com>, 2008, 2010.
+# SPDX-FileCopyrightText: 2008, 2010, 2024 zayed <zayed.alsaidi@gmail.com>
 # Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010, 2021.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2018.
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2021-07-25 20:14+0400\n"
+"PO-Revision-Date: 2024-06-08 12:00+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -304,19 +305,14 @@ msgid "Private"
 msgstr "خاص"
 
 #: extended_process_list.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process.<br>It "
-#| "does not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
+#, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "هذا هو مقدار الذاكرة الفعلية التي تستخدمها هذه العملية بمفردها ، وتقارب "
-"استخدام الذاكرة الخاصة للعملية. <br> لا تتضمن أي ذاكرة متبادلة ، ولا حجم رمز "
+"استخدام الذاكرة الخاصة للعملية.  لا تتضمن أي ذاكرة متبادلة ، ولا حجم رمز "
 "مكتباتها المشتركة."
 
 #: extended_process_list.cpp:354
@@ -330,18 +326,14 @@ msgid "Shared"
 msgstr "مشتركة"
 
 #: extended_process_list.cpp:365
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is approximately the amount of real physical memory that this "
-#| "process's shared libraries are using.<br>This memory is shared among all "
-#| "processes that use this library."
+#, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
-"هذا هو مقدار الذاكرة الفيزيائية الحقيقية التي تستخدمها المكتبات المشتركة."
-"<br>هذه الذاكرة مشتركة بين أغلب العمليات التي تستخدم هذه المكتبة."
+"هذا هو مقدار الذاكرة الفيزيائية الحقيقية التي تستخدمها المكتبات المشتركة.هذه "
+"الذاكرة مشتركة بين أغلب العمليات التي تستخدم هذه المكتبة."
 
 #: extended_process_list.cpp:371
 #, kde-format
