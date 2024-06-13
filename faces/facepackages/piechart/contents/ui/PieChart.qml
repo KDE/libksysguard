@@ -82,7 +82,9 @@ ChartControls.PieChartControl {
     }
 
     UsedTotalDisplay {
-        anchors.fill: parent
+        anchors.centerIn: parent
+        width: Math.min(parent.width, parent.height)
+        height: width
 
         usedSensor: root.controller.totalSensors.length > 0 ? root.controller.totalSensors[0] : ""
         totalSensor: root.controller.totalSensors.length > 1 ? root.controller.totalSensors[1] : ""
@@ -91,4 +93,3 @@ ChartControls.PieChartControl {
         updateRateLimit: chart.updateRateLimit
     }
 }
-

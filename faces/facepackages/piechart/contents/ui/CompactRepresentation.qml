@@ -23,7 +23,7 @@ Faces.CompactSensorFace {
     id: root
 
     // Prefer keeping things square as the pie itself also maintains a square aspect
-    Layout.preferredWidth: horizontalFormFactor ? height : undefined
+    Layout.preferredWidth: horizontalFormFactor ? Math.max(height, Layout.minimumWidth) : -1
 
     contentItem: ColumnLayout {
         PieChart {
