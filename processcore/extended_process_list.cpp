@@ -330,12 +330,14 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     d->m_coreAttributes << vmSizeSensor;
 
     auto vmRSSSensor =
-        new ProcessSensor<qlonglong>(this, QStringLiteral("vmRSS"), i18n("RSS Memory Usage"), &KSysGuard::Process::vmRSS, KSysGuard::Process::VmRSS);
+        new ProcessSensor<qlonglong>(this, QStringLiteral("vmRSS"), i18n("Resident Memory Usage"), &KSysGuard::Process::vmRSS, KSysGuard::Process::VmRSS);
     vmRSSSensor->setUnit(KSysGuard::UnitKiloByte);
+    vmRSSSensor->setShortName(i18n("Resident"));
     vmRSSSensor->setMin(0);
     vmRSSSensor->setMax(totalPhysicalMemory());
     vmRSSSensor->setDescription(
         i18n("This is the amount of physical memory that this process is using and includes the amount of memory used by shared libraries."));
+    d->m_coreAttributes << vmRSSSensor;
 
     auto vmURSSSensor =
         new ProcessSensor<qlonglong>(this, QStringLiteral("vmURSS"), i18n("Private Memory Usage"), &KSysGuard::Process::vmURSS, KSysGuard::Process::VmURSS);
