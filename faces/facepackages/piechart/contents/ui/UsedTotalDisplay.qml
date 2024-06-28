@@ -23,6 +23,8 @@ Item {
 
     property real contentMargin: 10
 
+    readonly property bool constrained: width < Kirigami.Units.gridUnit * 2
+
     FontMetrics {
         id: metrics
         font: Kirigami.Theme.defaultFont
@@ -57,6 +59,9 @@ Item {
             id: usedValue
             Layout.fillWidth: true
             Layout.maximumHeight: root.height - root.contentMargin * 2
+            Layout.leftMargin: root.constrained ? -root.contentMargin : 0
+            Layout.rightMargin: root.constrained ? -root.contentMargin : 0
+
             text: {
                 if (!root.usedSensor) {
                     return ""
@@ -64,7 +69,7 @@ Item {
 
                 // If size gets too small we really can't do much more than just
                 // hide things.
-                if (root.height < metrics.lineSpacing + root.contentMargin * 2) {
+                if (root.height < metrics.lineSpacing) {
                     return ""
                 }
                 return usedSensorObject.formattedValue
@@ -75,8 +80,17 @@ Item {
             fontSizeMode: Text.HorizontalFit
             minimumPointSize: Kirigami.Theme.smallFont.pointSize * 0.8
 
+            // When we're small the text is allowed to flow over the underlying
+            // pie chart, to improve contrast we render it with an outline using
+            // the inverse text color.
+            style: root.constrained ? Text.Outline : Text.Normal
+            styleColor: Qt.rgba(1.0 - Kirigami.Theme.textColor.r, 1.0 - Kirigami.Theme.textColor.g, 1.0 - Kirigami.Theme.textColor.b, 1.0)
+
+            // This slightly odd combination ensures that when the width becomes
+            // too small, the unit gets hidden because the text wraps but the
+            // wrapped part is hidden due to maximumLineCount.
             wrapMode: Text.Wrap
-            maximumLineCount: 2
+            maximumLineCount: 1
         }
 
         Kirigami.Separator {
