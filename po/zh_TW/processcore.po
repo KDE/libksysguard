@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-03 00:39+0000\n"
+"POT-Creation-Date: 2024-06-28 00:40+0000\n"
 "PO-Revision-Date: 2024-02-05 17:16+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -274,28 +274,34 @@ msgstr ""
 "數字幾近沒有意義。"
 
 #: extended_process_list.cpp:333
-#, kde-format
-msgid "RSS Memory Usage"
+#, fuzzy, kde-format
+#| msgid "RSS Memory Usage"
+msgid "Resident Memory Usage"
 msgstr "RSS 記憶體用量"
 
-#: extended_process_list.cpp:338
+#: extended_process_list.cpp:335
+#, kde-format
+msgid "Resident"
+msgstr ""
+
+#: extended_process_list.cpp:339
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using and "
 "includes the amount of memory used by shared libraries."
 msgstr "此為此處理程序的實體記憶體用量，包含共享函式庫的記憶體用量。"
 
-#: extended_process_list.cpp:341
+#: extended_process_list.cpp:343
 #, kde-format
 msgid "Private Memory Usage"
 msgstr "私人記憶體用量"
 
-#: extended_process_list.cpp:343
+#: extended_process_list.cpp:345
 #, kde-format
 msgid "Private"
 msgstr "私人"
 
-#: extended_process_list.cpp:347
+#: extended_process_list.cpp:349
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
@@ -305,17 +311,17 @@ msgstr ""
 "此為此處理程序自用的實體記憶體用量，且大約等於處理程序的私人記憶體用量。不包"
 "含任何已經換出的記憶體，及共享函式庫的程式碼大小。"
 
-#: extended_process_list.cpp:354
+#: extended_process_list.cpp:356
 #, kde-format
 msgid "Shared Memory Usage"
 msgstr "共享記憶體用量"
 
-#: extended_process_list.cpp:363
+#: extended_process_list.cpp:365
 #, kde-format
 msgid "Shared"
 msgstr "共享"
 
-#: extended_process_list.cpp:365
+#: extended_process_list.cpp:367
 #, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
@@ -325,17 +331,17 @@ msgstr ""
 "這大約等於真實此處理程序之共享函式庫的實體記憶體用量。此記憶體會與所有使用此"
 "函式庫的處理程序共用。"
 
-#: extended_process_list.cpp:371
+#: extended_process_list.cpp:373
 #, kde-format
 msgid "Memory Usage"
 msgstr "記憶體用量"
 
-#: extended_process_list.cpp:372
+#: extended_process_list.cpp:374
 #, kde-format
 msgid "Memory"
 msgstr "記憶體"
 
-#: extended_process_list.cpp:378
+#: extended_process_list.cpp:380
 #, kde-format
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -346,121 +352,121 @@ msgstr ""
 "這是此處理程序之實體記憶體真實用量的估計值。這是透過此處理程序之共享記憶體用"
 "量除以共享記憶體之處理程序數，然後加上處理程序之私人記憶體計算而成的。"
 
-#: extended_process_list.cpp:383
+#: extended_process_list.cpp:385
 #, kde-format
 msgid "Name"
 msgstr "名稱"
 
-#: extended_process_list.cpp:384
+#: extended_process_list.cpp:386
 #, kde-format
 msgid "The process name."
 msgstr "處理程序名稱。"
 
-#: extended_process_list.cpp:389
+#: extended_process_list.cpp:391
 #, kde-format
 msgid "Command"
 msgstr "命令"
 
-#: extended_process_list.cpp:393
+#: extended_process_list.cpp:395
 #, kde-format
 msgid "The command with which this process was launched."
 msgstr "啟動此處理程序的命令。"
 
-#: extended_process_list.cpp:397
+#: extended_process_list.cpp:399
 #, kde-format
 msgid "Status"
 msgstr "狀態"
 
-#: extended_process_list.cpp:402
+#: extended_process_list.cpp:404
 #, kde-format
 msgid "IO Characters Read"
 msgstr "讀取的 IO 字元"
 
-#: extended_process_list.cpp:411
+#: extended_process_list.cpp:413
 #, kde-format
 msgid "IO Characters Written"
 msgstr "寫入的 IO 字元"
 
-#: extended_process_list.cpp:420
+#: extended_process_list.cpp:422
 #, kde-format
 msgid "IO Read Syscalls"
 msgstr "IO 讀取系統呼叫"
 
-#: extended_process_list.cpp:429
+#: extended_process_list.cpp:431
 #, kde-format
 msgid "IO Read Syscalls Rate"
 msgstr "IO 讀取系統呼叫速率"
 
-#: extended_process_list.cpp:438
+#: extended_process_list.cpp:440
 #, kde-format
 msgid "IO Write Syscalls"
 msgstr "IO 寫入系統呼叫"
 
-#: extended_process_list.cpp:447
+#: extended_process_list.cpp:449
 #, kde-format
 msgid "IO Write Syscalls Rate"
 msgstr "IO 寫入系統呼叫速率"
 
-#: extended_process_list.cpp:456
+#: extended_process_list.cpp:458
 #, kde-format
 msgid "IO Characters Actually Read"
 msgstr "實際讀取的 IO 字元"
 
-#: extended_process_list.cpp:465
+#: extended_process_list.cpp:467
 #, kde-format
 msgid "IO Characters Read Rate"
 msgstr "實際讀取的 IO 字元速率"
 
-#: extended_process_list.cpp:468
+#: extended_process_list.cpp:470
 #, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr "某處理程序所有 IO 的讀取速率，包含磁碟快取及其他非實體的 IO。"
 
-#: extended_process_list.cpp:475
+#: extended_process_list.cpp:477
 #, kde-format
 msgid "IO Characters Written Rate"
 msgstr "IO 字元寫入速率"
 
-#: extended_process_list.cpp:478
+#: extended_process_list.cpp:480
 #, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr "某處理程序所有 IO 的寫入速率，包含磁碟快取及其他非實體的 IO。"
 
-#: extended_process_list.cpp:485
+#: extended_process_list.cpp:487
 #, kde-format
 msgid "Disk Read Rate"
 msgstr "磁碟讀取速率"
 
-#: extended_process_list.cpp:489
+#: extended_process_list.cpp:491
 #, kde-format
 msgid "Read"
 msgstr "讀取"
 
-#: extended_process_list.cpp:490
+#: extended_process_list.cpp:492
 #, kde-format
 msgid "The rate of data being read from disk."
 msgstr "從磁碟讀取資料的速率。"
 
-#: extended_process_list.cpp:496
+#: extended_process_list.cpp:498
 #, kde-format
 msgid "Disk Write Rate"
 msgstr "磁碟寫入速率"
 
-#: extended_process_list.cpp:500
+#: extended_process_list.cpp:502
 #, kde-format
 msgid "Write"
 msgstr "寫入"
 
-#: extended_process_list.cpp:501
+#: extended_process_list.cpp:503
 #, kde-format
 msgid "The rate of data being written to the disk."
 msgstr "資料寫入磁碟的速率。"
 
-#: extended_process_list.cpp:507
+#: extended_process_list.cpp:509
 #, kde-format
 msgid "Threads"
 msgstr "執行緒"

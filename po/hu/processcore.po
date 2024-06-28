@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-03 00:39+0000\n"
+"POT-Creation-Date: 2024-06-28 00:40+0000\n"
 "PO-Revision-Date: 2024-02-06 22:51+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -278,11 +278,17 @@ msgstr ""
 "Ez az érték önmagában kevés információt mutat."
 
 #: extended_process_list.cpp:333
-#, kde-format
-msgid "RSS Memory Usage"
+#, fuzzy, kde-format
+#| msgid "RSS Memory Usage"
+msgid "Resident Memory Usage"
 msgstr "RSS memóriahasználat"
 
-#: extended_process_list.cpp:338
+#: extended_process_list.cpp:335
+#, kde-format
+msgid "Resident"
+msgstr ""
+
+#: extended_process_list.cpp:339
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using and "
@@ -291,17 +297,17 @@ msgstr ""
 "A folyamat által használt fizikai memória mennyisége, beleértve a megosztott "
 "függvénykönyvtárak által használt memória mennyiségét is."
 
-#: extended_process_list.cpp:341
+#: extended_process_list.cpp:343
 #, kde-format
 msgid "Private Memory Usage"
 msgstr "Privát memóriahasználat"
 
-#: extended_process_list.cpp:343
+#: extended_process_list.cpp:345
 #, kde-format
 msgid "Private"
 msgstr "Privát"
 
-#: extended_process_list.cpp:347
+#: extended_process_list.cpp:349
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
@@ -313,17 +319,17 @@ msgstr ""
 "sem a lemezre kilapozódott memória, sem az osztott programkönyvtárak "
 "programkódjának méretét."
 
-#: extended_process_list.cpp:354
+#: extended_process_list.cpp:356
 #, kde-format
 msgid "Shared Memory Usage"
 msgstr "Megosztott memóriahasználat"
 
-#: extended_process_list.cpp:363
+#: extended_process_list.cpp:365
 #, kde-format
 msgid "Shared"
 msgstr "Megosztott"
 
-#: extended_process_list.cpp:365
+#: extended_process_list.cpp:367
 #, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
@@ -334,17 +340,17 @@ msgstr ""
 "folyamatnak az osztott könyvtárai használnak. Ez a memória közös az összes "
 "olyan folyamattal, amely használja a programkönyvtárt."
 
-#: extended_process_list.cpp:371
+#: extended_process_list.cpp:373
 #, kde-format
 msgid "Memory Usage"
 msgstr "Memóriahasználat"
 
-#: extended_process_list.cpp:372
+#: extended_process_list.cpp:374
 #, kde-format
 msgid "Memory"
 msgstr "Memória"
 
-#: extended_process_list.cpp:378
+#: extended_process_list.cpp:380
 #, kde-format
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -357,72 +363,72 @@ msgstr ""
 "folyamatok számának elosztásával, majd a folyamat privát memóriájának "
 "hozzáadásával történik."
 
-#: extended_process_list.cpp:383
+#: extended_process_list.cpp:385
 #, kde-format
 msgid "Name"
 msgstr "Név"
 
-#: extended_process_list.cpp:384
+#: extended_process_list.cpp:386
 #, kde-format
 msgid "The process name."
 msgstr "A folyamat neve."
 
-#: extended_process_list.cpp:389
+#: extended_process_list.cpp:391
 #, kde-format
 msgid "Command"
 msgstr "Parancs"
 
-#: extended_process_list.cpp:393
+#: extended_process_list.cpp:395
 #, kde-format
 msgid "The command with which this process was launched."
 msgstr "A folyamatot indító parancs."
 
-#: extended_process_list.cpp:397
+#: extended_process_list.cpp:399
 #, kde-format
 msgid "Status"
 msgstr "Állapot"
 
-#: extended_process_list.cpp:402
+#: extended_process_list.cpp:404
 #, kde-format
 msgid "IO Characters Read"
 msgstr "IO olvasott karakterek"
 
-#: extended_process_list.cpp:411
+#: extended_process_list.cpp:413
 #, kde-format
 msgid "IO Characters Written"
 msgstr "IO írott karakterek"
 
-#: extended_process_list.cpp:420
+#: extended_process_list.cpp:422
 #, kde-format
 msgid "IO Read Syscalls"
 msgstr "IO olvasás rendszerhívások"
 
-#: extended_process_list.cpp:429
+#: extended_process_list.cpp:431
 #, kde-format
 msgid "IO Read Syscalls Rate"
 msgstr "IO olvasás rendszerhívások sebessége"
 
-#: extended_process_list.cpp:438
+#: extended_process_list.cpp:440
 #, kde-format
 msgid "IO Write Syscalls"
 msgstr "IO írás rendszerhívások"
 
-#: extended_process_list.cpp:447
+#: extended_process_list.cpp:449
 #, kde-format
 msgid "IO Write Syscalls Rate"
 msgstr "IO írás rendszerhívások sebessége"
 
-#: extended_process_list.cpp:456
+#: extended_process_list.cpp:458
 #, kde-format
 msgid "IO Characters Actually Read"
 msgstr "IO ténylegesen olvasott karakterek"
 
-#: extended_process_list.cpp:465
+#: extended_process_list.cpp:467
 #, kde-format
 msgid "IO Characters Read Rate"
 msgstr "IO karakterek olvasási sebessége"
 
-#: extended_process_list.cpp:468
+#: extended_process_list.cpp:470
 #, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
@@ -431,12 +437,12 @@ msgstr ""
 "Egy folyamat teljes olvasási sebessége, beleértve a gyorsítótárakat és egyéb "
 "nem fizikai IO-t."
 
-#: extended_process_list.cpp:475
+#: extended_process_list.cpp:477
 #, kde-format
 msgid "IO Characters Written Rate"
 msgstr "IO karakterek írási sebessége"
 
-#: extended_process_list.cpp:478
+#: extended_process_list.cpp:480
 #, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
@@ -445,37 +451,37 @@ msgstr ""
 "Egy folyamat teljes írási sebessége, beleértve a gyorsítótárakat és egyéb "
 "nem fizikai IO-t."
 
-#: extended_process_list.cpp:485
+#: extended_process_list.cpp:487
 #, kde-format
 msgid "Disk Read Rate"
 msgstr "Lemezolvasási sebesség"
 
-#: extended_process_list.cpp:489
+#: extended_process_list.cpp:491
 #, kde-format
 msgid "Read"
 msgstr "Olvasás"
 
-#: extended_process_list.cpp:490
+#: extended_process_list.cpp:492
 #, kde-format
 msgid "The rate of data being read from disk."
 msgstr "Az adatok lemezről olvasásának sebessége."
 
-#: extended_process_list.cpp:496
+#: extended_process_list.cpp:498
 #, kde-format
 msgid "Disk Write Rate"
 msgstr "Lemezírási sebesség"
 
-#: extended_process_list.cpp:500
+#: extended_process_list.cpp:502
 #, kde-format
 msgid "Write"
 msgstr "Írás"
 
-#: extended_process_list.cpp:501
+#: extended_process_list.cpp:503
 #, kde-format
 msgid "The rate of data being written to the disk."
 msgstr "Az adatok lemezre írásának sebessége."
 
-#: extended_process_list.cpp:507
+#: extended_process_list.cpp:509
 #, kde-format
 msgid "Threads"
 msgstr "Szálak"

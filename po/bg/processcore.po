@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-03 00:39+0000\n"
+"POT-Creation-Date: 2024-06-28 00:40+0000\n"
 "PO-Revision-Date: 2024-02-03 15:35+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -279,11 +279,17 @@ msgstr ""
 "безполезна."
 
 #: extended_process_list.cpp:333
-#, kde-format
-msgid "RSS Memory Usage"
+#, fuzzy, kde-format
+#| msgid "RSS Memory Usage"
+msgid "Resident Memory Usage"
 msgstr "Използване на RSS памет"
 
-#: extended_process_list.cpp:338
+#: extended_process_list.cpp:335
+#, kde-format
+msgid "Resident"
+msgstr ""
+
+#: extended_process_list.cpp:339
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using and "
@@ -292,17 +298,17 @@ msgstr ""
 "Това е количеството физическа памет, което този процес използва и включва "
 "количеството памет, използвано от споделените библиотеки."
 
-#: extended_process_list.cpp:341
+#: extended_process_list.cpp:343
 #, kde-format
 msgid "Private Memory Usage"
 msgstr "Използване на частната памет"
 
-#: extended_process_list.cpp:343
+#: extended_process_list.cpp:345
 #, kde-format
 msgid "Private"
 msgstr "Частен"
 
-#: extended_process_list.cpp:347
+#: extended_process_list.cpp:349
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
@@ -313,17 +319,17 @@ msgstr ""
 "си,и приближава използването на частната памет на процеса. Не включва swap "
 "памет, нито размера на кода на нейните споделени библиотеки."
 
-#: extended_process_list.cpp:354
+#: extended_process_list.cpp:356
 #, kde-format
 msgid "Shared Memory Usage"
 msgstr "Използване на споделена памет"
 
-#: extended_process_list.cpp:363
+#: extended_process_list.cpp:365
 #, kde-format
 msgid "Shared"
 msgstr "Споделена"
 
-#: extended_process_list.cpp:365
+#: extended_process_list.cpp:367
 #, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
@@ -334,17 +340,17 @@ msgstr ""
 "библиотеки на процеса. Тази памет е споделена между всички процеси, "
 "използващи дадената библиотека."
 
-#: extended_process_list.cpp:371
+#: extended_process_list.cpp:373
 #, kde-format
 msgid "Memory Usage"
 msgstr "Използване на паметта"
 
-#: extended_process_list.cpp:372
+#: extended_process_list.cpp:374
 #, kde-format
 msgid "Memory"
 msgstr "Памет"
 
-#: extended_process_list.cpp:378
+#: extended_process_list.cpp:380
 #, kde-format
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -357,72 +363,72 @@ msgstr ""
 "на процеса на размера на процесите, които споделят тази памет, след което се "
 "добавя частната памет на процеса."
 
-#: extended_process_list.cpp:383
+#: extended_process_list.cpp:385
 #, kde-format
 msgid "Name"
 msgstr "Име"
 
-#: extended_process_list.cpp:384
+#: extended_process_list.cpp:386
 #, kde-format
 msgid "The process name."
 msgstr "Име на процеса."
 
-#: extended_process_list.cpp:389
+#: extended_process_list.cpp:391
 #, kde-format
 msgid "Command"
 msgstr "Команда"
 
-#: extended_process_list.cpp:393
+#: extended_process_list.cpp:395
 #, kde-format
 msgid "The command with which this process was launched."
 msgstr "Командата, с която е стартиран процеса."
 
-#: extended_process_list.cpp:397
+#: extended_process_list.cpp:399
 #, kde-format
 msgid "Status"
 msgstr "Статус"
 
-#: extended_process_list.cpp:402
+#: extended_process_list.cpp:404
 #, kde-format
 msgid "IO Characters Read"
 msgstr "Прочетени IO символи"
 
-#: extended_process_list.cpp:411
+#: extended_process_list.cpp:413
 #, kde-format
 msgid "IO Characters Written"
 msgstr "Записани IO символи"
 
-#: extended_process_list.cpp:420
+#: extended_process_list.cpp:422
 #, kde-format
 msgid "IO Read Syscalls"
 msgstr "IO Read Syscalls"
 
-#: extended_process_list.cpp:429
+#: extended_process_list.cpp:431
 #, kde-format
 msgid "IO Read Syscalls Rate"
 msgstr "Честота на IO Read Syscalls"
 
-#: extended_process_list.cpp:438
+#: extended_process_list.cpp:440
 #, kde-format
 msgid "IO Write Syscalls"
 msgstr "IO Write Syscalls"
 
-#: extended_process_list.cpp:447
+#: extended_process_list.cpp:449
 #, kde-format
 msgid "IO Write Syscalls Rate"
 msgstr "Честота на IO Write Syscalls"
 
-#: extended_process_list.cpp:456
+#: extended_process_list.cpp:458
 #, kde-format
 msgid "IO Characters Actually Read"
 msgstr "Актуално прочетени IO символи"
 
-#: extended_process_list.cpp:465
+#: extended_process_list.cpp:467
 #, kde-format
 msgid "IO Characters Read Rate"
 msgstr "Честота на четене на IO символи"
 
-#: extended_process_list.cpp:468
+#: extended_process_list.cpp:470
 #, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
@@ -431,12 +437,12 @@ msgstr ""
 "Скоростта на четене за всичко на IO процес, включително кеша на диска и "
 "други нефизични IO."
 
-#: extended_process_list.cpp:475
+#: extended_process_list.cpp:477
 #, kde-format
 msgid "IO Characters Written Rate"
 msgstr "Честота на писане на IO символи"
 
-#: extended_process_list.cpp:478
+#: extended_process_list.cpp:480
 #, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
@@ -445,37 +451,37 @@ msgstr ""
 "Скоростта на запис за всичко на IO процес, включително кеша на диска и други "
 "нефизични IO."
 
-#: extended_process_list.cpp:485
+#: extended_process_list.cpp:487
 #, kde-format
 msgid "Disk Read Rate"
 msgstr "Скорост на четене на диска"
 
-#: extended_process_list.cpp:489
+#: extended_process_list.cpp:491
 #, kde-format
 msgid "Read"
 msgstr "Четене"
 
-#: extended_process_list.cpp:490
+#: extended_process_list.cpp:492
 #, kde-format
 msgid "The rate of data being read from disk."
 msgstr "Скоростта на четене на данни от диска."
 
-#: extended_process_list.cpp:496
+#: extended_process_list.cpp:498
 #, kde-format
 msgid "Disk Write Rate"
 msgstr "Скорост на запис на диска"
 
-#: extended_process_list.cpp:500
+#: extended_process_list.cpp:502
 #, kde-format
 msgid "Write"
 msgstr "Запис"
 
-#: extended_process_list.cpp:501
+#: extended_process_list.cpp:503
 #, kde-format
 msgid "The rate of data being written to the disk."
 msgstr "Скоростта на записване на данни на диска."
 
-#: extended_process_list.cpp:507
+#: extended_process_list.cpp:509
 #, kde-format
 msgid "Threads"
 msgstr "Нишки"

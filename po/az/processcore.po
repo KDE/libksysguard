@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-03 00:39+0000\n"
+"POT-Creation-Date: 2024-06-28 00:40+0000\n"
 "PO-Revision-Date: 2021-05-24 23:06+0400\n"
 "Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -277,11 +277,17 @@ msgstr ""
 
 # RSS (Resident set size) - Yaddaşda daimi qalan proqramların ölçüsü
 #: extended_process_list.cpp:333
-#, kde-format
-msgid "RSS Memory Usage"
+#, fuzzy, kde-format
+#| msgid "RSS Memory Usage"
+msgid "Resident Memory Usage"
 msgstr "RSS yaddaş istifadəsi"
 
-#: extended_process_list.cpp:338
+#: extended_process_list.cpp:335
+#, kde-format
+msgid "Resident"
+msgstr ""
+
+#: extended_process_list.cpp:339
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using and "
@@ -290,17 +296,17 @@ msgstr ""
 "Bu, bu proses tərəfindən istifadə olunan və paylaşılan kitabxanaların "
 "istifadə etdiyi yaddaş ölçüsü daxil olmaqla, fiziki yaddaşın miqdarıdır."
 
-#: extended_process_list.cpp:341
+#: extended_process_list.cpp:343
 #, kde-format
 msgid "Private Memory Usage"
 msgstr "Fərdi yaddaş istifadəsi"
 
-#: extended_process_list.cpp:343
+#: extended_process_list.cpp:345
 #, kde-format
 msgid "Private"
 msgstr "Fərdi"
 
-#: extended_process_list.cpp:347
+#: extended_process_list.cpp:349
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is the amount of physical memory that this process is using by "
@@ -317,17 +323,17 @@ msgstr ""
 "faylında yerləşən yaddaş sahəsi, həm də paylaşılan yaddaş kodunun ölçüsü "
 "daxil deyil."
 
-#: extended_process_list.cpp:354
+#: extended_process_list.cpp:356
 #, kde-format
 msgid "Shared Memory Usage"
 msgstr "Paylaşılan yaddaş istifadəsi"
 
-#: extended_process_list.cpp:363
+#: extended_process_list.cpp:365
 #, kde-format
 msgid "Shared"
 msgstr "Paylaşlan yaddaş"
 
-#: extended_process_list.cpp:365
+#: extended_process_list.cpp:367
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is approximately the amount of real physical memory that this "
@@ -342,17 +348,17 @@ msgstr ""
 "yaddaşın təqribi həcmidir. <br>Bu yaddaş digər proseslərlə birgə istifadə "
 "olunur."
 
-#: extended_process_list.cpp:371
+#: extended_process_list.cpp:373
 #, kde-format
 msgid "Memory Usage"
 msgstr "Yaddaş İstifadəsi"
 
-#: extended_process_list.cpp:372
+#: extended_process_list.cpp:374
 #, kde-format
 msgid "Memory"
 msgstr "Yaddaş"
 
-#: extended_process_list.cpp:378
+#: extended_process_list.cpp:380
 #, kde-format
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -364,72 +370,72 @@ msgstr ""
 "təqribi ölçüdür. O, bu paylaşılan yaddaşı istifadə edən, proseslərin sayına "
 "bölünmüş yaddaşın və prosesin fərdi yaddaşının cəmi kimi hesablanır."
 
-#: extended_process_list.cpp:383
+#: extended_process_list.cpp:385
 #, kde-format
 msgid "Name"
 msgstr "Ad"
 
-#: extended_process_list.cpp:384
+#: extended_process_list.cpp:386
 #, kde-format
 msgid "The process name."
 msgstr "Prosesin adı"
 
-#: extended_process_list.cpp:389
+#: extended_process_list.cpp:391
 #, kde-format
 msgid "Command"
 msgstr "Əmr"
 
-#: extended_process_list.cpp:393
+#: extended_process_list.cpp:395
 #, kde-format
 msgid "The command with which this process was launched."
 msgstr "Bu prosesi başladan əmr."
 
-#: extended_process_list.cpp:397
+#: extended_process_list.cpp:399
 #, kde-format
 msgid "Status"
 msgstr "Vəziyyət"
 
-#: extended_process_list.cpp:402
+#: extended_process_list.cpp:404
 #, kde-format
 msgid "IO Characters Read"
 msgstr "GÇ simvolları oxundu"
 
-#: extended_process_list.cpp:411
+#: extended_process_list.cpp:413
 #, kde-format
 msgid "IO Characters Written"
 msgstr "GÇ simvolları yazıldı"
 
-#: extended_process_list.cpp:420
+#: extended_process_list.cpp:422
 #, kde-format
 msgid "IO Read Syscalls"
 msgstr "GÇ oxuma əməlləri"
 
-#: extended_process_list.cpp:429
+#: extended_process_list.cpp:431
 #, kde-format
 msgid "IO Read Syscalls Rate"
 msgstr "GÇ oxuma əməlləri tezliyi"
 
-#: extended_process_list.cpp:438
+#: extended_process_list.cpp:440
 #, kde-format
 msgid "IO Write Syscalls"
 msgstr "GÇ yazma əməlləri"
 
-#: extended_process_list.cpp:447
+#: extended_process_list.cpp:449
 #, kde-format
 msgid "IO Write Syscalls Rate"
 msgstr "GÇ yazma əməlləri tezliyi"
 
-#: extended_process_list.cpp:456
+#: extended_process_list.cpp:458
 #, kde-format
 msgid "IO Characters Actually Read"
 msgstr "GÇ simvollarının aktual oxunuşu"
 
-#: extended_process_list.cpp:465
+#: extended_process_list.cpp:467
 #, kde-format
 msgid "IO Characters Read Rate"
 msgstr "GÇ simvollarının oxunma tezliyi"
 
-#: extended_process_list.cpp:468
+#: extended_process_list.cpp:470
 #, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
@@ -438,12 +444,12 @@ msgstr ""
 "Bütün GÇ prosesləri üçün oxunma tezliyi, buraya disk keşi və digər fiziki "
 "olmayan GÇ əməlləri daxildir"
 
-#: extended_process_list.cpp:475
+#: extended_process_list.cpp:477
 #, kde-format
 msgid "IO Characters Written Rate"
 msgstr "GÇ simvolları yazma tezliyi"
 
-#: extended_process_list.cpp:478
+#: extended_process_list.cpp:480
 #, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
@@ -452,37 +458,37 @@ msgstr ""
 "Bütün GÇ prosesləri üçün yazma tezliyi, buraya disk keşi və digər fiziki "
 "olmayan GÇ əməlləri daxildir"
 
-#: extended_process_list.cpp:485
+#: extended_process_list.cpp:487
 #, kde-format
 msgid "Disk Read Rate"
 msgstr "Diskdən oxuma tezliyi"
 
-#: extended_process_list.cpp:489
+#: extended_process_list.cpp:491
 #, kde-format
 msgid "Read"
 msgstr "Oxunma"
 
-#: extended_process_list.cpp:490
+#: extended_process_list.cpp:492
 #, kde-format
 msgid "The rate of data being read from disk."
 msgstr "Verilənlərin diskdən oxunma tezliyi."
 
-#: extended_process_list.cpp:496
+#: extended_process_list.cpp:498
 #, kde-format
 msgid "Disk Write Rate"
 msgstr "Diskə yazılma tezliyi"
 
-#: extended_process_list.cpp:500
+#: extended_process_list.cpp:502
 #, kde-format
 msgid "Write"
 msgstr "Yazılma"
 
-#: extended_process_list.cpp:501
+#: extended_process_list.cpp:503
 #, kde-format
 msgid "The rate of data being written to the disk."
 msgstr "Veriilənlərin diskə yazılma tezliyi"
 
-#: extended_process_list.cpp:507
+#: extended_process_list.cpp:509
 #, kde-format
 msgid "Threads"
 msgstr "Axınlar"
