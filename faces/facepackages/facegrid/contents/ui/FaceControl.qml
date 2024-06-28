@@ -28,8 +28,12 @@ Control {
     leftPadding: 0
     rightPadding: 0
 
-    Layout.minimumWidth: contentItem?.Layout.minimumWidth ?? undefined
-    Layout.minimumHeight: contentItem?.Layout.minimumHeight ?? undefined
+    Layout.minimumWidth: contentItem?.Layout.minimumWidth ?? -1
+    Layout.minimumHeight: contentItem?.Layout.minimumHeight ?? -1
+    Layout.preferredWidth: contentItem?.Layout.preferredWidth ?? -1
+    Layout.preferredHeight: contentItem?.Layout.preferredHeight ?? -1
+    Layout.maximumWidth: contentItem?.Layout.maximumWidth ?? -1
+    Layout.maximumHeight: contentItem?.Layout.maximumHeight ?? -1
 
     implicitWidth: contentItem?.implicitWidth ?? 0
     implicitHeight: contentItem?.implicitHeight ?? 0
