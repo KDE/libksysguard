@@ -11,6 +11,7 @@
             }
         ],
         "Id": "org.kde.ksysguard.facegrid",
+        "Icon": "show-grid",
         "License": "LGPLv2+",
         "Name": "Grid",
         "Name[bg]": "Координатна мрежа",
