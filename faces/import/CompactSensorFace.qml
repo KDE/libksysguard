@@ -27,5 +27,5 @@ SensorFace {
 
     // Limit the maximum size to a reasonably sensible value. This matches what some Plasmoids do.
     Layout.maximumWidth: horizontalFormFactor ? Math.max(Kirigami.Units.iconSizes.enormous, Layout.minimumWidth) : -1
-    Layout.maximumHeight: verticalFormFactor ? Math.max(Kirigami.Units.iconSizes.huge, Layout.minimumHeight) : -1
+    Layout.maximumHeight: verticalFormFactor ? Math.max(Kirigami.Units.iconSizes.enormous, Layout.minimumHeight) : -1
 }
