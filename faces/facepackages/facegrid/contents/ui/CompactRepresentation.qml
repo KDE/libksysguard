@@ -13,9 +13,11 @@ import org.kde.ksysguard.faces as Faces
 import org.kde.quickcharts as Charts
 import org.kde.quickcharts.controls as ChartControls
 
-// Don't use CompactSensorFace here to ensure we always use the size hints from FaceGrid
-Faces.SensorFace {
+Faces.CompactSensorFace {
     id: root
+
+    Layout.minimumWidth: grid.columns * defaultMinimumSize + (grid.columns - 1) * grid.columnSpacing
+    Layout.minimumHeight: grid.rowCount * defaultMinimumSize  + (grid.rowCount - 1) * grid.rowSpacing
 
     readonly property int columnCount: root.controller.faceConfiguration.columnCount
     readonly property int autoColumnCount: Math.ceil(Math.sqrt(controller.highPrioritySensorIds.length))
