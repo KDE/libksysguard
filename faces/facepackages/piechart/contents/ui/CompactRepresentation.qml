@@ -27,7 +27,7 @@ Faces.CompactSensorFace {
 
     contentItem: ColumnLayout {
         PieChart {
-            Layout.maximumHeight: Math.max(root.width, Layout.minimumHeight)
+            Layout.maximumHeight: Math.min(Math.max(root.width, Layout.minimumHeight), root.height)
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
