@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-28 00:40+0000\n"
-"PO-Revision-Date: 2024-02-03 16:02+0300\n"
+"PO-Revision-Date: 2024-06-28 14:11+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.01.95\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -277,15 +277,14 @@ msgstr ""
 "dosyalar vb. içeren sanal belleğin miktarıdır. Bu rakam genelde anlamsızdır."
 
 #: extended_process_list.cpp:333
-#, fuzzy, kde-format
-#| msgid "RSS Memory Usage"
+#, kde-format
 msgid "Resident Memory Usage"
-msgstr "RSS Bellek Kullanımı"
+msgstr "Yerleşik Bellek Kullanımı"
 
 #: extended_process_list.cpp:335
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "Yerleşik"
 
 #: extended_process_list.cpp:339
 #, kde-format

@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-28 00:40+0000\n"
-"PO-Revision-Date: 2024-03-10 15:31+0200\n"
+"PO-Revision-Date: 2024-06-28 09:20+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.05.0\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -277,15 +277,14 @@ msgstr ""
 "קבצים בכונן ועוד. המספר הזה הוא כמעט חסר משמעות."
 
 #: extended_process_list.cpp:333
-#, fuzzy, kde-format
-#| msgid "RSS Memory Usage"
+#, kde-format
 msgid "Resident Memory Usage"
-msgstr "ניצול זיכרון גודל סדרה מיושבת (RSS)"
+msgstr "ניצולת זיכרון קבוע"
 
 #: extended_process_list.cpp:335
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "קבוע"
 
 #: extended_process_list.cpp:339
 #, kde-format

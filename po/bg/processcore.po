@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-28 00:40+0000\n"
-"PO-Revision-Date: 2024-02-03 15:35+0100\n"
+"PO-Revision-Date: 2024-06-28 21:06+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.05.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: cgroup_data_model.cpp:52
@@ -279,15 +279,14 @@ msgstr ""
 "безполезна."
 
 #: extended_process_list.cpp:333
-#, fuzzy, kde-format
-#| msgid "RSS Memory Usage"
+#, kde-format
 msgid "Resident Memory Usage"
-msgstr "Използване на RSS памет"
+msgstr "Използване на резидентна памет"
 
 #: extended_process_list.cpp:335
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "Резидентни"
 
 #: extended_process_list.cpp:339
 #, kde-format

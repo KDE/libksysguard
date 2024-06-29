@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-28 00:40+0000\n"
-"PO-Revision-Date: 2024-02-03 19:22+0100\n"
+"PO-Revision-Date: 2024-06-28 21:11+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "com>\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.05.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: cgroup_data_model.cpp:52
@@ -285,15 +285,14 @@ msgstr ""
 "disco y demás. Es posible que este número carezca de sentido."
 
 #: extended_process_list.cpp:333
-#, fuzzy, kde-format
-#| msgid "RSS Memory Usage"
+#, kde-format
 msgid "Resident Memory Usage"
-msgstr "Uso de memoria RSS"
+msgstr "Uso de memoria residente"
 
 #: extended_process_list.cpp:335
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "Residente"
 
 #: extended_process_list.cpp:339
 #, kde-format

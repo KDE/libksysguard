@@ -268,10 +268,9 @@ msgstr ""
 "值基本没有意义。"
 
 #: extended_process_list.cpp:333
-#, fuzzy, kde-format
-#| msgid "RSS Memory Usage"
+#, kde-format
 msgid "Resident Memory Usage"
-msgstr "RSS 内存用量 "
+msgstr ""
 
 #: extended_process_list.cpp:335
 #, kde-format
