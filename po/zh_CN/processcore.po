@@ -270,12 +270,12 @@ msgstr ""
 #: extended_process_list.cpp:333
 #, kde-format
 msgid "Resident Memory Usage"
-msgstr ""
+msgstr "常驻内存使用"
 
 #: extended_process_list.cpp:335
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "常驻"
 
 #: extended_process_list.cpp:339
 #, kde-format
