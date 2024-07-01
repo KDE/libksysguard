@@ -20,6 +20,11 @@ QString FormatterWrapper::formatValueShowNull(const QVariant &value, KSysGuard::
     return Formatter::formatValue(value, unit, targetPrefix, FormatOptionShowNull);
 }
 
+QString FormatterWrapper::formatValueWithPrecision(const QVariant &value, KSysGuard::Unit unit, int precision)
+{
+    return Formatter::formatValue(value, unit, MetricPrefixAutoAdjust, FormatOptionShowNull, precision);
+}
+
 qreal KSysGuard::FormatterWrapper::maximumLength(KSysGuard::Unit unit, const QFont &font)
 {
     return Formatter::maximumLength(unit, font);
