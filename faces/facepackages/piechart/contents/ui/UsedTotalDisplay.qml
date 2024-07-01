@@ -72,6 +72,13 @@ Item {
                 if (root.height < metrics.lineSpacing) {
                     return ""
                 }
+
+                // If we're small but not too small, reduce precision to reduce
+                // the amount of characters we need to fit.
+                if (root.constrained) {
+                    return Formatter.Formatter.formatValueWithPrecision(usedSensorObject.value, usedSensorObject.unit, 0)
+                }
+
                 return usedSensorObject.formattedValue
             }
             horizontalAlignment: Text.AlignHCenter
