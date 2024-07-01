@@ -376,7 +376,7 @@ static Unit adjustedUnit(qreal value, Unit unit, MetricPrefix prefix)
         }
     }
 
-    const Unit newUnit = Unit(prefix + baseUnit);
+    const Unit newUnit = Unit(int(prefix) + int(baseUnit));
     // If there is no prefixed unit,
     // don't overflow into the following unrelated units.
     if (unitBase(newUnit) != baseUnit) {
