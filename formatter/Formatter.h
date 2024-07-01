@@ -62,8 +62,13 @@ public:
      * @param unit The unit of the value.
      * @param targetPrefix Preferred metric prefix.
      * @param options
+     * @param precision The precision to use. If < 0, use a default value.
      */
-    static QString formatValue(const QVariant &value, Unit unit, MetricPrefix targetPrefix = MetricPrefixAutoAdjust, FormatOptions options = FormatOptionNone);
+    static QString formatValue(const QVariant &value,
+                               Unit unit,
+                               MetricPrefix targetPrefix = MetricPrefixAutoAdjust,
+                               FormatOptions options = FormatOptionNone,
+                               int precision = -1);
 
     /**
      * Returns a symbol that corresponds to the given @p unit.

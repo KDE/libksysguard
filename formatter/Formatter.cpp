@@ -386,7 +386,7 @@ static Unit adjustedUnit(qreal value, Unit unit, MetricPrefix prefix)
     return newUnit;
 }
 
-static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefix, FormatOptions options)
+static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefix, FormatOptions options, int precision)
 {
     qreal amount = value.toDouble();
 
@@ -399,7 +399,9 @@ static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefi
         amount /= std::pow(unitOrder(unit), adjusted - unit);
     }
 
-    const int precision = (value.type() != QVariant::Double && adjusted <= unit) ? 0 : 1;
+    if (precision < 0) {
+        precision = (value.typeId() != QMetaType::Double && adjusted <= unit) ? 0 : 1;
+    }
     const QString text = QLocale().toString(amount, 'f', precision);
 
     return unitFormat(adjusted).subs(text).toString();
@@ -449,7 +451,7 @@ KLocalizedString Formatter::localizedString(const QVariant &value, Unit unit, Me
     return unitFormat(adjusted);
 }
 
-QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix targetPrefix, FormatOptions options)
+QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix targetPrefix, FormatOptions options, int precision)
 {
     switch (unit) {
     case UnitByte:
@@ -506,14 +508,14 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
     case UnitRpm:
     case UnitCelsius:
     case UnitDecibelMilliWatts:
-        return formatNumber(value, unit, targetPrefix, options);
+        return formatNumber(value, unit, targetPrefix, options, precision);
 
     case UnitBootTimestamp:
         return formatBootTimestamp(value);
     case UnitTime:
         return formatTime(value);
     case UnitNone:
-        return formatNumber(value, unit, MetricPrefix::MetricPrefixUnity, options);
+        return formatNumber(value, unit, MetricPrefix::MetricPrefixUnity, options, precision);
     case UnitTicks:
         return formatTicks(value);
 
