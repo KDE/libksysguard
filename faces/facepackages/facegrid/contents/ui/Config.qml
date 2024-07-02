@@ -60,6 +60,7 @@ ColumnLayout {
                     const pluginId = sourceModel.data(sourceModel.index(row, 0, parent), root.pluginIdRole)
                     const excludedPlugins = [
                         "org.kde.ksysguard.facegrid",
+                        "org.kde.ksysguard.colorgrid",
                         "org.kde.ksysguard.applicationstable",
                         "org.kde.ksysguard.processtable"
                     ]
