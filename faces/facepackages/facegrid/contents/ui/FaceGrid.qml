@@ -34,7 +34,7 @@ GridLayout {
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
         text: root.controller.title
-        visible: !root.controller.compact && root.controller.showTitle && text.length > 0
+        visible: !grid.compact && root.controller.showTitle && text.length > 0
         level: 2
 
         TextMetrics {
