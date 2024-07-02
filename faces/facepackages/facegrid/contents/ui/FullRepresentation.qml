@@ -49,7 +49,6 @@ Faces.SensorFace {
     contentItem: FaceGrid {
         id: grid
         compact: false
-        columnCount: root.columnCount
-        autoColumnCount: root.autoColumnCount
+        columns: root.columnCount > 0 ? root.columnCount : root.autoColumnCount
     }
 }

@@ -17,15 +17,11 @@ import org.kde.ksysguard.formatter as Formatter
 GridLayout {
     id: grid
 
-    property int columnCount
-    property int autoColumnCount
     property bool compact
 
     readonly property real preferredWidth: titleMetrics.width
 
     readonly property int rowCount: Math.ceil(gridRepeater.count / columns)
-
-    columns: columnCount > 0 ? columnCount : autoColumnCount
 
     columnSpacing: compact ? 1 : Kirigami.Units.largeSpacing
     rowSpacing: compact ? 1 : Kirigami.Units.largeSpacing
