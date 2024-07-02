@@ -25,7 +25,23 @@ Faces.CompactSensorFace {
     contentItem: FaceGrid {
         id: grid
         compact: true
-        columnCount: root.columnCount
-        autoColumnCount: root.autoColumnCount
+        columns: {
+            let itemCount = root.controller.highPrioritySensorIds.length
+
+            let maxColumns = Math.floor(width / defaultMinimumSize)
+            let maxRows = Math.floor(height / defaultMinimumSize)
+
+            let columns = root.columnCount > 0 ? root.columnCount : root.autoColumnCount
+            let rows = Math.ceil(itemCount / columns)
+
+            if (horizontalFormFactor) {
+                rows = Math.min(rows, maxRows)
+                columns = Math.ceil(itemCount / rows)
+            } else if (verticalFormFactor) {
+                columns = Math.min(columns, maxColumns)
+            }
+
+            return columns
+        }
     }
 }
