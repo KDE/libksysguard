@@ -733,7 +733,7 @@ qreal Formatter::maximumLength(Unit unit, const QFont &font)
         maximum = formatValue(order - 0.5, UnitMegaHertz, MetricPrefixMega);
         break;
     case UnitPercent:
-        maximum = formatValue(9999.9, UnitPercent);
+        maximum = formatValue(999.9, UnitPercent);
         break;
     default:
         return -1.0;
