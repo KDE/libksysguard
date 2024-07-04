@@ -10,8 +10,8 @@
                 "Name[x-test]": "xxArjen Hiemstraxx"
             }
         ],
-        "Id": "org.kde.ksysguard.facegrid",
         "Icon": "show-grid",
+        "Id": "org.kde.ksysguard.facegrid",
         "License": "LGPLv2+",
         "Name": "Grid",
         "Name[bg]": "Координатна мрежа",
