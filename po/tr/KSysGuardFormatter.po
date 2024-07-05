@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-11 01:44+0000\n"
-"PO-Revision-Date: 2023-11-11 22:15+0300\n"
+"PO-Revision-Date: 2024-07-05 02:30+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: Formatter.cpp:33
 #, kde-format
@@ -567,37 +567,37 @@ msgstr "PW"
 #, kde-format
 msgctxt "Watt-hours unit symbol"
 msgid "Wh"
-msgstr "W-sa"
+msgstr "Wsa"
 
 #: Formatter.cpp:610
 #, kde-format
 msgctxt "Kilo-watthours unit symbol"
 msgid "kWh"
-msgstr "kWh"
+msgstr "kWsa"
 
 #: Formatter.cpp:612
 #, kde-format
 msgctxt "Mega-watthours unit symbol"
 msgid "MWh"
-msgstr "MWh"
+msgstr "MWsa"
 
 #: Formatter.cpp:614
 #, kde-format
 msgctxt "Giga-watthours unit symbol"
 msgid "GWh"
-msgstr "GWh"
+msgstr "GWsa"
 
 #: Formatter.cpp:616
 #, kde-format
 msgctxt "Tera-watthours unit symbol"
 msgid "TWh"
-msgstr "TWh"
+msgstr "TWsa"
 
 #: Formatter.cpp:618
 #, kde-format
 msgctxt "Peta-watthours unit symbol"
 msgid "PWh"
-msgstr "PWh"
+msgstr "PWsa"
 
 #: Formatter.cpp:621
 #, kde-format
