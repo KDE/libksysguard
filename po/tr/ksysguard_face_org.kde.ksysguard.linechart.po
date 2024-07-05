@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-08-07 00:17+0000\n"
-"PO-Revision-Date: 2023-02-07 19:20+0300\n"
+"PO-Revision-Date: 2024-07-05 02:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: contents/ui/Config.qml:42
 #, kde-format
@@ -75,7 +75,7 @@ msgstr "Şuraya (Y):"
 #: contents/ui/Config.qml:99
 #, kde-format
 msgid "Amount of History to Keep:"
-msgstr "Tutulacak Geçmiş Miktarı:"
+msgstr "Tutulacak geçmiş miktarı:"
 
 #: contents/ui/Config.qml:102
 #, kde-format
