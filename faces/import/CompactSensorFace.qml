@@ -21,9 +21,9 @@ SensorFace {
     Layout.minimumHeight: defaultMinimumSize
 
     // By default, prefer a rectangular size base on the golden ratio for horizontal panels
-    Layout.preferredWidth: horizontalFormFactor ? Math.max(height * goldenRatio, Layout.minimumWidth) : -1
+    Layout.preferredWidth: horizontalFormFactor ? Math.min(Math.max(height * goldenRatio, Layout.minimumWidth), Layout.maximumWidth) : -1
     // For vertical panels, just try to keep things square since increasing height usually does not make sense
-    Layout.preferredHeight: verticalFormFactor ? Math.max(width, Layout.minimumHeight) : -1
+    Layout.preferredHeight: verticalFormFactor ? Math.min(Math.max(width, Layout.minimumHeight), Layout.maximumHeight) : -1
 
     // Limit the maximum size to a reasonably sensible value. This matches what some Plasmoids do.
     Layout.maximumWidth: horizontalFormFactor ? Math.max(Kirigami.Units.iconSizes.enormous, Layout.minimumWidth) : -1
