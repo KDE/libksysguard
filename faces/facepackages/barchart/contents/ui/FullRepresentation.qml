@@ -30,7 +30,7 @@ Faces.SensorFace {
 
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
     Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * compactRepresentation.barCount, Kirigami.Units.gridUnit * 8)
-    Layout.preferredWidth: titleMetrics.width
+    Layout.preferredWidth: Math.max(titleMetrics.width, legend.preferredWidth)
 
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.largeSpacing
