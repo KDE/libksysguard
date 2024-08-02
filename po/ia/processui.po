@@ -1136,7 +1136,7 @@ msgid ""
 "<title>%1</title><para>The parent of all other processes and cannot be "
 "killed.</para><para><emphasis strong='true'>Process ID:</emphasis> %2</para>"
 msgstr ""
-"<title>%1</title><para>Le genitor de omne altere processes non poite esser "
+"<title>%1</title><para>Le genitor de omne altere processes non pote esser "
 "occidite.</para><para><emphasis strong='true'>ID de Processo:</emphasis> %2</"
 "para>"
 
