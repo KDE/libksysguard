@@ -276,7 +276,6 @@ msgstr ""
 
 #: extended_process_list.cpp:333
 #, fuzzy, kde-format
-#| msgid "RSS Memory Usage"
 msgid "Resident Memory Usage"
 msgstr "RSS-minnebruk"
 
@@ -306,11 +305,6 @@ msgstr "Privat"
 
 #: extended_process_list.cpp:349
 #, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process.<br>It "
-#| "does not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
@@ -332,10 +326,6 @@ msgstr "Delt"
 
 #: extended_process_list.cpp:367
 #, fuzzy, kde-format
-#| msgid ""
-#| "This is approximately the amount of real physical memory that this "
-#| "process's shared libraries are using.<br>This memory is shared among all "
-#| "processes that use this library."
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "

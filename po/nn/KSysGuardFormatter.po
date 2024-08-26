@@ -555,40 +555,30 @@ msgstr "V"
 
 #: Formatter.cpp:649
 #, fuzzy, kde-format
-#| msgctxt "Volts unit symbol"
-#| msgid "V"
 msgctxt "Kilovolts unit symbol"
 msgid "kV"
 msgstr "V"
 
 #: Formatter.cpp:651
 #, fuzzy, kde-format
-#| msgctxt "Volts unit symbol"
-#| msgid "V"
 msgctxt "Megavolts unit symbol"
 msgid "MV"
 msgstr "V"
 
 #: Formatter.cpp:653
 #, fuzzy, kde-format
-#| msgctxt "Volts unit symbol"
-#| msgid "V"
 msgctxt "Gigavolts unit symbol"
 msgid "GV"
 msgstr "V"
 
 #: Formatter.cpp:655
 #, fuzzy, kde-format
-#| msgctxt "Volts unit symbol"
-#| msgid "V"
 msgctxt "Teravolts unit symbol"
 msgid "TV"
 msgstr "V"
 
 #: Formatter.cpp:657
 #, fuzzy, kde-format
-#| msgctxt "Volts unit symbol"
-#| msgid "V"
 msgctxt "Petavolts unit symbol"
 msgid "PV"
 msgstr "V"
@@ -601,40 +591,30 @@ msgstr "W"
 
 #: Formatter.cpp:662
 #, fuzzy, kde-format
-#| msgctxt "Watts unit symbol"
-#| msgid "W"
 msgctxt "Kilowatts unit symbol"
 msgid "kW"
 msgstr "W"
 
 #: Formatter.cpp:664
 #, fuzzy, kde-format
-#| msgctxt "Watts unit symbol"
-#| msgid "W"
 msgctxt "Megawatts unit symbol"
 msgid "MW"
 msgstr "W"
 
 #: Formatter.cpp:666
 #, fuzzy, kde-format
-#| msgctxt "Watts unit symbol"
-#| msgid "W"
 msgctxt "Gigawatts unit symbol"
 msgid "GW"
 msgstr "W"
 
 #: Formatter.cpp:668
 #, fuzzy, kde-format
-#| msgctxt "Watts unit symbol"
-#| msgid "W"
 msgctxt "Terawatts unit symbol"
 msgid "TW"
 msgstr "W"
 
 #: Formatter.cpp:670
 #, fuzzy, kde-format
-#| msgctxt "Watts unit symbol"
-#| msgid "W"
 msgctxt "Petawatts unit symbol"
 msgid "PW"
 msgstr "W"
@@ -647,40 +627,30 @@ msgstr "Wh"
 
 #: Formatter.cpp:675
 #, fuzzy, kde-format
-#| msgctxt "Watt-hours unit symbol"
-#| msgid "Wh"
 msgctxt "Kilo-watthours unit symbol"
 msgid "kWh"
 msgstr "Wh"
 
 #: Formatter.cpp:677
 #, fuzzy, kde-format
-#| msgctxt "Watt-hours unit symbol"
-#| msgid "Wh"
 msgctxt "Mega-watthours unit symbol"
 msgid "MWh"
 msgstr "Wh"
 
 #: Formatter.cpp:679
 #, fuzzy, kde-format
-#| msgctxt "Watt-hours unit symbol"
-#| msgid "Wh"
 msgctxt "Giga-watthours unit symbol"
 msgid "GWh"
 msgstr "Wh"
 
 #: Formatter.cpp:681
 #, fuzzy, kde-format
-#| msgctxt "Watt-hours unit symbol"
-#| msgid "Wh"
 msgctxt "Tera-watthours unit symbol"
 msgid "TWh"
 msgstr "Wh"
 
 #: Formatter.cpp:683
 #, fuzzy, kde-format
-#| msgctxt "Watt-hours unit symbol"
-#| msgid "Wh"
 msgctxt "Peta-watthours unit symbol"
 msgid "PWh"
 msgstr "Wh"
@@ -693,40 +663,30 @@ msgstr "A"
 
 #: Formatter.cpp:688
 #, fuzzy, kde-format
-#| msgctxt "Ampere unit symbol"
-#| msgid "A"
 msgctxt "Kiloamperes unit symbol"
 msgid "kA"
 msgstr "A"
 
 #: Formatter.cpp:690
 #, fuzzy, kde-format
-#| msgctxt "Ampere unit symbol"
-#| msgid "A"
 msgctxt "Megaamperes unit symbol"
 msgid "MA"
 msgstr "A"
 
 #: Formatter.cpp:692
 #, fuzzy, kde-format
-#| msgctxt "Ampere unit symbol"
-#| msgid "A"
 msgctxt "Gigaamperes unit symbol"
 msgid "GA"
 msgstr "A"
 
 #: Formatter.cpp:694
 #, fuzzy, kde-format
-#| msgctxt "Ampere unit symbol"
-#| msgid "A"
 msgctxt "Teraamperes unit symbol"
 msgid "TA"
 msgstr "A"
 
 #: Formatter.cpp:696
 #, fuzzy, kde-format
-#| msgctxt "Ampere unit symbol"
-#| msgid "A"
 msgctxt "Petaamperes unit symbol"
 msgid "PA"
 msgstr "A"
