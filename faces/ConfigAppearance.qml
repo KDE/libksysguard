@@ -65,23 +65,49 @@ Kirigami.FormLayout {
         itemCount: root.controller.highPrioritySensorIds.length
     }
 
-    Kirigami.OverlaySheet {
-        id: presetSheet
-        parent: root
+    Kirigami.Dialog {
+        id: presetDialog
+        modal: true
+
+        title: i18nd("KSysGuardSensorFaces", "Load Preset")
+
         ListView {
             implicitWidth: Kirigami.Units.gridUnit * 15
+            implicitHeight: Kirigami.Units.gridUnit * 20
             focus: true
             model: controller.availablePresetsModel
-            delegate: Kirigami.SwipeListItem {
-                contentItem: QQC2.Label {
-                    elide: Text.ElideRight
-                    text: model.display
+            delegate: QQC2.ItemDelegate {
+                id: delegate
+                width: ListView.view.width
+
+                text: model.display
+
+                contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
+
+                    property bool truncated: label.truncated
+
+                    QQC2.Label {
+                        id: label
+                        Layout.fillWidth: true
+                        elide: Text.ElideRight
+                        text: delegate.text
+                    }
+
+                    QQC2.ToolButton {
+                        id: deleteButton
+                        text: i18nd("KSysGuardSensorFaces", "Delete this preset")
+                        icon.name: "delete"
+                        visible: model.writable
+                        onClicked: controller.uninstallPreset(model.pluginId);
+                        display: QQC2.ToolButton.IconOnly
+
+                        QQC2.ToolTip {
+                            text: deleteButton.text
+                        }
+                    }
                 }
-                actions: Kirigami.Action {
-                    icon.name: "delete"
-                    visible: model.writable
-                    onTriggered: controller.uninstallPreset(model.pluginId);
-                }
+
                 onClicked: {
                     cfg_title = model.display;
                     pendingPreset = model.pluginId;
@@ -90,15 +116,7 @@ Kirigami.FormLayout {
                     }
 
                     root.configurationChanged();
-                    presetSheet.close();
-                }
-
-                // shortcut overrides can only be on the item with focus
-                Keys.onShortcutOverride: {
-                    if (event.key === Qt.Key_Escape) {
-                        event.accepted = true;
-                        root.close();
-                    }
+                    presetDialog.close();
                 }
             }
         }
@@ -109,7 +127,7 @@ Kirigami.FormLayout {
         QQC2.Button {
             icon.name: "document-open"
             text: i18nd("KSysGuardSensorFaces", "Load Preset...")
-            onClicked: presetSheet.open()
+            onClicked: presetDialog.open()
         }
 
         NewStuff.Button {
