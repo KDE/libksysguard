@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-09 00:40+0000\n"
+"POT-Creation-Date: 2024-08-31 00:40+0000\n"
 "PO-Revision-Date: 2024-06-08 12:01+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,63 +18,74 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: ConfigAppearance.qml:107
+#: ConfigAppearance.qml:72
+#, fuzzy, kde-format
+#| msgid "Load Preset..."
+msgid "Load Preset"
+msgstr "حمّل المعد مسبقا..."
+
+#: ConfigAppearance.qml:99
+#, kde-format
+msgid "Delete this preset"
+msgstr ""
+
+#: ConfigAppearance.qml:125
 #, kde-format
 msgid "Presets:"
 msgstr "مسبقات الضّبط:"
 
-#: ConfigAppearance.qml:111
+#: ConfigAppearance.qml:129
 #, kde-format
 msgid "Load Preset..."
 msgstr "حمّل المعد مسبقا..."
 
-#: ConfigAppearance.qml:116
+#: ConfigAppearance.qml:134
 #, kde-format
 msgid "Get new presets..."
 msgstr "احصل على إعدادات معدة مسبقا جديدة"
 
-#: ConfigAppearance.qml:128
+#: ConfigAppearance.qml:146
 #, kde-format
 msgid "Save Settings As Preset"
 msgstr "احفظ الإعدادات كقيم معدة مسبقا"
 
-#: ConfigAppearance.qml:138
+#: ConfigAppearance.qml:156
 #, kde-format
 msgid "Title:"
 msgstr "العنوان:"
 
-#: ConfigAppearance.qml:144
+#: ConfigAppearance.qml:162
 #, kde-format
 msgid "Show Title"
 msgstr "أظهر العنوان"
 
-#: ConfigAppearance.qml:149 facepackages/facegrid/contents/ui/Config.qml:54
+#: ConfigAppearance.qml:167 facepackages/facegrid/contents/ui/Config.qml:54
 #, kde-format
 msgid "Display Style:"
 msgstr "نمط العرض:"
 
-#: ConfigAppearance.qml:169
+#: ConfigAppearance.qml:187
 #, kde-format
 msgid "Get New Display Styles..."
 msgstr "احصل على أنماط عرض جديدة..."
 
-#: ConfigAppearance.qml:179
+#: ConfigAppearance.qml:197
 #, kde-format
 msgid "Minimum Time Between Updates:"
 msgstr "أقل وقت بين التحديثات:"
 
-#: ConfigAppearance.qml:188
+#: ConfigAppearance.qml:206
 #, kde-format
 msgid "No Limit"
 msgstr "لا حدّ"
 
 #. i18ndp doesn't handle floats :(
-#: ConfigAppearance.qml:192
+#: ConfigAppearance.qml:210
 #, kde-format
 msgid "1 second"
 msgstr "ثانية واحدة"
 
-#: ConfigAppearance.qml:194
+#: ConfigAppearance.qml:212
 #, kde-format
 msgid "%1 seconds"
 msgstr "%1 ثانية"

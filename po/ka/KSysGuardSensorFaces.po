@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-09 00:40+0000\n"
+"POT-Creation-Date: 2024-08-31 00:40+0000\n"
 "PO-Revision-Date: 2024-03-22 02:17+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgia <kde-i18n-doc@kde.org>\n"
@@ -18,63 +18,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: ConfigAppearance.qml:107
+#: ConfigAppearance.qml:72
+#, fuzzy, kde-format
+#| msgid "Load Preset..."
+msgid "Load Preset"
+msgstr "პრესეტის ჩატვირთვა..."
+
+#: ConfigAppearance.qml:99
+#, kde-format
+msgid "Delete this preset"
+msgstr ""
+
+#: ConfigAppearance.qml:125
 #, kde-format
 msgid "Presets:"
 msgstr "პრესეტები:"
 
-#: ConfigAppearance.qml:111
+#: ConfigAppearance.qml:129
 #, kde-format
 msgid "Load Preset..."
 msgstr "პრესეტის ჩატვირთვა..."
 
-#: ConfigAppearance.qml:116
+#: ConfigAppearance.qml:134
 #, kde-format
 msgid "Get new presets..."
 msgstr "ახალი პრესეტების მიღება..."
 
-#: ConfigAppearance.qml:128
+#: ConfigAppearance.qml:146
 #, kde-format
 msgid "Save Settings As Preset"
 msgstr "მიმდინარე პარამეტრების პრესეტად შენახვა"
 
-#: ConfigAppearance.qml:138
+#: ConfigAppearance.qml:156
 #, kde-format
 msgid "Title:"
 msgstr "სათაური:"
 
-#: ConfigAppearance.qml:144
+#: ConfigAppearance.qml:162
 #, kde-format
 msgid "Show Title"
 msgstr "სათაურის ჩვენება"
 
-#: ConfigAppearance.qml:149 facepackages/facegrid/contents/ui/Config.qml:54
+#: ConfigAppearance.qml:167 facepackages/facegrid/contents/ui/Config.qml:54
 #, kde-format
 msgid "Display Style:"
 msgstr "ჩვენების სტილი:"
 
-#: ConfigAppearance.qml:169
+#: ConfigAppearance.qml:187
 #, kde-format
 msgid "Get New Display Styles..."
 msgstr "ჩვენების ახალი სტილების მიღება..."
 
-#: ConfigAppearance.qml:179
+#: ConfigAppearance.qml:197
 #, kde-format
 msgid "Minimum Time Between Updates:"
 msgstr "მინიმალური დრო განახლებებს შორის:"
 
-#: ConfigAppearance.qml:188
+#: ConfigAppearance.qml:206
 #, kde-format
 msgid "No Limit"
 msgstr "უსაზღვრო"
 
 #. i18ndp doesn't handle floats :(
-#: ConfigAppearance.qml:192
+#: ConfigAppearance.qml:210
 #, kde-format
 msgid "1 second"
 msgstr "1 წამი"
 
-#: ConfigAppearance.qml:194
+#: ConfigAppearance.qml:212
 #, kde-format
 msgid "%1 seconds"
 msgstr "%1 წამი"

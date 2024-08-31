@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-09 00:40+0000\n"
+"POT-Creation-Date: 2024-08-31 00:40+0000\n"
 "PO-Revision-Date: 2024-03-23 22:49+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -17,63 +17,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.02.0\n"
 
-#: ConfigAppearance.qml:107
+#: ConfigAppearance.qml:72
+#, fuzzy, kde-format
+#| msgid "Load Preset..."
+msgid "Load Preset"
+msgstr "Voorinstellingen laden..."
+
+#: ConfigAppearance.qml:99
+#, kde-format
+msgid "Delete this preset"
+msgstr ""
+
+#: ConfigAppearance.qml:125
 #, kde-format
 msgid "Presets:"
 msgstr "Voorinstellingen:"
 
-#: ConfigAppearance.qml:111
+#: ConfigAppearance.qml:129
 #, kde-format
 msgid "Load Preset..."
 msgstr "Voorinstellingen laden..."
 
-#: ConfigAppearance.qml:116
+#: ConfigAppearance.qml:134
 #, kde-format
 msgid "Get new presets..."
 msgstr "Nieuwe voorinstellingen ophalen..."
 
-#: ConfigAppearance.qml:128
+#: ConfigAppearance.qml:146
 #, kde-format
 msgid "Save Settings As Preset"
 msgstr "Instellingen als voorinstellingen opslaan"
 
-#: ConfigAppearance.qml:138
+#: ConfigAppearance.qml:156
 #, kde-format
 msgid "Title:"
 msgstr "Titel:"
 
-#: ConfigAppearance.qml:144
+#: ConfigAppearance.qml:162
 #, kde-format
 msgid "Show Title"
 msgstr "Titel tonen"
 
-#: ConfigAppearance.qml:149 facepackages/facegrid/contents/ui/Config.qml:54
+#: ConfigAppearance.qml:167 facepackages/facegrid/contents/ui/Config.qml:54
 #, kde-format
 msgid "Display Style:"
 msgstr "Weergavestijl:"
 
-#: ConfigAppearance.qml:169
+#: ConfigAppearance.qml:187
 #, kde-format
 msgid "Get New Display Styles..."
 msgstr "Nieuwe weergavestijlen ophalen..."
 
-#: ConfigAppearance.qml:179
+#: ConfigAppearance.qml:197
 #, kde-format
 msgid "Minimum Time Between Updates:"
 msgstr "Minimum tijd tussen bijwerken:"
 
-#: ConfigAppearance.qml:188
+#: ConfigAppearance.qml:206
 #, kde-format
 msgid "No Limit"
 msgstr "Geen limiet"
 
 #. i18ndp doesn't handle floats :(
-#: ConfigAppearance.qml:192
+#: ConfigAppearance.qml:210
 #, kde-format
 msgid "1 second"
 msgstr "1 seconde"
 
-#: ConfigAppearance.qml:194
+#: ConfigAppearance.qml:212
 #, kde-format
 msgid "%1 seconds"
 msgstr "%1 seconden"

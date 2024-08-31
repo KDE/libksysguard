@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-09 00:40+0000\n"
+"POT-Creation-Date: 2024-08-31 00:40+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,63 +17,74 @@ msgstr ""
 "X-Crowdin-File: /kf6-trunk/messages/libksysguard/KSysGuardSensorFaces.pot\n"
 "X-Crowdin-File-ID: 43539\n"
 
-#: ConfigAppearance.qml:107
+#: ConfigAppearance.qml:72
+#, fuzzy, kde-format
+#| msgid "Load Preset..."
+msgid "Load Preset"
+msgstr "加载预设..."
+
+#: ConfigAppearance.qml:99
+#, kde-format
+msgid "Delete this preset"
+msgstr ""
+
+#: ConfigAppearance.qml:125
 #, kde-format
 msgid "Presets:"
 msgstr "预设："
 
-#: ConfigAppearance.qml:111
+#: ConfigAppearance.qml:129
 #, kde-format
 msgid "Load Preset..."
 msgstr "加载预设..."
 
-#: ConfigAppearance.qml:116
+#: ConfigAppearance.qml:134
 #, kde-format
 msgid "Get new presets..."
 msgstr "获取新预设..."
 
-#: ConfigAppearance.qml:128
+#: ConfigAppearance.qml:146
 #, kde-format
 msgid "Save Settings As Preset"
 msgstr "保存设置为预设"
 
-#: ConfigAppearance.qml:138
+#: ConfigAppearance.qml:156
 #, kde-format
 msgid "Title:"
 msgstr "标题："
 
-#: ConfigAppearance.qml:144
+#: ConfigAppearance.qml:162
 #, kde-format
 msgid "Show Title"
 msgstr "显示标题"
 
-#: ConfigAppearance.qml:149 facepackages/facegrid/contents/ui/Config.qml:54
+#: ConfigAppearance.qml:167 facepackages/facegrid/contents/ui/Config.qml:54
 #, kde-format
 msgid "Display Style:"
 msgstr "显示样式："
 
-#: ConfigAppearance.qml:169
+#: ConfigAppearance.qml:187
 #, kde-format
 msgid "Get New Display Styles..."
 msgstr "获取新显示样式..."
 
-#: ConfigAppearance.qml:179
+#: ConfigAppearance.qml:197
 #, kde-format
 msgid "Minimum Time Between Updates:"
 msgstr "更新最小间隔："
 
-#: ConfigAppearance.qml:188
+#: ConfigAppearance.qml:206
 #, kde-format
 msgid "No Limit"
 msgstr "无限制"
 
 #. i18ndp doesn't handle floats :(
-#: ConfigAppearance.qml:192
+#: ConfigAppearance.qml:210
 #, kde-format
 msgid "1 second"
 msgstr "1 秒"
 
-#: ConfigAppearance.qml:194
+#: ConfigAppearance.qml:212
 #, kde-format
 msgid "%1 seconds"
 msgstr "%1 秒"
