@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-04 12:58+0100\n"
+"PO-Revision-Date: 2024-08-31 14:31+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -313,7 +313,7 @@ msgid ""
 msgstr ""
 "Esta é a cantidade de memoria física real que está a usar este proceso en "
 "si, e aproxímase ao uso se memoria privada do proceso. Non inclúe a memoria "
-"na swap, nin o tamaño do código das bibliotecas compartidas."
+"de intercambio, nin o tamaño do código das bibliotecas compartidas."
 
 #: extended_process_list.cpp:354
 #, kde-format
