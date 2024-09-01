@@ -19,7 +19,6 @@ msgstr ""
 
 #: ConfigAppearance.qml:72
 #, fuzzy, kde-format
-#| msgid "Load Preset..."
 msgid "Load Preset"
 msgstr "加载预设..."
 
