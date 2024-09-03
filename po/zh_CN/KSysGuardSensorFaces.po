@@ -18,14 +18,14 @@ msgstr ""
 "X-Crowdin-File-ID: 43539\n"
 
 #: ConfigAppearance.qml:72
-#, fuzzy, kde-format
+#, kde-format
 msgid "Load Preset"
-msgstr "加载预设..."
+msgstr "加载预设"
 
 #: ConfigAppearance.qml:99
 #, kde-format
 msgid "Delete this preset"
-msgstr ""
+msgstr "删除此预设"
 
 #: ConfigAppearance.qml:125
 #, kde-format
