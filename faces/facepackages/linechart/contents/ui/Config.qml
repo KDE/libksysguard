@@ -39,54 +39,54 @@ Kirigami.FormLayout {
     property real cfg_rangeToX
 
     Item {
-        Kirigami.FormData.label: i18n("Appearance")
+        Kirigami.FormData.label: i18nc("@title:group", "Appearance")
         Kirigami.FormData.isSection: true
     }
     QQC2.CheckBox {
         id: showSensorsLegendCheckbox
-        text: i18n("Show Sensors Legend")
+        text: i18nc("@option:check", "Show legend")
     }
     QQC2.CheckBox {
         id: stackedCheckbox
-        text: i18n("Stacked Charts")
+        text: i18nc("@option:check", "Stacked charts")
     }
     QQC2.CheckBox {
         id: smoothCheckbox
-        text: i18n("Smooth Lines")
+        text: i18nc("@option:check", "Smooth lines")
     }
     QQC2.CheckBox {
         id: showGridLinesCheckbox
-        text: i18n("Show Grid Lines")
+        text: i18nc("@option:check", "Show grid lines")
     }
     QQC2.CheckBox {
         id: showYAxisLabelsCheckbox
-        text: i18n("Show Y Axis Labels")
+        text: i18nc("@option:check", "Show Y axis labels")
     }
     QQC2.SpinBox {
         id: fillOpacitySpin
-        Kirigami.FormData.label: i18n("Fill Opacity:")
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Opacity of area below line:")
         editable: true
         from: 0
         to: 100
     }
     Item {
-        Kirigami.FormData.label: i18n("Data Ranges")
+        Kirigami.FormData.label: i18nc("title:group", "Data Ranges")
         Kirigami.FormData.isSection: true
     }
     QQC2.CheckBox {
         id: rangeAutoYCheckbox
-        text: i18n("Automatic Y Data Range")
+        text: i18nc("@option:check", "Automatic Y data range")
     }
     Faces.SensorRangeSpinBox {
         id: rangeFromYSpin
-        Kirigami.FormData.label: i18n("From (Y):")
+        Kirigami.FormData.label: i18nc("@label:spinbox", "From (Y):")
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoYCheckbox.checked
         sensors: controller.highPrioritySensorIds
     }
     Faces.SensorRangeSpinBox {
         id: rangeToYSpin
-        Kirigami.FormData.label: i18n("To (Y):")
+        Kirigami.FormData.label: i18nc("@label:spinbox", "To (Y):")
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoYCheckbox.checked
         sensors: controller.highPrioritySensorIds
@@ -96,10 +96,10 @@ Kirigami.FormLayout {
         editable: true
         from: 0
         to: Math.pow(2, 31) - 1
-        Kirigami.FormData.label: i18n("Amount of History to Keep:")
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Show last:")
 
         textFromValue: function(value, locale) {
-            return i18ncp("%1 is seconds of history", "%1 second", "%1 seconds", Number(value).toLocaleString(locale, "f", 0));
+            return i18ncp("@item:valuesuffix %1 is seconds of history", "%1 second", "%1 seconds", Number(value).toLocaleString(locale, "f", 0));
         }
         valueFromText: function(value, locale) {
             // Don't use fromLocaleString here since it will error out on extra

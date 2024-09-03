@@ -31,53 +31,53 @@ Kirigami.FormLayout {
 
     QQC2.CheckBox {
         id: showSensorsLegendCheckbox
-        text: i18n("Show Sensors Legend")
+        text: i18nc("@option:check", "Show legend")
     }
     QQC2.SpinBox {
         id: fromAngleSpin
-        Kirigami.FormData.label: i18n("Start from Angle:")
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Starting angle:")
         from: -180
         to: 360
         editable: true
         textFromValue: function(value, locale) {
-            return i18nc("angle degrees", "%1°", value);
+            return i18nc("@label angle degrees", "%1°", value);
         }
         valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text.replace(i18nc("angle degrees", "°"), ""));
+            return Number.fromLocaleString(locale, text.replace(i18nc("@item:intext angle degrees, used to read text from spinbox", "°"), ""));
         }
     }
     QQC2.SpinBox {
         id: toAngleSpin
-        Kirigami.FormData.label: i18n("Total Pie Angle:")
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Total pie angle:")
         from: 0
         to: 360
         editable: true
         textFromValue: function(value, locale) {
-            return i18nc("angle", "%1°", value);
+            return i18nc("@label angle", "%1°", value);
         }
         valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text.replace(i18nc("angle degrees", "°"), ""));
+            return Number.fromLocaleString(locale, text.replace(i18nc("@item:intext angle degrees, used to read text from spinbox", "°"), ""));
         }
     }
     QQC2.CheckBox {
         id: smoothEndsCheckbox
-        text: i18n("Rounded Lines")
+        text: i18nc("@option:check", "Rounded lines")
     }
 
     QQC2.CheckBox {
         id: rangeAutoCheckbox
-        text: i18n("Automatic Data Range")
+        text: i18nc("@option:check", "Automatic data range")
     }
     Faces.SensorRangeSpinBox {
         id: rangeFromSpin
-        Kirigami.FormData.label: i18n("From:")
+        Kirigami.FormData.label: i18nc("@label:spinbox data range", "From:")
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
         sensors: controller.highPrioritySensorIds
     }
     Faces.SensorRangeSpinBox {
         id: rangeToSpin
-        Kirigami.FormData.label: i18n("To:")
+        Kirigami.FormData.label: i18nc("@label:spinbox data range", "To:")
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
         sensors: controller.highPrioritySensorIds

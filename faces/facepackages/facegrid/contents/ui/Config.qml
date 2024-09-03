@@ -32,14 +32,14 @@ ColumnLayout {
 
         SpinBox {
             id: columnCountSpin
-            Kirigami.FormData.label: i18n("Number of Columns:")
+            Kirigami.FormData.label: i18nc("@label:spinbox", "Number of columns:")
             editable: true
             from: 0
             to: 99999
 
             textFromValue: function(value, locale) {
                 if (value <= 0) {
-                    return i18nc("@label", "Automatic")
+                    return i18nc("@label automatic number of columns", "Automatic")
                 }
                 return value.toString()
             }
@@ -51,7 +51,7 @@ ColumnLayout {
 
         ComboBox {
             id: faceCombo
-            Kirigami.FormData.label: i18n("Display Style:")
+            Kirigami.FormData.label: i18nc("@label:listbox items are sensor face names", "Display style:")
 
             model: KItemModels.KSortFilterProxyModel {
                 sourceModel: controller.availableFacesModel

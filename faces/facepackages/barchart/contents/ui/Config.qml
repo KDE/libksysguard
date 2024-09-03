@@ -32,13 +32,13 @@ Kirigami.FormLayout {
     property alias cfg_rangeToMultiplier: rangeToSpin.multiplier
 
     QQC2.CheckBox {
-        Kirigami.FormData.label: i18nc("General options", "General:")
+        Kirigami.FormData.label: i18nc("@title:group General options", "General:")
         id: showSensorsLegendCheckbox
-        text: i18n("Show Sensors Legend")
+        text: i18nc("@option:check", "Show legend")
     }
     QQC2.CheckBox {
         id: stackedCheckbox
-        text: i18n("Stacked Bars")
+        text: i18nc("@option:check", "Stacked bars")
     }
 
     Item {
@@ -46,7 +46,7 @@ Kirigami.FormLayout {
     }
 
     QQC2.RadioButton {
-        Kirigami.FormData.label: i18nc("Orientation of bar chart", "Bar Orientation:")
+        Kirigami.FormData.label: i18nc("@label for radiobutton group, Orientation of bar chart", "Bar orientation:")
         id: verticalBarsRadio
         text: i18nc("@option:radio Vertical option for the bar chart", "Vertical")
         checked: !cfg_horizontalBars
@@ -64,29 +64,29 @@ Kirigami.FormLayout {
     }
 
     QQC2.CheckBox {
-        Kirigami.FormData.label: i18nc("Options about axis and label of bar chart", "Axis:")
+        Kirigami.FormData.label: i18nc("@label Options about axis and label of bar chart", "Axis:")
         id: showYAxisLabelsCheckbox
-        text: i18n("Show Y Axis Labels")
+        text: i18nc("@option:check", "Show Y axis labels")
         enabled: !horizontalBarsRadio.checked
     }
     QQC2.CheckBox {
         id: showGridLinesCheckBox
-        text: i18n("Show Grid Lines")
+        text: i18nc("@option:check", "Show grid lines")
     }
     QQC2.CheckBox {
         id: rangeAutoCheckbox
-        text: i18n("Automatic Data Range")
+        text: i18nc("@option:check", "Automatic data range")
     }
     Faces.SensorRangeSpinBox {
         id: rangeFromSpin
-        Kirigami.FormData.label: i18n("From:")
+        Kirigami.FormData.label: i18nc("@label:spinbox data range", "From:")
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
         sensors: controller.highPrioritySensorIds
     }
     Faces.SensorRangeSpinBox {
         id: rangeToSpin
-        Kirigami.FormData.label: i18n("To:")
+        Kirigami.FormData.label: i18nc("@label:spinbox data range", "To:")
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
         sensors: controller.highPrioritySensorIds

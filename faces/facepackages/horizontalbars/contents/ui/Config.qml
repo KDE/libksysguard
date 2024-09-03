@@ -26,18 +26,18 @@ Kirigami.FormLayout {
 
     QQC2.CheckBox {
         id: rangeAutoCheckbox
-        text: i18n("Automatic Data Range")
+        text: i18nc("@option:check", "Automatic data range")
     }
     Faces.SensorRangeSpinBox {
         id: rangeFromSpin
-        Kirigami.FormData.label: i18n("From:")
+        Kirigami.FormData.label: i18nc("@label:spinbox data range", "From:")
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
         sensors: controller.highPrioritySensorIds
     }
     Faces.SensorRangeSpinBox {
         id: rangeToSpin
-        Kirigami.FormData.label: i18n("To:")
+        Kirigami.FormData.label: i18nc("@label:spinbox data range", "To:")
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         enabled: !rangeAutoCheckbox.checked
         sensors: controller.highPrioritySensorIds
