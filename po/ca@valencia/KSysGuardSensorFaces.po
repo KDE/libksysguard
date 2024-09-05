@@ -4,14 +4,14 @@
 # version 3 or later versions approved by the membership of KDE e.V.
 # or the same license as the source of its messages in English.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2020, 2021, 2022, 2023, 2024.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-31 00:40+0000\n"
-"PO-Revision-Date: 2024-03-22 18:34+0100\n"
+"PO-Revision-Date: 2024-08-31 11:47+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,18 +19,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: ConfigAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "Load Preset..."
+#, kde-format
 msgid "Load Preset"
-msgstr "Carrega els valors predefinits…"
+msgstr "Carrega uns valors predefinits"
 
 #: ConfigAppearance.qml:99
 #, kde-format
 msgid "Delete this preset"
-msgstr ""
+msgstr "Suprimix estos valors predefinits"
 
 #: ConfigAppearance.qml:125
 #, kde-format
@@ -40,7 +39,7 @@ msgstr "Valors predefinits:"
 #: ConfigAppearance.qml:129
 #, kde-format
 msgid "Load Preset..."
-msgstr "Carrega els valors predefinits…"
+msgstr "Carrega uns valors predefinits…"
 
 #: ConfigAppearance.qml:134
 #, kde-format
