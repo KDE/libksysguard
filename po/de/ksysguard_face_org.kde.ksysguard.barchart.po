@@ -1,10 +1,11 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-#
 # Burkhard Lück <lueck@hube-lueck.de>, 2021.
+# SPDX-FileCopyrightText: 2024 Johannes Obermayr <johannesobermayr@gmx.de>
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libksysguard\n"
+"Project-Id-Version: ksysguard_face_org.kde.ksysguard.barchart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-08-07 00:17+0000\n"
 "PO-Revision-Date: 2021-05-10 17:18+0200\n"
@@ -15,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #: contents/ui/Config.qml:35
 #, kde-format
