@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-08 00:39+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2024-03-27 23:51+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Asturian <alministradores@softastur.org>\n"
@@ -19,15 +19,18 @@ msgstr ""
 
 #: contents/ui/Config.qml:29
 #, kde-format
-msgid "Automatic Data Range"
+msgctxt "@option:check"
+msgid "Automatic data range"
 msgstr ""
 
 #: contents/ui/Config.qml:33
 #, kde-format
+msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr ""
 
 #: contents/ui/Config.qml:40
 #, kde-format
+msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr ""

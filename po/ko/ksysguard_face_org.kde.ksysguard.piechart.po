@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-12-09 00:44+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2022-02-20 21:29+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18,54 +18,78 @@ msgstr ""
 "X-Generator: Lokalize 21.08.1\n"
 
 #: contents/ui/Config.qml:34
-#, kde-format
-msgid "Show Sensors Legend"
+#, fuzzy, kde-format
+#| msgid "Show Sensors Legend"
+msgctxt "@option:check"
+msgid "Show legend"
 msgstr "센서 범례 표시"
 
 #: contents/ui/Config.qml:38
-#, kde-format
-msgid "Start from Angle:"
+#, fuzzy, kde-format
+#| msgid "Start from Angle:"
+msgctxt "@label:spinbox"
+msgid "Starting angle:"
 msgstr "시작 각도:"
 
 #: contents/ui/Config.qml:43
-#, kde-format
-msgctxt "angle degrees"
+#, fuzzy, kde-format
+#| msgctxt "angle degrees"
+#| msgid "%1°"
+msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: contents/ui/Config.qml:46 contents/ui/Config.qml:59
-#, kde-format
-msgctxt "angle degrees"
+#, fuzzy, kde-format
+#| msgctxt "angle degrees"
+#| msgid "°"
+msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: contents/ui/Config.qml:51
-#, kde-format
-msgid "Total Pie Angle:"
+#, fuzzy, kde-format
+#| msgid "Total Pie Angle:"
+msgctxt "@label:spinbox"
+msgid "Total pie angle:"
 msgstr "총 파이 각도:"
 
 #: contents/ui/Config.qml:56
-#, kde-format
-msgctxt "angle"
+#, fuzzy, kde-format
+#| msgctxt "angle degrees"
+#| msgid "%1°"
+msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: contents/ui/Config.qml:64
-#, kde-format
-msgid "Rounded Lines"
+#, fuzzy, kde-format
+#| msgid "Rounded Lines"
+msgctxt "@option:check"
+msgid "Rounded lines"
 msgstr "둥근 선"
 
 #: contents/ui/Config.qml:69
-#, kde-format
-msgid "Automatic Data Range"
+#, fuzzy, kde-format
+#| msgid "Automatic Data Range"
+msgctxt "@option:check"
+msgid "Automatic data range"
 msgstr "자동 데이터 범위"
 
 #: contents/ui/Config.qml:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "From:"
+msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "시작:"
 
 #: contents/ui/Config.qml:80
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "To:"
+msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "끝:"
+
+#~ msgctxt "angle"
+#~ msgid "%1°"
+#~ msgstr "%1°"

@@ -6,9 +6,9 @@
 # Automatically generated, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: libksysguard\n"
+"Project-Id-Version: ksysguard_face_org.kde.ksysguard.colorgrid\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-13 00:48+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2023-03-20 20:25+0100\n"
 "Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -20,17 +20,23 @@ msgstr ""
 "X-Generator: Lokalize 22.12.3\n"
 
 #: contents/ui/Config.qml:25
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use sensor color:"
+msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Sensor-Farbe verwenden:"
 
 #: contents/ui/Config.qml:30
-#, kde-format
-msgid "Number of Columns:"
+#, fuzzy, kde-format
+#| msgid "Number of Columns:"
+msgctxt "@label:spinbox"
+msgid "Number of columns:"
 msgstr "Anzahl der Spalten:"
 
 #: contents/ui/Config.qml:37
-#, kde-format
-msgctxt "@label"
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Automatic"
+msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automatisch"

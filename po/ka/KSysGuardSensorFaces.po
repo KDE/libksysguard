@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-31 00:40+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2024-08-31 03:40+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgia <kde-i18n-doc@kde.org>\n"
@@ -58,7 +58,7 @@ msgstr "სათაური:"
 msgid "Show Title"
 msgstr "სათაურის ჩვენება"
 
-#: ConfigAppearance.qml:167 facepackages/facegrid/contents/ui/Config.qml:54
+#: ConfigAppearance.qml:167
 #, kde-format
 msgid "Display Style:"
 msgstr "ჩვენების სტილი:"
@@ -107,27 +107,35 @@ msgid "Text-Only Sensors"
 msgstr "მხოლოდ ტექსტიანი სენსორები"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
-#, kde-format
-msgctxt "General options"
+#, fuzzy, kde-format
+#| msgctxt "General options"
+#| msgid "General:"
+msgctxt "@title:group General options"
 msgid "General:"
 msgstr "ზოგადი:"
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
-#, kde-format
-msgid "Show Sensors Legend"
+#, fuzzy, kde-format
+#| msgid "Show Sensors Legend"
+msgctxt "@option:check"
+msgid "Show legend"
 msgstr "სენსორების ახსნის ჩვენება"
 
 #: facepackages/barchart/contents/ui/Config.qml:41
-#, kde-format
-msgid "Stacked Bars"
+#, fuzzy, kde-format
+#| msgid "Stacked Bars"
+msgctxt "@option:check"
+msgid "Stacked bars"
 msgstr "მიწყობილი ჩოჩიები"
 
 #: facepackages/barchart/contents/ui/Config.qml:49
-#, kde-format
-msgctxt "Orientation of bar chart"
-msgid "Bar Orientation:"
+#, fuzzy, kde-format
+#| msgctxt "Orientation of bar chart"
+#| msgid "Bar Orientation:"
+msgctxt "@label for radiobutton group, Orientation of bar chart"
+msgid "Bar orientation:"
 msgstr "პანელის ორიენტაცია:"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
@@ -143,151 +151,210 @@ msgid "Horizontal"
 msgstr "ჰორიზონტალური"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
-#, kde-format
-msgctxt "Options about axis and label of bar chart"
+#, fuzzy, kde-format
+#| msgctxt "Options about axis and label of bar chart"
+#| msgid "Axis:"
+msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
 msgstr "ღერძი:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
-#, kde-format
-msgid "Show Y Axis Labels"
+#, fuzzy, kde-format
+#| msgid "Show Y Axis Labels"
+msgctxt "@option:check"
+msgid "Show Y axis labels"
 msgstr "Y ღერძის ჭდეების ჩვენება"
 
 #: facepackages/barchart/contents/ui/Config.qml:74
 #: facepackages/linechart/contents/ui/Config.qml:59
-#, kde-format
-msgid "Show Grid Lines"
+#, fuzzy, kde-format
+#| msgid "Show Grid Lines"
+msgctxt "@option:check"
+msgid "Show grid lines"
 msgstr "ბადის ხაზების ჩვენება"
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
-#, kde-format
-msgid "Automatic Data Range"
+#, fuzzy, kde-format
+#| msgid "Automatic Data Range"
+msgctxt "@option:check"
+msgid "Automatic data range"
 msgstr "მონაცემების ავტომატური დიაპაზონი"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "From:"
+msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "ვისგან:"
 
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "To:"
+msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "ვის:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:25
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use sensor color:"
+msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "სენსორის ფერი:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
-#, kde-format
-msgid "Number of Columns:"
+#, fuzzy, kde-format
+#| msgid "Number of Columns:"
+msgctxt "@label:spinbox"
+msgid "Number of columns:"
 msgstr "სვეტების რაოდენობა:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:37
 #: facepackages/facegrid/contents/ui/Config.qml:42
-#, kde-format
-msgctxt "@label"
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Automatic"
+msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "ავტომატური"
 
+#: facepackages/facegrid/contents/ui/Config.qml:54
+#, fuzzy, kde-format
+#| msgid "Display Style:"
+msgctxt "@label:listbox items are sensor face names"
+msgid "Display style:"
+msgstr "ჩვენების სტილი:"
+
 #: facepackages/linechart/contents/ui/Config.qml:42
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Appearance"
+msgctxt "@title:group"
 msgid "Appearance"
 msgstr "გარემოს იერსახე"
 
 #: facepackages/linechart/contents/ui/Config.qml:51
-#, kde-format
-msgid "Stacked Charts"
+#, fuzzy, kde-format
+#| msgid "Stacked Charts"
+msgctxt "@option:check"
+msgid "Stacked charts"
 msgstr "მიწყობილი გრაფიკები"
 
 #: facepackages/linechart/contents/ui/Config.qml:55
-#, kde-format
-msgid "Smooth Lines"
+#, fuzzy, kde-format
+#| msgid "Smooth Lines"
+msgctxt "@option:check"
+msgid "Smooth lines"
 msgstr "რბილი ხაზებ"
 
 #: facepackages/linechart/contents/ui/Config.qml:67
 #, kde-format
-msgid "Fill Opacity:"
-msgstr "გაუმჭვირვალეობით შევსება:"
+msgctxt "@label:spinbox"
+msgid "Opacity of area below line:"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Data Ranges"
+msgctxt "title:group"
 msgid "Data Ranges"
 msgstr "მონაცემის დიაპაზონები"
 
 #: facepackages/linechart/contents/ui/Config.qml:78
-#, kde-format
-msgid "Automatic Y Data Range"
+#, fuzzy, kde-format
+#| msgid "Automatic Y Data Range"
+msgctxt "@option:check"
+msgid "Automatic Y data range"
 msgstr "Y მონაცემების ავტომატური დიაპაზონი"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "From (Y):"
+msgctxt "@label:spinbox"
 msgid "From (Y):"
 msgstr "საიდან (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:89
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "To (Y):"
+msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "სადამდე(Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:99
-#, kde-format
-msgid "Amount of History to Keep:"
-msgstr "დასატოვებელი ისტორიის რაოდენობა:"
+#, fuzzy, kde-format
+#| msgid "Show Title"
+msgctxt "@label:spinbox"
+msgid "Show last:"
+msgstr "სათაურის ჩვენება"
 
 #: facepackages/linechart/contents/ui/Config.qml:102
-#, kde-format
-msgctxt "%1 is seconds of history"
+#, fuzzy, kde-format
+#| msgctxt "%1 is seconds of history"
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 წამი"
 msgstr[1] "%1 წამი"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
-#, kde-format
-msgid "Start from Angle:"
+#, fuzzy, kde-format
+#| msgid "Start from Angle:"
+msgctxt "@label:spinbox"
+msgid "Starting angle:"
 msgstr "დასაწყისის კუთხე:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
-#, kde-format
-msgctxt "angle degrees"
+#, fuzzy, kde-format
+#| msgctxt "angle degrees"
+#| msgid "%1°"
+msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:46
 #: facepackages/piechart/contents/ui/Config.qml:59
-#, kde-format
-msgctxt "angle degrees"
+#, fuzzy, kde-format
+#| msgctxt "angle degrees"
+#| msgid "°"
+msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: facepackages/piechart/contents/ui/Config.qml:51
-#, kde-format
-msgid "Total Pie Angle:"
+#, fuzzy, kde-format
+#| msgid "Total Pie Angle:"
+msgctxt "@label:spinbox"
+msgid "Total pie angle:"
 msgstr "სრული კუთხე:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
-#, kde-format
-msgctxt "angle"
+#, fuzzy, kde-format
+#| msgctxt "angle degrees"
+#| msgid "%1°"
+msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:64
-#, kde-format
-msgid "Rounded Lines"
+#, fuzzy, kde-format
+#| msgid "Rounded Lines"
+msgctxt "@option:check"
+msgid "Rounded lines"
 msgstr "მომრგვალებული ხაზები"
 
 #: facepackages/textonly/contents/ui/Config.qml:24
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Group sensors based on the value of the total sensors."
+msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "სენსორების ჯამური მნიშვნელობის მიხედვით დალაგება."
 
@@ -312,6 +379,16 @@ msgstr "უკან"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "სისტემური მონიტორის სენსორი"
+
+#~ msgid "Fill Opacity:"
+#~ msgstr "გაუმჭვირვალეობით შევსება:"
+
+#~ msgid "Amount of History to Keep:"
+#~ msgstr "დასატოვებელი ისტორიის რაოდენობა:"
+
+#~ msgctxt "angle"
+#~ msgid "%1°"
+#~ msgstr "%1°"
 
 #~ msgid "User Interface"
 #~ msgstr "მომხმარებლის ინტერფეისი"

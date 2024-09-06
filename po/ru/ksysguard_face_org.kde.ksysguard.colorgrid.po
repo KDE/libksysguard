@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-13 00:48+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2023-03-17 16:15+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -19,17 +19,23 @@ msgstr ""
 "X-Generator: Lokalize 22.08.3\n"
 
 #: contents/ui/Config.qml:25
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use sensor color:"
+msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Использовать цвет датчика:"
 
 #: contents/ui/Config.qml:30
-#, kde-format
-msgid "Number of Columns:"
+#, fuzzy, kde-format
+#| msgid "Number of Columns:"
+msgctxt "@label:spinbox"
+msgid "Number of columns:"
 msgstr "Количество столбцов:"
 
 #: contents/ui/Config.qml:37
-#, kde-format
-msgctxt "@label"
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Automatic"
+msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Автоматически"

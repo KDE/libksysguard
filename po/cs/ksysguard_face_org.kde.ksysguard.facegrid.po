@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-01-29 00:45+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2021-09-01 11:22+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18,17 +18,23 @@ msgstr ""
 "X-Generator: Lokalize 21.08.0\n"
 
 #: contents/ui/Config.qml:35
-#, kde-format
-msgid "Number of Columns:"
+#, fuzzy, kde-format
+#| msgid "Number of Columns:"
+msgctxt "@label:spinbox"
+msgid "Number of columns:"
 msgstr "Počet sloupců:"
 
 #: contents/ui/Config.qml:42
-#, kde-format
-msgctxt "@label"
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Automatic"
+msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automaticky"
 
 #: contents/ui/Config.qml:54
-#, kde-format
-msgid "Display Style:"
+#, fuzzy, kde-format
+#| msgid "Display Style:"
+msgctxt "@label:listbox items are sensor face names"
+msgid "Display style:"
 msgstr "Styl zobrazení:"

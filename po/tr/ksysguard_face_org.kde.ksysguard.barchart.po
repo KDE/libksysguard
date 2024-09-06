@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:39+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2024-03-22 15:23+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -18,25 +18,33 @@ msgstr ""
 "X-Generator: Lokalize 24.02.1\n"
 
 #: contents/ui/Config.qml:35
-#, kde-format
-msgctxt "General options"
+#, fuzzy, kde-format
+#| msgctxt "General options"
+#| msgid "General:"
+msgctxt "@title:group General options"
 msgid "General:"
 msgstr "Genel:"
 
 #: contents/ui/Config.qml:37
-#, kde-format
-msgid "Show Sensors Legend"
+#, fuzzy, kde-format
+#| msgid "Show Sensors Legend"
+msgctxt "@option:check"
+msgid "Show legend"
 msgstr "Algılayıcı Göstergelerini Göster"
 
 #: contents/ui/Config.qml:41
-#, kde-format
-msgid "Stacked Bars"
+#, fuzzy, kde-format
+#| msgid "Stacked Bars"
+msgctxt "@option:check"
+msgid "Stacked bars"
 msgstr "Yığılmış Çubuklar"
 
 #: contents/ui/Config.qml:49
-#, kde-format
-msgctxt "Orientation of bar chart"
-msgid "Bar Orientation:"
+#, fuzzy, kde-format
+#| msgctxt "Orientation of bar chart"
+#| msgid "Bar Orientation:"
+msgctxt "@label for radiobutton group, Orientation of bar chart"
+msgid "Bar orientation:"
 msgstr "Çubuk yönelimi:"
 
 #: contents/ui/Config.qml:51
@@ -52,32 +60,44 @@ msgid "Horizontal"
 msgstr "Yatay"
 
 #: contents/ui/Config.qml:67
-#, kde-format
-msgctxt "Options about axis and label of bar chart"
+#, fuzzy, kde-format
+#| msgctxt "Options about axis and label of bar chart"
+#| msgid "Axis:"
+msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
 msgstr "Eksen:"
 
 #: contents/ui/Config.qml:69
-#, kde-format
-msgid "Show Y Axis Labels"
+#, fuzzy, kde-format
+#| msgid "Show Y Axis Labels"
+msgctxt "@option:check"
+msgid "Show Y axis labels"
 msgstr "Y Ekseni Etiketlerini Göster"
 
 #: contents/ui/Config.qml:74
-#, kde-format
-msgid "Show Grid Lines"
+#, fuzzy, kde-format
+#| msgid "Show Grid Lines"
+msgctxt "@option:check"
+msgid "Show grid lines"
 msgstr "Izgara Çizgilerini Göster"
 
 #: contents/ui/Config.qml:78
-#, kde-format
-msgid "Automatic Data Range"
+#, fuzzy, kde-format
+#| msgid "Automatic Data Range"
+msgctxt "@option:check"
+msgid "Automatic data range"
 msgstr "Kendiliğinden Veri Erimi"
 
 #: contents/ui/Config.qml:82
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "From:"
+msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Nereden:"
 
 #: contents/ui/Config.qml:89
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "To:"
+msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Nereye:"

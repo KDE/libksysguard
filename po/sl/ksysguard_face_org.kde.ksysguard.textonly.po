@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-07-03 00:18+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2020-08-19 10:47+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -19,6 +19,8 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 
 #: contents/ui/Config.qml:24
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Group sensors based on the value of the total sensors."
+msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "Skupinski senzorji na podlagi vrednosti totalnih senzorjev."

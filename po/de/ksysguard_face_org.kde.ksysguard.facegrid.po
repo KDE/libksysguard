@@ -7,9 +7,9 @@
 # Automatically generated, 2021.
 msgid ""
 msgstr ""
-"Project-Id-Version: libksysguard\n"
+"Project-Id-Version: ksysguard_face_org.kde.ksysguard.facegrid\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-01-29 00:45+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2021-11-02 18:58+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -21,17 +21,23 @@ msgstr ""
 "X-Generator: Lokalize 21.08.2\n"
 
 #: contents/ui/Config.qml:35
-#, kde-format
-msgid "Number of Columns:"
+#, fuzzy, kde-format
+#| msgid "Number of Columns:"
+msgctxt "@label:spinbox"
+msgid "Number of columns:"
 msgstr "Anzahl der Spalten:"
 
 #: contents/ui/Config.qml:42
-#, kde-format
-msgctxt "@label"
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Automatic"
+msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automatisch"
 
 #: contents/ui/Config.qml:54
-#, kde-format
-msgid "Display Style:"
+#, fuzzy, kde-format
+#| msgid "Display Style:"
+msgctxt "@label:listbox items are sensor face names"
+msgid "Display style:"
 msgstr "Anzeige-Stil:"

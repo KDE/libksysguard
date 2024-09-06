@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-01-29 00:45+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2022-10-31 16:38+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -18,17 +18,23 @@ msgstr ""
 "X-Generator: Lokalize 22.08.1\n"
 
 #: contents/ui/Config.qml:35
-#, kde-format
-msgid "Number of Columns:"
+#, fuzzy, kde-format
+#| msgid "Number of Columns:"
+msgctxt "@label:spinbox"
+msgid "Number of columns:"
 msgstr "Số lượng cột:"
 
 #: contents/ui/Config.qml:42
-#, kde-format
-msgctxt "@label"
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Automatic"
+msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Tự động"
 
 #: contents/ui/Config.qml:54
-#, kde-format
-msgid "Display Style:"
+#, fuzzy, kde-format
+#| msgid "Display Style:"
+msgctxt "@label:listbox items are sensor face names"
+msgid "Display style:"
 msgstr "Kiểu cách hiển thị:"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-08 00:39+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2024-02-10 00:17+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18,16 +18,22 @@ msgstr ""
 "X-Generator: Lokalize 23.08.1\n"
 
 #: contents/ui/Config.qml:29
-#, kde-format
-msgid "Automatic Data Range"
+#, fuzzy, kde-format
+#| msgid "Automatic Data Range"
+msgctxt "@option:check"
+msgid "Automatic data range"
 msgstr "자동 데이터 범위"
 
 #: contents/ui/Config.qml:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "From:"
+msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "시작:"
 
 #: contents/ui/Config.qml:40
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "To:"
+msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "끝:"

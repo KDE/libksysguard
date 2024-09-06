@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-07-03 00:18+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2023-04-15 22:48+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -19,6 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: contents/ui/Config.qml:24
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Group sensors based on the value of the total sensors."
+msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "Grupigi sentilojn surbaze de la valoro de la sentiltotalo."

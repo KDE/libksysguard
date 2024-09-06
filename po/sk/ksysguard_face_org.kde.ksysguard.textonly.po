@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org.kde.ksysguard.textonly\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-07-03 00:18+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2020-07-31 20:33+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -16,6 +16,8 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: contents/ui/Config.qml:24
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Group sensors based on the value of the total sensors."
+msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "Zoskupiť senzory podľa hodnoty celkových senzorov."

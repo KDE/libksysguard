@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-07-03 00:18+0000\n"
+"POT-Creation-Date: 2024-09-06 00:41+0000\n"
 "PO-Revision-Date: 2020-09-06 01:18+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18,6 +18,8 @@ msgstr ""
 "X-Generator: Lokalize 19.12.3\n"
 
 #: contents/ui/Config.qml:24
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Group sensors based on the value of the total sensors."
+msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "총 센서의 값을 기준으로 센서를 그룹화합니다."
