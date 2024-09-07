@@ -22,7 +22,7 @@ msgstr ""
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr "常规："
+msgstr ""
 
 #: contents/ui/Config.qml:37
 #, kde-format
@@ -56,7 +56,7 @@ msgstr "水平"
 #, kde-format
 msgctxt "Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr "轴："
+msgstr ""
 
 #: contents/ui/Config.qml:69
 #, kde-format

@@ -98,7 +98,7 @@ msgstr "仅文本传感器"
 #, kde-format
 msgctxt "General options"
 msgid "General:"
-msgstr "常规："
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
@@ -134,7 +134,7 @@ msgstr "水平"
 #, kde-format
 msgctxt "Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr "轴："
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
