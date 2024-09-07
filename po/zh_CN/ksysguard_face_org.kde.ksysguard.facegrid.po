@@ -19,23 +19,19 @@ msgstr ""
 "X-Crowdin-File-ID: 42891\n"
 
 #: contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgid "Number of Columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr "列数："
+msgstr ""
 
 #: contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "自动"
 
 #: contents/ui/Config.qml:54
-#, fuzzy, kde-format
-#| msgid "Display Style:"
+#, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
-msgstr "显示风格："
+msgstr ""

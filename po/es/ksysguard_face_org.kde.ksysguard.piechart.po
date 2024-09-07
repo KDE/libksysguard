@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the libksysguard package.
 #
 # Automatically generated, 2020.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020, 2021.
+# SPDX-FileCopyrightText: 2020, 2021, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2021-12-09 19:01+0100\n"
+"PO-Revision-Date: 2024-09-06 03:44+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,77 +17,64 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.11.90\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: contents/ui/Config.qml:34
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "Mostrar leyenda de los sensores"
+msgstr "Mostrar leyenda"
 
 #: contents/ui/Config.qml:38
-#, fuzzy, kde-format
-#| msgid "Start from Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr "Empezar en el ángulo:"
+msgstr "Ángulo inicial:"
 
 #: contents/ui/Config.qml:43
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: contents/ui/Config.qml:46 contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "°"
+#, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Total Pie Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Ángulo total de la tarta:"
 
 #: contents/ui/Config.qml:56
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: contents/ui/Config.qml:64
-#, fuzzy, kde-format
-#| msgid "Rounded Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "Líneas redondeadas"
 
 #: contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Intervalo de datos automático"
 
 #: contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Desde:"
 
 #: contents/ui/Config.qml:80
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Hasta:"

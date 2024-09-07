@@ -19,22 +19,19 @@ msgstr ""
 "X-Crowdin-File-ID: 49392\n"
 
 #: contents/ui/Config.qml:29
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "自动数据范围"
+msgstr ""
 
 #: contents/ui/Config.qml:33
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr "起点："
+msgstr ""
 
 #: contents/ui/Config.qml:40
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr "终点："
+msgstr ""

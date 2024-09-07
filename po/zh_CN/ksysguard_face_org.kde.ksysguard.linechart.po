@@ -19,46 +19,40 @@ msgstr ""
 "X-Crowdin-File-ID: 43285\n"
 
 #: contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "外观"
 
 #: contents/ui/Config.qml:47
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "显示传感器图例"
+msgstr ""
 
 #: contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Stacked Charts"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
-msgstr "堆叠柱状图"
+msgstr ""
 
 #: contents/ui/Config.qml:55
-#, fuzzy, kde-format
-#| msgid "Smooth Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
-msgstr "平滑线条"
+msgstr ""
 
 #: contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr "显示网格线"
+msgstr ""
 
 #: contents/ui/Config.qml:63
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr "显示 Y 轴标签"
+msgstr ""
 
 #: contents/ui/Config.qml:67
 #, kde-format
@@ -67,29 +61,25 @@ msgid "Opacity of area below line:"
 msgstr ""
 
 #: contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "Data Ranges"
+#, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
 msgstr "数据范围"
 
 #: contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Y Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr "自动 Y 轴数据范围"
+msgstr ""
 
 #: contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
 msgstr "来源 (Y)："
 
 #: contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "目标 (Y)："
@@ -101,17 +91,8 @@ msgid "Show last:"
 msgstr ""
 
 #: contents/ui/Config.qml:102
-#, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 秒"
-
-#~ msgid "Fill Opacity:"
-#~ msgstr "填充不透明度："
-
-#~ msgid "Amount of History to Keep:"
-#~ msgstr "要保留的历史记录数量："

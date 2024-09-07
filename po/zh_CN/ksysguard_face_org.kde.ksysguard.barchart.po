@@ -19,34 +19,28 @@ msgstr ""
 "X-Crowdin-File-ID: 42643\n"
 
 #: contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgctxt "General options"
-#| msgid "General:"
+#, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr "常规："
+msgstr ""
 
 #: contents/ui/Config.qml:37
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "显示传感器图例"
+msgstr ""
 
 #: contents/ui/Config.qml:41
-#, fuzzy, kde-format
-#| msgid "Stacked Bars"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
-msgstr "堆叠柱状图"
+msgstr ""
 
 #: contents/ui/Config.qml:49
-#, fuzzy, kde-format
-#| msgctxt "Orientation of bar chart"
-#| msgid "Bar Orientation:"
+#, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr "图表方向："
+msgstr ""
 
 #: contents/ui/Config.qml:51
 #, kde-format
@@ -61,44 +55,37 @@ msgid "Horizontal"
 msgstr "水平"
 
 #: contents/ui/Config.qml:67
-#, fuzzy, kde-format
-#| msgctxt "Options about axis and label of bar chart"
-#| msgid "Axis:"
+#, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr "轴："
+msgstr ""
 
 #: contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr "显示 Y 轴标签"
+msgstr ""
 
 #: contents/ui/Config.qml:74
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr "显示网格线"
+msgstr ""
 
 #: contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "自动数据范围"
+msgstr ""
 
 #: contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "来源："
 
 #: contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "目标："

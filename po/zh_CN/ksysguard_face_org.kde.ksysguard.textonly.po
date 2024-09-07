@@ -19,8 +19,7 @@ msgstr ""
 "X-Crowdin-File-ID: 42419\n"
 
 #: contents/ui/Config.qml:24
-#, fuzzy, kde-format
-#| msgid "Group sensors based on the value of the total sensors."
+#, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "传感器分组，基于所有传感器的数值"

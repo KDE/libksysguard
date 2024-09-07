@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2022-09-12 11:20+0200\n"
+"PO-Revision-Date: 2024-09-06 04:09+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,46 +16,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "გარეგნობა"
 
 #: contents/ui/Config.qml:47
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "სენსორების ახსნის ჩვენება"
+msgstr "ახსნის ჩვენება"
 
 #: contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Stacked Charts"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
 msgstr "მიწყობილი გრაფიკები"
 
 #: contents/ui/Config.qml:55
-#, fuzzy, kde-format
-#| msgid "Smooth Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
-msgstr "რბილი ხაზებ"
+msgstr "ხაზების მოგლუვება"
 
 #: contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
 msgstr "ბადის ხაზების ჩვენება"
 
 #: contents/ui/Config.qml:63
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
 msgstr "Y ღერძის ჭდეების ჩვენება"
@@ -64,32 +58,28 @@ msgstr "Y ღერძის ჭდეების ჩვენება"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr ""
+msgstr "ალაგის გაუმჭვირვალობა ხაზის ქვეშ:"
 
 #: contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "Data Ranges"
+#, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
-msgstr "მონაცემის დიაპაზონები"
+msgstr "მონაცემის შუალედები"
 
 #: contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Y Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
 msgstr "Y მონაცემების ავტომატური დიაპაზონი"
 
 #: contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
 msgstr "საიდან (Y):"
 
 #: contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "სადამდე(Y):"
@@ -98,13 +88,10 @@ msgstr "სადამდე(Y):"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr ""
+msgstr "ბოლოს ჩვენება:"
 
 #: contents/ui/Config.qml:102
-#, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"

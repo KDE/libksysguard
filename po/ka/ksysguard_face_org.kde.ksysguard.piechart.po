@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2022-07-22 14:10+0200\n"
+"PO-Revision-Date: 2024-09-06 04:10+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,80 +16,67 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: contents/ui/Config.qml:34
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "სენსორების ახსნის ჩვენება"
+msgstr "ახსნის ჩვენება"
 
 #: contents/ui/Config.qml:38
-#, fuzzy, kde-format
-#| msgid "Start from Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr "დასაწყისის კუთხე:"
+msgstr "საწყისი კუთხე:"
 
 #: contents/ui/Config.qml:43
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: contents/ui/Config.qml:46 contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "°"
+#, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Total Pie Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "სრული კუთხე:"
 
 #: contents/ui/Config.qml:56
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: contents/ui/Config.qml:64
-#, fuzzy, kde-format
-#| msgid "Rounded Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "მომრგვალებული ხაზები"
 
 #: contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "მონაცემების ავტომატური დიაპაზონი"
 
 #: contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr "ვისგან:"
+msgstr "საიდან:"
 
 #: contents/ui/Config.qml:80
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr "ვის:"
+msgstr "სადამდე:"
 
 #~ msgctxt "angle"
 #~ msgid "%1°"

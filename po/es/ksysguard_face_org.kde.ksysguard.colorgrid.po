@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the libksysguard package.
 #
 # Automatically generated, 2022.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2022-10-13 12:31+0200\n"
+"PO-Revision-Date: 2024-09-06 03:42+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,26 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: contents/ui/Config.qml:25
-#, fuzzy, kde-format
-#| msgid "Use sensor color:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Usar color de sensor:"
 
 #: contents/ui/Config.qml:30
-#, fuzzy, kde-format
-#| msgid "Number of Columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Número de columnas:"
 
 #: contents/ui/Config.qml:37
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automático"

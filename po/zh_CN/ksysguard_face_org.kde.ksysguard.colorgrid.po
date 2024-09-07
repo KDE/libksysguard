@@ -19,23 +19,19 @@ msgstr ""
 "X-Crowdin-File-ID: 43483\n"
 
 #: contents/ui/Config.qml:25
-#, fuzzy, kde-format
-#| msgid "Use sensor color:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "使用传感器颜色："
 
 #: contents/ui/Config.qml:30
-#, fuzzy, kde-format
-#| msgid "Number of Columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr "列数："
+msgstr ""
 
 #: contents/ui/Config.qml:37
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "自动"

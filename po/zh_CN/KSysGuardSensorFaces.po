@@ -105,36 +105,30 @@ msgid "Text-Only Sensors"
 msgstr "仅文本传感器"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgctxt "General options"
-#| msgid "General:"
+#, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr "常规："
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "显示传感器图例"
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:41
-#, fuzzy, kde-format
-#| msgid "Stacked Bars"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
-msgstr "堆叠柱状图"
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:49
-#, fuzzy, kde-format
-#| msgctxt "Orientation of bar chart"
-#| msgid "Bar Orientation:"
+#, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr "图表方向："
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:51
 #, kde-format
@@ -149,43 +143,37 @@ msgid "Horizontal"
 msgstr "水平"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
-#, fuzzy, kde-format
-#| msgctxt "Options about axis and label of bar chart"
-#| msgid "Axis:"
+#, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr "轴："
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr "显示 Y 轴标签"
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:74
 #: facepackages/linechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr "显示网格线"
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "自动数据范围"
+msgstr ""
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "来源："
@@ -193,63 +181,54 @@ msgstr "来源："
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "目标："
 
 #: facepackages/colorgrid/contents/ui/Config.qml:25
-#, fuzzy, kde-format
-#| msgid "Use sensor color:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "使用传感器颜色："
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgid "Number of Columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr "列数："
+msgstr ""
 
 #: facepackages/colorgrid/contents/ui/Config.qml:37
 #: facepackages/facegrid/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "自动"
 
 #: facepackages/facegrid/contents/ui/Config.qml:54
-#, fuzzy, kde-format
-#| msgid "Display Style:"
+#, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
-msgstr "显示样式："
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "外观"
 
 #: facepackages/linechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Stacked Charts"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
-msgstr "堆叠柱状图"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:55
-#, fuzzy, kde-format
-#| msgid "Smooth Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
-msgstr "平滑线条"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:67
 #, kde-format
@@ -258,99 +237,81 @@ msgid "Opacity of area below line:"
 msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "Data Ranges"
+#, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
 msgstr "数据范围"
 
 #: facepackages/linechart/contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Y Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr "自动 Y 轴数据范围"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
 msgstr "来源 (Y)："
 
 #: facepackages/linechart/contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "目标 (Y)："
 
 #: facepackages/linechart/contents/ui/Config.qml:99
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr "显示标题"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:102
-#, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 秒"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
-#, fuzzy, kde-format
-#| msgid "Start from Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr "起始角度："
+msgstr ""
 
 #: facepackages/piechart/contents/ui/Config.qml:43
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:46
 #: facepackages/piechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "°"
+#, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: facepackages/piechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Total Pie Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
-msgstr "饼状图总角度："
+msgstr ""
 
 #: facepackages/piechart/contents/ui/Config.qml:56
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:64
-#, fuzzy, kde-format
-#| msgid "Rounded Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
-msgstr "圆滑线条"
+msgstr ""
 
 #: facepackages/textonly/contents/ui/Config.qml:24
-#, fuzzy, kde-format
-#| msgid "Group sensors based on the value of the total sensors."
+#, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "传感器分组，基于所有传感器的数值"
@@ -376,13 +337,3 @@ msgstr "返回"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "系统监视传感器"
-
-#~ msgid "Fill Opacity:"
-#~ msgstr "填充不透明度："
-
-#~ msgid "Amount of History to Keep:"
-#~ msgstr "要保留的历史记录数量："
-
-#~ msgctxt "angle"
-#~ msgid "%1°"
-#~ msgstr "%1°"
