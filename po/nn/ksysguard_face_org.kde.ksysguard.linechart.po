@@ -113,9 +113,3 @@ msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 sekund"
 msgstr[1] "%1 sekund"
-
-#~ msgid "Fill Opacity:"
-#~ msgstr "Fylltettleik:"
-
-#~ msgid "Amount of History to Keep:"
-#~ msgstr "Kor mykje historie skal takast vare på:"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2024-05-24 16:18+0100\n"
+"PO-Revision-Date: 2024-09-07 12:00+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,18 +15,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: ConfigAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "Load Preset..."
+#, kde-format
 msgid "Load Preset"
-msgstr "Load Preset..."
+msgstr "Load Preset"
 
 #: ConfigAppearance.qml:99
 #, kde-format
 msgid "Delete this preset"
-msgstr ""
+msgstr "Delete this preset"
 
 #: ConfigAppearance.qml:125
 #, kde-format
@@ -107,9 +106,7 @@ msgid "Text-Only Sensors"
 msgstr "Text-Only Sensors"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgctxt "General options"
-#| msgid "General:"
+#, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
 msgstr "General:"
@@ -117,26 +114,22 @@ msgstr "General:"
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "Show Sensors Legend"
+msgstr "Show legend"
 
 #: facepackages/barchart/contents/ui/Config.qml:41
-#, fuzzy, kde-format
-#| msgid "Stacked Bars"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
-msgstr "Stacked Bars"
+msgstr "Stacked bars"
 
 #: facepackages/barchart/contents/ui/Config.qml:49
-#, fuzzy, kde-format
-#| msgctxt "Orientation of bar chart"
-#| msgid "Bar Orientation:"
+#, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr "Bar Orientation:"
+msgstr "Bar orientation:"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
 #, kde-format
@@ -151,43 +144,37 @@ msgid "Horizontal"
 msgstr "Horizontal"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
-#, fuzzy, kde-format
-#| msgctxt "Options about axis and label of bar chart"
-#| msgid "Axis:"
+#, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
 msgstr "Axis:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr "Show Y Axis Labels"
+msgstr "Show Y axis labels"
 
 #: facepackages/barchart/contents/ui/Config.qml:74
 #: facepackages/linechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr "Show Grid Lines"
+msgstr "Show grid lines"
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "Automatic Data Range"
+msgstr "Automatic data range"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "From:"
@@ -195,110 +182,93 @@ msgstr "From:"
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "To:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:25
-#, fuzzy, kde-format
-#| msgid "Use sensor color:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Use sensor colour:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgid "Number of Columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr "Number of Columns:"
+msgstr "Number of columns:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:37
 #: facepackages/facegrid/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automatic"
 
 #: facepackages/facegrid/contents/ui/Config.qml:54
-#, fuzzy, kde-format
-#| msgid "Display Style:"
+#, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
-msgstr "Display Style:"
+msgstr "Display style:"
 
 #: facepackages/linechart/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "Appearance"
 
 #: facepackages/linechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Stacked Charts"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
-msgstr "Stacked Charts"
+msgstr "Stacked charts"
 
 #: facepackages/linechart/contents/ui/Config.qml:55
-#, fuzzy, kde-format
-#| msgid "Smooth Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
-msgstr "Smooth Lines"
+msgstr "Smooth lines"
 
 #: facepackages/linechart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr ""
+msgstr "Opacity of area below line:"
 
 #: facepackages/linechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "Data Ranges"
+#, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
 msgstr "Data Ranges"
 
 #: facepackages/linechart/contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Y Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr "Automatic Y Data Range"
+msgstr "Automatic Y data range"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
 msgstr "From (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "To (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:99
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr "Show Title"
+msgstr "Show last:"
 
 #: facepackages/linechart/contents/ui/Config.qml:102
-#, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -306,54 +276,44 @@ msgstr[0] "%1 second"
 msgstr[1] "%1 seconds"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
-#, fuzzy, kde-format
-#| msgid "Start from Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr "Start from Angle:"
+msgstr "Starting angle:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:46
 #: facepackages/piechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "°"
+#, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: facepackages/piechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Total Pie Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
-msgstr "Total Pie Angle:"
+msgstr "Total pie angle:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:64
-#, fuzzy, kde-format
-#| msgid "Rounded Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
-msgstr "Rounded Lines"
+msgstr "Rounded lines"
 
 #: facepackages/textonly/contents/ui/Config.qml:24
-#, fuzzy, kde-format
-#| msgid "Group sensors based on the value of the total sensors."
+#, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "Group sensors based on the value of the total sensors."

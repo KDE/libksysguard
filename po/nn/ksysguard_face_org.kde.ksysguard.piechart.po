@@ -91,7 +91,3 @@ msgstr "Frå:"
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Til:"
-
-#~ msgctxt "angle"
-#~ msgid "%1°"
-#~ msgstr "%1°"
