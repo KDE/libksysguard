@@ -11,37 +11,33 @@ import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: root
 
     property alias cfg_columnCount: columnCountSpin.value
     property alias cfg_useSensorColor: sensorColorCheck.checked
 
-    Kirigami.FormLayout {
-        id: form
+    CheckBox {
+        id: sensorColorCheck
+        Kirigami.FormData.label: i18nc("@option:check", "Use sensor color:")
+    }
 
-        CheckBox {
-            id: sensorColorCheck
-            Kirigami.FormData.label: i18nc("@option:check", "Use sensor color:")
+    SpinBox {
+        id: columnCountSpin
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Number of columns:")
+        editable: true
+        from: 0
+        to: 99999
+
+        textFromValue: function(value, locale) {
+            if (value <= 0) {
+                return i18nc("@label automatic number of columns", "Automatic")
+            }
+            return value.toString()
         }
 
-        SpinBox {
-            id: columnCountSpin
-            Kirigami.FormData.label: i18nc("@label:spinbox", "Number of columns:")
-            editable: true
-            from: 0
-            to: 99999
-
-            textFromValue: function(value, locale) {
-                if (value <= 0) {
-                    return i18nc("@label automatic number of columns", "Automatic")
-                }
-                return value.toString()
-            }
-
-            valueFromText: function(value, locale) {
-                return parseInt(value)
-            }
+        valueFromText: function(value, locale) {
+            return parseInt(value)
         }
     }
 }
