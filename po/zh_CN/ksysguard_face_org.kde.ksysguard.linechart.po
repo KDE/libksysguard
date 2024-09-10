@@ -31,7 +31,7 @@ msgstr "显示传感器图例"
 #: contents/ui/Config.qml:51
 #, kde-format
 msgid "Stacked Charts"
-msgstr "堆叠柱状图"
+msgstr "堆叠图"
 
 #: contents/ui/Config.qml:55
 #, kde-format

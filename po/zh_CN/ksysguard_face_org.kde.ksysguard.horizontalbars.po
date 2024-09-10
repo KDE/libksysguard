@@ -26,9 +26,9 @@ msgstr "自动数据范围"
 #: contents/ui/Config.qml:33
 #, kde-format
 msgid "From:"
-msgstr ""
+msgstr "起点："
 
 #: contents/ui/Config.qml:40
 #, kde-format
 msgid "To:"
-msgstr ""
+msgstr "终点："
