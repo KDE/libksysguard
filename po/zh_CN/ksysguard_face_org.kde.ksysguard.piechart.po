@@ -22,13 +22,13 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr ""
+msgstr "显示图例"
 
 #: contents/ui/Config.qml:38
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr ""
+msgstr "起点角度："
 
 #: contents/ui/Config.qml:43
 #, kde-format
@@ -46,7 +46,7 @@ msgstr "°"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
-msgstr ""
+msgstr "饼状图总角度："
 
 #: contents/ui/Config.qml:56
 #, kde-format
@@ -58,13 +58,13 @@ msgstr "%1°"
 #, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
-msgstr ""
+msgstr "圆滑线条"
 
 #: contents/ui/Config.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr ""
+msgstr "自动数据范围"
 
 #: contents/ui/Config.qml:73
 #, kde-format

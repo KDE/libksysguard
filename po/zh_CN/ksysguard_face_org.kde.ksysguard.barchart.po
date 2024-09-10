@@ -22,25 +22,25 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr ""
+msgstr "常规："
 
 #: contents/ui/Config.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr ""
+msgstr "显示图例"
 
 #: contents/ui/Config.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
-msgstr ""
+msgstr "堆叠图"
 
 #: contents/ui/Config.qml:49
 #, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr ""
+msgstr "图表方向："
 
 #: contents/ui/Config.qml:51
 #, kde-format
@@ -58,25 +58,25 @@ msgstr "水平"
 #, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "轴："
 
 #: contents/ui/Config.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr ""
+msgstr "显示 Y 轴标签"
 
 #: contents/ui/Config.qml:74
 #, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr ""
+msgstr "显示网格线"
 
 #: contents/ui/Config.qml:78
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr ""
+msgstr "自动数据范围"
 
 #: contents/ui/Config.qml:82
 #, kde-format

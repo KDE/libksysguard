@@ -28,37 +28,37 @@ msgstr "外观"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr ""
+msgstr "显示图例"
 
 #: contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
-msgstr ""
+msgstr "堆叠图"
 
 #: contents/ui/Config.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
-msgstr ""
+msgstr "平滑线条"
 
 #: contents/ui/Config.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr ""
+msgstr "显示网格线"
 
 #: contents/ui/Config.qml:63
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr ""
+msgstr "显示 Y 轴标签"
 
 #: contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr ""
+msgstr "线条下方区域的不透明度："
 
 #: contents/ui/Config.qml:73
 #, kde-format
@@ -70,7 +70,7 @@ msgstr "数据范围"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr ""
+msgstr "自动 Y 轴数据范围"
 
 #: contents/ui/Config.qml:82
 #, kde-format
@@ -88,7 +88,7 @@ msgstr "目标 (Y)："
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr ""
+msgstr "显示最近："
 
 #: contents/ui/Config.qml:102
 #, kde-format

@@ -22,7 +22,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr ""
+msgstr "列数："
 
 #: contents/ui/Config.qml:42
 #, kde-format
@@ -34,4 +34,4 @@ msgstr "自动"
 #, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
-msgstr ""
+msgstr "显示样式："

@@ -28,7 +28,7 @@ msgstr "使用传感器颜色："
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr ""
+msgstr "列数："
 
 #: contents/ui/Config.qml:37
 #, kde-format
