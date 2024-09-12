@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 00:41+0000\n"
+"POT-Creation-Date: 2024-09-12 00:40+0000\n"
 "PO-Revision-Date: 2024-09-06 17:02+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.05.2\n"
 
-#: contents/ui/Config.qml:25
+#: contents/ui/Config.qml:22
 #, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Använd sensorfärg:"
 
-#: contents/ui/Config.qml:30
+#: contents/ui/Config.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Antal kolumner:"
 
-#: contents/ui/Config.qml:37
+#: contents/ui/Config.qml:34
 #, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"

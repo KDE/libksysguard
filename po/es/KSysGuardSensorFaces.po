@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 00:41+0000\n"
+"POT-Creation-Date: 2024-09-12 00:40+0000\n"
 "PO-Revision-Date: 2024-09-06 03:38+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -189,20 +189,20 @@ msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Hasta:"
 
-#: facepackages/colorgrid/contents/ui/Config.qml:25
+#: facepackages/colorgrid/contents/ui/Config.qml:22
 #, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Usar color de sensor:"
 
-#: facepackages/colorgrid/contents/ui/Config.qml:30
+#: facepackages/colorgrid/contents/ui/Config.qml:27
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Número de columnas:"
 
-#: facepackages/colorgrid/contents/ui/Config.qml:37
+#: facepackages/colorgrid/contents/ui/Config.qml:34
 #: facepackages/facegrid/contents/ui/Config.qml:42
 #, kde-format
 msgctxt "@label automatic number of columns"

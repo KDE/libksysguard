@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 00:41+0000\n"
+"POT-Creation-Date: 2024-09-12 00:40+0000\n"
 "PO-Revision-Date: 2024-05-28 13:40+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -202,14 +202,14 @@ msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Eddig:"
 
-#: facepackages/colorgrid/contents/ui/Config.qml:25
+#: facepackages/colorgrid/contents/ui/Config.qml:22
 #, fuzzy, kde-format
 #| msgid "Use sensor color:"
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Szenzorszín használata:"
 
-#: facepackages/colorgrid/contents/ui/Config.qml:30
+#: facepackages/colorgrid/contents/ui/Config.qml:27
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, fuzzy, kde-format
 #| msgid "Number of Columns:"
@@ -217,7 +217,7 @@ msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Oszlopok száma:"
 
-#: facepackages/colorgrid/contents/ui/Config.qml:37
+#: facepackages/colorgrid/contents/ui/Config.qml:34
 #: facepackages/facegrid/contents/ui/Config.qml:42
 #, fuzzy, kde-format
 #| msgctxt "@label"
