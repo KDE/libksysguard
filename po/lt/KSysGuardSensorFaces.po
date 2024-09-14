@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-12 00:40+0000\n"
-"PO-Revision-Date: 2024-09-04 23:52+0300\n"
+"PO-Revision-Date: 2024-09-14 01:27+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -110,9 +110,7 @@ msgid "Text-Only Sensors"
 msgstr "Tik tekstiniai jutikliai"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgctxt "General options"
-#| msgid "General:"
+#, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
 msgstr "Bendra:"
@@ -120,23 +118,19 @@ msgstr "Bendra:"
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "Rodyti jutiklių legendą"
+msgstr "Rodyti legendą"
 
 #: facepackages/barchart/contents/ui/Config.qml:41
-#, fuzzy, kde-format
-#| msgid "Stacked Bars"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
 msgstr "Sudurtinės juostos"
 
 #: facepackages/barchart/contents/ui/Config.qml:49
-#, fuzzy, kde-format
-#| msgctxt "Orientation of bar chart"
-#| msgid "Bar Orientation:"
+#, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
 msgstr "Juostos orientacija:"
@@ -154,25 +148,21 @@ msgid "Horizontal"
 msgstr "Horizontali"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
-#, fuzzy, kde-format
-#| msgctxt "Options about axis and label of bar chart"
-#| msgid "Axis:"
+#, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
 msgstr "Ašis:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
 msgstr "Rodyti Y ašies etiketes"
 
 #: facepackages/barchart/contents/ui/Config.qml:74
 #: facepackages/linechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
 msgstr "Rodyti tinklelio linijas"
@@ -180,8 +170,7 @@ msgstr "Rodyti tinklelio linijas"
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Automatinis duomenų rėžis"
@@ -189,8 +178,7 @@ msgstr "Automatinis duomenų rėžis"
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Nuo:"
@@ -198,60 +186,51 @@ msgstr "Nuo:"
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Iki:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:22
-#, fuzzy, kde-format
-#| msgid "Use sensor color:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Naudoti jutiklio spalvą:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:27
 #: facepackages/facegrid/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgid "Number of Columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Stulpelių skaičius:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:34
 #: facepackages/facegrid/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automatiškai"
 
 #: facepackages/facegrid/contents/ui/Config.qml:54
-#, fuzzy, kde-format
-#| msgid "Display Style:"
+#, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
-msgstr "Rodinio stilius:"
+msgstr "Atvaizdavimo stilius:"
 
 #: facepackages/linechart/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "Išvaizda"
 
 #: facepackages/linechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Stacked Charts"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
 msgstr "Sudurtinės diagramos"
 
 #: facepackages/linechart/contents/ui/Config.qml:55
-#, fuzzy, kde-format
-#| msgid "Smooth Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
 msgstr "Glotnios linijos"
@@ -260,48 +239,40 @@ msgstr "Glotnios linijos"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr ""
+msgstr "Žemiau linijos esančios srities nepermatomumas:"
 
 #: facepackages/linechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "Data Ranges"
+#, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
 msgstr "Duomenų rėžiai"
 
 #: facepackages/linechart/contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Y Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
 msgstr "Automatinis Y duomenų rėžis"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
 msgstr "Nuo (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "Iki (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:99
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr "Rodyti pavadinimą"
+msgstr "Rodyti paskutinį:"
 
 #: facepackages/linechart/contents/ui/Config.qml:102
-#, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -311,54 +282,44 @@ msgstr[2] "%1 sekundžių"
 msgstr[3] "%1 sekundę"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
-#, fuzzy, kde-format
-#| msgid "Start from Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr "Pradėti nuo kampo:"
+msgstr "Pradinis kampas:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:46
 #: facepackages/piechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "°"
+#, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: facepackages/piechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Total Pie Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Bendras skritulio kampas:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:64
-#, fuzzy, kde-format
-#| msgid "Rounded Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "Apvalios linijos"
 
 #: facepackages/textonly/contents/ui/Config.qml:24
-#, fuzzy, kde-format
-#| msgid "Group sensors based on the value of the total sensors."
+#, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "Grupuoti jutiklius pagal visų jutiklių reikšmę."
