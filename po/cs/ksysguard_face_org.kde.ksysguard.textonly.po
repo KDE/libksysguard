@@ -19,7 +19,6 @@ msgstr ""
 
 #: contents/ui/Config.qml:24
 #, fuzzy, kde-format
-#| msgid "Group sensors based on the value of the total sensors."
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "Seskupovat čidla podle hodnot celkových čidel."
