@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-13 00:48+0000\n"
-"PO-Revision-Date: 2023-02-03 10:43+0100\n"
+"PO-Revision-Date: 2024-09-03 08:50+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,27 +15,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
 msgid "Presets:"
-msgstr "Předvolby:"
+msgstr "Přednastavení:"
 
 #: ConfigAppearance.qml:111
 #, kde-format
 msgid "Load Preset..."
-msgstr "Načíst předvolbu..."
+msgstr "Načíst přednastavení..."
 
 #: ConfigAppearance.qml:116
 #, kde-format
 msgid "Get new presets..."
-msgstr "Získat nové předvolby..."
+msgstr "Získat nová přednastavení..."
 
 #: ConfigAppearance.qml:128
 #, kde-format
 msgid "Save Settings As Preset"
-msgstr "Uložit nastavení jako předvolbu"
+msgstr "Uložit nastavení jako přednastavení"
 
 #: ConfigAppearance.qml:138
 #, kde-format
