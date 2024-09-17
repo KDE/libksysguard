@@ -19,21 +19,18 @@ msgstr ""
 
 #: contents/ui/Config.qml:29
 #, fuzzy, kde-format
-#| msgid "Automatic Data Range"
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Automatický rozsah dat"
 
 #: contents/ui/Config.qml:33
 #, fuzzy, kde-format
-#| msgid "From:"
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Od:"
 
 #: contents/ui/Config.qml:40
 #, fuzzy, kde-format
-#| msgid "To:"
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Do:"
