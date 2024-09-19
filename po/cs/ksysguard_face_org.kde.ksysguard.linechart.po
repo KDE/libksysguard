@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# Vit Pelcak <vit@pelcak.org>, 2020, 2021.
+# SPDX-FileCopyrightText: 2020, 2021, 2024 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2021-03-23 09:48+0100\n"
+"PO-Revision-Date: 2024-09-16 12:57+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: contents/ui/Config.qml:42
 #, kde-format
@@ -27,73 +27,73 @@ msgstr "Vzhled"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr ""
+msgstr "Zobrazit vysvětlivky"
 
 #: contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
-msgstr ""
+msgstr "Skládané grafy"
 
 #: contents/ui/Config.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
-msgstr ""
+msgstr "Hladké linie"
 
 #: contents/ui/Config.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr ""
+msgstr "Zobrazit linky mřížky"
 
 #: contents/ui/Config.qml:63
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr ""
+msgstr "Zobrazit popisky osy Y"
 
 #: contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr ""
+msgstr "Krytí oblasti pod čarou:"
 
 #: contents/ui/Config.qml:73
 #, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
-msgstr ""
+msgstr "Rozsahy dat"
 
 #: contents/ui/Config.qml:78
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr ""
+msgstr "Automatický rozsah dat Y"
 
 #: contents/ui/Config.qml:82
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
-msgstr ""
+msgstr "Od (Y):"
 
 #: contents/ui/Config.qml:89
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
-msgstr ""
+msgstr "Do (Y):"
 
 #: contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr ""
+msgstr "Zobrazit poslední:"
 
 #: contents/ui/Config.qml:102
 #, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1 sekundu"
+msgstr[1] "%1 sekundy"
+msgstr[2] "%1 sekund"

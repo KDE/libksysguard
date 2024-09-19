@@ -1,36 +1,36 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# Vit Pelcak <vit@pelcak.org>, 2021.
+# SPDX-FileCopyrightText: 2021, 2024 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2021-09-01 11:22+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2024-09-16 12:55+0200\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.0\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: contents/ui/Config.qml:35
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Počet sloupců:"
 
 #: contents/ui/Config.qml:42
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automaticky"
 
 #: contents/ui/Config.qml:54
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
 msgstr "Styl zobrazení:"
