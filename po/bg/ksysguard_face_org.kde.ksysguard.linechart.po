@@ -98,9 +98,3 @@ msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 секунда"
 msgstr[1] "%1 секунди"
-
-#~ msgid "Fill Opacity:"
-#~ msgstr "Запълване:"
-
-#~ msgid "Amount of History to Keep:"
-#~ msgstr "Обем на историята за запазване:"
