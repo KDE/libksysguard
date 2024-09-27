@@ -5,7 +5,7 @@
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
 # Abdulaziz AlSharif <a.a-a.s@hotmail.com>, 2007.
 # Usama Akkad <uak@aya.sy>, 2008.
-# zayed <zayed.alsaidi@gmail.com>, 2008, 2010.
+# SPDX-FileCopyrightText: 2008, 2010, 2024 zayed <zayed.alsaidi@gmail.com>
 # Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010, 2021, 2022.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2018.
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:57+0000\n"
-"PO-Revision-Date: 2022-01-23 23:07+0400\n"
+"PO-Revision-Date: 2024-09-26 12:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -22,6 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -50,11 +51,10 @@ msgid "Show Application Window"
 msgstr "اعرض نافذة التطبيق"
 
 #: ksysguardprocesslist.cpp:205
-#, fuzzy, kde-format
-#| msgid "Displayed Information"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detailed Information..."
-msgstr "المعلومات المعروضة"
+msgstr "معلومات مفصّلة..."
 
 #: ksysguardprocesslist.cpp:206
 #, kde-format
@@ -375,19 +375,19 @@ msgstr "اقتل"
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "لا يوجد بيانات لعرضها"
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 ك.بايت"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "أنعش"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -397,43 +397,40 @@ msgid "Quick search"
 msgstr "بحث سريع"
 
 #: processdetails/MemoryMapsTab.cpp:251 processdetails/OpenFilesTab.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Username"
+#, kde-format
 msgctxt "@title:column"
 msgid "Filename"
-msgstr "اسم المستخدم"
+msgstr "اسم الملفّ"
 
 #: processdetails/MemoryMapsTab.cpp:252
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "البداية"
 
 #: processdetails/MemoryMapsTab.cpp:253
-#, fuzzy, kde-format
-#| msgid "End"
+#, kde-format
 msgctxt "@title:column End of the address space"
 msgid "End"
-msgstr "أنهِ"
+msgstr "النهاية"
 
 #: processdetails/MemoryMapsTab.cpp:254
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "التّصاريح"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "الإزاحة"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
 msgctxt "@title:column"
 msgid "Inode"
-msgstr ""
+msgstr "مؤشرات الفهرسة"
 
 #: processdetails/MemoryMapsTab.cpp:283 processdetails/OpenFilesTab.cpp:278
 #, kde-format
@@ -445,7 +442,7 @@ msgstr ""
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "ملف"
 
 #: processdetails/OpenFilesTab.cpp:36
 #, fuzzy, kde-format
@@ -458,32 +455,31 @@ msgstr "المحارف المقروءة/المكتوبة"
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "جهاز كتلي"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "أنبوب"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "مقبس"
 
 #: processdetails/OpenFilesTab.cpp:124
-#, fuzzy, kde-format
-#| msgid "Idle"
+#, kde-format
 msgctxt "@title:column File ID"
 msgid "Id"
-msgstr "خاملة"
+msgstr "المعرّف"
 
 #: processdetails/OpenFilesTab.cpp:126
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
@@ -492,31 +488,28 @@ msgid "%1: Failed to list directory contents"
 msgstr ""
 
 #: processdetails/ProcessDetailsDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "All Processes"
+#, kde-format
 msgctxt "@title:window"
 msgid "Process Details"
-msgstr "كل العمليات"
+msgstr "تفاصيل العملية"
 
 #: processdetails/ProcessDetailsDialog.cpp:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "عامّ"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Memory Maps"
-msgstr "الذاكرة"
+msgstr "خرائط الذاكرة"
 
 #: processdetails/ProcessDetailsDialog.cpp:45
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "الملفات المفتوحة"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
@@ -525,11 +518,10 @@ msgid "The \"%1\" (PID: %2) process has stopped executing"
 msgstr ""
 
 #: processdetails/ProcessDetailsDialog.cpp:126
-#, fuzzy, kde-format
-#| msgid "Set Priority"
+#, kde-format
 msgctxt "@title:column Process I/O priority"
 msgid "IO Priority"
-msgstr "ضبط الأولوية"
+msgstr "أولوية الدخل والخرج"
 
 #: ProcessModel.cpp:62
 #, kde-format
@@ -1525,11 +1517,10 @@ msgid "Window Title"
 msgstr "عنوان النافذة"
 
 #: ProcessModel.cpp:2203
-#, fuzzy, kde-format
-#| msgid "Group: %1"
+#, kde-format
 msgctxt "process heading"
 msgid "CGroup"
-msgstr "المجموعة: %1"
+msgstr "سي غروب"
 
 #: ProcessModel.cpp:2204
 #, kde-format
@@ -1538,12 +1529,10 @@ msgid "MAC Context"
 msgstr ""
 
 #: ProcessModel.cpp:2205
-#, fuzzy, kde-format
-#| msgctxt "process heading"
-#| msgid "Memory"
+#, kde-format
 msgctxt "process heading"
 msgid "Total Memory"
-msgstr "الذاكرة"
+msgstr "مجموع الذاكرة"
 
 #: ProcessModel.cpp:2327
 #, kde-format
@@ -1949,7 +1938,7 @@ msgstr ""
 #: ReniceDlgUi.ui:199
 #, kde-format
 msgid "FIFO"
-msgstr ""
+msgstr "ما يدخل أولًا يخرج أولًا"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: ReniceDlgUi.ui:264

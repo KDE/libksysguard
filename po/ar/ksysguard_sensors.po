@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
+# SPDX-FileCopyrightText: 2022, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-06-14 00:50+0000\n"
-"PO-Revision-Date: 2022-09-06 20:41+0400\n"
+"PO-Revision-Date: 2024-09-26 12:20+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,42 +16,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: SensorGroup.cpp:29
 #, kde-format
 msgctxt "Total load sensor of all cores"
 msgid "[Group] Total Usage"
-msgstr ""
+msgstr "[الاستخدام الكلي [المجموعة]"
 
 #: SensorGroup.cpp:30
 #, kde-format
 msgctxt "All cores user load sensors"
 msgid "[Group] User Usage"
-msgstr ""
+msgstr "استخدام المستخدم [المجموعة]"
 
 #: SensorGroup.cpp:31
 #, kde-format
 msgctxt "All cores user system sensors"
 msgid "[Group] System Usage"
-msgstr ""
+msgstr "استخدام النظام [المجموعة]"
 
 #: SensorGroup.cpp:32
 #, kde-format
 msgctxt "All cores wait load sensors"
 msgid "[Group] Wait Usage"
-msgstr ""
+msgstr "استخدام الانتظام [المجموعة]"
 
 #: SensorGroup.cpp:33
 #, kde-format
 msgctxt "All cores clock frequency sensors"
 msgid "[Group] Clock Frequency"
-msgstr ""
+msgstr "التردّد الساعيّ [المجموعة]"
 
 #: SensorGroup.cpp:34
 #, kde-format
 msgctxt "All cores temperature sensors"
 msgid "[Group] Temperature"
-msgstr ""
+msgstr "الحرارة [المجموعة]"
 
 #: SensorGroup.cpp:35
 #, kde-format
@@ -62,62 +63,62 @@ msgstr "اسم [المجموعة]"
 #: SensorGroup.cpp:37
 #, kde-format
 msgid "[Group] Used"
-msgstr ""
+msgstr "المستخدم [المجموعة]"
 
 #: SensorGroup.cpp:38
 #, kde-format
 msgid "[Group] Available"
-msgstr ""
+msgstr "المتوفر [المجموعة]"
 
 #: SensorGroup.cpp:39 SensorGroup.cpp:59
 #, kde-format
 msgid "[Group] Percentage Used"
-msgstr ""
+msgstr "نسبة المستخدم [المجموعة]"
 
 #: SensorGroup.cpp:40
 #, kde-format
 msgid "[Group] Total Size"
-msgstr ""
+msgstr "الحجم الكليّ [المجموعة]"
 
 #: SensorGroup.cpp:42
 #, kde-format
 msgid "[Group] Network Name"
-msgstr ""
+msgstr "اسم الشبكة [المجموعة]"
 
 #: SensorGroup.cpp:43
 #, kde-format
 msgid "[Group] IPv4 Address"
-msgstr ""
+msgstr "عنوان IPv4 [المجموعة]"
 
 #: SensorGroup.cpp:44
 #, kde-format
 msgid "[Group] IPv6 Address"
-msgstr ""
+msgstr "عنوان IPv6 [المجموعة]"
 
 #: SensorGroup.cpp:45
 #, kde-format
 msgid "[Group] Signal Strength"
-msgstr ""
+msgstr "قوّة الإشارة [المجموعة]"
 
 #: SensorGroup.cpp:46 SensorGroup.cpp:47
 #, kde-format
 msgid "[Group] Download Rate"
-msgstr ""
+msgstr "معدّل التنزيل [المجموعة]"
 
 #: SensorGroup.cpp:48
 #, kde-format
 msgid "[Group] Total Downloaded"
-msgstr ""
+msgstr "مجموع المنزل [المجموعة]"
 
 #: SensorGroup.cpp:49 SensorGroup.cpp:50
 #, kde-format
 msgid "[Group] Upload Rate"
-msgstr ""
+msgstr "معدل الرفع [المجموعة]"
 
 #: SensorGroup.cpp:51
 #, kde-format
 msgid "[Group] Total Uploaded"
-msgstr ""
+msgstr "مجموع المرفوع [المجموعة]"
 
 #: SensorGroup.cpp:53
 #, kde-format
@@ -127,32 +128,32 @@ msgstr "اسم [المجموعة]"
 #: SensorGroup.cpp:54
 #, kde-format
 msgid "[Group] Total Space"
-msgstr ""
+msgstr "مجموع المساحة [المجموعة]"
 
 #: SensorGroup.cpp:55
 #, kde-format
 msgid "[Group] Used Space"
-msgstr ""
+msgstr "المساحة المُستخدَمة [المجموعة]"
 
 #: SensorGroup.cpp:56
 #, kde-format
 msgid "[Group] Free Space"
-msgstr ""
+msgstr "المساحة الحرّة [المجموعة]"
 
 #: SensorGroup.cpp:57
 #, kde-format
 msgid "[Group] Read Rate"
-msgstr ""
+msgstr "معدل القراءة [المجموعة]"
 
 #: SensorGroup.cpp:58
 #, kde-format
 msgid "[Group] Write Rate"
-msgstr ""
+msgstr "معدل الكتابة [المجموعة]"
 
 #: SensorGroup.cpp:60
 #, kde-format
 msgid "[Group] Percentage Free"
-msgstr ""
+msgstr "نسبة المتبقي [المجموعة]"
 
 #: SensorGroup.cpp:62
 #, kde-format
@@ -162,7 +163,7 @@ msgstr "معالج [المجموعة]"
 #: SensorGroup.cpp:63
 #, kde-format
 msgid "[Group] Disk"
-msgstr ""
+msgstr "القرص [المجموعة]"
 
 #: SensorGroup.cpp:64
 #, kde-format
