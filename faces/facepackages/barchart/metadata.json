@@ -5,6 +5,7 @@
             {
                 "Email": "kde@broulik.de",
                 "Name": "Kai Uwe Broulik",
+                "Name[ar]": "كاي أووي بروتيك",
                 "Name[bg]": "Kai Uwe Broulik",
                 "Name[ca@valencia]": "Kai Uwe Broulik",
                 "Name[ca]": "Kai Uwe Broulik",
@@ -44,6 +45,7 @@
         "Id": "org.kde.ksysguard.barchart",
         "License": "LGPLv2+",
         "Name": "Bar Chart",
+        "Name[ar]": "شريط بياني",
         "Name[bg]": "Графика с колони",
         "Name[ca@valencia]": "Diagrama de barres",
         "Name[ca]": "Diagrama de barres",

@@ -5,7 +5,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
-                "Name[ar]": "Marco Martin",
+                "Name[ar]": "ماركو مارتن",
                 "Name[ast]": "Marco Martin",
                 "Name[az]": "Marco Martin",
                 "Name[bg]": "Marco Martin",
@@ -51,6 +51,7 @@
         "Id": "org.kde.ksysguard.textonly",
         "License": "LGPLv2+",
         "Name": "Text Only",
+        "Name[ar]": "نص فقط",
         "Name[bg]": "Само текст",
         "Name[ca@valencia]": "Només el text",
         "Name[ca]": "Només el text",

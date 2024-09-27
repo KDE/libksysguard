@@ -5,7 +5,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
-                "Name[ar]": "Marco Martin",
+                "Name[ar]": "ماركو مارتن",
                 "Name[ast]": "Marco Martin",
                 "Name[az]": "Marco Martin",
                 "Name[bg]": "Marco Martin",
@@ -51,6 +51,7 @@
         "Id": "org.kde.ksysguard.piechart",
         "License": "LGPLv2+",
         "Name": "Pie Chart",
+        "Name[ar]": "رسم دائري",
         "Name[bg]": "Кръгова графика",
         "Name[ca@valencia]": "Diagrama de sectors",
         "Name[ca]": "Diagrama de sectors",

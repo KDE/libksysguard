@@ -5,7 +5,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
-                "Name[ar]": "Marco Martin",
+                "Name[ar]": "ماركو مارتن",
                 "Name[ast]": "Marco Martin",
                 "Name[az]": "Marco Martin",
                 "Name[bg]": "Marco Martin",
@@ -51,6 +51,7 @@
         "Id": "org.kde.ksysguard.horizontalbars",
         "License": "LGPLv2+",
         "Name": "Horizontal Bars",
+        "Name[ar]": "أشرطة عمودية",
         "Name[bg]": "Хоризонтални линии",
         "Name[ca@valencia]": "Barres horitzontals",
         "Name[ca]": "Barres horitzontals",
