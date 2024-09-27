@@ -78,7 +78,3 @@ msgstr "От:"
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "До:"
-
-#~ msgctxt "angle"
-#~ msgid "%1°"
-#~ msgstr "%1°"

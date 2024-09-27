@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-12 00:40+0000\n"
-"PO-Revision-Date: 2024-05-28 13:40+0200\n"
+"PO-Revision-Date: 2024-09-26 14:26+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,18 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: ConfigAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "Load Preset..."
+#, kde-format
 msgid "Load Preset"
-msgstr "Beállításkészlet betöltése…"
+msgstr "Beállításkészlet betöltése"
 
 #: ConfigAppearance.qml:99
 #, kde-format
 msgid "Delete this preset"
-msgstr ""
+msgstr "Beállításkészlet törlése"
 
 #: ConfigAppearance.qml:125
 #, kde-format
@@ -108,9 +107,7 @@ msgid "Text-Only Sensors"
 msgstr "Csak szöveges érzékelők"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgctxt "General options"
-#| msgid "General:"
+#, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
 msgstr "Általános:"
@@ -118,23 +115,19 @@ msgstr "Általános:"
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "Érzékelők feliratának megjelenítése"
+msgstr "Jelmagyarázat megjelenítése"
 
 #: facepackages/barchart/contents/ui/Config.qml:41
-#, fuzzy, kde-format
-#| msgid "Stacked Bars"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
 msgstr "Halmozott sávok"
 
 #: facepackages/barchart/contents/ui/Config.qml:49
-#, fuzzy, kde-format
-#| msgctxt "Orientation of bar chart"
-#| msgid "Bar Orientation:"
+#, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
 msgstr "Tájolás:"
@@ -152,25 +145,21 @@ msgid "Horizontal"
 msgstr "Vízszintes"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
-#, fuzzy, kde-format
-#| msgctxt "Options about axis and label of bar chart"
-#| msgid "Axis:"
+#, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
 msgstr "Tengely:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
 msgstr "Y-tengely címkéinek megjelenítése"
 
 #: facepackages/barchart/contents/ui/Config.qml:74
 #: facepackages/linechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
 msgstr "Rácsvonalak megjelenítése"
@@ -178,8 +167,7 @@ msgstr "Rácsvonalak megjelenítése"
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Automatikus adattartomány"
@@ -187,8 +175,7 @@ msgstr "Automatikus adattartomány"
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Ettől:"
@@ -196,60 +183,51 @@ msgstr "Ettől:"
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Eddig:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:22
-#, fuzzy, kde-format
-#| msgid "Use sensor color:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Szenzorszín használata:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:27
 #: facepackages/facegrid/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgid "Number of Columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Oszlopok száma:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:34
 #: facepackages/facegrid/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automatikus"
 
 #: facepackages/facegrid/contents/ui/Config.qml:54
-#, fuzzy, kde-format
-#| msgid "Display Style:"
+#, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
 msgstr "Nézetstílus:"
 
 #: facepackages/linechart/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "Megjelenés"
 
 #: facepackages/linechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Stacked Charts"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
 msgstr "Halmozott diagramok"
 
 #: facepackages/linechart/contents/ui/Config.qml:55
-#, fuzzy, kde-format
-#| msgid "Smooth Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
 msgstr "Sima vonalak"
@@ -258,48 +236,40 @@ msgstr "Sima vonalak"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr ""
+msgstr "Vonal alatti terület átlátszatlansága:"
 
 #: facepackages/linechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "Data Ranges"
+#, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
 msgstr "Adattartományok"
 
 #: facepackages/linechart/contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Y Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
 msgstr "Automatikus Y adattartomány"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
 msgstr "Ettől (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "Eddig (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:99
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr "Cím megjelenítése"
+msgstr "Utolsó megjelenítése:"
 
 #: facepackages/linechart/contents/ui/Config.qml:102
-#, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -307,54 +277,44 @@ msgstr[0] "%1 másodperc"
 msgstr[1] "%1 másodperc"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
-#, fuzzy, kde-format
-#| msgid "Start from Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Kezdőszög:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:46
 #: facepackages/piechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "°"
+#, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: facepackages/piechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Total Pie Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Teljes tortaszög:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:64
-#, fuzzy, kde-format
-#| msgid "Rounded Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "Lekerekített vonalak"
 
 #: facepackages/textonly/contents/ui/Config.qml:24
-#, fuzzy, kde-format
-#| msgid "Group sensors based on the value of the total sensors."
+#, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "Érzékelők csoportosítása az összes szenzor értéke szerint."
