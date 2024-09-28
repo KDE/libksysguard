@@ -5,6 +5,7 @@
             {
                 "Email": "ahiemstra@heimr.nl",
                 "Name": "Arjen Hiemstra",
+                "Name[ar]": "أريين هيمسترا",
                 "Name[bg]": "Arjen Hiemstra",
                 "Name[ca@valencia]": "Arjen Hiemstra",
                 "Name[ca]": "Arjen Hiemstra",
@@ -44,6 +45,7 @@
         "Id": "org.kde.ksysguard.facegrid",
         "License": "LGPLv2+",
         "Name": "Grid",
+        "Name[ar]": "الشّبكة",
         "Name[bg]": "Координатна мрежа",
         "Name[ca@valencia]": "Quadrícula",
         "Name[ca]": "Quadrícula",

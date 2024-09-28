@@ -5,7 +5,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
-                "Name[ar]": "Marco Martin",
+                "Name[ar]": "ماركو مارتن",
                 "Name[ast]": "Marco Martin",
                 "Name[az]": "Marco Martin",
                 "Name[bg]": "Marco Martin",
@@ -51,6 +51,7 @@
         "Id": "org.kde.ksysguard.linechart",
         "License": "LGPLv2+",
         "Name": "Line Chart",
+        "Name[ar]": "رسم خطي",
         "Name[bg]": "Линейна графика",
         "Name[ca@valencia]": "Diagrama de línies",
         "Name[ca]": "Diagrama de línies",
