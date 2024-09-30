@@ -16,7 +16,7 @@ Faces.SensorFace {
     id: root
 
     Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : Kirigami.Units.gridUnit * 2
-    Layout.minimumHeight: root.formFactor == Faces.SensorFace.Vertical ? contentItem.implicitHeight : Kirigami.Units.gridUnit
+    Layout.minimumHeight: root.formFactor == Faces.SensorFace.Vertical ? Math.max(contentItem.implicitHeight, Kirigami.Units.gridUnit) : Kirigami.Units.gridUnit
 
     contentItem: ColumnLayout {
         spacing: Kirigami.Units.smallSpacing

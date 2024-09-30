@@ -23,10 +23,10 @@ import org.kde.quickcharts.controls as ChartsControls
 Faces.CompactSensorFace {
     id: root
 
-    Layout.minimumWidth: horizontalFormFactor ? contentItem.Layout.minimumWidth : defaultMinimumSize
-    Layout.minimumHeight: verticalFormFactor ? contentItem.Layout.minimumHeight : defaultMinimumSize
+    Layout.minimumWidth: horizontalFormFactor ? Math.max(contentItem.Layout.minimumWidth, defaultMinimumSize) : defaultMinimumSize
+    Layout.minimumHeight: verticalFormFactor ? Math.max(contentItem.Layout.minimumHeight, defaultMinimumSize) : defaultMinimumSize
     Layout.preferredWidth: horizontalFormFactor ? contentItem.preferredWidth : -1
-    Layout.maximumWidth: horizontalFormFactor ? contentItem.preferredWidth : -1
+    Layout.maximumWidth: horizontalFormFactor ? Math.max(contentItem.preferredWidth, defaultMinimumSize) : -1
 
     FontMetrics {
         id: defaultMetrics
