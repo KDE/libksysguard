@@ -6,40 +6,38 @@
  */
 
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 
 import org.kde.ksysguard.sensors as Sensors
-
-import org.kde.quickcharts.controls as ChartsControls
+import org.kde.ksysguard.faces as Faces
+import org.kde.ksysguard.formatter as Formatter
 
 GridLayout {
     id: grid
 
     property QtObject controller
     property QtObject colorSource
-    property int columnCount
-    property int autoColumnCount
+    property bool compact
 
     readonly property real preferredWidth: titleMetrics.width
 
-    readonly property bool useSensorColor: controller.faceConfiguration.useSensorColor
+    readonly property int rowCount: Math.ceil(gridRepeater.count / columns)
 
-    columns: columnCount > 0 ? columnCount : autoColumnCount
-
-    columnSpacing: Kirigami.Units.largeSpacing
-    rowSpacing: Kirigami.Units.largeSpacing
+    columnSpacing: compact ? 1 : Kirigami.Units.largeSpacing
+    rowSpacing: compact ? 1 : Kirigami.Units.largeSpacing
 
     Kirigami.Heading {
         id: heading
         Layout.fillWidth: true
-        Layout.columnSpan: parent.columns
+        Layout.columnSpan: parent.columns > 0 ? parent.columns : 1
 
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
         text: grid.controller.title
-        visible: grid.controller.showTitle && text.length > 0
+        visible: !grid.compact && grid.controller.showTitle && text.length > 0
         level: 2
 
         TextMetrics {
@@ -50,20 +48,23 @@ GridLayout {
     }
 
     Repeater {
+        id: gridRepeater
+
         model: grid.controller.highPrioritySensorIds
 
         SensorRect {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            sensor: sensor
-            text: sensor.formattedValue
-            sensorColor: grid.useSensorColor ? grid.colorSource.map[modelData] : Kirigami.Theme.highlightColor
+            Layout.preferredWidth: 0
+            Layout.preferredHeight: 0
 
-            Sensors.Sensor {
-                id: sensor
+            sensor: Sensors.Sensor {
                 sensorId: modelData
                 updateRateLimit: grid.controller.updateRateLimit
             }
+
+            text: sensor.formattedValue
+            sensorColor: grid.useSensorColor ? grid.colorSource.map[modelData] : Kirigami.Theme.highlightColor
         }
     }
 }

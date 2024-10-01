@@ -28,15 +28,14 @@ Faces.SensorFace {
     readonly property int autoColumnCount: Math.ceil(Math.sqrt(controller.highPrioritySensorIds.length))
 
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
-    Layout.minimumWidth: Kirigami.Units.gridUnit * 8
+    Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 8, grid.Layout.minimumWidth)
     Layout.preferredWidth: grid.preferredWidth + Kirigami.Units.largeSpacing
 
     contentItem: FaceGrid {
         id: grid
-
         controller: root.controller
         colorSource: root.colorSource
-        columnCount: root.columnCount
-        autoColumnCount: root.autoColumnCount
+        compact: false
+        columns: root.columnCount > 0 ? root.columnCount : root.autoColumnCount
     }
 }

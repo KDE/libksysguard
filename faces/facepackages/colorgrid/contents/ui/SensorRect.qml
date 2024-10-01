@@ -32,5 +32,7 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         textFormat: Text.PlainText
+        fontSizeMode: Text.Fit
+        minimumPointSize: 6
     }
 }
