@@ -12,31 +12,40 @@ import org.kde.kirigami as Kirigami
 import org.kde.ksysguard.sensors as Sensors
 import org.kde.ksysguard.faces as Faces
 
-Faces.SensorFace {
+Faces.CompactSensorFace {
     id: root
 
-    Layout.minimumWidth: root.formFactor == Faces.SensorFace.Vertical ? Kirigami.Units.gridUnit : Kirigami.Units.gridUnit * 2
-    Layout.minimumHeight: root.formFactor == Faces.SensorFace.Vertical ? Math.max(contentItem.implicitHeight, Kirigami.Units.gridUnit) : Kirigami.Units.gridUnit
+    Layout.minimumWidth: Math.max(grid.columns * defaultMinimumSize + (grid.columns - 1) * grid.columnSpacing, defaultMinimumSize)
+    Layout.minimumHeight: Math.max(grid.rowCount * defaultMinimumSize  + (grid.rowCount - 1) * grid.rowSpacing, defaultMinimumSize)
 
-    contentItem: ColumnLayout {
-        spacing: Kirigami.Units.smallSpacing
+    readonly property int columnCount: root.controller.faceConfiguration.columnCount
+    readonly property int autoColumnCount: Math.ceil(Math.sqrt(controller.highPrioritySensorIds.length))
 
-        Repeater {
-            model: root.controller.highPrioritySensorIds
+    contentItem: FaceGrid {
+        id: grid
 
-            SensorRect {
-                Layout.preferredHeight: Math.min(implicitHeight, Math.max(root.height / root.controller.highPrioritySensorIds.length - Kirigami.Units.smallSpacing * (root.controller.highPrioritySensorIds.length - 1), Kirigami.Units.smallSpacing))
-                opacity: y + height <= root.height
-                sensor: sensor
-                text: sensor.formattedValue
-                useSensorColor: root.controller.faceConfiguration.useSensorColor
+        controller: root.controller
+        colorSource: root.colorSource
 
-                Sensors.Sensor {
-                    id: sensor
-                    sensorId: modelData
-                    updateRateLimit: root.controller.updateRateLimit
-                }
+        compact: true
+
+        columns: {
+            let itemCount = root.controller.highPrioritySensorIds.length
+
+            let maxColumns = Math.floor(width / defaultMinimumSize)
+            let maxRows = Math.floor(height / defaultMinimumSize)
+
+            let columns = root.columnCount > 0 ? root.columnCount : root.autoColumnCount
+            let rows = Math.ceil(itemCount / columns)
+
+            if (horizontalFormFactor) {
+                rows = Math.min(rows, maxRows)
+                columns = Math.ceil(itemCount / rows)
+            } else if (verticalFormFactor) {
+                columns = Math.min(columns, maxColumns)
             }
+
+            return columns
         }
     }
 }
