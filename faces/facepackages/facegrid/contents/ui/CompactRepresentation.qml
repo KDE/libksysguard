@@ -16,8 +16,8 @@ import org.kde.quickcharts.controls as ChartControls
 Faces.CompactSensorFace {
     id: root
 
-    Layout.minimumWidth: grid.columns * defaultMinimumSize + (grid.columns - 1) * grid.columnSpacing
-    Layout.minimumHeight: grid.rowCount * defaultMinimumSize  + (grid.rowCount - 1) * grid.rowSpacing
+    Layout.minimumWidth: Math.max(grid.columns * defaultMinimumSize + (grid.columns - 1) * grid.columnSpacing, defaultMinimumSize)
+    Layout.minimumHeight: Math.max(grid.rowCount * defaultMinimumSize  + (grid.rowCount - 1) * grid.rowSpacing, defaultMinimumSize)
 
     readonly property int columnCount: root.controller.faceConfiguration.columnCount
     readonly property int autoColumnCount: Math.ceil(Math.sqrt(controller.highPrioritySensorIds.length))
