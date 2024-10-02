@@ -14,7 +14,6 @@
 #include <QDir>
 #include <QFile>
 #include <QHash>
-#include <QPointer>
 #include <QSet>
 #include <QTextStream>
 #include <QThreadPool>
@@ -107,7 +106,6 @@ public:
     QFile mFile;
     char mBuffer[PROCESS_BUFFER_SIZE + 1]; // used as a buffer to read data into
     DIR *mProcDir;
-    QPointer<ReadProcSmapsRunnable> smapsRunnable;
 };
 
 ProcessesLocal::Private::~Private()
@@ -576,14 +574,14 @@ bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
     bool success = true;
     const QString dir = QLatin1String("/proc/") + QString::number(pid) + QLatin1Char('/');
 
-    if (mUpdateFlags.testFlag(Processes::Smaps) && !d->smapsRunnable) {
-        d->smapsRunnable = new ReadProcSmapsRunnable{dir};
+    if (mUpdateFlags.testFlag(Processes::Smaps)) {
+        auto runnable = new ReadProcSmapsRunnable{dir};
 
-        connect(d->smapsRunnable, &ReadProcSmapsRunnable::finished, this, [this, pid](qulonglong pss) {
+        connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid](qulonglong pss) {
             Q_EMIT processUpdated(pid, {{Process::VmPSS, pss}});
         });
 
-        QThreadPool::globalInstance()->start(d->smapsRunnable);
+        QThreadPool::globalInstance()->start(runnable);
     }
 
     if (!d->readProcStat(dir, process)) {
