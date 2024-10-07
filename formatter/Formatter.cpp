@@ -147,8 +147,8 @@ static KLocalizedString unitFormat(Unit unit)
     const static KLocalizedString percent = ki18nc("Percent unit", "%1\u200B%");
     // i18n: Use \u2009 (thin space) to separate value and unit
     const static KLocalizedString RPM = ki18nc("Revolutions per minute unit symbol", "%1\u2009RPM");
-    // i18n: Use \u200B (zero width space) to separate value and unit
-    const static KLocalizedString C = ki18nc("Celsius unit symbol", "%1\u200B°C");
+    // i18n: Use \u2009 (thin space)  to separate value and unit
+    const static KLocalizedString C = ki18nc("Celsius unit symbol", "%1\u2009°C");
     // i18n: Use \u2009 (thin space) to separate value and unit
     const static KLocalizedString dBm = ki18nc("Decibels unit symbol", "%1\u2009dBm");
     // i18n: Use \u200B (zero width space) to separate value and unit
