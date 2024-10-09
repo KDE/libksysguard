@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-04 00:40+0000\n"
+"POT-Creation-Date: 2024-10-09 00:41+0000\n"
 "PO-Revision-Date: 2024-07-27 19:39+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -369,12 +369,12 @@ msgctxt "Revolutions per minute unit symbol"
 msgid "%1 RPM"
 msgstr "%1 aps./min."
 
-#. i18n: Use \u200B (zero width space) to separate value and unit
+#. i18n: Use \u2009 (thin space)  to separate value and unit
 #: Formatter.cpp:151
 #, kde-format
 msgctxt "Celsius unit symbol"
-msgid "%1​°C"
-msgstr "%1​°C"
+msgid "%1 °C"
+msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
 #: Formatter.cpp:153
@@ -726,6 +726,10 @@ msgstr "sek."
 msgctxt "Rate unit symbol"
 msgid "s⁻¹"
 msgstr "s⁻¹"
+
+#~ msgctxt "Celsius unit symbol"
+#~ msgid "%1​°C"
+#~ msgstr "%1​°C"
 
 #~ msgctxt "Bytes unit symbol"
 #~ msgid "%1 B"
