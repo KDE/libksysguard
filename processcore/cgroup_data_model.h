@@ -115,6 +115,9 @@ Q_SIGNALS:
 
 protected:
     virtual bool filterAcceptsCGroup(CGroup *cgroup);
+    virtual void cgroupAdded(CGroup *cgroup);
+    virtual void cgroupPidsUpdated(CGroup *cgroup);
+    virtual void cgroupRemoved(CGroup *cgroup);
     virtual QList<Process *> processesFor(CGroup *cgroup) const;
 
 private:
