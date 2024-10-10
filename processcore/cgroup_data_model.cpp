@@ -427,9 +427,9 @@ void CGroupDataModel::update()
     }
 }
 
-bool CGroupDataModel::filterAcceptsCGroup(const QString &id)
+bool CGroupDataModel::filterAcceptsCGroup(CGroup *cgroup)
 {
-    return id.endsWith(QLatin1String(".service")) || id.endsWith(QLatin1String(".scope"));
+    return cgroup->id().endsWith(QLatin1String(".service")) || cgroup->id().endsWith(QLatin1String(".scope"));
 }
 
 void CGroupDataModel::update(CGroup *node)
@@ -463,7 +463,7 @@ void CGroupDataModel::update(CGroup *node)
             childNode = new CGroup(childId);
             d->m_cgroupMap[childNode->id()] = childNode;
 
-            if (filterAcceptsCGroup(childId)) {
+            if (filterAcceptsCGroup(childNode)) {
                 int row = d->m_cGroups.count();
                 beginInsertRows(QModelIndex(), row, row);
                 d->m_cGroups.append(childNode);

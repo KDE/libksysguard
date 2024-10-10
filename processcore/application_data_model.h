@@ -17,7 +17,7 @@ class PROCESSCORE_EXPORT ApplicationDataModel : public CGroupDataModel
     Q_OBJECT
 public:
     ApplicationDataModel(QObject *parent = nullptr);
-    bool filterAcceptsCGroup(const QString &id) override;
+    bool filterAcceptsCGroup(CGroup *cgroup) override;
 };
 
 }

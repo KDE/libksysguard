@@ -114,7 +114,7 @@ Q_SIGNALS:
     void availableChanged();
 
 protected:
-    virtual bool filterAcceptsCGroup(const QString &id);
+    virtual bool filterAcceptsCGroup(CGroup *cgroup);
 
 private:
     QScopedPointer<CGroupDataModelPrivate> d;
