@@ -15,8 +15,8 @@
 namespace KSysGuard
 {
 class CGroup;
-
 class CGroupDataModelPrivate;
+class Process;
 
 /**
  * @brief The CGroupDataModel class is a list model of all cgroups from a given root
