@@ -277,10 +277,11 @@ QVariant CGroupDataModel::data(const QModelIndex &index, int role) const
         return attribute->unit();
     }
     case ProcessDataModel::PIDs: {
-        const auto pids = static_cast<KSysGuard::CGroup *>(index.internalPointer())->pids();
+        KSysGuard::CGroup *app = static_cast<KSysGuard::CGroup *>(index.internalPointer());
+        const auto processes = processesFor(app);
         QVariantList result;
-        std::transform(pids.begin(), pids.end(), std::back_inserter(result), [](pid_t pid) {
-            return int(pid);
+        std::transform(processes.begin(), processes.end(), std::back_inserter(result), [](Process *process) {
+            return QVariant::fromValue(process->pid());
         });
         return result;
     }
