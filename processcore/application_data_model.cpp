@@ -16,13 +16,14 @@ ApplicationDataModel::ApplicationDataModel(QObject *parent)
 {
 }
 
-bool ApplicationDataModel::filterAcceptsCGroup(const QString &id)
+bool ApplicationDataModel::filterAcceptsCGroup(CGroup *cgroup)
 {
-    if (!CGroupDataModel::filterAcceptsCGroup(id)) {
+    if (!CGroupDataModel::filterAcceptsCGroup(cgroup->id())) {
         return false;
     }
+
     // this class is all temporary. In the future as per https://systemd.io/DESKTOP_ENVIRONMENTS/
     // all apps will have a managed by a drop-in that puts apps in the app.slice
     // when this happens adjust the root above and drop this filterAcceptsCGroup line
-    return id.contains(QLatin1String("/app-")) || (id.contains(QLatin1String("/flatpak")) && id.endsWith(QLatin1String("scope")));
+    return cgroup->id().contains(QLatin1String("/app-")) || (cgroup->id().contains(QLatin1String("/flatpak")) && cgroup->id().endsWith(QLatin1String("scope")));
 }
