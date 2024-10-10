@@ -422,6 +422,7 @@ void CGroupDataModel::update()
             endRemoveRows();
         }
         d->m_cgroupMap.remove(c->id());
+        cgroupRemoved(c);
         delete c;
     }
 }
@@ -429,6 +430,14 @@ void CGroupDataModel::update()
 bool CGroupDataModel::filterAcceptsCGroup(CGroup *cgroup)
 {
     return cgroup->id().endsWith(QLatin1String(".service")) || cgroup->id().endsWith(QLatin1String(".scope"));
+}
+
+void CGroupDataModel::cgroupAdded(CGroup *)
+{
+}
+
+void CGroupDataModel::cgroupRemoved(CGroup *)
+{
 }
 
 void CGroupDataModel::update(CGroup *node)
@@ -439,10 +448,11 @@ void CGroupDataModel::update(CGroup *node)
     // Update our own stat info
     // This may trigger some dataChanged
     node->requestPids(this, [this, node](QList<pid_t> pids) {
+        node->setPids(pids);
+        d->m_processMap.remove(node);
+
         auto row = d->m_cGroups.indexOf(node);
         if (row >= 0) {
-            d->m_cGroups[row]->setPids(pids);
-            d->m_processMap.remove(d->m_cGroups[row]);
             Q_EMIT dataChanged(index(row, 0, QModelIndex()), index(row, columnCount() - 1, QModelIndex()));
         }
     });
@@ -461,6 +471,7 @@ void CGroupDataModel::update(CGroup *node)
         if (!childNode) {
             childNode = new CGroup(childId);
             d->m_cgroupMap[childNode->id()] = childNode;
+            cgroupAdded(childNode);
 
             if (filterAcceptsCGroup(childNode)) {
                 int row = d->m_cGroups.count();
