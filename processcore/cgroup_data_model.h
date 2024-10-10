@@ -15,8 +15,8 @@
 namespace KSysGuard
 {
 class CGroup;
-
 class CGroupDataModelPrivate;
+class Process;
 
 /**
  * @brief The CGroupDataModel class is a list model of all cgroups from a given root
@@ -115,6 +115,7 @@ Q_SIGNALS:
 
 protected:
     virtual bool filterAcceptsCGroup(CGroup *cgroup);
+    virtual QList<Process *> processesFor(CGroup *cgroup) const;
 
 private:
     QScopedPointer<CGroupDataModelPrivate> d;
