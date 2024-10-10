@@ -27,8 +27,6 @@ using namespace KSysGuard;
 class KSysGuard::CGroupDataModelPrivate
 {
 public:
-    QList<KSysGuard::Process *> processesFor(CGroup *app);
-
     QSharedPointer<ExtendedProcesses> m_processes;
     QTimer *m_updateTimer;
     ProcessAttributeModel *m_attributeModel = nullptr;
@@ -249,12 +247,12 @@ QVariant CGroupDataModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
     case ProcessDataModel::FormattedValue: {
         KSysGuard::CGroup *app = reinterpret_cast<KSysGuard::CGroup *>(index.internalPointer());
-        const QVariant value = attribute->cgroupData(app, d->processesFor(app));
+        const QVariant value = attribute->cgroupData(app, processesFor(app));
         return KSysGuard::Formatter::formatValue(value, attribute->unit());
     }
     case ProcessDataModel::Value: {
         KSysGuard::CGroup *app = reinterpret_cast<KSysGuard::CGroup *>(index.internalPointer());
-        const QVariant value = attribute->cgroupData(app, d->processesFor(app));
+        const QVariant value = attribute->cgroupData(app, processesFor(app));
         return value;
     }
     case ProcessDataModel::Attribute: {
@@ -480,22 +478,22 @@ bool CGroupDataModel::isAvailable() const
     return d->m_available;
 }
 
-QList<Process *> CGroupDataModelPrivate::processesFor(CGroup *app)
+QList<Process *> CGroupDataModel::processesFor(CGroup *app) const
 {
-    if (m_processMap.contains(app)) {
-        return m_processMap.value(app);
+    if (d->m_processMap.contains(app)) {
+        return d->m_processMap.value(app);
     }
 
     QList<Process *> result;
     const auto pids = app->pids();
     std::for_each(pids.begin(), pids.end(), [this, &result](pid_t pid) {
-        auto process = m_processes->getProcess(pid);
+        auto process = d->m_processes->getProcess(pid);
         if (process) {
             result.append(process);
         }
     });
 
-    m_processMap.insert(app, result);
+    d->m_processMap.insert(app, result);
 
     return result;
 }
