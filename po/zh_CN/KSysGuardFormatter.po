@@ -372,7 +372,7 @@ msgstr "%1 RPM"
 #, kde-format
 msgctxt "Celsius unit symbol"
 msgid "%1 °C"
-msgstr ""
+msgstr "%1 °C"
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
 #: Formatter.cpp:153
@@ -724,7 +724,3 @@ msgstr "s"
 msgctxt "Rate unit symbol"
 msgid "s⁻¹"
 msgstr "s⁻¹"
-
-#~ msgctxt "Celsius unit symbol"
-#~ msgid "%1​°C"
-#~ msgstr "%1​°C"
