@@ -141,6 +141,9 @@ void FaceLoader::setColors(const QVariantMap &newColors)
     d->colors = newColors;
     if (d->controller) {
         d->controller->setSensorColors(d->colors);
+        // Ensure we emit a change signal for colors even if the controller thinks
+        // we shouldn't, to ensure all instances of the face are correctly updated.
+        Q_EMIT d->controller->sensorColorsChanged();
     }
     Q_EMIT colorsChanged();
 }
@@ -159,6 +162,9 @@ void FaceLoader::setLabels(const QVariantMap &newLabels)
     d->labels = newLabels;
     if (d->controller) {
         d->controller->setSensorLabels(d->labels);
+        // Ensure we emit a change signal for labels even if the controller thinks
+        // we shouldn't, to ensure all instances of the face are correctly updated.
+        Q_EMIT d->controller->sensorLabelsChanged();
     }
     Q_EMIT labelsChanged();
 }
@@ -177,6 +183,9 @@ void FaceLoader::setUpdateRateLimit(int newLimit)
     d->updateRateLimit = newLimit;
     if (d->controller) {
         d->controller->setUpdateRateLimit(d->updateRateLimit);
+        // Ensure we emit a change signal for the limit even if the controller thinks
+        // we shouldn't, to ensure all instances of the face are correctly updated.
+        Q_EMIT d->controller->updateRateLimitChanged();
     }
     Q_EMIT updateRateLimitChanged();
 }
