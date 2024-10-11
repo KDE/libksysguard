@@ -31,6 +31,7 @@ public:
     QString faceId;
     QVariantMap colors;
     QVariantMap labels;
+    int updateRateLimit = 0;
     bool readOnly = true;
     bool showTitle = false;
 };
@@ -162,6 +163,24 @@ void FaceLoader::setLabels(const QVariantMap &newLabels)
     Q_EMIT labelsChanged();
 }
 
+int FaceLoader::updateRateLimit() const
+{
+    return d->updateRateLimit;
+}
+
+void FaceLoader::setUpdateRateLimit(int newLimit)
+{
+    if (newLimit == d->updateRateLimit) {
+        return;
+    }
+
+    d->updateRateLimit = newLimit;
+    if (d->controller) {
+        d->controller->setUpdateRateLimit(d->updateRateLimit);
+    }
+    Q_EMIT updateRateLimitChanged();
+}
+
 bool FaceLoader::readOnly() const
 {
     return d->readOnly;
@@ -214,6 +233,7 @@ void FaceLoader::Private::setupController()
     controller->setSensorLabels(labels);
     controller->setShowTitle(showTitle);
     controller->setFaceId(faceId);
+    controller->setUpdateRateLimit(updateRateLimit);
 
     Q_EMIT q->controllerChanged();
 }

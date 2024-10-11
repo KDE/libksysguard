@@ -66,6 +66,12 @@ class SENSORFACES_EXPORT FaceLoader : public QObject, public QQmlParserStatus
      */
     Q_PROPERTY(QVariantMap labels READ labels WRITE setLabels NOTIFY labelsChanged)
     /**
+     * The minimum time that needs to elapse, in milliseconds, between updates of the face.
+     *
+     * This forward to the internal SensorFaceController.
+     */
+    Q_PROPERTY(int updateRateLimit READ updateRateLimit WRITE setUpdateRateLimit NOTIFY updateRateLimitChanged)
+    /**
      * Whether to allow modifying the face configuration.
      *
      * If false (the default), any changes to configuration will be ignored. If
@@ -108,6 +114,10 @@ public:
     QVariantMap labels() const;
     void setLabels(const QVariantMap &newLabels);
     Q_SIGNAL void labelsChanged();
+
+    int updateRateLimit() const;
+    void setUpdateRateLimit(int limit);
+    Q_SIGNAL void updateRateLimitChanged();
 
     bool readOnly() const;
     void setReadOnly(bool newReadOnly);
