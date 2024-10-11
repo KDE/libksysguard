@@ -46,6 +46,7 @@ Control {
         faceId: control.faceId
         colors: control.controller.sensorColors
         labels: control.controller.sensorLabels
+        updateRateLimit: control.controller.updateRateLimit
     }
 
     Component.onCompleted: updateContentItem()
