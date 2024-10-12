@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-09 00:41+0000\n"
-"PO-Revision-Date: 2024-07-04 10:53+0200\n"
+"PO-Revision-Date: 2024-10-11 19:46+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
 #: Formatter.cpp:43
@@ -373,7 +373,7 @@ msgstr "%1 RPM"
 #, kde-format
 msgctxt "Celsius unit symbol"
 msgid "%1 °C"
-msgstr ""
+msgstr "%1 °C"
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
 #: Formatter.cpp:153
