@@ -56,6 +56,10 @@ void SensorDaemonInterface::requestMetaData(const QString &sensorId)
 
 void SensorDaemonInterface::requestMetaData(const QStringList &sensorIds)
 {
+    if (sensorIds.isEmpty()) {
+        return;
+    }
+
     auto watcher = new QDBusPendingCallWatcher{d->dbusInterface->sensors(sensorIds), this};
     connect(watcher, &QDBusPendingCallWatcher::finished, watcher, [this](QDBusPendingCallWatcher *self) {
         self->deleteLater();
@@ -74,6 +78,10 @@ void SensorDaemonInterface::requestMetaData(const QStringList &sensorIds)
 
 void SensorDaemonInterface::requestValue(const QString &sensorId)
 {
+    if (sensorId.isEmpty()) {
+        return;
+    }
+
     auto watcher = new QDBusPendingCallWatcher{d->dbusInterface->sensorData({sensorId}), this};
     connect(watcher, &QDBusPendingCallWatcher::finished, watcher, [this](QDBusPendingCallWatcher *self) {
         self->deleteLater();
@@ -97,22 +105,38 @@ QDBusPendingCallWatcher *SensorDaemonInterface::allSensors() const
 
 void SensorDaemonInterface::subscribe(const QString &sensorId)
 {
+    if (sensorId.isEmpty()) {
+        return;
+    }
+
     subscribe(QStringList{sensorId});
 }
 
 void KSysGuard::SensorDaemonInterface::subscribe(const QStringList &sensorIds)
 {
+    if (sensorIds.isEmpty()) {
+        return;
+    }
+
     d->dbusInterface->subscribe(sensorIds);
     d->subscribedSensors.append(sensorIds);
 }
 
 void SensorDaemonInterface::unsubscribe(const QString &sensorId)
 {
+    if (sensorId.isEmpty()) {
+        return;
+    }
+
     unsubscribe(QStringList{sensorId});
 }
 
 void KSysGuard::SensorDaemonInterface::unsubscribe(const QStringList &sensorIds)
 {
+    if (sensorIds.isEmpty()) {
+        return;
+    }
+
     d->dbusInterface->unsubscribe(sensorIds);
 }
 
