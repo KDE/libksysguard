@@ -136,7 +136,11 @@ SensorResolver::SensorResolver(SensorFaceController *_controller, const QJsonArr
 
 void SensorResolver::execute()
 {
-    std::transform(expected.begin(), expected.end(), std::back_inserter(queries), [this](const QJsonValue &entry) {
+    std::transform(expected.begin(), expected.end(), std::back_inserter(queries), [this](const QJsonValue &entry) -> SensorQuery * {
+        if (entry.isNull()) {
+            return nullptr;
+        }
+
         auto query = new SensorQuery{entry.toString()};
         query->connect(query, &KSysGuard::SensorQuery::finished, controller, [this](SensorQuery *query) {
             query->sortByName();
@@ -159,6 +163,8 @@ void SensorResolver::execute()
         query->execute();
         return query;
     });
+
+    queries.removeAll(nullptr);
 }
 
 QList<QPair<QRegularExpression, QString>> KSysGuard::SensorFaceControllerPrivate::sensorIdReplacements;
