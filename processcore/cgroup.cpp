@@ -92,8 +92,9 @@ Q_GLOBAL_STATIC(CGroupSystemInformation, s_cGroupSystemInformation)
 // Flatpak's are currently in a cgroup, but they don't follow the specification
 // this has been fixed, but this provides some compatibility till that lands
 // app vs apps exists because the spec changed.
+// We allow app[-<launcher>]-<ApplicationID>[@<RANDOM>].slice which is not standard but very close for gnome terminal
 QRegularExpression
-    CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("(apps|app|flatpak)-(?:[^-]*-)?([^-]+(?=-.*\\.scope)|[^@]+(?=(?:@.*)?\\.service))"));
+    CGroupPrivate::s_appIdFromProcessGroupPattern(QStringLiteral("(apps|app|flatpak)-(?:[^-]*-)?([^-]+(?=-.*\\.scope)|[^@]+(?=(?:@.*)?\\.service|.slice))"));
 
 CGroup::CGroup(const QString &id)
     : d(new CGroupPrivate(id))
