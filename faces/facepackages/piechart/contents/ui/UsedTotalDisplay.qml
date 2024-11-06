@@ -8,6 +8,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import Qt5Compat.GraphicalEffects
+
 import org.kde.kirigami as Kirigami
 
 import org.kde.ksysguard.formatter as Formatter
@@ -87,17 +89,24 @@ Item {
             fontSizeMode: Text.HorizontalFit
             minimumPointSize: Kirigami.Theme.smallFont.pointSize * 0.8
 
-            // When we're small the text is allowed to flow over the underlying
-            // pie chart, to improve contrast we render it with an outline using
-            // the inverse text color.
-            style: root.constrained ? Text.Outline : Text.Normal
-            styleColor: Qt.rgba(1.0 - Kirigami.Theme.textColor.r, 1.0 - Kirigami.Theme.textColor.g, 1.0 - Kirigami.Theme.textColor.b, 1.0)
-
             // This slightly odd combination ensures that when the width becomes
             // too small, the unit gets hidden because the text wraps but the
             // wrapped part is hidden due to maximumLineCount.
             wrapMode: Text.Wrap
             maximumLineCount: 1
+
+            // When we're small we want to overlap the text onto the chart. To
+            // ensure the text remains readable, we want to have some sort of
+            // outline behind the text. Unfortunately, there is no way to
+            // achieve the visual effect we want here without using deprecated
+            // GraphicalEffects. MultiEffect is completely unusable and using
+            // `style: Text.Outline` makes the font rendering look pretty bad.
+            layer.enabled: root.constrained
+            layer.effect: Glow {
+                radius: 4
+                spread: 0.75
+                color: Kirigami.Theme.backgroundColor
+            }
         }
 
         Kirigami.Separator {
