@@ -19,6 +19,8 @@
 
 #include "process.h"
 
+#include <ranges>
+
 using namespace KSysGuard;
 
 class KSysGuard::CGroupPrivate
@@ -154,21 +156,22 @@ QString CGroupPrivate::unescapeName(const QString &name)
 
 KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
 {
-    const int lastSlash = processGroup.lastIndexOf(QLatin1Char('/'));
+    const auto parts = processGroup.split(QLatin1Char('/'));
 
-    QString serviceName = processGroup;
-    if (lastSlash != -1) {
-        serviceName = processGroup.mid(lastSlash + 1);
+    QString appId;
+
+    for (const auto &cgroupId : std::ranges::reverse_view(parts)) {
+        const auto &appIdMatch = s_appIdFromProcessGroupPattern.match(cgroupId);
+        if (appIdMatch.isValid() && appIdMatch.hasMatch()) {
+            appId = unescapeName(appIdMatch.captured(2));
+            break;
+        }
     }
 
-    const QRegularExpressionMatch &appIdMatch = s_appIdFromProcessGroupPattern.match(serviceName);
-
-    if (!appIdMatch.isValid() || !appIdMatch.hasMatch()) {
+    if (appId.isEmpty()) {
         // create a transient service object just to have a sensible name
-        return KService::Ptr(new KService(serviceName, QString(), QString()));
+        return KService::Ptr(new KService(parts.last(), QString(), QString()));
     }
-
-    const QString appId = unescapeName(appIdMatch.captured(2));
 
     KService::Ptr service = KService::serviceByMenuId(appId + QStringLiteral(".desktop"));
     if (!service && processGroup.endsWith(QLatin1String("@autostart.service"))) {
