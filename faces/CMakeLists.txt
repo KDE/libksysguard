@@ -20,7 +20,7 @@ set(faces_LIB_HEADERS
 
 ecm_qt_declare_logging_category(faces_LIB_SRCS
     HEADER faces_logging.h
-    IDENTIFIER LIBKSYSGUARD_SENSORS
+    IDENTIFIER LIBKSYSGUARD_FACES
     CATEGORY_NAME org.kde.libksysguard.faces
     DESCRIPTION "libksysguard (faces)" EXPORT LIBKSYSGUARD)
 
