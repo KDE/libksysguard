@@ -30,6 +30,8 @@
 #include <Solid/StorageAccess>
 #include <Solid/StorageVolume>
 
+#include "faces_logging.h"
+
 using namespace KSysGuard;
 
 FacesModel::FacesModel(QObject *parent)
@@ -1014,7 +1016,11 @@ void SensorFaceController::savePreset()
 
     auto *job = KPackage::PackageJob::install(QStringLiteral("Plasma/Applet"), dir.path());
     connect(job, &KJob::finished, this, [this]() {
-        d->availablePresetsModel->reload();
+        if (job->error() == 0) {
+            d->availablePresetsModel->reload();
+        } else {
+            qCWarning(LIBKSYSGUARD_FACES) << "Failed to install package:" << qPrintable(job->errorString());
+        }
     });
 }
 
