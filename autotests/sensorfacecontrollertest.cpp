@@ -9,6 +9,8 @@
 
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QQmlEngine>
+#include <QStandardPaths>
 
 #include <KConfig>
 #include <Solid/Block>
@@ -20,6 +22,8 @@
 #include "SensorFaceController.h"
 
 #include "SensorFaceController_p.h"
+
+using namespace Qt::StringLiterals;
 
 class SensorFaceControllerTest : public QObject
 {
@@ -206,6 +210,42 @@ private Q_SLOTS:
 
         auto newEntry = sensorsGroup.readEntry("sensors");
         QCOMPARE(newEntry.toUtf8(), QJsonDocument{expectedSensors}.toJson(QJsonDocument::Compact));
+    }
+
+    void testSavePreset()
+    {
+        auto qmlEngine = std::make_unique<QQmlEngine>();
+
+        KConfig faceConfig;
+        KConfigGroup faceGroup = faceConfig.group(u"Test"_s);
+
+        const auto highPrioritySensors = QJsonArray{u"cpu/all/usage"_s};
+        const auto lowPrioritySensors = QJsonArray{u"cpu/all/cpuCount"_s, u"cpu/all/coreCount"_s};
+
+        KSysGuard::SensorFaceController controller(faceGroup, qmlEngine.get(), qmlEngine.get());
+        controller.setFaceId(u"org.kde.ksysguard.linechart"_s);
+        controller.setTitle(u"Test"_s);
+        controller.setHighPrioritySensorIds(highPrioritySensors);
+        controller.setLowPrioritySensorIds(lowPrioritySensors);
+
+        QTemporaryDir tempDir;
+        QVERIFY(tempDir.isValid());
+
+        std::filesystem::path path(tempDir.path().toStdString());
+
+        controller.savePreset(path);
+        QVERIFY(std::filesystem::exists(path / "metadata.json"));
+        QVERIFY(std::filesystem::exists(path / "contents" / "config"));
+        QVERIFY(std::filesystem::exists(path / "contents" / "config" / "faceproperties"));
+
+        KConfig faceProperties(QString::fromStdString((path / "contents" / "config" / "faceproperties").string()));
+        QVERIFY(faceProperties.hasGroup("Config"));
+        auto group = faceProperties.group("Config");
+        QCOMPARE(group.readEntry("chartFace", QString{}), u"org.kde.ksysguard.linechart"_s);
+        auto configHighPrioritySensors = QJsonDocument::fromJson(group.readEntry("highPrioritySensorIds", QString()).toUtf8()).array();
+        QCOMPARE(configHighPrioritySensors, highPrioritySensors);
+        auto configLowPrioritySensors = QJsonDocument::fromJson(group.readEntry("lowPrioritySensorIds", QString()).toUtf8()).array();
+        QCOMPARE(configLowPrioritySensors, lowPrioritySensors);
     }
 };
 
