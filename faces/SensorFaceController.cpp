@@ -941,6 +941,30 @@ void SensorFaceController::loadPreset(const QString &preset)
 
 void SensorFaceController::savePreset()
 {
+    // Important! We need to ensure the directory remains valid as long as it has
+    // not been installed yet. Since the install is asynchronous, we need to make
+    // sure that the QTemporaryDir does not go out of scope until the install is
+    // finished, so this directory will be moved into the lambda connected to the
+    // job finished signal below to ensure it lives as long as the job.
+    QTemporaryDir dir;
+    if (!dir.isValid()) {
+        return;
+    }
+
+    savePreset(std::filesystem::path(dir.path().toStdString()));
+
+    auto *job = KPackage::PackageJob::install(QStringLiteral("Plasma/Applet"), dir.path());
+    connect(job, &KJob::finished, this, [this, dir = std::move(dir)](KJob *job) {
+        if (job->error() == 0) {
+            d->availablePresetsModel->reload();
+        } else {
+            qCWarning(LIBKSYSGUARD_FACES) << "Failed to install package:" << qPrintable(job->errorString());
+        }
+    });
+}
+
+void KSysGuard::SensorFaceController::savePreset(const std::filesystem::path &path)
+{
     QString pluginName = QStringLiteral("org.kde.plasma.systemmonitor.") + title().simplified().replace(QLatin1Char(' '), QStringLiteral("")).toLower();
     int suffix = 0;
 
@@ -954,16 +978,6 @@ void SensorFaceController::savePreset()
         } while (presetPackage.isValid());
 
         pluginName += QString::number(suffix);
-    }
-
-    // Important! We need to ensure the directory remains valid as long as it has
-    // not been installed yet. Since the install is asynchronous, we need to make
-    // sure that the QTemporaryDir does not go out of scope until the install is
-    // finished, so this directory will be moved into the lambda connected to the
-    // job finished signal below to ensure it lives as long as the job.
-    QTemporaryDir dir;
-    if (!dir.isValid()) {
-        return;
     }
 
     // First write "new style" plugin JSON file.
@@ -986,15 +1000,15 @@ void SensorFaceController::savePreset()
         {"KPackageStructure", "Plasma/Applet"},
     });
 
-    if (QFile file{dir.path() % QStringLiteral("/metadata.json")}; file.open(QIODevice::WriteOnly)) {
+    if (QFile file{path / "metadata.json"}; file.open(QIODevice::WriteOnly)) {
         file.write(json.toJson());
     } else {
         qWarning() << "Could not write metadata.json file for preset" << title();
     }
 
-    QDir subDir(dir.path());
-    subDir.mkpath(QStringLiteral("contents/config"));
-    KConfig faceConfig(subDir.path() % QStringLiteral("/contents/config/faceproperties"));
+    std::filesystem::create_directories(path / "contents" / "config");
+
+    KConfig faceConfig(QString::fromStdString((path / "contents" / "config" / "faceproperties").string()));
 
     KConfigGroup configGroup(&faceConfig, "Config");
 
@@ -1018,15 +1032,6 @@ void SensorFaceController::savePreset()
         }
     }
     configGroup.sync();
-
-    auto *job = KPackage::PackageJob::install(QStringLiteral("Plasma/Applet"), dir.path());
-    connect(job, &KJob::finished, this, [this, dir = std::move(dir)](KJob *job) {
-        if (job->error() == 0) {
-            d->availablePresetsModel->reload();
-        } else {
-            qCWarning(LIBKSYSGUARD_FACES) << "Failed to install package:" << qPrintable(job->errorString());
-        }
-    });
 }
 
 void SensorFaceController::uninstallPreset(const QString &pluginId)

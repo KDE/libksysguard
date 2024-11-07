@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <filesystem>
+
 #include <QAbstractItemModel>
 #include <QObject>
 #include <QPointer>
@@ -249,6 +251,7 @@ public:
      * Save the current configuration as a preset
      */
     Q_INVOKABLE void savePreset();
+    void savePreset(const std::filesystem::path &path);
     /**
      * Uninstall a specific preset
      */
