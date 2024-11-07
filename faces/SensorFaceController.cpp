@@ -954,6 +954,11 @@ void SensorFaceController::savePreset()
         pluginName += QString::number(suffix);
     }
 
+    // Important! We need to ensure the directory remains valid as long as it has
+    // not been installed yet. Since the install is asynchronous, we need to make
+    // sure that the QTemporaryDir does not go out of scope until the install is
+    // finished, so this directory will be moved into the lambda connected to the
+    // job finished signal below to ensure it lives as long as the job.
     QTemporaryDir dir;
     if (!dir.isValid()) {
         return;
@@ -1013,7 +1018,7 @@ void SensorFaceController::savePreset()
     configGroup.sync();
 
     auto *job = KPackage::PackageJob::install(QStringLiteral("Plasma/Applet"), dir.path());
-    connect(job, &KJob::finished, this, [this]() {
+    connect(job, &KJob::finished, this, [this, dir = std::move(dir)]() {
         d->availablePresetsModel->reload();
     });
 }
