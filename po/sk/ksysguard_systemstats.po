@@ -1,0 +1,34 @@
+# translation of ksysguard_systemstats.po to Slovak
+# SPDX-FileCopyrightText: 2024 Roman Paholik <wizzardsk@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: ksysguard_systemstats\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-03-05 00:39+0000\n"
+"PO-Revision-Date: 2024-11-10 16:17+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 24.08.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: SensorsFeatureSensor.cpp:26
+#, kde-format
+msgctxt "@title %1 is a number"
+msgid "Voltage %1"
+msgstr "Napätie %1"
+
+#: SensorsFeatureSensor.cpp:34
+#, kde-format
+msgctxt "@title %1 is a number"
+msgid "Fan %1"
+msgstr "Vetrák %1"
+
+#: SensorsFeatureSensor.cpp:42
+#, kde-format
+msgctxt "@title %1 is a number"
+msgid "Temperature %1"
+msgstr "Teplota %1"

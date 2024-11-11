@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-28 00:40+0000\n"
-"PO-Revision-Date: 2024-06-28 21:06+0200\n"
+"PO-Revision-Date: 2024-11-10 11:28+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.11.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: cgroup_data_model.cpp:52
@@ -245,7 +245,7 @@ msgid ""
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
 "Приоритетът, с който работи този процес. Варира от 19 (много добре, най-"
-"малък приоритет) до -19 (най-виоск приоритет)."
+"малък приоритет) до -19 (най-висок приоритет)."
 
 #: extended_process_list.cpp:308
 #, kde-format
