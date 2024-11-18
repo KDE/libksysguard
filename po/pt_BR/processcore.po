@@ -7,19 +7,20 @@
 # André Marcelo Alvarenga <andrealvarenga@gmx.net>, 2009, 2010.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2019, 2020, 2021.
 # Thiago Masato Costa Sueto <herzenschein@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2024 Geraldo Simiao <geraldosimiao@fedoraproject.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:41+0000\n"
-"PO-Revision-Date: 2021-10-05 17:13-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
-"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"PO-Revision-Date: 2024-11-16 00:47-0300\n"
+"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cgroup_data_model.cpp:50
@@ -267,7 +268,7 @@ msgstr "Nível de prioridade de E/S"
 #: extended_process_list.cpp:323
 #, kde-format
 msgid "VM Size"
-msgstr ""
+msgstr "Tamanho da MV"
 
 #: extended_process_list.cpp:328
 #, kde-format
@@ -281,15 +282,14 @@ msgstr ""
 "por diante. Este número é quase sem sentido."
 
 #: extended_process_list.cpp:333
-#, fuzzy, kde-format
-#| msgid "RSS Memory Usage"
+#, kde-format
 msgid "Resident Memory Usage"
-msgstr "Uso da memória RSS"
+msgstr "Uso da memória residente"
 
 #: extended_process_list.cpp:335
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "Residente"
 
 #: extended_process_list.cpp:339
 #, kde-format
@@ -311,19 +311,14 @@ msgid "Private"
 msgstr "Privada"
 
 #: extended_process_list.cpp:349
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process.<br>It "
-#| "does not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
+#, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "Esta é a quantidade de memória física que este processo está usando, e "
-"aproxima o uso da memória privada do processo.<br>Ela não inclui qualquer "
+"aproxima o uso da memória privada do processo. Ela não inclui qualquer "
 "memória permutada, nem o tamanho do código de suas bibliotecas "
 "compartilhadas."
 
@@ -338,18 +333,14 @@ msgid "Shared"
 msgstr "Compartilhada"
 
 #: extended_process_list.cpp:367
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is approximately the amount of real physical memory that this "
-#| "process's shared libraries are using.<br>This memory is shared among all "
-#| "processes that use this library."
+#, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
 "Esta é aproximadamente a quantidade de memória física real que as "
-"bibliotecas compartilhadas deste processo estão usando.<br>Esta memória é "
+"bibliotecas compartilhadas deste processo estão usando. Esta memória é "
 "compartilhada entre todos os processos que usam esta biblioteca."
 
 #: extended_process_list.cpp:373
@@ -498,25 +489,25 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Download Speed"
-msgstr ""
+msgstr "Velocidade de recebimento"
 
 #: plugins/network/network.cpp:37
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr ""
+msgstr "Recebimento"
 
 #: plugins/network/network.cpp:40
 #, kde-format
 msgctxt "@title"
 msgid "Upload Speed"
-msgstr ""
+msgstr "Velocidade de envio"
 
 #: plugins/network/network.cpp:41
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
+msgstr "Envio"
 
 #: plugins/nvidia/nvidia.cpp:28
 #, kde-format
