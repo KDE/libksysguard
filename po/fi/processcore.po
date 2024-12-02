@@ -6,7 +6,7 @@
 # Jorma Karvonen <karvonen.jorma@gmail.com>, 2010.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011.
-# Tommi Nieminen <translator@legisign.org>, 2019, 2021, 2024.
+# SPDX-FileCopyrightText: 2019, 2021, 2024 Tommi Nieminen <translator@legisign.org>
 #
 #
 # KDE Finnish translation sprint participants:
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:41+0000\n"
-"PO-Revision-Date: 2024-02-14 18:56+0200\n"
+"PO-Revision-Date: 2024-10-29 15:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -24,8 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-POT-Import-Date: 2012-12-01 22:22:38+0000\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -283,15 +282,14 @@ msgstr ""
 "juurikaan merkitystä."
 
 #: extended_process_list.cpp:333
-#, fuzzy, kde-format
-#| msgid "RSS Memory Usage"
+#, kde-format
 msgid "Resident Memory Usage"
-msgstr "RSS-muistin käyttö"
+msgstr "Pysyvän muistin käyttö"
 
 #: extended_process_list.cpp:335
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "Pysyvä"
 
 #: extended_process_list.cpp:339
 #, kde-format
