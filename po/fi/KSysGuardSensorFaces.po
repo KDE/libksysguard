@@ -1,32 +1,31 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# Tommi Nieminen <translator@legisign.org>, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-24 02:33+0000\n"
-"PO-Revision-Date: 2023-02-20 22:06+0200\n"
-"Last-Translator: Tommi Nieminen <tommi.nieminen@legisign.org>\n"
+"PO-Revision-Date: 2024-10-29 15:01+0200\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ConfigAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "Load Preset..."
+#, kde-format
 msgid "Load Preset"
-msgstr "Lataa esiasetus…"
+msgstr "Lataa esiasetus"
 
 #: ConfigAppearance.qml:99
 #, kde-format
 msgid "Delete this preset"
-msgstr ""
+msgstr "Poista tämä esiasetus"
 
 #: ConfigAppearance.qml:125
 #, kde-format
@@ -111,20 +110,18 @@ msgstr "Vain teksti -anturit"
 #, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr ""
+msgstr "Perusasetukset:"
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "Näytä anturien selitteet"
+msgstr "Näytä selite"
 
 #: facepackages/barchart/contents/ui/Config.qml:41
-#, fuzzy, kde-format
-#| msgid "Stacked Bars"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
 msgstr "Pinotut pylväät"
@@ -133,38 +130,36 @@ msgstr "Pinotut pylväät"
 #, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr ""
+msgstr "Palkin suunta:"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "Pysty"
 
 #: facepackages/barchart/contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "Vaaka"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "Akseli:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
 msgstr "Näytä Y-akselin selitteet"
 
 #: facepackages/barchart/contents/ui/Config.qml:74
 #: facepackages/linechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
 msgstr "Näytä ruudukkoviivat"
@@ -172,8 +167,7 @@ msgstr "Näytä ruudukkoviivat"
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
 #: facepackages/piechart/contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Automaattinen tietoalue"
@@ -181,69 +175,59 @@ msgstr "Automaattinen tietoalue"
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
 #: facepackages/piechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr "Alkaa:"
+msgstr "Mistä:"
 
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
 #: facepackages/piechart/contents/ui/Config.qml:80
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr "Päättyy:"
+msgstr "Mihin:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:22
-#, fuzzy, kde-format
-#| msgid "Use sensor color:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Käytä anturiväriä:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:27
 #: facepackages/facegrid/contents/ui/Config.qml:35
-#, fuzzy, kde-format
-#| msgid "Number of Columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Sarakkeiden määrä:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:34
 #: facepackages/facegrid/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
+#, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automaattinen"
 
 #: facepackages/facegrid/contents/ui/Config.qml:54
-#, fuzzy, kde-format
-#| msgid "Display Style:"
+#, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
 msgstr "Näyttötyyli:"
 
 #: facepackages/linechart/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
 #: facepackages/linechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Stacked Charts"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
 msgstr "Pinotut kaaviot"
 
 #: facepackages/linechart/contents/ui/Config.qml:55
-#, fuzzy, kde-format
-#| msgid "Smooth Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
 msgstr "Pehmeät viivat"
@@ -252,48 +236,40 @@ msgstr "Pehmeät viivat"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr ""
+msgstr "Viivan alaisen alueen peittävyys:"
 
 #: facepackages/linechart/contents/ui/Config.qml:73
-#, fuzzy, kde-format
-#| msgid "Data Ranges"
+#, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
 msgstr "Tietoalueet"
 
 #: facepackages/linechart/contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Y Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
 msgstr "Automaattinen Y-tietoalue"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
-msgstr "Y alkaa:"
+msgstr "Mistä (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To (Y):"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
-msgstr "Y päättyy:"
+msgstr "Mihin (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:99
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr "Näytä otsikko"
+msgstr "Näytä viimeisin:"
 
 #: facepackages/linechart/contents/ui/Config.qml:102
-#, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -301,54 +277,44 @@ msgstr[0] "Yksi sekunti"
 msgstr[1] "%1 sekuntia"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
-#, fuzzy, kde-format
-#| msgid "Start from Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Aloituskulma:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:46
 #: facepackages/piechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "°"
+#, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: facepackages/piechart/contents/ui/Config.qml:51
-#, fuzzy, kde-format
-#| msgid "Total Pie Angle:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Piirakan kokonaiskulma:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
+#, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: facepackages/piechart/contents/ui/Config.qml:64
-#, fuzzy, kde-format
-#| msgid "Rounded Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "Pyöristetyt viivat"
 
 #: facepackages/textonly/contents/ui/Config.qml:24
-#, fuzzy, kde-format
-#| msgid "Group sensors based on the value of the total sensors."
+#, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
 msgstr "Ryhmittele anturit niiden yhteisarvon mukaan."
