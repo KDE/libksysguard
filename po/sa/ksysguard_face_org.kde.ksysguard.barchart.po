@@ -20,70 +20,70 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr ""
+msgstr "सामान्य:"
 
 #: contents/ui/Config.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr ""
+msgstr "आख्यायिकां दर्शयतु"
 
 #: contents/ui/Config.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
-msgstr ""
+msgstr "स्तम्भितशलाका"
 
 #: contents/ui/Config.qml:49
 #, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr ""
+msgstr "बार अभिविन्यासः : १."
 
 #: contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "ऊर्ध्वाधर"
 
 #: contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "क्षैतिज"
 
 #: contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "अक्षः : १."
 
 #: contents/ui/Config.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr ""
+msgstr "Y अक्ष लेबल् दर्शयतु"
 
 #: contents/ui/Config.qml:74
 #, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr ""
+msgstr "जालरेखाः दर्शयतु"
 
 #: contents/ui/Config.qml:78
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr ""
+msgstr "स्वचालितदत्तांशपरिधिः"
 
 #: contents/ui/Config.qml:82
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr ""
+msgstr "इत्यस्मात्‌:"
 
 #: contents/ui/Config.qml:89
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr ""
+msgstr "इत्यस्मै:"

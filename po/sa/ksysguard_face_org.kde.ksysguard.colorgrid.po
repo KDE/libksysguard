@@ -20,16 +20,16 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
-msgstr ""
+msgstr "संवेदकवर्णस्य उपयोगं कुर्वन्तु : १."
 
 #: contents/ui/Config.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr ""
+msgstr "स्तम्भानां संख्या : १."
 
 #: contents/ui/Config.qml:34
 #, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
-msgstr ""
+msgstr "स्वतः"

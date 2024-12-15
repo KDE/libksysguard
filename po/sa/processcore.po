@@ -20,13 +20,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Desktop ID"
-msgstr ""
+msgstr "डेस्कटॉप ID"
 
 #: cgroup_data_model.cpp:64
 #, kde-format
 msgctxt "@title"
 msgid "Icon"
-msgstr ""
+msgstr "चिह्नम्"
 
 #: cgroup_data_model.cpp:78
 #, kde-format
@@ -474,25 +474,25 @@ msgstr "सूत्राणि"
 #, kde-format
 msgctxt "@title"
 msgid "Download Speed"
-msgstr ""
+msgstr "Download Speed इति"
 
 #: plugins/network/network.cpp:37
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr ""
+msgstr "अवाहरन"
 
 #: plugins/network/network.cpp:40
 #, kde-format
 msgctxt "@title"
 msgid "Upload Speed"
-msgstr ""
+msgstr "अपलोड् गतिः"
 
 #: plugins/network/network.cpp:41
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
+msgstr "अपलोड करें"
 
 #: plugins/nvidia/nvidia.cpp:28
 #, kde-format
@@ -508,139 +508,139 @@ msgstr "जीपीयू स्मृति"
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Normal"
-msgstr ""
+msgstr "सामान्य"
 
 #: process.cpp:104 process.cpp:125
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very low priority"
-msgstr ""
+msgstr "अतीव न्यूनप्राथमिकता"
 
 #: process.cpp:107 process.cpp:128
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Low priority"
-msgstr ""
+msgstr "न्यूनप्राथमिकता"
 
 #: process.cpp:110 process.cpp:131
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very high priority"
-msgstr ""
+msgstr "अतीव उच्चप्राथमिकता"
 
 #: process.cpp:113 process.cpp:134
 #, kde-format
 msgctxt "Process Niceness"
 msgid "High priority"
-msgstr ""
+msgstr "उच्च प्राथमिकता"
 
 #: process.cpp:143
 #, kde-format
 msgctxt "Priority Class"
 msgid "None"
-msgstr ""
+msgstr "न कश्चित्"
 
 #: process.cpp:145
 #, kde-format
 msgctxt "Priority Class"
 msgid "Real Time"
-msgstr ""
+msgstr "वास्तविक समय"
 
 #: process.cpp:147
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
-msgstr ""
+msgstr "सर्वोत्तमः प्रयासः"
 
 #: process.cpp:149
 #, kde-format
 msgctxt "Priority Class"
 msgid "Idle"
-msgstr ""
+msgstr "आलम"
 
 #: process.cpp:151
 #, kde-format
 msgctxt "Priority Class"
 msgid "Unknown"
-msgstr ""
+msgstr "अज्ञात"
 
 #: process.cpp:159
 #, kde-format
 msgctxt "process status"
 msgid "running"
-msgstr ""
+msgstr "चलति"
 
 #: process.cpp:161
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
-msgstr ""
+msgstr "शयन"
 
 #: process.cpp:163
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
-msgstr ""
+msgstr "डिस्क निद्रा"
 
 #: process.cpp:165
 #, kde-format
 msgctxt "process status"
 msgid "zombie"
-msgstr ""
+msgstr "ज़ॉम्बी"
 
 #: process.cpp:167
 #, kde-format
 msgctxt "process status"
 msgid "stopped"
-msgstr ""
+msgstr "निवृत्तः"
 
 #: process.cpp:169
 #, kde-format
 msgctxt "process status"
 msgid "paging"
-msgstr ""
+msgstr "पेजिंग"
 
 #: process.cpp:171
 #, kde-format
 msgctxt "process status"
 msgid "finished"
-msgstr ""
+msgstr "सम्पूर्ण"
 
 #: process.cpp:173
 #, kde-format
 msgctxt "process status"
 msgid "unknown"
-msgstr ""
+msgstr "अज्ञात"
 
 #: process.cpp:181
 #, kde-format
 msgctxt "Scheduler"
 msgid "FIFO"
-msgstr ""
+msgstr "FIFO"
 
 #: process.cpp:183
 #, kde-format
 msgctxt "Scheduler"
 msgid "Round Robin"
-msgstr ""
+msgstr "गोल रोबिन्"
 
 #: process.cpp:185
 #, kde-format
 msgctxt "Scheduler"
 msgid "Interactive"
-msgstr ""
+msgstr "अन्तरक्रियाशील"
 
 #: process.cpp:187
 #, kde-format
 msgctxt "Scheduler"
 msgid "Batch"
-msgstr ""
+msgstr "राशिः"
 
 #: process.cpp:189
 #, kde-format
 msgctxt "Scheduler"
 msgid "Idle"
-msgstr ""
+msgstr "आलम"
 
 #: process_controller.cpp:181
 #, kde-format

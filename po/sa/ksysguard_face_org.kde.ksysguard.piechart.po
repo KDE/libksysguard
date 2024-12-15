@@ -3,75 +3,78 @@
 # This file is distributed under the same license as the libksysguard package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:12+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: contents/ui/Config.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr ""
+msgstr "आख्यायिकां दर्शयतु"
 
 #: contents/ui/Config.qml:38
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr ""
+msgstr "प्रारम्भकोणः १."
 
 #: contents/ui/Config.qml:43
 #, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
-msgstr ""
+msgstr "%1°"
 
 #: contents/ui/Config.qml:46 contents/ui/Config.qml:59
 #, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
-msgstr ""
+msgstr "कुल पाई कोणः : १."
 
 #: contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@label angle"
 msgid "%1°"
-msgstr ""
+msgstr "%1°"
 
 #: contents/ui/Config.qml:64
 #, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
-msgstr ""
+msgstr "गोलरेखाः"
 
 #: contents/ui/Config.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr ""
+msgstr "स्वचालितदत्तांशपरिधिः"
 
 #: contents/ui/Config.qml:73
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr ""
+msgstr "इत्यस्मात्‌:"
 
 #: contents/ui/Config.qml:80
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr ""
+msgstr "इत्यस्मै:"

@@ -20,16 +20,16 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr ""
+msgstr "स्वचालितदत्तांशपरिधिः"
 
 #: contents/ui/Config.qml:33
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr ""
+msgstr "इत्यस्मात्‌:"
 
 #: contents/ui/Config.qml:40
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr ""
+msgstr "इत्यस्मै:"

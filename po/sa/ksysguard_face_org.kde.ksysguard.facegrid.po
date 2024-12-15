@@ -20,16 +20,16 @@ msgstr ""
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr ""
+msgstr "स्तम्भानां संख्या : १."
 
 #: contents/ui/Config.qml:42
 #, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
-msgstr ""
+msgstr "स्वतः"
 
 #: contents/ui/Config.qml:54
 #, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
-msgstr ""
+msgstr "प्रदर्शनशैली : १."

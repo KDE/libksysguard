@@ -20,4 +20,4 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
-msgstr ""
+msgstr "कुलसंवेदकानां मूल्याधारितं संवेदकानां समूहीकरणं कुर्वन्तु।"
