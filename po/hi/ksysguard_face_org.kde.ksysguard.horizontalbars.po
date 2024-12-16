@@ -1,4 +1,4 @@
-# Sanskrit translations for libksysguard package.
+# Hindi translations for libksysguard package.
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 # Kali <EMAIL@ADDRESS>, 2024.
@@ -8,17 +8,28 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
-"Language: sa\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n>2);\n"
 
-#: contents/ui/Config.qml:24
+#: contents/ui/Config.qml:29
 #, kde-format
 msgctxt "@option:check"
-msgid "Group sensors based on the value of the total sensors."
-msgstr "कुलसंवेदकानां मूल्याधारितं संवेदकानां समूहीकरणं कुर्वन्तु।"
+msgid "Automatic data range"
+msgstr ""
+
+#: contents/ui/Config.qml:33
+#, kde-format
+msgctxt "@label:spinbox data range"
+msgid "From:"
+msgstr ""
+
+#: contents/ui/Config.qml:40
+#, kde-format
+msgctxt "@label:spinbox data range"
+msgid "To:"
+msgstr ""

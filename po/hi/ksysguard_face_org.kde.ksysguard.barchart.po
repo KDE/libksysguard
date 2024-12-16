@@ -1,4 +1,4 @@
-# Sanskrit translations for libksysguard package.
+# Hindi translations for libksysguard package.
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 # Kali <EMAIL@ADDRESS>, 2024.
@@ -8,83 +8,82 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
-"Language: sa\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n>2);\n"
 
 #: contents/ui/Config.qml:35
 #, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr "सामान्य:"
+msgstr ""
 
 #: contents/ui/Config.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "आख्यायिकां दर्शयतु"
+msgstr ""
 
 #: contents/ui/Config.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
-msgstr "स्तम्भितशलाका"
+msgstr ""
 
 #: contents/ui/Config.qml:49
 #, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr "बार अभिविन्यासः : १."
+msgstr ""
 
 #: contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr "ऊर्ध्वाधर"
+msgstr ""
 
 #: contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr "क्षैतिज"
+msgstr ""
 
 #: contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr "अक्षः : १."
+msgstr ""
 
 #: contents/ui/Config.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr "Y अक्ष लेबल् दर्शयतु"
+msgstr ""
 
 #: contents/ui/Config.qml:74
 #, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr "जालरेखाः दर्शयतु"
+msgstr ""
 
 #: contents/ui/Config.qml:78
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "स्वचालितदत्तांशपरिधिः"
+msgstr ""
 
 #: contents/ui/Config.qml:82
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr "इत्यस्मात्‌:"
+msgstr ""
 
 #: contents/ui/Config.qml:89
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr "इत्यस्मै:"
+msgstr ""
