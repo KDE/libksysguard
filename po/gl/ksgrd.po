@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2024-12-08 16:08+0100\n"
+"PO-Revision-Date: 2024-12-16 00:02+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: SensorAgent.cpp:87
 #, kde-format
@@ -193,7 +193,7 @@ msgstr "Número de procesos inactivos"
 #: SensorManager.cpp:85
 #, kde-format
 msgid "Running Processes Count"
-msgstr "Número de procesos activos"
+msgstr "Número de procesos en execución"
 
 #: SensorManager.cpp:86
 #, kde-format
@@ -762,12 +762,12 @@ msgstr ""
 #: SensorManager.cpp:228
 #, kde-format
 msgid "Rx Invalid Crypt Packets"
-msgstr "Paquetes con cifraxe incorrecta no modo de recepción"
+msgstr "Paquetes con criptografía incorrecta no modo de recepción"
 
 #: SensorManager.cpp:229
 #, kde-format
 msgid "Total Rx Invalid Crypt Packets"
-msgstr "Paquetes totais con cifraxe incorrecta no modo de recepción"
+msgstr "Paquetes totais con criptografía incorrecta no modo de recepción"
 
 #: SensorManager.cpp:230
 #, kde-format
