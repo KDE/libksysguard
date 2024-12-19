@@ -387,6 +387,22 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
               "certain processes."));
     d->m_coreAttributes << vmPSSSensor;
 
+    auto memorySensor = new ProcessSensor<qlonglong>(this,
+                                                     QStringLiteral("memory"),
+                                                     i18nc("@title:column", "Memory Usage"),
+                                                     &KSysGuard::Process::memory,
+                                                     KSysGuard::Process::VmRSS);
+    memorySensor->setShortName(i18nc("@title:column", "Memory"));
+    memorySensor->setUnit(KSysGuard::UnitKiloByte);
+    memorySensor->setMin(0);
+    memorySensor->setMax(totalPhysicalMemory());
+    memorySensor->setRequiredUpdateFlags(Processes::Smaps);
+    memorySensor->setDescription(
+        i18nc("@info:tooltip",
+              "This is an approximation of the real amount of physical memory that this process is using. It will use the Proportional Memory Usage if"
+              "available, Private Memory Usage if that has a value and otherwise Resident Memory Usage."));
+    d->m_coreAttributes << memorySensor;
+
     auto nameSensor =
         new ProcessSensor<QString>(this, QStringLiteral("name"), i18n("Name"), &KSysGuard::Process::name, KSysGuard::Process::Name, ForwardFirstEntry);
     nameSensor->setDescription(i18n("The process name."));
