@@ -320,7 +320,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     ioniceLevelSensor->setUnit(KSysGuard::UnitNone);
     d->m_coreAttributes << ioniceLevelSensor;
 
-    auto vmSizeSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("vmSize"), i18n("VM Size"), &KSysGuard::Process::vmSize, KSysGuard::Process::VmSize);
+    auto vmSizeSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("vmSize"), i18n("VM Size"), &KSysGuard::Process::vmSize, KSysGuard::Process::Memory);
     vmSizeSensor->setUnit(KSysGuard::UnitKiloByte);
     vmSizeSensor->setMin(0);
     vmSizeSensor->setMax(totalPhysicalMemory());
@@ -330,7 +330,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     d->m_coreAttributes << vmSizeSensor;
 
     auto vmRSSSensor =
-        new ProcessSensor<qlonglong>(this, QStringLiteral("vmRSS"), i18n("Resident Memory Usage"), &KSysGuard::Process::vmRSS, KSysGuard::Process::VmRSS);
+        new ProcessSensor<qlonglong>(this, QStringLiteral("vmRSS"), i18n("Resident Memory Usage"), &KSysGuard::Process::vmRSS, KSysGuard::Process::Memory);
     vmRSSSensor->setUnit(KSysGuard::UnitKiloByte);
     vmRSSSensor->setShortName(i18n("Resident"));
     vmRSSSensor->setMin(0);
@@ -340,7 +340,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     d->m_coreAttributes << vmRSSSensor;
 
     auto vmURSSSensor =
-        new ProcessSensor<qlonglong>(this, QStringLiteral("vmURSS"), i18n("Private Memory Usage"), &KSysGuard::Process::vmURSS, KSysGuard::Process::VmURSS);
+        new ProcessSensor<qlonglong>(this, QStringLiteral("vmURSS"), i18n("Private Memory Usage"), &KSysGuard::Process::vmURSS, KSysGuard::Process::Memory);
     vmURSSSensor->setUnit(KSysGuard::UnitKiloByte);
     vmURSSSensor->setShortName(i18n("Private"));
     vmURSSSensor->setMin(0);
@@ -360,7 +360,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
             }
             return (qlonglong)(p->vmRSS() - p->vmURSS());
         },
-        KSysGuard::Process::VmRSS);
+        KSysGuard::Process::Memory);
     d->m_coreAttributes << sharedMemorySensor;
     sharedMemorySensor->setShortName(i18n("Shared"));
     sharedMemorySensor->setDescription(
@@ -371,7 +371,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     sharedMemorySensor->setMax(totalPhysicalMemory());
 
     auto vmPSSSensor =
-        new ProcessSensor<qlonglong>(this, QStringLiteral("vmPSS"), i18n("Proportional Memory Usage"), &KSysGuard::Process::vmPSS, KSysGuard::Process::VmPSS);
+        new ProcessSensor<qlonglong>(this, QStringLiteral("vmPSS"), i18n("Proportional Memory Usage"), &KSysGuard::Process::vmPSS, KSysGuard::Process::Memory);
     vmPSSSensor->setShortName(i18n("Proportional"));
     vmPSSSensor->setUnit(KSysGuard::UnitKiloByte);
     vmPSSSensor->setMin(0);
@@ -384,7 +384,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     d->m_coreAttributes << vmPSSSensor;
 
     auto memorySensor =
-        new ProcessSensor<qlonglong>(this, QStringLiteral("memory"), i18n("Memory Usage"), &KSysGuard::Process::memory, KSysGuard::Process::VmRSS);
+        new ProcessSensor<qlonglong>(this, QStringLiteral("memory"), i18n("Memory Usage"), &KSysGuard::Process::memory, KSysGuard::Process::Memory);
     memorySensor->setShortName(i18n("Memory"));
     memorySensor->setUnit(KSysGuard::UnitKiloByte);
     memorySensor->setMin(0);
