@@ -124,6 +124,8 @@ public:
     void setIoniceLevel(int ioniceLevel); ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not
                                           ///< applicable because ioPriorityClass is Idle or None
 
+    qlonglong memory() const; ///< Approximate memory usage in KiloBytes, this is vmPSS if available, vmURSS if that has a value and otherwise vmRSS.
+
     qlonglong vmSize() const;
     void setVmSize(qlonglong vmSize); ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
 
