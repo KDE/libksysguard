@@ -370,15 +370,21 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     sharedMemorySensor->setMin(0);
     sharedMemorySensor->setMax(totalPhysicalMemory());
 
-    auto vmPSSSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("vmPSS"), i18n("Memory Usage"), &KSysGuard::Process::vmPSS, KSysGuard::Process::VmPSS);
-    vmPSSSensor->setShortName(i18n("Memory"));
+    auto vmPSSSensor = new ProcessSensor<qlonglong>(this,
+                                                    QStringLiteral("vmPSS"),
+                                                    i18nc("@title:column", "Proportional Memory Usage"),
+                                                    &KSysGuard::Process::vmPSS,
+                                                    KSysGuard::Process::VmPSS);
+    vmPSSSensor->setShortName(i18nc("@title:column", "Proportional"));
     vmPSSSensor->setUnit(KSysGuard::UnitKiloByte);
     vmPSSSensor->setMin(0);
     vmPSSSensor->setMax(totalPhysicalMemory());
     vmPSSSensor->setRequiredUpdateFlags(Processes::Smaps);
     vmPSSSensor->setDescription(
-        i18n("This is an approximation of the real amount of physical memory that this process is using. It is calculated by dividing the process' shared "
-             "memory usage by the amount of processes sharing that memory, then adding the process' private memory."));
+        i18nc("@info:tooltip",
+              "This is an approximation of the real amount of physical memory that this process is using. It is calculated by dividing the process' shared "
+              "memory usage by the amount of processes sharing that memory, then adding the process' private memory. This value may not be available for "
+              "certain processes."));
     d->m_coreAttributes << vmPSSSensor;
 
     auto nameSensor =
