@@ -40,7 +40,7 @@ struct MemoryFields {
         return -1;
     }
 
-    std::chrono::system_clock::time_point lastUpdate;
+    std::chrono::steady_clock::time_point lastUpdate;
 
     qlonglong rss = -1;
     qlonglong pss = -1;
@@ -131,7 +131,7 @@ struct MemoryInfo {
         newDeltas.shared = precise.shared - imprecise.shared;
         newDeltas.priv = precise.priv - imprecise.priv;
         newDeltas.swap = precise.swap - imprecise.swap;
-        newDeltas.lastUpdate = std::chrono::system_clock::now();
+        newDeltas.lastUpdate = std::chrono::steady_clock::now();
 
         deltas = newDeltas;
     }

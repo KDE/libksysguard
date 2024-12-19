@@ -5,6 +5,8 @@
 */
 
 #include "processes_remote_p.h"
+
+#include "memoryinfo_p.h"
 #include "process.h"
 #include "processcore_debug.h"
 
@@ -130,14 +132,16 @@ bool ProcessesRemote::updateProcessInfo(long pid, Process *process)
     if (d->niceColumn != -1) {
         process->setNiceLevel(p.at(d->niceColumn).toLong());
     }
-    if (d->vmSizeColumn != -1) {
-        process->setVmSize(p.at(d->vmSizeColumn).toLong());
-    }
-    if (d->vmRSSColumn != -1) {
-        process->setVmRSS(p.at(d->vmRSSColumn).toLong());
-    }
-    if (d->vmURSSColumn != -1) {
-        process->setVmURSS(p.at(d->vmURSSColumn).toLong());
+    if (d->vmSizeColumn != -1 || d->vmRSSColumn != -1 || d->vmURSSColumn != -1) {
+        MemoryFields fields;
+        fields.rss = d->vmRSSColumn != -1 ? p.at(d->vmRSSColumn).toLongLong() : 0;
+        fields.priv = d->vmURSSColumn != -1 ? p.at(d->vmURSSColumn).toLongLong() : 0;
+        fields.shared = fields.rss > fields.priv ? fields.rss - fields.priv : 0;
+        fields.swap = 0;
+        fields.lastUpdate = std::chrono::steady_clock::now();
+        process->memoryInfo()->imprecise = fields;
+        process->memoryInfo()->vmSize = d->vmSizeColumn != -1 ? p.at(d->vmSizeColumn).toLongLong() : 0;
+        process->addChange(Process::Memory);
     }
     if (d->loginColumn != -1) {
         process->setLogin(QString::fromUtf8(p.at(d->loginColumn).data()));
@@ -147,9 +151,6 @@ bool ProcessesRemote::updateProcessInfo(long pid, Process *process)
     }
     if (d->tracerPidColumn != -1) {
         process->setTracerpid(p.at(d->tracerPidColumn).toLong());
-    }
-    if (d->vmURSSColumn != -1) {
-        process->setVmURSS(p.at(d->vmURSSColumn).toLong());
     }
     if (d->ttyColumn != -1) {
         process->setTty(p.at(d->ttyColumn));

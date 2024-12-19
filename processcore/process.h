@@ -18,6 +18,8 @@
 
 namespace KSysGuard
 {
+struct MemoryInfo;
+
 class ProcessPrivate; // forward decl d-ptr
 
 class PROCESSCORE_EXPORT Process
@@ -126,19 +128,17 @@ public:
 
     qlonglong memory() const; ///< Approximate memory usage in KiloBytes, this is vmPSS if available, vmURSS if that has a value and otherwise vmRSS.
 
-    qlonglong vmSize() const;
-    void setVmSize(qlonglong vmSize); ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
+    qlonglong vmSize() const; ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
 
-    qlonglong vmRSS() const;
-    void setVmRSS(qlonglong vmRSS); ///< Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this
-                                    ///< could be as low as 0
+    qlonglong vmRSS() const; ///< Physical memory used by the process and its shared libraries.  If the process and libraries are swapped to disk, this
+                             ///< could be as low as 0
 
-    qlonglong vmURSS() const;
-    void setVmURSS(qlonglong vmURSS); ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
+    qlonglong vmURSS() const; ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
 
-    qlonglong vmPSS() const;
-    void setVmPSS(qlonglong vmPSS); ///< Proportional set size, the amount of private physical memory used by the process + the amount of shared memory used
-                                    ///< divided over the number of processes using it.
+    qlonglong vmPSS() const; ///< Proportional set size, the amount of private physical memory used by the process + the amount of shared memory used
+                             ///< divided over the number of processes using it.
+
+    qlonglong swap() const; ///< Swap memory used by the process.
 
     QString name() const;
     void setName(const QString &name); ///< The name (e.g. "ksysguard", "konversation", "init")
@@ -195,14 +195,6 @@ public:
     int index() const; ///< Each process has a parent process.  Each sibling has a unique number to identify it under that parent.  This is that number.
     void setIndex(int index);
 
-    qlonglong &vmSizeChange() const; // REF, make non-ref later!  ///< The change in vmSize since last update, in KiB
-
-    qlonglong &vmRSSChange() const; // REF, make non-ref later!   ///< The change in vmRSS since last update, in KiB
-
-    qlonglong &vmURSSChange() const; // REF, make non-ref later!  ///< The change in vmURSS since last update, in KiB
-
-    qlonglong vmPSSChange() const; ///< The change in vmPSS since last update, in KiB.
-
     unsigned long &pixmapBytes() const; // REF, make non-ref later! ///< The number of bytes used for pixmaps/images and not counted by vmRSS or vmURSS
 
     bool &hasManagedGuiWindow() const; // REF, make non-ref later!
@@ -249,23 +241,24 @@ public:
         Usage = 0x10,
         TotalUsage = 0x20,
         NiceLevels = 0x40,
-        VmSize = 0x80,
-        VmRSS = 0x100,
-        VmURSS = 0x200,
+        Memory = 0x80,
+        MemoryPrecise = 0x100,
         Name = 0x400,
         Command = 0x800,
         Status = 0x1000,
         Login = 0x2000,
         IO = 0x4000,
         NumThreads = 0x8000,
-        VmPSS = 0x10000,
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
     Changes changes() const; /**< A QFlags representing what has changed */
     void setChanges(Change changes);
+    void addChange(Change change);
 
     using Updates = QList<QPair<Change, QVariant>>;
+
+    MemoryInfo *memoryInfo();
 
 private:
     void clear();

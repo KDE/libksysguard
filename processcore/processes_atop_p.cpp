@@ -5,7 +5,9 @@
 */
 
 #include "processes_atop_p.h"
+
 #include "atop_p.h"
+#include "memoryinfo_p.h"
 #include "process.h"
 #include "processcore_debug.h"
 
@@ -228,12 +230,16 @@ bool ProcessesATop::updateProcessInfo(long pid, Process *process)
     process->setSysUsage(process->sysTime() / d->rr.interval);
     process->setNiceLevel(p.cpu.nice);
     //    process->setscheduler(p.cpu.policy);
-    process->setVmSize(p.mem.vmem);
-    process->setVmRSS(p.mem.rmem);
-    process->vmSizeChange() = p.mem.vgrow;
-    process->vmRSSChange() = p.mem.rgrow;
-    process->setVmURSS(0);
-    process->vmURSSChange() = 0;
+
+    MemoryFields fields;
+    fields.rss = p.mem.rmem;
+    fields.priv = 0;
+    fields.shared = 0;
+    fields.swap = 0;
+    fields.lastUpdate = std::chrono::steady_clock::now();
+    process->memoryInfo()->imprecise = fields;
+    process->memoryInfo()->vmSize = p.mem.vmem;
+    process->addChange(Process::Memory);
 
     /* Fill in name and command */
     QString name = QString::fromUtf8(p.gen.name, qstrnlen(p.gen.name, PNAMLEN));

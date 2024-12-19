@@ -5,6 +5,8 @@
 */
 
 #include "process.h"
+
+#include "memoryinfo_p.h"
 #include "processes_local_p.h"
 
 #include <klocalizedstring.h>
@@ -91,6 +93,8 @@ static int ioprio_get(int which, int who)
 constexpr auto SmapsThreadDelay = std::chrono::milliseconds(100);
 // The number of PIDs to read in a single batch.
 constexpr auto SmapsThreadBatchSize = 5;
+// The minimum time between updates of precise memory data.
+constexpr auto PreciseUpdateInterval = std::chrono::seconds(30);
 
 using namespace Qt::StringLiterals;
 
@@ -157,35 +161,29 @@ void ProcessesLocal::Private::smapsThreadFunction(std::stop_token stopToken, Pro
                 continue;
             }
 
-            qulonglong rss = 0LL;
-            qulonglong pss = 0LL;
-            qulonglong shared = 0LL;
-            qulonglong urss = 0LL;
+            MemoryFields fields;
+
             auto buffer = QByteArray{1024, '\0'};
             while (file.readLine(buffer.data(), buffer.size()) > 0) {
                 auto parts = buffer.split(':');
                 if (parts.size() >= 2) {
-                    if (parts.at(0).startsWith("Rss")) {
-                        rss += std::stoll(parts.at(1).toStdString());
-                    } else if (parts.at(0).startsWith("Pss")) {
-                        pss += std::stoll(parts.at(1).toStdString());
+                    if (parts.at(0) == u"Rss"_s) {
+                        fields.rss += std::stoll(parts.at(1).toStdString());
+                    } else if (parts.at(0) == u"Pss"_s) {
+                        fields.pss += std::stoll(parts.at(1).toStdString());
                     } else if (parts.at(0).startsWith("Shared")) {
-                        shared += std::stoll(parts.at(1).toStdString());
+                        fields.shared += std::stoll(parts.at(1).toStdString());
                     } else if (parts.at(0).startsWith("Private")) {
-                        urss += std::stoll(parts.at(1).toStdString());
+                        fields.priv += std::stoll(parts.at(1).toStdString());
                     }
                 }
             }
 
             file.close();
 
-            Q_EMIT processes->processUpdated(pid,
-                                             {
-                                                 {Process::VmRSS, rss},
-                                                 {Process::VmPSS, pss},
-                                                 {Process::VmShared, shared},
-                                                 {Process::VmURSS, urss},
-                                             });
+            fields.lastUpdate = std::chrono::steady_clock::now();
+
+            Q_EMIT processes->processUpdated(pid, {{Process::MemoryPrecise, QVariant::fromValue(fields)}});
         }
     }
 }
@@ -271,6 +269,10 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 }
             }
             break;
+        case 'V':
+            if (mBuffer.startsWith("VmSwap:")) {
+                process->memoryInfo()->imprecise.swap = atol(mBuffer + sizeof("VmSwap:") - 1);
+            }
         default:
             break;
         }
@@ -382,8 +384,6 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
     word++; // Nove to the space after the last ")"
     int current_word = 1; // We've skipped the process ID and now at the end of the command name
     char status = '\0';
-    unsigned long long vmSize = 0;
-    unsigned long long vmRSS = 0;
     while (current_word < 23) {
         if (word[0] == ' ') {
             ++current_word;
@@ -428,10 +428,10 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
                 ps->setStartTime(atoll(word + 1));
                 break;
             case 22: // vmSize
-                vmSize = atoll(word + 1);
+                // Does nothing, read from statm below.
                 break;
             case 23: // vmRSS
-                vmRSS = atoll(word + 1);
+                // Does nothing, read from statm below.
                 break;
             default:
                 break;
@@ -441,16 +441,6 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
         }
         word++;
     }
-
-    /* There was a "(ps->vmRss+3) * sysconf(_SC_PAGESIZE)" here in the original ksysguard code.  I have no idea why!  After comparing it to
-     *   meminfo and other tools, this means we report the RSS by 12 bytes differently compared to them.  So I'm removing the +3
-     *   to be consistent.  NEXT TIME COMMENT STRANGE THINGS LIKE THAT! :-)
-     *
-     *   Update: I think I now know why - the kernel allocates 3 pages for
-     *   tracking information about each the process. This memory isn't
-     *   included in vmRSS..*/
-    ps->setVmRSS(vmRSS * (sysconf(_SC_PAGESIZE) / 1024)); /*convert to KiB*/
-    ps->setVmSize(vmSize / 1024); /* convert to KiB */
 
     switch (status) {
     case 'R':
@@ -486,34 +476,51 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
         return false; /* process has terminated in the meantime */
     }
 
-    if (mFile.readLine(mBuffer.data(), mBuffer.size())) <= 0) { //-1 indicates nothing read
+    qint64 size = 0;
+    if (size = mFile.readLine(mBuffer.data(), mBuffer.size()); size <= 0) { //-1 indicates nothing read
         mFile.close();
-        return 0;
+        return false;
     }
     mFile.close();
 
-    int current_word = 0;
-    char *word = mBuffer.data();
+    MemoryFields fields;
+    auto parts = mBuffer.mid(0, size).split(' ');
 
-    while (true) {
-        if (word[0] == ' ') {
-            if (++current_word == 2) {
-                // number of pages that are shared
-                break;
-            }
-        } else if (word[0] == 0) {
-            return false; // end of data - serious problem
-        }
-        word++;
+    if (parts.size() != 7) {
+        qWarning() << "Reading statm from" << dir + u"statm"_s << "failed, expected 7 fields, got" << parts.size();
+        return false;
     }
-    long shared = atol(word + 1);
 
-    /* we use the rss - shared  to find the amount of memory just this app uses */
-    process->setVmURSS(process->vmRSS() - (shared * sysconf(_SC_PAGESIZE) / 1024));
-#else
-    process->setVmURSS(0);
-#endif
+    static const auto pageSize = sysconf(_SC_PAGESIZE) / 1024;
+
+    // From kernel documentation:
+    // Table 1-3: Contents of the statm files (as of 2.6.8-rc3)
+    // ..............................................................................
+    // Field    Content
+    // size     total program size (pages)		(same as VmSize in status)
+    // resident size of memory portions (pages)	(same as VmRSS in status)
+    // shared   number of pages that are shared	(i.e. backed by a file, same
+    //                                              as RssFile+RssShmem in status)
+    // trs      number of pages that are 'code'	(not including libs; broken,
+    //                                              includes data segment)
+    // lrs      number of pages of library		(always 0 on 2.6)
+    // drs      number of pages of data/stack	(including libs; broken,
+    //                                              includes library text)
+    // dt       number of dirty pages			(always 0 on 2.6)
+    fields.rss = atol(parts.at(1)) * pageSize;
+    fields.shared = atol(parts.at(2)) * pageSize;
+    fields.priv = fields.rss - fields.shared;
+    fields.swap = process->swap();
+    fields.lastUpdate = std::chrono::steady_clock::now();
+
+    process->memoryInfo()->imprecise = fields;
+    process->memoryInfo()->vmSize = atol(parts.at(0)) * pageSize;
+    process->addChange(Process::Memory);
+
     return true;
+#else
+    return false;
+#endif
 }
 
 bool ProcessesLocal::Private::readProcCmdline(const QString &dir, Process *process)
@@ -657,9 +664,11 @@ bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
             d->smapsThread = std::make_unique<std::jthread>(Private::smapsThreadFunction, this);
         }
 
-        std::lock_guard<std::mutex> lock(d->smapsQueueMutex);
-        if (!d->smapsQueue.contains(pid)) {
-            d->smapsQueue.append(pid);
+        if (std::chrono::steady_clock::now() - process->memoryInfo()->precise.lastUpdate >= PreciseUpdateInterval) {
+            std::lock_guard<std::mutex> lock(d->smapsQueueMutex);
+            if (!d->smapsQueue.contains(pid)) {
+                d->smapsQueue.append(pid);
+            }
         }
     }
 

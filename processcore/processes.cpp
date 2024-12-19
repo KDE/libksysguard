@@ -5,6 +5,8 @@
 */
 
 #include "processes.h"
+
+#include "memoryinfo_p.h"
 #include "processes_atop_p.h"
 #include "processes_base_p.h"
 #include "processes_local_p.h"
@@ -375,8 +377,9 @@ void Processes::processUpdated(long pid, const Process::Updates &changes)
 
     for (auto entry : changes) {
         switch (entry.first) {
-        case Process::VmPSS:
-            process->setVmPSS(entry.second.toLongLong());
+        case Process::MemoryPrecise:
+            process->memoryInfo()->setPrecise(entry.second.value<MemoryFields>());
+            process->addChange(Process::Memory);
             break;
         default:
             break;

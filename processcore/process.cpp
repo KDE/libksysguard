@@ -7,6 +7,8 @@
 #include "process.h"
 #include <KLocalizedString>
 
+#include "memoryinfo_p.h"
+
 namespace KSysGuard
 {
 class ProcessPrivate
@@ -38,16 +40,6 @@ public:
     Process::Scheduler scheduler;
     Process::IoPriorityClass ioPriorityClass;
     int ioniceLevel;
-
-    qlonglong vmSize;
-    qlonglong vmRSS;
-    qlonglong vmURSS;
-    qlonglong vmPSS;
-    qlonglong vmSizeChange;
-    qlonglong vmRSSChange;
-    qlonglong vmURSSChange;
-    qlonglong vmPSSChange;
-
     unsigned long pixmapBytes;
     bool hasManagedGuiWindow;
     QString name;
@@ -74,6 +66,8 @@ public:
     int noNewPrivileges;
     QString cGroup;
     QString macContext;
+
+    MemoryInfo memory;
 };
 
 Process::Process()
@@ -213,14 +207,6 @@ void Process::clear()
     d->totalSysUsage = 0;
     d->numChildren = 0;
     d->niceLevel = 0;
-    d->vmSize = 0;
-    d->vmRSS = 0;
-    d->vmURSS = 0;
-    d->vmPSS = 0;
-    d->vmSizeChange = 0;
-    d->vmRSSChange = 0;
-    d->vmURSSChange = 0;
-    d->vmPSSChange = 0;
     d->pixmapBytes = 0;
     d->hasManagedGuiWindow = false;
     d->status = OtherStatus;
@@ -243,6 +229,8 @@ void Process::clear()
     d->elapsedTimeMilliSeconds = 0;
     d->numThreads = 0;
     d->changes = Process::Nothing;
+
+    d->memory = MemoryInfo{};
 }
 
 long int Process::pid() const
@@ -382,55 +370,40 @@ int Process::ioniceLevel() const
 
 qlonglong Process::memory() const
 {
-    if (d->vmPSS > 0) {
-        return d->vmPSS;
+    if (d->memory.pss() > 0) {
+        return d->memory.pss();
     }
 
-    if (d->vmURSS > 0) {
-        return d->vmURSS;
+    if (d->memory.priv() > 0) {
+        return d->memory.priv();
     }
 
-    return d->vmRSS;
+    return d->memory.rss();
 }
 
 qlonglong Process::vmSize() const
 {
-    return d->vmSize;
+    return d->memory.vmSize;
 }
 
 qlonglong Process::vmRSS() const
 {
-    return d->vmRSS;
+    return d->memory.rss();
 }
 
 qlonglong Process::vmURSS() const
 {
-    return d->vmURSS;
+    return d->memory.priv();
 }
 
 qlonglong Process::vmPSS() const
 {
-    return d->vmPSS;
+    return d->memory.pss();
 }
 
-qlonglong &Process::vmSizeChange() const
+qlonglong Process::swap() const
 {
-    return d->vmSizeChange;
-}
-
-qlonglong &Process::vmRSSChange() const
-{
-    return d->vmRSSChange;
-}
-
-qlonglong &Process::vmURSSChange() const
-{
-    return d->vmURSSChange;
-}
-
-qlonglong Process::vmPSSChange() const
-{
-    return d->vmPSSChange;
+    return d->memory.swap();
 }
 
 unsigned long &Process::pixmapBytes() const
@@ -763,56 +736,6 @@ void Process::setIoniceLevel(int _ioniceLevel)
     d->changes |= Process::NiceLevels;
 }
 
-void Process::setVmSize(qlonglong _vmSize)
-{
-    if (d->vmSizeChange != 0 || d->vmSize != 0) {
-        d->vmSizeChange = _vmSize - d->vmSize;
-    }
-    if (d->vmSize == _vmSize) {
-        return;
-    }
-    d->vmSize = _vmSize;
-    d->changes |= Process::VmSize;
-}
-
-void Process::setVmRSS(qlonglong _vmRSS)
-{
-    if (d->vmRSSChange != 0 || d->vmRSS != 0) {
-        d->vmRSSChange = _vmRSS - d->vmRSS;
-    }
-    if (d->vmRSS == _vmRSS) {
-        return;
-    }
-    d->vmRSS = _vmRSS;
-    d->changes |= Process::VmRSS;
-}
-
-void Process::setVmURSS(qlonglong _vmURSS)
-{
-    if (d->vmURSSChange != 0 || d->vmURSS != 0) {
-        d->vmURSSChange = _vmURSS - d->vmURSS;
-    }
-    if (d->vmURSS == _vmURSS) {
-        return;
-    }
-    d->vmURSS = _vmURSS;
-    d->changes |= Process::VmURSS;
-}
-
-void Process::setVmPSS(qlonglong pss)
-{
-    if (d->vmPSSChange != 0 || d->vmPSS != 0) {
-        d->vmPSSChange = pss - d->vmPSS;
-    }
-
-    if (d->vmPSS == pss) {
-        return;
-    }
-
-    d->vmPSS = pss;
-    d->changes |= Process::VmPSS;
-}
-
 void Process::setName(const QString &_name)
 {
     if (d->name == _name) {
@@ -972,6 +895,11 @@ void Process::setChanges(KSysGuard::Process::Change changes)
     d->changes = changes;
 }
 
+void Process::addChange(Change change)
+{
+    d->changes |= change;
+}
+
 void Process::setCGroup(const QString &_cGroup)
 {
     if (d->cGroup == _cGroup) {
@@ -990,4 +918,8 @@ void Process::setMACContext(const QString &_macContext)
     d->changes |= Process::Status;
 }
 
+MemoryInfo *Process::memoryInfo()
+{
+    return &d->memory;
+}
 }

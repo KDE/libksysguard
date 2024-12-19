@@ -5,6 +5,8 @@
 */
 
 #include "process.h"
+
+#include "memoryinfo_p.h"
 #include "processes_local_p.h"
 
 #include <KLocalizedString>
@@ -79,9 +81,14 @@ void ProcessesLocal::Private::readProcStat(struct kinfo_proc *p, Process *ps)
     ps->setUserTime(p->ki_rusage.ru_utime.tv_sec * 100 + p->ki_rusage.ru_utime.tv_usec / 10000);
     ps->setSysTime(p->ki_rusage.ru_stime.tv_sec * 100 + p->ki_rusage.ru_stime.tv_usec / 10000);
     ps->setNiceLevel(p->ki_nice);
-    ps->setVmSize(p->ki_size / 1024);
-    ps->setVmRSS(p->ki_rssize * getpagesize() / 1024);
     status = p->ki_stat;
+
+    MemoryFields fields;
+    fields.rss = p->ki_rssize * getpagesize() / 1024;
+    fields.lastUpdate = std::chrono::steady_clock::now();
+    ps->memoryInfo()->imprecise = fields;
+    ps->memoryInfo()->vmSize = p->ki_size / 1024;
+    ps->addChange(Process::Memory);
 
     // "idle","run","sleep","stop","zombie"
     switch (status) {
@@ -107,7 +114,6 @@ void ProcessesLocal::Private::readProcStat(struct kinfo_proc *p, Process *ps)
 
 void ProcessesLocal::Private::readProcStatm(struct kinfo_proc *p, Process *process)
 {
-    process->setVmURSS(-1);
 }
 
 bool ProcessesLocal::Private::readProcCmdline(long pid, Process *process)
