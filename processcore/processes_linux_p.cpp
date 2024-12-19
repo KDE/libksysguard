@@ -101,6 +101,7 @@ class ProcessesLocal::Private
 public:
     Private()
     {
+        mBuffer.fill('\0', PROCESS_BUFFER_SIZE);
         mProcDir = opendir("/proc");
     }
     ~Private();
@@ -116,7 +117,7 @@ public:
     static void smapsThreadFunction(std::stop_token stopToken, ProcessesLocal *processes);
 
     QFile mFile;
-    char mBuffer[PROCESS_BUFFER_SIZE + 1]; // used as a buffer to read data into
+    QByteArray mBuffer;
     DIR *mProcDir;
 
     std::unique_ptr<std::jthread> smapsThread = nullptr;
@@ -208,7 +209,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
 
     int size;
     int found = 0; // count how many fields we found
-    while ((size = mFile.readLine(mBuffer, sizeof(mBuffer))) > 0) { //-1 indicates an error
+    while ((size = mFile.readLine(mBuffer.data(), mBuffer.size())) > 0) { //-1 indicates an error
         switch (mBuffer[0]) {
         case 'N':
             if ((unsigned int)size > sizeof("Name:") && qstrncmp(mBuffer, "Name:", sizeof("Name:") - 1) == 0) {
@@ -287,7 +288,7 @@ bool ProcessesLocal::Private::readProcCGroup(const QString &dir, Process *proces
         return false; /* process has terminated in the meantime */
     }
 
-    while (mFile.readLine(mBuffer, sizeof(mBuffer)) > 0) { //-1 indicates an error
+    while (mFile.readLine(mBuffer.data(), mBuffer.size()) > 0) { //-1 indicates an error
         if (mBuffer[0] == '0' && mBuffer[1] == ':' && mBuffer[2] == ':') {
             process->setCGroup(QString::fromLocal8Bit(&mBuffer[3]).trimmed());
             break;
@@ -304,7 +305,7 @@ bool ProcessesLocal::Private::readProcAttr(const QString &dir, Process *process)
         return false; /* process has terminated in the meantime */
     }
 
-    if (mFile.readLine(mBuffer, sizeof(mBuffer)) > 0) { //-1 indicates an error
+    if (mFile.readLine(mBuffer.data(), mBuffer.size()) > 0) { //-1 indicates an error
         process->setMACContext(QString::fromLocal8Bit(mBuffer).trimmed());
     }
     mFile.close();
@@ -322,13 +323,13 @@ long ProcessesLocal::getParentPid(long pid)
     }
 
     int size; // amount of data read in
-    if ((size = d->mFile.readLine(d->mBuffer, sizeof(d->mBuffer))) <= 0) { //-1 indicates nothing read
+    if ((size = d->mFile.readLine(d->mBuffer.data(), d->mBuffer.size())) <= 0) { //-1 indicates nothing read
         d->mFile.close();
         return -1;
     }
 
     d->mFile.close();
-    char *word = d->mBuffer;
+    char *word = d->mBuffer.data();
     // The command name is the second parameter, and this ends with a closing bracket.  So find the last
     // closing bracket and start from there
     word = strrchr(word, ')');
@@ -364,14 +365,14 @@ bool ProcessesLocal::Private::readProcStat(const QString &dir, Process *ps)
         if (!mFile.open(QIODevice::ReadOnly)) {
             return false; /* process has terminated in the meantime */
         }
-        if (mFile.readLine(mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
+        if (mFile.readLine(mBuffer.data(), mBuffer.size()) <= 0) { //-1 indicates nothing read
             mFile.close();
             return false;
         }
         mFile.close();
     }
 
-    char *word = mBuffer;
+    char *word = mBuffer.data();
     // The command name is the second parameter, and this ends with a closing bracket.  So find the last
     // closing bracket and start from there
     word = strrchr(word, ')');
@@ -485,14 +486,14 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
         return false; /* process has terminated in the meantime */
     }
 
-    if (mFile.readLine(mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
+    if (mFile.readLine(mBuffer.data(), mBuffer.size())) <= 0) { //-1 indicates nothing read
         mFile.close();
         return 0;
     }
     mFile.close();
 
     int current_word = 0;
-    char *word = mBuffer;
+    char *word = mBuffer.data();
 
     while (true) {
         if (word[0] == ' ') {
@@ -608,14 +609,14 @@ bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *proce
     if (!mFile.open(QIODevice::ReadOnly)) {
         return false; /* process has terminated in the meantime */
     }
-    if (mFile.read(mBuffer, sizeof(mBuffer)) <= 0) { //-1 indicates nothing read
+    if (mFile.readLine(mBuffer.data(), mBuffer.size()) <= 0) { //-1 indicates nothing read
         mFile.close();
         return false;
     }
     mFile.close();
 
     int current_word = 0; // count from 0
-    char *word = mBuffer;
+    char *word = mBuffer.data();
     while (current_word < 6 && word[0] != 0) {
         if (word[0] == ' ') {
             qlonglong number = atoll(word + 1);
