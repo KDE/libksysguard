@@ -38,6 +38,7 @@ public:
     Process::Scheduler scheduler;
     Process::IoPriorityClass ioPriorityClass;
     int ioniceLevel;
+
     qlonglong vmSize;
     qlonglong vmRSS;
     qlonglong vmURSS;
@@ -46,6 +47,7 @@ public:
     qlonglong vmRSSChange;
     qlonglong vmURSSChange;
     qlonglong vmPSSChange;
+
     unsigned long pixmapBytes;
     bool hasManagedGuiWindow;
     QString name;
@@ -376,6 +378,19 @@ Process::IoPriorityClass Process::ioPriorityClass() const
 int Process::ioniceLevel() const
 {
     return d->ioniceLevel;
+}
+
+qlonglong Process::memory() const
+{
+    if (d->vmPSS > 0) {
+        return d->vmPSS;
+    }
+
+    if (d->vmURSS > 0) {
+        return d->vmURSS;
+    }
+
+    return d->vmRSS;
 }
 
 qlonglong Process::vmSize() const
