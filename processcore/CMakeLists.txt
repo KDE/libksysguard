@@ -18,7 +18,6 @@ set(ksysguard_LIB_SRCS
    process_attribute_model.cpp
    process_data_model.cpp
    process_data_provider.cpp
-   read_procsmaps_runnable.cpp read_procsmaps_runnable.h
 )
 ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore
     DESCRIPTION "libksysguard (processcore)" EXPORT LIBKSYSGUARD)
@@ -90,7 +89,6 @@ if(ENABLE_KAUTH_HELPER)
         process.cpp
         processes_local_p.cpp processes_local_p.h
         processes_base_p.cpp processes_base_p.h
-        read_procsmaps_runnable.cpp read_procsmaps_runnable.h
     )
 
     add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})

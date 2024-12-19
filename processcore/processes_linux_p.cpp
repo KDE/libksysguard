@@ -6,7 +6,6 @@
 
 #include "process.h"
 #include "processes_local_p.h"
-#include "read_procsmaps_runnable.h"
 
 #include <klocalizedstring.h>
 
@@ -14,6 +13,7 @@
 #include <QDir>
 #include <QFile>
 #include <QHash>
+#include <QQueue>
 #include <QSet>
 #include <QTextStream>
 #include <QThreadPool>
@@ -32,6 +32,8 @@
 #include <sys/ptrace.h>
 // for getsched
 #include <sched.h>
+
+#include <thread>
 
 #define PROCESS_BUFFER_SIZE 1000
 
@@ -85,6 +87,13 @@ static int ioprio_get(int which, int who)
 }
 #endif
 
+// The rate at which the thread reading /proc/PID/smaps_rollup reads batches.
+constexpr auto SmapsThreadDelay = std::chrono::milliseconds(100);
+// The number of PIDs to read in a single batch.
+constexpr auto SmapsThreadBatchSize = 5;
+
+using namespace Qt::StringLiterals;
+
 namespace KSysGuard
 {
 class ProcessesLocal::Private
@@ -103,20 +112,88 @@ public:
     inline bool readProcAttr(const QString &dir, Process *process);
     inline bool getNiceness(long pid, Process *process);
     inline bool getIOStatistics(const QString &dir, Process *process);
+
+    static void smapsThreadFunction(std::stop_token stopToken, ProcessesLocal *processes);
+
     QFile mFile;
     char mBuffer[PROCESS_BUFFER_SIZE + 1]; // used as a buffer to read data into
     DIR *mProcDir;
+
+    std::unique_ptr<std::jthread> smapsThread = nullptr;
+    QQueue<long> smapsQueue;
+    std::mutex smapsQueueMutex;
 };
 
 ProcessesLocal::Private::~Private()
 {
+    if (smapsThread) {
+        smapsThread->request_stop();
+        smapsThread->join();
+    }
     closedir(mProcDir);
+}
+
+void ProcessesLocal::Private::smapsThreadFunction(std::stop_token stopToken, ProcessesLocal *processes)
+{
+    while (!stopToken.stop_requested()) {
+        std::this_thread::sleep_for(SmapsThreadDelay);
+
+        std::vector<long> pids;
+        {
+            std::lock_guard<std::mutex> lock(processes->d->smapsQueueMutex);
+            while (!processes->d->smapsQueue.isEmpty() && pids.size() < SmapsThreadBatchSize) {
+                pids.push_back(processes->d->smapsQueue.takeFirst());
+            }
+        }
+
+        if (pids.empty()) {
+            continue;
+        }
+
+        for (auto pid : pids) {
+            QFile file{"/proc/"_L1 + QString::number(pid) + "/smaps_rollup"_L1};
+            if (!file.open(QIODevice::ReadOnly)) {
+                continue;
+            }
+
+            qulonglong rss = 0LL;
+            qulonglong pss = 0LL;
+            qulonglong shared = 0LL;
+            qulonglong urss = 0LL;
+            auto buffer = QByteArray{1024, '\0'};
+            while (file.readLine(buffer.data(), buffer.size()) > 0) {
+                auto parts = buffer.split(':');
+                if (parts.size() >= 2) {
+                    if (parts.at(0).startsWith("Rss")) {
+                        rss += std::stoll(parts.at(1).toStdString());
+                    } else if (parts.at(0).startsWith("Pss")) {
+                        pss += std::stoll(parts.at(1).toStdString());
+                    } else if (parts.at(0).startsWith("Shared")) {
+                        shared += std::stoll(parts.at(1).toStdString());
+                    } else if (parts.at(0).startsWith("Private")) {
+                        urss += std::stoll(parts.at(1).toStdString());
+                    }
+                }
+            }
+
+            file.close();
+
+            Q_EMIT processes->processUpdated(pid,
+                                             {
+                                                 {Process::VmRSS, rss},
+                                                 {Process::VmPSS, pss},
+                                                 {Process::VmShared, shared},
+                                                 {Process::VmURSS, urss},
+                                             });
+        }
+    }
 }
 
 ProcessesLocal::ProcessesLocal()
     : d(new Private())
 {
 }
+
 bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *process)
 {
     mFile.setFileName(dir + QStringLiteral("status"));
@@ -575,13 +652,14 @@ bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
     const QString dir = QLatin1String("/proc/") + QString::number(pid) + QLatin1Char('/');
 
     if (mUpdateFlags.testFlag(Processes::Smaps)) {
-        auto runnable = new ReadProcSmapsRunnable{dir};
+        if (!d->smapsThread) {
+            d->smapsThread = std::make_unique<std::jthread>(Private::smapsThreadFunction, this);
+        }
 
-        connect(runnable, &ReadProcSmapsRunnable::finished, this, [this, pid](qulonglong pss) {
-            Q_EMIT processUpdated(pid, {{Process::VmPSS, pss}});
-        });
-
-        QThreadPool::globalInstance()->start(runnable);
+        std::lock_guard<std::mutex> lock(d->smapsQueueMutex);
+        if (!d->smapsQueue.contains(pid)) {
+            d->smapsQueue.append(pid);
+        }
     }
 
     if (!d->readProcStat(dir, process)) {
@@ -816,5 +894,4 @@ ProcessesLocal::~ProcessesLocal()
 {
     delete d;
 }
-
 }
