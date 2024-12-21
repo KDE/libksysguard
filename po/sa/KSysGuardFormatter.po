@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-09 00:41+0000\n"
-"PO-Revision-Date: 2024-12-14 01:12+0530\n"
+"PO-Revision-Date: 2024-12-20 22:01+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -360,7 +360,7 @@ msgstr "%1P क"
 #, kde-format
 msgctxt "Percent unit"
 msgid "%1​%"
-msgstr "%1 % ९."
+msgstr "%1 %"
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
 #: Formatter.cpp:149

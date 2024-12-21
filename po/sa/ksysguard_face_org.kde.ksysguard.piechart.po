@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2024-12-14 01:12+0530\n"
+"PO-Revision-Date: 2024-12-20 21:53+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -29,7 +29,7 @@ msgstr "आख्यायिकां दर्शयतु"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr "प्रारम्भकोणः १."
+msgstr "प्रारम्भकोणः"
 
 #: contents/ui/Config.qml:43
 #, kde-format
@@ -47,7 +47,7 @@ msgstr "°"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
-msgstr "कुल पाई कोणः : १."
+msgstr "कुल पाई कोणः :"
 
 #: contents/ui/Config.qml:56
 #, kde-format

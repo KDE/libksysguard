@@ -3,25 +3,27 @@
 # This file is distributed under the same license as the libksysguard package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-20 21:53+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: contents/ui/Config.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr "स्तम्भानां संख्या : १."
+msgstr "स्तम्भानां संख्या :"
 
 #: contents/ui/Config.qml:42
 #, kde-format
@@ -33,4 +35,4 @@ msgstr "स्वतः"
 #, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
-msgstr "प्रदर्शनशैली : १."
+msgstr "प्रदर्शनशैली :"
