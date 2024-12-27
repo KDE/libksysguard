@@ -86,10 +86,9 @@ add_feature_info(KAUTH_HELPER ${ENABLE_KAUTH_HELPER} "Build and install ksysguar
 
 ecm_set_disabled_deprecation_versions(
     QT 5.15.0
+    KF 6.0.0
 )
 
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055B00)
-add_definitions(-DKF_DEPRECATED_WARNINGS_SINCE=0x060000)
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 
 set(CMAKE_CXX_STANDARD 20)
