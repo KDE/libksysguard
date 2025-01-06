@@ -21,73 +21,60 @@ msgstr ""
 
 #: contents/ui/Config.qml:34
 #, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
 msgctxt "@option:check"
 msgid "Show legend"
 msgstr "Vis figurforklaring for sensorar"
 
 #: contents/ui/Config.qml:38
 #, fuzzy, kde-format
-#| msgid "Start from Angle:"
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Start frå vinkelen:"
 
 #: contents/ui/Config.qml:43
 #, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
 #: contents/ui/Config.qml:46 contents/ui/Config.qml:59
 #, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "°"
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
 #: contents/ui/Config.qml:51
 #, fuzzy, kde-format
-#| msgid "Total Pie Angle:"
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Total kakestykke-vinkel:"
 
 #: contents/ui/Config.qml:56
 #, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
 #: contents/ui/Config.qml:64
 #, fuzzy, kde-format
-#| msgid "Rounded Lines"
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "Avrunda linjer"
 
 #: contents/ui/Config.qml:69
 #, fuzzy, kde-format
-#| msgid "Automatic Data Range"
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Automatisk dataområde"
 
 #: contents/ui/Config.qml:73
 #, fuzzy, kde-format
-#| msgid "From:"
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Frå:"
 
 #: contents/ui/Config.qml:80
 #, fuzzy, kde-format
-#| msgid "To:"
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Til:"

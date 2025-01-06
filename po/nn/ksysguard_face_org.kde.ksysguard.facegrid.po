@@ -21,22 +21,18 @@ msgstr ""
 
 #: contents/ui/Config.qml:35
 #, fuzzy, kde-format
-#| msgid "Number of Columns:"
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Talet på kolonnar:"
 
 #: contents/ui/Config.qml:42
 #, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automatisk"
 
 #: contents/ui/Config.qml:54
 #, fuzzy, kde-format
-#| msgid "Display Style:"
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
 msgstr "Visingsstil:"

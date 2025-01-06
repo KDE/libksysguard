@@ -23,42 +23,36 @@ msgstr ""
 
 #: contents/ui/Config.qml:42
 #, fuzzy, kde-format
-#| msgid "Appearance"
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "Utsjånad"
 
 #: contents/ui/Config.qml:47
 #, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
 msgctxt "@option:check"
 msgid "Show legend"
 msgstr "Vis figurforklaring for sensorar"
 
 #: contents/ui/Config.qml:51
 #, fuzzy, kde-format
-#| msgid "Stacked Charts"
 msgctxt "@option:check"
 msgid "Stacked charts"
 msgstr "Stabla diagram"
 
 #: contents/ui/Config.qml:55
 #, fuzzy, kde-format
-#| msgid "Smooth Lines"
 msgctxt "@option:check"
 msgid "Smooth lines"
 msgstr "Jamne linjer"
 
 #: contents/ui/Config.qml:59
 #, fuzzy, kde-format
-#| msgid "Show Grid Lines"
 msgctxt "@option:check"
 msgid "Show grid lines"
 msgstr "Vis rutenett"
 
 #: contents/ui/Config.qml:63
 #, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
 msgctxt "@option:check"
 msgid "Show Y axis labels"
 msgstr "Vis tekst på Y-aksen"
@@ -71,28 +65,24 @@ msgstr ""
 
 #: contents/ui/Config.qml:73
 #, fuzzy, kde-format
-#| msgid "Data Ranges"
 msgctxt "title:group"
 msgid "Data Ranges"
 msgstr "Dataområde"
 
 #: contents/ui/Config.qml:78
 #, fuzzy, kde-format
-#| msgid "Automatic Y Data Range"
 msgctxt "@option:check"
 msgid "Automatic Y data range"
 msgstr "Automatisk dataområde for Y-aksen"
 
 #: contents/ui/Config.qml:82
 #, fuzzy, kde-format
-#| msgid "From (Y):"
 msgctxt "@label:spinbox"
 msgid "From (Y):"
 msgstr "Frå (Y):"
 
 #: contents/ui/Config.qml:89
 #, fuzzy, kde-format
-#| msgid "To (Y):"
 msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "Til (Y):"
@@ -105,9 +95,6 @@ msgstr ""
 
 #: contents/ui/Config.qml:102
 #, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
