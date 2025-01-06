@@ -27,14 +27,12 @@ msgstr ""
 
 #: contents/ui/Config.qml:37
 #, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
 msgctxt "@option:check"
 msgid "Show legend"
 msgstr "Vis figurforklaring for sensorar"
 
 #: contents/ui/Config.qml:41
 #, fuzzy, kde-format
-#| msgid "Stacked Bars"
 msgctxt "@option:check"
 msgid "Stacked bars"
 msgstr "Stabla søyler"
@@ -65,35 +63,30 @@ msgstr ""
 
 #: contents/ui/Config.qml:69
 #, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
 msgctxt "@option:check"
 msgid "Show Y axis labels"
 msgstr "Vis tekst på Y-aksen"
 
 #: contents/ui/Config.qml:74
 #, fuzzy, kde-format
-#| msgid "Show Grid Lines"
 msgctxt "@option:check"
 msgid "Show grid lines"
 msgstr "Vis rutenett"
 
 #: contents/ui/Config.qml:78
 #, fuzzy, kde-format
-#| msgid "Automatic Data Range"
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Automatisk dataområde"
 
 #: contents/ui/Config.qml:82
 #, fuzzy, kde-format
-#| msgid "From:"
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Frå:"
 
 #: contents/ui/Config.qml:89
 #, fuzzy, kde-format
-#| msgid "To:"
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Til:"

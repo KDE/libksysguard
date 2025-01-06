@@ -21,22 +21,18 @@ msgstr ""
 
 #: contents/ui/Config.qml:22
 #, fuzzy, kde-format
-#| msgid "Use sensor color:"
 msgctxt "@option:check"
 msgid "Use sensor color:"
 msgstr "Bruk sensorfarge:"
 
 #: contents/ui/Config.qml:27
 #, fuzzy, kde-format
-#| msgid "Number of Columns:"
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
 msgstr "Talet på kolonnar:"
 
 #: contents/ui/Config.qml:34
 #, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Automatic"
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
 msgstr "Automatisk"
