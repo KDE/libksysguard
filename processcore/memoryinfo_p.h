@@ -54,22 +54,22 @@ struct MemoryFields {
  *
  * There are a number of values we want to track for memory usage:
  *
- * - RSS, resident set size, the amount of memory used by a process including
+ * - RSS: resident set size; the amount of memory used by a process including
  *        any shared memory.
- * - PSS, proportional set size, the amount of memory used by a process including
- *        the proportion of shared memory that a specif process contributes.
- * - Shared, the amount of memory used by a process that is shared between
+ * - PSS: proportional set size; the amount of memory used by a process, including
+ *        the proportion of shared memory that specific process contributes.
+ * - Shared: the amount of memory used by a process that is shared between
  *           multiple processes.
- * - Priv, private usage, the amount of memory used that is exclusively used by
+ * - Priv: private usage the amount of memory used that is exclusively used by
  *         a process.
- * - Swap, the amount of swap memory used by a process.
+ * - Swap: the amount of swap memory used by a process.
  *
- * On Linux, we have two potential sources for these values, one imprecise that
- * is cheap to update and one precise that is expensive to update. Since we
- * still want to use the precise information, we need to reduce the update
- * frequency of the precise information. To improve the accuracy of the
+ * On Linux, we have two potential sources for these values: one imprecise that
+ * is cheap to update, and one precise that is expensive to update. While we
+ * still want to use the precise information, we need to reduce its update
+ * frequency so that we use less processing power. To improve the accuracy of the
  * imprecise information, we calculate a delta between precise and imprecise
- * information and use that as a correction factor on the imprecise information
+ * information, and use that as a correction factor on the imprecise information
  * if it is more recent than the precise information.
  */
 struct MemoryInfo {

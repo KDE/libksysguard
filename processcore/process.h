@@ -126,7 +126,7 @@ public:
     void setIoniceLevel(int ioniceLevel); ///< IO Niceness (0 to 7) of this process.  A lower number means a higher io priority.  -1 if not known or not
                                           ///< applicable because ioPriorityClass is Idle or None
 
-    qlonglong memory() const; ///< Approximate memory usage in KiloBytes, this is vmPSS if available, vmURSS if that has a value and otherwise vmRSS.
+    qlonglong memory() const; ///< Approximate memory usage in KiloBytes. This is vmPSS if available, vmURSS if that has a value, and otherwise vmRSS.
 
     qlonglong vmSize() const; ///< Virtual memory size in KiloBytes, including memory used, mmap'ed files, graphics memory etc,
 
@@ -135,8 +135,8 @@ public:
 
     qlonglong vmURSS() const; ///< Physical memory used only by the process, and not counting the code for shared libraries. Set to -1 if unknown
 
-    qlonglong vmPSS() const; ///< Proportional set size, the amount of private physical memory used by the process + the amount of shared memory used
-                             ///< divided over the number of processes using it.
+    qlonglong vmPSS() const; ///< Proportional set size, the amount of private physical memory used by the process + (the amount of shared memory used
+                             ///< divided by the number of processes using it).
 
     qlonglong swap() const; ///< Swap memory used by the process.
 

@@ -382,8 +382,8 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     vmPSSSensor->setRequiredUpdateFlags(Processes::Smaps);
     vmPSSSensor->setDescription(
         i18nc("@info:tooltip",
-              "This is an approximation of the real amount of physical memory that this process is using. It is calculated by dividing the process' shared "
-              "memory usage by the amount of processes sharing that memory, then adding the process' private memory. This value may not be available for "
+              "This is an approximation of the real amount of physical memory that this process is using. It is calculated by dividing this process' shared "
+              "memory usage by the number of processes sharing that memory, then adding this process' private memory. This value may not be available for "
               "certain processes."));
     d->m_coreAttributes << vmPSSSensor;
 
@@ -400,7 +400,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     memorySensor->setDescription(
         i18nc("@info:tooltip",
               "This is an approximation of the real amount of physical memory that this process is using. It will use the Proportional Memory Usage if"
-              "available, Private Memory Usage if that has a value and otherwise Resident Memory Usage."));
+              "available, the Private Memory Usage if that has a value, and the Resident Memory Usage otherwise."));
     d->m_coreAttributes << memorySensor;
 
     auto nameSensor =
