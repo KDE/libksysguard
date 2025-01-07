@@ -167,9 +167,9 @@ void ProcessesLocal::Private::smapsThreadFunction(std::stop_token stopToken, Pro
             while (file.readLine(buffer.data(), buffer.size()) > 0) {
                 auto parts = buffer.split(':');
                 if (parts.size() >= 2) {
-                    if (parts.at(0) == u"Rss"_s) {
+                    if (parts.at(0) == "Rss") {
                         fields.rss += std::stoll(parts.at(1).toStdString());
-                    } else if (parts.at(0) == u"Pss"_s) {
+                    } else if (parts.at(0) == "Pss") {
                         fields.pss += std::stoll(parts.at(1).toStdString());
                     } else if (parts.at(0).startsWith("Shared")) {
                         fields.shared += std::stoll(parts.at(1).toStdString());
@@ -888,7 +888,7 @@ long long ProcessesLocal::totalPhysicalMemory()
     }
 
     int size;
-    while ((size = d->mFile.readLine(d->mBuffer, sizeof(d->mBuffer))) > 0) { //-1 indicates an error
+    while ((size = d->mFile.readLine(d->mBuffer.data(), d->mBuffer.size())) > 0) { //-1 indicates an error
         switch (d->mBuffer[0]) {
         case 'M':
             if ((unsigned int)size > sizeof("MemTotal:") && qstrncmp(d->mBuffer, "MemTotal:", sizeof("MemTotal:") - 1) == 0) {
@@ -900,6 +900,25 @@ long long ProcessesLocal::totalPhysicalMemory()
     return 0; // Not found.  Probably will never happen
 #endif
 }
+
+long long ProcessesLocal::totalSwapMemory()
+{
+    d->mFile.setFileName("/proc/meminfo");
+    if (!d->mFile.open(QIODevice::ReadOnly)) {
+        return 0;
+    }
+
+    int size;
+    while ((size = d->mFile.readLine(d->mBuffer.data(), d->mBuffer.size())) > 0) {
+        if (d->mBuffer.startsWith("SwapTotal:")) {
+            d->mFile.close();
+            return std::atoll(d->mBuffer.mid(sizeof("SwapTotal:") + 1));
+        }
+    }
+
+    return 0;
+}
+
 ProcessesLocal::~ProcessesLocal()
 {
     delete d;

@@ -403,6 +403,15 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
               "available, the Private Memory Usage if that has a value, and the Resident Memory Usage otherwise."));
     d->m_coreAttributes << memorySensor;
 
+    auto swapSensor =
+        new ProcessSensor<qlonglong>(this, QStringLiteral("swap"), i18nc("@title:column", "Swap Usage"), &KSysGuard::Process::swap, KSysGuard::Process::Memory);
+    swapSensor->setShortName(i18nc("@title:column", "Swap"));
+    swapSensor->setUnit(KSysGuard::UnitKiloByte);
+    swapSensor->setMin(0);
+    swapSensor->setMax(totalSwapMemory());
+    swapSensor->setDescription(i18nc("@info:tooltip", "This is an approximation of the amount of swap memory this process is using."));
+    d->m_coreAttributes << memorySensor;
+
     auto nameSensor =
         new ProcessSensor<QString>(this, QStringLiteral("name"), i18n("Name"), &KSysGuard::Process::name, KSysGuard::Process::Name, ForwardFirstEntry);
     nameSensor->setDescription(i18n("The process name."));

@@ -155,6 +155,13 @@ public:
      */
     long long totalPhysicalMemory();
 
+    /*
+     * The total amount of swap memory in KB.
+     *
+     * Returns 0 on error.
+     */
+    long long totalSwapMemory();
+
     /**
      *  Return the number of processor cores enabled.
      *  (A system can disable processors.  Disabled processors are not counted here).

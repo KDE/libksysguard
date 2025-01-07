@@ -281,6 +281,11 @@ long long ProcessesLocal::totalPhysicalMemory()
     return Total /= 1024;
 }
 
+long long ProcessesLocal::totalSwapMemory()
+{
+    return 0;
+}
+
 ProcessesLocal::~ProcessesLocal()
 {
     delete d;
