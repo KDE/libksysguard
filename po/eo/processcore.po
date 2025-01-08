@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:41+0000\n"
+"POT-Creation-Date: 2025-01-08 00:43+0000\n"
 "PO-Revision-Date: 2024-06-28 16:51+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -335,95 +335,158 @@ msgstr ""
 "bibliotekoj de ĉi tiu procezo uzas. Tiu memoro estas dividita inter ĉiuj "
 "procezoj kiuj uzas ĉi tiun bibliotekon."
 
-#: extended_process_list.cpp:373
-#, kde-format
-msgid "Memory Usage"
-msgstr "Memoruzo"
+#: extended_process_list.cpp:375
+#, fuzzy, kde-format
+#| msgid "Private Memory Usage"
+msgctxt "@title:column"
+msgid "Proportional Memory Usage"
+msgstr "Privata Memoruzo"
 
-#: extended_process_list.cpp:374
+#: extended_process_list.cpp:378
 #, kde-format
-msgid "Memory"
-msgstr "Memoro"
+msgctxt "@title:column"
+msgid "Proportional"
+msgstr ""
 
-#: extended_process_list.cpp:380
-#, kde-format
+#: extended_process_list.cpp:385
+#, fuzzy, kde-format
+#| msgid ""
+#| "This is an approximation of the real amount of physical memory that this "
+#| "process is using. It is calculated by dividing the process' shared memory "
+#| "usage by the amount of processes sharing that memory, then adding the "
+#| "process' private memory."
+msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
-"process is using. It is calculated by dividing the process' shared memory "
-"usage by the amount of processes sharing that memory, then adding the "
-"process' private memory."
+"process is using. It is calculated by dividing this process' shared memory "
+"usage by the number of processes sharing that memory, then adding this "
+"process' private memory. This value may not be available for certain "
+"processes."
 msgstr ""
 "Ĉi tio estas alproksimiĝo de la reala kvanto de fizika memoro, kiun ĉi tiu "
 "procezo uzas. Ĝi estas kalkulita dividante la komunan memoruzon de la "
 "procezo per la kvanto de procezoj dividantaj tiun memoron, tiam aldonante la "
 "privatan memoron de la procezo."
 
-#: extended_process_list.cpp:385
+#: extended_process_list.cpp:392
+#, fuzzy, kde-format
+#| msgid "Memory Usage"
+msgctxt "@title:column"
+msgid "Memory Usage"
+msgstr "Memoruzo"
+
+#: extended_process_list.cpp:395
+#, fuzzy, kde-format
+#| msgid "Memory"
+msgctxt "@title:column"
+msgid "Memory"
+msgstr "Memoro"
+
+#: extended_process_list.cpp:402
+#, fuzzy, kde-format
+#| msgid ""
+#| "This is an approximation of the real amount of physical memory that this "
+#| "process is using. It is calculated by dividing the process' shared memory "
+#| "usage by the amount of processes sharing that memory, then adding the "
+#| "process' private memory."
+msgctxt "@info:tooltip"
+msgid ""
+"This is an approximation of the real amount of physical memory that this "
+"process is using. It will use the Proportional Memory Usage ifavailable, the "
+"Private Memory Usage if that has a value, and the Resident Memory Usage "
+"otherwise."
+msgstr ""
+"Ĉi tio estas alproksimiĝo de la reala kvanto de fizika memoro, kiun ĉi tiu "
+"procezo uzas. Ĝi estas kalkulita dividante la komunan memoruzon de la "
+"procezo per la kvanto de procezoj dividantaj tiun memoron, tiam aldonante la "
+"privatan memoron de la procezo."
+
+#: extended_process_list.cpp:407
+#, fuzzy, kde-format
+#| msgid "GPU Usage"
+msgctxt "@title:column"
+msgid "Swap Usage"
+msgstr "Uzado de GPU"
+
+#: extended_process_list.cpp:408
+#, kde-format
+msgctxt "@title:column"
+msgid "Swap"
+msgstr ""
+
+#: extended_process_list.cpp:412
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"This is an approximation of the amount of swap memory this process is using."
+msgstr ""
+
+#: extended_process_list.cpp:416
 #, kde-format
 msgid "Name"
 msgstr "Nomo"
 
-#: extended_process_list.cpp:386
+#: extended_process_list.cpp:417
 #, kde-format
 msgid "The process name."
 msgstr "La proceza nomo."
 
-#: extended_process_list.cpp:391
+#: extended_process_list.cpp:422
 #, kde-format
 msgid "Command"
 msgstr "Komando"
 
-#: extended_process_list.cpp:395
+#: extended_process_list.cpp:426
 #, kde-format
 msgid "The command with which this process was launched."
 msgstr "La komando per kiu ĉi tiu procezo estis lanĉita."
 
-#: extended_process_list.cpp:399
+#: extended_process_list.cpp:430
 #, kde-format
 msgid "Status"
 msgstr "Statuso"
 
-#: extended_process_list.cpp:404
+#: extended_process_list.cpp:435
 #, kde-format
 msgid "IO Characters Read"
 msgstr "I/O Signoj Legitaj"
 
-#: extended_process_list.cpp:413
+#: extended_process_list.cpp:444
 #, kde-format
 msgid "IO Characters Written"
 msgstr "I/O Signoj Skribitaj"
 
-#: extended_process_list.cpp:422
+#: extended_process_list.cpp:453
 #, kde-format
 msgid "IO Read Syscalls"
 msgstr "I/O Legaj Syscalls"
 
-#: extended_process_list.cpp:431
+#: extended_process_list.cpp:462
 #, kde-format
 msgid "IO Read Syscalls Rate"
 msgstr "Ofteco de I/O Legaj Syscalls"
 
-#: extended_process_list.cpp:440
+#: extended_process_list.cpp:471
 #, kde-format
 msgid "IO Write Syscalls"
 msgstr "I/O Skribaj Syscalls"
 
-#: extended_process_list.cpp:449
+#: extended_process_list.cpp:480
 #, kde-format
 msgid "IO Write Syscalls Rate"
 msgstr "Ofteco de I/O Skribaj Syscalls"
 
-#: extended_process_list.cpp:458
+#: extended_process_list.cpp:489
 #, kde-format
 msgid "IO Characters Actually Read"
 msgstr "I/O Signoj Fakte Legitaj"
 
-#: extended_process_list.cpp:467
+#: extended_process_list.cpp:498
 #, kde-format
 msgid "IO Characters Read Rate"
 msgstr "Ofteco de I/O Signoj Legitaj"
 
-#: extended_process_list.cpp:470
+#: extended_process_list.cpp:501
 #, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
@@ -432,12 +495,12 @@ msgstr ""
 "La legado de la tuta IO de procezo, inkluzive de disko-kaŝmemoro kaj alia "
 "nefizika IO."
 
-#: extended_process_list.cpp:477
+#: extended_process_list.cpp:508
 #, kde-format
 msgid "IO Characters Written Rate"
 msgstr "Ofteco de I/O Signoj Skribitaj"
 
-#: extended_process_list.cpp:480
+#: extended_process_list.cpp:511
 #, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
@@ -446,37 +509,37 @@ msgstr ""
 "La skriba indico por la tuta IO de procezo, inkluzive de diskmemoro kaj alia "
 "nefizika IO."
 
-#: extended_process_list.cpp:487
+#: extended_process_list.cpp:518
 #, kde-format
 msgid "Disk Read Rate"
 msgstr "Ofteco de Diska Legado"
 
-#: extended_process_list.cpp:491
+#: extended_process_list.cpp:522
 #, kde-format
 msgid "Read"
 msgstr "Lego"
 
-#: extended_process_list.cpp:492
+#: extended_process_list.cpp:523
 #, kde-format
 msgid "The rate of data being read from disk."
 msgstr "La indico de datumoj legitaj de disko."
 
-#: extended_process_list.cpp:498
+#: extended_process_list.cpp:529
 #, kde-format
 msgid "Disk Write Rate"
 msgstr "Diska Skriba Rapido"
 
-#: extended_process_list.cpp:502
+#: extended_process_list.cpp:533
 #, kde-format
 msgid "Write"
 msgstr "Skribo"
 
-#: extended_process_list.cpp:503
+#: extended_process_list.cpp:534
 #, kde-format
 msgid "The rate of data being written to the disk."
 msgstr "La indico de datumoj skribitaj al la disko."
 
-#: extended_process_list.cpp:509
+#: extended_process_list.cpp:540
 #, kde-format
 msgid "Threads"
 msgstr "Fadenoj"
@@ -515,139 +578,139 @@ msgstr "Uzado de GPU"
 msgid "GPU Memory"
 msgstr "GPU Memoro"
 
-#: process.cpp:101 process.cpp:122
+#: process.cpp:97 process.cpp:118
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Normal"
 msgstr "Normala"
 
-#: process.cpp:104 process.cpp:125
+#: process.cpp:100 process.cpp:121
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very low priority"
 msgstr "Tre malalta prioritato"
 
-#: process.cpp:107 process.cpp:128
+#: process.cpp:103 process.cpp:124
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Low priority"
 msgstr "Malalta prioritato"
 
-#: process.cpp:110 process.cpp:131
+#: process.cpp:106 process.cpp:127
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very high priority"
 msgstr "Tre alta prioritato"
 
-#: process.cpp:113 process.cpp:134
+#: process.cpp:109 process.cpp:130
 #, kde-format
 msgctxt "Process Niceness"
 msgid "High priority"
 msgstr "Alta prioritato"
 
-#: process.cpp:143
+#: process.cpp:139
 #, kde-format
 msgctxt "Priority Class"
 msgid "None"
 msgstr "Neniu"
 
-#: process.cpp:145
+#: process.cpp:141
 #, kde-format
 msgctxt "Priority Class"
 msgid "Real Time"
 msgstr "Realtempe"
 
-#: process.cpp:147
+#: process.cpp:143
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
 msgstr "Plej pene"
 
-#: process.cpp:149
+#: process.cpp:145
 #, kde-format
 msgctxt "Priority Class"
 msgid "Idle"
 msgstr "Senokupe"
 
-#: process.cpp:151
+#: process.cpp:147
 #, kde-format
 msgctxt "Priority Class"
 msgid "Unknown"
 msgstr "Nekonata"
 
-#: process.cpp:159
+#: process.cpp:155
 #, kde-format
 msgctxt "process status"
 msgid "running"
 msgstr "rulante"
 
-#: process.cpp:161
+#: process.cpp:157
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
 msgstr "dormante"
 
-#: process.cpp:163
+#: process.cpp:159
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
 msgstr "diska dormado"
 
-#: process.cpp:165
+#: process.cpp:161
 #, kde-format
 msgctxt "process status"
 msgid "zombie"
 msgstr "zombia"
 
-#: process.cpp:167
+#: process.cpp:163
 #, kde-format
 msgctxt "process status"
 msgid "stopped"
 msgstr "haltita"
 
-#: process.cpp:169
+#: process.cpp:165
 #, kde-format
 msgctxt "process status"
 msgid "paging"
 msgstr "paĝante"
 
-#: process.cpp:171
+#: process.cpp:167
 #, kde-format
 msgctxt "process status"
 msgid "finished"
 msgstr "finis"
 
-#: process.cpp:173
+#: process.cpp:169
 #, kde-format
 msgctxt "process status"
 msgid "unknown"
 msgstr "nekonata"
 
-#: process.cpp:181
+#: process.cpp:177
 #, kde-format
 msgctxt "Scheduler"
 msgid "FIFO"
 msgstr "FIFO"
 
-#: process.cpp:183
+#: process.cpp:179
 #, kde-format
 msgctxt "Scheduler"
 msgid "Round Robin"
 msgstr "Round-Robin"
 
-#: process.cpp:185
+#: process.cpp:181
 #, kde-format
 msgctxt "Scheduler"
 msgid "Interactive"
 msgstr "Interaga"
 
-#: process.cpp:187
+#: process.cpp:183
 #, kde-format
 msgctxt "Scheduler"
 msgid "Batch"
 msgstr "Stapla"
 
-#: process.cpp:189
+#: process.cpp:185
 #, kde-format
 msgctxt "Scheduler"
 msgid "Idle"
