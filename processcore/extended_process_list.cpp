@@ -399,7 +399,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     memorySensor->setRequiredUpdateFlags(Processes::Smaps);
     memorySensor->setDescription(
         i18nc("@info:tooltip",
-              "This is an approximation of the real amount of physical memory that this process is using. It will use the Proportional Memory Usage if"
+              "This is an approximation of the real amount of physical memory that this process is using. It will use the Proportional Memory Usage if "
               "available, the Private Memory Usage if that has a value, and the Resident Memory Usage otherwise."));
     d->m_coreAttributes << memorySensor;
 
