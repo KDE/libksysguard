@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 00:43+0000\n"
-"PO-Revision-Date: 2024-06-28 06:53+0200\n"
+"POT-Creation-Date: 2025-01-09 00:42+0000\n"
+"PO-Revision-Date: 2025-01-08 05:45+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -344,25 +344,19 @@ msgstr ""
 "ki uporabljajo to knjižnico."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Raba zasebnega pomnilnika"
+msgstr "Proporcionalna raba pomnilnika"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Proporcionalno"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -374,53 +368,51 @@ msgstr ""
 "To je približek resnične količine fizičnega pomnilnika, ki ga ta proces "
 "uporablja. Izračunamo ga z deljenjem skupnega pomnilnika procesa glede na "
 "količino procesov, ki si delijo ta pomnilnik, nato pa prištejemo še zasebni "
-"pomnilnik procesa."
+"pomnilnik procesa. Ta vrednost morda ni na voljo za nekatere procese."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Raba pomnilnika"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Pomnilnik"
 
 #: extended_process_list.cpp:402
 #, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
 #| msgid ""
 #| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#| "process is using. It will use the Proportional Memory Usage ifavailable, "
+#| "the Private Memory Usage if that has a value, and the Resident Memory "
+#| "Usage otherwise."
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
-"process is using. It will use the Proportional Memory Usage ifavailable, the "
-"Private Memory Usage if that has a value, and the Resident Memory Usage "
+"process is using. It will use the Proportional Memory Usage if available, "
+"the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"To je približek resnične količine fizičnega pomnilnika, ki ga ta proces "
-"uporablja. Izračunamo ga z deljenjem skupnega pomnilnika procesa glede na "
-"količino procesov, ki si delijo ta pomnilnik, nato pa prištejemo še zasebni "
-"pomnilnik procesa."
+"To je približek dejanske količine fizičnega pomnilnika, ki ga uporablja ta "
+"proces. Uporabil bo proporcionalno uporabo pomnilnika, če je na voljo, "
+"uporabo zasebnega pomnilnika, če ima vrednost, in uporabo stalnega "
+"pomnilnika sicer."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "Raba GPE"
+msgstr "Raba izmenjalnega pomnilnika"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Izmenjalni pomnilnik"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -428,6 +420,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"To je približek količine izmenjalnega pomnilnika, ki ga uporablja ta proces."
 
 #: extended_process_list.cpp:416
 #, kde-format

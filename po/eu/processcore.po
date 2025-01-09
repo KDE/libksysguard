@@ -1,25 +1,25 @@
 # Translation for processcore.po to Euskara/Basque (eu).
-# Copyright (C) 2007-2024 This file is copyright:
+# Copyright (C) 2007-2025 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024, 2025 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
 # marcos <marcos@euskalgnu.org>, 2007.
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2008, 2010, 2014, 2019, 2020, 2021, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2008, 2010, 2014, 2019, 2020, 2021, 2024, 2025.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 00:43+0000\n"
-"PO-Revision-Date: 2024-07-20 11:55+0200\n"
+"POT-Creation-Date: 2025-01-09 00:42+0000\n"
+"PO-Revision-Date: 2025-01-08 22:42+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.12.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cgroup_data_model.cpp:50
@@ -342,25 +342,19 @@ msgstr ""
 "erabiltzen duten prozesu guztien artean partekatzen da."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Memoria Pribatuaren Erabilera"
+msgstr "Memoriaren erabilera proportzionala"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Proportzionala"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -369,56 +363,55 @@ msgid ""
 "process' private memory. This value may not be available for certain "
 "processes."
 msgstr ""
-"Prozesua erabiltzen ari den benetako memoria fisikoaren hurbilketa bat da "
-"hau. Prozesuak erabiltzen duen memoria partekatua berau erabiltzen duen "
-"prozesu kopuruarekin zatituz kalkulatzen da, ondoren prozesuak erabiltzen "
-"duen memoria pribatua batzen zaio."
+"Prozesua erabiltzen ari den benetako memoria fisiko zenbatekoaren hurbilketa "
+"bat da hau. Prozesuak erabiltzen duen memoria partekatua berau erabiltzen "
+"duen prozesu kopuruarekin zatituz kalkulatzen da, ondoren prozesu honek "
+"erabiltzen duen memoria pribatua batzen zaio. Prozesu batzuetarako baliteke "
+"balio hau erabilgarri ez egotea."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Memoriaren erabilera"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Memoria"
 
 #: extended_process_list.cpp:402
 #, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
 #| msgid ""
 #| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#| "process is using. It will use the Proportional Memory Usage ifavailable, "
+#| "the Private Memory Usage if that has a value, and the Resident Memory "
+#| "Usage otherwise."
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
-"process is using. It will use the Proportional Memory Usage ifavailable, the "
-"Private Memory Usage if that has a value, and the Resident Memory Usage "
+"process is using. It will use the Proportional Memory Usage if available, "
+"the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"Prozesua erabiltzen ari den benetako memoria fisikoaren hurbilketa bat da "
-"hau. Prozesuak erabiltzen duen memoria partekatua berau erabiltzen duen "
-"prozesu kopuruarekin zatituz kalkulatzen da, ondoren prozesuak erabiltzen "
-"duen memoria pribatua batzen zaio."
+"Prozesua erabiltzen ari den benetako memoria fisiko zenbatekoaren hurbilketa "
+"bat da hau. Memoriaren erabilera proportzionala erabiliko du erabilgarri "
+"badago, memoria pribatuaren erabilera horrek baliorik badu, eta bestela "
+"memoria egoiliarraren erabilera."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "GPUaren erabilera"
+msgstr "Trukaketaren erabilera"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Trukaketa"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -426,6 +419,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"Prozesu hau erabiltzen ari den trukaketa-memoria zenbatekoaren hurbilketa "
+"bat da hau."
 
 #: extended_process_list.cpp:416
 #, kde-format

@@ -5,20 +5,20 @@
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2010.
 # pan93412 <pan93412@gmail.com>, 2019, 2020.
-# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 00:43+0000\n"
-"PO-Revision-Date: 2024-09-17 08:05+0900\n"
+"POT-Creation-Date: 2025-01-09 00:42+0000\n"
+"PO-Revision-Date: 2025-01-08 18:02+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cgroup_data_model.cpp:50
@@ -331,25 +331,19 @@ msgstr ""
 "函式庫的處理程序共用。"
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "私人記憶體用量"
+msgstr "比例記憶體用量"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "比例"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -358,59 +352,58 @@ msgid ""
 "process' private memory. This value may not be available for certain "
 "processes."
 msgstr ""
-"這是此處理程序之實體記憶體真實用量的估計值。這是透過此處理程序之共享記憶體用"
-"量除以共享記憶體之處理程序數，然後加上處理程序之私人記憶體計算而成的。"
+"這是此處理程序的實際物理記憶體使用量的估計值。這個數值是將處理程序的共享記憶"
+"體使用量除以使用該共享記憶體的處理程序數量，之後加上這個處理程序的私人記憶體"
+"得知的。可能無法為某些處理程序估算這個數值。"
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "記憶體用量"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "記憶體"
 
 #: extended_process_list.cpp:402
 #, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
 #| msgid ""
 #| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#| "process is using. It will use the Proportional Memory Usage ifavailable, "
+#| "the Private Memory Usage if that has a value, and the Resident Memory "
+#| "Usage otherwise."
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
-"process is using. It will use the Proportional Memory Usage ifavailable, the "
-"Private Memory Usage if that has a value, and the Resident Memory Usage "
+"process is using. It will use the Proportional Memory Usage if available, "
+"the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"這是此處理程序之實體記憶體真實用量的估計值。這是透過此處理程序之共享記憶體用"
-"量除以共享記憶體之處理程序數，然後加上處理程序之私人記憶體計算而成的。"
+"這是此處理程序的實際物理記憶體使用量的估計值。可用的時候會依序使用「比例記憶"
+"體用量」、「私人記憶體用量」，或是「常駐記憶體用量」。"
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "GPU 用量"
+msgstr "Swap 用量"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Swap"
 
 #: extended_process_list.cpp:412
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "這是此處理程序的 Swap 記憶體使用量的估計值。"
 
 #: extended_process_list.cpp:416
 #, kde-format

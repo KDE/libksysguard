@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Rinse de Vries <rinsedevries@kde.nl>, 2007.
-# SPDX-FileCopyrightText: 2010, 2014, 2019, 2020, 2021, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2010, 2014, 2019, 2020, 2021, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 00:43+0000\n"
-"PO-Revision-Date: 2024-06-30 20:37+0200\n"
+"POT-Creation-Date: 2025-01-09 00:42+0000\n"
+"PO-Revision-Date: 2025-01-09 00:28+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.12.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: cgroup_data_model.cpp:50
@@ -279,7 +279,7 @@ msgstr ""
 #: extended_process_list.cpp:333
 #, kde-format
 msgid "Resident Memory Usage"
-msgstr "Eigen geheugengebruik"
+msgstr "Blijvend geheugengebruik"
 
 #: extended_process_list.cpp:335
 #, kde-format
@@ -338,25 +338,19 @@ msgstr ""
 "processen die deze bibliotheek gebruiken."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Privé geheugengebruik"
+msgstr "Proportioneel geheugengebruik"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Proportioneel"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -366,55 +360,54 @@ msgid ""
 "processes."
 msgstr ""
 "Dit is een benadering van de reële hoeveelheid fysiek geheugen dat dit "
-"proces gebruikt. Het wordt berekend door het gebruik van gedeeld geheugen "
-"door het proces te delen door de hoeveelheid van processen die dat geheugen "
-"delen en het privé geheugen van het proces er bij op te tellen."
+"proces gebruikt. Het wordt berekend door het gebruik van het gedeelde "
+"geheugen door het proces te delen door het aantal processen dat dat geheugen "
+"deelt en daarna het privé geheugen van het proces er bij op te tellen. De "
+"waarde kan niet beschikbaar zijn voor bepaalde processen."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Geheugengebruik"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Geheugen"
 
 #: extended_process_list.cpp:402
 #, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
 #| msgid ""
 #| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#| "process is using. It will use the Proportional Memory Usage ifavailable, "
+#| "the Private Memory Usage if that has a value, and the Resident Memory "
+#| "Usage otherwise."
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
-"process is using. It will use the Proportional Memory Usage ifavailable, the "
-"Private Memory Usage if that has a value, and the Resident Memory Usage "
+"process is using. It will use the Proportional Memory Usage if available, "
+"the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
 "Dit is een benadering van de reële hoeveelheid fysiek geheugen dat dit "
-"proces gebruikt. Het wordt berekend door het gebruik van gedeeld geheugen "
-"door het proces te delen door de hoeveelheid van processen die dat geheugen "
-"delen en het privé geheugen van het proces er bij op te tellen."
+"proces gebruikt. Het zal het proportioneel geheugengebruik gebruiken, indien "
+"beschikbaar, het privé geheugengebruik, als dat een waarde heeft, en anders "
+"het blijvend geheugengebruik."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "GPU gebruik"
+msgstr "Gebruik door swap"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Omwisselen"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -422,6 +415,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"Dit is een benadering van de hoeveelheid swap-geheugen dat dit proces "
+"gebruikt."
 
 #: extended_process_list.cpp:416
 #, kde-format

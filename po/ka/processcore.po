@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 00:43+0000\n"
-"PO-Revision-Date: 2024-06-28 05:39+0200\n"
+"POT-Creation-Date: 2025-01-09 00:42+0000\n"
+"PO-Revision-Date: 2025-01-08 03:58+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -335,25 +335,19 @@ msgstr ""
 "შორის, რომელიც ამ ბიბლიოთეკას იყენებს."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "პირადი მეხსიერების დატვირთვა"
+msgstr "პროპორცოული მეხსიერების გამოყენება"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "პროპორციული"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -367,49 +361,48 @@ msgstr ""
 "რაოდენობაზე, შემდეგ კი პროცესის პირადი მეხსიერების დამატებით გამოითვლება."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "მეხსიერების გამოყენება"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "მეხსიერება"
 
 #: extended_process_list.cpp:402
 #, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
 #| msgid ""
 #| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#| "process is using. It will use the Proportional Memory Usage ifavailable, "
+#| "the Private Memory Usage if that has a value, and the Resident Memory "
+#| "Usage otherwise."
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
-"process is using. It will use the Proportional Memory Usage ifavailable, the "
-"Private Memory Usage if that has a value, and the Resident Memory Usage "
+"process is using. It will use the Proportional Memory Usage if available, "
+"the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
 "ეს ფიზიკური მეხსიერების, რომელსაც პროცესი იყენებს, რეალური ნაწილია. ის "
-"პროცესის გაზიარებული მეხსიერების პროცესის გაყოფით გაშვებული პროცესების "
-"რაოდენობაზე, შემდეგ კი პროცესის პირადი მეხსიერების დამატებით გამოითვლება."
+"პროპორციული მეხსიერების გამოყენებას იყენებს, თუ ის ხელმისაწვდომია, "
+"კონფიდენციალურ მეხსიერების გამოყენებას, თუ მას მნიშვნელობა აქვს, წინააღმდეგ "
+"შემთხვევაში კი რეზიდენტული მეხსიერების გამოყენებას."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "GPU დატვირთვა"
+msgstr "სვოპის გამოყენება"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "გაცვლა"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -417,6 +410,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"ეს ამ პროცესის მიერ გამოყენებული სვოპის მეხსიერების დაახლოებითი რაოდენობაა."
 
 #: extended_process_list.cpp:416
 #, kde-format

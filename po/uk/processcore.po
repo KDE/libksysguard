@@ -4,15 +4,15 @@
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>, 2007.
-# Yuri Chornoivan <yurchor@ukr.net>, 2010, 2019, 2020, 2021, 2022, 2024.
+# Yuri Chornoivan <yurchor@ukr.net>, 2010, 2019, 2020, 2021, 2022, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 00:43+0000\n"
-"PO-Revision-Date: 2024-06-28 12:16+0300\n"
-"Last-Translator: Fracture dept <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"POT-Creation-Date: 2025-01-09 00:42+0000\n"
+"PO-Revision-Date: 2025-01-08 11:19+0200\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -345,25 +345,19 @@ msgstr ""
 "всіх процесів, що використовують спільні бібліотеки."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Використання приватної пам'яті"
+msgstr "Використання пропорційної пам'яті"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Пропорційна"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -375,53 +369,52 @@ msgstr ""
 "Це наближене значення реального об'єму фізичної пам'яті, який використовує "
 "цей процес. Значення обчислено діленням об'єму використаної процесами "
 "спільної пам'яті на кількість процесів, які спільно використовують цю "
-"пам'ять, із наступним додаванням об'єму приватної пам'яті процесу."
+"пам'ять, із наступним додаванням об'єму приватної пам'яті процесу. Це "
+"значення доступне не для усіх процесів."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Використання пам'яті"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Пам'ять"
 
 #: extended_process_list.cpp:402
 #, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
 #| msgid ""
 #| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#| "process is using. It will use the Proportional Memory Usage ifavailable, "
+#| "the Private Memory Usage if that has a value, and the Resident Memory "
+#| "Usage otherwise."
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
-"process is using. It will use the Proportional Memory Usage ifavailable, the "
-"Private Memory Usage if that has a value, and the Resident Memory Usage "
+"process is using. It will use the Proportional Memory Usage if available, "
+"the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
 "Це наближене значення реального об'єму фізичної пам'яті, який використовує "
-"цей процес. Значення обчислено діленням об'єму використаної процесами "
-"спільної пам'яті на кількість процесів, які спільно використовують цю "
-"пам'ять, із наступним додаванням об'єму приватної пам'яті процесу."
+"цей процес. Буде використано використання пропорційної пам'яті, якщо таке "
+"доступне, використання приватної пам'яті, якщо відомий її об'єм, інакше буде "
+"використано дані щодо використання резидентної пам'яті."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "Використання граф. процесора"
+msgstr "Використання рез. пам'яті"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Резервна пам'ять"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -429,6 +422,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"Це наближене значення об'єму резервної пам'яті, яке використано цим процесом."
 
 #: extended_process_list.cpp:416
 #, kde-format
