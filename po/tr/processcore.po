@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Serdar Soytetir <tulliana@gmail.com>, 2007, 2008.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-28 00:40+0000\n"
-"PO-Revision-Date: 2024-06-28 14:11+0300\n"
+"PO-Revision-Date: 2025-01-08 15:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -244,7 +244,7 @@ msgid ""
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
 "Bu sürecin çalıştırılmakta olduğu öncelik düzeyi. Normal zamanlayıcı için, "
-"bu 19 (en az öncelik) ve -19 (en yüksek öncelik) arasında değişir."
+"bu 19 (en az öncelik) ve −19 (en yüksek öncelik) arasında değişir."
 
 #: extended_process_list.cpp:308
 #, kde-format
@@ -254,12 +254,12 @@ msgstr "Zamanlayıcı"
 #: extended_process_list.cpp:313
 #, kde-format
 msgid "IO Priority Class"
-msgstr "Girdi-Çıktı Öncelik Sınıfı"
+msgstr "Girdi–Çıktı Öncelik Sınıfı"
 
 #: extended_process_list.cpp:319
 #, kde-format
 msgid "IO Nice Level"
-msgstr "Girdi-Çıktı Öncelik Düzeyi"
+msgstr "Girdi–Çıktı Öncelik Düzeyi"
 
 #: extended_process_list.cpp:323
 #, kde-format
@@ -387,42 +387,42 @@ msgstr "Durum"
 #: extended_process_list.cpp:404
 #, kde-format
 msgid "IO Characters Read"
-msgstr "Okunan Girdi-Çıktı Karakterleri"
+msgstr "Okunan Girdi–Çıktı Karakterleri"
 
 #: extended_process_list.cpp:413
 #, kde-format
 msgid "IO Characters Written"
-msgstr "Yazılan Girdi-Çıktı Karakterleri"
+msgstr "Yazılan Girdi–Çıktı Karakterleri"
 
 #: extended_process_list.cpp:422
 #, kde-format
 msgid "IO Read Syscalls"
-msgstr "Girdi-Çıktı Okuma Sistem Çağrıları"
+msgstr "Girdi–Çıktı’nın Okuduğu Sistem Çağrıları"
 
 #: extended_process_list.cpp:431
 #, kde-format
 msgid "IO Read Syscalls Rate"
-msgstr "Girdi-Çıktı Okuma Sistem Çağrıları Hızı"
+msgstr "Girdi–Çıktı Okuma Sistem Çağrıları Hızı"
 
 #: extended_process_list.cpp:440
 #, kde-format
 msgid "IO Write Syscalls"
-msgstr "Girdi-Çıktı Yazma Sistem Çağrıları"
+msgstr "Girdi–Çıktı’nın Yazdığı Sistem Çağrıları"
 
 #: extended_process_list.cpp:449
 #, kde-format
 msgid "IO Write Syscalls Rate"
-msgstr "Girdi-Çıktı Yazma Sistem Çağrıları Hızı"
+msgstr "Girdi–Çıktı Yazma Sistem Çağrıları Hızı"
 
 #: extended_process_list.cpp:458
 #, kde-format
 msgid "IO Characters Actually Read"
-msgstr "Gerçekte Okunan Girdi-Çıktı Karakterleri"
+msgstr "Gerçekte Okunan Girdi–Çıktı Karakterleri"
 
 #: extended_process_list.cpp:467
 #, kde-format
 msgid "IO Characters Read Rate"
-msgstr "Girdi-Çıktı Karakterleri Okuma Hızı"
+msgstr "Girdi–Çıktı Karakterleri Okuma Hızı"
 
 #: extended_process_list.cpp:470
 #, kde-format
@@ -430,13 +430,13 @@ msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
-"Disk önbelleğii ve diğer fiziksel olmayan girdi-çıktıyı içeren, bir sürecin "
-"tüm girdi-çıktı okuma hızı."
+"Disk önbelleğini ve diğer fiziksel olmayan girdiyi–çıktıyı içeren, bir "
+"sürecin tüm girdi-çıktı okuma hızı."
 
 #: extended_process_list.cpp:477
 #, kde-format
 msgid "IO Characters Written Rate"
-msgstr "Girdi-Çıktı Karakterleri Yazılma Hızı"
+msgstr "Girdi–Çıktı Karakterleri Yazma Hızı"
 
 #: extended_process_list.cpp:480
 #, kde-format
@@ -444,8 +444,8 @@ msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
-"Disk önbelleğii ve diğer fiziksel olmayan girdi-çıktıyı içeren, bir sürecin "
-"tüm girdi-çıktı yazma hızı."
+"Disk önbelleğini ve diğer fiziksel olmayan girdiyi–çıktıyı içeren, bir "
+"sürecin tüm girdi-çıktı yazma hızı."
 
 #: extended_process_list.cpp:487
 #, kde-format
