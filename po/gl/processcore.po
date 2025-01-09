@@ -4,14 +4,14 @@
 # mvillarino <mvillarino@users.sourceforge.net>, 2007, 2009.
 # marce villarino <mvillarino@users.sourceforge.net>, 2009.
 # Marce Villarino <mvillarino@gmail.com>, 2011, 2014.
-# SPDX-FileCopyrightText: 2023, 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 02:55+0000\n"
-"PO-Revision-Date: 2024-08-31 14:31+0200\n"
+"PO-Revision-Date: 2025-01-08 20:19+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -297,7 +297,7 @@ msgstr ""
 #: extended_process_list.cpp:341
 #, kde-format
 msgid "Private Memory Usage"
-msgstr "Uso de memoria privada"
+msgstr "Uso privado de memoria"
 
 #: extended_process_list.cpp:343
 #, kde-format
@@ -312,7 +312,7 @@ msgid ""
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "Esta é a cantidade de memoria física real que está a usar este proceso en "
-"si, e aproxímase ao uso se memoria privada do proceso.<br>Non inclúe a "
+"si, e aproxímase ao uso privado de memoria do proceso.<br>Non inclúe a "
 "memoria de intercambio, nin o tamaño do código das bibliotecas compartidas."
 
 #: extended_process_list.cpp:354
@@ -355,7 +355,7 @@ msgid ""
 "process' private memory."
 msgstr ""
 "Esta é unha aproximación da cantidade real de memoria física que este "
-"proceso usa. Calcúlase dividindo o uso de memoria compartida do proceso pola "
+"proceso usa. Calcúlase dividindo o uso compartido de memoria do proceso pola "
 "cantidade de procesos que comparten esa memoria, e sumando despois a memoria "
 "privada do proceso."
 
