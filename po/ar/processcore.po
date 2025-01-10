@@ -3,7 +3,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# SPDX-FileCopyrightText: 2008, 2010, 2024 zayed <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2008, 2010, 2024, 2025 zayed <zayed.alsaidi@gmail.com>
 # Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010, 2021.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2018.
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2024-09-26 12:06+0400\n"
+"PO-Revision-Date: 2025-01-09 17:06+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -341,25 +341,19 @@ msgstr ""
 "الذاكرة مشتركة بين أغلب العمليات التي تستخدم هذه المكتبة."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "استخدام الذاكرة الخاصة"
+msgstr "الاستخدام النسبي للذاكرة"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "النسبي"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -368,31 +362,25 @@ msgid ""
 "process' private memory. This value may not be available for certain "
 "processes."
 msgstr ""
-"هذا تقدير تقريبي للمقدار الحقيقي للذاكرة الفعلية التي تستخدمها هذه العملية. "
-"يتم حسابه عن طريق قسمة استخدام الذاكرة المشتركة للعملية على مقدار العمليات "
-"التي تشارك تلك الذاكرة ، ثم إضافة الذاكرة الخاصة للعملية."
+"هذا تقريب للكمية الحقيقية من الذاكرة الفعلية التي تستخدمها هذه العملية. يتم "
+"حسابه عن طريق قسمة استخدام الذاكرة المشتركة لهذه العملية على عدد العمليات "
+"التي تشترك في هذه الذاكرة، ثم إضافة الذاكرة الخاصة لهذه العملية. قد لا تكون "
+"هذه القيمة متاحة لعمليات معينة."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "استخدام الذاكرة"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "الذاكرة"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -400,29 +388,28 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"هذا تقدير تقريبي للمقدار الحقيقي للذاكرة الفعلية التي تستخدمها هذه العملية. "
-"يتم حسابه عن طريق قسمة استخدام الذاكرة المشتركة للعملية على مقدار العمليات "
-"التي تشارك تلك الذاكرة ، ثم إضافة الذاكرة الخاصة للعملية."
+"هذا تقريب للكمية الحقيقية من الذاكرة الفعلية التي تستخدمها هذه العملية. "
+"ستستخدم استخدام الذاكرة النسبية إذا كان متاحًا، واستخدام الذاكرة الخاصة إذا "
+"كان لها قيمة، واستخدام الذاكرة المقيمة بخلاف ذلك."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "استخدام معالج الرسوميات"
+msgstr "استخدام المبادلة"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "المبادلة"
 
 #: extended_process_list.cpp:412
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "هذا تقريب لمقدار ذاكرة المبادلة التي تستخدمها هذه العملية."
 
 #: extended_process_list.cpp:416
 #, kde-format

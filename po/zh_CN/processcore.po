@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/libksysguard/processcore.pot\n"
-"X-Crowdin-File-ID: 42931\n"
+"X-Crowdin-File: /kf6-stable/messages/libksysguard/processcore.pot\n"
+"X-Crowdin-File-ID: 49708\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -158,7 +158,7 @@ msgstr "开始时间"
 #: extended_process_list.cpp:230
 #, kde-format
 msgid "User CPU Usage"
-msgstr "用户 CPU 使用率"
+msgstr "用户 CPU 使用情况"
 
 #: extended_process_list.cpp:231
 #, kde-format
@@ -168,7 +168,7 @@ msgstr "用户 CPU"
 #: extended_process_list.cpp:238
 #, kde-format
 msgid "System CPU Usage"
-msgstr "系统 CPU 使用率"
+msgstr "系统 CPU 使用情况"
 
 #: extended_process_list.cpp:239
 #, kde-format
@@ -178,7 +178,7 @@ msgstr "系统 CPU"
 #: extended_process_list.cpp:248
 #, kde-format
 msgid "Total CPU Usage"
-msgstr "总 CPU 使用率"
+msgstr "总 CPU 使用情况"
 
 #: extended_process_list.cpp:254
 #, kde-format
@@ -188,32 +188,32 @@ msgstr "CPU"
 #: extended_process_list.cpp:258
 #, kde-format
 msgid "The current total CPU usage of the process."
-msgstr "此进程当前的 CPU 总使用率。"
+msgstr "此进程当前的 CPU 总使用情况。"
 
 #: extended_process_list.cpp:263
 #, kde-format
 msgid "Group User CPU Usage"
-msgstr "组用户 CPU 使用率"
+msgstr "组用户 CPU 使用情况"
 
 #: extended_process_list.cpp:267
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
-msgstr "此进程和所有子进程的总用户空间 CPU 使用率"
+msgstr "此进程和所有子进程的总用户空间 CPU 使用情况。"
 
 #: extended_process_list.cpp:275
 #, kde-format
 msgid "Group System CPU Usage"
-msgstr "组系统 CPU 使用率"
+msgstr "组系统 CPU 使用情况"
 
 #: extended_process_list.cpp:279
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
-msgstr "此进程和所有子进程的总系统 CPU 使用率"
+msgstr "此进程和所有子进程的系统 CPU 使用情况。"
 
 #: extended_process_list.cpp:288
 #, kde-format
 msgid "Group Total CPU Usage"
-msgstr "组总 CPU 使用率"
+msgstr "组总 CPU 使用情况"
 
 #: extended_process_list.cpp:294
 #, kde-format
@@ -223,7 +223,7 @@ msgstr "组 CPU"
 #: extended_process_list.cpp:295
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
-msgstr "此进程和所有子进程的 CPU 使用率"
+msgstr "此进程和所有子进程的总 CPU 使用情况。"
 
 #: extended_process_list.cpp:302
 #, kde-format
@@ -264,13 +264,13 @@ msgid ""
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless."
 msgstr ""
-"这是此进程在使用的虚拟内存空间总量，包含共享库、显存、磁盘上的文件等。这个数"
-"值基本没有意义。"
+"这是此进程正在使用的虚拟内存空间总量，包含共享库、显存、磁盘上的文件等。这个"
+"数值基本没有意义。"
 
 #: extended_process_list.cpp:333
 #, kde-format
 msgid "Resident Memory Usage"
-msgstr "常驻内存使用"
+msgstr "常驻内存使用情况"
 
 #: extended_process_list.cpp:335
 #, kde-format
@@ -282,12 +282,12 @@ msgstr "常驻"
 msgid ""
 "This is the amount of physical memory that this process is using and "
 "includes the amount of memory used by shared libraries."
-msgstr "这是此进程在使用的物理内存总量，包含共享库的内存用量。"
+msgstr "这是此进程正在使用的物理内存总量，包含共享库的内存占用。"
 
 #: extended_process_list.cpp:343
 #, kde-format
 msgid "Private Memory Usage"
-msgstr "私有内存使用"
+msgstr "私有内存使用情况"
 
 #: extended_process_list.cpp:345
 #, kde-format
@@ -301,13 +301,13 @@ msgid ""
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
-"这是此进程自身使用的物理内存总量和它的私有内存使用量的估计值。这不包括已经交"
-"换的内存和它的动态链接库代码大小。"
+"这是此进程自身使用的物理内存总量和它的私有内存使用情况的估计值。这不包括已经"
+"交换的内存和它的动态链接库代码大小。"
 
 #: extended_process_list.cpp:356
 #, kde-format
 msgid "Shared Memory Usage"
-msgstr "共享内存使用"
+msgstr "共享内存使用情况"
 
 #: extended_process_list.cpp:365
 #, kde-format
@@ -321,20 +321,20 @@ msgid ""
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
-"这是此进程的动态链接库占用的物理内存总量的估计值。所有使用此动态链接库的进程"
-"都会共享这部分内存。"
+"这是此进程的动态链接库正在使用的物理内存总量的估计值。所有使用此动态链接库的"
+"进程都会共享这部分内存。"
 
 #: extended_process_list.cpp:375
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr ""
+msgstr "比例内存使用情况"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "比例"
 
 #: extended_process_list.cpp:385
 #, kde-format
@@ -346,12 +346,15 @@ msgid ""
 "process' private memory. This value may not be available for certain "
 "processes."
 msgstr ""
+"这是该进程实际使用的物理内存量的近似值。该值是通过将此进程的共享内存使用总量"
+"除以共享该内存的进程数量，然后加上此进程的私有内存来计算得出的。对于某些特定"
+"进程，此值可能无法获取。"
 
 #: extended_process_list.cpp:392
 #, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
-msgstr "内存用量"
+msgstr "内存使用情况"
 
 #: extended_process_list.cpp:395
 #, kde-format
@@ -360,12 +363,7 @@ msgid "Memory"
 msgstr "内存"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is the amount of physical memory that this process is using by "
-#| "itself, and approximates the Private memory usage of the process. It does "
-#| "not include any swapped out memory, nor the code size of its shared "
-#| "libraries."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -373,27 +371,25 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"这是此进程自身使用的物理内存总量和它的私有内存使用量的估计值。这不包括已经交"
-"换的内存和它的动态链接库代码大小。"
 
 #: extended_process_list.cpp:407
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr ""
+msgstr "交换空间使用情况"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "交换"
 
 #: extended_process_list.cpp:412
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "这是此进程所使用的交换内存总量的近似值。"
 
 #: extended_process_list.cpp:416
 #, kde-format
@@ -541,7 +537,7 @@ msgstr "上传"
 #: plugins/nvidia/nvidia.cpp:28
 #, kde-format
 msgid "GPU Usage"
-msgstr "GPU 使用率"
+msgstr "GPU 使用情况"
 
 #: plugins/nvidia/nvidia.cpp:30
 #, kde-format

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2025-01-08 15:14+0300\n"
+"PO-Revision-Date: 2025-01-09 15:44+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -377,13 +377,7 @@ msgid "Memory"
 msgstr "Bellek"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It will use the Proportional Memory Usage ifavailable, "
-#| "the Private Memory Usage if that has a value, and the Resident Memory "
-#| "Usage otherwise."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2025-01-08 03:58+0100\n"
+"PO-Revision-Date: 2025-01-09 04:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -373,13 +373,7 @@ msgid "Memory"
 msgstr "მეხსიერება"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It will use the Proportional Memory Usage ifavailable, "
-#| "the Private Memory Usage if that has a value, and the Resident Memory "
-#| "Usage otherwise."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
