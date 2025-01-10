@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2025-01-08 16:39+0200\n"
+"PO-Revision-Date: 2025-01-09 22:06+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -349,12 +349,7 @@ msgid "Proportional"
 msgstr "יחסי"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -365,7 +360,8 @@ msgid ""
 msgstr ""
 "זה שערוך של הכמות הפיזית בה משתמש התהליך הזה. היא מחושבת על ידי חלוקת ניצולת "
 "הזיכרון השיתופי בכמות התהליכים שחולקים את הזיכרון הזה ולאחר מכן מתווסף "
-"לחישוב הזיכרון הפרטי של התהליך."
+"לחישוב הזיכרון הפרטי של התהליך. יכול להיות שהערך הזה לא יהיה זמין לתהליכים "
+"מסוימים."
 
 #: extended_process_list.cpp:392
 #, kde-format
@@ -380,12 +376,7 @@ msgid "Memory"
 msgstr "זיכרון"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -393,9 +384,8 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"זה שערוך של הכמות הפיזית בה משתמש התהליך הזה. היא מחושבת על ידי חלוקת ניצולת "
-"הזיכרון השיתופי בכמות התהליכים שחולקים את הזיכרון הזה ולאחר מכן מתווסף "
-"לחישוב הזיכרון הפרטי של התהליך."
+"זה שערוך של הכמות הפיזית בה משתמש התהליך הזה. היא תשתמש בניצולת הזיכרון "
+"היחסית אם ניתן, ניצולת הזיכרון הפרטי וניצולת הזיכרון הקבוע בכל מקרה אחר."
 
 #: extended_process_list.cpp:407
 #, kde-format
