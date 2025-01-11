@@ -371,6 +371,9 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
+"这是该进程实际使用的物理内存量的近似值。如果可用，将优先采用比例内存使用情况"
+"数值；若私有内存使用情况存在数值，则采用私有内存使用情况的数值；其他情况则采"
+"用常驻内存使用情况的数值。"
 
 #: extended_process_list.cpp:407
 #, kde-format
