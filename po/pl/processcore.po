@@ -2,14 +2,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007, 2010.
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 02:55+0000\n"
-"PO-Revision-Date: 2021-06-06 07:37+0200\n"
+"PO-Revision-Date: 2025-01-11 11:53+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -356,8 +356,9 @@ msgid ""
 msgstr ""
 "Jest to przybliżenie rzeczywistej ilości pamięci fizycznej, którą "
 "wykorzystuje ten proces. Jest ona obliczana poprzez dzielenie wykorzystania "
-"pamięci współdzielonej procesu przez ilość procesów współdzielących tę "
-"pamięć, a następnie dodawana jest prywatne wykorzystanie pamięć procesu."
+"pamięci współdzielonej przez liczbę procesów ją współdzielących, a następnie "
+"dodawane jest prywatne wykorzystanie pamięć procesu. Ta wartość może być "
+"niedostępna dla niektórych procesów."
 
 #: extended_process_list.cpp:383
 #, kde-format
