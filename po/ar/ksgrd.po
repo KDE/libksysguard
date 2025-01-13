@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2025-01-09 13:39+0400\n"
+"PO-Revision-Date: 2025-01-12 13:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -154,7 +154,7 @@ msgstr "الذاكرة السلكية"
 #: SensorManager.cpp:75
 #, kde-format
 msgid "Exec Pages"
-msgstr ""
+msgstr "صفحات التنفيذ"
 
 #: SensorManager.cpp:76
 #, kde-format
@@ -340,7 +340,7 @@ msgstr "معدّل الخطأ"
 #: SensorManager.cpp:116
 #, kde-format
 msgid "FIFO Overruns Rate"
-msgstr ""
+msgstr "معدل تجاوزات FIFO"
 
 #: SensorManager.cpp:117
 #, kde-format
@@ -350,7 +350,7 @@ msgstr "معدّل أخطاء الإطارات"
 #: SensorManager.cpp:118
 #, kde-format
 msgid "Multicast Packet Rate"
-msgstr ""
+msgstr "معدل حزم البث المتعدد"
 
 #: SensorManager.cpp:119
 #, kde-format
@@ -361,7 +361,7 @@ msgstr "معدّل الرزم"
 #, kde-format
 msgctxt "@item sensor description ('carrier' is a type of network signal)"
 msgid "Carrier Loss Rate"
-msgstr ""
+msgstr "معدل خسارة الناقل"
 
 #: SensorManager.cpp:121 SensorManager.cpp:132
 #, kde-format
@@ -391,7 +391,7 @@ msgstr "الأخطاء"
 #: SensorManager.cpp:127
 #, kde-format
 msgid "FIFO Overruns"
-msgstr ""
+msgstr "تجاوزات FIFO"
 
 #: SensorManager.cpp:128
 #, kde-format
@@ -401,7 +401,7 @@ msgstr "أخطاء الإطارات"
 #: SensorManager.cpp:129
 #, kde-format
 msgid "Multicast Packets"
-msgstr ""
+msgstr "حزم البث المتعدد"
 
 #: SensorManager.cpp:130
 #, kde-format
@@ -412,7 +412,7 @@ msgstr "الرزم"
 #, kde-format
 msgctxt "@item sensor description ('carrier' is a type of network signal)"
 msgid "Carrier Losses"
-msgstr ""
+msgstr "خسائر الناقل"
 
 #: SensorManager.cpp:135
 #, kde-format
@@ -592,7 +592,7 @@ msgstr "زمن التشغيل"
 #: SensorManager.cpp:172
 #, kde-format
 msgid "Linux Soft Raid (md)"
-msgstr ""
+msgstr "لينكس سوفت رايد (MD)"
 
 #: SensorManager.cpp:173
 #, kde-format
@@ -752,62 +752,62 @@ msgstr "مستوى الضوضاء"
 #: SensorManager.cpp:226
 #, kde-format
 msgid "Rx Invalid Nwid Packets"
-msgstr ""
+msgstr "حزم Nwid غير صالحة لـ Rx"
 
 #: SensorManager.cpp:227
 #, kde-format
 msgid "Total Rx Invalid Nwid Packets"
-msgstr ""
+msgstr "إجمالي حزم Nwid غير الصالحة"
 
 #: SensorManager.cpp:228
 #, kde-format
 msgid "Rx Invalid Crypt Packets"
-msgstr ""
+msgstr "حزم تشفير Rx غير صالحة"
 
 #: SensorManager.cpp:229
 #, kde-format
 msgid "Total Rx Invalid Crypt Packets"
-msgstr ""
+msgstr "إجمالي حزم تشفير Rx غير صالحة"
 
 #: SensorManager.cpp:230
 #, kde-format
 msgid "Rx Invalid Frag Packets"
-msgstr ""
+msgstr "حزم التجزئة غير صالحة لـ Rx"
 
 #: SensorManager.cpp:231
 #, kde-format
 msgid "Total Rx Invalid Frag Packets"
-msgstr ""
+msgstr "إجمالي حزم Rx غير صالحة"
 
 #: SensorManager.cpp:232
 #, kde-format
 msgid "Tx Excessive Retries Packets"
-msgstr ""
+msgstr "حزم إعادة المحاولات الزائدة لـ Tx"
 
 #: SensorManager.cpp:233
 #, kde-format
 msgid "Total Tx Excessive Retries Packets"
-msgstr ""
+msgstr "إجمالي حزم إعادة المحاولات الزائدة لـ Tx"
 
 #: SensorManager.cpp:234
 #, kde-format
 msgid "Invalid Misc Packets"
-msgstr ""
+msgstr "حزم متنوعة غير صالحة"
 
 #: SensorManager.cpp:235
 #, kde-format
 msgid "Total Invalid Misc Packets"
-msgstr ""
+msgstr "إجمالي الحزم المتنوعة غير الصالحة"
 
 #: SensorManager.cpp:236
 #, kde-format
 msgid "Missed Beacons"
-msgstr ""
+msgstr "الإرشادات مفقودة"
 
 #: SensorManager.cpp:237
 #, kde-format
 msgid "Total Missed Beacons"
-msgstr ""
+msgstr "إجمالي الإرشادات المفقودة"
 
 #: SensorManager.cpp:239
 #, kde-format
