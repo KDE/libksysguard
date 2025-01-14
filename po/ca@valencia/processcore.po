@@ -1,16 +1,16 @@
 # Translation of processcore.po to Catalan (Valencian)
-# Copyright (C) 2007-2024 This_file_is_part_of_KDE
+# Copyright (C) 2007-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2007, 2010, 2013, 2019, 2020, 2021, 2024.
+# Josep M. Ferrer <txemaq@gmail.com>, 2007, 2010, 2013, 2019, 2020, 2021, 2024, 2025.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2016, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2024-06-28 12:56+0200\n"
+"PO-Revision-Date: 2025-01-09 09:51+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -345,25 +345,19 @@ msgstr ""
 "compartix entre tots els processos que utilitzen esta biblioteca."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Ús de la memòria privada"
+msgstr "Ús proporcional de la memòria"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Proporcional"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -373,31 +367,25 @@ msgid ""
 "processes."
 msgstr ""
 "Esta és aproximadament la quantitat de memòria física real que està "
-"utilitzant este procés. Es calcula dividint l'ús de la memòria compatida del "
-"procés entre la quantitat de processos que compartixen esta memòria, i "
-"afegint la memòria privada del procés."
+"utilitzant este procés. Es calcula dividint l'ús de la memòria compatida "
+"d'este procés entre el nombre de processos que compartixen esta memòria, i "
+"afegint la memòria privada del procés. Este valor podria no estar disponible "
+"per a determinats processos."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Ús de la memòria"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Memòria"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -406,22 +394,21 @@ msgid ""
 "otherwise."
 msgstr ""
 "Esta és aproximadament la quantitat de memòria física real que està "
-"utilitzant este procés. Es calcula dividint l'ús de la memòria compatida del "
-"procés entre la quantitat de processos que compartixen esta memòria, i "
-"afegint la memòria privada del procés."
+"utilitzant este procés. Farà servir l'ús proporcional de memòria, si està "
+"disponible, l'ús de la memòria privada si té un valor, i en cas contrari, "
+"l'ús de la memòria resident."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "Ús de la GPU"
+msgstr "Ús de la memòria d'intercanvi"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Memòria d'intercanvi"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -429,6 +416,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"La quantitat és una aproximació de la quantitat de memòria d'intercanvi que "
+"està utilitzant este procés."
 
 #: extended_process_list.cpp:416
 #, kde-format
