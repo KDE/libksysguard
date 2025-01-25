@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2025-01-08 18:02+0900\n"
+"PO-Revision-Date: 2025-01-24 22:20+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -369,13 +369,7 @@ msgid "Memory"
 msgstr "記憶體"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It will use the Proportional Memory Usage ifavailable, "
-#| "the Private Memory Usage if that has a value, and the Resident Memory "
-#| "Usage otherwise."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
