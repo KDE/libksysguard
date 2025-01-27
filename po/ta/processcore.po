@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # ஆமாச்சு <amachu@ubuntu.com>, 2008.
-# SPDX-FileCopyrightText: 2024 Kishore G <kishore96@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: கேபசூ 4.1 தமிழாக்கம்\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2024-06-30 12:42+0530\n"
+"PO-Revision-Date: 2025-01-26 17:44+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -127,30 +127,24 @@ msgid "The controlling terminal on which this process is running."
 msgstr ""
 
 #: extended_process_list.cpp:202
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "User Time"
-msgstr "நிகழ் நேரம்"
+msgstr "பயனர் நேரம்"
 
 #: extended_process_list.cpp:206
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "இயங்குதள நேரம்"
 
 #: extended_process_list.cpp:210
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Total Time"
-msgstr "நிகழ் நேரம்"
+msgstr "மொத்த நேரம்"
 
 #: extended_process_list.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Time"
-msgstr "நிகழ் நேரம்"
+msgstr "நேரம்"
 
 #: extended_process_list.cpp:215
 #, kde-format
@@ -158,11 +152,9 @@ msgid "The total user and system time that this process has been running for"
 msgstr ""
 
 #: extended_process_list.cpp:220
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Start Time"
-msgstr "நிகழ் நேரம்"
+msgstr "துவக்க நேரம்"
 
 #: extended_process_list.cpp:230
 #, kde-format
