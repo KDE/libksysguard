@@ -63,7 +63,7 @@ msgstr "Eixe:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr "Amosar as lendas do eixo Y."
+msgstr "Amosar as lendas do eixe Y."
 
 #: contents/ui/Config.qml:74
 #, kde-format

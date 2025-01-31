@@ -4,13 +4,13 @@
 # Tamas Szanto <tszanto@interware.hu>, 2007.
 # Kiszel Kristóf <ulysses@kubuntu.org>, 2010, 2019.
 # Kristóf Kiszel <kiszel.kristof@gmail.com>, 2021.
-# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2024, 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2024-07-07 14:44+0200\n"
+"PO-Revision-Date: 2025-01-30 10:00+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -340,25 +340,19 @@ msgstr ""
 "olyan folyamattal, amely használja a programkönyvtárt."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Privát memóriahasználat"
+msgstr "Változó memóriahasználat"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Változó"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -370,29 +364,22 @@ msgstr ""
 "Ez a folyamat által használt fizikai memória valós mennyiségének közelítése. "
 "A számítása a folyamat megosztott memóriahasználatának a memórián osztozó "
 "folyamatok számának elosztásával, majd a folyamat privát memóriájának "
-"hozzáadásával történik."
+"hozzáadásával történik. Ez az érték nem minden folyamathoz érhető el."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Memóriahasználat"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Memória"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -401,22 +388,21 @@ msgid ""
 "otherwise."
 msgstr ""
 "Ez a folyamat által használt fizikai memória valós mennyiségének közelítése. "
-"A számítása a folyamat megosztott memóriahasználatának a memórián osztozó "
-"folyamatok számának elosztásával, majd a folyamat privát memóriájának "
-"hozzáadásával történik."
+"A Változó memóriahasználatot használja, ha az elérhetú, a Privát "
+"memóriahasználatot, ha annak van értéke, és a Rezidens memórihasználatot "
+"egyébként."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "GPU használat"
+msgstr "Swaphasználat"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Swap"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -424,6 +410,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"Ez a folyamat által használt swapmemória mennyiségének közelítő értéke."
 
 #: extended_process_list.cpp:416
 #, kde-format
