@@ -1,118 +1,117 @@
-# Copyright (C) 2024 This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2025-02-01 09:32+0200\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
-"Language: he\n"
+"PO-Revision-Date: 2025-01-31 16:18+0200\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
-"n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.12.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: ConfigAppearance.qml:72
 #, kde-format
 msgid "Load Preset"
-msgstr "טעינת ערכה"
+msgstr "Ielādēt priekšiestatījumu"
 
 #: ConfigAppearance.qml:99
 #, kde-format
 msgid "Delete this preset"
-msgstr "מחיקת הערכה הזאת…"
+msgstr "Dzēst šo priekšiestatījumu"
 
 #: ConfigAppearance.qml:125
 #, kde-format
 msgid "Presets:"
-msgstr "ערכות:"
+msgstr "Priekšiestatījumi:"
 
 #: ConfigAppearance.qml:129
 #, kde-format
 msgid "Load Preset..."
-msgstr "טעינת ערכה…"
+msgstr "Ielādēt priekšiestatījumu..."
 
 #: ConfigAppearance.qml:134
 #, kde-format
 msgid "Get new presets..."
-msgstr "משיכת ערכות חדשות…"
+msgstr "Iegūt jaunus priekšiestatījumus..."
 
 #: ConfigAppearance.qml:146
 #, kde-format
 msgid "Save Settings As Preset"
-msgstr "שמירת ההגדרות כערכה"
+msgstr "Saglabāt iestatījumus kā priekšiestatījumu"
 
 #: ConfigAppearance.qml:156
 #, kde-format
 msgid "Title:"
-msgstr "כותרת:"
+msgstr "Nosaukums:"
 
 #: ConfigAppearance.qml:162
 #, kde-format
 msgid "Show Title"
-msgstr "הצגת כותרת"
+msgstr "Rādīt nosaukumu"
 
 #: ConfigAppearance.qml:167
 #, kde-format
 msgid "Display Style:"
-msgstr "סגנון תצוגה:"
+msgstr "Parādīšanas stils:"
 
 #: ConfigAppearance.qml:187
 #, kde-format
 msgid "Get New Display Styles..."
-msgstr "הורדת סגנונות תצוגה חדשים..."
+msgstr "Iegūt jaunus parādīšanas stilus..."
 
 #: ConfigAppearance.qml:197
 #, kde-format
 msgid "Minimum Time Between Updates:"
-msgstr "הזמן המזערי בין עדכונים:"
+msgstr "Minimālais laiks starp atjaunināšanu:"
 
 #: ConfigAppearance.qml:206
 #, kde-format
 msgid "No Limit"
-msgstr "ללא הגבלה"
+msgstr "Bez ierobežojuma"
 
 #. i18ndp doesn't handle floats :(
 #: ConfigAppearance.qml:210
 #, kde-format
 msgid "1 second"
-msgstr "שנייה"
+msgstr "1 sekunde"
 
 #: ConfigAppearance.qml:212
 #, kde-format
 msgid "%1 seconds"
-msgstr "%1 שניות"
+msgstr "%1 sekundes"
 
 #: ConfigSensors.qml:131
 #, kde-format
 msgid "Total Sensor"
 msgid_plural "Total Sensors"
-msgstr[0] "סך הכול לחיישן"
-msgstr[1] "סך הכול לחיישנים"
-msgstr[2] "סך הכול לחיישנים"
-msgstr[3] "סך הכול לחיישנים"
+msgstr[0] "Kopā sensors"
+msgstr[1] "Kopā sensori"
+msgstr[2] "Kopā sensori"
 
 #: ConfigSensors.qml:150
 #, kde-format
 msgid "Sensors"
-msgstr "חיישנים"
+msgstr "Sensori"
 
 #: ConfigSensors.qml:176
 #, kde-format
 msgid "Text-Only Sensors"
-msgstr "חיישני טקסט בלבד"
+msgstr "Tikai teksta sensori"
 
 #: facepackages/barchart/contents/ui/Config.qml:35
 #, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr "כללי:"
+msgstr "Pamata:"
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
@@ -120,51 +119,51 @@ msgstr "כללי:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "הצגת מקרא"
+msgstr "Rādīt apzīmējumus"
 
 #: facepackages/barchart/contents/ui/Config.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
-msgstr "עמודות בערמה"
+msgstr "Grēdotas joslas"
 
 #: facepackages/barchart/contents/ui/Config.qml:49
 #, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr "כיוון עמודות:"
+msgstr "Joslu orientācija:"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr "אנכי"
+msgstr "Vertikālas"
 
 #: facepackages/barchart/contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr "אופקי"
+msgstr "Horizontālas"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr "ציר:"
+msgstr "Asis:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr "הצגת תוויות ציר Y"
+msgstr "Rādīt Y ass etiķetes"
 
 #: facepackages/barchart/contents/ui/Config.qml:74
 #: facepackages/linechart/contents/ui/Config.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr "הצגת קווי רשת"
+msgstr "Rādīt režģa līnijas"
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
@@ -172,7 +171,7 @@ msgstr "הצגת קווי רשת"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "טווח נתונים אוטומטי"
+msgstr "Automātisks datu diapazons"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
@@ -180,7 +179,7 @@ msgstr "טווח נתונים אוטומטי"
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr "מ־:"
+msgstr "No:"
 
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
@@ -188,103 +187,102 @@ msgstr "מ־:"
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr "עד:"
+msgstr "Līdz:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:22
 #, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
-msgstr "להשתמש בצבע חיישן:"
+msgstr "Lietot sensora krāsu:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:27
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr "מספר העמודות:"
+msgstr "Kolonnu skaits:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:34
 #: facepackages/facegrid/contents/ui/Config.qml:42
 #, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
-msgstr "אוטומטי"
+msgstr "Automātiski"
 
 #: facepackages/facegrid/contents/ui/Config.qml:54
 #, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
-msgstr "סגנון תצוגה:"
+msgstr "Parādīšanas stils:"
 
 #: facepackages/linechart/contents/ui/Config.qml:42
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
-msgstr "מראה"
+msgstr "Izskats"
 
 #: facepackages/linechart/contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
-msgstr "תרשימים בערמה"
+msgstr "Grēdots"
 
 #: facepackages/linechart/contents/ui/Config.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
-msgstr "קווים חלקים"
+msgstr "Līdzenas līnijas"
 
 #: facepackages/linechart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr "אטימות השטח שמתחת לקו:"
+msgstr "Necaurspīdība zem rindas:"
 
 #: facepackages/linechart/contents/ui/Config.qml:73
 #, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
-msgstr "טווחי נתונים"
+msgstr "Datu diapazoni"
 
 #: facepackages/linechart/contents/ui/Config.qml:78
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr "טווח נתונים אוטומטי ב־Y"
+msgstr "Automātisks Y datu diapazons"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
-msgstr "מ־ (Y):"
+msgstr "No (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:89
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
-msgstr "עד (Y):"
+msgstr "Līdz (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Show last:"
-msgstr "הצגת האחרונים:"
+msgstr "Rādīt pēdējās:"
 
 #: facepackages/linechart/contents/ui/Config.qml:102
 #, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
 msgid_plural "%1 seconds"
-msgstr[0] "שנייה"
-msgstr[1] "שתי שניות"
-msgstr[2] "%1 שניות"
-msgstr[3] "%1 שניות"
+msgstr[0] "%1 sekundi"
+msgstr[1] "%1 sekundes"
+msgstr[2] "%1 sekunžu"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr "זווית התחלה:"
+msgstr "Sākuma leņķis"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
 #, kde-format
@@ -303,7 +301,7 @@ msgstr "°"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
-msgstr "זווית עוגה כוללת:"
+msgstr "Kopējais sektoru diagrammas leņķis:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
 #, kde-format
@@ -315,42 +313,32 @@ msgstr "%1°"
 #, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
-msgstr "קווים מעוגלים"
+msgstr "Noapaļotas līnijas"
 
 #: facepackages/textonly/contents/ui/Config.qml:24
 #, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
-msgstr "קיבוץ חיישנים לפי ערך החיישנים הכולל."
+msgstr "Grupēt sensorus, ievērojot kopējo sensoru vērtību."
 
 #: import/Choices.qml:53
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr "יש ללחוץ כדי להוסיף חיישן…"
+msgstr "Klikšķiniet, lai atlasītu sensoru..."
 
 #: import/Choices.qml:368
 #, kde-format
 msgid "Search..."
-msgstr "חיפוש…"
+msgstr "Meklēt..."
 
 #: import/Choices.qml:381
 #, kde-format
 msgctxt "@action:button"
 msgid "Back"
-msgstr "חזרה"
+msgstr "Atpakaļ"
 
 #: SensorFaceController.cpp:450
 #, kde-format
 msgid "System Monitor Sensor"
-msgstr "חיישן צג המערכת"
-
-#~ msgid "Fill Opacity:"
-#~ msgstr "אטימות מילוי:"
-
-#~ msgid "Amount of History to Keep:"
-#~ msgstr "כמות ההיסטוריה לשימור:"
-
-#~ msgctxt "angle"
-#~ msgid "%1°"
-#~ msgstr "%1°"
+msgstr "Sistēmas pārrauga sensors"
