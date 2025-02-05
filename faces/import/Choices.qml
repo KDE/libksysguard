@@ -379,6 +379,7 @@ Control {
                         visible: delegateModel.rootIndex.valid
                         Layout.maximumHeight: visible ? implicitHeight : 0
                         ToolButton {
+                            id: backButton
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
                             icon.name: "go-previous"
@@ -435,6 +436,15 @@ Control {
                                 height: width
                                 source: "go-next-symbolic"
                                 opacity: model.SensorId.length == 0
+                            }
+
+                            Keys.onEnterPressed: clicked()
+                            Keys.onReturnPressed: clicked()
+                            Keys.onPressed: (event) => {
+                                if (backButton.visible && event.key === Qt.Key_Backspace) {
+                                    backButton.clicked()
+                                    event.accepted = true
+                                }
                             }
 
                             onClicked: {
