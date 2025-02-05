@@ -351,7 +351,11 @@ Control {
 
             searchField.forceActiveFocus();
         }
-        onClosed: delegateModel.rootIndex = delegateModel.parentModelIndex()
+        onClosed: {
+            while (delegateModel.rootIndex.valid) {
+                delegateModel.rootIndex = delegateModel.parentModelIndex()
+            }
+        }
 
         contentItem: ColumnLayout {
             spacing: 0
