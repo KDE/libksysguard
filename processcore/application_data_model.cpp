@@ -22,6 +22,29 @@ ApplicationDataModel::ApplicationDataModel(QObject *parent)
 
 ApplicationDataModel::~ApplicationDataModel() = default;
 
+QVariantMap KSysGuard::ApplicationDataModel::cgroupMapping() const
+{
+    return m_cgroupMapping;
+}
+
+void KSysGuard::ApplicationDataModel::setCGroupMapping(const QVariantMap &newMapping)
+{
+    if (newMapping == m_cgroupMapping) {
+        return;
+    }
+
+    m_cgroupMapping = newMapping;
+
+    m_mappedCgroups.clear();
+    std::ranges::transform(m_cgroupMapping.asKeyValueRange(), std::inserter(m_mappedCgroups, m_mappedCgroups.begin()), [](auto entry) {
+        return entry.second.toString();
+    });
+
+    m_cgroupMappingCache.clear();
+
+    Q_EMIT cgroupMappingChanged();
+}
+
 bool ApplicationDataModel::filterAcceptsCGroup(CGroup *cgroup)
 {
     if (!isCgroupRelevant(cgroup)) {
@@ -68,6 +91,7 @@ void ApplicationDataModel::cgroupRemoved(CGroup *cgroup)
     auto &application = itr.value();
 
     application.cgroups.removeOne(cgroup);
+    m_cgroupMappingCache.remove(cgroup->id());
 
     if (itr.value().cgroups.empty()) {
         m_applications.erase(itr);
@@ -96,11 +120,16 @@ bool ApplicationDataModel::isCgroupRelevant(CGroup *cgroup)
     }
 
     auto cgroupId = cgroup->id();
+    auto appId = applicationId(cgroup);
+
+    if (m_mappedCgroups.contains(appId)) {
+        return true;
+    }
+
     if (!cgroupId.contains(QLatin1String("/app-")) && !(cgroup->id().contains(QLatin1String("/flatpak")) && cgroup->id().endsWith(QLatin1String("scope")))) {
         return false;
     }
 
-    auto appId = applicationId(cgroup);
     // Certain DBus launched things will end up creating a CGroup that looks like
     // dbus-:1.2-org.telegram.desktop@0.service . Since these don't actually contain
     // anything relevant, just filter them out as they end up just cluttering the
@@ -114,10 +143,28 @@ bool ApplicationDataModel::isCgroupRelevant(CGroup *cgroup)
 
 QString ApplicationDataModel::applicationId(CGroup *cgroup) const
 {
-    auto appId = cgroup->service()->storageId();
-    if (appId.isEmpty()) {
-        appId = cgroup->service()->name();
+    auto cgroupId = cgroup->id();
+    if (m_cgroupMappingCache.contains(cgroupId)) {
+        return m_cgroupMappingCache.value(cgroupId);
     }
+
+    QString appId;
+
+    for (auto [cgroup, mappedName] : m_cgroupMapping.asKeyValueRange()) {
+        if (cgroupId.contains(cgroup, Qt::CaseSensitivity::CaseInsensitive)) {
+            appId = mappedName.toString();
+            break;
+        }
+    }
+
+    if (appId.isEmpty()) {
+        appId = cgroup->service()->storageId();
+        if (appId.isEmpty()) {
+            appId = cgroup->service()->name();
+        }
+    }
+
+    m_cgroupMappingCache.insert(cgroupId, appId);
 
     return appId;
 }
