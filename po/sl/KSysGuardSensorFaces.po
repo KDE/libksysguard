@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"POT-Creation-Date: 2025-02-06 00:42+0000\n"
 "PO-Revision-Date: 2024-09-06 07:25+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -329,12 +329,12 @@ msgctxt "@label"
 msgid "Click to select a sensor…"
 msgstr "Kliknite za izbiro senzorja…"
 
-#: import/Choices.qml:368
+#: import/Choices.qml:372
 #, kde-format
 msgid "Search..."
 msgstr "Išči..."
 
-#: import/Choices.qml:381
+#: import/Choices.qml:385
 #, kde-format
 msgctxt "@action:button"
 msgid "Back"
