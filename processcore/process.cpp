@@ -65,7 +65,6 @@ public:
     int elapsedTimeMilliSeconds;
     int noNewPrivileges;
     QString cGroup;
-    QString macContext;
 
     MemoryInfo memory;
 };
@@ -526,11 +525,6 @@ QString Process::cGroup() const
     return d->cGroup;
 }
 
-QString Process::macContext() const
-{
-    return d->macContext;
-}
-
 void Process::setParentPid(long int parent_pid)
 {
     d->parent_pid = parent_pid;
@@ -906,15 +900,6 @@ void Process::setCGroup(const QString &_cGroup)
         return;
     }
     d->cGroup = _cGroup;
-    d->changes |= Process::Status;
-}
-
-void Process::setMACContext(const QString &_macContext)
-{
-    if (d->macContext == _macContext) {
-        return;
-    }
-    d->macContext = _macContext;
     d->changes |= Process::Status;
 }
 

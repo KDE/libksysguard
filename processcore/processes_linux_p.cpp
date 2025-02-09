@@ -114,7 +114,6 @@ public:
     inline bool readProcStatm(const QString &dir, Process *process);
     inline bool readProcCmdline(const QString &dir, Process *process);
     inline bool readProcCGroup(const QString &dir, Process *process);
-    inline bool readProcAttr(const QString &dir, Process *process);
     inline bool getNiceness(long pid, Process *process);
     inline bool getIOStatistics(const QString &dir, Process *process);
 
@@ -295,20 +294,6 @@ bool ProcessesLocal::Private::readProcCGroup(const QString &dir, Process *proces
             process->setCGroup(QString::fromLocal8Bit(&mBuffer[3]).trimmed());
             break;
         }
-    }
-    mFile.close();
-    return true;
-}
-
-bool ProcessesLocal::Private::readProcAttr(const QString &dir, Process *process)
-{
-    mFile.setFileName(dir + QStringLiteral("attr/current"));
-    if (!mFile.open(QIODevice::ReadOnly)) {
-        return false; /* process has terminated in the meantime */
-    }
-
-    if (mFile.readLine(mBuffer.data(), mBuffer.size()) > 0) { //-1 indicates an error
-        process->setMACContext(QString::fromLocal8Bit(mBuffer).trimmed());
     }
     mFile.close();
     return true;
@@ -685,9 +670,6 @@ bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
         success = false;
     }
     if (!d->readProcCGroup(dir, process)) {
-        success = false;
-    }
-    if (!d->readProcAttr(dir, process)) {
         success = false;
     }
     if (!d->getNiceness(pid, process)) {
