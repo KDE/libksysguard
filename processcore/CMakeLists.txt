@@ -11,7 +11,6 @@ set(ksysguard_LIB_SRCS
    process.cpp
    process_attribute.cpp
    processes_local_p.cpp processes_local_p.h
-   processes_remote_p.cpp processes_remote_p.h
    processes_base_p.cpp processes_base_p.h
    process_controller.cpp
    process_attribute_model.cpp

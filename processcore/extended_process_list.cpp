@@ -86,7 +86,7 @@ ExtendedProcesses::Private::Private(ExtendedProcesses *_q)
 }
 
 ExtendedProcesses::ExtendedProcesses(QObject *parent)
-    : Processes(QString(), parent)
+    : Processes(parent)
     , d(new Private(this))
 {
     d->loadPlugins();

@@ -45,7 +45,7 @@ class PROCESSCORE_EXPORT Processes : public QObject
     Q_OBJECT
 
 public:
-    Processes(const QString &hostname = QString(), QObject *parent = nullptr);
+    Processes(QObject *parent = nullptr);
     ~Processes() override;
     enum UpdateFlag {
         StandardInformation = 1,
@@ -226,18 +226,6 @@ private:
     bool updateProcess(Process *process, long ppid);
     bool updateProcessInfo(Process *ps);
     bool addProcess(long pid, long ppid);
-
-Q_SIGNALS:
-    /** For a remote machine, we rely on being able to communicate with ksysguardd.
-     *  This must be dealt with by the program including this widget.  It must listen to our
-     *  'runCommand' signal, and run the given command, with the given id. */
-    void runCommand(const QString &command, int id);
-
-public:
-    /** For a remote machine, we rely on being able to communicate with ksysguardd.
-     *  The programming using this must call this slot when an answer is received from ksysguardd,
-     *  in response to a runCommand request.  The id identifies the answer */
-    void answerReceived(int id, const QList<QByteArray> &answer);
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(Processes::UpdateFlags)
 }

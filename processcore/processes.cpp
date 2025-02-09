@@ -9,7 +9,6 @@
 #include "memoryinfo_p.h"
 #include "processes_base_p.h"
 #include "processes_local_p.h"
-#include "processes_remote_p.h"
 
 #include <QByteArray>
 #include <QElapsedTimer>
@@ -32,7 +31,6 @@ public:
     {
         mFakeProcess.setParent(&mFakeProcess);
         mAbstractProcesses = nullptr;
-        mIsLocalHost = true;
         mProcesses.insert(-1, &mFakeProcess);
         mElapsedTimeMilliSeconds = 0;
         mUpdateFlags = {};
@@ -50,7 +48,6 @@ public:
     Process mFakeProcess; ///< A fake process with pid -1 just so that even init points to a parent
 
     AbstractProcesses *mAbstractProcesses; ///< The OS specific code to get the process information
-    bool mIsLocalHost; ///< Whether this is localhost or not
 
     QElapsedTimer mLastUpdated; ///< This is the time we last updated.  Used to calculate cpu usage.
     long mElapsedTimeMilliSeconds; ///< The number of milliseconds  (1000ths of a second) that passed since the last update
@@ -74,20 +71,14 @@ Processes::Private::~Private()
     mAbstractProcesses = nullptr;
 }
 
-Processes::Processes(const QString &host, QObject *parent)
+Processes::Processes(QObject *parent)
     : QObject(parent)
     , d(new Private(this))
 {
     qRegisterMetaType<KSysGuard::Process::Updates>();
 
-    if (host.isEmpty()) {
-        d->mAbstractProcesses = new ProcessesLocal();
-    } else {
-        ProcessesRemote *remote = new ProcessesRemote(host);
-        d->mAbstractProcesses = remote;
-        connect(remote, &ProcessesRemote::runCommand, this, &Processes::runCommand);
-    }
-    d->mIsLocalHost = host.isEmpty();
+    d->mAbstractProcesses = new ProcessesLocal();
+
     connect(d->mAbstractProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
     connect(d->mAbstractProcesses, &AbstractProcesses::processUpdated, this, &Processes::processUpdated);
 }
