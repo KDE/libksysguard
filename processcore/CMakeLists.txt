@@ -11,7 +11,6 @@ set(ksysguard_LIB_SRCS
    process.cpp
    process_attribute.cpp
    processes_local_p.cpp processes_local_p.h
-   processes_base_p.cpp processes_base_p.h
    process_controller.cpp
    process_attribute_model.cpp
    process_data_model.cpp
@@ -86,7 +85,6 @@ if(ENABLE_KAUTH_HELPER)
         helper.cpp helper.h
         process.cpp
         processes_local_p.cpp processes_local_p.h
-        processes_base_p.cpp processes_base_p.h
     )
 
     add_executable(ksysguardprocesslist_helper ${ksysguardprocesslist_helper_srcs})

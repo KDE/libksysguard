@@ -7,7 +7,6 @@
 #include "processes.h"
 
 #include "memoryinfo_p.h"
-#include "processes_base_p.h"
 #include "processes_local_p.h"
 
 #include <QByteArray>
@@ -47,7 +46,7 @@ public:
     QList<Process *> mListProcesses; ///< A list of the processes.  Does not include mFakeProcesses
     Process mFakeProcess; ///< A fake process with pid -1 just so that even init points to a parent
 
-    AbstractProcesses *mAbstractProcesses; ///< The OS specific code to get the process information
+    ProcessesLocal *mAbstractProcesses; ///< The OS specific code to get the process information
 
     QElapsedTimer mLastUpdated; ///< This is the time we last updated.  Used to calculate cpu usage.
     long mElapsedTimeMilliSeconds; ///< The number of milliseconds  (1000ths of a second) that passed since the last update
@@ -79,8 +78,8 @@ Processes::Processes(QObject *parent)
 
     d->mAbstractProcesses = new ProcessesLocal();
 
-    connect(d->mAbstractProcesses, &AbstractProcesses::processesUpdated, this, &Processes::processesUpdated);
-    connect(d->mAbstractProcesses, &AbstractProcesses::processUpdated, this, &Processes::processUpdated);
+    connect(d->mAbstractProcesses, &ProcessesLocal::processesUpdated, this, &Processes::processesUpdated);
+    connect(d->mAbstractProcesses, &ProcessesLocal::processUpdated, this, &Processes::processUpdated);
 }
 
 Processes::~Processes()
