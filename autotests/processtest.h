@@ -22,7 +22,6 @@ private slots:
     void testProcesses();
     void testProcessesTreeStructure();
     void testProcessesModification();
-    void testHistories();
     void testUpdateOrAddProcess();
 
     void testSetScheduler();

@@ -13,7 +13,6 @@ set(ksysguard_LIB_SRCS
    processes_local_p.cpp processes_local_p.h
    processes_remote_p.cpp processes_remote_p.h
    processes_base_p.cpp processes_base_p.h
-   processes_atop_p.cpp processes_atop_p.h atop_p.h
    process_controller.cpp
    process_attribute_model.cpp
    process_data_model.cpp

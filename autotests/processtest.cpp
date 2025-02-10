@@ -225,56 +225,6 @@ void testProcess::testTimeToUpdateAllProcesses()
     delete processController;
 }
 
-void testProcess::testHistories()
-{
-    KSysGuard::Processes *processController = new KSysGuard::Processes();
-    QBENCHMARK_ONCE {
-        if (!processController->isHistoryAvailable()) {
-            qWarning("History was not available");
-            delete processController;
-            return;
-        }
-    }
-    QCOMPARE(processController->historyFileName(), QStringLiteral("/var/log/atop.log"));
-    QList<QPair<QDateTime, uint>> history = processController->historiesAvailable();
-    bool success = processController->setViewingTime(history[0].first);
-    QVERIFY(success);
-    QVERIFY(processController->viewingTime() == history[0].first);
-    success = processController->setViewingTime(history[0].first.addSecs(-1));
-    QVERIFY(success);
-    QVERIFY(processController->viewingTime() == history[0].first);
-    success = processController->setViewingTime(history[0].first.addSecs(-history[0].second - 1));
-    QVERIFY(!success);
-    QVERIFY(processController->viewingTime() == history[0].first);
-    QCOMPARE(processController->historyFileName(), QStringLiteral("/var/log/atop.log"));
-
-    // Test the tree structure
-    processController->updateAllProcesses();
-    const QList<KSysGuard::Process *> processes = processController->getAllProcesses();
-
-    for (KSysGuard::Process *process : processes) {
-        QCOMPARE(countNumChildren(process), process->numChildren());
-
-        for (int i = 0; i < process->children().size(); i++) {
-            QVERIFY(process->children()[i]->parent());
-            QCOMPARE(process->children()[i]->parent(), process);
-        }
-    }
-
-    // test all the pids are unique
-    QSet<long> pids;
-    for (KSysGuard::Process *process : processes) {
-        if (process->pid() == 0)
-            continue;
-        QVERIFY(process->pid() > 0);
-        QVERIFY(!process->name().isEmpty());
-
-        QVERIFY(!pids.contains(process->pid()));
-        pids.insert(process->pid());
-    }
-    delete processController;
-}
-
 void testProcess::testUpdateOrAddProcess()
 {
     KSysGuard::Processes *processController = new KSysGuard::Processes();

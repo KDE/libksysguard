@@ -171,23 +171,6 @@ public:
     /** Update/add process for given pid immediately */
     bool updateOrAddProcess(long pid);
 
-    /** Whether we can get historic process and system data */
-    bool isHistoryAvailable() const;
-
-    /** Stop using historical data and use the most recent up-to-date data */
-    void useCurrentData();
-
-    /** Return a list of end times and intervals for all the available history */
-    QList<QPair<QDateTime, uint>> historiesAvailable() const;
-
-    /** Use historical process data closest to the given date-time.
-     *  Returns false if it is outside the range available or there is a problem
-     *  getting the data. */
-    bool setViewingTime(const QDateTime &when);
-    QDateTime viewingTime() const;
-    bool loadHistoryFile(const QString &filename);
-    QString historyFileName() const;
-
 public Q_SLOTS:
     /** The abstract processes has updated its list of processes */
     void processesUpdated();
