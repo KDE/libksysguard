@@ -6,7 +6,7 @@
 # Jorma Karvonen <karvonen.jorma@gmail.com>, 2010.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011.
-# SPDX-FileCopyrightText: 2019, 2021, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2019, 2021, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 #
 # KDE Finnish translation sprint participants:
