@@ -6,7 +6,7 @@
 # Jorma Karvonen <karvonen.jorma@gmail.com>, 2010.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011.
-# SPDX-FileCopyrightText: 2019, 2021, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2019, 2021, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 #
 # KDE Finnish translation sprint participants:
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2024-10-29 15:01+0200\n"
+"PO-Revision-Date: 2025-01-28 18:14+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -343,25 +343,19 @@ msgstr ""
 "käyttävien prosessien kesken."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Yksityisen muistin käyttö"
+msgstr "Suhteellinen muistinkäyttö"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Suhteellinen"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -371,20 +365,18 @@ msgid ""
 "processes."
 msgstr ""
 "Tämä vastaa suunnilleen prosessin käyttämän fyysisen muistin todellista "
-"määrää. Se on laskettu jakamalla ensin prosessien käyttämän muistin määrä "
-"sitä käyttävien prosessien määrällä ja lisäämällä sitten prosessien "
-"yksityinen muisti."
+"määrää. Se on laskettu jakamalla prosessin jaetun muistin käyttö tätä "
+"muistia käyttävien prosessien määrällä ja lisäämällä siihen prosessin "
+"yksityinen muisti. Joillekin prosesseille tämä arvo ei ole saatavilla."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
-msgstr "Muistin käyttö"
+msgstr "Muistinkäyttö"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Muisti"
@@ -409,24 +401,23 @@ msgstr ""
 "yksityinen muisti."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "GPU-käyttö"
+msgstr "Sivutuksen käyttö"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Sivutus"
 
 #: extended_process_list.cpp:412
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "Tämä on likiarvo prosessin käyttämän sivutusmuistin määrästä."
 
 #: extended_process_list.cpp:416
 #, kde-format
