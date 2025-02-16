@@ -903,7 +903,7 @@ msgstr "El programa del dimoni «%1» ha fallat."
 #: SensorSocketAgent.cpp:89
 #, kde-format
 msgid "Connection to %1 refused"
-msgstr "S'ha rebutjat la connexió a %1"
+msgstr "S'ha rebutjat la connexió amb %1"
 
 #: SensorSocketAgent.cpp:92
 #, kde-format
