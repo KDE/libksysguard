@@ -83,6 +83,14 @@ NetworkPlugin::NetworkPlugin(QObject *parent, const QVariantList &args)
     });
 }
 
+NetworkPlugin::~NetworkPlugin() noexcept
+{
+    if (m_process) {
+        m_process->terminate();
+        m_process->waitForFinished();
+    }
+}
+
 void NetworkPlugin::handleEnabledChanged(bool enabled)
 {
     if (enabled) {
