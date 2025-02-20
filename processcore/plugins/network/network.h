@@ -16,6 +16,7 @@ class NetworkPlugin : public KSysGuard::ProcessDataProvider
     Q_OBJECT
 public:
     NetworkPlugin(QObject *parent, const QVariantList &args);
+    ~NetworkPlugin();
 
     void handleEnabledChanged(bool enabled) override;
 
