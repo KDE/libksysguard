@@ -11,6 +11,7 @@
 #include <QDebug>
 
 #include "cgroup.h"
+#include "process_data_model.h"
 
 using namespace KSysGuard;
 using namespace Qt::StringLiterals;
@@ -21,6 +22,21 @@ ApplicationDataModel::ApplicationDataModel(QObject *parent)
 }
 
 ApplicationDataModel::~ApplicationDataModel() = default;
+
+QVariantMap ApplicationDataModel::applicationOverrides() const
+{
+    return m_applicationOverrides;
+}
+
+void ApplicationDataModel::setApplicationOverrides(const QVariantMap &newOverrides)
+{
+    if (newOverrides == m_applicationOverrides) {
+        return;
+    }
+
+    m_applicationOverrides = newOverrides;
+    Q_EMIT applicationOverridesChanged();
+}
 
 QVariantMap KSysGuard::ApplicationDataModel::cgroupMapping() const
 {
@@ -43,6 +59,26 @@ void KSysGuard::ApplicationDataModel::setCGroupMapping(const QVariantMap &newMap
     m_cgroupMappingCache.clear();
 
     Q_EMIT cgroupMappingChanged();
+}
+
+QVariant ApplicationDataModel::data(const QModelIndex &index, int role) const
+{
+    if (!checkIndex(index, CheckIndexOption::IndexIsValid)) {
+        return QVariant();
+    }
+
+    auto cgroup = reinterpret_cast<CGroup *>(index.internalPointer());
+    auto appId = applicationId(cgroup);
+    if (m_applicationOverrides.contains(appId) && (role == Qt::DisplayRole || role == ProcessDataModel::Value || role == ProcessDataModel::FormattedValue)) {
+        auto attribute = enabledAttributes().at(index.column());
+        auto overrides = m_applicationOverrides.value(appId).toMap();
+
+        if (overrides.contains(attribute)) {
+            return overrides.value(attribute);
+        }
+    }
+
+    return CGroupDataModel::data(index, role);
 }
 
 bool ApplicationDataModel::filterAcceptsCGroup(CGroup *cgroup)
