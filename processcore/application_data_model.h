@@ -26,6 +26,20 @@ public:
     ~ApplicationDataModel() override;
 
     /*!
+     * A map that contains overrides for the value of ProcessDataModel attributes for a certain application ID.
+     *
+     * This is expected to contain application IDs as keys and a map as value
+     * that contains attribute names as keys and the overridden value as value.
+     *
+     * Whenever an attribute is requested of an application matching one of these
+     * application IDs the overridden value for that attribute is returned instead.
+     */
+    Q_PROPERTY(QVariantMap applicationOverrides READ applicationOverrides WRITE setApplicationOverrides NOTIFY applicationOverridesChanged)
+    QVariantMap applicationOverrides() const;
+    void setApplicationOverrides(const QVariantMap &newOverrides);
+    Q_SIGNAL void applicationOverridesChanged();
+
+    /*!
      * A map containing (parts of) CGroup IDs and application IDs to use for those CGroups.
      *
      * Each key in the map is expected to be either a full CGroup ID or a string
@@ -49,6 +63,8 @@ public:
     Q_SIGNAL void cgroupMappingChanged();
 
 protected:
+    QVariant data(const QModelIndex &index, int role) const override;
+
     bool filterAcceptsCGroup(CGroup *cgroup) override;
     void cgroupAdded(CGroup *cgroup) override;
     void cgroupRemoved(CGroup *cgroup) override;
@@ -64,6 +80,7 @@ private:
     QString applicationId(CGroup *cgroup) const;
 
     QHash<QString, Application> m_applications;
+    QVariantMap m_applicationOverrides;
 
     QVariantMap m_cgroupMapping;
     // Helper to speed up lookup of mapped CGroups. Contains the unique values
