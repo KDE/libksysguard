@@ -286,6 +286,11 @@ long long ProcessesLocal::totalPhysicalMemory()
     return Total /= 1024;
 }
 
+long long ProcessesLocal::totalSwapMemory()
+{
+    return 0;
+}
+
 long int KSysGuard::ProcessesLocal::numberProcessorCores()
 {
     int mib[2];
