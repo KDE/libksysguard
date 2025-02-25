@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2025-01-09 00:28+0100\n"
+"PO-Revision-Date: 2025-02-24 17:25+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: \n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: cgroup_data_model.cpp:50
@@ -378,13 +378,7 @@ msgid "Memory"
 msgstr "Geheugen"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It will use the Proportional Memory Usage ifavailable, "
-#| "the Private Memory Usage if that has a value, and the Resident Memory "
-#| "Usage otherwise."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
