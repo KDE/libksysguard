@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 00:42+0000\n"
-"PO-Revision-Date: 2024-06-28 16:51+0200\n"
+"PO-Revision-Date: 2025-01-11 22:49+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -336,25 +336,19 @@ msgstr ""
 "procezoj kiuj uzas ĉi tiun bibliotekon."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Privata Memoruzo"
+msgstr "Proporcia Memoruzo"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Proporcia"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -366,29 +360,23 @@ msgstr ""
 "Ĉi tio estas alproksimiĝo de la reala kvanto de fizika memoro, kiun ĉi tiu "
 "procezo uzas. Ĝi estas kalkulita dividante la komunan memoruzon de la "
 "procezo per la kvanto de procezoj dividantaj tiun memoron, tiam aldonante la "
-"privatan memoron de la procezo."
+"privatan memoron de la procezo. Ĉi tiu valoro eble ne estas disponebla por "
+"certaj procezoj."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Memoruzo"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Memoro"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -397,29 +385,27 @@ msgid ""
 "otherwise."
 msgstr ""
 "Ĉi tio estas alproksimiĝo de la reala kvanto de fizika memoro, kiun ĉi tiu "
-"procezo uzas. Ĝi estas kalkulita dividante la komunan memoruzon de la "
-"procezo per la kvanto de procezoj dividantaj tiun memoron, tiam aldonante la "
-"privatan memoron de la procezo."
+"procezo uzas. Ĝi uzos la Proporcian Memoruzon se havebla, la Privatan "
+"Memoruzon se tio havas valoron, kaj la Loĝantan Memoruzon alie."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "Uzado de GPU"
+msgstr "Uzado de Swap"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Swap"
 
 #: extended_process_list.cpp:412
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "Ĉi tio estas alproksimiĝo de swap-memoro kiun ĉi procezo uzadas."
 
 #: extended_process_list.cpp:416
 #, kde-format
