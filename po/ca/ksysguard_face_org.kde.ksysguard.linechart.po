@@ -99,9 +99,3 @@ msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 segon"
 msgstr[1] "%1 segons"
-
-#~ msgid "Fill Opacity:"
-#~ msgstr "Opacitat de l'emplenament:"
-
-#~ msgid "Amount of History to Keep:"
-#~ msgstr "Quantitat d'historial a mantenir:"
