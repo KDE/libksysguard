@@ -66,9 +66,6 @@ void SensorGroup::retranslate()
     m_sensorNames[u"disk/(?!all).*/usedPercent"_s] = i18n("[Group] Percentage Used");
     m_sensorNames[u"disk/(?!all).*/freePercent"_s] = i18n("[Group] Percentage Free");
 
-    m_segmentNames[QLatin1String("cpu\\d+")] = i18n("[Group] CPU");
-    m_segmentNames[QLatin1String("disk/(?!all).*")] = i18n("[Group] Disk");
-    m_segmentNames[QLatin1String("(?!all).*")] = i18n("[Group]");
     m_sensorNames[u"power/(?!all).*/name"_s] = i18nc("Power group sensor", "[Group] Name");
     m_sensorNames[u"power/(?!all).*/charge"_s] = i18nc("Power group sensor", "[Group] Charge");
     m_sensorNames[u"power/(?!all).*/chargePercentage"_s] = i18nc("Power group sensor", "[Group] Charge Percentage");
@@ -76,6 +73,12 @@ void SensorGroup::retranslate()
     m_sensorNames[u"power/(?!all).*/capacity"_s] = i18nc("Power group sensor", "[Group] Current Capacity");
     m_sensorNames[u"power/(?!all).*/design"_s] = i18nc("Power group sensor", "[Group] Design Capacity");
     m_sensorNames[u"power/(?!all).*/health"_s] = i18nc("Power group sensor", "[Group] Health");
+
+    m_segmentNames[u"cpu/cpu\\d+"_s] = i18n("[Group] CPU");
+    m_segmentNames[u"gpu/gpu\\d+"_s] = i18n("[Group] GPU");
+    m_segmentNames[u"network/(?!all).*"_s] = i18nc("Network group title", "[Group] Network Device");
+    m_segmentNames[u"disk/(?!all).*"_s] = i18n("[Group] Disk");
+    m_segmentNames[u"power/(?!all).*"_s] = i18nc("Power group title", "[Group] Power");
 }
 
 QString SensorGroup::groupRegexForId(QString key /*Intentional copy*/)

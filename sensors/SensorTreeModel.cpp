@@ -317,7 +317,13 @@ QVariant SensorTreeModel::data(const QModelIndex &index, int role) const
             return info.name;
         }
 
-        return d->m_sensorGroup->segmentNameForRegEx(item->segment);
+        QStringList segments;
+        while (item != d->rootItem) {
+            segments.prepend(item->segment);
+            item = item->parent;
+        }
+
+        return d->m_sensorGroup->segmentNameForRegEx(segments.join(u'/'));
         // Only leaf nodes are valid sensors
     } else if (role == SensorId) {
         if (rowCount(index)) {
