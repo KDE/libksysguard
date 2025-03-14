@@ -69,6 +69,13 @@ void SensorGroup::retranslate()
     m_segmentNames[QLatin1String("cpu\\d+")] = i18n("[Group] CPU");
     m_segmentNames[QLatin1String("disk/(?!all).*")] = i18n("[Group] Disk");
     m_segmentNames[QLatin1String("(?!all).*")] = i18n("[Group]");
+    m_sensorNames[u"power/(?!all).*/name"_s] = i18nc("Power group sensor", "[Group] Name");
+    m_sensorNames[u"power/(?!all).*/charge"_s] = i18nc("Power group sensor", "[Group] Charge");
+    m_sensorNames[u"power/(?!all).*/chargePercentage"_s] = i18nc("Power group sensor", "[Group] Charge Percentage");
+    m_sensorNames[u"power/(?!all).*/chargeRate"_s] = i18nc("Power group sensor", "[Group] Charging Rate");
+    m_sensorNames[u"power/(?!all).*/capacity"_s] = i18nc("Power group sensor", "[Group] Current Capacity");
+    m_sensorNames[u"power/(?!all).*/design"_s] = i18nc("Power group sensor", "[Group] Design Capacity");
+    m_sensorNames[u"power/(?!all).*/health"_s] = i18nc("Power group sensor", "[Group] Health");
 }
 
 QString SensorGroup::groupRegexForId(QString key /*Intentional copy*/)
@@ -78,6 +85,7 @@ QString SensorGroup::groupRegexForId(QString key /*Intentional copy*/)
     static const QRegularExpression netExpr(u"network/(?!all).*/(.*)$"_s);
     static const QRegularExpression partitionsExpr(u"partitions/(?!all).*/(.*)$"_s);
     static const QRegularExpression diskExpr(u"disk/(?!all).*/(.*)"_s);
+    static const QRegularExpression powerExpr(u"power/(?!all).*/(.*)"_s);
 
     if (key.contains(cpuExpr)) {
         key.replace(cpuExpr, u"cpu/cpu\\d+/\\1"_s);
@@ -89,6 +97,8 @@ QString SensorGroup::groupRegexForId(QString key /*Intentional copy*/)
         key.replace(partitionsExpr, u"partitions/(?!all).*/\\1"_s);
     } else if (key.contains(diskExpr)) {
         key.replace(diskExpr, u"disk/(?!all).*/\\1"_s);
+    } else if (key.contains(powerExpr)) {
+        key.replace(powerExpr, u"power/(?!all).*/\\1"_s);
     } else {
         return QString{};
     }
