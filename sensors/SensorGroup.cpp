@@ -36,6 +36,11 @@ void SensorGroup::retranslate()
     m_sensorNames[u"cpu/cpu\\d+/temperature"_s] = i18nc("All cores temperature sensors", "[Group] Temperature");
     m_sensorNames[u"cpu/cpu\\d+/name"_s] = i18nc("All cores names", "[Group] Name");
 
+    m_sensorNames[u"gpu/gpu\\d+/usage"_s] = i18nc("GPU group sensor", "[Group] Total Usage");
+    m_sensorNames[u"gpu/gpu\\d+/usedVram"_s] = i18nc("GPU group sensor", "[Group] Video Memory Used");
+    m_sensorNames[u"gpu/gpu\\d+/totalVram"_s] = i18nc("GPU group sensor", "[Group] Total Video Memory");
+    m_sensorNames[u"gpu/gpu\\d+/name"_s] = i18nc("GPU group sensor", "[Group] Name");
+
     m_sensorNames[u"partitions/(?!all).*/usedspace"_s] = i18n("[Group] Used");
     m_sensorNames[u"partitions/(?!all).*/freespace"_s] = i18n("[Group] Available");
     m_sensorNames[u"partitions/(?!all).*/filllevel"_s] = i18n("[Group] Percentage Used");
@@ -69,12 +74,15 @@ void SensorGroup::retranslate()
 QString SensorGroup::groupRegexForId(QString key /*Intentional copy*/)
 {
     static const QRegularExpression cpuExpr(u"cpu/cpu\\d+/(.*)"_s);
+    static const QRegularExpression gpuExpr(u"gpu/gpu\\d+/(.*)"_s);
     static const QRegularExpression netExpr(u"network/(?!all).*/(.*)$"_s);
     static const QRegularExpression partitionsExpr(u"partitions/(?!all).*/(.*)$"_s);
     static const QRegularExpression diskExpr(u"disk/(?!all).*/(.*)"_s);
 
     if (key.contains(cpuExpr)) {
         key.replace(cpuExpr, u"cpu/cpu\\d+/\\1"_s);
+    } else if (key.contains(gpuExpr)) {
+        key.replace(gpuExpr, u"gpu/gpu\\d+/\\1"_s);
     } else if (key.contains(netExpr)) {
         key.replace(netExpr, u"network/(?!all).*/\\1"_s);
     } else if (key.contains(partitionsExpr)) {
