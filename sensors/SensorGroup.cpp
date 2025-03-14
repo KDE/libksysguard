@@ -81,6 +81,14 @@ QString SensorGroup::groupRegexForId(QString key /*Intentional copy*/)
         key.replace(partitionsExpr, u"partitions/(?!all).*/\\1"_s);
     } else if (key.contains(diskExpr)) {
         key.replace(diskExpr, u"disk/(?!all).*/\\1"_s);
+    } else {
+        return QString{};
+    }
+
+    // Only return the result if we actually have a proper name for it.
+    // This avoids us showing unmapped raw regex in the sensor tree model.
+    if (m_sensorNames.contains(key)) {
+        return key;
     }
 
     return QString();
