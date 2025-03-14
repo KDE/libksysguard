@@ -66,28 +66,21 @@ void SensorGroup::retranslate()
     m_segmentNames[QLatin1String("(?!all).*")] = i18n("[Group]");
 }
 
-QString SensorGroup::groupRegexForId(const QString &key)
+QString SensorGroup::groupRegexForId(QString key /*Intentional copy*/)
 {
-    QRegularExpression cpuExpr(QStringLiteral("cpu/cpu\\d+/(.*)"));
-    QRegularExpression netExpr(QStringLiteral("network/(?!all).*/(.*)$"));
-    QRegularExpression partitionsExpr(QStringLiteral("partitions/(?!all).*/(.*)$"));
-    QRegularExpression diskExpr(QStringLiteral("disk/(?!all).*/(.*)"));
+    static const QRegularExpression cpuExpr(u"cpu/cpu\\d+/(.*)"_s);
+    static const QRegularExpression netExpr(u"network/(?!all).*/(.*)$"_s);
+    static const QRegularExpression partitionsExpr(u"partitions/(?!all).*/(.*)$"_s);
+    static const QRegularExpression diskExpr(u"disk/(?!all).*/(.*)"_s);
 
     if (key.contains(cpuExpr)) {
-        QString expr = key;
-        return expr.replace(cpuExpr, QStringLiteral("cpu/cpu\\d+/\\1"));
-
+        key.replace(cpuExpr, u"cpu/cpu\\d+/\\1"_s);
     } else if (key.contains(netExpr)) {
-        QString expr = key;
-        return expr.replace(netExpr, QStringLiteral("network/(?!all).*/\\1"));
-
+        key.replace(netExpr, u"network/(?!all).*/\\1"_s);
     } else if (key.contains(partitionsExpr)) {
-        QString expr = key;
-        return expr.replace(partitionsExpr, QStringLiteral("partitions/(?!all).*/\\1"));
-
+        key.replace(partitionsExpr, u"partitions/(?!all).*/\\1"_s);
     } else if (key.contains(diskExpr)) {
-        QString expr = key;
-        return expr.replace(diskExpr, QStringLiteral("disk/(?!all).*/\\1"));
+        key.replace(diskExpr, u"disk/(?!all).*/\\1"_s);
     }
 
     return QString();

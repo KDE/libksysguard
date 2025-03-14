@@ -19,7 +19,7 @@ public:
 
     void retranslate();
 
-    QString groupRegexForId(const QString &key);
+    QString groupRegexForId(QString key /*Intentional copy*/);
     QString sensorNameForRegEx(const QString &expr);
     QString segmentNameForRegEx(const QString &expr);
 
