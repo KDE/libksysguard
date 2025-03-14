@@ -135,7 +135,7 @@ void SensorTreeModel::Private::addSensor(const QString &sensorId, const SensorIn
             m_groupMatches[sensorIdExpr] = 1;
         }
 
-        if (m_groupMatches[sensorIdExpr] == 2) {
+        if (m_groupMatches[sensorIdExpr] == 1) {
             SensorInfo newInfo;
             newInfo.name = m_sensorGroup->sensorNameForRegEx(sensorIdExpr);
             newInfo.description = info.description;
