@@ -56,7 +56,9 @@ public:
     void run() override
     {
         QFile pidFile(m_path);
-        pidFile.open(QFile::ReadOnly | QIODevice::Text);
+        if (!pidFile.open(QFile::ReadOnly | QIODevice::Text)) {
+            return;
+        }
         QTextStream stream(&pidFile);
 
         QList<pid_t> pids;
