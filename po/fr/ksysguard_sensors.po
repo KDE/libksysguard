@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-14 00:50+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2022-05-11 13:45+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -14,157 +14,251 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 22.04.0\n"
 
-#: SensorGroup.cpp:29
+#: SensorGroup.cpp:31
 #, kde-format
 msgctxt "Total load sensor of all cores"
 msgid "[Group] Total Usage"
 msgstr "[Groupe] Utilisation globale"
 
-#: SensorGroup.cpp:30
+#: SensorGroup.cpp:32
 #, kde-format
 msgctxt "All cores user load sensors"
 msgid "[Group] User Usage"
 msgstr "[Groupe] Utilisation par utilisateur"
 
-#: SensorGroup.cpp:31
+#: SensorGroup.cpp:33
 #, kde-format
 msgctxt "All cores user system sensors"
 msgid "[Group] System Usage"
 msgstr "[Groupe] Utilisation par le système"
 
-#: SensorGroup.cpp:32
+#: SensorGroup.cpp:34
 #, kde-format
 msgctxt "All cores wait load sensors"
 msgid "[Group] Wait Usage"
 msgstr "[Groupe] Utilisation en pause"
 
-#: SensorGroup.cpp:33
+#: SensorGroup.cpp:35
 #, kde-format
 msgctxt "All cores clock frequency sensors"
 msgid "[Group] Clock Frequency"
 msgstr "[Groupe] Fréquence d'horloge"
 
-#: SensorGroup.cpp:34
+#: SensorGroup.cpp:36
 #, kde-format
 msgctxt "All cores temperature sensors"
 msgid "[Group] Temperature"
 msgstr "[Groupe] Température"
 
-#: SensorGroup.cpp:35
+#: SensorGroup.cpp:37
 #, kde-format
 msgctxt "All cores names"
 msgid "[Group] Name"
 msgstr "[Groupe] Nom"
 
-#: SensorGroup.cpp:37
+#: SensorGroup.cpp:39
+#, fuzzy, kde-format
+#| msgctxt "Total load sensor of all cores"
+#| msgid "[Group] Total Usage"
+msgctxt "GPU group sensor"
+msgid "[Group] Total Usage"
+msgstr "[Groupe] Utilisation globale"
+
+#: SensorGroup.cpp:40
+#, fuzzy, kde-format
+#| msgctxt "All cores user load sensors"
+#| msgid "[Group] User Usage"
+msgctxt "GPU group sensor"
+msgid "[Group] Video Memory Used"
+msgstr "[Groupe] Utilisation par utilisateur"
+
+#: SensorGroup.cpp:41
+#, fuzzy, kde-format
+#| msgid "[Group] Total Size"
+msgctxt "GPU group sensor"
+msgid "[Group] Total Video Memory"
+msgstr "[Groupe] Taille globale"
+
+#: SensorGroup.cpp:42
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "GPU group sensor"
+msgid "[Group] Name"
+msgstr "[Groupe] Nom"
+
+#: SensorGroup.cpp:44
 #, kde-format
 msgid "[Group] Used"
 msgstr "[Groupe] Utilisé"
 
-#: SensorGroup.cpp:38
+#: SensorGroup.cpp:45
 #, kde-format
 msgid "[Group] Available"
 msgstr "[Groupe] Disponible"
 
-#: SensorGroup.cpp:39 SensorGroup.cpp:59
+#: SensorGroup.cpp:46 SensorGroup.cpp:66
 #, kde-format
 msgid "[Group] Percentage Used"
 msgstr "[Groupe] Pourcentage utilisé"
 
-#: SensorGroup.cpp:40
+#: SensorGroup.cpp:47
 #, kde-format
 msgid "[Group] Total Size"
 msgstr "[Groupe] Taille globale"
 
-#: SensorGroup.cpp:42
+#: SensorGroup.cpp:49
 #, kde-format
 msgid "[Group] Network Name"
 msgstr "[Groupe] Nom de réseau"
 
-#: SensorGroup.cpp:43
+#: SensorGroup.cpp:50
 #, kde-format
 msgid "[Group] IPv4 Address"
 msgstr "[Groupe] Adresse « IPv4 »"
 
-#: SensorGroup.cpp:44
+#: SensorGroup.cpp:51
 #, kde-format
 msgid "[Group] IPv6 Address"
 msgstr "[Groupe] Adresse « IPv6 »"
 
-#: SensorGroup.cpp:45
+#: SensorGroup.cpp:52
 #, kde-format
 msgid "[Group] Signal Strength"
 msgstr "[Groupe] Force du signal"
 
-#: SensorGroup.cpp:46 SensorGroup.cpp:47
+#: SensorGroup.cpp:53 SensorGroup.cpp:54
 #, kde-format
 msgid "[Group] Download Rate"
 msgstr "[Groupe] Débit en réception"
 
-#: SensorGroup.cpp:48
+#: SensorGroup.cpp:55
 #, kde-format
 msgid "[Group] Total Downloaded"
 msgstr "[Groupe] Taille des téléchargements"
 
-#: SensorGroup.cpp:49 SensorGroup.cpp:50
+#: SensorGroup.cpp:56 SensorGroup.cpp:57
 #, kde-format
 msgid "[Group] Upload Rate"
 msgstr "[Groupe] Débit en émission"
 
-#: SensorGroup.cpp:51
+#: SensorGroup.cpp:58
 #, kde-format
 msgid "[Group] Total Uploaded"
 msgstr "[Groupe] Taille des émissions"
 
-#: SensorGroup.cpp:53
+#: SensorGroup.cpp:60
 #, kde-format
 msgid "[Group] Name"
 msgstr "[Groupe] Nom"
 
-#: SensorGroup.cpp:54
+#: SensorGroup.cpp:61
 #, kde-format
 msgid "[Group] Total Space"
 msgstr "[Groupe] Espace global"
 
-#: SensorGroup.cpp:55
+#: SensorGroup.cpp:62
 #, kde-format
 msgid "[Group] Used Space"
 msgstr "[Groupe] Espace utilisé"
 
-#: SensorGroup.cpp:56
+#: SensorGroup.cpp:63
 #, kde-format
 msgid "[Group] Free Space"
 msgstr "[Groupe] Espace libre"
 
-#: SensorGroup.cpp:57
+#: SensorGroup.cpp:64
 #, kde-format
 msgid "[Group] Read Rate"
 msgstr "[Groupe] Débit en lecture"
 
-#: SensorGroup.cpp:58
+#: SensorGroup.cpp:65
 #, kde-format
 msgid "[Group] Write Rate"
 msgstr "[Groupe] Débit en écriture"
 
-#: SensorGroup.cpp:60
+#: SensorGroup.cpp:67
 #, kde-format
 msgid "[Group] Percentage Free"
 msgstr "[Groupe] Pourcentage libre"
 
-#: SensorGroup.cpp:62
+#: SensorGroup.cpp:69
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "Power group sensor"
+msgid "[Group] Name"
+msgstr "[Groupe] Nom"
+
+#: SensorGroup.cpp:70
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "Power group sensor"
+msgid "[Group] Charge"
+msgstr "[Groupe] Nom"
+
+#: SensorGroup.cpp:71
+#, fuzzy, kde-format
+#| msgid "[Group] Percentage Used"
+msgctxt "Power group sensor"
+msgid "[Group] Charge Percentage"
+msgstr "[Groupe] Pourcentage utilisé"
+
+#: SensorGroup.cpp:72
+#, fuzzy, kde-format
+#| msgid "[Group] Write Rate"
+msgctxt "Power group sensor"
+msgid "[Group] Charging Rate"
+msgstr "[Groupe] Débit en écriture"
+
+#: SensorGroup.cpp:73
+#, fuzzy, kde-format
+#| msgid "[Group] Free Space"
+msgctxt "Power group sensor"
+msgid "[Group] Current Capacity"
+msgstr "[Groupe] Espace libre"
+
+#: SensorGroup.cpp:74
+#, fuzzy, kde-format
+#| msgid "[Group] Used Space"
+msgctxt "Power group sensor"
+msgid "[Group] Design Capacity"
+msgstr "[Groupe] Espace utilisé"
+
+#: SensorGroup.cpp:75
+#, fuzzy, kde-format
+#| msgid "[Group] Read Rate"
+msgctxt "Power group sensor"
+msgid "[Group] Health"
+msgstr "[Groupe] Débit en lecture"
+
+#: SensorGroup.cpp:77
 #, kde-format
 msgid "[Group] CPU"
 msgstr "[Groupe] Processeur"
 
-#: SensorGroup.cpp:63
+#: SensorGroup.cpp:78
+#, fuzzy, kde-format
+#| msgid "[Group] CPU"
+msgid "[Group] GPU"
+msgstr "[Groupe] Processeur"
+
+#: SensorGroup.cpp:79
+#, fuzzy, kde-format
+#| msgid "[Group] Network Name"
+msgctxt "Network group title"
+msgid "[Group] Network Device"
+msgstr "[Groupe] Nom de réseau"
+
+#: SensorGroup.cpp:80
 #, kde-format
 msgid "[Group] Disk"
 msgstr "[Groupe] Disque"
 
-#: SensorGroup.cpp:64
-#, kde-format
-msgid "[Group]"
-msgstr "[Groupe]"
+#: SensorGroup.cpp:81
+#, fuzzy, kde-format
+#| msgid "[Group] CPU"
+msgctxt "Power group title"
+msgid "[Group] Power"
+msgstr "[Groupe] Processeur"
 
 #: SensorTreeModel.cpp:289
 #, kde-format
@@ -176,3 +270,6 @@ msgstr "Navigateur de senseurs"
 msgctxt "Name (unit)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgid "[Group]"
+#~ msgstr "[Groupe]"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_sensors\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-14 00:50+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2023-06-09 16:46+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -16,157 +16,251 @@ msgstr ""
 "X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: SensorGroup.cpp:29
+#: SensorGroup.cpp:31
 #, kde-format
 msgctxt "Total load sensor of all cores"
 msgid "[Group] Total Usage"
 msgstr "[Skupina] Celkové využitie"
 
-#: SensorGroup.cpp:30
+#: SensorGroup.cpp:32
 #, kde-format
 msgctxt "All cores user load sensors"
 msgid "[Group] User Usage"
 msgstr "[Skupina] Využitie používateľom"
 
-#: SensorGroup.cpp:31
+#: SensorGroup.cpp:33
 #, kde-format
 msgctxt "All cores user system sensors"
 msgid "[Group] System Usage"
 msgstr "[Skupina] Systémové využitie"
 
-#: SensorGroup.cpp:32
+#: SensorGroup.cpp:34
 #, kde-format
 msgctxt "All cores wait load sensors"
 msgid "[Group] Wait Usage"
 msgstr "[Skupina] Čakanie na využitie"
 
-#: SensorGroup.cpp:33
+#: SensorGroup.cpp:35
 #, kde-format
 msgctxt "All cores clock frequency sensors"
 msgid "[Group] Clock Frequency"
 msgstr "[Skupina] Taktovacia frekvencia"
 
-#: SensorGroup.cpp:34
+#: SensorGroup.cpp:36
 #, kde-format
 msgctxt "All cores temperature sensors"
 msgid "[Group] Temperature"
 msgstr "[Skupina] Teplota"
 
-#: SensorGroup.cpp:35
+#: SensorGroup.cpp:37
 #, kde-format
 msgctxt "All cores names"
 msgid "[Group] Name"
 msgstr "[Skupina] Názov"
 
-#: SensorGroup.cpp:37
+#: SensorGroup.cpp:39
+#, fuzzy, kde-format
+#| msgctxt "Total load sensor of all cores"
+#| msgid "[Group] Total Usage"
+msgctxt "GPU group sensor"
+msgid "[Group] Total Usage"
+msgstr "[Skupina] Celkové využitie"
+
+#: SensorGroup.cpp:40
+#, fuzzy, kde-format
+#| msgctxt "All cores user load sensors"
+#| msgid "[Group] User Usage"
+msgctxt "GPU group sensor"
+msgid "[Group] Video Memory Used"
+msgstr "[Skupina] Využitie používateľom"
+
+#: SensorGroup.cpp:41
+#, fuzzy, kde-format
+#| msgid "[Group] Total Size"
+msgctxt "GPU group sensor"
+msgid "[Group] Total Video Memory"
+msgstr "[Skupina] Celková veľkosť"
+
+#: SensorGroup.cpp:42
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "GPU group sensor"
+msgid "[Group] Name"
+msgstr "[Skupina] Názov"
+
+#: SensorGroup.cpp:44
 #, kde-format
 msgid "[Group] Used"
 msgstr "[Skupina] Použité"
 
-#: SensorGroup.cpp:38
+#: SensorGroup.cpp:45
 #, kde-format
 msgid "[Group] Available"
 msgstr "[Skupina] Dostupné"
 
-#: SensorGroup.cpp:39 SensorGroup.cpp:59
+#: SensorGroup.cpp:46 SensorGroup.cpp:66
 #, kde-format
 msgid "[Group] Percentage Used"
 msgstr "[Skupina] Percentuálne využitie"
 
-#: SensorGroup.cpp:40
+#: SensorGroup.cpp:47
 #, kde-format
 msgid "[Group] Total Size"
 msgstr "[Skupina] Celková veľkosť"
 
-#: SensorGroup.cpp:42
+#: SensorGroup.cpp:49
 #, kde-format
 msgid "[Group] Network Name"
 msgstr "[Skupina] Názov siete"
 
-#: SensorGroup.cpp:43
+#: SensorGroup.cpp:50
 #, kde-format
 msgid "[Group] IPv4 Address"
 msgstr "[Skupina] Adresa IPv4"
 
-#: SensorGroup.cpp:44
+#: SensorGroup.cpp:51
 #, kde-format
 msgid "[Group] IPv6 Address"
 msgstr "[Skupina] Adresa IPv6"
 
-#: SensorGroup.cpp:45
+#: SensorGroup.cpp:52
 #, kde-format
 msgid "[Group] Signal Strength"
 msgstr "[Skupina] Sila signálu"
 
-#: SensorGroup.cpp:46 SensorGroup.cpp:47
+#: SensorGroup.cpp:53 SensorGroup.cpp:54
 #, kde-format
 msgid "[Group] Download Rate"
 msgstr "[Skupina] Rýchlosť sťahovania"
 
-#: SensorGroup.cpp:48
+#: SensorGroup.cpp:55
 #, kde-format
 msgid "[Group] Total Downloaded"
 msgstr "[Skupina] Celkovo stiahnuté"
 
-#: SensorGroup.cpp:49 SensorGroup.cpp:50
+#: SensorGroup.cpp:56 SensorGroup.cpp:57
 #, kde-format
 msgid "[Group] Upload Rate"
 msgstr "[Skupina] Rýchlosť odosielania"
 
-#: SensorGroup.cpp:51
+#: SensorGroup.cpp:58
 #, kde-format
 msgid "[Group] Total Uploaded"
 msgstr "[Skupina] Celkovo odoslané"
 
-#: SensorGroup.cpp:53
+#: SensorGroup.cpp:60
 #, kde-format
 msgid "[Group] Name"
 msgstr "[Skupina] Názov"
 
-#: SensorGroup.cpp:54
+#: SensorGroup.cpp:61
 #, kde-format
 msgid "[Group] Total Space"
 msgstr "[Skupina] Celkové miesto"
 
-#: SensorGroup.cpp:55
+#: SensorGroup.cpp:62
 #, kde-format
 msgid "[Group] Used Space"
 msgstr "[Skupina] Použité miesto"
 
-#: SensorGroup.cpp:56
+#: SensorGroup.cpp:63
 #, kde-format
 msgid "[Group] Free Space"
 msgstr "[Skupina] Voľné miesto"
 
-#: SensorGroup.cpp:57
+#: SensorGroup.cpp:64
 #, kde-format
 msgid "[Group] Read Rate"
 msgstr "[Skupina] Rýchlosť čítania"
 
-#: SensorGroup.cpp:58
+#: SensorGroup.cpp:65
 #, kde-format
 msgid "[Group] Write Rate"
 msgstr "[Skupina] Rýchlosť zápisu"
 
-#: SensorGroup.cpp:60
+#: SensorGroup.cpp:67
 #, kde-format
 msgid "[Group] Percentage Free"
 msgstr "[Skupina] Percentuálne voľné"
 
-#: SensorGroup.cpp:62
+#: SensorGroup.cpp:69
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "Power group sensor"
+msgid "[Group] Name"
+msgstr "[Skupina] Názov"
+
+#: SensorGroup.cpp:70
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "Power group sensor"
+msgid "[Group] Charge"
+msgstr "[Skupina] Názov"
+
+#: SensorGroup.cpp:71
+#, fuzzy, kde-format
+#| msgid "[Group] Percentage Used"
+msgctxt "Power group sensor"
+msgid "[Group] Charge Percentage"
+msgstr "[Skupina] Percentuálne využitie"
+
+#: SensorGroup.cpp:72
+#, fuzzy, kde-format
+#| msgid "[Group] Write Rate"
+msgctxt "Power group sensor"
+msgid "[Group] Charging Rate"
+msgstr "[Skupina] Rýchlosť zápisu"
+
+#: SensorGroup.cpp:73
+#, fuzzy, kde-format
+#| msgid "[Group] Free Space"
+msgctxt "Power group sensor"
+msgid "[Group] Current Capacity"
+msgstr "[Skupina] Voľné miesto"
+
+#: SensorGroup.cpp:74
+#, fuzzy, kde-format
+#| msgid "[Group] Used Space"
+msgctxt "Power group sensor"
+msgid "[Group] Design Capacity"
+msgstr "[Skupina] Použité miesto"
+
+#: SensorGroup.cpp:75
+#, fuzzy, kde-format
+#| msgid "[Group] Read Rate"
+msgctxt "Power group sensor"
+msgid "[Group] Health"
+msgstr "[Skupina] Rýchlosť čítania"
+
+#: SensorGroup.cpp:77
 #, kde-format
 msgid "[Group] CPU"
 msgstr "[Skupina] CPU"
 
-#: SensorGroup.cpp:63
+#: SensorGroup.cpp:78
+#, fuzzy, kde-format
+#| msgid "[Group] CPU"
+msgid "[Group] GPU"
+msgstr "[Skupina] CPU"
+
+#: SensorGroup.cpp:79
+#, fuzzy, kde-format
+#| msgid "[Group] Network Name"
+msgctxt "Network group title"
+msgid "[Group] Network Device"
+msgstr "[Skupina] Názov siete"
+
+#: SensorGroup.cpp:80
 #, kde-format
 msgid "[Group] Disk"
 msgstr "[Group] Disk"
 
-#: SensorGroup.cpp:64
-#, kde-format
-msgid "[Group]"
-msgstr "[Skupina]"
+#: SensorGroup.cpp:81
+#, fuzzy, kde-format
+#| msgid "[Group] CPU"
+msgctxt "Power group title"
+msgid "[Group] Power"
+msgstr "[Skupina] CPU"
 
 #: SensorTreeModel.cpp:289
 #, kde-format
@@ -178,3 +272,6 @@ msgstr "Prehliadač senzorov"
 msgctxt "Name (unit)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgid "[Group]"
+#~ msgstr "[Skupina]"

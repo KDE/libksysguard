@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-14 00:50+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2024-09-26 12:20+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,157 +18,251 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: SensorGroup.cpp:29
+#: SensorGroup.cpp:31
 #, kde-format
 msgctxt "Total load sensor of all cores"
 msgid "[Group] Total Usage"
 msgstr "[الاستخدام الكلي [المجموعة]"
 
-#: SensorGroup.cpp:30
+#: SensorGroup.cpp:32
 #, kde-format
 msgctxt "All cores user load sensors"
 msgid "[Group] User Usage"
 msgstr "استخدام المستخدم [المجموعة]"
 
-#: SensorGroup.cpp:31
+#: SensorGroup.cpp:33
 #, kde-format
 msgctxt "All cores user system sensors"
 msgid "[Group] System Usage"
 msgstr "استخدام النظام [المجموعة]"
 
-#: SensorGroup.cpp:32
+#: SensorGroup.cpp:34
 #, kde-format
 msgctxt "All cores wait load sensors"
 msgid "[Group] Wait Usage"
 msgstr "استخدام الانتظام [المجموعة]"
 
-#: SensorGroup.cpp:33
+#: SensorGroup.cpp:35
 #, kde-format
 msgctxt "All cores clock frequency sensors"
 msgid "[Group] Clock Frequency"
 msgstr "التردّد الساعيّ [المجموعة]"
 
-#: SensorGroup.cpp:34
+#: SensorGroup.cpp:36
 #, kde-format
 msgctxt "All cores temperature sensors"
 msgid "[Group] Temperature"
 msgstr "الحرارة [المجموعة]"
 
-#: SensorGroup.cpp:35
+#: SensorGroup.cpp:37
 #, kde-format
 msgctxt "All cores names"
 msgid "[Group] Name"
 msgstr "اسم [المجموعة]"
 
-#: SensorGroup.cpp:37
+#: SensorGroup.cpp:39
+#, fuzzy, kde-format
+#| msgctxt "Total load sensor of all cores"
+#| msgid "[Group] Total Usage"
+msgctxt "GPU group sensor"
+msgid "[Group] Total Usage"
+msgstr "[الاستخدام الكلي [المجموعة]"
+
+#: SensorGroup.cpp:40
+#, fuzzy, kde-format
+#| msgctxt "All cores user load sensors"
+#| msgid "[Group] User Usage"
+msgctxt "GPU group sensor"
+msgid "[Group] Video Memory Used"
+msgstr "استخدام المستخدم [المجموعة]"
+
+#: SensorGroup.cpp:41
+#, fuzzy, kde-format
+#| msgid "[Group] Total Size"
+msgctxt "GPU group sensor"
+msgid "[Group] Total Video Memory"
+msgstr "الحجم الكليّ [المجموعة]"
+
+#: SensorGroup.cpp:42
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "GPU group sensor"
+msgid "[Group] Name"
+msgstr "اسم [المجموعة]"
+
+#: SensorGroup.cpp:44
 #, kde-format
 msgid "[Group] Used"
 msgstr "المستخدم [المجموعة]"
 
-#: SensorGroup.cpp:38
+#: SensorGroup.cpp:45
 #, kde-format
 msgid "[Group] Available"
 msgstr "المتوفر [المجموعة]"
 
-#: SensorGroup.cpp:39 SensorGroup.cpp:59
+#: SensorGroup.cpp:46 SensorGroup.cpp:66
 #, kde-format
 msgid "[Group] Percentage Used"
 msgstr "نسبة المستخدم [المجموعة]"
 
-#: SensorGroup.cpp:40
+#: SensorGroup.cpp:47
 #, kde-format
 msgid "[Group] Total Size"
 msgstr "الحجم الكليّ [المجموعة]"
 
-#: SensorGroup.cpp:42
+#: SensorGroup.cpp:49
 #, kde-format
 msgid "[Group] Network Name"
 msgstr "اسم الشبكة [المجموعة]"
 
-#: SensorGroup.cpp:43
+#: SensorGroup.cpp:50
 #, kde-format
 msgid "[Group] IPv4 Address"
 msgstr "عنوان IPv4 [المجموعة]"
 
-#: SensorGroup.cpp:44
+#: SensorGroup.cpp:51
 #, kde-format
 msgid "[Group] IPv6 Address"
 msgstr "عنوان IPv6 [المجموعة]"
 
-#: SensorGroup.cpp:45
+#: SensorGroup.cpp:52
 #, kde-format
 msgid "[Group] Signal Strength"
 msgstr "قوّة الإشارة [المجموعة]"
 
-#: SensorGroup.cpp:46 SensorGroup.cpp:47
+#: SensorGroup.cpp:53 SensorGroup.cpp:54
 #, kde-format
 msgid "[Group] Download Rate"
 msgstr "معدّل التنزيل [المجموعة]"
 
-#: SensorGroup.cpp:48
+#: SensorGroup.cpp:55
 #, kde-format
 msgid "[Group] Total Downloaded"
 msgstr "مجموع المنزل [المجموعة]"
 
-#: SensorGroup.cpp:49 SensorGroup.cpp:50
+#: SensorGroup.cpp:56 SensorGroup.cpp:57
 #, kde-format
 msgid "[Group] Upload Rate"
 msgstr "معدل الرفع [المجموعة]"
 
-#: SensorGroup.cpp:51
+#: SensorGroup.cpp:58
 #, kde-format
 msgid "[Group] Total Uploaded"
 msgstr "مجموع المرفوع [المجموعة]"
 
-#: SensorGroup.cpp:53
+#: SensorGroup.cpp:60
 #, kde-format
 msgid "[Group] Name"
 msgstr "اسم [المجموعة]"
 
-#: SensorGroup.cpp:54
+#: SensorGroup.cpp:61
 #, kde-format
 msgid "[Group] Total Space"
 msgstr "مجموع المساحة [المجموعة]"
 
-#: SensorGroup.cpp:55
+#: SensorGroup.cpp:62
 #, kde-format
 msgid "[Group] Used Space"
 msgstr "المساحة المُستخدَمة [المجموعة]"
 
-#: SensorGroup.cpp:56
+#: SensorGroup.cpp:63
 #, kde-format
 msgid "[Group] Free Space"
 msgstr "المساحة الحرّة [المجموعة]"
 
-#: SensorGroup.cpp:57
+#: SensorGroup.cpp:64
 #, kde-format
 msgid "[Group] Read Rate"
 msgstr "معدل القراءة [المجموعة]"
 
-#: SensorGroup.cpp:58
+#: SensorGroup.cpp:65
 #, kde-format
 msgid "[Group] Write Rate"
 msgstr "معدل الكتابة [المجموعة]"
 
-#: SensorGroup.cpp:60
+#: SensorGroup.cpp:67
 #, kde-format
 msgid "[Group] Percentage Free"
 msgstr "نسبة المتبقي [المجموعة]"
 
-#: SensorGroup.cpp:62
+#: SensorGroup.cpp:69
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "Power group sensor"
+msgid "[Group] Name"
+msgstr "اسم [المجموعة]"
+
+#: SensorGroup.cpp:70
+#, fuzzy, kde-format
+#| msgid "[Group] Name"
+msgctxt "Power group sensor"
+msgid "[Group] Charge"
+msgstr "اسم [المجموعة]"
+
+#: SensorGroup.cpp:71
+#, fuzzy, kde-format
+#| msgid "[Group] Percentage Used"
+msgctxt "Power group sensor"
+msgid "[Group] Charge Percentage"
+msgstr "نسبة المستخدم [المجموعة]"
+
+#: SensorGroup.cpp:72
+#, fuzzy, kde-format
+#| msgid "[Group] Write Rate"
+msgctxt "Power group sensor"
+msgid "[Group] Charging Rate"
+msgstr "معدل الكتابة [المجموعة]"
+
+#: SensorGroup.cpp:73
+#, fuzzy, kde-format
+#| msgid "[Group] Free Space"
+msgctxt "Power group sensor"
+msgid "[Group] Current Capacity"
+msgstr "المساحة الحرّة [المجموعة]"
+
+#: SensorGroup.cpp:74
+#, fuzzy, kde-format
+#| msgid "[Group] Used Space"
+msgctxt "Power group sensor"
+msgid "[Group] Design Capacity"
+msgstr "المساحة المُستخدَمة [المجموعة]"
+
+#: SensorGroup.cpp:75
+#, fuzzy, kde-format
+#| msgid "[Group] Read Rate"
+msgctxt "Power group sensor"
+msgid "[Group] Health"
+msgstr "معدل القراءة [المجموعة]"
+
+#: SensorGroup.cpp:77
 #, kde-format
 msgid "[Group] CPU"
 msgstr "معالج [المجموعة]"
 
-#: SensorGroup.cpp:63
+#: SensorGroup.cpp:78
+#, fuzzy, kde-format
+#| msgid "[Group] CPU"
+msgid "[Group] GPU"
+msgstr "معالج [المجموعة]"
+
+#: SensorGroup.cpp:79
+#, fuzzy, kde-format
+#| msgid "[Group] Network Name"
+msgctxt "Network group title"
+msgid "[Group] Network Device"
+msgstr "اسم الشبكة [المجموعة]"
+
+#: SensorGroup.cpp:80
 #, kde-format
 msgid "[Group] Disk"
 msgstr "القرص [المجموعة]"
 
-#: SensorGroup.cpp:64
-#, kde-format
-msgid "[Group]"
-msgstr "[المجموعة]"
+#: SensorGroup.cpp:81
+#, fuzzy, kde-format
+#| msgid "[Group] CPU"
+msgctxt "Power group title"
+msgid "[Group] Power"
+msgstr "معالج [المجموعة]"
 
 #: SensorTreeModel.cpp:289
 #, kde-format
@@ -180,3 +274,6 @@ msgstr "متصفح المجسّات"
 msgctxt "Name (unit)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgid "[Group]"
+#~ msgstr "[المجموعة]"
