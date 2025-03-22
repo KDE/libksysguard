@@ -1,15 +1,15 @@
 # Translation of ksysguard_sensors.po to Catalan
-# Copyright (C) 2022 This_file_is_part_of_KDE
+# Copyright (C) 2022-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-21 00:43+0000\n"
-"PO-Revision-Date: 2022-05-09 13:15+0200\n"
+"PO-Revision-Date: 2025-03-21 10:25+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: SensorGroup.cpp:31
 #, kde-format
@@ -62,31 +62,25 @@ msgid "[Group] Name"
 msgstr "[Grup] Nom"
 
 #: SensorGroup.cpp:39
-#, fuzzy, kde-format
-#| msgctxt "Total load sensor of all cores"
-#| msgid "[Group] Total Usage"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Total Usage"
 msgstr "[Grup] Ús total"
 
 #: SensorGroup.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "All cores user load sensors"
-#| msgid "[Group] User Usage"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Video Memory Used"
-msgstr "[Grup] Ús de l'usuari"
+msgstr "[Grup] Memòria usada de vídeo"
 
 #: SensorGroup.cpp:41
-#, fuzzy, kde-format
-#| msgid "[Group] Total Size"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Total Video Memory"
-msgstr "[Grup] Mida total"
+msgstr "[Grup] Memòria total de vídeo"
 
 #: SensorGroup.cpp:42
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Name"
 msgstr "[Grup] Nom"
@@ -187,53 +181,46 @@ msgid "[Group] Percentage Free"
 msgstr "[Grup] Percentatge lliure"
 
 #: SensorGroup.cpp:69
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Name"
 msgstr "[Grup] Nom"
 
 #: SensorGroup.cpp:70
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge"
-msgstr "[Grup] Nom"
+msgstr "[Grup] Càrrega"
 
 #: SensorGroup.cpp:71
-#, fuzzy, kde-format
-#| msgid "[Group] Percentage Used"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge Percentage"
-msgstr "[Grup] Percentatge d'ús"
+msgstr "[Grup] Percentatge de càrrega"
 
 #: SensorGroup.cpp:72
-#, fuzzy, kde-format
-#| msgid "[Group] Write Rate"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charging Rate"
-msgstr "[Grup] Velocitat d'escriptura"
+msgstr "[Grup] Velocitat de càrrega"
 
 #: SensorGroup.cpp:73
-#, fuzzy, kde-format
-#| msgid "[Group] Free Space"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Current Capacity"
-msgstr "[Grup] Espai lliure"
+msgstr "[Grup] Capacitat actual"
 
 #: SensorGroup.cpp:74
-#, fuzzy, kde-format
-#| msgid "[Group] Used Space"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Design Capacity"
-msgstr "[Grup] Espai usat"
+msgstr "[Grup] Capacitat segons disseny"
 
 #: SensorGroup.cpp:75
-#, fuzzy, kde-format
-#| msgid "[Group] Read Rate"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Health"
-msgstr "[Grup] Velocitat de lectura"
+msgstr "[Grup] Estat"
 
 #: SensorGroup.cpp:77
 #, kde-format
@@ -241,17 +228,15 @@ msgid "[Group] CPU"
 msgstr "[Grup] CPU"
 
 #: SensorGroup.cpp:78
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgid "[Group] GPU"
-msgstr "[Grup] CPU"
+msgstr "[Grup] GPU"
 
 #: SensorGroup.cpp:79
-#, fuzzy, kde-format
-#| msgid "[Group] Network Name"
+#, kde-format
 msgctxt "Network group title"
 msgid "[Group] Network Device"
-msgstr "[Grup] Nom de la xarxa"
+msgstr "[Grup] Dispositiu de xarxa"
 
 #: SensorGroup.cpp:80
 #, kde-format
@@ -259,11 +244,10 @@ msgid "[Group] Disk"
 msgstr "[Grup] Disc"
 
 #: SensorGroup.cpp:81
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgctxt "Power group title"
 msgid "[Group] Power"
-msgstr "[Grup] CPU"
+msgstr "[Grup] Energia"
 
 #: SensorTreeModel.cpp:289
 #, kde-format
