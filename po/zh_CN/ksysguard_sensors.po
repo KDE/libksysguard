@@ -69,13 +69,13 @@ msgstr "[分组] 总使用率"
 #, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Video Memory Used"
-msgstr ""
+msgstr "[分组] 已用显存"
 
 #: SensorGroup.cpp:41
 #, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Total Video Memory"
-msgstr ""
+msgstr "[分组] 总显存"
 
 #: SensorGroup.cpp:42
 #, kde-format
@@ -188,37 +188,37 @@ msgstr "[分组] 名称"
 #, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge"
-msgstr ""
+msgstr "[分组] 电量"
 
 #: SensorGroup.cpp:71
 #, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge Percentage"
-msgstr ""
+msgstr "[分组] 电量百分比"
 
 #: SensorGroup.cpp:72
 #, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charging Rate"
-msgstr ""
+msgstr "[分组] 充电速率"
 
 #: SensorGroup.cpp:73
 #, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Current Capacity"
-msgstr ""
+msgstr "[分组] 当前容量"
 
 #: SensorGroup.cpp:74
 #, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Design Capacity"
-msgstr ""
+msgstr "[分组] 设计容量"
 
 #: SensorGroup.cpp:75
 #, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Health"
-msgstr ""
+msgstr "[分组] 健康水平"
 
 #: SensorGroup.cpp:77
 #, kde-format
@@ -228,13 +228,13 @@ msgstr "[分组] CPU"
 #: SensorGroup.cpp:78
 #, kde-format
 msgid "[Group] GPU"
-msgstr ""
+msgstr "[分组] CPU"
 
 #: SensorGroup.cpp:79
 #, kde-format
 msgctxt "Network group title"
 msgid "[Group] Network Device"
-msgstr ""
+msgstr "[分组] 网络设备"
 
 #: SensorGroup.cpp:80
 #, kde-format
@@ -245,7 +245,7 @@ msgstr "[分组] 磁盘"
 #, kde-format
 msgctxt "Power group title"
 msgid "[Group] Power"
-msgstr ""
+msgstr "[分组] 电源"
 
 #: SensorTreeModel.cpp:289
 #, kde-format
