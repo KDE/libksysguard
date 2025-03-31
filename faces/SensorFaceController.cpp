@@ -1064,6 +1064,11 @@ void SensorFaceController::setShouldSync(bool sync)
     }
 }
 
+bool KSysGuard::SensorFaceController::forceSaveOnDestroy() const
+{
+    return d->faceProperties.readEntry(QStringLiteral("ForceSaveOnDestroy"), false);
+}
+
 void SensorFaceController::reloadFaceConfiguration()
 {
     const QString xmlPath = d->facePackage.filePath("mainconfigxml");

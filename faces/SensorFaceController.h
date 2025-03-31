@@ -271,6 +271,8 @@ public:
      */
     void setShouldSync(bool sync);
 
+    bool forceSaveOnDestroy() const;
+
     /**
      * Reload only the face configuration.
      *
