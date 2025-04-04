@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:42+0000\n"
-"PO-Revision-Date: 2025-01-28 18:14+0200\n"
+"PO-Revision-Date: 2025-03-23 14:21+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -382,12 +382,7 @@ msgid "Memory"
 msgstr "Muisti"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -396,9 +391,8 @@ msgid ""
 "otherwise."
 msgstr ""
 "Tämä vastaa suunnilleen prosessin käyttämän fyysisen muistin todellista "
-"määrää. Se on laskettu jakamalla ensin prosessien käyttämän muistin määrä "
-"sitä käyttävien prosessien määrällä ja lisäämällä sitten prosessien "
-"yksityinen muisti."
+"määrää. Luku edustaa joko suhteellista muistinkäyttöä, jos se on saatavilla, "
+"yksityistä muistinkäyttöä, jos sillä on arvo, tai pysyvää muistinkäyttöä."
 
 #: extended_process_list.cpp:407
 #, kde-format
