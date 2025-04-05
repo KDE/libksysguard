@@ -63,30 +63,24 @@ msgstr "[Gruppe] Namn"
 
 #: SensorGroup.cpp:39
 #, fuzzy, kde-format
-#| msgctxt "Total load sensor of all cores"
-#| msgid "[Group] Total Usage"
 msgctxt "GPU group sensor"
 msgid "[Group] Total Usage"
 msgstr "[Gruppe] Total bruk"
 
 #: SensorGroup.cpp:40
 #, fuzzy, kde-format
-#| msgctxt "All cores user load sensors"
-#| msgid "[Group] User Usage"
 msgctxt "GPU group sensor"
 msgid "[Group] Video Memory Used"
 msgstr "[Gruppe] Brukarbruk"
 
 #: SensorGroup.cpp:41
 #, fuzzy, kde-format
-#| msgid "[Group] Total Size"
 msgctxt "GPU group sensor"
 msgid "[Group] Total Video Memory"
 msgstr "[Gruppe] Storleik i alt"
 
 #: SensorGroup.cpp:42
 #, fuzzy, kde-format
-#| msgid "[Group] Name"
 msgctxt "GPU group sensor"
 msgid "[Group] Name"
 msgstr "[Gruppe] Namn"
@@ -188,49 +182,42 @@ msgstr "[Gruppe] Prosent ledig"
 
 #: SensorGroup.cpp:69
 #, fuzzy, kde-format
-#| msgid "[Group] Name"
 msgctxt "Power group sensor"
 msgid "[Group] Name"
 msgstr "[Gruppe] Namn"
 
 #: SensorGroup.cpp:70
 #, fuzzy, kde-format
-#| msgid "[Group] Name"
 msgctxt "Power group sensor"
 msgid "[Group] Charge"
 msgstr "[Gruppe] Namn"
 
 #: SensorGroup.cpp:71
 #, fuzzy, kde-format
-#| msgid "[Group] Percentage Used"
 msgctxt "Power group sensor"
 msgid "[Group] Charge Percentage"
 msgstr "[Gruppe] Prosent brukt"
 
 #: SensorGroup.cpp:72
 #, fuzzy, kde-format
-#| msgid "[Group] Write Rate"
 msgctxt "Power group sensor"
 msgid "[Group] Charging Rate"
 msgstr "[Gruppe] Skrivefart"
 
 #: SensorGroup.cpp:73
 #, fuzzy, kde-format
-#| msgid "[Group] Free Space"
 msgctxt "Power group sensor"
 msgid "[Group] Current Capacity"
 msgstr "[Gruppe] Ledig plass"
 
 #: SensorGroup.cpp:74
 #, fuzzy, kde-format
-#| msgid "[Group] Used Space"
 msgctxt "Power group sensor"
 msgid "[Group] Design Capacity"
 msgstr "[Gruppe] Brukt plass"
 
 #: SensorGroup.cpp:75
 #, fuzzy, kde-format
-#| msgid "[Group] Read Rate"
 msgctxt "Power group sensor"
 msgid "[Group] Health"
 msgstr "[Gruppe] Lesefart"
@@ -242,13 +229,11 @@ msgstr "[Gruppe] Prosessor"
 
 #: SensorGroup.cpp:78
 #, fuzzy, kde-format
-#| msgid "[Group] CPU"
 msgid "[Group] GPU"
 msgstr "[Gruppe] Prosessor"
 
 #: SensorGroup.cpp:79
 #, fuzzy, kde-format
-#| msgid "[Group] Network Name"
 msgctxt "Network group title"
 msgid "[Group] Network Device"
 msgstr "[Gruppe] Nettverksnamn"
@@ -260,7 +245,6 @@ msgstr "[Gruppe] Disk"
 
 #: SensorGroup.cpp:81
 #, fuzzy, kde-format
-#| msgid "[Group] CPU"
 msgctxt "Power group title"
 msgid "[Group] Power"
 msgstr "[Gruppe] Prosessor"

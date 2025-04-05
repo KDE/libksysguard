@@ -337,7 +337,6 @@ msgstr ""
 
 #: extended_process_list.cpp:375
 #, fuzzy, kde-format
-#| msgid "Private Memory Usage"
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
 msgstr "Privat minnebruk"
@@ -350,11 +349,6 @@ msgstr ""
 
 #: extended_process_list.cpp:385
 #, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -370,25 +364,18 @@ msgstr ""
 
 #: extended_process_list.cpp:392
 #, fuzzy, kde-format
-#| msgid "Memory Usage"
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Minnebruk"
 
 #: extended_process_list.cpp:395
 #, fuzzy, kde-format
-#| msgid "Memory"
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Minne"
 
 #: extended_process_list.cpp:402
 #, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -403,7 +390,6 @@ msgstr ""
 
 #: extended_process_list.cpp:407
 #, fuzzy, kde-format
-#| msgid "GPU Usage"
 msgctxt "@title:column"
 msgid "Swap Usage"
 msgstr "Grafikkprosessor-bruk"
