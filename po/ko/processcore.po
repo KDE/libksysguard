@@ -1,14 +1,14 @@
 # Translation of processcore to Korean.
 # Copyright (C) 2007 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdebase package.
-# SPDX-FileCopyrightText: 2007, 2010, 2019, 2020, 2021, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2007, 2010, 2019, 2020, 2021, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:42+0000\n"
-"PO-Revision-Date: 2024-08-20 00:30+0200\n"
+"PO-Revision-Date: 2025-04-06 23:36+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -333,25 +333,19 @@ msgstr ""
 "일치합니다. 이 메모리는 이 라이브러리를 사용하는 모든 프로세스가 공유합니다."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "개별 메모리 사용량"
+msgstr "비례 메모리 사용량"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "비례"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -362,29 +356,23 @@ msgid ""
 msgstr ""
 "이 프로세스가 사용하는 실제 물리적 메모리의 크기와 개략적으로 일치합니다. 프"
 "로세스의 공유 메모리 크기를 해당 메모리를 공유하는 프로세스 개수로 나눈 값과 "
-"프로세스의 개별 메모리의 합입니다."
+"프로세스의 개별 메모리의 합입니다. 일부 프로세스에서는 이 값을 사용할 수 없습"
+"니다."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "메모리 사용량"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "메모리"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -392,29 +380,28 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"이 프로세스가 사용하는 실제 물리적 메모리의 크기와 개략적으로 일치합니다. 프"
-"로세스의 공유 메모리 크기를 해당 메모리를 공유하는 프로세스 개수로 나눈 값과 "
-"프로세스의 개별 메모리의 합입니다."
+"이 프로세스가 사용하는 실제 물리적 메모리의 크기와 개략적으로 일치합니다. 사"
+"용 가능한 경우 비례 메모리 사용량이며, 독점 메모리 사용량이 있으면 그 값을 취"
+"하며, 없으면 상주 메모리 사용량입니다."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "GPU 사용량"
+msgstr "스왑 사용량"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "스왑"
 
 #: extended_process_list.cpp:412
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "이 프로세스가 사용하는 스왑 영역 크기와 개략적으로 일치합니다."
 
 #: extended_process_list.cpp:416
 #, kde-format
