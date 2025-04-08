@@ -5,13 +5,13 @@
 # Alexander Potashev <aspotashev@gmail.com>, 2010, 2019.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2020, 2021.
 # Мария Шикунова <translation-team@basealt.ru>, 2022.
-# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:42+0000\n"
-"PO-Revision-Date: 2024-09-18 14:33+0300\n"
+"PO-Revision-Date: 2025-04-07 16:24+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -306,7 +306,7 @@ msgstr ""
 #: extended_process_list.cpp:343
 #, kde-format
 msgid "Private Memory Usage"
-msgstr "Частное использование памяти"
+msgstr "Использование частной памяти"
 
 #: extended_process_list.cpp:345
 #, kde-format
@@ -322,7 +322,7 @@ msgid ""
 msgstr ""
 "Это объём физической памяти, которую процесс использует для своих нужд, "
 "фактически это приблизительное значение частного потребления памяти "
-"процессом. Сюда не входят участки памяти, находящиеся в файле подкачки, а "
+"процессом. Сюда не входят участки памяти, находящиеся в области подкачки, а "
 "также размер кода разделяемых библиотек."
 
 #: extended_process_list.cpp:356
@@ -333,7 +333,7 @@ msgstr "Использование разделяемой памяти"
 #: extended_process_list.cpp:365
 #, kde-format
 msgid "Shared"
-msgstr "Разд. память"
+msgstr "Разделяемая память"
 
 #: extended_process_list.cpp:367
 #, kde-format
@@ -347,25 +347,19 @@ msgstr ""
 "процессами."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Частное использование памяти"
+msgstr "Использование пропорциональной памяти"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Пропорциональная память"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -377,29 +371,23 @@ msgstr ""
 "Это приблизительный объём реальной физической памяти, которую использует "
 "процесс. Он подсчитан как сумма объёма частной памяти процесса и объёма "
 "разделяемой памяти процесса, делённой на количество процессов, использующих "
-"эту разделяемую память."
+"эту разделяемую память. Для некоторых процессов это значение может быть "
+"недоступным."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Использование памяти"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Память"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -408,22 +396,21 @@ msgid ""
 "otherwise."
 msgstr ""
 "Это приблизительный объём реальной физической памяти, которую использует "
-"процесс. Он подсчитан как сумма объёма частной памяти процесса и объёма "
-"разделяемой памяти процесса, делённой на количество процессов, использующих "
-"эту разделяемую память."
+"процесс. Указывается «Использование пропорциональной памяти» (если "
+"доступно), «Использование частной памяти» (если имеется значение), в иных "
+"случаях — «Использование резидентной памяти»."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "Использование GPU"
+msgstr "Использование области подкачки"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Область подкачки"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -431,6 +418,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"Это приблизительный объём памяти из области подкачки, которую использует "
+"процесс."
 
 #: extended_process_list.cpp:416
 #, kde-format
