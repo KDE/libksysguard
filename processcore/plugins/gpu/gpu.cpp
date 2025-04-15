@@ -32,10 +32,10 @@ const fs::path proc_path{"/proc"};
 const fs::path fdinfo_dir{"fdinfo"};
 const fs::path fd_dir{"fd"};
 
-const QByteArray driver_prefix{"drm-driver"};
-const QByteArray gfx_prefix{"drm-engine-gfx"};
-const QByteArray mem_prefix{"drm-memory-vram"};
-const QByteArray amd_drm_driver{"amdgpu"};
+const QByteArrayView driver_prefix{"drm-driver"};
+const QByteArrayView gfx_prefix{"drm-engine-gfx"};
+const QByteArrayView mem_prefix{"drm-memory-vram"};
+const QByteArrayView amd_drm_driver{"amdgpu"};
 
 const int32_t drm_node_type = 226;
 
