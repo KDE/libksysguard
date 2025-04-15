@@ -169,15 +169,12 @@ void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::
         }
     }
 
-    // FIXME: It's possible that it's necessary to aggregate gfx engine usage from child processes.
-    // This seems to work ok currently though.
 
     float usage = 0;
     if (m_process_history.find(pid) != m_process_history.end()) {
         auto prev = m_process_history[pid];
         usage = calc_gpu_usage(fd_totals.gfx, prev.gfx, fd_totals.ts - prev.ts);
     }
-
     m_process_history[pid] = fd_totals;
     m_memory->setData(proc, fd_totals.vram);
     m_usage->setData(proc, usage);
