@@ -33,23 +33,25 @@ const fs::path proc_path{"/proc"};
 const fs::path fdinfo_dir{"fdinfo"};
 const fs::path fd_dir{"fd"};
 
+const QByteArrayView engine_prefix{"drm-engine-"};
 const QByteArrayView driver_prefix{"drm-driver"};
-const QByteArrayView gfx_prefix{"drm-engine-gfx"};
-const QByteArrayView mem_prefix{"drm-memory-vram"};
+const QByteArrayView mem_resident_prefix{"drm-resident-"};
+const QByteArrayView amd_resident_prefix{"drm-memory-"};
 const QByteArrayView amd_drm_driver{"amdgpu"};
+const QByteArrayView amd_engine{"gfx"};
 
 const int32_t drm_node_type = 226;
 
-template<class T>
-static inline bool to_digits(QByteArrayView s, T &v)
+static inline std::optional<uint64_t> to_digits(QByteArrayView s)
 {
-    auto [ptr, ec]{std::from_chars(s.data(), s.data() + s.size(), v)};
+    uint64_t value;
+    auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), value);
 
     if (ec != std::errc()) {
-        return false;
+        return {};
     }
 
-    return true;
+    return value;
 }
 
 static inline float calc_gpu_usage(uint64_t curr, uint64_t prev, std::chrono::high_resolution_clock::duration diff)
@@ -107,35 +109,44 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
     proc.gfx = 0;
     proc.vram = 0;
 
+    QByteArray driver;
+    QHash<QByteArray, uint64_t> engineValues;
+
     // Had to use a do/while loop here because f.atEnd() was returning 1
     // until the first f.readLine()
     do {
         QByteArray line{f.readLine()};
         const auto separator = line.indexOf(':');
         const auto key = QByteArrayView{line.data(), separator}.trimmed();
-        const auto value = QByteArrayView{line.data(), separator}.trimmed();
+        const auto value = QByteArrayView{line.data() + separator + 1, line.end()}.trimmed();
 
         if (value.contains(':')) {
             continue;
         };
-
         if (key == driver_prefix) {
-            if (value != amd_drm_driver) {
-                break;
-            };
-        } else if (key == gfx_prefix) {
-            if (!to_digits(value, proc.gfx)) {
-                continue;
-            };
-        } else if (key == mem_prefix) {
-            if (!to_digits(value, proc.vram)) {
-                continue;
-            };
+            driver = value.toByteArray();
+        } else if (key.startsWith(engine_prefix)) {
+            if (const auto digits = to_digits(value)) {
+                engineValues[key.mid(engine_prefix.size())] = digits.value();
+            }
+        } else if (key.startsWith(mem_resident_prefix) || key.startsWith(amd_resident_prefix)) {
+            const auto mem = to_digits(value).value_or(0);
+            // Unit can be KiB (matching the attribute), MiB or unspecified (Bytes)
+            if (value.endsWith("KiB")) {
+                proc.vram += mem;
+            } else if (value.endsWith("Mib")) {
+                proc.vram += mem * 1024;
+            } else {
+                proc.vram += mem / 1024;
+            }
         }
     } while (!f.atEnd());
 
     f.close();
 
+    if (driver == amd_drm_driver) {
+        proc.gfx = engineValues[amd_engine];
+    }
     return (proc.gfx != 0) && (proc.vram != 0);
 }
 
