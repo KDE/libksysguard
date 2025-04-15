@@ -139,7 +139,7 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
     return (proc.gfx != 0) && (proc.vram != 0);
 }
 
-void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<pid_t, GpuFd> &previousValues)
+void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<pid_t, GpuFd> &previousValues)
 {
     fs::path fdinfo_path  = path / fdinfo_dir;
 
@@ -152,7 +152,7 @@ void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::
         }
 
         if (fileRefersToDrmNode(path, fdinfo.path().filename().string())) {
-            GpuFd gpu_fd{pid};
+            GpuFd gpu_fd;
             if (!processPidEntry(fdinfo.path(), gpu_fd)) {
                 continue;
             }
@@ -161,7 +161,7 @@ void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::
     }
 
     // Take the largest of all the values that we found.
-    GpuFd fd_totals{pid};
+    GpuFd fd_totals;
     for (auto &fd : gpu_fds) {
         if (fd.gfx > fd_totals.gfx) {
             fd_totals.gfx = fd.gfx;
@@ -171,13 +171,13 @@ void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::
         }
     }
 
-
     float usage = 0;
-    if (auto it = previousValues.find(pid); it != previousValues.end()) {
+    if (auto it = previousValues.find(proc->pid()); it != previousValues.end()) {
         auto prev = it->second;
         usage = calc_gpu_usage(fd_totals.gfx, prev.gfx, fd_totals.ts - prev.ts);
     }
-    m_process_history[pid] = fd_totals;
+
+    m_process_history[proc->pid()] = fd_totals;
     m_memory->setData(proc, fd_totals.vram);
     m_usage->setData(proc, usage);
 }
@@ -218,7 +218,7 @@ void GpuPlugin::update()
             continue;
         }
 
-        processPidDir(pid, entry.path(), proc, previousValues);
+        processPidDir(entry.path(), proc, previousValues);
     }
 }
 
