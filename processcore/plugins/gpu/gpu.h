@@ -8,7 +8,7 @@
 
 #include <chrono>
 #include <filesystem>
-#include <map>
+#include <unordered_map>
 #include <vector>
 
 #include <processcore/process_attribute.h>
@@ -36,7 +36,7 @@ private:
     KSysGuard::ProcessAttribute *m_memory = nullptr;
 
     bool m_enabled = false;
-    std::map<pid_t, GpuFd> m_process_history;
+    std::unordered_map<pid_t, GpuFd> m_process_history;
 
     void processPidDir(const pid_t p, const fs::path &path, KSysGuard::Process *proc);
     bool processPidEntry(const fs::path &path, GpuFd &proc);

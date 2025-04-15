@@ -170,7 +170,6 @@ void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::
         }
     }
 
-
     float usage = 0;
     if (m_process_history.find(pid) != m_process_history.end()) {
         auto prev = m_process_history[pid];
