@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2022 Lenon Kitchens <lenon.kitchens@gmail.com>
+    SPDX-FileCopyrightText: 2025 David Redondo <kde@david-redondo.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -138,7 +139,7 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
     return (proc.gfx != 0) && (proc.vram != 0);
 }
 
-void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::Process *proc)
+void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<pid_t, GpuFd> &previousValues)
 {
     fs::path fdinfo_path  = path / fdinfo_dir;
 
@@ -170,9 +171,10 @@ void GpuPlugin::processPidDir(const pid_t pid, const fs::path &path, KSysGuard::
         }
     }
 
+
     float usage = 0;
-    if (m_process_history.find(pid) != m_process_history.end()) {
-        auto prev = m_process_history[pid];
+    if (auto it = previousValues.find(pid); it != previousValues.end()) {
+        auto prev = it->second;
         usage = calc_gpu_usage(fd_totals.gfx, prev.gfx, fd_totals.ts - prev.ts);
     }
     m_process_history[pid] = fd_totals;
@@ -192,6 +194,8 @@ void GpuPlugin::update()
         return;
     }
 
+    std::unordered_map<pid_t, GpuFd> previousValues;
+    std::swap(previousValues, m_process_history);
     std::error_code ec;
     for (const auto &entry : fs::directory_iterator(proc_path, ec)) {
         if (ec != std::errc()) {
@@ -214,7 +218,7 @@ void GpuPlugin::update()
             continue;
         }
 
-        processPidDir(pid, entry.path(), proc);
+        processPidDir(pid, entry.path(), proc, previousValues);
     }
 }
 

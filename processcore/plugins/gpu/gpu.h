@@ -38,7 +38,7 @@ private:
     bool m_enabled = false;
     std::unordered_map<pid_t, GpuFd> m_process_history;
 
-    void processPidDir(const pid_t p, const fs::path &path, KSysGuard::Process *proc);
+    void processPidDir(const pid_t p, const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<pid_t, GpuFd> &previousValues);
     bool processPidEntry(const fs::path &path, GpuFd &proc);
     bool fileRefersToDrmNode(const fs::path &path, const std::string &fname);
 };
