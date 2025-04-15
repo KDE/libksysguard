@@ -39,6 +39,8 @@ const QByteArrayView mem_resident_prefix{"drm-resident-"};
 const QByteArrayView amd_resident_prefix{"drm-memory-"};
 const QByteArrayView amd_drm_driver{"amdgpu"};
 const QByteArrayView amd_engine{"gfx"};
+const QByteArrayView intel_drm_driver{"i915"};
+const QByteArrayView intel_engine{"render"};
 
 const int32_t drm_node_type = 226;
 
@@ -68,9 +70,9 @@ static inline float calc_gpu_usage(uint64_t curr, uint64_t prev, std::chrono::hi
 GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
     : ProcessDataProvider(parent, args)
 {
-    m_usage = new KSysGuard::ProcessAttribute(QStringLiteral("amdgpu_usage"), i18n("GPU Usage"), this);
+    m_usage = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_usage"), i18n("GPU Usage"), this);
     m_usage->setUnit(KSysGuard::UnitPercent);
-    m_memory = new KSysGuard::ProcessAttribute(QStringLiteral("amdgpu_memory"), i18n("GPU Memory"), this);
+    m_memory = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_memory"), i18n("GPU Memory"), this);
     m_memory->setUnit(KSysGuard::UnitKiloByte);
 
     addProcessAttribute(m_usage);
@@ -146,7 +148,10 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
 
     if (driver == amd_drm_driver) {
         proc.gfx = engineValues[amd_engine];
+    } else if (driver == intel_drm_driver) {
+        proc.gfx = engineValues[intel_engine];
     }
+
     return (proc.gfx != 0) && (proc.vram != 0);
 }
 
@@ -193,12 +198,6 @@ void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, co
     m_usage->setData(proc, usage);
 }
 
-/*
-    For each pid entry in proc, scan the fdinfo directory for entries containing both
-    drm-driver: amdgpu and drm-engine-gfx: <999999999> ns.  When found, determine the
-    elapsed ns since the last reading and compute a GPU usage percentage from there.
-    Be care of multiple entries in fdinfo matching the criteria.
-*/
 void GpuPlugin::update()
 {
     if (!m_enabled) {
