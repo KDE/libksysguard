@@ -40,7 +40,7 @@ const QByteArray amd_drm_driver{"amdgpu"};
 const int32_t drm_node_type = 226;
 
 template<class T>
-static inline bool to_digits(const std::string s, T &v)
+static inline bool to_digits(QByteArrayView s, T &v)
 {
     auto [ptr, ec]{std::from_chars(s.data(), s.data() + s.size(), v)};
 
@@ -110,23 +110,24 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
     // until the first f.readLine()
     do {
         QByteArray line{f.readLine()};
+        const auto separator = line.indexOf(':');
+        const auto key = QByteArrayView{line.data(), separator}.trimmed();
+        const auto value = QByteArrayView{line.data(), separator}.trimmed();
 
-        QList<QByteArray> tokens{line.split(':')};
-
-        if (tokens.size() < 2) {
+        if (value.contains(':')) {
             continue;
         };
 
-        if (line.startsWith(driver_prefix)) {
-            if (tokens[1].trimmed() != amd_drm_driver) {
+        if (key == driver_prefix) {
+            if (value != amd_drm_driver) {
                 break;
             };
-        } else if (line.startsWith(gfx_prefix)) {
-            if (!to_digits(tokens[1].trimmed().toStdString(), proc.gfx)) {
+        } else if (key == gfx_prefix) {
+            if (!to_digits(value, proc.gfx)) {
                 continue;
             };
-        } else if (line.startsWith(mem_prefix)) {
-            if (!to_digits(tokens[1].trimmed().toStdString(), proc.vram)) {
+        } else if (key == mem_prefix) {
+            if (!to_digits(value, proc.vram)) {
                 continue;
             };
         }
