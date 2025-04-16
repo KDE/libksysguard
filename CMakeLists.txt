@@ -80,6 +80,8 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         PURPOSE "Used for reading hardware sensors")
 endif()
 
+find_package(Libdrm REQUIRED)
+
 option(ENABLE_KAUTH_HELPER "Build and install ksysguardprocesslist_helper KAuth helper" ON)
 add_feature_info(KAUTH_HELPER ${ENABLE_KAUTH_HELPER} "Build and install ksysguardprocesslist_helper KAuth helper")
 

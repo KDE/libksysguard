@@ -29,6 +29,7 @@
 #include <sys/sysmacros.h>
 #endif
 #include <unistd.h>
+#include <xf86drm.h>
 
 const fs::path proc_path{"/proc"};
 const fs::path fdinfo_dir{"fdinfo"};
@@ -68,29 +69,10 @@ static inline float calc_gpu_usage(uint64_t curr, uint64_t prev, std::chrono::hi
     return perc;
 }
 
-GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
-    : ProcessDataProvider(parent, args)
+static std::optional<uint> drmMinor(const fs::path &path)
 {
-    m_usage = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_usage"), i18n("GPU Usage"), this);
-    m_usage->setUnit(KSysGuard::UnitPercent);
-    m_memory = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_memory"), i18n("GPU Memory"), this);
-    m_memory->setUnit(KSysGuard::UnitKiloByte);
-
-    addProcessAttribute(m_usage);
-    addProcessAttribute(m_memory);
-}
-
-void GpuPlugin::handleEnabledChanged(bool enabled)
-{
-    m_enabled = enabled;
-}
-
-static std::optional<uint> drmMinor(const fs::path &path, const std::string &fname)
-{
-    std::string fd_path{path.string() + fd_dir.string() + "/" + fname};
-
     struct stat sbuf;
-    if (stat(fd_path.c_str(), &sbuf) != 0) {
+    if (stat(path.string().c_str(), &sbuf) != 0) {
         return {};
     }
 
@@ -102,6 +84,41 @@ static std::optional<uint> drmMinor(const fs::path &path, const std::string &fna
         return {};
     };
     return minor(sbuf.st_rdev);
+}
+
+GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
+    : ProcessDataProvider(parent, args)
+{
+    m_usage = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_usage"), i18n("GPU Usage"), this);
+    m_usage->setUnit(KSysGuard::UnitPercent);
+    m_memory = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_memory"), i18n("GPU Memory"), this);
+    m_memory->setUnit(KSysGuard::UnitKiloByte);
+    m_gpuName = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_module"), i18n("GPU"), this);
+    m_gpuName->setDescription(i18n("Displays which GPU the process is using"));
+
+    addProcessAttribute(m_usage);
+    addProcessAttribute(m_memory);
+    addProcessAttribute(m_gpuName);
+
+    std::vector<drmDevicePtr> devices;
+    const int count = drmGetDevices2(0, nullptr, 0);
+    devices.resize(count);
+    if (drmGetDevices2(0, devices.data(), count) > 0) {
+        for (const auto &device : devices) {
+            if (auto minor = drmMinor(device->nodes[DRM_NODE_PRIMARY])) {
+                m_minorToGpuNum[*minor] = *minor;
+                if (auto renderMinor = drmMinor(device->nodes[DRM_NODE_RENDER])) {
+                    m_minorToGpuNum[*renderMinor] = *minor;
+                }
+            }
+        }
+    }
+    drmFreeDevices(devices.data(), devices.size());
+}
+
+void GpuPlugin::handleEnabledChanged(bool enabled)
+{
+    m_enabled = enabled;
 }
 
 bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
@@ -171,7 +188,7 @@ void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, co
             continue;
         }
 
-        if (auto device = drmMinor(path, fdinfo.path().filename().string())) {
+        if (auto device = drmMinor(path / fd_dir / fdinfo.path().filename())) {
             if (gpu_fds.contains(HistoryKey(proc->pid(), *device))) {
                 continue;
             }
@@ -183,20 +200,34 @@ void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, co
         }
     }
 
-
     float usage = 0;
     uint32_t vram = 0;
+    int device = -1;
     for (const auto &value : gpu_fds) {
-        vram = std::max(vram, value.second.vram);
         if (auto it = previousValues.find(value.first); it != previousValues.end()) {
             auto prev = it->second;
-            usage = std::max(usage, calc_gpu_usage(value.second.gfx, prev.gfx, value.second.ts - prev.ts));
+            const auto deviceUsage = calc_gpu_usage(value.second.gfx, prev.gfx, value.second.ts - prev.ts);
+            if (deviceUsage > usage) {
+                usage = deviceUsage;
+                device = value.first.deviceMinor;
+                vram = value.second.vram;
+            } else if (usage == 0 && value.second.vram > vram) {
+                device = value.first.deviceMinor;
+                vram = value.second.vram;
+            }
         }
     }
 
     m_process_history.merge(gpu_fds);
     m_memory->setData(proc, vram);
     m_usage->setData(proc, usage);
+    if (device != -1) {
+        auto gpu = m_minorToGpuNum.find(device);
+        if (gpu != m_minorToGpuNum.end()) {
+            // Match ksystemstats gpu plugin
+            m_gpuName->setData(proc, i18nc("%1 is a number", "GPU %1", gpu->second + 1));
+        }
+    }
 }
 
 void GpuPlugin::update()

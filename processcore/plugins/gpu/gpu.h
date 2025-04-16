@@ -47,9 +47,11 @@ public:
 private:
     KSysGuard::ProcessAttribute *m_usage = nullptr;
     KSysGuard::ProcessAttribute *m_memory = nullptr;
+    KSysGuard::ProcessAttribute *m_gpuName = nullptr;
 
     bool m_enabled = false;
     std::unordered_map<HistoryKey, GpuFd> m_process_history;
+    std::unordered_map<unsigned int, unsigned int> m_minorToGpuNum;
 
     void processPidDir(const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<HistoryKey, GpuFd> &previousValues);
     bool processPidEntry(const fs::path &path, GpuFd &proc);
