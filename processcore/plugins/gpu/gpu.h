@@ -22,6 +22,20 @@ struct GpuFd {
     std::chrono::high_resolution_clock::time_point ts{std::chrono::high_resolution_clock::now()};
 };
 
+struct HistoryKey {
+    pid_t pid;
+    uint64_t deviceMinor;
+    friend bool operator==(const HistoryKey &, const HistoryKey &) = default;
+};
+
+template<>
+struct std::hash<HistoryKey> {
+    std::size_t operator()(const HistoryKey &key, size_t seed = 0) const noexcept
+    {
+        return qHashMulti(seed, key.pid, key.deviceMinor);
+    }
+};
+
 class GpuPlugin : public KSysGuard::ProcessDataProvider
 {
     Q_OBJECT
@@ -35,9 +49,8 @@ private:
     KSysGuard::ProcessAttribute *m_memory = nullptr;
 
     bool m_enabled = false;
-    std::unordered_map<pid_t, GpuFd> m_process_history;
+    std::unordered_map<HistoryKey, GpuFd> m_process_history;
 
-    void processPidDir(const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<pid_t, GpuFd> &previousValues);
+    void processPidDir(const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<HistoryKey, GpuFd> &previousValues);
     bool processPidEntry(const fs::path &path, GpuFd &proc);
-    bool fileRefersToDrmNode(const fs::path &path, const std::string &fname);
 };

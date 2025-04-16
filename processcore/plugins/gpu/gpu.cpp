@@ -16,6 +16,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QHash>
 #include <QProcess>
 #include <QStandardPaths>
 
@@ -84,20 +85,23 @@ void GpuPlugin::handleEnabledChanged(bool enabled)
     m_enabled = enabled;
 }
 
-bool GpuPlugin::fileRefersToDrmNode(const fs::path &path, const std::string &fname)
+static std::optional<uint> drmMinor(const fs::path &path, const std::string &fname)
 {
     std::string fd_path{path.string() + fd_dir.string() + "/" + fname};
 
     struct stat sbuf;
     if (stat(fd_path.c_str(), &sbuf) != 0) {
-        return false;
+        return {};
     }
 
     if ((sbuf.st_mode & S_IFCHR) == 0) {
-        return false;
+        return {};
     }
 
-    return (major(sbuf.st_rdev) == drm_node_type);
+    if ((major(sbuf.st_rdev) != drm_node_type)) {
+        return {};
+    };
+    return minor(sbuf.st_rdev);
 }
 
 bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
@@ -155,11 +159,11 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
     return (proc.gfx != 0) && (proc.vram != 0);
 }
 
-void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<pid_t, GpuFd> &previousValues)
+void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<HistoryKey, GpuFd> &previousValues)
 {
     fs::path fdinfo_path  = path / fdinfo_dir;
 
-    std::vector<GpuFd> gpu_fds;
+    std::unordered_map<HistoryKey, GpuFd> gpu_fds;
 
     std::error_code ec;
     for (const auto &fdinfo : fs::directory_iterator(fdinfo_path, ec)) {
@@ -167,34 +171,31 @@ void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, co
             continue;
         }
 
-        if (fileRefersToDrmNode(path, fdinfo.path().filename().string())) {
+        if (auto device = drmMinor(path, fdinfo.path().filename().string())) {
+            if (gpu_fds.contains(HistoryKey(proc->pid(), *device))) {
+                continue;
+            }
             GpuFd gpu_fd;
             if (!processPidEntry(fdinfo.path(), gpu_fd)) {
                 continue;
             }
-            gpu_fds.push_back(gpu_fd);
+            gpu_fds.emplace(HistoryKey(proc->pid(), *device), gpu_fd);
         }
     }
 
-    // Take the largest of all the values that we found.
-    GpuFd fd_totals;
-    for (auto &fd : gpu_fds) {
-        if (fd.gfx > fd_totals.gfx) {
-            fd_totals.gfx = fd.gfx;
-        }
-        if (fd.vram > fd_totals.vram) {
-            fd_totals.vram = fd.vram;
-        }
-    }
 
     float usage = 0;
-    if (auto it = previousValues.find(proc->pid()); it != previousValues.end()) {
-        auto prev = it->second;
-        usage = calc_gpu_usage(fd_totals.gfx, prev.gfx, fd_totals.ts - prev.ts);
+    uint32_t vram = 0;
+    for (const auto &value : gpu_fds) {
+        vram = std::max(vram, value.second.vram);
+        if (auto it = previousValues.find(value.first); it != previousValues.end()) {
+            auto prev = it->second;
+            usage = std::max(usage, calc_gpu_usage(value.second.gfx, prev.gfx, value.second.ts - prev.ts));
+        }
     }
 
-    m_process_history[proc->pid()] = fd_totals;
-    m_memory->setData(proc, fd_totals.vram);
+    m_process_history.merge(gpu_fds);
+    m_memory->setData(proc, vram);
     m_usage->setData(proc, usage);
 }
 
@@ -204,7 +205,7 @@ void GpuPlugin::update()
         return;
     }
 
-    std::unordered_map<pid_t, GpuFd> previousValues;
+    std::unordered_map<HistoryKey, GpuFd> previousValues;
     std::swap(previousValues, m_process_history);
     std::error_code ec;
     for (const auto &entry : fs::directory_iterator(proc_path, ec)) {
