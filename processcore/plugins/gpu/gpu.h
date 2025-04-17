@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <QProcess>
+
 #include <chrono>
 #include <filesystem>
 #include <unordered_map>
@@ -28,6 +30,16 @@ struct HistoryKey {
     friend bool operator==(const HistoryKey &, const HistoryKey &) = default;
 };
 
+struct NvidiaValues {
+    unsigned int usage = 0;
+    unsigned int vram = 0;
+};
+
+struct GpuInfo {
+    std::string pciAdress;
+    unsigned int deviceMinor;
+};
+
 template<>
 struct std::hash<HistoryKey> {
     std::size_t operator()(const HistoryKey &key, size_t seed = 0) const noexcept
@@ -41,8 +53,10 @@ class GpuPlugin : public KSysGuard::ProcessDataProvider
     Q_OBJECT
 public:
     GpuPlugin(QObject *parent, const QVariantList &args);
+    ~GpuPlugin();
     void handleEnabledChanged(bool enabled) override;
     void update() override;
+    void readNvidiaData();
 
 private:
     KSysGuard::ProcessAttribute *m_usage = nullptr;
@@ -50,9 +64,15 @@ private:
     KSysGuard::ProcessAttribute *m_gpuName = nullptr;
 
     bool m_enabled = false;
+    QString m_sniExecutablePath;
+    QProcess *m_nvidiaSmiProcess = nullptr;
+
     std::unordered_map<HistoryKey, GpuFd> m_process_history;
+    std::unordered_map<HistoryKey, NvidiaValues> m_currentNvidiaValues;
     std::unordered_map<unsigned int, unsigned int> m_minorToGpuNum;
+    std::unordered_map<unsigned int, unsigned int> m_nvidiaIndexToGpuNum;
 
     void processPidDir(const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<HistoryKey, GpuFd> &previousValues);
     bool processPidEntry(const fs::path &path, GpuFd &proc);
+    void setupNvidia(const std::vector<GpuInfo> &gpuInfo);
 };
