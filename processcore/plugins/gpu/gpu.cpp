@@ -31,6 +31,8 @@
 #include <unistd.h>
 #include <xf86drm.h>
 
+using namespace Qt::StringLiterals;
+
 const fs::path proc_path{"/proc"};
 const fs::path fdinfo_dir{"fdinfo"};
 const fs::path fd_dir{"fd"};
@@ -45,6 +47,8 @@ const QByteArrayView intel_drm_driver{"i915"};
 const QByteArrayView intel_engine{"render"};
 
 const int32_t drm_node_type = 226;
+
+const int nvidiaVendorId = 0x10de;
 
 static inline std::optional<uint64_t> to_digits(QByteArrayView s)
 {
@@ -88,6 +92,7 @@ static std::optional<uint> drmMinor(const fs::path &path)
 
 GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
     : ProcessDataProvider(parent, args)
+    , m_sniExecutablePath(QStandardPaths::findExecutable(QStringLiteral("nvidia-smi")))
 {
     m_usage = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_usage"), i18n("GPU Usage"), this);
     m_usage->setUnit(KSysGuard::UnitPercent);
@@ -103,6 +108,7 @@ GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
     std::vector<drmDevicePtr> devices;
     const int count = drmGetDevices2(0, nullptr, 0);
     devices.resize(count);
+    std::vector<std::pair<QByteArray, uint>> nvidiaGpus;
     if (drmGetDevices2(0, devices.data(), count) > 0) {
         for (const auto &device : devices) {
             if (auto minor = drmMinor(device->nodes[DRM_NODE_PRIMARY])) {
@@ -110,15 +116,103 @@ GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
                 if (auto renderMinor = drmMinor(device->nodes[DRM_NODE_RENDER])) {
                     m_minorToGpuNum[*renderMinor] = *minor;
                 }
+                if (device->bustype == DRM_BUS_PCI && device->deviceinfo.pci->vendor_id == nvidiaVendorId) {
+                    QByteArray pciAddress(strlen("00000000:01:00.0"), Qt::Uninitialized);
+                    sprintf(pciAddress.data(),
+                            "%.8x:%.2x:%.2x.%x",
+                            device->businfo.pci->domain,
+                            device->businfo.pci->bus,
+                            device->businfo.pci->dev,
+                            device->businfo.pci->func);
+                    nvidiaGpus.emplace_back(pciAddress, *minor);
+                }
             }
         }
     }
+
+    if (nvidiaGpus.size() > 0 && !m_sniExecutablePath.isEmpty()) {
+        auto nvidiaQuery = QProcess();
+        nvidiaQuery.start(m_sniExecutablePath, {"--query-gpu=pci.bus_id,index"_L1, "--format=csv,noheader"_L1});
+        while (nvidiaQuery.waitForReadyRead()) {
+            if (!nvidiaQuery.canReadLine()) {
+                continue;
+            }
+            const auto line = nvidiaQuery.readLine().split(u',');
+            if (auto gpuNum = std::ranges::find(nvidiaGpus, line[0], &decltype(nvidiaGpus)::value_type::first); gpuNum != nvidiaGpus.end()) {
+                m_nvidiaIndexToGpuNum.emplace(line[1].toUInt(), gpuNum->second);
+            }
+        }
+        m_nvidiaSmiProcess = new QProcess;
+        m_nvidiaSmiProcess->setProgram(m_sniExecutablePath);
+        m_nvidiaSmiProcess->setArguments({QStringLiteral("pmon"), QStringLiteral("-s"), QStringLiteral("mu")});
+        connect(m_nvidiaSmiProcess, &QProcess::readyReadStandardOutput, this, &GpuPlugin::readNvidiaData);
+    }
     drmFreeDevices(devices.data(), devices.size());
+}
+
+GpuPlugin::~GpuPlugin() noexcept
+{
+    if (m_nvidiaSmiProcess) {
+        m_nvidiaSmiProcess->terminate();
+        m_nvidiaSmiProcess->waitForFinished();
+    }
 }
 
 void GpuPlugin::handleEnabledChanged(bool enabled)
 {
     m_enabled = enabled;
+    if (!m_nvidiaSmiProcess) {
+        return;
+    }
+    if (enabled) {
+        m_nvidiaSmiProcess->start();
+    } else {
+        m_nvidiaSmiProcess->terminate();
+    }
+}
+
+struct pmonIndices {
+    int pid = -1;
+    int index = -1;
+    int sm = -1;
+    int fb = -1;
+};
+
+void GpuPlugin::readNvidiaData()
+{
+    static pmonIndices indices;
+
+    while (m_nvidiaSmiProcess->canReadLine()) {
+        const QString line = QString::fromLatin1(m_nvidiaSmiProcess->readLine());
+        auto parts = QStringView(line).split(u' ', Qt::SkipEmptyParts);
+        // discover index of fields in the header format is something like
+        // # gpu         pid   type     fb   ccpm     sm    mem    enc    dec    jpg    ofa    command
+        // # Idx           #    C/G     MB     MB      %      %      %      %      %      %    name
+        //     0       1424     G     15      0      -      -      -      -      -      -    Xorg
+        if (line.startsWith(u'#')) { // comment line
+            if (indices.pid == -1) {
+                // Remove First part because of leading '# ';
+                parts.removeFirst();
+                indices.index = parts.indexOf("gpu"_L1);
+                indices.pid = parts.indexOf("pid"_L1);
+                indices.sm = parts.indexOf("sm"_L1);
+                indices.fb = parts.indexOf("fb"_L1);
+            }
+            continue;
+        }
+
+        if (indices.pid == -1 || indices.index == -1) {
+            m_nvidiaSmiProcess->terminate();
+            continue;
+        }
+
+        pid_t pid = parts[indices.pid].toUInt();
+        unsigned int index = parts[indices.index].toUInt();
+        unsigned int sm = indices.sm >= 0 ? parts[indices.sm].toUInt() : 0;
+        unsigned int mem = indices.fb >= 0 ? parts[indices.fb].toUInt() * 1024 : 0;
+
+        m_currentNvidiaValues[{pid, index}] = {sm, mem};
+    }
 }
 
 bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
@@ -219,6 +313,19 @@ void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, co
         }
     }
 
+    for (const auto &nvidiaGpu : m_nvidiaIndexToGpuNum) {
+        if (auto values = m_currentNvidiaValues.find(HistoryKey(proc->pid(), nvidiaGpu.first)); values != m_currentNvidiaValues.end()) {
+            if (values->second.usage > usage) {
+                usage = values->second.usage;
+                vram = values->second.vram;
+                device = nvidiaGpu.second;
+            } else if (usage == 0 && values->second.vram > vram) {
+                vram = values->second.vram;
+                device = nvidiaGpu.second;
+            }
+        }
+    }
+
     m_process_history.merge(gpu_fds);
     m_memory->setData(proc, vram);
     m_usage->setData(proc, usage);
@@ -263,6 +370,7 @@ void GpuPlugin::update()
 
         processPidDir(entry.path(), proc, previousValues);
     }
+    m_currentNvidiaValues.clear();
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(PluginFactory, "gpu.json", registerPlugin<GpuPlugin>();)
