@@ -56,26 +56,6 @@ Processes::Error ProcessesLocal::sendSignal(long pid, int sig)
     return Processes::NotSupported;
 }
 
-Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
-{
-    return Processes::NotSupported;
-}
-
-Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
-{
-    return Processes::NotSupported;
-}
-
-Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority)
-{
-    return Processes::NotSupported;
-}
-
-bool ProcessesLocal::supportsIoNiceness()
-{
-    return false;
-}
-
 long long ProcessesLocal::totalPhysicalMemory()
 {
     long long memory = 0;

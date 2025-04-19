@@ -104,37 +104,6 @@ public:
     bool sendSignal(long pid, int sig);
 
     /**
-     *  Set the priority for a process.  This is from 19 (very nice, lowest priority) to
-     *    -20 (highest priority).  The default value for a process is 0.
-     *
-     *  @return false if you do not have permission to set the priority
-     */
-    bool setNiceness(long pid, int priority);
-
-    /**
-     *  Set the scheduler for a process.  This is defined according to POSIX.1-2001
-     *  See "man sched_setscheduler" for more information.
-     *
-     *  @p priorityClass One of SCHED_FIFO, SCHED_RR, SCHED_OTHER, and SCHED_BATCH
-     *  @p priority Set to 0 for SCHED_OTHER and SCHED_BATCH.  Between 1 and 99 for SCHED_FIFO and SCHED_RR
-     *  @return false if you do not have permission to set the priority
-     */
-    bool setScheduler(long pid, KSysGuard::Process::Scheduler priorityClass, int priority);
-
-    /**
-     *  Set the io priority for a process.  This is from 7 (very nice, lowest io priority) to
-     *  0 (highest priority).  The default value is determined as: io_nice = (cpu_nice + 20) / 5.
-     *
-     *  @return false if you do not have permission to set the priority
-     */
-    bool setIoNiceness(long pid, KSysGuard::Process::IoPriorityClass priorityClass, int priority);
-
-    /**
-     *  Returns true if ionice is supported on this system
-     */
-    bool supportsIoNiceness();
-
-    /**
      *  Return the internal pointer of all the processes.  The order of the processes
      *  is guaranteed to never change.  Call updateAllProcesses() first to actually
      *  update the information.

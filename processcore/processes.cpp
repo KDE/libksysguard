@@ -419,41 +419,6 @@ bool Processes::sendSignal(long pid, int sig)
     return true;
 }
 
-bool Processes::setNiceness(long pid, int priority)
-{
-    auto error = d->mAbstractProcesses->setNiceness(pid, priority);
-    if (error != NoError) {
-        d->mLastError = error;
-        return false;
-    }
-    return true;
-}
-
-bool Processes::setScheduler(long pid, KSysGuard::Process::Scheduler priorityClass, int priority)
-{
-    auto error = d->mAbstractProcesses->setScheduler(pid, priorityClass, priority);
-    if (error != NoError) {
-        d->mLastError = error;
-        return false;
-    }
-    return true;
-}
-
-bool Processes::setIoNiceness(long pid, KSysGuard::Process::IoPriorityClass priorityClass, int priority)
-{
-    auto error = d->mAbstractProcesses->setIoNiceness(pid, priorityClass, priority);
-    if (error != NoError) {
-        d->mLastError = error;
-        return false;
-    }
-    return true;
-}
-
-bool Processes::supportsIoNiceness()
-{
-    return d->mAbstractProcesses->supportsIoNiceness();
-}
-
 long long Processes::totalPhysicalMemory()
 {
     return d->mAbstractProcesses->totalPhysicalMemory();

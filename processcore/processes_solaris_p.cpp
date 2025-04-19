@@ -202,29 +202,6 @@ Processes::Error ProcessesLocal::sendSignal(long pid, int sig)
     return Processes::NoError;
 }
 
-/*
- *
- */
-Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
-{
-    return Processes::NotSupported;
-}
-
-Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
-{
-    return Processes::NotSupported;
-}
-
-Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority)
-{
-    return Processes::NotSupported; // Not yet supported
-}
-
-bool ProcessesLocal::supportsIoNiceness()
-{
-    return false;
-}
-
 long long ProcessesLocal::totalPhysicalMemory()
 {
     long long memory = ((long long)sysconf(_SC_PHYS_PAGES)) * (sysconf(_SC_PAGESIZE) / 1024);

@@ -73,17 +73,6 @@ public:
      */
     Processes::Error sendSignal(long pid, int sig);
 
-    /** \brief Set the priority for a process.
-     *
-     *  For the normal scheduler, this is usually from 19
-     *  (very nice, lowest priority) to -20 (highest priority).  The default value for a process is 0.
-     *
-     *  This has no effect if the scheduler is not the normal one (SCHED_OTHER in Linux).
-     *
-     *  @return Error::NoError if successful
-     */
-    Processes::Error setNiceness(long pid, int priority);
-
     /** \brief Set the scheduler for a process.
      *
      * This is defined according to POSIX.1-2001
@@ -93,7 +82,6 @@ public:
      *  @p priority Set to 0 for SCHED_OTHER and SCHED_BATCH.  Between 1 and 99 for SCHED_FIFO and SCHED_RR
      *  @return Error::NoError if successful
      */
-    Processes::Error setScheduler(long pid, int priorityClass, int priority);
 
     /** \brief Return the total amount of physical memory in KiB.
      *
@@ -106,19 +94,6 @@ public:
      * The total amount of swap memory that is available on the system.
      */
     long long totalSwapMemory();
-
-    /** \brief Set the i/o priority for a process.
-     *
-     *  This is from 7 (very nice, lowest i/o priority) to
-     *  0 (highest priority).  The default value is determined as: io_nice = (cpu_nice + 20) / 5.
-     *
-     *  @return Error::NoError if successful
-     */
-    Processes::Error setIoNiceness(long pid, int priorityClass, int priority);
-
-    /** \brief Returns true if ionice is supported on this system
-     */
-    bool supportsIoNiceness();
 
     /** \brief Return the number of processor cores enabled.
      *

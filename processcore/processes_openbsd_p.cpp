@@ -239,36 +239,6 @@ Processes::Error ProcessesLocal::sendSignal(long pid, int sig)
     return Processes::NoError;
 }
 
-Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
-{
-    if (setpriority(PRIO_PROCESS, pid, priority)) {
-        // set niceness failed
-        return Processes::Unknown;
-    }
-    return Processes::NoError;
-}
-
-Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
-{
-    if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch) {
-        priority = 0;
-    }
-    if (pid <= 0) {
-        return Processes::InvalidPid; // check the parameters
-    }
-    return Processes::NotSupported;
-}
-
-Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority)
-{
-    return Processes::NotSupported; // Not yet supported
-}
-
-bool ProcessesLocal::supportsIoNiceness()
-{
-    return false;
-}
-
 long long ProcessesLocal::totalPhysicalMemory()
 {
     static int physmem_mib[] = {CTL_HW, HW_PHYSMEM};

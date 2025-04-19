@@ -23,10 +23,5 @@ private slots:
     void testProcessesTreeStructure();
     void testProcessesModification();
     void testUpdateOrAddProcess();
-
-    void testSetScheduler();
-    void testSetScheduler_data();
-    void testSetIoScheduler_data();
-    void testSetIoScheduler();
 };
 #endif
