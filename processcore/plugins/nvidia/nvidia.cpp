@@ -29,7 +29,7 @@ NvidiaPlugin::NvidiaPlugin(QObject *parent, const QVariantList &args)
     m_usage = new ProcessAttribute(QStringLiteral("nvidia_usage"), i18n("GPU Usage"), this);
     m_usage->setUnit(KSysGuard::UnitPercent);
     m_memory = new ProcessAttribute(QStringLiteral("nvidia_memory"), i18n("GPU Memory"), this);
-    m_memory->setUnit(KSysGuard::UnitPercent);
+    m_memory->setUnit(KSysGuard::UnitMegaByte);
 
     connect(processes(), &Processes::beginAddProcess, this, [this](Process *process) {
         m_usage->setData(process, 0);
@@ -57,14 +57,14 @@ void NvidiaPlugin::handleEnabledChanged(bool enabled)
 struct pmonIndices {
     int pid = -1;
     int sm = -1;
-    int mem = -1;
+    int fb = -1;
 };
 
 void NvidiaPlugin::setup()
 {
     m_process = new QProcess(this);
     m_process->setProgram(m_sniExecutablePath);
-    m_process->setArguments({QStringLiteral("pmon")});
+    m_process->setArguments({QStringLiteral("pmon"), QStringLiteral("-s"), QStringLiteral("um")});
 
     connect(m_process, &QProcess::readyReadStandardOutput, this, [this]() {
         static pmonIndices indices;
@@ -82,7 +82,7 @@ void NvidiaPlugin::setup()
                     parts.removeFirst();
                     indices.pid = parts.indexOf("pid"_L1);
                     indices.sm = parts.indexOf("sm"_L1);
-                    indices.mem = parts.indexOf("mem"_L1);
+                    indices.fb = parts.indexOf("fb"_L1);
                 }
                 continue;
             }
@@ -94,7 +94,7 @@ void NvidiaPlugin::setup()
 
             long pid = parts[indices.pid].toUInt();
             int sm = indices.sm >= 0 ? parts[indices.sm].toUInt() : 0;
-            int mem = indices.mem >= 0 ? parts[indices.mem].toUInt() : 0;
+            int mem = indices.mem >= 0 ? parts[indices.fb].toUInt() : 0;
 
             KSysGuard::Process *process = getProcess(pid);
             if (!process) {
