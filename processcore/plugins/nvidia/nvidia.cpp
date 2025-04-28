@@ -16,6 +16,7 @@
 #include <processcore/process.h>
 
 using namespace KSysGuard;
+using namespace Qt::StringLiterals;
 
 NvidiaPlugin::NvidiaPlugin(QObject *parent, const QVariantList &args)
     : ProcessDataProvider(parent, args)
@@ -48,6 +49,12 @@ void NvidiaPlugin::handleEnabledChanged(bool enabled)
     }
 }
 
+struct pmonIndices {
+    int pid = -1;
+    int sm = -1;
+    int mem = -1;
+};
+
 void NvidiaPlugin::setup()
 {
     m_process = new QProcess(this);
@@ -55,32 +62,40 @@ void NvidiaPlugin::setup()
     m_process->setArguments({QStringLiteral("pmon")});
 
     connect(m_process, &QProcess::readyReadStandardOutput, this, [this]() {
+        static pmonIndices indices;
+
         while (m_process->canReadLine()) {
             const QString line = QString::fromLatin1(m_process->readLine());
-            if (line.startsWith(QLatin1Char('#'))) { // comment line
-                if (line != QLatin1String("# gpu        pid  type    sm   mem   enc   dec   command\n")
-                    && line != QLatin1String("# Idx          #   C/G     %     %     %     %   name\n")) {
-                    // header format doesn't match what we expected, bail before we send any garbage
-                    m_process->terminate();
+            auto parts = QStringView(line).split(u' ', Qt::SkipEmptyParts);
+            // discover index of fields in the header format is something like
+            // # gpu         pid   type     fb   ccpm     sm    mem    enc    dec    jpg    ofa    command
+            // # Idx           #    C/G     MB     MB      %      %      %      %      %      %    name
+            //     0       1424     G     15      0      -      -      -      -      -      -    Xorg
+            if (line.startsWith(u'#')) { // comment line
+                if (indices.pid == -1) {
+                    // Remove First part because of leading '# ';
+                    parts.removeFirst();
+                    indices.pid = parts.indexOf("pid"_L1);
+                    indices.sm = parts.indexOf("sm"_L1);
+                    indices.mem = parts.indexOf("mem"_L1);
                 }
                 continue;
             }
-            const auto parts = QStringView(line).split(QLatin1Char(' '), Qt::SkipEmptyParts);
 
-            // format at time of writing is
-            // # gpu        pid  type    sm   mem   enc   dec   command
-            if (parts.count() < 5) { // we only access up to the 5th element
+            if (indices.pid == -1) {
+                m_process->terminate();
                 continue;
             }
 
-            long pid = parts[1].toUInt();
-            int sm = parts[3].toUInt();
-            int mem = parts[4].toUInt();
+            long pid = parts[indices.pid].toUInt();
+            int sm = indices.sm >= 0 ? parts[indices.sm].toUInt() : 0;
+            int mem = indices.mem >= 0 ? parts[indices.mem].toUInt() : 0;
 
             KSysGuard::Process *process = getProcess(pid);
             if (!process) {
                 continue; // can in race condition etc
             }
+
             m_usage->setData(process, sm);
             m_memory->setData(process, mem);
         }
