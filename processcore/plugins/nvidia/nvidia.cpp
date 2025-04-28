@@ -31,6 +31,11 @@ NvidiaPlugin::NvidiaPlugin(QObject *parent, const QVariantList &args)
     m_memory = new ProcessAttribute(QStringLiteral("nvidia_memory"), i18n("GPU Memory"), this);
     m_memory->setUnit(KSysGuard::UnitPercent);
 
+    connect(processes(), &Processes::beginAddProcess, this, [this](Process *process) {
+        m_usage->setData(process, 0);
+        m_memory->setData(process, 0);
+    });
+
     addProcessAttribute(m_usage);
     addProcessAttribute(m_memory);
 }
