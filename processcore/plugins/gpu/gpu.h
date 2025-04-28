@@ -19,7 +19,7 @@ namespace fs = std::filesystem;
 struct GpuFd {
     uint64_t gfx{0};
     uint32_t vram{0};
-    std::chrono::high_resolution_clock::time_point ts{std::chrono::high_resolution_clock::now()};
+    std::chrono::high_resolution_clock::time_point ts;
 };
 
 struct HistoryKey {

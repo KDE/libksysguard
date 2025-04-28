@@ -193,6 +193,7 @@ void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, co
                 continue;
             }
             GpuFd gpu_fd;
+            gpu_fd.ts = std::chrono::high_resolution_clock::now();
             if (!processPidEntry(fdinfo.path(), gpu_fd)) {
                 continue;
             }
