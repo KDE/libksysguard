@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-11 00:42+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2025-01-31 16:20+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -557,12 +557,12 @@ msgctxt "@title"
 msgid "Upload"
 msgstr "Augšupielāde"
 
-#: plugins/nvidia/nvidia.cpp:28
+#: plugins/nvidia/nvidia.cpp:29
 #, kde-format
 msgid "GPU Usage"
 msgstr "GPU lietojums"
 
-#: plugins/nvidia/nvidia.cpp:30
+#: plugins/nvidia/nvidia.cpp:31
 #, kde-format
 msgid "GPU Memory"
 msgstr "GPU atmiņa"

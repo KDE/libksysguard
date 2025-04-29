@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-11 00:42+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2025-01-24 22:20+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -542,12 +542,12 @@ msgctxt "@title"
 msgid "Upload"
 msgstr "上傳"
 
-#: plugins/nvidia/nvidia.cpp:28
+#: plugins/nvidia/nvidia.cpp:29
 #, kde-format
 msgid "GPU Usage"
 msgstr "GPU 用量"
 
-#: plugins/nvidia/nvidia.cpp:30
+#: plugins/nvidia/nvidia.cpp:31
 #, kde-format
 msgid "GPU Memory"
 msgstr "GPU 記憶體"
