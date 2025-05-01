@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2020-09-28 13:21+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -552,6 +552,35 @@ msgstr "Andmete kettale kirjutamise kiirus."
 msgid "Threads"
 msgstr "Lõimed"
 
+#: plugins/gpu/gpu.cpp:92 plugins/nvidia/nvidia.cpp:29
+#, fuzzy, kde-format
+#| msgid "User CPU Usage"
+msgid "GPU Usage"
+msgstr "Kasutaja CPU kasutus"
+
+#: plugins/gpu/gpu.cpp:94 plugins/nvidia/nvidia.cpp:31
+#, fuzzy, kde-format
+#| msgid "Memory"
+msgid "GPU Memory"
+msgstr "Mälu"
+
+#: plugins/gpu/gpu.cpp:96
+#, fuzzy, kde-format
+#| msgid "CPU"
+msgid "GPU"
+msgstr "CPU"
+
+#: plugins/gpu/gpu.cpp:97
+#, kde-format
+msgid "Displays which GPU the process is using"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:229
+#, kde-format
+msgctxt "%1 is a number"
+msgid "GPU %1"
+msgstr ""
+
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
@@ -575,18 +604,6 @@ msgstr ""
 msgctxt "@title"
 msgid "Upload"
 msgstr ""
-
-#: plugins/nvidia/nvidia.cpp:29
-#, fuzzy, kde-format
-#| msgid "User CPU Usage"
-msgid "GPU Usage"
-msgstr "Kasutaja CPU kasutus"
-
-#: plugins/nvidia/nvidia.cpp:31
-#, fuzzy, kde-format
-#| msgid "Memory"
-msgid "GPU Memory"
-msgstr "Mälu"
 
 #: process.cpp:96 process.cpp:117
 #, kde-format

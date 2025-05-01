@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2025-01-30 10:00+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -535,6 +535,33 @@ msgstr "Az adatok lemezre írásának sebessége."
 msgid "Threads"
 msgstr "Szálak"
 
+#: plugins/gpu/gpu.cpp:92 plugins/nvidia/nvidia.cpp:29
+#, kde-format
+msgid "GPU Usage"
+msgstr "GPU használat"
+
+#: plugins/gpu/gpu.cpp:94 plugins/nvidia/nvidia.cpp:31
+#, kde-format
+msgid "GPU Memory"
+msgstr "GPU memória"
+
+#: plugins/gpu/gpu.cpp:96
+#, fuzzy, kde-format
+#| msgid "CPU"
+msgid "GPU"
+msgstr "CPU"
+
+#: plugins/gpu/gpu.cpp:97
+#, kde-format
+msgid "Displays which GPU the process is using"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:229
+#, kde-format
+msgctxt "%1 is a number"
+msgid "GPU %1"
+msgstr ""
+
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
@@ -558,16 +585,6 @@ msgstr "Feltöltési sebesség"
 msgctxt "@title"
 msgid "Upload"
 msgstr "Feltöltés"
-
-#: plugins/nvidia/nvidia.cpp:29
-#, kde-format
-msgid "GPU Usage"
-msgstr "GPU használat"
-
-#: plugins/nvidia/nvidia.cpp:31
-#, kde-format
-msgid "GPU Memory"
-msgstr "GPU memória"
 
 #: process.cpp:96 process.cpp:117
 #, kde-format

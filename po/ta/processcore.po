@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: கேபசூ 4.1 தமிழாக்கம்\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2025-01-26 17:44+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -502,6 +502,32 @@ msgstr ""
 msgid "Threads"
 msgstr ""
 
+#: plugins/gpu/gpu.cpp:92 plugins/nvidia/nvidia.cpp:29
+#, kde-format
+msgid "GPU Usage"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:94 plugins/nvidia/nvidia.cpp:31
+#, kde-format
+msgid "GPU Memory"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:96
+#, kde-format
+msgid "GPU"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:97
+#, kde-format
+msgid "Displays which GPU the process is using"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:229
+#, kde-format
+msgctxt "%1 is a number"
+msgid "GPU %1"
+msgstr ""
+
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
@@ -524,16 +550,6 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
-
-#: plugins/nvidia/nvidia.cpp:29
-#, kde-format
-msgid "GPU Usage"
-msgstr ""
-
-#: plugins/nvidia/nvidia.cpp:31
-#, kde-format
-msgid "GPU Memory"
 msgstr ""
 
 #: process.cpp:96 process.cpp:117

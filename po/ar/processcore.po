@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2025-01-09 17:06+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -534,6 +534,33 @@ msgstr "معدل كتابة البيانات على القرص."
 msgid "Threads"
 msgstr "الخطوط"
 
+#: plugins/gpu/gpu.cpp:92 plugins/nvidia/nvidia.cpp:29
+#, kde-format
+msgid "GPU Usage"
+msgstr "استخدام معالج الرسوميات"
+
+#: plugins/gpu/gpu.cpp:94 plugins/nvidia/nvidia.cpp:31
+#, kde-format
+msgid "GPU Memory"
+msgstr "ذاكرة معالج الرسوميات"
+
+#: plugins/gpu/gpu.cpp:96
+#, fuzzy, kde-format
+#| msgid "CPU"
+msgid "GPU"
+msgstr "المعالج"
+
+#: plugins/gpu/gpu.cpp:97
+#, kde-format
+msgid "Displays which GPU the process is using"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:229
+#, kde-format
+msgctxt "%1 is a number"
+msgid "GPU %1"
+msgstr ""
+
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
@@ -557,16 +584,6 @@ msgstr "سرعة الرفع"
 msgctxt "@title"
 msgid "Upload"
 msgstr "الرفع"
-
-#: plugins/nvidia/nvidia.cpp:29
-#, kde-format
-msgid "GPU Usage"
-msgstr "استخدام معالج الرسوميات"
-
-#: plugins/nvidia/nvidia.cpp:31
-#, kde-format
-msgid "GPU Memory"
-msgstr "ذاكرة معالج الرسوميات"
 
 #: process.cpp:96 process.cpp:117
 #, kde-format

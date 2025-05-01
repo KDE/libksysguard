@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2025-04-06 23:36+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -524,6 +524,33 @@ msgstr "디스크에 데이터를 쓰는 전송률입니다."
 msgid "Threads"
 msgstr "스레드"
 
+#: plugins/gpu/gpu.cpp:92 plugins/nvidia/nvidia.cpp:29
+#, kde-format
+msgid "GPU Usage"
+msgstr "GPU 사용량"
+
+#: plugins/gpu/gpu.cpp:94 plugins/nvidia/nvidia.cpp:31
+#, kde-format
+msgid "GPU Memory"
+msgstr "GPU 메모리"
+
+#: plugins/gpu/gpu.cpp:96
+#, fuzzy, kde-format
+#| msgid "CPU"
+msgid "GPU"
+msgstr "CPU"
+
+#: plugins/gpu/gpu.cpp:97
+#, kde-format
+msgid "Displays which GPU the process is using"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:229
+#, kde-format
+msgctxt "%1 is a number"
+msgid "GPU %1"
+msgstr ""
+
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
@@ -547,16 +574,6 @@ msgstr "업로드 속도"
 msgctxt "@title"
 msgid "Upload"
 msgstr "업로드"
-
-#: plugins/nvidia/nvidia.cpp:29
-#, kde-format
-msgid "GPU Usage"
-msgstr "GPU 사용량"
-
-#: plugins/nvidia/nvidia.cpp:31
-#, kde-format
-msgid "GPU Memory"
-msgstr "GPU 메모리"
 
 #: process.cpp:96 process.cpp:117
 #, kde-format
