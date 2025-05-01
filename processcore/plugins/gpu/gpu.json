@@ -1,5 +1,5 @@
 {
     "KPlugin": {
-      "Description": "Stats of per-process GPU resources for AMD cards"
+        "Description": "Stats of per-process GPU resources for AMD cards"
     }
 }
