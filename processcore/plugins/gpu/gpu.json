@@ -1,5 +1,13 @@
 {
     "KPlugin": {
-        "Description": "Stats of per-process GPU resources for AMD cards"
+        "Description": "Stats of per-process GPU resources for AMD cards",
+        "Description[ca]": "Estadístiques dels recursos de GPU per procés per a les targetes AMD",
+        "Description[es]": "Estadísticas de recursos de GPU por proceso para tarjetas AMD",
+        "Description[ka]": "თითოეული პროცესის GPU-ის რესურსების სტატისტიკა AMD-ის ბარათებისთვის",
+        "Description[nl]": "Statistieken van per-proces GPU-hulpbronnen voor AMD-kaarten",
+        "Description[sl]": "Statistika virov GPU po procesu za kartice AMD",
+        "Description[uk]": "Статистика ресурсів окремих процесів графічного процесора для карток AMD",
+        "Description[x-test]": "xxStats of per-process GPU resources for AMD cardsxx",
+        "Description[zh_TW]": "AMD 顯示卡的各個行程的 GPU 資源"
     }
 }
