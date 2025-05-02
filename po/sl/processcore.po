@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-01 00:43+0000\n"
-"PO-Revision-Date: 2025-01-09 07:18+0100\n"
+"PO-Revision-Date: 2025-05-01 06:06+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -550,21 +550,20 @@ msgid "GPU Memory"
 msgstr "Pomnilnik GPE"
 
 #: plugins/gpu/gpu.cpp:96
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "CPE"
+msgstr "GPE"
 
 #: plugins/gpu/gpu.cpp:97
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Prikazuje, kateri grafični procesor uporablja proces"
 
 #: plugins/gpu/gpu.cpp:229
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
-msgstr ""
+msgstr "GPE %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format

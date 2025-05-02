@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-01 00:43+0000\n"
-"PO-Revision-Date: 2025-01-09 09:51+0100\n"
+"PO-Revision-Date: 2025-05-01 10:34+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -553,21 +553,20 @@ msgid "GPU Memory"
 msgstr "Memòria de la GPU"
 
 #: plugins/gpu/gpu.cpp:96
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "CPU"
+msgstr "GPU"
 
 #: plugins/gpu/gpu.cpp:97
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Mostra quina GPU està utilitzant el procés"
 
 #: plugins/gpu/gpu.cpp:229
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
-msgstr ""
+msgstr "GPU %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format
