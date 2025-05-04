@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-01 00:43+0000\n"
-"PO-Revision-Date: 2025-01-09 17:38+0100\n"
+"PO-Revision-Date: 2025-05-01 17:49+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -553,21 +553,20 @@ msgid "GPU Memory"
 msgstr "Memoria GPU"
 
 #: plugins/gpu/gpu.cpp:96
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "CPU"
+msgstr "GPU"
 
 #: plugins/gpu/gpu.cpp:97
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Visualizza quale GPU sta utilizzando il processo"
 
 #: plugins/gpu/gpu.cpp:229
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
-msgstr ""
+msgstr "GPU %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format
