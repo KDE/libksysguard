@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-01 00:43+0000\n"
-"PO-Revision-Date: 2021-05-19 17:19+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2024-07-03 10:46+0200\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -515,10 +515,9 @@ msgid "GPU Memory"
 msgstr "Paměť GPU"
 
 #: plugins/gpu/gpu.cpp:96
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "CPU"
+msgstr "GPU"
 
 #: plugins/gpu/gpu.cpp:97
 #, kde-format
