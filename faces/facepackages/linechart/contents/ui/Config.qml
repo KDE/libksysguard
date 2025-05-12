@@ -97,6 +97,7 @@ Kirigami.FormLayout {
         from: 0
         to: Math.pow(2, 31) - 1
         Kirigami.FormData.label: i18nc("@label:spinbox", "Show last:")
+        Layout.maximumWidth: Kirigami.Units.gridUnit * 10
 
         textFromValue: function(value, locale) {
             return i18ncp("@item:valuesuffix %1 is seconds of history", "%1 second", "%1 seconds", Number(value).toLocaleString(locale, "f", 0));
