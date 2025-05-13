@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 00:41+0000\n"
+"POT-Creation-Date: 2025-05-13 00:43+0000\n"
 "PO-Revision-Date: 2022-10-31 16:41+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -31,7 +31,7 @@ msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Bắt đầu từ góc:"
 
-#: contents/ui/Config.qml:43
+#: contents/ui/Config.qml:44
 #, fuzzy, kde-format
 #| msgctxt "angle degrees"
 #| msgid "%1°"
@@ -39,7 +39,7 @@ msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
-#: contents/ui/Config.qml:46 contents/ui/Config.qml:59
+#: contents/ui/Config.qml:47 contents/ui/Config.qml:61
 #, fuzzy, kde-format
 #| msgctxt "angle degrees"
 #| msgid "°"
@@ -47,14 +47,14 @@ msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
-#: contents/ui/Config.qml:51
+#: contents/ui/Config.qml:52
 #, fuzzy, kde-format
 #| msgid "Total Pie Angle:"
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Tổng góc bánh:"
 
-#: contents/ui/Config.qml:56
+#: contents/ui/Config.qml:58
 #, fuzzy, kde-format
 #| msgctxt "angle degrees"
 #| msgid "%1°"
@@ -62,28 +62,28 @@ msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
-#: contents/ui/Config.qml:64
+#: contents/ui/Config.qml:66
 #, fuzzy, kde-format
 #| msgid "Rounded Lines"
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "Các đường bo tròn"
 
-#: contents/ui/Config.qml:69
+#: contents/ui/Config.qml:71
 #, fuzzy, kde-format
 #| msgid "Automatic Data Range"
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Khoảng dữ liệu tự động"
 
-#: contents/ui/Config.qml:73
+#: contents/ui/Config.qml:75
 #, fuzzy, kde-format
 #| msgid "From:"
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Từ:"
 
-#: contents/ui/Config.qml:80
+#: contents/ui/Config.qml:82
 #, fuzzy, kde-format
 #| msgid "To:"
 msgctxt "@label:spinbox data range"

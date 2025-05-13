@@ -60,11 +60,10 @@ msgid "[Group] Name"
 msgstr ""
 
 #: SensorGroup.cpp:39
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Total Usage"
-msgstr "[Skupina] CPU"
+msgstr ""
 
 #: SensorGroup.cpp:40
 #, kde-format
@@ -79,11 +78,10 @@ msgid "[Group] Total Video Memory"
 msgstr ""
 
 #: SensorGroup.cpp:42
-#, fuzzy, kde-format
-#| msgid "[Group]"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Name"
-msgstr "[Skupina]"
+msgstr ""
 
 #: SensorGroup.cpp:44
 #, kde-format
@@ -181,18 +179,16 @@ msgid "[Group] Percentage Free"
 msgstr ""
 
 #: SensorGroup.cpp:69
-#, fuzzy, kde-format
-#| msgid "[Group]"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Name"
-msgstr "[Skupina]"
+msgstr ""
 
 #: SensorGroup.cpp:70
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge"
-msgstr "[Skupina] CPU"
+msgstr ""
 
 #: SensorGroup.cpp:71
 #, kde-format
@@ -219,11 +215,10 @@ msgid "[Group] Design Capacity"
 msgstr ""
 
 #: SensorGroup.cpp:75
-#, fuzzy, kde-format
-#| msgid "[Group]"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Health"
-msgstr "[Skupina]"
+msgstr ""
 
 #: SensorGroup.cpp:77
 #, kde-format
@@ -231,10 +226,9 @@ msgid "[Group] CPU"
 msgstr "[Skupina] CPU"
 
 #: SensorGroup.cpp:78
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgid "[Group] GPU"
-msgstr "[Skupina] CPU"
+msgstr ""
 
 #: SensorGroup.cpp:79
 #, kde-format
@@ -248,11 +242,10 @@ msgid "[Group] Disk"
 msgstr "[Skupina] Disk"
 
 #: SensorGroup.cpp:81
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgctxt "Power group title"
 msgid "[Group] Power"
-msgstr "[Skupina] CPU"
+msgstr ""
 
 #: SensorTreeModel.cpp:289
 #, kde-format

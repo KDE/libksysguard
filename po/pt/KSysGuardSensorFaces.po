@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-06 00:42+0000\n"
+"POT-Creation-Date: 2025-05-13 00:43+0000\n"
 "PO-Revision-Date: 2022-10-13 12:12+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -166,7 +166,7 @@ msgstr "Mostrar as Linhas da Grelha"
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
-#: facepackages/piechart/contents/ui/Config.qml:69
+#: facepackages/piechart/contents/ui/Config.qml:71
 #, fuzzy, kde-format
 #| msgid "Automatic Data Range"
 msgctxt "@option:check"
@@ -175,7 +175,7 @@ msgstr "Intervalo de Dados Automático"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
-#: facepackages/piechart/contents/ui/Config.qml:73
+#: facepackages/piechart/contents/ui/Config.qml:75
 #, fuzzy, kde-format
 #| msgid "From:"
 msgctxt "@label:spinbox data range"
@@ -184,7 +184,7 @@ msgstr "De:"
 
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
-#: facepackages/piechart/contents/ui/Config.qml:80
+#: facepackages/piechart/contents/ui/Config.qml:82
 #, fuzzy, kde-format
 #| msgid "To:"
 msgctxt "@label:spinbox data range"
@@ -284,7 +284,7 @@ msgctxt "@label:spinbox"
 msgid "Show last:"
 msgstr "Mostrar o Título"
 
-#: facepackages/linechart/contents/ui/Config.qml:102
+#: facepackages/linechart/contents/ui/Config.qml:103
 #, fuzzy, kde-format
 #| msgctxt "%1 is seconds of history"
 #| msgid "%1 second"
@@ -302,7 +302,7 @@ msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Iniciar com o Ângulo:"
 
-#: facepackages/piechart/contents/ui/Config.qml:43
+#: facepackages/piechart/contents/ui/Config.qml:44
 #, fuzzy, kde-format
 #| msgctxt "angle degrees"
 #| msgid "%1°"
@@ -310,8 +310,8 @@ msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
-#: facepackages/piechart/contents/ui/Config.qml:46
-#: facepackages/piechart/contents/ui/Config.qml:59
+#: facepackages/piechart/contents/ui/Config.qml:47
+#: facepackages/piechart/contents/ui/Config.qml:61
 #, fuzzy, kde-format
 #| msgctxt "angle degrees"
 #| msgid "°"
@@ -319,14 +319,14 @@ msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
-#: facepackages/piechart/contents/ui/Config.qml:51
+#: facepackages/piechart/contents/ui/Config.qml:52
 #, fuzzy, kde-format
 #| msgid "Total Pie Angle:"
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Ângulo Total da Fatia:"
 
-#: facepackages/piechart/contents/ui/Config.qml:56
+#: facepackages/piechart/contents/ui/Config.qml:58
 #, fuzzy, kde-format
 #| msgctxt "angle degrees"
 #| msgid "%1°"
@@ -334,7 +334,7 @@ msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
-#: facepackages/piechart/contents/ui/Config.qml:64
+#: facepackages/piechart/contents/ui/Config.qml:66
 #, fuzzy, kde-format
 #| msgid "Rounded Lines"
 msgctxt "@option:check"

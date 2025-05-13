@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 00:41+0000\n"
+"POT-Creation-Date: 2025-05-13 00:43+0000\n"
 "PO-Revision-Date: 2024-09-06 03:43+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -91,7 +91,7 @@ msgctxt "@label:spinbox"
 msgid "Show last:"
 msgstr "Mostrar último:"
 
-#: contents/ui/Config.qml:102
+#: contents/ui/Config.qml:103
 #, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"

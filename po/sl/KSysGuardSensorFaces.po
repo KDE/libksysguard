@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-06 00:42+0000\n"
+"POT-Creation-Date: 2025-05-13 00:43+0000\n"
 "PO-Revision-Date: 2024-09-06 07:25+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -168,7 +168,7 @@ msgstr "Prikaži mrežne črte"
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
-#: facepackages/piechart/contents/ui/Config.qml:69
+#: facepackages/piechart/contents/ui/Config.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
@@ -176,7 +176,7 @@ msgstr "Samodejni obseg podatkov"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
-#: facepackages/piechart/contents/ui/Config.qml:73
+#: facepackages/piechart/contents/ui/Config.qml:75
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
@@ -184,7 +184,7 @@ msgstr "Od:"
 
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
-#: facepackages/piechart/contents/ui/Config.qml:80
+#: facepackages/piechart/contents/ui/Config.qml:82
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
@@ -270,7 +270,7 @@ msgctxt "@label:spinbox"
 msgid "Show last:"
 msgstr "Prikaži zadnjega:"
 
-#: facepackages/linechart/contents/ui/Config.qml:102
+#: facepackages/linechart/contents/ui/Config.qml:103
 #, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "%1 second"
@@ -286,32 +286,32 @@ msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Začetni kot:"
 
-#: facepackages/piechart/contents/ui/Config.qml:43
+#: facepackages/piechart/contents/ui/Config.qml:44
 #, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
-#: facepackages/piechart/contents/ui/Config.qml:46
-#: facepackages/piechart/contents/ui/Config.qml:59
+#: facepackages/piechart/contents/ui/Config.qml:47
+#: facepackages/piechart/contents/ui/Config.qml:61
 #, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
-#: facepackages/piechart/contents/ui/Config.qml:51
+#: facepackages/piechart/contents/ui/Config.qml:52
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Skupni kot kroga:"
 
-#: facepackages/piechart/contents/ui/Config.qml:56
+#: facepackages/piechart/contents/ui/Config.qml:58
 #, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
-#: facepackages/piechart/contents/ui/Config.qml:64
+#: facepackages/piechart/contents/ui/Config.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org.kde.ksysguard.linechart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 00:41+0000\n"
+"POT-Creation-Date: 2025-05-13 00:43+0000\n"
 "PO-Revision-Date: 2023-03-20 23:06+0100\n"
 "Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -100,7 +100,7 @@ msgctxt "@label:spinbox"
 msgid "Show last:"
 msgstr ""
 
-#: contents/ui/Config.qml:102
+#: contents/ui/Config.qml:103
 #, fuzzy, kde-format
 #| msgctxt "%1 is seconds of history"
 #| msgid "%1 second"

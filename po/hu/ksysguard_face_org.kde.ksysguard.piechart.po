@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 00:41+0000\n"
+"POT-Creation-Date: 2025-05-13 00:43+0000\n"
 "PO-Revision-Date: 2024-09-26 14:25+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -30,49 +30,49 @@ msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Kezdőszög:"
 
-#: contents/ui/Config.qml:43
+#: contents/ui/Config.qml:44
 #, kde-format
 msgctxt "@label angle degrees"
 msgid "%1°"
 msgstr "%1°"
 
-#: contents/ui/Config.qml:46 contents/ui/Config.qml:59
+#: contents/ui/Config.qml:47 contents/ui/Config.qml:61
 #, kde-format
 msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
-#: contents/ui/Config.qml:51
+#: contents/ui/Config.qml:52
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Teljes tortaszög:"
 
-#: contents/ui/Config.qml:56
+#: contents/ui/Config.qml:58
 #, kde-format
 msgctxt "@label angle"
 msgid "%1°"
 msgstr "%1°"
 
-#: contents/ui/Config.qml:64
+#: contents/ui/Config.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "Lekerekített vonalak"
 
-#: contents/ui/Config.qml:69
+#: contents/ui/Config.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Automatikus adattartomány"
 
-#: contents/ui/Config.qml:73
+#: contents/ui/Config.qml:75
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "Ettől:"
 
-#: contents/ui/Config.qml:80
+#: contents/ui/Config.qml:82
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"

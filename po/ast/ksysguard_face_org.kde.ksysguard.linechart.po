@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 00:41+0000\n"
+"POT-Creation-Date: 2025-05-13 00:43+0000\n"
 "PO-Revision-Date: 2023-11-04 22:57+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -90,7 +90,7 @@ msgctxt "@label:spinbox"
 msgid "Show last:"
 msgstr ""
 
-#: contents/ui/Config.qml:102
+#: contents/ui/Config.qml:103
 #, fuzzy, kde-format
 #| msgctxt "%1 is seconds of history"
 #| msgid "%1 second"
