@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 00:43+0000\n"
+"POT-Creation-Date: 2025-05-15 00:44+0000\n"
 "PO-Revision-Date: 2025-05-01 12:44+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -541,27 +541,27 @@ msgstr "Швидкість, із якою дані записуються на �
 msgid "Threads"
 msgstr "Потоки"
 
-#: plugins/gpu/gpu.cpp:92 plugins/nvidia/nvidia.cpp:29
+#: plugins/gpu/gpu.cpp:97
 #, kde-format
 msgid "GPU Usage"
 msgstr "Використання граф. процесора"
 
-#: plugins/gpu/gpu.cpp:94 plugins/nvidia/nvidia.cpp:31
+#: plugins/gpu/gpu.cpp:99
 #, kde-format
 msgid "GPU Memory"
 msgstr "Пам'ять граф. процесора"
 
-#: plugins/gpu/gpu.cpp:96
+#: plugins/gpu/gpu.cpp:101
 #, kde-format
 msgid "GPU"
 msgstr "ГП"
 
-#: plugins/gpu/gpu.cpp:97
+#: plugins/gpu/gpu.cpp:102
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr "Показує, який графічний процесор використовується процесом"
 
-#: plugins/gpu/gpu.cpp:229
+#: plugins/gpu/gpu.cpp:343
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"

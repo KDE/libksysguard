@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 00:43+0000\n"
+"POT-Creation-Date: 2025-05-15 00:44+0000\n"
 "PO-Revision-Date: 2025-05-04 06:27+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -534,27 +534,27 @@ msgstr "معدل كتابة البيانات على القرص."
 msgid "Threads"
 msgstr "الخطوط"
 
-#: plugins/gpu/gpu.cpp:92 plugins/nvidia/nvidia.cpp:29
+#: plugins/gpu/gpu.cpp:97
 #, kde-format
 msgid "GPU Usage"
 msgstr "استخدام معالج الرسوميات"
 
-#: plugins/gpu/gpu.cpp:94 plugins/nvidia/nvidia.cpp:31
+#: plugins/gpu/gpu.cpp:99
 #, kde-format
 msgid "GPU Memory"
 msgstr "ذاكرة معالج الرسوميات"
 
-#: plugins/gpu/gpu.cpp:96
+#: plugins/gpu/gpu.cpp:101
 #, kde-format
 msgid "GPU"
 msgstr "معالج الرسوميات"
 
-#: plugins/gpu/gpu.cpp:97
+#: plugins/gpu/gpu.cpp:102
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr "يعرض وحدة معالجة الرسوميات التي تستخدمها العملية"
 
-#: plugins/gpu/gpu.cpp:229
+#: plugins/gpu/gpu.cpp:343
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
