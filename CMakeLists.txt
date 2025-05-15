@@ -6,7 +6,7 @@ set(PROJECT_VERSION "6.3.80")
 
 # check with non-Plasma consumers (e.g. KDevelop) before bumping these versions to make sure the KDE CI does not break
 set(QT_MIN_VERSION "6.7.0")
-set(KF6_MIN_VERSION "6.10.0")
+set(KF6_MIN_VERSION "6.14.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
