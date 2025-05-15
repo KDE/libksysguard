@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Stats of per-process GPU resources for AMD cards",
         "Description[ar]": "إحصائيات لكل عملية لموارد معالج الرسوميات لبطاقات أي أم دي",
+        "Description[bg]": "Статистика на GPU ресурси/процес за AMD карти",
         "Description[ca@valencia]": "Estadístiques dels recursos de GPU per procés per a les targetes AMD",
         "Description[ca]": "Estadístiques dels recursos de GPU per procés per a les targetes AMD",
         "Description[es]": "Estadísticas de recursos de GPU por proceso para tarjetas AMD",
