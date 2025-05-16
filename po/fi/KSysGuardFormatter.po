@@ -1,6 +1,6 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <tommi.nieminen@legisign.org>
+# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <tranlator@legisign.org>
 #
 msgid ""
 msgstr ""
