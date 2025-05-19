@@ -91,6 +91,7 @@ NetworkPlugin::NetworkPlugin(QObject *parent, const QVariantList &args)
 NetworkPlugin::~NetworkPlugin() noexcept
 {
     if (m_process) {
+        disconnect(m_process, &QProcess::readyReadStandardOutput, this, nullptr);
         m_process->terminate();
         m_process->waitForFinished();
     }
