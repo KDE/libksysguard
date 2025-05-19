@@ -595,47 +595,33 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process)
 
 bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *process)
 {
-    QString filename = dir + QStringLiteral("io");
-    // As an optimization, if the last file read in was io, then we already have this info in memory
-    mFile.setFileName(filename);
+    mFile.setFileName(dir + QStringLiteral("io"));
     if (!mFile.open(QIODevice::ReadOnly)) {
         return false; /* process has terminated in the meantime */
     }
-    if (mFile.readLine(mBuffer.data(), mBuffer.size()) <= 0) { //-1 indicates nothing read
-        mFile.close();
-        return false;
-    }
-    mFile.close();
 
-    int current_word = 0; // count from 0
-    char *word = mBuffer.data();
-    while (current_word < 6 && word[0] != 0) {
-        if (word[0] == ' ') {
-            qlonglong number = atoll(word + 1);
-            switch (current_word++) {
-            case 0: // rchar - characters read
+    while (mFile.readLine(mBuffer.data(), mBuffer.size()) > 0) {
+        auto parts = mBuffer.split(':');
+        if (parts.size() >= 2) {
+            auto name = parts.at(0).trimmed();
+            auto number = atoll(parts.at(1));
+            if (name == "rchar") {
                 process->setIoCharactersRead(number);
-                break;
-            case 1: // wchar - characters written
+            } else if (name == "wchar") {
                 process->setIoCharactersWritten(number);
-                break;
-            case 2: // syscr - read syscall
+            } else if (name == "syscr") {
                 process->setIoReadSyscalls(number);
-                break;
-            case 3: // syscw - write syscall
+            } else if (name == "syscw") {
                 process->setIoWriteSyscalls(number);
-                break;
-            case 4: // read_bytes - bytes actually read from I/O
+            } else if (name == "read_bytes") {
                 process->setIoCharactersActuallyRead(number);
-                break;
-            case 5: // write_bytes - bytes actually written to I/O
+            } else if (name == "write_bytes") {
                 process->setIoCharactersActuallyWritten(number);
-            default:
-                break;
             }
         }
-        word++;
     }
+
+    mFile.close();
     return true;
 }
 
