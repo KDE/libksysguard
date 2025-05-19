@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: கேபசூ 4.1 தமிழாக்கம்\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-15 00:44+0000\n"
-"PO-Revision-Date: 2025-01-26 17:44+0530\n"
+"PO-Revision-Date: 2025-05-18 19:05+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -49,7 +49,7 @@ msgstr ""
 #: extended_process_list.cpp:101
 #, kde-format
 msgid "Parent PID"
-msgstr ""
+msgstr "தாய் பணியெண்"
 
 #: extended_process_list.cpp:108
 #, kde-format
@@ -64,7 +64,7 @@ msgstr ""
 #: extended_process_list.cpp:113
 #, kde-format
 msgid "UID"
-msgstr ""
+msgstr "பயனர் எண்"
 
 #: extended_process_list.cpp:119
 #, kde-format
@@ -164,7 +164,7 @@ msgstr ""
 #: extended_process_list.cpp:231
 #, kde-format
 msgid "User CPU"
-msgstr ""
+msgstr "பயனர் சீபியூ"
 
 #: extended_process_list.cpp:238
 #, kde-format
@@ -174,7 +174,7 @@ msgstr ""
 #: extended_process_list.cpp:239
 #, kde-format
 msgid "System CPU"
-msgstr ""
+msgstr "கணினி சீபியூ"
 
 #: extended_process_list.cpp:248
 #, kde-format
@@ -184,7 +184,7 @@ msgstr ""
 #: extended_process_list.cpp:254
 #, kde-format
 msgid "CPU"
-msgstr ""
+msgstr "சீபியூ"
 
 #: extended_process_list.cpp:258
 #, kde-format
@@ -386,7 +386,7 @@ msgstr ""
 #: extended_process_list.cpp:416
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "பெயர்"
 
 #: extended_process_list.cpp:417
 #, kde-format
@@ -396,7 +396,7 @@ msgstr ""
 #: extended_process_list.cpp:422
 #, kde-format
 msgid "Command"
-msgstr ""
+msgstr "கட்டளை"
 
 #: extended_process_list.cpp:426
 #, kde-format
@@ -406,7 +406,7 @@ msgstr ""
 #: extended_process_list.cpp:430
 #, kde-format
 msgid "Status"
-msgstr ""
+msgstr "நிலை"
 
 #: extended_process_list.cpp:435
 #, kde-format
@@ -475,7 +475,7 @@ msgstr ""
 #: extended_process_list.cpp:522
 #, kde-format
 msgid "Read"
-msgstr ""
+msgstr "படிப்பது"
 
 #: extended_process_list.cpp:523
 #, kde-format
@@ -490,7 +490,7 @@ msgstr ""
 #: extended_process_list.cpp:533
 #, kde-format
 msgid "Write"
-msgstr ""
+msgstr "எழுதுவது"
 
 #: extended_process_list.cpp:534
 #, kde-format
@@ -538,7 +538,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr ""
+msgstr "பதிவிறக்கம்"
 
 #: plugins/network/network.cpp:40
 #, kde-format
@@ -550,7 +550,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
+msgstr "பதிவேற்றம்"
 
 #: process.cpp:96 process.cpp:117
 #, kde-format
