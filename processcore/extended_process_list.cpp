@@ -561,6 +561,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
 
 ExtendedProcesses::~ExtendedProcesses()
 {
+    qDeleteAll(d->m_providers);
 }
 
 QList<ProcessAttribute *> ExtendedProcesses::attributes() const
