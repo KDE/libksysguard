@@ -1,15 +1,15 @@
 # Spanish translations for KSysGuardSensorFaces.po package.
-# Copyright (C) 2020 This file is copyright:
+# Copyright (C) 2020-2025 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-#
 # Automatically generated, 2020.
-# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-13 00:43+0000\n"
-"PO-Revision-Date: 2024-09-06 03:38+0200\n"
+"PO-Revision-Date: 2025-05-20 01:54+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -37,12 +37,12 @@ msgstr "Ajustes automáticos:"
 #: ConfigAppearance.qml:129
 #, kde-format
 msgid "Load Preset..."
-msgstr "Cargar ajustes automáticos..."
+msgstr "Cargar ajustes automáticos…"
 
 #: ConfigAppearance.qml:134
 #, kde-format
 msgid "Get new presets..."
-msgstr "Obtener nuevos ajustes automáticos..."
+msgstr "Obtener nuevos ajustes automáticos…"
 
 #: ConfigAppearance.qml:146
 #, kde-format
@@ -67,7 +67,7 @@ msgstr "Estilo del visor:"
 #: ConfigAppearance.qml:187
 #, kde-format
 msgid "Get New Display Styles..."
-msgstr "Obtener nuevos estilos de visor..."
+msgstr "Obtener nuevos estilos de visor…"
 
 #: ConfigAppearance.qml:197
 #, kde-format
@@ -324,12 +324,12 @@ msgstr "Sensores de grupo basados en el valor de los sensores totales."
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr "Pulse para seleccionar un sensor..."
+msgstr "Pulse para seleccionar un sensor…"
 
 #: import/Choices.qml:372
 #, kde-format
 msgid "Search..."
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #: import/Choices.qml:385
 #, kde-format
@@ -341,65 +341,3 @@ msgstr "Volver"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sensor del monitor del sistema"
-
-#~ msgid "Fill Opacity:"
-#~ msgstr "Opacidad del relleno:"
-
-#~ msgid "Amount of History to Keep:"
-#~ msgstr "Tamaño del historial a guardar:"
-
-#~ msgctxt "angle"
-#~ msgid "%1°"
-#~ msgstr "%1°"
-
-#~ msgid "User Interface"
-#~ msgstr "Interfaz del usuario"
-
-#~ msgid ""
-#~ "The compact representation of the sensors plasmoid when collapsed, for "
-#~ "instance in a panel."
-#~ msgstr ""
-#~ "La representación compacta del plasmoide de los sensores cuando está "
-#~ "comprimida (por ejemplo, en un panel)."
-
-#~ msgid "The representation of the plasmoid when it's fully expanded."
-#~ msgstr ""
-#~ "La representación del plasmoide cuando está completamente expandido."
-
-#~ msgid "The optional configuration page for this face."
-#~ msgstr "La página de configuración opcional para esta carátula."
-
-#~ msgid "Configuration support"
-#~ msgstr "Implementación de configuración"
-
-#~ msgid "KConfigXT xml file for face-specific configuration options."
-#~ msgstr ""
-#~ "Archivo XML de KConfigXT para las opciones de configuración específicas "
-#~ "de carátulas."
-
-#~ msgid ""
-#~ "The configuration file that describes face properties and capabilities."
-#~ msgstr ""
-#~ "El archivo de configuración que describe las propiedades y capacidades de "
-#~ "la carátula."
-
-#~ msgid "Automatic X Data Range"
-#~ msgstr "Intervalo de datos en X automático"
-
-#~ msgid "From (X):"
-#~ msgstr "Desde (X):"
-
-#~ msgid "To (X):"
-#~ msgstr "Hasta (X):"
-
-#~ msgid "Remove"
-#~ msgstr "Eliminar"
-
-#~ msgid "Drop Sensor Here"
-#~ msgstr "Suelte un sensor aquí"
-
-#~ msgid "Chart Sensors"
-#~ msgstr "Sensores de gráficos"
-
-#~ msgid "Drop Sensors Here"
-#~ msgstr "Suelte sensores aquí"
