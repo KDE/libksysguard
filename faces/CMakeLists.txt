@@ -44,6 +44,7 @@ ecm_target_qml_sources(SensorFaces SOURCES
     import/SensorRangeSpinBox.qml
     import/Choices.qml
     import/CompactSensorFace.qml
+    import/SuffixSpinBox.qml
 )
 
 ecm_finalize_qml_module(SensorFaces)
