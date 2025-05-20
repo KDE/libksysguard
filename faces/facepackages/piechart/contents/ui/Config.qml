@@ -33,33 +33,23 @@ Kirigami.FormLayout {
         id: showSensorsLegendCheckbox
         text: i18nc("@option:check", "Show legend")
     }
-    QQC2.SpinBox {
+    Faces.SuffixSpinBox {
         id: fromAngleSpin
         Kirigami.FormData.label: i18nc("@label:spinbox", "Starting angle:")
         Layout.maximumWidth: Kirigami.Units.gridUnit * 10
         from: -180
         to: 360
-        editable: true
-        textFromValue: function(value, locale) {
-            return i18nc("@label angle degrees", "%1°", value);
-        }
-        valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text.replace(i18nc("@item:intext angle degrees, used to read text from spinbox", "°"), ""));
-        }
+        spacing: 0
+        suffix: i18nc("@label angle degrees", "°")
     }
-    QQC2.SpinBox {
+    Faces.SuffixSpinBox {
         id: toAngleSpin
         Kirigami.FormData.label: i18nc("@label:spinbox", "Total pie angle:")
         Layout.maximumWidth: Kirigami.Units.gridUnit * 10
         from: 0
         to: 360
-        editable: true
-        textFromValue: function(value, locale) {
-            return i18nc("@label angle", "%1°", value);
-        }
-        valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text.replace(i18nc("@item:intext angle degrees, used to read text from spinbox", "°"), ""));
-        }
+        spacing: 0
+        suffix: i18nc("@label angle degrees", "°")
     }
     QQC2.CheckBox {
         id: smoothEndsCheckbox
