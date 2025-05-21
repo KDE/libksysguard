@@ -45,7 +45,7 @@ Faces.CompactSensorFace {
                 opacity: y + height <= root.height
                 sensor: sensor
                 controller: root.controller
-                color: root.colorSource.map[modelData]
+                color: root.colorSource.map[modelData] ?? "white"
 
                 Sensors.Sensor {
                     id: sensor
