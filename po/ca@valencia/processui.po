@@ -121,7 +121,7 @@ msgid ""
 "information."
 msgstr ""
 "<qt>Finalitza el procés seleccionat. Avís - podeu perdre el treball sense "
-"guardar.<br>Cliqueu amb el botó dret en un procés per a enviar altres "
+"guardar.<br>Cliqueu amb el botó dret damunt d'un procés per a enviar altres "
 "senyals.<br>Vegeu Què és açò per a la informació tècnica."
 
 #: ksysguardprocesslist.cpp:442

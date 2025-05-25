@@ -255,7 +255,7 @@ msgstr "Agrupa els sensors segons el valor dels sensors totals."
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr "Feu clic per a seleccionar un sensor…"
+msgstr "Cliqueu per a seleccionar un sensor…"
 
 #: import/Choices.qml:368
 #, kde-format
