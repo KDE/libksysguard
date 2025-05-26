@@ -1,16 +1,16 @@
 # Translation for ksysguard_sensors.po to Euskara/Basque (eu).
-# Copyright (C) 2022, This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2022, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-21 00:43+0000\n"
-"PO-Revision-Date: 2022-08-06 21:26+0200\n"
+"PO-Revision-Date: 2025-05-25 13:07+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: SensorGroup.cpp:31
 #, kde-format
 msgctxt "Total load sensor of all cores"
 msgid "[Group] Total Usage"
-msgstr "[Taldea] Erabilera guztira"
+msgstr "[Taldea] Erabilera, guztira"
 
 #: SensorGroup.cpp:32
 #, kde-format
 msgctxt "All cores user load sensors"
 msgid "[Group] User Usage"
-msgstr "[Taldea] Erabiltzaile erabilera"
+msgstr "[Taldea] Erabiltzaileen erabilera"
 
 #: SensorGroup.cpp:33
 #, kde-format
@@ -63,31 +63,25 @@ msgid "[Group] Name"
 msgstr "[Taldea] Izena"
 
 #: SensorGroup.cpp:39
-#, fuzzy, kde-format
-#| msgctxt "Total load sensor of all cores"
-#| msgid "[Group] Total Usage"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Total Usage"
-msgstr "[Taldea] Erabilera guztira"
+msgstr "[Taldea] Erabilera, guztira"
 
 #: SensorGroup.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "All cores user load sensors"
-#| msgid "[Group] User Usage"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Video Memory Used"
-msgstr "[Taldea] Erabiltzaile erabilera"
+msgstr "[Taldea] Erabilitako bideo-memoria"
 
 #: SensorGroup.cpp:41
-#, fuzzy, kde-format
-#| msgid "[Group] Total Size"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Total Video Memory"
-msgstr "[Taldea] Neurria guztira"
+msgstr "[Taldea] Bideo-memoria, guztira"
 
 #: SensorGroup.cpp:42
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Name"
 msgstr "[Taldea] Izena"
@@ -188,53 +182,46 @@ msgid "[Group] Percentage Free"
 msgstr "[Taldea] Ehuneko hutsa"
 
 #: SensorGroup.cpp:69
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Name"
 msgstr "[Taldea] Izena"
 
 #: SensorGroup.cpp:70
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge"
-msgstr "[Taldea] Izena"
+msgstr "[Taldea] Karga"
 
 #: SensorGroup.cpp:71
-#, fuzzy, kde-format
-#| msgid "[Group] Percentage Used"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge Percentage"
-msgstr "[Taldea] Erabilitako ehunekoa"
+msgstr "[Taldea] Karga ehunekoa"
 
 #: SensorGroup.cpp:72
-#, fuzzy, kde-format
-#| msgid "[Group] Write Rate"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charging Rate"
-msgstr "[Taldea] Idazte emaria"
+msgstr "[Taldea] Kargatzeko abiadura"
 
 #: SensorGroup.cpp:73
-#, fuzzy, kde-format
-#| msgid "[Group] Free Space"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Current Capacity"
-msgstr "[Taldea] Leku hutsa"
+msgstr "[Taldea] Egungo kapazitatea"
 
 #: SensorGroup.cpp:74
-#, fuzzy, kde-format
-#| msgid "[Group] Used Space"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Design Capacity"
-msgstr "[Taldea] Erabilitako espazioa"
+msgstr "[Taldea] Diseinuzko kapazitatea"
 
 #: SensorGroup.cpp:75
-#, fuzzy, kde-format
-#| msgid "[Group] Read Rate"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Health"
-msgstr "[Taldea] Irakurtze emaria"
+msgstr "[Taldea] Osasuna"
 
 #: SensorGroup.cpp:77
 #, kde-format
@@ -242,17 +229,15 @@ msgid "[Group] CPU"
 msgstr "[Taldea] PUZ"
 
 #: SensorGroup.cpp:78
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgid "[Group] GPU"
-msgstr "[Taldea] PUZ"
+msgstr "[Taldea] GPU"
 
 #: SensorGroup.cpp:79
-#, fuzzy, kde-format
-#| msgid "[Group] Network Name"
+#, kde-format
 msgctxt "Network group title"
 msgid "[Group] Network Device"
-msgstr "[Taldea] Sarearen izena"
+msgstr "[Taldea] Sareko gailua"
 
 #: SensorGroup.cpp:80
 #, kde-format
@@ -260,11 +245,10 @@ msgid "[Group] Disk"
 msgstr "[Taldea] Diskoa"
 
 #: SensorGroup.cpp:81
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgctxt "Power group title"
 msgid "[Group] Power"
-msgstr "[Taldea] PUZ"
+msgstr "[Taldea] Energia"
 
 #: SensorTreeModel.cpp:289
 #, kde-format
