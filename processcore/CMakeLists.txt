@@ -15,6 +15,7 @@ set(ksysguard_LIB_SRCS
    process_attribute_model.cpp
    process_data_model.cpp
    process_data_provider.cpp
+   process_foreign_types.h
 )
 ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore
     DESCRIPTION "libksysguard (processcore)" EXPORT LIBKSYSGUARD)
@@ -55,9 +56,12 @@ set_target_properties(processcore PROPERTIES
     SOVERSION ${KSYSGUARD_SOVERSION}
     EXPORT_NAME ProcessCore
 )
+
+ecm_add_qml_module(processcore URI "org.kde.ksysguard.process" VERSION 1.0 GENERATE_PLUGIN_SOURCE)
+ecm_finalize_qml_module(processcore)
+
 install(TARGETS processcore EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-add_subdirectory(declarative)
 add_subdirectory(plugins)
 
 ########### install files ###############
