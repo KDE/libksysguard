@@ -13,6 +13,7 @@
 
 #include <QObject>
 #include <QVariant>
+#include <qqmlintegration.h>
 
 #include "process.h"
 
@@ -33,6 +34,7 @@ namespace KSysGuard
 class PROCESSCORE_EXPORT ProcessController : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     ProcessController(QObject *parent = nullptr);

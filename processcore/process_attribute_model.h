@@ -8,6 +8,7 @@
 #pragma once
 
 #include <QAbstractListModel>
+#include <qqmlintegration.h>
 
 #include "processcore_export.h"
 
@@ -23,6 +24,9 @@ class ProcessAttribute;
 class PROCESSCORE_EXPORT ProcessAttributeModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("Available from ProcessDataModel")
+
 public:
     enum class Role {
         Name = Qt::DisplayRole, /// Human readable translated name of the attribute

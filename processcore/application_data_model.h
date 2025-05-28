@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <qqmlintegration.h>
+
 #include "cgroup_data_model.h"
 
 #include "processcore_export.h"
@@ -21,6 +23,8 @@ class Process;
 class PROCESSCORE_EXPORT ApplicationDataModel : public CGroupDataModel
 {
     Q_OBJECT
+    QML_ELEMENT
+
 public:
     ApplicationDataModel(QObject *parent = nullptr);
     ~ApplicationDataModel() override;

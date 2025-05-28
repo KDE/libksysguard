@@ -7,6 +7,8 @@
 #pragma once
 
 #include <QAbstractItemModel>
+#include <qqmlintegration.h>
+
 #include <processcore/processes.h>
 
 #include "processcore_export.h"
@@ -29,6 +31,7 @@ class ProcessAttributeModel;
 class PROCESSCORE_EXPORT ProcessDataModel : public QAbstractItemModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
     /**
      * A list of ids of all available attributes.
