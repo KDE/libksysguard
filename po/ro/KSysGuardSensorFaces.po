@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-05-29 00:44+0000\n"
 "PO-Revision-Date: 2022-05-02 15:37+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -365,7 +365,7 @@ msgstr ""
 msgid "Search..."
 msgstr "Caută…"
 
-#: import/Choices.qml:385
+#: import/Choices.qml:386
 #, kde-format
 msgctxt "@action:button"
 msgid "Back"

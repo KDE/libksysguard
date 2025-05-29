@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-05-29 00:44+0000\n"
 "PO-Revision-Date: 2024-09-23 15:01+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -331,7 +331,7 @@ msgstr "Щракнете за избор на сензор…"
 msgid "Search..."
 msgstr "Търсене..."
 
-#: import/Choices.qml:385
+#: import/Choices.qml:386
 #, kde-format
 msgctxt "@action:button"
 msgid "Back"
