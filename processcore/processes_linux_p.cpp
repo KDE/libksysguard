@@ -198,11 +198,11 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
     if (!mFile.open(QIODevice::ReadOnly))
         return false; /* process has terminated in the meantime */
 
-    process->setUid(0);
-    process->setGid(0);
-    process->setTracerpid(-1);
-    process->setNumThreads(0);
-    process->setNoNewPrivileges(0);
+    bool uidFound = false;
+    bool gidFound = false;
+    bool tracerFound = false;
+    bool numThreadsFound = false;
+    bool noNewPrivilegesFound = false;
 
     int size;
     int found = 0; // count how many fields we found
@@ -218,6 +218,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 }
             } else if ((unsigned int)size > sizeof("NoNewPrivs:") && qstrncmp(mBuffer, "NoNewPrivs:", sizeof("NoNewPrivs:") - 1) == 0) {
                 process->setNoNewPrivileges(atol(mBuffer + sizeof("NoNewPrivs:") - 1));
+                noNewPrivilegesFound = true;
                 if (++found == 6) {
                     goto finish;
                 }
@@ -234,6 +235,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setEuid(euid);
                 process->setSuid(suid);
                 process->setFsuid(fsuid);
+                uidFound = true;
                 if (++found == 6) {
                     goto finish;
                 }
@@ -247,6 +249,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setEgid(egid);
                 process->setSgid(sgid);
                 process->setFsgid(fsgid);
+                gidFound = true;
                 if (++found == 6) {
                     goto finish;
                 }
@@ -258,11 +261,13 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 if (process->tracerpid() == 0) {
                     process->setTracerpid(-1);
                 }
+                tracerFound = true;
                 if (++found == 6) {
                     goto finish;
                 }
             } else if ((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:") - 1) == 0) {
                 process->setNumThreads(atol(mBuffer + sizeof("Threads:") - 1));
+                numThreadsFound = true;
                 if (++found == 6) {
                     goto finish;
                 }
@@ -278,6 +283,28 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
     }
 
 finish:
+    if (!uidFound) {
+        process->setUid(0);
+        process->setEuid(0);
+        process->setSuid(0);
+        process->setFsuid(0);
+    }
+    if (!gidFound) {
+        process->setGid(0);
+        process->setEgid(0);
+        process->setSgid(0);
+        process->setFsgid(0);
+    }
+    if (!tracerFound) {
+        process->setTracerpid(-1);
+    }
+    if (!numThreadsFound) {
+        process->setNumThreads(0);
+    }
+    if (!noNewPrivilegesFound) {
+        process->setNoNewPrivileges(0);
+    }
+
     mFile.close();
     return true;
 }
