@@ -211,7 +211,7 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
             if (process->pid() != -1) {
                 const QModelIndex index = d->getQModelIndex(process, columnIndex);
                 if (index.isValid() && process != d->m_removingRowFor) {
-                    Q_EMIT dataChanged(index, index);
+                    Q_EMIT dataChanged(index, index, {Qt::DisplayRole, Value, FormattedValue});
                 }
             }
         });
