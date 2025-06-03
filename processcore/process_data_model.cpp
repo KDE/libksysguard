@@ -5,6 +5,9 @@
 */
 
 #include "process_data_model.h"
+
+#include <ranges>
+
 #include "formatter.h"
 
 #include "processcore/extended_process_list.h"
@@ -31,6 +34,7 @@ public:
 
     void update();
     QModelIndex getQModelIndex(Process *process, int column) const;
+    void handleChangedProcesses();
 
     ProcessDataModel *q;
     KSysGuard::Process *m_rootProcess;
@@ -39,10 +43,15 @@ public:
     ProcessAttributeModel *m_attributeModel = nullptr;
     const int m_updateInterval = 2000;
     bool m_flatList = true;
-    KSysGuard::Process *m_removingRowFor = nullptr;
 
     QHash<QString, KSysGuard::ProcessAttribute *> m_availableAttributes;
     QList<KSysGuard::ProcessAttribute *> m_enabledAttributes;
+
+    // A list of indices that we got change notifications for that still need to
+    // be propagated. Note that this needs to be stored as QPersistentModelIndex
+    // so any changes to rows and columns are automatically accounted for in the
+    // index.
+    QList<QPersistentModelIndex> m_pendingChanges;
 };
 
 ProcessDataModel::ProcessDataModel(QObject *parent)
@@ -209,10 +218,10 @@ void ProcessDataModel::setEnabledAttributes(const QStringList &enabledAttributes
         disconnect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, nullptr);
         connect(attribute, &KSysGuard::ProcessAttribute::dataChanged, this, [this, columnIndex](KSysGuard::Process *process) {
             if (process->pid() != -1) {
-                const QModelIndex index = d->getQModelIndex(process, columnIndex);
-                if (index.isValid() && process != d->m_removingRowFor) {
-                    Q_EMIT dataChanged(index, index, {Qt::DisplayRole, Value, FormattedValue});
-                }
+                // Don't emit dataChanged here directly, instead add the changed
+                // index to the list of pending changes so that we can deduplicate
+                // and batch these later.
+                d->m_pendingChanges.append(d->getQModelIndex(process, columnIndex));
             }
         });
     }
@@ -325,21 +334,20 @@ void ProcessDataModel::Private::endInsertRow()
 void ProcessDataModel::Private::beginRemoveRow(KSysGuard::Process *process)
 {
     Q_ASSERT(process);
-    Q_ASSERT(!m_removingRowFor);
-
-    m_removingRowFor = process;
-    int row = process->parent()->children().indexOf(process);
+    int row = m_flatList ? process->index() : process->parent()->children().indexOf(process);
     Q_ASSERT(row >= 0);
-    if (m_flatList) {
-        q->beginRemoveRows(QModelIndex(), process->index(), process->index());
-    } else {
-        q->beginRemoveRows(getQModelIndex(process->parent(), 0), row, row);
-    }
+    auto parentIndex = m_flatList ? QModelIndex{} : getQModelIndex(process->parent(), 0);
+
+    q->beginRemoveRows(parentIndex, row, row);
+
+    auto removed = std::ranges::remove_if(m_pendingChanges, [row, parentIndex](const QPersistentModelIndex &index) {
+        return index.parent() == parentIndex && index.row() == row;
+    });
+    m_pendingChanges.erase(removed.begin(), removed.end());
 }
 
 void ProcessDataModel::Private::endRemoveRow()
 {
-    m_removingRowFor = nullptr;
     q->endRemoveRows();
 }
 
@@ -374,6 +382,7 @@ void ProcessDataModel::Private::update()
     }
 
     m_processes->updateAllProcesses(m_updateInterval, flags);
+    handleChangedProcesses();
 }
 
 QModelIndex ProcessDataModel::Private::getQModelIndex(KSysGuard::Process *process, int column) const
@@ -467,4 +476,54 @@ QVariant ProcessDataModel::headerData(int section, Qt::Orientation orientation, 
     }
 
     return QVariant();
+}
+
+void ProcessDataModel::Private::handleChangedProcesses()
+{
+    if (m_pendingChanges.isEmpty()) {
+        return;
+    }
+
+    // Take a snapshot of the current state of pending changes.
+    // This avoids any additional changes made to m_pendingChanges affecting the
+    // operations below.
+    QList<QPersistentModelIndex> pendingChanges;
+    std::swap(m_pendingChanges, pendingChanges);
+
+    // Sort all changes so consecutive rows are also consecutive elements in the list.
+    std::ranges::stable_sort(pendingChanges, [](const QModelIndex &first, const QModelIndex &second) {
+        if (first.parent() == second.parent()) {
+            return first.row() < second.row();
+        } else {
+            return first.parent() < second.parent();
+        }
+    });
+
+    auto first = pendingChanges.takeFirst();
+    QModelIndex parentIndex = first.parent();
+    int firstChangedRow = first.row();
+    int lastChangedRow = first.row();
+    int firstChangedColumn = first.column();
+    int lastChangedColumn = first.column();
+
+    for (const auto &index : std::as_const(pendingChanges)) {
+        if (index.parent() != parentIndex || index.row() > lastChangedRow + 1) {
+            auto firstIndex = q->index(firstChangedRow, firstChangedColumn, parentIndex);
+            auto lastIndex = q->index(lastChangedRow, lastChangedColumn, parentIndex);
+            if (firstIndex.isValid() && lastIndex.isValid()) {
+                Q_EMIT q->dataChanged(firstIndex, lastIndex);
+            }
+
+            parentIndex = index.parent();
+            firstChangedRow = lastChangedRow = index.row();
+            firstChangedColumn = lastChangedColumn = index.column();
+            continue;
+        } else {
+            lastChangedRow = index.row();
+            firstChangedColumn = std::min(firstChangedColumn, index.column());
+            lastChangedColumn = std::max(lastChangedColumn, index.column());
+        }
+    }
+
+    Q_EMIT q->dataChanged(q->index(firstChangedRow, firstChangedColumn, parentIndex), q->index(lastChangedRow, lastChangedColumn, parentIndex), {Qt::DisplayRole, Value, FormattedValue});
 }
