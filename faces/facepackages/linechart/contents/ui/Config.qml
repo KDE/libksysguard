@@ -96,7 +96,7 @@ Kirigami.FormLayout {
         editable: true
         from: 0
         to: Math.pow(2, 31) - 1
-        Kirigami.FormData.label: i18nc("@label:spinbox", "Show last:")
+        Kirigami.FormData.label: i18nc("@label:spinbox", "History to show:")
         Layout.maximumWidth: Kirigami.Units.gridUnit * 10
 
         textFromValue: function(value, locale) {
