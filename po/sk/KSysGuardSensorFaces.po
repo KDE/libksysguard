@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2023-06-09 16:50+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -283,11 +283,10 @@ msgid "To (Y):"
 msgstr "Do (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:99
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "Zobraziť názov"
+msgid "History to show:"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, fuzzy, kde-format
@@ -375,6 +374,12 @@ msgstr "Späť"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Senzor monitorovania systému"
+
+#, fuzzy
+#~| msgid "Show Title"
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "Zobraziť názov"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "Nepriehľadnosť výplne:"

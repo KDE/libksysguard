@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org.kde.ksysguard.linechart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2024-09-06 23:35+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -89,8 +89,8 @@ msgstr "До Y:"
 #: contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "Показати останні:"
+msgid "History to show:"
+msgstr ""
 
 #: contents/ui/Config.qml:103
 #, kde-format
@@ -101,6 +101,10 @@ msgstr[0] "%1 секунду"
 msgstr[1] "%1 секунди"
 msgstr[2] "%1 секунд"
 msgstr[3] "%1 секунду"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "Показати останні:"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "Непрозорість залиття:"

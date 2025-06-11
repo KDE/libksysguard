@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2020-07-22 12:30+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -87,7 +87,7 @@ msgstr ""
 #: contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
+msgid "History to show:"
 msgstr ""
 
 #: contents/ui/Config.qml:103

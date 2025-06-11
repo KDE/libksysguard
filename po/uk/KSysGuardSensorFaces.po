@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2024-09-06 23:37+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -269,8 +269,8 @@ msgstr "До Y:"
 #: facepackages/linechart/contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "Показати останні:"
+msgid "History to show:"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, kde-format
@@ -346,6 +346,10 @@ msgstr "Назад"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Датчик нагляду за системою"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "Показати останні:"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "Непрозорість залиття:"

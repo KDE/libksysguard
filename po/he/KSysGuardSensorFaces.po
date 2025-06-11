@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2025-02-01 09:32+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -267,8 +267,8 @@ msgstr "עד (Y):"
 #: facepackages/linechart/contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "הצגת האחרונים:"
+msgid "History to show:"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, kde-format
@@ -344,6 +344,10 @@ msgstr "חזרה"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "חיישן צג המערכת"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "הצגת האחרונים:"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "אטימות מילוי:"

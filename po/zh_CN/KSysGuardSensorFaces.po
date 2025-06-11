@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -263,8 +263,8 @@ msgstr "目标 (Y)："
 #: facepackages/linechart/contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "显示最近："
+msgid "History to show:"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, kde-format
@@ -337,3 +337,7 @@ msgstr "返回"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "系统监视传感器"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "显示最近："

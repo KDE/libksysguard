@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2024-09-06 14:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -86,8 +86,8 @@ msgstr "Şuraya (Y):"
 #: contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "Sonuncuyu göster:"
+msgid "History to show:"
+msgstr ""
 
 #: contents/ui/Config.qml:103
 #, kde-format
@@ -96,6 +96,10 @@ msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 saniye"
 msgstr[1] "%1 saniye"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "Sonuncuyu göster:"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "Dolgu Matlığı:"

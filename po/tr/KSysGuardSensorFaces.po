@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2025-06-08 19:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -264,8 +264,8 @@ msgstr "Şuna (Y):"
 #: facepackages/linechart/contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "Sonuncuyu göster:"
+msgid "History to show:"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, kde-format
@@ -339,6 +339,10 @@ msgstr "Geri"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sistem Monitörü Algılayıcısı"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "Sonuncuyu göster:"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "Dolgu matlığı:"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2024-09-06 16:34+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -268,8 +268,8 @@ msgstr "Fins a (Y):"
 #: facepackages/linechart/contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "Mostra els últims:"
+msgid "History to show:"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, kde-format
@@ -343,6 +343,10 @@ msgstr "Enrere"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sensor del monitor del sistema"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "Mostra els últims:"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "Opacitat de l'emplenament:"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2024-09-03 21:51+0200\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -289,11 +289,10 @@ msgid "To (Y):"
 msgstr "Bis (Y):"
 
 #: facepackages/linechart/contents/ui/Config.qml:99
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "Titel anzeigen"
+msgid "History to show:"
+msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, fuzzy, kde-format
@@ -380,6 +379,12 @@ msgstr "Zurück"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Systemmonitor-Sensor"
+
+#, fuzzy
+#~| msgid "Show Title"
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "Titel anzeigen"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "Füllungsdeckkraft:"

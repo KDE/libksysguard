@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-06-11 00:44+0000\n"
 "PO-Revision-Date: 2024-09-14 01:16+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -88,8 +88,8 @@ msgstr "Iki (Y):"
 #: contents/ui/Config.qml:99
 #, kde-format
 msgctxt "@label:spinbox"
-msgid "Show last:"
-msgstr "Rodyti paskutinį:"
+msgid "History to show:"
+msgstr ""
 
 #: contents/ui/Config.qml:103
 #, kde-format
@@ -100,6 +100,10 @@ msgstr[0] "%1 sekundę"
 msgstr[1] "%1 sekundes"
 msgstr[2] "%1 sekundžių"
 msgstr[3] "%1 sekundę"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Show last:"
+#~ msgstr "Rodyti paskutinį:"
 
 #~ msgid "Fill Opacity:"
 #~ msgstr "Užpildo nepermatomumas:"
