@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-11 00:44+0000\n"
-"PO-Revision-Date: 2024-09-06 13:55+0200\n"
+"PO-Revision-Date: 2025-06-11 16:17+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: ConfigAppearance.qml:72
 #, kde-format
@@ -265,7 +265,7 @@ msgstr "Tot (Y):"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "History to show:"
-msgstr ""
+msgstr "Te tonen geschiedenis:"
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, kde-format

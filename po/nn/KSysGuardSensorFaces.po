@@ -342,8 +342,3 @@ msgstr "Tilbake"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Systemovervakingssensor"
-
-#, fuzzy
-#~ msgctxt "@label:spinbox"
-#~ msgid "Show last:"
-#~ msgstr "Vis tittel"

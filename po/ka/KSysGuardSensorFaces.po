@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-11 00:44+0000\n"
-"PO-Revision-Date: 2024-09-06 04:13+0200\n"
+"PO-Revision-Date: 2025-06-11 05:04+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgia <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: ConfigAppearance.qml:72
 #, kde-format
@@ -266,7 +266,7 @@ msgstr "სადამდე(Y):"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "History to show:"
-msgstr ""
+msgstr "ისტორია საჩვენებლად:"
 
 #: facepackages/linechart/contents/ui/Config.qml:103
 #, kde-format
