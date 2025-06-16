@@ -88,7 +88,7 @@ msgstr "目标 (Y)："
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "History to show:"
-msgstr ""
+msgstr "显示的历史记录："
 
 #: contents/ui/Config.qml:103
 #, kde-format
