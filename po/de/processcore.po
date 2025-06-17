@@ -3,20 +3,21 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2010.
 # Burkhard Lück <lueck@hube-lueck.de>, 2019, 2020.
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
+# SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-15 00:44+0000\n"
-"PO-Revision-Date: 2024-09-03 21:52+0200\n"
-"Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
+"PO-Revision-Date: 2025-05-17 19:35+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -351,7 +352,7 @@ msgstr "Private Speicherbelegung"
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Proportional"
 
 #: extended_process_list.cpp:385
 #, fuzzy, kde-format
@@ -375,15 +376,13 @@ msgstr ""
 "des Prozesses addiert wird."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Speicherbelegung"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Speicher"
@@ -409,17 +408,16 @@ msgstr ""
 "des Prozesses addiert wird."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "GPU-Auslastung"
+msgstr "Belegung des Auslagerungsspeichers"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Auslagerungsspeicher"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -427,6 +425,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"Dies ist eine Schätzung für die Menge an Auslagerungsspeicher, die dieser "
+"Prozess verwendet."
 
 #: extended_process_list.cpp:416
 #, kde-format
