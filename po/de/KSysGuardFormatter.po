@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the libksysguard package.
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
 # SPDX-FileCopyrightText: 2024 Johannes Obermayr <johannesobermayr@gmx.de>
+# SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
 #
 # Automatically generated, 2023.
 msgid ""
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #: Formatter.cpp:33
 #, kde-format
