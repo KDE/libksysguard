@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-15 00:44+0000\n"
+"POT-Creation-Date: 2025-06-19 00:44+0000\n"
 "PO-Revision-Date: 2008-12-13 19:06+0100\n"
 "Last-Translator: Mark Kwidzińsczi <mark@linuxcsb.org>\n"
 "Language-Team: Kashubian <i18n-csb@linuxcsb.org>\n"
@@ -512,27 +512,27 @@ msgstr ""
 msgid "Threads"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:97
+#: plugins/gpu/gpu.cpp:98
 #, kde-format
 msgid "GPU Usage"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:99
+#: plugins/gpu/gpu.cpp:100
 #, kde-format
 msgid "GPU Memory"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:101
+#: plugins/gpu/gpu.cpp:102
 #, kde-format
 msgid "GPU"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:103
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:343
+#: plugins/gpu/gpu.cpp:344
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"

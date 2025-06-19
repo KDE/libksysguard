@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-15 00:44+0000\n"
+"POT-Creation-Date: 2025-06-19 00:44+0000\n"
 "PO-Revision-Date: 2025-05-31 11:41+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -534,27 +534,27 @@ msgstr "Frekvensen som data skrivs till disken med."
 msgid "Threads"
 msgstr "Trådar"
 
-#: plugins/gpu/gpu.cpp:97
+#: plugins/gpu/gpu.cpp:98
 #, kde-format
 msgid "GPU Usage"
 msgstr "Grafikprocessoranvändning"
 
-#: plugins/gpu/gpu.cpp:99
+#: plugins/gpu/gpu.cpp:100
 #, kde-format
 msgid "GPU Memory"
 msgstr "Grafikprocessorminne"
 
-#: plugins/gpu/gpu.cpp:101
+#: plugins/gpu/gpu.cpp:102
 #, kde-format
 msgid "GPU"
 msgstr "Grafikprocessor"
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:103
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr "Visar vilken grafikprocessor processen använder"
 
-#: plugins/gpu/gpu.cpp:343
+#: plugins/gpu/gpu.cpp:344
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
