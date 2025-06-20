@@ -67,7 +67,7 @@ Faces.SensorFace {
                     font: Kirigami.Theme.smallFont
                     text: Formatter.Formatter.formatValueShowNull(ChartsControls.AxisLabels.label,
                         compactRepresentation.sensorsModel.unit)
-                    color: Kirigami.Theme.disabledTextColor
+                    opacity: 0.75
                 }
                 source: Charts.ChartAxisSource {
                     chart: compactRepresentation
