@@ -52,7 +52,7 @@ Item {
             text: chart.sensorsModel.sensorLabels[usedSensor] ||  (usedSensorObject.name + (usedSensorObject.shortName.length > 0 ? "\x9C" + usedSensorObject.shortName : ""))
             horizontalAlignment: Text.AlignHCenter
             font: Kirigami.Theme.smallFont
-            color: Kirigami.Theme.disabledTextColor
+            opacity: 0.75
             visible: totalValue.visible && root.height > metrics.lineSpacing * 5
             elide: Text.ElideRight
         }
@@ -135,7 +135,7 @@ Item {
             text: chart.sensorsModel.sensorLabels[totalSensor] || (totalSensorObject.name + (totalSensorObject.shortName.length > 0 ? "\x9C" + totalSensorObject.shortName : ""))
             horizontalAlignment: Text.AlignHCenter
             font: Kirigami.Theme.smallFont
-            color: Kirigami.Theme.disabledTextColor
+            opacity: 0.75
             visible: totalValue.visible && root.height > metrics.lineSpacing * 5
             elide: Text.ElideRight
         }
