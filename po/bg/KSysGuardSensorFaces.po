@@ -341,7 +341,3 @@ msgstr "Назад"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Сензор на системния монитор"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Show last:"
-#~ msgstr "Показване на последно:"
