@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-19 00:44+0000\n"
-"PO-Revision-Date: 2025-03-23 14:21+0200\n"
+"PO-Revision-Date: 2025-06-04 20:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -547,21 +547,20 @@ msgid "GPU Memory"
 msgstr "GPU-muisti"
 
 #: plugins/gpu/gpu.cpp:102
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "CPU"
+msgstr "Graafinen suoritin"
 
 #: plugins/gpu/gpu.cpp:103
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Näyttää, mitä graafista suoritinta prosessi käyttää"
 
 #: plugins/gpu/gpu.cpp:344
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
-msgstr ""
+msgstr "Graafinen suoritin %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format
