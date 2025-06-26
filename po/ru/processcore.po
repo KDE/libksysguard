@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-19 00:44+0000\n"
-"PO-Revision-Date: 2025-04-07 16:24+0300\n"
+"PO-Revision-Date: 2025-06-25 15:28+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -187,7 +187,7 @@ msgstr "ЦП системы"
 #: extended_process_list.cpp:248
 #, kde-format
 msgid "Total CPU Usage"
-msgstr "Общее использование процесора"
+msgstr "Общее использование процессора"
 
 #: extended_process_list.cpp:254
 #, kde-format
@@ -547,29 +547,28 @@ msgstr "Потоки"
 #: plugins/gpu/gpu.cpp:98
 #, kde-format
 msgid "GPU Usage"
-msgstr "Использование GPU"
+msgstr "Использование ГП"
 
 #: plugins/gpu/gpu.cpp:100
 #, kde-format
 msgid "GPU Memory"
-msgstr "Память GPU"
+msgstr "Память ГП"
 
 #: plugins/gpu/gpu.cpp:102
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "ЦП"
+msgstr "ГП"
 
 #: plugins/gpu/gpu.cpp:103
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Показывает, какой ГП используется процессом"
 
 #: plugins/gpu/gpu.cpp:344
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
-msgstr ""
+msgstr "ГП %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format
