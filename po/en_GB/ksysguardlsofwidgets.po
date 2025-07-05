@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguardlsofwidgets\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2009-02-26 20:54+0000\n"
 "Last-Translator: Andrew Coles <andrew_coles@yahoo.co.uk>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -22,8 +22,7 @@ msgctxt "Short for File Descriptor"
 msgid "FD"
 msgstr "FD"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: lsof.cpp:22 LsofSearchWidget.ui:28
+#: lsof.cpp:22
 #, kde-format
 msgid "Type"
 msgstr "Type"
@@ -38,14 +37,8 @@ msgstr "Object"
 msgid "Renice Process"
 msgstr "Renice Process"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: LsofSearchWidget.ui:23
-#, kde-format
-msgid "Stream"
-msgstr "Stream"
+#~ msgid "Stream"
+#~ msgstr "Stream"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: LsofSearchWidget.ui:33
-#, kde-format
-msgid "Filename"
-msgstr "Filename"
+#~ msgid "Filename"
+#~ msgstr "Filename"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguardlsofwidgets\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2009-06-12 19:10+0200\n"
 "Last-Translator: Michal Sulek <misurel@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -21,8 +21,7 @@ msgctxt "Short for File Descriptor"
 msgid "FD"
 msgstr "FD"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: lsof.cpp:22 LsofSearchWidget.ui:28
+#: lsof.cpp:22
 #, kde-format
 msgid "Type"
 msgstr "Typ"
@@ -37,14 +36,8 @@ msgstr "Objekt"
 msgid "Renice Process"
 msgstr "Zmeniť prioritu procesu"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: LsofSearchWidget.ui:23
-#, kde-format
-msgid "Stream"
-msgstr "Prúd"
+#~ msgid "Stream"
+#~ msgstr "Prúd"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: LsofSearchWidget.ui:33
-#, kde-format
-msgid "Filename"
-msgstr "Názov súboru"
+#~ msgid "Filename"
+#~ msgstr "Názov súboru"

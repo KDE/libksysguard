@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdebase\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-09-06 00:20+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2008-11-16 03:07+0730\n"
 "Last-Translator: Hari Vishnu <harivishnu@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
@@ -22,8 +22,7 @@ msgctxt "Short for File Descriptor"
 msgid "FD"
 msgstr "FD"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: lsof.cpp:22 LsofSearchWidget.ui:28
+#: lsof.cpp:22
 #, kde-format
 msgid "Type"
 msgstr "തരം"
@@ -38,14 +37,8 @@ msgstr "വസ്തു"
 msgid "Renice Process"
 msgstr "പ്രക്രിയ റീനൈസ് ചെയ്യുക"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: LsofSearchWidget.ui:23
-#, kde-format
-msgid "Stream"
-msgstr "സ്റ്റ്രീം"
+#~ msgid "Stream"
+#~ msgstr "സ്റ്റ്രീം"
 
-#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
-#: LsofSearchWidget.ui:33
-#, kde-format
-msgid "Filename"
-msgstr "ഫയലിന്റെ പേരു്‌"
+#~ msgid "Filename"
+#~ msgstr "ഫയലിന്റെ പേരു്‌"
