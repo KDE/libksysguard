@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2010-02-08 20:16+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -23,7 +23,8 @@ msgctxt "Short for File Descriptor"
 msgid "FD"
 msgstr "FD"
 
-#: lsof.cpp:22
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
 #, kde-format
 msgid "Type"
 msgstr "Түрі"
@@ -38,8 +39,14 @@ msgstr "Нысаны"
 msgid "Renice Process"
 msgstr "Артықшылығын өзгерту"
 
-#~ msgid "Stream"
-#~ msgstr "Ағыны"
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "Ағыны"
 
-#~ msgid "Filename"
-#~ msgstr "Файл атауы"
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "Файл атауы"

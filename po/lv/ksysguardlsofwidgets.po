@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguardlsofwidgets\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2008-11-18 11:47+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -24,7 +24,8 @@ msgctxt "Short for File Descriptor"
 msgid "FD"
 msgstr "FD"
 
-#: lsof.cpp:22
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
 #, kde-format
 msgid "Type"
 msgstr "Tips"
@@ -39,8 +40,14 @@ msgstr "Objekts"
 msgid "Renice Process"
 msgstr "Mainīt procesa prioritāti"
 
-#~ msgid "Stream"
-#~ msgstr "Straume"
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "Straume"
 
-#~ msgid "Filename"
-#~ msgstr "Faila nosaukums"
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "Faila nosaukums"

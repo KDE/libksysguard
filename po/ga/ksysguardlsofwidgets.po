@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ksysguardlsofwidgets.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2008-08-04 12:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -23,7 +23,8 @@ msgctxt "Short for File Descriptor"
 msgid "FD"
 msgstr "TC"
 
-#: lsof.cpp:22
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: lsof.cpp:22 LsofSearchWidget.ui:28
 #, kde-format
 msgid "Type"
 msgstr "Cineál"
@@ -38,8 +39,14 @@ msgstr "Réad"
 msgid "Renice Process"
 msgstr "Athraigh Tosaíocht an Phróisis"
 
-#~ msgid "Stream"
-#~ msgstr "Sruth"
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:23
+#, kde-format
+msgid "Stream"
+msgstr "Sruth"
 
-#~ msgid "Filename"
-#~ msgstr "Ainm comhaid"
+#. i18n: ectx: property (text), widget (KLsofWidget, klsofwidget)
+#: LsofSearchWidget.ui:33
+#, kde-format
+msgid "Filename"
+msgstr "Ainm comhaid"
