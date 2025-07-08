@@ -4,20 +4,21 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2019, 2020.
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
 # SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n@prly.mozmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 02:55+0000\n"
-"PO-Revision-Date: 2023-03-23 20:55+0100\n"
-"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
+"PO-Revision-Date: 2025-06-18 14:08+0200\n"
+"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
@@ -332,7 +333,7 @@ msgid ""
 "shared libraries are using.<br>This memory is shared among all processes "
 "that use this library."
 msgstr ""
-"Dies ist etwa die Menge physischen Speichers, die der Prozess und seine "
+"Dies ist ungefähr die Menge physischen Speichers, die der Prozess und seine "
 "gemeinsamen Bibliotheken verwenden.<br>Dieser Speicher wird gemeinsam von "
 "allen Prozessen genutzt, die diese Bibliothek verwenden."
 
@@ -354,7 +355,7 @@ msgid ""
 "usage by the amount of processes sharing that memory, then adding the "
 "process' private memory."
 msgstr ""
-"Dies ist eine Schätzung der tatsächlichen Menge physischen Speichers, die "
+"Dies ist eine Annäherung an die tatsächliche Menge physischen Speichers, die "
 "dieser Prozess verwendet. Sie wird errechnet, indem die vom Prozess "
 "gemeinsam verwendete Speicherbelegung durch die Anzahl an Prozessen geteilt "
 "wird, die sich den Speicher teilen, und anschließend der private Speicher "

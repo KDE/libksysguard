@@ -1,15 +1,15 @@
 # Spanish translations for KSysGuardSensorFaces.po package.
-# Copyright (C) 2020 This file is copyright:
+# Copyright (C) 2020-2025 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-#
 # Automatically generated, 2020.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020, 2021, 2022.
+#
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-13 00:48+0000\n"
-"PO-Revision-Date: 2022-10-13 12:31+0200\n"
+"PO-Revision-Date: 2025-07-07 17:14+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -27,12 +27,12 @@ msgstr "Ajustes automáticos:"
 #: ConfigAppearance.qml:111
 #, kde-format
 msgid "Load Preset..."
-msgstr "Cargar ajustes automáticos..."
+msgstr "Cargar ajustes automáticos…"
 
 #: ConfigAppearance.qml:116
 #, kde-format
 msgid "Get new presets..."
-msgstr "Obtener nuevos ajustes automáticos..."
+msgstr "Obtener nuevos ajustes automáticos…"
 
 #: ConfigAppearance.qml:128
 #, kde-format
@@ -57,7 +57,7 @@ msgstr "Estilo del visor:"
 #: ConfigAppearance.qml:169
 #, kde-format
 msgid "Get New Display Styles..."
-msgstr "Obtener nuevos estilos de visor..."
+msgstr "Obtener nuevos estilos de visor…"
 
 #: ConfigAppearance.qml:179
 #, kde-format
@@ -253,12 +253,12 @@ msgstr "Sensores de grupo basados en el valor de los sensores totales."
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr "Pulse para seleccionar un sensor..."
+msgstr "Pulse para seleccionar un sensor…"
 
 #: import/Choices.qml:368
 #, kde-format
 msgid "Search..."
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #: import/Choices.qml:381
 #, kde-format
@@ -313,24 +313,3 @@ msgstr ""
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sensor del monitor del sistema"
-
-#~ msgid "Automatic X Data Range"
-#~ msgstr "Intervalo de datos en X automático"
-
-#~ msgid "From (X):"
-#~ msgstr "Desde (X):"
-
-#~ msgid "To (X):"
-#~ msgstr "Hasta (X):"
-
-#~ msgid "Remove"
-#~ msgstr "Eliminar"
-
-#~ msgid "Drop Sensor Here"
-#~ msgstr "Suelte un sensor aquí"
-
-#~ msgid "Chart Sensors"
-#~ msgstr "Sensores de gráficos"
-
-#~ msgid "Drop Sensors Here"
-#~ msgstr "Suelte sensores aquí"

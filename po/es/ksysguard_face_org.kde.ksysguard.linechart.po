@@ -1,15 +1,15 @@
 # Spanish translations for ksysguard_face_org.kde.ksysguard.linechart.po package.
-# Copyright (C) 2020 This file is copyright:
+# Copyright (C) 2020-2025 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-#
 # Automatically generated, 2020.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020, 2021.
+#
+# SPDX-FileCopyrightText: 2020, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: ksysguard_face_org\n"
+"Project-Id-Version: ksysguard_face_org.kde.ksysguard.linechart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-08-07 00:17+0000\n"
-"PO-Revision-Date: 2021-01-06 12:44+0100\n"
+"PO-Revision-Date: 2025-07-07 17:14+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -86,12 +86,3 @@ msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 segundo"
 msgstr[1] "%1 segundos"
-
-#~ msgid "Automatic X Data Range"
-#~ msgstr "Intervalo de datos en X automático"
-
-#~ msgid "From (X):"
-#~ msgstr "Desde (X):"
-
-#~ msgid "To (X):"
-#~ msgstr "Hasta (X):"

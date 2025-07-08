@@ -1,15 +1,15 @@
 # Spanish translations for ksysguard_face_org.kde.ksysguard.facegrid.po package.
-# Copyright (C) 2021 This file is copyright:
+# Copyright (C) 2021-2025 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-#
 # Automatically generated, 2021.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2021.
+#
+# SPDX-FileCopyrightText: 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: ksysguard_face_org\n"
+"Project-Id-Version: ksysguard_face_org.kde.ksysguard.facegrid\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-01-29 00:45+0000\n"
-"PO-Revision-Date: 2021-08-27 12:01+0200\n"
+"PO-Revision-Date: 2025-07-07 17:14+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
