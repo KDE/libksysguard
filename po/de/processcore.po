@@ -4,20 +4,21 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2019, 2020.
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
 # SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n@prly.mozmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-19 00:44+0000\n"
-"PO-Revision-Date: 2025-05-17 19:35+0200\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2025-06-18 14:08+0200\n"
+"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -337,16 +338,15 @@ msgid ""
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
-"Dies ist etwa die Menge physischen Speichers, die der Prozess und seine "
+"Dies ist ungefähr die Menge physischen Speichers, die der Prozess und seine "
 "gemeinsamen Bibliotheken verwenden. Dieser Speicher wird gemeinsam von allen "
 "Prozessen genutzt, die diese Bibliothek verwenden."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Private Speicherbelegung"
+msgstr "Proportionale Speicherbelegung"
 
 #: extended_process_list.cpp:378
 #, kde-format
@@ -355,12 +355,7 @@ msgid "Proportional"
 msgstr "Proportional"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -369,11 +364,12 @@ msgid ""
 "process' private memory. This value may not be available for certain "
 "processes."
 msgstr ""
-"Dies ist eine Schätzung der tatsächlichen Menge physischen Speichers, die "
+"Dies ist eine Annäherung an die tatsächliche Menge physischen Speichers, die "
 "dieser Prozess verwendet. Sie wird errechnet, indem die vom Prozess "
 "gemeinsam verwendete Speicherbelegung durch die Anzahl an Prozessen geteilt "
 "wird, die sich den Speicher teilen, und anschließend der private Speicher "
-"des Prozesses addiert wird."
+"des Prozesses addiert wird. Dieser Wert ist für bestimmte Prozesse nicht "
+"verfügbar."
 
 #: extended_process_list.cpp:392
 #, kde-format
@@ -388,12 +384,7 @@ msgid "Memory"
 msgstr "Speicher"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -401,11 +392,11 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"Dies ist eine Schätzung der tatsächlichen Menge physischen Speichers, die "
-"dieser Prozess verwendet. Sie wird errechnet, indem die vom Prozess "
-"gemeinsam verwendete Speicherbelegung durch die Anzahl an Prozessen geteilt "
-"wird, die sich den Speicher teilen, und anschließend der private Speicher "
-"des Prozesses addiert wird."
+"Dies ist eine Annäherung an die tatsächliche Menge physischen Speichers, die "
+"dieser Prozess verwendet. Falls verfügbar, verwendet sie die proportionale "
+"Speicherbelegung, andernfalls die private Speicherbelegung. Sollte diese "
+"ebenfalls keinen Wert haben, wird die Diensthabender-Speicherbelegung "
+"verwendet."
 
 #: extended_process_list.cpp:407
 #, kde-format
@@ -425,7 +416,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
-"Dies ist eine Schätzung für die Menge an Auslagerungsspeicher, die dieser "
+"Dies ist eine Annäherung an die Menge an Auslagerungsspeicher, die dieser "
 "Prozess verwendet."
 
 #: extended_process_list.cpp:416
@@ -563,21 +554,20 @@ msgid "GPU Memory"
 msgstr "GPU-Speicher"
 
 #: plugins/gpu/gpu.cpp:102
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "CPU"
+msgstr "GPU"
 
 #: plugins/gpu/gpu.cpp:103
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Zeigt an, welche GPU der Prozess verwendet"
 
 #: plugins/gpu/gpu.cpp:344
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
-msgstr ""
+msgstr "GPU %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format

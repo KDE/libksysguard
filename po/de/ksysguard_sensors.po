@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the libksysguard package.
 # Frederik Schwarzer <schwarzer@kde.org>, 2022.
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
+# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n@prly.mozmail.com>
 #
 # Automatically generated, 2022.
 msgid ""
@@ -10,15 +11,15 @@ msgstr ""
 "Project-Id-Version: ksysguard_sensors\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-21 00:43+0000\n"
-"PO-Revision-Date: 2023-03-20 23:23+0100\n"
-"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
+"PO-Revision-Date: 2025-06-17 11:39+0200\n"
+"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: SensorGroup.cpp:31
 #, kde-format
@@ -63,9 +64,7 @@ msgid "[Group] Name"
 msgstr "[Gruppe] Name"
 
 #: SensorGroup.cpp:39
-#, fuzzy, kde-format
-#| msgctxt "Total load sensor of all cores"
-#| msgid "[Group] Total Usage"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Total Usage"
 msgstr "[Gruppe] Gesamtauslastung"
@@ -86,8 +85,7 @@ msgid "[Group] Total Video Memory"
 msgstr "[Gruppe] Gesamtgröße"
 
 #: SensorGroup.cpp:42
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Name"
 msgstr "[Gruppe] Name"
@@ -188,39 +186,34 @@ msgid "[Group] Percentage Free"
 msgstr "[Gruppe] Prozent frei"
 
 #: SensorGroup.cpp:69
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Name"
 msgstr "[Gruppe] Name"
 
 #: SensorGroup.cpp:70
-#, fuzzy, kde-format
-#| msgid "[Group] Name"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge"
-msgstr "[Gruppe] Name"
+msgstr "[Gruppe] Ladung"
 
 #: SensorGroup.cpp:71
-#, fuzzy, kde-format
-#| msgid "[Group] Percentage Used"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charge Percentage"
-msgstr "[Gruppe] Prozent belegt"
+msgstr "[Gruppe] Ladung in Prozent"
 
 #: SensorGroup.cpp:72
-#, fuzzy, kde-format
-#| msgid "[Group] Write Rate"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Charging Rate"
-msgstr "[Gruppe] Schreibrate"
+msgstr "[Gruppe] Laderate"
 
 #: SensorGroup.cpp:73
-#, fuzzy, kde-format
-#| msgid "[Group] Free Space"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Current Capacity"
-msgstr "[Gruppe] Freier Speicherplatz"
+msgstr "[Gruppe] Aktuelle Kapazität"
 
 #: SensorGroup.cpp:74
 #, fuzzy, kde-format
@@ -230,11 +223,10 @@ msgid "[Group] Design Capacity"
 msgstr "[Gruppe] Belegter Speicherplatz"
 
 #: SensorGroup.cpp:75
-#, fuzzy, kde-format
-#| msgid "[Group] Read Rate"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Health"
-msgstr "[Gruppe] Leserate"
+msgstr "[Gruppe] Gesundheit"
 
 #: SensorGroup.cpp:77
 #, kde-format
@@ -242,17 +234,15 @@ msgid "[Group] CPU"
 msgstr "[Gruppe] Prozessor"
 
 #: SensorGroup.cpp:78
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgid "[Group] GPU"
-msgstr "[Gruppe] Prozessor"
+msgstr "[Gruppe] GPU"
 
 #: SensorGroup.cpp:79
-#, fuzzy, kde-format
-#| msgid "[Group] Network Name"
+#, kde-format
 msgctxt "Network group title"
 msgid "[Group] Network Device"
-msgstr "[Gruppe] Netzwerkname"
+msgstr "[Gruppe] Netzwerkgerät"
 
 #: SensorGroup.cpp:80
 #, kde-format
@@ -260,11 +250,10 @@ msgid "[Group] Disk"
 msgstr "[Gruppe] Datenträger"
 
 #: SensorGroup.cpp:81
-#, fuzzy, kde-format
-#| msgid "[Group] CPU"
+#, kde-format
 msgctxt "Power group title"
 msgid "[Group] Power"
-msgstr "[Gruppe] Prozessor"
+msgstr "[Gruppe] Energie"
 
 #: SensorTreeModel.cpp:289
 #, kde-format

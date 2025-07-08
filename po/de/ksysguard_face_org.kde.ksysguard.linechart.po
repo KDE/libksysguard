@@ -3,21 +3,22 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2021.
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
 # SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n@prly.mozmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org.kde.ksysguard.linechart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-11 00:44+0000\n"
-"PO-Revision-Date: 2025-05-17 19:31+0200\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2025-06-17 11:35+0200\n"
+"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: contents/ui/Config.qml:42
 #, kde-format
@@ -89,7 +90,7 @@ msgstr "Bis (Y):"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "History to show:"
-msgstr ""
+msgstr "Anzuzeigender Verlauf:"
 
 #: contents/ui/Config.qml:103
 #, kde-format
