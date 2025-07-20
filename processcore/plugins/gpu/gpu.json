@@ -18,6 +18,7 @@
         "Description[ka]": "თითოეული პროცესის GPU-ის რესურსების სტატისტიკა AMD-ის ბარათებისთვის",
         "Description[ko]": "AMD 카드의 프로세스별 GPU 자원 통계",
         "Description[nl]": "Statistieken van per-proces GPU-hulpbronnen voor AMD-kaarten",
+        "Description[pl]": "Statystyka dla zasobów GPU na proces dla kart AMD",
         "Description[ru]": "Статистика использования процессами ресурсов ГП для карт AMD",
         "Description[sl]": "Statistika virov GPU po procesu za kartice AMD",
         "Description[sv]": "Statistik över grafikprocessorresurser per process för AMD-kort",
