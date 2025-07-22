@@ -83,8 +83,10 @@ NetworkPlugin::NetworkPlugin(QObject *parent, const QVariantList &args)
     });
 
     connect(processes(), &Processes::beginAddProcess, this, [this](Process *process) {
-        m_inboundSensor->setData(process, 0);
-        m_outboundSensor->setData(process, 0);
+        connect(processes(), &Processes::endAddProcess, this, [this, process] {
+            m_inboundSensor->setData(process, 0);
+            m_outboundSensor->setData(process, 0);
+        }, Qt::SingleShotConnection);
     });
 }
 
