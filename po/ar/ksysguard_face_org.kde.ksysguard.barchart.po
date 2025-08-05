@@ -76,7 +76,7 @@ msgstr "أظهر خطوط الشبكة"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "مدى البيانات آلي"
+msgstr "مدى البيانات آليّ"
 
 #: contents/ui/Config.qml:82
 #, kde-format

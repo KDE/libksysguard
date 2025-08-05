@@ -64,7 +64,7 @@ msgstr "خطوط مدورة"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "مدى البيانات آلي"
+msgstr "مدى البيانات آليّ"
 
 #: contents/ui/Config.qml:75
 #, kde-format

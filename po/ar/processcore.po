@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-19 02:34+0000\n"
-"PO-Revision-Date: 2025-05-04 06:27+0400\n"
+"PO-Revision-Date: 2025-08-04 21:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -276,9 +276,9 @@ msgid ""
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless."
 msgstr ""
-"هذا هو مقدار مساحة الذاكرة الوهمية التي تستخدمها العملية، ويشمل ذلك المكتبات "
-"المشتركة وذاكرة الرسوميات والملفات في القرص وغيرها. ما من مغزًى تقريبًا لها "
-"الرقم."
+"هذا هو مقدار مساحة الذاكرة الافتراضية التي تستخدمها العملية، ويشمل ذلك "
+"المكتبات المشتركة وذاكرة الرسوميات والملفات في القرص وغيرها. ما من مغزًى "
+"تقريبًا لها الرقم."
 
 #: extended_process_list.cpp:333
 #, kde-format
@@ -654,13 +654,13 @@ msgstr "تعمل"
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
-msgstr "نائمة"
+msgstr "معلّقة"
 
 #: process.cpp:158
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
-msgstr "نائمة في القرص"
+msgstr "معلّقة في القرص"
 
 #: process.cpp:160
 #, kde-format

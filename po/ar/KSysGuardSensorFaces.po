@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-30 02:39+0000\n"
-"PO-Revision-Date: 2024-09-26 11:58+0400\n"
+"PO-Revision-Date: 2025-06-12 12:11+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -174,7 +174,7 @@ msgstr "أظهر خطوط الشبكة"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "مدى البيانات آلي"
+msgstr "مدى البيانات آليّ"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
@@ -252,7 +252,7 @@ msgstr "مدى البيانات"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr "مدى بيانات ص آلية"
+msgstr "مدى بيانات ص آليّة"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
 #, kde-format
