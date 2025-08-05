@@ -174,7 +174,7 @@ msgstr "أظهر خطوط الشبكة"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr "مدى البيانات آلي"
+msgstr "مدى البيانات آليّ"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
@@ -252,7 +252,7 @@ msgstr "مدى البيانات"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr "مدى بيانات ص آلية"
+msgstr "مدى بيانات ص آليّة"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
 #, kde-format

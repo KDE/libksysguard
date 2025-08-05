@@ -70,7 +70,7 @@ msgstr "مدى البيانات"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr "مدى بيانات ص آلية"
+msgstr "مدى بيانات ص آليّة"
 
 #: contents/ui/Config.qml:82
 #, kde-format
