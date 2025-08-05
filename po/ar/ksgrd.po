@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2025-01-12 13:09+0400\n"
+"PO-Revision-Date: 2025-08-04 12:08+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -199,7 +199,7 @@ msgstr "عدد العمليات التي تعمل"
 #: SensorManager.cpp:86
 #, kde-format
 msgid "Sleeping Processes Count"
-msgstr "عدد العمليات النائمة"
+msgstr "عدد العمليات المعلّقة"
 
 #: SensorManager.cpp:87
 #, kde-format
@@ -812,7 +812,7 @@ msgstr "إجمالي الإرشادات المفقودة"
 #: SensorManager.cpp:239
 #, kde-format
 msgid "Log Files"
-msgstr "ملفّات السّجلّ"
+msgstr "ملفّات السجل"
 
 #: SensorManager.cpp:243
 #, kde-format
@@ -886,7 +886,7 @@ msgstr "قيمة نقطة كسرية"
 #: SensorManager.cpp:259
 #, kde-format
 msgid "Log File"
-msgstr "ملفّ السّجلّ"
+msgstr "ملفّ السجل"
 
 #: SensorShellAgent.cpp:108
 #, kde-format
