@@ -24,6 +24,7 @@ public:
     ~Capture();
 
     bool start();
+    void stop();
     std::string lastError() const;
     void reportStatistics();
     Packet nextPacket();
@@ -37,6 +38,7 @@ private:
     std::string m_interface;
     std::string m_error;
     std::thread m_thread;
+    std::atomic_bool m_running = false;
     std::mutex m_mutex;
     std::condition_variable m_condition;
     std::deque<Packet> m_queue;

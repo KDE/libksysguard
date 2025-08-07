@@ -31,13 +31,7 @@ Capture::Capture(const std::string &interface)
 
 Capture::~Capture()
 {
-    if (m_pcap) {
-        pcap_breakloop(m_pcap);
-        if (m_thread.joinable()) {
-            m_thread.join();
-        }
-        pcap_close(m_pcap);
-    }
+    stop();
 }
 
 bool Capture::start()
@@ -74,7 +68,29 @@ bool Capture::start()
 
     m_thread = std::thread{&Capture::loop, this};
 
+    m_running = true;
+
     return true;
+}
+
+void Capture::stop()
+{
+    if (!m_running) {
+        return;
+    }
+
+    m_running = false;
+
+    if (m_pcap) {
+        pcap_breakloop(m_pcap);
+        if (m_thread.joinable()) {
+            m_thread.join();
+        }
+        pcap_close(m_pcap);
+        m_pcap = nullptr;
+    }
+
+    m_condition.notify_all();
 }
 
 std::string Capture::lastError() const
@@ -99,8 +115,12 @@ Packet Capture::nextPacket()
 {
     std::unique_lock<std::mutex> lock(m_mutex);
     m_condition.wait(lock, [this]() {
-        return m_queue.size() > 0;
+        return m_queue.size() > 0 || !m_running;
     });
+
+    if (m_queue.size() == 0) {
+        return Packet{};
+    }
 
     auto packet = std::move(m_queue.front());
     m_queue.pop_front();
