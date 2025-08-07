@@ -17,6 +17,7 @@ Accumulator::Accumulator(std::shared_ptr<Capture> capture, std::shared_ptr<Conne
     , m_running(true)
 {
     m_thread = std::thread{&Accumulator::loop, this};
+    pthread_setname_np(m_thread.native_handle(), "accumulator");
 }
 
 Accumulator::~Accumulator()

@@ -67,6 +67,7 @@ bool Capture::start()
     pcap_freecode(&filter);
 
     m_thread = std::thread{&Capture::loop, this};
+    pthread_setname_np(m_thread.native_handle(), "capture");
 
     m_running = true;
 

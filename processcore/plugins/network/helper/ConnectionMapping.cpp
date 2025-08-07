@@ -84,6 +84,7 @@ ConnectionMapping::ConnectionMapping()
     : m_running(true)
 {
     m_thread = std::thread(&ConnectionMapping::loop, this);
+    pthread_setname_np(m_thread.native_handle(), "connmap");
 }
 
 ConnectionMapping::~ConnectionMapping()
