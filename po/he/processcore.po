@@ -6,241 +6,235 @@
 # Diego Iastrubni <elcuco@kde.org>, 2008, 2009.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 02:55+0000\n"
-"PO-Revision-Date: 2017-05-16 06:58-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-08-06 18:08+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 25.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: cgroup_data_model.cpp:52
 #, kde-format
 msgctxt "@title"
 msgid "Desktop ID"
-msgstr ""
+msgstr "מזהה שולחן עבודה"
 
 #: cgroup_data_model.cpp:66
 #, kde-format
 msgctxt "@title"
 msgid "Icon"
-msgstr ""
+msgstr "סמל"
 
 #: cgroup_data_model.cpp:80
 #, kde-format
 msgctxt "@title"
 msgid "Name"
-msgstr ""
+msgstr "שם"
 
 #: extended_process_list.cpp:95
 #, kde-format
 msgid "PID"
-msgstr ""
+msgstr "מזהה תהליך"
 
 #: extended_process_list.cpp:96
 #, kde-format
 msgid "The unique Process ID that identifies this process."
-msgstr ""
+msgstr "מזהה התהליך הייחודי שמבדל אותו מהשאר."
 
 #: extended_process_list.cpp:101
 #, kde-format
 msgid "Parent PID"
-msgstr ""
+msgstr "מזהה תהליך הורה"
 
 #: extended_process_list.cpp:108
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "משתמש"
 
 #: extended_process_list.cpp:109
 #, kde-format
 msgid "The user who owns this process."
-msgstr ""
+msgstr "המשתמש שהתהליך הזה בבעלותו."
 
 #: extended_process_list.cpp:113
 #, kde-format
 msgid "UID"
-msgstr ""
+msgstr "מזהה משתמש"
 
 #: extended_process_list.cpp:119
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "שם משתמש"
 
 #: extended_process_list.cpp:135
 #, kde-format
 msgid "Can Login"
-msgstr ""
+msgstr "יכול להיכנס"
 
 #: extended_process_list.cpp:162
 #, kde-format
 msgid "EUID"
-msgstr ""
+msgstr "EUID"
 
 #: extended_process_list.cpp:166
 #, kde-format
 msgid "suid"
-msgstr ""
+msgstr "suid"
 
 #: extended_process_list.cpp:170
 #, kde-format
 msgid "fsuid"
-msgstr ""
+msgstr "fsuid"
 
 #: extended_process_list.cpp:174
 #, kde-format
 msgid "gid"
-msgstr ""
+msgstr "gid"
 
 #: extended_process_list.cpp:178
 #, kde-format
 msgid "egid"
-msgstr ""
+msgstr "egid"
 
 #: extended_process_list.cpp:182
 #, kde-format
 msgid "sgid"
-msgstr ""
+msgstr "sgid"
 
 #: extended_process_list.cpp:186
 #, kde-format
 msgid "fsgid"
-msgstr ""
+msgstr "fsgid"
 
 #: extended_process_list.cpp:191
 #, kde-format
 msgid "Tracer Pid"
-msgstr ""
+msgstr "מזהה תהליך עוקב"
 
 #: extended_process_list.cpp:198
 #, kde-format
 msgid "tty"
-msgstr ""
+msgstr "tty"
 
 #: extended_process_list.cpp:199
 #, kde-format
 msgid "The controlling terminal on which this process is running."
-msgstr ""
+msgstr "המסוף השולט בו רץ התהליך."
 
 #: extended_process_list.cpp:202
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "User Time"
-msgstr "זמן אמת"
+msgstr "זמן משתמש"
 
 #: extended_process_list.cpp:206
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "שעת המערכת"
 
 #: extended_process_list.cpp:210
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Total Time"
-msgstr "זמן אמת"
+msgstr "זמן כולל"
 
 #: extended_process_list.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Time"
-msgstr "זמן אמת"
+msgstr "זמן"
 
 #: extended_process_list.cpp:215
 #, kde-format
 msgid "The total user and system time that this process has been running for"
-msgstr ""
+msgstr "זמן המשתמש והמערכת הכולל של ריצת התהליך הזה"
 
 #: extended_process_list.cpp:220
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Start Time"
-msgstr "זמן אמת"
+msgstr "זמן התחלה"
 
 #: extended_process_list.cpp:230
 #, kde-format
 msgid "User CPU Usage"
-msgstr ""
+msgstr "ניצולת מעבד למשתמש"
 
 #: extended_process_list.cpp:231
 #, kde-format
 msgid "User CPU"
-msgstr ""
+msgstr "מעבד למשתמש"
 
 #: extended_process_list.cpp:238
 #, kde-format
 msgid "System CPU Usage"
-msgstr ""
+msgstr "ניצולת מעבד למערכת"
 
 #: extended_process_list.cpp:239
 #, kde-format
 msgid "System CPU"
-msgstr ""
+msgstr "מעבד למערכת"
 
 #: extended_process_list.cpp:248
 #, kde-format
 msgid "Total CPU Usage"
-msgstr ""
+msgstr "ניצולת מעבד כוללת"
 
 #: extended_process_list.cpp:254
 #, kde-format
 msgid "CPU"
-msgstr ""
+msgstr "מעבד"
 
 #: extended_process_list.cpp:258
 #, kde-format
 msgid "The current total CPU usage of the process."
-msgstr ""
+msgstr "ניצולת המעבד הכוללת הנוכחית של התהליך."
 
 #: extended_process_list.cpp:263
 #, kde-format
 msgid "Group User CPU Usage"
-msgstr ""
+msgstr "קיבוץ ניצולת מעבד לפי משתמש"
 
 #: extended_process_list.cpp:267
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
+"כמות ניצולת המעבד שנוצל במרחב המשתמש על ידי התהליך הזה על כל הצאצאים שלו."
 
 #: extended_process_list.cpp:275
 #, kde-format
 msgid "Group System CPU Usage"
-msgstr ""
+msgstr "קיבוץ ניצולת מעבד לפי מערכת"
 
 #: extended_process_list.cpp:279
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
-msgstr ""
+msgstr "כמות ניצולת המעבד של המערכת על ידי התהליך הזה על כל הצאצאים שלו."
 
 #: extended_process_list.cpp:288
 #, kde-format
 msgid "Group Total CPU Usage"
-msgstr ""
+msgstr "קיבוץ ניצולת מעבד כוללת"
 
 #: extended_process_list.cpp:294
 #, kde-format
 msgid "Group CPU"
-msgstr ""
+msgstr "קיבוץ מעבד"
 
 #: extended_process_list.cpp:295
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
-msgstr ""
+msgstr "כמות ניצולת המעבד הכוללת על ידי התהליך הזה על כל הצאצאים שלו."
 
 #: extended_process_list.cpp:302
 #, kde-format
 msgid "Nice Level"
-msgstr ""
+msgstr "רמת Nice"
 
 #: extended_process_list.cpp:304
 #, kde-format
@@ -248,26 +242,28 @@ msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
+"העדיפות שבה התהליך הזה רץ. עבור מערכת התזמון הרגילה, ערכים בין 19 (עדיפות "
+"נמוכה, very nice) ובין ‎-19 (עדיפות עליונה)."
 
 #: extended_process_list.cpp:308
 #, kde-format
 msgid "Scheduler"
-msgstr ""
+msgstr "מתזמן"
 
 #: extended_process_list.cpp:313
 #, kde-format
 msgid "IO Priority Class"
-msgstr ""
+msgstr "מחלקת עדיפות קלט/פלט"
 
 #: extended_process_list.cpp:319
 #, kde-format
 msgid "IO Nice Level"
-msgstr ""
+msgstr "רמת Nice של קלט/פלט"
 
 #: extended_process_list.cpp:323
 #, kde-format
 msgid "VM Size"
-msgstr ""
+msgstr "גודל זיכרון וירטואלי"
 
 #: extended_process_list.cpp:328
 #, kde-format
@@ -276,11 +272,13 @@ msgid ""
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless."
 msgstr ""
+"זה נפח הזיכרון הווירטואלי בו משתמש התהליך, כולל ספריות משותפות, זיכרון גרפי, "
+"קבצים בכונן ועוד. המספר הזה הוא כמעט חסר משמעות."
 
 #: extended_process_list.cpp:333
 #, kde-format
 msgid "RSS Memory Usage"
-msgstr ""
+msgstr "ניצולת זיכרון RSS"
 
 #: extended_process_list.cpp:338
 #, kde-format
@@ -288,16 +286,18 @@ msgid ""
 "This is the amount of physical memory that this process is using and "
 "includes the amount of memory used by shared libraries."
 msgstr ""
+"זאת כמות הזיכרון הפיזי שהתהליך בה משתמש התהליך הזה לרבות כמות הזיכרון שמשמש "
+"את הספריות המשותפות."
 
 #: extended_process_list.cpp:341
 #, kde-format
 msgid "Private Memory Usage"
-msgstr ""
+msgstr "ניצולת זיכרון פרטי"
 
 #: extended_process_list.cpp:343
 #, kde-format
 msgid "Private"
-msgstr ""
+msgstr "פרטי"
 
 #: extended_process_list.cpp:347
 #, kde-format
@@ -306,16 +306,19 @@ msgid ""
 "and approximates the Private memory usage of the process.<br>It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
+"זאת כמות הזיכרון הפיזי בה משתמש התהליך הזה בעצמו, ושערוך של הזיכרון הפרטי בו "
+"משתמש התהליך.<br>הוא לא כולל זיכרון שהועבר לשטח ההחלפה או את גודל הקוד של "
+"הספריות המשותפות שלו."
 
 #: extended_process_list.cpp:354
 #, kde-format
 msgid "Shared Memory Usage"
-msgstr ""
+msgstr "ניצולת זיכרון שיתופי"
 
 #: extended_process_list.cpp:363
 #, kde-format
 msgid "Shared"
-msgstr ""
+msgstr "שיתופי"
 
 #: extended_process_list.cpp:365
 #, kde-format
@@ -324,16 +327,18 @@ msgid ""
 "shared libraries are using.<br>This memory is shared among all processes "
 "that use this library."
 msgstr ""
+"זאת בערך כמות הזיכרון הפיזי הממשי שהספריות המשותפות של המיזם הזה צורכות."
+"<br>הזיכרון הזה משותף בין תהליכים שמשתמשים בספרייה הזאת."
 
 #: extended_process_list.cpp:371
 #, kde-format
 msgid "Memory Usage"
-msgstr ""
+msgstr "ניצולת זיכרון"
 
 #: extended_process_list.cpp:372
 #, kde-format
 msgid "Memory"
-msgstr ""
+msgstr "זיכרון"
 
 #: extended_process_list.cpp:378
 #, kde-format
@@ -343,71 +348,74 @@ msgid ""
 "usage by the amount of processes sharing that memory, then adding the "
 "process' private memory."
 msgstr ""
+"זה שערוך של הכמות הפיזית בה משתמש התהליך הזה. היא מחושבת על ידי חלוקת ניצולת "
+"הזיכרון השיתופי בכמות התהליכים שחולקים את הזיכרון הזה ולאחר מכן מתווסף "
+"לחישוב הזיכרון הפרטי של התהליך."
 
 #: extended_process_list.cpp:383
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "שם"
 
 #: extended_process_list.cpp:384
 #, kde-format
 msgid "The process name."
-msgstr ""
+msgstr "שם התהליך."
 
 #: extended_process_list.cpp:389
 #, kde-format
 msgid "Command"
-msgstr ""
+msgstr "פקודה"
 
 #: extended_process_list.cpp:393
 #, kde-format
 msgid "The command with which this process was launched."
-msgstr ""
+msgstr "הפקודה שאיתה התהליך הזה הופעל."
 
 #: extended_process_list.cpp:397
 #, kde-format
 msgid "Status"
-msgstr ""
+msgstr "מצב"
 
 #: extended_process_list.cpp:402
 #, kde-format
 msgid "IO Characters Read"
-msgstr ""
+msgstr "תווי קלט/פלט שנקראובפועל"
 
 #: extended_process_list.cpp:411
 #, kde-format
 msgid "IO Characters Written"
-msgstr ""
+msgstr "תווי קלט/פלט שנכתבו"
 
 #: extended_process_list.cpp:420
 #, kde-format
 msgid "IO Read Syscalls"
-msgstr ""
+msgstr "קריאות מערכת לקריאת קלט/פלט"
 
 #: extended_process_list.cpp:429
 #, kde-format
 msgid "IO Read Syscalls Rate"
-msgstr ""
+msgstr "קצב קריאות מערכת לקריאת קלט/פלט"
 
 #: extended_process_list.cpp:438
 #, kde-format
 msgid "IO Write Syscalls"
-msgstr ""
+msgstr "קריאות מערכת לכתיבת קלט/פלט"
 
 #: extended_process_list.cpp:447
 #, kde-format
 msgid "IO Write Syscalls Rate"
-msgstr ""
+msgstr "קצב קריאות מערכת לכתיבת קלט/פלט"
 
 #: extended_process_list.cpp:456
 #, kde-format
 msgid "IO Characters Actually Read"
-msgstr ""
+msgstr "תווי קלט/פלט שנקראו בפועל"
 
 #: extended_process_list.cpp:465
 #, kde-format
 msgid "IO Characters Read Rate"
-msgstr ""
+msgstr "קצב קריאת תווי קלט/פלט"
 
 #: extended_process_list.cpp:468
 #, kde-format
@@ -415,11 +423,13 @@ msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"קצב הקריאה של כל הקלט/פלט של התהליך, כולל מטמון הכונן וקלט/פלט אחר שאינו "
+"פיזי."
 
 #: extended_process_list.cpp:475
 #, kde-format
 msgid "IO Characters Written Rate"
-msgstr ""
+msgstr "קצב כתיבת תווי קלט/פלט"
 
 #: extended_process_list.cpp:478
 #, kde-format
@@ -427,75 +437,77 @@ msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"קצב הכתיבה של כל הקלט/פלט של התהליך, כולל מטמון הכונן וקלט/פלט אחר שאינו "
+"פיזי."
 
 #: extended_process_list.cpp:485
 #, kde-format
 msgid "Disk Read Rate"
-msgstr ""
+msgstr "קצב קריאה מהכונן"
 
 #: extended_process_list.cpp:489
 #, kde-format
 msgid "Read"
-msgstr ""
+msgstr "קריאה"
 
 #: extended_process_list.cpp:490
 #, kde-format
 msgid "The rate of data being read from disk."
-msgstr ""
+msgstr "קצב הנתונים שנקראים מהכונן."
 
 #: extended_process_list.cpp:496
 #, kde-format
 msgid "Disk Write Rate"
-msgstr ""
+msgstr "קצב כתיבה לכונן"
 
 #: extended_process_list.cpp:500
 #, kde-format
 msgid "Write"
-msgstr ""
+msgstr "כתיבה"
 
 #: extended_process_list.cpp:501
 #, kde-format
 msgid "The rate of data being written to the disk."
-msgstr ""
+msgstr "קצב הנתונים שנכתבים לכונן."
 
 #: extended_process_list.cpp:507
 #, kde-format
 msgid "Threads"
-msgstr ""
+msgstr "תהליכונים"
 
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
 msgid "Download Speed"
-msgstr ""
+msgstr "מהירות הורדה"
 
 #: plugins/network/network.cpp:37
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr ""
+msgstr "הורדה"
 
 #: plugins/network/network.cpp:40
 #, kde-format
 msgctxt "@title"
 msgid "Upload Speed"
-msgstr ""
+msgstr "מהירות העלאה"
 
 #: plugins/network/network.cpp:41
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
+msgstr "העלאה"
 
 #: plugins/nvidia/nvidia.cpp:28
 #, kde-format
 msgid "GPU Usage"
-msgstr ""
+msgstr "ניצולת מעבד גרפי"
 
 #: plugins/nvidia/nvidia.cpp:30
 #, kde-format
 msgid "GPU Memory"
-msgstr ""
+msgstr "זיכרון מעבד גרפי"
 
 #: process.cpp:101 process.cpp:117
 #, kde-format
@@ -638,34 +650,34 @@ msgstr "לא פעיל"
 #: process_controller.cpp:179
 #, kde-format
 msgid "Success"
-msgstr ""
+msgstr "הצלחה"
 
 #: process_controller.cpp:181
 #, kde-format
 msgid "Insufficient permissions."
-msgstr ""
+msgstr "אין מספיק הרשאות."
 
 #: process_controller.cpp:183
 #, kde-format
 msgid "No matching process was found."
-msgstr ""
+msgstr "לא נמצא תהליך מתאים."
 
 #: process_controller.cpp:185
 #, kde-format
 msgid "Not supported on the current system."
-msgstr ""
+msgstr "אין תמיכה במערכת הנוכחית."
 
 #: process_controller.cpp:187
 #, kde-format
 msgid "The user cancelled."
-msgstr ""
+msgstr "המשתמש ביטל."
 
 #: process_controller.cpp:189
 #, kde-format
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "אירעה שגיאה בלתי מוגדרת."
 
 #: process_controller.cpp:191
 #, kde-format
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "אירעה שגיאה לא ידועה."
