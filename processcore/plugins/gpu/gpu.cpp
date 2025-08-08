@@ -9,7 +9,6 @@
 
 #include <algorithm>
 #include <charconv>
-#include <format>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -118,11 +117,11 @@ GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
                     m_minorToGpuNum[*renderMinor] = *minor;
                 }
                 if (device->bustype == DRM_BUS_PCI && device->deviceinfo.pci->vendor_id == nvidiaVendorId) {
-                    auto pciAddress = std::format("{:08x}:{:02x}:{:02x}.{:x}",
-                                                  device->businfo.pci->domain,
-                                                  device->businfo.pci->bus,
-                                                  device->businfo.pci->dev,
-                                                  device->businfo.pci->func);
+                    auto pciAddress = QString::asprintf("%08x:%02x:%02x.%x",
+                        device->businfo.pci->domain,
+                        device->businfo.pci->bus,
+                        device->businfo.pci->dev,
+                        device->businfo.pci->func).toStdString();
                     nvidiaGpus.emplace_back(pciAddress, *minor);
                 }
             }
