@@ -281,7 +281,7 @@ msgid ""
 "You do not have the permission to change the I/O priority of the process and "
 "there was a problem trying to run as root."
 msgstr ""
-"لا تملك تصريحًا بتغيير أولوية الدخل والخرج للعملية، كما وحدثت مشكلة أثناء "
+"لا تملك إذْنًا بتغيير أولوية الدخل والخرج للعملية، كما وحدثت مشكلة أثناء "
 "محاولة التشغيل بحساب الجذر."
 
 #: ksysguardprocesslist.cpp:1344
@@ -290,7 +290,7 @@ msgid ""
 "You do not have the permission to change the CPU Scheduler for the process "
 "and there was a problem trying to run as root."
 msgstr ""
-"لا تملك تصريحًا بتغيير مجدول المعالجة للعملية، كما وحدثت مشكلة أثناء محاولة "
+"لا تملك إذْنًا بتغيير مجدول المعالجة للعملية، كما وحدثت مشكلة أثناء محاولة "
 "التشغيل بحساب الجذر."
 
 #: ksysguardprocesslist.cpp:1359
@@ -735,7 +735,7 @@ msgid ""
 "shared memory divided by the amount of processes using that shared memory "
 "added."
 msgstr ""
-"مقدار الذاكرة المادية الخاصة التي تستخدمها عملية ما ، مع مقدار الذاكرة "
+"مقدار الذاكرة المادية الخاصة التي تستخدمها عملية ما، مع مقدار الذاكرة "
 "المشتركة مقسومًا على مقدار العمليات التي تستخدم تلك الذاكرة المشتركة المضافة."
 
 #: ProcessModel.cpp:1122
@@ -1576,7 +1576,7 @@ msgstr ""
 "italic;\">معلومات تقنية: </span><br />تُرسل إشارة SIGTERM إلى العمليّة "
 "المعطاة. إن لم تكن الامتيازات كافية لذلك، فستُطلب كلمة السر كإجراء مبدئي.<br /"
 ">يمكنك بتشغيل البرنامج <span style=\" font-family:'Courier New,courier';"
-"\">تصريح polkit-kde-</span> إعطاء التصاريح لمستخدمين بعينهم (أو لكل "
+"\">إذْن polkit-kde-</span> إعطاء الأذونات لمستخدمين بعينهم (أو لكل "
 "المستخدمين) لقتل أية عمليّة ودون طلب كلمة سر. </p></body></html>"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnKillProcess)
