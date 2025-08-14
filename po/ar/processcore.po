@@ -316,8 +316,8 @@ msgid ""
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
-"هذا هو مقدار الذاكرة الفعلية التي تستخدمها هذه العملية بمفردها ، وتقارب "
-"استخدام الذاكرة الخاصة للعملية.  لا تتضمن أي ذاكرة متبادلة ، ولا حجم رمز "
+"هذا هو مقدار الذاكرة الفعلية التي تستخدمها هذه العملية بمفردها، وتقارب "
+"استخدام الذاكرة الخاصة للعملية.  لا تتضمن أي ذاكرة متبادلة، ولا حجم رمز "
 "مكتباتها المشتركة."
 
 #: extended_process_list.cpp:356
@@ -482,8 +482,8 @@ msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
-"معدل القراءة لجميع عمليات الإدخال / الإخراج ، بما في ذلك ذاكرة التخزين "
-"المؤقت على القرص وغيرها من عمليات الإدخال والإخراج غير المادية."
+"معدل القراءة لجميع عمليات الإدخال / الإخراج، بما في ذلك ذاكرة التخزين المؤقت "
+"على القرص وغيرها من عمليات الإدخال والإخراج غير المادية."
 
 #: extended_process_list.cpp:508
 #, kde-format
@@ -496,7 +496,7 @@ msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
-"معدل كتابة لجميع عمليات الإدخال / الإخراج ، بما في ذلك ذاكرة التخزين المؤقت "
+"معدل كتابة لجميع عمليات الإدخال / الإخراج، بما في ذلك ذاكرة التخزين المؤقت "
 "على القرص وغيرها من عمليات الإدخال والإخراج غير المادية."
 
 #: extended_process_list.cpp:518
