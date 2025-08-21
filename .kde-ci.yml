@@ -15,3 +15,4 @@ Dependencies:
     'frameworks/knewstuff': '@latest-kf6'
 Options:
  require-passing-tests-on: ['Linux']
+ run-qmllint: true
