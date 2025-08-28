@@ -97,7 +97,3 @@ msgid_plural "%1 seconds"
 msgstr[0] "%1 sekundu"
 msgstr[1] "%1 sekundy"
 msgstr[2] "%1 sekund"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Show last:"
-#~ msgstr "Zobrazit poslední:"

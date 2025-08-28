@@ -341,7 +341,3 @@ msgstr "Zpět"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Senzor monitoru systému"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Show last:"
-#~ msgstr "Zobrazit poslední:"
