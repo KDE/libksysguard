@@ -44,7 +44,6 @@
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[vi]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
             }
@@ -86,7 +85,6 @@
         "Name[sv]": "Enbart text",
         "Name[tr]": "Yalnızca Metin",
         "Name[uk]": "Лише текст",
-        "Name[x-test]": "xxText Onlyxx",
         "Name[zh_CN]": "仅文字",
         "Name[zh_TW]": "僅文字",
         "Version": "1.0",

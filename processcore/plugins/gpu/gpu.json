@@ -26,7 +26,6 @@
         "Description[sv]": "Statistik över grafikprocessorresurser per process för AMD-kort",
         "Description[tr]": "AMD kartları için süreç başına GPU özkaynakları istatistikleri",
         "Description[uk]": "Статистика ресурсів окремих процесів графічного процесора для карток AMD",
-        "Description[x-test]": "xxStats of per-process GPU resources for AMD cardsxx",
         "Description[zh_CN]": "AMD 显卡的单个进程 GPU 资源统计信息",
         "Description[zh_TW]": "AMD 顯示卡的各個行程的 GPU 資源"
     }

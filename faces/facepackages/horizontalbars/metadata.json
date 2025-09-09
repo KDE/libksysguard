@@ -44,7 +44,6 @@
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[vi]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
             }
@@ -86,7 +85,6 @@
         "Name[sv]": "Horisontella staplar",
         "Name[tr]": "Yatay Çubuklar",
         "Name[uk]": "Горизонтальні смуги",
-        "Name[x-test]": "xxHorizontal Barsxx",
         "Name[zh_CN]": "水平柱状图",
         "Name[zh_TW]": "橫長條圖",
         "Version": "1.0",

@@ -38,7 +38,6 @@
                 "Name[sv]": "Kai Uwe Broulik",
                 "Name[tr]": "Kai Uwe Broulik",
                 "Name[uk]": "Kai Uwe Broulik",
-                "Name[x-test]": "xxKai Uwe Broulikxx",
                 "Name[zh_CN]": "Kai Uwe Broulik",
                 "Name[zh_TW]": "Kai Uwe Broulik"
             }
@@ -80,7 +79,6 @@
         "Name[sv]": "Färgrutnät",
         "Name[tr]": "Renk Izgarası",
         "Name[uk]": "Кольорова таблиця",
-        "Name[x-test]": "xxColor Gridxx",
         "Name[zh_CN]": "彩色网格",
         "Name[zh_TW]": "色彩格線",
         "Version": "1.0",
