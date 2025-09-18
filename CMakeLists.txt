@@ -5,7 +5,7 @@ project(libksysguard)
 set(PROJECT_VERSION "6.4.80")
 
 # check with non-Plasma consumers (e.g. KDevelop) before bumping these versions to make sure the KDE CI does not break
-set(QT_MIN_VERSION "6.8.0")
+set(QT_MIN_VERSION "6.9.0")
 set(KF6_MIN_VERSION "6.18.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
