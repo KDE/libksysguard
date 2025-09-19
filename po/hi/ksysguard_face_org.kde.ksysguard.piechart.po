@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-09-19 02:39+0000\n"
 "PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -29,49 +29,37 @@ msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr ""
 
-#: contents/ui/Config.qml:44
+#: contents/ui/Config.qml:43 contents/ui/Config.qml:52
 #, kde-format
 msgctxt "@label angle degrees"
-msgid "%1°"
-msgstr ""
-
-#: contents/ui/Config.qml:47 contents/ui/Config.qml:61
-#, kde-format
-msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr ""
 
-#: contents/ui/Config.qml:52
+#: contents/ui/Config.qml:47
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr ""
 
-#: contents/ui/Config.qml:58
-#, kde-format
-msgctxt "@label angle"
-msgid "%1°"
-msgstr ""
-
-#: contents/ui/Config.qml:66
+#: contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr ""
 
-#: contents/ui/Config.qml:71
+#: contents/ui/Config.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr ""
 
-#: contents/ui/Config.qml:75
+#: contents/ui/Config.qml:65
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr ""
 
-#: contents/ui/Config.qml:82
+#: contents/ui/Config.qml:72
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"

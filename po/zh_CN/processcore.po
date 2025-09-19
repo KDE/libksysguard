@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/libksysguard/processcore.pot\n"
-"X-Crowdin-File-ID: 42931\n"
+"X-Crowdin-File: /kf6-stable/messages/libksysguard/processcore.pot\n"
+"X-Crowdin-File-ID: 49708\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -158,7 +158,7 @@ msgstr "开始时间"
 #: extended_process_list.cpp:230
 #, kde-format
 msgid "User CPU Usage"
-msgstr "用户 CPU 使用情况"
+msgstr "用户 CPU 使用率"
 
 #: extended_process_list.cpp:231
 #, kde-format
@@ -168,7 +168,7 @@ msgstr "用户 CPU"
 #: extended_process_list.cpp:238
 #, kde-format
 msgid "System CPU Usage"
-msgstr "系统 CPU 使用情况"
+msgstr "系统 CPU 使用率"
 
 #: extended_process_list.cpp:239
 #, kde-format
@@ -178,7 +178,7 @@ msgstr "系统 CPU"
 #: extended_process_list.cpp:248
 #, kde-format
 msgid "Total CPU Usage"
-msgstr "总 CPU 使用情况"
+msgstr "总 CPU 使用率"
 
 #: extended_process_list.cpp:254
 #, kde-format
@@ -188,32 +188,32 @@ msgstr "CPU"
 #: extended_process_list.cpp:258
 #, kde-format
 msgid "The current total CPU usage of the process."
-msgstr "此进程当前的 CPU 总使用情况。"
+msgstr "此进程当前的 CPU 总使用率。"
 
 #: extended_process_list.cpp:263
 #, kde-format
 msgid "Group User CPU Usage"
-msgstr "组用户 CPU 使用情况"
+msgstr "组用户 CPU 使用率"
 
 #: extended_process_list.cpp:267
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
-msgstr "此进程和所有子进程的总用户空间 CPU 使用情况。"
+msgstr "此进程和所有子进程的总用户空间 CPU 使用率。"
 
 #: extended_process_list.cpp:275
 #, kde-format
 msgid "Group System CPU Usage"
-msgstr "组系统 CPU 使用情况"
+msgstr "组系统 CPU 使用率"
 
 #: extended_process_list.cpp:279
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
-msgstr "此进程和所有子进程的系统 CPU 使用情况。"
+msgstr "此进程和所有子进程的系统 CPU 使用率。"
 
 #: extended_process_list.cpp:288
 #, kde-format
 msgid "Group Total CPU Usage"
-msgstr "组总 CPU 使用情况"
+msgstr "组总 CPU 使用率"
 
 #: extended_process_list.cpp:294
 #, kde-format
@@ -223,7 +223,7 @@ msgstr "组 CPU"
 #: extended_process_list.cpp:295
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
-msgstr "此进程和所有子进程的总 CPU 使用情况。"
+msgstr "此进程和所有子进程的总 CPU 使用率。"
 
 #: extended_process_list.cpp:302
 #, kde-format
@@ -270,7 +270,7 @@ msgstr ""
 #: extended_process_list.cpp:333
 #, kde-format
 msgid "Resident Memory Usage"
-msgstr "常驻内存使用情况"
+msgstr "常驻内存使用率"
 
 #: extended_process_list.cpp:335
 #, kde-format
@@ -287,7 +287,7 @@ msgstr "这是此进程正在使用的物理内存总量，包含共享库的内
 #: extended_process_list.cpp:343
 #, kde-format
 msgid "Private Memory Usage"
-msgstr "私有内存使用情况"
+msgstr "私有内存使用率"
 
 #: extended_process_list.cpp:345
 #, kde-format
@@ -301,13 +301,13 @@ msgid ""
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
-"这是此进程自身使用的物理内存总量和它的私有内存使用情况的估计值。这不包括已经"
-"交换的内存和它的动态链接库代码大小。"
+"这是此进程自身使用的物理内存总量和它的私有内存使用率的估计值。这不包括已经交"
+"换的内存和它的动态链接库代码大小。"
 
 #: extended_process_list.cpp:356
 #, kde-format
 msgid "Shared Memory Usage"
-msgstr "共享内存使用情况"
+msgstr "共享内存使用率"
 
 #: extended_process_list.cpp:365
 #, kde-format
@@ -328,7 +328,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "比例内存使用情况"
+msgstr "比例内存使用率"
 
 #: extended_process_list.cpp:378
 #, kde-format
@@ -354,7 +354,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
-msgstr "内存使用情况"
+msgstr "内存使用率"
 
 #: extended_process_list.cpp:395
 #, kde-format
@@ -371,15 +371,15 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"这是该进程实际使用的物理内存量的近似值。如果可用，将优先采用比例内存使用情况"
-"数值；若私有内存使用情况存在数值，则采用私有内存使用情况的数值；其他情况则采"
-"用常驻内存使用情况的数值。"
+"这是该进程实际使用的物理内存量的近似值。如果可用，将优先采用比例内存使用率数"
+"值；若私有内存使用率存在数值，则采用私有内存使用率的数值；其他情况则采用常驻"
+"内存使用率的数值。"
 
 #: extended_process_list.cpp:407
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "交换空间使用情况"
+msgstr "交换空间使用率"
 
 #: extended_process_list.cpp:408
 #, kde-format
@@ -516,7 +516,7 @@ msgstr "线程"
 #: plugins/gpu/gpu.cpp:97
 #, kde-format
 msgid "GPU Usage"
-msgstr "GPU 使用情况"
+msgstr "GPU 使用率"
 
 #: plugins/gpu/gpu.cpp:99
 #, kde-format

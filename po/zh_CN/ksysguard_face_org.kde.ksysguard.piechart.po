@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-09-19 02:39+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/libksysguard/ksysguard_face_org.kde."
+"X-Crowdin-File: /kf6-stable/messages/libksysguard/ksysguard_face_org.kde."
 "ksysguard.piechart.pot\n"
-"X-Crowdin-File-ID: 43459\n"
+"X-Crowdin-File-ID: 52116\n"
 
 #: contents/ui/Config.qml:34
 #, kde-format
@@ -30,50 +30,48 @@ msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "起点角度："
 
-#: contents/ui/Config.qml:44
-#, kde-format
+#: contents/ui/Config.qml:43 contents/ui/Config.qml:52
+#, fuzzy, kde-format
+#| msgctxt "@item:intext angle degrees, used to read text from spinbox"
+#| msgid "°"
 msgctxt "@label angle degrees"
-msgid "%1°"
-msgstr "%1°"
-
-#: contents/ui/Config.qml:47 contents/ui/Config.qml:61
-#, kde-format
-msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
-#: contents/ui/Config.qml:52
+#: contents/ui/Config.qml:47
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "饼状图总角度："
 
-#: contents/ui/Config.qml:58
-#, kde-format
-msgctxt "@label angle"
-msgid "%1°"
-msgstr "%1°"
-
-#: contents/ui/Config.qml:66
+#: contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
 msgstr "圆滑线条"
 
-#: contents/ui/Config.qml:71
+#: contents/ui/Config.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "自动数据范围"
 
-#: contents/ui/Config.qml:75
+#: contents/ui/Config.qml:65
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "来源："
 
-#: contents/ui/Config.qml:82
+#: contents/ui/Config.qml:72
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "目标："
+
+#~ msgctxt "@label angle degrees"
+#~ msgid "%1°"
+#~ msgstr "%1°"
+
+#~ msgctxt "@label angle"
+#~ msgid "%1°"
+#~ msgstr "%1°"

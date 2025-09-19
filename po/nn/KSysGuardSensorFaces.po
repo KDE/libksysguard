@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:44+0000\n"
+"POT-Creation-Date: 2025-09-19 02:39+0000\n"
 "PO-Revision-Date: 2023-03-10 22:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -168,7 +168,7 @@ msgstr "Vis rutenett"
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
-#: facepackages/piechart/contents/ui/Config.qml:71
+#: facepackages/piechart/contents/ui/Config.qml:61
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
@@ -176,7 +176,7 @@ msgstr "Automatisk dataområde"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
-#: facepackages/piechart/contents/ui/Config.qml:75
+#: facepackages/piechart/contents/ui/Config.qml:65
 #, fuzzy, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
@@ -184,7 +184,7 @@ msgstr "Frå:"
 
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
-#: facepackages/piechart/contents/ui/Config.qml:82
+#: facepackages/piechart/contents/ui/Config.qml:72
 #, fuzzy, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
@@ -264,19 +264,20 @@ msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "Til (Y):"
 
-#: facepackages/linechart/contents/ui/Config.qml:99
+#: facepackages/linechart/contents/ui/Config.qml:96
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "History to show:"
 msgstr ""
 
-#: facepackages/linechart/contents/ui/Config.qml:103
+#: facepackages/linechart/contents/ui/Config.qml:98
 #, fuzzy, kde-format
+#| msgid "1 second"
 msgctxt "@item:valuesuffix %1 is seconds of history"
-msgid "%1 second"
-msgid_plural "%1 seconds"
-msgstr[0] "%1 sekund"
-msgstr[1] "%1 sekund"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "1 sekund"
+msgstr[1] "1 sekund"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, fuzzy, kde-format
@@ -284,32 +285,20 @@ msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Start frå vinkelen:"
 
-#: facepackages/piechart/contents/ui/Config.qml:44
+#: facepackages/piechart/contents/ui/Config.qml:43
+#: facepackages/piechart/contents/ui/Config.qml:52
 #, fuzzy, kde-format
 msgctxt "@label angle degrees"
-msgid "%1°"
-msgstr "%1°"
-
-#: facepackages/piechart/contents/ui/Config.qml:47
-#: facepackages/piechart/contents/ui/Config.qml:61
-#, fuzzy, kde-format
-msgctxt "@item:intext angle degrees, used to read text from spinbox"
 msgid "°"
 msgstr "°"
 
-#: facepackages/piechart/contents/ui/Config.qml:52
+#: facepackages/piechart/contents/ui/Config.qml:47
 #, fuzzy, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Total kakestykke-vinkel:"
 
-#: facepackages/piechart/contents/ui/Config.qml:58
-#, fuzzy, kde-format
-msgctxt "@label angle"
-msgid "%1°"
-msgstr "%1°"
-
-#: facepackages/piechart/contents/ui/Config.qml:66
+#: facepackages/piechart/contents/ui/Config.qml:56
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
@@ -342,3 +331,20 @@ msgstr "Tilbake"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Systemovervakingssensor"
+
+#, fuzzy
+#~ msgctxt "@item:valuesuffix %1 is seconds of history"
+#~ msgid "%1 second"
+#~ msgid_plural "%1 seconds"
+#~ msgstr[0] "%1 sekund"
+#~ msgstr[1] "%1 sekund"
+
+#, fuzzy
+#~ msgctxt "@label angle degrees"
+#~ msgid "%1°"
+#~ msgstr "%1°"
+
+#, fuzzy
+#~ msgctxt "@label angle"
+#~ msgid "%1°"
+#~ msgstr "%1°"

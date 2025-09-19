@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:44+0000\n"
+"POT-Creation-Date: 2025-09-19 02:39+0000\n"
 "PO-Revision-Date: 2023-06-09 16:50+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -171,7 +171,7 @@ msgstr "Zobraziť čiary mriežky"
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
-#: facepackages/piechart/contents/ui/Config.qml:71
+#: facepackages/piechart/contents/ui/Config.qml:61
 #, fuzzy, kde-format
 #| msgid "Automatic Data Range"
 msgctxt "@option:check"
@@ -180,7 +180,7 @@ msgstr "Automatický dátový rozsah"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
-#: facepackages/piechart/contents/ui/Config.qml:75
+#: facepackages/piechart/contents/ui/Config.qml:65
 #, fuzzy, kde-format
 #| msgid "From:"
 msgctxt "@label:spinbox data range"
@@ -189,7 +189,7 @@ msgstr "Od:"
 
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
-#: facepackages/piechart/contents/ui/Config.qml:82
+#: facepackages/piechart/contents/ui/Config.qml:72
 #, fuzzy, kde-format
 #| msgid "To:"
 msgctxt "@label:spinbox data range"
@@ -282,23 +282,21 @@ msgctxt "@label:spinbox"
 msgid "To (Y):"
 msgstr "Do (Y):"
 
-#: facepackages/linechart/contents/ui/Config.qml:99
+#: facepackages/linechart/contents/ui/Config.qml:96
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "History to show:"
 msgstr ""
 
-#: facepackages/linechart/contents/ui/Config.qml:103
+#: facepackages/linechart/contents/ui/Config.qml:98
 #, fuzzy, kde-format
-#| msgctxt "%1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#| msgid "1 second"
 msgctxt "@item:valuesuffix %1 is seconds of history"
-msgid "%1 second"
-msgid_plural "%1 seconds"
-msgstr[0] "%1 sekunda"
-msgstr[1] "%1 sekundy"
-msgstr[2] "%1 sekúnd"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "1 sekunda"
+msgstr[1] "1 sekunda"
+msgstr[2] "1 sekunda"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, fuzzy, kde-format
@@ -307,39 +305,23 @@ msgctxt "@label:spinbox"
 msgid "Starting angle:"
 msgstr "Začať od uhla:"
 
-#: facepackages/piechart/contents/ui/Config.qml:44
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
-msgctxt "@label angle degrees"
-msgid "%1°"
-msgstr "%1°"
-
-#: facepackages/piechart/contents/ui/Config.qml:47
-#: facepackages/piechart/contents/ui/Config.qml:61
+#: facepackages/piechart/contents/ui/Config.qml:43
+#: facepackages/piechart/contents/ui/Config.qml:52
 #, fuzzy, kde-format
 #| msgctxt "angle degrees"
 #| msgid "°"
-msgctxt "@item:intext angle degrees, used to read text from spinbox"
+msgctxt "@label angle degrees"
 msgid "°"
 msgstr "°"
 
-#: facepackages/piechart/contents/ui/Config.qml:52
+#: facepackages/piechart/contents/ui/Config.qml:47
 #, fuzzy, kde-format
 #| msgid "Total Pie Angle:"
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
 msgstr "Celkový koláčový uhol:"
 
-#: facepackages/piechart/contents/ui/Config.qml:58
-#, fuzzy, kde-format
-#| msgctxt "angle degrees"
-#| msgid "%1°"
-msgctxt "@label angle"
-msgid "%1°"
-msgstr "%1°"
-
-#: facepackages/piechart/contents/ui/Config.qml:66
+#: facepackages/piechart/contents/ui/Config.qml:56
 #, fuzzy, kde-format
 #| msgid "Rounded Lines"
 msgctxt "@option:check"
@@ -374,6 +356,31 @@ msgstr "Späť"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Senzor monitorovania systému"
+
+#, fuzzy
+#~| msgctxt "%1 is seconds of history"
+#~| msgid "%1 second"
+#~| msgid_plural "%1 seconds"
+#~ msgctxt "@item:valuesuffix %1 is seconds of history"
+#~ msgid "%1 second"
+#~ msgid_plural "%1 seconds"
+#~ msgstr[0] "%1 sekunda"
+#~ msgstr[1] "%1 sekundy"
+#~ msgstr[2] "%1 sekúnd"
+
+#, fuzzy
+#~| msgctxt "angle degrees"
+#~| msgid "%1°"
+#~ msgctxt "@label angle degrees"
+#~ msgid "%1°"
+#~ msgstr "%1°"
+
+#, fuzzy
+#~| msgctxt "angle degrees"
+#~| msgid "%1°"
+#~ msgctxt "@label angle"
+#~ msgid "%1°"
+#~ msgstr "%1°"
 
 #, fuzzy
 #~| msgid "Show Title"
