@@ -1,16 +1,16 @@
 # Translation for ksysguard_face_org.kde.ksysguard.piechart.po to Euskara/Basque (eu).
-# Copyright (C) 2020-2024 This file is copyright:
+# Copyright (C) 2020-2025 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2022, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2022, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-19 02:39+0000\n"
-"PO-Revision-Date: 2024-09-06 22:11+0200\n"
+"PO-Revision-Date: 2025-09-20 04:20+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/ui/Config.qml:34
 #, kde-format
@@ -33,9 +33,7 @@ msgid "Starting angle:"
 msgstr "Hasierako angelua:"
 
 #: contents/ui/Config.qml:43 contents/ui/Config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:intext angle degrees, used to read text from spinbox"
-#| msgid "°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "°"
 msgstr "°"

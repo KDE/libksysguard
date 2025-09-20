@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-19 02:39+0000\n"
-"PO-Revision-Date: 2025-06-29 17:49+0300\n"
+"PO-Revision-Date: 2025-09-19 09:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/ui/Config.qml:34
 #, kde-format
@@ -30,9 +30,7 @@ msgid "Starting angle:"
 msgstr "Başlangıç açısı:"
 
 #: contents/ui/Config.qml:43 contents/ui/Config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:intext angle degrees, used to read text from spinbox"
-#| msgid "°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "°"
 msgstr "°"

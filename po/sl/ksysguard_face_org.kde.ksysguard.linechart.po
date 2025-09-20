@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-19 02:39+0000\n"
-"PO-Revision-Date: 2025-06-11 06:02+0200\n"
+"PO-Revision-Date: 2025-09-19 10:41+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: contents/ui/Config.qml:42
 #, kde-format
@@ -91,17 +91,14 @@ msgid "History to show:"
 msgstr "Zgodovina za prikaz:"
 
 #: contents/ui/Config.qml:98
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix %1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "%1 sekund"
-msgstr[1] "%1 sekunda"
-msgstr[2] "%1 sekundi"
-msgstr[3] "%1 sekunde"
+msgstr[0] "sekund"
+msgstr[1] "sekunda"
+msgstr[2] "sekundi"
+msgstr[3] "sekunde"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Show last:"
