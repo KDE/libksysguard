@@ -851,6 +851,16 @@ QAbstractItemModel *SensorFaceController::availablePresetsModel()
     return d->availablePresetsModel;
 }
 
+void SensorFaceController::loadConfig(KConfigGroup &config)
+{
+    d->configGroup = config;
+    d->appearanceGroup = KConfigGroup(&config, "Appearance");
+    d->sensorsGroup = KConfigGroup(&config, "Sensors");
+    d->colorsGroup = KConfigGroup(&config, "SensorColors");
+    d->labelsGroup = KConfigGroup(&config, "SensorLabels");
+    reloadConfig();
+}
+
 void SensorFaceController::reloadConfig()
 {
     if (d->faceConfigLoader) {

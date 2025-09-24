@@ -239,6 +239,11 @@ public:
     QAbstractItemModel *availablePresetsModel();
 
     /**
+     * Load the configuration from a given config group
+     */
+    void loadConfig(KConfigGroup &config);
+
+    /**
      * Reload the configuration.
      */
     Q_INVOKABLE void reloadConfig();
