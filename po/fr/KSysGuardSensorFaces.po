@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-19 00:43+0000\n"
-"PO-Revision-Date: 2025-06-13 13:04+0200\n"
+"PO-Revision-Date: 2025-09-20 10:17+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: ConfigAppearance.qml:72
 #, kde-format
@@ -265,13 +265,12 @@ msgid "History to show:"
 msgstr "Historique à afficher :"
 
 #: facepackages/linechart/contents/ui/Config.qml:98
-#, fuzzy, kde-format
-#| msgid "1 second"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "1 seconde"
-msgstr[1] "1 seconde"
+msgstr[0] "seconde"
+msgstr[1] "secondes"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
@@ -281,9 +280,7 @@ msgstr "Angle de démarrage :"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
 #: facepackages/piechart/contents/ui/Config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:intext angle degrees, used to read text from spinbox"
-#| msgid "°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "°"
 msgstr " °"
