@@ -965,7 +965,7 @@ void SensorFaceController::savePreset()
 
     auto *job = KPackage::PackageJob::install(QStringLiteral("Plasma/Applet"), dir.path());
     connect(job, &KJob::finished, this, [this, dir = std::move(dir)](KJob *job) {
-        if (job->error() == 0) {
+        if (job->error() == 0 && d->availablePresetsModel) {
             d->availablePresetsModel->reload();
         } else {
             qCWarning(LIBKSYSGUARD_FACES) << "Failed to install package:" << qPrintable(job->errorString());
@@ -1056,7 +1056,7 @@ void SensorFaceController::uninstallPreset(const QString &pluginId)
     root.cdUp();
     auto *job = KPackage::PackageJob::uninstall(QStringLiteral("Plasma/Applet"), pluginId, root.path());
 
-    connect(job, &KJob::finished, this, [this]() {
+    connect(job, &KJob::finished, d->availablePresetsModel, [this]() {
         d->availablePresetsModel->reload();
     });
 }
