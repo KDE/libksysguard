@@ -267,12 +267,11 @@ msgid "History to show:"
 msgstr "显示的历史记录："
 
 #: facepackages/linechart/contents/ui/Config.qml:98
-#, fuzzy, kde-format
-#| msgid "1 second"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "1 秒"
+msgstr[0] "秒"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
@@ -282,9 +281,7 @@ msgstr "起点角度："
 
 #: facepackages/piechart/contents/ui/Config.qml:43
 #: facepackages/piechart/contents/ui/Config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:intext angle degrees, used to read text from spinbox"
-#| msgid "°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "°"
 msgstr "°"
@@ -328,16 +325,3 @@ msgstr "返回"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "系统监视传感器"
-
-#~ msgctxt "@item:valuesuffix %1 is seconds of history"
-#~ msgid "%1 second"
-#~ msgid_plural "%1 seconds"
-#~ msgstr[0] "%1 秒"
-
-#~ msgctxt "@label angle degrees"
-#~ msgid "%1°"
-#~ msgstr "%1°"
-
-#~ msgctxt "@label angle"
-#~ msgid "%1°"
-#~ msgstr "%1°"

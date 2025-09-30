@@ -91,11 +91,8 @@ msgid "History to show:"
 msgstr "显示的历史记录："
 
 #: contents/ui/Config.qml:98
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix %1 is seconds of history"
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "%1 秒"
+msgstr[0] "秒"
