@@ -269,14 +269,13 @@ msgid "History to show:"
 msgstr ""
 
 #: facepackages/linechart/contents/ui/Config.qml:98
-#, fuzzy, kde-format
-#| msgid "1 second"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "1 sekunda"
-msgstr[1] "1 sekunda"
-msgstr[2] "1 sekunda"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
@@ -286,12 +285,10 @@ msgstr "Počáteční úhel:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
 #: facepackages/piechart/contents/ui/Config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:intext angle degrees, used to read text from spinbox"
-#| msgid "°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "°"
-msgstr "°"
+msgstr ""
 
 #: facepackages/piechart/contents/ui/Config.qml:47
 #, kde-format
@@ -332,18 +329,3 @@ msgstr "Zpět"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Senzor monitoru systému"
-
-#~ msgctxt "@item:valuesuffix %1 is seconds of history"
-#~ msgid "%1 second"
-#~ msgid_plural "%1 seconds"
-#~ msgstr[0] "%1 sekunda"
-#~ msgstr[1] "%1 sekundy"
-#~ msgstr[2] "%1 sekund"
-
-#~ msgctxt "@label angle degrees"
-#~ msgid "%1°"
-#~ msgstr "%1°"
-
-#~ msgctxt "@label angle"
-#~ msgid "%1°"
-#~ msgstr "%1°"
