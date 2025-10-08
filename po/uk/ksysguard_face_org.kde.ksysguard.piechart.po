@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2024.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_face_org.kde.ksysguard.piechart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-19 02:39+0000\n"
-"PO-Revision-Date: 2024-09-06 23:36+0300\n"
+"PO-Revision-Date: 2025-10-07 22:19+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -33,9 +33,7 @@ msgid "Starting angle:"
 msgstr "Початковий кут:"
 
 #: contents/ui/Config.qml:43 contents/ui/Config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:intext angle degrees, used to read text from spinbox"
-#| msgid "°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "°"
 msgstr "°"
