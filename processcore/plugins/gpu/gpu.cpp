@@ -107,6 +107,8 @@ GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
 
     std::vector<drmDevicePtr> devices;
     const int count = drmGetDevices2(0, nullptr, 0);
+    if (count <= 0)
+        return;
     devices.resize(count);
     std::vector<GpuInfo> nvidiaGpus;
     if (drmGetDevices2(0, devices.data(), count) > 0) {
