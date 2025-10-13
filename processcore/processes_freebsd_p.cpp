@@ -147,7 +147,7 @@ ProcessesLocal::ProcessesLocal()
 
 long ProcessesLocal::getParentPid(long pid)
 {
-    long long ppid = 0;
+    long long ppid = -1;
     struct kinfo_proc p;
     if (d->readProc(pid, &p)) {
         ppid = p.ki_ppid;
