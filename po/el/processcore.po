@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-10-14 00:44+0000\n"
 "PO-Revision-Date: 2010-06-03 10:05+0300\n"
 "Last-Translator: Petros Vidalis <p_vidalis@hotmail.com>\n"
 "Language-Team: Ελληνικά <i18ngr@lists.hellug.gr>\n"
@@ -532,7 +532,7 @@ msgstr ""
 msgid "Displays which GPU the process is using"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:343
+#: plugins/gpu/gpu.cpp:345
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-10-14 00:44+0000\n"
 "PO-Revision-Date: 2010-01-22 15:41+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -529,7 +529,7 @@ msgstr ""
 msgid "Displays which GPU the process is using"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:343
+#: plugins/gpu/gpu.cpp:345
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-10-14 00:44+0000\n"
 "PO-Revision-Date: 2025-05-04 13:30+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -558,7 +558,7 @@ msgstr "Procesador gráfico"
 msgid "Displays which GPU the process is using"
 msgstr "Amosa o procesador gráfico que usa o proceso."
 
-#: plugins/gpu/gpu.cpp:343
+#: plugins/gpu/gpu.cpp:345
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
