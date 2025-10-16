@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2024-07-27 19:48+0300\n"
+"PO-Revision-Date: 2025-10-15 16:36+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -339,25 +339,19 @@ msgstr ""
 "kurie naudoja šią biblioteką."
 
 #: extended_process_list.cpp:375
-#, fuzzy, kde-format
-#| msgid "Private Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Privačios atminties naudojimas"
+msgstr "Proporcionalus atminties naudojimas"
 
 #: extended_process_list.cpp:378
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Proporcionalus"
 
 #: extended_process_list.cpp:385
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -372,26 +366,19 @@ msgstr ""
 "privačiąją atmintį."
 
 #: extended_process_list.cpp:392
-#, fuzzy, kde-format
-#| msgid "Memory Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Atminties naudojimas"
 
 #: extended_process_list.cpp:395
-#, fuzzy, kde-format
-#| msgid "Memory"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Atmintis"
 
 #: extended_process_list.cpp:402
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is an approximation of the real amount of physical memory that this "
-#| "process is using. It is calculated by dividing the process' shared memory "
-#| "usage by the amount of processes sharing that memory, then adding the "
-#| "process' private memory."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -399,23 +386,22 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
-"Tai yra šio proceso naudojamos fizinės atminties realaus kiekio artinys. Jis "
-"yra apskaičiuojamas bendrosios atminties naudojimą šiuo procesu padalinant "
-"iš procesų, bendrinančių tą atmintį, skaičiaus, o tuomet pridedant proceso "
-"privačiąją atmintį."
+"Tai yra šio proceso naudojamos fizinės atminties realaus kiekio artinys. "
+"Jis, jei prieinama, naudos proporcionalų atminties naudojimą, privačios "
+"atminties naudojimą (jei šis turi reikšmę), o priešingu atveju, naudos "
+"rezidentinės atminties naudojimą."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
-#| msgid "GPU Usage"
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "Grafikos procesoriaus naudojimas"
+msgstr "Sukeitimų srities naudojimas"
 
 #: extended_process_list.cpp:408
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Sukeitimų sritis"
 
 #: extended_process_list.cpp:412
 #, kde-format
@@ -423,6 +409,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr ""
+"Tai yra šio proceso naudojamos sukeitimų srities atminties kiekio artinys."
 
 #: extended_process_list.cpp:416
 #, kde-format
@@ -556,21 +543,20 @@ msgid "GPU Memory"
 msgstr "Grafikos procesoriaus atmintis"
 
 #: plugins/gpu/gpu.cpp:101
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "Procesorius"
+msgstr "Grafikos procesorius"
 
 #: plugins/gpu/gpu.cpp:102
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Rodo, kurį grafikos procesorių naudoja procesas"
 
 #: plugins/gpu/gpu.cpp:343
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
-msgstr ""
+msgstr "Grafikos procesorius %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format
