@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 00:41+0000\n"
-"PO-Revision-Date: 2024-09-06 00:41+0000\n"
+"PO-Revision-Date: 2025-10-15 16:53+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,21 +17,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.6\n"
 
 #: contents/ui/Config.qml:29
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr ""
+msgstr "Automatinis duomenų rėžis"
 
 #: contents/ui/Config.qml:33
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr ""
+msgstr "Nuo:"
 
 #: contents/ui/Config.qml:40
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr ""
+msgstr "Iki:"
