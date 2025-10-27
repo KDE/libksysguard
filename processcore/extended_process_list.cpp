@@ -410,7 +410,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     swapSensor->setMin(0);
     swapSensor->setMax(totalSwapMemory());
     swapSensor->setDescription(i18nc("@info:tooltip", "This is an approximation of the amount of swap memory this process is using."));
-    d->m_coreAttributes << memorySensor;
+    d->m_coreAttributes << swapSensor;
 
     auto nameSensor =
         new ProcessSensor<QString>(this, QStringLiteral("name"), i18n("Name"), &KSysGuard::Process::name, KSysGuard::Process::Name, ForwardFirstEntry);
