@@ -116,8 +116,8 @@ ColumnLayout {
         }
     }
 
-    property var highPrioritySensors: []
-    property var lowPrioritySensors: []
+    property list<Sensors.Sensor> highPrioritySensors: []
+    property list<Sensors.Sensor> lowPrioritySensors: []
 
     Instantiator {
         model: root.highPrioritySensorIds
@@ -126,11 +126,9 @@ ColumnLayout {
 
         onObjectAdded: (index, object) => {
             root.highPrioritySensors.push(object)
-            root.highPrioritySensors = root.highPrioritySensors
         }
         onObjectRemoved: (index, object) => {
             root.highPrioritySensors.splice(root.highPrioritySensors.indexOf(object), 1)
-            root.highPrioritySensors = root.highPrioritySensors
         }
     }
 
@@ -141,11 +139,9 @@ ColumnLayout {
 
         onObjectAdded: (index, object) => {
             root.lowPrioritySensors.push(object)
-            root.lowPrioritySensors = root.lowPrioritySensors
         }
         onObjectRemoved: (index, object) => {
             root.lowPrioritySensors.splice(root.lowPrioritySensors.indexOf(object), 1)
-            root.lowPrioritySensors = root.lowPrioritySensors
         }
     }
 }
