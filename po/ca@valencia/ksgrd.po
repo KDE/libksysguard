@@ -1,9 +1,9 @@
 # Translation of ksgrd.po to Catalan (Valencian)
-# Copyright (C) 2013-2021 This_file_is_part_of_KDE
+# Copyright (C) 2013-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2013, 2017, 2019, 2020, 2021 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2013, 2017, 2019, 2020, 2021, 2025 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2014, 2015, 2016, 2020 Antoni Bella Pérez <antonibella5@yahoo.com>
 # SPDX-FileCopyrightText: 2019 Empar Montoro Martín <montoro_mde@gva.es>
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-03-01 00:45+0000\n"
-"PO-Revision-Date: 2021-10-12 19:37+0200\n"
+"PO-Revision-Date: 2025-11-14 15:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: SensorAgent.cpp:87
 #, kde-format
@@ -744,7 +744,7 @@ msgstr "Qualitat de l'enllaç"
 #: SensorManager.cpp:224
 #, kde-format
 msgid "Signal Level"
-msgstr "Intensitat del senyal"
+msgstr "Nivell del senyal"
 
 #: SensorManager.cpp:225
 #, kde-format
