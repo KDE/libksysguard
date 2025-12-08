@@ -64,7 +64,7 @@ GridLayout {
             }
 
             text: sensor.formattedValue
-            sensorColor: grid.useSensorColor ? grid.colorSource.map[modelData] : Kirigami.Theme.highlightColor
+            sensorColor: grid.controller.faceConfiguration.useSensorColor ? grid.colorSource.map[modelData] : Kirigami.Theme.highlightColor
         }
     }
 }
