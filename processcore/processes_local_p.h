@@ -84,6 +84,15 @@ public:
      */
     Processes::Error setNiceness(long pid, int priority);
 
+    /** \brief Get the priority of a process.
+     *
+     *  For the normal scheduler, this is usually from 19
+     *  (very nice, lowest priority) to -20 (highest priority).  The default value for a process is 0.
+     *
+     *  @return The nice value of the process
+     */
+    int getNiceness(long pid);
+
     /** \brief Set the scheduler for a process.
      *
      * This is defined according to POSIX.1-2001
@@ -94,6 +103,15 @@ public:
      *  @return Error::NoError if successful
      */
     Processes::Error setScheduler(long pid, int priorityClass, int priority);
+
+    /** \brief Get the scheduler class of a process.
+     *
+     * This is defined according to POSIX.1-2001
+     *  See "man sched_setscheduler" for more information.
+     *
+     *  @return The priority class
+     */
+    int getSchedulerClass(long pid);
 
     /** \brief Return the total amount of physical memory in KiB.
      *
@@ -115,6 +133,21 @@ public:
      *  @return Error::NoError if successful
      */
     Processes::Error setIoNiceness(long pid, int priorityClass, int priority);
+
+    /** \brief Get the i/o priority of a process.
+     *
+     *  This is from 7 (very nice, lowest i/o priority) to
+     *  0 (highest priority).  The default value is determined as: io_nice = (cpu_nice + 20) / 5.
+     *
+     *  @return The i/o nice value of the process
+     */
+    int getIoNiceness(long pid);
+
+    /** \brief Get the i/o priority class of a process.
+     *
+     *  @return The i/o priority class of the process
+     */
+    int getIoPriorityClass(long pid);
 
     /** \brief Returns true if ionice is supported on this system
      */

@@ -210,14 +210,34 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
     return Processes::NotSupported;
 }
 
+int ProcessesLocal::getNiceness(long pid)
+{
+    return 0;
+}
+
 Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     return Processes::NotSupported;
 }
 
+int ProcessesLocal::getSchedulerClass(long pid)
+{
+    return 0;
+}
+
 Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority)
 {
     return Processes::NotSupported; // Not yet supported
+}
+
+int ProcessesLocal::getIoNiceness(long pid)
+{
+    return 0;
+}
+
+int ProcessesLocal::getIoPriorityClass(long pid)
+{
+    return KSysGuard::Process::None;
 }
 
 bool ProcessesLocal::supportsIoNiceness()

@@ -356,8 +356,6 @@ void Processes::processUpdated(long pid, const Process::Updates &changes)
 
 void Processes::Private::markProcessesAsEnded(long pid)
 {
-    Q_ASSERT(pid >= 0);
-
     Process *process = mProcesses.value(pid);
     if (!process) {
         return;
@@ -367,8 +365,6 @@ void Processes::Private::markProcessesAsEnded(long pid)
 }
 void Processes::deleteProcess(long pid)
 {
-    Q_ASSERT(pid >= 0);
-
     Process *process = d->mProcesses.value(pid);
     if (!process) {
         return;

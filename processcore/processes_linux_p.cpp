@@ -73,8 +73,7 @@ extern int sys_ioprio_get(int, int);
 
 /* Set up ionice functions */
 #ifdef HAVE_IONICE
-#define IOPRIO_WHO_PROCESS 1
-#define IOPRIO_CLASS_SHIFT 13
+#include <linux/ioprio.h>
 
 /* Expose the kernel calls to userspace via syscall
  * See man ioprio_set  and man ioprio_get   for information on these functions */
@@ -768,6 +767,19 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
     return Processes::NoError;
 }
 
+int ProcessesLocal::getNiceness(long pid)
+{
+    if (pid <= 0) {
+        return 0;
+    }
+    errno = 0;
+    const int nice = getpriority(PRIO_PROCESS, pid);
+    if (errno != 0) {
+        return 0;
+    }
+    return nice;
+}
+
 Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     errno = 0;
@@ -833,6 +845,24 @@ Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int p
     return Processes::NoError;
 }
 
+int ProcessesLocal::getSchedulerClass(long pid)
+{
+    if (pid <= 0) {
+        return 0;
+    }
+    const int policy = sched_getscheduler(pid);
+    switch (policy) {
+    case (SCHED_OTHER): return KSysGuard::Process::Other;
+    case (SCHED_RR): return KSysGuard::Process::RoundRobin;
+    case (SCHED_FIFO): return KSysGuard::Process::Fifo;
+#ifdef SCHED_IDLE
+    case (SCHED_IDLE): return KSysGuard::Process::SchedulerIdle;
+#endif
+    case (SCHED_BATCH): return KSysGuard::Process::Batch;
+    default: return 0;
+    }
+}
+
 Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority)
 {
     errno = 0;
@@ -840,7 +870,7 @@ Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int 
         return Processes::InvalidPid;
     }
 #ifdef HAVE_IONICE
-    if (ioprio_set(IOPRIO_WHO_PROCESS, pid, priority | priorityClass << IOPRIO_CLASS_SHIFT) == -1) {
+    if (ioprio_set(IOPRIO_WHO_PROCESS, pid, IOPRIO_PRIO_VALUE(priorityClass, priority)) == -1) {
         // set io niceness failed
         switch (errno) {
         case ESRCH:
@@ -856,6 +886,32 @@ Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int 
     return Processes::NoError;
 #else
     return Processes::NotSupported;
+#endif
+}
+
+int ProcessesLocal::getIoNiceness(long pid)
+{
+    if (pid <= 0) {
+        return 0;
+    }
+#ifdef HAVE_IONICE
+    const int mask = ioprio_get(IOPRIO_WHO_PROCESS, pid);
+    return IOPRIO_PRIO_DATA(mask);
+#else
+    return 0;
+#endif
+}
+
+int ProcessesLocal::getIoPriorityClass(long pid)
+{
+    if (pid <= 0) {
+        return 0;
+    }
+#ifdef HAVE_IONICE
+    const int mask = ioprio_get(IOPRIO_WHO_PROCESS, pid);
+    return IOPRIO_PRIO_CLASS(mask);
+#else
+    return 0;
 #endif
 }
 

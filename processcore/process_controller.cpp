@@ -108,7 +108,12 @@ KSysGuard::ProcessController::Result KSysGuard::ProcessController::setPriority(c
     return setPriority(d->listToVector(pids), priority);
 }
 
-ProcessController::Result ProcessController::setCPUScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
+int ProcessController::priority(long long pid)
+{
+    return s_localProcesses->getNiceness(pid);
+}
+
+ProcessController::Result ProcessController::setCpuScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
 {
     if (scheduler == KSysGuard::Process::Other || scheduler == KSysGuard::Process::Batch) {
         priority = 0;
@@ -126,17 +131,22 @@ ProcessController::Result ProcessController::setCPUScheduler(const QList<int> &p
                              {{QStringLiteral("cpuScheduler"), scheduler}, {QStringLiteral("cpuSchedulerPriority"), priority}});
 }
 
-KSysGuard::ProcessController::Result KSysGuard::ProcessController::setCPUScheduler(const QList<long long> &pids, Process::Scheduler scheduler, int priority)
+KSysGuard::ProcessController::Result KSysGuard::ProcessController::setCpuScheduler(const QList<long long> &pids, Process::Scheduler scheduler, int priority)
 {
-    return setCPUScheduler(d->listToVector(pids), scheduler, priority);
+    return setCpuScheduler(d->listToVector(pids), scheduler, priority);
 }
 
-KSysGuard::ProcessController::Result KSysGuard::ProcessController::setCPUScheduler(const QVariantList &pids, Process::Scheduler scheduler, int priority)
+KSysGuard::ProcessController::Result KSysGuard::ProcessController::setCpuScheduler(const QVariantList &pids, Process::Scheduler scheduler, int priority)
 {
-    return setCPUScheduler(d->listToVector(pids), scheduler, priority);
+    return setCpuScheduler(d->listToVector(pids), scheduler, priority);
 }
 
-ProcessController::Result ProcessController::setIOScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
+Process::Scheduler ProcessController::cpuScheduler(long long pid)
+{
+    return static_cast<Process::Scheduler>(s_localProcesses->getSchedulerClass(pid));
+}
+
+ProcessController::Result ProcessController::setIoScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
 {
     if (!s_localProcesses->supportsIoNiceness()) {
         return Result::Unsupported;
@@ -163,15 +173,25 @@ ProcessController::Result ProcessController::setIOScheduler(const QList<int> &pi
 }
 
 KSysGuard::ProcessController::Result
-KSysGuard::ProcessController::setIOScheduler(const QList<long long> &pids, Process::IoPriorityClass priorityClass, int priority)
+KSysGuard::ProcessController::setIoScheduler(const QList<long long> &pids, Process::IoPriorityClass priorityClass, int priority)
 {
-    return setIOScheduler(d->listToVector(pids), priorityClass, priority);
+    return setIoScheduler(d->listToVector(pids), priorityClass, priority);
 }
 
 KSysGuard::ProcessController::Result
-KSysGuard::ProcessController::setIOScheduler(const QVariantList &pids, Process::IoPriorityClass priorityClass, int priority)
+KSysGuard::ProcessController::setIoScheduler(const QVariantList &pids, Process::IoPriorityClass priorityClass, int priority)
 {
-    return setIOScheduler(d->listToVector(pids), priorityClass, priority);
+    return setIoScheduler(d->listToVector(pids), priorityClass, priority);
+}
+
+int ProcessController::ioPriority(long long pid)
+{
+    return s_localProcesses->getIoNiceness(pid);
+}
+
+Process::IoPriorityClass ProcessController::ioScheduler(long long pid)
+{
+    return static_cast<Process::IoPriorityClass>(s_localProcesses->getIoPriorityClass(pid));
 }
 
 QString ProcessController::resultToString(Result result)

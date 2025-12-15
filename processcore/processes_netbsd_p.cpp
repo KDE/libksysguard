@@ -243,6 +243,16 @@ Processes::Error ProcessesLocal::setNiceness(long pid, int priority)
     return Processes::NoError;
 }
 
+int ProcessesLocal::getNiceness(long pid)
+{
+    errno = 0;
+    const int nice = getpriority(PRIO_PROCESS, pid);
+    if (errno != 0) {
+        return 0;
+    }
+    return nice;
+}
+
 Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)
 {
     if (priorityClass == KSysGuard::Process::Other || priorityClass == KSysGuard::Process::Batch) {
@@ -276,9 +286,36 @@ Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int p
     return Processes::Unknown;
 }
 
+int ProcessesLocal::getSchedulerClass(long pid)
+{
+    if (pid <= 0) {
+        return 0; // check the parameters
+    }
+    const int policy = sched_getscheduler(pid);
+    switch (policy) {
+    case (SCHED_OTHER): return KSysGuard::Process::Other;
+    case (SCHED_RR): return KSysGuard::Process::RoundRobin;
+    case (SCHED_FIFO): return KSysGuard::Process::Fifo;
+#ifdef SCHED_BATCH
+    case (SCHED_BATCH): return KSysGuard::Process::Batch;
+#endif
+    default: return 0;
+    }
+}
+
 Processes::Error ProcessesLocal::setIoNiceness(long pid, int priorityClass, int priority)
 {
     return Processes::NotSupported; // Not yet supported
+}
+
+int ProcessesLocal::getIoNiceness(long pid)
+{
+    return 0;
+}
+
+int ProcessesLocal::getIoPriorityClass(long pid)
+{
+    return KSysGuard::Process::None;
 }
 
 bool ProcessesLocal::supportsIoNiceness()

@@ -129,6 +129,17 @@ public:
     Q_INVOKABLE Result setPriority(const QVariantList &pids, int priority);
 
     /**
+     * Get the priority (niceness) of a process.
+     *
+     * If the retrieval fails, it still returns the default value.
+     *
+     * \param pid The pid to get the priority from.
+     *
+     * \return The priority of the process.
+     */
+    Q_INVOKABLE int priority(long long pid);
+
+    /**
      * Set the CPU scheduling policy and priority of a number of processes.
      *
      * This will set the CPU scheduling policy and priority of all processes in
@@ -144,15 +155,26 @@ public:
      *         that a non-Success result may indicate any of the processes in
      *         \p pids encountered that result.
      */
-    Q_INVOKABLE Result setCPUScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority);
+    Q_INVOKABLE Result setCpuScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority);
     /**
-     * \overload Result setCPUScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
+     * \overload Result setCpuScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
      */
-    Q_INVOKABLE Result setCPUScheduler(const QList<long long> &pids, Process::Scheduler scheduler, int priority);
+    Q_INVOKABLE Result setCpuScheduler(const QList<long long> &pids, Process::Scheduler scheduler, int priority);
     /**
-     * \overload Result setCPUScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
+     * \overload Result setCpuScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
      */
-    Q_INVOKABLE Result setCPUScheduler(const QVariantList &pids, Process::Scheduler scheduler, int priority);
+    Q_INVOKABLE Result setCpuScheduler(const QVariantList &pids, Process::Scheduler scheduler, int priority);
+
+    /**
+     * Get the CPU scheduling policy and priority of a process.
+     *
+     * If the retrieval fails, it still returns the default value.
+     *
+     * \param pid The pid to get the scheduler from.
+     *
+     * \return The scheduler of the process.
+     */
+    Q_INVOKABLE Process::Scheduler cpuScheduler(long long pid);
 
     /**
      * Set the IO scheduling policy and priority of a number of processes.
@@ -170,15 +192,37 @@ public:
      *         that a non-Success result may indicate any of the processes in
      *         \p pids encountered that result.
      */
-    Q_INVOKABLE Result setIOScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority);
+    Q_INVOKABLE Result setIoScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority);
     /**
-     * \overload Result setIOScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
+     * \overload Result setIoScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
      */
-    Q_INVOKABLE Result setIOScheduler(const QList<long long> &pids, Process::IoPriorityClass priorityClass, int priority);
+    Q_INVOKABLE Result setIoScheduler(const QList<long long> &pids, Process::IoPriorityClass priorityClass, int priority);
     /**
-     * \overload Result setIOScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
+     * \overload Result setIoScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
      */
-    Q_INVOKABLE Result setIOScheduler(const QVariantList &pids, Process::IoPriorityClass priorityClass, int priority);
+    Q_INVOKABLE Result setIoScheduler(const QVariantList &pids, Process::IoPriorityClass priorityClass, int priority);
+
+    /**
+     * Get the IO priority of a process.
+     *
+     * If the retrieval fails, it still returns the default value.
+     *
+     * \param pid The pid to get the IO priority from.
+     *
+     * \return The IO priority of the process.
+     */
+    Q_INVOKABLE int ioPriority(long long pid);
+
+    /**
+     * Get the IO scheduling policy of a process.
+     *
+     * If the retrieval fails, it still returns the default value.
+     *
+     * \param pid The pid to get the IO scheduler from.
+     *
+     * \return The IO scheduler of the process.
+     */
+    Q_INVOKABLE Process::IoPriorityClass ioScheduler(long long pid);
 
     /**
      * Convert a Result value to a user-visible string.
