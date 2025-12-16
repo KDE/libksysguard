@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-16 06:52+0000\n"
 "PO-Revision-Date: 2025-05-01 03:39+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
@@ -717,37 +717,37 @@ msgctxt "Scheduler"
 msgid "Idle"
 msgstr "უმოქმედო"
 
-#: process_controller.cpp:181
+#: process_controller.cpp:201
 #, kde-format
 msgid "Success"
 msgstr "წარმატება"
 
-#: process_controller.cpp:183
+#: process_controller.cpp:203
 #, kde-format
 msgid "Insufficient permissions."
 msgstr "არასაკმარისი წვდომები."
 
-#: process_controller.cpp:185
+#: process_controller.cpp:205
 #, kde-format
 msgid "No matching process was found."
 msgstr "შესაბამისი პროცესი ვერ ვიპოვე."
 
-#: process_controller.cpp:187
+#: process_controller.cpp:207
 #, kde-format
 msgid "Not supported on the current system."
 msgstr "ამ სისტემაზე მხარდაუჭერელია."
 
-#: process_controller.cpp:189
+#: process_controller.cpp:209
 #, kde-format
 msgid "The user cancelled."
 msgstr "გაუქმდა მომხმარებლის მიერ."
 
-#: process_controller.cpp:191
+#: process_controller.cpp:211
 #, kde-format
 msgid "An unspecified error occurred."
 msgstr "გაუთვალისწინებელი შეცდომა."
 
-#: process_controller.cpp:193
+#: process_controller.cpp:213
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "უცნობი შეცდომა."

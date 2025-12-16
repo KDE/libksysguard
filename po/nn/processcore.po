@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-16 06:52+0000\n"
 "PO-Revision-Date: 2023-03-31 21:47+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -719,37 +719,37 @@ msgctxt "Scheduler"
 msgid "Idle"
 msgstr "Passiv"
 
-#: process_controller.cpp:181
+#: process_controller.cpp:201
 #, kde-format
 msgid "Success"
 msgstr "Vellukka"
 
-#: process_controller.cpp:183
+#: process_controller.cpp:203
 #, kde-format
 msgid "Insufficient permissions."
 msgstr "Manglar løyve."
 
-#: process_controller.cpp:185
+#: process_controller.cpp:205
 #, kde-format
 msgid "No matching process was found."
 msgstr "Fann ikkje nokon samsvarande prosess."
 
-#: process_controller.cpp:187
+#: process_controller.cpp:207
 #, kde-format
 msgid "Not supported on the current system."
 msgstr "Ikkje støtta på dette systemet."
 
-#: process_controller.cpp:189
+#: process_controller.cpp:209
 #, kde-format
 msgid "The user cancelled."
 msgstr "Avbroten av brukaren."
 
-#: process_controller.cpp:191
+#: process_controller.cpp:211
 #, kde-format
 msgid "An unspecified error occurred."
 msgstr "Det oppstod ein uspesifisert feil."
 
-#: process_controller.cpp:193
+#: process_controller.cpp:213
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "Det oppstod ein ukjend feil."
