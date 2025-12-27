@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2025-08-06 18:06+0300\n"
+"PO-Revision-Date: 2025-12-26 10:38+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -15,49 +15,49 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #: Formatter.cpp:33
 #, kde-format
 msgctxt "Bytes unit symbol"
 msgid "%1 B"
-msgstr ""
+msgstr "%1 ב׳"
 
 #: Formatter.cpp:34
 #, kde-format
 msgctxt "Kilobytes unit symbol"
 msgid "%1 KiB"
-msgstr ""
+msgstr "%1 KiB"
 
 #: Formatter.cpp:35
 #, kde-format
 msgctxt "Megabytes unit symbol"
 msgid "%1 MiB"
-msgstr ""
+msgstr "%1 MiB"
 
 #: Formatter.cpp:36
 #, kde-format
 msgctxt "Gigabytes unit symbol"
 msgid "%1 GiB"
-msgstr ""
+msgstr "%1 GiB"
 
 #: Formatter.cpp:37
 #, kde-format
 msgctxt "Terabytes unit symbol"
 msgid "%1 TiB"
-msgstr ""
+msgstr "%1 TiB"
 
 #: Formatter.cpp:38
 #, kde-format
 msgctxt "Petabytes unit symbol"
 msgid "%1 PiB"
-msgstr ""
+msgstr "%1 PiB"
 
 #: Formatter.cpp:40
 #, kde-format
 msgctxt "Bytes per second unit symbol"
 msgid "%1 B/s"
-msgstr ""
+msgstr "%1 ב׳ לשנ׳"
 
 #: Formatter.cpp:41
 #, kde-format
@@ -99,85 +99,85 @@ msgstr ""
 #, kde-format
 msgctxt "Kilobits per second unit symbol"
 msgid "%1 Kbps"
-msgstr ""
+msgstr "%1 קסל״ש"
 
 #: Formatter.cpp:49
 #, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "%1 Mbps"
-msgstr ""
+msgstr "%1 מסל״ש"
 
 #: Formatter.cpp:50
 #, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "%1 Gbps"
-msgstr ""
+msgstr "%1 גסל״ש"
 
 #: Formatter.cpp:51
 #, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "%1 Tbps"
-msgstr ""
+msgstr "%1 טסל״ש"
 
 #: Formatter.cpp:52
 #, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "%1 Pbps"
-msgstr ""
+msgstr "%1 פסל״ש"
 
 #: Formatter.cpp:54
 #, kde-format
 msgctxt "Hertz unit symbol"
 msgid "%1 Hz"
-msgstr ""
+msgstr "%1 הרץ"
 
 #: Formatter.cpp:55
 #, kde-format
 msgctxt "Kilohertz unit symbol"
 msgid "%1 kHz"
-msgstr ""
+msgstr "%1 קה״צ"
 
 #: Formatter.cpp:56
 #, kde-format
 msgctxt "Megahertz unit symbol"
 msgid "%1 MHz"
-msgstr ""
+msgstr "%1 מה״צ"
 
 #: Formatter.cpp:57
 #, kde-format
 msgctxt "Gigahertz unit symbol"
 msgid "%1 GHz"
-msgstr ""
+msgstr "%1 גה״ץ"
 
 #: Formatter.cpp:58
 #, kde-format
 msgctxt "Terahertz unit symbol"
 msgid "%1 THz"
-msgstr ""
+msgstr "%1 טה״צ"
 
 #: Formatter.cpp:59
 #, kde-format
 msgctxt "Petahertz unit symbol"
 msgid "%1 PHz"
-msgstr ""
+msgstr "%1 פה״צ"
 
 #: Formatter.cpp:61
 #, kde-format
 msgctxt "Percent unit"
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: Formatter.cpp:62
 #, kde-format
 msgctxt "Revolutions per minute unit symbol"
 msgid "%1 RPM"
-msgstr ""
+msgstr "%1 סל״ד"
 
 #: Formatter.cpp:63
 #, kde-format
 msgctxt "Celsius unit symbol"
 msgid "%1°C"
-msgstr ""
+msgstr "%1°C"
 
 #: Formatter.cpp:64
 #, kde-format
