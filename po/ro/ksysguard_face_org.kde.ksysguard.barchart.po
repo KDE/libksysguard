@@ -1,39 +1,37 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# Sergiu Bivol <sergiu@cip.md>, 2020.
+# SPDX-FileCopyrightText: 2020, 2026 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2020-11-12 23:36+0000\n"
+"PO-Revision-Date: 2026-01-03 14:54+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
-"Language-Team: Romanian\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/ui/Config.qml:35
 #, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr ""
+msgstr "Generale:"
 
 #: contents/ui/Config.qml:37
-#, fuzzy, kde-format
-#| msgid "Show Sensors Legend"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "Arată legenda senzorilor"
+msgstr "Arată legenda"
 
 #: contents/ui/Config.qml:41
-#, fuzzy, kde-format
-#| msgid "Stacked Bars"
+#, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
 msgstr "Bare suprapuse"
@@ -42,57 +40,52 @@ msgstr "Bare suprapuse"
 #, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr ""
+msgstr "Orientarea barelor:"
 
 #: contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "Verticală"
 
 #: contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "Orizontală"
 
 #: contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "Axă:"
 
 #: contents/ui/Config.qml:69
-#, fuzzy, kde-format
-#| msgid "Show Y Axis Labels"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
 msgstr "Arată etichetele axei Y"
 
 #: contents/ui/Config.qml:74
-#, fuzzy, kde-format
-#| msgid "Show Grid Lines"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
 msgstr "Arată liniile grilei"
 
 #: contents/ui/Config.qml:78
-#, fuzzy, kde-format
-#| msgid "Automatic Data Range"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
 msgstr "Diapazon de date automat"
 
 #: contents/ui/Config.qml:82
-#, fuzzy, kde-format
-#| msgid "From:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
 msgstr "De la:"
 
 #: contents/ui/Config.qml:89
-#, fuzzy, kde-format
-#| msgid "To:"
+#, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
 msgstr "Până la:"
