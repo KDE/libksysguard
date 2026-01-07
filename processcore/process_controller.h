@@ -15,6 +15,7 @@
 #include <QVariant>
 #include <qqmlintegration.h>
 
+#include "enums.h"
 #include "process.h"
 
 #include "processcore_export.h"
@@ -40,34 +41,10 @@ public:
     ProcessController(QObject *parent = nullptr);
     ~ProcessController() override;
 
-    /**
-     * A signal that can be sent to a process.
-     */
-    enum Signal {
-        StopSignal = SIGSTOP,
-        ContinueSignal = SIGCONT,
-        HangupSignal = SIGHUP,
-        InterruptSignal = SIGINT,
-        TerminateSignal = SIGTERM,
-        KillSignal = SIGKILL,
-        User1Signal = SIGUSR1,
-        User2Signal = SIGUSR2
-    };
-    Q_ENUM(Signal)
-
-    /**
-     * What kind of result a call to one of the ProcessController methods had.
-     */
-    enum class Result {
-        Unknown, ///< Something happened, we just do not know what.
-        Success, ///< Everything went alright.
-        InsufficientPermissions, ///< Some processes require privileges to modify and we failed getting those.
-        NoSuchProcess, ///< Tried to modify a process that no longer exists.
-        Unsupported, ///< The specified action is not supported.
-        UserCancelled, ///< The user cancelled the action, usually when requesting privileges.
-        Error, ///< An error occurred when requesting privileges.
-    };
-    Q_ENUM(Result)
+    using Signal = Enums::Signal::Signal;
+    using Result = Enums::Result::Result;
+    using Scheduler = Enums::Scheduler::Scheduler;
+    using IoPriority = Enums::IoPriority::IoPriority;
 
     /**
      * The window used as parent for any dialogs that get shown.
@@ -155,15 +132,15 @@ public:
      *         that a non-Success result may indicate any of the processes in
      *         \p pids encountered that result.
      */
-    Q_INVOKABLE Result setCpuScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority);
+    Q_INVOKABLE Result setCpuScheduler(const QList<int> &pids, Scheduler scheduler, int priority);
     /**
-     * \overload Result setCpuScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
+     * \overload Result setCpuScheduler(const QList<int> &pids, Scheduler scheduler, int priority)
      */
-    Q_INVOKABLE Result setCpuScheduler(const QList<long long> &pids, Process::Scheduler scheduler, int priority);
+    Q_INVOKABLE Result setCpuScheduler(const QList<long long> &pids, Scheduler scheduler, int priority);
     /**
-     * \overload Result setCpuScheduler(const QList<int> &pids, Process::Scheduler scheduler, int priority)
+     * \overload Result setCpuScheduler(const QList<int> &pids, Scheduler scheduler, int priority)
      */
-    Q_INVOKABLE Result setCpuScheduler(const QVariantList &pids, Process::Scheduler scheduler, int priority);
+    Q_INVOKABLE Result setCpuScheduler(const QVariantList &pids, Scheduler scheduler, int priority);
 
     /**
      * Get the CPU scheduling policy and priority of a process.
@@ -174,7 +151,7 @@ public:
      *
      * \return The scheduler of the process.
      */
-    Q_INVOKABLE Process::Scheduler cpuScheduler(long long pid);
+    Q_INVOKABLE Scheduler cpuScheduler(long long pid);
 
     /**
      * Set the IO scheduling policy and priority of a number of processes.
@@ -192,15 +169,15 @@ public:
      *         that a non-Success result may indicate any of the processes in
      *         \p pids encountered that result.
      */
-    Q_INVOKABLE Result setIoScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority);
+    Q_INVOKABLE Result setIoScheduler(const QList<int> &pids, IoPriority priorityClass, int priority);
     /**
-     * \overload Result setIoScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
+     * \overload Result setIoScheduler(const QList<int> &pids, IoPriority priorityClass, int priority)
      */
-    Q_INVOKABLE Result setIoScheduler(const QList<long long> &pids, Process::IoPriorityClass priorityClass, int priority);
+    Q_INVOKABLE Result setIoScheduler(const QList<long long> &pids, IoPriority priorityClass, int priority);
     /**
-     * \overload Result setIoScheduler(const QList<int> &pids, Process::IoPriorityClass priorityClass, int priority)
+     * \overload Result setIoScheduler(const QList<int> &pids, IoPriority priorityClass, int priority)
      */
-    Q_INVOKABLE Result setIoScheduler(const QVariantList &pids, Process::IoPriorityClass priorityClass, int priority);
+    Q_INVOKABLE Result setIoScheduler(const QVariantList &pids, IoPriority priorityClass, int priority);
 
     /**
      * Get the IO priority of a process.
@@ -222,7 +199,7 @@ public:
      *
      * \return The IO scheduler of the process.
      */
-    Q_INVOKABLE Process::IoPriorityClass ioScheduler(long long pid);
+    Q_INVOKABLE IoPriority ioScheduler(long long pid);
 
     /**
      * Convert a Result value to a user-visible string.
