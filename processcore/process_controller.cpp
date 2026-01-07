@@ -179,10 +179,6 @@ ProcessController::Result ProcessController::setIoScheduler(const QList<int> &pi
         return Result::Unsupported;
     }
 
-    if (priorityClass == KSysGuard::Process::None) {
-        priorityClass = KSysGuard::Process::BestEffort;
-    }
-
     if (priorityClass == IoPriority::Idle) {
         priority = 0;
     }
