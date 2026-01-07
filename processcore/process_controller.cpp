@@ -64,17 +64,17 @@ ProcessController::ProcessController(QObject *parent)
 {
 }
 
-KSysGuard::ProcessController::~ProcessController()
+ProcessController::~ProcessController()
 {
     // Empty destructor needed for std::unique_ptr to incomplete class.
 }
 
-QWindow *KSysGuard::ProcessController::window() const
+QWindow *ProcessController::window() const
 {
     return d->window;
 }
 
-void KSysGuard::ProcessController::setWindow(QWindow *window)
+void ProcessController::setWindow(QWindow *window)
 {
     d->window = window;
 }
@@ -93,12 +93,12 @@ ProcessController::Result ProcessController::sendSignal(const QList<int> &pids, 
     return d->runKAuthAction(QStringLiteral("org.kde.ksysguard.processlisthelper.sendsignal"), result.unchanged, {{QStringLiteral("signal"), signal}});
 }
 
-KSysGuard::ProcessController::Result KSysGuard::ProcessController::sendSignal(const QList<long long> &pids, int signal)
+ProcessController::Result ProcessController::sendSignal(const QList<long long> &pids, int signal)
 {
     return sendSignal(d->listToVector(pids), signal);
 }
 
-KSysGuard::ProcessController::Result KSysGuard::ProcessController::sendSignal(const QVariantList &pids, int signal)
+ProcessController::Result ProcessController::sendSignal(const QVariantList &pids, int signal)
 {
     return sendSignal(d->listToVector(pids), signal);
 }
@@ -115,12 +115,12 @@ ProcessController::Result ProcessController::setPriority(const QList<int> &pids,
     return d->runKAuthAction(QStringLiteral("org.kde.ksysguard.processlisthelper.renice"), result.unchanged, {{QStringLiteral("nicevalue"), priority}});
 }
 
-KSysGuard::ProcessController::Result KSysGuard::ProcessController::setPriority(const QList<long long> &pids, int priority)
+ProcessController::Result ProcessController::setPriority(const QList<long long> &pids, int priority)
 {
     return setPriority(d->listToVector(pids), priority);
 }
 
-KSysGuard::ProcessController::Result KSysGuard::ProcessController::setPriority(const QVariantList &pids, int priority)
+ProcessController::Result ProcessController::setPriority(const QVariantList &pids, int priority)
 {
     return setPriority(d->listToVector(pids), priority);
 }
@@ -245,15 +245,15 @@ QString ProcessController::resultToString(Result result)
     }
 }
 
-ApplyResult KSysGuard::ProcessController::Private::applyToPids(const QList<int> &pids, const std::function<Processes::Error(int)> &function)
+ApplyResult ProcessController::Private::applyToPids(const QList<int> &pids, const std::function<Processes::Error(int)> &function)
 {
     ApplyResult result;
 
     for (auto pid : pids) {
         auto error = function(pid);
         switch (error) {
-        case KSysGuard::Processes::InsufficientPermissions:
-        case KSysGuard::Processes::Unknown:
+        case Processes::InsufficientPermissions:
+        case Processes::Unknown:
             result.unchanged << pid;
             result.resultCode = Result::InsufficientPermissions;
             break;
@@ -310,7 +310,7 @@ ProcessController::Result ProcessController::Private::runKAuthAction(const QStri
     }
 }
 
-QList<int> KSysGuard::ProcessController::Private::listToVector(const QList<long long> &list)
+QList<int> ProcessController::Private::listToVector(const QList<long long> &list)
 {
     QList<int> vector;
     std::transform(list.cbegin(), list.cend(), std::back_inserter(vector), [](long long entry) {
@@ -319,7 +319,7 @@ QList<int> KSysGuard::ProcessController::Private::listToVector(const QList<long 
     return vector;
 }
 
-QList<int> KSysGuard::ProcessController::Private::listToVector(const QVariantList &list)
+QList<int> ProcessController::Private::listToVector(const QVariantList &list)
 {
     QList<int> vector;
     std::transform(list.cbegin(), list.cend(), std::back_inserter(vector), [](const QVariant &entry) {
