@@ -11,6 +11,7 @@
 
 #include <signal.h>
 
+#include <QJSValue>
 #include <QObject>
 #include <QVariant>
 #include <qqmlintegration.h>
@@ -116,6 +117,8 @@ public:
      */
     Q_INVOKABLE int priority(long long pid);
 
+    Q_INVOKABLE QJSValue priority(const QList<long long> &pids);
+
     /**
      * Set the CPU scheduling policy and priority of a number of processes.
      *
@@ -152,6 +155,14 @@ public:
      * \return The scheduler of the process.
      */
     Q_INVOKABLE Scheduler cpuScheduler(long long pid);
+
+    /*!
+     * Get the CPU scheduler for a list of processes.
+     *
+     * This will return the scheduler for the list of processes if all of them
+     * use the same scheduler, otherwise it will return null.
+     */
+    Q_INVOKABLE QJSValue cpuScheduler(const QList<long long> &pids);
 
     /**
      * Set the IO scheduling policy and priority of a number of processes.
@@ -190,6 +201,8 @@ public:
      */
     Q_INVOKABLE int ioPriority(long long pid);
 
+    Q_INVOKABLE QJSValue ioPriority(const QList<long long> &pids);
+
     /**
      * Get the IO scheduling policy of a process.
      *
@@ -200,6 +213,8 @@ public:
      * \return The IO scheduler of the process.
      */
     Q_INVOKABLE IoPriority ioScheduler(long long pid);
+
+    Q_INVOKABLE QJSValue ioScheduler(const QList<long long> &pids);
 
     /**
      * Convert a Result value to a user-visible string.

@@ -20,6 +20,23 @@
 
 using namespace KSysGuard;
 
+// Returns the single, unique value of the range if the range consists of several
+// instances of the same unique value, or std::nullopt if there are more values.
+template<typename Range, typename F, typename ResultType = std::invoke_result_t<F, typename Range::value_type>>
+std::optional<ResultType> uniqueValue(const Range &range, F function)
+{
+    if (std::empty(range)) {
+        return std::nullopt;
+    }
+
+    auto first = function(*std::begin(range));
+    if (std::ranges::all_of(range, std::bind_front(std::equal_to{}, first), function)) {
+        return first;
+    }
+
+    return std::nullopt;
+}
+
 struct ApplyResult {
     ProcessController::Result resultCode = ProcessController::Result::Success;
     QList<int> unchanged;
@@ -113,6 +130,11 @@ int ProcessController::priority(long long pid)
     return s_localProcesses->getNiceness(pid);
 }
 
+QJSValue ProcessController::priority(const QList<long long> &pids)
+{
+    return uniqueValue(pids, std::bind_front(&ProcessesLocal::getNiceness, s_localProcesses)).value_or(QJSValue::NullValue);
+}
+
 ProcessController::Result ProcessController::setCpuScheduler(const QList<int> &pids, Scheduler scheduler, int priority)
 {
     if (scheduler == Scheduler::Other || scheduler == Scheduler::Batch) {
@@ -144,6 +166,11 @@ ProcessController::Result ProcessController::setCpuScheduler(const QVariantList 
 ProcessController::Scheduler ProcessController::cpuScheduler(long long pid)
 {
     return static_cast<Scheduler>(s_localProcesses->getSchedulerClass(pid));
+}
+
+QJSValue ProcessController::cpuScheduler(const QList<long long> &pids)
+{
+    return uniqueValue(pids, std::bind_front(&ProcessesLocal::getSchedulerClass, s_localProcesses)).value_or(QJSValue::NullValue);
 }
 
 ProcessController::Result ProcessController::setIoScheduler(const QList<int> &pids, IoPriority priorityClass, int priority)
@@ -187,9 +214,19 @@ int ProcessController::ioPriority(long long pid)
     return s_localProcesses->getIoNiceness(pid);
 }
 
+QJSValue ProcessController::ioPriority(const QList<long long> &pids)
+{
+    return uniqueValue(pids, std::bind_front(&ProcessesLocal::getIoNiceness, s_localProcesses)).value_or(QJSValue::NullValue);
+}
+
 ProcessController::IoPriority ProcessController::ioScheduler(long long pid)
 {
     return static_cast<IoPriority>(s_localProcesses->getIoPriorityClass(pid));
+}
+
+QJSValue ProcessController::ioScheduler(const QList<long long> &pids)
+{
+    return uniqueValue(pids, std::bind_front(&ProcessesLocal::getIoPriorityClass, s_localProcesses)).value_or(QJSValue::NullValue);
 }
 
 QString ProcessController::resultToString(Result result)
