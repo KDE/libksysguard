@@ -14,6 +14,7 @@
 #include <QJSValue>
 #include <QObject>
 #include <QVariant>
+#include <QWindow>
 #include <qqmlintegration.h>
 
 #include "enums.h"
@@ -47,6 +48,7 @@ public:
     using Scheduler = Enums::Scheduler::Scheduler;
     using IoPriority = Enums::IoPriority::IoPriority;
 
+    Q_PROPERTY(QWindow *window READ window WRITE setWindow)
     /**
      * The window used as parent for any dialogs that get shown.
      */
