@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-16 06:52+0000\n"
+"POT-Creation-Date: 2026-01-09 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -701,37 +701,37 @@ msgctxt "Scheduler"
 msgid "Idle"
 msgstr "空闲"
 
-#: process_controller.cpp:201
+#: process_controller.cpp:232
 #, kde-format
 msgid "Success"
 msgstr "成功"
 
-#: process_controller.cpp:203
+#: process_controller.cpp:234
 #, kde-format
 msgid "Insufficient permissions."
 msgstr "权限不够。"
 
-#: process_controller.cpp:205
+#: process_controller.cpp:236
 #, kde-format
 msgid "No matching process was found."
 msgstr "未找到匹配的进程。"
 
-#: process_controller.cpp:207
+#: process_controller.cpp:238
 #, kde-format
 msgid "Not supported on the current system."
 msgstr "当前系统不支持。"
 
-#: process_controller.cpp:209
+#: process_controller.cpp:240
 #, kde-format
 msgid "The user cancelled."
 msgstr "用户已取消。"
 
-#: process_controller.cpp:211
+#: process_controller.cpp:242
 #, kde-format
 msgid "An unspecified error occurred."
 msgstr "发生未指定错误。"
 
-#: process_controller.cpp:213
+#: process_controller.cpp:244
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "发生未知错误。"
