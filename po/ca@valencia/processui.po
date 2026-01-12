@@ -250,7 +250,7 @@ msgid ""
 "trying to run as root."
 msgstr ""
 "No teniu el permís per a canviar el «nice» del procés i hi ha hagut un "
-"problema en intentar executar-ho com a administrador."
+"problema mentre s'intentava executar com a administrador."
 
 #: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
@@ -264,7 +264,7 @@ msgid ""
 "there was a problem trying to run as root."
 msgstr ""
 "No teniu el permís per a canviar la prioritat d'E/S del procés i hi ha hagut "
-"un problema en intentar executar-ho com a administrador."
+"un problema mentre s'intentava executar com a administrador."
 
 #: ksysguardprocesslist.cpp:1344
 #, kde-format
@@ -273,7 +273,7 @@ msgid ""
 "and there was a problem trying to run as root."
 msgstr ""
 "No teniu el permís per a canviar el planificador de la CPU i hi ha hagut un "
-"problema en intentar executar-ho com a administrador."
+"problema mentre s'intentava executar com a administrador."
 
 #: ksysguardprocesslist.cpp:1359
 #, kde-format
@@ -281,8 +281,8 @@ msgid ""
 "You do not have the permission to kill the process and there was a problem "
 "trying to run as root."
 msgstr ""
-"No teniu el permís per a matar el procés i hi ha hagut un problema en "
-"intentar executar-ho com a administrador."
+"No teniu el permís per a matar el procés i hi ha hagut un problema mentre "
+"s'intentava executar com a administrador."
 
 #: ksysguardprocesslist.cpp:1396
 #, kde-format

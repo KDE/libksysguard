@@ -908,7 +908,7 @@ msgstr "S'ha rebutjat la connexió amb %1"
 #: SensorSocketAgent.cpp:92
 #, kde-format
 msgid "Host %1 not found"
-msgstr "No s'ha trobat la màquina %1"
+msgstr "No s'ha trobat l'amfitrió %1"
 
 #: SensorSocketAgent.cpp:95
 #, kde-format
@@ -916,10 +916,10 @@ msgid ""
 "An error occurred with the network (e.g. the network cable was accidentally "
 "unplugged) for host %1."
 msgstr ""
-"S'ha produït un error de la xarxa amb la màquina %1 (p. ex., el cable de "
+"S'ha produït un error de la xarxa amb l'amfitrió %1 (p. ex., el cable de "
 "xarxa s'ha desconnectat accidentalment)."
 
 #: SensorSocketAgent.cpp:98
 #, kde-format
 msgid "Error for host %1: %2"
-msgstr "Error per a la màquina %1: %2"
+msgstr "Error per a l'amfitrió %1: %2"
