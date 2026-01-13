@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(libksysguard)
 
-set(PROJECT_VERSION "6.5.4")
+set(PROJECT_VERSION "6.5.5")
 
 # check with non-Plasma consumers (e.g. KDevelop) before bumping these versions to make sure the KDE CI does not break
 set(QT_MIN_VERSION "6.9.0")
