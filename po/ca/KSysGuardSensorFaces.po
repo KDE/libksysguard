@@ -331,17 +331,3 @@ msgstr "Enrere"
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sensor del monitor del sistema"
-
-#~ msgctxt "@item:valuesuffix %1 is seconds of history"
-#~ msgid "%1 second"
-#~ msgid_plural "%1 seconds"
-#~ msgstr[0] "%1 segon"
-#~ msgstr[1] "%1 segons"
-
-#~ msgctxt "@label angle degrees"
-#~ msgid "%1°"
-#~ msgstr "%1°"
-
-#~ msgctxt "@label angle"
-#~ msgid "%1°"
-#~ msgstr "%1°"
