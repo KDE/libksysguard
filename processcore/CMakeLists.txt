@@ -64,6 +64,7 @@ ecm_finalize_qml_module(processcore)
 install(TARGETS processcore EXPORT libksysguardLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 add_subdirectory(plugins)
+add_subdirectory(identifytool)
 
 ########### install files ###############
 
