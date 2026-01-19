@@ -26,6 +26,12 @@ class CGroupPrivate;
 class PROCESSCORE_EXPORT CGroup
 {
 public:
+    /**
+     * Create a new cgroup object for a given cgroup entry
+     * The id is the fully formed separated path, such as
+     * "system.slice/dbus.service"
+     */
+    CGroup(const QString &id);
     virtual ~CGroup();
     /**
      * @brief id
@@ -73,16 +79,7 @@ public:
     static QString cgroupSysBasePath();
 
 private:
-    /**
-     * Create a new cgroup object for a given cgroup entry
-     * The id is the fully formed separated path, such as
-     * "system.slice/dbus.service"
-     */
-    CGroup(const QString &id);
-
     QScopedPointer<CGroupPrivate> d;
-    friend class CGroupDataModel;
-    friend class CGroupDataModelPrivate;
 };
 
 }
