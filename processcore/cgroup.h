@@ -39,6 +39,15 @@ public:
      */
     QString id() const;
 
+    /*!
+     * The guessed application ID, derived from the cgroup ID.
+     *
+     * This application ID may not be valid, as it is purely based on the cgroup
+     * ID. This also means that this value returned by service()->menuId() may
+     * not match.
+     */
+    QString appId() const;
+
     /**
      * @brief Returns metadata about the given service
      * Only applicable for .service entries and really only useful for applications.

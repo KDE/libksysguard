@@ -28,14 +28,17 @@ class KSysGuard::CGroupPrivate
 public:
     CGroupPrivate(const QString &_processGroupId)
         : processGroupId(_processGroupId)
-        , service(serviceFromAppId(_processGroupId))
+        , appId(appIdFromCGroup(_processGroupId))
+        , service(serviceFromAppId(_processGroupId, appId))
     {
     }
     const QString processGroupId;
+    const QString appId;
     const KService::Ptr service;
     QList<pid_t> pids;
 
-    static KService::Ptr serviceFromAppId(const QString &appId);
+    static QString appIdFromCGroup(const QString &cgroup);
+    static KService::Ptr serviceFromAppId(const QString &cgroup, const QString &appId);
 
     static QRegularExpression s_appIdFromProcessGroupPattern;
     static QString unescapeName(const QString &cgroupId);
@@ -112,6 +115,11 @@ QString KSysGuard::CGroup::id() const
     return d->processGroupId;
 }
 
+QString KSysGuard::CGroup::appId() const
+{
+    return d->appId;
+}
+
 KService::Ptr KSysGuard::CGroup::service() const
 {
     return d->service;
@@ -157,9 +165,9 @@ QString CGroupPrivate::unescapeName(const QString &name)
     return rc;
 }
 
-KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
+QString CGroupPrivate::appIdFromCGroup(const QString &cgroup)
 {
-    const auto parts = processGroup.split(QLatin1Char('/'));
+    const auto parts = cgroup.split(QLatin1Char('/'));
 
     QString appId;
 
@@ -171,13 +179,18 @@ KService::Ptr CGroupPrivate::serviceFromAppId(const QString &processGroup)
         }
     }
 
+    return appId;
+}
+
+KService::Ptr CGroupPrivate::serviceFromAppId(const QString &cgroup, const QString &appId)
+{
     if (appId.isEmpty()) {
         // create a transient service object just to have a sensible name
-        return KService::Ptr(new KService(parts.last(), QString(), QString()));
+        return KService::Ptr(new KService(cgroup.right(cgroup.lastIndexOf('/')), QString(), QString()));
     }
 
     KService::Ptr service = KService::serviceByMenuId(appId + QStringLiteral(".desktop"));
-    if (!service && processGroup.endsWith(QLatin1String("@autostart.service"))) {
+    if (!service && cgroup.endsWith(QLatin1String("@autostart.service"))) {
         auto file = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, QLatin1String("autostart/%1.desktop").arg(appId));
         if (!file.isEmpty()) {
             service = new KService(file);
