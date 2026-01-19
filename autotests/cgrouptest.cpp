@@ -33,6 +33,8 @@ private Q_SLOTS:
                                << "org.gnome.Evince";
         QTest::newRow("scope no launcher") << "app-org.gnome.Evince-12345.scope"
                                            << "org.gnome.Evince";
+        QTest::newRow("dbus autolaunch") << "dbus-:1.2-org.kde.kdeconnect@0.service"
+                                         << "org.kde.kdeconnect";
     }
 
     void testAppUnitRegex()
