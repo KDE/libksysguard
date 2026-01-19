@@ -166,14 +166,6 @@ bool ApplicationDataModel::isCgroupRelevant(CGroup *cgroup)
         return false;
     }
 
-    // Certain DBus launched things will end up creating a CGroup that looks like
-    // dbus-:1.2-org.telegram.desktop@0.service . Since these don't actually contain
-    // anything relevant, just filter them out as they end up just cluttering the
-    // list.
-    if (appId.startsWith(u"dbus-:"_s)) {
-        return false;
-    }
-
     return true;
 }
 
