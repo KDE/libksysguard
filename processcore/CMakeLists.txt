@@ -30,11 +30,11 @@ target_link_libraries(processcore
    PUBLIC
     Qt::Core
     KSysGuard::Formatter
+    KF6::Service
    PRIVATE
     KF6::I18n
     KF6::AuthCore
     KF6::CoreAddons
-    KF6::Service
     ZLIB::ZLIB
 )
 
