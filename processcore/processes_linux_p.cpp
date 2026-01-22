@@ -173,6 +173,8 @@ void ProcessesLocal::Private::smapsThreadFunction(std::stop_token stopToken, Pro
                         fields.shared += std::stoll(parts.at(1).toStdString());
                     } else if (parts.at(0).startsWith("Private")) {
                         fields.priv += std::stoll(parts.at(1).toStdString());
+                    } else if (parts.at(0) == "Swap") {
+                        fields.swap += std::stoll(parts.at(1).toStdString());
                     }
                 }
             }
