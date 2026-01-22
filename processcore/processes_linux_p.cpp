@@ -529,7 +529,7 @@ bool ProcessesLocal::Private::readProcStatm(const QString &dir, Process *process
     fields.rss = atol(parts.at(1)) * pageSize;
     fields.shared = atol(parts.at(2)) * pageSize;
     fields.priv = fields.rss - fields.shared;
-    fields.swap = process->swap();
+    fields.swap = process->memoryInfo()->imprecise.swap;
     fields.lastUpdate = std::chrono::steady_clock::now();
 
     process->memoryInfo()->imprecise = fields;
