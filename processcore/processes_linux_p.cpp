@@ -203,6 +203,8 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
     bool numThreadsFound = false;
     bool noNewPrivilegesFound = false;
 
+    constexpr int maxFieldCount = 7;
+
     int size;
     int found = 0; // count how many fields we found
     while ((size = mFile.readLine(mBuffer.data(), mBuffer.size())) > 0) { //-1 indicates an error
@@ -212,13 +214,13 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 if (process->command().isEmpty()) {
                     process->setName(QString::fromLocal8Bit(mBuffer + sizeof("Name:") - 1, size - sizeof("Name:") + 1).trimmed());
                 }
-                if (++found == 6) {
+                if (++found == maxFieldCount) {
                     goto finish;
                 }
             } else if ((unsigned int)size > sizeof("NoNewPrivs:") && qstrncmp(mBuffer, "NoNewPrivs:", sizeof("NoNewPrivs:") - 1) == 0) {
                 process->setNoNewPrivileges(atol(mBuffer + sizeof("NoNewPrivs:") - 1));
                 noNewPrivilegesFound = true;
-                if (++found == 6) {
+                if (++found == maxFieldCount) {
                     goto finish;
                 }
             }
@@ -235,7 +237,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setSuid(suid);
                 process->setFsuid(fsuid);
                 uidFound = true;
-                if (++found == 6) {
+                if (++found == maxFieldCount) {
                     goto finish;
                 }
             }
@@ -249,7 +251,7 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                 process->setSgid(sgid);
                 process->setFsgid(fsgid);
                 gidFound = true;
-                if (++found == 6) {
+                if (++found == maxFieldCount) {
                     goto finish;
                 }
             }
@@ -261,13 +263,13 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
                     process->setTracerpid(-1);
                 }
                 tracerFound = true;
-                if (++found == 6) {
+                if (++found == maxFieldCount) {
                     goto finish;
                 }
             } else if ((unsigned int)size > sizeof("Threads:") && qstrncmp(mBuffer, "Threads:", sizeof("Threads:") - 1) == 0) {
                 process->setNumThreads(atol(mBuffer + sizeof("Threads:") - 1));
                 numThreadsFound = true;
-                if (++found == 6) {
+                if (++found == maxFieldCount) {
                     goto finish;
                 }
             }
@@ -275,6 +277,10 @@ bool ProcessesLocal::Private::readProcStatus(const QString &dir, Process *proces
         case 'V':
             if (mBuffer.startsWith("VmSwap:")) {
                 process->memoryInfo()->imprecise.swap = atol(mBuffer + sizeof("VmSwap:") - 1);
+
+                if (++found == maxFieldCount) {
+                    goto finish;
+                }
             }
         default:
             break;
