@@ -1726,7 +1726,7 @@ msgstr "Eines"
 #: ReniceDlg.cpp:28
 #, kde-format
 msgid "Set Priority"
-msgstr "Definició de la prioritat"
+msgstr "Establiment de la prioritat"
 
 #: ReniceDlg.cpp:63
 #, kde-format
