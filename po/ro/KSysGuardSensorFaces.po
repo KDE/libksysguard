@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
-# Sergiu Bivol <sergiu@cip.md>, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2026 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2022-05-02 15:37+0100\n"
+"PO-Revision-Date: 2026-01-03 15:05+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: ConfigAppearance.qml:107
 #, kde-format
@@ -142,7 +142,7 @@ msgstr "Până la:"
 #: facepackages/colorgrid/contents/ui/Config.qml:25
 #, kde-format
 msgid "Use sensor color:"
-msgstr ""
+msgstr "Folosește culoarea senzorului:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:30
 #: facepackages/facegrid/contents/ui/Config.qml:35
@@ -254,7 +254,7 @@ msgstr "Grupează senzorii în baza valorii senzorilor totali."
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr ""
+msgstr "Apăsați pentru a alege un senzor…"
 
 #: import/Choices.qml:368
 #, kde-format
