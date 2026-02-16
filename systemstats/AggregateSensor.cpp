@@ -348,7 +348,11 @@ QVariant PercentageSensor::value() const
     if (!value.isValid()) {
         return QVariant();
     }
-    return (value.toReal() / d->sensor->info().max) * 100.0;
+    const auto max = d->sensor->info().max;
+    if (max <= 0) {
+        return 0.0;
+    }
+    return (value.toReal() / max) * 100.0;
 }
 
 void PercentageSensor::subscribe()
