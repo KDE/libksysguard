@@ -9,8 +9,10 @@
 
 #include "Formatter.h"
 
+#include <KConfigGroup>
 #include <KFormat>
 #include <KLocalizedString>
+#include <KSharedConfig>
 
 #include <QFontMetrics>
 #include <QLocale>
@@ -28,6 +30,20 @@ namespace KSysGuard
 {
 // TODO: Is there a bit nicer way to handle formatting?
 
+static KFormat::BinaryUnitDialect binaryDialect()
+{
+    static auto dialect = [] {
+        KSharedConfigPtr globalConfig = KSharedConfig::openConfig(QStringLiteral("kdeglobals"));
+        KConfigGroup localeGroup(globalConfig, QStringLiteral("Locale"));
+        int i = localeGroup.readEntry("BinaryUnitDialect", static_cast<int>(KFormat::IECBinaryDialect));
+        if (i < KFormat::DefaultBinaryDialect || i > KFormat::BinaryUnitDialect::LastBinaryDialect) {
+            i = KFormat::IECBinaryDialect;
+        }
+        return static_cast<KFormat::BinaryUnitDialect>(i);
+    }();
+    return dialect;
+}
+
 static KLocalizedString unitFormat(Unit unit)
 {
     // The strings here use \u200B (zero-width space) to allow the unit symbol
@@ -42,33 +58,66 @@ static KLocalizedString unitFormat(Unit unit)
     // i18n: Use \u2009 (thin space) to separate value and unit
     const static KLocalizedString B = ki18nc("Bytes unit symbol", "%1\u2009B");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString KiB = ki18nc("Kilobytes unit symbol", "%1\u202FKi\u200BB");
+    const static KLocalizedString KiB = ki18nc("Kibibytes unit symbol", "%1\u202FKi\u200BB");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString MiB = ki18nc("Megabytes unit symbol", "%1\u202FMi\u200BB");
+    const static KLocalizedString MiB = ki18nc("Mebibytes unit symbol", "%1\u202FMi\u200BB");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString GiB = ki18nc("Gigabytes unit symbol", "%1\u202FGi\u200BB");
+    const static KLocalizedString GiB = ki18nc("Gibibytes unit symbol", "%1\u202FGi\u200BB");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString TiB = ki18nc("Terabytes unit symbol", "%1\u202FTi\u200BB");
+    const static KLocalizedString TiB = ki18nc("Tebibytes unit symbol", "%1\u202FTi\u200BB");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString PiB = ki18nc("Petabytes unit symbol", "%1\u202FPi\u200BB");
+    const static KLocalizedString PiB = ki18nc("Pebibytes unit symbol", "%1\u202FPi\u200BB");
+
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString kB = ki18nc("Kilobytes unit symbol", "%1\u202Fk\u200BB");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString MB = ki18nc("Megabytes unit symbol", "%1\u202FM\u200BB");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString GB = ki18nc("Gigabytes unit symbol", "%1\u202FG\u200BB");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString TB = ki18nc("Terabytes unit symbol", "%1\u202FT\u200BB");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString PB = ki18nc("Petabytes unit symbol", "%1\u202FP\u200BB");
 
     // i18n: Use \u2009 (thin space) to separate value and unit
     const static KLocalizedString bps = ki18nc("Bytes per second unit symbol", "%1\u2009B/s");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString Kbps = ki18nc("Kilobytes per second unit symbol", "%1\u202FKi\u200BB/s");
+    const static KLocalizedString Kibps = ki18nc("Kibibytes per second unit symbol", "%1\u202FKi\u200BB/s");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString Mbps = ki18nc("Megabytes per second unit symbol", "%1\u202FMi\u200BB/s");
+    const static KLocalizedString Mibps = ki18nc("Mebibytes per second unit symbol", "%1\u202FMi\u200BB/s");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString Gbps = ki18nc("Gigabytes per second unit symbol", "%1\u202FGi\u200BB/s");
+    const static KLocalizedString Gibps = ki18nc("Gibibytes per second unit symbol", "%1\u202FGi\u200BB/s");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString Tbps = ki18nc("Terabytes per second unit symbol", "%1\u202FTi\u200BB/s");
+    const static KLocalizedString Tibps = ki18nc("Tebibytes per second unit symbol", "%1\u202FTi\u200BB/s");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString Pbps = ki18nc("Petabytes per second unit symbol", "%1\u202FPi\u200BB/s");
+    const static KLocalizedString Pibps = ki18nc("Pebibytes per second unit symbol", "%1\u202FPi\u200BB/s");
+
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString kbps = ki18nc("Kilobytes per second unit symbol", "%1\u202Fk\u200BB/s");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString Mbps = ki18nc("Megabytes per second unit symbol", "%1\u202FM\u200BB/s");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString Gbps = ki18nc("Gigabytes per second unit symbol", "%1\u202FG\u200BB/s");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString Tbps = ki18nc("Terabytes per second unit symbol", "%1\u202FT\u200BB/s");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString Pbps = ki18nc("Petabytes per second unit symbol", "%1\u202FP\u200BB/s");
 
     // i18n: Use \u2009 (thin space) to separate value and unit
     const static KLocalizedString bitsps = ki18nc("Bits per second unit symbol", "%1\u2009bps");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-    const static KLocalizedString Kbitsps = ki18nc("Kilobits per second unit symbol", "%1\u202Fk\u200Bbps");
+    const static KLocalizedString Kibitsps = ki18nc("Kilobits per second unit symbol", "%1\u202FKi\u200Bbps");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString Mibitsps = ki18nc("Megabits per second unit symbol", "%1\u202FMi\u200Bbps");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString Gibitsps = ki18nc("Gigabits per second unit symbol", "%1\u202FGi\u200Bbps");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString Tibitsps = ki18nc("Terabits per second unit symbol", "%1\u202FTi\u200Bbps");
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString Pibitsps = ki18nc("Petabits per second unit symbol", "%1\u202FPi\u200Bbps");
+
+    // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+    const static KLocalizedString kbitsps = ki18nc("Kilobits per second unit symbol", "%1\u202Fk\u200Bbps");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
     const static KLocalizedString Mbitsps = ki18nc("Megabits per second unit symbol", "%1\u202FM\u200Bbps");
     // i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
@@ -157,45 +206,47 @@ static KLocalizedString unitFormat(Unit unit)
     const static KLocalizedString rate = ki18nc("Rate unit symbol", "%1\u2009s⁻¹");
     const static KLocalizedString unitless = ki18nc("Unitless", "%1");
 
+    const auto binaryDialect = KSysGuard::binaryDialect();
+
     switch (unit) {
     case UnitByte:
         return B;
     case UnitKiloByte:
-        return KiB;
+        return binaryDialect == KFormat::IECBinaryDialect ? KiB : kB;
     case UnitMegaByte:
-        return MiB;
+        return binaryDialect == KFormat::IECBinaryDialect ? MiB : MB;
     case UnitGigaByte:
-        return GiB;
+        return binaryDialect == KFormat::IECBinaryDialect ? GiB : GB;
     case UnitTeraByte:
-        return TiB;
+        return binaryDialect == KFormat::IECBinaryDialect ? TiB : TB;
     case UnitPetaByte:
-        return PiB;
+        return binaryDialect == KFormat::IECBinaryDialect ? PiB : PB;
 
     case UnitByteRate:
         return bps;
     case UnitKiloByteRate:
-        return Kbps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Kibps : kbps;
     case UnitMegaByteRate:
-        return Mbps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Mibps : Mbps;
     case UnitGigaByteRate:
-        return Gbps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Gibps : Gbps;
     case UnitTeraByteRate:
-        return Tbps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Tibps : Tbps;
     case UnitPetaByteRate:
-        return Pbps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Pibps : Pbps;
 
     case UnitBitRate:
         return bitsps;
     case UnitKiloBitRate:
-        return Kbitsps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Kibitsps : kbitsps;
     case UnitMegaBitRate:
-        return Mbitsps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Mibitsps : Mbitsps;
     case UnitGigaBitRate:
-        return Gbitsps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Gibitsps : Gbitsps;
     case UnitTeraBitRate:
-        return Tbitsps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Tibitsps : Tbitsps;
     case UnitPetaBitRate:
-        return Pbitsps;
+        return binaryDialect == KFormat::IECBinaryDialect ? Pibitsps : Pbitsps;
 
     case UnitHertz:
         return Hz;
@@ -301,7 +352,7 @@ static int unitOrder(Unit unit)
     case UnitGigaBitRate:
     case UnitTeraBitRate:
     case UnitPetaBitRate:
-        return 1024;
+        return binaryDialect() != KFormat::MetricBinaryDialect ? 1024 : 1000;
 
     case UnitHertz:
     case UnitKiloHertz:
@@ -424,6 +475,11 @@ static Unit adjustedUnit(qreal value, Unit unit, MetricPrefix prefix)
     }
 
     const Unit baseUnit = unitBase(unit);
+    int inputOrder = order;
+    // Indepent of the user preference how it should be shown in the  UI the input byte values use "proper" magnitudes of 1024
+    if (baseUnit == Unit::UnitByte || baseUnit == Unit::UnitByteRate || baseUnit == Unit::UnitBitRate) {
+        inputOrder = 1024;
+    }
     const MetricPrefix basePrefix = MetricPrefix(unit - baseUnit);
 
     if (prefix == MetricPrefixAutoAdjust) {
@@ -590,45 +646,56 @@ QString Formatter::formatValue(const QVariant &value, Unit unit, MetricPrefix ta
 QString Formatter::symbol(Unit unit)
 {
     // TODO: Is it possible to avoid duplication of these symbols?
+    const auto binaryDialect = KSysGuard::binaryDialect();
     switch (unit) {
     case UnitByte:
         return i18nc("Bytes unit symbol", "B");
     case UnitKiloByte:
-        return i18nc("Kilobytes unit symbol", "KiB");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Kibibytes unit symbol", "KiB") : i18nc("Kilobytes unit symbol", "kB");
     case UnitMegaByte:
-        return i18nc("Megabytes unit symbol", "MiB");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Mebibytes unit symbol", "MiB") : i18nc("Megabytes unit symbol", "MB");
     case UnitGigaByte:
-        return i18nc("Gigabytes unit symbol", "GiB");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Gibibytes unit symbol", "GiB") : i18nc("Gigabytes unit symbol", "GB");
     case UnitTeraByte:
-        return i18nc("Terabytes unit symbol", "TiB");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Tebibytes unit symbol", "TiB") : i18nc("Terabytes unit symbol", "TB");
     case UnitPetaByte:
-        return i18nc("Petabytes unit symbol", "PiB");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Pebibytes unit symbol", "PiB") : i18nc("Petabytes unit symbol", "PB");
 
     case UnitByteRate:
         return i18nc("Bytes per second unit symbol", "B/s");
     case UnitKiloByteRate:
-        return i18nc("Kilobytes per second unit symbol", "KiB/s");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Kibibytes per second unit symbol", "KiB/s")
+                                                          : i18nc("Kilobytes per second unit symbol", "kB/s");
     case UnitMegaByteRate:
-        return i18nc("Megabytes per second unit symbol", "MiB/s");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Mebibytes per second unit symbol", "MiB/s")
+                                                          : i18nc("Megabytes per second unit symbol", "MB/s");
     case UnitGigaByteRate:
-        return i18nc("Gigabytes per second unit symbol", "GiB/s");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Gibibytes per second unit symbol", "GiB/s")
+                                                          : i18nc("Gigabytes per second unit symbol", "GB/s");
     case UnitTeraByteRate:
-        return i18nc("Terabytes per second unit symbol", "TiB/s");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Tebibytes per second unit symbol", "TiB/s")
+                                                          : i18nc("Terabytes per second unit symbol", "TB/s");
     case UnitPetaByteRate:
-        return i18nc("Petabytes per second unit symbol", "PiB/s");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Pebibytes per second unit symbol", "PiB/s")
+                                                          : i18nc("Petabytes per second unit symbol", "PB/s");
 
     case UnitBitRate:
         return i18nc("Bits per second unit symbol", "bps");
     case UnitKiloBitRate:
-        return i18nc("Kilobits per second unit symbol", "Kbps");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Kibibits per second unit symbol", "Kibps")
+                                                          : i18nc("Kilobits per second unit symbol", "kbps");
     case UnitMegaBitRate:
-        return i18nc("Megabits per second unit symbol", "Mbps");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Mebibits per second unit symbol", "Mibps")
+                                                          : i18nc("Megabits per second unit symbol", "Mbps");
     case UnitGigaBitRate:
-        return i18nc("Gigabits per second unit symbol", "Gbps");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Gibibits per second unit symbol", "Gibps")
+                                                          : i18nc("Gigabits per second unit symbol", "Gbps");
     case UnitTeraBitRate:
-        return i18nc("Terabits per second unit symbol", "Tbps");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Tebibits per second unit symbol", "Tibps")
+                                                          : i18nc("Terabits per second unit symbol", "Tbps");
     case UnitPetaBitRate:
-        return i18nc("Petabits per second unit symbol", "Pbps");
+        return binaryDialect == KFormat::IECBinaryDialect ? i18nc("Pebibits per second unit symbol", "Pibps")
+                                                          : i18nc("Petabits per second unit symbol", "Pbps");
 
     case UnitHertz:
         return i18nc("Hertz unit symbol", "Hz");

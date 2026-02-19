@@ -35,6 +35,7 @@ target_link_libraries(Formatter
     PRIVATE
     KF6::CoreAddons
     KF6::I18n
+    KF6::ConfigCore
 )
 
 generate_export_header(Formatter)
