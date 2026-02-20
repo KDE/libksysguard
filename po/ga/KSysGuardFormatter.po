@@ -3,723 +3,919 @@
 # This file is distributed under the same license as the libksysguard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-20 00:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
-"Language: \n"
+"Language-Team: Irish Gaelic <kde-i18n-doc@kde.org>\n"
+"Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:43
+#: Formatter.cpp:59
 #, kde-format
 msgctxt "Bytes unit symbol"
 msgid "%1 B"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:45
+#: Formatter.cpp:61
 #, kde-format
-msgctxt "Kilobytes unit symbol"
+msgctxt "Kibibytes unit symbol"
 msgid "%1 Ki​B"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:47
+#: Formatter.cpp:63
 #, kde-format
-msgctxt "Megabytes unit symbol"
+msgctxt "Mebibytes unit symbol"
 msgid "%1 Mi​B"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:49
+#: Formatter.cpp:65
 #, kde-format
-msgctxt "Gigabytes unit symbol"
+msgctxt "Gibibytes unit symbol"
 msgid "%1 Gi​B"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:51
+#: Formatter.cpp:67
 #, kde-format
-msgctxt "Terabytes unit symbol"
+msgctxt "Tebibytes unit symbol"
 msgid "%1 Ti​B"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:53
+#: Formatter.cpp:69
 #, kde-format
-msgctxt "Petabytes unit symbol"
+msgctxt "Pebibytes unit symbol"
 msgid "%1 Pi​B"
 msgstr ""
 
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:72
+#, kde-format
+msgctxt "Kilobytes unit symbol"
+msgid "%1 k​B"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:74
+#, kde-format
+msgctxt "Megabytes unit symbol"
+msgid "%1 M​B"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:76
+#, kde-format
+msgctxt "Gigabytes unit symbol"
+msgid "%1 G​B"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:78
+#, kde-format
+msgctxt "Terabytes unit symbol"
+msgid "%1 T​B"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:80
+#, kde-format
+msgctxt "Petabytes unit symbol"
+msgid "%1 P​B"
+msgstr ""
+
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:56
+#: Formatter.cpp:83
 #, kde-format
 msgctxt "Bytes per second unit symbol"
 msgid "%1 B/s"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:58
+#: Formatter.cpp:85
 #, kde-format
-msgctxt "Kilobytes per second unit symbol"
+msgctxt "Kibibytes per second unit symbol"
 msgid "%1 Ki​B/s"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:60
+#: Formatter.cpp:87
 #, kde-format
-msgctxt "Megabytes per second unit symbol"
+msgctxt "Mebibytes per second unit symbol"
 msgid "%1 Mi​B/s"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:62
+#: Formatter.cpp:89
 #, kde-format
-msgctxt "Gigabytes per second unit symbol"
+msgctxt "Gibibytes per second unit symbol"
 msgid "%1 Gi​B/s"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:64
+#: Formatter.cpp:91
 #, kde-format
-msgctxt "Terabytes per second unit symbol"
+msgctxt "Tebibytes per second unit symbol"
 msgid "%1 Ti​B/s"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:66
+#: Formatter.cpp:93
 #, kde-format
-msgctxt "Petabytes per second unit symbol"
+msgctxt "Pebibytes per second unit symbol"
 msgid "%1 Pi​B/s"
 msgstr ""
 
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:96
+#, kde-format
+msgctxt "Kilobytes per second unit symbol"
+msgid "%1 k​B/s"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:98
+#, kde-format
+msgctxt "Megabytes per second unit symbol"
+msgid "%1 M​B/s"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:100
+#, kde-format
+msgctxt "Gigabytes per second unit symbol"
+msgid "%1 G​B/s"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:102
+#, kde-format
+msgctxt "Terabytes per second unit symbol"
+msgid "%1 T​B/s"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:104
+#, kde-format
+msgctxt "Petabytes per second unit symbol"
+msgid "%1 P​B/s"
+msgstr ""
+
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:69
+#: Formatter.cpp:107
 #, kde-format
 msgctxt "Bits per second unit symbol"
 msgid "%1 bps"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:71
+#: Formatter.cpp:109
+#, kde-format
+msgctxt "Kilobits per second unit symbol"
+msgid "%1 Ki​bps"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:111
+#, kde-format
+msgctxt "Megabits per second unit symbol"
+msgid "%1 Mi​bps"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:113
+#, kde-format
+msgctxt "Gigabits per second unit symbol"
+msgid "%1 Gi​bps"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:115
+#, kde-format
+msgctxt "Terabits per second unit symbol"
+msgid "%1 Ti​bps"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:117
+#, kde-format
+msgctxt "Petabits per second unit symbol"
+msgid "%1 Pi​bps"
+msgstr ""
+
+#. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
+#: Formatter.cpp:120
 #, kde-format
 msgctxt "Kilobits per second unit symbol"
 msgid "%1 k​bps"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:73
+#: Formatter.cpp:122
 #, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "%1 M​bps"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:75
+#: Formatter.cpp:124
 #, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "%1 G​bps"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:77
+#: Formatter.cpp:126
 #, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "%1 T​bps"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:79
+#: Formatter.cpp:128
 #, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "%1 P​bps"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:82
+#: Formatter.cpp:131
 #, kde-format
 msgctxt "Hertz unit symbol"
 msgid "%1 Hz"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:84
+#: Formatter.cpp:133
 #, kde-format
 msgctxt "Kilohertz unit symbol"
 msgid "%1 k​Hz"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:86
+#: Formatter.cpp:135
 #, kde-format
 msgctxt "Megahertz unit symbol"
 msgid "%1 M​Hz"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:88
+#: Formatter.cpp:137
 #, kde-format
 msgctxt "Gigahertz unit symbol"
 msgid "%1 G​Hz"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:90
+#: Formatter.cpp:139
 #, kde-format
 msgctxt "Terahertz unit symbol"
 msgid "%1 T​Hz"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:92
+#: Formatter.cpp:141
 #, kde-format
 msgctxt "Petahertz unit symbol"
 msgid "%1 P​Hz"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:95
+#: Formatter.cpp:144
 #, kde-format
 msgctxt "Volts unit symbol"
 msgid "%1 V"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:97
+#: Formatter.cpp:146
 #, kde-format
 msgctxt "Kilovolts unit symbol"
 msgid "%1 k​V"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:99
+#: Formatter.cpp:148
 #, kde-format
 msgctxt "Megavolts unit symbol"
 msgid "%1 M​V"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:101
+#: Formatter.cpp:150
 #, kde-format
 msgctxt "Gigavolts unit symbol"
 msgid "%1 G​V"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:103
+#: Formatter.cpp:152
 #, kde-format
 msgctxt "Teravolts unit symbol"
 msgid "%1 T​V"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:105
+#: Formatter.cpp:154
 #, kde-format
 msgctxt "Petavolts unit symbol"
 msgid "%1 P​V"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:108
+#: Formatter.cpp:157
 #, kde-format
 msgctxt "Watts unit symbol"
 msgid "%1 W"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:110
+#: Formatter.cpp:159
 #, kde-format
 msgctxt "Kilowatts unit symbol"
 msgid "%1 k​W"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:112
+#: Formatter.cpp:161
 #, kde-format
 msgctxt "Megawatts unit symbol"
 msgid "%1 M​W"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:114
+#: Formatter.cpp:163
 #, kde-format
 msgctxt "Gigawatts unit symbol"
 msgid "%1 G​W"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:116
+#: Formatter.cpp:165
 #, kde-format
 msgctxt "Terawatts unit symbol"
 msgid "%1 T​W"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:118
+#: Formatter.cpp:167
 #, kde-format
 msgctxt "Petawatts unit symbol"
 msgid "%1 P​W"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:121
+#: Formatter.cpp:170
 #, kde-format
 msgctxt "Watt-hours unit symbol"
 msgid "%1 Wh"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:123
+#: Formatter.cpp:172
 #, kde-format
 msgctxt "Kilowatt-hours unit symbol"
 msgid "%1 k​Wh"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:125
+#: Formatter.cpp:174
 #, kde-format
 msgctxt "Megawatt-hours unit symbol"
 msgid "%1 M​Wh"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:127
+#: Formatter.cpp:176
 #, kde-format
 msgctxt "Gigawatt-hours unit symbol"
 msgid "%1 G​Wh"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:129
+#: Formatter.cpp:178
 #, kde-format
 msgctxt "Terawatt-hours unit symbol"
 msgid "%1 T​Wh"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:131
+#: Formatter.cpp:180
 #, kde-format
 msgctxt "Petawatt-hours unit symbol"
 msgid "%1 P​Wh"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:134
+#: Formatter.cpp:183
 #, kde-format
 msgctxt "Ampere unit symbol"
 msgid "%1 A"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:136
+#: Formatter.cpp:185
 #, kde-format
 msgctxt "Kiloamperes unit symbol"
 msgid "%1 k​A"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:138
+#: Formatter.cpp:187
 #, kde-format
 msgctxt "Megaamperes unit symbol"
 msgid "%1 M​A"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:140
+#: Formatter.cpp:189
 #, kde-format
 msgctxt "Gigaamperes unit symbol"
 msgid "%1 G​A"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:142
+#: Formatter.cpp:191
 #, kde-format
 msgctxt "Teraamperes unit symbol"
 msgid "%1 T​A"
 msgstr ""
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
-#: Formatter.cpp:144
+#: Formatter.cpp:193
 #, kde-format
 msgctxt "Petaamperes unit symbol"
 msgid "%1 P​A"
 msgstr ""
 
 #. i18n: Use \u200B (zero width space) to separate value and unit
-#: Formatter.cpp:147
+#: Formatter.cpp:196
 #, kde-format
 msgctxt "Percent unit"
 msgid "%1​%"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:149
+#: Formatter.cpp:198
 #, kde-format
 msgctxt "Revolutions per minute unit symbol"
 msgid "%1 RPM"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space)  to separate value and unit
-#: Formatter.cpp:151
+#: Formatter.cpp:200
 #, kde-format
 msgctxt "Celsius unit symbol"
 msgid "%1 °C"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:153
+#: Formatter.cpp:202
 #, kde-format
 msgctxt "Decibels unit symbol"
 msgid "%1 dBm"
 msgstr ""
 
 #. i18n: Use \u200B (zero width space) to separate value and unit
-#: Formatter.cpp:155
+#: Formatter.cpp:204
 #, kde-format
 msgctxt "Seconds unit symbol"
 msgid "%1​s"
 msgstr ""
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
-#: Formatter.cpp:157
+#: Formatter.cpp:206
 #, kde-format
 msgctxt "Rate unit symbol"
 msgid "%1 s⁻¹"
 msgstr ""
 
-#: Formatter.cpp:158
+#: Formatter.cpp:207
 #, kde-format
 msgctxt "Unitless"
 msgid "%1"
 msgstr ""
 
-#: Formatter.cpp:595
+#: Formatter.cpp:652
 #, kde-format
 msgctxt "Bytes unit symbol"
 msgid "B"
 msgstr ""
 
-#: Formatter.cpp:597
+#: Formatter.cpp:654
 #, kde-format
-msgctxt "Kilobytes unit symbol"
+msgctxt "Kibibytes unit symbol"
 msgid "KiB"
 msgstr ""
 
-#: Formatter.cpp:599
+#: Formatter.cpp:654
 #, kde-format
-msgctxt "Megabytes unit symbol"
+msgctxt "Kilobytes unit symbol"
+msgid "kB"
+msgstr ""
+
+#: Formatter.cpp:656
+#, kde-format
+msgctxt "Mebibytes unit symbol"
 msgid "MiB"
 msgstr ""
 
-#: Formatter.cpp:601
+#: Formatter.cpp:656
 #, kde-format
-msgctxt "Gigabytes unit symbol"
+msgctxt "Megabytes unit symbol"
+msgid "MB"
+msgstr ""
+
+#: Formatter.cpp:658
+#, kde-format
+msgctxt "Gibibytes unit symbol"
 msgid "GiB"
 msgstr ""
 
-#: Formatter.cpp:603
+#: Formatter.cpp:658
 #, kde-format
-msgctxt "Terabytes unit symbol"
+msgctxt "Gigabytes unit symbol"
+msgid "GB"
+msgstr ""
+
+#: Formatter.cpp:660
+#, kde-format
+msgctxt "Tebibytes unit symbol"
 msgid "TiB"
 msgstr ""
 
-#: Formatter.cpp:605
+#: Formatter.cpp:660
 #, kde-format
-msgctxt "Petabytes unit symbol"
+msgctxt "Terabytes unit symbol"
+msgid "TB"
+msgstr ""
+
+#: Formatter.cpp:662
+#, kde-format
+msgctxt "Pebibytes unit symbol"
 msgid "PiB"
 msgstr ""
 
-#: Formatter.cpp:608
+#: Formatter.cpp:662
+#, kde-format
+msgctxt "Petabytes unit symbol"
+msgid "PB"
+msgstr ""
+
+#: Formatter.cpp:665
 #, kde-format
 msgctxt "Bytes per second unit symbol"
 msgid "B/s"
 msgstr ""
 
-#: Formatter.cpp:610
+#: Formatter.cpp:667
 #, kde-format
-msgctxt "Kilobytes per second unit symbol"
+msgctxt "Kibibytes per second unit symbol"
 msgid "KiB/s"
 msgstr ""
 
-#: Formatter.cpp:612
+#: Formatter.cpp:668
 #, kde-format
-msgctxt "Megabytes per second unit symbol"
+msgctxt "Kilobytes per second unit symbol"
+msgid "kB/s"
+msgstr ""
+
+#: Formatter.cpp:670
+#, kde-format
+msgctxt "Mebibytes per second unit symbol"
 msgid "MiB/s"
 msgstr ""
 
-#: Formatter.cpp:614
+#: Formatter.cpp:671
 #, kde-format
-msgctxt "Gigabytes per second unit symbol"
+msgctxt "Megabytes per second unit symbol"
+msgid "MB/s"
+msgstr ""
+
+#: Formatter.cpp:673
+#, kde-format
+msgctxt "Gibibytes per second unit symbol"
 msgid "GiB/s"
 msgstr ""
 
-#: Formatter.cpp:616
+#: Formatter.cpp:674
 #, kde-format
-msgctxt "Terabytes per second unit symbol"
+msgctxt "Gigabytes per second unit symbol"
+msgid "GB/s"
+msgstr ""
+
+#: Formatter.cpp:676
+#, kde-format
+msgctxt "Tebibytes per second unit symbol"
 msgid "TiB/s"
 msgstr ""
 
-#: Formatter.cpp:618
+#: Formatter.cpp:677
 #, kde-format
-msgctxt "Petabytes per second unit symbol"
+msgctxt "Terabytes per second unit symbol"
+msgid "TB/s"
+msgstr ""
+
+#: Formatter.cpp:679
+#, kde-format
+msgctxt "Pebibytes per second unit symbol"
 msgid "PiB/s"
 msgstr ""
 
-#: Formatter.cpp:621
+#: Formatter.cpp:680
+#, kde-format
+msgctxt "Petabytes per second unit symbol"
+msgid "PB/s"
+msgstr ""
+
+#: Formatter.cpp:683
 #, kde-format
 msgctxt "Bits per second unit symbol"
 msgid "bps"
 msgstr ""
 
-#: Formatter.cpp:623
+#: Formatter.cpp:685
 #, kde-format
-msgctxt "Kilobits per second unit symbol"
-msgid "Kbps"
+msgctxt "Kibibits per second unit symbol"
+msgid "Kibps"
 msgstr ""
 
-#: Formatter.cpp:625
+#: Formatter.cpp:686
+#, kde-format
+msgctxt "Kilobits per second unit symbol"
+msgid "kbps"
+msgstr ""
+
+#: Formatter.cpp:688
+#, kde-format
+msgctxt "Mebibits per second unit symbol"
+msgid "Mibps"
+msgstr ""
+
+#: Formatter.cpp:689
 #, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "Mbps"
 msgstr ""
 
-#: Formatter.cpp:627
+#: Formatter.cpp:691
+#, kde-format
+msgctxt "Gibibits per second unit symbol"
+msgid "Gibps"
+msgstr ""
+
+#: Formatter.cpp:692
 #, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "Gbps"
 msgstr ""
 
-#: Formatter.cpp:629
+#: Formatter.cpp:694
+#, kde-format
+msgctxt "Tebibits per second unit symbol"
+msgid "Tibps"
+msgstr ""
+
+#: Formatter.cpp:695
 #, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "Tbps"
 msgstr ""
 
-#: Formatter.cpp:631
+#: Formatter.cpp:697
+#, kde-format
+msgctxt "Pebibits per second unit symbol"
+msgid "Pibps"
+msgstr ""
+
+#: Formatter.cpp:698
 #, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "Pbps"
 msgstr ""
 
-#: Formatter.cpp:634
+#: Formatter.cpp:701
 #, kde-format
 msgctxt "Hertz unit symbol"
 msgid "Hz"
 msgstr ""
 
-#: Formatter.cpp:636
+#: Formatter.cpp:703
 #, kde-format
 msgctxt "Kilohertz unit symbol"
 msgid "kHz"
 msgstr ""
 
-#: Formatter.cpp:638
+#: Formatter.cpp:705
 #, kde-format
 msgctxt "Megahertz unit symbol"
 msgid "MHz"
 msgstr ""
 
-#: Formatter.cpp:640
+#: Formatter.cpp:707
 #, kde-format
 msgctxt "Gigahertz unit symbol"
 msgid "GHz"
 msgstr ""
 
-#: Formatter.cpp:642
+#: Formatter.cpp:709
 #, kde-format
 msgctxt "Terahertz unit symbol"
 msgid "THz"
 msgstr ""
 
-#: Formatter.cpp:644
+#: Formatter.cpp:711
 #, kde-format
 msgctxt "Petahertz unit symbol"
 msgid "PHz"
 msgstr ""
 
-#: Formatter.cpp:647
+#: Formatter.cpp:714
 #, kde-format
 msgctxt "Volts unit symbol"
 msgid "V"
 msgstr ""
 
-#: Formatter.cpp:649
+#: Formatter.cpp:716
 #, kde-format
 msgctxt "Kilovolts unit symbol"
 msgid "kV"
 msgstr ""
 
-#: Formatter.cpp:651
+#: Formatter.cpp:718
 #, kde-format
 msgctxt "Megavolts unit symbol"
 msgid "MV"
 msgstr ""
 
-#: Formatter.cpp:653
+#: Formatter.cpp:720
 #, kde-format
 msgctxt "Gigavolts unit symbol"
 msgid "GV"
 msgstr ""
 
-#: Formatter.cpp:655
+#: Formatter.cpp:722
 #, kde-format
 msgctxt "Teravolts unit symbol"
 msgid "TV"
 msgstr ""
 
-#: Formatter.cpp:657
+#: Formatter.cpp:724
 #, kde-format
 msgctxt "Petavolts unit symbol"
 msgid "PV"
 msgstr ""
 
-#: Formatter.cpp:660
+#: Formatter.cpp:727
 #, kde-format
 msgctxt "Watts unit symbol"
 msgid "W"
 msgstr ""
 
-#: Formatter.cpp:662
+#: Formatter.cpp:729
 #, kde-format
 msgctxt "Kilowatts unit symbol"
 msgid "kW"
 msgstr ""
 
-#: Formatter.cpp:664
+#: Formatter.cpp:731
 #, kde-format
 msgctxt "Megawatts unit symbol"
 msgid "MW"
 msgstr ""
 
-#: Formatter.cpp:666
+#: Formatter.cpp:733
 #, kde-format
 msgctxt "Gigawatts unit symbol"
 msgid "GW"
 msgstr ""
 
-#: Formatter.cpp:668
+#: Formatter.cpp:735
 #, kde-format
 msgctxt "Terawatts unit symbol"
 msgid "TW"
 msgstr ""
 
-#: Formatter.cpp:670
+#: Formatter.cpp:737
 #, kde-format
 msgctxt "Petawatts unit symbol"
 msgid "PW"
 msgstr ""
 
-#: Formatter.cpp:673
+#: Formatter.cpp:740
 #, kde-format
 msgctxt "Watt-hours unit symbol"
 msgid "Wh"
 msgstr ""
 
-#: Formatter.cpp:675
+#: Formatter.cpp:742
 #, kde-format
 msgctxt "Kilo-watthours unit symbol"
 msgid "kWh"
 msgstr ""
 
-#: Formatter.cpp:677
+#: Formatter.cpp:744
 #, kde-format
 msgctxt "Mega-watthours unit symbol"
 msgid "MWh"
 msgstr ""
 
-#: Formatter.cpp:679
+#: Formatter.cpp:746
 #, kde-format
 msgctxt "Giga-watthours unit symbol"
 msgid "GWh"
 msgstr ""
 
-#: Formatter.cpp:681
+#: Formatter.cpp:748
 #, kde-format
 msgctxt "Tera-watthours unit symbol"
 msgid "TWh"
 msgstr ""
 
-#: Formatter.cpp:683
+#: Formatter.cpp:750
 #, kde-format
 msgctxt "Peta-watthours unit symbol"
 msgid "PWh"
 msgstr ""
 
-#: Formatter.cpp:686
+#: Formatter.cpp:753
 #, kde-format
 msgctxt "Ampere unit symbol"
 msgid "A"
 msgstr ""
 
-#: Formatter.cpp:688
+#: Formatter.cpp:755
 #, kde-format
 msgctxt "Kiloamperes unit symbol"
 msgid "kA"
 msgstr ""
 
-#: Formatter.cpp:690
+#: Formatter.cpp:757
 #, kde-format
 msgctxt "Megaamperes unit symbol"
 msgid "MA"
 msgstr ""
 
-#: Formatter.cpp:692
+#: Formatter.cpp:759
 #, kde-format
 msgctxt "Gigaamperes unit symbol"
 msgid "GA"
 msgstr ""
 
-#: Formatter.cpp:694
+#: Formatter.cpp:761
 #, kde-format
 msgctxt "Teraamperes unit symbol"
 msgid "TA"
 msgstr ""
 
-#: Formatter.cpp:696
+#: Formatter.cpp:763
 #, kde-format
 msgctxt "Petaamperes unit symbol"
 msgid "PA"
 msgstr ""
 
-#: Formatter.cpp:699
+#: Formatter.cpp:766
 #, kde-format
 msgctxt "Percent unit"
 msgid "%"
 msgstr ""
 
-#: Formatter.cpp:701
+#: Formatter.cpp:768
 #, kde-format
 msgctxt "Revolutions per minute unit symbol"
 msgid "RPM"
 msgstr ""
 
-#: Formatter.cpp:703
+#: Formatter.cpp:770
 #, kde-format
 msgctxt "Celsius unit symbol"
 msgid "°C"
 msgstr ""
 
-#: Formatter.cpp:705
+#: Formatter.cpp:772
 #, kde-format
 msgctxt "Decibels unit symbol"
 msgid "dBm"
 msgstr ""
 
-#: Formatter.cpp:707
+#: Formatter.cpp:774
 #, kde-format
 msgctxt "Seconds unit symbol"
 msgid "s"
 msgstr ""
 
-#: Formatter.cpp:710
+#: Formatter.cpp:777
 #, kde-format
 msgctxt "Rate unit symbol"
 msgid "s⁻¹"
