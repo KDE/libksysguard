@@ -126,11 +126,9 @@ msgid "The controlling terminal on which this process is running."
 msgstr ""
 
 #: extended_process_list.cpp:202
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "User Time"
-msgstr "Fíor-Am"
+msgstr ""
 
 #: extended_process_list.cpp:206
 #, kde-format
@@ -138,18 +136,14 @@ msgid "System Time"
 msgstr ""
 
 #: extended_process_list.cpp:210
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Total Time"
-msgstr "Fíor-Am"
+msgstr ""
 
 #: extended_process_list.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Time"
-msgstr "Fíor-Am"
+msgstr ""
 
 #: extended_process_list.cpp:215
 #, kde-format
@@ -157,11 +151,9 @@ msgid "The total user and system time that this process has been running for"
 msgstr ""
 
 #: extended_process_list.cpp:220
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Start Time"
-msgstr "Fíor-Am"
+msgstr ""
 
 #: extended_process_list.cpp:230
 #, kde-format
