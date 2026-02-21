@@ -951,7 +951,3 @@ msgstr "s"
 msgctxt "Rate unit symbol"
 msgid "s⁻¹"
 msgstr "s⁻¹"
-
-#~ msgctxt "Kilobits per second unit symbol"
-#~ msgid "Kbps"
-#~ msgstr "kb/s"
