@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the libksysguard package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2024-10-09 10:03+0300\n"
+"PO-Revision-Date: 2026-02-20 15:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
 #: Formatter.cpp:43
@@ -106,42 +106,42 @@ msgstr "%1 Pi​B/sn"
 #, kde-format
 msgctxt "Bits per second unit symbol"
 msgid "%1 bps"
-msgstr "%1 bps"
+msgstr "%1 b/sn"
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
 #: Formatter.cpp:71
 #, kde-format
 msgctxt "Kilobits per second unit symbol"
 msgid "%1 k​bps"
-msgstr "%1 k​bps"
+msgstr "%1 k​b/sn"
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
 #: Formatter.cpp:73
 #, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "%1 M​bps"
-msgstr "%1 M​bps"
+msgstr "%1 M​b/sn"
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
 #: Formatter.cpp:75
 #, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "%1 G​bps"
-msgstr "%1 G​bps"
+msgstr "%1 G​b/sn"
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
 #: Formatter.cpp:77
 #, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "%1 T​bps"
-msgstr "%1 T​bps"
+msgstr "%1 T​b/sn"
 
 #. i18n: Use \u202F (thin non-break space) to separate value and prefixed unit; Use \u200B (zero-width space) to separate prefix and unit.
 #: Formatter.cpp:79
 #, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "%1 P​bps"
-msgstr "%1 P​bps"
+msgstr "%1 P​b/sn"
 
 #. i18n: Use \u2009 (thin space) to separate value and unit
 #: Formatter.cpp:82
@@ -477,7 +477,7 @@ msgstr "PiB/sn"
 #, kde-format
 msgctxt "Bits per second unit symbol"
 msgid "bps"
-msgstr "bps"
+msgstr "b/sn"
 
 #: Formatter.cpp:623
 #, kde-format
@@ -489,25 +489,25 @@ msgstr "Kbps"
 #, kde-format
 msgctxt "Megabits per second unit symbol"
 msgid "Mbps"
-msgstr "Mbps"
+msgstr "Mb/sn"
 
 #: Formatter.cpp:627
 #, kde-format
 msgctxt "Gigabits per second unit symbol"
 msgid "Gbps"
-msgstr "Gbps"
+msgstr "Gb/sn"
 
 #: Formatter.cpp:629
 #, kde-format
 msgctxt "Terabits per second unit symbol"
 msgid "Tbps"
-msgstr "Tbps"
+msgstr "Tb/sn"
 
 #: Formatter.cpp:631
 #, kde-format
 msgctxt "Petabits per second unit symbol"
 msgid "Pbps"
-msgstr "Pbps"
+msgstr "Pb/sn"
 
 #: Formatter.cpp:634
 #, kde-format
