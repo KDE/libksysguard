@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2026-01-03 15:12+0000\n"
+"PO-Revision-Date: 2026-02-11 12:27+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -995,7 +995,7 @@ msgstr ""
 #, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid "<para><emphasis strong='true'>Group:</emphasis> %1</para>"
-msgstr ""
+msgstr "<para><emphasis strong='true'>Grup:</emphasis> %1</para>"
 
 #: ProcessModel.cpp:1328
 #, kde-kuit-format
@@ -1016,19 +1016,16 @@ msgid "<para><emphasis strong='true'>File System Group:</emphasis> %1</para>"
 msgstr ""
 
 #: ProcessModel.cpp:1342
-#, fuzzy, kde-format
-#| msgctxt "Short description of a process. PID, name, user"
-#| msgid "<numid>%1</numid>: %2, owned by user %3"
+#, kde-format
 msgctxt "Short description of a process. PID, name, user"
 msgid "%1: %2, owned by user %3"
-msgstr "<numid>%1</numid>: %2, deținut de utilizatorul %3"
+msgstr "%1: %2, deținut de utilizatorul %3"
 
 #: ProcessModel.cpp:1353
-#, fuzzy, kde-format
-#| msgid "%1 (uid: %2)"
+#, kde-format
 msgctxt "Group name and group id"
 msgid "%1 (gid: %2)"
-msgstr "%1 (uid: %2)"
+msgstr "%1 (gid: %2)"
 
 #: ProcessModel.cpp:1375
 #, kde-format
@@ -1079,12 +1076,10 @@ msgid "%1/s"
 msgstr "%1/s"
 
 #: ProcessModel.cpp:1595
-#, fuzzy, kde-kuit-format
-#| msgctxt "tooltip. name,pid "
-#| msgid "This process is being debugged by %1 (<numid>%2</numid>)"
+#, kde-kuit-format
 msgctxt "tooltip. name,pid "
 msgid "This process is being debugged by %1 (%2)"
-msgstr "Acest proces este depanat de către %1 (<numid>%2</numid>)"
+msgstr "Acest proces este depanat de către %1 (%2)"
 
 #: ProcessModel.cpp:1617
 #, kde-kuit-format
@@ -1114,6 +1109,8 @@ msgid ""
 "<title>%1</title><para><emphasis strong='true'>Process ID:</emphasis> %2</"
 "para>"
 msgstr ""
+"<title>%1</title><para><emphasis strong='true'>Identificator proces:</"
+"emphasis> %2</para>"
 
 #: ProcessModel.cpp:1635
 #, kde-kuit-format
@@ -1123,6 +1120,10 @@ msgid ""
 "para><para><emphasis strong='true'>Parent:</emphasis> %3</"
 "para><para><emphasis strong='true'>Parent's ID:</emphasis> %4</para>"
 msgstr ""
+"<title>%1</title><para><emphasis strong='true'>Identificator proces:</"
+"emphasis> %2</para><para><emphasis strong='true'>Părinte:</emphasis> %3</"
+"para><para><emphasis strong='true'>Identificatorul părintelui:</emphasis> "
+"%4</para>"
 
 #: ProcessModel.cpp:1645
 #, kde-kuit-format
@@ -1314,13 +1315,14 @@ msgid ""
 msgstr ""
 
 #: ProcessModel.cpp:1891
-#, fuzzy, kde-kuit-format
-#| msgid "Memory usage: %1 out of %2  (%3 %)<br />"
+#, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "<para><emphasis strong='true'>Total memory usage:</emphasis> %1 out of %2  "
 "(%3 %)</para>"
-msgstr "Utilizare memorie: %1 din %2  (%3 %)<br />"
+msgstr ""
+"<para><emphasis strong='true'>Utilizare totală a memoriei:</emphasis> %1 din "
+"%2  (%3 %)</para>"
 
 #: ProcessModel.cpp:2181
 #, kde-format
@@ -1493,7 +1495,7 @@ msgstr ""
 #: ProcessWidgetUI.ui:42
 #, kde-format
 msgid "&End Process..."
-msgstr "&Termină procesul..."
+msgstr "&Termină procesul…"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:58
@@ -1502,6 +1504,8 @@ msgid ""
 "Type comma separated search terms or regular expressions to filter the "
 "process list"
 msgstr ""
+"Tastați termenii căutării separați prin virgulă sau expresii regulate pentru "
+"a filtra lista de procese"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:69
@@ -1552,6 +1556,30 @@ msgid ""
 "inside the kernel and are not real processes.  As such, many of the fields "
 "(such as Username) do not apply.\n"
 msgstr ""
+"<qt>Schimbă care procese sunt afișate și cum. Procesele pot fi filtrate mai "
+"departe prin folosirea filtrului de căutare rapidă.<p>\n"
+"<table>\n"
+"<tr><td>Toate procesele</td><td>Arată toate procesele din sistem.</td></tr>\n"
+"<tr><td>Toate procesele, arbore</td><td>Arată toate procesele din sistem "
+"într-o ierarhie folosind informația despre identificatorul procesului-"
+"părinte.</td></tr>\n"
+"<tr><td>Procesele sistemului</td><td>Arată procesele ce rulează ca root și "
+"ca utilizatori ce nu se pot autentifica.</td></tr>\n"
+"<tr><td>Procesele utilizatorilor</td><td>Arată procesele ce rulează ca "
+"utilizatori ne-root ce se pot autentifica.</td></tr>\n"
+"<tr><td>Procesele proprii</td><td>Arată procesele deținute de către același "
+"utilizator ca cel ce deține acest proces.</td></tr>\n"
+"<tr><td>Doar programe</td><td>Arată procesele ce rulează ca utilizator ce se "
+"poate autentifica și sunt atașate la un TTY sau au cel puțin o fereastră X11."
+"</td></tr>\n"
+"</table>\n"
+"<p>\n"
+"<i>Informații tehnice:</i><br>\n"
+"Procesele cu fire de execuție multiple sunt arătate ca un singur proces și "
+"nu sunt tratate diferit.<br>\n"
+"Firele de execuție ale nucleului sunt arătate ca procese normale dar "
+"rulează, de fapt, în interiorul nucleului și nu sunt procese reale. De "
+"aceea, multe câmpuri (ca Utilizator) nu se aplică.\n"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cmbFilter)
 #: ProcessWidgetUI.ui:111
@@ -1836,7 +1864,7 @@ msgstr ""
 #: ReniceDlgUi.ui:179
 #, kde-format
 msgid "Round robin"
-msgstr "Round robin"
+msgstr "Circular"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioFIFO)
 #: ReniceDlgUi.ui:189
@@ -2184,7 +2212,7 @@ msgstr "Prioritate ridicată"
 #: scripting.cpp:243
 #, kde-format
 msgid "QtWebEngineWidgets not available"
-msgstr ""
+msgstr "QtWebEngineWidgets indisponibil"
 
 #: scripting.cpp:244
 #, kde-format
@@ -2192,6 +2220,8 @@ msgid ""
 "KSysGuard library was compiled without QtWebEngineWidgets, please contact "
 "your distribution."
 msgstr ""
+"Biblioteca KSysGuard a fost compilată fără QtWebEngineWidgets, contactați-vă "
+"distribuția."
 
 #, fuzzy
 #~| msgctxt "process heading"
