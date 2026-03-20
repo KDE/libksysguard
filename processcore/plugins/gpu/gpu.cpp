@@ -7,6 +7,10 @@
 
 #include "gpu.h"
 
+#ifdef HAVE_UDEV
+#include <libudev.h>
+#endif
+
 #include <algorithm>
 #include <charconv>
 #include <fstream>
@@ -21,6 +25,36 @@
 #include <QStandardPaths>
 
 #include <KLocalizedString>
+
+#include "cgroup.h"
+#include "processes.h"
+#include "process_attribute.h"
+#include <processcore/gpu_utils.h>
+
+using namespace KSysGuard;
+
+class GpuNameAttribute : public KSysGuard::ProcessAttribute
+{
+public:
+    GpuNameAttribute(QObject *parent)
+        : KSysGuard::ProcessAttribute(QStringLiteral("gpu_module"), i18n("GPU"), parent)
+    {
+    }
+
+    QVariant cgroupData(KSysGuard::CGroup *cgroup, const QList<KSysGuard::Process *> &groupProcesses) const override
+    {
+        Q_UNUSED(cgroup)
+        for (auto process : groupProcesses) {
+            const QVariant value = data(process);
+            if (value.isValid() && !value.toString().isEmpty()) {
+                return value; // Return the first valid GPU name found in this cgroup
+            }
+        }
+        return QVariant{};
+    }
+};
+
+namespace fs = std::filesystem;
 #include <KPluginFactory>
 
 #include <processcore/process.h>
@@ -99,7 +133,7 @@ GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
     m_usage->setMax(100);
     m_memory = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_memory"), i18n("GPU Memory"), this);
     m_memory->setUnit(KSysGuard::UnitKiloByte);
-    m_gpuName = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_module"), i18n("GPU"), this);
+    m_gpuName = new GpuNameAttribute(this);
     m_gpuName->setDescription(i18n("Displays which GPU the process is using"));
 
     addProcessAttribute(m_usage);
@@ -112,12 +146,30 @@ GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
         return;
     devices.resize(count);
     std::vector<GpuInfo> nvidiaGpus;
+
+#ifdef HAVE_UDEV
+    struct udev *udev = udev_new();
+#endif
+
     if (drmGetDevices2(0, devices.data(), count) > 0) {
         for (const auto &device : devices) {
             if (auto minor = drmMinor(device->nodes[DRM_NODE_PRIMARY])) {
-                m_minorToGpuNum[*minor] = *minor;
+                QString gpuName;
+#ifdef HAVE_UDEV
+                if (udev) {
+                    struct udev_device *drmDevice = udev_device_new_from_syspath(udev, QStringLiteral("/sys/class/drm/card%1").arg(*minor).toUtf8().constData());
+                    gpuName = KSysGuard::gpuName(drmDevice, *minor);
+                    udev_device_unref(drmDevice);
+                } else {
+                    gpuName = KSysGuard::gpuNameFallback(*minor);
+                }
+#else
+                gpuName = KSysGuard::gpuNameFallback(*minor);
+#endif
+
+                m_minorToGpuName[*minor] = gpuName;
                 if (auto renderMinor = drmMinor(device->nodes[DRM_NODE_RENDER])) {
-                    m_minorToGpuNum[*renderMinor] = *minor;
+                    m_minorToGpuName[*renderMinor] = gpuName;
                 }
                 if (device->bustype == DRM_BUS_PCI && device->deviceinfo.pci->vendor_id == nvidiaVendorId) {
                     auto pciAddress = QString::asprintf("%08x:%02x:%02x.%x",
@@ -130,6 +182,12 @@ GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
             }
         }
     }
+
+#ifdef HAVE_UDEV
+    if (udev) {
+        udev_unref(udev);
+    }
+#endif
 
     if (nvidiaGpus.size() > 0 && !m_sniExecutablePath.isEmpty()) {
         setupNvidia(nvidiaGpus);
@@ -343,10 +401,10 @@ void GpuPlugin::processPidDir(const fs::path &path, KSysGuard::Process *proc, co
     m_memory->setData(proc, vram);
     m_usage->setData(proc, usage);
     if (device != -1) {
-        auto gpu = m_minorToGpuNum.find(device);
-        if (gpu != m_minorToGpuNum.end()) {
+        auto gpu = m_minorToGpuName.find(device);
+        if (gpu != m_minorToGpuName.end()) {
             // Match ksystemstats gpu plugin
-            m_gpuName->setData(proc, i18nc("%1 is a number", "GPU %1", gpu->second + 1));
+            m_gpuName->setData(proc, gpu->second);
         }
     }
 }

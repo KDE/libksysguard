@@ -69,7 +69,7 @@ private:
 
     std::unordered_map<HistoryKey, GpuFd> m_process_history;
     std::unordered_map<HistoryKey, NvidiaValues> m_currentNvidiaValues;
-    std::unordered_map<unsigned int, unsigned int> m_minorToGpuNum;
+    std::unordered_map<unsigned int, QString> m_minorToGpuName;
     std::unordered_map<unsigned int, unsigned int> m_nvidiaIndexToGpuNum;
 
     void processPidDir(const fs::path &path, KSysGuard::Process *proc, const std::unordered_map<HistoryKey, GpuFd> &previousValues);

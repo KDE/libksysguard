@@ -78,6 +78,12 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set_package_properties(Sensors PROPERTIES
         TYPE REQUIRED
         PURPOSE "Used for reading hardware sensors")
+
+    find_package(UDev)
+    set_package_properties(UDev PROPERTIES
+        TYPE OPTIONAL
+        PURPOSE "UDev is used for finding graphics cards."
+    )
 endif()
 
 find_package(Libdrm REQUIRED)

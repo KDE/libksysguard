@@ -16,6 +16,7 @@ set(ksysguard_LIB_SRCS
    process_data_model.cpp
    process_data_provider.cpp
    process_foreign_types.h
+   gpu_utils.cpp gpu_utils.h
    enums.h
 )
 ecm_qt_declare_logging_category(ksysguard_LIB_SRCS HEADER processcore_debug.h IDENTIFIER LIBKSYSGUARD_PROCESSCORE CATEGORY_NAME org.kde.libksysguard.processcore
@@ -37,6 +38,11 @@ target_link_libraries(processcore
     KF6::CoreAddons
     ZLIB::ZLIB
 )
+
+if (UDev_FOUND)
+    target_link_libraries(processcore PRIVATE UDev::UDev)
+    target_compile_definitions(processcore PRIVATE HAVE_UDEV)
+endif()
 
 if( ${CMAKE_SYSTEM_NAME} MATCHES "NetBSD" )
   message(STATUS "Adding kvm library on NetBSD")
@@ -77,6 +83,7 @@ install( FILES
     process_data_model.h
     process_attribute_model.h
     formatter.h
+    gpu_utils.h
     unit.h
     enums.h
     ${CMAKE_CURRENT_BINARY_DIR}/processcore_export.h
