@@ -64,13 +64,13 @@ static inline std::optional<uint64_t> to_digits(QByteArrayView s)
 
 static inline float calc_gpu_usage(uint64_t curr, uint64_t prev, std::chrono::high_resolution_clock::duration diff)
 {
-    if (curr <= prev) {
+    if (curr <= prev || diff.count() <= 0) {
         return 0.0F;
     }
 
     float perc = (static_cast<float>(curr - prev) / static_cast<float>(diff.count())) * 100.0F;
 
-    return perc;
+    return std::min(perc, 100.0F);
 }
 
 static std::optional<uint> drmMinor(const fs::path &path)
@@ -96,6 +96,7 @@ GpuPlugin::GpuPlugin(QObject *parent, const QVariantList &args)
 {
     m_usage = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_usage"), i18n("GPU Usage"), this);
     m_usage->setUnit(KSysGuard::UnitPercent);
+    m_usage->setMax(100);
     m_memory = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_memory"), i18n("GPU Memory"), this);
     m_memory->setUnit(KSysGuard::UnitKiloByte);
     m_gpuName = new KSysGuard::ProcessAttribute(QStringLiteral("gpu_module"), i18n("GPU"), this);
@@ -147,13 +148,16 @@ GpuPlugin::~GpuPlugin() noexcept
 void GpuPlugin::setupNvidia(const std::vector<GpuInfo> &gpuInfo)
 {
     auto nvidiaQuery = QProcess();
-    nvidiaQuery.start(m_sniExecutablePath, {"--query-gpu=pci.bus_id,index"_L1, "--format=csv,noheader"_L1});
+    nvidiaQuery.start(m_sniExecutablePath, {"--query-gpu=pci.bus_id,index,memory.total"_L1, "--format=csv,noheader,nounits"_L1});
     nvidiaQuery.waitForFinished();
     while (nvidiaQuery.canReadLine()) {
         const auto line = nvidiaQuery.readLine().split(u',');
+        if (line.size() < 3) continue;
         QByteArray pciId = line[0].trimmed();
         if (auto gpuNum = std::ranges::find(gpuInfo, QByteArrayView(pciId), &GpuInfo::pciAdress); gpuNum != gpuInfo.end()) {
             m_nvidiaIndexToGpuNum.emplace(line[1].toUInt(), gpuNum->deviceMinor);
+            uint64_t totalMem = line[2].toULongLong() * 1024; // MiB to KiB
+            m_memory->setMax(qMax(m_memory->max(), (qreal)totalMem));
         }
     }
 
