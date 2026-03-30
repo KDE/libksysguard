@@ -148,19 +148,19 @@ void GpuPlugin::setupNvidia(const std::vector<GpuInfo> &gpuInfo)
 {
     auto nvidiaQuery = QProcess();
     nvidiaQuery.start(m_sniExecutablePath, {"--query-gpu=pci.bus_id,index"_L1, "--format=csv,noheader"_L1});
-    while (nvidiaQuery.waitForReadyRead()) {
-        if (!nvidiaQuery.canReadLine()) {
-            continue;
-        }
+    nvidiaQuery.waitForFinished();
+    while (nvidiaQuery.canReadLine()) {
         const auto line = nvidiaQuery.readLine().split(u',');
-        if (auto gpuNum = std::ranges::find(gpuInfo, QByteArrayView(line[0]), &GpuInfo::pciAdress); gpuNum != gpuInfo.end()) {
+        QByteArray pciId = line[0].trimmed();
+        if (auto gpuNum = std::ranges::find(gpuInfo, QByteArrayView(pciId), &GpuInfo::pciAdress); gpuNum != gpuInfo.end()) {
             m_nvidiaIndexToGpuNum.emplace(line[1].toUInt(), gpuNum->deviceMinor);
         }
-        m_nvidiaSmiProcess = new QProcess;
-        m_nvidiaSmiProcess->setProgram(m_sniExecutablePath);
-        m_nvidiaSmiProcess->setArguments({QStringLiteral("pmon"), QStringLiteral("-s"), QStringLiteral("mu")});
-        connect(m_nvidiaSmiProcess, &QProcess::readyReadStandardOutput, this, &GpuPlugin::readNvidiaData);
     }
+
+    m_nvidiaSmiProcess = new QProcess;
+    m_nvidiaSmiProcess->setProgram(m_sniExecutablePath);
+    m_nvidiaSmiProcess->setArguments({QStringLiteral("pmon"), QStringLiteral("-s"), QStringLiteral("mu")});
+    connect(m_nvidiaSmiProcess, &QProcess::readyReadStandardOutput, this, &GpuPlugin::readNvidiaData);
 }
 
 void GpuPlugin::handleEnabledChanged(bool enabled)
