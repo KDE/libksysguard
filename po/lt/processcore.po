@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-09 00:44+0000\n"
+"POT-Creation-Date: 2026-04-01 00:47+0000\n"
 "PO-Revision-Date: 2025-10-15 16:36+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -537,22 +537,22 @@ msgstr "Gijos"
 msgid "GPU Usage"
 msgstr "Grafikos procesoriaus naudojimas"
 
-#: plugins/gpu/gpu.cpp:99
+#: plugins/gpu/gpu.cpp:100
 #, kde-format
 msgid "GPU Memory"
 msgstr "Grafikos procesoriaus atmintis"
 
-#: plugins/gpu/gpu.cpp:101
+#: plugins/gpu/gpu.cpp:102
 #, kde-format
 msgid "GPU"
 msgstr "Grafikos procesorius"
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:103
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr "Rodo, kurį grafikos procesorių naudoja procesas"
 
-#: plugins/gpu/gpu.cpp:345
+#: plugins/gpu/gpu.cpp:349
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
