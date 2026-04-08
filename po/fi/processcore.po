@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-01 00:47+0000\n"
+"POT-Creation-Date: 2026-04-08 00:47+0000\n"
 "PO-Revision-Date: 2025-06-04 20:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -536,31 +536,41 @@ msgstr "Levylle kirjoitettavan datan nopeus."
 msgid "Threads"
 msgstr "Säikeet"
 
-#: plugins/gpu/gpu.cpp:97
-#, kde-format
-msgid "GPU Usage"
-msgstr "GPU-käyttö"
+#: gpu_utils.cpp:19
+#, fuzzy, kde-format
+#| msgctxt "%1 is a number"
+#| msgid "GPU %1"
+msgctxt "@title %1 is GPU number"
+msgid "GPU %1"
+msgstr "Graafinen suoritin %1"
 
-#: plugins/gpu/gpu.cpp:100
-#, kde-format
-msgid "GPU Memory"
-msgstr "GPU-muisti"
+#: gpu_utils.cpp:36
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
+msgctxt "@title %1 is vendor name"
+msgid "%1 GPU"
+msgstr "%1 GiB"
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:40
 #, kde-format
 msgid "GPU"
 msgstr "Graafinen suoritin"
 
-#: plugins/gpu/gpu.cpp:103
+#: plugins/gpu/gpu.cpp:131
+#, kde-format
+msgid "GPU Usage"
+msgstr "GPU-käyttö"
+
+#: plugins/gpu/gpu.cpp:134
+#, kde-format
+msgid "GPU Memory"
+msgstr "GPU-muisti"
+
+#: plugins/gpu/gpu.cpp:137
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr "Näyttää, mitä graafista suoritinta prosessi käyttää"
-
-#: plugins/gpu/gpu.cpp:349
-#, kde-format
-msgctxt "%1 is a number"
-msgid "GPU %1"
-msgstr "Graafinen suoritin %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format
@@ -773,10 +783,6 @@ msgstr "Tuntematon virhe."
 #~ msgctxt "Megabytes unit symbol"
 #~ msgid "%1 MiB"
 #~ msgstr "%1 MiB"
-
-#~ msgctxt "Gigabytes unit symbol"
-#~ msgid "%1 GiB"
-#~ msgstr "%1 GiB"
 
 #~ msgctxt "Terabytes unit symbol"
 #~ msgid "%1 TiB"

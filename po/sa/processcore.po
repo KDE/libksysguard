@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-01 00:47+0000\n"
+"POT-Creation-Date: 2026-04-08 00:47+0000\n"
 "PO-Revision-Date: 2024-12-13 19:09+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -533,31 +533,37 @@ msgstr "डिस्कमध्ये लिखितस्य दत्ता�
 msgid "Threads"
 msgstr "सूत्राणि"
 
-#: plugins/gpu/gpu.cpp:97
+#: gpu_utils.cpp:19
 #, kde-format
-msgid "GPU Usage"
-msgstr "GPU उपयोगः"
+msgctxt "@title %1 is GPU number"
+msgid "GPU %1"
+msgstr ""
 
-#: plugins/gpu/gpu.cpp:100
+#: gpu_utils.cpp:36
 #, kde-format
-msgid "GPU Memory"
-msgstr "जीपीयू स्मृति"
+msgctxt "@title %1 is vendor name"
+msgid "%1 GPU"
+msgstr ""
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:40
 #, fuzzy, kde-format
 #| msgid "CPU"
 msgid "GPU"
 msgstr "CPU"
 
-#: plugins/gpu/gpu.cpp:103
+#: plugins/gpu/gpu.cpp:131
+#, kde-format
+msgid "GPU Usage"
+msgstr "GPU उपयोगः"
+
+#: plugins/gpu/gpu.cpp:134
+#, kde-format
+msgid "GPU Memory"
+msgstr "जीपीयू स्मृति"
+
+#: plugins/gpu/gpu.cpp:137
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
-
-#: plugins/gpu/gpu.cpp:349
-#, kde-format
-msgctxt "%1 is a number"
-msgid "GPU %1"
 msgstr ""
 
 #: plugins/network/network.cpp:36

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-01 00:47+0000\n"
+"POT-Creation-Date: 2026-04-08 00:47+0000\n"
 "PO-Revision-Date: 2025-05-27 22:02+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -535,31 +535,41 @@ msgstr "Az adatok lemezre írásának sebessége."
 msgid "Threads"
 msgstr "Szálak"
 
-#: plugins/gpu/gpu.cpp:97
-#, kde-format
-msgid "GPU Usage"
-msgstr "GPU használat"
+#: gpu_utils.cpp:19
+#, fuzzy, kde-format
+#| msgctxt "%1 is a number"
+#| msgid "GPU %1"
+msgctxt "@title %1 is GPU number"
+msgid "GPU %1"
+msgstr "%1. GPU"
 
-#: plugins/gpu/gpu.cpp:100
-#, kde-format
-msgid "GPU Memory"
-msgstr "GPU memória"
+#: gpu_utils.cpp:36
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
+msgctxt "@title %1 is vendor name"
+msgid "%1 GPU"
+msgstr "%1 GiB"
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:40
 #, kde-format
 msgid "GPU"
 msgstr "GPU"
 
-#: plugins/gpu/gpu.cpp:103
+#: plugins/gpu/gpu.cpp:131
+#, kde-format
+msgid "GPU Usage"
+msgstr "GPU használat"
+
+#: plugins/gpu/gpu.cpp:134
+#, kde-format
+msgid "GPU Memory"
+msgstr "GPU memória"
+
+#: plugins/gpu/gpu.cpp:137
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr "Megjeleníti, hogy a folyamat melyik GPU-t használja"
-
-#: plugins/gpu/gpu.cpp:349
-#, kde-format
-msgctxt "%1 is a number"
-msgid "GPU %1"
-msgstr "%1. GPU"
 
 #: plugins/network/network.cpp:36
 #, kde-format
@@ -772,10 +782,6 @@ msgstr "Ismeretlen hiba történt."
 #~ msgctxt "Megabytes unit symbol"
 #~ msgid "%1 MiB"
 #~ msgstr "%1 MiB"
-
-#~ msgctxt "Gigabytes unit symbol"
-#~ msgid "%1 GiB"
-#~ msgstr "%1 GiB"
 
 #~ msgctxt "Terabytes unit symbol"
 #~ msgid "%1 TiB"

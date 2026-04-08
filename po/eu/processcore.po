@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-01 00:47+0000\n"
+"POT-Creation-Date: 2026-04-08 00:47+0000\n"
 "PO-Revision-Date: 2025-05-25 12:49+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -539,31 +539,41 @@ msgstr "Diskora idaten ari den datuen tasa."
 msgid "Threads"
 msgstr "Hariak"
 
-#: plugins/gpu/gpu.cpp:97
-#, kde-format
-msgid "GPU Usage"
-msgstr "GPUaren erabilera"
+#: gpu_utils.cpp:19
+#, fuzzy, kde-format
+#| msgctxt "%1 is a number"
+#| msgid "GPU %1"
+msgctxt "@title %1 is GPU number"
+msgid "GPU %1"
+msgstr "%1. GPU"
 
-#: plugins/gpu/gpu.cpp:100
-#, kde-format
-msgid "GPU Memory"
-msgstr "GPUaren memoria"
+#: gpu_utils.cpp:36
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
+msgctxt "@title %1 is vendor name"
+msgid "%1 GPU"
+msgstr "%1 GiB"
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:40
 #, kde-format
 msgid "GPU"
 msgstr "GPU"
 
-#: plugins/gpu/gpu.cpp:103
+#: plugins/gpu/gpu.cpp:131
+#, kde-format
+msgid "GPU Usage"
+msgstr "GPUaren erabilera"
+
+#: plugins/gpu/gpu.cpp:134
+#, kde-format
+msgid "GPU Memory"
+msgstr "GPUaren memoria"
+
+#: plugins/gpu/gpu.cpp:137
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr "Prozesua zein GPU erabiltzena ari den azaltzen du"
-
-#: plugins/gpu/gpu.cpp:349
-#, kde-format
-msgctxt "%1 is a number"
-msgid "GPU %1"
-msgstr "%1. GPU"
 
 #: plugins/network/network.cpp:36
 #, kde-format
@@ -776,10 +786,6 @@ msgstr "Errore ezezagun bat gertatu da."
 #~ msgctxt "Megabytes unit symbol"
 #~ msgid "%1 MiB"
 #~ msgstr "%1 MiB"
-
-#~ msgctxt "Gigabytes unit symbol"
-#~ msgid "%1 GiB"
-#~ msgstr "%1 GiB"
 
 #~ msgctxt "Terabytes unit symbol"
 #~ msgid "%1 TiB"

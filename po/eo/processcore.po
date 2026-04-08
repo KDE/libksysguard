@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-01 00:47+0000\n"
+"POT-Creation-Date: 2026-04-08 00:47+0000\n"
 "PO-Revision-Date: 2025-01-11 22:49+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -530,31 +530,37 @@ msgstr "La indico de datumoj skribitaj al la disko."
 msgid "Threads"
 msgstr "Fadenoj"
 
-#: plugins/gpu/gpu.cpp:97
+#: gpu_utils.cpp:19
 #, kde-format
-msgid "GPU Usage"
-msgstr "Uzado de GPU"
+msgctxt "@title %1 is GPU number"
+msgid "GPU %1"
+msgstr ""
 
-#: plugins/gpu/gpu.cpp:100
+#: gpu_utils.cpp:36
 #, kde-format
-msgid "GPU Memory"
-msgstr "GPU Memoro"
+msgctxt "@title %1 is vendor name"
+msgid "%1 GPU"
+msgstr ""
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:40
 #, fuzzy, kde-format
 #| msgid "CPU"
 msgid "GPU"
 msgstr "CPU"
 
-#: plugins/gpu/gpu.cpp:103
+#: plugins/gpu/gpu.cpp:131
+#, kde-format
+msgid "GPU Usage"
+msgstr "Uzado de GPU"
+
+#: plugins/gpu/gpu.cpp:134
+#, kde-format
+msgid "GPU Memory"
+msgstr "GPU Memoro"
+
+#: plugins/gpu/gpu.cpp:137
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
-
-#: plugins/gpu/gpu.cpp:349
-#, kde-format
-msgctxt "%1 is a number"
-msgid "GPU %1"
 msgstr ""
 
 #: plugins/network/network.cpp:36

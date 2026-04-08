@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-01 00:47+0000\n"
+"POT-Creation-Date: 2026-04-08 00:47+0000\n"
 "PO-Revision-Date: 2019-10-21 07:22+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -510,30 +510,38 @@ msgstr ""
 msgid "Threads"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:97
+#: gpu_utils.cpp:19
 #, kde-format
-msgid "GPU Usage"
+msgctxt "@title %1 is GPU number"
+msgid "GPU %1"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:100
-#, kde-format
-msgid "GPU Memory"
-msgstr ""
+#: gpu_utils.cpp:36
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
+msgctxt "@title %1 is vendor name"
+msgid "%1 GPU"
+msgstr "%1 GiB"
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:40
 #, kde-format
 msgid "GPU"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:103
+#: plugins/gpu/gpu.cpp:131
 #, kde-format
-msgid "Displays which GPU the process is using"
+msgid "GPU Usage"
 msgstr ""
 
-#: plugins/gpu/gpu.cpp:349
+#: plugins/gpu/gpu.cpp:134
 #, kde-format
-msgctxt "%1 is a number"
-msgid "GPU %1"
+msgid "GPU Memory"
+msgstr ""
+
+#: plugins/gpu/gpu.cpp:137
+#, kde-format
+msgid "Displays which GPU the process is using"
 msgstr ""
 
 #: plugins/network/network.cpp:36
@@ -744,10 +752,6 @@ msgstr ""
 #~ msgctxt "Megabytes unit symbol"
 #~ msgid "%1 MiB"
 #~ msgstr "%1 MiB"
-
-#~ msgctxt "Gigabytes unit symbol"
-#~ msgid "%1 GiB"
-#~ msgstr "%1 GiB"
 
 #~ msgctxt "Terabytes unit symbol"
 #~ msgid "%1 TiB"

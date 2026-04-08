@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-01 00:47+0000\n"
+"POT-Creation-Date: 2026-04-08 00:47+0000\n"
 "PO-Revision-Date: 2025-06-10 22:47+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -524,31 +524,41 @@ msgstr "디스크에 데이터를 쓰는 전송률입니다."
 msgid "Threads"
 msgstr "스레드"
 
-#: plugins/gpu/gpu.cpp:97
-#, kde-format
-msgid "GPU Usage"
-msgstr "GPU 사용량"
+#: gpu_utils.cpp:19
+#, fuzzy, kde-format
+#| msgctxt "%1 is a number"
+#| msgid "GPU %1"
+msgctxt "@title %1 is GPU number"
+msgid "GPU %1"
+msgstr "GPU %1"
 
-#: plugins/gpu/gpu.cpp:100
-#, kde-format
-msgid "GPU Memory"
-msgstr "GPU 메모리"
+#: gpu_utils.cpp:36
+#, fuzzy, kde-format
+#| msgctxt "Gigabytes unit symbol"
+#| msgid "%1 GiB"
+msgctxt "@title %1 is vendor name"
+msgid "%1 GPU"
+msgstr "%1 GiB"
 
-#: plugins/gpu/gpu.cpp:102
+#: plugins/gpu/gpu.cpp:40
 #, kde-format
 msgid "GPU"
 msgstr "GPU"
 
-#: plugins/gpu/gpu.cpp:103
+#: plugins/gpu/gpu.cpp:131
+#, kde-format
+msgid "GPU Usage"
+msgstr "GPU 사용량"
+
+#: plugins/gpu/gpu.cpp:134
+#, kde-format
+msgid "GPU Memory"
+msgstr "GPU 메모리"
+
+#: plugins/gpu/gpu.cpp:137
 #, kde-format
 msgid "Displays which GPU the process is using"
 msgstr "프로세스가 사용 중인 GPU 표시"
-
-#: plugins/gpu/gpu.cpp:349
-#, kde-format
-msgctxt "%1 is a number"
-msgid "GPU %1"
-msgstr "GPU %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format
@@ -761,10 +771,6 @@ msgstr "알 수 없는 오류가 발생했습니다."
 #~ msgctxt "Megabytes unit symbol"
 #~ msgid "%1 MiB"
 #~ msgstr "%1 MiB"
-
-#~ msgctxt "Gigabytes unit symbol"
-#~ msgid "%1 GiB"
-#~ msgstr "%1 GiB"
 
 #~ msgctxt "Terabytes unit symbol"
 #~ msgid "%1 TiB"
