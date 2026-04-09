@@ -508,7 +508,7 @@ msgstr "Vlákna"
 #, kde-format
 msgctxt "@title %1 is GPU number"
 msgid "GPU %1"
-msgstr ""
+msgstr "GPU %1"
 
 #: gpu_utils.cpp:36
 #, kde-format

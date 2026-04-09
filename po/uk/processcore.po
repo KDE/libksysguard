@@ -4,13 +4,13 @@
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>, 2007.
-# Yuri Chornoivan <yurchor@ukr.net>, 2010, 2019, 2020, 2021, 2022, 2024, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2010, 2019, 2020, 2021, 2022, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-08 00:47+0000\n"
-"PO-Revision-Date: 2025-05-01 12:44+0300\n"
+"PO-Revision-Date: 2026-04-08 08:32+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -542,20 +542,16 @@ msgid "Threads"
 msgstr "Потоки"
 
 #: gpu_utils.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "%1 is a number"
-#| msgid "GPU %1"
+#, kde-format
 msgctxt "@title %1 is GPU number"
 msgid "GPU %1"
 msgstr "Гр. проц. %1"
 
 #: gpu_utils.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "Gigabytes unit symbol"
-#| msgid "%1 GiB"
+#, kde-format
 msgctxt "@title %1 is vendor name"
 msgid "%1 GPU"
-msgstr "%1 ГіБ"
+msgstr "Гр. пр. %1"
 
 #: plugins/gpu/gpu.cpp:40
 #, kde-format

@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2007, 2010.
 # Paolo Zamponi <feus73@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024, 2025 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024, 2025, 2026 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-08 00:47+0000\n"
-"PO-Revision-Date: 2025-05-01 17:49+0200\n"
+"PO-Revision-Date: 2026-04-08 18:29+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: cgroup_data_model.cpp:50
 #, kde-format
@@ -543,20 +543,16 @@ msgid "Threads"
 msgstr "Thread"
 
 #: gpu_utils.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "%1 is a number"
-#| msgid "GPU %1"
+#, kde-format
 msgctxt "@title %1 is GPU number"
 msgid "GPU %1"
 msgstr "GPU %1"
 
 #: gpu_utils.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "Gigabytes unit symbol"
-#| msgid "%1 GiB"
+#, kde-format
 msgctxt "@title %1 is vendor name"
 msgid "%1 GPU"
-msgstr "%1 GiB"
+msgstr "GPU %1"
 
 #: plugins/gpu/gpu.cpp:40
 #, kde-format
