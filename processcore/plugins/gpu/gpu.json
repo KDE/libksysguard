@@ -24,6 +24,7 @@
         "Description[pt_BR]": "Estatísticas dos recursos da GPU por processo para placas AMD",
         "Description[ro]": "Statistici per proces ale resurselor GPU pentru plăci AMD",
         "Description[ru]": "Статистика использования процессами ресурсов ГП для карт AMD",
+        "Description[sk]": "Štatistiky zdrojov GPU pre procesy pre karty Nvidia",
         "Description[sl]": "Statistika virov GPU po procesu za kartice AMD",
         "Description[sv]": "Statistik över grafikprocessorresurser per process för AMD-kort",
         "Description[tr]": "AMD kartları için süreç başına GPU özkaynakları istatistikleri",
