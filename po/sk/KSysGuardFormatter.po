@@ -599,7 +599,7 @@ msgstr " MiB/s"
 #, kde-format
 msgctxt "Megabytes per second unit symbol"
 msgid "MB/s"
-msgstr ""
+msgstr "MB/s"
 
 #: Formatter.cpp:673
 #, kde-format
@@ -611,7 +611,7 @@ msgstr " GiB/s"
 #, kde-format
 msgctxt "Gigabytes per second unit symbol"
 msgid "GB/s"
-msgstr ""
+msgstr "GB/s"
 
 #: Formatter.cpp:676
 #, kde-format
@@ -623,7 +623,7 @@ msgstr " TiB/s"
 #, kde-format
 msgctxt "Terabytes per second unit symbol"
 msgid "TB/s"
-msgstr ""
+msgstr "TB/s"
 
 #: Formatter.cpp:679
 #, kde-format
@@ -635,7 +635,7 @@ msgstr " PiB/s"
 #, kde-format
 msgctxt "Petabytes per second unit symbol"
 msgid "PB/s"
-msgstr ""
+msgstr "PB/s"
 
 #: Formatter.cpp:683
 #, kde-format
