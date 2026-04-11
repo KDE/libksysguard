@@ -517,13 +517,13 @@ msgstr "线程"
 #, kde-format
 msgctxt "@title %1 is GPU number"
 msgid "GPU %1"
-msgstr ""
+msgstr "GPU %1"
 
 #: gpu_utils.cpp:36
 #, kde-format
 msgctxt "@title %1 is vendor name"
 msgid "%1 GPU"
-msgstr ""
+msgstr "%1 GPU"
 
 #: plugins/gpu/gpu.cpp:40
 #, kde-format
