@@ -537,7 +537,7 @@ msgstr "显示进程正在使用的 GPU"
 #, kde-format
 msgctxt "%1 is a number"
 msgid "GPU %1"
-msgstr ""
+msgstr "GPU %1"
 
 #: plugins/network/network.cpp:36
 #, kde-format
