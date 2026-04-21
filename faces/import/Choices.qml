@@ -330,6 +330,7 @@ Control {
         y: (control.Kirigami.ScenePosition.y + control.height + height > control.Window.height)
             ? - height
             : control.height
+        z: Kirigami.OverlayZStacking.z
         implicitHeight: Math.min(contentItem.implicitHeight + 2, Kirigami.Units.gridUnit * 20)
         width: control.width + 2
         topMargin: 6
