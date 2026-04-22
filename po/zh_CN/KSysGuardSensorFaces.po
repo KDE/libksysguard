@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-22 00:47+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -310,12 +310,12 @@ msgctxt "@label"
 msgid "Click to select a sensor…"
 msgstr "点击选择传感器…"
 
-#: import/Choices.qml:372
+#: import/Choices.qml:373
 #, kde-format
 msgid "Search..."
 msgstr "搜索..."
 
-#: import/Choices.qml:386
+#: import/Choices.qml:387
 #, kde-format
 msgctxt "@action:button"
 msgid "Back"
