@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-22 02:43+0000\n"
 "PO-Revision-Date: 2025-06-17 22:42+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -318,12 +318,12 @@ msgctxt "@label"
 msgid "Click to select a sensor…"
 msgstr "Klicken Sie, um einen Sensor auszuwählen …"
 
-#: import/Choices.qml:372
+#: import/Choices.qml:373
 #, kde-format
 msgid "Search..."
 msgstr "Suchen …"
 
-#: import/Choices.qml:386
+#: import/Choices.qml:387
 #, kde-format
 msgctxt "@action:button"
 msgid "Back"
