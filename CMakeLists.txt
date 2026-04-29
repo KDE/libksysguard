@@ -47,7 +47,7 @@ ecm_setup_version(${PROJECT_VERSION}
                   VARIABLE_PREFIX KSYSGUARD
                   VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/ksysguard_version.h"
                   PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfigVersion.cmake"
-                  SOVERSION 10
+                  SOVERSION 11
 )
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")

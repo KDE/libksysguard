@@ -114,8 +114,7 @@ QVariant ProcessDataModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
     case FormattedValue: {
         KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(index.internalPointer());
-        const QVariant value = attribute->data(process);
-        return KSysGuard::Formatter::formatValue(value, attribute->unit());
+        return attribute->formattedData(process);
     }
     case Value: {
         KSysGuard::Process *process = reinterpret_cast<KSysGuard::Process *>(index.internalPointer());
