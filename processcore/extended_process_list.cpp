@@ -442,7 +442,8 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     d->m_coreAttributes << commandSensor;
 
     auto statusSensor =
-        new ProcessSensor<QString>(this, QStringLiteral("status"), i18n("Status"), &KSysGuard::Process::translatedStatus, KSysGuard::Process::Status);
+        new ProcessSensor<Process::ProcessStatus>(this, QStringLiteral("status"), i18n("Status"), &KSysGuard::Process::status, KSysGuard::Process::Status);
+    statusSensor->setFormattedDataExtractFunc(&KSysGuard::Process::translatedStatus);
     d->m_coreAttributes << statusSensor;
 
     auto ioCharactersReadSensor = new ProcessSensor<qlonglong>(this,
