@@ -99,6 +99,11 @@ public:
     virtual QVariant data(KSysGuard::Process *process) const;
 
     /**
+     * The last stored value for a given process, formatted by its unit
+     */
+    virtual QVariant formattedData(KSysGuard::Process *process) const;
+
+    /**
      * Updates the stored value for a given process
      * Note stray processes will be automatically expunged
      */

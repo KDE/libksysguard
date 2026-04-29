@@ -6,6 +6,7 @@
 
 #include "process_attribute.h"
 #include "cgroup.h"
+#include "formatter.h"
 
 #include <QMetaMethod>
 
@@ -141,6 +142,11 @@ void ProcessAttribute::setRequiredUpdateFlags(Processes::UpdateFlags flags)
 QVariant ProcessAttribute::data(KSysGuard::Process *process) const
 {
     return d->m_data.value(process);
+}
+
+QVariant ProcessAttribute::formattedData(Process *process) const
+{
+    return KSysGuard::Formatter::formatValue(data(process), unit());
 }
 
 void ProcessAttribute::setData(KSysGuard::Process *process, const QVariant &value)
