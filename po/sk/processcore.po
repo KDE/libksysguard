@@ -315,7 +315,7 @@ msgid ""
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "Toto je veľkosť reálnej fyzickej pamäte, ktorú používa samotný proces, "
-"približuje sa k súkromnému využitiu pamäte procesu.<br>Nezahŕňa žiadnu "
+"približuje sa k súkromnému využitiu pamäte procesu. Nezahŕňa žiadnu "
 "odkladanú pamäť ani veľkosť kódu zdieľaných knižníc."
 
 #: extended_process_list.cpp:356
@@ -336,8 +336,8 @@ msgid ""
 "use this library."
 msgstr ""
 "Toto je približne množstvo skutočnej fyzickej pamäte, ktorú využívajú "
-"zdieľané knižnice tohto procesu.<br>Táto pamäť je zdieľaná všetkými "
-"procesmi, ktoré používajú túto knižnicu."
+"zdieľané knižnice tohto procesu. Táto pamäť je zdieľaná všetkými procesmi, "
+"ktoré používajú túto knižnicu."
 
 #: extended_process_list.cpp:375
 #, kde-format
