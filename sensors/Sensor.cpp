@@ -5,8 +5,6 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "Sensor.h"
-
 #include <chrono>
 #include <optional>
 
