@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 00:47+0000\n"
+"POT-Creation-Date: 2026-05-14 00:45+0000\n"
 "PO-Revision-Date: 2026-04-26 22:38+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -36,204 +36,204 @@ msgctxt "@title"
 msgid "Name"
 msgstr "이름"
 
-#: extended_process_list.cpp:95
+#: extended_process_list.cpp:110
 #, kde-format
 msgid "PID"
 msgstr "프로세스 ID"
 
-#: extended_process_list.cpp:96
+#: extended_process_list.cpp:111
 #, kde-format
 msgid "The unique Process ID that identifies this process."
 msgstr "이 프로세스를 구분하는 유일한 프로세스 ID입니다."
 
-#: extended_process_list.cpp:101
+#: extended_process_list.cpp:116
 #, kde-format
 msgid "Parent PID"
 msgstr "부모 PID"
 
-#: extended_process_list.cpp:108
+#: extended_process_list.cpp:123
 #, kde-format
 msgid "Login"
 msgstr "로그인"
 
-#: extended_process_list.cpp:109
+#: extended_process_list.cpp:124
 #, kde-format
 msgid "The user who owns this process."
 msgstr "프로세스를 소유한 사용자입니다."
 
-#: extended_process_list.cpp:113
+#: extended_process_list.cpp:128
 #, kde-format
 msgid "UID"
 msgstr "UID"
 
-#: extended_process_list.cpp:119
+#: extended_process_list.cpp:134
 #, kde-format
 msgid "Username"
 msgstr "사용자 이름"
 
-#: extended_process_list.cpp:135
+#: extended_process_list.cpp:150
 #, kde-format
 msgid "Can Login"
 msgstr "로그인 가능"
 
-#: extended_process_list.cpp:162
+#: extended_process_list.cpp:177
 #, kde-format
 msgid "EUID"
 msgstr "EUID"
 
-#: extended_process_list.cpp:166
+#: extended_process_list.cpp:181
 #, kde-format
 msgid "suid"
 msgstr "suid"
 
-#: extended_process_list.cpp:170
+#: extended_process_list.cpp:185
 #, kde-format
 msgid "fsuid"
 msgstr "fsuid"
 
-#: extended_process_list.cpp:174
+#: extended_process_list.cpp:189
 #, kde-format
 msgid "gid"
 msgstr "gid"
 
-#: extended_process_list.cpp:178
+#: extended_process_list.cpp:193
 #, kde-format
 msgid "egid"
 msgstr "egid"
 
-#: extended_process_list.cpp:182
+#: extended_process_list.cpp:197
 #, kde-format
 msgid "sgid"
 msgstr "sgid"
 
-#: extended_process_list.cpp:186
+#: extended_process_list.cpp:201
 #, kde-format
 msgid "fsgid"
 msgstr "fsgid"
 
-#: extended_process_list.cpp:191
+#: extended_process_list.cpp:206
 #, kde-format
 msgid "Tracer Pid"
 msgstr "추적기 PID"
 
-#: extended_process_list.cpp:198
+#: extended_process_list.cpp:213
 #, kde-format
 msgid "tty"
 msgstr "tty"
 
-#: extended_process_list.cpp:199
+#: extended_process_list.cpp:214
 #, kde-format
 msgid "The controlling terminal on which this process is running."
 msgstr "프로세스가 실행 중인 제어 터미널입니다."
 
-#: extended_process_list.cpp:202
+#: extended_process_list.cpp:217
 #, kde-format
 msgid "User Time"
 msgstr "사용자 시간"
 
-#: extended_process_list.cpp:206
+#: extended_process_list.cpp:221
 #, kde-format
 msgid "System Time"
 msgstr "시스템 시간"
 
-#: extended_process_list.cpp:210
+#: extended_process_list.cpp:225
 #, kde-format
 msgid "Total Time"
 msgstr "총 시간"
 
-#: extended_process_list.cpp:213
+#: extended_process_list.cpp:228
 #, kde-format
 msgid "Time"
 msgstr "시간"
 
-#: extended_process_list.cpp:215
+#: extended_process_list.cpp:230
 #, kde-format
 msgid "The total user and system time that this process has been running for"
 msgstr "이 프로세스가 실행된 총 사용자 및 시스템 시간의 합입니다"
 
-#: extended_process_list.cpp:220
+#: extended_process_list.cpp:235
 #, kde-format
 msgid "Start Time"
 msgstr "시작 시간"
 
-#: extended_process_list.cpp:230
+#: extended_process_list.cpp:245
 #, kde-format
 msgid "User CPU Usage"
 msgstr "사용자 CPU 사용량"
 
-#: extended_process_list.cpp:231
+#: extended_process_list.cpp:246
 #, kde-format
 msgid "User CPU"
 msgstr "사용자 CPU"
 
-#: extended_process_list.cpp:238
+#: extended_process_list.cpp:253
 #, kde-format
 msgid "System CPU Usage"
 msgstr "시스템 CPU 사용량"
 
-#: extended_process_list.cpp:239
+#: extended_process_list.cpp:254
 #, kde-format
 msgid "System CPU"
 msgstr "시스템 CPU"
 
-#: extended_process_list.cpp:248
+#: extended_process_list.cpp:263
 #, kde-format
 msgid "Total CPU Usage"
 msgstr "총 CPU 사용량"
 
-#: extended_process_list.cpp:254
+#: extended_process_list.cpp:269
 #, kde-format
 msgid "CPU"
 msgstr "CPU"
 
-#: extended_process_list.cpp:258
+#: extended_process_list.cpp:273
 #, kde-format
 msgid "The current total CPU usage of the process."
 msgstr "현재 프로세스의 CPU 사용량입니다."
 
-#: extended_process_list.cpp:263
+#: extended_process_list.cpp:278
 #, kde-format
 msgid "Group User CPU Usage"
 msgstr "그룹 사용자 CPU 사용량"
 
-#: extended_process_list.cpp:267
+#: extended_process_list.cpp:282
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
 "이 프로세스와 모든 자식 프로세스가 사용하는 총 사용자 공간 CPU 사용량입니다."
 
-#: extended_process_list.cpp:275
+#: extended_process_list.cpp:290
 #, kde-format
 msgid "Group System CPU Usage"
 msgstr "그룹 시스템 CPU 사용량"
 
-#: extended_process_list.cpp:279
+#: extended_process_list.cpp:294
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
 msgstr ""
 "이 프로세스와 모든 자식 프로세스가 사용하는 총 시스템 CPU 사용량입니다."
 
-#: extended_process_list.cpp:288
+#: extended_process_list.cpp:303
 #, kde-format
 msgid "Group Total CPU Usage"
 msgstr "그룹 총 CPU 사용량"
 
-#: extended_process_list.cpp:294
+#: extended_process_list.cpp:309
 #, kde-format
 msgid "Group CPU"
 msgstr "그룹 CPU"
 
-#: extended_process_list.cpp:295
+#: extended_process_list.cpp:310
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
 msgstr "이 프로세스와 모든 자식 프로세스가 사용하는 총 CPU 사용량입니다."
 
-#: extended_process_list.cpp:302
+#: extended_process_list.cpp:317
 #, kde-format
 msgid "Nice Level"
 msgstr "Nice 단계"
 
-#: extended_process_list.cpp:304
+#: extended_process_list.cpp:319
 #, kde-format
 msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
@@ -242,27 +242,27 @@ msgstr ""
 "프로세스가 실행 중인 우선 순위입니다. 일반적인 스케줄러를 사용하면 가능한 범"
 "위는 19(최저 우선 순위)에서 -19(최고 우선 순위)입니다."
 
-#: extended_process_list.cpp:308
+#: extended_process_list.cpp:323
 #, kde-format
 msgid "Scheduler"
 msgstr "스케줄러"
 
-#: extended_process_list.cpp:313
+#: extended_process_list.cpp:328
 #, kde-format
 msgid "IO Priority Class"
 msgstr "IO 우선 순위 클래스"
 
-#: extended_process_list.cpp:319
+#: extended_process_list.cpp:334
 #, kde-format
 msgid "IO Nice Level"
 msgstr "IO Nice 단계"
 
-#: extended_process_list.cpp:323
+#: extended_process_list.cpp:338
 #, kde-format
 msgid "VM Size"
 msgstr "VM 크기"
 
-#: extended_process_list.cpp:328
+#: extended_process_list.cpp:343
 #, kde-format
 msgid ""
 "This is the amount of virtual memory space that the process is using, "
@@ -272,17 +272,17 @@ msgstr ""
 "공유 라이브러리, 그래픽 메모리, 디스크의 파일 등을 합친 프로세스가 사용하고 "
 "있는 가상 메모리의 크기입니다. 대개 이 숫자는 의미가 없습니다."
 
-#: extended_process_list.cpp:333
+#: extended_process_list.cpp:348
 #, kde-format
 msgid "Resident Memory Usage"
 msgstr "상주 메모리 사용량"
 
-#: extended_process_list.cpp:335
+#: extended_process_list.cpp:350
 #, kde-format
 msgid "Resident"
 msgstr "상주"
 
-#: extended_process_list.cpp:339
+#: extended_process_list.cpp:354
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using and "
@@ -291,17 +291,17 @@ msgstr ""
 "이 프로세스가 사용하는 물리적 메모리 크기입니다. 공유 라이브러리가 사용하는 "
 "메모리도 들어 있습니다."
 
-#: extended_process_list.cpp:343
+#: extended_process_list.cpp:358
 #, kde-format
 msgid "Private Memory Usage"
 msgstr "개별 메모리 사용량"
 
-#: extended_process_list.cpp:345
+#: extended_process_list.cpp:360
 #, kde-format
 msgid "Private"
 msgstr "개별"
 
-#: extended_process_list.cpp:349
+#: extended_process_list.cpp:364
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
@@ -312,17 +312,17 @@ msgstr ""
 "독점적으로 사용하는 메모리 크기와 거의 일치합니다. 이 크기는 스왑 영역으로 전"
 "환된 메모리나 공유 라이브러리 등을 제외합니다."
 
-#: extended_process_list.cpp:356
+#: extended_process_list.cpp:371
 #, kde-format
 msgid "Shared Memory Usage"
 msgstr "공유 메모리 사용량"
 
-#: extended_process_list.cpp:365
+#: extended_process_list.cpp:380
 #, kde-format
 msgid "Shared"
 msgstr "공유됨"
 
-#: extended_process_list.cpp:367
+#: extended_process_list.cpp:382
 #, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
@@ -332,19 +332,19 @@ msgstr ""
 "프로세스의 공유 라이브러리가 사용하는 실제 물리적 메모리의 크기와 개략적으로 "
 "일치합니다. 이 메모리는 이 라이브러리를 사용하는 모든 프로세스가 공유합니다."
 
-#: extended_process_list.cpp:375
+#: extended_process_list.cpp:390
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
 msgstr "비례 메모리 사용량"
 
-#: extended_process_list.cpp:378
+#: extended_process_list.cpp:393
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
 msgstr "비례"
 
-#: extended_process_list.cpp:385
+#: extended_process_list.cpp:400
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -359,19 +359,19 @@ msgstr ""
 "프로세스의 개별 메모리의 합입니다. 일부 프로세스에서는 이 값을 사용할 수 없습"
 "니다."
 
-#: extended_process_list.cpp:392
+#: extended_process_list.cpp:407
 #, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "메모리 사용량"
 
-#: extended_process_list.cpp:395
+#: extended_process_list.cpp:410
 #, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "메모리"
 
-#: extended_process_list.cpp:402
+#: extended_process_list.cpp:417
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -384,91 +384,91 @@ msgstr ""
 "용 가능한 경우 비례 메모리 사용량이며, 독점 메모리 사용량이 있으면 그 값을 취"
 "하며, 없으면 상주 메모리 사용량입니다."
 
-#: extended_process_list.cpp:407
+#: extended_process_list.cpp:422
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
 msgstr "스왑 사용량"
 
-#: extended_process_list.cpp:408
+#: extended_process_list.cpp:423
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
 msgstr "스왑"
 
-#: extended_process_list.cpp:412
+#: extended_process_list.cpp:427
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr "이 프로세스가 사용하는 스왑 영역 크기와 개략적으로 일치합니다."
 
-#: extended_process_list.cpp:416
+#: extended_process_list.cpp:431
 #, kde-format
 msgid "Name"
 msgstr "이름"
 
-#: extended_process_list.cpp:417
+#: extended_process_list.cpp:432
 #, kde-format
 msgid "The process name."
 msgstr "프로세스 이름입니다."
 
-#: extended_process_list.cpp:422
+#: extended_process_list.cpp:437
 #, kde-format
 msgid "Command"
 msgstr "명령"
 
-#: extended_process_list.cpp:426
+#: extended_process_list.cpp:441
 #, kde-format
 msgid "The command with which this process was launched."
 msgstr "이 프로세스가 실행된 명령입니다."
 
-#: extended_process_list.cpp:430
+#: extended_process_list.cpp:445
 #, kde-format
 msgid "Status"
 msgstr "상태"
 
-#: extended_process_list.cpp:435
+#: extended_process_list.cpp:451
 #, kde-format
 msgid "IO Characters Read"
 msgstr "IO 읽은 글자 수"
 
-#: extended_process_list.cpp:444
+#: extended_process_list.cpp:460
 #, kde-format
 msgid "IO Characters Written"
 msgstr "IO 쓴 글자 수"
 
-#: extended_process_list.cpp:453
+#: extended_process_list.cpp:469
 #, kde-format
 msgid "IO Read Syscalls"
 msgstr "IO 읽기 시스템 호출"
 
-#: extended_process_list.cpp:462
+#: extended_process_list.cpp:478
 #, kde-format
 msgid "IO Read Syscalls Rate"
 msgstr "IO 읽기 시스템 호출 비율"
 
-#: extended_process_list.cpp:471
+#: extended_process_list.cpp:487
 #, kde-format
 msgid "IO Write Syscalls"
 msgstr "IO 쓰기 시스템 호출"
 
-#: extended_process_list.cpp:480
+#: extended_process_list.cpp:496
 #, kde-format
 msgid "IO Write Syscalls Rate"
 msgstr "IO 쓰기 시스템 호출 비율"
 
-#: extended_process_list.cpp:489
+#: extended_process_list.cpp:505
 #, kde-format
 msgid "IO Characters Actually Read"
 msgstr "IO 실제 읽은 글자 수"
 
-#: extended_process_list.cpp:498
+#: extended_process_list.cpp:514
 #, kde-format
 msgid "IO Characters Read Rate"
 msgstr "IO 글자 읽기 비율"
 
-#: extended_process_list.cpp:501
+#: extended_process_list.cpp:517
 #, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
@@ -476,12 +476,12 @@ msgid ""
 msgstr ""
 "디스크 캐시와 물리적이 아닌 IO를 포함하는 전체 프로세스의 읽기 비율입니다."
 
-#: extended_process_list.cpp:508
+#: extended_process_list.cpp:524
 #, kde-format
 msgid "IO Characters Written Rate"
 msgstr "IO 쓴 글자 수 비율"
 
-#: extended_process_list.cpp:511
+#: extended_process_list.cpp:527
 #, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
@@ -489,37 +489,37 @@ msgid ""
 msgstr ""
 "디스크 캐시와 물리적이 아닌 IO를 포함하는 전체 프로세스의 쓰기 비율입니다."
 
-#: extended_process_list.cpp:518
+#: extended_process_list.cpp:534
 #, kde-format
 msgid "Disk Read Rate"
 msgstr "디스크 읽기 전송률"
 
-#: extended_process_list.cpp:522
+#: extended_process_list.cpp:538
 #, kde-format
 msgid "Read"
 msgstr "읽기"
 
-#: extended_process_list.cpp:523
+#: extended_process_list.cpp:539
 #, kde-format
 msgid "The rate of data being read from disk."
 msgstr "디스크에서 데이터를 읽는 전송률입니다."
 
-#: extended_process_list.cpp:529
+#: extended_process_list.cpp:545
 #, kde-format
 msgid "Disk Write Rate"
 msgstr "디스크 쓰기 전송률"
 
-#: extended_process_list.cpp:533
+#: extended_process_list.cpp:549
 #, kde-format
 msgid "Write"
 msgstr "쓰기"
 
-#: extended_process_list.cpp:534
+#: extended_process_list.cpp:550
 #, kde-format
 msgid "The rate of data being written to the disk."
 msgstr "디스크에 데이터를 쓰는 전송률입니다."
 
-#: extended_process_list.cpp:540
+#: extended_process_list.cpp:556
 #, kde-format
 msgid "Threads"
 msgstr "스레드"
