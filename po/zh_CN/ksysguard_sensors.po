@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/libksysguard/ksysguard_sensors.pot\n"
-"X-Crowdin-File-ID: 43533\n"
+"X-Crowdin-File: /kf6-stable/messages/libksysguard/ksysguard_sensors.pot\n"
+"X-Crowdin-File-ID: 50502\n"
 
 #: SensorGroup.cpp:31
 #, kde-format
