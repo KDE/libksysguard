@@ -4,13 +4,13 @@
 # SPDX-FileCopyrightText: 2023 Jannick Kuhr <opensource@kuhr.org>
 # SPDX-FileCopyrightText: 2024 Johannes Obermayr <johannesobermayr@gmx.de>
 # SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n.daphipz@fastmail.de>
+# SPDX-FileCopyrightText: 2025-2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: KSysGuardSensorFaces\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-22 00:47+0000\n"
-"PO-Revision-Date: 2025-06-17 22:42+0200\n"
+"PO-Revision-Date: 2026-05-15 22:13+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: ConfigAppearance.qml:72
 #, kde-format
@@ -271,13 +271,12 @@ msgid "History to show:"
 msgstr "Anzuzeigender Verlauf:"
 
 #: facepackages/linechart/contents/ui/Config.qml:98
-#, fuzzy, kde-format
-#| msgid "1 second"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "1 Sekunde"
-msgstr[1] "1 Sekunde"
+msgstr[0] "Sekunde"
+msgstr[1] "Sekunden"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
@@ -287,9 +286,7 @@ msgstr "Startwinkel:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
 #: facepackages/piechart/contents/ui/Config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:intext angle degrees, used to read text from spinbox"
-#| msgid "°"
+#, kde-format
 msgctxt "@label angle degrees"
 msgid "°"
 msgstr "°"
