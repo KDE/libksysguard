@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n.daphipz@fastmail.de>
-# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010 Thomas Reitelbach <tr@erdfunkstelle.de>
-# SPDX-FileCopyrightText: 2009, 2011, 2014, 2015, 2017, 2018, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2007-2010 Thomas Reitelbach <tr@erdfunkstelle.de>
+# SPDX-FileCopyrightText: 2009, 2011, 2014-2015, 2017-2018, 2020-2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2010 Johannes Obermayr <johannesobermayr@gmx.de>
-# SPDX-FileCopyrightText: 2010, 2011, 2012, 2015, 2016, 2020, 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2010 Markus Slopianka <kamikazow@fishmouth.net>
 # SPDX-FileCopyrightText: 2010 Panagiotis Papadopoulos <pano_90@gmx.net>
+# SPDX-FileCopyrightText: 2010-2012, 2015-2016, 2020, 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2023 Jannick Kuhr <opensource@kuhr.org>
+# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: processui\n"
@@ -745,7 +745,7 @@ msgid ""
 "more information.</td></tr></table>"
 msgstr ""
 "<qt>Der Eigentümer dieses Prozesses. Falls sich der Eigentümer vom "
-"effektiven Benutzer unterscheidet (z. B. setuid), wird der Eigentümer "
+"effektiven Benutzer unterscheidet (z. B. setuid), wird der Eigentümer "
 "gefolgt vom effektiven Benutzer angezeigt. Die Kurzhilfe enthält die "
 "vollständigen Informationen. <p><table><tr><td>Anmeldename/Gruppe</"
 "td><td>Der Benutzername des eigentlichen Benutzers/der Gruppe, der dieser "
@@ -933,14 +933,14 @@ msgstr ""
 "Bytes, die der Prozess über die Aufrufe read() sowie pread() angefordert "
 "hat. Dazu zählen auch Ein- und Ausgaben über TTYs. Ob tatsächlich ein "
 "physikalischer Leseprozess auf einem Datenträger stattgefunden hat ist für "
-"die Rechnung unerheblich (der Lesevorgang kann z. B. auch aus dem Pagecache "
+"die Rechnung unerheblich (der Lesevorgang kann z. B. auch aus dem Pagecache "
 "erfolgt sein).</td></tr><tr><td>Geschriebene Zeichen</td><td>Die Anzahl "
 "Bytes, die der Prozess in das Speichersystem geschrieben hat bzw. sollte. Es "
 "gelten die gleichen Regeln wie für die Berechnung der gelesenen Bytes.</td></"
 "tr><tr><td>Gelesene Systemaufrufe</td><td>Die Anzahl der E/A-"
-"Leseoperationen, z. B. Systemaufrufe wie read() und pread().</td></"
+"Leseoperationen, z. B. Systemaufrufe wie read() und pread().</td></"
 "tr><tr><td>Geschriebene Systemaufrufe</td><td>Die Anzahl der E/A-"
-"Schreiboperationen, z. B. Systemaufrufe wie write() und pwrite().</td></"
+"Schreiboperationen, z. B. Systemaufrufe wie write() und pwrite().</td></"
 "tr><tr><td>Gelesene Bytes</td><td>Die Anzahl Bytes, die der Prozess "
 "tatsächlich aus dem Speichersystem angefordert hat. Dies wird auf der Ebene "
 "von submit_bio() gezählt und ist somit akkurat für Blockbasierte "
@@ -1687,7 +1687,7 @@ msgstr ""
 "nicht anders behandelt.<br>\n"
 "Kernel-Threads werden wie normale Prozesse angezeigt, laufen aber in "
 "Wirklichkeit im Kernel und sind keine tatsächlichen Prozesse. Auf solche "
-"Prozesse treffen daher einige Eigenschaften (wie z. B. Benutzername) nicht "
+"Prozesse treffen daher einige Eigenschaften (wie z. B. Benutzername) nicht "
 "zu.\n"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cmbFilter)
