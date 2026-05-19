@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the libksysguard package.
 # SPDX-FileCopyrightText: 2022 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2023 Jannick Kuhr <opensource@kuhr.org>
-# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n.daphipz@fastmail.de>
+# SPDX-FileCopyrightText: 2025-2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: ksysguard_sensors\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-06-17 11:39+0200\n"
+"PO-Revision-Date: 2026-05-15 21:50+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: SensorGroup.cpp:31
 #, kde-format
@@ -68,19 +68,16 @@ msgid "[Group] Total Usage"
 msgstr "[Gruppe] Gesamtauslastung"
 
 #: SensorGroup.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "All cores user load sensors"
-#| msgid "[Group] User Usage"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Video Memory Used"
-msgstr "[Gruppe] Benutzerauslastung"
+msgstr "[Gruppe] Grafikspeicher belegt"
 
 #: SensorGroup.cpp:41
-#, fuzzy, kde-format
-#| msgid "[Group] Total Size"
+#, kde-format
 msgctxt "GPU group sensor"
 msgid "[Group] Total Video Memory"
-msgstr "[Gruppe] Gesamtgröße"
+msgstr "[Gruppe] Gesamter Grafikspeicher"
 
 #: SensorGroup.cpp:42
 #, kde-format
@@ -214,11 +211,10 @@ msgid "[Group] Current Capacity"
 msgstr "[Gruppe] Aktuelle Kapazität"
 
 #: SensorGroup.cpp:74
-#, fuzzy, kde-format
-#| msgid "[Group] Used Space"
+#, kde-format
 msgctxt "Power group sensor"
 msgid "[Group] Design Capacity"
-msgstr "[Gruppe] Belegter Speicherplatz"
+msgstr "[Gruppe] Nominelle Kapazität"
 
 #: SensorGroup.cpp:75
 #, kde-format
