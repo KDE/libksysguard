@@ -20,7 +20,8 @@ Kirigami.FormLayout {
     property alias cfg_lineChartStacked: stackedCheckbox.checked
     property alias cfg_lineChartFillOpacity: fillOpacitySpin.value
     property alias cfg_lineChartSmooth: smoothCheckbox.checked
-    property alias cfg_showGridLines: showGridLinesCheckbox.checked
+    property alias cfg_showGridLines: showGridLinesCheckbox.
+    property alias cfg_amountGridLines: amountGridLinesSpin.value
     property alias cfg_showYAxisLabels: showYAxisLabelsCheckbox.checked
 
     property alias cfg_rangeAutoY: rangeAutoYCheckbox.checked
@@ -61,6 +62,13 @@ Kirigami.FormLayout {
     QQC2.CheckBox {
         id: showYAxisLabelsCheckbox
         text: i18nc("@option:check", "Show Y axis labels")
+    }
+    QQC2.SpinBox {
+        id: amountGridLinesSpin
+        Kirigami.FormData.label: i18nc("@label:spinbox", "Amount of grid lines:")
+        editable: true
+        from: 0
+        to: 100
     }
     QQC2.SpinBox {
         id: fillOpacitySpin

@@ -25,6 +25,7 @@ Faces.SensorFace {
     readonly property bool showLegend: controller.faceConfiguration.showLegend
     readonly property bool showGridLines: root.controller.faceConfiguration.showGridLines
     readonly property bool showYAxisLabels: root.controller.faceConfiguration.showYAxisLabels
+    readonly property int amountGridLines: root.controller.faceConfiguration.amountGridLines
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
     Layout.minimumWidth: Kirigami.Units.gridUnit * 8
     Layout.preferredWidth: Math.max(titleMetrics.width, legend.preferredWidth)
@@ -72,7 +73,7 @@ Faces.SensorFace {
                 source: Charts.ChartAxisSource {
                     chart: compactRepresentation
                     axis: Charts.ChartAxisSource.YAxis
-                    itemCount: 5
+                    itemCount: amountGridLines
                 }
                 TextMetrics {
                     id: axisMetrics
@@ -98,7 +99,7 @@ Faces.SensorFace {
                     z: compactRepresentation.z - 1
                     chart: compactRepresentation
 
-                    major.count: 3
+                    major.count: axisLabels.source.itemCount - 2
                     major.lineWidth: 1
                     // The same color as a Kirigami.Separator
                     major.color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)

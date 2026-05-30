@@ -18,8 +18,11 @@
         <entry name="lineChartSmooth" type="Bool">
             <default>true</default>
         </entry>
-         <entry name="showGridLines" type="Bool">
+        <entry name="showGridLines" type="Bool">
             <default>true</default>
+        </entry>
+        <entry name="amountGridLines" type="Int">
+            <default>5</default>
         </entry>
         <entry name="showYAxisLabels" type="Bool">
             <default>true</default>
