@@ -1,12 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Mint <5602mint@gmail.com>
 # Tomohiro Hyakutake <tomhioo@outlook.jp>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-22 00:47+0000\n"
-"PO-Revision-Date: 2021-09-21 00:50+0900\n"
-"Last-Translator: Tomohiro Hyakutake <tomhioo@outlook.jp>\n"
-"Language-Team: Japanese <kde-jp@kde.org>\n"
+"PO-Revision-Date: 2026-05-24 15:01+0900\n"
+"Last-Translator: Mint <5602mint@gmail.com>\n"
+"Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: ConfigAppearance.qml:72
 #, fuzzy, kde-format
@@ -25,7 +26,7 @@ msgstr "プリセットを読み込む..."
 #: ConfigAppearance.qml:99
 #, kde-format
 msgid "Delete this preset"
-msgstr ""
+msgstr "このプリセットを削除"
 
 #: ConfigAppearance.qml:125
 #, kde-format
@@ -81,23 +82,23 @@ msgstr "制限なし"
 #: ConfigAppearance.qml:210
 #, kde-format
 msgid "1 second"
-msgstr ""
+msgstr "1 秒"
 
 #: ConfigAppearance.qml:212
 #, kde-format
 msgid "%1 seconds"
-msgstr ""
+msgstr "%1 秒"
 
 #: ConfigSensors.qml:131
 #, kde-format
 msgid "Total Sensor"
 msgid_plural "Total Sensors"
-msgstr[0] ""
+msgstr[0] "合計値のセンサー"
 
 #: ConfigSensors.qml:150
 #, kde-format
 msgid "Sensors"
-msgstr ""
+msgstr "センサー"
 
 #: ConfigSensors.qml:176
 #, kde-format
@@ -108,61 +109,59 @@ msgstr "テキストのみのセンサー"
 #, kde-format
 msgctxt "@title:group General options"
 msgid "General:"
-msgstr ""
+msgstr "全般:"
 
 #: facepackages/barchart/contents/ui/Config.qml:37
 #: facepackages/linechart/contents/ui/Config.qml:47
 #: facepackages/piechart/contents/ui/Config.qml:34
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show legend"
-msgstr "タイトルを表示"
+msgstr "凡例を表示"
 
 #: facepackages/barchart/contents/ui/Config.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked bars"
-msgstr ""
+msgstr "積み重ね棒グラフ"
 
 #: facepackages/barchart/contents/ui/Config.qml:49
 #, kde-format
 msgctxt "@label for radiobutton group, Orientation of bar chart"
 msgid "Bar orientation:"
-msgstr ""
+msgstr "棒の向き:"
 
 #: facepackages/barchart/contents/ui/Config.qml:51
 #, kde-format
 msgctxt "@option:radio Vertical option for the bar chart"
 msgid "Vertical"
-msgstr ""
+msgstr "垂直"
 
 #: facepackages/barchart/contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:radio Horizontal option for the bar chart"
 msgid "Horizontal"
-msgstr ""
+msgstr "水平"
 
 #: facepackages/barchart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label Options about axis and label of bar chart"
 msgid "Axis:"
-msgstr ""
+msgstr "軸:"
 
 #: facepackages/barchart/contents/ui/Config.qml:69
 #: facepackages/linechart/contents/ui/Config.qml:63
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Y axis labels"
-msgstr ""
+msgstr "縦軸ラベルを表示"
 
 #: facepackages/barchart/contents/ui/Config.qml:74
 #: facepackages/linechart/contents/ui/Config.qml:59
-#, fuzzy, kde-format
-#| msgid "Show Title"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show grid lines"
-msgstr "タイトルを表示"
+msgstr "グリッド線を表示"
 
 #: facepackages/barchart/contents/ui/Config.qml:78
 #: facepackages/horizontalbars/contents/ui/Config.qml:29
@@ -170,7 +169,7 @@ msgstr "タイトルを表示"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic data range"
-msgstr ""
+msgstr "データの範囲を自動設定"
 
 #: facepackages/barchart/contents/ui/Config.qml:82
 #: facepackages/horizontalbars/contents/ui/Config.qml:33
@@ -178,7 +177,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "From:"
-msgstr ""
+msgstr "最小:"
 
 #: facepackages/barchart/contents/ui/Config.qml:89
 #: facepackages/horizontalbars/contents/ui/Config.qml:40
@@ -186,38 +185,36 @@ msgstr ""
 #, kde-format
 msgctxt "@label:spinbox data range"
 msgid "To:"
-msgstr ""
+msgstr "最大:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:22
 #, kde-format
 msgctxt "@option:check"
 msgid "Use sensor color:"
-msgstr ""
+msgstr "センサーの色を使用:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:27
 #: facepackages/facegrid/contents/ui/Config.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Number of columns:"
-msgstr ""
+msgstr "列の数:"
 
 #: facepackages/colorgrid/contents/ui/Config.qml:34
 #: facepackages/facegrid/contents/ui/Config.qml:42
 #, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
-msgstr ""
+msgstr "自動"
 
 #: facepackages/facegrid/contents/ui/Config.qml:54
-#, fuzzy, kde-format
-#| msgid "Display Style:"
+#, kde-format
 msgctxt "@label:listbox items are sensor face names"
 msgid "Display style:"
 msgstr "表示スタイル:"
 
 #: facepackages/linechart/contents/ui/Config.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance"
 msgstr "外観"
@@ -226,112 +223,106 @@ msgstr "外観"
 #, kde-format
 msgctxt "@option:check"
 msgid "Stacked charts"
-msgstr ""
+msgstr "積み重ねチャート"
 
 #: facepackages/linechart/contents/ui/Config.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Smooth lines"
-msgstr ""
+msgstr "滑らかな線"
 
 #: facepackages/linechart/contents/ui/Config.qml:67
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Opacity of area below line:"
-msgstr ""
+msgstr "線より下の不透明度:"
 
 #: facepackages/linechart/contents/ui/Config.qml:73
 #, kde-format
 msgctxt "title:group"
 msgid "Data Ranges"
-msgstr ""
+msgstr "データ範囲"
 
 #: facepackages/linechart/contents/ui/Config.qml:78
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatic Y data range"
-msgstr ""
+msgstr "データの縦軸範囲を自動設定"
 
 #: facepackages/linechart/contents/ui/Config.qml:82
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "From (Y):"
-msgstr ""
+msgstr "最小 (縦軸):"
 
 #: facepackages/linechart/contents/ui/Config.qml:89
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "To (Y):"
-msgstr ""
+msgstr "最大 (縦軸):"
 
 #: facepackages/linechart/contents/ui/Config.qml:96
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "History to show:"
-msgstr ""
+msgstr "表示する履歴:"
 
 #: facepackages/linechart/contents/ui/Config.qml:98
 #, kde-format
 msgctxt "@item:valuesuffix %1 is seconds of history"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
+msgstr[0] "秒"
 
 #: facepackages/piechart/contents/ui/Config.qml:38
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Starting angle:"
-msgstr ""
+msgstr "開始角度:"
 
 #: facepackages/piechart/contents/ui/Config.qml:43
 #: facepackages/piechart/contents/ui/Config.qml:52
 #, kde-format
 msgctxt "@label angle degrees"
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: facepackages/piechart/contents/ui/Config.qml:47
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Total pie angle:"
-msgstr ""
+msgstr "合計の角度:"
 
 #: facepackages/piechart/contents/ui/Config.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Rounded lines"
-msgstr ""
+msgstr "線を丸める"
 
 #: facepackages/textonly/contents/ui/Config.qml:24
 #, kde-format
 msgctxt "@option:check"
 msgid "Group sensors based on the value of the total sensors."
-msgstr ""
+msgstr "トータルのセンサーに基づいてセンサーをグループ化"
 
 #: import/Choices.qml:53
 #, kde-format
 msgctxt "@label"
 msgid "Click to select a sensor…"
-msgstr ""
+msgstr "クリックしてセンサーを検索…"
 
 #: import/Choices.qml:373
 #, kde-format
 msgid "Search..."
-msgstr ""
+msgstr "検索..."
 
 #: import/Choices.qml:387
 #, kde-format
 msgctxt "@action:button"
 msgid "Back"
-msgstr ""
+msgstr "戻る"
 
 #: SensorFaceController.cpp:450
 #, kde-format
 msgid "System Monitor Sensor"
-msgstr ""
-
-#, fuzzy
-#~| msgid "Show Title"
-#~ msgctxt "@label:spinbox"
-#~ msgid "Show last:"
-#~ msgstr "タイトルを表示"
+msgstr "システムモニタセンサー"
