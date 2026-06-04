@@ -14,6 +14,8 @@
 
 #define QSL QStringLiteral
 
+using namespace Qt::StringLiterals;
+
 class FormatterTest : public QObject
 {
     Q_OBJECT
@@ -103,6 +105,27 @@ private Q_SLOTS:
         auto elapsed = QDateTime::currentDateTime().addSecs(-input);
         auto formatted = KSysGuard::Formatter::formatValue(systemBootTime.secsTo(elapsed) * ticks, KSysGuard::UnitBootTimestamp);
         QVERIFY(output.contains(formatted));
+    }
+
+    void testPrecision_data()
+    {
+        QTest::addColumn<QVariant>("input");
+        QTest::addColumn<KSysGuard::Unit>("unit");
+        QTest::addColumn<QString>("output");
+        QTest::newRow("double in string") << QVariant(u"1.123"_s) << KSysGuard::Unit::UnitNone << u"1.1"_s;
+        QTest::newRow("double") << QVariant(1.123) << KSysGuard::Unit::UnitNone << u"1.1"_s;
+        QTest::newRow("adjusted") << QVariant(1234) << KSysGuard::Unit::UnitKiloVolt << u"1.2\u202FM\u200BV"_s;
+        QTest::newRow("normal") << QVariant(60) << KSysGuard::Unit::UnitNone << u"60"_s;
+    }
+
+    void testPrecision()
+    {
+        QFETCH(QVariant, input);
+        QFETCH(KSysGuard::Unit, unit);
+        QFETCH(QString, output);
+
+        auto formatted = KSysGuard::Formatter::formatValue(input, unit);
+        QCOMPARE(formatted, output);
     }
 };
 

@@ -519,7 +519,13 @@ static QString formatNumber(const QVariant &value, Unit unit, MetricPrefix prefi
     }
 
     if (precision < 0) {
-        precision = (value.typeId() != QMetaType::Double && adjusted <= unit) ? 0 : 1;
+        if (value.typeId() == QMetaType::Double // If it's a double
+            || adjusted > unit // or we're using a larger prefix
+            || (value.typeId() == QMetaType::QString && value.toString().contains(QLocale().decimalPoint()))) { // or it's a string that contains a double
+            precision = 1; // use a higher precision
+        } else {
+            precision = 0; // else use a lower precision
+        }
     }
     const QString text = QLocale().toString(amount, 'f', precision);
 
