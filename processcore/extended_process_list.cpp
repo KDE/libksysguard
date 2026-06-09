@@ -65,9 +65,9 @@ public:
     {
         if (m_extractFormattedFunc) {
             return QVariant::fromValue(m_extractFormattedFunc(process));
-        } else {
-            return data(process);
         }
+
+        return KSysGuard::ProcessAttribute::formattedData(process);
     }
 
     void setFormattedDataExtractFunc(const std::function<QString(KSysGuard::Process *)> &func)
