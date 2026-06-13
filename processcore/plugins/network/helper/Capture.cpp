@@ -76,17 +76,18 @@ bool Capture::start()
 
 void Capture::stop()
 {
-    if (!m_running) {
-        return;
-    }
-
-    m_running = false;
-
-    if (m_pcap) {
+    if (m_running) {
+        m_running = false;
         pcap_breakloop(m_pcap);
         if (m_thread.joinable()) {
             m_thread.join();
         }
+    }
+
+    // Close the handle even when the capture loop never started, so a pcap_create
+    // followed by a failed pcap_activate (for example without capture permission)
+    // does not leak it.
+    if (m_pcap) {
         pcap_close(m_pcap);
         m_pcap = nullptr;
     }
