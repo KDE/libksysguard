@@ -124,6 +124,10 @@ CGroupDataModel::CGroupDataModel(const QString &root, QObject *parent)
 
 CGroupDataModel::~CGroupDataModel()
 {
+    // m_cgroupMap owns every child cgroup (the root is held separately by the
+    // QScopedPointer m_rootGroup). m_cGroups holds a filtered subset of the same
+    // pointers, so deleting the map frees them all exactly once.
+    qDeleteAll(d->m_cgroupMap);
 }
 
 int CGroupDataModel::rowCount(const QModelIndex &parent) const
