@@ -167,6 +167,12 @@ void SensorResolver::execute()
     });
 
     queries.removeAll(nullptr);
+
+    if (queries.isEmpty()) {
+        // No queries means no SensorQuery::finished will ever fire to run the
+        // callback, so invoke it now. The callback deletes this resolver.
+        callback(this);
+    }
 }
 
 QList<QPair<QRegularExpression, QString>> KSysGuard::SensorFaceControllerPrivate::sensorIdReplacements;
