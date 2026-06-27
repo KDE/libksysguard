@@ -10,6 +10,7 @@
 #include <QtTestGui>
 
 #include <limits>
+#include <memory>
 
 #include "processcore/process.h"
 #include "processcore/processes.h"
@@ -45,13 +46,13 @@ void testProcess::testSetScheduler()
     QFETCH(KSysGuard::Process::Scheduler, scheduler);
     QFETCH(bool, niceness);
 
-    KSysGuard::Processes *processController = new KSysGuard::Processes();
+    auto processController = std::make_unique<KSysGuard::Processes>();
 
     QProcess proc;
     proc.start(QStringLiteral("sleep"), {QStringLiteral("100")});
     QVERIFY(proc.waitForStarted());
 
-    int pid=proc.processId();
+    int pid = proc.processId();
     QVERIFY(pid);
 
     if (!processController->setScheduler(pid, scheduler, priority))
@@ -61,7 +62,7 @@ void testProcess::testSetScheduler()
         QSKIP("skipping verfifcation because setNiceness failed");
 
     processController->updateAllProcesses();
-    KSysGuard::Process* process = processController->getProcess(pid);
+    KSysGuard::Process *process = processController->getProcess(pid);
 
     QVERIFY(process);
     QCOMPARE(process->scheduler(), scheduler);
@@ -88,20 +89,20 @@ void testProcess::testSetIoScheduler()
     QFETCH(int, priority);
     QFETCH(KSysGuard::Process::IoPriorityClass, prioClass);
 
-    KSysGuard::Processes *processController = new KSysGuard::Processes();
+    auto processController = std::make_unique<KSysGuard::Processes>();
 
     QProcess proc;
     proc.start(QStringLiteral("sleep"), {QStringLiteral("100")});
     QVERIFY(proc.waitForStarted());
 
-    int pid=proc.processId();
+    int pid = proc.processId();
     QVERIFY(pid);
 
     if (!processController->setIoNiceness(pid, prioClass, priority))
         QSKIP("skipping verfifcation because setNiceness failed");
 
     processController->updateAllProcesses();
-    KSysGuard::Process* process = processController->getProcess(pid);
+    KSysGuard::Process *process = processController->getProcess(pid);
 
     QVERIFY(process);
     QCOMPARE(process->ioPriorityClass(), prioClass);
@@ -163,7 +164,7 @@ void testProcess::testProcessesTreeStructure()
         for (KSysGuard::Process *process : processes) {
             QCOMPARE(countNumChildren(process), process->numChildren());
 
-            for(int i = 0; i < process->children().size(); i++) {
+            for (int i = 0; i < process->children().size(); i++) {
                 QVERIFY(process->children()[i]->parent());
                 QCOMPARE(process->children()[i]->parent(), process);
             }
@@ -226,7 +227,7 @@ void testProcess::testTimeToUpdateAllProcesses()
 
 void testProcess::testUpdateOrAddProcess()
 {
-    KSysGuard::Processes *processController = new KSysGuard::Processes();
+    auto processController = std::make_unique<KSysGuard::Processes>();
     processController->updateAllProcesses();
     KSysGuard::Process *process;
     // Make sure that this doesn't crash at least
@@ -240,13 +241,13 @@ void testProcess::testUpdateOrAddProcess()
     processController->updateOrAddProcess(0);
     processController->updateOrAddProcess(-1);
 
-    processController->updateOrAddProcess(std::numeric_limits<long>::max()-1);
-    QVERIFY(processController->getProcess(std::numeric_limits<long>::max()-1));
+    processController->updateOrAddProcess(std::numeric_limits<long>::max() - 1);
+    QVERIFY(processController->getProcess(std::numeric_limits<long>::max() - 1));
     processController->updateAllProcesses();
-    QVERIFY(processController->getProcess(std::numeric_limits<long>::max()-1));
-    QCOMPARE(processController->getProcess(std::numeric_limits<long>::max()-1)->status(), KSysGuard::Process::Ended);
+    QVERIFY(processController->getProcess(std::numeric_limits<long>::max() - 1));
+    QCOMPARE(processController->getProcess(std::numeric_limits<long>::max() - 1)->status(), KSysGuard::Process::Ended);
     processController->updateAllProcesses();
-    QVERIFY(!processController->getProcess(std::numeric_limits<long>::max()-1));
+    QVERIFY(!processController->getProcess(std::numeric_limits<long>::max() - 1));
 }
 
 QTEST_MAIN(testProcess)
