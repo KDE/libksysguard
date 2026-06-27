@@ -16,6 +16,8 @@
 #include <QStandardItemModel>
 
 #include <functional>
+#include <memory>
+#include <vector>
 
 #include "sensorfaces_export.h"
 
@@ -49,7 +51,11 @@ class PresetsModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
-    enum AdditionalRoles { PluginIdRole = Qt::UserRole + 1, ConfigRole, WritableRole };
+    enum AdditionalRoles {
+        PluginIdRole = Qt::UserRole + 1,
+        ConfigRole,
+        WritableRole
+    };
     Q_ENUM(AdditionalRoles)
 
     PresetsModel(QObject *parent = nullptr);
@@ -60,8 +66,9 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 };
 
-struct SensorResolver {
+struct SENSORFACES_EXPORT SensorResolver {
     SensorResolver(SensorFaceController *_controller, const QJsonArray &_expected);
+    ~SensorResolver();
     void execute();
 
     SensorFaceController *controller = nullptr;
@@ -117,6 +124,10 @@ public:
     QJsonArray highPrioritySensorIds;
     QJsonArray lowPrioritySensorIds;
     QJsonArray missingSensors;
+
+    // In-flight sensor resolvers, owned here so they (and their pending queries) are freed if the
+    // controller is destroyed before resolution completes. See resolveSensors().
+    std::vector<std::unique_ptr<SensorResolver>> pendingResolvers;
 
     QTimer *syncTimer;
     bool shouldSync = true;
