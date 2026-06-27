@@ -136,6 +136,14 @@ SensorResolver::SensorResolver(SensorFaceController *_controller, const QJsonArr
 {
 }
 
+SensorResolver::~SensorResolver()
+{
+    // Queries that finished normally removed themselves from the list and deleteLater()'d. This
+    // only frees the ones still pending when the resolver is destroyed early, e.g. when the
+    // controller is torn down before sensor resolution completes.
+    qDeleteAll(queries);
+}
+
 void SensorResolver::execute()
 {
     std::transform(expected.begin(), expected.end(), std::back_inserter(queries), [this](const QJsonValue &entry) -> SensorQuery * {
@@ -299,7 +307,7 @@ QJsonArray SensorFaceControllerPrivate::readAndUpdateSensors(KConfigGroup &confi
 
 void SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partialEntries, std::function<void(SensorResolver *)> callback)
 {
-    auto resolver = new SensorResolver{q, partialEntries};
+    auto resolver = std::make_unique<SensorResolver>(q, partialEntries);
     resolver->callback = [this, callback](SensorResolver *resolver) {
         callback(resolver);
 
@@ -310,9 +318,13 @@ void SensorFaceControllerPrivate::resolveSensors(const QJsonArray &partialEntrie
             Q_EMIT q->missingSensorsChanged();
         }
 
-        delete resolver;
+        // Drop the resolver from the owning list, which deletes it (and any leftover queries).
+        std::erase_if(pendingResolvers, [resolver](const std::unique_ptr<SensorResolver> &candidate) {
+            return candidate.get() == resolver;
+        });
     };
-    resolver->execute();
+    pendingResolvers.push_back(std::move(resolver));
+    pendingResolvers.back()->execute();
 }
 
 SensorFace *SensorFaceControllerPrivate::createGui(const QString &qmlPath)
