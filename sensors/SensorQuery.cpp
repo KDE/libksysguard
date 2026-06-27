@@ -19,7 +19,11 @@ using namespace KSysGuard;
 class SensorQuery::Private
 {
 public:
-    enum class State { Initial, Running, Finished };
+    enum class State {
+        Initial,
+        Running,
+        Finished
+    };
 
     void updateResult(const QDBusPendingReply<SensorInfoMap> &reply);
 
@@ -69,6 +73,8 @@ bool KSysGuard::SensorQuery::execute()
     d->state = Private::State::Running;
 
     auto watcher = SensorDaemonInterface::instance()->allSensors();
+    // Own the watcher so it is freed even if the query is destroyed before the call finishes.
+    watcher->setParent(this);
     d->watcher = watcher;
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [watcher, this]() {
         watcher->deleteLater();
