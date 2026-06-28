@@ -24,32 +24,32 @@ msgstr ""
 #: ConfigAppearance.qml:72
 #, kde-format
 msgid "Load Preset"
-msgstr "Carrega uns valors predefinits"
+msgstr "Carrega uns ajustaments predefinits"
 
 #: ConfigAppearance.qml:99
 #, kde-format
 msgid "Delete this preset"
-msgstr "Suprimix estos valors predefinits"
+msgstr "Suprimix estos ajustaments predefinits"
 
 #: ConfigAppearance.qml:125
 #, kde-format
 msgid "Presets:"
-msgstr "Valors predefinits:"
+msgstr "Ajustaments predefinits:"
 
 #: ConfigAppearance.qml:129
 #, kde-format
 msgid "Load Preset..."
-msgstr "Carrega uns valors predefinits…"
+msgstr "Carrega uns ajustaments predefinits…"
 
 #: ConfigAppearance.qml:134
 #, kde-format
 msgid "Get new presets..."
-msgstr "Obtín valors predefinits nous…"
+msgstr "Obtín ajustaments predefinits nous…"
 
 #: ConfigAppearance.qml:146
 #, kde-format
 msgid "Save Settings As Preset"
-msgstr "Guarda la configuració com a valors predefinits"
+msgstr "Guarda la configuració com a ajustaments predefinits"
 
 #: ConfigAppearance.qml:156
 #, kde-format
