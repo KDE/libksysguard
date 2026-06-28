@@ -193,6 +193,26 @@ public:
     Q_INVOKABLE Result setIoScheduler(const QVariantList &pids, IoPriority priorityClass, int priority);
 
     /**
+     * Apply niceness, CPU scheduler and IO scheduler to a number of processes in one go.
+     *
+     * This is equivalent to calling setPriority(), setCpuScheduler() and setIoScheduler() in
+     * sequence, except that when privilege escalation is required it is requested only once for all
+     * three changes instead of once per change. Use this when applying several scheduling changes
+     * at the same time (for example from a renice dialog) to avoid repeated authentication prompts.
+     *
+     * \param pids A vector of pids to change.
+     * \param niceValue The new niceness value. See setPriority().
+     * \param cpuScheduler The new CPU scheduler. See setCpuScheduler().
+     * \param cpuPriority The new CPU scheduler priority. See setCpuScheduler().
+     * \param ioPriorityClass The new IO scheduling class. See setIoScheduler().
+     * \param ioPriority The new IO scheduler priority. See setIoScheduler().
+     *
+     * \return A Result value that indicates whether the action succeeded.
+     */
+    Q_INVOKABLE Result
+    applyScheduling(const QVariantList &pids, int niceValue, Scheduler cpuScheduler, int cpuPriority, IoPriority ioPriorityClass, int ioPriority);
+
+    /**
      * Get the IO priority of a process.
      *
      * If the retrieval fails, it still returns the default value.

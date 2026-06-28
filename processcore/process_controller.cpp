@@ -205,6 +205,70 @@ ProcessController::Result ProcessController::setIoScheduler(const QVariantList &
     return setIoScheduler(d->listToVector(pids), priorityClass, priority);
 }
 
+ProcessController::Result
+ProcessController::applyScheduling(const QVariantList &pids, int niceValue, Scheduler cpuScheduler, int cpuPriority, IoPriority ioPriorityClass, int ioPriority)
+{
+    const QList<int> pidList = d->listToVector(pids);
+
+    // Mirror the per-property setters: some scheduler classes ignore the priority.
+    if (cpuScheduler == Scheduler::Other || cpuScheduler == Scheduler::Batch) {
+        cpuPriority = 0;
+    }
+    const bool ioSupported = s_localProcesses->supportsIoNiceness();
+    if (ioPriorityClass == IoPriority::Idle) {
+        ioPriority = 0;
+    }
+
+    // Apply each change locally where possible. Each applyToPids call collects the pids it could not
+    // change without privileges; we then escalate the union of those once, instead of three times.
+    auto niceResult = d->applyToPids(pidList, [niceValue](int pid) {
+        return s_localProcesses->setNiceness(pid, niceValue);
+    });
+    auto cpuResult = d->applyToPids(pidList, [cpuScheduler, cpuPriority](int pid) {
+        return s_localProcesses->setScheduler(pid, cpuScheduler, cpuPriority);
+    });
+    ApplyResult ioResult;
+    if (ioSupported) {
+        ioResult = d->applyToPids(pidList, [ioPriorityClass, ioPriority](int pid) {
+            return s_localProcesses->setIoNiceness(pid, ioPriorityClass, ioPriority);
+        });
+    }
+
+    QList<int> unchanged = niceResult.unchanged;
+    for (int pid : std::as_const(cpuResult.unchanged)) {
+        if (!unchanged.contains(pid)) {
+            unchanged << pid;
+        }
+    }
+    for (int pid : std::as_const(ioResult.unchanged)) {
+        if (!unchanged.contains(pid)) {
+            unchanged << pid;
+        }
+    }
+
+    if (unchanged.isEmpty()) {
+        // Nothing needed privilege escalation; report the first non-success result, if any.
+        for (auto code : {niceResult.resultCode, cpuResult.resultCode, ioResult.resultCode}) {
+            if (code != Result::Success) {
+                return code;
+            }
+        }
+        return Result::Success;
+    }
+
+    QVariantMap options = {
+        {QStringLiteral("nicevalue"), niceValue},
+        {QStringLiteral("cpuScheduler"), cpuScheduler},
+        {QStringLiteral("cpuSchedulerPriority"), cpuPriority},
+    };
+    if (ioSupported) {
+        options.insert(QStringLiteral("ioScheduler"), ioPriorityClass);
+        options.insert(QStringLiteral("ioSchedulerPriority"), ioPriority);
+    }
+
+    return d->runKAuthAction(QStringLiteral("org.kde.ksysguard.processlisthelper.applyscheduling"), unchanged, options);
+}
+
 int ProcessController::ioPriority(long long pid)
 {
     return s_localProcesses->getIoNiceness(pid);
