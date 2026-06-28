@@ -616,3 +616,7 @@ Description[zh_TW]=變更要使用哪個 CPU 排程器來排程指定的行程
 Policy=auth_admin
 
 
+[org.kde.ksysguard.processlisthelper.applyscheduling]
+Name=Change process scheduling
+Description=Change the niceness, CPU scheduler and IO scheduler of a given process in one operation
+Policy=auth_admin

@@ -149,4 +149,44 @@ ActionReply KSysGuardProcessListHelper::changecpuscheduler(const QVariantMap &pa
     }
 }
 
+ActionReply KSysGuardProcessListHelper::applyscheduling(const QVariantMap &parameters)
+{
+    if (!parameters.contains(QLatin1String("pidcount"))) {
+        return ActionReply(ActionReply::HelperErrorType);
+    }
+
+    KSysGuard::ProcessesLocal processes;
+    const int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
+
+    const bool hasNice = parameters.contains(QLatin1String("nicevalue"));
+    const bool hasCpu = parameters.contains(QLatin1String("cpuScheduler")) && parameters.contains(QLatin1String("cpuSchedulerPriority"));
+    const bool hasIo = parameters.contains(QLatin1String("ioScheduler")) && parameters.contains(QLatin1String("ioSchedulerPriority"));
+
+    const int niceValue = qvariant_cast<int>(parameters.value(QStringLiteral("nicevalue")));
+    const int cpuScheduler = qvariant_cast<int>(parameters.value(QStringLiteral("cpuScheduler")));
+    const int cpuSchedulerPriority = qvariant_cast<int>(parameters.value(QStringLiteral("cpuSchedulerPriority")));
+    const int ioScheduler = qvariant_cast<int>(parameters.value(QStringLiteral("ioScheduler")));
+    const int ioSchedulerPriority = qvariant_cast<int>(parameters.value(QStringLiteral("ioSchedulerPriority")));
+
+    bool success = true;
+    for (int i = 0; i < numProcesses; ++i) {
+        qlonglong pid = GET_PID(i);
+        if (hasNice) {
+            success &= (processes.setNiceness(pid, niceValue) == KSysGuard::Processes::NoError);
+        }
+        if (hasCpu) {
+            success &= (processes.setScheduler(pid, cpuScheduler, cpuSchedulerPriority) == KSysGuard::Processes::NoError);
+        }
+        if (hasIo) {
+            success &= (processes.setIoNiceness(pid, ioScheduler, ioSchedulerPriority) == KSysGuard::Processes::NoError);
+        }
+    }
+
+    if (success) {
+        return ActionReply::SuccessReply();
+    } else {
+        return ActionReply(ActionReply::HelperErrorType);
+    }
+}
+
 KAUTH_HELPER_MAIN("org.kde.ksysguard.processlisthelper", KSysGuardProcessListHelper)
