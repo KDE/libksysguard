@@ -24,7 +24,7 @@ msgstr ""
 #: ConfigAppearance.qml:107
 #, kde-format
 msgid "Presets:"
-msgstr "Valors predefinits:"
+msgstr "Ajustaments predefinits:"
 
 #: ConfigAppearance.qml:111
 #, kde-format
