@@ -28,6 +28,7 @@ public:
 public Q_SLOTS:
     ActionReply sendsignal(const QVariantMap &parameters);
     ActionReply renice(const QVariantMap &parameters);
+    ActionReply setAffinity(const QVariantMap &parameters);
     ActionReply changeioscheduler(const QVariantMap &parameters);
     ActionReply changecpuscheduler(const QVariantMap &parameters);
 };

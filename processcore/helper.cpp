@@ -9,6 +9,7 @@
 
 #include "helper.h"
 #include "processes_local_p.h"
+#include <QBitArray>
 
 using namespace KAuth;
 
@@ -79,6 +80,26 @@ ActionReply KSysGuardProcessListHelper::renice(const QVariantMap &parameters)
     } else {
         return ActionReply(ActionReply::HelperErrorType);
     }
+}
+
+ActionReply KSysGuardProcessListHelper::setAffinity(const QVariantMap &parameters)
+{
+    if (!parameters.contains(QLatin1String("affinity")) || !parameters.contains(QLatin1String("pidcount"))) {
+        return {ActionReply::HelperErrorType};
+    }
+
+    KSysGuard::ProcessesLocal processes;
+    auto const affinity = qvariant_cast<QBitArray>(parameters.value(QStringLiteral("affinity")));
+    bool success = true;
+    int numProcesses = parameters.value(QStringLiteral("pidcount")).toInt();
+    for (int i = 0; i < numProcesses; ++i) {
+        qlonglong pid = GET_PID(i);
+        success &= (processes.setAffinity(pid, affinity) != KSysGuard::Processes::NoError);
+    }
+    if (success) {
+        return ActionReply::SuccessReply();
+    }
+    return {ActionReply::HelperErrorType};
 }
 
 ActionReply KSysGuardProcessListHelper::changeioscheduler(const QVariantMap &parameters)

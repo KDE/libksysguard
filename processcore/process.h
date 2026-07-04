@@ -115,6 +115,8 @@ public:
     int niceLevel() const;
     void setNiceLevel(int niceLevel); ///< If Scheduler = Other, niceLevel is the niceness (-20 to 20) of this process.  A lower number means a higher priority.
                                       ///< Otherwise sched priority (1 to 99)
+    QBitArray affinity() const;
+    void setAffinity(QBitArray mask);
 
     Scheduler scheduler() const;
     void setScheduler(Scheduler scheduler); ///< The scheduler this process is running in.  See man sched_getscheduler for more info
@@ -240,6 +242,7 @@ public:
         NiceLevels = 0x40,
         Memory = 0x80,
         MemoryPrecise = 0x100,
+        Affinity = 0x200,
         Name = 0x400,
         Command = 0x800,
         Status = 0x1000,

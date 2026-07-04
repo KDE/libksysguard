@@ -93,6 +93,18 @@ public:
      */
     int getNiceness(long pid);
 
+    /** \brief Set CPU affinity mask for a process.
+     *
+     *  @return Error::NoError if successful
+     */
+    Processes::Error setAffinity(long pid, const QBitArray &affinityMask);
+
+    /** \brief Get the CPU affinity mask of a process.
+     *
+     *  @return The CPU affinity mask of a process
+     */
+    QBitArray getAffinity(long pid);
+
     /** \brief Set the scheduler for a process.
      *
      * This is defined according to POSIX.1-2001

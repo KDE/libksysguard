@@ -7,6 +7,7 @@
 #include "process_controller.h"
 
 #include <functional>
+#include <sched.h>
 
 #include <QWindow>
 
@@ -133,6 +134,67 @@ int ProcessController::priority(long long pid)
 QJSValue ProcessController::priority(const QList<long long> &pids)
 {
     return uniqueValue(pids, std::bind_front(&ProcessesLocal::getNiceness, s_localProcesses)).value_or(QJSValue::NullValue);
+}
+
+ProcessController::Result ProcessController::setAffinity(const QList<int> &pids, const QBitArray &affinity)
+{
+    auto result = d->applyToPids(pids, [&affinity](int pid) {
+        return s_localProcesses->setAffinity(pid, affinity);
+    });
+    if (result.unchanged.isEmpty()) {
+        return result.resultCode;
+    }
+
+    return d->runKAuthAction(QStringLiteral("org.kde.ksysguard.processlisthelper.setaffinity"), result.unchanged, {{QStringLiteral("affinity"), affinity}});
+}
+
+ProcessController::Result ProcessController::setAffinity(const QList<int> &pids, const QVariantList &cpuIndices)
+{
+    QBitArray bits(CPU_SETSIZE);
+    for (const QVariant &cpu : cpuIndices) {
+        int cpuIndex = cpu.toInt();
+        if (cpuIndex >= 0 && cpuIndex < bits.size()) {
+            bits.setBit(cpuIndex);
+        }
+    }
+    return setAffinity(pids, bits);
+}
+
+ProcessController::Result ProcessController::setAffinity(const QList<long long> &pids, const QVariantList &cpuIndices)
+{
+    return setAffinity(d->listToVector(pids), cpuIndices);
+}
+
+ProcessController::Result ProcessController::setAffinity(const QVariantList &pids, const QVariantList &cpuIndices)
+{
+    return setAffinity(d->listToVector(pids), cpuIndices);
+}
+
+QBitArray ProcessController::affinity(long long pid)
+{
+    return s_localProcesses->getAffinity(pid);
+}
+
+QVariantList ProcessController::affinity(const QList<long long> &pids)
+{
+    auto result = uniqueValue(pids, std::bind_front(&ProcessesLocal::getAffinity, s_localProcesses));
+    if (!result.has_value()) {
+        return {};
+    }
+
+    const QBitArray &bits = result.value();
+    if (bits.isEmpty()) {
+        return {};
+    }
+
+    QVariantList cpuIndices;
+    for (int i = 0; i < bits.size(); ++i) {
+        if (bits.testBit(i)) {
+            cpuIndices.append(i);
+        }
+    }
+
+    return cpuIndices;
 }
 
 ProcessController::Result ProcessController::setCpuScheduler(const QList<int> &pids, Scheduler scheduler, int priority)

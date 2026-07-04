@@ -11,6 +11,7 @@
 
 #include <klocalizedstring.h>
 
+#include <QBitArray>
 #include <QByteArray>
 #include <QDir>
 #include <QFile>
@@ -114,6 +115,7 @@ public:
     inline bool readProcCmdline(const QString &dir, Process *process);
     inline bool readProcCGroup(const QString &dir, Process *process);
     inline bool getNiceness(long pid, Process *process);
+    inline bool getAffinity(long pid, Process *process);
     inline bool getIOStatistics(const QString &dir, Process *process);
 
     static void smapsThreadFunction(std::stop_token stopToken, ProcessesLocal *processes);
@@ -627,6 +629,27 @@ bool ProcessesLocal::Private::getNiceness(long pid, Process *process)
 #endif
 }
 
+bool ProcessesLocal::Private::getAffinity(long pid, Process *process)
+{
+    cpu_set_t mask;
+    CPU_ZERO(&mask);
+
+    if (sched_getaffinity(pid, sizeof(mask), &mask) != 0) {
+        return false;
+    }
+
+    long cpuCount = sysconf(_SC_NPROCESSORS_CONF);
+    QBitArray affinityMask(cpuCount, false);
+    for (int cpu = 0; cpu < qMin(cpuCount, CPU_SETSIZE); ++cpu) {
+        if (CPU_ISSET(cpu, &mask)) {
+            affinityMask.setBit(cpu);
+        }
+    }
+
+    process->setAffinity(affinityMask);
+    return true;
+}
+
 bool ProcessesLocal::Private::getIOStatistics(const QString &dir, Process *process)
 {
     mFile.setFileName(dir + QStringLiteral("io"));
@@ -693,6 +716,9 @@ bool ProcessesLocal::updateProcessInfo(long pid, Process *process)
         success = false;
     }
     if (!d->getNiceness(pid, process)) {
+        success = false;
+    }
+    if (!d->getAffinity(pid, process)) {
         success = false;
     }
     if (mUpdateFlags.testFlag(Processes::IOStatistics) && !d->getIOStatistics(dir, process)) {
@@ -786,6 +812,82 @@ int ProcessesLocal::getNiceness(long pid)
         return 0;
     }
     return nice;
+}
+
+Processes::Error ProcessesLocal::setAffinity(long pid, const QBitArray &affinityMask)
+{
+    errno = 0;
+    if (pid <= 0) {
+        return Processes::InvalidPid;
+    }
+
+    auto error = [] {
+        switch (errno) {
+        case ESRCH:
+        case ENOENT:
+            return Processes::ProcessDoesNotExistOrZombie;
+        case EINVAL:
+        case EFAULT:
+            return Processes::InvalidParameter;
+        case EACCES:
+        case EPERM:
+            return Processes::InsufficientPermissions;
+        default:
+            return Processes::Unknown;
+        }
+    };
+
+    auto threadList{QDir(QString::fromLatin1("/proc/%1/task").arg(pid)).entryList(QDir::NoDotAndDotDot | QDir::Dirs)};
+    if (threadList.isEmpty()) {
+        return error();
+    }
+
+    cpu_set_t mask;
+    CPU_ZERO(&mask);
+
+    const int max = qMin(affinityMask.size(), CPU_SETSIZE);
+
+    for (int cpu = 0; cpu < max; ++cpu) {
+        if (affinityMask.testBit(cpu)) {
+            CPU_SET(cpu, &mask);
+        }
+    }
+
+    for (auto entry : threadList) {
+        int threadId = entry.toInt();
+        if (!threadId) {
+            return Processes::InvalidParameter;
+        }
+        if (sched_setaffinity(threadId, sizeof(mask), &mask)) {
+            return error();
+        }
+    }
+    return Processes::NoError;
+}
+
+QBitArray ProcessesLocal::getAffinity(long pid)
+{
+    if (pid <= 0) {
+        return {};
+    }
+
+    cpu_set_t mask;
+    CPU_ZERO(&mask);
+
+    errno = 0;
+    if (sched_getaffinity(pid, sizeof(mask), &mask) != 0) {
+        return {};
+    }
+
+    long cpuCount = sysconf(_SC_NPROCESSORS_CONF);
+    const int maxCpu = qMin(cpuCount, static_cast<long>(CPU_SETSIZE));
+    QBitArray affinityMask(maxCpu, false);
+    for (int cpu = 0; cpu < maxCpu; ++cpu) {
+        if (CPU_ISSET(cpu, &mask)) {
+            affinityMask.setBit(cpu);
+        }
+    }
+    return affinityMask;
 }
 
 Processes::Error ProcessesLocal::setScheduler(long pid, int priorityClass, int priority)

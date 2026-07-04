@@ -11,6 +11,7 @@
 
 #include <KLocalizedString>
 
+#include <QBitArray>
 #include <QSet>
 
 #include <sched.h>
@@ -303,6 +304,19 @@ int ProcessesLocal::getIoPriorityClass(long pid)
 bool ProcessesLocal::supportsIoNiceness()
 {
     return false;
+}
+
+Processes::Error ProcessesLocal::setAffinity(long pid, const QBitArray &affinityMask)
+{
+    Q_UNUSED(pid);
+    Q_UNUSED(affinityMask);
+    return Processes::NotSupported;
+}
+
+QBitArray ProcessesLocal::getAffinity(long pid)
+{
+    Q_UNUSED(pid);
+    return {};
 }
 
 long long ProcessesLocal::totalPhysicalMemory()

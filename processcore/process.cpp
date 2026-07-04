@@ -8,6 +8,7 @@
 #include <KLocalizedString>
 
 #include "memoryinfo_p.h"
+#include <QBitArray>
 
 namespace KSysGuard
 {
@@ -37,6 +38,7 @@ public:
     int totalSysUsage;
     unsigned long numChildren;
     int niceLevel;
+    QBitArray affinityMask;
     Process::Scheduler scheduler;
     Process::IoPriorityClass ioPriorityClass;
     int ioniceLevel;
@@ -206,6 +208,7 @@ void Process::clear()
     d->totalSysUsage = 0;
     d->numChildren = 0;
     d->niceLevel = 0;
+    d->affinityMask = QBitArray(0, false);
     d->pixmapBytes = 0;
     d->hasManagedGuiWindow = false;
     d->status = OtherStatus;
@@ -350,6 +353,11 @@ long unsigned &Process::numChildren() const
 int Process::niceLevel() const
 {
     return d->niceLevel;
+}
+
+QBitArray Process::affinity() const
+{
+    return d->affinityMask;
 }
 
 Process::Scheduler Process::scheduler() const
@@ -701,6 +709,15 @@ void Process::setNiceLevel(int _niceLevel)
     }
     d->niceLevel = _niceLevel;
     d->changes |= Process::NiceLevels;
+}
+
+void Process::setAffinity(QBitArray _affinityMask)
+{
+    if (d->affinityMask == _affinityMask) {
+        return;
+    }
+    d->affinityMask = _affinityMask;
+    d->changes |= Process::Affinity;
 }
 
 void Process::setScheduler(Scheduler _scheduler)

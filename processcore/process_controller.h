@@ -11,6 +11,7 @@
 
 #include <signal.h>
 
+#include <QBitArray>
 #include <QJSValue>
 #include <QObject>
 #include <QVariant>
@@ -120,6 +121,44 @@ public:
     Q_INVOKABLE int priority(long long pid);
 
     Q_INVOKABLE QJSValue priority(const QList<long long> &pids);
+
+    /**
+     * Set the affinity mask of a number of processes.
+     *
+     * This will set the affinity mask of all processes in \p pids to \p affinityMask.
+     *
+     * \param pids A vector of pids to set the priority of.
+     * \param affinityMask The affinity mask to set.
+     *
+     * \return A Result value that indicates whether the action succeeded. Note
+     *         that a non-Success result may indicate any of the processes in
+     *         \p pids encountered that result.
+     */
+    Q_INVOKABLE Result setAffinity(const QList<int> &pids, const QBitArray &affinityMask);
+    /**
+     * \overload Result setAffinity(const QList<int> &pids, const QVariantList &cpuIndices)
+     */
+    Q_INVOKABLE Result setAffinity(const QList<int> &pids, const QVariantList &cpuIndices);
+    /**
+     * \overload Result setAffinity(const QList<long long> &pids, const QVariantList &cpuIndices)
+     */
+    Q_INVOKABLE Result setAffinity(const QList<long long> &pids, const QVariantList &cpuIndices);
+    /**
+     * \overload Result setAffinity(const QVariantList &pids, const QVariantList &cpuIndices)
+     */
+    Q_INVOKABLE Result setAffinity(const QVariantList &pids, const QVariantList &cpuIndices);
+    /**
+     * Get the affinity mask of a process.
+     *
+     * If the retrieval fails, it still returns the default value.
+     *
+     * \param pid The pid to get the priority from.
+     *
+     * \return The affinity mask of the process.
+     */
+    Q_INVOKABLE QBitArray affinity(long long pid);
+
+    Q_INVOKABLE QVariantList affinity(const QList<long long> &pids);
 
     /**
      * Set the CPU scheduling policy and priority of a number of processes.
