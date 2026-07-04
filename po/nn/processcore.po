@@ -1,20 +1,19 @@
 # Translation of processcore to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2007, 2008, 2010, 2019, 2020, 2023.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-14 00:45+0000\n"
-"PO-Revision-Date: 2023-03-31 21:47+0200\n"
+"PO-Revision-Date: 2026-07-03 19:24+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 26.07.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -275,14 +274,14 @@ msgstr ""
 "grafikkminne, filer på disk osb. Dette talet er nesten meiningslaust."
 
 #: extended_process_list.cpp:348
-#, fuzzy, kde-format
+#, kde-format
 msgid "Resident Memory Usage"
-msgstr "RSS-minnebruk"
+msgstr "Fysisk minnebruk"
 
 #: extended_process_list.cpp:350
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "Fysisk"
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -304,14 +303,14 @@ msgid "Private"
 msgstr "Privat"
 
 #: extended_process_list.cpp:364
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
 "Dette er mengda fysisk minne denne prosessen brukar sjølv, og omtrentleg "
-"privat minnebruk for prosessen.<br/>Det tek ikkje med plass i veksleminnet, "
+"privat minnebruk for prosessen. Det tek ikkje med plass i veksleminnet, "
 "heller ikkje kodestorleiken for delte bibliotek."
 
 #: extended_process_list.cpp:371
@@ -325,30 +324,30 @@ msgid "Shared"
 msgstr "Delt"
 
 #: extended_process_list.cpp:382
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
 "Dette er den omtrentlege mengda verkeleg fysisk minne dei delte biblioteka i "
-"denne prosessen brukar.<br/>Alle prosessane som brukar dette biblioteket "
-"deler dette minnet."
+"denne prosessen brukar. Alle prosessane som brukar dette biblioteket, deler "
+"dette minnet."
 
 #: extended_process_list.cpp:390
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr "Privat minnebruk"
+msgstr "Proporsjonal minnebruk"
 
 #: extended_process_list.cpp:393
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Proporsjonal"
 
 #: extended_process_list.cpp:400
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -360,16 +359,16 @@ msgstr ""
 "Dette er den omtrentlege mengda verkeleg fysisk minne som prosessen brukar. "
 "Ho vert rekna ut ved å dela delt minnebruk for prosessen med talet på "
 "prosessar som brukar minnet, og så leggja til den private minnebruken til "
-"prosessen."
+"prosessen. Denne verdien er ikkje tilgjengeleg for alle prosessar."
 
 #: extended_process_list.cpp:407
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "Minnebruk"
 
 #: extended_process_list.cpp:410
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "Minne"
@@ -389,23 +388,23 @@ msgstr ""
 "prosessen."
 
 #: extended_process_list.cpp:422
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr "Grafikkprosessor-bruk"
+msgstr "Veksleminne-bruk"
 
 #: extended_process_list.cpp:423
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Veksleminne"
 
 #: extended_process_list.cpp:427
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "Dette er omtrentleg mengda veksleminne prosessen brukar."
 
 #: extended_process_list.cpp:431
 #, kde-format
@@ -534,19 +533,18 @@ msgstr "Trådar"
 #, kde-format
 msgctxt "@title %1 is GPU number"
 msgid "GPU %1"
-msgstr ""
+msgstr "Grafikkprosessor %1"
 
 #: gpu_utils.cpp:36
 #, kde-format
 msgctxt "@title %1 is vendor name"
 msgid "%1 GPU"
-msgstr ""
+msgstr "%1 grafikkprosessor"
 
 #: plugins/gpu/gpu.cpp:40
-#, fuzzy, kde-format
-#| msgid "CPU"
+#, kde-format
 msgid "GPU"
-msgstr "Prosessor"
+msgstr "Grafikkprosessor"
 
 #: plugins/gpu/gpu.cpp:131
 #, kde-format
@@ -561,7 +559,7 @@ msgstr "Grafikkprosessor-minne"
 #: plugins/gpu/gpu.cpp:137
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Viser kva grafikkprosesor (GPU) prosessen brukar"
 
 #: plugins/network/network.cpp:36
 #, kde-format
