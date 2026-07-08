@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-14 00:45+0000\n"
+"POT-Creation-Date: 2026-07-08 00:46+0000\n"
 "PO-Revision-Date: 2026-04-09 08:44+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -585,175 +585,175 @@ msgctxt "@title"
 msgid "Upload"
 msgstr "העלאה"
 
-#: process.cpp:96 process.cpp:117
+#: process.cpp:98 process.cpp:119
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Normal"
 msgstr "רגיל"
 
-#: process.cpp:99 process.cpp:120
+#: process.cpp:101 process.cpp:122
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very low priority"
 msgstr "עדיפות נמוכה מאוד"
 
-#: process.cpp:102 process.cpp:123
+#: process.cpp:104 process.cpp:125
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Low priority"
 msgstr "עדיפות נמוכה"
 
-#: process.cpp:105 process.cpp:126
+#: process.cpp:107 process.cpp:128
 #, kde-format
 msgctxt "Process Niceness"
 msgid "Very high priority"
 msgstr "עדיפות גבוהה מאוד"
 
-#: process.cpp:108 process.cpp:129
+#: process.cpp:110 process.cpp:131
 #, kde-format
 msgctxt "Process Niceness"
 msgid "High priority"
 msgstr "עדיפות גבוהה"
 
-#: process.cpp:138
+#: process.cpp:140
 #, kde-format
 msgctxt "Priority Class"
 msgid "None"
 msgstr "כלום"
 
-#: process.cpp:140
+#: process.cpp:142
 #, kde-format
 msgctxt "Priority Class"
 msgid "Real Time"
 msgstr "זמן אמת"
 
-#: process.cpp:142
+#: process.cpp:144
 #, kde-format
 msgctxt "Priority Class"
 msgid "Best Effort"
 msgstr "המאמץ הטוב ביותר"
 
-#: process.cpp:144
+#: process.cpp:146
 #, kde-format
 msgctxt "Priority Class"
 msgid "Idle"
 msgstr "לא פעיל"
 
-#: process.cpp:146
+#: process.cpp:148
 #, kde-format
 msgctxt "Priority Class"
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: process.cpp:154
+#: process.cpp:156
 #, kde-format
 msgctxt "process status"
 msgid "running"
 msgstr "רץ"
 
-#: process.cpp:156
+#: process.cpp:158
 #, kde-format
 msgctxt "process status"
 msgid "sleeping"
 msgstr "ישן"
 
-#: process.cpp:158
+#: process.cpp:160
 #, kde-format
 msgctxt "process status"
 msgid "disk sleep"
 msgstr "שנת כונן"
 
-#: process.cpp:160
+#: process.cpp:162
 #, kde-format
 msgctxt "process status"
 msgid "zombie"
 msgstr "זומבי"
 
-#: process.cpp:162
+#: process.cpp:164
 #, kde-format
 msgctxt "process status"
 msgid "stopped"
 msgstr "עצר"
 
-#: process.cpp:164
+#: process.cpp:166
 #, kde-format
 msgctxt "process status"
 msgid "paging"
 msgstr "דפדוף"
 
-#: process.cpp:166
+#: process.cpp:168
 #, kde-format
 msgctxt "process status"
 msgid "finished"
 msgstr "הסתיים"
 
-#: process.cpp:168
+#: process.cpp:170
 #, kde-format
 msgctxt "process status"
 msgid "unknown"
 msgstr "לא ידוע"
 
-#: process.cpp:176
+#: process.cpp:178
 #, kde-format
 msgctxt "Scheduler"
 msgid "FIFO"
 msgstr "FIFO"
 
-#: process.cpp:178
+#: process.cpp:180
 #, kde-format
 msgctxt "Scheduler"
 msgid "Round Robin"
 msgstr "עיגול פינות"
 
-#: process.cpp:180
+#: process.cpp:182
 #, kde-format
 msgctxt "Scheduler"
 msgid "Interactive"
 msgstr "אינטראקטיבי"
 
-#: process.cpp:182
+#: process.cpp:184
 #, kde-format
 msgctxt "Scheduler"
 msgid "Batch"
 msgstr "אצווה"
 
-#: process.cpp:184
+#: process.cpp:186
 #, kde-format
 msgctxt "Scheduler"
 msgid "Idle"
 msgstr "לא פעיל"
 
-#: process_controller.cpp:232
+#: process_controller.cpp:294
 #, kde-format
 msgid "Success"
 msgstr "הצלחה"
 
-#: process_controller.cpp:234
+#: process_controller.cpp:296
 #, kde-format
 msgid "Insufficient permissions."
 msgstr "אין מספיק הרשאות."
 
-#: process_controller.cpp:236
+#: process_controller.cpp:298
 #, kde-format
 msgid "No matching process was found."
 msgstr "לא נמצא תהליך מתאים."
 
-#: process_controller.cpp:238
+#: process_controller.cpp:300
 #, kde-format
 msgid "Not supported on the current system."
 msgstr "אין תמיכה במערכת הנוכחית."
 
-#: process_controller.cpp:240
+#: process_controller.cpp:302
 #, kde-format
 msgid "The user cancelled."
 msgstr "המשתמש ביטל."
 
-#: process_controller.cpp:242
+#: process_controller.cpp:304
 #, kde-format
 msgid "An unspecified error occurred."
 msgstr "אירעה שגיאה בלתי מוגדרת."
 
-#: process_controller.cpp:244
+#: process_controller.cpp:306
 #, kde-format
 msgid "An unknown error occurred."
 msgstr "אירעה שגיאה לא ידועה."
