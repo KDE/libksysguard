@@ -10,6 +10,7 @@ ecm_add_test(formattertest.cpp LINK_LIBRARIES Qt::Test KSysGuard::Formatter)
 ecm_add_test(sensortreemodeltest.cpp LINK_LIBRARIES Qt::Test Qt::DBus KSysGuard::Sensors)
 ecm_add_test(sensordatamodeltest.cpp LINK_LIBRARIES Qt::Test Qt::DBus KSysGuard::Sensors KSysGuard::Formatter)
 ecm_add_test(processdatamodeltest.cpp LINK_LIBRARIES Qt::Test KSysGuard::ProcessCore)
+ecm_add_test(sensorcontainertest.cpp LINK_LIBRARIES Qt::Test KSysGuard::SystemStats)
 ecm_add_test(cgrouptest.cpp LINK_LIBRARIES Qt::Test KF6::Service KSysGuard::ProcessCore)
 
 include_directories(../faces)
