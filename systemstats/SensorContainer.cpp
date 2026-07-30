@@ -68,6 +68,12 @@ void SensorContainer::addObject(SensorObject *object)
     connect(object, &SensorObject::aboutToBeRemoved, this, [this, object]() {
         removeObject(object);
     });
+
+    connect(object, &QObject::destroyed, this, [this, objectId](QObject *destroyedObject) {
+        if (d->sensorObjects.value(objectId) == destroyedObject) {
+            d->sensorObjects.remove(objectId);
+        }
+    });
 }
 
 void SensorContainer::removeObject(SensorObject *object)
