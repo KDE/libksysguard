@@ -36,7 +36,7 @@ SensorObject::SensorObject(const QString &id, const QString &name, SensorContain
 
     if (parent) {
         QMetaObject::invokeMethod(
-            parent,
+            this,
             [this, parent] {
                 parent->addObject(this);
             },
