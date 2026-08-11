@@ -251,16 +251,13 @@ msgid "Show Tooltips"
 msgstr "Prikaži iskočne pomoći"
 
 #: ksysguardprocesslist.cpp:1177
-#, fuzzy, kde-format
-#| msgid ""
-#| "You do not have the permission to kill the process and there was a "
-#| "problem trying to run as root.  Error %1 %2"
+#, kde-format
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
 "trying to run as root."
 msgstr ""
-"Nemate dozvolu uništiti procesi i dogodio se problem s prilikom pokušaja "
-"pokretanja kao root. Greška %1 %2"
+"Nemate dozvolu promjene prioriteta procesa i došlo je problema pokretanja "
+"naredbe kao administrator (root)."
 
 #: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format

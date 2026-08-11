@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2026-02-05 12:12+0400\n"
+"PO-Revision-Date: 2026-08-10 18:39+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -267,8 +267,7 @@ msgstr "اعرض التلميحات"
 msgid ""
 "You do not have the permission to renice the process and there was a problem "
 "trying to run as root."
-msgstr ""
-"لا تملك صلاحيات لتلطيف هذه العملية و حدثت مشكلة عند محاولة الدخول كجذر."
+msgstr "لا تملك أذون لتلطيف هذه العملية و حدثت مشكلة عند محاولة الدخول كجذر."
 
 #: ksysguardprocesslist.cpp:1203 ksysguardprocesslist.cpp:1387
 #, kde-format
@@ -298,7 +297,7 @@ msgstr ""
 msgid ""
 "You do not have the permission to kill the process and there was a problem "
 "trying to run as root."
-msgstr "لا تملك صلاحيات لقتل هذه العملية و حدثت مشكلة عند محاولة الدخول كجذر."
+msgstr "لا تملك أذن لقتل هذه العملية و حدثت مشكلة عند محاولة الدخول كجذر."
 
 #: ksysguardprocesslist.cpp:1396
 #, kde-format
@@ -417,7 +416,7 @@ msgstr "النهاية"
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr "التّصاريح"
+msgstr "الأذون"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
@@ -1576,8 +1575,8 @@ msgstr ""
 "italic;\">معلومات تقنية: </span><br />تُرسل إشارة SIGTERM إلى العمليّة "
 "المعطاة. إن لم تكن الامتيازات كافية لذلك، فستُطلب كلمة السر كإجراء مبدئي.<br /"
 ">يمكنك بتشغيل البرنامج <span style=\" font-family:'Courier New,courier';"
-"\">إذْن polkit-kde-</span> إعطاء الأذونات لمستخدمين بعينهم (أو لكل "
-"المستخدمين) لقتل أية عمليّة ودون طلب كلمة سر. </p></body></html>"
+"\">إذْن polkit-kde-</span> إعطاء الأذون لمستخدمين بعينهم (أو لكل المستخدمين) "
+"لقتل أية عمليّة ودون طلب كلمة سر. </p></body></html>"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnKillProcess)
 #: ProcessWidgetUI.ui:42
