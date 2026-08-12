@@ -1805,7 +1805,7 @@ msgstr ""
 "الأخرى استنادًا إلى أولوية ديناميكية تُحدد فقط داخل هذه القائمة. تعتمد "
 "الأولوية الديناميكية على مستوى الأولوية المعطى والمتزايد لكل فترة زمنية تكون "
 "فيها العملية جاهزة للتشغيل، ولكن يرفض تشغيلها بواسطة الجدول الزمني. يضمن هذا "
-"تقدمًا عادلاً بين جميع العمليات العادية.</span></p></body></html>"
+"تقدمًا عادلًا بين جميع العمليات العادية.</span></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioNormal)
 #. i18n: ectx: property (text), widget (QRadioButton, radioIONormal)
@@ -2003,7 +2003,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">جدولة الدخول أولاً والخروج أولاً</span></p>\n"
+"weight:600;\">جدولة الدخول أولًا والخروج أولًا</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">عندما تصبح عملية <span "
 "style=\" font-weight:600;\">FIFO</span> قابلة للتشغيل، فإنها ستسبق دائمًا أي "
