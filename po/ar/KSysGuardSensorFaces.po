@@ -97,7 +97,7 @@ msgstr[0] "مستشعر"
 msgstr[1] "مستشعر واحد"
 msgstr[2] "مستشعرين"
 msgstr[3] "مستشعرات"
-msgstr[4] "مستشعراً"
+msgstr[4] "مستشعرًا"
 msgstr[5] "مستشعر"
 
 #: ConfigSensors.qml:150
