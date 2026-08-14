@@ -619,6 +619,7 @@ Policy=auth_admin
 [org.kde.ksysguard.processlisthelper.applyscheduling]
 Name=Change process scheduling
 Name[ar]=غيّر جدولة العملية
+Name[bg]=Промяна на планирането на процеса
 Name[ca]=Canvia la planificació de procés
 Name[ca@valencia]=Canvia la planificació de procés
 Name[es]=Cambiar planificación del proceso
@@ -634,6 +635,7 @@ Name[tr]=Süreç Zamanlamasını Değiştir
 Name[uk]=Змінити планування процесів
 Description=Change the niceness, CPU scheduler and IO scheduler of a given process in one operation
 Description[ar]=غيّر درجة اللطف، ومجدول وحدة المعالجة المركزية (CPU)، ومجدول عمليات الإدخال/الإخراج (IO) لعملية معينة في عملية واحدة
+Description[bg]=Промяна на приоритета, планировчика на процесора и планировчика на IO операции на даден процес в една операция
 Description[ca]=Canvia la «niceness», el planificador de la CPU i el planificador d'E/S d'un procés indicat en una operació
 Description[ca@valencia]=Canvia la «niceness», el planificador de la CPU i el planificador d'E/S d'un procés indicat en una operació
 Description[es]=Cambiar la prioridad, el planificador de CPU y el planificador de E/S de un determinado proceso en una operación
