@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2026-08-18 18:03+0300\n"
+"PO-Revision-Date: 2026-09-07 08:24+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: ksysguardprocesslist.cpp:199 ksysguardprocesslist.cpp:543
 #, kde-format
@@ -44,11 +44,10 @@ msgid "Show Application Window"
 msgstr "הצגת חלון היישום"
 
 #: ksysguardprocesslist.cpp:205
-#, fuzzy, kde-format
-#| msgid "Displayed Information"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detailed Information..."
-msgstr "מידע מפורט..."
+msgstr "מידע מפורט…"
 
 #: ksysguardprocesslist.cpp:206
 #, kde-format
@@ -134,7 +133,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Kill a Window"
-msgstr ""
+msgstr "השמדת חלון"
 
 #: ksysguardprocesslist.cpp:545
 #, kde-format
@@ -358,19 +357,19 @@ msgstr "חיסול (KILL)"
 #, kde-format
 msgctxt "@info:status"
 msgid "No data to display"
-msgstr ""
+msgstr "אין נתונים להצגה"
 
 #: processdetails/MemoryMapsTab.cpp:73
 #, kde-format
 msgctxt "kilobytes"
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 ק״ב"
 
 #: processdetails/MemoryMapsTab.cpp:123 processdetails/OpenFilesTab.cpp:164
 #, kde-format
 msgctxt "@action:button"
 msgid "Refresh"
-msgstr ""
+msgstr "ריענון"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, txtFilter)
 #: processdetails/MemoryMapsTab.cpp:126 processdetails/OpenFilesTab.cpp:167
@@ -389,7 +388,7 @@ msgstr "שם קובץ"
 #, kde-format
 msgctxt "@title:column Start of the address space"
 msgid "Start"
-msgstr ""
+msgstr "התחלה"
 
 #: processdetails/MemoryMapsTab.cpp:253
 #, kde-format
@@ -401,13 +400,13 @@ msgstr "סוף"
 #, kde-format
 msgctxt "@title:column"
 msgid "Permissions"
-msgstr ""
+msgstr "הרשאות"
 
 #: processdetails/MemoryMapsTab.cpp:255
 #, kde-format
 msgctxt "@title:column Offset into the file"
 msgid "Offset"
-msgstr ""
+msgstr "היסט"
 
 #: processdetails/MemoryMapsTab.cpp:256
 #, kde-format
@@ -419,13 +418,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:status"
 msgid "No data matching the filter"
-msgstr ""
+msgstr "אין נתונים שתואמים את המסנן"
 
 #: processdetails/OpenFilesTab.cpp:33
 #, kde-format
 msgctxt "Device type"
 msgid "File"
-msgstr ""
+msgstr "קובץ"
 
 #: processdetails/OpenFilesTab.cpp:36
 #, kde-format
@@ -437,19 +436,19 @@ msgstr "התקן תווים"
 #, kde-format
 msgctxt "Device type"
 msgid "Block device"
-msgstr ""
+msgstr "התקן בלוק"
 
 #: processdetails/OpenFilesTab.cpp:42
 #, kde-format
 msgctxt "Device type"
 msgid "Pipe"
-msgstr ""
+msgstr "שרשור"
 
 #: processdetails/OpenFilesTab.cpp:45
 #, kde-format
 msgctxt "Device type"
 msgid "Socket"
-msgstr ""
+msgstr "שקע"
 
 #: processdetails/OpenFilesTab.cpp:124
 #, kde-format
@@ -461,13 +460,13 @@ msgstr "מזהה"
 #, kde-format
 msgctxt "@title:column File type"
 msgid "Type"
-msgstr ""
+msgstr "סוג"
 
 #: processdetails/OpenFilesTab.cpp:247
 #, kde-format
 msgctxt "@info:status"
 msgid "%1: Failed to list directory contents"
-msgstr ""
+msgstr "%1: הצגת תוכן התיקייה נכשלה"
 
 #: processdetails/ProcessDetailsDialog.cpp:27
 #, kde-format
@@ -479,7 +478,7 @@ msgstr "פרטי תהליך"
 #, kde-format
 msgctxt "@title:tab"
 msgid "General"
-msgstr ""
+msgstr "כללי"
 
 #: processdetails/ProcessDetailsDialog.cpp:42
 #, kde-format
@@ -491,7 +490,7 @@ msgstr "מפות זיכרון"
 #, kde-format
 msgctxt "@title:tab"
 msgid "Open Files"
-msgstr ""
+msgstr "קבצים פתוחים"
 
 #: processdetails/ProcessDetailsDialog.cpp:79
 #, kde-format
@@ -642,7 +641,7 @@ msgstr ""
 #: ProcessModel.cpp:1091
 #, kde-format
 msgid "<qt>The elapsed time since the process was started.</qt>"
-msgstr ""
+msgstr "<qt>הזמן שחלף מאז שהתהליך הופעל.</qt>"
 
 #: ProcessModel.cpp:1093
 #, kde-format
@@ -674,12 +673,12 @@ msgstr "מספר תהליך ייחודי המזהה תהליך זה."
 #: ProcessModel.cpp:1103
 #, kde-format
 msgid "The number of bytes read.  See What's This for more information."
-msgstr ""
+msgstr "מספר הבתים שנקראו. תחת „מה זה” אפשר למצוא פרטים נוספים."
 
 #: ProcessModel.cpp:1105
 #, kde-format
 msgid "The number of bytes written.  See What's This for more information."
-msgstr ""
+msgstr "מספר הבתים שנכתבו. תחת „מה זה” אפשר למצוא פרטים נוספים."
 
 #: ProcessModel.cpp:1107
 #, fuzzy, kde-format
