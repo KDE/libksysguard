@@ -73,8 +73,9 @@ const fs::path fd_dir{"fd"};
 
 const QByteArrayView engine_prefix{"drm-engine-"};
 const QByteArrayView driver_prefix{"drm-driver"};
-const QByteArrayView mem_resident_prefix{"drm-resident-"};
-const QByteArrayView amd_resident_prefix{"drm-memory-"};
+const QByteArrayView amd_resident_prefix{"drm-memory-"};//deprecated
+const QByteArrayView total_vram_prefix{"drm-total-vram"};
+const QByteArrayView total_gtt_prefix{"drm-total-gtt"};
 const QByteArrayView amd_drm_driver{"amdgpu"};
 const QByteArrayView amd_engine{"gfx"};
 const QByteArrayView intel_drm_driver{"i915"};
@@ -299,6 +300,24 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
     QByteArray driver;
     QHash<QByteArray, uint64_t> engineValues;
 
+    bool foundTotalVramKey = false;
+    bool foundTotalGTTKey = false;
+
+    uint32_t deprecatedVram = 0;
+
+    auto increaseMemory = [](uint32_t &target, const QByteArrayView &value) {
+        const auto mem = to_digits(value).value_or(0);
+        if (value.endsWith("KiB")) {
+            target += mem;
+        }
+        else if (value.endsWith("MiB")) {
+            target += mem * 1024;
+        }
+        else {
+            target += mem / 1024;
+        }
+    };
+
     // Had to use a do/while loop here because f.atEnd() was returning 1
     // until the first f.readLine()
     do {
@@ -309,25 +328,29 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
 
         if (value.contains(':')) {
             continue;
-        };
+        }
+
         if (key == driver_prefix) {
             driver = value.toByteArray();
         } else if (key.startsWith(engine_prefix)) {
             if (const auto digits = to_digits(value)) {
                 engineValues[key.mid(engine_prefix.size())] = digits.value();
             }
-        } else if (key.startsWith(mem_resident_prefix) || key.startsWith(amd_resident_prefix)) {
-            const auto mem = to_digits(value).value_or(0);
-            // Unit can be KiB (matching the attribute), MiB or unspecified (Bytes)
-            if (value.endsWith("KiB")) {
-                proc.vram += mem;
-            } else if (value.endsWith("Mib")) {
-                proc.vram += mem * 1024;
-            } else {
-                proc.vram += mem / 1024;
-            }
+        } else if (key.startsWith(total_vram_prefix) && !foundTotalVramKey) {
+            foundTotalVramKey = true;
+            increaseMemory(proc.vram, value);
+        } else if (key.startsWith(total_gtt_prefix) && !foundTotalGTTKey) {
+            foundTotalGTTKey = true;
+            increaseMemory(proc.vram, value);
+        } else if (key.startsWith(amd_resident_prefix) && !key.endsWith("cpu")) {
+            increaseMemory(deprecatedVram, value);
         }
     } while (!f.atEnd());
+
+    // If the driver only implements the older drm fdinfo keys
+    if (!foundTotalVramKey && !foundTotalGTTKey) {
+        proc.vram += deprecatedVram;
+    }
 
     f.close();
 
