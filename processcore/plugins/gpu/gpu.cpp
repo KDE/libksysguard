@@ -73,9 +73,8 @@ const fs::path fd_dir{"fd"};
 
 const QByteArrayView engine_prefix{"drm-engine-"};
 const QByteArrayView driver_prefix{"drm-driver"};
-const QByteArrayView amd_resident_prefix{"drm-memory-"};//deprecated
+const QByteArrayView amd_memory_prefix{"drm-memory-vram"};//deprecated
 const QByteArrayView total_vram_prefix{"drm-total-vram"};
-const QByteArrayView total_gtt_prefix{"drm-total-gtt"};
 const QByteArrayView amd_drm_driver{"amdgpu"};
 const QByteArrayView amd_engine{"gfx"};
 const QByteArrayView intel_drm_driver{"i915"};
@@ -301,7 +300,7 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
     QHash<QByteArray, uint64_t> engineValues;
 
     bool foundTotalVramKey = false;
-    bool foundTotalGTTKey = false;
+    bool foundAmdMemoryKey = false;
 
     uint32_t deprecatedVram = 0;
 
@@ -339,16 +338,14 @@ bool GpuPlugin::processPidEntry(const fs::path &path, GpuFd &proc)
         } else if (key.startsWith(total_vram_prefix) && !foundTotalVramKey) {
             foundTotalVramKey = true;
             increaseMemory(proc.vram, value);
-        } else if (key.startsWith(total_gtt_prefix) && !foundTotalGTTKey) {
-            foundTotalGTTKey = true;
-            increaseMemory(proc.vram, value);
-        } else if (key.startsWith(amd_resident_prefix) && !key.endsWith("cpu")) {
+        } else if (key.startsWith(amd_memory_prefix) && !foundAmdMemoryKey) {
+            foundAmdMemoryKey = true;
             increaseMemory(deprecatedVram, value);
         }
     } while (!f.atEnd());
 
     // If the driver only implements the older drm fdinfo keys
-    if (!foundTotalVramKey && !foundTotalGTTKey) {
+    if (!foundTotalVramKey) {
         proc.vram += deprecatedVram;
     }
 
