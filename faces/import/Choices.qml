@@ -390,6 +390,8 @@ Control {
                         }
                         Kirigami.Heading {
                             level: 2
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
                             text: delegateModel.rootIndex.model ? delegateModel.rootIndex.model.data(delegateModel.rootIndex) : ""
                         }
                     }
