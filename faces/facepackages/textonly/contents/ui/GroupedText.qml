@@ -59,6 +59,7 @@ ColumnLayout {
                 opacity: (root.y + parent.y + y + height) < root.totalHeight ? 1 : 0
                 visible: text.length > 0
                 elide: Text.ElideRight
+                textFormat: Text.PlainText
             }
 
             ChartsControls.Legend {
