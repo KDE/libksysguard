@@ -210,7 +210,7 @@ Description[uk]=Надіслати вказаний сигнал процесо�
 Description[vi]=Gửi một tín hiệu đến một tiến trình
 Description[wa]=Evoyî on signå dné a on processus diné
 Description[zh_CN]=向进程发送指定信号
-Description[zh_TW]=送一個指定的信號給指定的行程
+Description[zh_TW]=傳送指定訊號給指定行程
 Policy=auth_admin
 
 [org.kde.ksysguard.processlisthelper.renice]
@@ -638,6 +638,7 @@ Name[sv]=Ändra processchemaläggning
 Name[tr]=Süreç Zamanlamasını Değiştir
 Name[uk]=Змінити планування процесів
 Name[zh_CN]=更改进程调度
+Name[zh_TW]=變更行程排程
 Description=Change the niceness, CPU scheduler and IO scheduler of a given process in one operation
 Description[ar]=غيّر درجة اللطف، ومجدول وحدة المعالجة المركزية (CPU)، ومجدول عمليات الإدخال/الإخراج (IO) لعملية معينة في عملية واحدة
 Description[bg]=Промяна на приоритета, планировчика на процесора и планировчика на IO операции на даден процес в една операция
@@ -659,4 +660,5 @@ Description[sv]=Ändra prioritetsvärdet, processorschemaläggare, samt in- och 
 Description[tr]=Bir işlemde verilen bir sürecin önceliğini, CPU ve girdi–çıktı zamanlayıcısını değiştirin
 Description[uk]=Змінити пріоритетність, планування часу процесора та планування введення-виведення вказаного процесу за одну дію
 Description[zh_CN]=通过一次操作更改指定进程的优先级、CPU 调度器和 I/O 调度器
+Description[zh_TW]=一次改變指定行程的 nice 值、CPU 排程器、及 IO 排程器
 Policy=auth_admin
