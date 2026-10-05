@@ -1,0 +1,259 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: libksysguard\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"PO-Revision-Date: 2026-10-04 19:09+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@ijekavian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: SensorGroup.cpp:31
+#, kde-format
+msgctxt "Total load sensor of all cores"
+msgid "[Group] Total Usage"
+msgstr "[Група] Укупно оптерећење"
+
+#: SensorGroup.cpp:32
+#, kde-format
+msgctxt "All cores user load sensors"
+msgid "[Group] User Usage"
+msgstr "[Група] Корисничко оптерећење"
+
+#: SensorGroup.cpp:33
+#, kde-format
+msgctxt "All cores user system sensors"
+msgid "[Group] System Usage"
+msgstr "[Група] Системско оптерећење"
+
+#: SensorGroup.cpp:34
+#, kde-format
+msgctxt "All cores wait load sensors"
+msgid "[Group] Wait Usage"
+msgstr "[Група] Оптерећење чекањем"
+
+#: SensorGroup.cpp:35
+#, kde-format
+msgctxt "All cores clock frequency sensors"
+msgid "[Group] Clock Frequency"
+msgstr "[Група] Такт"
+
+#: SensorGroup.cpp:36
+#, kde-format
+msgctxt "All cores temperature sensors"
+msgid "[Group] Temperature"
+msgstr "[Група] Температура"
+
+#: SensorGroup.cpp:37
+#, kde-format
+msgctxt "All cores names"
+msgid "[Group] Name"
+msgstr "[Група] Име"
+
+#: SensorGroup.cpp:39
+#, kde-format
+msgctxt "GPU group sensor"
+msgid "[Group] Total Usage"
+msgstr "[Група] Укупно оптерећење"
+
+#: SensorGroup.cpp:40
+#, kde-format
+msgctxt "GPU group sensor"
+msgid "[Group] Video Memory Used"
+msgstr "[Група] Заузета видео меморија"
+
+#: SensorGroup.cpp:41
+#, kde-format
+msgctxt "GPU group sensor"
+msgid "[Group] Total Video Memory"
+msgstr "[Група] Укупна видео меморија"
+
+#: SensorGroup.cpp:42
+#, kde-format
+msgctxt "GPU group sensor"
+msgid "[Group] Name"
+msgstr "[Група] Име"
+
+#: SensorGroup.cpp:44
+#, kde-format
+msgid "[Group] Used"
+msgstr "[Група] Попуњено"
+
+#: SensorGroup.cpp:45
+#, kde-format
+msgid "[Group] Available"
+msgstr "[Група] Доступно"
+
+#: SensorGroup.cpp:46 SensorGroup.cpp:66
+#, kde-format
+msgid "[Group] Percentage Used"
+msgstr "[Група] Проценат попуњености"
+
+#: SensorGroup.cpp:47
+#, kde-format
+msgid "[Group] Total Size"
+msgstr "[Група] Укупна величина"
+
+#: SensorGroup.cpp:49
+#, kde-format
+msgid "[Group] Network Name"
+msgstr "[Група] Име мреже"
+
+#: SensorGroup.cpp:50
+#, kde-format
+msgid "[Group] IPv4 Address"
+msgstr "[Група] ИПв4 адреса"
+
+#: SensorGroup.cpp:51
+#, kde-format
+msgid "[Group] IPv6 Address"
+msgstr "[Група] ИПв6 адреса"
+
+#: SensorGroup.cpp:52
+#, kde-format
+msgid "[Group] Signal Strength"
+msgstr "[Група] Јачина сигнала"
+
+#: SensorGroup.cpp:53 SensorGroup.cpp:54
+#, kde-format
+msgid "[Group] Download Rate"
+msgstr "[Група] Проток преузимања"
+
+#: SensorGroup.cpp:55
+#, kde-format
+msgid "[Group] Total Downloaded"
+msgstr "[Група] Укупно преузето"
+
+#: SensorGroup.cpp:56 SensorGroup.cpp:57
+#, kde-format
+msgid "[Group] Upload Rate"
+msgstr "[Група] Проток отпремања"
+
+#: SensorGroup.cpp:58
+#, kde-format
+msgid "[Group] Total Uploaded"
+msgstr "[Група] Укупно отпремљено"
+
+#: SensorGroup.cpp:60
+#, kde-format
+msgid "[Group] Name"
+msgstr "[Група] Име"
+
+#: SensorGroup.cpp:61
+#, kde-format
+msgid "[Group] Total Space"
+msgstr "[Група] Укупан простор"
+
+#: SensorGroup.cpp:62
+#, kde-format
+msgid "[Group] Used Space"
+msgstr "[Група] Попуњен простор"
+
+#: SensorGroup.cpp:63
+#, kde-format
+msgid "[Group] Free Space"
+msgstr "[Група] Слободан простор"
+
+#: SensorGroup.cpp:64
+#, kde-format
+msgid "[Group] Read Rate"
+msgstr "[Група] Проток читања"
+
+#: SensorGroup.cpp:65
+#, kde-format
+msgid "[Group] Write Rate"
+msgstr "[Група] Проток писања"
+
+#: SensorGroup.cpp:67
+#, kde-format
+msgid "[Group] Percentage Free"
+msgstr "[Група] Проценат слободног простора"
+
+#: SensorGroup.cpp:69
+#, kde-format
+msgctxt "Power group sensor"
+msgid "[Group] Name"
+msgstr "[Група] Име"
+
+#: SensorGroup.cpp:70
+#, kde-format
+msgctxt "Power group sensor"
+msgid "[Group] Charge"
+msgstr "[Група] Попуњеност"
+
+#: SensorGroup.cpp:71
+#, kde-format
+msgctxt "Power group sensor"
+msgid "[Group] Charge Percentage"
+msgstr "[Група] Проценат попуњености"
+
+#: SensorGroup.cpp:72
+#, kde-format
+msgctxt "Power group sensor"
+msgid "[Group] Charging Rate"
+msgstr "[Група] Брзина пуњења"
+
+#: SensorGroup.cpp:73
+#, kde-format
+msgctxt "Power group sensor"
+msgid "[Group] Current Capacity"
+msgstr "[Група] Тренутни капацитет"
+
+#: SensorGroup.cpp:74
+#, kde-format
+msgctxt "Power group sensor"
+msgid "[Group] Design Capacity"
+msgstr "[Група] Првобитни капацитет"
+
+#: SensorGroup.cpp:75
+#, kde-format
+msgctxt "Power group sensor"
+msgid "[Group] Health"
+msgstr "[Група] Здравље"
+
+#: SensorGroup.cpp:77
+#, kde-format
+msgid "[Group] CPU"
+msgstr "[Група] ЦПУ"
+
+#: SensorGroup.cpp:78
+#, kde-format
+msgid "[Group] GPU"
+msgstr "[Група] ГПУ"
+
+#: SensorGroup.cpp:79
+#, kde-format
+msgctxt "Network group title"
+msgid "[Group] Network Device"
+msgstr "[Група] Мрежни уређај"
+
+#: SensorGroup.cpp:80
+#, kde-format
+msgid "[Group] Disk"
+msgstr "[Група] Диск"
+
+#: SensorGroup.cpp:81
+#, kde-format
+msgctxt "Power group title"
+msgid "[Group] Power"
+msgstr "[Група] Напајање"
+
+#: SensorTreeModel.cpp:289
+#, kde-format
+msgid "Sensor Browser"
+msgstr "Прегледач сензора"
+
+#: SensorTreeModel.cpp:314
+#, kde-format
+msgctxt "Name (unit)"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"

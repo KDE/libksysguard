@@ -1,12 +1,13 @@
 # Translation of processcore.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2007, 2010.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-10 00:47+0000\n"
-"PO-Revision-Date: 2010-06-30 14:15+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 19:09+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -22,222 +23,217 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Desktop ID"
-msgstr ""
+msgstr "ИД .десктоп фајла"
 
 #: cgroup_data_model.cpp:64
 #, kde-format
 msgctxt "@title"
 msgid "Icon"
-msgstr ""
+msgstr "иконица"
 
 #: cgroup_data_model.cpp:78
 #, kde-format
 msgctxt "@title"
 msgid "Name"
-msgstr ""
+msgstr "име"
 
 #: extended_process_list.cpp:110
 #, kde-format
 msgid "PID"
-msgstr ""
+msgstr "ПИД"
 
 #: extended_process_list.cpp:111
 #, kde-format
 msgid "The unique Process ID that identifies this process."
-msgstr ""
+msgstr "Јединствени ИД процеса који га једнозначно представља."
 
 #: extended_process_list.cpp:116
 #, kde-format
 msgid "Parent PID"
-msgstr ""
+msgstr "ПИД родитеља"
 
 #: extended_process_list.cpp:123
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "пријавно име"
 
 #: extended_process_list.cpp:124
 #, kde-format
 msgid "The user who owns this process."
-msgstr ""
+msgstr "Корисник власник овог процеса."
 
 #: extended_process_list.cpp:128
 #, kde-format
 msgid "UID"
-msgstr ""
+msgstr "УИД"
 
 #: extended_process_list.cpp:134
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "корисник"
 
 #: extended_process_list.cpp:150
 #, kde-format
 msgid "Can Login"
-msgstr ""
+msgstr "може да се пријави"
 
 #: extended_process_list.cpp:177
 #, kde-format
 msgid "EUID"
-msgstr ""
+msgstr "ефективни УИД"
 
 #: extended_process_list.cpp:181
 #, kde-format
 msgid "suid"
-msgstr ""
+msgstr "сачувани УИД"
 
 #: extended_process_list.cpp:185
 #, kde-format
 msgid "fsuid"
-msgstr ""
+msgstr "УИД фајл система"
 
 #: extended_process_list.cpp:189
 #, kde-format
 msgid "gid"
-msgstr ""
+msgstr "ГИД"
 
 #: extended_process_list.cpp:193
 #, kde-format
 msgid "egid"
-msgstr ""
+msgstr "ефективни ГИД"
 
 #: extended_process_list.cpp:197
 #, kde-format
 msgid "sgid"
-msgstr ""
+msgstr "сачувани ГИД"
 
 #: extended_process_list.cpp:201
 #, kde-format
 msgid "fsgid"
-msgstr ""
+msgstr "ГИД фајл система"
 
 #: extended_process_list.cpp:206
 #, kde-format
 msgid "Tracer Pid"
-msgstr ""
+msgstr "ПИД пратиоца"
 
 #: extended_process_list.cpp:213
 #, kde-format
 msgid "tty"
-msgstr ""
+msgstr "ТТИ"
 
 #: extended_process_list.cpp:214
 #, kde-format
 msgid "The controlling terminal on which this process is running."
-msgstr ""
+msgstr "Контролишући терминал под којим овај процес ради."
 
 #: extended_process_list.cpp:217
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "User Time"
-msgstr "стварновременски"
+msgstr "корисничко време"
 
 #: extended_process_list.cpp:221
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "системско време"
 
 #: extended_process_list.cpp:225
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Total Time"
-msgstr "стварновременски"
+msgstr "укупно време"
 
 #: extended_process_list.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Time"
-msgstr "стварновременски"
+msgstr "време"
 
 #: extended_process_list.cpp:230
 #, kde-format
 msgid "The total user and system time that this process has been running for"
-msgstr ""
+msgstr "Укупно корисничко и системско време током којег овај процес ради"
 
 #: extended_process_list.cpp:235
-#, fuzzy, kde-format
-#| msgctxt "Priority Class"
-#| msgid "Real Time"
+#, kde-format
 msgid "Start Time"
-msgstr "стварновременски"
+msgstr "време покретања"
 
 #: extended_process_list.cpp:245
 #, kde-format
 msgid "User CPU Usage"
-msgstr ""
+msgstr "корисничко оптерећење ЦПУ‑а"
 
 #: extended_process_list.cpp:246
 #, kde-format
 msgid "User CPU"
-msgstr ""
+msgstr "кориснички ЦПУ"
 
 #: extended_process_list.cpp:253
 #, kde-format
 msgid "System CPU Usage"
-msgstr ""
+msgstr "системско оптерећење ЦПУ‑а"
 
 #: extended_process_list.cpp:254
 #, kde-format
 msgid "System CPU"
-msgstr ""
+msgstr "системски ЦПУ"
 
 #: extended_process_list.cpp:263
 #, kde-format
 msgid "Total CPU Usage"
-msgstr ""
+msgstr "укупно оптерећење ЦПУ‑а"
 
 #: extended_process_list.cpp:269
 #, kde-format
 msgid "CPU"
-msgstr ""
+msgstr "ЦПУ"
 
 #: extended_process_list.cpp:273
 #, kde-format
 msgid "The current total CPU usage of the process."
-msgstr ""
+msgstr "Тренутно укупно оптерећење ЦПУ‑а процесом."
 
 #: extended_process_list.cpp:278
 #, kde-format
 msgid "Group User CPU Usage"
-msgstr ""
+msgstr "групно корисничко оптерећење ЦПУ‑а"
 
 #: extended_process_list.cpp:282
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
+"Корисничко оптерећење ЦПУ‑а овим процесом и свим његовим дечијим процесима."
 
 #: extended_process_list.cpp:290
 #, kde-format
 msgid "Group System CPU Usage"
-msgstr ""
+msgstr "групно системско оптерећење ЦПУ‑а"
 
 #: extended_process_list.cpp:294
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
 msgstr ""
+"Системско оптерећење ЦПУ‑а овим процесом и свим његовим дечијим процесима."
 
 #: extended_process_list.cpp:303
 #, kde-format
 msgid "Group Total CPU Usage"
-msgstr ""
+msgstr "групно укупно оптерећење ЦПУ‑а"
 
 #: extended_process_list.cpp:309
 #, kde-format
 msgid "Group CPU"
-msgstr ""
+msgstr "групни ЦПУ"
 
 #: extended_process_list.cpp:310
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
 msgstr ""
+"Укупно оптерећење ЦПУ‑а овим процесом и свим његовим дечијим процесима."
 
 #: extended_process_list.cpp:317
 #, kde-format
 msgid "Nice Level"
-msgstr ""
+msgstr "степен финоће"
 
 #: extended_process_list.cpp:319
 #, kde-format
@@ -245,26 +241,28 @@ msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
+"Приоритет са којим процес ради. За уобичајени распоређивач, креће се од 19 "
+"(врло фин, најнижи приоритет) до -19 (највиши приоритет)."
 
 #: extended_process_list.cpp:323
 #, kde-format
 msgid "Scheduler"
-msgstr ""
+msgstr "распоређивач"
 
 #: extended_process_list.cpp:328
 #, kde-format
 msgid "IO Priority Class"
-msgstr ""
+msgstr "У/И класа приоритета"
 
 #: extended_process_list.cpp:334
 #, kde-format
 msgid "IO Nice Level"
-msgstr ""
+msgstr "степен У/И финоће"
 
 #: extended_process_list.cpp:338
 #, kde-format
 msgid "VM Size"
-msgstr ""
+msgstr "величина виртуелне меморије"
 
 #: extended_process_list.cpp:343
 #, kde-format
@@ -273,16 +271,19 @@ msgid ""
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless."
 msgstr ""
+"Количина виртуелног меморијског простора који процес користи, укључујући "
+"дељене библиотеке, графичку меморију, фајлове на диску, итд. Овај број је "
+"скоро без икаквог значаја."
 
 #: extended_process_list.cpp:348
 #, kde-format
 msgid "Resident Memory Usage"
-msgstr ""
+msgstr "искоришћење резидентне меморије"
 
 #: extended_process_list.cpp:350
 #, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "резидентна"
 
 #: extended_process_list.cpp:354
 #, kde-format
@@ -290,16 +291,18 @@ msgid ""
 "This is the amount of physical memory that this process is using and "
 "includes the amount of memory used by shared libraries."
 msgstr ""
+"Количина физичке меморије коју овај процес користи, укључујући меморију коју "
+"користе дељене библиотеке."
 
 #: extended_process_list.cpp:358
 #, kde-format
 msgid "Private Memory Usage"
-msgstr ""
+msgstr "искоришћење приватне меморије"
 
 #: extended_process_list.cpp:360
 #, kde-format
 msgid "Private"
-msgstr ""
+msgstr "приватна"
 
 #: extended_process_list.cpp:364
 #, kde-format
@@ -308,16 +311,19 @@ msgid ""
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
+"Количина физичке меморије коју овај процес користи сам по себи, приближно "
+"једнака искоришћењу приватне меморије процеса. Не укључује меморију на "
+"размени, нити величину кода његових дељених библиотека."
 
 #: extended_process_list.cpp:371
 #, kde-format
 msgid "Shared Memory Usage"
-msgstr ""
+msgstr "искоришћење дељене меморије"
 
 #: extended_process_list.cpp:380
 #, kde-format
 msgid "Shared"
-msgstr ""
+msgstr "дељена"
 
 #: extended_process_list.cpp:382
 #, kde-format
@@ -326,18 +332,20 @@ msgid ""
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
+"Приближна количина праве физичке меморије коју користе дељене библиотеке "
+"овог процеса. Ову меморију деле сви процеси који користе исту библиотеку."
 
 #: extended_process_list.cpp:390
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr ""
+msgstr "искоришћење пропорционалне меморије"
 
 #: extended_process_list.cpp:393
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "пропорционална"
 
 #: extended_process_list.cpp:400
 #, kde-format
@@ -349,18 +357,22 @@ msgid ""
 "process' private memory. This value may not be available for certain "
 "processes."
 msgstr ""
+"Приближна стварна количина физичке меморије коју овај процес користи. Рачуна "
+"се тако што се искоришћење дељене меморије овог процеса подели бројем "
+"процеса који ту меморију деле, па се дода приватна меморија овог процеса. "
+"Ова вредност можда није доступна за неке процесе."
 
 #: extended_process_list.cpp:407
 #, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
-msgstr ""
+msgstr "искоришћење меморије"
 
 #: extended_process_list.cpp:410
 #, kde-format
 msgctxt "@title:column"
 msgid "Memory"
-msgstr ""
+msgstr "меморија"
 
 #: extended_process_list.cpp:417
 #, kde-format
@@ -371,90 +383,94 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
+"Приближна стварна количина физичке меморије коју овај процес користи. "
+"Користи се искоришћење пропорционалне меморије ако је доступно, искоришћење "
+"приватне меморије ако има вредност, а у супротном искоришћење резидентне "
+"меморије."
 
 #: extended_process_list.cpp:422
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr ""
+msgstr "искоришћење разменске меморије"
 
 #: extended_process_list.cpp:423
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "разменска меморија"
 
 #: extended_process_list.cpp:427
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "Приближна количина разменске меморије коју овај процес користи."
 
 #: extended_process_list.cpp:431
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "име"
 
 #: extended_process_list.cpp:432
 #, kde-format
 msgid "The process name."
-msgstr ""
+msgstr "Име процеса."
 
 #: extended_process_list.cpp:437
 #, kde-format
 msgid "Command"
-msgstr ""
+msgstr "наредба"
 
 #: extended_process_list.cpp:441
 #, kde-format
 msgid "The command with which this process was launched."
-msgstr ""
+msgstr "Наредба којом је овај процес покренут."
 
 #: extended_process_list.cpp:445
 #, kde-format
 msgid "Status"
-msgstr ""
+msgstr "стање"
 
 #: extended_process_list.cpp:451
 #, kde-format
 msgid "IO Characters Read"
-msgstr ""
+msgstr "прочитани знакови (У/И)"
 
 #: extended_process_list.cpp:460
 #, kde-format
 msgid "IO Characters Written"
-msgstr ""
+msgstr "уписани знакови (У/И)"
 
 #: extended_process_list.cpp:469
 #, kde-format
 msgid "IO Read Syscalls"
-msgstr ""
+msgstr "сиспозиви читања (У/И)"
 
 #: extended_process_list.cpp:478
 #, kde-format
 msgid "IO Read Syscalls Rate"
-msgstr ""
+msgstr "проток сиспозива читања (У/И)"
 
 #: extended_process_list.cpp:487
 #, kde-format
 msgid "IO Write Syscalls"
-msgstr ""
+msgstr "сиспозиви писања (У/И)"
 
 #: extended_process_list.cpp:496
 #, kde-format
 msgid "IO Write Syscalls Rate"
-msgstr ""
+msgstr "проток сиспозива писања (У/И)"
 
 #: extended_process_list.cpp:505
 #, kde-format
 msgid "IO Characters Actually Read"
-msgstr ""
+msgstr "стварно прочитани знакови (У/И)"
 
 #: extended_process_list.cpp:514
 #, kde-format
 msgid "IO Characters Read Rate"
-msgstr ""
+msgstr "проток читања знакова (У/И)"
 
 #: extended_process_list.cpp:517
 #, kde-format
@@ -462,11 +478,12 @@ msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"Проток читања за сав У/И процеса, укључујући кеш диска и други нефизички У/И."
 
 #: extended_process_list.cpp:524
 #, kde-format
 msgid "IO Characters Written Rate"
-msgstr ""
+msgstr "проток писања знакова (У/И)"
 
 #: extended_process_list.cpp:527
 #, kde-format
@@ -474,97 +491,98 @@ msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"Проток писања за сав У/И процеса, укључујући кеш диска и други нефизички У/И."
 
 #: extended_process_list.cpp:534
 #, kde-format
 msgid "Disk Read Rate"
-msgstr ""
+msgstr "проток читања са диска"
 
 #: extended_process_list.cpp:538
 #, kde-format
 msgid "Read"
-msgstr ""
+msgstr "читање"
 
 #: extended_process_list.cpp:539
 #, kde-format
 msgid "The rate of data being read from disk."
-msgstr ""
+msgstr "Проток података који се читају са диска."
 
 #: extended_process_list.cpp:545
 #, kde-format
 msgid "Disk Write Rate"
-msgstr ""
+msgstr "проток писања на диск"
 
 #: extended_process_list.cpp:549
 #, kde-format
 msgid "Write"
-msgstr ""
+msgstr "писање"
 
 #: extended_process_list.cpp:550
 #, kde-format
 msgid "The rate of data being written to the disk."
-msgstr ""
+msgstr "Проток података који се пишу на диск."
 
 #: extended_process_list.cpp:556
 #, kde-format
 msgid "Threads"
-msgstr ""
+msgstr "нити"
 
 #: gpu_utils.cpp:19
 #, kde-format
 msgctxt "@title %1 is GPU number"
 msgid "GPU %1"
-msgstr ""
+msgstr "ГПУ %1"
 
 #: gpu_utils.cpp:36
 #, kde-format
 msgctxt "@title %1 is vendor name"
 msgid "%1 GPU"
-msgstr ""
+msgstr "%1 ГПУ"
 
 #: plugins/gpu/gpu.cpp:40
 #, kde-format
 msgid "GPU"
-msgstr ""
+msgstr "ГПУ"
 
 #: plugins/gpu/gpu.cpp:131
 #, kde-format
 msgid "GPU Usage"
-msgstr ""
+msgstr "оптерећење ГПУ‑а"
 
 #: plugins/gpu/gpu.cpp:134
 #, kde-format
 msgid "GPU Memory"
-msgstr ""
+msgstr "меморија ГПУ‑а"
 
 #: plugins/gpu/gpu.cpp:137
 #, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Приказује који ГПУ процес користи"
 
 #: plugins/network/network.cpp:36
 #, kde-format
 msgctxt "@title"
 msgid "Download Speed"
-msgstr ""
+msgstr "брзина преузимања"
 
 #: plugins/network/network.cpp:37
 #, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr ""
+msgstr "преузимање"
 
 #: plugins/network/network.cpp:40
 #, kde-format
 msgctxt "@title"
 msgid "Upload Speed"
-msgstr ""
+msgstr "брзина отпремања"
 
 #: plugins/network/network.cpp:41
 #, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
+msgstr "отпремање"
 
 #: process.cpp:98 process.cpp:119
 #, kde-format
@@ -707,34 +725,34 @@ msgstr "мирујући"
 #: process_controller.cpp:358
 #, kde-format
 msgid "Success"
-msgstr ""
+msgstr "Успех"
 
 #: process_controller.cpp:360
 #, kde-format
 msgid "Insufficient permissions."
-msgstr ""
+msgstr "Недовољне дозволе."
 
 #: process_controller.cpp:362
 #, kde-format
 msgid "No matching process was found."
-msgstr ""
+msgstr "Није нађен одговарајући процес."
 
 #: process_controller.cpp:364
 #, kde-format
 msgid "Not supported on the current system."
-msgstr ""
+msgstr "Није подржано на тренутном систему."
 
 #: process_controller.cpp:366
 #, kde-format
 msgid "The user cancelled."
-msgstr ""
+msgstr "Корисник је одустао."
 
 #: process_controller.cpp:368
 #, kde-format
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Дошло је до неодређене грешке."
 
 #: process_controller.cpp:370
 #, kde-format
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Дошло је до непознате грешке."
