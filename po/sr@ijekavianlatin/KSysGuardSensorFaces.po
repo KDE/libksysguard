@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-22 00:47+0000\n"
-"PO-Revision-Date: 2026-10-04 19:09+0200\n"
+"PO-Revision-Date: 2026-10-07 11:45+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
@@ -207,7 +207,7 @@ msgstr "Broj kolona:"
 #, kde-format
 msgctxt "@label automatic number of columns"
 msgid "Automatic"
-msgstr "Automatski"
+msgstr "automatski"
 
 #: facepackages/facegrid/contents/ui/Config.qml:54
 #, kde-format
