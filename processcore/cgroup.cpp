@@ -32,18 +32,21 @@ public:
         , service(serviceFromAppId(_processGroupId, appId))
     {
     }
+
+    class ReadPidsRunnable;
+
     const QString processGroupId;
     const QString appId;
     const KService::Ptr service;
     QList<pid_t> pids;
+
+    ReadPidsRunnable *runnable = nullptr;
 
     static QString appIdFromCGroup(const QString &cgroup);
     static KService::Ptr serviceFromAppId(const QString &cgroup, const QString &appId);
 
     static QRegularExpression s_appIdFromProcessGroupPattern;
     static QString unescapeName(const QString &cgroupId);
-
-    class ReadPidsRunnable;
 };
 
 class CGroupPrivate::ReadPidsRunnable : public QRunnable
@@ -56,8 +59,17 @@ public:
     {
     }
 
+    void cancel()
+    {
+        m_cancelled = true;
+    }
+
     void run() override
     {
+        if (m_cancelled) {
+            return;
+        }
+
         QFile pidFile(m_path);
         if (!pidFile.open(QFile::ReadOnly | QIODevice::Text)) {
             return;
@@ -71,7 +83,7 @@ public:
             line = stream.readLine();
         }
         // Ensure we call the callback on the thread the context object lives on.
-        if (m_context) {
+        if (m_context && !m_cancelled) {
             QMetaObject::invokeMethod(m_context, std::bind(m_callback, pids));
         }
     }
@@ -80,6 +92,7 @@ private:
     QPointer<QObject> m_context;
     QString m_path;
     std::function<void(QList<pid_t>)> m_callback;
+    std::atomic_bool m_cancelled = false;
 };
 
 class CGroupSystemInformation
@@ -108,6 +121,9 @@ CGroup::CGroup(const QString &id)
 
 CGroup::~CGroup()
 {
+    if (d->runnable) {
+        d->runnable->cancel();
+    }
 }
 
 QString KSysGuard::CGroup::id() const
@@ -133,13 +149,14 @@ QList<pid_t> CGroup::pids() const
 void CGroup::setPids(const QList<pid_t> &pids)
 {
     d->pids = pids;
+    d->runnable = nullptr;
 }
 
 void CGroup::requestPids(QObject *context, std::function<void(QList<pid_t>)> callback)
 {
     QString path = cgroupSysBasePath() + d->processGroupId + QLatin1String("/cgroup.procs");
-    auto readPidsRunnable = new CGroupPrivate::ReadPidsRunnable(context, path, callback);
-    QThreadPool::globalInstance()->start(readPidsRunnable);
+    d->runnable = new CGroupPrivate::ReadPidsRunnable(context, path, callback);
+    QThreadPool::globalInstance()->start(d->runnable);
 }
 
 QString CGroupPrivate::unescapeName(const QString &name)
