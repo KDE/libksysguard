@@ -39,7 +39,8 @@ ProgressBar {
 
     contentItem: Item {
         Rectangle {
-            width: bar.visualPosition * parent.width
+            x: bar.mirrored ? parent.width - width : 0
+            width: bar.position * parent.width
             height: parent.height
             color: bar.color
             radius: height / 2
