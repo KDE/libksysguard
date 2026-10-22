@@ -23,6 +23,7 @@ Charts.LineChart {
 
     readonly property alias sensorsModel: sensorsModel
     readonly property int historyAmount: controller.faceConfiguration.historyAmount
+    readonly property int maximumHistoryPoints: 2000
 
     direction: Charts.XYChart.ZeroAtEnd
 
@@ -91,7 +92,7 @@ Charts.LineChart {
                 roleName: "Value"
             }
 
-            interval: {
+            readonly property int sensorInterval: {
                 if (chart.controller.updateRateLimit > 0) {
                     return chart.controller.updateRateLimit
                 }
@@ -102,6 +103,7 @@ Charts.LineChart {
 
                 return 0
             }
+            interval: sensorInterval > 0 ? Math.max(sensorInterval, Math.ceil(chart.historyAmount * 1000 / chart.maximumHistoryPoints)) : 0
             maximumHistory: interval > 0 ? (chart.historyAmount * 1000) / interval : 0
             fillMode: Charts.HistoryProxySource.FillFromEnd
 
