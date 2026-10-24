@@ -205,7 +205,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
                                                         QStringLiteral("tracerpid"),
                                                         i18n("Tracer Pid"),
                                                         &KSysGuard::Process::tracerpid,
-                                                        Process::Nothing,
+                                                        Process::Tracerpid,
                                                         ForwardFirstEntry);
     d->m_coreAttributes << tracerpidSensor;
 
@@ -214,17 +214,24 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
     ttySensor->setDescription(i18n("The controlling terminal on which this process is running."));
     d->m_coreAttributes << ttySensor;
 
-    auto userTimeSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("userTime"), i18n("User Time"), &KSysGuard::Process::userTime);
+    auto userTimeSensor =
+        new ProcessSensor<qlonglong>(this, QStringLiteral("userTime"), i18n("User Time"), &KSysGuard::Process::userTime, KSysGuard::Process::CpuTimes);
     userTimeSensor->setUnit(KSysGuard::UnitTicks);
     d->m_coreAttributes << userTimeSensor;
 
-    auto sysTimeSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("sysTime"), i18n("System Time"), &KSysGuard::Process::sysTime);
+    auto sysTimeSensor =
+        new ProcessSensor<qlonglong>(this, QStringLiteral("sysTime"), i18n("System Time"), &KSysGuard::Process::sysTime, KSysGuard::Process::CpuTimes);
     sysTimeSensor->setUnit(KSysGuard::UnitTicks);
     d->m_coreAttributes << sysTimeSensor;
 
-    auto timeSensor = new ProcessSensor<qlonglong>(this, QStringLiteral("totalTime"), i18n("Total Time"), [](KSysGuard::Process *p) {
-        return p->userTime() + p->sysTime();
-    });
+    auto timeSensor = new ProcessSensor<qlonglong>(
+        this,
+        QStringLiteral("totalTime"),
+        i18n("Total Time"),
+        [](KSysGuard::Process *p) {
+            return p->userTime() + p->sysTime();
+        },
+        KSysGuard::Process::CpuTimes);
     timeSensor->setShortName(i18n("Time"));
     timeSensor->setUnit(KSysGuard::UnitTicks);
     timeSensor->setDescription(i18n("The total user and system time that this process has been running for"));

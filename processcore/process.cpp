@@ -644,12 +644,20 @@ void Process::setTty(const QByteArray &tty)
 
 void Process::setUserTime(qlonglong userTime)
 {
+    if (d->userTime == userTime) {
+        return;
+    }
     d->userTime = userTime;
+    d->changes |= Process::CpuTimes;
 }
 
 void Process::setSysTime(qlonglong sysTime)
 {
+    if (d->sysTime == sysTime) {
+        return;
+    }
     d->sysTime = sysTime;
+    d->changes |= Process::CpuTimes;
 }
 
 void Process::setStartTime(qlonglong startTime)

@@ -249,6 +249,7 @@ public:
         Login = 0x2000,
         IO = 0x4000,
         NumThreads = 0x8000,
+        CpuTimes = 0x10000,
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
