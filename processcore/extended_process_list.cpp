@@ -476,7 +476,7 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
                                                              i18n("IO Read Syscalls"),
                                                              &KSysGuard::Process::ioReadSyscalls,
                                                              KSysGuard::Process::IO);
-    ioReadSyscallsSensor->setUnit(KSysGuard::UnitRate);
+    ioReadSyscallsSensor->setUnit(KSysGuard::UnitNone);
     ioReadSyscallsSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioReadSyscallsSensor;
 
@@ -487,19 +487,19 @@ ExtendedProcesses::ExtendedProcesses(QObject *parent)
                                                                  KSysGuard::Process::IO);
     ioReadSyscallsRateSensor->setUnit(KSysGuard::UnitRate);
     ioReadSyscallsRateSensor->setRequiredUpdateFlags(Processes::IOStatistics);
-    d->m_coreAttributes << ioReadSyscallsSensor;
+    d->m_coreAttributes << ioReadSyscallsRateSensor;
 
     auto ioWriteSyscallsSensor = new ProcessSensor<qlonglong>(this,
                                                               QStringLiteral("ioWriteSyscalls"),
                                                               i18n("IO Write Syscalls"),
                                                               &KSysGuard::Process::ioWriteSyscalls,
                                                               KSysGuard::Process::IO);
-    ioWriteSyscallsSensor->setUnit(KSysGuard::UnitRate);
+    ioWriteSyscallsSensor->setUnit(KSysGuard::UnitNone);
     ioWriteSyscallsSensor->setRequiredUpdateFlags(Processes::IOStatistics);
     d->m_coreAttributes << ioWriteSyscallsSensor;
 
     auto ioWriteSyscallsRateSensor = new ProcessSensor<qlonglong>(this,
-                                                                  QStringLiteral("ioReadSyscallsRate"),
+                                                                  QStringLiteral("ioWriteSyscallsRate"),
                                                                   i18n("IO Write Syscalls Rate"),
                                                                   &KSysGuard::Process::ioWriteSyscallsRate,
                                                                   KSysGuard::Process::IO);
