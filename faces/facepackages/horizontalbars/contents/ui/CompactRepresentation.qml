@@ -25,8 +25,10 @@ Faces.CompactSensorFace {
     readonly property int barCount: controller.highPrioritySensorIds.length
     readonly property real minimumTotalHeight: Kirigami.Units.smallSpacing * barCount + (barCount - 1)
     Layout.minimumHeight: verticalFormFactor ? Math.max(minimumTotalHeight, Kirigami.Units.gridUnit) : defaultMinimumSize
+    Layout.preferredHeight: verticalFormFactor ? Math.max(Kirigami.Units.largeSpacing * barCount + column.spacing * (barCount + 1), Layout.minimumHeight) : -1
 
     contentItem: ColumnLayout {
+        id: column
         spacing: 1
 
         Item { Layout.fillWidth: true }
