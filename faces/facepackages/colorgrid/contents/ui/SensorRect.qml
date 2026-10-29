@@ -9,6 +9,7 @@ import QtQuick.Controls
 
 import org.kde.kirigami as Kirigami
 
+import org.kde.ksysguard.formatter as Formatter
 import org.kde.ksysguard.sensors as Sensors
 
 Rectangle {
@@ -34,5 +35,6 @@ Rectangle {
         textFormat: Text.PlainText
         fontSizeMode: Text.Fit
         minimumPointSize: 6
+        visible: Formatter.Formatter.maximumLength(rect.sensor.unit, Qt.font({family: font.family, pointSize: minimumPointSize})) <= width
     }
 }
