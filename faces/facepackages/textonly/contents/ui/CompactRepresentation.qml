@@ -68,9 +68,11 @@ Faces.CompactSensorFace {
 
         Repeater {
             id: repeater
-            model: root.controller.highPrioritySensorIds
+            model: root.controller.highPrioritySensorIds.concat(root.controller.lowPrioritySensorIds)
 
             ChartsControls.LegendDelegate {
+                readonly property bool lowPriority: index >= root.controller.highPrioritySensorIds.length
+
                 Layout.fillWidth: true
                 Layout.minimumWidth: root.horizontalFormFactor ? minimumWidth : Kirigami.Units.gridUnit
                 Layout.preferredWidth: root.horizontalFormFactor ? preferredWidth : minimumWidth
@@ -79,7 +81,7 @@ Faces.CompactSensorFace {
                 name: root.controller.sensorLabels[modelData] || sensor.name
                 shortName: root.controller.sensorLabels[modelData] || sensor.shortName
                 value: sensor.formattedValue
-                color: root.colorSource.map[modelData]
+                color: lowPriority ? "transparent" : root.colorSource.map[modelData]
 
                 font: root.useSmallFont ? Kirigami.Theme.smallFont : Kirigami.Theme.defaultFont
 
