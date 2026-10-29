@@ -21,6 +21,7 @@ GridLayout {
     property QtObject controller
     property QtObject colorSource
     property bool compact
+    property real cellSize: 0
 
     readonly property real preferredWidth: titleMetrics.width
 
@@ -55,8 +56,8 @@ GridLayout {
         SensorRect {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.preferredWidth: 0
-            Layout.preferredHeight: 0
+            Layout.preferredWidth: grid.cellSize
+            Layout.preferredHeight: grid.cellSize
 
             sensor: Sensors.Sensor {
                 sensorId: modelData

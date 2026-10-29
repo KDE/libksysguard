@@ -29,13 +29,15 @@ Faces.SensorFace {
 
     // Arbitrary minimumWidth to make easier to align plasmoids in a predictable way
     Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 8, grid.Layout.minimumWidth)
-    Layout.preferredWidth: grid.preferredWidth + Kirigami.Units.largeSpacing
+    Layout.preferredWidth: Math.max(grid.preferredWidth, grid.implicitWidth) + Kirigami.Units.largeSpacing
+    Layout.preferredHeight: grid.implicitHeight
 
     contentItem: FaceGrid {
         id: grid
         controller: root.controller
         colorSource: root.colorSource
         compact: false
+        cellSize: root.formFactor === Faces.SensorFace.Planar ? 0 : Kirigami.Units.gridUnit * 3
         columns: root.columnCount > 0 ? root.columnCount : root.autoColumnCount
     }
 }
