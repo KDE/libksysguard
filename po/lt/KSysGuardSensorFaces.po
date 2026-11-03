@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libksysguard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-22 00:47+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2025-10-15 16:49+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: none\n"
@@ -329,7 +329,7 @@ msgctxt "@action:button"
 msgid "Back"
 msgstr "Atgal"
 
-#: SensorFaceController.cpp:450
+#: SensorFaceController.cpp:468
 #, kde-format
 msgid "System Monitor Sensor"
 msgstr "Sistemos prižiūryklės jutiklis"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: processcore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-10 00:47+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2026-04-09 11:11+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -130,117 +130,117 @@ msgstr "جلسة الطرفيّة"
 msgid "The controlling terminal on which this process is running."
 msgstr "الطرفية المتحكّمة التي تعمل فيها هذه العملية."
 
-#: extended_process_list.cpp:217
+#: extended_process_list.cpp:218
 #, kde-format
 msgid "User Time"
 msgstr "وقت المستخدم"
 
-#: extended_process_list.cpp:221
+#: extended_process_list.cpp:223
 #, kde-format
 msgid "System Time"
 msgstr "وقت النظام"
 
-#: extended_process_list.cpp:225
+#: extended_process_list.cpp:230
 #, kde-format
 msgid "Total Time"
 msgstr "الوقت الكلي"
 
-#: extended_process_list.cpp:228
+#: extended_process_list.cpp:235
 #, kde-format
 msgid "Time"
 msgstr "الوقت"
 
-#: extended_process_list.cpp:230
+#: extended_process_list.cpp:237
 #, kde-format
 msgid "The total user and system time that this process has been running for"
 msgstr "إجمالي وقت النظام والمستخدمين التي أمضته العملية لأجل"
 
-#: extended_process_list.cpp:235
+#: extended_process_list.cpp:242
 #, kde-format
 msgid "Start Time"
 msgstr "وقت البدء"
 
-#: extended_process_list.cpp:245
+#: extended_process_list.cpp:252
 #, kde-format
 msgid "User CPU Usage"
 msgstr "استخدام المستخدم للمعالج"
 
-#: extended_process_list.cpp:246
+#: extended_process_list.cpp:253
 #, kde-format
 msgid "User CPU"
 msgstr "معالج المستخدم"
 
-#: extended_process_list.cpp:253
+#: extended_process_list.cpp:260
 #, kde-format
 msgid "System CPU Usage"
 msgstr "استخدام النظام للمعالج"
 
-#: extended_process_list.cpp:254
+#: extended_process_list.cpp:261
 #, kde-format
 msgid "System CPU"
 msgstr "معالج النظام"
 
-#: extended_process_list.cpp:263
+#: extended_process_list.cpp:270
 #, kde-format
 msgid "Total CPU Usage"
 msgstr "استخدام المعالج الكلي"
 
-#: extended_process_list.cpp:269
+#: extended_process_list.cpp:276
 #, kde-format
 msgid "CPU"
 msgstr "المعالج"
 
-#: extended_process_list.cpp:273
+#: extended_process_list.cpp:280
 #, kde-format
 msgid "The current total CPU usage of the process."
 msgstr "كل ما تستخدمه العملية من المعالج حاليًا."
 
-#: extended_process_list.cpp:278
+#: extended_process_list.cpp:285
 #, kde-format
 msgid "Group User CPU Usage"
 msgstr "استخدام المعالج لمجموعة مستخدمين"
 
-#: extended_process_list.cpp:282
+#: extended_process_list.cpp:289
 #, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
 "مقدار استخدام المعالج المخصص لفضاء المستخدم بواسطة هذه العملية وجميع العناصر "
 "التابعة لها."
 
-#: extended_process_list.cpp:290
+#: extended_process_list.cpp:297
 #, kde-format
 msgid "Group System CPU Usage"
 msgstr "استخدام المعالج لمجموعة النظام"
 
-#: extended_process_list.cpp:294
+#: extended_process_list.cpp:301
 #, kde-format
 msgid "The amount of system CPU used by this process and all its children."
 msgstr ""
 "مقدار استخدام معالج النظام بواسطة هذه العملية وجميع العناصر التابعة لها."
 
-#: extended_process_list.cpp:303
+#: extended_process_list.cpp:310
 #, kde-format
 msgid "Group Total CPU Usage"
 msgstr "استخدام المعالج الكلي للمجموعة"
 
-#: extended_process_list.cpp:309
+#: extended_process_list.cpp:316
 #, kde-format
 msgid "Group CPU"
 msgstr "معالج المجموعة"
 
-#: extended_process_list.cpp:310
+#: extended_process_list.cpp:317
 #, kde-format
 msgid "The total amount of CPU used by this process and all its children."
 msgstr ""
 "مقدار استخدام معالج النظام الكلي بواسطة هذه العملية وجميع العناصر التابعة "
 "لها."
 
-#: extended_process_list.cpp:317
+#: extended_process_list.cpp:324
 #, kde-format
 msgid "Nice Level"
 msgstr "مستوى اللطافة"
 
-#: extended_process_list.cpp:319
+#: extended_process_list.cpp:326
 #, kde-format
 msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
@@ -249,27 +249,27 @@ msgstr ""
 "الأولوية التي تعمل بها العملية. تتراوح (في المجدول العادي) بين 19 (لطيفة "
 "جدًا، منخفضة الأولوية) إلى -19 (عالية الأولوية)."
 
-#: extended_process_list.cpp:323
+#: extended_process_list.cpp:330
 #, kde-format
 msgid "Scheduler"
 msgstr "المجدول"
 
-#: extended_process_list.cpp:328
+#: extended_process_list.cpp:335
 #, kde-format
 msgid "IO Priority Class"
 msgstr "فئة الأولوية للدخل والخرج"
 
-#: extended_process_list.cpp:334
+#: extended_process_list.cpp:341
 #, kde-format
 msgid "IO Nice Level"
 msgstr "مستوى اللطافة للدخل والخرج"
 
-#: extended_process_list.cpp:338
+#: extended_process_list.cpp:345
 #, kde-format
 msgid "VM Size"
 msgstr "حجم الجهاز الافتراضي"
 
-#: extended_process_list.cpp:343
+#: extended_process_list.cpp:350
 #, kde-format
 msgid ""
 "This is the amount of virtual memory space that the process is using, "
@@ -280,17 +280,17 @@ msgstr ""
 "المكتبات المشتركة وذاكرة الرسوميات والملفات في القرص وغيرها. ما من مغزًى "
 "تقريبًا لها الرقم."
 
-#: extended_process_list.cpp:348
+#: extended_process_list.cpp:355
 #, kde-format
 msgid "Resident Memory Usage"
 msgstr "استخدام ذاكرة المشغولة"
 
-#: extended_process_list.cpp:350
+#: extended_process_list.cpp:357
 #, kde-format
 msgid "Resident"
 msgstr "المشغولة"
 
-#: extended_process_list.cpp:354
+#: extended_process_list.cpp:361
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using and "
@@ -299,17 +299,17 @@ msgstr ""
 "هذا هو مقدار الذاكرة الفعلية التي تستخدمها هذه العملية وتتضمن مقدار الذاكرة "
 "المستخدمة بواسطة المكتبات المشتركة."
 
-#: extended_process_list.cpp:358
+#: extended_process_list.cpp:365
 #, kde-format
 msgid "Private Memory Usage"
 msgstr "استخدام الذاكرة الخاصة"
 
-#: extended_process_list.cpp:360
+#: extended_process_list.cpp:367
 #, kde-format
 msgid "Private"
 msgstr "خاص"
 
-#: extended_process_list.cpp:364
+#: extended_process_list.cpp:371
 #, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
@@ -320,17 +320,17 @@ msgstr ""
 "استخدام الذاكرة الخاصة للعملية.  لا تتضمن أي ذاكرة متبادلة، ولا حجم رمز "
 "مكتباتها المشتركة."
 
-#: extended_process_list.cpp:371
+#: extended_process_list.cpp:378
 #, kde-format
 msgid "Shared Memory Usage"
 msgstr "استخدام الذاكرة المشتركة"
 
-#: extended_process_list.cpp:380
+#: extended_process_list.cpp:387
 #, kde-format
 msgid "Shared"
 msgstr "مشتركة"
 
-#: extended_process_list.cpp:382
+#: extended_process_list.cpp:389
 #, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
@@ -340,19 +340,19 @@ msgstr ""
 "هذا هو مقدار الذاكرة الفيزيائية الحقيقية التي تستخدمها المكتبات المشتركة.هذه "
 "الذاكرة مشتركة بين أغلب العمليات التي تستخدم هذه المكتبة."
 
-#: extended_process_list.cpp:390
+#: extended_process_list.cpp:397
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
 msgstr "الاستخدام النسبي للذاكرة"
 
-#: extended_process_list.cpp:393
+#: extended_process_list.cpp:400
 #, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
 msgstr "النسبي"
 
-#: extended_process_list.cpp:400
+#: extended_process_list.cpp:407
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -367,19 +367,19 @@ msgstr ""
 "تشترك في هذه الذاكرة، ثم إضافة الذاكرة الخاصة لهذه العملية. قد لا تكون هذه "
 "القيمة متاحة لعمليات معينة."
 
-#: extended_process_list.cpp:407
+#: extended_process_list.cpp:414
 #, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
 msgstr "استخدام الذاكرة"
 
-#: extended_process_list.cpp:410
+#: extended_process_list.cpp:417
 #, kde-format
 msgctxt "@title:column"
 msgid "Memory"
 msgstr "الذاكرة"
 
-#: extended_process_list.cpp:417
+#: extended_process_list.cpp:424
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -392,91 +392,91 @@ msgstr ""
 "ستستخدم استخدام الذاكرة النسبية إذا كان متاحًا، واستخدام الذاكرة الخاصة إذا "
 "كان لها قيمة، واستخدام الذاكرة المقيمة بخلاف ذلك."
 
-#: extended_process_list.cpp:422
+#: extended_process_list.cpp:429
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
 msgstr "استخدام المبادلة"
 
-#: extended_process_list.cpp:423
+#: extended_process_list.cpp:430
 #, kde-format
 msgctxt "@title:column"
 msgid "Swap"
 msgstr "المبادلة"
 
-#: extended_process_list.cpp:427
+#: extended_process_list.cpp:434
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
 msgstr "هذا تقريب لمقدار ذاكرة المبادلة التي تستخدمها هذه العملية."
 
-#: extended_process_list.cpp:431
+#: extended_process_list.cpp:438
 #, kde-format
 msgid "Name"
 msgstr "الاسم"
 
-#: extended_process_list.cpp:432
+#: extended_process_list.cpp:439
 #, kde-format
 msgid "The process name."
 msgstr "اسم العملية."
 
-#: extended_process_list.cpp:437
+#: extended_process_list.cpp:444
 #, kde-format
 msgid "Command"
 msgstr "الأمر"
 
-#: extended_process_list.cpp:441
+#: extended_process_list.cpp:448
 #, kde-format
 msgid "The command with which this process was launched."
 msgstr "الأمر الذي أطلق هذه العملية."
 
-#: extended_process_list.cpp:445
+#: extended_process_list.cpp:452
 #, kde-format
 msgid "Status"
 msgstr "الحالة"
 
-#: extended_process_list.cpp:451
+#: extended_process_list.cpp:458
 #, kde-format
 msgid "IO Characters Read"
 msgstr "قراءة محارف الدخل والخرج"
 
-#: extended_process_list.cpp:460
+#: extended_process_list.cpp:467
 #, kde-format
 msgid "IO Characters Written"
 msgstr "كتابة محارف الدخل والخرج"
 
-#: extended_process_list.cpp:469
+#: extended_process_list.cpp:476
 #, kde-format
 msgid "IO Read Syscalls"
 msgstr "نداءات النظام لقراءة الدخل والخرج"
 
-#: extended_process_list.cpp:478
+#: extended_process_list.cpp:485
 #, kde-format
 msgid "IO Read Syscalls Rate"
 msgstr "معدل نداءات النظام لقراءة الدخل والخرج"
 
-#: extended_process_list.cpp:487
+#: extended_process_list.cpp:494
 #, kde-format
 msgid "IO Write Syscalls"
 msgstr "نداءات النظام لكتابة الدخل والخرج"
 
-#: extended_process_list.cpp:496
+#: extended_process_list.cpp:503
 #, kde-format
 msgid "IO Write Syscalls Rate"
 msgstr "معدل نداءات النظام لكتابة الدخل والخرج"
 
-#: extended_process_list.cpp:505
+#: extended_process_list.cpp:512
 #, kde-format
 msgid "IO Characters Actually Read"
 msgstr "القراة الفعلية لمحارف الدخل والخرج"
 
-#: extended_process_list.cpp:514
+#: extended_process_list.cpp:521
 #, kde-format
 msgid "IO Characters Read Rate"
 msgstr "معدل قراءة محارف الدخل والخرج"
 
-#: extended_process_list.cpp:517
+#: extended_process_list.cpp:524
 #, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
@@ -485,12 +485,12 @@ msgstr ""
 "معدل القراءة لجميع عمليات الإدخال / الإخراج، بما في ذلك خبيئة القرص وغيرها "
 "من عمليات الإدخال والإخراج غير المادية."
 
-#: extended_process_list.cpp:524
+#: extended_process_list.cpp:531
 #, kde-format
 msgid "IO Characters Written Rate"
 msgstr "معدل كتابة محارف الدخل والخرج"
 
-#: extended_process_list.cpp:527
+#: extended_process_list.cpp:534
 #, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
@@ -499,37 +499,37 @@ msgstr ""
 "معدل كتابة لجميع عمليات الإدخال / الإخراج، بما في ذلك خبيئة القرص وغيرها من "
 "عمليات الإدخال والإخراج غير المادية."
 
-#: extended_process_list.cpp:534
+#: extended_process_list.cpp:541
 #, kde-format
 msgid "Disk Read Rate"
 msgstr "معدل قراءة القرص"
 
-#: extended_process_list.cpp:538
+#: extended_process_list.cpp:545
 #, kde-format
 msgid "Read"
 msgstr "القراءة"
 
-#: extended_process_list.cpp:539
+#: extended_process_list.cpp:546
 #, kde-format
 msgid "The rate of data being read from disk."
 msgstr "معدل البيانات المقروءة من القرص."
 
-#: extended_process_list.cpp:545
+#: extended_process_list.cpp:552
 #, kde-format
 msgid "Disk Write Rate"
 msgstr "معدل الكتابة في القرص"
 
-#: extended_process_list.cpp:549
+#: extended_process_list.cpp:556
 #, kde-format
 msgid "Write"
 msgstr "الكتابة"
 
-#: extended_process_list.cpp:550
+#: extended_process_list.cpp:557
 #, kde-format
 msgid "The rate of data being written to the disk."
 msgstr "معدل كتابة البيانات على القرص."
 
-#: extended_process_list.cpp:556
+#: extended_process_list.cpp:563
 #, kde-format
 msgid "Threads"
 msgstr "الخطوط"
