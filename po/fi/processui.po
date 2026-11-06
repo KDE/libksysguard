@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
 "PO-Revision-Date: 2023-02-20 22:08+0200\n"
-"Last-Translator: Tommi Nieminen <tommi.nieminen@legisign.org>\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -653,9 +653,7 @@ msgid ""
 "privileges via setuid etc.</qt>"
 msgstr ""
 "<qt>Linux-lippu NoNewPrivileges: jos asetettu, prosessi ei voi saada lisää "
-"käyttölikeuksia setuidin tms. kautta.</qt><qt>Linux-lippu NoNewPrivileges: "
-"jos asetettu, prosessi ei voi saada lisää käyttölikeuksia setuidin tms. "
-"kautta.</qt>"
+"käyttölikeuksia setuidin tms. kautta.</qt>"
 
 #: ProcessModel.cpp:1095
 #, kde-format
@@ -699,9 +697,8 @@ msgid ""
 "<qt>Mandatory Access Control (SELinux or AppArmor) context for this process."
 "</qt>"
 msgstr ""
-"<qt>Tämän prosessi pakollisen käyttöoikeuksienhallinnan (SELinux- tai "
-"AppArmor-) konteksti.</qt><qt>Tämän prosessi pakollisen "
-"käyttöoikeuksienhallinnan (SELinux- tai AppArmor-) konteksti.</qt>"
+"<qt>Tämän prosessin pakollisen käyttöoikeuksienhallinnan (SELinux- tai "
+"AppArmor-) konteksti.</qt>"
 
 #: ProcessModel.cpp:1112
 #, kde-format
@@ -943,10 +940,7 @@ msgid ""
 msgstr ""
 "<qt><i>Teknistä tietoa:</i> Tämä näyttää /proc/[pid]/cgroupista luetun "
 "cgroup-jäsenyyden. SystemD ja sovellussäiliöt (container) käyttävät "
-"cgroupeja rajoittamaan ja valvomaan resurssien käyttöä.<qt><i>Teknistä "
-"tietoa:</i> Tämä näyttää /proc/[pid]/cgroupista luetun cgroup-jäsenyyden. "
-"SystemD ja sovellussäiliöt (container) käyttävät cgroupeja rajoittamaan ja "
-"valvomaan resurssien käyttöä."
+"cgroupeja rajoittamaan ja valvomaan resurssien käyttöä."
 
 #: ProcessModel.cpp:1207
 #, kde-format
@@ -1578,8 +1572,7 @@ msgid ""
 "process list"
 msgstr ""
 "Suodata prosesseja antamalla pilkuin erotettu luettelo hakusanoja tai "
-"säännöllisiä lausekkeitaSuodata prosesseja antamalla pilkuin erotettu "
-"luettelo hakusanoja tai säännöllisiä lausekkeita"
+"säännöllisiä lausekkeita"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, txtFilter)
 #: ProcessWidgetUI.ui:69
