@@ -19,6 +19,7 @@ ecm_add_test(sensorfacecontrollertest.cpp LINK_LIBRARIES
     KF6::ConfigCore
     KF6::ConfigGui
     KF6::I18n
+    KF6::I18nQml
     KF6::Package
     KF6::ConfigQml
     KF6::Solid

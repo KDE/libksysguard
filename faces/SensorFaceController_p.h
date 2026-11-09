@@ -9,7 +9,7 @@
 #include <KConfigGroup>
 #include <KConfigLoader>
 #include <KConfigPropertyMap>
-#include <KLocalizedContext>
+#include <KLocalizedQmlContext>
 #include <KPackage/PackageLoader>
 #include <QJsonArray>
 #include <QQuickItem>
@@ -108,7 +108,7 @@ public:
     bool configNeedsSave = false;
     KPackage::Package facePackage;
     QString faceId;
-    KLocalizedContext *contextObj = nullptr;
+    KLocalizedQmlContext *contextObj = nullptr;
     KConfigGroup configGroup;
     KConfigGroup appearanceGroup;
     KConfigGroup sensorsGroup;

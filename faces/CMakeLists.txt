@@ -78,6 +78,7 @@ target_link_libraries(SensorFaces
         Qt::Core
         Qt::DBus
         KF6::I18n
+        KF6::I18nQml
         KF6::Package
         KF6::ConfigQml
         KF6::Solid

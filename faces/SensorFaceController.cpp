@@ -411,7 +411,7 @@ SensorFaceController::SensorFaceController(KConfigGroup &config, QQmlEngine *eng
         d->sensorsGroup.sync();
     });
 
-    d->contextObj = new KLocalizedContext(this);
+    d->contextObj = new KLocalizedQmlContext(this);
 
     d->resolveSensors(d->readAndUpdateSensors(d->sensorsGroup, QStringLiteral("totalSensors")), [this](SensorResolver *resolver) {
         d->totalSensors = resolver->found;
