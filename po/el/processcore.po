@@ -21,112 +21,112 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 
 #: cgroup_data_model.cpp:50
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title"
 msgid "Desktop ID"
-msgstr ""
+msgstr "ID επιφάνειας εργασίας"
 
 #: cgroup_data_model.cpp:64
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title"
 msgid "Icon"
-msgstr ""
+msgstr "Εικονίδιο"
 
 #: cgroup_data_model.cpp:78
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: extended_process_list.cpp:110
-#, kde-format
+#, fuzzy, kde-format
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: extended_process_list.cpp:111
-#, kde-format
+#, fuzzy, kde-format
 msgid "The unique Process ID that identifies this process."
-msgstr ""
+msgstr "Το μοναδικό αναγνωριστικό (ID) αυτής της διεργασίας."
 
 #: extended_process_list.cpp:116
-#, kde-format
+#, fuzzy, kde-format
 msgid "Parent PID"
-msgstr ""
+msgstr "Γονικό PID"
 
 #: extended_process_list.cpp:123
-#, kde-format
+#, fuzzy, kde-format
 msgid "Login"
-msgstr ""
+msgstr "Χρήστης"
 
 #: extended_process_list.cpp:124
-#, kde-format
+#, fuzzy, kde-format
 msgid "The user who owns this process."
-msgstr ""
+msgstr "Ο χρήστης στον οποίο ανήκει αυτή η διεργασία."
 
 #: extended_process_list.cpp:128
-#, kde-format
+#, fuzzy, kde-format
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: extended_process_list.cpp:134
-#, kde-format
+#, fuzzy, kde-format
 msgid "Username"
-msgstr ""
+msgstr "Όνομα χρήστη"
 
 #: extended_process_list.cpp:150
-#, kde-format
+#, fuzzy, kde-format
 msgid "Can Login"
-msgstr ""
+msgstr "Δυνατότητα σύνδεσης"
 
 #: extended_process_list.cpp:177
-#, kde-format
+#, fuzzy, kde-format
 msgid "EUID"
-msgstr ""
+msgstr "EUID"
 
 #: extended_process_list.cpp:181
-#, kde-format
+#, fuzzy, kde-format
 msgid "suid"
-msgstr ""
+msgstr "suid"
 
 #: extended_process_list.cpp:185
-#, kde-format
+#, fuzzy, kde-format
 msgid "fsuid"
-msgstr ""
+msgstr "fsuid"
 
 #: extended_process_list.cpp:189
-#, kde-format
+#, fuzzy, kde-format
 msgid "gid"
-msgstr ""
+msgstr "gid"
 
 #: extended_process_list.cpp:193
-#, kde-format
+#, fuzzy, kde-format
 msgid "egid"
-msgstr ""
+msgstr "egid"
 
 #: extended_process_list.cpp:197
-#, kde-format
+#, fuzzy, kde-format
 msgid "sgid"
-msgstr ""
+msgstr "sgid"
 
 #: extended_process_list.cpp:201
-#, kde-format
+#, fuzzy, kde-format
 msgid "fsgid"
-msgstr ""
+msgstr "fsgid"
 
 #: extended_process_list.cpp:206
-#, kde-format
+#, fuzzy, kde-format
 msgid "Tracer Pid"
-msgstr ""
+msgstr "PID ιχνηλάτη"
 
 #: extended_process_list.cpp:213
-#, kde-format
+#, fuzzy, kde-format
 msgid "tty"
-msgstr ""
+msgstr "tty"
 
 #: extended_process_list.cpp:214
-#, kde-format
+#, fuzzy, kde-format
 msgid "The controlling terminal on which this process is running."
-msgstr ""
+msgstr "Το τερματικό ελέγχου στο οποίο εκτελείται αυτή η διεργασία."
 
 #: extended_process_list.cpp:218
 #, fuzzy, kde-format
@@ -136,9 +136,9 @@ msgid "User Time"
 msgstr "Πραγματικού χρόνου"
 
 #: extended_process_list.cpp:223
-#, kde-format
+#, fuzzy, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Χρόνος συστήματος"
 
 #: extended_process_list.cpp:230
 #, fuzzy, kde-format
@@ -152,12 +152,13 @@ msgstr "Πραγματικού χρόνου"
 #| msgctxt "Priority Class"
 #| msgid "Real Time"
 msgid "Time"
-msgstr "Πραγματικού χρόνου"
+msgstr "Χρόνος"
 
 #: extended_process_list.cpp:237
-#, kde-format
+#, fuzzy, kde-format
 msgid "The total user and system time that this process has been running for"
 msgstr ""
+"Ο συνολικός χρόνος χρήστη και συστήματος που εκτελείται αυτή η διεργασία"
 
 #: extended_process_list.cpp:242
 #, fuzzy, kde-format
@@ -167,182 +168,201 @@ msgid "Start Time"
 msgstr "Πραγματικού χρόνου"
 
 #: extended_process_list.cpp:252
-#, kde-format
+#, fuzzy, kde-format
 msgid "User CPU Usage"
-msgstr ""
+msgstr "Χρήση CPU χρήστη"
 
 #: extended_process_list.cpp:253
-#, kde-format
+#, fuzzy, kde-format
 msgid "User CPU"
-msgstr ""
+msgstr "CPU χρήστη"
 
 #: extended_process_list.cpp:260
-#, kde-format
+#, fuzzy, kde-format
 msgid "System CPU Usage"
-msgstr ""
+msgstr "Χρήση CPU συστήματος"
 
 #: extended_process_list.cpp:261
-#, kde-format
+#, fuzzy, kde-format
 msgid "System CPU"
-msgstr ""
+msgstr "CPU συστήματος"
 
 #: extended_process_list.cpp:270
-#, kde-format
+#, fuzzy, kde-format
 msgid "Total CPU Usage"
-msgstr ""
+msgstr "Συνολική χρήση CPU"
 
 #: extended_process_list.cpp:276
-#, kde-format
+#, fuzzy, kde-format
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: extended_process_list.cpp:280
-#, kde-format
+#, fuzzy, kde-format
 msgid "The current total CPU usage of the process."
-msgstr ""
+msgstr "Η τρέχουσα συνολική χρήση CPU της διεργασίας."
 
 #: extended_process_list.cpp:285
-#, kde-format
+#, fuzzy, kde-format
 msgid "Group User CPU Usage"
-msgstr ""
+msgstr "Χρήση CPU χρήστη ομάδας"
 
 #: extended_process_list.cpp:289
-#, kde-format
+#, fuzzy, kde-format
 msgid "The amount of userspace CPU used by this process and all its children."
 msgstr ""
+"Η CPU χώρου χρήστη που χρησιμοποιεί αυτή η διεργασία και όλες οι θυγατρικές "
+"της."
 
 #: extended_process_list.cpp:297
-#, kde-format
+#, fuzzy, kde-format
 msgid "Group System CPU Usage"
-msgstr ""
+msgstr "Χρήση CPU συστήματος ομάδας"
 
 #: extended_process_list.cpp:301
-#, kde-format
+#, fuzzy, kde-format
 msgid "The amount of system CPU used by this process and all its children."
 msgstr ""
+"Η CPU συστήματος που χρησιμοποιεί αυτή η διεργασία και όλες οι θυγατρικές "
+"της."
 
 #: extended_process_list.cpp:310
-#, kde-format
+#, fuzzy, kde-format
 msgid "Group Total CPU Usage"
-msgstr ""
+msgstr "Συνολική χρήση CPU ομάδας"
 
 #: extended_process_list.cpp:316
-#, kde-format
+#, fuzzy, kde-format
 msgid "Group CPU"
-msgstr ""
+msgstr "CPU ομάδας"
 
 #: extended_process_list.cpp:317
-#, kde-format
+#, fuzzy, kde-format
 msgid "The total amount of CPU used by this process and all its children."
 msgstr ""
+"Η συνολική CPU που χρησιμοποιεί αυτή η διεργασία και όλες οι θυγατρικές της."
 
 #: extended_process_list.cpp:324
-#, kde-format
+#, fuzzy, kde-format
 msgid "Nice Level"
-msgstr ""
+msgstr "Επίπεδο nice"
 
 #: extended_process_list.cpp:326
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "The priority with which this process is being run. For the normal scheduler, "
 "this ranges from 19 (very nice, least priority) to -19 (top priority)."
 msgstr ""
+"Η προτεραιότητα με την οποία εκτελείται αυτή η διεργασία. Για τον κανονικό "
+"χρονοπρογραμματιστή κυμαίνεται από 19 (πολύ «ευγενική», χαμηλότερη "
+"προτεραιότητα) έως -19 (ανώτατη προτεραιότητα)."
 
 #: extended_process_list.cpp:330
-#, kde-format
+#, fuzzy, kde-format
 msgid "Scheduler"
-msgstr ""
+msgstr "Χρονοπρογραμματιστής"
 
 #: extended_process_list.cpp:335
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Priority Class"
-msgstr ""
+msgstr "Κλάση προτεραιότητας Ε/Ε"
 
 #: extended_process_list.cpp:341
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Nice Level"
-msgstr ""
+msgstr "Επίπεδο nice Ε/Ε"
 
 #: extended_process_list.cpp:345
-#, kde-format
+#, fuzzy, kde-format
 msgid "VM Size"
-msgstr ""
+msgstr "Μέγεθος VM"
 
 #: extended_process_list.cpp:350
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "This is the amount of virtual memory space that the process is using, "
 "included shared libraries, graphics memory, files on disk, and so on. This "
 "number is almost meaningless."
 msgstr ""
+"Ο χώρος εικονικής μνήμης που χρησιμοποιεί η διεργασία, μαζί με κοινόχρηστες "
+"βιβλιοθήκες, μνήμη γραφικών, αρχεία στον δίσκο κ.λπ. Ο αριθμός αυτός δεν "
+"έχει σχεδόν καμία πρακτική σημασία."
 
 #: extended_process_list.cpp:355
-#, kde-format
+#, fuzzy, kde-format
 msgid "Resident Memory Usage"
-msgstr ""
+msgstr "Χρήση μόνιμης μνήμης"
 
 #: extended_process_list.cpp:357
-#, kde-format
+#, fuzzy, kde-format
 msgid "Resident"
-msgstr ""
+msgstr "Μόνιμη"
 
 #: extended_process_list.cpp:361
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using and "
 "includes the amount of memory used by shared libraries."
 msgstr ""
+"Η φυσική μνήμη που χρησιμοποιεί αυτή η διεργασία, μαζί με τη μνήμη των "
+"κοινόχρηστων βιβλιοθηκών."
 
 #: extended_process_list.cpp:365
-#, kde-format
+#, fuzzy, kde-format
 msgid "Private Memory Usage"
-msgstr ""
+msgstr "Χρήση ιδιωτικής μνήμης"
 
 #: extended_process_list.cpp:367
-#, kde-format
+#, fuzzy, kde-format
 msgid "Private"
-msgstr ""
+msgstr "Ιδιωτική"
 
 #: extended_process_list.cpp:371
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "This is the amount of physical memory that this process is using by itself, "
 "and approximates the Private memory usage of the process. It does not "
 "include any swapped out memory, nor the code size of its shared libraries."
 msgstr ""
+"Η φυσική μνήμη που χρησιμοποιεί η ίδια η διεργασία, κατά προσέγγιση η "
+"ιδιωτική της μνήμη. Δεν περιλαμβάνει μνήμη στο swap ούτε τον κώδικα των "
+"κοινόχρηστων βιβλιοθηκών της."
 
 #: extended_process_list.cpp:378
-#, kde-format
+#, fuzzy, kde-format
 msgid "Shared Memory Usage"
-msgstr ""
+msgstr "Χρήση κοινόχρηστης μνήμης"
 
 #: extended_process_list.cpp:387
-#, kde-format
+#, fuzzy, kde-format
 msgid "Shared"
-msgstr ""
+msgstr "Κοινόχρηστη"
 
 #: extended_process_list.cpp:389
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "This is approximately the amount of real physical memory that this process's "
 "shared libraries are using. This memory is shared among all processes that "
 "use this library."
 msgstr ""
+"Κατά προσέγγιση η πραγματική φυσική μνήμη που χρησιμοποιούν οι κοινόχρηστες "
+"βιβλιοθήκες της διεργασίας. Αυτή η μνήμη μοιράζεται σε όλες τις διεργασίες "
+"που χρησιμοποιούν τη βιβλιοθήκη."
 
 #: extended_process_list.cpp:397
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:column"
 msgid "Proportional Memory Usage"
-msgstr ""
+msgstr "Αναλογική χρήση μνήμης"
 
 #: extended_process_list.cpp:400
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:column"
 msgid "Proportional"
-msgstr ""
+msgstr "Αναλογική"
 
 #: extended_process_list.cpp:407
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -351,21 +371,25 @@ msgid ""
 "process' private memory. This value may not be available for certain "
 "processes."
 msgstr ""
+"Προσέγγιση της πραγματικής φυσικής μνήμης που χρησιμοποιεί η διεργασία. "
+"Υπολογίζεται διαιρώντας την κοινόχρηστη μνήμη της με τον αριθμό των "
+"διεργασιών που τη μοιράζονται και προσθέτοντας την ιδιωτική της μνήμη. Η "
+"τιμή ίσως να μην είναι διαθέσιμη για ορισμένες διεργασίες."
 
 #: extended_process_list.cpp:414
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:column"
 msgid "Memory Usage"
-msgstr ""
+msgstr "Χρήση μνήμης"
 
 #: extended_process_list.cpp:417
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:column"
 msgid "Memory"
-msgstr ""
+msgstr "Μνήμη"
 
 #: extended_process_list.cpp:424
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the real amount of physical memory that this "
@@ -373,200 +397,207 @@ msgid ""
 "the Private Memory Usage if that has a value, and the Resident Memory Usage "
 "otherwise."
 msgstr ""
+"Προσέγγιση της πραγματικής φυσικής μνήμης που χρησιμοποιεί η διεργασία. "
+"Χρησιμοποιεί την αναλογική χρήση μνήμης αν είναι διαθέσιμη, αλλιώς την "
+"ιδιωτική αν έχει τιμή, και σε κάθε άλλη περίπτωση τη μόνιμη."
 
 #: extended_process_list.cpp:429
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:column"
 msgid "Swap Usage"
-msgstr ""
+msgstr "Χρήση swap"
 
 #: extended_process_list.cpp:430
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:column"
 msgid "Swap"
-msgstr ""
+msgstr "Swap"
 
 #: extended_process_list.cpp:434
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This is an approximation of the amount of swap memory this process is using."
-msgstr ""
+msgstr "Προσέγγιση της μνήμης swap που χρησιμοποιεί αυτή η διεργασία."
 
 #: extended_process_list.cpp:438
-#, kde-format
+#, fuzzy, kde-format
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: extended_process_list.cpp:439
-#, kde-format
+#, fuzzy, kde-format
 msgid "The process name."
-msgstr ""
+msgstr "Το όνομα της διεργασίας."
 
 #: extended_process_list.cpp:444
-#, kde-format
+#, fuzzy, kde-format
 msgid "Command"
-msgstr ""
+msgstr "Εντολή"
 
 #: extended_process_list.cpp:448
-#, kde-format
+#, fuzzy, kde-format
 msgid "The command with which this process was launched."
-msgstr ""
+msgstr "Η εντολή με την οποία εκκινήθηκε αυτή η διεργασία."
 
 #: extended_process_list.cpp:452
-#, kde-format
+#, fuzzy, kde-format
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #: extended_process_list.cpp:458
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Characters Read"
-msgstr ""
+msgstr "Χαρακτήρες Ε/Ε που διαβάστηκαν"
 
 #: extended_process_list.cpp:467
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Characters Written"
-msgstr ""
+msgstr "Χαρακτήρες Ε/Ε που γράφτηκαν"
 
 #: extended_process_list.cpp:476
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Read Syscalls"
-msgstr ""
+msgstr "Κλήσεις συστήματος ανάγνωσης Ε/Ε"
 
 #: extended_process_list.cpp:485
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Read Syscalls Rate"
-msgstr ""
+msgstr "Ρυθμός κλήσεων συστήματος ανάγνωσης Ε/Ε"
 
 #: extended_process_list.cpp:494
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Write Syscalls"
-msgstr ""
+msgstr "Κλήσεις συστήματος εγγραφής Ε/Ε"
 
 #: extended_process_list.cpp:503
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Write Syscalls Rate"
-msgstr ""
+msgstr "Ρυθμός κλήσεων συστήματος εγγραφής Ε/Ε"
 
 #: extended_process_list.cpp:512
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Characters Actually Read"
-msgstr ""
+msgstr "Χαρακτήρες Ε/Ε που διαβάστηκαν πραγματικά"
 
 #: extended_process_list.cpp:521
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Characters Read Rate"
-msgstr ""
+msgstr "Ρυθμός ανάγνωσης χαρακτήρων Ε/Ε"
 
 #: extended_process_list.cpp:524
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "The read rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"Ο ρυθμός ανάγνωσης για όλη την Ε/Ε της διεργασίας, μαζί με την κρυφή μνήμη "
+"δίσκου και άλλη μη φυσική Ε/Ε."
 
 #: extended_process_list.cpp:531
-#, kde-format
+#, fuzzy, kde-format
 msgid "IO Characters Written Rate"
-msgstr ""
+msgstr "Ρυθμός εγγραφής χαρακτήρων Ε/Ε"
 
 #: extended_process_list.cpp:534
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "The write rate for all of a process' IO, including disk cache and other "
 "nonphysical IO."
 msgstr ""
+"Ο ρυθμός εγγραφής για όλη την Ε/Ε της διεργασίας, μαζί με την κρυφή μνήμη "
+"δίσκου και άλλη μη φυσική Ε/Ε."
 
 #: extended_process_list.cpp:541
-#, kde-format
+#, fuzzy, kde-format
 msgid "Disk Read Rate"
-msgstr ""
+msgstr "Ρυθμός ανάγνωσης δίσκου"
 
 #: extended_process_list.cpp:545
-#, kde-format
+#, fuzzy, kde-format
 msgid "Read"
-msgstr ""
+msgstr "Ανάγνωση"
 
 #: extended_process_list.cpp:546
-#, kde-format
+#, fuzzy, kde-format
 msgid "The rate of data being read from disk."
-msgstr ""
+msgstr "Ο ρυθμός ανάγνωσης δεδομένων από τον δίσκο."
 
 #: extended_process_list.cpp:552
-#, kde-format
+#, fuzzy, kde-format
 msgid "Disk Write Rate"
-msgstr ""
+msgstr "Ρυθμός εγγραφής δίσκου"
 
 #: extended_process_list.cpp:556
-#, kde-format
+#, fuzzy, kde-format
 msgid "Write"
-msgstr ""
+msgstr "Εγγραφή"
 
 #: extended_process_list.cpp:557
-#, kde-format
+#, fuzzy, kde-format
 msgid "The rate of data being written to the disk."
-msgstr ""
+msgstr "Ο ρυθμός εγγραφής δεδομένων στον δίσκο."
 
 #: extended_process_list.cpp:563
-#, kde-format
+#, fuzzy, kde-format
 msgid "Threads"
-msgstr ""
+msgstr "Νήματα"
 
 #: gpu_utils.cpp:19
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title %1 is GPU number"
 msgid "GPU %1"
-msgstr ""
+msgstr "GPU %1"
 
 #: gpu_utils.cpp:36
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title %1 is vendor name"
 msgid "%1 GPU"
-msgstr ""
+msgstr "GPU %1"
 
 #: plugins/gpu/gpu.cpp:40
-#, kde-format
+#, fuzzy, kde-format
 msgid "GPU"
-msgstr ""
+msgstr "GPU"
 
 #: plugins/gpu/gpu.cpp:131
-#, kde-format
+#, fuzzy, kde-format
 msgid "GPU Usage"
-msgstr ""
+msgstr "Χρήση GPU"
 
 #: plugins/gpu/gpu.cpp:134
-#, kde-format
+#, fuzzy, kde-format
 msgid "GPU Memory"
-msgstr ""
+msgstr "Μνήμη GPU"
 
 #: plugins/gpu/gpu.cpp:137
-#, kde-format
+#, fuzzy, kde-format
 msgid "Displays which GPU the process is using"
-msgstr ""
+msgstr "Δείχνει ποια GPU χρησιμοποιεί η διεργασία"
 
 #: plugins/network/network.cpp:36
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title"
 msgid "Download Speed"
-msgstr ""
+msgstr "Ταχύτητα λήψης"
 
 #: plugins/network/network.cpp:37
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title"
 msgid "Download"
-msgstr ""
+msgstr "Λήψη"
 
 #: plugins/network/network.cpp:40
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title"
 msgid "Upload Speed"
-msgstr ""
+msgstr "Ταχύτητα αποστολής"
 
 #: plugins/network/network.cpp:41
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title"
 msgid "Upload"
-msgstr ""
+msgstr "Αποστολή"
 
 #: process.cpp:98 process.cpp:119
 #, kde-format
@@ -707,36 +738,36 @@ msgid "Idle"
 msgstr "Σε αδράνεια"
 
 #: process_controller.cpp:358
-#, kde-format
+#, fuzzy, kde-format
 msgid "Success"
-msgstr ""
+msgstr "Επιτυχία"
 
 #: process_controller.cpp:360
-#, kde-format
+#, fuzzy, kde-format
 msgid "Insufficient permissions."
-msgstr ""
+msgstr "Ανεπαρκή δικαιώματα."
 
 #: process_controller.cpp:362
-#, kde-format
+#, fuzzy, kde-format
 msgid "No matching process was found."
-msgstr ""
+msgstr "Δεν βρέθηκε αντίστοιχη διεργασία."
 
 #: process_controller.cpp:364
-#, kde-format
+#, fuzzy, kde-format
 msgid "Not supported on the current system."
-msgstr ""
+msgstr "Δεν υποστηρίζεται στο τρέχον σύστημα."
 
 #: process_controller.cpp:366
-#, kde-format
+#, fuzzy, kde-format
 msgid "The user cancelled."
-msgstr ""
+msgstr "Ο χρήστης ακύρωσε."
 
 #: process_controller.cpp:368
-#, kde-format
+#, fuzzy, kde-format
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Παρουσιάστηκε μη καθορισμένο σφάλμα."
 
 #: process_controller.cpp:370
-#, kde-format
+#, fuzzy, kde-format
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Παρουσιάστηκε άγνωστο σφάλμα."
