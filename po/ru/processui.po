@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: processui\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 06:31+0000\n"
-"PO-Revision-Date: 2023-03-17 16:15+0300\n"
-"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"PO-Revision-Date: 2026-11-11 22:56+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -1312,8 +1312,8 @@ msgid ""
 msgstr ""
 "<para><emphasis strong='true'>Состояние процесса:</emphasis> %1 %2</"
 "para><para><emphasis strong='true'>Использование ЦП пользователем:</"
-"emphasis> %3%</para><para><emphasis strong='true'>Использование ЦП ядром:</"
-"emphasis> %4%</para>"
+"emphasis> %3 %</para><para><emphasis strong='true'>Использование ЦП ядром:</"
+"emphasis> %4 %</para>"
 
 #: ProcessModel.cpp:1758
 #, kde-kuit-format
@@ -1326,9 +1326,9 @@ msgid ""
 msgstr ""
 "<para><emphasis strong='true'>Количество дочерних процессов:</emphasis> %1</"
 "para><para><emphasis strong='true'>Использование ЦП в режиме пользователя:</"
-"emphasis> %2%</para><para><emphasis strong='true'>Использование ЦП в режиме "
-"ядра:</emphasis> %3%</para><para><emphasis strong='true'>Общее использование "
-"ЦП:</emphasis> %4%</para>"
+"emphasis> %2 %</para><para><emphasis strong='true'>Использование ЦП в режиме "
+"ядра:</emphasis> %3 %</para><para><emphasis strong='true'>Общее "
+"использование ЦП:</emphasis> %4 %</para>"
 
 #: ProcessModel.cpp:1769
 #, kde-kuit-format
@@ -1357,8 +1357,8 @@ msgid ""
 "<para><emphasis strong='true'>Memory usage:</emphasis> %1 out of %2  (%3 %)</"
 "para>"
 msgstr ""
-"<para><emphasis strong='true'>Использование памяти:</emphasis> %1 из %2  (%3 "
-"%)</para>"
+"<para><emphasis strong='true'>Использование памяти:</emphasis> %1 из %2  "
+"(%3 %)</para>"
 
 #: ProcessModel.cpp:1809
 #, kde-kuit-format
@@ -1374,7 +1374,7 @@ msgid ""
 "%)</para>"
 msgstr ""
 "<para><emphasis strong='true'>Использование резидентной памяти:</emphasis> "
-"%1 из %2  (%3 %)</para>"
+"%1 из %2  (%3 %)</para>"
 
 #: ProcessModel.cpp:1819
 #, kde-kuit-format
@@ -1402,7 +1402,7 @@ msgid ""
 "of %2  (%3 %)</para>"
 msgstr ""
 "<para><emphasis strong='true'>Использование памяти разделяемыми библиотеками:"
-"</emphasis> %1 из %2  (%3 %)</para>"
+"</emphasis> %1 из %2  (%3 %)</para>"
 
 #: ProcessModel.cpp:1836 ProcessModel.cpp:1897
 #, kde-kuit-format
@@ -1442,7 +1442,7 @@ msgid ""
 "(%3 %)</para>"
 msgstr ""
 "<para><emphasis strong='true'>Общее использование памяти:</emphasis> %1 из "
-"%2  (%3 %)</para>"
+"%2  (%3 %)</para>"
 
 #: ProcessModel.cpp:2181
 #, kde-format
@@ -1567,7 +1567,7 @@ msgstr "Вся память"
 #: ProcessModel.cpp:2327
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, btnKillProcess)
 #: ProcessWidgetUI.ui:39
