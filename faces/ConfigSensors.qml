@@ -141,8 +141,7 @@ ColumnLayout {
 
         onSelectedChanged: root.cfg_totalSensors = selected
         onSensorLabelChanged: (sensorId, label) => {
-            cfg_sensorLabels[sensorId] = label
-            root.cfg_sensorLabelsChanged()
+            root.cfg_sensorLabels = Object.assign({}, root.cfg_sensorLabels, {[sensorId]: label})
         }
     }
 
@@ -167,8 +166,7 @@ ColumnLayout {
             root.cfg_sensorColorsChanged();
         }
         onSensorLabelChanged: (sensorId, label) => {
-            cfg_sensorLabels[sensorId] = label
-            root.cfg_sensorLabelsChanged()
+            root.cfg_sensorLabels = Object.assign({}, root.cfg_sensorLabels, {[sensorId]: label})
         }
     }
 
@@ -185,8 +183,7 @@ ColumnLayout {
 
         onSelectedChanged: root.cfg_lowPrioritySensorIds = selected
         onSensorLabelChanged: (sensorId, label) => {
-            cfg_sensorLabels[sensorId] = label
-            root.cfg_sensorLabelsChanged()
+            root.cfg_sensorLabels = Object.assign({}, root.cfg_sensorLabels, {[sensorId]: label})
         }
     }
 
